@@ -169,7 +169,7 @@ add_action( 'after_setup_theme', 'cube_blog_content_width', 0 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function cube_blog_widgets_init() {
-	register_sidebar( 
+	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Sidebar', 'cube-blog' ),
 			'id'            => 'sidebar-1',
@@ -178,7 +178,7 @@ function cube_blog_widgets_init() {
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
-		) 
+		)
 	);
 
 	register_sidebar(
@@ -269,14 +269,14 @@ function cube_blog_scripts() {
 	wp_enqueue_script( 'cube-blog-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'cube-blog-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.0', true );
-	
+
 	$cube_blog_l10n = array(
 		'quote'          => cube_blog_get_svg( array( 'icon' => 'angle-down' ) ),
 		'expand'         => esc_html__( 'Expand child menu', 'cube-blog' ),
 		'collapse'       => esc_html__( 'Collapse child menu', 'cube-blog' ),
 		'icon'           => cube_blog_get_svg( array( 'icon' => 'angle-down', 'fallback' => true ) ),
 	);
-	
+
 	wp_localize_script( 'cube-blog-navigation', 'cube_blog_l10n', $cube_blog_l10n );
 
 	wp_enqueue_script( 'cube-blog-custom-script', get_template_directory_uri() . '/assets/js/custom.js', array('jquery'), '20151215', true );
@@ -284,6 +284,13 @@ function cube_blog_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+    // custom js
+	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', NULL, '1.0', true );
+    // Leaflet Maps
+	wp_enqueue_style( 'leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+	wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+
 }
 add_action( 'wp_enqueue_scripts', 'cube_blog_scripts' );
 

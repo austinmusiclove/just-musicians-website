@@ -17,6 +17,7 @@ get_header();
 				<?php
 				while ( have_posts() ) :
 					the_post();
+                    $post_id = get_the_ID();
 
 					get_template_part( 'template-parts/content', 'single' );
 
@@ -27,6 +28,39 @@ get_header();
 
 				endwhile; // End of the loop.
 				?>
+                <div>
+                    <div id="leaflet-map" style="height: 350px; width: 100%"></div>
+                    <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
+                    <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
+                    <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" venueName="<?php echo get_field( 'name' ); ?>" ></div>
+                </div>
+                <div>
+                    <h2>Reviews</h2>
+                    <?php
+                        $args = array(
+                            'post_type' => 'venue_review',
+                            'posts_per_page' => 5,
+                            'meta_query' => array(
+                                array(
+                                    'key' => 'venue',
+                                    'value' => $post_id,
+                                    'compare' => '=='
+                                )
+                            )
+                        );
+                        $query = new WP_Query($args);
+                        if ($query->have_posts()) :
+                            while( $query->have_posts() ) :
+                                $query->the_post();
+                                ?>
+                                    <h3><?php echo get_field('overall_rating'); ?>/5</h3>
+                                    <p><?php echo get_field('review'); ?></p>
+                                <?php
+                            endwhile;
+                        endif;
+                        wp_reset_postdata();
+                    ?>
+                </div>
 			</div><!-- .single-post-wrap -->
 		</main><!-- #main -->
 	</div><!-- #primary -->
@@ -37,4 +71,5 @@ get_header();
 
 <?php
 get_footer();
+?>
 

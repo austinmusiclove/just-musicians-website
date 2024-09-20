@@ -1,4 +1,5 @@
 node_modules
 ai1wm-backups
 wp-config.php
+build
 .DS_Store

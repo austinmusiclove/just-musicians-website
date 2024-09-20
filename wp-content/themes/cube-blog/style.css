@@ -574,7 +574,7 @@ table {
   	border-collapse: collapse;
 }
 
-table, td, th {  
+table, td, th {
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -622,7 +622,7 @@ input[type="submit"]:hover,
     color: #fff;
 }
 
-button:active, 
+button:active,
 button:focus,
 input[type="button"]:active,
 input[type="button"]:focus,
@@ -704,8 +704,8 @@ a {
 	color: #f37e7e;
 }
 
-a:hover, 
-a:focus, 
+a:hover,
+a:focus,
 a:active {
 	color: #000;
 }
@@ -714,7 +714,7 @@ a:focus {
 	outline: medium dotted #000;
 }
 
-a:hover, 
+a:hover,
 a:active {
 	outline: 0;
 }
@@ -761,7 +761,7 @@ a:active {
 
 .site-title a:hover,
 .site-title a:focus {
-	color: #f37e7e; 
+	color: #f37e7e;
 }
 
 .site-description {
@@ -952,8 +952,8 @@ svg {
     vertical-align: middle;
 }
 
-.site-main .comment-navigation, 
-.site-main .posts-navigation, 
+.site-main .comment-navigation,
+.site-main .posts-navigation,
 .site-main .post-navigation {
 	margin: 1.5em 0;
     background-color: #fff;
@@ -976,18 +976,18 @@ svg {
 	width: 50%;
 }
 
-.site-main .comment-navigation a, 
-.site-main .posts-navigation a, 
+.site-main .comment-navigation a,
+.site-main .posts-navigation a,
 .site-main .post-navigation a {
 	color: #000;
 	text-decoration: none;
 }
 
-.site-main .comment-navigation a:hover, 
-.site-main .posts-navigation a:hover, 
+.site-main .comment-navigation a:hover,
+.site-main .posts-navigation a:hover,
 .site-main .post-navigation a:hover,
-.site-main .comment-navigation a:focus, 
-.site-main .posts-navigation a:focus, 
+.site-main .comment-navigation a:focus,
+.site-main .posts-navigation a:focus,
 .site-main .post-navigation a:focus {
 	color: #f37e7e;
 }
@@ -1135,11 +1135,11 @@ svg {
 .site-footer:after,
 .container:before,
 .container:after,
-.site-main .comment-navigation:before, 
-.site-main .posts-navigation:before, 
+.site-main .comment-navigation:before,
+.site-main .posts-navigation:before,
 .site-main .post-navigation:before,
-.site-main .comment-navigation:after, 
-.site-main .posts-navigation:after, 
+.site-main .comment-navigation:after,
+.site-main .posts-navigation:after,
 .site-main .post-navigation:after,
 .blog-archive:before,
 .blog-archive:after {
@@ -1156,11 +1156,11 @@ svg {
 .site-footer:after,
 .container:before,
 .container:after,
-.site-main .comment-navigation:before, 
-.site-main .posts-navigation:before, 
+.site-main .comment-navigation:before,
+.site-main .posts-navigation:before,
 .site-main .post-navigation:before,
-.site-main .comment-navigation:after, 
-.site-main .posts-navigation:after, 
+.site-main .comment-navigation:after,
+.site-main .posts-navigation:after,
 .site-main .post-navigation:after,
 .blog-archive:before,
 .blog-archive:after {
@@ -1343,7 +1343,7 @@ svg {
     display: block;
 }
 
-.wp-block-latest-comments__comment-author, 
+.wp-block-latest-comments__comment-author,
 .wp-block-latest-comments__comment-link {
 	font-weight: 400;
 }
@@ -1476,7 +1476,7 @@ svg {
 
 .reply {
     margin: 10px 0 0;
-    text-align: right;    
+    text-align: right;
 }
 
 .form-submit {
@@ -1723,7 +1723,7 @@ object {
     font-size: 32px;
 }
 
-.home .page-header, 
+.home .page-header,
 .blog .page-header {
     display: none;
 }
@@ -2075,7 +2075,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
     transform: translateX(-50%);
 }
 
-#colophon, 
+#colophon,
 #colophon a {
     color: #ccc;
 }
@@ -2731,7 +2731,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 	    -webkit-transition: -webkit-transform .3s ease-out,opacity .3s ease;
 	    transition: transform .3s ease-out,opacity .3s ease;
 	    visibility: visible;
-	}	
+	}
 
 	.navigation-menu ul ul svg {
 	    position: absolute;
@@ -2946,3 +2946,141 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 .slick-dots li button:before {
 	display: none;
 }
+/*--------------------------------------------------------------
+# Leaflet Map
+--------------------------------------------------------------*/
+#leaflet-map { height: 350px; }
+/*
+@media (max-width: 1023px) {
+    #leaflet-map.venue-archive-map { height: 384px; }
+}
+*/
+
+/* Event listing map icons */
+@-webkit-keyframes grow {
+    0% { scale: 1; }
+    50% { scale: 1.08; }
+    100% { scale: 1; }
+}
+.jm-map-icon {
+    border-radius: 15px;
+    background-clip: padding-box;
+    background-color: rgba(68, 42, 136, .9);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.jm-map-icon div {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: white;
+}
+.jm-map-icon-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: white;
+}
+.jm-map-icon:hover {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 18px !important;
+    margin-top: -18px !important;
+    margin-left: -18px !important;
+    background-color: rgba(68, 42, 136, 1);
+
+
+}
+.jm-map-icon:hover > div {
+    width: 7px;
+    height: 7px;
+}
+.jm-map-cluster-icon {
+    border-radius: 20px;
+    background-clip: padding-box;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+}
+.jm-map-cluster-icon div {
+    text-align: center;
+    background-color: rgba(68, 42, 136, .9);
+    font: 15px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: 900;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jm-map-cluster-icon:hover > div {
+    background-color: rgba(68, 42, 136, 1);
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 2s;
+    -moz-transition-duration: 2s;
+    -webkit-animation-name: grow;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: grow;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
+/* Leaflet pop up box */
+/*
+.leaflet-popup-content-wrapper {
+    padding: 0 !important;
+}
+.leaflet-popup-content {
+    margin: 0 !important;
+}
+.map-popup-headings {
+    position: absolute;
+    bottom: 40px;
+    padding: 20px;
+    color: white;
+}
+.map-popup-headings h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.map-popup-headings h4 {
+    font-size: 14px;
+    font-weight: 300;
+}
+.map-popup-image-container {
+    height: 186px;
+}
+.map-popup-image-container:before {
+    content: "";
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    display: block;
+    background: linear-gradient(to top, rgba(35,35,37,0.85) 0%, rgba(35,35,37,0.40) 35%, rgba(22,22,23,0) 60%, rgba(0,0,0,0) 100%);
+    background-color: rgba(35,35,37,0.2);
+}
+.map-popup-date-time {
+    padding: 16px 22px;
+}
+.leaflet-popup-close-button {
+    top: 10px !important;
+    right: 10px !important;
+    background-color: white !important;
+    font-size: 15px !important;
+    font-weight: 900 !important;
+    color: #333 !important;
+    font-weight: 900 !important;
+    border-radius: 50% !important;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+*/

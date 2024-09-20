@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying archive pages
+ * The template for displaying venue archive pages
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -14,6 +14,7 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
             <h1>Browse Venues</h1>
+            <div class="block lg:h-screen lg:sticky lg:top-0 venue-archive-map" id="leaflet-map"></div>
 			<div class="blog-archive columns-3 clear">
 				<?php if ( have_posts() ) : ?>
 					<?php
@@ -21,6 +22,9 @@ get_header();
 					while ( have_posts() ) :
 						the_post();
 
+                        ?>
+                            <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>"></div>
+                        <?php
 						/*
 						 * Include the Post-Type-specific template for the content.
 						 * If you want to override this in a child theme, then include a file
