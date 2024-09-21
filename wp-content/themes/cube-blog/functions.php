@@ -343,3 +343,10 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/icon-functions.php';
 
+/**
+ * Schedule Programs
+ */
+wp_schedule_event( time(), 'daily', 'update_venue_review_stats', array(), false);
+wp_schedule_event( time(), 'daily', 'update_venue_stats', array(), false);
+//update_venue_review_stats();
+//update_venue_stats();

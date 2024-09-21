@@ -16,23 +16,36 @@ get_header();
             <h1>Browse Venues</h1>
             <div class="block lg:h-screen lg:sticky lg:top-0 venue-archive-map" id="leaflet-map"></div>
 			<div class="blog-archive columns-3 clear">
-				<?php if ( have_posts() ) : ?>
-					<?php
-					/* Start the Loop */
-					while ( have_posts() ) :
-						the_post();
+                <?php
+                /* Start the Loop */
+                $args = array(
+                    'post_type' => 'venue',
+                    'posts_per_page' => 24,
+                    'meta_query' => array(
+                        array(
+                            'key' => '_review_count',
+                            'value' => 0,
+                            'compare' => '>'
+                        )
+                    )
+                );
+                $query = new WP_Query($args);
+                if ($query->have_posts()) :
+                    while( $query->have_posts() ) :
+                        $query->the_post();
 
                         ?>
-                            <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>"></div>
+                        <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>"></div>
                         <?php
 						/*
 						 * Include the Post-Type-specific template for the content.
 						 * If you want to override this in a child theme, then include a file
 						 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 						 */
-						get_template_part( 'template-parts/content', get_post_type() );
+						//get_template_part( 'template-parts/content', get_post_type() );
 
 					endwhile;
+                    wp_reset_postdata();
 
 				else :
 
@@ -43,13 +56,16 @@ get_header();
 			</div><!-- .blog-archive -->
 
 			<?php
+            /*
 			the_posts_pagination(
 				array(
 					'prev_text'          => cube_blog_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'cube-blog' ) . '</span>',
 					'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'cube-blog' ) . '</span>' . cube_blog_get_svg( array( 'icon' => 'arrow-right' ) ),
 					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'cube-blog' ) . ' </span>',
 				)
-			); ?>
+            );
+            */
+            ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

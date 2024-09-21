@@ -156,6 +156,7 @@ function update_post( WP_REST_Request $request ) {
   if (isset($request['post_content'])) { $post_arr['post_content'] = $request['post_content']; }
   if (isset($request['tax_input'])) { $post_arr['tax_input'] = $request['tax_input']; }
   if (isset($request['post_title'])) { $post_arr['post_title'] = $request['post_title']; }
+  if (isset($request['post_status'])) { $post_arr['post_status'] = $request['post_status']; }
 
   $post_id = wp_update_post( wp_slash($post_arr), true );
   return $post_id;

@@ -12,7 +12,7 @@ function register_post_types() {
 		//'show_in_menu' => true,
 		//'can_export' => true,
 		//'capability_type' => 'page',
-		'has_archive' => 'venues',
+		'has_archive' => true,
         'public' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
