@@ -27,7 +27,7 @@ get_header();
                     }
                 }
 				?>
-                <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?> </h2>
+                <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?>/5 </h2>
                 <h2>Average Pay: $<?php echo get_field('_average_pay'); ?> per hour per performer</h2>
                 <div>
                     <div id="leaflet-map" style="height: 350px; width: 100%"></div>
