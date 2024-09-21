@@ -50,5 +50,12 @@ function update_venue_review_stats() {
             }
         }
     }
+    return;
 }
-?>
+
+add_action('rest_api_init', function () {
+  register_rest_route( 'venue_reviews/v1', 'stats', [
+    'methods' => 'GET',
+    'callback' => 'update_venue_review_stats',
+  ]);
+});

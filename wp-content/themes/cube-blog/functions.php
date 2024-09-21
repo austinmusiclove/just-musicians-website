@@ -348,5 +348,5 @@ require get_template_directory() . '/inc/icon-functions.php';
  */
 wp_schedule_event( time(), 'daily', 'update_venue_review_stats', array(), false);
 wp_schedule_event( time(), 'daily', 'update_venue_stats', array(), false);
-//update_venue_review_stats();
-//update_venue_stats();
+//update_venue_review_stats(); // for testing only
+//update_venue_stats(); // for testing only
