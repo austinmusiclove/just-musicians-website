@@ -28,7 +28,7 @@ get_header();
                 }
 				?>
                 <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?>/5 </h2>
-                <h2>Average Pay: $<?php echo get_field('_average_pay'); ?> per hour per performer</h2>
+                <h2>Average Performer Rate: $<?php echo get_field('_average_pay'); ?>/hr</h2>
                 <div>
                     <div id="leaflet-map" style="height: 350px; width: 100%"></div>
                     <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
@@ -57,8 +57,8 @@ get_header();
                                     <h3><?php echo get_field('overall_rating'); ?>/5 - Anonymous Performer</h3>
                                     <p>Hours Performed: <?php echo get_field('hours_performed'); ?>
                                     <br>Total Performers: <?php echo get_field('total_performers'); ?>
-                                    <br>Total Pay: <?php echo get_field('total_earnings'); ?>
-                                    <br>Hourly rate per performer: <?php echo get_field('_earnings_per_hour_per_performer'); ?></p>
+                                    <br>Total Pay: $<?php echo get_field('total_earnings'); ?>
+                                    <br>Hourly rate per performer: $<?php echo get_field('_earnings_per_hour_per_performer'); ?></p>
                                     <p><?php echo get_field('review'); ?></p>
                                 <?php
                             endwhile;
