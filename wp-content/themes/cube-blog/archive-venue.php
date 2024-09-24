@@ -30,8 +30,8 @@ get_header();
                     )
                 );
                 $query = new WP_Query($args);
-                if ($query->have_posts()) :
-                    while( $query->have_posts() ) :
+                if ($query->have_posts()) {
+                    while( $query->have_posts() ) {
                         $query->the_post();
 
                         ?>
@@ -44,14 +44,52 @@ get_header();
 						 */
 						//get_template_part( 'template-parts/content', get_post_type() );
 
-					endwhile;
+                    }
                     wp_reset_postdata();
 
-				else :
+                }else {
 
 					get_template_part( 'template-parts/content', 'none' );
 
-				endif;
+                }
+				?>
+                <h2 style="padding-top:20px">Top Rated Venues</h2>
+                <table>
+                    <tr>
+                        <th>Venue</th>
+                        <th>Review Count</th>
+                        <th>Average Performer Wage</th>
+                        <th>Rating</th>
+                    </tr>
+                <?php
+                $args = array(
+                    'post_type' => 'venue',
+                    'posts_per_page' => 10,
+                    'meta_query' => array(
+                        array(
+                            'key' => '_review_count',
+                            'value' => 0,
+                            'compare' => '>'
+                        )
+                    ),
+                    'order' => 'DEC',
+                    'orderby' => 'meta_value_num',
+                    'meta_key' => '_overall_rating'
+                );
+                $query = new WP_Query($args);
+                if ($query->have_posts()) {
+                    while( $query->have_posts() ) {
+                        $query->the_post();
+                        ?>
+                        <tr>
+                            <td><?php echo get_field('name') ?></td>
+                            <td><?php echo get_field('_review_count') ?></td>
+                            <td>$<?php echo get_field('_average_pay') ?>/hr</td>
+                            <td><?php echo get_field('_overall_rating') ?></td>
+                        </tr>
+                        <?php
+                    }
+                }
 				?>
 			</div><!-- .blog-archive -->
 
