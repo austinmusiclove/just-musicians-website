@@ -91,6 +91,7 @@ get_header();
                     }
                 }
 				?>
+                </table>
 			</div><!-- .blog-archive -->
 
 			<?php
