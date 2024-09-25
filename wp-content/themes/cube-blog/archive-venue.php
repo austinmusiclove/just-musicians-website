@@ -14,6 +14,7 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
             <h1>Browse Venues</h1>
+            <div id="map-init-div" zoom-level="11"></div>
             <div class="block lg:h-screen lg:sticky lg:top-0 venue-archive-map" id="leaflet-map"></div>
 			<div class="blog-archive columns-3 clear">
                 <?php
@@ -53,12 +54,12 @@ get_header();
 
                 }
 				?>
-                <h2 style="padding-top:20px">Top Rated Venues</h2>
+                <h2 style="padding-top:20px">Top Paying Venues</h2>
                 <table>
                     <tr>
                         <th>Venue</th>
-                        <th>Review Count</th>
                         <th>Average Performer Wage</th>
+                        <th>Review Count</th>
                         <th>Rating</th>
                     </tr>
                 <?php
@@ -74,7 +75,7 @@ get_header();
                     ),
                     'order' => 'DEC',
                     'orderby' => 'meta_value_num',
-                    'meta_key' => '_overall_rating'
+                    'meta_key' => '_average_pay'
                 );
                 $query = new WP_Query($args);
                 if ($query->have_posts()) {
@@ -83,8 +84,8 @@ get_header();
                         ?>
                         <tr>
                             <td><?php echo get_field('name') ?></td>
-                            <td><?php echo get_field('_review_count') ?></td>
                             <td>$<?php echo get_field('_average_pay') ?>/hr</td>
+                            <td><?php echo get_field('_review_count') ?></td>
                             <td><?php echo get_field('_overall_rating') ?></td>
                         </tr>
                         <?php
