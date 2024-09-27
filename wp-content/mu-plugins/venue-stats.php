@@ -32,7 +32,7 @@ function update_venue_stats() {
         while( $venues_query->have_posts() ) {
             $review_count = 0;
             $overall_rating_sum = 0;
-            $earnings_phpp_sum = 0;
+            $hourly_performer_rate_sum = 0;
             $venues_query->the_post();
             $venue_post_id = get_the_ID();
 
@@ -55,13 +55,13 @@ function update_venue_stats() {
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();
                     $overall_rating_sum += (int)get_post_meta(get_the_ID(), 'overall_rating' , true);
-                    $earnings_phpp = (float)get_post_meta(get_the_ID(), '_earnings_per_hour_per_performer' , true);
-                    $earnings_phpp_sum += $earnings_phpp;
+                    $hourly_performer_rate = (float)get_post_meta(get_the_ID(), 'hourly_performer_rate' , true);
+                    $hourly_performer_rate_sum += $hourly_performer_rate;
                     $review_count++;
                 }
             }
             $overall_rating_average = round(($review_count > 0) ? $overall_rating_sum/$review_count : 0, 2);
-            $earnings_phpp_average = round(($review_count > 0) ? $earnings_phpp_sum/$review_count : 0, 2);
+            $hourly_performer_rate_average = round(($review_count > 0) ? $hourly_performer_rate_sum/$review_count : 0, 2);
 
             // update venue meta data
             $update_args = array(
@@ -69,7 +69,7 @@ function update_venue_stats() {
                 'meta_input' => array(
                     '_review_count' => $review_count,
                     '_overall_rating' => $overall_rating_average,
-                    '_average_pay' => $earnings_phpp_average,
+                    '_average_pay' => $hourly_performer_rate_average,
                 ),
             );
             $update_result = wp_update_post( wp_slash($update_args), true );

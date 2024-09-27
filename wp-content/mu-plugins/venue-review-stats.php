@@ -32,6 +32,7 @@ function update_venue_review_stats() {
         while( $venues_query->have_posts() ) {
             $venues_query->the_post();
             $venue_review_post_id = get_the_ID();
+            /*
             $total_earnings = (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
             $total_performers = (int)get_post_meta(get_the_ID(), 'total_performers' , true);
             $hours_performed = (float)get_post_meta(get_the_ID(), 'hours_performed' , true);
@@ -48,6 +49,7 @@ function update_venue_review_stats() {
             if( is_wp_error( $update_result ) ) {
                 return $venue_post_id->get_error_message();
             }
+            */
         }
     }
     return;

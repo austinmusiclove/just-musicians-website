@@ -58,7 +58,7 @@ get_header();
                                     <p>Hours Performed: <?php echo get_field('hours_performed'); ?>
                                     <br>Total Performers: <?php echo get_field('total_performers'); ?>
                                     <br>Total Pay: $<?php echo get_field('total_earnings'); ?>
-                                    <br>Hourly rate per performer: $<?php echo get_field('_earnings_per_hour_per_performer'); ?></p>
+                                    <br>Hourly rate per performer: $<?php echo get_field('hourly_performer_rate'); ?></p>
                                     <p><?php echo get_field('review'); ?></p>
                                 <?php
                             endwhile;
