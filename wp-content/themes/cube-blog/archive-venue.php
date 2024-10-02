@@ -36,7 +36,7 @@ get_header();
                         $query->the_post();
 
                         ?>
-                        <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>"></div>
+                            <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>" averagePay="<?php echo get_field('_average_pay');  ?>" overallRating="<?php echo get_field('_overall_rating'); ?>"></div>
                         <?php
 						/*
 						 * Include the Post-Type-specific template for the content.

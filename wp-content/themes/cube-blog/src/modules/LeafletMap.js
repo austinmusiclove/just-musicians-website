@@ -57,10 +57,8 @@ class LeafletMap {
             var coordinateTitle = coordinateElements[i].getAttribute('coordinateTitle');
             var reviewCount = coordinateElements[i].getAttribute('reviewCount');
             var coordinateLinkUrl = coordinateElements[i].getAttribute('coordinateLinkUrl');
-            //var eventDateTime = coordinateElements[i].getAttribute('eventDateTime');
-            //var venueImageUrl = coordinateElements[i].getAttribute('venueImageUrl');
-            //var eventUrl = "";
-            //if (eventLinks.length > i) { eventUrl = eventLinks[i].getAttribute('href'); }
+            var overallRating = coordinateElements[i].getAttribute('overallRating');
+            var averagePay = coordinateElements[i].getAttribute('averagePay');
 
             // Build marker
             var marker = L.marker([latitude, longitude], {
@@ -78,14 +76,25 @@ class LeafletMap {
                                 <h3>${coordinateTitle}</h3>
                             </div>
                         </a>
-                        <div class="map-popup-date-time">${reviewCount} reviews</div>
+                        <div class="map-popup-date-time">Total reviews: ${reviewCount}</div>
+                        <div class="map-popup-date-time">Average Pay: $${averagePay}</div>
+                        <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;
                 var popup = L.popup()
                     .setLatLng([latitude, longitude])
                     .setContent(popupContent)
+                //  .openOn(map);
 
                 marker.bindPopup(popup);
+                /*
+                marker.on('mouseover', function(e) {
+                    marker.openPopup();
+                });
+                marker.on('mouseout', function(e) {
+                    marker.closePopup();
+                });
+                */
             }
 
             //markers.push(marker);
