@@ -83,7 +83,7 @@ get_header();
                         $query->the_post();
                         ?>
                         <tr>
-                            <td><?php echo get_field('name') ?></td>
+                            <td><a href="<?php the_permalink(); ?>"><?php echo get_field('name') ?></a></td>
                             <td>$<?php echo get_field('_average_pay') ?>/hr</td>
                             <td><?php echo get_field('_review_count') ?></td>
                             <td><?php echo get_field('_overall_rating') ?></td>
