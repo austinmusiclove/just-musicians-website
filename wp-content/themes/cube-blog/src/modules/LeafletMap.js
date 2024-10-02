@@ -36,7 +36,6 @@ class LeafletMap {
     }
 
     addMarkers() {
-        /*
         var cluster = L.markerClusterGroup({
             showCoverageOnHover: false,
             zoomToBoundsOnClick: false,
@@ -46,10 +45,9 @@ class LeafletMap {
             spiderfyPolylineOptions: { weight: 1.5, color: '#442A88', opacity: 0.5 }, // FCECAC FFE77F EE7E7E EB4C67 B1A6CE 442A88
             iconCreateFunction: this.iconCreationFunction
         });
-        */
         var coordinateElements = document.getElementsByClassName('coordinate-data');
         //var eventLinks = document.getElementsByClassName('event-url');
-        //var markers = [];
+        var markers = [];
         for (var i = 0; i < coordinateElements.length; i++) {
             var latitude = coordinateElements[i].getAttribute('latitude');
             var longitude = coordinateElements[i].getAttribute('longitude');
@@ -77,31 +75,22 @@ class LeafletMap {
                             </div>
                         </a>
                         <div class="map-popup-date-time">Total reviews: ${reviewCount}</div>
-                        <div class="map-popup-date-time">Average Pay: $${averagePay}</div>
+                        <div class="map-popup-date-time">Average Performer Rate: $${averagePay}/hr</div>
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;
                 var popup = L.popup()
                     .setLatLng([latitude, longitude])
                     .setContent(popupContent)
-                //  .openOn(map);
-
                 marker.bindPopup(popup);
-                /*
-                marker.on('mouseover', function(e) {
-                    marker.openPopup();
-                });
-                marker.on('mouseout', function(e) {
-                    marker.closePopup();
-                });
-                */
+                marker.on('mouseover', function() { this.openPopup(); });
             }
 
-            //markers.push(marker);
-            marker.addTo(this.map);
+            markers.push(marker);
+            //marker.addTo(this.map);
         }
-        //cluster.addLayers(markers);
-        //this.map.addLayer(cluster);
+        cluster.addLayers(markers);
+        this.map.addLayer(cluster);
     }
 
     iconCreationFunction(cluster) {

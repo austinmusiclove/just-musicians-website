@@ -86,7 +86,7 @@ get_header();
                             <td><a href="<?php the_permalink(); ?>"><?php echo get_field('name') ?></a></td>
                             <td>$<?php echo get_field('_average_pay') ?>/hr</td>
                             <td><?php echo get_field('_review_count') ?></td>
-                            <td><?php echo get_field('_overall_rating') ?></td>
+                            <td><?php echo get_field('_overall_rating') ?>/5</td>
                         </tr>
                         <?php
                     }

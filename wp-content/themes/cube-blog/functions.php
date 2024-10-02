@@ -289,7 +289,10 @@ function cube_blog_scripts() {
 	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', NULL, '1.0', true );
     // Leaflet Maps
 	wp_enqueue_style( 'leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+    wp_enqueue_style( 'leaflet-clustering-css', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css' );
+    wp_enqueue_style( 'leaflet-clustering-css-default', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css' );
 	wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+    wp_enqueue_script( 'leaflet-clustering-js', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js', array('leaflet-js'), null, true );
 
 }
 add_action( 'wp_enqueue_scripts', 'cube_blog_scripts' );
