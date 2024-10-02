@@ -351,7 +351,7 @@ require get_template_directory() . '/inc/icon-functions.php';
  */
 #wp_schedule_event( time(), 'hourly', 'update_venue_review_stats', array(), false);
 #wp_schedule_event( time(), 'hourly', 'update_venue_stats', array(), false);
-wp_clear_scheduled_hook( 'update_venue_review_stats' );
-wp_clear_scheduled_hook( 'update_venue_stats' );
+#wp_clear_scheduled_hook( 'update_venue_review_stats' );
+#wp_clear_scheduled_hook( 'update_venue_stats' );
 //update_venue_review_stats(); // for testing only
 //update_venue_stats(); // for testing only
