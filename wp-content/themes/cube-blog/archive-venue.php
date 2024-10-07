@@ -21,7 +21,7 @@ get_header();
                 /* Start the Loop */
                 $args = array(
                     'post_type' => 'venue',
-                    'posts_per_page' => 24,
+                    'nopaging' => true,
                     'meta_query' => array(
                         array(
                             'key' => '_review_count',
@@ -57,6 +57,7 @@ get_header();
                 <h2 style="padding-top:20px">Top Paying Venues</h2>
                 <table>
                     <tr>
+                        <th>Rank</th>
                         <th>Venue</th>
                         <th>Average Performer Wage</th>
                         <th>Review Count</th>
@@ -65,7 +66,7 @@ get_header();
                 <?php
                 $args = array(
                     'post_type' => 'venue',
-                    'posts_per_page' => 10,
+                    'posts_per_page' => 20,
                     'meta_query' => array(
                         array(
                             'key' => '_review_count',
@@ -79,10 +80,13 @@ get_header();
                 );
                 $query = new WP_Query($args);
                 if ($query->have_posts()) {
+                    $rank = 0;
                     while( $query->have_posts() ) {
+                        $rank++;
                         $query->the_post();
                         ?>
                         <tr>
+                            <td><?php echo $rank ?></td>
                             <td><a href="<?php the_permalink(); ?>"><?php echo get_field('name') ?></a></td>
                             <td>$<?php echo get_field('_average_pay') ?>/hr</td>
                             <td><?php echo get_field('_review_count') ?></td>
