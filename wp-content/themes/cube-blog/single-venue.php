@@ -59,8 +59,8 @@ get_header();
                                         <br>Hours Performed: <?php echo get_field('hours_performed'); ?>
                                         <br>Total Performers: <?php echo get_field('total_performers'); ?>
                                         <?php if (get_field('_has_guarantee_comp')) { ?><br>Guarantee: $<?php echo get_field('guarantee_earnings'); } ?>
-                                        <?php if (get_field('_has_door_comp')) { ?><br>Door: $<?php echo get_field('door_earnings'); } ?>
-                                        <?php if (get_field('_has_sales_comp')) { ?><br>Sales: $<?php echo get_field('sales_earnings'); } ?>
+                                        <?php if (get_field('_has_door_comp')) { ?><br>Door: $<?php echo get_field('door_earnings'); ?> (<?php echo get_field('door_percentage'); ?>%) <?php } ?>
+                                        <?php if (get_field('_has_sales_comp')) { ?><br>Sales: $<?php echo get_field('sales_earnings'); ?> (<?php echo get_field('door_percentage'); ?>%) <?php } ?>
                                         <?php if (get_field('_has_tips_comp')) { ?><br>Tips: $<?php echo get_field('tips_earnings'); } ?>
                                         <br>Total Earnings: $<?php echo get_field('total_earnings'); ?>
                                     </p>
