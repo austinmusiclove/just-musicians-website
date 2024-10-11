@@ -54,10 +54,16 @@ get_header();
                                 $query->the_post();
                                 ?>
                                     <h3><?php echo get_field('overall_rating'); ?>/5 - Anonymous Performer</h3>
-                                    <p>Hours Performed: <?php echo get_field('hours_performed'); ?>
-                                    <br>Total Performers: <?php echo get_field('total_performers'); ?>
-                                    <br>Total Pay: $<?php echo get_field('total_earnings'); ?>
-                                    <br>Hourly rate per performer: $<?php echo get_field('hourly_performer_rate'); ?></p>
+                                    <p>
+                                        Compensation Type: <?php echo get_field('_comp_types_string'); ?>
+                                        <br>Hours Performed: <?php echo get_field('hours_performed'); ?>
+                                        <br>Total Performers: <?php echo get_field('total_performers'); ?>
+                                        <?php if (get_field('_has_guarantee_comp')) { ?><br>Guarantee: $<?php echo get_field('guarantee_earnings'); } ?>
+                                        <?php if (get_field('_has_door_comp')) { ?><br>Door: $<?php echo get_field('door_earnings'); } ?>
+                                        <?php if (get_field('_has_sales_comp')) { ?><br>Sales: $<?php echo get_field('sales_earnings'); } ?>
+                                        <?php if (get_field('_has_tips_comp')) { ?><br>Tips: $<?php echo get_field('tips_earnings'); } ?>
+                                        <br>Total Earnings: $<?php echo get_field('total_earnings'); ?>
+                                    </p>
                                     <p><?php echo get_field('review'); ?></p>
                                 <?php
                             endwhile;
