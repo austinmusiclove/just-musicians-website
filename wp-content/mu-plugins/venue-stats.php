@@ -31,13 +31,18 @@ function update_venue_stats() {
         // for each venue get reviews and generate stats
         while( $venues_query->have_posts() ) {
             $review_count = 0;
+            $guarantee_review_count = 0;
+            $door_deal_review_count = 0;
+            $sales_deal_review_count = 0;
             $overall_rating_sum = 0;
-            $hourly_performer_rate_sum = 0;
+            $earnings_sum = 0;
+            $earnings_per_performer_sum = 0;
+            $earnings_per_hour_sum = 0;
+            $earnings_per_performer_per_hour_sum = 0;
+
+            // Get reviews for this venue
             $venues_query->the_post();
             $venue_post_id = get_the_ID();
-
-            //if ($venue_post_id == 128) { // for testing; 128 is half step
-
             $args = array(
                 'post_type' => 'venue_review',
                 'nopaging' => true,
@@ -54,22 +59,38 @@ function update_venue_stats() {
             if ($venue_reviews_query->have_posts()) {
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();
-                    $overall_rating_sum += (int)get_post_meta(get_the_ID(), 'overall_rating' , true);
-                    $hourly_performer_rate = (float)get_post_meta(get_the_ID(), 'hourly_performer_rate' , true);
-                    $hourly_performer_rate_sum += $hourly_performer_rate;
                     $review_count++;
+                    if (get_post_meta(get_the_ID(), '_has_guarantee_comp' , true)) { $guarantee_review_count++; }
+                    if (get_post_meta(get_the_ID(), '_has_door_comp' , true)) { $door_deal_review_count++; }
+                    if (get_post_meta(get_the_ID(), '_has_sales_comp' , true)) { $sales_deal_review_count++; }
+                    $overall_rating_sum += (int)get_post_meta(get_the_ID(), 'overall_rating' , true);
+                    $earnings_sum += (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
+                    $earnings_per_performer_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_performer' , true);
+                    $earnings_per_hour_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_hour' , true);
+                    $earnings_per_performer_per_hour_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_performer_per_hour' , true);
                 }
             }
+
+            // Calc averages
             $overall_rating_average = round(($review_count > 0) ? $overall_rating_sum/$review_count : 0, 2);
-            $hourly_performer_rate_average = round(($review_count > 0) ? $hourly_performer_rate_sum/$review_count : 0, 2);
+            $earnings_average = round(($review_count > 0) ? $earnings_sum/$review_count : 0, 2);
+            $earnings_per_performer_average = round(($review_count > 0) ? $earnings_per_performer_sum/$review_count : 0, 2);
+            $earnings_per_hour_average = round(($review_count > 0) ? $earnings_per_hour_sum/$review_count : 0, 2);
+            $earnings_per_performer_per_hour_average = round(($review_count > 0) ? $earnings_per_performer_per_hour_sum/$review_count : 0, 2);
 
             // update venue meta data
             $update_args = array(
                 'ID' => $venue_post_id,
                 'meta_input' => array(
                     '_review_count' => $review_count,
+                    '_guarantee_review_count' => $guarantee_review_count,
+                    '_door_deal_review_count' => $door_deal_review_count,
+                    '_sales_deal_review_count' => $sales_deal_review_count,
                     '_overall_rating' => $overall_rating_average,
-                    '_average_pay' => $hourly_performer_rate_average,
+                    '_average_earnings' => $earnings_average,
+                    '_average_earnings_per_performer' => $earnings_per_performer_average,
+                    '_average_earnings_per_hour' => $earnings_per_hour_average,
+                    '_average_earnings_per_performer_per_hour' => $earnings_per_performer_per_hour_average,
                 ),
             );
             $update_result = wp_update_post( wp_slash($update_args), true );

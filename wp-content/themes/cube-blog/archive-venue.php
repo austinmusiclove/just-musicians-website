@@ -36,7 +36,7 @@ get_header();
                         $query->the_post();
 
                         ?>
-                            <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>" averagePay="<?php echo get_field('_average_pay');  ?>" overallRating="<?php echo get_field('_overall_rating'); ?>"></div>
+                            <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>" averageEarnings="<?php echo get_field('_average_earnings');  ?>" overallRating="<?php echo get_field('_overall_rating'); ?>"></div>
                         <?php
 						/*
 						 * Include the Post-Type-specific template for the content.
@@ -59,14 +59,14 @@ get_header();
                     <tr>
                         <th>Rank</th>
                         <th>Venue</th>
-                        <th>Average Performer Wage</th>
+                        <th>Average Earnings per Gig</th>
                         <th>Review Count</th>
                         <th>Rating</th>
                     </tr>
                 <?php
                 $args = array(
                     'post_type' => 'venue',
-                    'posts_per_page' => 20,
+                    'nopaging' => true,
                     'meta_query' => array(
                         array(
                             'key' => '_review_count',
@@ -76,7 +76,7 @@ get_header();
                     ),
                     'order' => 'DEC',
                     'orderby' => 'meta_value_num',
-                    'meta_key' => '_average_pay'
+                    'meta_key' => '_average_earnings'
                 );
                 $query = new WP_Query($args);
                 if ($query->have_posts()) {
@@ -88,7 +88,7 @@ get_header();
                         <tr>
                             <td><?php echo $rank ?></td>
                             <td><a href="<?php the_permalink(); ?>"><?php echo get_field('name') ?></a></td>
-                            <td>$<?php echo get_field('_average_pay') ?>/hr</td>
+                            <td>$<?php echo get_field('_average_earnings') ?></td>
                             <td><?php echo get_field('_review_count') ?></td>
                             <td><?php echo get_field('_overall_rating') ?>/5</td>
                         </tr>

@@ -56,7 +56,7 @@ class LeafletMap {
             var reviewCount = coordinateElements[i].getAttribute('reviewCount');
             var coordinateLinkUrl = coordinateElements[i].getAttribute('coordinateLinkUrl');
             var overallRating = coordinateElements[i].getAttribute('overallRating');
-            var averagePay = coordinateElements[i].getAttribute('averagePay');
+            var averageEarnings = coordinateElements[i].getAttribute('averageEarnings');
 
             // Build marker
             var marker = L.marker([latitude, longitude], {
@@ -75,7 +75,7 @@ class LeafletMap {
                             </div>
                         </a>
                         <div class="map-popup-date-time">Total reviews: ${reviewCount}</div>
-                        <div class="map-popup-date-time">Average Performer Rate: $${averagePay}/hr</div>
+                        <div class="map-popup-date-time">Average Earnings Per Gig: $${averageEarnings}</div>
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;

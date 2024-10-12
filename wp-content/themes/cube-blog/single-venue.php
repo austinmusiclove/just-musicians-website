@@ -28,7 +28,9 @@ get_header();
                 }
 				?>
                 <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?>/5 </h2>
-                <h2>Average Performer Rate: $<?php echo get_field('_average_pay'); ?>/hr</h2>
+                <p>Average Earnings Per Gig: $<?php echo get_field('_average_earnings'); ?>
+                <br>Average Earnings Per Performer: $<?php echo get_field('_average_earnings_per_performer'); ?>
+                <br>Average Earnings Per Performer Per Hour: $<?php echo get_field('_average_earnings_per_performer_per_hour'); ?></p>
                 <div>
                     <div id="leaflet-map" style="height: 350px; width: 100%"></div>
                     <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
