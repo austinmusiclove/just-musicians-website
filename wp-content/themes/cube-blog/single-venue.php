@@ -28,7 +28,8 @@ get_header();
                 }
 				?>
                 <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?>/5 </h2>
-                <p>Average Earnings Per Gig: $<?php echo get_field('_average_earnings'); ?>
+                <p>Total Reviews: <?php echo get_field('_review_count'); ?>
+                <br>Average Earnings Per Gig: $<?php echo get_field('_average_earnings'); ?>
                 <br>Average Earnings Per Performer: $<?php echo get_field('_average_earnings_per_performer'); ?>
                 <br>Average Earnings Per Performer Per Hour: $<?php echo get_field('_average_earnings_per_performer_per_hour'); ?></p>
                 <div>
