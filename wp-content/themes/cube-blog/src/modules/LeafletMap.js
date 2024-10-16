@@ -1,4 +1,5 @@
 //import L from 'leaflet'; NPM version does not work; it was loading tiles out of order; switched to loading the CDN version in functions.php
+// Depends on leaflet and leaflet cluster plugin
 
 class LeafletMap {
     constructor() {
@@ -19,16 +20,21 @@ class LeafletMap {
             if (enablePopups && enablePopups == "false") { this.enablePopups = false; }
         }
         // create a map for element with id leaflet-map
-        var mapElement = document.getElementById('leaflet-map');
-        if (mapElement !== null) {
+        this.mapElement = document.getElementById('leaflet-map');
+        if (this.mapElement !== null) {
             this.map = L.map('leaflet-map', {}).setView(this.mapCenter, this.zoomLevel);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(this.map);
             //var marker = L.marker([30.274271, -97.740317]).addTo(this.map);
-            document.addEventListener("DOMContentLoaded", this.addMarkers.bind(this));
+            this._setUpListeners();
         }
+    }
+
+    _setUpListeners() {
+        document.addEventListener("DOMContentLoaded", this.addMarkers.bind(this));
+        this.mapElement.addEventListener("markersLoaded", this.addMarkers.bind(this));
     }
 
     addMarker(latitude, longitude) {

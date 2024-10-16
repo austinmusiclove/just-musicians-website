@@ -16,7 +16,7 @@ get_header();
             <h1>Browse Venues</h1>
             <div id="map-init-div" zoom-level="11"></div>
             <div class="block lg:h-screen lg:sticky lg:top-0 venue-archive-map" id="leaflet-map"></div>
-			<div class="blog-archive columns-3 clear">
+			<div id="main-content-container" class="blog-archive columns-3 clear">
                 <?php
                 /* Start the Loop */
                 $args = array(
@@ -36,7 +36,9 @@ get_header();
                         $query->the_post();
 
                         ?>
+<!--
                             <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" coordinateTitle="<?php echo get_field( 'name' ); ?>" reviewCount="<?php echo get_field( '_review_count' ); ?>" coordinateLinkUrl="<?php echo esc_url( get_permalink() ); ?>" averageEarnings="<?php echo get_field('_average_earnings');  ?>" overallRating="<?php echo get_field('_overall_rating'); ?>"></div>
+-->
                         <?php
 						/*
 						 * Include the Post-Type-specific template for the content.
@@ -48,7 +50,7 @@ get_header();
                     }
                     wp_reset_postdata();
 
-                }else {
+                } else {
 
 					get_template_part( 'template-parts/content', 'none' );
 
@@ -98,6 +100,31 @@ get_header();
 				?>
                 </table>
 			</div><!-- .blog-archive -->
+            <script>
+                // get venues
+                const markersLoadedEvent = new CustomEvent('markersLoaded');
+                fetch("<?php echo get_site_url() . "/wp-json/v1/venues"; ?>").then(function(response){
+                    return response.json();
+                }).then(function(data) {
+                    const leafletMapContainer = document.getElementById('leaflet-map');
+                    for (let i = 0; i < data.length; i++) {
+                        let element = document.createElement('div');
+                        element.classList.add('coordinate-data');
+                        element.setAttribute('latitude', data[i].latitude);
+                        element.setAttribute('longitude', data[i].longitude);
+                        element.setAttribute('coordinateTitle', data[i].name);
+                        element.setAttribute('reviewCount', data[i].review_count);
+                        element.setAttribute('coordinateLinkUrl', data[i].permalink);
+                        element.setAttribute('averageEarnings', data[i].average_earnings);
+                        element.setAttribute('overallRating', data[i].overall_rating);
+                        leafletMapContainer.appendChild(element);
+                    }
+                    leafletMapContainer.dispatchEvent(markersLoadedEvent, {'bubbles': true});
+                }).catch(function(err) {
+                    console.warn(err);
+                });
+
+            </script>
 
 			<?php
             /*

@@ -24,9 +24,12 @@ function get_venues() {
             $query->the_post();
             array_push($result, array(
                 'name' => get_field('name'),
-                'average_pay' => get_field('_average_pay'),
+                'latitude' => get_field('latitude'),
+                'longitude' => get_field('longitude'),
+                'average_earnings' => get_field('_average_earnings'),
                 'review_count' => get_field('_review_count'),
                 'overall_rating' => get_field('_overall_rating'),
+                'permalink' => get_the_permalink(),
             ));
         }
     }

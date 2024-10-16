@@ -2,6 +2,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/ChartGenerator.js":
+/*!***************************************!*\
+  !*** ./src/modules/ChartGenerator.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class ChartGenerator {
+  constructor() {}
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChartGenerator);
+
+/***/ }),
+
 /***/ "./src/modules/LeafletMap.js":
 /*!***********************************!*\
   !*** ./src/modules/LeafletMap.js ***!
@@ -13,6 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 //import L from 'leaflet'; NPM version does not work; it was loading tiles out of order; switched to loading the CDN version in functions.php
+// Depends on leaflet and leaflet cluster plugin
 
 class LeafletMap {
   constructor() {
@@ -39,16 +57,20 @@ class LeafletMap {
       }
     }
     // create a map for element with id leaflet-map
-    var mapElement = document.getElementById('leaflet-map');
-    if (mapElement !== null) {
+    this.mapElement = document.getElementById('leaflet-map');
+    if (this.mapElement !== null) {
       this.map = L.map('leaflet-map', {}).setView(this.mapCenter, this.zoomLevel);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
       //var marker = L.marker([30.274271, -97.740317]).addTo(this.map);
-      document.addEventListener("DOMContentLoaded", this.addMarkers.bind(this));
+      this._setUpListeners();
     }
+  }
+  _setUpListeners() {
+    document.addEventListener("DOMContentLoaded", this.addMarkers.bind(this));
+    this.mapElement.addEventListener("markersLoaded", this.addMarkers.bind(this));
   }
   addMarker(latitude, longitude) {
     var marker = L.marker([latitude, longitude]).addTo(this.map);
@@ -129,6 +151,29 @@ class LeafletMap {
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LeafletMap);
 
+/***/ }),
+
+/***/ "./src/modules/VenueDataManager.js":
+/*!*****************************************!*\
+  !*** ./src/modules/VenueDataManager.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+class VenueDataManager {
+  constructor() {}
+  getVenues(pay_structure = "guarantee,door,sales", pay_calc_method = "_average_earnings", limit = -1) {
+    // get venues with api
+    // return array of venues
+    return ['venues'];
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueDataManager);
+
 /***/ })
 
 /******/ 	});
@@ -193,11 +238,17 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/LeafletMap */ "./src/modules/LeafletMap.js");
+/* harmony import */ var _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ChartGenerator */ "./src/modules/ChartGenerator.js");
+/* harmony import */ var _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenueDataManager */ "./src/modules/VenueDataManager.js");
 // Import modules
+
+
 
 
 // Instantiate
 const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
+const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
+const venueDataManager = new _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__["default"]();
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map
