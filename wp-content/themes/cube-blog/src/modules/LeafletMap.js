@@ -1,12 +1,17 @@
 //import L from 'leaflet'; NPM version does not work; it was loading tiles out of order; switched to loading the CDN version in functions.php
 // Depends on leaflet and leaflet cluster plugin
 
+const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
+const ADD_MARKERS_EVENT_NAME = 'AddMarkers';
+const ADD_MARKER_EVENT_NAME = 'AddMarker';
+
 class LeafletMap {
     constructor() {
         // Set defaults
         this.mapCenter = [30.274271, -97.740317];
         this.zoomLevel = 10;
         this.enablePopups = true;
+        this.cluster = null;
 
         // check for map options
         var mapInitDiv = document.getElementById('map-init-div');
@@ -33,47 +38,40 @@ class LeafletMap {
     }
 
     _setUpListeners() {
-        document.addEventListener("DOMContentLoaded", this.addMarkers.bind(this));
-        this.mapElement.addEventListener("markersLoaded", this.addMarkers.bind(this));
+        document.addEventListener(REPLACE_MARKERS_EVENT_NAME, this.replaceMarkers.bind(this));
+        document.addEventListener(ADD_MARKERS_EVENT_NAME, this.addMarkers.bind(this));
+        document.addEventListener(ADD_MARKER_EVENT_NAME, this.addMarker.bind(this));
     }
 
-    addMarker(latitude, longitude) {
-        var marker = L.marker([latitude, longitude]).addTo(this.map);
+    addMarker(evnt) {
+        let marker = this.getMarker(evnt.detail.latitude, evnt.detail.longitude);
+        marker.addTo(this.map);
     }
 
-    addMarkers() {
-        var cluster = L.markerClusterGroup({
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: false,
-            spiderfyOnMaxZoom: true,
-            removeOutsideVisibleBounds: true,
-            maxClusterRadius: 40,
-            spiderfyPolylineOptions: { weight: 1.5, color: '#442A88', opacity: 0.5 }, // FCECAC FFE77F EE7E7E EB4C67 B1A6CE 442A88
-            iconCreateFunction: this.iconCreationFunction
-        });
-        var coordinateElements = document.getElementsByClassName('coordinate-data');
-        //var eventLinks = document.getElementsByClassName('event-url');
-        var markers = [];
-        for (var i = 0; i < coordinateElements.length; i++) {
-            var latitude = coordinateElements[i].getAttribute('latitude');
-            var longitude = coordinateElements[i].getAttribute('longitude');
-            //var eventName = coordinateElements[i].getAttribute('eventName');
-            var coordinateTitle = coordinateElements[i].getAttribute('coordinateTitle');
-            var reviewCount = coordinateElements[i].getAttribute('reviewCount');
-            var coordinateLinkUrl = coordinateElements[i].getAttribute('coordinateLinkUrl');
-            var overallRating = coordinateElements[i].getAttribute('overallRating');
-            var averageEarnings = coordinateElements[i].getAttribute('averageEarnings');
+    replaceMarkers(evnt) {
+        if (this.cluster) { this.map.removeLayer(this.cluster); }
+        this.addMarkers(evnt);
+    }
+
+    addMarkers(evnt) {
+        let markers = evnt.detail.markers
+        this.cluster = this.getCluster();
+        let leafletMarkers = [];
+        for (let i = 0; i < markers.length; i++) {
+            let latitude = markers[i].latitude;
+            let longitude = markers[i].longitude;
+            let coordinateTitle = markers[i].coordinateTitle;
+            let reviewCount = markers[i].reviewCount;
+            let coordinateLinkUrl = markers[i].coordinateLinkUrl;
+            let overallRating = markers[i].overallRating;
+            let averageEarnings = markers[i].averageEarnings;
 
             // Build marker
-            var marker = L.marker([latitude, longitude], {
-                icon: new L.DivIcon({ html: '<div class="jm-map-icon-dot"></div>', className: 'jm-map-icon', iconSize: new L.Point(30, 30) }),
-                title: 'marker',//venueName,
-                //alt: "map marker for " + venueName
-            })
+            let marker = this.getMarker(latitude, longitude);
 
             // Build Popup
             if (this.enablePopups) {
-                var popupContent = `
+                let popupContent = `
                     <div style="margin: 0; width: 271px;">
                         <a class="map-popup-image-container" href="${coordinateLinkUrl}">
                             <div class="map-popup-headings">
@@ -85,20 +83,38 @@ class LeafletMap {
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;
-                var popup = L.popup()
+                let popup = L.popup()
                     .setLatLng([latitude, longitude])
                     .setContent(popupContent)
                 marker.bindPopup(popup);
                 marker.on('mouseover', function() { this.openPopup(); });
             }
 
-            markers.push(marker);
-            //marker.addTo(this.map);
+            leafletMarkers.push(marker);
         }
-        cluster.addLayers(markers);
-        this.map.addLayer(cluster);
+        this.cluster.addLayers(leafletMarkers);
+        this.map.addLayer(this.cluster);
     }
 
+    getMarker(latitude, longitude) {
+        return L.marker([latitude, longitude], {
+            icon: new L.DivIcon({ html: '<div class="jm-map-icon-dot"></div>', className: 'jm-map-icon', iconSize: new L.Point(30, 30) }),
+            title: 'marker',
+            //alt: TODO add alt text
+        })
+    }
+
+    getCluster() {
+        return L.markerClusterGroup({
+            showCoverageOnHover: false,
+            zoomToBoundsOnClick: false,
+            spiderfyOnMaxZoom: true,
+            removeOutsideVisibleBounds: true,
+            maxClusterRadius: 40,
+            spiderfyPolylineOptions: { weight: 1.5, color: '#442A88', opacity: 0.5 }, // FCECAC FFE77F EE7E7E EB4C67 B1A6CE 442A88
+            iconCreateFunction: this.iconCreationFunction
+        });
+    }
     iconCreationFunction(cluster) {
         var childCount = cluster.getChildCount();
         return new L.DivIcon({ html: '<div><span >' + childCount + '</span></div>', className: 'jm-map-cluster-icon', iconSize: new L.Point(40, 40) });

@@ -35,7 +35,14 @@ get_header();
                 <div>
                     <div id="leaflet-map" style="height: 350px; width: 100%"></div>
                     <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
-                    <div class="coordinate-data" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' );?>" venueName="<?php echo get_field( 'name' ); ?>" ></div>
+                    <script>
+                        addEventListener("DOMContentLoaded", () => {
+                            document.dispatchEvent(new CustomEvent('AddMarker', {'detail': {
+                                'latitude': <?php echo get_field('latitude'); ?>,
+                                'longitude': <?php echo get_field('longitude'); ?>
+                            }}));
+                        });
+                    </script>
                 </div>
                 <div>
                     <h2 style="padding-top: 20px">Reviews</h2>
