@@ -46,40 +46,12 @@ get_header();
                 </div>
                 <div>
                     <h2 style="padding-top: 20px">Reviews</h2>
-                    <?php
-                        $args = array(
-                            'post_type' => 'venue_review',
-                            'posts_per_page' => 5,
-                            'meta_query' => array(
-                                array(
-                                    'key' => 'venue',
-                                    'value' => $post_id,
-                                    'compare' => '=='
-                                )
-                            )
-                        );
-                        $query = new WP_Query($args);
-                        if ($query->have_posts()) :
-                            while( $query->have_posts() ) :
-                                $query->the_post();
-                                ?>
-                                    <h3><?php echo get_field('overall_rating'); ?>/5 - Anonymous Performer</h3>
-                                    <p>
-                                        Compensation Type: <?php echo get_field('_comp_types_string'); ?>
-                                        <br>Hours Performed: <?php echo get_field('hours_performed'); ?>
-                                        <br>Total Performers: <?php echo get_field('total_performers'); ?>
-                                        <?php if (get_field('_has_guarantee_comp')) { ?><br>Guarantee: $<?php echo get_field('guarantee_earnings'); } ?>
-                                        <?php if (get_field('_has_door_comp')) { ?><br>Door: $<?php echo get_field('door_earnings'); ?> (<?php echo get_field('door_percentage'); ?>%) <?php } ?>
-                                        <?php if (get_field('_has_sales_comp')) { ?><br>Sales: $<?php echo get_field('sales_earnings'); ?> (<?php echo get_field('door_percentage'); ?>%) <?php } ?>
-                                        <?php if (get_field('_has_tips_comp')) { ?><br>Tips: $<?php echo get_field('tips_earnings'); } ?>
-                                        <br>Total Earnings: $<?php echo get_field('total_earnings'); ?>
-                                    </p>
-                                    <p><?php echo get_field('review'); ?></p>
-                                <?php
-                            endwhile;
-                        endif;
-                        wp_reset_postdata();
-                    ?>
+                    <div id="venue-reviews-container"></div>
+                    <script>
+                        addEventListener("DOMContentLoaded", () => {
+                            document.dispatchEvent(new CustomEvent('GetVenueReviews', {'detail': { 'venueId': <?php the_ID(); ?>}}));
+                        });
+                    </script>
                 </div>
 			</div><!-- .single-post-wrap -->
 		</main><!-- #main -->

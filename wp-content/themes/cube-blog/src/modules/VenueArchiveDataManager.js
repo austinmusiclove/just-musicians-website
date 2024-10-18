@@ -9,16 +9,12 @@ const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 class VenueArchiveDataManager {
     constructor() {
         this._setupElements();
-        this._setupEvents();
         this._setupEventListeners();
     }
 
     _setupElements() {
         this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
         this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
-    }
-    _setupEvents() {
-        //this.markersLoadedEvent = new CustomEvent(REPLACE_MARKERS_EVENT_NAME);
     }
     _setupEventListeners() {
         document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
@@ -29,7 +25,7 @@ class VenueArchiveDataManager {
         let payStructure = evnt.detail.payStructure;
         this.clearData();
         this.addSpinners();
-        this.getVenueData(payMetric, payStructure).then((response) => {
+        this.getVenuesFromServer(payMetric, payStructure).then((response) => {
             this.removeSpinners();
             return response.data;
         }).then((data) => {
@@ -50,7 +46,7 @@ class VenueArchiveDataManager {
     addSpinners() { } // adds elements that show the new content is loading
     removeSpinners() { } // removes elements that show that content is loading
     // returns promise for venue data from the venues api
-    getVenueData(payMetric='_average_earnings', payStructure=null) {
+    getVenuesFromServer(payMetric='_average_earnings', payStructure=null) {
         return axios.get(`${GET_VENUES_API_URL}/?payMetric=${payMetric}`);
     }
     getTopVenuesTableHeaderHtml() {

@@ -188,15 +188,11 @@ const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 class VenueArchiveDataManager {
   constructor() {
     this._setupElements();
-    this._setupEvents();
     this._setupEventListeners();
   }
   _setupElements() {
     this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
     this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
-  }
-  _setupEvents() {
-    //this.markersLoadedEvent = new CustomEvent(REPLACE_MARKERS_EVENT_NAME);
   }
   _setupEventListeners() {
     document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
@@ -206,7 +202,7 @@ class VenueArchiveDataManager {
     let payStructure = evnt.detail.payStructure;
     this.clearData();
     this.addSpinners();
-    this.getVenueData(payMetric, payStructure).then(response => {
+    this.getVenuesFromServer(payMetric, payStructure).then(response => {
       this.removeSpinners();
       return response.data;
     }).then(data => {
@@ -230,7 +226,7 @@ class VenueArchiveDataManager {
   addSpinners() {} // adds elements that show the new content is loading
   removeSpinners() {} // removes elements that show that content is loading
   // returns promise for venue data from the venues api
-  getVenueData(payMetric = '_average_earnings', payStructure = null) {
+  getVenuesFromServer(payMetric = '_average_earnings', payStructure = null) {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${GET_VENUES_API_URL}/?payMetric=${payMetric}`);
   }
   getTopVenuesTableHeaderHtml() {
@@ -277,11 +273,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+const VENUE_REVIEWS_CONTAINER_ID = 'venue-reviews-container';
+const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
+const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 class VenueDataManager {
   constructor() {
+    this._setupElements();
     this._setupEventListeners();
   }
-  _setupEventListeners() {}
+  _setupElements() {
+    this.venueReviewsContainer = document.getElementById(VENUE_REVIEWS_CONTAINER_ID);
+  }
+  _setupEventListeners() {
+    document.addEventListener(GET_VENUE_REVIEWS_EVENT_NAME, this.getVenueReviews.bind(this));
+  }
+  getVenueReviews(evnt) {
+    let venueId = evnt.detail.venueId;
+    this.getVenueReviewsFromServer(venueId).then(response => {
+      return response.data;
+    }).then(data => {
+      let reviewsHtml = '';
+      for (let iterator = 0; iterator < data.length; iterator++) {
+        reviewsHtml += this.getVenueReviewHtml(data[iterator]);
+      }
+      this.venueReviewsContainer.innerHTML = reviewsHtml;
+    }).catch(err => {
+      console.warn(err);
+    });
+  }
+  getVenueReviewsFromServer(venueId) {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${GET_VENUE_REVIEWS_API_URL}/?venue_id=${venueId}`);
+  }
+  getVenueReviewHtml(venueReview) {
+    let html = `
+            <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
+            <p>
+                Compensation Type: ${venueReview.comp_types_string}
+                <br>Hours Performed: ${venueReview.hours_performed}
+                <br>Total Performers: ${venueReview.total_performers}`;
+    if (venueReview.has_guarantee_comp) {
+      html += `<br>Guarantee: $${venueReview.guarantee_earnings}`;
+    }
+    if (venueReview.has_door_comp) {
+      html += `<br>Door: $${venueReview.door_earnings} (${venueReview.door_percentage}%)`;
+    }
+    if (venueReview.has_sales_comp) {
+      html += `<br>Sales: $${venueReview.sales_earnings} (${venueReview.sales_percentage}%)`;
+    }
+    if (venueReview.has_tips_comp) {
+      html += `<br>Tips: $${venueReview.tips_earnings}`;
+    }
+    html += `
+                <br>Total Earnings: $${venueReview.total_earnings}
+            </p>
+            <p>${venueReview.review}</p>`;
+    return html;
+  }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueDataManager);
 
