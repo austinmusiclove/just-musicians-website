@@ -50,9 +50,9 @@ get_header();
                         </script>
                     </div>
                 </div>
-                <div style="display:flex;">
-                    <div style="height:400px; width:400px"><canvas id="pay-method-chart"></canvas></div>
+                <div style="display:flex; margin-top:40px">
                     <div style="height:400px; width:400px"><canvas id="pay-structure-chart"></canvas></div>
+                    <div style="height:400px; width:400px"><canvas id="pay-method-chart"></canvas></div>
                     <div style="height:400px; width:400px"><canvas id="pay-speed-chart"></canvas></div>
                 </div>
                 <div>

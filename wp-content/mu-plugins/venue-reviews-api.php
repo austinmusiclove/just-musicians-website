@@ -36,6 +36,7 @@ function get_venue_reviews() {
                 'has_tips_comp' => get_field('_has_tips_comp'),
                 'tips_earnings' => get_field('tips_earnings'),
                 'total_earnings' => get_field('total_earnings'),
+                'payment_speed' => get_field('payment_speed'),
                 'payment_method' => get_field('payment_method'),
                 'review' => get_field('review'),
             ));
