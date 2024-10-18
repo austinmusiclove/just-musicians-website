@@ -18,9 +18,11 @@ class VenueArchiveDataManager {
     }
     _setupEventListeners() {
         document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
+        console.log('set up list');
     }
 
     getVenues(evnt) {
+        console.log('get venues');
         let payMetric = evnt.detail.payMetric;
         let payStructure = evnt.detail.payStructure;
         this.clearData();
@@ -47,6 +49,7 @@ class VenueArchiveDataManager {
     removeSpinners() { } // removes elements that show that content is loading
     // returns promise for venue data from the venues api
     getVenuesFromServer(payMetric='_average_earnings', payStructure=null) {
+        console.log('call api');
         return axios.get(`${GET_VENUES_API_URL}/?payMetric=${payMetric}`);
     }
     getTopVenuesTableHeaderHtml() {
