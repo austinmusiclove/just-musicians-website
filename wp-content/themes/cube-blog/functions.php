@@ -295,12 +295,10 @@ function cube_blog_scripts() {
 	wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
     wp_enqueue_script( 'leaflet-clustering-js', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js', array('leaflet-js'), null, true );
 
-    /*
     wp_localize_script('jm-custom-js', 'siteData', array(
         'root_url' => get_site_url(),
         'nonce' => wp_create_nonce('wp_rest')
     ));
-    */
 }
 add_action( 'wp_enqueue_scripts', 'cube_blog_scripts' );
 
