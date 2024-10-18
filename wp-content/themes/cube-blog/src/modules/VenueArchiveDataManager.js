@@ -8,17 +8,22 @@ const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 
 class VenueArchiveDataManager {
     constructor() {
+        console.log('construct arch data man');
         this._setupElements();
         this._setupEventListeners();
+        console.log('end construct arch data man');
     }
 
     _setupElements() {
+        console.log('set up elements');
         this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
         this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
+        console.log('set up elements end');
     }
     _setupEventListeners() {
-        document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
         console.log('set up list');
+        document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
+        console.log('set up list end');
     }
 
     getVenues(evnt) {
