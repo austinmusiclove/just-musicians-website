@@ -187,24 +187,17 @@ const GET_VENUES_EVENT_NAME = 'GetVenues';
 const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 class VenueArchiveDataManager {
   constructor() {
-    console.log('construct arch data man');
     this._setupElements();
     this._setupEventListeners();
-    console.log('end construct arch data man');
   }
   _setupElements() {
-    console.log('set up elements');
     this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
     this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
-    console.log('set up elements end');
   }
   _setupEventListeners() {
-    console.log('set up list');
     document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
-    console.log('set up list end');
   }
   getVenues(evnt) {
-    console.log('get venues');
     let payMetric = evnt.detail.payMetric;
     let payStructure = evnt.detail.payStructure;
     this.clearData();
@@ -234,7 +227,6 @@ class VenueArchiveDataManager {
   removeSpinners() {} // removes elements that show that content is loading
   // returns promise for venue data from the venues api
   getVenuesFromServer(payMetric = '_average_earnings', payStructure = null) {
-    console.log('call api');
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${GET_VENUES_API_URL}/?payMetric=${payMetric}`);
   }
   getTopVenuesTableHeaderHtml() {
@@ -5160,7 +5152,6 @@ const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default
 const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
 const venueDataManager = new _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__["default"]();
 const venueArchiveDataManager = new _modules_VenueArchiveDataManager__WEBPACK_IMPORTED_MODULE_3__["default"]();
-console.log('index.js');
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

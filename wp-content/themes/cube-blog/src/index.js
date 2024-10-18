@@ -9,4 +9,3 @@ const leafletMap = new LeafletMap();
 const chartGenerator = new ChartGenerator();
 const venueDataManager = new VenueDataManager();
 const venueArchiveDataManager = new VenueArchiveDataManager();
-console.log('index.js');
