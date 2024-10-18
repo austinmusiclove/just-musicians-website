@@ -23,7 +23,6 @@ get_header();
             <script>
                 addEventListener("DOMContentLoaded", () => {
                     document.dispatchEvent(new CustomEvent('GetVenues', {'detail': {'payStructure': null, 'payMetric': '_average_earnings'}}));
-                    console.log('dispatch get venues');
                 });
             </script>
 
