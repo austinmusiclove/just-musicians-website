@@ -1,17 +1,11 @@
 import axios from 'axios';
 
-const VENUE_REVIEWS_CONTAINER_ID = 'venue-reviews-container';
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 
 class VenueDataManager {
     constructor() {
-        this._setupElements()
         this._setupEventListeners()
-    }
-
-    _setupElements() {
-        this.venueReviewsContainer = document.getElementById(VENUE_REVIEWS_CONTAINER_ID);
     }
     _setupEventListeners() {
         document.addEventListener(GET_VENUE_REVIEWS_EVENT_NAME, this.getVenueReviews.bind(this));
@@ -19,6 +13,7 @@ class VenueDataManager {
 
     getVenueReviews(evnt) {
         let venueId = evnt.detail.venueId;
+        let container = document.getElementById(evnt.detail.containerId);
         this.getVenueReviewsFromServer(venueId).then((response) => {
             return response.data;
         }).then((data) => {
@@ -26,7 +21,7 @@ class VenueDataManager {
             for (let iterator = 0; iterator < data.length; iterator++) {
                 reviewsHtml += this.getVenueReviewHtml(data[iterator])
             }
-            this.venueReviewsContainer.innerHTML = reviewsHtml
+            container.innerHTML = reviewsHtml
         }).catch((err) => {
             console.warn(err);
         });

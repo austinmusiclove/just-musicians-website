@@ -22,7 +22,7 @@ get_header();
 			</div><!-- .blog-archive -->
             <script>
                 addEventListener("DOMContentLoaded", () => {
-                    document.dispatchEvent(new CustomEvent('GetVenues', {'detail': {'payStructure': null, 'payMetric': '_average_earnings'}}));
+                    document.dispatchEvent(new CustomEvent('GetVenues', {'detail': {'tableId': 'top-venues-table', 'payStructure': null, 'payMetric': '_average_earnings'}}));
                 });
             </script>
 

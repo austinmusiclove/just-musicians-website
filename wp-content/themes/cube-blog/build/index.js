@@ -12,8 +12,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+const GENERATE_PIE_CHART_EVENT_NAME = 'GeneratePieChart';
 class ChartGenerator {
-  constructor() {}
+  constructor() {
+    this._setupEventListeners();
+  }
+  _setupEventListeners() {
+    document.addEventListener(GENERATE_PIE_CHART_EVENT_NAME, this.generatePieChart.bind(this));
+  }
+  generatePieChart() {}
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChartGenerator);
 
@@ -180,19 +187,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
-const LEAFLET_MAP_CONTAINER_ID = 'leaflet-map';
-const TOP_VENUES_TABLE_ID = 'top-venues-table';
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const GET_VENUES_EVENT_NAME = 'GetVenues';
 const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 class VenueArchiveDataManager {
   constructor() {
-    this._setupElements();
     this._setupEventListeners();
-  }
-  _setupElements() {
-    this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
-    this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
   }
   _setupEventListeners() {
     document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
@@ -200,6 +200,7 @@ class VenueArchiveDataManager {
   getVenues(evnt) {
     let payMetric = evnt.detail.payMetric;
     let payStructure = evnt.detail.payStructure;
+    let tableElement = document.getElementById(evnt.detail.tableId);
     this.clearData();
     this.addSpinners();
     this.getVenuesFromServer(payMetric, payStructure).then(response => {
@@ -217,7 +218,7 @@ class VenueArchiveDataManager {
           'markers': markers
         }
       }));
-      this.topVenuesTable.innerHTML = tableHtml;
+      tableElement.innerHTML = tableHtml;
     }).catch(err => {
       console.warn(err);
     });
@@ -275,22 +276,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
-const VENUE_REVIEWS_CONTAINER_ID = 'venue-reviews-container';
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 class VenueDataManager {
   constructor() {
-    this._setupElements();
     this._setupEventListeners();
-  }
-  _setupElements() {
-    this.venueReviewsContainer = document.getElementById(VENUE_REVIEWS_CONTAINER_ID);
   }
   _setupEventListeners() {
     document.addEventListener(GET_VENUE_REVIEWS_EVENT_NAME, this.getVenueReviews.bind(this));
   }
   getVenueReviews(evnt) {
     let venueId = evnt.detail.venueId;
+    let container = document.getElementById(evnt.detail.containerId);
     this.getVenueReviewsFromServer(venueId).then(response => {
       return response.data;
     }).then(data => {
@@ -298,7 +295,7 @@ class VenueDataManager {
       for (let iterator = 0; iterator < data.length; iterator++) {
         reviewsHtml += this.getVenueReviewHtml(data[iterator]);
       }
-      this.venueReviewsContainer.innerHTML = reviewsHtml;
+      container.innerHTML = reviewsHtml;
     }).catch(err => {
       console.warn(err);
     });

@@ -1,20 +1,12 @@
 import axios from 'axios';
 
-const LEAFLET_MAP_CONTAINER_ID = 'leaflet-map';
-const TOP_VENUES_TABLE_ID = 'top-venues-table';
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const GET_VENUES_EVENT_NAME = 'GetVenues';
 const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 
 class VenueArchiveDataManager {
     constructor() {
-        this._setupElements();
         this._setupEventListeners();
-    }
-
-    _setupElements() {
-        this.leafletMap = document.getElementById(LEAFLET_MAP_CONTAINER_ID);
-        this.topVenuesTable = document.getElementById(TOP_VENUES_TABLE_ID);
     }
     _setupEventListeners() {
         document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
@@ -23,6 +15,7 @@ class VenueArchiveDataManager {
     getVenues(evnt) {
         let payMetric = evnt.detail.payMetric;
         let payStructure = evnt.detail.payStructure;
+        let tableElement = document.getElementById(evnt.detail.tableId);
         this.clearData();
         this.addSpinners();
         this.getVenuesFromServer(payMetric, payStructure).then((response) => {
@@ -36,7 +29,7 @@ class VenueArchiveDataManager {
                 tableHtml += this.getTopVenuesTableRowHtml(iterator+1, data[iterator])
             }
             document.dispatchEvent(new CustomEvent(REPLACE_MARKERS_EVENT_NAME, {'detail': { 'markers': markers}}));
-            this.topVenuesTable.innerHTML = tableHtml;
+            tableElement.innerHTML = tableHtml;
         }).catch((err) => {
             console.warn(err);
         });

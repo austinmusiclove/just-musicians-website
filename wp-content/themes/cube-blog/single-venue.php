@@ -49,7 +49,7 @@ get_header();
                     <div id="venue-reviews-container"></div>
                     <script>
                         addEventListener("DOMContentLoaded", () => {
-                            document.dispatchEvent(new CustomEvent('GetVenueReviews', {'detail': { 'venueId': <?php the_ID(); ?>}}));
+                            document.dispatchEvent(new CustomEvent('GetVenueReviews', {'detail': { 'containerId': 'venue-reviews-container', 'venueId': <?php the_ID(); ?>}}));
                         });
                     </script>
                 </div>
