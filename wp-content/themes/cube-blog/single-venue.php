@@ -27,29 +27,46 @@ get_header();
                     }
                 }
 				?>
-                <h2>Overall Rating: <?php echo get_field('_overall_rating'); ?>/5 </h2>
-                <p>Total Reviews: <?php echo get_field('_review_count'); ?>
-                <br>Average Earnings Per Gig: $<?php echo get_field('_average_earnings'); ?>
-                <br>Average Earnings Per Performer: $<?php echo get_field('_average_earnings_per_performer'); ?>
-                <br>Average Earnings Per Performer Per Hour: $<?php echo get_field('_average_earnings_per_performer_per_hour'); ?></p>
-                <div>
-                    <div id="leaflet-map" style="height: 350px; width: 100%"></div>
-                    <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
-                    <script>
-                        addEventListener("DOMContentLoaded", () => {
-                            document.dispatchEvent(new CustomEvent('AddMarker', {'detail': {
-                                'latitude': <?php echo get_field('latitude'); ?>,
-                                'longitude': <?php echo get_field('longitude'); ?>
-                            }}));
-                        });
-                    </script>
+                <div style="display:flex; justify-content:space-between; margin-top:40px;">
+                    <div>
+                        <table style="width:100%">
+                            <tr><td>Overall Rating</td><td><?php echo get_field('_overall_rating'); ?>/5</td></tr>
+                            <tr><td>Total Reviews:</td><td><?php echo get_field('_review_count'); ?></td></tr>
+                            <tr><td>Average Earnings Per Gig:</td><td>$<?php echo get_field('_average_earnings'); ?></td></tr>
+                            <tr><td>Average Earnings Per Performer:</td><td>$<?php echo get_field('_average_earnings_per_performer'); ?></td></tr>
+                            <tr><td>Average Earnings Per Performer Per Hour:</td><td>$<?php echo get_field('_average_earnings_per_performer_per_hour'); ?></td></tr>
+                        </table>
+                    </div>
+                    <div>
+                        <div id="leaflet-map" style="height: 300px; width: 500px"></div>
+                        <div id="map-init-div" zoom-level="14" enable-popups="false" latitude="<?php echo get_field( 'latitude' ); ?>" longitude="<?php echo get_field( 'longitude' ); ?>"></div>
+                        <script>
+                            addEventListener("DOMContentLoaded", () => {
+                                document.dispatchEvent(new CustomEvent('AddMarker', {'detail': {
+                                    'latitude': <?php echo get_field('latitude'); ?>,
+                                    'longitude': <?php echo get_field('longitude'); ?>
+                                }}));
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div style="display:flex;">
+                    <div style="height:400px; width:400px"><canvas id="pay-method-chart"></canvas></div>
+                    <div style="height:400px; width:400px"><canvas id="pay-structure-chart"></canvas></div>
+                    <div style="height:400px; width:400px"><canvas id="pay-speed-chart"></canvas></div>
                 </div>
                 <div>
                     <h2 style="padding-top: 20px">Reviews</h2>
                     <div id="venue-reviews-container"></div>
                     <script>
                         addEventListener("DOMContentLoaded", () => {
-                            document.dispatchEvent(new CustomEvent('GetVenueReviews', {'detail': { 'containerId': 'venue-reviews-container', 'venueId': <?php the_ID(); ?>}}));
+                            document.dispatchEvent(new CustomEvent('GetVenueReviews', {'detail': {
+                                'reviewsContainerId': 'venue-reviews-container',
+                                'payStructureChartContainerId': 'pay-structure-chart',
+                                'paySpeedChartContainerId': 'pay-speed-chart',
+                                'payMethodChartContainerId': 'pay-method-chart',
+                                'venueId': <?php the_ID(); ?>
+                            }}));
                         });
                     </script>
                 </div>

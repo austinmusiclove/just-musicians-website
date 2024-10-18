@@ -286,14 +286,15 @@ function cube_blog_scripts() {
 	}
 
     // custom js
-	//wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', null, '1.0', true );
-	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', array('leaflet-js', 'leaflet-clustering-js'), '1.0', true );
+	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', array('leaflet-js', 'leaflet-clustering-js', 'chart-js'), '1.0', true );
     // Leaflet Maps
 	wp_enqueue_style( 'leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
     wp_enqueue_style( 'leaflet-clustering-css', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css' );
     wp_enqueue_style( 'leaflet-clustering-css-default', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css' );
 	wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
     wp_enqueue_script( 'leaflet-clustering-js', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js', array('leaflet-js'), null, true );
+    // Charts
+	wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js');
 
     wp_localize_script('jm-custom-js', 'siteData', array(
         'root_url' => get_site_url(),

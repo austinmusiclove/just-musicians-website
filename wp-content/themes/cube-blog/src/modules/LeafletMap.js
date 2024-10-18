@@ -14,6 +14,7 @@ class LeafletMap {
         this.cluster = null;
 
         // check for map options
+        // TODO replace map init div with sending an event to init map
         var mapInitDiv = document.getElementById('map-init-div');
         if (mapInitDiv) {
             var latitude = mapInitDiv.getAttribute('latitude');

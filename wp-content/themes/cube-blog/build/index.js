@@ -12,15 +12,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const GENERATE_PIE_CHART_EVENT_NAME = 'GeneratePieChart';
 class ChartGenerator {
-  constructor() {
-    this._setupEventListeners();
+  constructor() {}
+  generatePolarAreaChart(containerId, chartTitle, data) {
+    const ctx = document.getElementById(containerId);
+    let chartLabels = ['Cash', 'Check', 'Direct Deposit', 'Zelle', 'PayPal', 'Venmo', 'Cash App'];
+    let chartData = [data.hasOwnProperty(chartLabels[0]) ? data[chartLabels[0]] : 0, data.hasOwnProperty(chartLabels[1]) ? data[chartLabels[1]] : 0, data.hasOwnProperty(chartLabels[2]) ? data[chartLabels[2]] : 0, data.hasOwnProperty(chartLabels[3]) ? data[chartLabels[3]] : 0, data.hasOwnProperty(chartLabels[4]) ? data[chartLabels[4]] : 0, data.hasOwnProperty(chartLabels[5]) ? data[chartLabels[5]] : 0, data.hasOwnProperty(chartLabels[6]) ? data[chartLabels[6]] : 0];
+    new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: 'Dataset 1',
+          data: chartData,
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(201, 203, 207, 0.2)']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            pointLabels: {
+              display: true,
+              centerPointLabels: true,
+              font: {
+                size: 18
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: chartTitle
+          }
+        }
+      }
+    });
   }
-  _setupEventListeners() {
-    document.addEventListener(GENERATE_PIE_CHART_EVENT_NAME, this.generatePieChart.bind(this));
-  }
-  generatePieChart() {}
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChartGenerator);
 
@@ -51,6 +83,7 @@ class LeafletMap {
     this.cluster = null;
 
     // check for map options
+    // TODO replace map init div with sending an event to init map
     var mapInitDiv = document.getElementById('map-init-div');
     if (mapInitDiv) {
       var latitude = mapInitDiv.getAttribute('latitude');
@@ -279,7 +312,8 @@ __webpack_require__.r(__webpack_exports__);
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 class VenueDataManager {
-  constructor() {
+  constructor(chartGenerator) {
+    this.chartGenerator = chartGenerator;
     this._setupEventListeners();
   }
   _setupEventListeners() {
@@ -287,15 +321,26 @@ class VenueDataManager {
   }
   getVenueReviews(evnt) {
     let venueId = evnt.detail.venueId;
-    let container = document.getElementById(evnt.detail.containerId);
     this.getVenueReviewsFromServer(venueId).then(response => {
       return response.data;
     }).then(data => {
+      // parse data
       let reviewsHtml = '';
+      //let payStructureData = {};
+      //let paySpeedData = {};
+      let payMethodData = {};
       for (let iterator = 0; iterator < data.length; iterator++) {
         reviewsHtml += this.getVenueReviewHtml(data[iterator]);
+        let payMethod = data[iterator].payment_method;
+        payMethodData.hasOwnProperty(payMethod) ? payMethodData[payMethod] += 1 : payMethodData[payMethod] = 1;
       }
-      container.innerHTML = reviewsHtml;
+
+      // reviews section
+      let reviewsContainer = document.getElementById(evnt.detail.reviewsContainerId);
+      reviewsContainer.innerHTML = reviewsHtml;
+
+      // charts section
+      this.chartGenerator.generatePolarAreaChart(evnt.detail.payMethodChartContainerId, 'Payout Method', payMethodData);
     }).catch(err => {
       console.warn(err);
     });
@@ -328,6 +373,9 @@ class VenueDataManager {
             <p>${venueReview.review}</p>`;
     return html;
   }
+  generatePayStructureChart(evnt) {}
+  generatePaySpeedChart(evnt) {}
+  generatePayMethodChart(evnt) {}
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueDataManager);
 
@@ -5147,7 +5195,7 @@ __webpack_require__.r(__webpack_exports__);
 // Instantiate
 const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
 const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
-const venueDataManager = new _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__["default"]();
+const venueDataManager = new _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
 const venueArchiveDataManager = new _modules_VenueArchiveDataManager__WEBPACK_IMPORTED_MODULE_3__["default"]();
 /******/ })()
 ;

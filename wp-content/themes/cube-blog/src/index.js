@@ -7,5 +7,5 @@ import VenueArchiveDataManager from "./modules/VenueArchiveDataManager";
 // Instantiate
 const leafletMap = new LeafletMap();
 const chartGenerator = new ChartGenerator();
-const venueDataManager = new VenueDataManager();
+const venueDataManager = new VenueDataManager(chartGenerator);
 const venueArchiveDataManager = new VenueArchiveDataManager();

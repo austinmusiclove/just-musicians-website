@@ -4,7 +4,8 @@ const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 
 class VenueDataManager {
-    constructor() {
+    constructor(chartGenerator) {
+        this.chartGenerator = chartGenerator;
         this._setupEventListeners()
     }
     _setupEventListeners() {
@@ -13,15 +14,28 @@ class VenueDataManager {
 
     getVenueReviews(evnt) {
         let venueId = evnt.detail.venueId;
-        let container = document.getElementById(evnt.detail.containerId);
         this.getVenueReviewsFromServer(venueId).then((response) => {
             return response.data;
         }).then((data) => {
+            // parse data
             let reviewsHtml = ''
+            //let payStructureData = {};
+            //let paySpeedData = {};
+            let payMethodData = {};
             for (let iterator = 0; iterator < data.length; iterator++) {
                 reviewsHtml += this.getVenueReviewHtml(data[iterator])
+                let payMethod = data[iterator].payment_method;
+                payMethodData.hasOwnProperty(payMethod) ? payMethodData[payMethod] += 1 : payMethodData[payMethod] = 1;
             }
-            container.innerHTML = reviewsHtml
+
+            // reviews section
+            let reviewsContainer = document.getElementById(evnt.detail.reviewsContainerId);
+            reviewsContainer.innerHTML = reviewsHtml
+
+            // charts section
+            this.chartGenerator.generatePolarAreaChart(evnt.detail.payMethodChartContainerId, 'Payout Method', payMethodData);
+
+
         }).catch((err) => {
             console.warn(err);
         });
@@ -48,6 +62,10 @@ class VenueDataManager {
             <p>${venueReview.review}</p>`
         return html;
     }
+
+    generatePayStructureChart(evnt) {}
+    generatePaySpeedChart(evnt) {}
+    generatePayMethodChart(evnt) {}
 }
 
 export default VenueDataManager
