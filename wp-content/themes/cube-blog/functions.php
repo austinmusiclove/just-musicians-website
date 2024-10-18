@@ -286,7 +286,7 @@ function cube_blog_scripts() {
 	}
 
     // custom js
-	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', null, 'leaflet-clustering-js'), '1.0', true );
+	wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', null, '1.0', true );
 	//wp_enqueue_script( 'jm-custom-js', get_template_directory_uri() . '/build/index.js', array('leaflet-js', 'leaflet-clustering-js'), '1.0', true );
     // Leaflet Maps
 	wp_enqueue_style( 'leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
