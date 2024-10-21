@@ -3,8 +3,6 @@
 function get_venue_reviews() {
     $venueId = $_GET['venue_id'];
     $result = array();
-    //$pay_metric = '';
-    //$pay_type = '';
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,

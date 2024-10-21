@@ -3,6 +3,12 @@ import axios from 'axios';
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const GET_VENUES_EVENT_NAME = 'GetVenues';
 const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
+const PAY_METRIC_LABELS = {
+    'average_earnings': 'Avg. Earnings Per Gig',
+    'average_earnings_per_performer': 'Avg. Earnings Per Gig Per Performer',
+    'average_earnings_per_hour': 'Avg. Earnings Per Hour',
+    'average_earnings_per_performer_per_hour': 'Avg. Earnings Per Performer Per Hour',
+};
 
 class VenueArchiveDataManager {
     constructor() {
@@ -14,16 +20,16 @@ class VenueArchiveDataManager {
 
     getVenues(evnt) {
         let payMetric = evnt.detail.payMetric;
-        let payStructure = evnt.detail.payStructure;
+        let payType = evnt.detail.payType;
         let tableElement = document.getElementById(evnt.detail.tableId);
         this.clearData();
         this.addSpinners();
-        this.getVenuesFromServer(payMetric, payStructure).then((response) => {
+        this.getVenuesFromServer(payMetric, payType).then((response) => {
             this.removeSpinners();
             return response.data;
         }).then((data) => {
             let markers = []
-            let tableHtml = this.getTopVenuesTableHeaderHtml();
+            let tableHtml = this.getTopVenuesTableHeaderHtml(payMetric);
             for (let iterator = 0; iterator < data.length; iterator++) {
                 markers.push(this.getMarkerData(data[iterator]));
                 tableHtml += this.getTopVenuesTableRowHtml(iterator+1, data[iterator])
@@ -39,14 +45,16 @@ class VenueArchiveDataManager {
     addSpinners() { } // adds elements that show the new content is loading
     removeSpinners() { } // removes elements that show that content is loading
     // returns promise for venue data from the venues api
-    getVenuesFromServer(payMetric='_average_earnings', payStructure=null) {
-        return axios.get(`${GET_VENUES_API_URL}/?payMetric=${payMetric}`);
+    getVenuesFromServer(payMetric='_average_earnings', payType=null) {
+        let url = `${GET_VENUES_API_URL}/?pay_metric=${payMetric}`
+        if (payType) { url += `&pay_type=${payType}`}
+        return axios.get(url);
     }
-    getTopVenuesTableHeaderHtml() {
+    getTopVenuesTableHeaderHtml(payMetric) {
         return `<tr>
                     <th>Rank</th>
                     <th>Venue</th>
-                    <th>Average Earnings per Gig</th>
+                    <th>${PAY_METRIC_LABELS[payMetric]}</th>
                     <th>Review Count</th>
                     <th>Rating</th>
                 </tr>`
@@ -55,7 +63,7 @@ class VenueArchiveDataManager {
         return `<tr>
                     <td>${rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
-                    <td>$${venue.average_earnings}</td>
+                    <td>$${venue.pay_metric}</td>
                     <td>${venue.review_count}</td>
                     <td>${venue.overall_rating}/5</td>
                 </tr>`

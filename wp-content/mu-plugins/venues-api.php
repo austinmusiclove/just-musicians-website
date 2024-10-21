@@ -2,21 +2,34 @@
 
 function get_venues() {
     $result = array();
-    //$pay_metric = '';
-    //$pay_type = '';
+    $pay_metric = $_GET['pay_metric'];
+    $pay_type = $_GET['pay_type'];
+
+    $review_count_var = '_review_count';
+    $sort_var = '_average_earnings';
+    if (isset($pay_metric)) {
+        $sort_var = '_' . $pay_metric;
+    }
+    if (isset($pay_type)) {
+        $review_count_var = '_' . $pay_type . $review_count_var;
+        if (isset($pay_metric)) {
+            $sort_var = '_' . $pay_type . $sort_var;
+        }
+    }
+
     $args = array(
         'post_type' => 'venue',
         'nopaging' => true,
         'meta_query' => array(
             array(
-                'key' => '_review_count',
+                'key' => $review_count_var,
                 'value' => 0,
                 'compare' => '>'
             )
         ),
         'order' => 'DEC',
         'orderby' => 'meta_value_num',
-        'meta_key' => '_average_earnings'
+        'meta_key' => $sort_var
     );
     $query = new WP_Query($args);
     if ($query->have_posts()) {
@@ -30,6 +43,7 @@ function get_venues() {
                 'review_count' => get_field('_review_count'),
                 'overall_rating' => get_field('_overall_rating'),
                 'permalink' => get_the_permalink(),
+                'pay_metric' => get_field($sort_var),
             ));
         }
     }
@@ -38,8 +52,8 @@ function get_venues() {
 
 
 add_action('rest_api_init', function () {
- register_rest_route( 'v1', 'venues', [
-    'methods' => 'GET',
-    'callback' => 'get_venues',
-  ]);
+    register_rest_route( 'v1', 'venues', [
+        'methods' => 'GET',
+        'callback' => 'get_venues',
+    ]);
 });

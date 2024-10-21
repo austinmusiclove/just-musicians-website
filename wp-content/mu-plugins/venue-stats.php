@@ -39,6 +39,18 @@ function update_venue_stats() {
             $earnings_per_performer_sum = 0;
             $earnings_per_hour_sum = 0;
             $earnings_per_performer_per_hour_sum = 0;
+            $guarantee_earnings_sum = 0;
+            $guarantee_earnings_per_performer_sum = 0;
+            $guarantee_earnings_per_hour_sum = 0;
+            $guarantee_earnings_per_performer_per_hour_sum = 0;
+            $door_deal_earnings_sum = 0;
+            $door_deal_earnings_per_performer_sum = 0;
+            $door_deal_earnings_per_hour_sum = 0;
+            $door_deal_earnings_per_performer_per_hour_sum = 0;
+            $sales_deal_earnings_sum = 0;
+            $sales_deal_earnings_per_performer_sum = 0;
+            $sales_deal_earnings_per_hour_sum = 0;
+            $sales_deal_earnings_per_performer_per_hour_sum = 0;
 
             // Get reviews for this venue
             $venues_query->the_post();
@@ -60,14 +72,37 @@ function update_venue_stats() {
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();
                     $review_count++;
-                    if (get_post_meta(get_the_ID(), '_has_guarantee_comp' , true)) { $guarantee_review_count++; }
-                    if (get_post_meta(get_the_ID(), '_has_door_comp' , true)) { $door_deal_review_count++; }
-                    if (get_post_meta(get_the_ID(), '_has_sales_comp' , true)) { $sales_deal_review_count++; }
                     $overall_rating_sum += (int)get_post_meta(get_the_ID(), 'overall_rating' , true);
-                    $earnings_sum += (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
-                    $earnings_per_performer_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_performer' , true);
-                    $earnings_per_hour_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_hour' , true);
-                    $earnings_per_performer_per_hour_sum += (float)get_post_meta(get_the_ID(), '_earnings_per_performer_per_hour' , true);
+                    $review_earnings = (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
+                    $review_earnings_per_performer = (float)get_post_meta(get_the_ID(), '_earnings_per_performer' , true);
+                    $review_earnings_per_hour = (float)get_post_meta(get_the_ID(), '_earnings_per_hour' , true);
+                    $review_earnings_per_performer_per_hour = (float)get_post_meta(get_the_ID(), '_earnings_per_performer_per_hour' , true);
+
+                    $earnings_sum += $review_earnings;
+                    $earnings_per_performer_sum += $review_earnings_per_performer;
+                    $earnings_per_hour_sum += $review_earnings_per_hour;
+                    $earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
+                    if (get_post_meta(get_the_ID(), '_has_guarantee_comp' , true)) {
+                        $guarantee_review_count++;
+                        $guarantee_earnings_sum += $review_earnings;
+                        $guarantee_earnings_per_performer_sum += $review_earnings_per_performer;
+                        $guarantee_earnings_per_hour_sum += $review_earnings_per_hour;
+                        $guarantee_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
+                    }
+                    if (get_post_meta(get_the_ID(), '_has_door_comp' , true)) {
+                        $door_deal_review_count++;
+                        $door_deal_earnings_sum += $review_earnings;
+                        $door_deal_earnings_per_performer_sum += $review_earnings_per_performer;
+                        $door_deal_earnings_per_hour_sum += $review_earnings_per_hour;
+                        $door_deal_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
+                    }
+                    if (get_post_meta(get_the_ID(), '_has_sales_comp' , true)) {
+                        $sales_deal_review_count++;
+                        $sales_deal_earnings_sum += $review_earnings;
+                        $sales_deal_earnings_per_performer_sum += $review_earnings_per_performer;
+                        $sales_deal_earnings_per_hour_sum += $review_earnings_per_hour;
+                        $sales_deal_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
+                    }
                 }
             }
 
@@ -77,6 +112,18 @@ function update_venue_stats() {
             $earnings_per_performer_average = round(($review_count > 0) ? $earnings_per_performer_sum/$review_count : 0, 2);
             $earnings_per_hour_average = round(($review_count > 0) ? $earnings_per_hour_sum/$review_count : 0, 2);
             $earnings_per_performer_per_hour_average = round(($review_count > 0) ? $earnings_per_performer_per_hour_sum/$review_count : 0, 2);
+            $guarantee_earnings_average = round(($guarantee_review_count > 0) ? $guarantee_earnings_sum/$guarantee_review_count : 0, 2);
+            $guarantee_earnings_per_performer_average = round(($guarantee_review_count > 0) ? $guarantee_earnings_per_performer_sum/$guarantee_review_count : 0, 2);
+            $guarantee_earnings_per_hour_average = round(($guarantee_review_count > 0) ? $guarantee_earnings_per_hour_sum/$guarantee_review_count : 0, 2);
+            $guarantee_earnings_per_performer_per_hour_average = round(($guarantee_review_count > 0) ? $guarantee_earnings_per_performer_per_hour_sum/$guarantee_review_count : 0, 2);
+            $door_deal_earnings_average = round(($door_deal_review_count > 0) ? $door_deal_earnings_sum/$door_deal_review_count : 0, 2);
+            $door_deal_earnings_per_performer_average = round(($door_deal_review_count > 0) ? $door_deal_earnings_per_performer_sum/$door_deal_review_count : 0, 2);
+            $door_deal_earnings_per_hour_average = round(($door_deal_review_count > 0) ? $door_deal_earnings_per_hour_sum/$door_deal_review_count : 0, 2);
+            $door_deal_earnings_per_performer_per_hour_average = round(($door_deal_review_count > 0) ? $door_deal_earnings_per_performer_per_hour_sum/$door_deal_review_count : 0, 2);
+            $sales_deal_earnings_average = round(($sales_deal_review_count > 0) ? $sales_deal_earnings_sum/$sales_deal_review_count : 0, 2);
+            $sales_deal_earnings_per_performer_average = round(($sales_deal_review_count > 0) ? $sales_deal_earnings_per_performer_sum/$sales_deal_review_count : 0, 2);
+            $sales_deal_earnings_per_hour_average = round(($sales_deal_review_count > 0) ? $sales_deal_earnings_per_hour_sum/$sales_deal_review_count : 0, 2);
+            $sales_deal_earnings_per_performer_per_hour_average = round(($sales_deal_review_count > 0) ? $sales_deal_earnings_per_performer_per_hour_sum/$sales_deal_review_count : 0, 2);
 
             // update venue meta data
             $update_args = array(
@@ -91,6 +138,18 @@ function update_venue_stats() {
                     '_average_earnings_per_performer' => $earnings_per_performer_average,
                     '_average_earnings_per_hour' => $earnings_per_hour_average,
                     '_average_earnings_per_performer_per_hour' => $earnings_per_performer_per_hour_average,
+                    '_guarantee_average_earnings' => $guarantee_earnings_average,
+                    '_guarantee_average_earnings_per_performer' => $guarantee_earnings_per_performer_average,
+                    '_guarantee_average_earnings_per_hour' => $guarantee_earnings_per_hour_average,
+                    '_guarantee_average_earnings_per_performer_per_hour' => $guarantee_earnings_per_performer_per_hour_average,
+                    '_door_deal_average_earnings' => $door_deal_earnings_average,
+                    '_door_deal_average_earnings_per_performer' => $door_deal_earnings_per_performer_average,
+                    '_door_deal_average_earnings_per_hour' => $door_deal_earnings_per_hour_average,
+                    '_door_deal_average_earnings_per_performer_per_hour' => $door_deal_earnings_per_performer_per_hour_average,
+                    '_sales_deal_average_earnings' => $sales_deal_earnings_average,
+                    '_sales_deal_average_earnings_per_performer' => $sales_deal_earnings_per_performer_average,
+                    '_sales_deal_average_earnings_per_hour' => $sales_deal_earnings_per_hour_average,
+                    '_sales_deal_average_earnings_per_performer_per_hour' => $sales_deal_earnings_per_performer_per_hour_average,
                 ),
             );
             $update_result = wp_update_post( wp_slash($update_args), true );
