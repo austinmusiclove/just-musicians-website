@@ -55,7 +55,6 @@ class VenueArchiveDataManager {
                     <th>Rank</th>
                     <th>Venue</th>
                     <th>${PAY_METRIC_LABELS[payMetric]}</th>
-                    <th>Review Count</th>
                     <th>Rating</th>
                 </tr>`
     }
@@ -64,7 +63,6 @@ class VenueArchiveDataManager {
                     <td>${rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
                     <td>$${venue.pay_metric}</td>
-                    <td>${venue.review_count}</td>
                     <td>${venue.overall_rating}/5</td>
                 </tr>`
     }
@@ -73,7 +71,6 @@ class VenueArchiveDataManager {
             'coordinateTitle': venue.name,
             'latitude': venue.latitude,
             'longitude': venue.longitude,
-            'reviewCount': venue.review_count,
             'coordinateLinkUrl': venue.permalink,
             'averageEarnings': venue.average_earnings,
             'overallRating': venue.overall_rating,

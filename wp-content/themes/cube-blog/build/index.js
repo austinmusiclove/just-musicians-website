@@ -123,7 +123,6 @@ class LeafletMap {
       let latitude = markers[i].latitude;
       let longitude = markers[i].longitude;
       let coordinateTitle = markers[i].coordinateTitle;
-      let reviewCount = markers[i].reviewCount;
       let coordinateLinkUrl = markers[i].coordinateLinkUrl;
       let overallRating = markers[i].overallRating;
       let averageEarnings = markers[i].averageEarnings;
@@ -140,7 +139,6 @@ class LeafletMap {
                                 <h3>${coordinateTitle}</h3>
                             </div>
                         </a>
-                        <div class="map-popup-date-time">Total reviews: ${reviewCount}</div>
                         <div class="map-popup-date-time">Average Earnings Per Gig: $${averageEarnings}</div>
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
@@ -266,7 +264,6 @@ class VenueArchiveDataManager {
                     <th>Rank</th>
                     <th>Venue</th>
                     <th>${PAY_METRIC_LABELS[payMetric]}</th>
-                    <th>Review Count</th>
                     <th>Rating</th>
                 </tr>`;
   }
@@ -275,7 +272,6 @@ class VenueArchiveDataManager {
                     <td>${rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
                     <td>$${venue.pay_metric}</td>
-                    <td>${venue.review_count}</td>
                     <td>${venue.overall_rating}/5</td>
                 </tr>`;
   }
@@ -284,7 +280,6 @@ class VenueArchiveDataManager {
       'coordinateTitle': venue.name,
       'latitude': venue.latitude,
       'longitude': venue.longitude,
-      'reviewCount': venue.review_count,
       'coordinateLinkUrl': venue.permalink,
       'averageEarnings': venue.average_earnings,
       'overallRating': venue.overall_rating

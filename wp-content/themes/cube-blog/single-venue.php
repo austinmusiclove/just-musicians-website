@@ -31,7 +31,6 @@ get_header();
                     <div>
                         <table style="width:100%">
                             <tr><td>Overall Rating</td><td><?php echo get_field('_overall_rating'); ?>/5</td></tr>
-                            <tr><td>Total Reviews:</td><td><?php echo get_field('_review_count'); ?></td></tr>
                             <tr><td>Average Earnings Per Gig:</td><td>$<?php echo get_field('_average_earnings'); ?></td></tr>
                             <tr><td>Average Earnings Per Performer:</td><td>$<?php echo get_field('_average_earnings_per_performer'); ?></td></tr>
                             <tr><td>Average Earnings Per Performer Per Hour:</td><td>$<?php echo get_field('_average_earnings_per_performer_per_hour'); ?></td></tr>
