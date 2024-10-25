@@ -1,11 +1,13 @@
 // Import modules
 import LeafletMap from "./modules/LeafletMap";
 import ChartGenerator from "./modules/ChartGenerator";
-import VenueDataManager from "./modules/VenueDataManager";
-import VenueArchiveDataManager from "./modules/VenueArchiveDataManager";
+import VenuePageManager from "./modules/VenuePageManager";
+import VenueArchiveManager from "./modules/VenueArchiveManager";
+import VenueReviewFormManager from "./modules/VenueReviewFormManager";
 
 // Instantiate
 const leafletMap = new LeafletMap();
 const chartGenerator = new ChartGenerator();
-const venueDataManager = new VenueDataManager(chartGenerator);
-const venueArchiveDataManager = new VenueArchiveDataManager();
+const venuePageManager = new VenuePageManager(chartGenerator);
+const venueArchiveManager = new VenueArchiveManager();
+const venueReviewFormManager = new VenueReviewFormManager();

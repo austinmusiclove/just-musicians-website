@@ -2,9 +2,9 @@
 
 function get_venues() {
     $result = array();
+
     $pay_metric = $_GET['pay_metric'];
     $pay_type = $_GET['pay_type'];
-
     $review_count_var = '_review_count';
     $sort_var = '_average_earnings';
     if (isset($pay_metric)) {
@@ -17,14 +17,19 @@ function get_venues() {
         }
     }
 
+    $min_review_count = 1;
+    if (isset($_GET['min_review_count'])) {
+        $min_review_count = $_GET['min_review_count'];
+    }
+
     $args = array(
         'post_type' => 'venue',
         'nopaging' => true,
         'meta_query' => array(
             array(
                 'key' => $review_count_var,
-                'value' => 0,
-                'compare' => '>'
+                'value' => $min_review_count,
+                'compare' => '>='
             )
         ),
         'order' => 'DEC',
@@ -36,6 +41,7 @@ function get_venues() {
         while( $query->have_posts() ) {
             $query->the_post();
             array_push($result, array(
+                'ID' => get_the_ID(),
                 'name' => get_field('name'),
                 'latitude' => get_field('latitude'),
                 'longitude' => get_field('longitude'),

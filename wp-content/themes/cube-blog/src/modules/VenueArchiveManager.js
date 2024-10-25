@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const GET_VENUES_EVENT_NAME = 'GetVenues';
-const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 const PAY_METRIC_LABELS = {
     'average_earnings': 'Avg. Earnings Per Gig',
     'average_earnings_per_performer': 'Avg. Earnings Per Gig Per Performer',
@@ -10,7 +9,7 @@ const PAY_METRIC_LABELS = {
     'average_earnings_per_performer_per_hour': 'Avg. Earnings Per Performer Per Hour',
 };
 
-class VenueArchiveDataManager {
+class VenueArchiveManager {
     constructor() {
         this._setupEventListeners();
     }
@@ -46,7 +45,7 @@ class VenueArchiveDataManager {
     removeSpinners() { } // removes elements that show that content is loading
     // returns promise for venue data from the venues api
     getVenuesFromServer(payMetric='_average_earnings', payType=null) {
-        let url = `${GET_VENUES_API_URL}/?pay_metric=${payMetric}`
+        let url = `${siteData.venues_api_url}/?pay_metric=${payMetric}`
         if (payType) { url += `&pay_type=${payType}`}
         return axios.get(url);
     }
@@ -79,5 +78,5 @@ class VenueArchiveDataManager {
 
 }
 
-export default VenueArchiveDataManager
+export default VenueArchiveManager
 

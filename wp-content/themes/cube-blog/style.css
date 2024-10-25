@@ -654,7 +654,7 @@ input[type="color"],
 textarea {
 	color: #666;
     background-color: #fff;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     padding: 8px 12px;
     border-radius: 0;
     display: inline-block;
@@ -3033,55 +3033,156 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
     -moz-animation-timing-function: linear;
 }
 
-/* Leaflet pop up box */
-/*
-.leaflet-popup-content-wrapper {
-    padding: 0 !important;
+/*--------------------------------------------------------------
+# Form
+--------------------------------------------------------------*/
+#venue-review-form input[type="text"],
+#venue-review-form input[type="number"],
+#venue-review-form input[type="date"],
+#venue-review-form input[type="time"] {
+    min-width: 300px;
+    margin-top: 10px;
 }
-.leaflet-popup-content {
-    margin: 0 !important;
-}
-.map-popup-headings {
-    position: absolute;
-    bottom: 40px;
-    padding: 20px;
-    color: white;
-}
-.map-popup-headings h3 {
-    font-size: 20px;
-    margin-bottom: 5px;
-}
-.map-popup-headings h4 {
-    font-size: 14px;
-    font-weight: 300;
-}
-.map-popup-image-container {
-    height: 186px;
-}
-.map-popup-image-container:before {
-    content: "";
-    position: absolute;
-    height: inherit;
-    width: 100%;
-    display: block;
-    background: linear-gradient(to top, rgba(35,35,37,0.85) 0%, rgba(35,35,37,0.40) 35%, rgba(22,22,23,0) 60%, rgba(0,0,0,0) 100%);
-    background-color: rgba(35,35,37,0.2);
-}
-.map-popup-date-time {
-    padding: 16px 22px;
-}
-.leaflet-popup-close-button {
-    top: 10px !important;
-    right: 10px !important;
-    background-color: white !important;
-    font-size: 15px !important;
-    font-weight: 900 !important;
-    color: #333 !important;
-    font-weight: 900 !important;
-    border-radius: 50% !important;
-    z-index: 999;
+.form-group {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
 }
-*/
+.form-group div {
+    margin: 0 20px 20px 0;
+}
+.form-separator {
+    margin-top: 50px;
+}
+.button-label {
+	-webkit-appearance: button;
+	position: relative;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: 600;
+    color: #f37e7e;
+    border: 1px solid #f37e7e;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    vertical-align: middle;
+    padding: 11px 18px;
+    line-height: 1.3;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+    margin: 10px 10px 0 0;
+    min-width: 160px;
+}
+.button-label:active,
+.button-label:hover,
+.button-input:checked + label.button-label {
+	background-color: #f37e7e;
+    color: #fff;
+}
+.button-label:active,
+.button-label:focus {
+    outline: medium dotted #000;
+}
+.button-input {
+    display: none;
+}
+input.other-input {
+    display: none;
+}
+.button-input-other:checked ~ input.other-input {
+    display: block;
+}
+#guarantee_questions.versus-option,
+#door_questions.versus-option,
+#bar_questions.versus-option {
+    display: block;
+}
+
+/*--------------------------------------------------------------
+# Dropdown inputs
+--------------------------------------------------------------*/
+.dropdown {
+    border: 1px solid #ccc;
+    position: absolute;
+    z-index: 1000;
+    background: white;
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown div:hover {
+    background-color: #f0f0f0;
+}
+
+/*--------------------------------------------------------------
+# Rating inputs
+--------------------------------------------------------------*/
+.rating-table,
+.rating-table tr,
+.rating-table tr td {
+    border-style: hidden;
+}
+.rating {
+    display: flex;
+    justify-content: flex-start; /* Align stars to the left */
+}
+
+.star {
+    font-size: 30px; /* Size of the stars */
+    color: gray; /* Default color */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.star.selected,
+.star:hover {
+    color: gold; /* Color of selected stars */
+}
+
+/*--------------------------------------------------------------
+# Tooltips
+--------------------------------------------------------------*/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 5px; /* Space between label and icon */
+    border: 1px solid black;
+    border-radius: 100%;
+    padding: 0 12px;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%; /* Position above the icon */
+    left: 50%;
+    margin-left: -100px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-icon {
+    width: 16px; /* Icon size */
+    height: 16px;
+    vertical-align: middle; /* Align with text */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+

@@ -194,10 +194,10 @@ class LeafletMap {
 
 /***/ }),
 
-/***/ "./src/modules/VenueArchiveDataManager.js":
-/*!************************************************!*\
-  !*** ./src/modules/VenueArchiveDataManager.js ***!
-  \************************************************/
+/***/ "./src/modules/VenueArchiveManager.js":
+/*!********************************************!*\
+  !*** ./src/modules/VenueArchiveManager.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -208,14 +208,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const GET_VENUES_EVENT_NAME = 'GetVenues';
-const GET_VENUES_API_URL = `${siteData.root_url}/wp-json/v1/venues`;
 const PAY_METRIC_LABELS = {
   'average_earnings': 'Avg. Earnings Per Gig',
   'average_earnings_per_performer': 'Avg. Earnings Per Gig Per Performer',
   'average_earnings_per_hour': 'Avg. Earnings Per Hour',
   'average_earnings_per_performer_per_hour': 'Avg. Earnings Per Performer Per Hour'
 };
-class VenueArchiveDataManager {
+class VenueArchiveManager {
   constructor() {
     this._setupEventListeners();
   }
@@ -253,7 +252,7 @@ class VenueArchiveDataManager {
   removeSpinners() {} // removes elements that show that content is loading
   // returns promise for venue data from the venues api
   getVenuesFromServer(payMetric = '_average_earnings', payType = null) {
-    let url = `${GET_VENUES_API_URL}/?pay_metric=${payMetric}`;
+    let url = `${siteData.venues_api_url}/?pay_metric=${payMetric}`;
     if (payType) {
       url += `&pay_type=${payType}`;
     }
@@ -286,13 +285,13 @@ class VenueArchiveDataManager {
     };
   }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueArchiveDataManager);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueArchiveManager);
 
 /***/ }),
 
-/***/ "./src/modules/VenueDataManager.js":
+/***/ "./src/modules/VenuePageManager.js":
 /*!*****************************************!*\
-  !*** ./src/modules/VenueDataManager.js ***!
+  !*** ./src/modules/VenuePageManager.js ***!
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -304,7 +303,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
-class VenueDataManager {
+class VenuePageManager {
   constructor(chartGenerator) {
     this.chartGenerator = chartGenerator;
     this._setupEventListeners();
@@ -358,7 +357,7 @@ class VenueDataManager {
         let paySpeed = paySpeedStringTable[data[iterator].payment_speed];
         payStructureChartData['Guarantee'] += parseFloat(data[iterator].guarantee_earnings);
         payStructureChartData['Door Deal'] += parseFloat(data[iterator].door_earnings);
-        payStructureChartData['Bar Deal'] += parseFloat(data[iterator].sales_earnings);
+        payStructureChartData['Bar Deal'] += parseFloat(data[iterator].bar_earnings);
         payStructureChartData['Tips'] += parseFloat(data[iterator].tips_earnings);
         payMethodChartData.hasOwnProperty(payMethod) ? payMethodChartData[payMethod] += 1 : payMethodChartData['Other'] += 1;
         paySpeedChartData[paySpeed] += 1;
@@ -383,7 +382,6 @@ class VenueDataManager {
     let html = `
             <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
             <p>
-                Compensation Type: ${venueReview.comp_types_string}
                 <br>Hours Performed: ${venueReview.hours_performed}
                 <br>Total Performers: ${venueReview.total_performers}`;
     if (venueReview.has_guarantee_comp) {
@@ -392,8 +390,8 @@ class VenueDataManager {
     if (venueReview.has_door_comp) {
       html += `<br>Door: $${venueReview.door_earnings} (${venueReview.door_percentage}%)`;
     }
-    if (venueReview.has_sales_comp) {
-      html += `<br>Sales: $${venueReview.sales_earnings} (${venueReview.sales_percentage}%)`;
+    if (venueReview.has_bar_comp) {
+      html += `<br>Sales: $${venueReview.bar_earnings} (${venueReview.bar_percentage}%)`;
     }
     if (venueReview.has_tips_comp) {
       html += `<br>Tips: $${venueReview.tips_earnings}`;
@@ -405,7 +403,176 @@ class VenueDataManager {
     return html;
   }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueDataManager);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenuePageManager);
+
+/***/ }),
+
+/***/ "./src/modules/VenueReviewFormManager.js":
+/*!***********************************************!*\
+  !*** ./src/modules/VenueReviewFormManager.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+class VenueReviewFormManager {
+  // TODO move all ids to the php page and have them sent in with an event
+  // TODO add unit tests
+  constructor() {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (this.setupElements()) {
+        this.setupEventListeners();
+        this.loadVenueOptions();
+      }
+    });
+  }
+  setupElements() {
+    this.venueInput = document.getElementById('venue_name');
+    if (this.venueInput == null) {
+      return false;
+    }
+    this.venueIdInput = document.getElementById('venue_id');
+    this.venueOptions = document.getElementById('venue_options');
+    this.venueOptionsMap = {};
+    this.stars = document.querySelectorAll('.star');
+    this.versusToggle = document.getElementById("has_versus_comp");
+    this.versusInput1 = document.getElementById("versus_comp_1");
+    this.versusInput2 = document.getElementById("versus_comp_2");
+    this.guaranteeQuestions = document.getElementById("guarantee_questions");
+    this.doorQuestions = document.getElementById("door_questions");
+    this.barQuestions = document.getElementById("bar_questions");
+    return true;
+  }
+  setupEventListeners() {
+    // Handle Venue input
+    this.venueInput.addEventListener('keyup', this.handleVenueInputChange.bind(this));
+    // Handle rating input elements
+    this.stars.forEach(star => {
+      star.addEventListener('mouseover', this.handleStarMouseover.bind(this));
+      star.addEventListener('mouseout', this.handleStarMouseout.bind(this));
+      star.addEventListener('click', this.handleStarClick.bind(this));
+    });
+    // Handle versus input
+    this.versusToggle.addEventListener('change', this.handleVersusToggle.bind(this));
+    this.versusInput1.addEventListener('change', this.handleVersusOptionChange.bind(this));
+    this.versusInput2.addEventListener('change', this.handleVersusOptionChange.bind(this));
+  }
+
+  // Handle Venue input field
+  handleVenueInputChange(evnt) {
+    let inputValue = evnt.target.value.toLowerCase();
+    if (inputValue.length > 1) {
+      this.show(this.venueOptions);
+      for (const [venueName, venueOptionElement] of Object.entries(this.venueOptionsMap)) {
+        if (venueName.toLowerCase().includes(inputValue)) {
+          this.show(venueOptionElement);
+        } else {
+          this.hide(venueOptionElement);
+        }
+      }
+    } else {
+      this.hide(this.venueOptions);
+    }
+  }
+  handleVenueOptionClick(evnt) {
+    this.venueInput.value = evnt.target.getAttribute('data-name');
+    this.venueIdInput.value = evnt.target.getAttribute('data-id');
+    this.hide(this.venueOptions);
+  }
+  loadVenueOptions() {
+    this.getVenues().then(response => {
+      return response.data;
+    }).then(data => {
+      let html = '';
+      for (let iterator = 0; iterator < data.length; iterator++) {
+        html += this.getVenueOptionHtml(data[iterator]);
+      }
+      this.venueOptions.innerHTML = html;
+      for (let iterator = 0; iterator < data.length; iterator++) {
+        let venue = data[iterator];
+        let optionElement = document.getElementById(`venue-${venue['ID']}`);
+        this.venueOptionsMap[venue['name']] = optionElement;
+        optionElement.addEventListener('click', this.handleVenueOptionClick.bind(this));
+      }
+    }).catch(err => {
+      console.warn(err);
+    });
+  }
+  getVenueOptionHtml(venue) {
+    return `<div id="venue-${venue.ID}" data-name="${venue.name}" data-id="${venue.ID}">${venue.name}</div>`;
+  }
+  getVenues() {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_api_url}/?min_review_count=0`);
+  }
+
+  // Rating inputs
+  handleStarMouseover(evnt) {
+    const inputGroup = evnt.target.getAttribute('group');
+    const ratingValue = evnt.target.getAttribute('value');
+    this.highlightStars(inputGroup, ratingValue);
+  }
+  handleStarMouseout(evnt) {
+    const inputGroup = evnt.target.getAttribute('group');
+    const selectedRating = document.querySelector(`input[name="${inputGroup}"]:checked`);
+    this.highlightStars(inputGroup, selectedRating ? selectedRating.value : 0);
+  }
+  handleStarClick(evnt) {
+    const inputGroup = evnt.target.getAttribute('group');
+    const ratingValue = evnt.target.getAttribute('value');
+    evnt.target.checked = true;
+    this.highlightStars(inputGroup, ratingValue);
+  }
+  highlightStars(inputGroup, rating) {
+    const inputGroupStars = document.querySelectorAll(`.star[group=${inputGroup}]`);
+    inputGroupStars.forEach(star => {
+      if (star.getAttribute('value') <= rating) {
+        star.classList.add('selected');
+      } else {
+        star.classList.remove('selected');
+      }
+    });
+  }
+
+  // Versus input
+  handleVersusToggle(evnt) {
+    if (!evnt.target.checked) {
+      this.versusInput1.selectedIndex = 0;
+      this.versusInput2.selectedIndex = 0;
+      this.handleVersusOptionChange();
+    }
+  }
+  handleVersusOptionChange() {
+    let versus1 = this.versusInput1.value;
+    let versus2 = this.versusInput2.value;
+    if (versus1 == 'Guarantee' || versus2 == 'Guarantee') {
+      this.guaranteeQuestions.classList.add('versus-option');
+    } else {
+      this.guaranteeQuestions.classList.remove('versus-option');
+    }
+    if (versus1 == 'Door Deal' || versus2 == 'Door Deal') {
+      this.doorQuestions.classList.add('versus-option');
+    } else {
+      this.doorQuestions.classList.remove('versus-option');
+    }
+    if (versus1 == 'Bar Deal' || versus2 == 'Bar Deal') {
+      this.barQuestions.classList.add('versus-option');
+    } else {
+      this.barQuestions.classList.remove('versus-option');
+    }
+    // disallow having the same option on both sides
+  }
+  show(element) {
+    element.style.display = "block";
+  }
+  hide(element) {
+    element.style.display = "none";
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueReviewFormManager);
 
 /***/ }),
 
@@ -5212,9 +5379,11 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/LeafletMap */ "./src/modules/LeafletMap.js");
 /* harmony import */ var _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ChartGenerator */ "./src/modules/ChartGenerator.js");
-/* harmony import */ var _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenueDataManager */ "./src/modules/VenueDataManager.js");
-/* harmony import */ var _modules_VenueArchiveDataManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueArchiveDataManager */ "./src/modules/VenueArchiveDataManager.js");
+/* harmony import */ var _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenuePageManager */ "./src/modules/VenuePageManager.js");
+/* harmony import */ var _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueArchiveManager */ "./src/modules/VenueArchiveManager.js");
+/* harmony import */ var _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/VenueReviewFormManager */ "./src/modules/VenueReviewFormManager.js");
 // Import modules
+
 
 
 
@@ -5223,8 +5392,9 @@ __webpack_require__.r(__webpack_exports__);
 // Instantiate
 const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
 const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
-const venueDataManager = new _modules_VenueDataManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
-const venueArchiveDataManager = new _modules_VenueArchiveDataManager__WEBPACK_IMPORTED_MODULE_3__["default"]();
+const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
+const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"]();
+const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

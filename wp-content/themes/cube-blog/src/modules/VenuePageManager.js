@@ -3,7 +3,7 @@ import axios from 'axios';
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
 const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
 
-class VenueDataManager {
+class VenuePageManager {
     constructor(chartGenerator) {
         this.chartGenerator = chartGenerator;
         this._setupEventListeners()
@@ -37,7 +37,7 @@ class VenueDataManager {
                 let paySpeed = paySpeedStringTable[data[iterator].payment_speed];
                 payStructureChartData['Guarantee'] += parseFloat(data[iterator].guarantee_earnings);
                 payStructureChartData['Door Deal'] += parseFloat(data[iterator].door_earnings);
-                payStructureChartData['Bar Deal'] += parseFloat(data[iterator].sales_earnings);
+                payStructureChartData['Bar Deal'] += parseFloat(data[iterator].bar_earnings);
                 payStructureChartData['Tips'] += parseFloat(data[iterator].tips_earnings);
                 payMethodChartData.hasOwnProperty(payMethod) ? payMethodChartData[payMethod] += 1 : payMethodChartData['Other'] += 1;
                 paySpeedChartData[paySpeed] += 1;
@@ -66,12 +66,11 @@ class VenueDataManager {
         let html = `
             <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
             <p>
-                Compensation Type: ${venueReview.comp_types_string}
                 <br>Hours Performed: ${venueReview.hours_performed}
                 <br>Total Performers: ${venueReview.total_performers}`
         if (venueReview.has_guarantee_comp) { html += `<br>Guarantee: $${venueReview.guarantee_earnings}`; }
         if (venueReview.has_door_comp) { html += `<br>Door: $${venueReview.door_earnings} (${venueReview.door_percentage}%)`; }
-        if (venueReview.has_sales_comp) { html += `<br>Sales: $${venueReview.sales_earnings} (${venueReview.sales_percentage}%)`; }
+        if (venueReview.has_bar_comp) { html += `<br>Sales: $${venueReview.bar_earnings} (${venueReview.bar_percentage}%)`; }
         if (venueReview.has_tips_comp) { html += `<br>Tips: $${venueReview.tips_earnings}`; }
         html += `
                 <br>Total Earnings: $${venueReview.total_earnings}
@@ -81,4 +80,4 @@ class VenueDataManager {
     }
 }
 
-export default VenueDataManager
+export default VenuePageManager
