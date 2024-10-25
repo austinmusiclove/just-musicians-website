@@ -25,6 +25,12 @@ get_header();
                     function get_comp_structure_string($comp_structure) {
                         if (in_array('Versus', $comp_structure)) {
                             return join(" vs " , array(sanitize_text_field($_POST['versus_comp_1']), sanitize_text_field($_POST['versus_comp_2'])));
+                        } else if (in_array('Tips', $comp_structure) && count($comp_structure) == 1) {
+                            return 'Tips';
+                        } else if (in_array('In Kind', $comp_structure) && count($comp_structure) == 1) {
+                            return 'In Kind';
+                        } else if (in_array('In Kind', $comp_structure) && in_array('Tips', $comp_structure) && count($comp_structure) == 2) {
+                            return 'In Kind and Tips';
                         } else {
                             $comp_structures = array();
                             if (in_array('Guarantee', $comp_structure)) { array_push($comp_structures, 'Guarantee'); }
