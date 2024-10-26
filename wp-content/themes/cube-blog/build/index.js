@@ -389,13 +389,19 @@ class VenuePageManager {
                 Hours Performed: ${venueReview.hours_performed}
                 <br>Total Performers: ${venueReview.total_performers}`;
     if (venueReview.has_guarantee_comp) {
-      html += `<br>Guarantee: $${venueReview.guarantee_earnings}`;
+      html += `<br>Guarantee: $${venueReview.is_versus ? venueReview.guarantee_promise : venueReview.guarantee_earnings}`;
     }
     if (venueReview.has_door_comp) {
-      html += `<br>Door: $${venueReview.door_earnings} (${venueReview.door_percentage}%)`;
+      html += `<br>Door Percentage: ${venueReview.door_percentage}%`;
+    }
+    if (venueReview.has_door_comp) {
+      html += `<br>Door Earnings: $${venueReview.door_earnings}`;
     }
     if (venueReview.has_bar_comp) {
-      html += `<br>Sales: $${venueReview.bar_earnings} (${venueReview.bar_percentage}%)`;
+      html += `<br>Bar Percentage: ${venueReview.bar_percentage}%`;
+    }
+    if (venueReview.has_bar_comp) {
+      html += `<br>Bar Earnings: $${venueReview.bar_earnings}`;
     }
     if (venueReview.has_tips_comp) {
       html += `<br>Tips: $${venueReview.tips_earnings}`;
