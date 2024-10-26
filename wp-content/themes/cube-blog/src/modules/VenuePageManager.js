@@ -65,9 +65,11 @@ class VenuePageManager {
     getVenueReviewHtml(venueReview) {
         let html = `
             <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
-            <p>
-                <br>Hours Performed: ${venueReview.hours_performed}
-                <br>Total Performers: ${venueReview.total_performers}`
+            <p>`
+        if (venueReview.comp_structure_string) { html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`; }
+        html += `
+                Hours Performed: ${venueReview.hours_performed}
+                <br>Total Performers: ${venueReview.total_performers}`;
         if (venueReview.has_guarantee_comp) { html += `<br>Guarantee: $${venueReview.guarantee_earnings}`; }
         if (venueReview.has_door_comp) { html += `<br>Door: $${venueReview.door_earnings} (${venueReview.door_percentage}%)`; }
         if (venueReview.has_bar_comp) { html += `<br>Sales: $${venueReview.bar_earnings} (${venueReview.bar_percentage}%)`; }

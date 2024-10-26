@@ -381,8 +381,12 @@ class VenuePageManager {
   getVenueReviewHtml(venueReview) {
     let html = `
             <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
-            <p>
-                <br>Hours Performed: ${venueReview.hours_performed}
+            <p>`;
+    if (venueReview.comp_structure_string) {
+      html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`;
+    }
+    html += `
+                Hours Performed: ${venueReview.hours_performed}
                 <br>Total Performers: ${venueReview.total_performers}`;
     if (venueReview.has_guarantee_comp) {
       html += `<br>Guarantee: $${venueReview.guarantee_earnings}`;
