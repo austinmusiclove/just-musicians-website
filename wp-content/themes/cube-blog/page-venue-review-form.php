@@ -82,6 +82,7 @@ get_header();
                                 'production_cost_type' => sanitize_text_field($_POST['production_cost_type']),
                                 'tips_earnings' => sanitize_text_field($_POST['tips_earnings']),
                                 'other_comp_structure' => sanitize_text_field($_POST['other_comp_structure']),
+                                'total_earnings' => sanitize_text_field($_POST['total_earnings']),
                                 'payment_speed' => sanitize_text_field($_POST['payment_speed']),
                                 'payment_method' => sanitize_text_field($_POST['payment_method']),
                                 'provided_sound_engineer' => sanitize_text_field($_POST['provided_sound_engineer']),
