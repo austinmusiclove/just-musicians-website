@@ -160,7 +160,7 @@ get_header();
 
                                 <!-- Hours Performed -->
                                 <div><label for="minutes_performed">Set Duration in Minutes</label><br>
-                                <input type="number" id="minutes_performed" name="minutes_performed" min=0 step="5" ></div>
+                                <input type="number" id="minutes_performed" name="minutes_performed" min=0 ></div>
                             </div>
                             <div class="form-separator"></div>
 
