@@ -44,11 +44,12 @@ get_header();
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $venue_name = sanitize_text_field($_POST['venue_name']);
                         $performing_act_name = sanitize_text_field($_POST['performing_act_name']);
+                        $performance_date = sanitize_text_field($_POST['performance_date']);
                         $comp_structure = (isset($_POST['comp_structure'])) ? array_map('sanitize_text_field', $_POST['comp_structure']) : array();
                         $comp_structure_string = get_comp_structure_string($comp_structure);
 
                         $new_post = array(
-                            'post_title'   => $performing_act_name . ' - ' . $venue_name,
+                            'post_title'   => $performing_act_name . ' - ' . $venue_name . ' - ' . $performance_date,
                             'post_status'  => 'pending',
                             'post_type'    => 'venue_review',
                             'meta_input'   => array(
@@ -57,7 +58,7 @@ get_header();
                                 'performing_act_name' => $performing_act_name,
                                 'middle_man' => sanitize_text_field($_POST['middle_man']),
                                 'gig_type' => sanitize_text_field($_POST['gig_type']),
-                                'performance_date' => sanitize_text_field($_POST['performance_date']),
+                                'performance_date' => $performance_date,
                                 'performance_start_time' => sanitize_text_field($_POST['performance_start_time']),
                                 'minutes_performed' => sanitize_text_field($_POST['minutes_performed']), // add field
                                 'hours_performed' => (float) sanitize_text_field($_POST['minutes_performed']) / 60,
