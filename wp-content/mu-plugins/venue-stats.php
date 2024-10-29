@@ -63,12 +63,13 @@ function update_venue_stats() {
                     array(
                         'key' => 'venue',
                         'value' => $venue_post_id,
-                        'compare' => '=='
+                        'compare' => 'LIKE'
                     )
                 )
             );
             $venue_reviews_query = new WP_Query($args);
             if ($venue_reviews_query->have_posts()) {
+
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();
                     $review_count++;
@@ -89,14 +90,14 @@ function update_venue_stats() {
                         $guarantee_earnings_per_hour_sum += $review_earnings_per_hour;
                         $guarantee_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
                     }
-                    if (in_array('Door', get_field('comp_structure'))) {
+                    if (in_array('Door Deal', get_field('comp_structure'))) {
                         $door_deal_review_count++;
                         $door_deal_earnings_sum += $review_earnings;
                         $door_deal_earnings_per_performer_sum += $review_earnings_per_performer;
                         $door_deal_earnings_per_hour_sum += $review_earnings_per_hour;
                         $door_deal_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
                     }
-                    if (in_array('Bar', get_field('comp_structure'))) {
+                    if (in_array('Bar Deal', get_field('comp_structure'))) {
                         $bar_deal_review_count++;
                         $bar_deal_earnings_sum += $review_earnings;
                         $bar_deal_earnings_per_performer_sum += $review_earnings_per_performer;
@@ -156,7 +157,6 @@ function update_venue_stats() {
             if( is_wp_error( $update_result ) ) {
                 return $venue_post_id->get_error_message();
             }
-            //} // for testing
         }
     }
     return;
