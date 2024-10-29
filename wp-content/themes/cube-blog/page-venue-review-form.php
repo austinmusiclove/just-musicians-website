@@ -114,10 +114,13 @@ get_header();
                                 <div><label for="venue_name">Venue Name</label><br>
                                 <input type="text" id="venue_name" name="venue_name" autocomplete="off">
                                 <input type="hidden" id="venue_id" name="venue_id">
-                                <div class="dropdown" id="venue_options"></div></div>
+                                <div style="display:none;" class="dropdown" id="venue_options"></div></div>
 
                                 <!-- Performer Name -->
-                                <div><label for="performing_act_name">Performer Name</label><br>
+                                <div><label for="performing_act_name">Performing Act Name</label>
+                                <span class="tooltip">
+                                    i<span class="tooltip-text">This is the name printed on the show bill. Your review will be completely annonymous. Performing act name is only collected for verification purposes</span>
+                                </span><br>
                                 <input type="text" id="performing_act_name" name="performing_act_name" ></div>
 
                                 <!-- Promoter or agency involved -->
@@ -145,7 +148,10 @@ get_header();
 
                             <div class="form-group">
                                 <!-- Performance date -->
-                                <div><label for="performance_date">Performance Date</label><br>
+                                <div><label for="performance_date">Performance Date</label>
+                                <span class="tooltip">
+                                    i<span class="tooltip-text">Your review will be completely annonymous. Performance date is only collected for verification purposes</span>
+                                </span><br>
                                 <input type="date" id="performance_date" name="performance_date" ></div>
 
                                 <!-- Start Time -->
