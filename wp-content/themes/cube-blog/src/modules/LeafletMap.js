@@ -65,6 +65,7 @@ class LeafletMap {
             let coordinateLinkUrl = markers[i].coordinateLinkUrl;
             let overallRating = markers[i].overallRating;
             let averageEarnings = markers[i].averageEarnings;
+            let reviewCount = markers[i].reviewCount;
 
             // Build marker
             let marker = this.getMarker(latitude, longitude);
@@ -79,6 +80,7 @@ class LeafletMap {
                             </div>
                         </a>
                         <div class="map-popup-date-time">Average Earnings Per Gig: $${averageEarnings}</div>
+                        <div class="map-popup-date-time">Review Count: ${reviewCount}</div>
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;

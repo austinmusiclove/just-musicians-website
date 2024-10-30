@@ -126,6 +126,7 @@ class LeafletMap {
       let coordinateLinkUrl = markers[i].coordinateLinkUrl;
       let overallRating = markers[i].overallRating;
       let averageEarnings = markers[i].averageEarnings;
+      let reviewCount = markers[i].reviewCount;
 
       // Build marker
       let marker = this.getMarker(latitude, longitude);
@@ -140,6 +141,7 @@ class LeafletMap {
                             </div>
                         </a>
                         <div class="map-popup-date-time">Average Earnings Per Gig: $${averageEarnings}</div>
+                        <div class="map-popup-date-time">Review Count: ${reviewCount}</div>
                         <div class="map-popup-date-time">Rating: ${overallRating}/5</div>
                     </div>
                 `;
@@ -263,6 +265,7 @@ class VenueArchiveManager {
                     <th>Rank</th>
                     <th>Venue</th>
                     <th>${PAY_METRIC_LABELS[payMetric]}</th>
+                    <th>Review Count</th>
                     <th>Rating</th>
                 </tr>`;
   }
@@ -271,6 +274,7 @@ class VenueArchiveManager {
                     <td>${rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
                     <td>$${venue.pay_metric}</td>
+                    <td>${venue.review_count}</td>
                     <td>${venue.overall_rating}/5</td>
                 </tr>`;
   }
@@ -281,6 +285,7 @@ class VenueArchiveManager {
       'longitude': venue.longitude,
       'coordinateLinkUrl': venue.permalink,
       'averageEarnings': venue.average_earnings,
+      'reviewCount': venue.review_count,
       'overallRating': venue.overall_rating
     };
   }
