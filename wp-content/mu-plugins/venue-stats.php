@@ -62,16 +62,13 @@ function update_venue_stats() {
                 'meta_query' => array(
                     array(
                         'key' => 'venue',
-                        'value' => $venue_post_id,
-                        'compare' => '=='
+                        'value' => '"' . $venue_post_id . '"',
+                        'compare' => 'LIKE'
                     )
                 )
             );
             $venue_reviews_query = new WP_Query($args);
             if ($venue_reviews_query->have_posts()) {
-                if ($venue_post_id == 287) {
-                    return $venue_reviews_query->found_posts;
-                }
 
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();

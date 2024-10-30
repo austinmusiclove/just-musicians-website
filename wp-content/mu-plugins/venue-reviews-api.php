@@ -9,7 +9,7 @@ function get_venue_reviews() {
         'meta_query' => array(
             array(
                 'key' => 'venue',
-                'value' => $venueId,
+                'value' => '"' . $venueId . '"',
                 'compare' => 'LIKE'
             )
         )
