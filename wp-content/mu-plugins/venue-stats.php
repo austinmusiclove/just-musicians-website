@@ -83,21 +83,21 @@ function update_venue_stats() {
                     $earnings_per_performer_sum += $review_earnings_per_performer;
                     $earnings_per_hour_sum += $review_earnings_per_hour;
                     $earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
-                    if (in_array('Guarantee', get_field('comp_structure'))) {
+                    if ('Guarantee' == get_field('_comp_structure_string')) {
                         $guarantee_review_count++;
                         $guarantee_earnings_sum += $review_earnings;
                         $guarantee_earnings_per_performer_sum += $review_earnings_per_performer;
                         $guarantee_earnings_per_hour_sum += $review_earnings_per_hour;
                         $guarantee_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
                     }
-                    if (in_array('Door Deal', get_field('comp_structure'))) {
+                    if ('Door Deal' == get_field('_comp_structure_string')) {
                         $door_deal_review_count++;
                         $door_deal_earnings_sum += $review_earnings;
                         $door_deal_earnings_per_performer_sum += $review_earnings_per_performer;
                         $door_deal_earnings_per_hour_sum += $review_earnings_per_hour;
                         $door_deal_earnings_per_performer_per_hour_sum += $review_earnings_per_performer_per_hour;
                     }
-                    if (in_array('Bar Deal', get_field('comp_structure'))) {
+                    if ('Bar Deal' == get_field('_comp_structure_string')) {
                         $bar_deal_review_count++;
                         $bar_deal_earnings_sum += $review_earnings;
                         $bar_deal_earnings_per_performer_sum += $review_earnings_per_performer;
