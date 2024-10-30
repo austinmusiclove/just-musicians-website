@@ -14,6 +14,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class ChartGenerator {
   constructor() {}
+  generateBarChart(containerId, chartTitle, chartLabels, chartData) {
+    const ctx = document.getElementById(containerId);
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          data: chartData,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        indexAxis: 'y',
+        plugins: {
+          title: {
+            display: true,
+            text: chartTitle
+          },
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  }
   generatePolarAreaChart(containerId, chartTitle, chartLabels, chartData) {
     const ctx = document.getElementById(containerId);
     new Chart(ctx, {
@@ -373,9 +403,9 @@ class VenuePageManager {
       reviewsContainer.innerHTML = reviewsHtml;
 
       // charts section
-      this.chartGenerator.generatePolarAreaChart(evnt.detail.payStructureChartContainerId, 'Pay Structure', Object.keys(payStructureChartData), Object.values(payStructureChartData));
-      this.chartGenerator.generatePolarAreaChart(evnt.detail.payMethodChartContainerId, 'Payout Method', Object.keys(payMethodChartData), Object.values(payMethodChartData));
-      this.chartGenerator.generatePolarAreaChart(evnt.detail.paySpeedChartContainerId, 'Payout Speed', Object.keys(paySpeedChartData), Object.values(paySpeedChartData));
+      this.chartGenerator.generateBarChart(evnt.detail.payStructureChartContainerId, 'Pay Structure', Object.keys(payStructureChartData), Object.values(payStructureChartData));
+      this.chartGenerator.generateBarChart(evnt.detail.payMethodChartContainerId, 'Payout Method', Object.keys(payMethodChartData), Object.values(payMethodChartData));
+      this.chartGenerator.generateBarChart(evnt.detail.paySpeedChartContainerId, 'Payout Speed', Object.keys(paySpeedChartData), Object.values(paySpeedChartData));
     }).catch(err => {
       console.warn(err);
     });

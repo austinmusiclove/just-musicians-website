@@ -48,9 +48,9 @@ class VenuePageManager {
             reviewsContainer.innerHTML = reviewsHtml
 
             // charts section
-            this.chartGenerator.generatePolarAreaChart(evnt.detail.payStructureChartContainerId, 'Pay Structure', Object.keys(payStructureChartData), Object.values(payStructureChartData));
-            this.chartGenerator.generatePolarAreaChart(evnt.detail.payMethodChartContainerId, 'Payout Method', Object.keys(payMethodChartData), Object.values(payMethodChartData));
-            this.chartGenerator.generatePolarAreaChart(evnt.detail.paySpeedChartContainerId, 'Payout Speed', Object.keys(paySpeedChartData), Object.values(paySpeedChartData));
+            this.chartGenerator.generateBarChart(evnt.detail.payStructureChartContainerId, 'Pay Structure', Object.keys(payStructureChartData), Object.values(payStructureChartData));
+            this.chartGenerator.generateBarChart(evnt.detail.payMethodChartContainerId, 'Payout Method', Object.keys(payMethodChartData), Object.values(payMethodChartData));
+            this.chartGenerator.generateBarChart(evnt.detail.paySpeedChartContainerId, 'Payout Speed', Object.keys(paySpeedChartData), Object.values(paySpeedChartData));
 
 
         }).catch((err) => {

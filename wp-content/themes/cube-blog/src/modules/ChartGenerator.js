@@ -3,6 +3,32 @@ class ChartGenerator {
     constructor() {
     }
 
+    generateBarChart(containerId, chartTitle, chartLabels, chartData) {
+        const ctx = document.getElementById(containerId);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    data: chartData,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true } },
+                indexAxis: 'y',
+                plugins: {
+                    title: {
+                        display: true,
+                        text: chartTitle
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
     generatePolarAreaChart(containerId, chartTitle, chartLabels, chartData) {
         const ctx = document.getElementById(containerId);
 
@@ -25,6 +51,7 @@ class ChartGenerator {
             }
         });
     }
+
 }
 
 export default ChartGenerator
