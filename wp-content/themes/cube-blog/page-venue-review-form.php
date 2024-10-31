@@ -47,6 +47,7 @@ get_header();
                         $performance_date = sanitize_text_field($_POST['performance_date']);
                         $comp_structure = (isset($_POST['comp_structure'])) ? array_map('sanitize_text_field', $_POST['comp_structure']) : array();
                         $comp_structure_string = get_comp_structure_string($comp_structure);
+                        $backline = (isset($_POST['backline'])) ? array_filter(array_map('sanitize_text_field', $_POST['backline'])) : array();
 
                         $new_post = array(
                             'post_title'   => $performing_act_name . ' - ' . $venue_name . ' - ' . $performance_date,
@@ -87,7 +88,7 @@ get_header();
                                 'payment_speed' => sanitize_text_field($_POST['payment_speed']),
                                 'payment_method' => sanitize_text_field($_POST['payment_method']),
                                 'provided_sound_engineer' => sanitize_text_field($_POST['provided_sound_engineer']),
-                                'backline' => (isset($_POST['backline'])) ? array_map('sanitize_text_field', $_POST['backline']) : array(),
+                                'backline' => $backline,
                                 'review' => sanitize_textarea_field($_POST['review']),
                                 'buyer_contact' => sanitize_text_field($_POST['buyer_contact']),
                             ),
