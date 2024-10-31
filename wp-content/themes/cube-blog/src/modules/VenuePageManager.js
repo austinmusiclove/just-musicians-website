@@ -33,6 +33,9 @@ class VenuePageManager {
                 'Never got paid': 'Never',
             }
             for (let iterator = 0; iterator < data.length; iterator++) {
+                console.log(data[iterator]);
+                console.log(data[iterator].door_earnings);
+                console.log(parseFloat(data[iterator].door_earnings));
                 reviewsHtml += this.getVenueReviewHtml(data[iterator])
                 let payMethod = data[iterator].payment_method;
                 let paySpeed = paySpeedStringTable[data[iterator].payment_speed];
