@@ -394,10 +394,10 @@ class VenuePageManager {
         reviewsHtml += this.getVenueReviewHtml(data[iterator]);
         let payMethod = data[iterator].payment_method;
         let paySpeed = paySpeedStringTable[data[iterator].payment_speed];
-        payStructureChartData['Guarantee'] += parseFloat(data[iterator].guarantee_earnings);
-        payStructureChartData['Door Deal'] += parseFloat(data[iterator].door_earnings);
-        payStructureChartData['Bar Deal'] += parseFloat(data[iterator].bar_earnings);
-        payStructureChartData['Tips'] += parseFloat(data[iterator].tips_earnings);
+        payStructureChartData['Guarantee'] += data[iterator].guarantee_earnings ? parseFloat(data[iterator].guarantee_earnings) : 0;
+        payStructureChartData['Door Deal'] += data[iterator].door_earnings ? parseFloat(data[iterator].door_earnings) : 0;
+        payStructureChartData['Bar Deal'] += data[iterator].bar_earnings ? parseFloat(data[iterator].bar_earnings) : 0;
+        payStructureChartData['Tips'] += data[iterator].tips_earnings ? parseFloat(data[iterator].tips_earnings) : 0;
         payMethodChartData.hasOwnProperty(payMethod) ? payMethodChartData[payMethod] += 1 : payMethodChartData['Other'] += 1;
         paySpeedChartData[paySpeed] += 1;
         console.log(payStructureChartData['Guarantee']);
