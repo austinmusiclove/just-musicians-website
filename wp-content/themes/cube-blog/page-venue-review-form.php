@@ -153,7 +153,7 @@ get_header();
                                 <span class="tooltip">
                                     i<span class="tooltip-text">Your review will be completely annonymous. Performance date is only collected for verification purposes</span>
                                 </span><br>
-                                <input type="date" id="performance_date" name="performance_date" ></div>
+                                <input required type="date" id="performance_date" name="performance_date" ></div>
 
                                 <!-- Start Time -->
                                 <div><label for="performance_start_time">Set Start Time</label><br>
@@ -161,7 +161,7 @@ get_header();
 
                                 <!-- Hours Performed -->
                                 <div><label for="minutes_performed">Set Duration in Minutes</label><br>
-                                <input type="number" id="minutes_performed" name="minutes_performed" min=0 ></div>
+                                <input required type="number" id="minutes_performed" name="minutes_performed" min=0 ></div>
                             </div>
                             <div class="form-separator"></div>
 
@@ -171,7 +171,7 @@ get_header();
                                 <span class="tooltip">
                                     i<span class="tooltip-text">Total number of performers that performed as part of your group in this performance</span>
                                 </span><br>
-                                <input type="number" id="total_performers" name="total_performers" min=1 ></div>
+                                <input required type="number" id="total_performers" name="total_performers" min=1 ></div>
                                 <!-- # Total Acts -->
                                 <div><label for="total_acts">Number of Acts on the Bill</label>
                                 <span class="tooltip">
@@ -400,7 +400,7 @@ get_header();
                             <span class="tooltip">
                                 i<span class="tooltip-text">How much money did you (if you performed solo) or your group (if you performed with a group) make in total?</span>
                             </span><br>
-                            <input type="number" name="total_earnings" id="total_earnings"><br>
+                            <input required type="number" name="total_earnings" id="total_earnings"><br>
                             <div class="form-separator"></div>
                             <!-- Pay speed -->
                             <label for="payment_speed">How quickly after the show did you get paid?</label>
