@@ -351,6 +351,7 @@ class VenuePageManager {
     this.getVenueReviewsFromServer(venueId).then(response => {
       return response.data;
     }).then(data => {
+      console.log(data);
       // parse data
       let reviewsHtml = '';
       let payStructureChartData = {
@@ -396,6 +397,8 @@ class VenuePageManager {
         payStructureChartData['Tips'] += parseFloat(data[iterator].tips_earnings);
         payMethodChartData.hasOwnProperty(payMethod) ? payMethodChartData[payMethod] += 1 : payMethodChartData['Other'] += 1;
         paySpeedChartData[paySpeed] += 1;
+        console.log(payStructureChartData['Guarantee']);
+        console.log(payStructureChartData['Door Deal']);
       }
 
       // reviews section

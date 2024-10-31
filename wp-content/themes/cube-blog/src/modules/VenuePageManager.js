@@ -17,6 +17,7 @@ class VenuePageManager {
         this.getVenueReviewsFromServer(venueId).then((response) => {
             return response.data;
         }).then((data) => {
+            console.log(data);
             // parse data
             let reviewsHtml = ''
             let payStructureChartData = {'Guarantee': 0, 'Door Deal': 0, 'Bar Deal': 0, 'Tips': 0};
