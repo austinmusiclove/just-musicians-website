@@ -113,7 +113,7 @@ get_header();
                             <div class="form-separator"></div>
                             <div class="form-group">
                                 <div><label for="venue_name">Venue Name</label><br>
-                                <input type="text" id="venue_name" name="venue_name" autocomplete="off">
+                                <input required type="text" id="venue_name" name="venue_name" autocomplete="off">
                                 <input type="hidden" id="venue_id" name="venue_id">
                                 <div style="display:none;" class="dropdown" id="venue_options"></div></div>
 
@@ -122,7 +122,7 @@ get_header();
                                 <span class="tooltip">
                                     i<span class="tooltip-text">This is the name printed on the show bill. Your review will be completely annonymous. Performing act name is only collected for verification purposes</span>
                                 </span><br>
-                                <input type="text" id="performing_act_name" name="performing_act_name" ></div>
+                                <input required type="text" id="performing_act_name" name="performing_act_name" ></div>
 
                                 <!-- Promoter or agency involved -->
                                 <div><label for="middle_man">Promoter or Booking Agency</label>
