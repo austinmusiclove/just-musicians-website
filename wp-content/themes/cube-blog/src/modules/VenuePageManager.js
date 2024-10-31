@@ -17,7 +17,6 @@ class VenuePageManager {
         this.getVenueReviewsFromServer(venueId).then((response) => {
             return response.data;
         }).then((data) => {
-            console.log(data);
             // parse data
             let reviewsHtml = ''
             let payStructureChartData = {'Guarantee': 0, 'Door Deal': 0, 'Bar Deal': 0, 'Tips': 0};
@@ -33,9 +32,6 @@ class VenuePageManager {
                 'Never got paid': 'Never',
             }
             for (let iterator = 0; iterator < data.length; iterator++) {
-                console.log(data[iterator]);
-                console.log(data[iterator].door_earnings);
-                console.log(parseFloat(data[iterator].door_earnings));
                 reviewsHtml += this.getVenueReviewHtml(data[iterator])
                 let payMethod = data[iterator].payment_method;
                 let paySpeed = paySpeedStringTable[data[iterator].payment_speed];
@@ -45,8 +41,6 @@ class VenuePageManager {
                 payStructureChartData['Tips'] += data[iterator].tips_earnings ? parseFloat(data[iterator].tips_earnings): 0;
                 payMethodChartData.hasOwnProperty(payMethod) ? payMethodChartData[payMethod] += 1 : payMethodChartData['Other'] += 1;
                 paySpeedChartData[paySpeed] += 1;
-                console.log(payStructureChartData['Guarantee'])
-                console.log(payStructureChartData['Door Deal'])
             }
 
             // reviews section
