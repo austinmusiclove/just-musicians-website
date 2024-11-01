@@ -55,11 +55,36 @@ function get_venues() {
     }
     return $result;
 }
-
-
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venues', [
         'methods' => 'GET',
         'callback' => 'get_venues',
+    ]);
+});
+
+function get_venue_post_id_by_name() {
+    $venue_name = $_GET['venue_name'];
+
+    $args = array(
+        'post_type' => 'venue',
+        'post_status' => 'publish',
+        'meta_query' => array(
+            array(
+                'key' => 'name',
+                'value' => $venue_name,
+                'compare' => '='
+            )
+        ),
+    );
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        $query->the_post();
+        return get_the_ID();
+    }
+}
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'venues/id', [
+        'methods' => 'GET',
+        'callback' => 'get_venue_post_id_by_name',
     ]);
 });
