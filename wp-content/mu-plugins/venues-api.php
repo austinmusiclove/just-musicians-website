@@ -63,7 +63,7 @@ add_action('rest_api_init', function () {
 });
 
 function get_venue_post_id_by_name() {
-    $venue_name = $_GET['venue_name'];
+    $venue_name = stripslashes($_GET['venue_name']);
 
     $args = array(
         'post_type' => 'venue',
