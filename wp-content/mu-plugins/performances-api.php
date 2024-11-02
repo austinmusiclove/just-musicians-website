@@ -79,6 +79,7 @@ add_action('rest_api_init', function () {
 
 
 function get_performances_by_performer() {
+    $result = array();
     $start_date = $_GET['start_date'];
     $end_date = $_GET['end_date'];
     $performing_act_name = stripslashes($_GET['performing_act_name']);
@@ -109,16 +110,16 @@ function get_performances_by_performer() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return array(
+        array_push($result, array(
             'id' => get_the_ID(),
             'performance_id' => get_field('performance_id'),
             'venue' => get_field('venue'),
             'venue_name' => get_field('venue_name'),
             'performing_act_name' => get_field('performing_act_name'),
             'performance_date' => get_field('performance_date'),
-        );
+        ));
     }
-    return 0;
+    return $result;
 }
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'performances/performer', [
