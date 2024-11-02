@@ -109,15 +109,16 @@ function get_performances_by_performer() {
     );
     $query = new WP_Query($args);
     if ($query->have_posts()) {
-        $query->the_post();
-        array_push($result, array(
-            'id' => get_the_ID(),
-            'performance_id' => get_field('performance_id'),
-            'venue' => get_field('venue'),
-            'venue_name' => get_field('venue_name'),
-            'performing_act_name' => get_field('performing_act_name'),
-            'performance_date' => get_field('performance_date'),
-        ));
+        while( $query->have_posts() ) {
+            $query->the_post();
+            array_push($result, array(
+                'id' => get_the_ID(),
+                'performance_id' => get_field('performance_id'),
+                'venue_name' => get_field('venue_name'),
+                'performing_act_name' => get_field('performing_act_name'),
+                'performance_date' => get_field('performance_date'),
+            ));
+        }
     }
     return $result;
 }
