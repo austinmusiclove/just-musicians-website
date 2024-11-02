@@ -472,6 +472,7 @@ class VenueReviewFormManager {
       if (this.setupElements()) {
         this.setupEventListeners();
         this.loadVenueOptions();
+        this.preFill();
       }
     });
   }
@@ -483,6 +484,10 @@ class VenueReviewFormManager {
     this.venueIdInput = document.getElementById('venue_id');
     this.venueOptions = document.getElementById('venue_options');
     this.venueOptionsMap = {};
+    this.performanceIdInput = document.getElementById('performance_id');
+    this.performancePostIdInput = document.getElementById('performance_post_id');
+    this.performerInput = document.getElementById('performing_act_name');
+    this.performanceDateInput = document.getElementById('performance_date');
     this.stars = document.querySelectorAll('.star');
     this.versusToggle = document.getElementById("has_versus_comp");
     this.versusInput1 = document.getElementById("versus_comp_1");
@@ -552,6 +557,23 @@ class VenueReviewFormManager {
   }
   getVenues() {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_api_url}/?min_review_count=0`);
+  }
+  preFill() {
+    let performanceId = this.performanceIdInput.value;
+    this.getPerformance(performanceId).then(response => {
+      return response.data;
+    }).then(data => {
+      this.performancePostIdInput.value = data.id;
+      this.venueInput.value = data.venue_name;
+      this.venueIdInput.value = data.venue;
+      this.performerInput.value = data.performing_act_name;
+      this.performanceDateInput.value = data.performance_date;
+    }).catch(err => {
+      console.warn(err);
+    });
+  }
+  getPerformance(performanceId) {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.performance_by_id_api_url}/?performance_id=${performanceId}`);
   }
 
   // Rating inputs

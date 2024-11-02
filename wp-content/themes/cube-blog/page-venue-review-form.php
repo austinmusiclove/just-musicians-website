@@ -54,6 +54,7 @@ get_header();
                             'post_status'  => 'pending',
                             'post_type'    => 'venue_review',
                             'meta_input'   => array(
+                                'performance' => sanitize_text_field($_POST['performance_post_id']),
                                 '_venue_name' => $venue_name,
                                 'venue' => sanitize_text_field($_POST['venue_id']),
                                 'performing_act_name' => $performing_act_name,
@@ -113,6 +114,8 @@ get_header();
                             <h2>Performance Details</h2>
                             <div class="form-separator"></div>
                             <div class="form-group">
+                                <input type="hidden" id="performance_id" name="performance_id" value="<?php echo $_GET['pid']; ?>">
+                                <input type="hidden" id="performance_post_id" name="performance_post_id">
                                 <div><label for="venue_name">Venue Name</label><br>
                                 <input required type="text" id="venue_name" name="venue_name" autocomplete="off">
                                 <input type="hidden" id="venue_id" name="venue_id">

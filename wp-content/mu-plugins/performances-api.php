@@ -46,7 +46,6 @@ add_action('rest_api_init', function () {
 
 function get_performance_by_performance_id() {
     $performance_id = $_GET['performance_id'];
-
     $args = array(
         'post_type' => 'performance',
         'posts_per_page' => 1,
@@ -62,6 +61,8 @@ function get_performance_by_performance_id() {
     if ($query->have_posts()) {
         $query->the_post();
         return array(
+            'id' => get_the_ID(),
+            'venue' => get_field('venue'),
             'venue_name' => get_field('venue_name'),
             'performing_act_name' => get_field('performing_act_name'),
             'performance_date' => get_field('performance_date'),
