@@ -137,20 +137,6 @@ get_header();
                             </div>
                             <div class="form-separator"></div>
 
-                            <!-- Gig type -->
-                            <label for="gig_type">Gig Type</label><br>
-                            <input class="button-input" value="Free Show" type="radio" name="gig_type" id="free"/>
-                            <label class="button-label" for="free">Free Show</label>
-                            <input class="button-input" value="Ticketed/Cover-charge Show" type="radio" name="gig_type" id="ticketed"/>
-                            <label class="button-label" for="ticketed">Ticketed/Cover-charge Show</label>
-                            <input class="button-input" value="Background Music" type="radio" name="gig_type" id="background"/>
-                            <label class="button-label" for="background">Background Music</label>
-                            <input class="button-input" value="Private Event" type="radio" name="gig_type" id="private"/>
-                            <label class="button-label" for="private">Private Event</label>
-                            <input class="button-input" value="Corporate Event" type="radio" name="gig_type" id="corporate"/>
-                            <label class="button-label" for="corporate">Corporate Event</label><br><br>
-                            <div class="form-separator"></div>
-
                             <div class="form-group">
                                 <!-- Performance date -->
                                 <div><label for="performance_date">Performance Date</label>
@@ -183,6 +169,20 @@ get_header();
                                 </span><br>
                                 <input type="number" id="total_acts" name="total_acts" min=1 ></div>
                             </div>
+                            <div class="form-separator"></div>
+
+                            <!-- Gig type -->
+                            <label for="gig_type">Gig Type</label><br>
+                            <input class="button-input" value="Free Show" type="radio" name="gig_type" id="free"/>
+                            <label class="button-label" for="free">Free Show</label>
+                            <input class="button-input" value="Ticketed/Cover-charge Show" type="radio" name="gig_type" id="ticketed"/>
+                            <label class="button-label" for="ticketed">Ticketed/Cover-charge Show</label>
+                            <input class="button-input" value="Background Music" type="radio" name="gig_type" id="background"/>
+                            <label class="button-label" for="background">Background Music</label>
+                            <input class="button-input" value="Private Event" type="radio" name="gig_type" id="private"/>
+                            <label class="button-label" for="private">Private Event</label>
+                            <input class="button-input" value="Corporate Event" type="radio" name="gig_type" id="corporate"/>
+                            <label class="button-label" for="corporate">Corporate Event</label><br><br>
                             <div class="form-separator"></div>
 
                             <!------------ Rating ----------------->
