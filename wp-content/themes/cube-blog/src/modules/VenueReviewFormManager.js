@@ -98,11 +98,13 @@ class VenueReviewFormManager {
         this.getPerformance(performanceId).then( (response) => {
             return response.data;
         }).then((data) => {
-            this.performancePostIdInput.value = data.id;
-            this.venueInput.value = data.venue_name;
-            this.venueIdInput.value = data.venue;
-            this.performerInput.value = data.performing_act_name;
-            this.performanceDateInput.value = data.performance_date;
+            if (data) {
+                this.performancePostIdInput.value = data.id;
+                this.venueInput.value = data.venue_name;
+                this.venueIdInput.value = data.venue;
+                this.performerInput.value = data.performing_act_name;
+                this.performanceDateInput.value = data.performance_date;
+            }
         }).catch( (err) => {
             console.warn(err);
         });
