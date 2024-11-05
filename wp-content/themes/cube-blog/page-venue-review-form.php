@@ -19,8 +19,6 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 			<div class="single-page-wrapper">
-                <h1>Venue Review Form</h1>
-                <p>Each review is verified and anonymous. Each review coresponds to exactly one performance by one act. You are welcome to fill out as many reviews as you'd like. Check the <a href="<?php echo get_site_url() . "/venues" ?>">venues page</a> to see the published reviews and the compensation insights derived from them.</p>
 				<?php
                     function get_comp_structure_string($comp_structure) {
                         if (in_array('Versus', $comp_structure)) {
@@ -49,13 +47,13 @@ get_header();
                         $comp_structure_string = get_comp_structure_string($comp_structure);
                         $backline = (isset($_POST['backline'])) ? array_filter(array_map('sanitize_text_field', $_POST['backline'])) : array();
 
-                        $new_post = array(
+                        $review_post = array(
                             'post_title'   => $performing_act_name . ' - ' . $venue_name . ' - ' . $performance_date,
                             'post_status'  => 'pending',
                             'post_type'    => 'venue_review',
                             'meta_input'   => array(
                                 'performance' => sanitize_text_field($_POST['performance_post_id']),
-                                '_venue_name' => $venue_name,
+                                'venue_name' => $venue_name,
                                 'venue' => sanitize_text_field($_POST['venue_id']),
                                 'performing_act_name' => $performing_act_name,
                                 'middle_man' => sanitize_text_field($_POST['middle_man']),
@@ -94,13 +92,24 @@ get_header();
                                 'buyer_contact' => sanitize_text_field($_POST['buyer_contact']),
                             ),
                         );
-                        $post_id = wp_insert_post($new_post);
+                        $post_id = wp_insert_post($review_post);
 
-                        // Check for errors
                         if (is_wp_error($post_id)) {
                             echo '<h2>There was an error saving your submission. Please try again.</h2>';
                         } else {
-                            echo '<h2>Thank you for your submission!</h2>';
+                            $submission_post = array(
+                                'post_title'   => 'Venue Review: ' . $performing_act_name . ' - ' . $venue_name . ' - ' . $performance_date,
+                                'post_status'  => 'publish',
+                                'post_type'    => 'review_submission',
+                                'meta_input'   => array(
+                                    'type' => 'Venue',
+                                    'review_post' => $post_id,
+                                    'submission' => json_encode($review_post),
+                                )
+                            );
+                            $post_id = wp_insert_post($submission_post);
+
+                            echo '<h2>Thank you for your venue review submission!</h2>';
                             echo '<p>Your review has been submitted successfully.</p>';
                             echo '<a style="margin: 0 20px 20px 0;" href="' . get_permalink() . '"><button>Submit another Review</button></a>';
                             echo '<a href="' . get_site_url() . '/venues"><button>Browse Venues</button></a>';
@@ -108,6 +117,8 @@ get_header();
                     } else {
                         // Display the form
                         ?>
+                        <h1>Venue Review Form</h1>
+                        <p>Each review is verified and anonymous. Each review coresponds to exactly one performance by one act. You are welcome to fill out as many reviews as you'd like. Check the <a href="<?php echo get_site_url() . "/venues" ?>">venues page</a> to see the published reviews and the compensation insights derived from them.</p>
                         <form id="venue-review-form" method="post" action="">
                             <!------------ Gig details ----------------->
                             <hr>

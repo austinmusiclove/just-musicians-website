@@ -41,6 +41,21 @@ function register_post_types() {
         'menu_icon' => 'dashicons-feedback'
     ));
 
+    // Venue Review Submission
+    register_post_type('review_submission', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Review Submission',
+          'add_new_item' => 'Add New Review Submission',
+          'edit_item' => 'Edit Review Submission',
+          'all_items' => 'All Review Submissions',
+          'singular_name' => 'Review Submission'
+        ),
+        'menu_icon' => 'dashicons-clipboard'
+    ));
+
     // Performance
     register_post_type('performance', array(
         'public' => true,
