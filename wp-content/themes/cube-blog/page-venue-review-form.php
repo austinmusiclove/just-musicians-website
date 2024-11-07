@@ -89,7 +89,7 @@ get_header();
                                 'provided_sound_engineer' => sanitize_text_field($_POST['provided_sound_engineer']),
                                 'backline' => $backline,
                                 'review' => sanitize_textarea_field($_POST['review']),
-                                'buyer_contact' => sanitize_text_field($_POST['buyer_contact']),
+                                'author_email' => sanitize_textarea_field($_POST['author_email']),
                             ),
                         );
                         $post_id = wp_insert_post($review_post);
@@ -493,6 +493,12 @@ get_header();
                             <!-- Review -->
                             <label for="review">Please tell the community about your experience working with this venue.</label><br>
                             <textarea id="review" name="review"></textarea><br><br>
+                            <div class="form-separator"></div>
+                            <label for="author_email">Email</label>
+                            <span class="tooltip">
+                                i<span class="tooltip-text">This will not be published in any way. This is only used to contact you in case we have questions about this review and we cannot find a way to contact you.</span>
+                            </span><br>
+                            <input required type="email" name="author_email" id="author_email"><br>
                             <div class="form-separator"></div>
 
                             <!-- Talent buyer contact -->
