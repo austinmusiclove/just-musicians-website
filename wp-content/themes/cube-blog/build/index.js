@@ -456,7 +456,7 @@ class VenueInsightGenerator {
     return null;
   }
   calculateAverage(numbers) {
-    return numbers.map(item => parseFloat(item)).reduce((sum, num) => sum + num, 0) / numbers.length;
+    return (numbers.map(item => parseFloat(item)).reduce((sum, num) => sum + num, 0) / numbers.length).toFixed(2);
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueInsightGenerator);
