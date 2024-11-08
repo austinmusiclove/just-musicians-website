@@ -6,14 +6,9 @@ function get_venue_reviews() {
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,
-        'meta_query' => array(
-            array(
-                'key' => 'venue',
-                'value' => $venue_id,
-                'compare' => 'IN',
-                'type' => 'NUMERIC'
-            )
-        )
+        'meta_key' => 'venue',
+        'meta_value' => $venue_id,
+        'meta_compare' => 'IN',
     );
     $query = new WP_Query($args);
     if ($query->have_posts()) {
