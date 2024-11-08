@@ -8,9 +8,9 @@ function get_venue_reviews() {
         'nopaging' => true,
         'meta_query' => array(
             array(
-                'key' => 'pay_method',
-                'value' => 'Cash',
-                'compare' => '='
+                'key' => 'venue',
+                'value' => $venue_id,
+                'compare' => 'IN'
             )
         )
     );
