@@ -11,8 +11,8 @@ function get_venue_reviews() {
         'meta_query' => array(
             array(
                 'key' => 'venue',
-                'value' => $venue_id,
-                'compare' => '=',
+                'value' => array($venue_id),
+                'compare' => 'IN'
                 'type' => 'NUMERIC',
             )
         )
