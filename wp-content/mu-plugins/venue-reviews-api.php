@@ -1,19 +1,13 @@
 <?php
-//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND CAST(wp_postmeta.meta_value AS SIGNED) = '106' )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
-//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND CAST(wp_postmeta.meta_value AS SIGNED) IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
-//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
-//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
-//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
-//"SELECT SQL_CALC_FOUND_ROWS  wp_posts.ID\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t LIMIT 0, 12"
 
 function get_venue_reviews() {
     $venue_id = sanitize_text_field($_GET['venue_id']);
     $result = array();
     $args = array(
         'post_type' => 'venue_review',
-        'post_per_page' => -1,
+        'nopaging' => true,
         'post_status' => 'publish',
-        'meta_key' => 'venue',
+        'meta_key' => 'venue_post_id',
         'meta_value' => $venue_id,
     );
     $query = new WP_Query($args);
@@ -24,7 +18,7 @@ function get_venue_reviews() {
             $query->the_post();
             array_push($result, array(
                 'ID' => get_the_ID(),
-                'venue' => get_field('venue'),
+                'venue_post_id' => get_field('venue_post_id'),
                 'overall_rating' => get_field('overall_rating'),
                 'comp_types_string' => get_field('_comp_types_string'),
                 'hours_performed' => get_field('hours_performed'),
@@ -66,7 +60,7 @@ function get_venue_reviews_batch() {
         'post_status' => 'publish',
         'meta_query' => array(
             array(
-                'key' => 'venue',
+                'key' => 'venue_post_id',
                 'value' => explode(',', $venue_ids),
                 'compare' => 'IN'
             )
@@ -98,7 +92,7 @@ function get_venue_reviews_batch() {
             $query->the_post();
             array_push($result, array(
                 'ID' => get_the_ID(),
-                'venue' => get_field('venue')[0],
+                'venue_post_id' => get_field('venue_post_id'),
                 'overall_rating' => get_field('overall_rating'),
                 'comp_types_string' => get_field('_comp_types_string'),
                 'hours_performed' => get_field('hours_performed'),

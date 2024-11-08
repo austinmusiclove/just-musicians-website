@@ -31,6 +31,7 @@ function update_venue_review_stats() {
         // for each venue review, update stats
         while( $venues_query->have_posts() ) {
             $venues_query->the_post();
+            $venue = get_field('venue');
             $venue_review_post_id = get_the_ID();
             $total_earnings = (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
             $total_performers = (int)get_post_meta(get_the_ID(), 'total_performers' , true);
@@ -43,6 +44,8 @@ function update_venue_review_stats() {
             $update_args = array(
                 'ID' => $venue_review_post_id,
                 'meta_input' => array(
+                    'venue_name' => $venue[0]->name,
+                    'venue_post_id' => $venue[0]->ID,
                     '_earnings_per_performer' => $earnings_per_performer,
                     '_earnings_per_hour' => $earnings_per_hour,
                     '_earnings_per_performer_per_hour' => $earnings_per_performer_per_hour,
