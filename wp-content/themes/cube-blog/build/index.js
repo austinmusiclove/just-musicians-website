@@ -401,7 +401,6 @@ class VenueInsightGenerator {
     }
   }
   addVenues(venueIds) {
-    this.ready = false;
     let difference = venueIds.filter(item => !this.venueIds.includes(item));
     this.venueIds.push(...difference);
     return this.getVenueReviews(difference);
@@ -414,7 +413,7 @@ class VenueInsightGenerator {
       }).then(data => {
         for (let iterator2 = 0; iterator2 < data.length; iterator2++) {
           let review = data[iterator2];
-          let venueId = review['venue'];
+          let venueId = review['venue_post_id'];
           if (!this.venueReviews.hasOwnProperty(venueId)) {
             this.venueReviews[venueId] = [];
           }
