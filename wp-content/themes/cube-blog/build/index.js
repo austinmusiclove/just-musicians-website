@@ -262,6 +262,7 @@ class VenueArchiveManager {
     this.venueData = {};
     this.payMetric = this.payMetricElement.value || null;
     this.payStructure = this.payStructureElement.value || null;
+    this.firstRender = true;
   }
   _setupElements() {
     this.payStructureElement = document.getElementById('pay-structure');
@@ -288,9 +289,10 @@ class VenueArchiveManager {
       return response.data;
     }).then(data => {
       this.currentSearchVenues = data;
+      this.updateTableAndMap(this.currentSearchVenues);
       return this.venueInsightGenerator.addVenues(this.currentSearchVenues.map(venue => venue.ID));
     }).then(() => {
-      this.updateTableAndMap();
+      this.enableFilters();
       this.removeSpinners();
     }).catch(err => {
       console.warn(err);
@@ -300,15 +302,20 @@ class VenueArchiveManager {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(GET_VENUES_API_URL);
   }
   updateTableAndMap() {
+    let tableVenues = [];
     this.payMetric = this.payMetricElement.value || 'average_earnings';
     this.payStructure = this.payStructureElement.value || null;
-    let tableVenues = [];
-    for (let iterator = 0; iterator < this.currentSearchVenues.length; iterator++) {
-      let venue = this.currentSearchVenues[iterator];
-      if (this.venueInsightGenerator.getInsight(venue.ID, 'review_count', this.payStructure) > 0) {
-        let metric = this.venueInsightGenerator.getInsight(venue.ID, this.payMetric, this.payStructure);
-        venue[this.payMetric] = metric;
-        tableVenues.push(venue);
+    if (this.firstRender) {
+      this.firstRender = false;
+      tableVenues = this.currentSearchVenues;
+    } else {
+      for (let iterator = 0; iterator < this.currentSearchVenues.length; iterator++) {
+        let venue = this.currentSearchVenues[iterator];
+        if (this.venueInsightGenerator.getInsight(venue.ID, 'review_count', this.payStructure) > 0) {
+          let metric = this.venueInsightGenerator.getInsight(venue.ID, this.payMetric, this.payStructure);
+          venue[this.payMetric] = metric;
+          tableVenues.push(venue);
+        }
       }
     }
     tableVenues.sort((item1, item2) => item2[this.payMetric] - item1[this.payMetric]);
@@ -330,6 +337,10 @@ class VenueArchiveManager {
   clearData() {} // clears existing venue data on the page
   addSpinners() {} // adds elements that show the new content is loading
   removeSpinners() {} // removes elements that show that content is loading
+  enableFilters() {
+    this.payMetricElement.disabled = false;
+    this.payStructureElement.disabled = false;
+  }
   // returns promise for venue data from the venues api
   getTopVenuesTableHeaderHtml() {
     return `<tr>
@@ -410,8 +421,8 @@ class VenueInsightGenerator {
       return this.getVenueReviewsFromServer(batch).then(response => {
         return response.data;
       }).then(data => {
-        for (let iterator2 = 0; iterator2 < data.length; iterator2++) {
-          let review = data[iterator2];
+        for (let iterator = 0; iterator < data.length; iterator++) {
+          let review = data[iterator];
           let venueId = review['venue_post_id'];
           if (!this.venueReviews.hasOwnProperty(venueId)) {
             this.venueReviews[venueId] = [];
@@ -422,8 +433,6 @@ class VenueInsightGenerator {
         console.warn(err);
       });
     });
-    //for (let iterator = 0; iterator < batches.length; iterator++) {
-    //}
     return Promise.all(promises);
   }
   getVenueIdBatches(venueIds) {

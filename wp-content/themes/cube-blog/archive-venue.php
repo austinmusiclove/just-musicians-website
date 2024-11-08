@@ -21,7 +21,7 @@ get_header();
                         <h2 style="margin:20px 0px 20px 0px;">Top Paying Venues</h2>
                         <div style="margin:0px 20px 20px 0px;">
                             <label for="venues">Pay Structure</label>
-                            <select name="pay-structure" id="pay-structure">
+                            <select disabled name="pay-structure" id="pay-structure">
                                 <option value="">All</option>
                                 <option value="Guarantee">Guarantee</option>
                                 <option value="Door Deal">Door Deal</option>
@@ -30,7 +30,7 @@ get_header();
                         </div>
                         <div style="margin:0px 20px 20px 0px;">
                             <label for="venues">Sort By</label>
-                            <select name="pay-metric" id="pay-metric">
+                            <select disabled name="pay-metric" id="pay-metric">
                                 <option value="average_earnings">Earnings Per Gig</option>
                                 <option value="average_earnings_per_performer">Earnings Per Performer</option>
                                 <option value="average_earnings_per_hour">Earnings Per Hour</option>

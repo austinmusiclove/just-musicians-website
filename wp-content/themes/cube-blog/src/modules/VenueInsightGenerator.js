@@ -33,8 +33,8 @@ class VenueInsightGenerator {
             return this.getVenueReviewsFromServer(batch).then(response => {
                 return response.data;
             }).then(data => {
-                for (let iterator2 = 0; iterator2 < data.length; iterator2++) {
-                    let review = data[iterator2];
+                for (let iterator = 0; iterator < data.length; iterator++) {
+                    let review = data[iterator];
                     let venueId = review['venue_post_id'];
                     if (!this.venueReviews.hasOwnProperty(venueId)) { this.venueReviews[venueId] = []; }
                     this.venueReviews[venueId].push(review);
@@ -43,8 +43,6 @@ class VenueInsightGenerator {
                 console.warn(err);
             });
         });
-            //for (let iterator = 0; iterator < batches.length; iterator++) {
-            //}
         return Promise.all(promises);
     }
     getVenueIdBatches(venueIds) {
