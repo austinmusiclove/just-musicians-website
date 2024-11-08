@@ -15,7 +15,7 @@ function get_venue_reviews() {
         'post_status' => 'publish',
     );
     $query = new WP_Query($args);
-    return $query->request;
+    //return $query->request;
     return $query->posts;
     if ($query->have_posts()) {
         while( $query->have_posts() ) {
