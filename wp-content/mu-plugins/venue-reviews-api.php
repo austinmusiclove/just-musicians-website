@@ -6,6 +6,7 @@ function get_venue_reviews() {
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,
+        'post_status' => 'publish',
         'meta_query' => array(
             array(
                 'key' => 'venue',
@@ -59,6 +60,7 @@ function get_venue_reviews_batch() {
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,
+        'post_status' => 'publish',
         'meta_query' => array(
             'relation' => 'OR'
         )
