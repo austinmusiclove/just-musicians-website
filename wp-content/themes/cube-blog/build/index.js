@@ -238,8 +238,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
+const GET_VENUES_API_URL = siteData.venues_api_url;
+const GET_VENUE_REVIEWS_BATCH_API_URL = siteData.venue_reviews_batch_api_url;
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
-const GET_VENUES_EVENT_NAME = 'GetVenues';
 const PAY_METRIC_LABELS = {
   'average_earnings': 'Avg. Earnings Per Gig',
   'average_earnings_per_performer': 'Avg. Earnings Per Gig Per Performer',
@@ -247,63 +248,104 @@ const PAY_METRIC_LABELS = {
   'average_earnings_per_performer_per_hour': 'Avg. Earnings Per Performer Per Hour'
 };
 class VenueArchiveManager {
-  constructor() {
-    this._setupEventListeners();
+  constructor(venueInsightGenerator) {
+    if (this._setupElements()) {
+      this._setupState();
+      this._setupEventListeners();
+      this._initialize();
+      this.venueInsightGenerator = venueInsightGenerator;
+    }
+  }
+  _setupState() {
+    this.currentSearchVenues = [];
+    this.venueReviews = [];
+    this.venueData = {};
+    this.payMetric = this.payMetricElement.value || null;
+    this.payStructure = this.payStructureElement.value || null;
+  }
+  _setupElements() {
+    this.payStructureElement = document.getElementById('pay-structure');
+    if (this.payStructureElement == null) {
+      return false;
+    }
+    this.payMetricElement = document.getElementById('pay-metric');
+    this.tableElement = document.getElementById('top-venues-table');
+    return true;
   }
   _setupEventListeners() {
-    document.addEventListener(GET_VENUES_EVENT_NAME, this.getVenues.bind(this));
+    this.payStructureElement.addEventListener('change', this.updateTableAndMap.bind(this));
+    this.payMetricElement.addEventListener('change', this.updateTableAndMap.bind(this));
   }
-  getVenues(evnt) {
-    let payMetric = evnt.detail.payMetric;
-    let payType = evnt.detail.payType;
-    let tableElement = document.getElementById(evnt.detail.tableId);
+  _initialize() {
+    document.addEventListener("DOMContentLoaded", () => {
+      this.getVenues();
+    });
+  }
+  getVenues() {
     this.clearData();
     this.addSpinners();
-    this.getVenuesFromServer(payMetric, payType).then(response => {
-      this.removeSpinners();
+    this.getVenuesFromServer().then(response => {
       return response.data;
     }).then(data => {
-      let markers = [];
-      let tableHtml = this.getTopVenuesTableHeaderHtml(payMetric);
-      for (let iterator = 0; iterator < data.length; iterator++) {
-        markers.push(this.getMarkerData(data[iterator]));
-        tableHtml += this.getTopVenuesTableRowHtml(iterator + 1, data[iterator]);
-      }
-      document.dispatchEvent(new CustomEvent(REPLACE_MARKERS_EVENT_NAME, {
-        'detail': {
-          'markers': markers
-        }
-      }));
-      tableElement.innerHTML = tableHtml;
+      this.currentSearchVenues = data;
+      return this.venueInsightGenerator.addVenues(this.currentSearchVenues.map(venue => venue.ID));
+    }).then(() => {
+      this.updateTableAndMap();
+      this.removeSpinners();
     }).catch(err => {
       console.warn(err);
     });
+  }
+  getVenuesFromServer() {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(GET_VENUES_API_URL);
+  }
+  updateTableAndMap() {
+    this.payMetric = this.payMetricElement.value || 'average_earnings';
+    this.payStructure = this.payStructureElement.value || null;
+    let tableVenues = [];
+    for (let iterator = 0; iterator < this.currentSearchVenues.length; iterator++) {
+      let venue = this.currentSearchVenues[iterator];
+      if (this.venueInsightGenerator.getInsight(venue.ID, 'review_count', this.payStructure) > 0) {
+        let metric = this.venueInsightGenerator.getInsight(venue.ID, this.payMetric, this.payStructure);
+        venue[this.payMetric] = metric;
+        venue['rank'] = iterator + 1;
+        tableVenues.push(venue);
+      }
+    }
+    tableVenues.sort((item1, item2) => item2[this.payMetric] - item1[this.payMetric]);
+
+    // update table and markers
+    let markers = [];
+    let tableHtml = this.getTopVenuesTableHeaderHtml();
+    for (let iterator = 0; iterator < tableVenues.length; iterator++) {
+      tableHtml += this.getTopVenuesTableRowHtml(tableVenues[iterator]);
+      markers.push(this.getMarkerData(tableVenues[iterator]));
+    }
+    document.dispatchEvent(new CustomEvent(REPLACE_MARKERS_EVENT_NAME, {
+      'detail': {
+        'markers': markers
+      }
+    }));
+    this.tableElement.innerHTML = tableHtml;
   }
   clearData() {} // clears existing venue data on the page
   addSpinners() {} // adds elements that show the new content is loading
   removeSpinners() {} // removes elements that show that content is loading
   // returns promise for venue data from the venues api
-  getVenuesFromServer(payMetric = '_average_earnings', payType = null) {
-    let url = `${siteData.venues_api_url}/?pay_metric=${payMetric}`;
-    if (payType) {
-      url += `&pay_type=${payType}`;
-    }
-    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(url);
-  }
-  getTopVenuesTableHeaderHtml(payMetric) {
+  getTopVenuesTableHeaderHtml() {
     return `<tr>
                     <th>Rank</th>
                     <th>Venue</th>
-                    <th>${PAY_METRIC_LABELS[payMetric]}</th>
+                    <th>${PAY_METRIC_LABELS[this.payMetric]}</th>
                     <th>Review Count</th>
                     <th>Rating</th>
                 </tr>`;
   }
-  getTopVenuesTableRowHtml(rank, venue) {
+  getTopVenuesTableRowHtml(venue) {
     return `<tr>
-                    <td>${rank}</td>
+                    <td>${venue.rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
-                    <td>$${venue.pay_metric}</td>
+                    <td>$${venue[this.payMetric]}</td>
                     <td>${venue.review_count}</td>
                     <td>${venue.overall_rating}/5</td>
                 </tr>`;
@@ -324,6 +366,104 @@ class VenueArchiveManager {
 
 /***/ }),
 
+/***/ "./src/modules/VenueInsightGenerator.js":
+/*!**********************************************!*\
+  !*** ./src/modules/VenueInsightGenerator.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+const GET_VENUE_REVIEWS_BATCH_API_URL = siteData.venue_reviews_batch_api_url;
+class VenueInsightGenerator {
+  constructor() {
+    this._setupState();
+  }
+  _setupState() {
+    this.venueIds = [];
+    this.venueReviews = {};
+    this.venueReviewBatchSize = 100;
+  }
+  getInsight(venueId, metric, payStructure) {
+    if (this.venueIds.includes(venueId)) {
+      let reviews = this.venueReviews[venueId];
+      if (payStructure) {
+        reviews = reviews.filter(item => item['comp_structure_string'] == payStructure);
+      }
+      ;
+      return this.calculateMetric(reviews, metric);
+    } else {
+      return null;
+    }
+  }
+  addVenues(venueIds) {
+    this.ready = false;
+    let difference = venueIds.filter(item => !this.venueIds.includes(item));
+    this.venueIds.push(...difference);
+    return this.getVenueReviews(difference);
+  }
+  getVenueReviews(venueIds) {
+    let batches = this.getVenueIdBatches(venueIds);
+    let promises = batches.map(batch => {
+      return this.getVenueReviewsFromServer(batch).then(response => {
+        return response.data;
+      }).then(data => {
+        for (let iterator2 = 0; iterator2 < data.length; iterator2++) {
+          let review = data[iterator2];
+          let venueId = review['venue'];
+          if (!this.venueReviews.hasOwnProperty(venueId)) {
+            this.venueReviews[venueId] = [];
+          }
+          this.venueReviews[venueId].push(review);
+        }
+      }).catch(err => {
+        console.warn(err);
+      });
+    });
+    //for (let iterator = 0; iterator < batches.length; iterator++) {
+    //}
+    return Promise.all(promises);
+  }
+  getVenueIdBatches(venueIds) {
+    let batches = [];
+    for (let iterator = 0; iterator < venueIds.length; iterator += this.venueReviewBatchSize) {
+      batches.push(venueIds.slice(iterator, iterator + this.venueReviewBatchSize));
+    }
+    return batches;
+  }
+  getVenueReviewsFromServer(venueIds) {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${GET_VENUE_REVIEWS_BATCH_API_URL}/?venue_ids=${venueIds.join(',')}`);
+  }
+  calculateMetric(reviews, metric) {
+    if (metric == 'review_count') {
+      return reviews.length;
+    }
+    if (metric == 'average_earnings') {
+      return this.calculateAverage(reviews.map(review => review['total_earnings']));
+    }
+    if (metric == 'average_earnings_per_performer') {
+      return this.calculateAverage(reviews.map(review => review['earnings_per_performer']));
+    }
+    if (metric == 'average_earnings_per_hour') {
+      return this.calculateAverage(reviews.map(review => review['earnings_per_hour']));
+    }
+    if (metric == 'average_earnings_per_performer_per_hour') {
+      return this.calculateAverage(reviews.map(review => review['earnings_per_performer_per_hour']));
+    }
+    return null;
+  }
+  calculateAverage(numbers) {
+    return numbers.map(item => parseFloat(item)).reduce((sum, num) => sum + num, 0) / numbers.length;
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueInsightGenerator);
+
+/***/ }),
+
 /***/ "./src/modules/VenuePageManager.js":
 /*!*****************************************!*\
   !*** ./src/modules/VenuePageManager.js ***!
@@ -337,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
-const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
+const GET_VENUE_REVIEWS_API_URL = siteData.venue_reviews_api_url;
 class VenuePageManager {
   constructor(chartGenerator) {
     this.chartGenerator = chartGenerator;
@@ -5451,7 +5591,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenuePageManager */ "./src/modules/VenuePageManager.js");
 /* harmony import */ var _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueArchiveManager */ "./src/modules/VenueArchiveManager.js");
 /* harmony import */ var _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/VenueReviewFormManager */ "./src/modules/VenueReviewFormManager.js");
+/* harmony import */ var _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/VenueInsightGenerator */ "./src/modules/VenueInsightGenerator.js");
 // Import modules
+
 
 
 
@@ -5461,8 +5603,9 @@ __webpack_require__.r(__webpack_exports__);
 // Instantiate
 const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
 const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
+const venueInsightGenerator = new _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__["default"]();
 const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
-const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"]();
+const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"](venueInsightGenerator);
 const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
 /******/ })()
 ;

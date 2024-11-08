@@ -23,9 +23,9 @@ get_header();
                             <label for="venues">Pay Structure</label>
                             <select name="pay-structure" id="pay-structure">
                                 <option value="">All</option>
-                                <option value="guarantee">Guarantee</option>
-                                <option value="door_deal">Door Deal</option>
-                                <option value="bar_deal">Bar Deal</option>
+                                <option value="Guarantee">Guarantee</option>
+                                <option value="Door Deal">Door Deal</option>
+                                <option value="Bar Deal">Bar Deal</option>
                             </select>
                         </div>
                         <div style="margin:0px 20px 20px 0px;">
@@ -41,16 +41,6 @@ get_header();
                 </form>
                 <table id="top-venues-table"></table>
 			</div><!-- .blog-archive -->
-            <script>
-                addEventListener("DOMContentLoaded", () => {
-                    let payStructureElement = document.getElementById('pay-structure');
-                    let payMetricElement = document.getElementById('pay-metric');
-
-                    document.dispatchEvent(new CustomEvent('GetVenues', {'detail': {'tableId': 'top-venues-table', 'payType': payStructureElement.value || null, 'payMetric': payMetricElement.value}}));
-                    payStructureElement.addEventListener('change', function() { document.dispatchEvent(new CustomEvent('GetVenues', {'detail': { 'tableId': 'top-venues-table', 'payType': payStructureElement.value, 'payMetric': payMetricElement.value }})) });
-                    payMetricElement.addEventListener('change', function() { document.dispatchEvent(new CustomEvent('GetVenues', {'detail': { 'tableId': 'top-venues-table', 'payType': payStructureElement.value, 'payMetric': payMetricElement.value }})) });
-                });
-            </script>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 <?php get_sidebar(); ?>

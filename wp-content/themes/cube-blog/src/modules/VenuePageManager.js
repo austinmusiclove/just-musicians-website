@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GET_VENUE_REVIEWS_EVENT_NAME = 'GetVenueReviews';
-const GET_VENUE_REVIEWS_API_URL = `${siteData.root_url}/wp-json/v1/venue_reviews`;
+const GET_VENUE_REVIEWS_API_URL = siteData.venue_reviews_api_url;
 
 class VenuePageManager {
     constructor(chartGenerator) {

@@ -300,6 +300,8 @@ function cube_blog_scripts() {
         'root_url' => get_site_url(),
         'venues_api_url' => get_site_url() . '/wp-json/v1/venues',
         'performance_by_id_api_url' => get_site_url() . '/wp-json/v1/performances/id',
+        'venue_reviews_api_url' => get_site_url() . '/wp-json/v1/venue_reviews',
+        'venue_reviews_batch_api_url' => get_site_url() . '/wp-json/v1/venue_reviews/batch',
         'nonce' => wp_create_nonce('wp_rest')
     ));
 }
