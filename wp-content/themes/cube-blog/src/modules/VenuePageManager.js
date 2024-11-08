@@ -68,7 +68,7 @@ class VenuePageManager {
             <p>`
         if (venueReview.comp_structure_string) { html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`; }
         html += `
-                Hours Performed: ${venueReview.hours_performed}
+                Hours Performed: ${this.roundMaxTwoPlaces(parseFloat(venueReview.hours_performed))}
                 <br>Total Performers: ${venueReview.total_performers}`;
         if (venueReview.has_guarantee_comp) { html += `<br>Guarantee: $${(venueReview.is_versus) ? venueReview.guarantee_promise : venueReview.guarantee_earnings}`; }
         if (venueReview.has_door_comp) { html += `<br>Door Percentage: ${venueReview.door_percentage}%`; }
@@ -81,6 +81,10 @@ class VenuePageManager {
             </p>
             <p>${venueReview.review}</p>`
         return html;
+    }
+
+    roundMaxTwoPlaces(number) {
+        return Math.round(number * 100) / 100;
     }
 }
 

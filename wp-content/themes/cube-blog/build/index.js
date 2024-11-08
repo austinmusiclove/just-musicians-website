@@ -559,7 +559,7 @@ class VenuePageManager {
       html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`;
     }
     html += `
-                Hours Performed: ${venueReview.hours_performed}
+                Hours Performed: ${this.roundMaxTwoPlaces(parseFloat(venueReview.hours_performed))}
                 <br>Total Performers: ${venueReview.total_performers}`;
     if (venueReview.has_guarantee_comp) {
       html += `<br>Guarantee: $${venueReview.is_versus ? venueReview.guarantee_promise : venueReview.guarantee_earnings}`;
@@ -584,6 +584,9 @@ class VenuePageManager {
             </p>
             <p>${venueReview.review}</p>`;
     return html;
+  }
+  roundMaxTwoPlaces(number) {
+    return Math.round(number * 100) / 100;
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenuePageManager);
