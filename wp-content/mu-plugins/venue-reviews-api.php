@@ -14,6 +14,7 @@ function get_venue_reviews() {
         'post_per_page' => -1,
         'post_status' => 'publish',
         'meta_key' => 'venue',
+        'meta_value' => $venue_id,
     );
     $query = new WP_Query($args);
     //return $query->request;
