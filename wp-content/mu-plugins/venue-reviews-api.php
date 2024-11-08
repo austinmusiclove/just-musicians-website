@@ -12,7 +12,7 @@ function get_venue_reviews() {
             array(
                 'key' => 'venue',
                 'value' => array($venue_id),
-                'compare' => 'IN'
+                'compare' => 'IN',
                 'type' => 'NUMERIC',
             )
         )
