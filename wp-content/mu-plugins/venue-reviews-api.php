@@ -8,9 +8,9 @@ function get_venue_reviews() {
         'nopaging' => true,
         'meta_query' => array(
             array(
-                'key' => 'venue',
-                'value' => $venue_id,
-                'compare' => 'IN',
+                'key' => 'payment_method',
+                'value' => 'Cash',
+                'compare' => '=',
             )
         )
     );
@@ -59,11 +59,10 @@ function get_venue_reviews_batch() {
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,
-    );
-    /*
         'meta_query' => array(
             'relation' => 'OR'
         )
+    );
     $meta_query = array('relation' => 'OR');
     foreach ($venue_ids_array as $venue_id) {
         array_push($args['meta_query'], array(
@@ -72,7 +71,6 @@ function get_venue_reviews_batch() {
             'compare' => 'IN'
         ));
     }
-    */
 
     $query = new WP_Query($args);
     if ($query->have_posts()) {
