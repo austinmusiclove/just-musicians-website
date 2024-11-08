@@ -4,13 +4,14 @@
 //"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
 //"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
 //"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
+//"SELECT SQL_CALC_FOUND_ROWS  wp_posts.ID\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND wp_postmeta.meta_value IN ('106') )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t LIMIT 0, 12"
 
 function get_venue_reviews() {
     $venue_id = sanitize_text_field($_GET['venue_id']);
     $result = array();
     $args = array(
         'post_type' => 'venue_review',
-        'nopaging' => true,
+        'post_per_page' => -1,
         'post_status' => 'publish',
         'meta_query' => array(
             array(
@@ -21,7 +22,7 @@ function get_venue_reviews() {
         )
     );
     $query = new WP_Query($args);
-    return $query->request;
+    //return $query->request;
     if ($query->have_posts()) {
         while( $query->have_posts() ) {
             $query->the_post();
