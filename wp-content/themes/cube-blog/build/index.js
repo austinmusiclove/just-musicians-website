@@ -308,7 +308,6 @@ class VenueArchiveManager {
       if (this.venueInsightGenerator.getInsight(venue.ID, 'review_count', this.payStructure) > 0) {
         let metric = this.venueInsightGenerator.getInsight(venue.ID, this.payMetric, this.payStructure);
         venue[this.payMetric] = metric;
-        venue['rank'] = iterator + 1;
         tableVenues.push(venue);
       }
     }
@@ -318,7 +317,7 @@ class VenueArchiveManager {
     let markers = [];
     let tableHtml = this.getTopVenuesTableHeaderHtml();
     for (let iterator = 0; iterator < tableVenues.length; iterator++) {
-      tableHtml += this.getTopVenuesTableRowHtml(tableVenues[iterator]);
+      tableHtml += this.getTopVenuesTableRowHtml(iterator + 1, tableVenues[iterator]);
       markers.push(this.getMarkerData(tableVenues[iterator]));
     }
     document.dispatchEvent(new CustomEvent(REPLACE_MARKERS_EVENT_NAME, {
@@ -341,9 +340,9 @@ class VenueArchiveManager {
                     <th>Rating</th>
                 </tr>`;
   }
-  getTopVenuesTableRowHtml(venue) {
+  getTopVenuesTableRowHtml(rank, venue) {
     return `<tr>
-                    <td>${venue.rank}</td>
+                    <td>${rank}</td>
                     <td><a href="${venue.permalink}">${venue.name}</a></td>
                     <td>$${venue[this.payMetric]}</td>
                     <td>${venue.review_count}</td>
