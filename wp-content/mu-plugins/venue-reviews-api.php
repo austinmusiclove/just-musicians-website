@@ -6,13 +6,6 @@ function get_venue_reviews() {
     $args = array(
         'post_type' => 'venue_review',
         'nopaging' => true,
-        'meta_query' => array(
-            array(
-                'key' => 'venue',
-                'value' => 515,
-                'compare' => 'IN'
-            )
-        )
     );
     $query = new WP_Query($args);
     if ($query->have_posts()) {
@@ -20,7 +13,7 @@ function get_venue_reviews() {
             $query->the_post();
             array_push($result, array(
                 'ID' => get_the_ID(),
-                'venue' => get_field('venue')[0],
+                'venue' => get_field('venue'),
                 'overall_rating' => get_field('overall_rating'),
                 'comp_types_string' => get_field('_comp_types_string'),
                 'hours_performed' => get_field('hours_performed'),
