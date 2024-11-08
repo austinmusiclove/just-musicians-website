@@ -1,7 +1,7 @@
 <?php
 
 function get_venue_reviews() {
-    $venue_id = $_GET['venue_id'];
+    $venue_id = sanitize_text_field($_GET['venue_id']);
     $result = array();
     $args = array(
         'post_type' => 'venue_review',
@@ -10,7 +10,7 @@ function get_venue_reviews() {
             array(
                 'key' => 'venue',
                 'value' => $venue_id,
-                'compare' => 'LIKE'
+                'compare' => 'IN'
             )
         )
     );
