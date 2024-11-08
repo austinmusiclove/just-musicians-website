@@ -2,6 +2,7 @@
 
 function get_venue_reviews() {
     $venue_id = $_GET['venue_id'];
+    return $venue_id;
     $result = array();
     $args = array(
         'post_type' => 'venue_review',
