@@ -13,10 +13,11 @@ function get_venue_reviews() {
         'post_type' => 'venue_review',
         'post_per_page' => -1,
         'post_status' => 'publish',
+        'meta_key' => 'venue',
     );
     $query = new WP_Query($args);
     //return $query->request;
-    return $query->posts;
+    //return $query->posts;
     if ($query->have_posts()) {
         while( $query->have_posts() ) {
             $query->the_post();
