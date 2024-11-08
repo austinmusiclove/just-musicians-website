@@ -1,4 +1,5 @@
 <?php
+//"SELECT   wp_posts.*\n\t\t\t\t\t FROM wp_posts  INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id )\n\t\t\t\t\t WHERE 1=1  AND ( \n  ( wp_postmeta.meta_key = 'venue' AND CAST(wp_postmeta.meta_value AS SIGNED) = '106' )\n) AND wp_posts.post_type = 'venue_review' AND ((wp_posts.post_status = 'publish'))\n\t\t\t\t\t GROUP BY wp_posts.ID\n\t\t\t\t\t ORDER BY wp_posts.post_date DESC\n\t\t\t\t\t "
 
 function get_venue_reviews() {
     $venue_id = sanitize_text_field($_GET['venue_id']);
@@ -11,12 +12,12 @@ function get_venue_reviews() {
             array(
                 'key' => 'venue',
                 'value' => $venue_id,
-                'compare' => 'IN',
+                'compare' => '=',
+                'type' => 'NUMERIC',
             )
         )
     );
     $query = new WP_Query($args);
-    return $query->request;
     if ($query->have_posts()) {
         while( $query->have_posts() ) {
             $query->the_post();
