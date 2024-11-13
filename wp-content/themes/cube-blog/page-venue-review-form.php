@@ -54,6 +54,7 @@ get_header();
                             'meta_input'   => array(
                                 'performance' => sanitize_text_field($_POST['performance_post_id']),
                                 'venue_name' => $venue_name,
+                                'venue_post_id' => sanitize_text_field($_POST['venue_id']),
                                 'venue' => sanitize_text_field($_POST['venue_id']),
                                 'performing_act_name' => $performing_act_name,
                                 'middle_man' => sanitize_text_field($_POST['middle_man']),
