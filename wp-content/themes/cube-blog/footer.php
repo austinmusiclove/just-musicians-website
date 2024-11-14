@@ -21,6 +21,26 @@
 			</div><!-- .container -->
 		<?php endif; ?>
 
+		<nav id="site-navigation" class="main-navigation navigation-menu">
+			<div class="container">
+				<button class="menu-toggle" aria-controls="footer-menu" aria-expanded="false">
+					<?php
+						echo cube_blog_get_svg( array( 'icon' => 'bars' ) );
+						echo cube_blog_get_svg( array( 'icon' => 'close' ) );
+					?>
+					<span class="footer-menu-label"><?php esc_html_e( 'Menu', 'cube-blog' ); ?></span>
+				</button>
+
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'footer_menu',
+	    			'container' 	 => false,
+					'menu_id'        => 'footer-menu',
+					'menu_class'     => 'nav-menu',
+				) );
+				?>
+			</div><!-- .container -->
+		</nav><!-- #site-navigation -->
 		<div class="site-info">
 			<div class="container">
                 Copywright 2024 Just Musicians

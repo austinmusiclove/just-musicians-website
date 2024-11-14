@@ -45,6 +45,7 @@ if ( ! function_exists( 'cube_blog_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'primary_menu' 		=> esc_html__( 'Primary Menu', 'cube-blog' ),
+			'footer_menu' 		=> esc_html__( 'Footer Menu', 'cube-blog' ),
 		) );
 
 		/*
