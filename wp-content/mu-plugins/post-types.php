@@ -70,6 +70,21 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-microphone'
     ));
+
+    // Performance
+    register_post_type('listing', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Listing',
+          'add_new_item' => 'Add New Listing',
+          'edit_item' => 'Edit Listing',
+          'all_items' => 'All Listings',
+          'singular_name' => 'Listing'
+        ),
+        'menu_icon' => 'dashicons-id-alt'
+    ));
 }
 
 add_action('init', 'register_post_types');
