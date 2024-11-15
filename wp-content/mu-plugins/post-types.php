@@ -4,7 +4,7 @@
 function register_post_types() {
     // Venue
     register_post_type('venue', array(
-        //'rewrite' => array('slug', 'venues'),
+        'rewrite' => array('slug' => 'venues'),
 		//'show_in_admin_bar' => true,
 		//'show_in_nav_menus' => true,
 		//'exclude_from_search' => false,

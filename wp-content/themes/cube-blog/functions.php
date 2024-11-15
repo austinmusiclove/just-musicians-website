@@ -357,12 +357,20 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/icon-functions.php';
 
-/**
- * Schedule Programs
- */
-#wp_schedule_event( time(), 'hourly', 'update_venue_review_stats', array(), false);
-#wp_schedule_event( time(), 'hourly', 'update_venue_stats', array(), false);
-#wp_clear_scheduled_hook( 'update_venue_review_stats' );
-#wp_clear_scheduled_hook( 'update_venue_stats' );
-//update_venue_review_stats(); // for testing only
-//update_venue_stats(); // for testing only
+/* Admin Bar */
+add_action('wp_loaded', 'noAdminBar');
+function noAdminBar() {
+    $currentUser = wp_get_current_user();
+    if (count($currentUser->roles) >= 1 and $currentUser->roles[0] != 'administrator') {
+        show_admin_bar(false);
+    }
+}
+
+/* Handle Redirects */
+function redirect_path($from_path, $to_path) {
+    if ($_SERVER['REQUEST_URI'] == $from_path) {
+        wp_redirect($to_path, 301, false);
+        exit;
+    }
+}
+redirect_path('/venue', '/venues');
