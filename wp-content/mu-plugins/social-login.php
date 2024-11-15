@@ -16,9 +16,9 @@ defined( 'ABSPATH' ) or die();
 // call sdk library
 require_once 'google-api/vendor/autoload.php';
 
-$GOOGLE_CLIENT_ID = GB_GOOGLE_WEB_OAUTH_CLIENT_ID;
-$GOOGLE_CLIENT_SECRET = GB_GOOGLE_WEB_OAUTH_CLIENT_SECRET;
-$GOOGLE_REDIRECT_URI = GB_GOOGLE_WEB_OAUTH_REDIRECT_URI;
+$GOOGLE_CLIENT_ID = JM_GOOGLE_WEB_OAUTH_CLIENT_ID;
+$GOOGLE_CLIENT_SECRET = JM_GOOGLE_WEB_OAUTH_CLIENT_SECRET;
+$GOOGLE_REDIRECT_URI = JM_GOOGLE_WEB_OAUTH_REDIRECT_URI;
 $GOOGLE_APPLICATION_NAME = "GigBuddy";
 $GOOGLE_SCOPES = "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email";
 
