@@ -301,12 +301,11 @@ const PAY_METRIC_LABELS = {
 };
 class VenueArchiveManager {
   constructor(venueInsightGenerator) {
-    if (this._setupElements()) {
-      this._setupState();
-      this._setupEventListeners();
-      this._initialize();
-      this.venueInsightGenerator = venueInsightGenerator;
-    }
+    this._setupElements();
+    this._setupState();
+    this._setupEventListeners();
+    this._initialize();
+    this.venueInsightGenerator = venueInsightGenerator;
   }
   _setupState() {
     this.currentSearchVenues = [];
@@ -318,12 +317,8 @@ class VenueArchiveManager {
   }
   _setupElements() {
     this.payStructureElement = document.getElementById('pay-structure');
-    if (this.payStructureElement == null) {
-      return false;
-    }
     this.payMetricElement = document.getElementById('pay-metric');
     this.tableElement = document.getElementById('top-venues-table');
-    return true;
   }
   _setupEventListeners() {
     this.payStructureElement.addEventListener('change', this.updateTableAndMap.bind(this));
@@ -671,18 +666,14 @@ class VenueReviewFormManager {
   // TODO add unit tests
   constructor() {
     document.addEventListener('DOMContentLoaded', () => {
-      if (this.setupElements()) {
-        this.setupEventListeners();
-        this.loadVenueOptions();
-        this.preFill();
-      }
+      this.setupElements();
+      this.setupEventListeners();
+      this.loadVenueOptions();
+      this.preFill();
     });
   }
   setupElements() {
     this.venueInput = document.getElementById('venue_name');
-    if (this.venueInput == null) {
-      return false;
-    }
     this.venueIdInput = document.getElementById('venue_id');
     this.venueOptions = document.getElementById('venue_options');
     this.venueOptionsMap = {};
@@ -697,7 +688,6 @@ class VenueReviewFormManager {
     this.guaranteeQuestions = document.getElementById("guarantee_questions");
     this.doorQuestions = document.getElementById("door_questions");
     this.barQuestions = document.getElementById("bar_questions");
-    return true;
   }
   setupEventListeners() {
     // Handle Venue input
@@ -5664,15 +5654,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// Instantiate
-const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
-const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
-const venueInsightGenerator = new _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__["default"]();
-const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
-const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"](venueInsightGenerator);
-const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
+// Venue Review Form
+if (siteData.url_path.includes('venue-review-form')) {
+  const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
+}
 
-// User Management
+// Venues archive and pages
+if (siteData.url_path.includes('venues')) {
+  const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  const venueInsightGenerator = new _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__["default"]();
+  const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
+  const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"](venueInsightGenerator);
+}
+
+// User Registration
 if (siteData.url_path.includes('sign-up')) {
   const userManager = new _modules_UserManager__WEBPACK_IMPORTED_MODULE_6__["default"]();
 }

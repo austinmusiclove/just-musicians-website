@@ -5,17 +5,15 @@ class VenueReviewFormManager {
     // TODO add unit tests
     constructor() {
         document.addEventListener('DOMContentLoaded', () => {
-            if (this.setupElements()) {
-                this.setupEventListeners();
-                this.loadVenueOptions();
-                this.preFill();
-            }
-        })
+            this.setupElements();
+            this.setupEventListeners();
+            this.loadVenueOptions();
+            this.preFill();
+        });
     }
 
     setupElements() {
         this.venueInput = document.getElementById('venue_name');
-        if (this.venueInput == null) { return false; }
         this.venueIdInput = document.getElementById('venue_id');
         this.venueOptions = document.getElementById('venue_options');
         this.venueOptionsMap = {};
@@ -30,7 +28,6 @@ class VenueReviewFormManager {
         this.guaranteeQuestions = document.getElementById("guarantee_questions");
         this.doorQuestions = document.getElementById("door_questions");
         this.barQuestions = document.getElementById("bar_questions");
-        return true;
     }
     setupEventListeners() {
         // Handle Venue input

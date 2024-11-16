@@ -12,12 +12,11 @@ const PAY_METRIC_LABELS = {
 
 class VenueArchiveManager {
     constructor(venueInsightGenerator) {
-        if (this._setupElements()) {
-            this._setupState();
-            this._setupEventListeners();
-            this._initialize();
-            this.venueInsightGenerator = venueInsightGenerator;
-        }
+        this._setupElements();
+        this._setupState();
+        this._setupEventListeners();
+        this._initialize();
+        this.venueInsightGenerator = venueInsightGenerator;
     }
     _setupState() {
         this.currentSearchVenues = [];
@@ -29,10 +28,8 @@ class VenueArchiveManager {
     }
     _setupElements() {
         this.payStructureElement = document.getElementById('pay-structure');
-        if (this.payStructureElement == null) { return false; }
         this.payMetricElement = document.getElementById('pay-metric');
         this.tableElement = document.getElementById('top-venues-table');
-        return true;
     }
     _setupEventListeners() {
         this.payStructureElement.addEventListener('change', this.updateTableAndMap.bind(this));
