@@ -285,6 +285,7 @@ get_header();
                             <!------------ Pay ----------------->
                             <hr>
                             <h2>Compensation</h2>
+                            <p>The numbers you enter in this section apply to how much your band got paid (or you if you were solo), not now much each performer was paid individually or how much the venue paid out to all the bands combined.</p>
                             <!-- Structure -->
                             <style>
                                 #guarantee_questions,
