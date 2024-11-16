@@ -299,10 +299,12 @@ function cube_blog_scripts() {
 
     wp_localize_script('jm-custom-js', 'siteData', array(
         'root_url' => get_site_url(),
+        'url_path' => $_SERVER['REQUEST_URI'],
         'venues_api_url' => get_site_url() . '/wp-json/v1/venues',
         'performance_by_id_api_url' => get_site_url() . '/wp-json/v1/performances/id',
         'venue_reviews_api_url' => get_site_url() . '/wp-json/v1/venue_reviews',
         'venue_reviews_batch_api_url' => get_site_url() . '/wp-json/v1/venue_reviews/batch',
+        'user_registration_api_url' => get_site_url() . '/wp-json/v1/users/register',
         'nonce' => wp_create_nonce('wp_rest')
     ));
 }

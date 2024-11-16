@@ -38,7 +38,7 @@ function register_post_types() {
           'all_items' => 'All Venue Reviews',
           'singular_name' => 'Venue Review'
         ),
-        'menu_icon' => 'dashicons-feedback'
+        'menu_icon' => 'dashicons-star-empty'
     ));
 
     // Venue Review Submission
@@ -71,7 +71,7 @@ function register_post_types() {
         'menu_icon' => 'dashicons-microphone'
     ));
 
-    // Performance
+    // Listing
     register_post_type('listing', array(
         'public' => true,
         'show_in_rest' => true,
@@ -84,6 +84,21 @@ function register_post_types() {
           'singular_name' => 'Listing'
         ),
         'menu_icon' => 'dashicons-id-alt'
+    ));
+
+    // Collections
+    register_post_type('collection', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Collection',
+          'add_new_item' => 'Add New Collection',
+          'edit_item' => 'Edit Collection',
+          'all_items' => 'All Collections',
+          'singular_name' => 'Collection'
+        ),
+        'menu_icon' => 'dashicons-list-view'
     ));
 }
 

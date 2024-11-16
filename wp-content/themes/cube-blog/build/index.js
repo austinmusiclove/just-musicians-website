@@ -226,6 +226,58 @@ class LeafletMap {
 
 /***/ }),
 
+/***/ "./src/modules/UserManager.js":
+/*!************************************!*\
+  !*** ./src/modules/UserManager.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+class UserManager {
+  constructor() {
+    this._setupElements();
+    this._setupListeners();
+  }
+  _setupElements() {
+    this.registrationFormElement = document.getElementById('registration-form');
+    this.registrationSubmitElement = document.getElementById('register-submit');
+    this.errorContainerElement = document.getElementById('error-container');
+  }
+  _setupListeners() {
+    this.registrationSubmitElement.addEventListener('click', this.registerUser.bind(this));
+  }
+  registerUser(evnt) {
+    evnt.preventDefault();
+    this.clearErrors();
+    return this.callRegisterUserAPI().then(response => {
+      window.location.href = siteData.root_url;
+    }).catch(err => {
+      this.displayErrors(err.response.data.data.errors);
+    });
+  }
+  callRegisterUserAPI() {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${siteData.user_registration_api_url}`, this.registrationFormElement);
+  }
+  displayErrors(errors) {
+    let errorHtml = '';
+    for (let iterator = 0; iterator < errors.length; iterator++) {
+      errorHtml += `<div class="error_message">${errors[iterator]}</div>`;
+    }
+    this.errorContainerElement.innerHTML = errorHtml;
+  }
+  clearErrors() {
+    this.errorContainerElement.innerHTML = '';
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserManager);
+
+/***/ }),
+
 /***/ "./src/modules/VenueArchiveManager.js":
 /*!********************************************!*\
   !*** ./src/modules/VenueArchiveManager.js ***!
@@ -5602,7 +5654,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueArchiveManager */ "./src/modules/VenueArchiveManager.js");
 /* harmony import */ var _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/VenueReviewFormManager */ "./src/modules/VenueReviewFormManager.js");
 /* harmony import */ var _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/VenueInsightGenerator */ "./src/modules/VenueInsightGenerator.js");
+/* harmony import */ var _modules_UserManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/UserManager */ "./src/modules/UserManager.js");
 // Import modules
+
 
 
 
@@ -5617,6 +5671,11 @@ const venueInsightGenerator = new _modules_VenueInsightGenerator__WEBPACK_IMPORT
 const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
 const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"](venueInsightGenerator);
 const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
+
+// User Management
+if (siteData.url_path.includes('sign-up')) {
+  const userManager = new _modules_UserManager__WEBPACK_IMPORTED_MODULE_6__["default"]();
+}
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

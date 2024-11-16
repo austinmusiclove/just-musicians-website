@@ -3191,4 +3191,14 @@ input.other-input {
     cursor: pointer; /* Change cursor to pointer */
 }
 
+/*--------------------------------------------------------------
+# Login and Registration
+--------------------------------------------------------------*/
+.user-mgmt-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
