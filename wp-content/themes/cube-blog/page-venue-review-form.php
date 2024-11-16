@@ -195,6 +195,8 @@ get_header();
                             <label class="button-label" for="private">Private Event</label>
                             <input class="button-input" value="Corporate Event" type="radio" name="gig_type" id="corporate"/>
                             <label class="button-label" for="corporate">Corporate Event</label><br><br>
+                            <input class="button-input" value="Benefit Show" type="radio" name="gig_type" id="benefit"/>
+                            <label class="button-label" for="benefit">Benefit Show</label><br><br>
                             <div class="form-separator"></div>
 
                             <!------------ Rating ----------------->
