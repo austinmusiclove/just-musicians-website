@@ -99,16 +99,59 @@ function get_venue_reviews_batch() {
     return $result;
 }
 
+function get_venue_reviews_csv() {
+    $result = "id,Venue Post Id,Overall Rating,Hours Performed,Total Performers,Comp Structure String,Guarantee Promise,Guarantee Eearnings,Door Earnings,Door Percentage,Bar Earnings,Bar Percentage,Tips Earnings,Total Earnings,Payment Speed,Payment Method,Backline,Review,end\n";
+    $args = array(
+        'post_type' => 'venue_review',
+        'nopaging' => true,
+        'post_status' => 'publish',
+    );
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        while( $query->have_posts() ) {
+            $query->the_post();
+            $row = array(
+                get_the_ID(),
+                get_field('venue_post_id'),
+                get_field('overall_rating'),
+                get_field('hours_performed'),
+                get_field('total_performers'),
+                get_field('_comp_structure_string'),
+                get_field('guarantee_promise'),
+                get_field('guarantee_earnings'),
+                get_field('door_earnings'),
+                get_field('door_percentage'),
+                get_field('bar_earnings'),
+                get_field('bar_percentage'),
+                get_field('tips_earnings'),
+                get_field('total_earnings'),
+                get_field('payment_speed'),
+                get_field('payment_method'),
+                get_field('backline'),
+                get_field('review'),
+                "end",
+            );
+            $result = $result . implode(',', $row) . "\n";
+        }
+    }
+    return $result;
+}
+
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venue_reviews', [
         'methods' => 'GET',
         'callback' => 'get_venue_reviews',
     ]);
 });
-
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venue_reviews/batch', [
         'methods' => 'GET',
         'callback' => 'get_venue_reviews_batch',
+    ]);
+});
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'venue_reviews/csv', [
+        'methods' => 'GET',
+        'callback' => 'get_venue_reviews_csv',
     ]);
 });
