@@ -26,7 +26,7 @@ get_header();
                                 <option value="Guarantee">Guarantee</option>
                                 <option value="Door Deal">Door Deal</option>
                                 <option value="Bar Deal">Bar Deal</option>
-                                <option value="Bar Deal">Guarantee vs Door Deal</option>
+                                <option value="Guarantee vs Door Deal">Guarantee vs Door Deal</option>
                             </select>
                         </div>
                         <div style="margin:0px 20px 20px 0px;">
