@@ -7,7 +7,6 @@ function get_artist_post_id() {
         'posts_per_page' => 1,
         'meta_key' => 'artist_id',
         'meta_value' => $artist_id,
-        ),
     );
     $query = new WP_Query($args);
     if ($query->have_posts()) {
