@@ -56,21 +56,6 @@ function register_post_types() {
         'menu_icon' => 'dashicons-clipboard'
     ));
 
-    // Performance
-    register_post_type('performance', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title'),
-        'labels' => array(
-          'name' => 'Performance',
-          'add_new_item' => 'Add New Performance',
-          'edit_item' => 'Edit Performance',
-          'all_items' => 'All Performances',
-          'singular_name' => 'Performance'
-        ),
-        'menu_icon' => 'dashicons-microphone'
-    ));
-
     // Listing
     register_post_type('listing', array(
         'public' => true,
@@ -99,6 +84,36 @@ function register_post_types() {
           'singular_name' => 'Collection'
         ),
         'menu_icon' => 'dashicons-list-view'
+    ));
+
+    // Performance
+    register_post_type('performance', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Performance',
+          'add_new_item' => 'Add New Performance',
+          'edit_item' => 'Edit Performance',
+          'all_items' => 'All Performances',
+          'singular_name' => 'Performance'
+        ),
+        'menu_icon' => 'dashicons-microphone'
+    ));
+
+    // Artists
+    register_post_type('artist', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Artist',
+          'add_new_item' => 'Add New Artist',
+          'edit_item' => 'Edit Artist',
+          'all_items' => 'All Artists',
+          'singular_name' => 'Artist'
+        ),
+        'menu_icon' => 'dashicons-art'
     ));
 }
 
