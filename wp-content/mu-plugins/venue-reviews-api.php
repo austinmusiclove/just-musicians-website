@@ -40,6 +40,7 @@ function get_venue_reviews() {
                 'payment_method' => get_field('payment_method'),
                 'backline' => get_field('backline'),
                 'review' => get_field('review'),
+                'exclude_from_stats' => get_field('exclude_from_stats'),
             ));
         }
     }
@@ -93,6 +94,7 @@ function get_venue_reviews_batch() {
                 'payment_method' => get_field('payment_method'),
                 'backline' => get_field('backline'),
                 'review' => get_field('review'),
+                'exclude_from_stats' => get_field('exclude_from_stats'),
             ));
         }
     }
@@ -129,6 +131,7 @@ function get_venue_reviews_csv() {
                 get_field('payment_method'),
                 get_field('backline'),
                 get_field('review'),
+                get_field('exclude_from_stats'),
                 "end",
             );
             $result = $result . implode(',', $row) . "\n";

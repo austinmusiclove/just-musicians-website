@@ -31,6 +31,8 @@ function update_venue_stats() {
         // for each venue get reviews and generate stats
         while( $venues_query->have_posts() ) {
             $review_count = 0;
+            $stats_review_count = 0;
+            $rating_count = 0;
             $overall_rating_sum = 0;
             $earnings_sum = 0;
 
@@ -55,21 +57,28 @@ function update_venue_stats() {
                 while( $venue_reviews_query->have_posts() ) {
                     $venue_reviews_query->the_post();
                     $review_count++;
-                    $overall_rating_sum += (int)get_field('overall_rating');
-                    $review_earnings = (float)get_field('total_earnings');
-                    $earnings_sum += $review_earnings;
+                    if (!get_field('exclude_from_stats')) {
+                        $stats_review_count++;
+                        $earnings_sum += (float)get_field('total_earnings');
+                    }
+                    $overall_rating = (int)get_field('overall_rating');
+                    if ($overall_rating > 0) {
+                        $rating_count ++;
+                        $overall_rating_sum += $overall_rating;
+                    }
                 }
             }
 
             // Calc averages
-            $overall_rating_average = round(($review_count > 0) ? $overall_rating_sum/$review_count : 0, 2);
-            $earnings_average = round(($review_count > 0) ? $earnings_sum/$review_count : 0, 2);
+            $overall_rating_average = round(($rating_count > 0) ? $overall_rating_sum/$rating_count : 0, 2);
+            $earnings_average = round(($stats_review_count > 0) ? $earnings_sum/$stats_review_count : 0, 2);
 
             // update venue meta data
             $update_args = array(
                 'ID' => $venue_post_id,
                 'meta_input' => array(
                     '_review_count' => $review_count,
+                    '_stats_review_count' => $stats_review_count,
                     '_overall_rating' => $overall_rating_average,
                     '_average_earnings' => $earnings_average,
                 ),

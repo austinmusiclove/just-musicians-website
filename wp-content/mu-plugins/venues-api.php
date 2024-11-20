@@ -7,7 +7,7 @@ function get_venues() {
         'nopaging' => true,
         'meta_query' => array(
             array(
-                'key' => '_review_count',
+                'key' => '_stats_review_count',
                 'value' => 1,
                 'compare' => '>='
             )
@@ -34,12 +34,6 @@ function get_venues() {
     }
     return $result;
 }
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'venues', [
-        'methods' => 'GET',
-        'callback' => 'get_venues',
-    ]);
-});
 
 function get_venue_post_id_by_name() {
     $venue_name = stripslashes($_GET['venue_name']);
@@ -61,6 +55,13 @@ function get_venue_post_id_by_name() {
         return get_the_ID();
     }
 }
+
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'venues', [
+        'methods' => 'GET',
+        'callback' => 'get_venues',
+    ]);
+});
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venues/id', [
         'methods' => 'GET',

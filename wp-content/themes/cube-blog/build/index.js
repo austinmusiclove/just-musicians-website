@@ -291,7 +291,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 const GET_VENUES_API_URL = siteData.venues_api_url;
-const GET_VENUE_REVIEWS_BATCH_API_URL = siteData.venue_reviews_batch_api_url;
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const PAY_METRIC_LABELS = {
   'average_earnings': 'Avg. Earnings Per Gig',
@@ -336,7 +335,7 @@ class VenueArchiveManager {
       return response.data;
     }).then(data => {
       this.currentSearchVenues = data;
-      this.updateTableAndMap(this.currentSearchVenues);
+      this.updateTableAndMap();
       return this.venueInsightGenerator.addVenues(this.currentSearchVenues.map(venue => venue.ID));
     }).then(() => {
       this.enableFilters();
@@ -470,11 +469,13 @@ class VenueInsightGenerator {
       }).then(data => {
         for (let iterator = 0; iterator < data.length; iterator++) {
           let review = data[iterator];
-          let venueId = review['venue_post_id'];
-          if (!this.venueReviews.hasOwnProperty(venueId)) {
-            this.venueReviews[venueId] = [];
+          if (!review['exclude_from_stats']) {
+            let venueId = review['venue_post_id'];
+            if (!this.venueReviews.hasOwnProperty(venueId)) {
+              this.venueReviews[venueId] = [];
+            }
+            this.venueReviews[venueId].push(review);
           }
-          this.venueReviews[venueId].push(review);
         }
       }).catch(err => {
         console.warn(err);
@@ -608,8 +609,9 @@ class VenuePageManager {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${GET_VENUE_REVIEWS_API_URL}/?venue_id=${venueId}`);
   }
   getVenueReviewHtml(venueReview) {
+    let ratingText = venueReview.overall_rating > 0 ? `${venueReview.overall_rating}/5 - ` : '';
     let html = `
-            <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
+            <h3>${ratingText}Anonymous Performer</h3>
             <p>`;
     if (venueReview.comp_structure_string) {
       html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`;

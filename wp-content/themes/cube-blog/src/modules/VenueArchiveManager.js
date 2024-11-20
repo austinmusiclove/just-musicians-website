@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const GET_VENUES_API_URL = siteData.venues_api_url;
-const GET_VENUE_REVIEWS_BATCH_API_URL = siteData.venue_reviews_batch_api_url;
 const REPLACE_MARKERS_EVENT_NAME = 'ReplaceMarkers';
 const PAY_METRIC_LABELS = {
     'average_earnings': 'Avg. Earnings Per Gig',
@@ -48,7 +47,7 @@ class VenueArchiveManager {
             return response.data;
         }).then((data) => {
             this.currentSearchVenues = data;
-            this.updateTableAndMap(this.currentSearchVenues);
+            this.updateTableAndMap();
             return this.venueInsightGenerator.addVenues(this.currentSearchVenues.map((venue) => venue.ID));
         }).then(() => {
             this.enableFilters();

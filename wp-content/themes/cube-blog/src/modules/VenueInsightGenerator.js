@@ -35,9 +35,11 @@ class VenueInsightGenerator {
             }).then(data => {
                 for (let iterator = 0; iterator < data.length; iterator++) {
                     let review = data[iterator];
-                    let venueId = review['venue_post_id'];
-                    if (!this.venueReviews.hasOwnProperty(venueId)) { this.venueReviews[venueId] = []; }
-                    this.venueReviews[venueId].push(review);
+                    if (!review['exclude_from_stats']) {
+                        let venueId = review['venue_post_id'];
+                        if (!this.venueReviews.hasOwnProperty(venueId)) { this.venueReviews[venueId] = []; }
+                        this.venueReviews[venueId].push(review);
+                    }
                 }
             }).catch((err) => {
                 console.warn(err);

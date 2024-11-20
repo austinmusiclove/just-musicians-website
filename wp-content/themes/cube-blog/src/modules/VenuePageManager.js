@@ -63,8 +63,9 @@ class VenuePageManager {
     }
 
     getVenueReviewHtml(venueReview) {
+        let ratingText = venueReview.overall_rating > 0 ? `${venueReview.overall_rating}/5 - ` : '';
         let html = `
-            <h3>${venueReview.overall_rating}/5 - Anonymous Performer</h3>
+            <h3>${ratingText}Anonymous Performer</h3>
             <p>`
         if (venueReview.comp_structure_string) { html += `Compensation Structure: ${venueReview.comp_structure_string}<br>`; }
         html += `
