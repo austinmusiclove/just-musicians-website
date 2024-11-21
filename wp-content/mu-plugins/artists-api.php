@@ -16,7 +16,7 @@ function get_artist_post_id() {
     return 0;
 }
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'artists', [
+    register_rest_route( 'v1', 'artists/post_id', [
         'methods' => 'GET',
         'callback' => 'get_artist_post_id',
     ]);

@@ -159,7 +159,6 @@ function update_post( WP_REST_Request $request ) {
   if (isset($request['post_status'])) { $post_arr['post_status'] = $request['post_status']; }
 
   $post_id = wp_update_post( wp_slash($post_arr), true );
-  return $post_id;
 
   if( is_wp_error( $post_id ) ) {
     return $post_id->get_error_message();

@@ -117,4 +117,46 @@ function register_post_types() {
     ));
 }
 
+function register_taxonomies() {
+  register_taxonomy('genre', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => true,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Genres',
+      'add_new_item' => 'Add New Genre',
+      'edit_item' => 'Edit Genre',
+      'all_items' => 'All Genres',
+      'singular_name' => 'Genre'
+    )
+  ));
+  register_taxonomy('tag', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => true,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Tags',
+      'add_new_item' => 'Add New Tag',
+      'edit_item' => 'Edit Tag',
+      'all_items' => 'All Tags',
+      'singular_name' => 'Tag'
+    )
+  ));
+}
+
 add_action('init', 'register_post_types');
+add_action('init', 'register_taxonomies');
+
+function get_taxonomy_terms() {
+    $taxonomy = $_GET['taxonomy'];
+    return get_terms(array(
+        'taxonomy' => $taxonomy,
+        'hide_empty' => false
+    ));
+}
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'taxonomies/terms', [
+        'methods' => 'GET',
+        'callback' => 'get_taxonomy_terms',
+    ]);
+});
