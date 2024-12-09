@@ -60,7 +60,7 @@ function register_post_types() {
     register_post_type('listing', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'thumbnail'),
         'labels' => array(
           'name' => 'Listing',
           'add_new_item' => 'Add New Listing',
@@ -120,7 +120,7 @@ function register_post_types() {
 function register_taxonomies() {
   register_taxonomy('genre', array('listing', 'artist'), array(
     'public' => true,
-    'hierarchical' => true,
+    'hierarchical' => false,
     'show_in_rest' => true,
     'labels' => array(
       'name' => 'Genres',
@@ -132,7 +132,7 @@ function register_taxonomies() {
   ));
   register_taxonomy('tag', array('listing', 'artist'), array(
     'public' => true,
-    'hierarchical' => true,
+    'hierarchical' => false,
     'show_in_rest' => true,
     'labels' => array(
       'name' => 'Tags',

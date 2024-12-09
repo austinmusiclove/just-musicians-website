@@ -296,15 +296,22 @@ function cube_blog_scripts() {
     wp_enqueue_script( 'leaflet-clustering-js', 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js', array('leaflet-js'), null, true );
     // Charts
 	wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js');
+    // Youtube iFrame API
+	wp_enqueue_script( 'google-iframe-api', 'https://www.youtube.com/iframe_api');
 
     wp_localize_script('jm-custom-js', 'siteData', array(
         'root_url' => get_site_url(),
         'url_path' => $_SERVER['REQUEST_URI'],
+        'request_method' => $_SERVER['REQUEST_METHOD'],
         'venues_api_url' => get_site_url() . '/wp-json/v1/venues',
+        'venue_post_id_by_name_api_url' => get_site_url() . '/wp-json/v1/venues/id',
+        'venues_by_post_id_batch_api_url' => get_site_url() . '/wp-json/v1/venues/batch',
         'performance_by_id_api_url' => get_site_url() . '/wp-json/v1/performances/id',
+        'artist_api_url' => get_site_url() . '/wp-json/v1/artists',
         'venue_reviews_api_url' => get_site_url() . '/wp-json/v1/venue_reviews',
         'venue_reviews_batch_api_url' => get_site_url() . '/wp-json/v1/venue_reviews/batch',
         'user_registration_api_url' => get_site_url() . '/wp-json/v1/users/register',
+        'get_taxonomy_terms_api_url' => get_site_url() . '/wp-json/v1/taxonomies/terms',
         'nonce' => wp_create_nonce('wp_rest')
     ));
 }
@@ -376,3 +383,8 @@ function redirect_path($from_path, $to_path) {
     }
 }
 redirect_path('/venue', '/venues');
+
+/* Constants */
+$instagram_url_prefix = 'https://instagram.com/';
+$tiktok_url_prefix = 'https://tiktok.com/';
+$x_url_prefix = 'https://x.com/';

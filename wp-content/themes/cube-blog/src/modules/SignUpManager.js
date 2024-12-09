@@ -1,42 +1,38 @@
 import axios from 'axios';
 
-class UserManager {
-    constructor() {
-        this._setupElements();
-        this._setupListeners();
+class SignUpManager {
+    constructor(errorDisplayFactory) {
+        this.errorDisplayFactory = errorDisplayFactory;
+        document.addEventListener('DOMContentLoaded', () => {
+            this._setupElements();
+            this._setupListeners();
+            this._setupComponents();
+        });
     }
     _setupElements() {
         this.registrationFormElement = document.getElementById('registration-form');
         this.registrationSubmitElement = document.getElementById('register-submit');
-        this.errorContainerElement = document.getElementById('error-container');
     }
     _setupListeners() {
         this.registrationSubmitElement.addEventListener('click', this.registerUser.bind(this));
     }
+    _setupComponents() {
+        this.errorDisplay = this.errorDisplayFactory.create('error-container', 'error-message');
+    }
 
     registerUser(evnt) {
         evnt.preventDefault();
-        this.clearErrors();
+        this.errorDisplay.clearErrors();
         return this.callRegisterUserAPI().then((response) => {
             window.location.href = siteData.root_url;
         }).catch( (err) => {
-            this.displayErrors(err.response.data.data.errors);
+            console.log(err.response.data.data.errors);
+            this.errorDisplay.showErrors(err.response.data.data.errors);
         });
     }
     callRegisterUserAPI() {
         return axios.post(`${siteData.user_registration_api_url}`, this.registrationFormElement);
     }
-
-    displayErrors(errors) {
-        let errorHtml = ''
-        for (let iterator = 0; iterator < errors.length; iterator++) {
-            errorHtml += `<div class="error_message">${errors[iterator]}</div>`;
-        }
-        this.errorContainerElement.innerHTML = errorHtml;
-    }
-    clearErrors() {
-        this.errorContainerElement.innerHTML = '';
-    }
 }
 
-export default UserManager
+export default SignUpManager;

@@ -597,8 +597,8 @@ input[type="submit"],
     font-size: 12px;
     line-height: 42px;
     font-weight: 600;
-    color: #f37e7e;
-    border: 1px solid #f37e7e;
+    color: #846b4e;
+    border: 1px solid #846b4e;
     text-transform: uppercase;
     letter-spacing: 0.10em;
     display: inline-block;
@@ -618,7 +618,7 @@ input[type="submit"]:hover,
 .btn:focus,
 .reply a:hover,
 .reply a:focus {
-	background-color: #f37e7e;
+	background-color: #846b4e;
     color: #fff;
 }
 
@@ -631,7 +631,7 @@ input[type="reset"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus,
 .wp-block-search__button:focus {
-	background-color: #f37e7e;
+	background-color: #846b4e;
     color: #fff;
     outline: medium dotted #000;
 }
@@ -679,7 +679,7 @@ input[type="color"]:focus,
 textarea:focus {
 	color: #111;
 	outline: medium dotted #000;
-	border-color: #f37e7e;
+	border-color: #846b4e;
 }
 
 select {
@@ -701,7 +701,7 @@ textarea {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 a:hover,
@@ -761,7 +761,7 @@ a:active {
 
 .site-title a:hover,
 .site-title a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .site-description {
@@ -866,7 +866,7 @@ div.nav-menu > ul {
 .navigation-menu .nav-menu > li.focus > a,
 .navigation-menu .nav-menu > li > a:hover,
 .navigation-menu .nav-menu > li > a:focus {
-    color: #f37e7e;
+    color: #846b4e;
 }
 
 .navigation-menu li a svg {
@@ -878,13 +878,13 @@ div.nav-menu > ul {
 .navigation-menu a:hover,
 .navigation-menu a:focus,
 .navigation-menu li:hover > a {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .navigation-menu .nav-menu > li > a:hover svg,
 .navigation-menu .nav-menu > li > a:focus svg,
 .navigation-menu .nav-menu > li:hover > a svg {
-	fill: #f37e7e;
+	fill: #846b4e;
 }
 
 .menu-toggle,
@@ -989,7 +989,7 @@ svg {
 .site-main .comment-navigation a:focus,
 .site-main .posts-navigation a:focus,
 .site-main .post-navigation a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .nav-subtitle {
@@ -1028,8 +1028,8 @@ svg {
 .navigation.pagination .page-numbers.current,
 .navigation.pagination .page-numbers:hover,
 .navigation.pagination .page-numbers:focus {
-    background-color: #f37e7e;
-    border-color: #f37e7e;
+    background-color: #846b4e;
+    border-color: #846b4e;
     color: #fff;
 }
 
@@ -1044,7 +1044,7 @@ svg {
 .post-navigation .nav-previous a:focus svg,
 .post-navigation .nav-next a:hover svg,
 .post-navigation .nav-next a:focus svg {
-    fill: #f37e7e;
+    fill: #846b4e;
 }
 
 .navigation.pagination {
@@ -1200,7 +1200,7 @@ svg {
     right: 0;
     margin: 0;
     padding: 8px 15px;
-    background-color: #f37e7e;
+    background-color: #846b4e;
     color: #fff;
     line-height: 28px;
     font-size: 12px;
@@ -1298,7 +1298,7 @@ svg {
 
 #secondary a:hover,
 #secondary a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .wp-block-tag-cloud a {
@@ -1316,8 +1316,8 @@ svg {
 .wp-block-tag-cloud a:hover,
 .wp-block-tag-cloud a:focus {
     color: #fff !important;
-    background-color: #f37e7e;
-    border-color: #f37e7e;
+    background-color: #846b4e;
+    border-color: #846b4e;
 }
 
 #colophon .wp-block-tag-cloud a {
@@ -1325,7 +1325,7 @@ svg {
 }
 
 .wp-block-search__button {
-    background-color: #f37e7e;
+    background-color: #846b4e;
     line-height: 1;
     padding: 0;
     height: auto;
@@ -1390,7 +1390,7 @@ svg {
     font-size: 150px;
     font-weight: bold;
     line-height: 1;
-    color: #f37e7e;
+    color: #846b4e;
 }
 
 .error-404.not-found input.search-field {
@@ -1686,7 +1686,7 @@ object {
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 15px solid #f37e7e;
+    border-left: 15px solid #846b4e;
     display: inline-block;
     margin-left: 2px;
     margin-top: 4px;
@@ -1702,13 +1702,13 @@ object {
     display: inline-block;
     width: 15px;
     height: 20px;
-    background: #f37e7e;
+    background: #846b4e;
     position: absolute;
     left: 0;
     right: 0;
     margin: auto;
     top: 14px;
-    border-left: 5px solid #f37e7e;
+    border-left: 5px solid #846b4e;
     box-shadow: inset 5px 0 0 0 #fff;
 }
 
@@ -1799,7 +1799,7 @@ object {
     visibility: visible;
     display: inline-block;
     line-height: 1.3;
-    color: #f37e7e;
+    color: #846b4e;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 12px;
@@ -1817,7 +1817,7 @@ object {
 .posted-on a:focus,
 .comments-link a:hover,
 .comments-link a:focus {
-    color: #f37e7e;
+    color: #846b4e;
 }
 
 .blog-archive.grid.columns-5 article {
@@ -1887,7 +1887,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 .blog-archive .byline a:hover,
 .blog-archive .posted-on a:focus,
 .blog-archive .byline a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .blog-archive .cat-links a:hover,
@@ -1915,7 +1915,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 
 .blog-post-item .entry-meta a:hover,
 .blog-post-item .entry-meta a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .blog-post-item .entry-meta > span:not(:last-child) {
@@ -1978,7 +1978,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 .single-post-wrap .entry-footer .tags-links a:focus,
 .logged-in-as a:hover,
 .logged-in-as a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 .single .entry-footer > span {
@@ -2063,7 +2063,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 #footer-widgets .widget-title:after {
     content: "";
     position: absolute;
-    background-color: #f37e7e;
+    background-color: #846b4e;
     width: 50px;
     height: 3px;
     left: 50%;
@@ -2082,7 +2082,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 
 #colophon a:hover,
 #colophon a:focus {
-	color: #f37e7e;
+	color: #846b4e;
 }
 
 #colophon .tagcloud a {
@@ -2104,7 +2104,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 .to-top {
     width: 40px;
     height: 40px;
-    background-color: #f37e7e;
+    background-color: #846b4e;
     position: fixed;
     bottom: -100px;
     right: 15px;
@@ -2760,7 +2760,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 	}
 
 	.navigation-menu li.current-menu-item > a {
-	    color: #f37e7e;
+	    color: #846b4e;
 	}
 
 	.navigation-menu ul ul a {
@@ -2777,15 +2777,15 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 	.navigation-menu .nav-menu > li.focus > a,
 	.navigation-menu .nav-menu > li > a:hover,
 	.navigation-menu .nav-menu > li > a:focus {
-	    color: #f37e7e;
+	    color: #846b4e;
 	}
 
 	.navigation-menu .nav-menu > li:hover {
-		border-right-color: #f37e7e;
+		border-right-color: #846b4e;
 	}
 
 	.navigation-menu .nav-menu > li.current-menu-item {
-	    border-right-color: #f37e7e;
+	    border-right-color: #846b4e;
 	}
 
 	.navigation-menu ul ul {
@@ -2847,7 +2847,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 
 	#masthead .nav-menu ul.sub-menu {
 		text-align: left;
-	    border-top: 2px solid #f37e7e;
+	    border-top: 2px solid #846b4e;
 	}
 
 	.site-branding {
@@ -2940,7 +2940,7 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 }
 
 .slick-dots li.slick-active button {
-    background-color: #f37e7e;
+    background-color: #846b4e;
 }
 
 .slick-dots li button:before {
@@ -3036,11 +3036,13 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 /*--------------------------------------------------------------
 # Form
 --------------------------------------------------------------*/
-#venue-review-form input[type="text"],
-#venue-review-form input[type="number"],
-#venue-review-form input[type="email"],
-#venue-review-form input[type="date"],
-#venue-review-form input[type="time"] {
+.custom-form input[type="text"],
+.custom-form input[type="number"],
+.custom-form input[type="email"],
+.custom-form input[type="tel"],
+.custom-form input[type="date"],
+.custom-form input[type="time"],
+.custom-form input[type="url"] {
     min-width: 300px;
     margin-top: 10px;
 }
@@ -3060,8 +3062,8 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
     background-color: transparent;
     font-size: 12px;
     font-weight: 600;
-    color: #f37e7e;
-    border: 1px solid #f37e7e;
+    color: #846b4e;
+    border: 1px solid #846b4e;
     text-transform: uppercase;
     letter-spacing: 0.10em;
     vertical-align: middle;
@@ -3076,12 +3078,12 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 }
 @media only screen and (min-device-width: 640px) {
     .button-label:hover {
-        background-color: #f37e7e;
+        background-color: #846b4e;
         color: #fff;
     }
 }
 .button-input:checked + label.button-label {
-	background-color: #f37e7e;
+	background-color: #846b4e;
     color: #fff;
 }
 .button-label:active,
@@ -3097,10 +3099,61 @@ input.other-input {
 .button-input-other:checked ~ input.other-input {
     display: block;
 }
-#guarantee_questions.versus-option,
-#door_questions.versus-option,
-#bar_questions.versus-option {
+#guarantee-questions.versus-option,
+#door-questions.versus-option,
+#bar-questions.versus-option {
     display: block;
+}
+
+/*--------------------------------------------------------------
+# Error Messages
+--------------------------------------------------------------*/
+.error-message {
+    width: fit-content;
+    padding: 0px 5px;
+    margin: 0 2px;
+    background-color: rgb(243, 126, 126, .25);
+}
+.error-message::before {
+    content: " ! "
+}
+
+/*--------------------------------------------------------------
+# Dragging
+--------------------------------------------------------------*/
+.dragging {
+    border: 1px dashed black;
+    background-color: rgba(132,107,78, .25)
+}
+
+/*--------------------------------------------------------------
+# Tag inputs
+--------------------------------------------------------------*/
+.tag-delete-button {
+    display: inline-block;
+}
+.media-tag-delete-button {
+}
+.tag-item {
+    background-color: rgba(237, 212, 169, 1);
+}
+.tag-item,
+.media-tag-item {
+    display: inline-block;
+    width: fit-content;
+    padding: 0px 5px;
+    margin: 5px 2px;
+}
+.media-container {
+    padding: 5px 0;
+    background-color: rgba(221,215,188, .25);
+}
+.tag-item input {
+    display: none;
+}
+.media-tag-item {
+    display: block;
+    margin: 40px 0;
 }
 
 /*--------------------------------------------------------------
@@ -3137,16 +3190,14 @@ input.other-input {
     display: flex;
     justify-content: flex-start; /* Align stars to the left */
 }
-
 .star {
     font-size: 30px; /* Size of the stars */
-    color: gray; /* Default color */
+    color: #ddd7bc; /* Default color */
     cursor: pointer; /* Pointer cursor on hover */
 }
-
 .star.selected,
 .star:hover {
-    color: gold; /* Color of selected stars */
+    color: #d29429; /* Color of selected stars */
 }
 
 /*--------------------------------------------------------------
@@ -3199,6 +3250,3 @@ input.other-input {
     flex-direction: column;
     align-items: center;
 }
-
-
-

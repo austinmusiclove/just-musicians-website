@@ -2,6 +2,689 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/DragSortList.js":
+/*!****************************************!*\
+  !*** ./src/components/DragSortList.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const DRAGGING_CLASS = 'dragging';
+class DragSortList {
+  constructor(dragContainer, dragItemClass) {
+    this.dragContainer = dragContainer;
+    this.dragItemClass = dragItemClass;
+    this.draggingClass = DRAGGING_CLASS;
+    this.draggedItem = null;
+    this._setupListeners();
+  }
+  _setupListeners() {
+    this.dragContainer.addEventListener('dragover', this.handleDragover.bind(this));
+    this.dragContainer.addEventListener('dragstart', this.handleDragStart.bind(this));
+    this.dragContainer.addEventListener('dragend', this.handleDragEnd.bind(this));
+  }
+  handleDragover(evnt) {
+    evnt.preventDefault();
+    let afterElement = this.getDragAfterElement(evnt.clientY);
+    let currentElement = document.querySelector(`.${this.draggingClass}`);
+    if (afterElement == null) {
+      this.dragContainer.appendChild(this.draggedItem);
+    } else {
+      this.dragContainer.insertBefore(this.draggedItem, afterElement);
+    }
+  }
+  handleDragStart(evnt) {
+    this.draggedItem = evnt.target;
+    setTimeout(() => {
+      this.draggedItem.classList.add(this.draggingClass);
+    }, 0);
+  }
+  handleDragEnd(evnt) {
+    setTimeout(() => {
+      this.draggedItem.classList.remove(this.draggingClass);
+      this.draggedItem = null;
+    }, 0);
+  }
+  getDragAfterElement(yValue) {
+    let draggableElements = [...this.dragContainer.querySelectorAll(`div.${this.dragItemClass}:not(.${this.draggingClass})`)];
+    let reduceFunction = function (closest, nextElement) {
+      let box = nextElement.getBoundingClientRect();
+      let offset = yValue - box.top - box.height / 2; // y distance cursor is below middle of this element
+      if (offset < 0 && offset > closest.offset) {
+        return {
+          offset: offset,
+          element: nextElement
+        };
+      } else {
+        return closest;
+      }
+    };
+    let afterElement = draggableElements.reduce(reduceFunction, {
+      offset: Number.NEGATIVE_INFINITY
+    }).element;
+    return afterElement;
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DragSortList);
+
+/***/ }),
+
+/***/ "./src/components/DragSortListFactory.js":
+/*!***********************************************!*\
+  !*** ./src/components/DragSortListFactory.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DragSortList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DragSortList */ "./src/components/DragSortList.js");
+
+class DragSortListFactory {
+  constructor() {}
+  create(dragContainerId, dragItemClass) {
+    return new _DragSortList__WEBPACK_IMPORTED_MODULE_0__["default"](dragContainerId, dragItemClass);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DragSortListFactory);
+
+/***/ }),
+
+/***/ "./src/components/ErrorDisplay.js":
+/*!****************************************!*\
+  !*** ./src/components/ErrorDisplay.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class ErrorDisplay {
+  constructor(helper, errorContainer, errorMessageClass) {
+    this.helper = helper;
+    this.errorContainer = errorContainer;
+    this.errorMessageClass = errorMessageClass;
+  }
+  showErrors(errors) {
+    for (let iterator = 0; iterator < errors.length; iterator++) {
+      let newError = this.getErrorElement(errors[iterator]);
+      this.errorContainer.appendChild(newError);
+    }
+    this.helper.show(this.errorContainer);
+  }
+  showError(errorString) {
+    let newError = this.getErrorElement(errorString);
+    this.errorContainer.appendChild(newError);
+    this.helper.show(this.errorContainer);
+  }
+  getErrorElement(errorString) {
+    let newError = document.createElement('div');
+    newError.classList.add(this.errorMessageClass);
+    newError.innerText = errorString;
+    return newError;
+  }
+  clearErrors() {
+    this.errorContainer.innerHTML = '';
+    this.helper.hide(this.errorContainer);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ErrorDisplay);
+
+/***/ }),
+
+/***/ "./src/components/ErrorDisplayFactory.js":
+/*!***********************************************!*\
+  !*** ./src/components/ErrorDisplayFactory.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ErrorDisplay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ErrorDisplay */ "./src/components/ErrorDisplay.js");
+
+class ErrorDisplayFactory {
+  constructor(helper) {
+    this.helper = helper;
+  }
+  create(errorContainer, errorMessageClass) {
+    return new _ErrorDisplay__WEBPACK_IMPORTED_MODULE_0__["default"](this.helper, errorContainer, errorMessageClass);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ErrorDisplayFactory);
+
+/***/ }),
+
+/***/ "./src/components/PhoneInput.js":
+/*!**************************************!*\
+  !*** ./src/components/PhoneInput.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class PhoneInput {
+  constructor(inputElement) {
+    this.inputElement = inputElement;
+    this._setupListeners();
+  }
+  _setupListeners() {
+    this.inputElement.addEventListener('input', this.reformat.bind(this));
+  }
+  reformat(evnt) {
+    let match = evnt.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+    evnt.target.value = !match[2] ? match[1] : `(${match[1]}) ${match[2]}` + (match[3] ? `-${match[3]}` : '');
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhoneInput);
+
+/***/ }),
+
+/***/ "./src/components/PhoneInputFactory.js":
+/*!*********************************************!*\
+  !*** ./src/components/PhoneInputFactory.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PhoneInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhoneInput */ "./src/components/PhoneInput.js");
+
+class PhoneInputFactory {
+  constructor() {}
+  create(inputElement) {
+    return new _PhoneInput__WEBPACK_IMPORTED_MODULE_0__["default"](inputElement);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PhoneInputFactory);
+
+/***/ }),
+
+/***/ "./src/components/StarRatingInput.js":
+/*!*******************************************!*\
+  !*** ./src/components/StarRatingInput.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class StarRatingInput {
+  constructor(starClass, starGroup) {
+    this.starClass = starClass;
+    this.starGroup = starGroup;
+    document.addEventListener('DOMContentLoaded', () => {
+      this._setupElements();
+      this._setupListeners();
+    });
+  }
+  _setupElements() {
+    this.stars = document.querySelectorAll(`.${this.starClass}[group=${this.starGroup}]`);
+  }
+  _setupListeners() {
+    this.stars.forEach(star => {
+      star.addEventListener('mouseover', this.handleStarMouseover.bind(this));
+      star.addEventListener('mouseout', this.handleStarMouseout.bind(this));
+      star.addEventListener('click', this.handleStarClick.bind(this));
+    });
+  }
+  handleStarMouseover(evnt) {
+    const ratingValue = evnt.target.getAttribute('value');
+    this.highlightStars(ratingValue);
+  }
+  handleStarMouseout(evnt) {
+    const selectedRating = document.querySelector(`input[name="${this.starGroup}"]:checked`);
+    this.highlightStars(selectedRating ? selectedRating.value : 0);
+  }
+  handleStarClick(evnt) {
+    const ratingValue = evnt.target.getAttribute('value');
+    evnt.target.checked = true;
+    this.highlightStars(ratingValue);
+  }
+  highlightStars(rating) {
+    this.stars.forEach(star => {
+      if (star.getAttribute('value') <= rating) {
+        star.classList.add('selected');
+      } else {
+        star.classList.remove('selected');
+      }
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StarRatingInput);
+
+/***/ }),
+
+/***/ "./src/components/StarRatingInputFactory.js":
+/*!**************************************************!*\
+  !*** ./src/components/StarRatingInputFactory.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StarRatingInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StarRatingInput */ "./src/components/StarRatingInput.js");
+
+class StarRatingInputFactory {
+  constructor() {}
+  create(starClass, starGroup) {
+    return new _StarRatingInput__WEBPACK_IMPORTED_MODULE_0__["default"](starClass, starGroup);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StarRatingInputFactory);
+
+/***/ }),
+
+/***/ "./src/components/TagInput.js":
+/*!************************************!*\
+  !*** ./src/components/TagInput.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class TagInput {
+  constructor(inputName, textInput, tagContainer, tagClass, deleteClass, helper, svgLibrary, errorDisplay) {
+    this.inputName = inputName;
+    this.textInput = textInput;
+    this.tagContainer = tagContainer;
+    this.tagClass = tagClass;
+    this.deleteClass = deleteClass;
+    this.helper = helper;
+    this.svgLibrary = svgLibrary;
+    this.errorDisplay = errorDisplay;
+    this._setupListeners();
+  }
+  _setupListeners() {
+    this.textInput.addEventListener('keydown', this.handleTagInputKeyDown.bind(this));
+  }
+  handleTagInputKeyDown(evnt) {
+    if (evnt.key === 'Enter') {
+      evnt.preventDefault();
+      this.addTag();
+    }
+  }
+  addTag(tagToAdd) {
+    this.errorDisplay.clearErrors();
+    let tagName = tagToAdd ? tagToAdd : this.textInput.value;
+    let tagSlug = this.helper.convertStringToSlug(tagName);
+    let error = this.checkTagErrors(tagName, tagSlug);
+    if (!error) {
+      this.addNewTag(tagName, tagSlug);
+      this.textInput.value = '';
+    } else {
+      this.errorDisplay.showError(error);
+    }
+  }
+  checkTagErrors(tagName, tagSlug) {
+    if (tagSlug == '') {
+      return 'Tag must contain at least one alphanumeric character';
+    }
+    return false;
+  }
+  addNewTag(tagName, tagSlug) {
+    let newTag = document.createElement('div');
+    newTag.classList.add(this.tagClass);
+    newTag.innerHTML = `
+            <input checked value="${tagName}" type="checkbox" name="${this.inputName}[]" id="${tagSlug}"/>
+            <label for="${tagSlug}">${tagName}</label>
+            <div class="${this.deleteClass}">
+            ${this.svgLibrary.getRedXSvg()}
+            </div>
+        `;
+    newTag.addEventListener('click', this.handleRemoveTag.bind(this));
+    this.tagContainer.appendChild(newTag);
+  }
+  handleRemoveTag(evnt) {
+    if (evnt.target.closest(`.${this.deleteClass}`)) {
+      evnt.target.closest(`.${this.tagClass}`).remove();
+    }
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TagInput);
+
+/***/ }),
+
+/***/ "./src/components/TagInputFactory.js":
+/*!*******************************************!*\
+  !*** ./src/components/TagInputFactory.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TagInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TagInput */ "./src/components/TagInput.js");
+/* harmony import */ var _YouTubeTagInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./YouTubeTagInput */ "./src/components/YouTubeTagInput.js");
+
+
+class TagInputFactory {
+  constructor(helper, youTubeHelper, svgLibrary, errorDisplayFactory, dragSortListFactory) {
+    this.helper = helper;
+    this.youTubeHelper = youTubeHelper;
+    this.svgLibrary = svgLibrary;
+    this.errorDisplayFactory = errorDisplayFactory;
+    this.dragSortListFactory = dragSortListFactory;
+  }
+  create(inputName, textInput, tagContainer, tagClass, deleteClass, errorContainer, errorMessageClass, type) {
+    let errorDisplay = this.errorDisplayFactory.create(errorContainer, errorMessageClass);
+    if (type == 'youtube') {
+      return new _YouTubeTagInput__WEBPACK_IMPORTED_MODULE_1__["default"](inputName, textInput, tagContainer, tagClass, deleteClass, this.helper, this.youTubeHelper, this.svgLibrary, errorDisplay, this.dragSortListFactory);
+    }
+    return new _TagInput__WEBPACK_IMPORTED_MODULE_0__["default"](inputName, textInput, tagContainer, tagClass, deleteClass, this.helper, this.svgLibrary, errorDisplay);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TagInputFactory);
+
+/***/ }),
+
+/***/ "./src/components/TextInputOptionDropdown.js":
+/*!***************************************************!*\
+  !*** ./src/components/TextInputOptionDropdown.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class TextInputOptionDropdown {
+  constructor(textInput, optionDropdown, fetchFunction, dataIdField, dataNameField, optionSelectionCallback, helper) {
+    this.textInput = textInput;
+    this.optionDropdown = optionDropdown;
+    this.fetchFunction = fetchFunction;
+    this.dataIdField = dataIdField;
+    this.dataNameField = dataNameField;
+    this.optionSelectionCallback = optionSelectionCallback;
+    this.helper = helper;
+    this.optionsMap = {};
+    this._setupListeners();
+    this.loadOptions();
+  }
+  _setupListeners() {
+    this.textInput.addEventListener('keyup', this.handleTextInputChange.bind(this));
+  }
+  handleTextInputChange(evnt) {
+    let inputValue = evnt.target.value.toLowerCase();
+    if (inputValue.length > 1) {
+      this.helper.show(this.optionDropdown);
+      for (const [optionName, optionElement] of Object.entries(this.optionsMap)) {
+        if (optionName.toLowerCase().includes(inputValue)) {
+          this.helper.show(optionElement);
+        } else {
+          this.helper.hide(optionElement);
+        }
+      }
+    } else {
+      this.helper.hide(this.optionDropdown);
+    }
+  }
+  handleOptionClick(evnt) {
+    let id = evnt.target.getAttribute('data-id');
+    let name = evnt.target.getAttribute('data-name');
+    this.textInput.value = name;
+    this.optionSelectionCallback(id, name);
+    this.helper.hide(this.optionDropdown);
+  }
+  loadOptions() {
+    this.fetchFunction().then(response => {
+      return response.data;
+    }).then(data => {
+      let html = '';
+      for (let iterator = 0; iterator < data.length; iterator++) {
+        let identifier = data[iterator][this.dataIdField];
+        let name = data[iterator][this.dataNameField];
+        let optionElement = document.createElement('div');
+        optionElement.setAttribute('id', `option-${identifier}`);
+        optionElement.setAttribute('data-id', identifier);
+        optionElement.setAttribute('data-name', name);
+        optionElement.innerText = name;
+        optionElement.addEventListener('click', this.handleOptionClick.bind(this));
+        this.optionDropdown.appendChild(optionElement);
+        this.optionsMap[name] = optionElement;
+      }
+    }).catch(err => {
+      console.warn(err);
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextInputOptionDropdown);
+
+/***/ }),
+
+/***/ "./src/components/TextInputOptionDropdownFactory.js":
+/*!**********************************************************!*\
+  !*** ./src/components/TextInputOptionDropdownFactory.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TextInputOptionDropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextInputOptionDropdown */ "./src/components/TextInputOptionDropdown.js");
+
+class TextInputOptionDropdownFactory {
+  constructor(helper) {
+    this.helper = helper;
+  }
+  create(textInput, optionDropdown, fetchFunction, dataIdField, dataNameField, optionSelectionCallback) {
+    return new _TextInputOptionDropdown__WEBPACK_IMPORTED_MODULE_0__["default"](textInput, optionDropdown, fetchFunction, dataIdField, dataNameField, optionSelectionCallback, this.helper);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextInputOptionDropdownFactory);
+
+/***/ }),
+
+/***/ "./src/components/YouTubeTagInput.js":
+/*!*******************************************!*\
+  !*** ./src/components/YouTubeTagInput.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TagInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TagInput */ "./src/components/TagInput.js");
+
+class YouTubeTagInput extends _TagInput__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  constructor(inputName, textInput, tagContainer, tagClass, deleteClass, helper, youTubeHelper, svgLibrary, errorDisplay, dragSortListFactory) {
+    super(inputName, textInput, tagContainer, tagClass, deleteClass, helper, svgLibrary, errorDisplay);
+    this.youTubeHelper = youTubeHelper;
+    this.dragSortListFactory = dragSortListFactory;
+    this._setupComponents();
+    this.draggedItem = null;
+  }
+  _setupComponents() {
+    this.dragSortList = this.dragSortListFactory.create(this.tagContainer, this.tagClass);
+  }
+  checkTagErrors(tagName, tagSlug) {
+    if (tagName == '') {
+      return 'Please enter a valid youtube video link';
+    }
+    if (!this.helper.isValidUrl(tagName)) {
+      return 'Invalid URL';
+    }
+    if (!this.youTubeHelper.isYoutubeUrl(tagName)) {
+      return 'Only links from youtube.com are accepted.';
+    }
+    if (!this.youTubeHelper.getVideoIdFromYoutubeUrl(tagName)) {
+      return 'Invalid YouTube URL. No video id. Make sure this is a link to a video, not a channel or a short.';
+    }
+    return false;
+  }
+  addNewTag(tagName, tagSlug) {
+    let newTag = document.createElement('div');
+    newTag.classList.add(this.tagClass);
+    newTag.setAttribute('draggable', true);
+    let youtubeIframeId = `${tagSlug}-${this.helper.getRandomNumber(8)}`;
+    newTag.innerHTML = `
+            <div style="display:flex">
+                <div style="display: flex; flex-direction: column; justify-content: center; padding: 10px;">
+                    <div class="${this.deleteClass}">${this.svgLibrary.getRedXSvg()}</div>
+                    <div>${this.svgLibrary.getDragPointSvg()}</div>
+                </div>
+                <div>
+                    <input checked style="display:none;" value="${tagName}" type="checkbox" name="${this.inputName}[]" id="${tagSlug}"/>
+                    <div style="display:block; height:200px;" id="${youtubeIframeId}"></div>
+                </div>
+            </div>
+        `;
+    newTag.addEventListener('click', this.handleRemoveTag.bind(this));
+    this.tagContainer.appendChild(newTag);
+    this.youTubeHelper.addYoutubeIframe(youtubeIframeId, tagName);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (YouTubeTagInput);
+
+/***/ }),
+
+/***/ "./src/libraries/Helper.js":
+/*!*********************************!*\
+  !*** ./src/libraries/Helper.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class Helper {
+  constructor() {}
+  convertStringToSlug(string) {
+    let result = string.toLowerCase(); // convert to lower case
+    result = result.replaceAll(/[^a-z0-9\-]/g, '-'); // convert non alphanumerica to -
+    result = result.replaceAll(/-+/g, '-'); // remove consecutive hyphens
+    result = result.replace(/^-+|-+$/g, ""); // trim hyphens from the start and end
+    return result;
+  }
+  getRandomNumber(numDigits) {
+    const min = Math.pow(10, numDigits - 1); // Minimum value (e.g., 100 for numDigits=3)
+    const max = Math.pow(10, numDigits) - 1; // Maximum value (e.g., 999 for numDigits=3)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  isValidUrl(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+  show(element, display) {
+    let displayValue = display ? display : 'block';
+    element.style.display = displayValue;
+  }
+  hide(element) {
+    element.style.display = "none";
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Helper);
+
+/***/ }),
+
+/***/ "./src/libraries/SvgLibrary.js":
+/*!*************************************!*\
+  !*** ./src/libraries/SvgLibrary.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class SvgLibrary {
+  constructor() {}
+  getRedXSvg() {
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+                    <defs>
+                    </defs>
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                        <path d="M 13.4 88.492 L 1.508 76.6 c -2.011 -2.011 -2.011 -5.271 0 -7.282 L 69.318 1.508 c 2.011 -2.011 5.271 -2.011 7.282 0 L 88.492 13.4 c 2.011 2.011 2.011 5.271 0 7.282 L 20.682 88.492 C 18.671 90.503 15.411 90.503 13.4 88.492 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(236,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 69.318 88.492 L 1.508 20.682 c -2.011 -2.011 -2.011 -5.271 0 -7.282 L 13.4 1.508 c 2.011 -2.011 5.271 -2.011 7.282 0 l 67.809 67.809 c 2.011 2.011 2.011 5.271 0 7.282 L 76.6 88.492 C 74.589 90.503 71.329 90.503 69.318 88.492 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(236,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                    </g>
+                </svg>`;
+  }
+  getDragPointSvg() {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 15 15" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.49998 4.09998C2.27906 4.09998 2.09998 4.27906 2.09998 4.49998C2.09998 4.72089 2.27906 4.89998 2.49998 4.89998H12.5C12.7209 4.89998 12.9 4.72089 12.9 4.49998C12.9 4.27906 12.7209 4.09998 12.5 4.09998H2.49998ZM2.49998 6.09998C2.27906 6.09998 2.09998 6.27906 2.09998 6.49998C2.09998 6.72089 2.27906 6.89998 2.49998 6.89998H12.5C12.7209 6.89998 12.9 6.72089 12.9 6.49998C12.9 6.27906 12.7209 6.09998 12.5 6.09998H2.49998ZM2.09998 8.49998C2.09998 8.27906 2.27906 8.09998 2.49998 8.09998H12.5C12.7209 8.09998 12.9 8.27906 12.9 8.49998C12.9 8.72089 12.7209 8.89998 12.5 8.89998H2.49998C2.27906 8.89998 2.09998 8.72089 2.09998 8.49998ZM2.49998 10.1C2.27906 10.1 2.09998 10.2791 2.09998 10.5C2.09998 10.7209 2.27906 10.9 2.49998 10.9H12.5C12.7209 10.9 12.9 10.7209 12.9 10.5C12.9 10.2791 12.7209 10.1 12.5 10.1H2.49998Z" fill="#000000"/>
+                </svg>`;
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SvgLibrary);
+
+/***/ }),
+
+/***/ "./src/libraries/YouTubeHelper.js":
+/*!****************************************!*\
+  !*** ./src/libraries/YouTubeHelper.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class YouTubeHelper {
+  constructor(helper) {
+    this.helper = helper;
+  }
+  isYoutubeUrl(url) {
+    if (!this.helper.isValidUrl(url)) {
+      return false;
+    }
+    let urlObject = new URL(url);
+    return urlObject.hostname.includes('youtube.com');
+  }
+  getVideoIdFromYoutubeUrl(url) {
+    if (!this.isYoutubeUrl(url)) {
+      return false;
+    }
+    let youtubeUrl = new URL(url);
+    return youtubeUrl.searchParams.get('v');
+  }
+  addYoutubeIframe(iframeId, videoUrl, controls = 1, autoplay = 0) {
+    let videoId = this.getVideoIdFromYoutubeUrl(videoUrl);
+    let player = new YT.Player(iframeId, {
+      width: '384',
+      height: '216',
+      videoId: videoId,
+      playerVars: {
+        'playsinline': 1,
+        'autoplay': autoplay,
+        'controls': controls,
+        'disablekb': 1,
+        'rel': 0,
+        'iv_load_policy': 3,
+        'mute': 1
+      },
+      events: {
+        'onReady': function () {}
+      }
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (YouTubeHelper);
+
+/***/ }),
+
 /***/ "./src/modules/ChartGenerator.js":
 /*!***************************************!*\
   !*** ./src/modules/ChartGenerator.js ***!
@@ -226,10 +909,10 @@ class LeafletMap {
 
 /***/ }),
 
-/***/ "./src/modules/UserManager.js":
-/*!************************************!*\
-  !*** ./src/modules/UserManager.js ***!
-  \************************************/
+/***/ "./src/modules/ListingFormManager.js":
+/*!*******************************************!*\
+  !*** ./src/modules/ListingFormManager.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -238,43 +921,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
-class UserManager {
-  constructor() {
-    this._setupElements();
-    this._setupListeners();
+class ListingFormManager {
+  constructor(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory) {
+    this.helper = helper;
+    this.tagInputFactory = tagInputFactory;
+    this.textInputOptionDropdownFactory = textInputOptionDropdownFactory;
+    this.phoneInputFactory = phoneInputFactory;
+    document.addEventListener('DOMContentLoaded', () => {
+      this._setupElements();
+      this._setupEventListeners();
+      this._setupComponents();
+      this.preFill();
+    });
+  }
+  _setupElements() {
+    this.artistIdInput = document.getElementById('artist_uuid');
+    this.phoneInputElement = document.getElementById('phone');
+    this.venueTextInput = document.getElementById('venues-input');
+    this.venueOptions = document.getElementById('venue-options');
+    this.venueErrorContainer = document.getElementById('venue-input-error');
+    this.selectedVenuesContainer = document.getElementById('selected-venues');
+    this.tagTextInput = document.getElementById('tags-input');
+    this.tagOptions = document.getElementById('tag-options');
+    this.selectedTagsContainer = document.getElementById('selected-tags');
+    this.tagErrorContainer = document.getElementById('tag-input-error');
+    this.mediaTextInput = document.getElementById('media-input');
+    this.selectedMediaContainer = document.getElementById('selected-media');
+    this.mediaErrorContainer = document.getElementById('media-input-error');
+  }
+  _setupEventListeners() {
+    // interrupt submit
+    // check urls are not 404s
+  }
+  _setupComponents() {
+    this.venueTagsInput = this.tagInputFactory.create('venues', this.venueTextInput, this.selectedVenuesContainer, 'tag-item', 'tag-delete-button', this.venueErrorContainer, 'error-message');
+    function getVenues() {
+      return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_api_url}/?min_review_count=0`);
+    }
+    function addVenueTag(venueId, venueName) {
+      this.venueTagsInput.addTag(venueName);
+    }
+    this.venueInputOptionDropdown = this.textInputOptionDropdownFactory.create(this.venueTextInput, this.venueOptions, getVenues, 'ID', 'name', addVenueTag.bind(this));
+    this.tagsInput = this.tagInputFactory.create('tags', this.tagTextInput, this.selectedTagsContainer, 'tag-item', 'tag-delete-button', this.tagErrorContainer, 'error-message');
+    function getTags() {
+      return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.get_taxonomy_terms_api_url}/?taxonomy=tag`);
+    }
+    function addTag(termId, termName) {
+      this.tagsInput.addTag(termName);
+    }
+    this.tagInputOptionDropdown = this.textInputOptionDropdownFactory.create(this.tagTextInput, this.tagOptions, getTags, 'term_id', 'name', addTag.bind(this));
+    this.phoneInput = this.phoneInputFactory.create(this.phoneInputElement);
+    this.mediaTagsInput = this.tagInputFactory.create('media', this.mediaTextInput, this.selectedMediaContainer, 'media-tag-item', 'media-tag-delete-button', this.mediaErrorContainer, 'error-message', 'youtube');
+  }
+  preFill() {
+    let artistUUID = this.artistIdInput.value;
+    if (artistUUID) {
+      this.getArtist(artistUUID).then(response => {
+        return response.data;
+      }).then(data => {
+        if (data) {
+          document.getElementById('artist-post-id').value = data.ID;
+          document.getElementById('performer-name').value = data.name;
+          document.getElementById('description').value = data.claimed_genre;
+          document.getElementById('city').value = data.city;
+          document.getElementById('state').value = data.state;
+          document.getElementById('bio').value = data.bio;
+          document.getElementById('listing-email').value = data.email;
+          document.getElementById('phone').value = data.phone;
+          document.getElementById('website').value = data.website;
+          document.getElementById('instagram-handle').value = data.instagram_handle;
+          document.getElementById('tiktok-handle').value = data.tiktok_handle;
+          document.getElementById('x-handle').value = data.x_handle;
+          document.getElementById('facebook-url').value = data.facebook_url;
+          document.getElementById('youtube-url').value = data.youtube_url;
+          document.getElementById('bandcamp-url').value = data.bandcamp_url;
+          document.getElementById('spotify-artist-url').value = `https://open.spotify.com/artist/${data.spotify_artist_id}`;
+          document.getElementById('spotify-artist-id').value = data.spotify_artist_id;
+          document.getElementById('soundcloud-url').value = data.soundcloud_url;
+          // listing type
+          let listingTypeOption = document.getElementById(data.type.toLowerCase());
+          if (listingTypeOption) {
+            listingTypeOption.checked = true;
+          }
+          // genres
+          for (let iterator = 0; iterator < data.macro_genres.length; iterator++) {
+            let genre = data.macro_genres[iterator];
+            let genreOption = document.getElementById(this.helper.convertStringToSlug(genre));
+            if (genreOption) {
+              genreOption.checked = true;
+            }
+          }
+          // verified venues
+          document.getElementById('verified-venues').value = data.venues_played_verified; // set hidden venues played verified input
+          return this.getVenuesBatch(data.venues_played_verified);
+        }
+      }).then(response => {
+        // display verified venues in form
+        let venues = response.data;
+        for (let iterator = 0; iterator < venues.length; iterator++) {
+          let venue = venues[iterator];
+          this.venueTagsInput.addTag(venue.name);
+        }
+      }).catch(err => {
+        console.warn(err);
+      });
+    }
+  }
+  getArtist(artistUUID) {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.artist_api_url}/?artist_uuid=${artistUUID}`);
+  }
+  getVenuesBatch(venueIds) {
+    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_by_post_id_batch_api_url}/?venue_ids=${venueIds.join(",")}`);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListingFormManager);
+
+/***/ }),
+
+/***/ "./src/modules/SignUpManager.js":
+/*!**************************************!*\
+  !*** ./src/modules/SignUpManager.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+class SignUpManager {
+  constructor(errorDisplayFactory) {
+    this.errorDisplayFactory = errorDisplayFactory;
+    document.addEventListener('DOMContentLoaded', () => {
+      this._setupElements();
+      this._setupListeners();
+      this._setupComponents();
+    });
   }
   _setupElements() {
     this.registrationFormElement = document.getElementById('registration-form');
     this.registrationSubmitElement = document.getElementById('register-submit');
-    this.errorContainerElement = document.getElementById('error-container');
   }
   _setupListeners() {
     this.registrationSubmitElement.addEventListener('click', this.registerUser.bind(this));
   }
+  _setupComponents() {
+    this.errorDisplay = this.errorDisplayFactory.create('error-container', 'error-message');
+  }
   registerUser(evnt) {
     evnt.preventDefault();
-    this.clearErrors();
+    this.errorDisplay.clearErrors();
     return this.callRegisterUserAPI().then(response => {
       window.location.href = siteData.root_url;
     }).catch(err => {
-      this.displayErrors(err.response.data.data.errors);
+      console.log(err.response.data.data.errors);
+      this.errorDisplay.showErrors(err.response.data.data.errors);
     });
   }
   callRegisterUserAPI() {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${siteData.user_registration_api_url}`, this.registrationFormElement);
   }
-  displayErrors(errors) {
-    let errorHtml = '';
-    for (let iterator = 0; iterator < errors.length; iterator++) {
-      errorHtml += `<div class="error_message">${errors[iterator]}</div>`;
-    }
-    this.errorContainerElement.innerHTML = errorHtml;
-  }
-  clearErrors() {
-    this.errorContainerElement.innerHTML = '';
-  }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserManager);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignUpManager);
 
 /***/ }),
 
@@ -664,93 +1473,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 class VenueReviewFormManager {
-  // TODO move all ids to the php page and have them sent in with an event
-  // TODO add unit tests
-  constructor() {
+  constructor(helper, textInputOptionDropdownFactory, starRatingInputFactory) {
+    this.helper = helper;
+    this.textInputOptionDropdownFactory = textInputOptionDropdownFactory;
+    this.starRatingInputFactory = starRatingInputFactory;
     document.addEventListener('DOMContentLoaded', () => {
-      this.setupElements();
-      this.setupEventListeners();
-      this.loadVenueOptions();
+      this._setupElements();
+      this._setupEventListeners();
+      this._setupComponents();
       this.preFill();
     });
   }
-  setupElements() {
-    this.venueInput = document.getElementById('venue_name');
-    this.venueIdInput = document.getElementById('venue_id');
-    this.venueOptions = document.getElementById('venue_options');
-    this.venueOptionsMap = {};
-    this.performanceIdInput = document.getElementById('performance_id');
-    this.performancePostIdInput = document.getElementById('performance_post_id');
-    this.performerInput = document.getElementById('performing_act_name');
-    this.performanceDateInput = document.getElementById('performance_date');
-    this.stars = document.querySelectorAll('.star');
-    this.versusToggle = document.getElementById("has_versus_comp");
-    this.versusInput1 = document.getElementById("versus_comp_1");
-    this.versusInput2 = document.getElementById("versus_comp_2");
-    this.guaranteeQuestions = document.getElementById("guarantee_questions");
-    this.doorQuestions = document.getElementById("door_questions");
-    this.barQuestions = document.getElementById("bar_questions");
+  _setupElements() {
+    this.venueInput = document.getElementById('venue-name');
+    this.venueIdInput = document.getElementById('venue-id');
+    this.venueOptions = document.getElementById('venue-options');
+    this.performanceIdInput = document.getElementById('performance-id');
+    this.performancePostIdInput = document.getElementById('performance-post-id');
+    this.performerInput = document.getElementById('performing-act-name');
+    this.performanceDateInput = document.getElementById('performance-date');
+    this.versusToggle = document.getElementById("has-versus-comp");
+    this.versusInput1 = document.getElementById("versus-comp-1");
+    this.versusInput2 = document.getElementById("versus-comp-2");
+    this.guaranteeQuestions = document.getElementById("guarantee-questions");
+    this.doorQuestions = document.getElementById("door-questions");
+    this.barQuestions = document.getElementById("bar-questions");
   }
-  setupEventListeners() {
-    // Handle Venue input
-    this.venueInput.addEventListener('keyup', this.handleVenueInputChange.bind(this));
-    // Handle rating input elements
-    this.stars.forEach(star => {
-      star.addEventListener('mouseover', this.handleStarMouseover.bind(this));
-      star.addEventListener('mouseout', this.handleStarMouseout.bind(this));
-      star.addEventListener('click', this.handleStarClick.bind(this));
-    });
-    // Handle versus input
+  _setupEventListeners() {
     this.versusToggle.addEventListener('change', this.handleVersusToggle.bind(this));
     this.versusInput1.addEventListener('change', this.handleVersusOptionChange.bind(this));
     this.versusInput2.addEventListener('change', this.handleVersusOptionChange.bind(this));
   }
+  _setupComponents() {
+    function getVenues() {
+      return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_api_url}/?min_review_count=0`);
+    }
+    function setVenueId(venueId, venueName) {
+      this.venueIdInput.value = venueId;
+    }
+    this.venueInputOptionDropdown = this.textInputOptionDropdownFactory.create(this.venueInput, this.venueOptions, getVenues, 'ID', 'name', setVenueId.bind(this));
+    this.overallRatingInput = this.starRatingInputFactory.create('star', 'overall-rating');
+    this.communicationRatingInput = this.starRatingInputFactory.create('star', 'communication-rating');
+    this.soundRatingInput = this.starRatingInputFactory.create('star', 'sound-rating');
+    this.safetyRatingInput = this.starRatingInputFactory.create('star', 'safety-rating');
+  }
 
-  // Handle Venue input field
-  handleVenueInputChange(evnt) {
-    let inputValue = evnt.target.value.toLowerCase();
-    if (inputValue.length > 1) {
-      this.show(this.venueOptions);
-      for (const [venueName, venueOptionElement] of Object.entries(this.venueOptionsMap)) {
-        if (venueName.toLowerCase().includes(inputValue)) {
-          this.show(venueOptionElement);
-        } else {
-          this.hide(venueOptionElement);
-        }
-      }
-    } else {
-      this.hide(this.venueOptions);
+  // Versus input
+  handleVersusToggle(evnt) {
+    if (!evnt.target.checked) {
+      this.versusInput1.selectedIndex = 0;
+      this.versusInput2.selectedIndex = 0;
+      this.resetVersusOptions(); // enable all other options
+      this.showAppropriateVersusQuestions();
     }
   }
-  handleVenueOptionClick(evnt) {
-    this.venueInput.value = evnt.target.getAttribute('data-name');
-    this.venueIdInput.value = evnt.target.getAttribute('data-id');
-    this.hide(this.venueOptions);
+  handleVersusOptionChange(evnt) {
+    this.resetVersusOptions(evnt.target.value); // disallows having the same option on both sides
+    this.showAppropriateVersusQuestions();
   }
-  loadVenueOptions() {
-    this.getVenues().then(response => {
-      return response.data;
-    }).then(data => {
-      let html = '';
-      for (let iterator = 0; iterator < data.length; iterator++) {
-        html += this.getVenueOptionHtml(data[iterator]);
-      }
-      this.venueOptions.innerHTML = html;
-      for (let iterator = 0; iterator < data.length; iterator++) {
-        let venue = data[iterator];
-        let optionElement = document.getElementById(`venue-${venue['ID']}`);
-        this.venueOptionsMap[venue['name']] = optionElement;
-        optionElement.addEventListener('click', this.handleVenueOptionClick.bind(this));
-      }
-    }).catch(err => {
-      console.warn(err);
-    });
+  resetVersusOptions(option) {
+    this.disableMatch([...this.versusInput1.children].slice(1), option);
+    this.disableMatch([...this.versusInput2.children].slice(1), option);
   }
-  getVenueOptionHtml(venue) {
-    return `<div id="venue-${venue.ID}" data-name="${venue.name}" data-id="${venue.ID}">${venue.name}</div>`;
+  disableMatch(elements, match) {
+    for (let iterator = 0; iterator < elements.length; iterator++) {
+      let optionElement = elements[iterator];
+      optionElement.disabled = optionElement.value == match;
+    }
   }
-  getVenues() {
-    return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.venues_api_url}/?min_review_count=0`);
+  showAppropriateVersusQuestions() {
+    let versus1 = this.versusInput1.value;
+    let versus2 = this.versusInput2.value;
+    if (versus1 == 'Guarantee' || versus2 == 'Guarantee') {
+      this.guaranteeQuestions.classList.add('versus-option');
+    } else {
+      this.guaranteeQuestions.classList.remove('versus-option');
+    }
+    if (versus1 == 'Door Deal' || versus2 == 'Door Deal') {
+      this.doorQuestions.classList.add('versus-option');
+    } else {
+      this.doorQuestions.classList.remove('versus-option');
+    }
+    if (versus1 == 'Bar Deal' || versus2 == 'Bar Deal') {
+      this.barQuestions.classList.add('versus-option');
+    } else {
+      this.barQuestions.classList.remove('versus-option');
+    }
   }
   preFill() {
     let performanceId = this.performanceIdInput.value;
@@ -770,69 +1578,6 @@ class VenueReviewFormManager {
   }
   getPerformance(performanceId) {
     return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${siteData.performance_by_id_api_url}/?performance_id=${performanceId}`);
-  }
-
-  // Rating inputs
-  handleStarMouseover(evnt) {
-    const inputGroup = evnt.target.getAttribute('group');
-    const ratingValue = evnt.target.getAttribute('value');
-    this.highlightStars(inputGroup, ratingValue);
-  }
-  handleStarMouseout(evnt) {
-    const inputGroup = evnt.target.getAttribute('group');
-    const selectedRating = document.querySelector(`input[name="${inputGroup}"]:checked`);
-    this.highlightStars(inputGroup, selectedRating ? selectedRating.value : 0);
-  }
-  handleStarClick(evnt) {
-    const inputGroup = evnt.target.getAttribute('group');
-    const ratingValue = evnt.target.getAttribute('value');
-    evnt.target.checked = true;
-    this.highlightStars(inputGroup, ratingValue);
-  }
-  highlightStars(inputGroup, rating) {
-    const inputGroupStars = document.querySelectorAll(`.star[group=${inputGroup}]`);
-    inputGroupStars.forEach(star => {
-      if (star.getAttribute('value') <= rating) {
-        star.classList.add('selected');
-      } else {
-        star.classList.remove('selected');
-      }
-    });
-  }
-
-  // Versus input
-  handleVersusToggle(evnt) {
-    if (!evnt.target.checked) {
-      this.versusInput1.selectedIndex = 0;
-      this.versusInput2.selectedIndex = 0;
-      this.handleVersusOptionChange();
-    }
-  }
-  handleVersusOptionChange() {
-    let versus1 = this.versusInput1.value;
-    let versus2 = this.versusInput2.value;
-    if (versus1 == 'Guarantee' || versus2 == 'Guarantee') {
-      this.guaranteeQuestions.classList.add('versus-option');
-    } else {
-      this.guaranteeQuestions.classList.remove('versus-option');
-    }
-    if (versus1 == 'Door Deal' || versus2 == 'Door Deal') {
-      this.doorQuestions.classList.add('versus-option');
-    } else {
-      this.doorQuestions.classList.remove('versus-option');
-    }
-    if (versus1 == 'Bar Deal' || versus2 == 'Bar Deal') {
-      this.barQuestions.classList.add('versus-option');
-    } else {
-      this.barQuestions.classList.remove('versus-option');
-    }
-    // disallow having the same option on both sides
-  }
-  show(element) {
-    element.style.display = "block";
-  }
-  hide(element) {
-    element.style.display = "none";
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VenueReviewFormManager);
@@ -5640,14 +6385,26 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/LeafletMap */ "./src/modules/LeafletMap.js");
-/* harmony import */ var _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ChartGenerator */ "./src/modules/ChartGenerator.js");
-/* harmony import */ var _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenuePageManager */ "./src/modules/VenuePageManager.js");
-/* harmony import */ var _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueArchiveManager */ "./src/modules/VenueArchiveManager.js");
-/* harmony import */ var _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/VenueReviewFormManager */ "./src/modules/VenueReviewFormManager.js");
+/* harmony import */ var _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/ChartGenerator */ "./src/modules/ChartGenerator.js");
+/* harmony import */ var _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/VenuePageManager */ "./src/modules/VenuePageManager.js");
+/* harmony import */ var _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/VenueArchiveManager */ "./src/modules/VenueArchiveManager.js");
+/* harmony import */ var _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/VenueReviewFormManager */ "./src/modules/VenueReviewFormManager.js");
+/* harmony import */ var _modules_ListingFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ListingFormManager */ "./src/modules/ListingFormManager.js");
 /* harmony import */ var _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/VenueInsightGenerator */ "./src/modules/VenueInsightGenerator.js");
-/* harmony import */ var _modules_UserManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/UserManager */ "./src/modules/UserManager.js");
+/* harmony import */ var _modules_SignUpManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/SignUpManager */ "./src/modules/SignUpManager.js");
+/* harmony import */ var _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/LeafletMap */ "./src/modules/LeafletMap.js");
+/* harmony import */ var _components_ErrorDisplayFactory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ErrorDisplayFactory */ "./src/components/ErrorDisplayFactory.js");
+/* harmony import */ var _components_TagInputFactory__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/TagInputFactory */ "./src/components/TagInputFactory.js");
+/* harmony import */ var _components_DragSortListFactory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/DragSortListFactory */ "./src/components/DragSortListFactory.js");
+/* harmony import */ var _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TextInputOptionDropdownFactory */ "./src/components/TextInputOptionDropdownFactory.js");
+/* harmony import */ var _components_StarRatingInputFactory__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/StarRatingInputFactory */ "./src/components/StarRatingInputFactory.js");
+/* harmony import */ var _components_PhoneInputFactory__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/PhoneInputFactory */ "./src/components/PhoneInputFactory.js");
+/* harmony import */ var _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./libraries/Helper.js */ "./src/libraries/Helper.js");
+/* harmony import */ var _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./libraries/YouTubeHelper.js */ "./src/libraries/YouTubeHelper.js");
+/* harmony import */ var _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./libraries/SvgLibrary.js */ "./src/libraries/SvgLibrary.js");
 // Import modules
+// Modules are built specifically for a page or set of pages
+// Modules can contain references to HTML ids that are hard coded in the page
 
 
 
@@ -5655,24 +6412,66 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// move to components
+ // split between archive map and single point map
+
+// Import Component Factories
+// Components should not reference any hard coded HTML ids, instead
+// Component Factory create methods should accept ids
+// Modules should wait until after DOMContentLoaded to run create methods from component factories to avoid searching the DOM before it is loaded
+
+
+
+
+
+
+
+// Import Libraries
+// Libraries contain helper functions and reusable HTML snippets
+
+
+
+
+// ************************************************************* //
+// Only instantiate modules that are needed for the current page //
+// ************************************************************* //
+
+// Listing Form
+if (siteData.url_path.includes('listing-form') && siteData.request_method == 'GET') {
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const youTubeHelper = new _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_15__["default"](helper);
+  const svgLibrary = new _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_16__["default"]();
+  const errorDisplayFactory = new _components_ErrorDisplayFactory__WEBPACK_IMPORTED_MODULE_8__["default"](helper);
+  const dragSortListFactory = new _components_DragSortListFactory__WEBPACK_IMPORTED_MODULE_10__["default"]();
+  const tagInputFactory = new _components_TagInputFactory__WEBPACK_IMPORTED_MODULE_9__["default"](helper, youTubeHelper, svgLibrary, errorDisplayFactory, dragSortListFactory);
+  const textInputOptionDropdownFactory = new _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__["default"](helper);
+  const phoneInputFactory = new _components_PhoneInputFactory__WEBPACK_IMPORTED_MODULE_13__["default"]();
+  const listingFormManager = new _modules_ListingFormManager__WEBPACK_IMPORTED_MODULE_4__["default"](helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory);
+}
 
 // Venue Review Form
-if (siteData.url_path.includes('venue-review-form')) {
-  const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_4__["default"]();
+else if (siteData.url_path.includes('venue-review-form') && siteData.request_method == 'GET') {
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const textInputOptionDropdownFactory = new _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__["default"](helper);
+  const starRatingInputFactory = new _components_StarRatingInputFactory__WEBPACK_IMPORTED_MODULE_12__["default"]();
+  const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_3__["default"](helper, textInputOptionDropdownFactory, starRatingInputFactory);
 }
 
 // Venues archive and pages
-if (siteData.url_path.includes('venues')) {
-  const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_0__["default"]();
-  const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_1__["default"]();
+else if (siteData.url_path.includes('venues')) {
+  const leafletMap = new _modules_LeafletMap__WEBPACK_IMPORTED_MODULE_7__["default"]();
+  const chartGenerator = new _modules_ChartGenerator__WEBPACK_IMPORTED_MODULE_0__["default"]();
   const venueInsightGenerator = new _modules_VenueInsightGenerator__WEBPACK_IMPORTED_MODULE_5__["default"]();
-  const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_2__["default"](chartGenerator);
-  const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_3__["default"](venueInsightGenerator);
+  const venuePageManager = new _modules_VenuePageManager__WEBPACK_IMPORTED_MODULE_1__["default"](chartGenerator);
+  const venueArchiveManager = new _modules_VenueArchiveManager__WEBPACK_IMPORTED_MODULE_2__["default"](venueInsightGenerator);
 }
 
 // User Registration
-if (siteData.url_path.includes('sign-up')) {
-  const userManager = new _modules_UserManager__WEBPACK_IMPORTED_MODULE_6__["default"]();
+else if (siteData.url_path.includes('sign-up')) {
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const errorDisplayFactory = new _components_ErrorDisplayFactory__WEBPACK_IMPORTED_MODULE_8__["default"](helper);
+  const signUpManager = new _modules_SignUpManager__WEBPACK_IMPORTED_MODULE_6__["default"](errorDisplayFactory);
 }
 /******/ })()
 ;
