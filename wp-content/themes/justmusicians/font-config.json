@@ -1,0 +1,16 @@
+{
+  "formats": ["woff2"], 
+  "fontName": "Material Design Icons",
+  "fontFile": "materialdesignicons",
+  "dest": ".",
+   "icons": [
+      "camera",
+      "menu",
+      "account-outline",
+      "tune",
+      "bookmark-outline",
+      "pause",
+      "arrow-left",
+      "archive",
+      "email"]
+}

@@ -1,0 +1,37 @@
+html,
+body,
+button,
+input,
+select,
+optgroup,
+textarea,
+p {
+	font-size: 15px;
+	color: black;
+	font-family: 'Poppins';
+  	font-weight: 400;
+	line-height: 160%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 120%;
+}
+
+dfn, i, em, .italic  {
+	font-style: italic;
+}
+
+b, strong {
+	font-weight: bold!important;
+}
+
+form {
+	input, select {
+		display: block;
+		width: 100%;
+		border: 1px solid rgba(0,0,0,.4);
+		border-radius: .25rem;
+		font-size: 1rem;
+		padding: .5rem .75rem;
+	}
+}
