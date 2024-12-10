@@ -1011,6 +1011,14 @@ class ListingFormManager {
               genreOption.checked = true;
             }
           }
+          // ensemble size
+          for (let iterator = 0; iterator < data.ensemble_size.length; iterator++) {
+            let size = data.ensemble_size[iterator];
+            let sizeOption = document.getElementById(`ensemble-size-${this.helper.convertStringToSlug(size)}`);
+            if (sizeOption) {
+              sizeOption.checked = true;
+            }
+          }
           // verified venues
           document.getElementById('verified-venues').value = data.venues_played_verified; // set hidden venues played verified input
           return this.getVenuesBatch(data.venues_played_verified);

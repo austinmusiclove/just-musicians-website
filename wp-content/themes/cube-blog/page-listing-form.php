@@ -67,8 +67,8 @@ get_header();
                                 'ensemble_size' => $ensemble_size,
                                 'venues_played_verified' => $verified_venues,
                                 'venues_played_unverified_strings' => $venues_strings,
-                                'draw' => sanitize_text_field($_POST['draw']),
-                                'email' => sanitize_text_field($_POST['email']),
+                                //'draw' => sanitize_text_field($_POST['draw']),
+                                'email' => sanitize_text_field($_POST['listing-email']),
                                 'phone' => sanitize_text_field($_POST['phone']),
                                 'website' => sanitize_text_field($_POST['website']),
                                 'instagram_handle' => $instagram_handle,
@@ -121,7 +121,8 @@ get_header();
                         // Display the form
                         ?>
                         <h1>Live Musician Listing Submission Form</h1>
-                        <p>Just Musicians is accepting submissions to be listed in the Just Musicians directory, a free to use live music booking platform. On the platform your listing will be searchable by talent buyers and when they find you they will be able to contact you directly without either party having to pay a fee. The mission of the platform is to make live music booking easier for both talent and talent buyers, break down barriers to entry for new artists, and to foster fairness in the live music industry. After submitting this form, your listing will be reviewed. Approved listings will be included in the launch of the directory.</p>
+                        <p>Just Musicians is accepting submissions to be listed in the Just Musicians directory, a free to use live music booking platform. Talent buyers will be able to find you and reach out to you directly through your available contact methods. No transaction fees, no pay per lead, no middle man, just musicians.</p>
+                        <p>The mission of the platform is to make live music booking easier for both talent and talent buyers, break down barriers to entry for new artists, and to foster fairness in the live music industry. After submitting this form, your listing will be reviewed. Approved listings will be included in the launch of the directory.</p>
                         <form class="custom-form" method="post" action="" enctype="multipart/form-data">
                             <?php wp_nonce_field('listing-form-submission', 'lfs-nonce'); ?>
                             <!------------ Gig details ----------------->
@@ -133,7 +134,7 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Listing type -->
-                            <label for="listing-type">Listing Type</label><br>
+                            <label for="listing-type">Listing Type. If you do multiple things, you may submit multiple profiles.</label><br>
                             <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician"/>
                             <label class="button-label" for="musician">Musician</label>
                             <input class="button-input" value="Band" type="radio" name="listing-type" id="band"/>
@@ -146,15 +147,15 @@ get_header();
 
                             <div class="form-group">
                                 <!-- Performer Name -->
-                                <div><label for="performer-name">Name</label><br>
-                                <input required type="text" id="performer-name" name="performer-name" autocomplete="off"></div>
+                                <div><label for="performer-name">Performer or Band Name</label><br>
+                                <input required type="text" id="performer-name" name="performer-name" autocomplete="off" ></div>
 
                                 <!-- Description -->
-                                <div><label for="description">Description. Max len 30</label>
+                                <div><label for="description">30 Character Description. This will appear just below your name in your listing. </label>
                                 <span class="tooltip">
-                                    i<span class="tooltip-text"></span>
+                                    i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
                                 </span><br>
-                                <input type="text" id="description" name="description" maxlength="30"></div>
+                                <input type="text" id="description" name="description" maxlength="30" placeholder="5-piece Country Band"></div>
                             </div>
                             <div class="form-separator"></div>
 
@@ -162,7 +163,7 @@ get_header();
                                 <!-- City -->
                                 <div><label for="city">City</label>
                                 <span class="tooltip">
-                                    i<span class="tooltip-text"></span>
+                                    i<span class="tooltip-text">This would be where you consider yourself to be "based out of".</span>
                                 </span><br>
                                 <input type="text" id="city" name="city" ></div>
 
@@ -171,7 +172,10 @@ get_header();
                                 <input type="text" id="state" name="state"></div>
 
                                 <!-- Zip Code -->
-                                <div><label for="zip-code">Zip Code</label><br>
+                                <div><label for="zip-code">Zip Code</label>
+                                <span class="tooltip">
+                                    i<span class="tooltip-text">This will be used to help match buyers with musicians who are broadly geographically near by.</span>
+                                </span><br>
                                 <input type="number" id="zip-code" name="zip-code" min=0 ></div>
                             </div>
                             <div class="form-separator"></div>
@@ -218,7 +222,7 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Ensemble Size -->
-                            <label for="ensemble-size">Ensemble Size. Check all that apply.</label><br>
+                            <label for="ensemble-size">How many performers in your group? If you perform with different ensemble sizes, check all that apply.</label><br>
                             <input class="button-input" value="1" type="checkbox" name="ensemble_size[]" id="ensemble-size-1"/>
                             <label class="button-label" for="ensemble-size-1">1</label>
                             <input class="button-input" value="2" type="checkbox" name="ensemble_size[]" id="ensemble-size-2"/>
@@ -242,7 +246,11 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Other genres and descriptors (tag taxonomy) -->
-                            <label for="tags">Tags</label><br>
+                            <label for="tags">Keywords</label>
+                            <span class="tooltip">
+                                i<span class="tooltip-text">Type a keyword and press enter to add it</span>
+                            </span><br>
+                            <div>Enter any key words that you would want to appear in search results for. i.e. wedding band, cover band etc.</div>
                             <div class="error-container" id="tag-input-error"></div><br>
                             <div id="selected-tags"></div>
                             <input type="text" id="tags-input"/>
@@ -250,7 +258,11 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Venues Played -->
-                            <label for="venues">Venues</label><br>
+                            <label for="venues">Venues</label>
+                            <span class="tooltip">
+                                i<span class="tooltip-text">Type a venue name and press enter to add it</span>
+                            </span><br>
+                            <div>Enter any venues you have played that you would like to be listed on your profile</div>
                             <div class="error-container" id="venue-input-error"></div><br>
                             <div id="selected-venues"></div>
                             <input type="text" id="venues-input"/>
@@ -258,9 +270,11 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Draw -->
-                            <label for="draw">Draw</label><br>
+                            <!--
+                            <label for="draw"></label><br>
                             <textarea id="draw" name="draw"></textarea><br><br>
                             <div class="form-separator"></div>
+                            -->
 
                             <!------------ Contact and Links ----------------->
                             <hr>
@@ -283,7 +297,7 @@ get_header();
                                 <input type="hidden" id="instagram-url" name="instagram-url"></div>
                                 <!-- Tiktok -->
                                 <div><label for="tiktok-handle">Tiktok Handle</label><br>
-                                <input type="text" id="tiktok-handle" name="tiktok-handle">
+                                <input type="text" id="tiktok-handle" name="tiktok-handle" pattern="^[a-zA-Z0-9_.]+$" title="Handle can only contain letters, numbers, underscores, and periods. No @ sign.">
                                 <input type="hidden" id="tiktok-url" name="tiktok-url"></div>
                                 <!-- X -->
                                 <div><label for="x-handle">X Handle</label><br>
@@ -321,11 +335,13 @@ get_header();
                             <p></p>
                             <!-- Thumbnail -->
                             <label for="thumbnail">Thumbnail</label><br>
+                            <div>This is your main thumbnail image. It's the first thing people will see as they are scrolling listings.</div><br>
                             <input id="thumbnail" name="thumbnail" type="file" accept="image/*">
                             <div class="form-separator"></div>
 
                             <!-- Youtube links -->
-                            <label for="media">Media</label><br>
+                            <label for="media">Youtube Video Links</label><br>
+                            <div>This is your chance to show your stuff to potential talent buyers. Inlude as many youtube links as you wish.</div>
                             <div class="error-container" id="media-input-error"></div><br>
                             <input type="text" id="media-input"/>
                             <div class="media-container" id="selected-media"></div>

@@ -76,8 +76,14 @@ class ListingFormManager {
                     // genres
                     for (let iterator = 0; iterator < data.macro_genres.length; iterator++) {
                         let genre = data.macro_genres[iterator];
-                        let genreOption = document.getElementById(this.helper.convertStringToSlug(genre))
+                        let genreOption = document.getElementById(this.helper.convertStringToSlug(genre));
                         if (genreOption) { genreOption.checked = true; }
+                    }
+                    // ensemble size
+                    for (let iterator = 0; iterator < data.ensemble_size.length; iterator++) {
+                        let size = data.ensemble_size[iterator];
+                        let sizeOption = document.getElementById(`ensemble-size-${this.helper.convertStringToSlug(size)}`);
+                        if (sizeOption) { sizeOption.checked = true; }
                     }
                     // verified venues
                     document.getElementById('verified-venues').value = data.venues_played_verified; // set hidden venues played verified input
