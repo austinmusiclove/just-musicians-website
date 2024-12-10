@@ -155,7 +155,7 @@ get_header();
                                 <span class="tooltip">
                                     i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
                                 </span><br>
-                                <input type="text" id="description" name="description" maxlength="30" placeholder="5-piece Country Band"></div>
+                                <input required type="text" id="description" name="description" maxlength="30" placeholder="5-piece Country Band"></div>
                             </div>
                             <div class="form-separator"></div>
 
@@ -165,18 +165,18 @@ get_header();
                                 <span class="tooltip">
                                     i<span class="tooltip-text">This would be where you consider yourself to be "based out of".</span>
                                 </span><br>
-                                <input type="text" id="city" name="city" ></div>
+                                <input required type="text" id="city" name="city" ></div>
 
                                 <!-- State -->
                                 <div><label for="state">State</label><br>
-                                <input type="text" id="state" name="state"></div>
+                                <input required type="text" id="state" name="state"></div>
 
                                 <!-- Zip Code -->
                                 <div><label for="zip-code">Zip Code</label>
                                 <span class="tooltip">
                                     i<span class="tooltip-text">This will be used to help match buyers with musicians who are broadly geographically near by.</span>
                                 </span><br>
-                                <input type="number" id="zip-code" name="zip-code" min=0 ></div>
+                                <input required type="text" id="zip-code" name="zip-code" pattern="^\d{5}(-\d{4})?$" title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)."></div>
                             </div>
                             <div class="form-separator"></div>
 
@@ -336,7 +336,7 @@ get_header();
                             <!-- Thumbnail -->
                             <label for="thumbnail">Thumbnail</label><br>
                             <div>This is your main thumbnail image. It's the first thing people will see as they are scrolling listings.</div><br>
-                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*">
+                            <input required id="thumbnail" name="thumbnail" type="file" accept="image/*">
                             <div class="form-separator"></div>
 
                             <!-- Youtube links -->
