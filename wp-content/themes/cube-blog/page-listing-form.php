@@ -74,12 +74,6 @@ get_header();
                         $unofficial_tags = array_filter($all_tags, 'is_not_tag_term');
                         $tags = array_filter($all_tags, 'is_tag_term');
                         $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
-                        echo "<div style='display:none'>Genres input: " . implode(', ', $_POST['genres']) . "</div>";
-                        echo "<div style='display:none'>Tags input: " . implode(', ', $_POST['tags']) . "</div>";
-                        echo "<div style='display:none'>macro genres: " . implode(', ', $macro_genres) . "</div>";
-                        echo "<div style='display:none'>all tags: " . implode(', ', $all_tags) . "</div>";
-                        echo "<div style='display:none'>unofficial tags: " . implode(', ', $unofficial_tags) . "</div>";
-                        echo "<div style='display:none'>tags: " . implode(', ', $tags) . "</div>";
                         $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_url', $_POST['media'])) : array();
 
                         $listing_post = array(
@@ -98,7 +92,7 @@ get_header();
                                 'venues_played_verified' => $verified_venues,
                                 'venues_played_unverified_strings' => $venues_strings,
                                 //'draw' => sanitize_text_field($_POST['draw']),
-                                'draw' => implode(', ', $_POST['genres']),
+                                'draw' => 'Genres input: ' . implode(', ', $_POST['genres']) . ' | ' . 'Tags input: ' . implode(', ', $_POST['tags']) . ' | ' . 'macro genres: ' . implode(', ', $macro_genres) . ' | ' . 'all tags: ' . implode(', ', $all_tags) . ' | ' .'unofficial tags: ' . implode(', ', $unofficial_tags) . ' | ' . 'tags: ' . implode(', ', $tags),
                                 'email' => sanitize_text_field($_POST['listing-email']),
                                 'phone' => sanitize_text_field($_POST['phone']),
                                 'website' => sanitize_url($_POST['website']),
