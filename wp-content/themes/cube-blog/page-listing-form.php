@@ -308,7 +308,7 @@ get_header();
                             <div class="form-group">
                                 <!-- Email -->
                                 <div><label for="listing-email">Email</label><br>
-                                <input type="email" id="listing-email" name="listing-email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="example@example.com"></div>
+                                <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com"></div>
                                 <!-- Phone -->
                                 <div><label for="phone">Phone</label><br>
                                 <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" title="Format: (555) 555-5555"></div>
@@ -319,7 +319,7 @@ get_header();
                             <div class="form-group">
                                 <!-- Instagram -->
                                 <div><label for="instagram-handle">Instagram Handle</label><br>
-                                <input type="text" id="instagram-handle" name="instagram-handle" pattern="^[a-zA-Z0-9_\.]{1,30}$" title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign.">
+                                <input type="text" id="instagram-handle" name="instagram-handle" pattern="^[A-Za-zA-Z0-9_\.]{1,30}$" title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign.">
                                 <input type="hidden" id="instagram-url" name="instagram-url"></div>
                                 <!-- Tiktok -->
                                 <div><label for="tiktok-handle">Tiktok Handle</label><br>
@@ -367,7 +367,7 @@ get_header();
 
                             <!-- Youtube links -->
                             <label for="media">Youtube Video Links</label><br>
-                            <div>This is your chance to show your stuff to potential talent buyers. Paste a link into the box and hit enter. Add as many as you wish.</div>
+                            <div>This is your chance to show your stuff to potential talent buyers. Paste a Youtube video link into the box and hit enter. Add as many as you wish. Listings with video will rank higher in search than those with only images.</div>
                             <div class="error-container" id="media-input-error"></div><br>
                             <input type="text" id="media-input"/>
                             <div class="media-container" id="selected-media"></div>
