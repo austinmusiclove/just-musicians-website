@@ -160,7 +160,7 @@ get_header();
                             <div class="form-separator"></div>
 
                             <!-- Listing type -->
-                            <label for="listing-type">Listing Type. If you do multiple things, you may submit multiple profiles.</label><br>
+                            <label for="listing-type">Listing Type. Chose the option that best describes your act. If you do multiple things, you may submit multiple listings.</label><br>
                             <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician"/>
                             <label class="button-label" for="musician">Musician</label>
                             <input class="button-input" value="Band" type="radio" name="listing-type" id="band"/>
