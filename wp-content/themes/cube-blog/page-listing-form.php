@@ -92,7 +92,6 @@ get_header();
                                 'venues_played_verified' => $verified_venues,
                                 'venues_played_unverified_strings' => $venues_strings,
                                 //'draw' => sanitize_text_field($_POST['draw']),
-                                'draw' => 'Genres input: ' . implode(', ', $_POST['genres']) . ' | ' . 'Tags input: ' . implode(', ', $_POST['tags']) . ' | ' . 'macro genres: ' . implode(', ', $macro_genres) . ' | ' . 'all tags: ' . implode(', ', $all_tags) . ' | ' .'unofficial tags: ' . implode(', ', $unofficial_tags) . ' | ' . 'tags: ' . implode(', ', $tags),
                                 'email' => sanitize_text_field($_POST['listing-email']),
                                 'phone' => sanitize_text_field($_POST['phone']),
                                 'website' => sanitize_url($_POST['website']),
@@ -124,6 +123,10 @@ get_header();
                         if (is_wp_error($post_id)) {
                             echo '<h2>There was an error saving your submission. Please try again or contact the adminstrator at john@justmusicians.com.</h2>';
                         } else {
+                            // Set taxonomy
+                            wp_set_post_terms($post_id, $macro_genres, 'genre');
+                            wp_set_post_terms($post_id, $tags, 'tag');
+
                             // Add featured image and don't show error if thumbnail fails
                             $thumbnail_upload = wp_handle_upload($_FILES['thumbnail'], ['test_form' => false]);
                             if (isset($thumbnail_upload['file'])) {
