@@ -29,8 +29,7 @@ class ListingFormManager {
         this.mediaErrorContainer = document.getElementById('media-input-error');
     }
     _setupEventListeners() {
-        // interrupt submit
-        // check urls are not 404s
+        // interrupt submit to check urls are not 404s
     }
     _setupComponents() {
         this.venueTagsInput = this.tagInputFactory.create('venues', this.venueTextInput, this.selectedVenuesContainer, 'tag-item', 'tag-delete-button', this.venueErrorContainer, 'error-message');

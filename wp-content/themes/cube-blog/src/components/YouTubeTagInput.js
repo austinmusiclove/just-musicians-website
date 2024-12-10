@@ -8,10 +8,21 @@ class YouTubeTagInput extends TagInput {
         this._setupComponents();
         this.draggedItem = null;
     }
+    _setupListeners() {
+        super._setupListeners();
+        this.textInput.addEventListener('paste', this.handleTagInputPaste.bind(this));
+    }
     _setupComponents() {
         this.dragSortList = this.dragSortListFactory.create(this.tagContainer, this.tagClass);
     }
 
+    handleTagInputPaste(evnt) {
+        evnt.preventDefault();
+        let clipboardData = evnt.clipboardData || window.clipboardData;
+        let pastedText = clipboardData.getData('text');
+        this.textInput.value = pastedText;
+        this.addTag(pastedText);
+    }
     checkTagErrors(tagName, tagSlug) {
         if (tagName == '') { return 'Please enter a valid youtube video link'; }
         if (!this.helper.isValidUrl(tagName)) { return 'Invalid URL'; }
@@ -31,6 +42,7 @@ class YouTubeTagInput extends TagInput {
                     <div>${this.svgLibrary.getDragPointSvg()}</div>
                 </div>
                 <div>
+                    <label name="${this.inputName}[]">${tagName}</label>
                     <input checked style="display:none;" value="${tagName}" type="checkbox" name="${this.inputName}[]" id="${tagSlug}"/>
                     <div style="display:block; height:200px;" id="${youtubeIframeId}"></div>
                 </div>

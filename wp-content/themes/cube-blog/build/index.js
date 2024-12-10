@@ -512,8 +512,19 @@ class YouTubeTagInput extends _TagInput__WEBPACK_IMPORTED_MODULE_0__["default"] 
     this._setupComponents();
     this.draggedItem = null;
   }
+  _setupListeners() {
+    super._setupListeners();
+    this.textInput.addEventListener('paste', this.handleTagInputPaste.bind(this));
+  }
   _setupComponents() {
     this.dragSortList = this.dragSortListFactory.create(this.tagContainer, this.tagClass);
+  }
+  handleTagInputPaste(evnt) {
+    evnt.preventDefault();
+    let clipboardData = evnt.clipboardData || window.clipboardData;
+    let pastedText = clipboardData.getData('text');
+    this.textInput.value = pastedText;
+    this.addTag(pastedText);
   }
   checkTagErrors(tagName, tagSlug) {
     if (tagName == '') {
@@ -542,6 +553,7 @@ class YouTubeTagInput extends _TagInput__WEBPACK_IMPORTED_MODULE_0__["default"] 
                     <div>${this.svgLibrary.getDragPointSvg()}</div>
                 </div>
                 <div>
+                    <label name="${this.inputName}[]">${tagName}</label>
                     <input checked style="display:none;" value="${tagName}" type="checkbox" name="${this.inputName}[]" id="${tagSlug}"/>
                     <div style="display:block; height:200px;" id="${youtubeIframeId}"></div>
                 </div>
@@ -950,8 +962,7 @@ class ListingFormManager {
     this.mediaErrorContainer = document.getElementById('media-input-error');
   }
   _setupEventListeners() {
-    // interrupt submit
-    // check urls are not 404s
+    // interrupt submit to check urls are not 404s
   }
   _setupComponents() {
     this.venueTagsInput = this.tagInputFactory.create('venues', this.venueTextInput, this.selectedVenuesContainer, 'tag-item', 'tag-delete-button', this.venueErrorContainer, 'error-message');

@@ -65,7 +65,7 @@ get_header();
                         $tiktok_url = !empty($tiktok_handle) ? $tiktok_url_prefix . $tiktok_handle : '';
                         $x_handle = preg_replace('/^@/', '', sanitize_text_field($_POST['x-handle']));
                         $x_url = !empty($x_handle) ? $x_url_prefix . $x_handle : '';
-                        $spotify_artist_url = sanitize_text_field($_POST['spotify-artist-url']);
+                        $spotify_artist_url = sanitize_url($_POST['spotify-artist-url']);
                         $spotify_artist_id = get_spotify_artist_id_from_url($spotify_artist_url);
                         $tag_terms = array_map(function ($item) { return $item->name; }, get_terms(array( 'taxonomy' => 'tag', 'hide_empty' => false)));
                         function is_tag_term($term) { global $tag_terms; return in_array($term, $tag_terms, true); }
@@ -74,7 +74,7 @@ get_header();
                         $unofficial_tags = array_filter($all_tags, 'is_not_tag_term');
                         $tags = array_filter($all_tags, 'is_tag_term');
                         $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
-                        $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_text_field', $_POST['media'])) : array();
+                        $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_url', $_POST['media'])) : array();
 
                         $listing_post = array(
                             'post_title'   => $performer_name,
@@ -94,7 +94,7 @@ get_header();
                                 //'draw' => sanitize_text_field($_POST['draw']),
                                 'email' => sanitize_text_field($_POST['listing-email']),
                                 'phone' => sanitize_text_field($_POST['phone']),
-                                'website' => sanitize_text_field($_POST['website']),
+                                'website' => sanitize_url($_POST['website']),
                                 'instagram_handle' => $instagram_handle,
                                 'instagram_url' => $instagram_url,
                                 // instagram is private
@@ -102,13 +102,13 @@ get_header();
                                 'tiktok_url' => $tiktok_url,
                                 'x_handle' => $x_handle,
                                 'x_url' => $x_url,
-                                'facebook_url' => sanitize_text_field($_POST['facebook-url']),
-                                'youtube_url' => sanitize_text_field($_POST['youtube-url']),
-                                'bandcamp_url' => sanitize_text_field($_POST['bandcamp-url']),
+                                'facebook_url' => sanitize_url($_POST['facebook-url']),
+                                'youtube_url' => sanitize_url($_POST['youtube-url']),
+                                'bandcamp_url' => sanitize_url($_POST['bandcamp-url']),
                                 'spotify_artist_url' => $spotify_artist_url,
                                 'spotify_artist_id' => $spotify_artist_id,
-                                'apple_music_artist_url' => sanitize_text_field($_POST['apple-music-url']),
-                                'soundcloud_url' => sanitize_text_field($_POST['soundcloud-url']),
+                                'apple_music_artist_url' => sanitize_url($_POST['apple-music-url']),
+                                'soundcloud_url' => sanitize_url($_POST['soundcloud-url']),
                                 'youtube_video_urls' => $youtube_video_urls,
                                 'unofficial_tags' => $unofficial_tags,
                             ),
@@ -308,13 +308,13 @@ get_header();
                             <div class="form-group">
                                 <!-- Email -->
                                 <div><label for="listing-email">Email</label><br>
-                                <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com"></div>
+                                <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com" placeholder="example@example.com"></div>
                                 <!-- Phone -->
                                 <div><label for="phone">Phone</label><br>
                                 <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" title="Format: (555) 555-5555"></div>
                                 <!-- Website -->
                                 <div><label for="website">Website</label><br>
-                                <input type="url" id="website" name="website" min=0 ></div>
+                                <input type="url" id="website" name="website" placeholder="https://" ></div>
                             </div>
                             <div class="form-group">
                                 <!-- Instagram -->
@@ -367,7 +367,7 @@ get_header();
 
                             <!-- Youtube links -->
                             <label for="media">Youtube Video Links</label><br>
-                            <div>This is your chance to show your stuff to potential talent buyers. Paste a Youtube video link into the box and hit enter. Add as many as you wish. Listings with video will rank higher in search than those with only images.</div>
+                            <div>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</div>
                             <div class="error-container" id="media-input-error"></div><br>
                             <input type="text" id="media-input"/>
                             <div class="media-container" id="selected-media"></div>
