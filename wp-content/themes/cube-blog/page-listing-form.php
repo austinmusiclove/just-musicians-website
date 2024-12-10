@@ -74,6 +74,12 @@ get_header();
                         $unofficial_tags = array_filter($all_tags, 'is_not_tag_term');
                         $tags = array_filter($all_tags, 'is_tag_term');
                         $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
+                        echo "<div style='display:none'>Genres input: " . implode(', ', $_POST['genres']) . "</div>";
+                        echo "<div style='display:none'>Tags input: " . implode(', ', $_POST['tags']) . "</div>";
+                        echo "<div style='display:none'>macro genres: " . implode(', ', $macro_genres) . "</div>";
+                        echo "<div style='display:none'>all tags: " . implode(', ', $all_tags) . "</div>";
+                        echo "<div style='display:none'>unofficial tags: " . implode(', ', $unofficial_tags) . "</div>";
+                        echo "<div style='display:none'>tags: " . implode(', ', $tags) . "</div>";
                         $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_url', $_POST['media'])) : array();
 
                         $listing_post = array(
@@ -92,6 +98,7 @@ get_header();
                                 'venues_played_verified' => $verified_venues,
                                 'venues_played_unverified_strings' => $venues_strings,
                                 //'draw' => sanitize_text_field($_POST['draw']),
+                                'draw' => implode(', ', $_POST['genres']),
                                 'email' => sanitize_text_field($_POST['listing-email']),
                                 'phone' => sanitize_text_field($_POST['phone']),
                                 'website' => sanitize_url($_POST['website']),
@@ -161,7 +168,7 @@ get_header();
 
                             <!-- Listing type -->
                             <label for="listing-type">Listing Type. Chose the option that best describes your act. If you do multiple things, you may submit multiple listings.</label><br>
-                            <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician"/>
+                            <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician" required/>
                             <label class="button-label" for="musician">Musician</label>
                             <input class="button-input" value="Band" type="radio" name="listing-type" id="band"/>
                             <label class="button-label" for="band">Band</label>
