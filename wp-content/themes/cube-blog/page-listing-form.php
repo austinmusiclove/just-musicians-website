@@ -15,6 +15,34 @@ get_header();
 		<main id="main" class="site-main">
 			<div class="single-page-wrapper">
 				<?php
+                    function get_listing_content($listing_post) {
+                        return implode(" ", array(
+                            $listing_post['meta_input']['type'],
+                            $listing_post['meta_input']['name'],
+                            $listing_post['meta_input']['description'],
+                            $listing_post['meta_input']['city'],
+                            $listing_post['meta_input']['state'],
+                            $listing_post['meta_input']['zip_code'],
+                            $listing_post['meta_input']['bio'],
+                            implode(', ', $listing_post['meta_input']['venues_played_unverified_strings']),
+                            $listing_post['meta_input']['email'],
+                            $listing_post['meta_input']['phone'],
+                            $listing_post['meta_input']['website'],
+                            $listing_post['meta_input']['instagram_handle'],
+                            $listing_post['meta_input']['tiktok_handle'],
+                            $listing_post['meta_input']['x_handle'],
+                            $listing_post['meta_input']['facebook_url'],
+                            $listing_post['meta_input']['youtube_url'],
+                            $listing_post['meta_input']['bandcamp_url'],
+                            $listing_post['meta_input']['spotify_artist_url'],
+                            $listing_post['meta_input']['apple_music_artist_url'],
+                            $listing_post['meta_input']['soundcloud_url'],
+                            implode(', ', $listing_post['meta_input']['youtube_video_urls']),
+                            implode(', ', $listing_post['meta_input']['unofficial_tags']),
+                            implode(', ', $listing_post['tax_input']['tag']),
+                            implode(', ', $listing_post['tax_input']['genre']),
+                        ));
+                    }
                     function get_spotify_artist_id_from_url($spotify_artist_url) {
                         if (preg_match('/\/artist\/([A-Za-z0-9]{22})/', $spotify_artist_url, $matches)) {
                             return $matches[1];
@@ -45,17 +73,13 @@ get_header();
                         $all_tags = (isset($_POST['tags'])) ? array_filter(array_map('sanitize_text_field', $_POST['tags'])) : array();
                         $unofficial_tags = array_filter($all_tags, 'is_not_tag_term');
                         $tags = array_filter($all_tags, 'is_tag_term');
-                        $macro_genres = (isset($_POST['macro_genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
+                        $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
                         $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_text_field', $_POST['media'])) : array();
-
-                        // todo add all tags to content so the profile can be searched by this
-                        // todo add other things to content so the profile can be searched
 
                         $listing_post = array(
                             'post_title'   => $performer_name,
                             'post_status'  => 'pending',
                             'post_type'    => 'listing',
-                            //'post_content' => $_POST,
                             'meta_input'   => array(
                                 'type' => sanitize_text_field($_POST['listing-type']),
                                 'name' => $performer_name,
@@ -93,6 +117,8 @@ get_header();
                                 'genre' => $macro_genres,
                             ),
                         );
+                        $listing_post['post_content'] = get_listing_content($listing_post); // Set content to contain any information that the post should be searchable by
+
                         $post_id = wp_insert_post($listing_post);
                         if (is_wp_error($post_id)) {
                             echo '<h2>There was an error saving your submission. Please try again or contact the adminstrator at john@justmusicians.com.</h2>';
@@ -341,7 +367,7 @@ get_header();
 
                             <!-- Youtube links -->
                             <label for="media">Youtube Video Links</label><br>
-                            <div>This is your chance to show your stuff to potential talent buyers. Inlude as many youtube links as you wish.</div>
+                            <div>This is your chance to show your stuff to potential talent buyers. Paste a link into the box and hit enter. Add as many as you wish.</div>
                             <div class="error-container" id="media-input-error"></div><br>
                             <input type="text" id="media-input"/>
                             <div class="media-container" id="selected-media"></div>
