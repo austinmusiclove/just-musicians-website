@@ -27,7 +27,7 @@ class YouTubeTagInput extends TagInput {
         if (tagName == '') { return 'Please enter a valid youtube video link'; }
         if (!this.helper.isValidUrl(tagName)) { return 'Invalid URL'; }
         if (!this.youTubeHelper.isYoutubeUrl(tagName)) { return 'Only links from youtube.com are accepted.' }
-        if (!this.youTubeHelper.getVideoIdFromYoutubeUrl(tagName)) { return 'Invalid YouTube URL. No video id. Make sure this is a link to a video, not a channel or a short.' }
+        if (!this.youTubeHelper.getVideoIdFromYoutubeUrl(tagName)) { return 'Invalid YouTube URL. No video id. Make sure this is a direct link to a video, not a channel, short, or a shortened URL.' }
         return false;
     }
     addNewTag(tagName, tagSlug) {

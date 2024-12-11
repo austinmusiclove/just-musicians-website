@@ -5,7 +5,7 @@ class YouTubeHelper {
     isYoutubeUrl(url) {
         if (!this.helper.isValidUrl(url)) { return false; }
         let urlObject = new URL(url);
-        return urlObject.hostname.includes('youtube.com');
+        return urlObject.hostname.includes('youtube.com') || urlObject.hostname.includes('youtu.be');
     }
     getVideoIdFromYoutubeUrl(url) {
         if (!this.isYoutubeUrl(url)) { return false; }

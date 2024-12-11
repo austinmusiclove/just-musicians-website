@@ -537,7 +537,7 @@ class YouTubeTagInput extends _TagInput__WEBPACK_IMPORTED_MODULE_0__["default"] 
       return 'Only links from youtube.com are accepted.';
     }
     if (!this.youTubeHelper.getVideoIdFromYoutubeUrl(tagName)) {
-      return 'Invalid YouTube URL. No video id. Make sure this is a link to a video, not a channel or a short.';
+      return 'Invalid YouTube URL. No video id. Make sure this is a direct link to a video, not a channel, short, or a shortened URL.';
     }
     return false;
   }
@@ -663,7 +663,7 @@ class YouTubeHelper {
       return false;
     }
     let urlObject = new URL(url);
-    return urlObject.hostname.includes('youtube.com');
+    return urlObject.hostname.includes('youtube.com') || urlObject.hostname.includes('youtu.be');
   }
   getVideoIdFromYoutubeUrl(url) {
     if (!this.isYoutubeUrl(url)) {
