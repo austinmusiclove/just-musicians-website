@@ -83,6 +83,8 @@ get_header();
                             'meta_input'   => array(
                                 'type' => sanitize_text_field($_POST['listing-type']),
                                 'name' => $performer_name,
+                                'artist_uuid' => sanitize_text_field($_POST['artist-uuid']),
+                                'artist_post' => sanitize_text_field($_POST['artist-post-id']),
                                 'description' => sanitize_text_field($_POST['description']),
                                 'city' => sanitize_text_field($_POST['city']),
                                 'state' => sanitize_text_field($_POST['state']),
@@ -158,7 +160,7 @@ get_header();
                             <!------------ Gig details ----------------->
                             <hr>
                             <h2>Listing Details</h2>
-                            <input type="hidden" id="artist_uuid" name="artist_uuid" value="<?php echo $_GET['aid']; ?>">
+                            <input type="hidden" id="artist-uuid" name="artist-uuid" value="<?php echo $_GET['aid']; ?>">
                             <input type="hidden" id="artist-post-id" name="artist-post-id">
                             <input type="hidden" id="verified-venues" name="verified-venues">
                             <div class="form-separator"></div>

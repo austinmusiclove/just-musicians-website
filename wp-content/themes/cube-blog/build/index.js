@@ -1032,7 +1032,7 @@ class ListingFormManager {
     });
   }
   _setupElements() {
-    this.artistIdInput = document.getElementById('artist_uuid');
+    this.artistIdInput = document.getElementById('artist-uuid');
     this.phoneInputElement = document.getElementById('phone');
     this.venueTextInput = document.getElementById('venues-input');
     this.venueOptions = document.getElementById('venue-options');
