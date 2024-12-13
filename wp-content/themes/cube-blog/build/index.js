@@ -2,6 +2,90 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/CroppableImageInput.js":
+/*!***********************************************!*\
+  !*** ./src/components/CroppableImageInput.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class CroppableImageInput {
+  constructor(imageInput, croppedImageInput, imageDisplay) {
+    this.cropper = null;
+    this.imageInput = imageInput;
+    this.croppedImageInput = croppedImageInput;
+    this.imageDisplay = imageDisplay;
+    this._setupListeners();
+  }
+  _setupListeners() {
+    this.imageInput.addEventListener('change', this.handleImageChange.bind(this));
+  }
+  handleImageChange(evnt) {
+    const files = evnt.target.files;
+    if (files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        this.imageDisplay.src = e.target.result;
+        this.imageDisplay.style.display = "block";
+        if (this.cropper) this.cropper.destroy(); // Destroy existing cropper if it exists
+
+        // Initialize Cropper.js with 4:3 aspect ratio
+        this.cropper = new Cropper(this.imageDisplay, {
+          aspectRatio: 4 / 3,
+          viewMode: 1,
+          cropend: this.handleCropEnd.bind(this)
+        });
+      }.bind(this);
+      reader.readAsDataURL(files[0]);
+    }
+  }
+
+  // Set the cropped image as the value of the cropped file input
+  handleCropEnd() {
+    if (this.cropper) {
+      const croppedCanvas = this.cropper.getCroppedCanvas();
+      croppedCanvas.toBlob(blob => {
+        if (blob) {
+          const file = new File([blob], "cropped-image.png", {
+            type: "image/png"
+          });
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          this.croppedImageInput.files = dataTransfer.files;
+        }
+      }, "image/png");
+    }
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CroppableImageInput);
+
+/***/ }),
+
+/***/ "./src/components/CroppableImageInputFactory.js":
+/*!******************************************************!*\
+  !*** ./src/components/CroppableImageInputFactory.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CroppableImageInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CroppableImageInput */ "./src/components/CroppableImageInput.js");
+
+class CroppableImageInputFactory {
+  constructor() {}
+  create(imageInput, croppedImageInput, imageDisplay) {
+    return new _CroppableImageInput__WEBPACK_IMPORTED_MODULE_0__["default"](imageInput, croppedImageInput, imageDisplay);
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CroppableImageInputFactory);
+
+/***/ }),
+
 /***/ "./src/components/DragSortList.js":
 /*!****************************************!*\
   !*** ./src/components/DragSortList.js ***!
@@ -934,11 +1018,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 class ListingFormManager {
-  constructor(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory) {
+  constructor(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory, croppableImageInputFactory) {
     this.helper = helper;
     this.tagInputFactory = tagInputFactory;
     this.textInputOptionDropdownFactory = textInputOptionDropdownFactory;
     this.phoneInputFactory = phoneInputFactory;
+    this.croppableImageInputFactory = croppableImageInputFactory;
     document.addEventListener('DOMContentLoaded', () => {
       this._setupElements();
       this._setupEventListeners();
@@ -959,6 +1044,9 @@ class ListingFormManager {
     this.tagErrorContainer = document.getElementById('tag-input-error');
     this.mediaTextInput = document.getElementById('media-input');
     this.selectedMediaContainer = document.getElementById('selected-media');
+    this.thumbnailInput = document.getElementById('thumbnail');
+    this.croppedThumbnailInput = document.getElementById('cropped-thumbnail');
+    this.thumbnailDisplay = document.getElementById('thumbnail-display');
     this.mediaErrorContainer = document.getElementById('media-input-error');
   }
   _setupEventListeners() {
@@ -982,6 +1070,7 @@ class ListingFormManager {
     }
     this.tagInputOptionDropdown = this.textInputOptionDropdownFactory.create(this.tagTextInput, this.tagOptions, getTags, 'term_id', 'name', addTag.bind(this));
     this.phoneInput = this.phoneInputFactory.create(this.phoneInputElement);
+    this.croppableImageInput = this.croppableImageInputFactory.create(this.thumbnailInput, this.croppedThumbnailInput, this.thumbnailDisplay);
     this.mediaTagsInput = this.tagInputFactory.create('media', this.mediaTextInput, this.selectedMediaContainer, 'media-tag-item', 'media-tag-delete-button', this.mediaErrorContainer, 'error-message', 'youtube');
   }
   preFill() {
@@ -6418,9 +6507,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TextInputOptionDropdownFactory */ "./src/components/TextInputOptionDropdownFactory.js");
 /* harmony import */ var _components_StarRatingInputFactory__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/StarRatingInputFactory */ "./src/components/StarRatingInputFactory.js");
 /* harmony import */ var _components_PhoneInputFactory__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/PhoneInputFactory */ "./src/components/PhoneInputFactory.js");
-/* harmony import */ var _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./libraries/Helper.js */ "./src/libraries/Helper.js");
-/* harmony import */ var _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./libraries/YouTubeHelper.js */ "./src/libraries/YouTubeHelper.js");
-/* harmony import */ var _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./libraries/SvgLibrary.js */ "./src/libraries/SvgLibrary.js");
+/* harmony import */ var _components_CroppableImageInputFactory__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/CroppableImageInputFactory */ "./src/components/CroppableImageInputFactory.js");
+/* harmony import */ var _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./libraries/Helper.js */ "./src/libraries/Helper.js");
+/* harmony import */ var _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./libraries/YouTubeHelper.js */ "./src/libraries/YouTubeHelper.js");
+/* harmony import */ var _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./libraries/SvgLibrary.js */ "./src/libraries/SvgLibrary.js");
 // Import modules
 // Modules are built specifically for a page or set of pages
 // Modules can contain references to HTML ids that are hard coded in the page
@@ -6446,6 +6536,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 // Import Libraries
 // Libraries contain helper functions and reusable HTML snippets
 
@@ -6458,20 +6549,21 @@ __webpack_require__.r(__webpack_exports__);
 
 // Listing Form
 if (siteData.url_path.includes('listing-form') && siteData.request_method == 'GET') {
-  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
-  const youTubeHelper = new _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_15__["default"](helper);
-  const svgLibrary = new _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_16__["default"]();
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_15__["default"]();
+  const youTubeHelper = new _libraries_YouTubeHelper_js__WEBPACK_IMPORTED_MODULE_16__["default"](helper);
+  const svgLibrary = new _libraries_SvgLibrary_js__WEBPACK_IMPORTED_MODULE_17__["default"]();
   const errorDisplayFactory = new _components_ErrorDisplayFactory__WEBPACK_IMPORTED_MODULE_8__["default"](helper);
   const dragSortListFactory = new _components_DragSortListFactory__WEBPACK_IMPORTED_MODULE_10__["default"]();
   const tagInputFactory = new _components_TagInputFactory__WEBPACK_IMPORTED_MODULE_9__["default"](helper, youTubeHelper, svgLibrary, errorDisplayFactory, dragSortListFactory);
   const textInputOptionDropdownFactory = new _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__["default"](helper);
   const phoneInputFactory = new _components_PhoneInputFactory__WEBPACK_IMPORTED_MODULE_13__["default"]();
-  const listingFormManager = new _modules_ListingFormManager__WEBPACK_IMPORTED_MODULE_4__["default"](helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory);
+  const croppableImageInputFactory = new _components_CroppableImageInputFactory__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const listingFormManager = new _modules_ListingFormManager__WEBPACK_IMPORTED_MODULE_4__["default"](helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory, croppableImageInputFactory);
 }
 
 // Venue Review Form
 else if (siteData.url_path.includes('venue-review-form') && siteData.request_method == 'GET') {
-  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_15__["default"]();
   const textInputOptionDropdownFactory = new _components_TextInputOptionDropdownFactory__WEBPACK_IMPORTED_MODULE_11__["default"](helper);
   const starRatingInputFactory = new _components_StarRatingInputFactory__WEBPACK_IMPORTED_MODULE_12__["default"]();
   const venueReviewFormManager = new _modules_VenueReviewFormManager__WEBPACK_IMPORTED_MODULE_3__["default"](helper, textInputOptionDropdownFactory, starRatingInputFactory);
@@ -6488,7 +6580,7 @@ else if (siteData.url_path.includes('venues')) {
 
 // User Registration
 else if (siteData.url_path.includes('sign-up')) {
-  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_14__["default"]();
+  const helper = new _libraries_Helper_js__WEBPACK_IMPORTED_MODULE_15__["default"]();
   const errorDisplayFactory = new _components_ErrorDisplayFactory__WEBPACK_IMPORTED_MODULE_8__["default"](helper);
   const signUpManager = new _modules_SignUpManager__WEBPACK_IMPORTED_MODULE_6__["default"](errorDisplayFactory);
 }

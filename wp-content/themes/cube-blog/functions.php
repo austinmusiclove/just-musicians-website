@@ -298,6 +298,9 @@ function cube_blog_scripts() {
 	wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js');
     // Youtube iFrame API
 	wp_enqueue_script( 'google-iframe-api', 'https://www.youtube.com/iframe_api');
+    // Cropper.js
+	wp_enqueue_style( 'cropper-css', 'https://unpkg.com/cropperjs/dist/cropper.min.css');
+	wp_enqueue_script( 'cropper-js', 'https://unpkg.com/cropperjs');
 
     wp_localize_script('jm-custom-js', 'siteData', array(
         'root_url' => get_site_url(),

@@ -22,6 +22,7 @@ import DragSortListFactory from "./components/DragSortListFactory";
 import TextInputOptionDropdownFactory from "./components/TextInputOptionDropdownFactory";
 import StarRatingInputFactory from "./components/StarRatingInputFactory";
 import PhoneInputFactory from "./components/PhoneInputFactory";
+import CroppableImageInputFactory from "./components/CroppableImageInputFactory";
 
 // Import Libraries
 // Libraries contain helper functions and reusable HTML snippets
@@ -44,7 +45,8 @@ if (siteData.url_path.includes('listing-form') && siteData.request_method == 'GE
     const tagInputFactory = new TagInputFactory(helper, youTubeHelper, svgLibrary, errorDisplayFactory, dragSortListFactory);
     const textInputOptionDropdownFactory = new TextInputOptionDropdownFactory(helper);
     const phoneInputFactory = new PhoneInputFactory();
-    const listingFormManager = new ListingFormManager(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory);
+    const croppableImageInputFactory = new CroppableImageInputFactory();
+    const listingFormManager = new ListingFormManager(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory, croppableImageInputFactory);
 }
 
 // Venue Review Form

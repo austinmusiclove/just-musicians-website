@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 class ListingFormManager {
-    constructor(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory) {
+    constructor(helper, tagInputFactory, textInputOptionDropdownFactory, phoneInputFactory, croppableImageInputFactory) {
         this.helper = helper
         this.tagInputFactory = tagInputFactory;
         this.textInputOptionDropdownFactory = textInputOptionDropdownFactory;
         this.phoneInputFactory = phoneInputFactory;
+        this.croppableImageInputFactory = croppableImageInputFactory;
         document.addEventListener('DOMContentLoaded', () => {
             this._setupElements();
             this._setupEventListeners();
@@ -26,6 +27,9 @@ class ListingFormManager {
         this.tagErrorContainer = document.getElementById('tag-input-error');
         this.mediaTextInput = document.getElementById('media-input');
         this.selectedMediaContainer = document.getElementById('selected-media');
+        this.thumbnailInput = document.getElementById('thumbnail');
+        this.croppedThumbnailInput = document.getElementById('cropped-thumbnail');
+        this.thumbnailDisplay = document.getElementById('thumbnail-display');
         this.mediaErrorContainer = document.getElementById('media-input-error');
     }
     _setupEventListeners() {
@@ -41,6 +45,7 @@ class ListingFormManager {
         function addTag(termId, termName) { this.tagsInput.addTag(termName); }
         this.tagInputOptionDropdown = this.textInputOptionDropdownFactory.create(this.tagTextInput, this.tagOptions, getTags, 'term_id', 'name', addTag.bind(this));
         this.phoneInput = this.phoneInputFactory.create(this.phoneInputElement);
+        this.croppableImageInput = this.croppableImageInputFactory.create(this.thumbnailInput, this.croppedThumbnailInput, this.thumbnailDisplay);
         this.mediaTagsInput = this.tagInputFactory.create('media', this.mediaTextInput, this.selectedMediaContainer, 'media-tag-item', 'media-tag-delete-button', this.mediaErrorContainer, 'error-message', 'youtube');
     }
 

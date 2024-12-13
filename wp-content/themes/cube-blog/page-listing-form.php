@@ -128,7 +128,7 @@ get_header();
                             wp_set_post_terms($post_id, $tags, 'tag');
 
                             // Add featured image and don't show error if thumbnail fails
-                            $thumbnail_upload = wp_handle_upload($_FILES['thumbnail'], ['test_form' => false]);
+                            $thumbnail_upload = wp_handle_upload($_FILES['cropped-thumbnail'], ['test_form' => false]);
                             if (isset($thumbnail_upload['file'])) {
                                 // Set attachment data
                                 $attachment = array(
@@ -165,7 +165,7 @@ get_header();
 
                             <!-- Listing type -->
                             <label for="listing-type">Listing Type. Chose the option that best describes your act. If you do multiple things, you may submit multiple listings.</label><br>
-                            <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician" required/>
+                            <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician"/>
                             <label class="button-label" for="musician">Musician</label>
                             <input class="button-input" value="Band" type="radio" name="listing-type" id="band"/>
                             <label class="button-label" for="band">Band</label>
@@ -367,6 +367,10 @@ get_header();
                             <label for="thumbnail">Thumbnail</label><br>
                             <div>This is your main thumbnail image. It's the first thing people will see as they are scrolling listings.</div><br>
                             <input required id="thumbnail" name="thumbnail" type="file" accept="image/*">
+                            <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*">
+                            <div style="max-width: 500px; margin: 20px 0;">
+                                <img id="thumbnail-display" style="display: none; max-width: 100%;" />
+                            </div>
                             <div class="form-separator"></div>
 
                             <!-- Youtube links -->
