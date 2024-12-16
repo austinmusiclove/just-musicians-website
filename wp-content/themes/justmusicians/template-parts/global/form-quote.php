@@ -7,16 +7,10 @@
 
         <label for="what" class="hidden">What do you need?</label>
         <select id="what" name="what">
+            <option value="" disabled selected hidden>What do you need?</option>
             <option value="option1a">Option 1A</option>
             <option value="option1b">Option 1B</option>
             <option value="option1c">Option 1C</option>
-        </select>
-
-        <label for="when" class="hidden">When do you need it?</label>
-        <select id="when" name="when">
-            <option value="option2a">Option 2A</option>
-            <option value="option2b">Option 2B</option>
-            <option value="option2c">Option 2C</option>
         </select>
 
         <label for="zipcode" class="hidden">Enter zipcode</label>

@@ -16,15 +16,20 @@ get_header();
 
 <div class="container grid grid-cols-12 gap-12">
     <div class="col-span-3 border-r border-black/20 pr-8">
-        <div class="sticky top-24 pt-20">
+        <div class="sticky top-24 pt-20 pb-8">
 
-        <div class="flex items-center justify-between mb-12">
-            <h2 class="font-sun-motter text-25">Filter</h2>
-            <button class="underline opacity-40 hover:opacity-100 inline-block text-14">clear all</button>
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="font-sun-motter text-25">Filter</h2>
+                <button class="underline opacity-40 hover:opacity-100 inline-block text-14">clear all</button>
+            </div>
+            <div class="text-14 opacity-60">
+                Producer | Gospel Choir | Solo/Duo | Acoustic
+            </div>
         </div>
 
-            <?php 
-                echo get_template_part('template-parts/filters/tags', '', array(
+            <?php                 
+                echo get_template_part('template-parts/filters/elements/tags', '', array(
                     'title' => 'Genre',
                     'tag_1' => 'folk',
                     'tag_2' => 'indie rock',
@@ -32,7 +37,7 @@ get_header();
                     'tag_4' => 'psychedelic',
                     'see_all' => false
                 ));  
-                echo get_template_part('template-parts/filters/tags', '', array(
+                echo get_template_part('template-parts/filters/elements/tags', '', array(
                     'title' => 'Type',
                     'tag_1' => 'band',
                     'tag_2' => 'DJ',
@@ -40,7 +45,7 @@ get_header();
                     'tag_4' => 'solo/duo',
                     'see_all' => false
                 )); 
-                echo get_template_part('template-parts/filters/tags', '', array(
+                echo get_template_part('template-parts/filters/elements/tags', '', array(
                     'title' => 'Category',
                     'tag_1' => 'acoustic',
                     'tag_2' => 'cover band',
@@ -48,11 +53,22 @@ get_header();
                     'tag_4' => 'wedding band',
                     'see_all' => true
                 )); 
+                echo get_template_part('template-parts/filters/location', '', array()); 
             ?>
             
         </div>
     </div>
     <div class="col-span-6 py-4">
+        <div class="text-16 flex items-center gap-2 py-2">
+                <img id="info-sort" class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>" />
+                <div class="flex items-center gap-1.5">
+                Sort:
+                <span class="font-bold flex items-center">
+                    Default
+                    <img class="ml-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+                </span>
+            </div>
+        </div>
         <?php 
             echo get_template_part('template-parts/search/profile', '', array(
                 'name' => 'Chastity',

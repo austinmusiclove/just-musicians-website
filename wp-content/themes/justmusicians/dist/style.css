@@ -202,6 +202,17 @@ html {
 }
 
 /*Utility*/
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 1rem;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
 /*Overwrites*/
 .inherit-text-size > * {
   font-size: inherit !important;
