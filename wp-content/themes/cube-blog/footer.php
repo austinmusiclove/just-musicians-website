@@ -43,7 +43,7 @@
 		</nav><!-- #site-navigation -->
 		<div class="site-info">
 			<div class="container">
-                Copywright 2024 Just Musicians
+                Copywright 2025 Just Musicians
 			</div><!-- .container -->
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
