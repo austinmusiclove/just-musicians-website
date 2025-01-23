@@ -1,7 +1,7 @@
 <h3 class="font-sun-motter text-20 mb-3">Request a quote from a local musician</h3>
 <p class="text-16 text-brown-dark-1 leading-tight mb-6">Tell us about your business or occasion to receive quotes from up to three local musicians.</p>
 
-<form action="/submit-form" method="post">
+<form method="post">
 
     <fieldset class="flex flex-col gap-y-2 mb-6">
 
@@ -14,9 +14,12 @@
         </select>
 
         <label for="zipcode" class="hidden">Enter zipcode</label>
-        <input id="zipcode" name="zipcode" placeholder="Enter zip code" />
+        <input type="number" id="zipcode" name="zipcode" placeholder="Enter zip code" />
 
     </fieldset>
 
-    <button type="submit" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3">Get Started</button>
 </form>
+<!-- Moved outside of form element to prevent form submission -->
+<button data-trigger="quote" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3">Get Started</button>
+
+<?php echo get_template_part('template-parts/global/form-quote/popup', '', array()); ?> 

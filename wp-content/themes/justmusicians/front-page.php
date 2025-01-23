@@ -59,16 +59,7 @@ get_header();
         </div>
     </div>
     <div class="col-span-6 py-4">
-        <div class="text-16 flex items-center gap-2 py-2">
-                <img id="info-sort" class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>" />
-                <div class="flex items-center gap-1.5">
-                Sort:
-                <span class="font-bold flex items-center">
-                    Default
-                    <img class="ml-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
-                </span>
-            </div>
-        </div>
+        <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
         <?php 
             echo get_template_part('template-parts/search/profile', '', array(
                 'name' => 'Chastity',

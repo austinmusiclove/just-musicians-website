@@ -49,28 +49,13 @@
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow flex items-stretch">
             <div id="search" class="grow relative px-1 py-1">
               <input class="w-full h-full py-2 px-3" type="text" placeholder="Search" />
-              <div id="search-state-1" class="absolute top-full left-0 w-full px-4 py-4 bg-white hidden flex flex-col shadow-md rounded-sm">
-                <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
-                  Bands
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
-                  Solo/Duo
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
-                  DJs
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
-                  Wedding Music
-                </a>
-              </div>
+                <?php echo get_template_part('template-parts/search/search-state-1', '', array()); ?>
+                <?php echo get_template_part('template-parts/search/search-state-2', '', array()); ?>
             </div>  
             <div class="w-px bg-black/20 my-2"></div>
             <div class="grow relative px-1 py-1 flex items-center">
-              <input class="w-full h-full py-2 px-3" type="text" placeholder="Austin, Texas" />
+              <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
+              <input class="w-full h-full py-2 pr-3 pl-5" type="text" placeholder="Austin, Texas" />
             </div>
             <button class="flex cursor-pointer items-center px-2 py-2 hover:scale-105">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
