@@ -7,4 +7,42 @@
     border-width: 5px;
     border-style: solid;
     border-color: black transparent transparent transparent;
+}
+
+.pagination {
+  margin-bottom: 2rem;
+  .page-numbers {
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+    font-size: 1rem;
+    a, span {
+      height: 1.9rem;
+      width: 1.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #F1F1F1;
+      border-radius: .33rem;
+      &.current {
+        border: 0px;
+        background-color: #D29429;
+        color: #000000;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      &:hover {
+        opacity: .6;
+      }
+      &.next, &.prev {
+        width: fit-content;
+        padding: .5rem;
+        border: 0px;
+      }
+    }
   }
+}

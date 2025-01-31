@@ -9,13 +9,13 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package BarnRaiser
+ * @package JustMuscians
  */
 get_header();
 ?>
 
-<div class="container grid grid-cols-12 gap-12">
-    <div class="col-span-3 border-r border-black/20 pr-8">
+<div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
+    <div class="hidden md:block md:col-span-3 border-r border-black/20 pr-8">
         <div class="sticky top-24 pt-20 pb-8">
 
         <div class="mb-8">
@@ -58,7 +58,7 @@ get_header();
             
         </div>
     </div>
-    <div class="col-span-6 py-4">
+    <div class="col md:col-span-6 py-6 md:py-4">
         <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
         <?php 
             echo get_template_part('template-parts/search/profile', '', array(
@@ -116,12 +116,26 @@ get_header();
                 'genre_1' => 'blues',
                 'genre_2' => 'rock',
                 'slug' => 'eric-tessmer.jpg'
-            ));     
-        ?>
+            ));   
+            ?>
+
+            <div class="xl:hidden">
+                <?php 
+                // Mobile form - moves to right column at lg breakpoint
+                echo get_template_part('template-parts/global/form-quote', '', array(
+                    'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
+                    'responsive' => 'xl:border-none xl:p-0'
+                ));
+                ?>
+            </div>
     </div>
-    <div class="col-span-3 relative py-8">
+
+    <div class="hidden xl:block col-span-3 relative py-8">
         <div class="sticky top-24">
-            <?php echo get_template_part('template-parts/global/form-quote', '', array()); ?> 
+            <?php echo get_template_part('template-parts/global/form-quote', '', array(
+                'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
+                'responsive' => 'xl:border-none xl:p-0'
+            )); ?> 
         </div>
     </div>
 </div>

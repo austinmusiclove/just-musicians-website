@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package BarnRaiser
+ * @package JustMusicians
  */
 
 get_header();

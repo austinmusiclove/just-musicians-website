@@ -6,4 +6,17 @@ html {
   scroll-behavior: smooth;
 }
 
+.footer-menu {
+  color: white;
+}
+.footer-menu:last-child {
+  margin-right: 0;
+}
+.footer-menu ul li {
+  font-size: 0.89rem;
+}
+.footer-menu ul li a:hover {
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=customize.css.map */

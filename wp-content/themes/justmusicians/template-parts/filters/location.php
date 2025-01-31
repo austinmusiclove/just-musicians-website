@@ -2,7 +2,7 @@
     <h3 class="font-bold text-18 mb-3">Location</h3>
     <form class="flex flex-col gap-y-2">
         <label for="zipcode" class="hidden">Enter zipcode</label>
-        <input id="zipcode" name="zipcode" placeholder="Enter zip code" />
+        <input id="zipcode" type="number" name="zipcode" placeholder="Enter zip code" />
         <label for="radius" class="hidden">Radius</label>
         <select id="radius" name="radius">
             <option value="" disabled selected hidden>Radius</option>

@@ -25,20 +25,4 @@ b, strong {
   font-weight: bold !important;
 }
 
-form input[type=text], form input[type=number], form select {
-  display: block;
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-}
-form fieldset.radio-buttons div {
-  margin-bottom: 1rem;
-}
-form textarea {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
-}
-
 /*# sourceMappingURL=type.css.map */

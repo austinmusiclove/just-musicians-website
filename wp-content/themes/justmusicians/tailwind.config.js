@@ -43,6 +43,7 @@ module.exports = {
 		'./footer.php',
 		'./front-page.php',
 		'./header.php',
+		'./index.php',
 		'./page.php',
 		'./search.php',
 		'./searchform.php',

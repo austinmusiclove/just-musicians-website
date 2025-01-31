@@ -138,28 +138,25 @@ b, strong {
   font-weight: bold !important;
 }
 
-form input[type=text], form input[type=number], form select {
-  display: block;
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-}
-form fieldset.radio-buttons div {
-  margin-bottom: 1rem;
-}
-form textarea {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
-}
-
 * {
   text-rendering: optimizeLegibility;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+.footer-menu {
+  color: white;
+}
+.footer-menu:last-child {
+  margin-right: 0;
+}
+.footer-menu ul li {
+  font-size: 0.89rem;
+}
+.footer-menu ul li a:hover {
+  text-decoration: underline;
 }
 
 /*Pages*/
@@ -207,8 +204,178 @@ html {
 .article-body ol {
   list-style-type: decimal;
 }
+.article-body .wp-block-table {
+  margin-bottom: 2rem;
+}
+.article-body .wp-block-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+  line-height: 120%;
+  border: 2px solid #333;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 100%;
+}
+@media (max-width: 560px) {
+  .article-body .wp-block-table table {
+    font-size: 1rem;
+  }
+}
+.article-body .wp-block-table table td,
+.article-body .wp-block-table table th {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+.article-body .wp-block-table table thead th {
+  background-color: #FAF4EA;
+}
+.article-body .wp-block-table table thead th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+.article-body .wp-block-table table thead th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+.article-body .wp-block-table table tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+.article-body .wp-block-table table tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.image-container::before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 66%;
+  left: 0;
+  background-color: white;
+}
 
 /*Utility*/
+form input[type=text], form input[type=number], form select {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+}
+form fieldset.radio-buttons div {
+  margin-bottom: 1rem;
+}
+form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+}
+
+/* Base styles */
+.custom-checkbox {
+  display: inline-flex;
+  align-items: start;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  line-height: 125%;
+}
+
+.custom-checkbox input {
+  opacity: 0;
+}
+
+.custom-checkbox span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.25rem;
+  background-color: white;
+  position: absolute;
+  top: 0.25rem;
+  left: 0;
+  flex-shrink: 0;
+}
+
+.custom-checkbox span::after {
+  content: "";
+  position: absolute;
+  top: 0.09rem;
+  left: 0.3rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid #ffffff;
+  border-width: 0 0.125rem 0.125rem 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+/* Checked state */
+.custom-checkbox input:checked + span {
+  background-color: #D29429;
+  border-color: #D29429;
+}
+
+.custom-checkbox input:checked + span::after {
+  opacity: 1;
+}
+
+.custom-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-radio div {
+  position: relative;
+}
+
+.custom-radio input {
+  opacity: 0;
+  cursor: pointer;
+  margin-right: 0.125rem;
+}
+
+.custom-radio span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #D29429;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  cursor: pointer;
+  pointer-events: none;
+  top: 0.25rem;
+  left: 0;
+}
+
+/* Inner circle for selected state */
+.custom-radio span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #D29429;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Checked state */
+.custom-radio input:checked + span {
+  border-color: #D29429;
+  background-color: #e6f0ff;
+}
+
+.custom-radio input:checked + span::after {
+  opacity: 1;
+}
+
 .tooltip::after {
   content: "";
   position: absolute;
@@ -218,6 +385,44 @@ html {
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+
+.pagination {
+  margin-bottom: 2rem;
+}
+.pagination .page-numbers {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1rem;
+}
+.pagination .page-numbers a, .pagination .page-numbers span {
+  height: 1.9rem;
+  width: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #F1F1F1;
+  border-radius: 0.33rem;
+}
+.pagination .page-numbers a.current, .pagination .page-numbers span.current {
+  border: 0px;
+  background-color: #D29429;
+  color: #000000;
+}
+.pagination .page-numbers a.current:hover, .pagination .page-numbers span.current:hover {
+  opacity: 1;
+}
+.pagination .page-numbers a:hover, .pagination .page-numbers span:hover {
+  opacity: 0.6;
+}
+.pagination .page-numbers a.next, .pagination .page-numbers a.prev, .pagination .page-numbers span.next, .pagination .page-numbers span.prev {
+  width: fit-content;
+  padding: 0.5rem;
+  border: 0px;
 }
 
 /*Overwrites*/

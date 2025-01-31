@@ -1,4 +1,4 @@
-<div data-slide="2" class="slide hidden w-[32rem] pb-8">
+<div data-slide="2" class="slide hidden w-[32rem] pb-8 grow">
 
 <div class="progress-tracker bg-yellow h-2 w-64 absolute top-0 left-0"></div>
 
