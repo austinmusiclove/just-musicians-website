@@ -1,4 +1,4 @@
-<div data-popup="quote" class="popup-wrapper hidden pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-30 flex items-center justify-center">
+<div data-popup="quote" class="popup-wrapper hidden pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-40 flex items-center justify-center">
     <div data-trigger="quote" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
     <div class="bg-white relative p-8 md:p-20 relative w-full h-full md:w-auto md:h-auto flex items-center justify-center" style="max-width: 780px;">

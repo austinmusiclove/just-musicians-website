@@ -46,3 +46,16 @@
     }
   }
 }
+
+.hamburger.active div {
+  &:first-child {
+    transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    display: none;
+  }
+  &:last-child {
+    transform: rotate(-45deg);
+  }
+}
+

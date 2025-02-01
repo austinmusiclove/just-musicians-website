@@ -425,6 +425,16 @@ form textarea {
   border: 0px;
 }
 
+.hamburger.active div:first-child {
+  transform: rotate(45deg);
+}
+.hamburger.active div:nth-child(2) {
+  display: none;
+}
+.hamburger.active div:last-child {
+  transform: rotate(-45deg);
+}
+
 /*Overwrites*/
 .inherit-text-size > * {
   font-size: inherit !important;

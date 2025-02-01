@@ -28,15 +28,22 @@
           $('#search-state-2').addClass('hidden');
         }
     });
-
-
-
   
   });
 
   $('[data-trigger="filter"]').on('click', function () {
     $('[data-popup="filter"]').toggleClass('hidden');
   });
+
+  $('[data-trigger="mobile-menu"]').on('click', function () {
+    $('[data-element="mobile-menu"]').toggleClass('hidden');
+    $(this).toggleClass('active');
+  });
+
+  function closeMenu() {
+    $('[data-element="mobile-menu"]').addClass('hidden');
+    $('[data-trigger="mobile-menu"]').removeClass('active');
+  }
 
   $('[data-trigger="quote"]').on('click', function () {
     if ($('[data-popup="quote"]').hasClass('hidden')) {
@@ -51,6 +58,11 @@
     } else {
       $('[data-popup="quote"]').addClass('hidden');
     }
+  });
+
+  $('[data-trigger="mobile-menu-dropdown"]').on('click', function () {
+    $(this).toggleClass('active');
+    $('[data-element="mobile-menu-dropdown"]').toggleClass('hidden');
   });
   
 
@@ -74,9 +86,14 @@
     $('[data-slide="4"]').removeClass('hidden');
   });
 
+  $(window).resize(function() {
+    closeMenu();
+  });
+
 
 
 })(jQuery);
+
 
 
 

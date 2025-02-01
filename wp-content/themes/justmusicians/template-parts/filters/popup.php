@@ -1,4 +1,4 @@
-<div data-popup="filter" class="popup-wrapper hidden w-screen h-screen fixed top-0 left-0 z-30 flex items-center justify-center">
+<div data-popup="filter" class="popup-wrapper hidden w-screen h-screen fixed top-0 left-0 z-40 flex items-center justify-center">
     <div data-trigger="filter" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
     <div class="bg-white relative w-full h-full sm:h-auto sm:w-auto pt-20 px-4 sm:px-8 md:px-20 pb-32" style="max-width: 780px;">

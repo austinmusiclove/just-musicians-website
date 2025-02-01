@@ -36,7 +36,7 @@
 
     <body <?php body_class('flex flex-col min-h-screen relative'); ?> >
       <!-- Setting a fixed height allows us to position the popups on mobile -->
-    <header class="bg-brown-light-3 md:px-6 py-2 sticky top-0 z-10 h-28 md:h-auto">
+    <header class="bg-brown-light-3 md:px-6 py-2 sticky top-0 z-30 h-28 md:h-auto">
       <div class="container flex flex-row md:grid grid-cols-12 gap-2 md:gap-4 lg:gap-12">
 
         <div class="w-32 md:w-auto col-span-2 relative">
@@ -67,33 +67,32 @@
             <span class="flex items-center gap-2 relative group">
               <a href="#">Live Music</a>
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
-
               <!-- Dropdown menu -->
               <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                   Bands
-              </a>
-              <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
-                  Solo/Duo
-              </a>
-              <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
-                  DJs
-              </a>
-              <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
-                  Wedding Music
-              </a>
-            </div>
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                    <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
+                    Solo/Duo
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                    <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
+                    DJs
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                    <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
+                    Wedding Music
+                </a>
+              </div>
             </span>
             <a href="#">Reviews</a>
           </div>
         
           <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center mr-4">
-              <div id="menu-trigger" class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative">
+              <div data-trigger="mobile-menu" class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative">
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 -translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>
@@ -117,5 +116,6 @@
 
 
     <?php wp_body_open(); ?>
+    <?php echo get_template_part('template-parts/global/mobile-menu', '', array()); ?>
     <div id="page" class="flex flex-col grow z-0">
 		<div id="content" class="grow flex flex-col relative">
