@@ -18,7 +18,7 @@
   
     $searchInput.on('input', function () {
         const value = $(this).val().trim();
-        // When user starts to ype
+        // When user starts to type
         if (value) {
           $('#search-state-1').addClass('hidden');
           $('#search-state-2').removeClass('hidden');
@@ -28,16 +28,24 @@
           $('#search-state-2').addClass('hidden');
         }
     });
-  
   });
+  
 
   $('[data-trigger="filter"]').on('click', function () {
     $('[data-popup="filter"]').toggleClass('hidden');
   });
 
+  $('[data-trigger="mobile-filter"]').on('click', function () {
+    $('[data-element="mobile-filter"]').toggleClass('hidden');
+    $('body').toggleClass('frozen');
+    closeMenu();
+  });
+
   $('[data-trigger="mobile-menu"]').on('click', function () {
     $('[data-element="mobile-menu"]').toggleClass('hidden');
     $(this).toggleClass('active');
+    $('[data-element="mobile-filter"]').addClass('hidden');
+    $('body').removeClass('frozen');
   });
 
   function closeMenu() {
@@ -88,6 +96,9 @@
 
   $(window).resize(function() {
     closeMenu();
+    $('[data-element="mobile-filter"]').addClass('hidden');
+    $('body').removeClass('frozen');
+
   });
 
 

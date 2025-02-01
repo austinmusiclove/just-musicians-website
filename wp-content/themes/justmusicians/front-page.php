@@ -16,7 +16,7 @@ get_header();
 
 <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
     <div class="hidden md:block md:col-span-3 border-r border-black/20 pr-8">
-        <div class="sticky top-24 pt-20 pb-8">
+        <div class="sticky top-24 pt-20 pb-20">
 
         <div class="mb-8">
             <div class="flex items-center justify-between mb-4">
@@ -28,38 +28,17 @@ get_header();
             </div>
         </div>
 
-            <?php                 
-                echo get_template_part('template-parts/filters/elements/tags', '', array(
-                    'title' => 'Genre',
-                    'tag_1' => 'folk',
-                    'tag_2' => 'indie rock',
-                    'tag_3' => 'latin',
-                    'tag_4' => 'psychedelic',
-                    'see_all' => false
-                ));  
-                echo get_template_part('template-parts/filters/elements/tags', '', array(
-                    'title' => 'Type',
-                    'tag_1' => 'band',
-                    'tag_2' => 'DJ',
-                    'tag_3' => 'musician',
-                    'tag_4' => 'solo/duo',
-                    'see_all' => false
-                )); 
-                echo get_template_part('template-parts/filters/elements/tags', '', array(
-                    'title' => 'Category',
-                    'tag_1' => 'acoustic',
-                    'tag_2' => 'cover band',
-                    'tag_3' => 'producer',
-                    'tag_4' => 'wedding band',
-                    'see_all' => true
-                )); 
-                echo get_template_part('template-parts/filters/location', '', array()); 
-            ?>
+        <?php echo get_template_part('template-parts/search/filters', '', array()); ?>
             
         </div>
     </div>
     <div class="col md:col-span-6 py-6 md:py-4">
-        <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
+
+        <div class="flex items-center justify-between md:justify-start">
+            <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
+            <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
+        </div>
+
         <?php 
             echo get_template_part('template-parts/search/profile', '', array(
                 'name' => 'Chastity',

@@ -6,6 +6,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body.frozen {
+  overflow: hidden;
+}
+
 .footer-menu {
   color: white;
   &:last-child {

@@ -107,7 +107,7 @@
       </div>
     </header>
 
-    <div id="tooltip-sort" class="tooltip text-white bg-black px-4 py-3 text-14 rounded sm absolute z-20 w-64 hidden">
+    <div id="tooltip-sort" class="tooltip text-white bg-black px-4 py-3 text-14 rounded sm absolute z-30 w-64 hidden">
       Learn more about the default Just Musicians search algorithm <a class="text-yellow underline" href="#">here</a>.
     </div>
 
