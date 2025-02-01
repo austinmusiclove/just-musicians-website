@@ -611,6 +611,10 @@ video {
   right: -4rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .bottom-10 {
   bottom: 2.5rem;
 }
@@ -665,10 +669,6 @@ video {
 
 .top-full {
   top: 100%;
-}
-
-.bottom-0 {
-  bottom: 0px;
 }
 
 .z-0 {
@@ -832,6 +832,10 @@ video {
   height: 10rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -850,14 +854,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-3 {
-  height: 0.75rem;
-}
-
-.h-5 {
-  height: 1.25rem;
 }
 
 .min-h-screen {
@@ -1209,10 +1205,6 @@ video {
   padding: 2rem;
 }
 
-.p-0 {
-  padding: 0px;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1236,6 +1228,11 @@ video {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-0 {
@@ -1288,13 +1285,12 @@ video {
   padding-bottom: 2rem;
 }
 
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 .pb-0 {
   padding-bottom: 0px;
+}
+
+.pb-20 {
+  padding-bottom: 5rem;
 }
 
 .pb-3 {
@@ -1305,12 +1301,20 @@ video {
   padding-bottom: 8rem;
 }
 
+.pb-56 {
+  padding-bottom: 14rem;
+}
+
 .pb-6 {
   padding-bottom: 1.5rem;
 }
 
 .pb-8 {
   padding-bottom: 2rem;
+}
+
+.pl-1 {
+  padding-left: 0.25rem;
 }
 
 .pl-5 {
@@ -1321,12 +1325,20 @@ video {
   padding-right: 0.25rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-0 {
+  padding-top: 0px;
 }
 
 .pt-12 {
@@ -1343,38 +1355,6 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
-}
-
-.pl-0 {
-  padding-left: 0px;
-}
-
-.pl-0\.5 {
-  padding-left: 0.125rem;
-}
-
-.pr-2 {
-  padding-right: 0.5rem;
-}
-
-.pl-1 {
-  padding-left: 0.25rem;
-}
-
-.pt-0 {
-  padding-top: 0px;
-}
-
-.pb-20 {
-  padding-bottom: 5rem;
-}
-
-.pb-48 {
-  padding-bottom: 12rem;
-}
-
-.pb-56 {
-  padding-bottom: 14rem;
 }
 
 .text-center {
@@ -1431,10 +1411,6 @@ video {
 
 .font-bold {
   font-weight: 700;
-}
-
-.font-normal {
-  font-weight: 400;
 }
 
 .uppercase {
@@ -1537,10 +1513,6 @@ video {
   margin-bottom: 0px;
 }
 
-.last\:border-0:last-child {
-  border-width: 0px;
-}
-
 .last\:border-b-0:last-child {
   border-bottom-width: 0px;
 }
@@ -1584,6 +1556,10 @@ video {
 
 .hover\:bg-yellow\/40:hover {
   background-color: rgb(210 148 41 / 0.4);
+}
+
+.hover\:bg-yellow\/20:hover {
+  background-color: rgb(210 148 41 / 0.2);
 }
 
 .hover\:text-black:hover {
@@ -1904,10 +1880,6 @@ video {
 
   .lg\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .lg\:justify-start {
-    justify-content: flex-start;
   }
 
   .lg\:gap-12 {

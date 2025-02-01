@@ -35,6 +35,17 @@
     $('[data-popup="filter"]').toggleClass('hidden');
   });
 
+  $('[data-element="option"]').on('click', function () {
+    var selectedText = $(this).html();
+    var selectedElement = $('[data-value="selected"]');
+    selectedElement.html(selectedText);
+        $('[data-element="what-do-you-need"]').addClass('hidden');
+  });
+
+  $('[data-trigger="what-do-you-need"]').on('click', function () {
+    $('[data-element="what-do-you-need"]').toggleClass('hidden');
+  });
+
   $('[data-trigger="mobile-filter"]').on('click', function () {
     $('[data-element="mobile-filter"]').toggleClass('hidden');
     $('body').toggleClass('frozen');

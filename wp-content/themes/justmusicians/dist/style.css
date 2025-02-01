@@ -259,7 +259,7 @@ body.frozen {
 }
 
 /*Utility*/
-form input[type=text], form input[type=number], form select {
+form input[type=text], form input[type=number], form select, form .pseudo-select {
   display: block;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.4);

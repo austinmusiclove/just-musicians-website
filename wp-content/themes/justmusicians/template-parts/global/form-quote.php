@@ -7,13 +7,34 @@
 
         <fieldset class="flex flex-col gap-y-2 mb-6">
 
-            <label for="what" class="hidden">What do you need?</label>
-            <select id="what" name="what">
-                <option value="" disabled selected hidden>What do you need?</option>
-                <option value="option1a">Option 1A</option>
-                <option value="option1b">Option 1B</option>
-                <option value="option1c">Option 1C</option>
-            </select>
+            <div class="pseudo-select relative">
+                <div data-trigger="what-do-you-need" class="w-full flex flex-row items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-2" data-value="selected">What do you need?</span>
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+                </div>
+                <!-- Options -->
+                <div data-element="what-do-you-need" class="absolute top-full w-full left-0 px-4 py-4 bg-white hidden font-regular border border-black/20 font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
+                    <span class="px-2 py-1.5 flex items-center gap-2 rounded-sm">
+                        Select Musician Type
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
+                        Bands
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
+                        Solo/Duo
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
+                        DJs
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
+                        Wedding Music
+                    </span>
+                </div>
+            </div>
 
             <label for="zipcode" class="hidden">Enter zipcode</label>
             <input type="number" id="zipcode" name="zipcode" placeholder="Enter zip code" />
