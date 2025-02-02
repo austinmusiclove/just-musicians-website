@@ -25,4 +25,12 @@ b, strong {
   font-weight: bold !important;
 }
 
+@font-face {
+  font-family: "Sun Motter";
+  src: url("../../lib/fonts/sun-motter-regular.woff2") format("woff2"), url("../../lib/fonts/sun-motter-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*# sourceMappingURL=type.css.map */

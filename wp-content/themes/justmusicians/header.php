@@ -27,6 +27,12 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
 
+
+  <!-- Poppins weights 400 and 700 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
   
 	<?php wp_head(); ?>
 
@@ -48,10 +54,11 @@
         <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-12 justify-between">
           
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow w-full flex items-stretch">
-            <div id="search" class="grow relative px-1 py-1">
+            <div data-search="desktop" class="grow relative px-1 py-1">
               <input class="w-full h-full py-2 px-3" type="text" placeholder="Search" />
                 <?php echo get_template_part('template-parts/search/search-state-1', '', array()); ?>
                 <?php echo get_template_part('template-parts/search/search-state-2', '', array()); ?>
+                <?php echo get_template_part('template-parts/search/mobile-search', '', array()); ?>
             </div>  
             <div class="hidden md:block w-px bg-black/20 my-2"></div>
             <div class="hidden md:block grow relative px-1 py-1 flex items-center">

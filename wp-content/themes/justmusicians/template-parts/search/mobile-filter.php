@@ -1,4 +1,3 @@
-
 <?php $classes = 'flex text-16 items-center gap-1 group relative py-0.5 rounded-full md:hidden cursor-pointer'; ?>
 
 <button data-trigger="mobile-filter" class="pl-1 pr-2 bg-yellow/20 hover:bg-yellow/40 <?php echo $classes; ?>">

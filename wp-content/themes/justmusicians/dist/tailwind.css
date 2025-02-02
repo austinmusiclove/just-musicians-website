@@ -712,6 +712,10 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-16 {
   margin-bottom: 4rem;
 }
@@ -774,6 +778,14 @@ video {
 
 .mt-5 {
   margin-top: 1.25rem;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
+}
+
+.mb-0\.5 {
+  margin-bottom: 0.125rem;
 }
 
 .block {
@@ -1205,6 +1217,10 @@ video {
   padding: 2rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1355,6 +1371,10 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pl-6 {
+  padding-left: 1.5rem;
 }
 
 .text-center {
@@ -1554,12 +1574,12 @@ video {
   background-color: rgb(237 212 169 / 0.5);
 }
 
-.hover\:bg-yellow\/40:hover {
-  background-color: rgb(210 148 41 / 0.4);
-}
-
 .hover\:bg-yellow\/20:hover {
   background-color: rgb(210 148 41 / 0.2);
+}
+
+.hover\:bg-yellow\/40:hover {
+  background-color: rgb(210 148 41 / 0.4);
 }
 
 .hover\:text-black:hover {
