@@ -7,6 +7,6 @@
         <span class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20"><?php echo $args['tag_4']; ?></span>
     </div>
     <?php if ($args['see_all'] == true) { ?>
-        <button class="underline mt-3 inline-block text-14">see all</button>
+        <button data-trigger="filter" class="underline mt-3 inline-block text-14">see all</button>
     <?php } ?>
 </div>

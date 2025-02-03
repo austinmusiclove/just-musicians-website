@@ -2,8 +2,8 @@
 
 // Register menus
 register_nav_menus( array(
-  'header_menu_desktop' => esc_html__( 'Header', 'BarnRaiser' ),
-  'footer_menu' => esc_html__( 'Footer', 'BarnRaiser' ),
+  'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
+  'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
 ) );
 
 

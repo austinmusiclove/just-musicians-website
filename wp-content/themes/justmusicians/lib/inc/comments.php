@@ -33,8 +33,8 @@ add_action('admin_menu', function () {
 });
  
 // Remove comments links from admin bar
-function br_remove_comments(){
+function un_remove_comments(){
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu('comments');
 }
-add_action( 'wp_before_admin_bar_render', 'br_remove_comments' );
+add_action( 'wp_before_admin_bar_render', 'un_remove_comments' );

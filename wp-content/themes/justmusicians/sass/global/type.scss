@@ -25,13 +25,12 @@ b, strong {
 	font-weight: bold!important;
 }
 
-form {
-	input, select {
-		display: block;
-		width: 100%;
-		border: 1px solid rgba(0,0,0,.4);
-		border-radius: .25rem;
-		font-size: 1rem;
-		padding: .5rem .75rem;
-	}
-}
+@font-face {
+	font-family: 'Sun Motter';
+	src: url('../../lib/fonts/sun-motter-regular.woff2') format('woff2'),
+		url('../../lib/fonts/sun-motter-regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+  }
+

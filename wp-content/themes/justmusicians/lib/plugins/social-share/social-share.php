@@ -4,7 +4,7 @@
 
 
 
-function br_social_buttons() {
+function un_social_buttons() {
     global $post;
     $permalink = get_permalink($post->ID);
     $title = get_the_title();
@@ -13,8 +13,8 @@ function br_social_buttons() {
     $class = "bg-black w-10 h-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-105";
 
     // Email content
-    $subject = 'Barn Raiser: '.$title;
-    $body = "I'd like to share this article I found at Barn Raiser: ".$permalink;
+    $subject = 'Just Musicians: '.$title;
+    $body = "I'd like to share this article I found at Just Musicians: ".$permalink;
 
 
     $content = '<div class="social-buttons flex xl:flex-col items-center xl:space-y-2">

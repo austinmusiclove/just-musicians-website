@@ -43,6 +43,7 @@ module.exports = {
 		'./footer.php',
 		'./front-page.php',
 		'./header.php',
+		'./index.php',
 		'./page.php',
 		'./search.php',
 		'./searchform.php',
@@ -56,7 +57,13 @@ module.exports = {
 		'./lib/plugins/*.{php,js}',
 		'./lib/plugins/**/*.{php,js}',
 		'./template-parts/*.{php,js}',
-		'./template-parts/**/*.{php,js}',
+		'./template-parts/*.{php,js}',
+		'./template-parts/filters/*.{php,js}',
+		'./template-parts/filters/**/*.{php,js}',
+		'./template-parts/global/**/*.{php,js}',
+		'./template-parts/filters/elements/*.{php,js}',
+		'./template-parts/search/*.{php,js}',
+		'./template-parts/search/sort.php',
 		// Other
 		'./templates/**/*.{php,js}',
 		'./tailwind/missing.php',
@@ -97,7 +104,7 @@ module.exports = {
 			},
 			aspectRatio: {
 				'4/3': '4 / 3',
-			  },
+			},
 		},
 	},
 	plugins: [

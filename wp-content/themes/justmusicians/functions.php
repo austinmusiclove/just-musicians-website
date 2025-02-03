@@ -1,15 +1,15 @@
 <?php
 /**
- * BarnRaiser functions and definitions
+ * JustMusicians functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package BarnRaiser
+ * @package JustMusicians
  */
 
-if ( ! function_exists( 'BarnRaiser_setup' ) ) :
-	function BarnRaiser_setup() {
-		load_theme_textdomain( 'BarnRaiser', get_template_directory() . '/languages' );
+if ( ! function_exists( 'JustMusicians_setup' ) ) :
+	function JustMusicians_setup() {
+		load_theme_textdomain( 'JustMusicians', get_template_directory() . '/languages' );
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
@@ -29,18 +29,18 @@ if ( ! function_exists( 'BarnRaiser_setup' ) ) :
 		) );
 	}
 endif;
-add_action( 'after_setup_theme', 'BarnRaiser_setup' );
+add_action( 'after_setup_theme', 'JustMusicians_setup' );
 
 
 // Enqueue Scripts and Styles
-function barnraiser_scripts() {
+function justmusicians_scripts() {
 		$pkg = json_decode(file_get_contents('package.json', true));
 		global $post;
 
 		// Core
-		wp_enqueue_style('barnraiser-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
-		wp_enqueue_style('barnraiser-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
-		wp_enqueue_script('barnraiser-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
+		wp_enqueue_style('justmusicians-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
+		wp_enqueue_style('justmusicians-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
+		wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
 		// Utilities
 
@@ -63,7 +63,7 @@ function barnraiser_scripts() {
 
 
 }
-add_action( 'wp_enqueue_scripts', 'barnraiser_scripts' );
+add_action( 'wp_enqueue_scripts', 'justmusicians_scripts' );
 
 // Include
 require get_template_directory() . '/lib/inc/template-functions.php';

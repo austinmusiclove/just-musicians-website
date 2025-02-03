@@ -1,5 +1,5 @@
 {
-	"name": "BarnRaiser",
+	"name": "JustMusicians",
 	"version": "1.1.10",
 	"description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
 	"main": "index.js",
@@ -22,6 +22,6 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "https://dbussell@bitbucket.org/dbussell/barn-raiser.git"
+		"url": "https://dbussell@bitbucket.org/dbussell/justmusicians.git"
 	}
 }

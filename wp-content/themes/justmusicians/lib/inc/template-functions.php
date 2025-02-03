@@ -84,15 +84,15 @@ function yoast_seo_robots_modify_search( $robots ) {
 
 
 // Hide drafts and private posts from ACF post object field
-add_filter('acf/fields/post_object/query', 'br_acf_fields_post_object_query', 10, 3);
-function br_acf_fields_post_object_query( $args, $field, $post_id ) {
+add_filter('acf/fields/post_object/query', 'un_acf_fields_post_object_query', 10, 3);
+function un_acf_fields_post_object_query( $args, $field, $post_id ) {
 
     $args['post_status'] = 'publish';
 
     return $args;
 }
 
-function br_get_featured_image(int $image_id, string $size = 'medium', $opts = []) {
+function un_get_featured_image(int $image_id, string $size = 'medium', $opts = []) {
 	$opts['srcset'] = wp_get_attachment_image_srcset( $image_id, $size );
 	$opts['sizes'] = wp_calculate_image_sizes($size, null, null, $image_id);
 	

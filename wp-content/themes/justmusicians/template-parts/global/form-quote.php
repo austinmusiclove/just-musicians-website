@@ -1,28 +1,49 @@
-<h3 class="font-sun-motter text-20 mb-3">Request a quote from a local musician</h3>
-<p class="text-16 text-brown-dark-1 leading-tight mb-6">Tell us about your business or occasion to receive quotes from up to three local musicians.</p>
+<div class="border border-black/20 p-8 <?php echo $args['responsive']; ?>">
 
-<form action="/submit-form" method="post">
+    <h3 class="font-sun-motter text-20 mb-3">Request a quote from a local musician</h3>
+    <p class="text-16 text-brown-dark-1 leading-tight mb-6">Tell us about your business or occasion to receive quotes from up to three local musicians.</p>
 
-    <fieldset class="flex flex-col gap-y-2 mb-6">
+    <form method="post">
 
-        <label for="what" class="hidden">What do you need?</label>
-        <select id="what" name="what">
-            <option value="option1a">Option 1A</option>
-            <option value="option1b">Option 1B</option>
-            <option value="option1c">Option 1C</option>
-        </select>
+        <fieldset class="flex flex-col gap-y-2 mb-6">
 
-        <label for="when" class="hidden">When do you need it?</label>
-        <select id="when" name="when">
-            <option value="option2a">Option 2A</option>
-            <option value="option2b">Option 2B</option>
-            <option value="option2c">Option 2C</option>
-        </select>
+            <div class="pseudo-select relative">
+                <div data-trigger="what-do-you-need" class="w-full flex flex-row items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-2" data-value="selected">What do you need?</span>
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+                </div>
+                <!-- Options -->
+                <div data-element="what-do-you-need" class="absolute top-full w-full left-0 px-4 py-4 bg-white hidden font-regular border border-black/20 font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
+                    <span class="px-2 py-1.5 flex items-center gap-2 rounded-sm">
+                        Select Musician Type
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
+                        Bands
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
+                        Solo/Duo
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
+                        DJs
+                    </span>
+                    <span data-element="option" class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow/20 cursor-pointer">
+                        <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
+                        Wedding Music
+                    </span>
+                </div>
+            </div>
 
-        <label for="zipcode" class="hidden">Enter zipcode</label>
-        <input id="zipcode" name="zipcode" placeholder="Enter zip code" />
+            <label for="zipcode" class="hidden">Enter zipcode</label>
+            <input type="number" id="zipcode" name="zipcode" placeholder="Enter zip code" />
 
-    </fieldset>
+        </fieldset>
 
-    <button type="submit" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3">Get Started</button>
-</form>
+    </form>
+    <!-- Moved outside of form element to prevent form submission -->
+    <button data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">Get Started</button>
+</div>
+
+<?php echo get_template_part('template-parts/global/form-quote/popup', '', array()); ?> 
