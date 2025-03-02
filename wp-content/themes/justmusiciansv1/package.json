@@ -1,0 +1,27 @@
+{
+	"name": "JustMusicians",
+	"version": "1.1.10",
+	"description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
+	"main": "index.js",
+	"scripts": {
+		"clean": "rimraf dist",
+		"dev:scss": "sass --watch sass:dist",
+		"dev:tailwind": "tailwindcss --config tailwind.config.js --watch -i tailwind/input.css -o dist/tailwind.css",
+		"dev": "NODE_ENV=development run-p dev:scss dev:tailwind",
+		"build:scss": "sass --style=compressed sass:dist",
+		"build:tailwind": "tailwindcss --config tailwind.config.js --minify -i tailwind/input.css -o dist/tailwind.css",
+		"build": "NODE_ENV=production run-s clean build:scss build:tailwind"
+	},
+	"devDependencies": {
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^4.4.0",
+		"sass": "^1.58.3",
+		"tailwindcss": "^3.2.7"
+	},
+	"author": "",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "https://dbussell@bitbucket.org/dbussell/justmusicians.git"
+	}
+}

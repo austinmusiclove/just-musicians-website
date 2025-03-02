@@ -41,4 +41,5 @@
 	}
 }
 
-
+/* Hide elements that get hidden by Alpinejs before Alpinejs loads */
+[x-cloak] { display: none !important; }

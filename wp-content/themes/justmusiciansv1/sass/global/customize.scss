@@ -1,0 +1,24 @@
+// Global
+* {
+  text-rendering: optimizeLegibility;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body.frozen {
+  overflow: hidden;
+}
+
+.footer-menu {
+  color: white;
+  &:last-child {
+    margin-right: 0;
+  }
+  ul li {
+    font-size: .89rem;
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}

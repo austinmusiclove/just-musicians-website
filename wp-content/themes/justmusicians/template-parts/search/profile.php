@@ -1,5 +1,12 @@
 
-<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative">
+<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
+    <?php if ($args['last']) { // infinite scroll ?>
+    hx-get="/wp-html/v1/listings/?page=<?php echo $args['next_page']; ?>"
+    hx-trigger="revealed once"
+    hx-swap="beforeend"
+    hx-include="#listing-form"
+    <?php } ?>
+>
 
     <button class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105">
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
@@ -7,7 +14,7 @@
 
     <div class="w-full sm:w-56 shrink-0">
         <div class="bg-yellow-light aspect-4/3">
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/' . $args['slug']; ?>" />
+            <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
         </div>
     </div>
 
@@ -19,15 +26,20 @@
         </span>
         <p class="text-14"><?php echo $args['description']; ?></p>
         <div class="flex items-center gap-1">
-            <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"><?php echo $args['genre_1']; ?></span>
-            <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"><?php echo $args['genre_2']; ?></span>
+            <?php foreach((array) $args['genres'] as $genre) { ?>
+            <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"><?php echo $genre; ?></span><?php
+            } ?>
         </div>
         <div class="flex items-center gap-1">
-            <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/instagram.svg'; ?>" />
-            <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/facebook.svg'; ?>" />
-            <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/youtube.svg'; ?>" />
+            <?php if (!empty($args['instagram_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['instagram_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/instagram.svg'; ?>" /></a>
+            <?php } if (!empty($args['facebook_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['facebook_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/facebook.svg'; ?>" /></a>
+            <?php } if (!empty($args['youtube_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['youtube_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/youtube.svg'; ?>" /></a>
+            <?php } ?>
         </div>
     </div>
 
-    <button class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-4 rounded-sm font-sun-motter text-12 inline-block">Request Quote</button>
+    <button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-4 rounded-sm font-sun-motter text-12 inline-block">Request Quote</button>
 </div>

@@ -14,8 +14,8 @@ const applyMultiplier = (values, multiplier) => {
   // https://www.modularscale.com/?14&px&1.125
 	const baseSpacing = {
 		0: '0rem',
-		12: '.89rem', 
-		14: '1rem', 
+		12: '.89rem',
+		14: '1rem',
 		16: '1.13rem',
 		18: '1.27rem',
 		20: '1.4rem',
@@ -98,13 +98,16 @@ module.exports = {
 		},
 		extend: {
 			boxShadow: {
-				'black-offset': '2px 2px 0px 0px black', 
+				'black-offset': '2px 2px 0px 0px black',
 			  },
 			borderRadius: {
 			},
 			aspectRatio: {
 				'4/3': '4 / 3',
 			},
+            minHeight: (theme) => ({
+                ...theme('spacing'),
+            }),
 		},
 	},
 	plugins: [
@@ -116,10 +119,10 @@ module.exports = {
 			addComponents({
 			  '.container': {
 				maxWidth: '100%',
-				marginLeft: 'auto', 
+				marginLeft: 'auto',
 				marginRight: 'auto',
 				paddingLeft: '1rem',
-				paddingRight: '1rem', 
+				paddingRight: '1rem',
 				'@screen sm': {
 				  maxWidth: '100%',
 				},

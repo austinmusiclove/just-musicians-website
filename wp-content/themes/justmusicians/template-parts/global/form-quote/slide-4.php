@@ -1,4 +1,4 @@
-<div data-slide="4" class="slide hidden w-[24rem] text-center">
+<div data-slide="4" class="slide w-[24rem] text-center" x-show="showSlide4" x-cloak>
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">Thanks for submitting your request!</h2>
@@ -8,4 +8,4 @@
 
 </div>
 
-   
+

@@ -1,30 +1,48 @@
 <div>
-<?php                 
+<?php
     echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'genre-filters',
         'title' => 'Genre',
-        'tag_1' => 'folk',
-        'tag_2' => 'indie rock',
-        'tag_3' => 'latin',
-        'tag_4' => 'psychedelic',
-        'see_all' => false
-    ));  
+        'input_name' => 'genres', // should match the input name used for the tag check boxes
+        'tag_1' => 'Folk',
+        'tag_2' => 'Hip Hop/Rap',
+        'tag_3' => 'Latin',
+        'tag_4' => 'Soul/RnB',
+        'tag_1_selected' => false,
+        'tag_2_selected' => false,
+        'tag_3_selected' => false,
+        'tag_4_selected' => false,
+        'alpine_modal_var' => 'showGenreModal'
+    ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'type-filters',
         'title' => 'Type',
-        'tag_1' => 'band',
+        'input_name' => 'types', // should match the input name used for the tag check boxes
+        'tag_1' => 'Band',
         'tag_2' => 'DJ',
-        'tag_3' => 'musician',
-        'tag_4' => 'solo/duo',
-        'see_all' => false
-    )); 
+        'tag_3' => 'Musician',
+        'tag_4' => 'Artist',
+        'tag_1_selected' => false,
+        'tag_2_selected' => false,
+        'tag_3_selected' => false,
+        'tag_4_selected' => false,
+        'alpine_modal_var' => 'showTypeModal'
+    ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'category-filters',
         'title' => 'Category',
-        'tag_1' => 'acoustic',
-        'tag_2' => 'cover band',
-        'tag_3' => 'producer',
-        'tag_4' => 'wedding band',
-        'see_all' => true
-    )); 
-    echo get_template_part('template-parts/filters/location', '', array()); 
+        'input_name' => 'tags', // should match the input name used for the tag check boxes
+        'tag_1' => 'Acoustic',
+        'tag_2' => 'Cover Band',
+        'tag_3' => 'Wedding Band',
+        'tag_4' => 'Background Music',
+        'tag_1_selected' => false,
+        'tag_2_selected' => false,
+        'tag_3_selected' => false,
+        'tag_4_selected' => false,
+        'alpine_modal_var' => 'showTagModal'
+    ));
+    //echo get_template_part('template-parts/filters/location', '', array());
 
     ?>
 
@@ -32,6 +50,9 @@
         <h3 class="font-bold text-18 mb-3">Verification</h3>
         <?php echo get_template_part('template-parts/filters/elements/checkbox', '', array(
             'label' => 'Verified only',
+            'name' => 'verified',
+            'value' => 'Verified',
+            'x-model' => 'verifiedCheckbox',
         )); ?>
     </div>
 </div>

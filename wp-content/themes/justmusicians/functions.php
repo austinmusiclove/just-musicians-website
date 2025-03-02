@@ -40,9 +40,13 @@ function justmusicians_scripts() {
 		// Core
 		wp_enqueue_style('justmusicians-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
 		wp_enqueue_style('justmusicians-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
-		wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
+		//wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
 		// Utilities
+        wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', ['alpinejs-resize', 'alpinejs-focus'], $pkg->version, true);
 
 
 		// Home
@@ -119,12 +123,20 @@ add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
  * @author Guy Dumais.
  * @link https://en.guydumais.digital/disable-jquery-migrate-in-wordpress/
  */
+/*
 add_filter( 'wp_default_scripts', $af = static function( &$scripts) {
     if(!is_admin()) {
         $scripts->remove( 'jquery');
         $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.12.4' );
-    }    
+    }
 }, PHP_INT_MAX );
 unset( $af );
+ */
 
 
+// Disable admin bar for all users
+show_admin_bar(false);
+
+
+// HTML APIs
+include_once 'html-api/html-api-setup.php';

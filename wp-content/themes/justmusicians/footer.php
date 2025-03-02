@@ -27,12 +27,10 @@
 
             <!-- Footer Menu 1 -->
             <div class="footer-menu">
-                <div class="font-sans text-20 font-bold mb-4">Genres</div>
+                <div class="font-sans text-20 font-bold mb-4">Resources</div>
                 <ul>
-                    <li><a href="#">Country</a></li>
-                    <li><a href="#">Indie Rock</a></li>
-                    <li><a href="#">Latin</a></li>
-                    <li><a href="#">Psychedelic</a></li>
+                    <li><a href="post">Blog</a></li>
+                    <li><a href="#">Podcast</a></li>
                 </ul>
             </div>
 

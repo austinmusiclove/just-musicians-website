@@ -1,33 +1,26 @@
-<div data-search-state="desktop-2" class="absolute top-full left-0 w-full px-4 py-4 bg-white hidden flex flex-col shadow-md rounded-sm">
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-        rock
+<div data-search-state="desktop-2" class="absolute top-full left-0 w-full px-4 py-4 bg-white flex flex-col shadow-md rounded-sm">
+<!-- Categories and genres -->
+<?php
+foreach((array) $args['categories'] as $category) {
+?>
+    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="searchInput = '<?php echo str_replace("'", "\'", $category); ?>'; showSearchOptions = false;" >
+        <?php echo $category; ?>
     </a>
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-        pop rock
-    </a>
+<?php
+}
+?>
 
-    <!-- Riders Against the Storm -->
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
+<!-- Listings -->
+<?php
+foreach((array) $args['listings'] as $listing) {
+?>
+    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="searchInput = '<?php echo str_replace("'", "\'", $listing['name']); ?>'; showSearchOptions = false;" >
         <div class="w-6 aspect-square shrink-0">
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/riders-against-the-storm.jpg' ?>" />
+            <img class="w-full h-full object-cover" src="<?php echo $listing['thumbnail_url']; ?>" />
         </div>
-        Riders Against the Storm
+        <?php echo $listing['name']; ?>
     </a>
-
-    <!-- Eric Tessmer -->
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-        <div class="w-6 aspect-square shrink-0">
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/eric-tessmer.jpg' ?>" />
-        </div>
-        Eric Tessmer
-    </a>
-
-     <!-- Kiltro -->
-     <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#">
-        <div class="w-6 aspect-square shrink-0">
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/kiltro.jpeg' ?>" />
-        </div>
-        Kiltro
-    </a>
-
+<?php
+}
+?>
 </div>
