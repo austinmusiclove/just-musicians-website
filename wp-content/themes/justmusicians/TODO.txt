@@ -1,26 +1,28 @@
 To Launch
     "Request Quote" or "Contact Directly" modal
-    Inquiry form
-    Log in/ sign up coming soon modal
-    Favorite button coming soon modal
-    Hide reviews
-    Footer links
+    Inquiry form copy and flow
     About page
-    Blog
+    Blog home page featured post with featured image
+    Header links need to work from blog page
+    Search bar needs to work from blog page
+    Add footer links for tags and types
+Data
+    regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
+    add tags for each listing manually
 UX
-    Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     media slider
+    Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
+    shows no results and no more results when no results
+UI
+    1290-1300 screen size long listing name gets in the way of favorite button
 Devon
     Need icons for bandcamp, tiktok, soundcloud, x, spotify, apple music
     improved skeleton
-    Ask Devon about <200b> after descriptions in listing cards
     Fonts 404s
     verified icon
     No search results with personality
-    ask if i messed up the filter bar by removing the top class
-    is it important to close filters, search bar, and search options on screen resize? I took it out because i had an issue where it was triggering every time the search results changed height of the container
 Security
     audit rest api inputs and html api inputs
 Performance
@@ -37,7 +39,5 @@ Future
 Code structure
     create default options for each filter so that they can be used both on the initial load and on the api side; or maybe put the default option logic into the template part itself
     tags.php and tags-modal.php have the same preg replace function and it should maybe be a function because they need to match or else it will break
-Data
-    regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both

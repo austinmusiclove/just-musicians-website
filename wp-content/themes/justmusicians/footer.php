@@ -28,33 +28,24 @@
             <!-- Footer Menu 1 -->
             <div class="footer-menu">
                 <div class="font-sans text-20 font-bold mb-4">Resources</div>
-                <ul>
-                    <li><a href="post">Blog</a></li>
-                    <li><a href="#">Podcast</a></li>
-                </ul>
+                <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-1' ) ); ?>
             </div>
 
             <!-- Footer Menu 2 -->
+<!--
             <div class="footer-menu">
                 <div class="font-sans text-20 font-bold mb-4">Categories</div>
-                <ul>
-                    <li><a href="#">Country</a></li>
-                    <li><a href="#">Indie Rock</a></li>
-                    <li><a href="#">Latin</a></li>
-                    <li><a href="#">Psychedelic</a></li>
-                </ul>
+                <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-2' ) ); ?>
             </div>
+-->
 
             <!-- Footer Menu 3 -->
+<!--
             <div class="footer-menu">
                 <div class="font-sans text-20 font-bold mb-4">Types</div>
-                <ul>
-                    <li><a href="#">Band</a></li>
-                    <li><a href="#">DJ</a></li>
-                    <li><a href="#">Musician</a></li>
-                    <li><a href="#">Solo/DJ</a></li>
-                </ul>
+                <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-3' ) ); ?>
             </div>
+-->
 
         </div>
     </div>

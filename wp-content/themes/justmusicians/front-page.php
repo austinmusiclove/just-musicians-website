@@ -116,7 +116,7 @@ get_header();
                         'name' => 'tags',
                         'x-show' => 'showTagModal',
                     ]);
-                echo get_template_part('template-parts/global/form-quote/popup', '', []);
+                    echo get_template_part('template-parts/global/form-quote/popup', '', []);
                 ?>
 
             </div>
@@ -124,4 +124,5 @@ get_header();
     </form>
 </div>
 <?php
+
 get_footer();

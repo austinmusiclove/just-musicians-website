@@ -8,7 +8,7 @@
     <?php } ?>
 >
 
-    <button class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105">
+    <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105" x-on:click="showFavModal = ! showFavModal">
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
     </button>
 
