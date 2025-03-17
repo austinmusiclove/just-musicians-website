@@ -12,6 +12,7 @@
         if (!empty($args['value'])) { echo ' value="' . $args['value'] . '"'; }
         if (!empty($args['x-model'])) { echo ' x-model="' . $args['x-model'] . '"'; }
         if (!empty($args['x-ref'])) { echo ' x-ref="' . $args['x-ref'] . '"'; }
+        if ($args['checked']) { echo ' checked'; }
     ?>
     />
 <span class="checkmark"></span><?php echo $args['label']; ?></label>

@@ -15,7 +15,7 @@ function get_listings($args) {
 
     $query_args = [
         'post_type' => 'listing',
-        'posts_per_page' => 3,
+        'posts_per_page' => 10,
         'paged' => $page,
     ];
     if (!empty($search_term)) {

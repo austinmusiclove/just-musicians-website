@@ -11,7 +11,7 @@
               x-ref="mobileSearchInput"
               x-bind:value="searchInput"
               x-on:keyup.enter="searchInput = $el.value"
-              hx-get="wp-html/v1/search-options-mobile"
+              hx-get="<?php echo get_site_url(); ?>/wp-html/v1/search-options-mobile"
               hx-trigger="input changed delay:300ms, updatesearchoptions"
               hx-target="#active-search-results-mobile"
             />

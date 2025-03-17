@@ -51,5 +51,6 @@
 
     </form>
     <!-- Moved outside of form element to prevent form submission -->
-    <button data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="showInquiryModal = true; showSlide1 = true;">Get Started</button>
+    <!-- <button type="button" data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="showInquiryModal = true; showSlide1 = true;">Get Started</button> -->
+    <button type="button" data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="showInquiryModalPlaceholder = true;">Get Started</button>
 </div>

@@ -16,6 +16,7 @@
                     'x-model' => $args['name'] . 'Checkboxes',
                     'x-ref' => strtolower($args['name']) . preg_replace("/[^A-Za-z0-9]/", '', $label), // same formula used in tags.php
                     'is_array' => true,
+                    'checked' => false,
                 ]);
             }
         ?>

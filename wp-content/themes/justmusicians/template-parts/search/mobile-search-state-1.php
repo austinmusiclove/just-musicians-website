@@ -2,19 +2,19 @@
 
     <div>
         <div class="font-bold mb-4 opacity-60">Suggestions</div>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesBandCheckbox').click() });">
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qtype=Band">
             <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
             Bands
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesMusicianCheckbox').click() });">
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qtype=Musician">
             <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
             Musicians
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesDJCheckbox').click() });">
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qtype=DJ">
             <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
             DJs
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('tagsWeddingBandCheckbox').click() });">
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qtag=Wedding Band">
             <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
             Wedding Music
         </a>

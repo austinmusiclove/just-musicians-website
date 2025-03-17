@@ -1,11 +1,3 @@
-To Launch
-    "Request Quote" or "Contact Directly" modal
-    Inquiry form copy and flow
-    About page
-    Blog home page featured post with featured image
-    Header links need to work from blog page
-    Search bar needs to work from blog page
-    Add footer links for tags and types
 Data
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     add tags for each listing manually
@@ -15,14 +7,16 @@ UX
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
     shows no results and no more results when no results
+    "Request Quote" or "Contact Directly" modal
+    Inquiry form copy and flow
 UI
     1290-1300 screen size long listing name gets in the way of favorite button
 Devon
     Need icons for bandcamp, tiktok, soundcloud, x, spotify, apple music
     improved skeleton
-    Fonts 404s
     verified icon
     No search results with personality
+    Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
 Security
     audit rest api inputs and html api inputs
 Performance

@@ -4,8 +4,9 @@
 <!-- Categories and genres -->
 <?php
 foreach((array) $args['categories'] as $category) {
+    $search_term = str_replace("'", "\'", $category);
 ?>
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="searchInput = '<?php echo str_replace("'", "\'", $category); ?>'; showSearchOptions = false;" >
+    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qsearch=" . $search_term; ?>" x-on:click="showSearchOptions = false;" >
         <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
         <?php echo $category; ?>
     </a>
@@ -22,8 +23,9 @@ foreach((array) $args['categories'] as $category) {
 <!-- Listings -->
 <?php
 foreach((array) $args['listings'] as $listing) {
+    $search_term = str_replace("'", "\'", $listing['name']);
 ?>
-    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="#" x-on:click="searchInput = '<?php echo str_replace("'", "\'", $listing['name']); ?>'; showSearchOptions = false;" >
+    <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qsearch=" . $search_term; ?>" x-on:click="showSearchOptions = false;" >
         <div class="w-6 aspect-square shrink-0">
             <img class="w-full h-full object-cover" src="<?php echo $listing['thumbnail_url']; ?>" />
         </div>

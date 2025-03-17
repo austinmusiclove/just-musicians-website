@@ -26,10 +26,10 @@ get_header();
             showSlide3: false,
             showSlide4: false,
             showSlide5: false,
-            searchVal: '',
-            genresCheckboxes: [],
-            typesCheckboxes: [],
-            tagsCheckboxes: [],
+            searchVal: searchInput,
+            genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
+            typesCheckboxes: [<?php if (!empty($_GET['qtype'])) { echo "'" . $_GET['qtype'] . "'"; } ?>],
+            tagsCheckboxes: [<?php if (!empty($_GET['qtag'])) { echo "'" . $_GET['qtag'] . "'"; } ?>],
             verifiedCheckbox: false,
             get selectedFilters() {
                 return [...this.genresCheckboxes, ...this.typesCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');

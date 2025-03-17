@@ -43,13 +43,14 @@
             width: 0,
             showFavModal: false,
             showLoginModal: false,
+            showInquiryModalPlaceholder: false,
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile() { return this.showSearchOptions && this.width < 768 },
             showMobileMenu: false,
             showMobileMenuDropdown: false,
             showMobileFilters: false,
-            searchInput: '',
+            searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
         }"
         x-init="width = window.innerWidth"
         x-resize.document="
@@ -74,10 +75,10 @@
             <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
                 x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
-                x-on:keyup.enter="searchInput = $el.value"
+                x-on:keyup.enter="location.href = '/?qsearch=' + $el.value"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
-                hx-get="wp-html/v1/search-options"
+                hx-get="<?php echo get_site_url(); ?>/wp-html/v1/search-options"
                 hx-trigger="input changed delay:300ms, updatesearchoptions"
                 hx-target="#active-search-results-desktop"
               />
@@ -91,7 +92,7 @@
               <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
               <input class="w-full h-full py-2 pr-3 pl-5" type="text" placeholder="Austin, Texas" disabled />
             </div>
-            <button class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="searchInput = $refs.desktopSearchInput.value">
+            <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + $refs.desktopSearchInput.value">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
             </button>
           </div>
@@ -102,19 +103,19 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesBandCheckbox').click() });">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Band">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                   Bands
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesMusicianCheckbox').click() });">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Musician">
                   <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
                   Musicians
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('typesDJCheckbox').click() });">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=DJ">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
                   DJs
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#" x-on:click="document.getElementById('clear-form').click(); $nextTick(() => { document.getElementById('tagsWeddingBandCheckbox').click() });">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtag=Wedding Band">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
                   Wedding Music
                 </a>
@@ -152,5 +153,10 @@
             'alpine_show_var' => 'showFavModal',
             'heading' => 'Coming Soon',
             'paragraph' => 'Favorites and the ability to create custom lists are both coming soon for signed in users.',
+        ]);
+        echo get_template_part('template-parts/global/modal', '', [
+            'alpine_show_var' => 'showInquiryModalPlaceholder',
+            'heading' => 'Coming Soon',
+            'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',
         ]);
     ?>

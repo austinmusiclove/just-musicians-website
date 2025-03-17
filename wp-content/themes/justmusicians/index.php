@@ -15,23 +15,40 @@ get_header();
 ?>
 
 <header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php echo $header_padding; ?>">
+    <?php
+    $featured_query = new WP_Query([
+        'category_name' => 'Featured',
+        'posts_per_page' => 1,
+    ]);
+    if ($featured_query->have_posts()) :
+        while ( $featured_query->have_posts() ) : $featured_query->the_post();
+    ?>
+
     <img class="w-32 absolute top-0 right-0 z-10" src="<?php echo get_template_directory_uri() . '/lib/images/other/violator-blog.svg'; ?>" />
-    <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative"> 
+    <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">
 
 
     <div class="sm:col-span-3 flex flex-col justify-center">
         <div class="w-full">
             <div class="w-full aspect-4/3 shadow-black-offset border-2 border-black relative">
-                <img class="h-full w-full object-cover" src="<?php echo get_template_directory_uri(); ?>/lib/images/placeholder/eric-tessmer.jpg" />
+                <?= un_get_featured_image(get_post_thumbnail_id(), 'medium', ['class' => 'h-full w-full object-cover']) ?>
+                <!--<img class="h-full w-full object-cover" src="<?php echo get_template_directory_uri(); ?>/lib/images/placeholder/eric-tessmer.jpg" />-->
             </div>
         </div>
-    </div>  
-    <div class="sm:col-span-4 flex flex-col gap-y-6 justify-center">
-        <div class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block w-fit font-bold">Nov 11, 2024</div>
-        <h1 class="font-bold text-32 md:text-36 lg:text-40">Beyond the Hits: 10 Under-the-Radar Bands You Need to Hear This Month</h1>
-        <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold">John Filippone</div>
-        <a class="font-bold text-36 font-sans text-yellow inline-block hover:text-black" href="#">Read &rarr;</a>
     </div>
+    <div class="sm:col-span-4 flex flex-col gap-y-6 justify-center">
+        <div class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block w-fit font-bold"><?php the_date(); ?></div>
+        <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
+        <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold"><?php the_author(); ?></div>
+        <a class="font-bold text-36 font-sans text-yellow inline-block hover:text-black" href="<?php the_permalink(); ?>">Read &rarr;</a>
+    </div>
+
+    <?php
+        endwhile;
+        wp_reset_postdata();
+    endif;
+    ?>
+
 
 
     </div>
@@ -42,13 +59,13 @@ get_header();
 
     <div class="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-8 md:gap-20 xl:gap-24">
         <div class="col-span-4 xl:col-span-5 grid md:grid-cols-2 gap-20 xl:gap-x-24 gap-y-8">
-        <?php 
+        <?php
             if ( have_posts() ) {
                 $count = 0;
                 global $wp_query;
                 $post_count = $wp_query->post_count;
                 while ( have_posts() ) {
-                    the_post(); 
+                    the_post();
                     $count++;
                 if ($count == $post_count - 1) {
                     $border = 'border-b border-black/20 pb-8 md:border-0';
@@ -69,9 +86,9 @@ get_header();
                     <a class="font-bold text-25 font-sans text-yellow inline-block hover:scale-105" href="<?php echo esc_url(get_the_permalink()); ?>">Read &rarr;</a>
 
                  </div>
-        <?php 
-                } 
-            } 
+        <?php
+                }
+            }
         ?>
 
         </div>
@@ -80,11 +97,11 @@ get_header();
                 <?php echo get_template_part('template-parts/global/form-quote', '', array(
                     'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
                     'responsive' => 'lg:border-none lg:p-0'
-                )); ?> 
+                )); ?>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <?php
