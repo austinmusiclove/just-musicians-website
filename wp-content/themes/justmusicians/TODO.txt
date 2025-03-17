@@ -9,6 +9,7 @@ UX
     shows no results and no more results when no results
     "Request Quote" or "Contact Directly" modal
     Inquiry form copy and flow
+    Num performers range filter
 UI
     1290-1300 screen size long listing name gets in the way of favorite button
 Devon

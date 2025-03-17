@@ -11,28 +11,30 @@
         </div>
         <!-- Dropdown menu -->
         <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown" x-transition x-cloak>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Band">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                 Bands
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Musician">
                 <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
                 Solo/Duo
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=DJ">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
                 DJs
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtag=Wedding Music">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
                 Wedding Music
             </a>
         </div>
 
     </div>
+    <!--
     <div class="<?php echo $class; ?>">
         <a class="font-sun-motter" href="#">Reviews</a>
     </div>
+    -->
 
 
     </div>
