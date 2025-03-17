@@ -29,7 +29,7 @@ if (count($listings) > 0) {
             'genres' => $genres,
             'thumbnail_url' => $listing['thumbnail_url'],
             'facebook_url' => $listing['facebook_url'],
-            'intagram_url' => $listing['instagram_url'],
+            'instagram_url' => $listing['instagram_url'],
             'x_url' => $listing['x_url'],
             'youtube_url' => $listing['youtube_url'],
             'tiktok_url' => $listing['tiktok_url'],
