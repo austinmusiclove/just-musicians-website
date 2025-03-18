@@ -18,7 +18,7 @@
         <?php echo get_template_part('template-parts/search/filters', '', ['device' => 'mobile']); ?>
 
         <div class="bg-white py-4 px-4 fixed bottom-0 left-0 w-screen">
-            <button type="button" class="bg-navy w-full shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3">Update</button>
+            <button type="button" class="bg-navy w-full shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3" x-on:click="showMobileFilters = false" >Update</button>
         </div>
 
     </div>

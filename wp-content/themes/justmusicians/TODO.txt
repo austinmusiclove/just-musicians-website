@@ -2,6 +2,7 @@ Data
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     add tags for each listing manually
 UX
+    update button in mobile filter does not close modal
     media slider
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
