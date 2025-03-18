@@ -25,7 +25,7 @@
             <?php echo $args['location']; ?>
         </span>
         <p class="text-14"><?php echo $args['description']; ?></p>
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-1 flex-wrap">
             <?php foreach((array) $args['genres'] as $genre) { ?>
             <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"><?php echo $genre; ?></span><?php
             } ?>
