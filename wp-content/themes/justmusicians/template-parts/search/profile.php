@@ -15,13 +15,22 @@
     <?php
     if (count($args['youtube_video_ids']) > 0) { ?>
 
-        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl mx-auto overflow-hidden" x-data="{ currentIndex: 0, totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?> }">
+        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden" x-data="{ currentIndex: 0, totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?> }">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentIndex * 100}%)`">
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
 
                 <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
 
-                    <iframe width="210" src="https://www.youtube.com/embed/<?php echo $video_id; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
+                        <iframe class="w-full h-full object-cover"
+                            src="https://www.youtube.com/embed/<?php echo $video_id; ?>"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
 
                 <?php } ?>
 
