@@ -12,11 +12,35 @@
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
     </button>
 
-    <div class="w-full sm:w-56 shrink-0">
-        <div class="bg-yellow-light aspect-4/3">
-            <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+    <?php
+    if (count($args['youtube_video_ids']) > 0) { ?>
+
+        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl mx-auto overflow-hidden" x-data="{ currentIndex: 0, totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?> }">
+            <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentIndex * 100}%)`">
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+
+                <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
+
+                    <iframe width="210" src="https://www.youtube.com/embed/<?php echo $video_id; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <?php } ?>
+
+            </div>
+            <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
+                  <button type="button" class="bg-black text-white p-2 rounded-full text-lg" @click="currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1">&#10094;</button>
+                  <button type="button" class="bg-black text-white p-2 rounded-full text-lg" @click="currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1">&#10095;</button>
+            </div>
         </div>
-    </div>
+
+    <?php } else {?>
+
+        <div class="w-full sm:w-56 shrink-0">
+            <div class="bg-yellow-light aspect-4/3">
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+            </div>
+        </div>
+
+    <?php } ?>
 
     <div class="py-2 flex flex-col gap-y-2">
         <h2 class="text-22 font-bold"><a href="#"><?php echo $args['name']; ?></a></h2>

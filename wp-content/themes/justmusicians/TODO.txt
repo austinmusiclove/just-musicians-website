@@ -1,9 +1,17 @@
 Data
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     add tags for each listing manually
+    check social links and youtube videos for 404s
 UX
-    update button in mobile filter does not close modal
     media slider
+    Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
+    Add search bar to category modal
+    Add Filters
+        sub genre
+        instrumentation
+        events
+        ensemble size
+        location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
@@ -19,6 +27,14 @@ Devon
     verified icon
     No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
+    display number of results
+Paid features
+    Advanced search filters
+        venues played
+        instagram followers
+        spotify monthly listeners
+        tiktok followers
+    Verification
 Security
     audit rest api inputs and html api inputs
 Performance
@@ -37,3 +53,4 @@ Code structure
     tags.php and tags-modal.php have the same preg replace function and it should maybe be a function because they need to match or else it will break
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
+

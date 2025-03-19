@@ -71,6 +71,16 @@ function get_listings($args) {
     $query = new WP_Query($query_args);
     while ($query->have_posts()) {
         $query->the_post();
+
+        // Get valid video links for this listing
+        $youtube_video_urls = get_field('youtube_video_urls');
+        $youtube_video_ids = [];
+        if ($youtube_video_urls) {
+            foreach($youtube_video_urls as $url) {
+              if (preg_match('/(?:https?:\/\/(?:www\.)?youtube\.com(?:\/[^\/]+)?\?v=([a-zA-Z0-9_-]+))/', $url, $matches)) { array_push($youtube_video_ids, $matches[1]); }
+            }
+        }
+
         array_push($results, [
             'title' => get_the_title(),
             'name' => get_field('name'),
@@ -88,6 +98,8 @@ function get_listings($args) {
             'spotify_artist_url' => get_field('spotify_artist_url'),
             'apple_music_artist_url' => get_field('apple_music_artist_url'),
             'soundcloud_url' => get_field('soundcloud_url'),
+            'youtube_video_urls' => get_field('youtube_video_urls'),
+            'youtube_video_ids' => $youtube_video_ids,
         ]);
     }
 

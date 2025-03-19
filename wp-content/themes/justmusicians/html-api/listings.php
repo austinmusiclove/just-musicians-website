@@ -37,6 +37,8 @@ if (count($listings) > 0) {
             'spotify_artist_url' => $listing['spotify_artist_url'],
             'apple_music_artist_url' => $listing['apple_music_artist_url'],
             'soundcloud_url' => $listing['soundcloud_url'],
+            'youtube_video_urls' => $listing['youtube_video_urls'],
+            'youtube_video_ids' => $listing['youtube_video_ids'],
             'last' => $index == array_key_last($listings),
             'next_page' => $next_page,
         ]);
