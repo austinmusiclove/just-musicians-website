@@ -81,13 +81,13 @@
 
             </div>
             <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
-                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 left-4">
+                <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
                     <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
                         @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
                         x-on:mouseout="playCurrentPlayer()"
                     > &#10094; </button>
                 </div>
-                <div class="absolute top-1/2 right-0 transform -translate-y-1/2 right-4">
+                <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
                     <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
                         @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
                         x-on:mouseout="playCurrentPlayer()"
