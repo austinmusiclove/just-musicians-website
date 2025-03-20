@@ -35,13 +35,11 @@
                     this.players[videoId] = player;
                 },
                 pausePlayer(videoId) {
-                    console.log("pause: " + videoId);
                     if (videoId && this.players[videoId]) {
                         this.players[videoId].pauseVideo();
                     }
                 },
                 playPlayer(videoId) {
-                    console.log("play: " + videoId);
                     if (videoId && this.players[videoId]) {
                         this.players[videoId].playVideo();
                     }
