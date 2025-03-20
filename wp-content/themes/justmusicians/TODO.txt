@@ -4,6 +4,7 @@ Data
     check social links and youtube videos for 404s
 UX
     media slider
+        mute button
     Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
     Add search bar to category modal
     Add Filters

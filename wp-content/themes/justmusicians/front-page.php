@@ -36,7 +36,7 @@ get_header();
             },
             get selectedFiltersCount() {
                 return [...this.genresCheckboxes, ...this.typesCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
-            }
+            },
         }"
         hx-get="wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
@@ -65,6 +65,10 @@ get_header();
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
                         <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
                     </div>
+
+                    <script>
+                        window.onYouTubeIframeAPIReady = function () { document.dispatchEvent(new Event('youtube-api-ready')); };
+                    </script>
 
                     <span id="results">
                         <?php

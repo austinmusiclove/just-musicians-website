@@ -15,29 +15,86 @@
     <?php
     if (count($args['youtube_video_ids']) > 0) { ?>
 
-        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden" x-data="{ currentIndex: 0, totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?> }">
-            <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentIndex * 100}%)`">
+        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
+            x-data='{
+                previousIndex: 0,
+                currentIndex: 0,
+                totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?>,
+                videos: [null, ...<?php echo json_encode($args['youtube_video_ids']); ?>], // add a null as the first element to correspond to the thumbnail image as the first slide
+                players: {},
+                initPlayer(videoId) {
+                    var player = new YT.Player("youtube-player-" + videoId, {
+                        videoId: videoId,
+                        playerVars: {
+                            controls: 0,
+                            enablejsapi: 1,
+                            origin: "<?php echo site_url(); ?>",
+                            rel: 0,
+                        },
+                    });
+                    this.players[videoId] = player;
+                },
+                pausePlayer(videoId) {
+                    console.log("pause: " + videoId);
+                    if (videoId && this.players[videoId]) {
+                        this.players[videoId].pauseVideo();
+                    }
+                },
+                playPlayer(videoId) {
+                    console.log("play: " + videoId);
+                    if (videoId && this.players[videoId]) {
+                        this.players[videoId].playVideo();
+                    }
+                },
+                pauseCurrentPlayer() {
+                    this.pausePlayer(this.videos[this.currentIndex]);
+                },
+                playCurrentPlayer() {
+                    this.playPlayer(this.videos[this.currentIndex]);
+                },
+                updateIndex(newIndex) {
+                    this.previousIndex = this.currentIndex; // Save the previous index before updating
+                    this.currentIndex = newIndex;            // Update to the new index
+                },
+            }'
+            x-init="() => {
+                document.addEventListener('youtube-api-ready', () => {
+                    videos.forEach(videoId => initPlayer(videoId));
+                }, {once: true});
+                if (typeof YT!= 'undefined') {
+                    document.dispatchEvent(new Event('youtube-api-ready'));
+                }
+            };"
+            >
+            <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
+                :style="`transform: translateX(-${currentIndex * 100}%)`"
+                @transitionend="pausePlayer(videos[previousIndex]); playPlayer(videos[currentIndex])">
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
 
                 <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
 
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
-                        <iframe class="w-full h-full object-cover"
-                            src="https://www.youtube.com/embed/<?php echo $video_id; ?>"
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
-                        </iframe>
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
+                        x-on:mouseout="pauseCurrentPlayer()"
+                        x-on:mouseenter="playCurrentPlayer()">
+                        <div id="youtube-player-<?php echo $video_id; ?>" class="w-full h-full object-cover"></div>
                     </div>
 
                 <?php } ?>
 
             </div>
             <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
-                  <button type="button" class="bg-black text-white p-2 rounded-full text-lg" @click="currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1">&#10094;</button>
-                  <button type="button" class="bg-black text-white p-2 rounded-full text-lg" @click="currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1">&#10095;</button>
+                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 left-4">
+                    <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
+                        @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                        x-on:mouseout="playCurrentPlayer()"
+                    > &#10094; </button>
+                </div>
+                <div class="absolute top-1/2 right-0 transform -translate-y-1/2 right-4">
+                    <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
+                        @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                        x-on:mouseout="playCurrentPlayer()"
+                    > &#10095; </button>
+                </div>
             </div>
         </div>
 

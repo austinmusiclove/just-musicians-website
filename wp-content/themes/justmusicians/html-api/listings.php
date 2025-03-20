@@ -16,12 +16,14 @@ $next_page = $result['next_page'];
 
 // Render listings
 if (count($listings) > 0) {
+    $all_video_ids = [];
     foreach($listings as $index => $listing) {
         $genres = [];
         $listing['genre'] ??= [];
         if (!empty($listing['genre'])) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
+        array_push($all_video_ids, ...$listing['youtube_video_ids']);
         get_template_part('template-parts/search/profile', '', [
             'name' => $listing['name'],
             'location' => $listing['city'] . ', ' . $listing['state'],
