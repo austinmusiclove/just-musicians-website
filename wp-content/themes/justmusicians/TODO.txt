@@ -21,6 +21,7 @@ UX
     "Request Quote" or "Contact Directly" modal
     Inquiry form copy and flow
     Num performers range filter
+    make filters sticky to the top as you scroll down
 UI
     1290-1300 screen size long listing name gets in the way of favorite button
 Devon
@@ -42,6 +43,7 @@ Security
 Performance
     only swap out the filter section that was altered
     reduce size of image retrieved for listings in active search options
+    use webp for images
 Tags/categories to add
     live looper
     background music

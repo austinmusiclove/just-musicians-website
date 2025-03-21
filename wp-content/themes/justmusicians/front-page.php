@@ -67,10 +67,75 @@ get_header();
                     </div>
 
                     <script>
+                        //var tag = document.createElement('script');
+                        //tag.src = "https://www.youtube.com/iframe_api";
+                        //var firstScriptTag = document.getElementsByTagName('script')[0];
+                        //firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                         window.onYouTubeIframeAPIReady = function () { document.dispatchEvent(new Event('youtube-api-ready')); };
                     </script>
 
-                    <span id="results">
+                    <span id="results"
+                        x-data='{
+                            players: {},
+                            initPlayerFromIframe(videoId) {
+                                //console.log("init from iframe: " + videoId);
+                                if (videoId) {
+                                    var player = new YT.Player(videoId, {
+                                        playerVars: {
+                                            controls: 0,
+                                            origin: "<?php echo site_url(); ?>",
+                                            enablejsapi: 1,
+                                        },
+                                        events: {
+                                            "onReady": () => {
+                                                //console.log("ready: " + videoId);
+                                                this.players[videoId].isReady = true;
+                                            }
+                                        }
+                                    });
+                                    this.players[videoId] = player;
+                                }
+                            },
+                            initPlayer(videoId) {
+                                //console.log("init: " + videoId);
+                                if (videoId) {
+                                    var player = new YT.Player(videoId, {
+                                        videoId: videoId,
+                                        playerVars: {
+                                            controls: 0,
+                                            origin: "<?php echo site_url(); ?>",
+                                            enablejsapi: 1,
+                                        },
+                                        events: {
+                                            "onReady": () => {
+                                                //console.log("ready: " + videoId);
+                                                this.players[videoId].isReady = true;
+                                            }
+                                        }
+                                    });
+                                    this.players[videoId] = player;
+                                }
+                            },
+                            pausePlayer(videoId) {
+                                //console.log("pause player: " + videoId);
+                                if (videoId && this.players[videoId] && this.players[videoId].isReady) {
+                                    this.players[videoId].pauseVideo();
+                                    //this.players[videoId].postMessage({ event: "command", func: "pauseVideo" }, "https://www.youtube.com");
+                                }
+                            },
+                            playPlayer(videoId) {
+                                //console.log("play player: " + videoId);
+                                if (videoId && this.players[videoId] && this.players[videoId].isReady) {
+                                    this.players[videoId].playVideo();
+                                    //this.players[videoId].postMessage({ event: "command", func: "playVideo" }, "https://www.youtube.com");
+
+                                }
+                            },
+                        }'
+                        x-on:init-youtube-player="initPlayerFromIframe($event.detail.videoId);"
+                        x-on:pause-youtube-player="pausePlayer($event.detail.videoId)"
+                        x-on:play-youtube-player="playPlayer($event.detail.videoId)"
+                    >
                         <?php
                             echo get_template_part('template-parts/search/profile-skeleton');
                             echo get_template_part('template-parts/search/profile-skeleton');

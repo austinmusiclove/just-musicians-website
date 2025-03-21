@@ -20,35 +20,16 @@
                 previousIndex: 0,
                 currentIndex: 0,
                 totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?>,
-                videos: [null, ...<?php echo json_encode($args['youtube_video_ids']); ?>], // add a null as the first element to correspond to the thumbnail image as the first slide
-                players: {},
-                initPlayer(videoId) {
-                    var player = new YT.Player("youtube-player-" + videoId, {
-                        videoId: videoId,
-                        playerVars: {
-                            controls: 0,
-                            enablejsapi: 1,
-                            origin: "<?php echo site_url(); ?>",
-                            rel: 0,
-                        },
-                    });
-                    this.players[videoId] = player;
-                },
-                pausePlayer(videoId) {
-                    if (videoId && this.players[videoId]) {
-                        this.players[videoId].pauseVideo();
+                videoIds: [null, ...<?php echo json_encode($args['youtube_video_ids']); ?>], // add a null as the first element to correspond to the thumbnail image as the first slide
+                pauseVideoById(videoId) {
+                    if (videoId) {
+                      $dispatch("pause-youtube-player", {"videoId": videoId});
                     }
                 },
-                playPlayer(videoId) {
-                    if (videoId && this.players[videoId]) {
-                        this.players[videoId].playVideo();
+                playVideoById(videoId) {
+                    if (videoId) {
+                        $dispatch("play-youtube-player", {"videoId": videoId});
                     }
-                },
-                pauseCurrentPlayer() {
-                    this.pausePlayer(this.videos[this.currentIndex]);
-                },
-                playCurrentPlayer() {
-                    this.playPlayer(this.videos[this.currentIndex]);
                 },
                 updateIndex(newIndex) {
                     this.previousIndex = this.currentIndex; // Save the previous index before updating
@@ -57,25 +38,40 @@
             }'
             x-init="() => {
                 document.addEventListener('youtube-api-ready', () => {
-                    videos.forEach(videoId => initPlayer(videoId));
+                    videoIds.forEach(videoId => {
+                        if (videoId) { $dispatch('init-youtube-player', {'videoId': videoId}); }
+                    });
                 }, {once: true});
                 if (typeof YT!= 'undefined') {
-                    document.dispatchEvent(new Event('youtube-api-ready'));
+                    $dispatch('youtube-api-ready');
+                    //document.dispatchEvent(new Event('youtube-api-ready'));
                 }
             };"
             >
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%)`"
-                @transitionend="pausePlayer(videos[previousIndex]); playPlayer(videos[currentIndex])">
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+                @transitionend="pauseVideoById(videoIds[previousIndex]); playVideoById(videoIds[currentIndex]);">
+                <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
 
                 <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
-
                     <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                        x-on:mouseout="pauseCurrentPlayer()"
-                        x-on:mouseenter="playCurrentPlayer()">
-                        <div id="youtube-player-<?php echo $video_id; ?>" class="w-full h-full object-cover"></div>
+                        x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
+                        x-on:mouseenter="playVideoById(videoIds[currentIndex])">
+                        <iframe id="<?php echo $video_id; ?>"
+                            class="aspect-4/3 w-full h-full object-cover"
+                            src="https://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1&controls=0&origin=<?php echo site_url(); ?>"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                        ></iframe>
                     </div>
+
+                <!--
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
+                        x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
+                        x-on:mouseenter="playVideoById(videoIds[currentIndex])">
+                        <div id="<?php echo $video_id; ?>" class="w-full h-full object-cover"></div>
+                    </div>
+                -->
 
                 <?php } ?>
 
@@ -84,13 +80,13 @@
                 <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
                     <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
                         @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-                        x-on:mouseout="playCurrentPlayer()"
+                        x-on:mouseout="playVideoById(videoIds[currentIndex])"
                     > &#10094; </button>
                 </div>
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
                     <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
                         @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-                        x-on:mouseout="playCurrentPlayer()"
+                        x-on:mouseout="playVideoById(videoIds[currentIndex])"
                     > &#10095; </button>
                 </div>
             </div>
