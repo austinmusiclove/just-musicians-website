@@ -2,6 +2,7 @@ Data
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     add tags for each listing manually
     check social links and youtube videos for 404s
+    fix tiktok urls; need @ in front of handle in url
 UX
     media slider
         mute button

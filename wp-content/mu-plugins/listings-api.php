@@ -89,6 +89,7 @@ function get_listings($args) {
             'description' => get_field('description'),
             'genre' => get_the_terms(get_the_ID(), 'genre'),
             'thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'small'),
+            'website' => get_field('website'),
             'facebook_url' => get_field('facebook_url'),
             'instagram_url' => get_field('instagram_url'),
             'x_url' => get_field('x_url'),

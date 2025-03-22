@@ -115,12 +115,26 @@
             } ?>
         </div>
         <div class="flex items-center gap-1">
-            <?php if (!empty($args['instagram_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['instagram_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/instagram.svg'; ?>" /></a>
+            <?php if (!empty($args['website'])) { ?>
+                <a target="_blank" href="<?php echo $args['website']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Website.svg'; ?>" /></a>
+            <?php } if (!empty($args['instagram_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['instagram_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" /></a>
             <?php } if (!empty($args['facebook_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['facebook_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/facebook.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['facebook_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" /></a>
             <?php } if (!empty($args['youtube_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['youtube_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/youtube.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['youtube_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" /></a>
+            <?php } if (!empty($args['x_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['x_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" /></a>
+            <?php } if (!empty($args['tiktok_url'])) { ?>
+                <!--<a target="_blank" href="<?php echo $args['tiktok_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" /></a>-->
+            <?php } if (!empty($args['bandcamp_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['bandcamp_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" /></a>
+            <?php } if (!empty($args['spotify_artist_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['spotify_artist_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" /></a>
+            <?php } if (!empty($args['apple_music_artist_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['apple_music_artist_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_AppleMusic.svg'; ?>" /></a>
+            <?php } if (!empty($args['soundcloud_url'])) { ?>
+                <a target="_blank" href="<?php echo $args['soundcloud_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" /></a>
             <?php } ?>
         </div>
     </div>
