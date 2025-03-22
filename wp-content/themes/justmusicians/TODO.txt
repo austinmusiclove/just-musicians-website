@@ -7,6 +7,10 @@ UX
     media slider
         mute button
         bug: video keeps playing if you scroll away from video while slide animation is happening
+        play button on thumbnail that moves slider to next slide
+        pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
+        pause if window is not in focus? or when change tab? check fiverr
+        remove left or right arrow when there is no more items in that direction
     Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
     Add search bar to category modal
     Add Filters
@@ -26,12 +30,15 @@ UX
 UI
     1290-1300 screen size long listing name gets in the way of favorite button
 Devon
-    Need icons for bandcamp, tiktok, soundcloud, x, spotify, apple music
+    new pages
+        log in modal
+        listing landing page
+        create/edit listing
+    display number of results
     improved skeleton
     verified icon
     No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
-    display number of results
 Paid features
     Advanced search filters
         venues played
