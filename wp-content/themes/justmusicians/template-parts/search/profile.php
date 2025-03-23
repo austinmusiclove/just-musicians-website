@@ -44,7 +44,6 @@
                 }, {once: true});
                 if (typeof YT!= 'undefined') {
                     $dispatch('youtube-api-ready');
-                    //document.dispatchEvent(new Event('youtube-api-ready'));
                 }
             };"
             >
@@ -64,14 +63,6 @@
                             referrerpolicy="strict-origin-when-cross-origin"
                         ></iframe>
                     </div>
-
-                <!--
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                        x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
-                        x-on:mouseenter="playVideoById(videoIds[currentIndex])">
-                        <div id="<?php echo $video_id; ?>" class="w-full h-full object-cover"></div>
-                    </div>
-                -->
 
                 <?php } ?>
 

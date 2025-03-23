@@ -71,8 +71,6 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
 ));
 $default_types = array_values(array_diff(['Sound Engineer', 'Producer', 'Artist', 'Musician', 'DJ', 'Band'], $valid_types));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
-    'vt' => $valid_types,
-    'dt' => $default_types,
     'id' => 'type-filters',
     'title' => 'Type',
     'input_name' => 'types', // should match the input name used for the tag check boxes
