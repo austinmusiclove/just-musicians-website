@@ -94,7 +94,12 @@
     <?php } ?>
 
     <div class="py-2 flex flex-col gap-y-2">
-        <h2 class="text-22 font-bold"><a href="#"><?php echo $args['name']; ?></a></h2>
+        <div class="flex flex-row">
+            <h2 class="text-22 font-bold"><a href="#"><?php echo $args['name']; ?></a></h2>
+            <?php if ($args['verified']) { ?>
+                <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/certificate-solid.svg'; ?>" />
+            <?php } ?>
+        </div>
         <span class="text-14 flex items-center">
             <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
             <?php echo $args['location']; ?>

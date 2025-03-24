@@ -99,6 +99,7 @@ function get_listings($args) {
             'spotify_artist_url' => get_field('spotify_artist_url'),
             'apple_music_artist_url' => get_field('apple_music_artist_url'),
             'soundcloud_url' => get_field('soundcloud_url'),
+            'verified' => get_field('verified'),
             'youtube_video_urls' => get_field('youtube_video_urls'),
             'youtube_video_ids' => $youtube_video_ids,
         ]);

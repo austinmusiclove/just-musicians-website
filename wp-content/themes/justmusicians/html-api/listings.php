@@ -40,6 +40,7 @@ if (count($listings) > 0) {
             'soundcloud_url' => $listing['soundcloud_url'],
             'youtube_video_urls' => $listing['youtube_video_urls'],
             'youtube_video_ids' => $listing['youtube_video_ids'],
+            'verified' => $listing['verified'],
             'lazyload_thumbnail' => $index >= 3,
             'last' => $index == array_key_last($listings),
             'next_page' => $next_page,
