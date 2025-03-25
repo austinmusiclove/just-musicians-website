@@ -3,7 +3,7 @@
 function get_default_option($filter, $index) {
     switch ($filter) {
         case 'category':
-            return ['Band', 'DJ', 'Musician', 'Cover Band'][$index];
+            return ['Band', 'DJ', 'Solo Artist', 'Cover Band'][$index];
         case 'genre':
             return ['Folk', 'Hip Hop', 'Latin', 'Soul'][$index];
         case 'subgenre':

@@ -15,9 +15,9 @@
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                 Bands
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Musician">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Solo Artist">
                 <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
-                Solo/Duo
+                Solo Artists
             </a>
             <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=DJ">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
@@ -30,11 +30,9 @@
         </div>
 
     </div>
-    <!--
     <div class="<?php echo $class; ?>">
-        <a class="font-sun-motter" href="#">Reviews</a>
+        <a class="font-sun-motter" href="/blog">Blog</a>
     </div>
-    -->
 
 
     </div>
