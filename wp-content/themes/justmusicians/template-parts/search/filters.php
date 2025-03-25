@@ -12,7 +12,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showTypeModal'
+        'show_modal_var' => 'showTypeModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -26,7 +26,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showGenreModal'
+        'show_modal_var' => 'showGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
@@ -40,7 +40,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showSubGenreModal'
+        'show_modal_var' => 'showSubGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
@@ -54,7 +54,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showInstrumentationModal'
+        'show_modal_var' => 'showInstrumentationModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
@@ -68,7 +68,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showSettingModal'
+        'show_modal_var' => 'showSettingModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'tag-filters',
@@ -82,7 +82,7 @@
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'alpine_modal_var' => 'showTagModal'
+        'show_modal_var' => 'showTagModal'
     ));
     //echo get_template_part('template-parts/filters/location', '', array());
 

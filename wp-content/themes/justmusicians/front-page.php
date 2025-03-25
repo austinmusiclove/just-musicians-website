@@ -43,6 +43,10 @@ get_header();
             get selectedFiltersCount() {
                 return [...this.typesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
             },
+            tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
+            showTagModalOption(option) {
+                return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
+            },
         }"
         hx-get="wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
@@ -172,7 +176,7 @@ get_header();
                         'name' => 'instrumentations',
                         'x-model' => 'instrumentationsCheckboxes',
                         'x-show' => 'showInstrumentationModal',
-                        'has_search_bar' => false,
+                        'has_search_bar' => true,
                     ]);
                     $settings = get_terms([ 'taxonomy' => 'setting', 'fields' => 'names', 'hide_empty' => false, ]);
                     echo get_template_part('template-parts/filters/tag-modal', '', [

@@ -18,7 +18,6 @@ UX
     Add search bar to category modal
     Add Filters
         make sure taxonomy with ' and " works
-        fix filter buttons in sidebar
         ensemble size
         location
         something about providing sound equipment

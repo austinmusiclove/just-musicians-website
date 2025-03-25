@@ -74,7 +74,7 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_types[1]),
     'tag_3_selected' => !empty($valid_types[2]),
     'tag_4_selected' => !empty($valid_types[3]),
-    'alpine_modal_var' => 'showTypeModal'
+    'show_modal_var' => 'showTypeModal'
 ));
 $default_genres = array_values(array_diff([get_default_option('genre', 3), get_default_option('genre', 2), get_default_option('genre', 1), get_default_option('genre', 0)], $valid_genres));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -89,7 +89,7 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_genres[1]),
     'tag_3_selected' => !empty($valid_genres[2]),
     'tag_4_selected' => !empty($valid_genres[3]),
-    'alpine_modal_var' => 'showGenreModal'
+    'show_modal_var' => 'showGenreModal'
 ));
 $default_subgenres = array_values(array_diff([get_default_option('subgenre', 3), get_default_option('subgenre', 2), get_default_option('subgenre', 1), get_default_option('subgenre', 0)], $valid_subgenres));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -104,7 +104,7 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_subgenres[1]),
     'tag_3_selected' => !empty($valid_subgenres[2]),
     'tag_4_selected' => !empty($valid_subgenres[3]),
-    'alpine_modal_var' => 'showSubGenreModal'
+    'show_modal_var' => 'showSubGenreModal'
 ));
 $default_instrumentations = array_values(array_diff([get_default_option('instrumentation', 3), get_default_option('instrumentation', 2), get_default_option('instrumentation', 1), get_default_option('instrumentation', 0)], $valid_instrumentations));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -119,7 +119,7 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_instrumentations[1]),
     'tag_3_selected' => !empty($valid_instrumentations[2]),
     'tag_4_selected' => !empty($valid_instrumentations[3]),
-    'alpine_modal_var' => 'showInstrumentationModal'
+    'show_modal_var' => 'showInstrumentationModal'
 ));
 $default_settings = array_values(array_diff([get_default_option('setting', 3), get_default_option('setting', 2), get_default_option('setting', 1), get_default_option('setting', 0)], $valid_settings));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -134,7 +134,7 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_settings[1]),
     'tag_3_selected' => !empty($valid_settings[2]),
     'tag_4_selected' => !empty($valid_settings[3]),
-    'alpine_modal_var' => 'showSettingModal'
+    'show_modal_var' => 'showSettingModal'
 ));
 $default_tags = array_values(array_diff(['Punk Band', 'Live Looper', 'Orchestral', 'Background Music', 'Wedding Band', 'Cover Band', 'Acoustic'], $valid_tags));
 $default_tags = array_values(array_diff([get_default_option('tag', 3), get_default_option('tag', 2), get_default_option('tag', 1), get_default_option('tag', 0)], $valid_tags));
@@ -150,5 +150,5 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_2_selected' => !empty($valid_tags[1]),
     'tag_3_selected' => !empty($valid_tags[2]),
     'tag_4_selected' => !empty($valid_tags[3]),
-    'alpine_modal_var' => 'showTagModal'
+    'show_modal_var' => 'showTagModal'
 ));
