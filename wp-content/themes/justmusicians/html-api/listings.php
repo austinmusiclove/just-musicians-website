@@ -2,16 +2,22 @@
 // Get listings
 $result = get_listings([
     'search' => $_GET['search'],
-    'genres' => $_GET['genres'],
     'types' => $_GET['types'],
+    'genres' => $_GET['genres'],
+    'subgenres' => $_GET['subgenres'],
+    'instrumentations' => $_GET['instrumentations'],
+    'settings' => $_GET['settings'],
     'tags' => $_GET['tags'],
     'verified' => $_GET['verified'],
     'page' => $_GET['page'],
 ]);
 $listings = $result['listings'];
-$valid_genres = $result['valid_genres'];
-$valid_tags = $result['valid_tags'];
 $valid_types = $result['valid_types'];
+$valid_genres = $result['valid_genres'];
+$valid_subgenres = $result['valid_subgenres'];
+$valid_instrumentations = $result['valid_instrumentations'];
+$valid_settings = $result['valid_settings'];
+$valid_tags = $result['valid_tags'];
 $next_page = $result['next_page'];
 
 // Render listings
@@ -55,7 +61,22 @@ if (count($listings) > 0) {
 
 // Render Filters
 // TODO only swap out the filter section that was altered
-$default_genres = array_values(array_diff(['Country', 'Rock', 'Pop', 'Soul/RnB', 'Latin', 'Hip Hop/Rap', 'Folk'], $valid_genres));
+$default_types = array_values(array_diff([get_default_option('type', 3), get_default_option('type', 2), get_default_option('type', 1), get_default_option('type', 0)], $valid_types));
+echo get_template_part('template-parts/filters/elements/tags', '', array(
+    'id' => 'type-filters',
+    'title' => 'Listing Type',
+    'input_name' => 'types', // should match the input name used for the tag check boxes
+    'tag_1' => $valid_types[0] ?? array_pop($default_types),
+    'tag_2' => $valid_types[1] ?? array_pop($default_types),
+    'tag_3' => $valid_types[2] ?? array_pop($default_types),
+    'tag_4' => $valid_types[3] ?? array_pop($default_types),
+    'tag_1_selected' => !empty($valid_types[0]),
+    'tag_2_selected' => !empty($valid_types[1]),
+    'tag_3_selected' => !empty($valid_types[2]),
+    'tag_4_selected' => !empty($valid_types[3]),
+    'alpine_modal_var' => 'showTypeModal'
+));
+$default_genres = array_values(array_diff([get_default_option('genre', 3), get_default_option('genre', 2), get_default_option('genre', 1), get_default_option('genre', 0)], $valid_genres));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
     'id' => 'genre-filters',
     'title' => 'Genre',
@@ -70,25 +91,56 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_4_selected' => !empty($valid_genres[3]),
     'alpine_modal_var' => 'showGenreModal'
 ));
-$default_types = array_values(array_diff(['Sound Engineer', 'Producer', 'Artist', 'Musician', 'DJ', 'Band'], $valid_types));
+$default_subgenres = array_values(array_diff([get_default_option('subgenre', 3), get_default_option('subgenre', 2), get_default_option('subgenre', 1), get_default_option('subgenre', 0)], $valid_subgenres));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
-    'id' => 'type-filters',
-    'title' => 'Type',
-    'input_name' => 'types', // should match the input name used for the tag check boxes
-    'tag_1' => $valid_types[0] ?? array_pop($default_types),
-    'tag_2' => $valid_types[1] ?? array_pop($default_types),
-    'tag_3' => $valid_types[2] ?? array_pop($default_types),
-    'tag_4' => $valid_types[3] ?? array_pop($default_types),
-    'tag_1_selected' => !empty($valid_types[0]),
-    'tag_2_selected' => !empty($valid_types[1]),
-    'tag_3_selected' => !empty($valid_types[2]),
-    'tag_4_selected' => !empty($valid_types[3]),
-    'alpine_modal_var' => 'showTypeModal'
+    'id' => 'subgenre-filters',
+    'title' => 'Sub Genre',
+    'input_name' => 'subgenres',
+    'tag_1' => $valid_subgenres[0] ?? array_pop($default_subgenres),
+    'tag_2' => $valid_subgenres[1] ?? array_pop($default_subgenres),
+    'tag_3' => $valid_subgenres[2] ?? array_pop($default_subgenres),
+    'tag_4' => $valid_subgenres[3] ?? array_pop($default_subgenres),
+    'tag_1_selected' => !empty($valid_subgenres[0]),
+    'tag_2_selected' => !empty($valid_subgenres[1]),
+    'tag_3_selected' => !empty($valid_subgenres[2]),
+    'tag_4_selected' => !empty($valid_subgenres[3]),
+    'alpine_modal_var' => 'showSubGenreModal'
+));
+$default_instrumentations = array_values(array_diff([get_default_option('instrumentation', 3), get_default_option('instrumentation', 2), get_default_option('instrumentation', 1), get_default_option('instrumentation', 0)], $valid_instrumentations));
+echo get_template_part('template-parts/filters/elements/tags', '', array(
+    'id' => 'instrumentation-filters',
+    'title' => 'Instrumentation',
+    'input_name' => 'instrumentations',
+    'tag_1' => $valid_instrumentations[0] ?? array_pop($default_instrumentations),
+    'tag_2' => $valid_instrumentations[1] ?? array_pop($default_instrumentations),
+    'tag_3' => $valid_instrumentations[2] ?? array_pop($default_instrumentations),
+    'tag_4' => $valid_instrumentations[3] ?? array_pop($default_instrumentations),
+    'tag_1_selected' => !empty($valid_instrumentations[0]),
+    'tag_2_selected' => !empty($valid_instrumentations[1]),
+    'tag_3_selected' => !empty($valid_instrumentations[2]),
+    'tag_4_selected' => !empty($valid_instrumentations[3]),
+    'alpine_modal_var' => 'showInstrumentationModal'
+));
+$default_settings = array_values(array_diff([get_default_option('setting', 3), get_default_option('setting', 2), get_default_option('setting', 1), get_default_option('setting', 0)], $valid_settings));
+echo get_template_part('template-parts/filters/elements/tags', '', array(
+    'id' => 'setting-filters',
+    'title' => 'Settings',
+    'input_name' => 'settings',
+    'tag_1' => $valid_settings[0] ?? array_pop($default_settings),
+    'tag_2' => $valid_settings[1] ?? array_pop($default_settings),
+    'tag_3' => $valid_settings[2] ?? array_pop($default_settings),
+    'tag_4' => $valid_settings[3] ?? array_pop($default_settings),
+    'tag_1_selected' => !empty($valid_settings[0]),
+    'tag_2_selected' => !empty($valid_settings[1]),
+    'tag_3_selected' => !empty($valid_settings[2]),
+    'tag_4_selected' => !empty($valid_settings[3]),
+    'alpine_modal_var' => 'showSettingModal'
 ));
 $default_tags = array_values(array_diff(['Punk Band', 'Live Looper', 'Orchestral', 'Background Music', 'Wedding Band', 'Cover Band', 'Acoustic'], $valid_tags));
+$default_tags = array_values(array_diff([get_default_option('tag', 3), get_default_option('tag', 2), get_default_option('tag', 1), get_default_option('tag', 0)], $valid_tags));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
-    'id' => 'category-filters',
-    'title' => 'Category',
+    'id' => 'tag-filters',
+    'title' => 'Other Categories',
     'input_name' => 'tags',
     'tag_1' => $valid_tags[0] ?? array_pop($default_tags),
     'tag_2' => $valid_tags[1] ?? array_pop($default_tags),

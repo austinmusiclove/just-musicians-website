@@ -17,11 +17,11 @@ UX
     Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
     Add search bar to category modal
     Add Filters
-        sub genre
-        instrumentation
-        events
+        make sure taxonomy with ' and " works
+        fix filter buttons in sidebar
         ensemble size
         location
+        something about providing sound equipment
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
@@ -41,8 +41,8 @@ Devon
         listing landing page
         create/edit listing
     display number of results
+    search bar in tag modal
     improved skeleton
-    verified icon
     No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
 Paid features
@@ -52,6 +52,8 @@ Paid features
         spotify monthly listeners
         tiktok followers
     Verification
+Back End
+    Allow modifying default filters from the theme customizor
 Security
     audit rest api inputs and html api inputs
 Deploy
@@ -60,17 +62,11 @@ Performance
     only swap out the filter section that was altered
     reduce size of image retrieved for listings in active search options
     use webp for images
-Tags/categories to add
-    live looper
-    background music
-    Orchestral
-    instruments (pianist, cellist, etc.)
 Future
     location filtering
     venues played filter
 Code structure
     create default options for each filter so that they can be used both on the initial load and on the api side; or maybe put the default option logic into the template part itself
-    tags.php and tags-modal.php have the same preg replace function and it should maybe be a function because they need to match or else it will break
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
 

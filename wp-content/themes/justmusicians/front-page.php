@@ -17,8 +17,11 @@ get_header();
 <div id="page" class="flex flex-col grow">
     <form id="listing-form"
         x-data="{
-            showGenreModal: false,
             showTypeModal: false,
+            showGenreModal: false,
+            showSubGenreModal: false,
+            showInstrumentationModal: false,
+            showSettingModal: false,
             showTagModal: false,
             showInquiryModal: false,
             showSlide1: false,
@@ -27,15 +30,18 @@ get_header();
             showSlide4: false,
             showSlide5: false,
             searchVal: searchInput,
-            genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
             typesCheckboxes: [<?php if (!empty($_GET['qtype'])) { echo "'" . $_GET['qtype'] . "'"; } ?>],
+            genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
+            subgenresCheckboxes: [<?php if (!empty($_GET['qsubgenre'])) { echo "'" . $_GET['qsubgenre'] . "'"; } ?>],
+            instrumentationsCheckboxes: [<?php if (!empty($_GET['qinstrumentation'])) { echo "'" . $_GET['qinstrumentation'] . "'"; } ?>],
+            settingsCheckboxes: [<?php if (!empty($_GET['qsetting'])) { echo "'" . $_GET['qsetting'] . "'"; } ?>],
             tagsCheckboxes: [<?php if (!empty($_GET['qtag'])) { echo "'" . $_GET['qtag'] . "'"; } ?>],
             verifiedCheckbox: false,
             get selectedFilters() {
-                return [...this.genresCheckboxes, ...this.typesCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.typesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.genresCheckboxes, ...this.typesCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
+                return [...this.typesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
             },
         }"
         hx-get="wp-html/v1/listings/"
@@ -132,23 +138,59 @@ get_header();
 
                 <!-- Modals -->
                 <?php
-                    $genres = get_terms([ 'taxonomy' => 'genre', 'fields' => 'names', 'hide_empty' => false, ]);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
-                        'labels' => $genres,
-                        'name' => 'genres',
-                        'x-show' => 'showGenreModal',
-                    ]);
                     $types = ['Band', 'DJ', 'Musician', 'Artist', 'Sound Engineer', 'Producer'];
                     echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Listing Type',
                         'labels' => $types,
                         'name' => 'types',
+                        'x-model' => 'typesCheckboxes',
                         'x-show' => 'showTypeModal',
+                        'has_search_bar' => false,
+                    ]);
+                    $genres = get_terms([ 'taxonomy' => 'genre', 'fields' => 'names', 'hide_empty' => false, ]);
+                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Genre',
+                        'labels' => $genres,
+                        'name' => 'genres',
+                        'x-model' => 'genresCheckboxes',
+                        'x-show' => 'showGenreModal',
+                        'has_search_bar' => false,
+                    ]);
+                    $subgenres = get_terms([ 'taxonomy' => 'subgenre', 'fields' => 'names', 'hide_empty' => false, ]);
+                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Sub Genre',
+                        'labels' => $subgenres,
+                        'name' => 'subgenres',
+                        'x-model' => 'subgenresCheckboxes',
+                        'x-show' => 'showSubGenreModal',
+                        'has_search_bar' => true,
+                    ]);
+                    $instrumentation = get_terms([ 'taxonomy' => 'instrumentation', 'fields' => 'names', 'hide_empty' => false, ]);
+                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Instrumentation',
+                        'labels' => $instrumentation,
+                        'name' => 'instrumentations',
+                        'x-model' => 'instrumentationsCheckboxes',
+                        'x-show' => 'showInstrumentationModal',
+                        'has_search_bar' => false,
+                    ]);
+                    $settings = get_terms([ 'taxonomy' => 'setting', 'fields' => 'names', 'hide_empty' => false, ]);
+                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Setting',
+                        'labels' => $settings,
+                        'name' => 'settings',
+                        'x-model' => 'settingsCheckboxes',
+                        'x-show' => 'showSettingModal',
+                        'has_search_bar' => false,
                     ]);
                     $tags = get_terms([ 'taxonomy' => 'tag', 'fields' => 'names', 'hide_empty' => false, ]);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Other Categories',
                         'labels' => $tags,
                         'name' => 'tags',
+                        'x-model' => 'tagsCheckboxes',
                         'x-show' => 'showTagModal',
+                        'has_search_bar' => false,
                     ]);
                     echo get_template_part('template-parts/global/form-quote/popup', '', []);
                 ?>

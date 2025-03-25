@@ -130,6 +130,42 @@ function register_taxonomies() {
       'singular_name' => 'Genre'
     )
   ));
+  register_taxonomy('subgenre', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Sub Genres',
+      'add_new_item' => 'Add New Sub Genre',
+      'edit_item' => 'Edit Sub Genre',
+      'all_items' => 'All Sub Genres',
+      'singular_name' => 'Sub Genre'
+    )
+  ));
+  register_taxonomy('instrumentation', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Instrumentations',
+      'add_new_item' => 'Add New Instrumentation',
+      'edit_item' => 'Edit Instrumentation',
+      'all_items' => 'All Instrumentations',
+      'singular_name' => 'Instrumentation'
+    )
+  ));
+  register_taxonomy('setting', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Settings',
+      'add_new_item' => 'Add New Setting',
+      'edit_item' => 'Edit Setting',
+      'all_items' => 'All Settings',
+      'singular_name' => 'Setting'
+    )
+  ));
   register_taxonomy('tag', array('listing', 'artist'), array(
     'public' => true,
     'hierarchical' => false,

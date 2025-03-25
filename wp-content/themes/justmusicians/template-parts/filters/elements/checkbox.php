@@ -1,4 +1,4 @@
-<label class="custom-checkbox">
+<label class="custom-checkbox" <?php if (!empty($args['x-show'])) { echo ' x-show="' . $args['x-show'] . '"'; } ?> >
     <input type="checkbox" x-on:change="$dispatch('filterupdate');"
     <?php
         if (!empty($args['name'])) {

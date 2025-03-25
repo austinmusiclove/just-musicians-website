@@ -139,6 +139,10 @@ unset( $af );
 show_admin_bar(false);
 
 
+// Helper functions
+include_once 'lib/inc/helper.php';
+
+
 // HTML APIs
 include_once 'html-api/html-api-setup.php';
 

@@ -2,10 +2,10 @@
     <h3 class="font-bold text-18 mb-3"><?php echo $args['title']; ?></h3>
     <div class="flex items-center gap-1 flex-wrap">
         <?php
-            $tag_1_ref = strtolower($args['input_name']) . preg_replace("/[^A-Za-z0-9]/", '', $args['tag_1']); // same formula used in tag-modal.php
-            $tag_2_ref = strtolower($args['input_name']) . preg_replace("/[^A-Za-z0-9]/", '', $args['tag_2']);
-            $tag_3_ref = strtolower($args['input_name']) . preg_replace("/[^A-Za-z0-9]/", '', $args['tag_3']);
-            $tag_4_ref = strtolower($args['input_name']) . preg_replace("/[^A-Za-z0-9]/", '', $args['tag_4']);
+            $tag_1_ref = get_checkbox_ref_string($args['input_name'], $args['tag_1']);
+            $tag_2_ref = get_checkbox_ref_string($args['input_name'], $args['tag_2']);
+            $tag_3_ref = get_checkbox_ref_string($args['input_name'], $args['tag_3']);
+            $tag_4_ref = get_checkbox_ref_string($args['input_name'], $args['tag_4']);
         ?>
         <span class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light<?php if ($args['tag_1_selected']) { echo ' bg-yellow'; }?>"
             x-on:click="$refs.<?php echo $tag_1_ref; ?>.click()"><?php echo $args['tag_1']; ?></span>

@@ -5,9 +5,12 @@ function get_listings($args) {
     $search_term = sanitize_text_field($args['search']);
     $name_search_term = sanitize_text_field($args['name_search']);
     $types = rest_sanitize_array($args['types']);
-    $valid_genres = validate_tax_input($args['genres'], 'genre');
-    $valid_tags = validate_tax_input($args['tags'], 'tag');
     $valid_types = validate_listing_types($types);
+    $valid_genres = validate_tax_input($args['genres'], 'genre');
+    $valid_subgenres = validate_tax_input($args['subgenres'], 'subgenre');
+    $valid_instrumentations = validate_tax_input($args['instrumentations'], 'instrumentation');
+    $valid_settings = validate_tax_input($args['settings'], 'setting');
+    $valid_tags = validate_tax_input($args['tags'], 'tag');
     $verified = rest_sanitize_boolean($args['verified']);
     $sanitized_page = sanitize_text_field($args['page']);
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
@@ -55,6 +58,30 @@ function get_listings($args) {
             'compare' => 'IN',
         ]);
     }
+    if (!empty($valid_subgenres)) {
+        array_push($tax_queries, [
+            'taxonomy' => 'subgenre',
+            'field' => 'name',
+            'terms' => $valid_subgenres,
+            'compare' => 'IN',
+        ]);
+    }
+    if (!empty($valid_instrumentations)) {
+        array_push($tax_queries, [
+            'taxonomy' => 'instrumentation',
+            'field' => 'name',
+            'terms' => $valid_instrumentations,
+            'compare' => 'IN',
+        ]);
+    }
+    if (!empty($valid_settings)) {
+        array_push($tax_queries, [
+            'taxonomy' => 'setting',
+            'field' => 'name',
+            'terms' => $valid_settings,
+            'compare' => 'IN',
+        ]);
+    }
     if (!empty($valid_tags)) {
         array_push($tax_queries, [
             'taxonomy' => 'tag',
@@ -67,7 +94,6 @@ function get_listings($args) {
         'relation' => 'AND',
         ...$tax_queries,
     ];
-    //return $query_args;
     $query = new WP_Query($query_args);
     while ($query->have_posts()) {
         $query->the_post();
@@ -107,9 +133,12 @@ function get_listings($args) {
 
     return [
         'listings' => $results,
-        'valid_genres' => $valid_genres,
-        'valid_tags' => $valid_tags,
         'valid_types' => $valid_types,
+        'valid_genres' => $valid_genres,
+        'valid_subgenres' => $valid_subgenres,
+        'valid_instrumentations' => $valid_instrumentations,
+        'valid_settings' => $valid_settings,
+        'valid_tags' => $valid_tags,
         'next_page' => $next_page,
     ];
 }
@@ -139,6 +168,9 @@ function get_listings_request_handler($request) {
         'search' => $request['s'],
         'types' => $request['types'],
         'genres' => $request['genres'],
+        'subgenres' => $request['subgenres'],
+        'instrumentation' => $request['instrumentation'],
+        'settings' => $request['settings'],
         'tags' => $request['tags'],
         'verified' => $request['verified'],
         'page' => $request['page'],

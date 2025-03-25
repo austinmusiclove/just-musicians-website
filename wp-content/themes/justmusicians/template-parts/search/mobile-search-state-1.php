@@ -14,7 +14,7 @@
             <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
             DJs
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qtag=Wedding Band">
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="/?qsetting=Wedding">
             <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
             Wedding Music
         </a>
