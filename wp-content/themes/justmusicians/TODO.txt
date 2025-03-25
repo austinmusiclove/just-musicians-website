@@ -14,8 +14,6 @@ UX
         remove left or right arrow when there is no more items in that direction
         pre buffer youtube videos
         make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
-    Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
-    Add search bar to category modal
     Filters
         Update footer links
         show all selected filters in side bar not just 4
@@ -25,12 +23,12 @@ UX
         maybe combine types with other categories into "Categories" and make listing type a non public facing thing that defines type of artist page template
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
-    maybe show all selected filters in yellow bubbles instead of just 4 always
     shows no results and no more results when no results
     "Request Quote" or "Contact Directly" modal
     Inquiry form copy and flow
     Num performers range filter
     make filters sticky to the top as you scroll down
+    bug: sometimes active search options don't come up
 Sign up
     check for 404s on links
     test big file upload for thumbnails
