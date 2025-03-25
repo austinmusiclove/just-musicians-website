@@ -153,7 +153,7 @@ function validate_tax_input($tax_input, $taxonomy) {
         'fields' => 'names',
         'hide_empty' => false,
     ]);
-    $valid_input = array_filter($input, fn($item) => in_array($item, $terms, true));
+    $valid_input = array_map('stripslashes', array_filter($input, fn($item) => in_array(stripslashes($item), $terms, true)));
     return $valid_input;
 }
 

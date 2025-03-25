@@ -16,11 +16,11 @@ UX
         make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
     Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
     Add search bar to category modal
-    Add Filters
-        make sure taxonomy with ' and " works
-        ensemble size
-        location
-        something about providing sound equipment
+    Filters
+        show all selected filters in side bar not just 4
+        add ensemble size
+        add something about providing sound equipment
+        add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
@@ -68,4 +68,6 @@ Code structure
     create default options for each filter so that they can be used both on the initial load and on the api side; or maybe put the default option logic into the template part itself
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
+Document
+    no taxonomy terms with " in them
 
