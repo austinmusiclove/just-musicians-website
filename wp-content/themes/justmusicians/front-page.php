@@ -17,12 +17,11 @@ get_header();
 <div id="page" class="flex flex-col grow">
     <form id="listing-form"
         x-data="{
-            showTypeModal: false,
+            showCategoryModal: false,
             showGenreModal: false,
             showSubGenreModal: false,
             showInstrumentationModal: false,
             showSettingModal: false,
-            showTagModal: false,
             showInquiryModal: false,
             showSlide1: false,
             showSlide2: false,
@@ -30,7 +29,7 @@ get_header();
             showSlide4: false,
             showSlide5: false,
             searchVal: searchInput,
-            typesCheckboxes: [<?php if (!empty($_GET['qtype'])) { echo "'" . $_GET['qtype'] . "'"; } ?>],
+            categoriesCheckboxes: [<?php if (!empty($_GET['qcategory'])) { echo "'" . $_GET['qcategory'] . "'"; } ?>],
             genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
             subgenresCheckboxes: [<?php if (!empty($_GET['qsubgenre'])) { echo "'" . $_GET['qsubgenre'] . "'"; } ?>],
             instrumentationsCheckboxes: [<?php if (!empty($_GET['qinstrumentation'])) { echo "'" . $_GET['qinstrumentation'] . "'"; } ?>],
@@ -38,10 +37,10 @@ get_header();
             tagsCheckboxes: [<?php if (!empty($_GET['qtag'])) { echo "'" . $_GET['qtag'] . "'"; } ?>],
             verifiedCheckbox: false,
             get selectedFilters() {
-                return [...this.typesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.typesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.tagsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
             },
             tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
             showTagModalOption(option) {
@@ -142,13 +141,13 @@ get_header();
 
                 <!-- Modals -->
                 <?php
-                    $types = ['Band', 'DJ', 'Musician', 'Artist', 'Sound Engineer', 'Producer'];
+                    $categories = get_terms([ 'taxonomy' => 'mcategory', 'fields' => 'names', 'hide_empty' => false, ]);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
-                        'title' => 'Listing Type',
-                        'labels' => $types,
-                        'name' => 'types',
-                        'x-model' => 'typesCheckboxes',
-                        'x-show' => 'showTypeModal',
+                        'title' => 'Category',
+                        'labels' => $categories,
+                        'name' => 'categories',
+                        'x-model' => 'categoriesCheckboxes',
+                        'x-show' => 'showCategoryModal',
                         'has_search_bar' => false,
                     ]);
                     $genres = get_terms([ 'taxonomy' => 'genre', 'fields' => 'names', 'hide_empty' => false, ]);
@@ -185,15 +184,6 @@ get_header();
                         'name' => 'settings',
                         'x-model' => 'settingsCheckboxes',
                         'x-show' => 'showSettingModal',
-                        'has_search_bar' => false,
-                    ]);
-                    $tags = get_terms([ 'taxonomy' => 'tag', 'fields' => 'names', 'hide_empty' => false, ]);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
-                        'title' => 'Other Categories',
-                        'labels' => $tags,
-                        'name' => 'tags',
-                        'x-model' => 'tagsCheckboxes',
-                        'x-show' => 'showTagModal',
                         'has_search_bar' => false,
                     ]);
                     echo get_template_part('template-parts/global/form-quote/popup', '', []);

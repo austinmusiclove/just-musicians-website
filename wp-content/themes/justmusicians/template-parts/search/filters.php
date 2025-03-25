@@ -1,18 +1,18 @@
 <div>
 <?php
     echo get_template_part('template-parts/filters/elements/tags', '', array(
-        'id' => 'type-filters',
-        'title' => 'Listing Type',
-        'input_name' => 'types', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('type', 0),
-        'tag_2' => get_default_option('type', 1),
-        'tag_3' => get_default_option('type', 2),
-        'tag_4' => get_default_option('type', 3),
+        'id' => 'category-filters',
+        'title' => 'Categories',
+        'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
+        'tag_1' => get_default_option('category', 0),
+        'tag_2' => get_default_option('category', 1),
+        'tag_3' => get_default_option('category', 2),
+        'tag_4' => get_default_option('category', 3),
         'tag_1_selected' => false,
         'tag_2_selected' => false,
         'tag_3_selected' => false,
         'tag_4_selected' => false,
-        'show_modal_var' => 'showTypeModal'
+        'show_modal_var' => 'showCategoryModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -69,20 +69,6 @@
         'tag_3_selected' => false,
         'tag_4_selected' => false,
         'show_modal_var' => 'showSettingModal'
-    ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
-        'id' => 'tag-filters',
-        'title' => 'Other Categories',
-        'input_name' => 'tags', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('tag', 0),
-        'tag_2' => get_default_option('tag', 1),
-        'tag_3' => get_default_option('tag', 2),
-        'tag_4' => get_default_option('tag', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
-        'show_modal_var' => 'showTagModal'
     ));
     //echo get_template_part('template-parts/filters/location', '', array());
 

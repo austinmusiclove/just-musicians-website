@@ -2,7 +2,7 @@
 // Get listings
 $result = get_listings([
     'search' => $_GET['search'],
-    'types' => $_GET['types'],
+    'categories' => $_GET['categories'],
     'genres' => $_GET['genres'],
     'subgenres' => $_GET['subgenres'],
     'instrumentations' => $_GET['instrumentations'],
@@ -12,7 +12,7 @@ $result = get_listings([
     'page' => $_GET['page'],
 ]);
 $listings = $result['listings'];
-$valid_types = $result['valid_types'];
+$valid_categories = $result['valid_categories'];
 $valid_genres = $result['valid_genres'];
 $valid_subgenres = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
@@ -61,20 +61,20 @@ if (count($listings) > 0) {
 
 // Render Filters
 // TODO only swap out the filter section that was altered
-$default_types = array_values(array_diff([get_default_option('type', 3), get_default_option('type', 2), get_default_option('type', 1), get_default_option('type', 0)], $valid_types));
+$default_categories = array_values(array_diff([get_default_option('category', 3), get_default_option('category', 2), get_default_option('category', 1), get_default_option('category', 0)], $valid_categories));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
-    'id' => 'type-filters',
-    'title' => 'Listing Type',
-    'input_name' => 'types', // should match the input name used for the tag check boxes
-    'tag_1' => $valid_types[0] ?? array_pop($default_types),
-    'tag_2' => $valid_types[1] ?? array_pop($default_types),
-    'tag_3' => $valid_types[2] ?? array_pop($default_types),
-    'tag_4' => $valid_types[3] ?? array_pop($default_types),
-    'tag_1_selected' => !empty($valid_types[0]),
-    'tag_2_selected' => !empty($valid_types[1]),
-    'tag_3_selected' => !empty($valid_types[2]),
-    'tag_4_selected' => !empty($valid_types[3]),
-    'show_modal_var' => 'showTypeModal'
+    'id' => 'category-filters',
+    'title' => 'Categories',
+    'input_name' => 'categories', // should match the input name used for the tag check boxes
+    'tag_1' => $valid_categories[0] ?? array_pop($default_categories),
+    'tag_2' => $valid_categories[1] ?? array_pop($default_categories),
+    'tag_3' => $valid_categories[2] ?? array_pop($default_categories),
+    'tag_4' => $valid_categories[3] ?? array_pop($default_categories),
+    'tag_1_selected' => !empty($valid_categories[0]),
+    'tag_2_selected' => !empty($valid_categories[1]),
+    'tag_3_selected' => !empty($valid_categories[2]),
+    'tag_4_selected' => !empty($valid_categories[3]),
+    'show_modal_var' => 'showCategoryModal'
 ));
 $default_genres = array_values(array_diff([get_default_option('genre', 3), get_default_option('genre', 2), get_default_option('genre', 1), get_default_option('genre', 0)], $valid_genres));
 echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -135,20 +135,4 @@ echo get_template_part('template-parts/filters/elements/tags', '', array(
     'tag_3_selected' => !empty($valid_settings[2]),
     'tag_4_selected' => !empty($valid_settings[3]),
     'show_modal_var' => 'showSettingModal'
-));
-$default_tags = array_values(array_diff(['Punk Band', 'Live Looper', 'Orchestral', 'Background Music', 'Wedding Band', 'Cover Band', 'Acoustic'], $valid_tags));
-$default_tags = array_values(array_diff([get_default_option('tag', 3), get_default_option('tag', 2), get_default_option('tag', 1), get_default_option('tag', 0)], $valid_tags));
-echo get_template_part('template-parts/filters/elements/tags', '', array(
-    'id' => 'tag-filters',
-    'title' => 'Other Categories',
-    'input_name' => 'tags',
-    'tag_1' => $valid_tags[0] ?? array_pop($default_tags),
-    'tag_2' => $valid_tags[1] ?? array_pop($default_tags),
-    'tag_3' => $valid_tags[2] ?? array_pop($default_tags),
-    'tag_4' => $valid_tags[3] ?? array_pop($default_tags),
-    'tag_1_selected' => !empty($valid_tags[0]),
-    'tag_2_selected' => !empty($valid_tags[1]),
-    'tag_3_selected' => !empty($valid_tags[2]),
-    'tag_4_selected' => !empty($valid_tags[3]),
-    'show_modal_var' => 'showTagModal'
 ));

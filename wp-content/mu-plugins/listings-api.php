@@ -6,6 +6,7 @@ function get_listings($args) {
     $name_search_term = sanitize_text_field($args['name_search']);
     $types = rest_sanitize_array($args['types']);
     $valid_types = validate_listing_types($types);
+    $valid_categories = validate_tax_input($args['categories'], 'mcategory');
     $valid_genres = validate_tax_input($args['genres'], 'genre');
     $valid_subgenres = validate_tax_input($args['subgenres'], 'subgenre');
     $valid_instrumentations = validate_tax_input($args['instrumentations'], 'instrumentation');
@@ -50,6 +51,14 @@ function get_listings($args) {
         ...$meta_queries,
     ];
     $tax_queries = [];
+    if (!empty($valid_categories)) {
+        array_push($tax_queries, [
+            'taxonomy' => 'mcategory',
+            'field' => 'name',
+            'terms' => $valid_categories,
+            'compare' => 'IN',
+        ]);
+    }
     if (!empty($valid_genres)) {
         array_push($tax_queries, [
             'taxonomy' => 'genre',
@@ -134,6 +143,7 @@ function get_listings($args) {
     return [
         'listings' => $results,
         'valid_types' => $valid_types,
+        'valid_categories' => $valid_categories,
         'valid_genres' => $valid_genres,
         'valid_subgenres' => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
@@ -167,6 +177,7 @@ function get_listings_request_handler($request) {
     return get_listings([
         'search' => $request['s'],
         'types' => $request['types'],
+        'categories' => $request['categories'],
         'genres' => $request['genres'],
         'subgenres' => $request['subgenres'],
         'instrumentation' => $request['instrumentation'],

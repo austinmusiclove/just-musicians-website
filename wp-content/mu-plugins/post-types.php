@@ -118,6 +118,18 @@ function register_post_types() {
 }
 
 function register_taxonomies() {
+  register_taxonomy('mcategory', array('listing', 'artist'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'labels' => array(
+      'name' => 'Category',
+      'add_new_item' => 'Add New Category',
+      'edit_item' => 'Edit Category',
+      'all_items' => 'All Categories',
+      'singular_name' => 'Category'
+    )
+  ));
   register_taxonomy('genre', array('listing', 'artist'), array(
     'public' => true,
     'hierarchical' => false,

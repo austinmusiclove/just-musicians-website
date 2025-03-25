@@ -11,15 +11,15 @@
         </div>
         <!-- Dropdown menu -->
         <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown" x-transition x-cloak>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Band">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Band">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                 Bands
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=Musician">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Musician">
                 <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
                 Solo/Duo
             </a>
-            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qtype=DJ">
+            <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=DJ">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
                 DJs
             </a>

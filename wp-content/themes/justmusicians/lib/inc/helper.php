@@ -2,8 +2,8 @@
 
 function get_default_option($filter, $index) {
     switch ($filter) {
-        case 'type':
-            return ['Band', 'DJ', 'Musician', 'Artist'][$index];
+        case 'category':
+            return ['Band', 'DJ', 'Musician', 'Cover Band'][$index];
         case 'genre':
             return ['Folk', 'Hip Hop', 'Latin', 'Soul'][$index];
         case 'subgenre':
@@ -12,8 +12,6 @@ function get_default_option($filter, $index) {
             return ['Guitar', 'Vocals', 'Piano', 'Saxophone'][$index];
         case 'setting':
             return ['Dive Bar', 'Wedding', 'Brewery', 'Hotel'][$index];
-        case 'tag':
-            return ['Full Band', 'Cover Band', 'Original Band', 'Background Music'][$index];
     }
 }
 

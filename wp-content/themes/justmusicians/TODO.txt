@@ -1,6 +1,6 @@
 Data
-    regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     add tags for each listing manually
+    regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     check social links and youtube videos for 404s
     fix tiktok urls; need @ in front of handle in url
 UX
@@ -17,6 +17,7 @@ UX
     Category options do not scroll in modal on mobile (probably on both but not enough options to tell yet)
     Add search bar to category modal
     Filters
+        Update footer links
         show all selected filters in side bar not just 4
         add ensemble size
         add something about providing sound equipment
@@ -71,4 +72,4 @@ Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
 Document
     no taxonomy terms with " in them
-
+    if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
