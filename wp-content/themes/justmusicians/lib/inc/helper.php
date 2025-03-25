@@ -5,7 +5,7 @@ function get_default_option($filter, $index) {
         case 'type':
             return ['Band', 'DJ', 'Musician', 'Artist'][$index];
         case 'genre':
-            return ['Folk', 'Hip Hop/Rap', 'Latin', 'Soul/RnB'][$index];
+            return ['Folk', 'Hip Hop', 'Latin', 'Soul'][$index];
         case 'subgenre':
             return ['Acoustic', 'Indie', 'Punk Rock', 'Americana'][$index];
         case 'instrumentation':

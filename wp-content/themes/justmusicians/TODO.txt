@@ -21,6 +21,7 @@ UX
         add ensemble size
         add something about providing sound equipment
         add location
+        maybe combine types with other categories into "Categories" and make listing type a non public facing thing that defines type of artist page template
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     maybe show all selected filters in yellow bubbles instead of just 4 always
