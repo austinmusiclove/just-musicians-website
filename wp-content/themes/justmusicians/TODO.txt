@@ -3,7 +3,10 @@ Data
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     check social links and youtube videos for 404s
     fix tiktok urls; need @ in front of handle in url
+    Add taxonomies
+        category: Session Musician, Producer, Sound Engineer, Tribute Band
 UX
+    add about and blog to main header and mobile header nav
     media slider
         make sure youtube api not used until initialized
         mute button
@@ -15,12 +18,10 @@ UX
         pre buffer youtube videos
         make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
     Filters
-        Update footer links
         show all selected filters in side bar not just 4
         add ensemble size
         add something about providing sound equipment
         add location
-        maybe combine types with other categories into "Categories" and make listing type a non public facing thing that defines type of artist page template
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
     shows no results and no more results when no results
