@@ -32,9 +32,12 @@ if (empty($search_term)) {
         'search' => $search_term,
         'fields' => 'names',
     ));
-    $terms = [...$categories, ...$genres, ...$subgenres, ...$instrumentations, ...$settings];
     get_template_part('template-parts/search/search-state-2', '', array(
         'listings' => $listings,
-        'terms' => $terms,
+        'categories' => $categories,
+        'genres' => $genres,
+        'subgenres' => $subgenres,
+        'instrumentations' => $instrumentations,
+        'settings' => $settings,
     ));
 }
