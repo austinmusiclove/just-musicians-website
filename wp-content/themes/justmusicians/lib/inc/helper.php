@@ -7,11 +7,11 @@ function get_default_option($filter, $index) {
         case 'genre':
             return ['Folk', 'Hip Hop', 'Latin', 'Soul'][$index];
         case 'subgenre':
-            return ['Acoustic', 'Indie', 'Punk Rock', 'Americana'][$index];
+            return ['Americana', 'Punk Rock', 'Honky Tonk', '90s Covers'][$index];
         case 'instrumentation':
             return ['Guitar', 'Vocals', 'Piano', 'Saxophone'][$index];
         case 'setting':
-            return ['Dive Bar', 'Wedding', 'Brewery', 'Hotel'][$index];
+            return ['Dive Bar', 'Wedding', 'Festival', 'Hotel'][$index];
     }
 }
 
