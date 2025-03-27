@@ -64,7 +64,7 @@ get_header();
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
 
-                      <?php echo get_template_part('template-parts/search/filters', '', ['device' => 'desktop']); ?>
+                      <?php echo get_template_part('template-parts/search/filters', '', array()); ?>
 
                     </div>
                 </div>
