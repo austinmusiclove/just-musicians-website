@@ -111,11 +111,11 @@ get_header();
                         x-on:play-youtube-player="playPlayer($event.detail.videoId)"
                     >
                         <?php
-                            echo get_template_part('template-parts/search/profile-skeleton');
-                            echo get_template_part('template-parts/search/profile-skeleton');
-                            echo get_template_part('template-parts/search/profile-skeleton');
-                            echo get_template_part('template-parts/search/profile-skeleton');
-                            echo get_template_part('template-parts/search/profile-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
                         ?>
                     </span>
 
