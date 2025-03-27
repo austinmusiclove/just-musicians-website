@@ -83,6 +83,7 @@ get_header();
                         x-data='{
                             players: {},
                             playersMuted: false,
+                            playersPaused: false,
                             initPlayerFromIframe(playerId) {
                                 if (playerId) {
                                     var player = new YT.Player(playerId, {
@@ -106,11 +107,13 @@ get_header();
                                     } else {
                                         this.players[playerId].pauseVideo();
                                     }
+                                    this.players[playerId].isPaused = true;
                                 }
                             },
                             playPlayer(playerId) {
                                 if (playerId && this.players[playerId] && this.players[playerId].isReady) {
                                     this.players[playerId].playVideo();
+                                    this.players[playerId].isPaused = false;
                                 }
                             },
                             toggleMute() {

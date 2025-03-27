@@ -37,6 +37,9 @@
                     }
                 },
                 muteAllVideos() { $dispatch("mute-youtube-players"); },
+                isPaused() {
+                    return this.currentIndex > 0 && players[this.playerIds[this.currentIndex - 1]].isPaused;
+                },
                 updateIndex(newIndex) {
                     this.previousIndex = this.currentIndex; // Save the previous index before updating
                     this.currentIndex = newIndex;            // Update to the new index
@@ -80,6 +83,12 @@
                     @click="updateIndex(1)"
                     x-show="currentIndex == 0">
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+                </span>
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <span
+                    x-show="currentIndex > 0 && isPaused()">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
                 </span>
             </div>
             <div class="absolute transform left-2 bottom-2">
