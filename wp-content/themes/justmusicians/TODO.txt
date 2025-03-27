@@ -1,3 +1,8 @@
+Milestones
+    get all profiles up
+    *podcast page
+    *log in
+    profile edit
 Data
     add tags for each listing manually
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
@@ -5,18 +10,18 @@ Data
     fix tiktok urls; need @ in front of handle in url
 UX
     media slider
-        make sure youtube api not used until initialized
-        mute button
+        *mute button
+        *play button on thumbnail that moves slider to next slide
+        *remove left or right arrow when there is no more items in that direction
+        *make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
         bug: video keeps playing if you scroll away from video while slide animation is happening
-        play button on thumbnail that moves slider to next slide
         pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
         pause if window is not in focus? or when change tab? check fiverr
-        remove left or right arrow when there is no more items in that direction
         pre buffer youtube videos
-        make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
     Filters
-        show all selected filters in side bar not just 4
-        add ensemble size
+        *show all selected filters in side bar not just 4
+        *add ensemble size
+        *make filters sticky to the top as you scroll down
         add something about providing sound equipment
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
@@ -24,8 +29,6 @@ UX
     shows no results and no more results when no results
     "Request Quote" or "Contact Directly" modal
     Inquiry form copy and flow
-    Num performers range filter
-    make filters sticky to the top as you scroll down
     bug: sometimes active search options don't come up
 Sign up
     check for 404s on links
@@ -35,6 +38,7 @@ UI
 Devon
     new pages
         log in modal
+        logged in state for header
         listing landing page
         create/edit listing
     display number of results
@@ -56,12 +60,12 @@ Security
 Deploy
     dedicated server
 Performance
+    first 5 results without second trip to server
     only swap out the filter section that was altered
     reduce size of image retrieved for listings in active search options
     use webp for images
 Future
     location filtering
-    venues played filter
 Code structure
     create default options for each filter so that they can be used both on the initial load and on the api side; or maybe put the default option logic into the template part itself
 Quirks

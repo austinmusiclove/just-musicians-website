@@ -148,7 +148,7 @@ get_header();
                         'name' => 'categories',
                         'x-model' => 'categoriesCheckboxes',
                         'x-show' => 'showCategoryModal',
-                        'has_search_bar' => false,
+                        'has_search_bar' => true,
                     ]);
                     $genres = get_terms([ 'taxonomy' => 'genre', 'fields' => 'names', 'hide_empty' => false, ]);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
@@ -157,7 +157,7 @@ get_header();
                         'name' => 'genres',
                         'x-model' => 'genresCheckboxes',
                         'x-show' => 'showGenreModal',
-                        'has_search_bar' => false,
+                        'has_search_bar' => true,
                     ]);
                     $subgenres = get_terms([ 'taxonomy' => 'subgenre', 'fields' => 'names', 'hide_empty' => false, ]);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
@@ -184,7 +184,7 @@ get_header();
                         'name' => 'settings',
                         'x-model' => 'settingsCheckboxes',
                         'x-show' => 'showSettingModal',
-                        'has_search_bar' => false,
+                        'has_search_bar' => true,
                     ]);
                     echo get_template_part('template-parts/global/form-quote/popup', '', []);
                 ?>
