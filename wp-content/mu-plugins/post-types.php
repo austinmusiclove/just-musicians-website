@@ -115,6 +115,21 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-art'
     ));
+
+    // Podcast
+    register_post_type('podcast', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'thumbnail', 'excerpt'),
+        'labels' => array(
+          'name' => 'Podcast',
+          'add_new_item' => 'Add New Podcast',
+          'edit_item' => 'Edit Podcast',
+          'all_items' => 'All Podcasts',
+          'singular_name' => 'Podcast'
+        ),
+        'menu_icon' => 'dashicons-microphone'
+    ));
 }
 
 function register_taxonomies() {

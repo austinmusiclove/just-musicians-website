@@ -2,7 +2,7 @@ Milestones
     get all profiles up
     *podcast page
     *log in
-    profile edit
+    *profile edit
 Data
     add tags for each listing manually
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
@@ -32,13 +32,13 @@ UI
 Devon
     get other verified icon
     i broke the sticky filter side bar
+    podcast - get violotor-blog svg
     new pages
         log in modal
         logged in state for header
         listing landing page
         create/edit listing
     display number of results
-    improved skeleton
     No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
 Paid features
@@ -53,6 +53,7 @@ Back End
 Security
     audit rest api inputs and html api inputs
 Deploy
+    when updates go up, it does not update immediately for others; maybe they get new html but not new css or something
     dedicated server
 Performance
     first 5 results without second trip to server
