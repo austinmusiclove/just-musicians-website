@@ -69,16 +69,20 @@
             </div>
             <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
                 <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
-                    <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
+                    <button type="button"
                         @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
                         x-on:mouseout="playVideoById(videoIds[currentIndex])"
-                    > &#10094; </button>
+                        x-show="currentIndex > 0">
+                        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                    </button>
                 </div>
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
-                    <button type="button" class="bg-black text-white p-2 rounded-full text-lg"
+                    <button type="button"
                         @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
                         x-on:mouseout="playVideoById(videoIds[currentIndex])"
-                    > &#10095; </button>
+                        x-show="currentIndex < totalSlides-1">
+                        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                    </button>
                 </div>
             </div>
         </div>

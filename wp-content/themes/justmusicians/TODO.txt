@@ -12,7 +12,6 @@ UX
     media slider
         *mute button
         *play button on thumbnail that moves slider to next slide
-        *remove left or right arrow when there is no more items in that direction
         *make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
         bug: video keeps playing if you scroll away from video while slide animation is happening
         pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
