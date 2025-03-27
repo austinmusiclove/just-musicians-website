@@ -93,7 +93,10 @@ get_header();
                                             enablejsapi: 1,
                                         },
                                         events: {
-                                            "onReady": () => { this.players[playerId].isReady = true; },
+                                            "onReady": () => {
+                                                this.players[playerId].isReady = true;
+                                                if (!this.playersMuted) { this.players[playerId].unMute(); }
+                                            },
                                             "onStateChange": (event) => {
                                                 this.players[playerId].state = event.data;
                                                 if (event.data == 1) { this.players[playerId].isPaused = false; } // 1 is playing

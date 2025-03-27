@@ -61,7 +61,7 @@
             x-on:mouseleave="leaveSlider()"
             x-on:mouseenter="enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
-                :style="`transform: translateX(-${currentIndex * 100}%)`"
+                x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
                 x-on:transitionstart="pausePreviousSlide(); playCurrentSlide();">
                 <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="updateIndex(1)" />
 
