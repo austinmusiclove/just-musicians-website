@@ -10,9 +10,6 @@ Data
     fix tiktok urls; need @ in front of handle in url
 UX
     media slider
-        *move arrows out of frame when not scrolled over
-        bug: if i hit right arrow and move away quickly the video will be playing without mouse on the iframe; test with kelsi creek
-        keep video playing on scroll over video buttons
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
     Filters

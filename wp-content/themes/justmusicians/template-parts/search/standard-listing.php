@@ -20,6 +20,7 @@
                 previousIndex: 0,
                 currentIndex: 0,
                 totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
+                showArrows: false,
                 playerIds: <?php echo json_encode($args['youtube_player_ids']); ?>,
                 pausePreviousSlide() {
                     if (this.previousIndex > 0) {
@@ -40,6 +41,8 @@
                 isPaused() {
                     return this.currentIndex > 0 && players[this.playerIds[this.currentIndex - 1]].isPaused;
                 },
+                enterSlider() { this.playCurrentSlide(); this.showArrows = true; },
+                leaveSlider() { this.pauseCurrentSlide(); this.showArrows = false; },
                 updateIndex(newIndex) {
                     this.previousIndex = this.currentIndex; // Save the previous index before updating
                     this.currentIndex = newIndex;            // Update to the new index
@@ -55,19 +58,18 @@
                     $dispatch('youtube-api-ready');
                 }
             };"
-            >
+            x-on:mouseleave="leaveSlider()"
+            x-on:mouseenter="enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%)`"
                 x-on:transitionstart="pausePreviousSlide(); playCurrentSlide();">
                 <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="updateIndex(1)" />
 
                 <?php foreach($args['youtube_player_ids'] as $index=>$player_id) { ?>
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                        x-on:mouseout="pauseCurrentSlide()"
-                        x-on:mouseenter="playCurrentSlide()">
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
                         <iframe id="<?php echo $player_id; ?>"
                             class="aspect-4/3 w-full h-full object-cover"
-                            src="https://www.youtube.com/embed/<?php echo $args['youtube_video_ids'][$index]; ?>?enablejsapi=1&controls=0&origin=<?php echo site_url(); ?>"
+                            src="https://www.youtube.com/embed/<?php echo $args['youtube_video_ids'][$index]; ?>?enablejsapi=1&controls=0&mute=1&origin=<?php echo site_url(); ?>"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
                         ></iframe>
@@ -78,48 +80,43 @@
 
 
             <!-- Video player buttons -->
-            <div class="absolute transform left-2 bottom-2">
-                <span
-                    @click="updateIndex(1)"
-                    x-show="currentIndex == 0">
-                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+            <div class="absolute transform left-2 bottom-2"
+                @click="updateIndex(1)"
+                x-show="currentIndex == 0">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                x-show="currentIndex > 0 && isPaused()">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
+            </div>
+            <div class="absolute transform left-2 bottom-2"
+                @click="muteAllVideos()"
+                x-show="currentIndex > 0 && playersMuted">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+            </div>
+            <div class="absolute transform left-2 bottom-2"
+                @click="muteAllVideos()"
+                x-show="currentIndex > 0 && !playersMuted">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+            </div>
+            <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+                @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                x-show="currentIndex > 0 && showArrows"
+                x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="-translate-x-full opacity-0" >
+                <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
                 </span>
             </div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <span
-                    x-show="currentIndex > 0 && isPaused()">
-                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
-                </span>
-            </div>
-            <div class="absolute transform left-2 bottom-2">
-                <span
-                    @click="muteAllVideos()"
-                    x-show="currentIndex > 0 && playersMuted">
-                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
-                </span>
-            </div>
-            <div class="absolute transform left-2 bottom-2">
-                <span
-                    @click="muteAllVideos()"
-                    x-show="currentIndex > 0 && !playersMuted">
-                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
-                </span>
-            </div>
-            <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
-                <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
-                    <span
-                        @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-                        x-show="currentIndex > 0">
-                        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                    </span>
-                </div>
-                <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
-                    <span
-                        @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-                        x-show="currentIndex < totalSlides - 1">
-                        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                    </span>
-                </div>
+            <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                x-show="currentIndex < totalSlides - 1 && showArrows"
+                x-transition:enter-start="translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="translate-x-full opacity-0" >
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
             </div>
 
 

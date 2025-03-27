@@ -82,7 +82,7 @@ get_header();
                     <span id="results"
                         x-data='{
                             players: {},
-                            playersMuted: false,
+                            playersMuted: true,
                             playersPaused: false,
                             initPlayerFromIframe(playerId) {
                                 if (playerId) {
@@ -94,7 +94,12 @@ get_header();
                                         },
                                         events: {
                                             "onReady": () => { this.players[playerId].isReady = true; },
-                                            "onStateChange": (event) => { this.players[playerId].state = event.data; } }
+                                            "onStateChange": (event) => {
+                                                this.players[playerId].state = event.data;
+                                                if (event.data == 1) { this.players[playerId].isPaused = false; } // 1 is playing
+                                                if (event.data == 2) { this.players[playerId].isPaused = true; } // 2 is paused
+                                            }
+                                        }
                                     });
                                     this.players[playerId] = player;
                                 }
@@ -102,18 +107,18 @@ get_header();
                             pausePlayer(playerId) {
                                 if (playerId && this.players[playerId] && this.players[playerId].isReady) {
                                     var playerState = this.players[playerId].state;
-                                    if (playerState == -1 || playerState == 3) {
+                                    if (playerState == -1 || playerState == 3) { // -1 is unstarted and 3 is buffering
                                         this.players[playerId].stopVideo();
                                     } else {
                                         this.players[playerId].pauseVideo();
                                     }
-                                    this.players[playerId].isPaused = true;
+                                    this.players[playerId].isPaused = true; // redundant but this usually fires before onStateChange creating a snappier UX
                                 }
                             },
                             playPlayer(playerId) {
                                 if (playerId && this.players[playerId] && this.players[playerId].isReady) {
                                     this.players[playerId].playVideo();
-                                    this.players[playerId].isPaused = false;
+                                    this.players[playerId].isPaused = false; // redundant but this usually fires before onStateChange creating a snappier UX
                                 }
                             },
                             toggleMute() {
