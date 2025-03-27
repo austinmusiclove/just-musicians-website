@@ -82,6 +82,7 @@ get_header();
                     <span id="results"
                         x-data='{
                             players: {},
+                            playersMuted: false,
                             initPlayerFromIframe(videoId) {
                                 if (videoId) {
                                     var player = new YT.Player(videoId, {
@@ -105,10 +106,19 @@ get_header();
                                     this.players[videoId].playVideo();
                                 }
                             },
+                            toggleMute() {
+                                if (this.playersMuted) {
+                                    Object.values(this.players).forEach(player => player.unMute());
+                                } else {
+                                    Object.values(this.players).forEach(player => player.mute());
+                                }
+                                this.playersMuted = !this.playersMuted;
+                            },
                         }'
                         x-on:init-youtube-player="initPlayerFromIframe($event.detail.videoId);"
                         x-on:pause-youtube-player="pausePlayer($event.detail.videoId)"
                         x-on:play-youtube-player="playPlayer($event.detail.videoId)"
+                        x-on:mute-youtube-player="mutePlayer($event.detail.videoId)"
                     >
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');

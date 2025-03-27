@@ -49,13 +49,13 @@
             >
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%)`"
-                @transitionend="pauseVideoById(videoIds[previousIndex]); playVideoById(videoIds[currentIndex]);">
+                @transitionend="pauseVideoById(videoIds[previousIndex]); playVideoById(videoIds[currentIndex]);"
+                x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
+                x-on:mouseenter="playVideoById(videoIds[currentIndex])">
                 <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
 
                 <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                        x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
-                        x-on:mouseenter="playVideoById(videoIds[currentIndex])">
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
                         <iframe id="<?php echo $video_id; ?>"
                             class="aspect-4/3 w-full h-full object-cover"
                             src="https://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1&controls=0&origin=<?php echo site_url(); ?>"
@@ -67,24 +67,48 @@
                 <?php } ?>
 
             </div>
+
+
+            <!-- Video player buttons -->
+            <div class="absolute transform left-2 bottom-2">
+                <span
+                    @click="updateIndex(1)"
+                    x-show="currentIndex == 0">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+                </span>
+            </div>
+            <div class="absolute transform left-2 bottom-2">
+                <span
+                    @click="toggleMute()"
+                    x-show="currentIndex > 0 && playersMuted">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+                </span>
+            </div>
+            <div class="absolute transform left-2 bottom-2">
+                <span
+                    @click="toggleMute()"
+                    x-show="currentIndex > 0 && !playersMuted">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+                </span>
+            </div>
             <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2 px-4">
                 <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
-                    <button type="button"
+                    <span
                         @click="updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-                        x-on:mouseout="playVideoById(videoIds[currentIndex])"
                         x-show="currentIndex > 0">
                         <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                    </button>
+                    </span>
                 </div>
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
-                    <button type="button"
+                    <span
                         @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-                        x-on:mouseout="playVideoById(videoIds[currentIndex])"
                         x-show="currentIndex < totalSlides-1">
                         <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                    </button>
+                    </span>
                 </div>
             </div>
+
+
         </div>
 
     <?php } else {?>

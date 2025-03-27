@@ -10,8 +10,7 @@ Data
     fix tiktok urls; need @ in front of handle in url
 UX
     media slider
-        *mute button
-        *play button on thumbnail that moves slider to next slide
+        keep video playing on scroll over video buttons
         *make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
         bug: video keeps playing if you scroll away from video while slide animation is happening
         pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
