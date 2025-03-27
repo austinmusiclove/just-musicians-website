@@ -1,5 +1,6 @@
 <?php
 // Get listings
+$page = $_GET['page'] ?: 1;
 $result = get_listings([
     'search' => $_GET['search'],
     'categories' => $_GET['categories'],
@@ -9,7 +10,7 @@ $result = get_listings([
     'settings' => $_GET['settings'],
     'tags' => $_GET['tags'],
     'verified' => $_GET['verified'],
-    'page' => $_GET['page'],
+    'page' => $page,
 ]);
 $listings = $result['listings'];
 $valid_categories = $result['valid_categories'];
@@ -28,6 +29,7 @@ if (count($listings) > 0) {
         if (!empty($listing['genre'])) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
+        $result_id = $page . '-' . $index;
         get_template_part('template-parts/search/standard-listing', '', [
             'name' => $listing['name'],
             'location' => $listing['city'] . ', ' . $listing['state'],
@@ -46,6 +48,7 @@ if (count($listings) > 0) {
             'soundcloud_url' => $listing['soundcloud_url'],
             'youtube_video_urls' => $listing['youtube_video_urls'],
             'youtube_video_ids' => $listing['youtube_video_ids'],
+            'youtube_player_ids' => array_map(fn($video_id, $video_index) => $video_id . '-' . $result_id . '-' . $video_index, $listing['youtube_video_ids'], array_keys($listing['youtube_video_ids'])),
             'verified' => $listing['verified'],
             'lazyload_thumbnail' => $index >= 3,
             'last' => $index == array_key_last($listings),

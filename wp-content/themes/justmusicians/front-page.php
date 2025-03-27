@@ -83,42 +83,42 @@ get_header();
                         x-data='{
                             players: {},
                             playersMuted: false,
-                            initPlayerFromIframe(videoId) {
-                                if (videoId) {
-                                    var player = new YT.Player(videoId, {
+                            initPlayerFromIframe(playerId) {
+                                if (playerId) {
+                                    var player = new YT.Player(playerId, {
                                         playerVars: {
                                             controls: 0,
                                             origin: "<?php echo site_url(); ?>",
                                             enablejsapi: 1,
                                         },
-                                        events: { "onReady": () => { this.players[videoId].isReady = true; } }
+                                        events: { "onReady": () => { this.players[playerId].isReady = true; } }
                                     });
-                                    this.players[videoId] = player;
+                                    this.players[playerId] = player;
                                 }
                             },
-                            pausePlayer(videoId) {
-                                if (videoId && this.players[videoId] && this.players[videoId].isReady) {
-                                    this.players[videoId].pauseVideo();
+                            pausePlayer(playerId) {
+                                if (playerId && this.players[playerId] && this.players[playerId].isReady) {
+                                    this.players[playerId].pauseVideo();
                                 }
                             },
-                            playPlayer(videoId) {
-                                if (videoId && this.players[videoId] && this.players[videoId].isReady) {
-                                    this.players[videoId].playVideo();
+                            playPlayer(playerId) {
+                                if (playerId && this.players[playerId] && this.players[playerId].isReady) {
+                                    this.players[playerId].playVideo();
                                 }
                             },
                             toggleMute() {
                                 if (this.playersMuted) {
-                                    Object.values(this.players).forEach(player => player.unMute());
+                                    Object.values(this.players).forEach((player) => {if (player.isReady) { player.unMute(); }});
                                 } else {
-                                    Object.values(this.players).forEach(player => player.mute());
+                                    Object.values(this.players).forEach((player) => {if (player.isReady) { player.mute(); }});
                                 }
                                 this.playersMuted = !this.playersMuted;
                             },
                         }'
-                        x-on:init-youtube-player="initPlayerFromIframe($event.detail.videoId);"
-                        x-on:pause-youtube-player="pausePlayer($event.detail.videoId)"
-                        x-on:play-youtube-player="playPlayer($event.detail.videoId)"
-                        x-on:mute-youtube-player="mutePlayer($event.detail.videoId)"
+                        x-on:init-youtube-player="initPlayerFromIframe($event.detail.playerId);"
+                        x-on:pause-youtube-player="pausePlayer($event.detail.playerId)"
+                        x-on:play-youtube-player="playPlayer($event.detail.playerId)"
+                        x-on:mute-youtube-players="toggleMute()"
                     >
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');

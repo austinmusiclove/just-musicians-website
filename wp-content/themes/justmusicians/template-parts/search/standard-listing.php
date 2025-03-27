@@ -13,24 +13,30 @@
     </button>
 
     <?php
-    if (count($args['youtube_video_ids']) > 0) { ?>
+    if (count($args['youtube_player_ids']) > 0) { ?>
 
         <div class="w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
             x-data='{
                 previousIndex: 0,
                 currentIndex: 0,
-                totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?>,
-                videoIds: [null, ...<?php echo json_encode($args['youtube_video_ids']); ?>], // add a null as the first element to correspond to the thumbnail image as the first slide
-                pauseVideoById(videoId) {
-                    if (videoId) {
-                      $dispatch("pause-youtube-player", {"videoId": videoId});
+                totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
+                playerIds: <?php echo json_encode($args['youtube_player_ids']); ?>,
+                pausePreviousSlide() {
+                    if (this.currentIndex - 1 > 0) {
+                        $dispatch("pause-youtube-player", {"playerId": this.playerIds[this.currentIndex - 2]});
                     }
                 },
-                playVideoById(videoId) {
-                    if (videoId) {
-                        $dispatch("play-youtube-player", {"videoId": videoId});
+                pauseCurrentSlide() {
+                    if (this.currentIndex > 0) {
+                        $dispatch("pause-youtube-player", {"playerId": this.playerIds[this.currentIndex - 1]});
                     }
                 },
+                playCurrentSlide() {
+                    if (this.currentIndex > 0) {
+                        $dispatch("play-youtube-player", {"playerId": this.playerIds[this.currentIndex - 1]});
+                    }
+                },
+                muteAllVideos() { $dispatch("mute-youtube-players"); },
                 updateIndex(newIndex) {
                     this.previousIndex = this.currentIndex; // Save the previous index before updating
                     this.currentIndex = newIndex;            // Update to the new index
@@ -38,32 +44,31 @@
             }'
             x-init="() => {
                 document.addEventListener('youtube-api-ready', () => {
-                    videoIds.forEach(videoId => {
-                        if (videoId) { $dispatch('init-youtube-player', {'videoId': videoId}); }
+                    playerIds.forEach((playerId) => {
+                        if (playerId) { $dispatch('init-youtube-player', {'playerId': playerId}); }
                     });
                 }, {once: true});
-                if (typeof YT!= 'undefined') {
+                if (typeof YT != 'undefined') {
                     $dispatch('youtube-api-ready');
                 }
             };"
             >
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%)`"
-                @transitionend="pauseVideoById(videoIds[previousIndex]); playVideoById(videoIds[currentIndex]);"
-                x-on:mouseout="pauseVideoById(videoIds[currentIndex])"
-                x-on:mouseenter="playVideoById(videoIds[currentIndex])">
-                <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+                @transitionend="pausePreviousSlide(); playCurrentSlide();">
+                <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="updateIndex(1)" />
 
-                <?php foreach($args['youtube_video_ids'] as $video_id) { ?>
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
-                        <iframe id="<?php echo $video_id; ?>"
+                <?php foreach($args['youtube_player_ids'] as $index=>$player_id) { ?>
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
+                        x-on:mouseout="pauseCurrentSlide()"
+                        x-on:mouseenter="playCurrentSlide()">
+                        <iframe id="<?php echo $player_id; ?>"
                             class="aspect-4/3 w-full h-full object-cover"
-                            src="https://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1&controls=0&origin=<?php echo site_url(); ?>"
+                            src="https://www.youtube.com/embed/<?php echo $args['youtube_video_ids'][$index]; ?>?enablejsapi=1&controls=0&origin=<?php echo site_url(); ?>"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin"
                         ></iframe>
                     </div>
-
                 <?php } ?>
 
             </div>
@@ -79,14 +84,14 @@
             </div>
             <div class="absolute transform left-2 bottom-2">
                 <span
-                    @click="toggleMute()"
+                    @click="muteAllVideos()"
                     x-show="currentIndex > 0 && playersMuted">
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
                 </span>
             </div>
             <div class="absolute transform left-2 bottom-2">
                 <span
-                    @click="toggleMute()"
+                    @click="muteAllVideos()"
                     x-show="currentIndex > 0 && !playersMuted">
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
                 </span>
@@ -102,7 +107,7 @@
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
                     <span
                         @click="updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-                        x-show="currentIndex < totalSlides-1">
+                        x-show="currentIndex < totalSlides - 1">
                         <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
                     </span>
                 </div>

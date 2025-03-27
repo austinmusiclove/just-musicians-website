@@ -10,10 +10,10 @@ Data
     fix tiktok urls; need @ in front of handle in url
 UX
     media slider
+        *pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
+        *move arrows out of frame when not scrolled over
+        *bug: video keeps playing if you scroll away from video while slide animation is happening
         keep video playing on scroll over video buttons
-        *make iframe id unique so that it can handle same youtube video on two different listings or even on the same listing
-        bug: video keeps playing if you scroll away from video while slide animation is happening
-        pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
     Filters
@@ -34,13 +34,14 @@ Sign up
 UI
     1280-1300 screen size long listing name gets in the way of favorite button; move sidebar down at 1300
 Devon
+    get other verified icon
+    i broke the sticky filter side bar
     new pages
         log in modal
         logged in state for header
         listing landing page
         create/edit listing
     display number of results
-    search bar in tag modal
     improved skeleton
     No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
