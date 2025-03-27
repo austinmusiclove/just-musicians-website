@@ -91,14 +91,21 @@ get_header();
                                             origin: "<?php echo site_url(); ?>",
                                             enablejsapi: 1,
                                         },
-                                        events: { "onReady": () => { this.players[playerId].isReady = true; } }
+                                        events: {
+                                            "onReady": () => { this.players[playerId].isReady = true; },
+                                            "onStateChange": (event) => { this.players[playerId].state = event.data; } }
                                     });
                                     this.players[playerId] = player;
                                 }
                             },
                             pausePlayer(playerId) {
                                 if (playerId && this.players[playerId] && this.players[playerId].isReady) {
-                                    this.players[playerId].pauseVideo();
+                                    var playerState = this.players[playerId].state;
+                                    if (playerState == -1 || playerState == 3) {
+                                        this.players[playerId].stopVideo();
+                                    } else {
+                                        this.players[playerId].pauseVideo();
+                                    }
                                 }
                             },
                             playPlayer(playerId) {

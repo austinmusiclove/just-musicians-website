@@ -12,7 +12,6 @@ UX
     media slider
         *pause symbol appear over the video when scroll away to indicate it is paused and not just buffering
         *move arrows out of frame when not scrolled over
-        *bug: video keeps playing if you scroll away from video while slide animation is happening
         keep video playing on scroll over video buttons
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos

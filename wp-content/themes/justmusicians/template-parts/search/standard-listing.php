@@ -22,8 +22,8 @@
                 totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
                 playerIds: <?php echo json_encode($args['youtube_player_ids']); ?>,
                 pausePreviousSlide() {
-                    if (this.currentIndex - 1 > 0) {
-                        $dispatch("pause-youtube-player", {"playerId": this.playerIds[this.currentIndex - 2]});
+                    if (this.previousIndex > 0) {
+                        $dispatch("pause-youtube-player", {"playerId": this.playerIds[this.previousIndex - 1]});
                     }
                 },
                 pauseCurrentSlide() {
@@ -55,7 +55,7 @@
             >
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%)`"
-                @transitionend="pausePreviousSlide(); playCurrentSlide();">
+                x-on:transitionstart="pausePreviousSlide(); playCurrentSlide();">
                 <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="updateIndex(1)" />
 
                 <?php foreach($args['youtube_player_ids'] as $index=>$player_id) { ?>
