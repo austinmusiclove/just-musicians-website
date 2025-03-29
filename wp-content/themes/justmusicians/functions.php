@@ -118,22 +118,6 @@ function mind_defer_scripts( $tag, $handle, $src ) {
 add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 
 
-/**
- * Disable jQuery Migrate in WordPress.
- *
- * @author Guy Dumais.
- * @link https://en.guydumais.digital/disable-jquery-migrate-in-wordpress/
- */
-/*
-add_filter( 'wp_default_scripts', $af = static function( &$scripts) {
-    if(!is_admin()) {
-        $scripts->remove( 'jquery');
-        $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.12.4' );
-    }
-}, PHP_INT_MAX );
-unset( $af );
- */
-
 
 // Disable admin bar for all users
 show_admin_bar(false);

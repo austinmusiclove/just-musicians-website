@@ -1,17 +1,24 @@
 Milestones
     get all profiles up
-    *podcast page
     *log in
     *profile edit
+    inquiries
+    messaging
+    venue reviews
+    artist reviews
+    venue applications
 Data
     add tags for each listing manually
     regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     check social links and youtube videos for 404s
     fix tiktok urls; need @ in front of handle in url
+    *support youtu.be urls and m.youtube and when v is the second query param instead of the first
 UX
     media slider
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
+        don't load iframes until hover maybe
+        video seeking
     Filters
         *show all selected filters in side bar not just 4
         *add ensemble size
@@ -20,7 +27,6 @@ UX
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     inquiry questions and actual flow
-    shows no results and no more results when no results
     "Request Quote" or "Contact Directly" modal
     Inquiry form copy and flow
     bug: sometimes active search options don't come up
@@ -53,7 +59,7 @@ Back End
 Security
     audit rest api inputs and html api inputs
 Deploy
-    when updates go up, it does not update immediately for others; maybe they get new html but not new css or something
+    when updates go up, it does not update immediately for others; maybe they get new html but not new css or something; probably just need to update version and rebuild with new version and make sure those files get version numbers
     dedicated server
 Performance
     first 5 results without second trip to server
@@ -62,8 +68,6 @@ Performance
     use webp for images
 Future
     location filtering
-Code structure
-    create default options for each filter so that they can be used both on the initial load and on the api side; or maybe put the default option logic into the template part itself
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
 Document

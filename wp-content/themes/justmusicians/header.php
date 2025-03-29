@@ -41,8 +41,10 @@
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
         x-data="{
             width: 0,
+            loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
             showFavModal: false,
             showLoginModal: false,
+            showSignupModal: false,
             showInquiryModalPlaceholder: false,
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
@@ -132,8 +134,9 @@
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>
               </div>
             </div>
-            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-on:click="showLoginModal = !showLoginModal">Log In</button>
-            <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-on:click="showLoginModal = !showLoginModal">Sign Up</button>
+            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
+            <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showSignupModal = !showSignupModal">Sign Up</button>
+            <a href="<?php echo wp_logout_url('/'); ?>"><button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="loggedIn">Log Out</button></a>
           </div>
 
         </div>
@@ -144,10 +147,13 @@
     <?php wp_body_open(); ?>
     <?php
         echo get_template_part('template-parts/global/mobile-menu', '', array());
-        echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showLoginModal',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'Log in and Sign up is not yet supported. All listings are currently invite only as we develop the website and improve the user experience.',
+        echo get_template_part('template-parts/login/login-modal', '', [
+            'alpine_login_show_var' => 'showLoginModal',
+            'alpine_signup_show_var' => 'showSignupModal',
+        ]);
+        echo get_template_part('template-parts/login/signup-modal', '', [
+            'alpine_login_show_var' => 'showLoginModal',
+            'alpine_signup_show_var' => 'showSignupModal',
         ]);
         echo get_template_part('template-parts/global/modal', '', [
             'alpine_show_var' => 'showFavModal',

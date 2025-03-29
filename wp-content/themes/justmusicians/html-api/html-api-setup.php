@@ -19,13 +19,19 @@ add_filter('query_vars', 'register_html_api_query_vars');
 function html_api_v1_template_redirects() {
     $path = get_query_var('wp-html-v1');
     if ($path == 'listings') {
-        include_once get_template_directory() . '/html-api/listings.php';  // Adjust the path to your PHP file
+        include_once get_template_directory() . '/html-api/listings.php';
         exit;
     } else if ($path == 'search-options') {
-        include_once get_template_directory() . '/html-api/search-options.php';  // Adjust the path to your PHP file
+        include_once get_template_directory() . '/html-api/search-options.php';
         exit;
     } else if ($path == 'search-options-mobile') {
-        include_once get_template_directory() . '/html-api/search-options-mobile.php';  // Adjust the path to your PHP file
+        include_once get_template_directory() . '/html-api/search-options-mobile.php';
+        exit;
+    } else if ($path == 'register-user') {
+        include_once get_template_directory() . '/html-api/register-user.php';
+        exit;
+    } else if ($path == 'activate-account') {
+        include_once get_template_directory() . '/html-api/activate-account.php';
         exit;
     }
 }
