@@ -55,11 +55,14 @@ if (count($listings) > 0) {
             'next_page' => $next_page,
         ]);
     }
-} else if ($next_page == 2) { ?>
-    <p>No results</p>
-<?php } else { ?>
-    <p>No more results</p>
-<?php }
+
+} else if ($next_page == 2) { 
+    get_template_part( 'template-parts/content/no-more-results'); 
+} else {
+    get_template_part( 'template-parts/content/no-search-results'); 
+} 
+
+
 
 
 // Render Filters
