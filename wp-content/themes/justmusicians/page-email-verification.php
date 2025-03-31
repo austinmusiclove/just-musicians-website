@@ -29,7 +29,7 @@ get_header();
             if ($update_success == true) {
                 echo "Your email has been verified. You may now close this browser tab.";
             } else {
-                echo "Error updating account record. Please contact the admin for assistance on your subscription at admin@gigbuddy.org";
+                echo "Error updating account record. Please contact the admin for assistance on your subscription at john@justmusicians.com";
             }
         ?></p>
     </div>

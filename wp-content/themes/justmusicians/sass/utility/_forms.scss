@@ -28,25 +28,25 @@ form {
     position: relative;
     line-height: 125%;
   }
-  
+
   .custom-checkbox input {
-    //display: none; 
+    //display: none;
     opacity: 0;
   }
-  
+
   .custom-checkbox span {
     display: inline-block;
     width: 1rem;
     height: 1rem;
     border: 1px solid rgba(0,0,0,.4);
-    border-radius: .25rem; 
+    border-radius: .25rem;
     background-color: white;
     position: absolute;
     top: .25rem;
     left: 0;
     flex-shrink: 0;
   }
-  
+
   .custom-checkbox span::after {
     content: "";
     position: absolute;
@@ -59,49 +59,49 @@ form {
     transform: rotate(45deg);
     opacity: 0;
   }
-  
+
   /* Checked state */
   .custom-checkbox input:checked + span {
     background-color: #D29429;
     border-color: #D29429;
   }
-  
+
   .custom-checkbox input:checked + span::after {
     opacity: 1;
   }
-  
-  
+
+
   .custom-radio-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .custom-radio div {
     position: relative;
   }
-  
+
   .custom-radio input {
     opacity: 0;
     cursor: pointer;
     margin-right:.125rem;
   }
-  
+
   .custom-radio span {
     display: inline-block;
     width: 1rem;
     height: 1rem;
     border: 2px solid #D29429;
-    border-radius: 50%; 
+    border-radius: 50%;
     background-color: white;
     position: absolute;
     cursor: pointer;
     pointer-events: none;
     top: .25rem;
     left: 0;
-  
+
   }
-  
+
   /* Inner circle for selected state */
   .custom-radio span::after {
     content: "";
@@ -115,15 +115,15 @@ form {
     border-radius: 50%;
     opacity: 0;
   }
-  
+
   /* Checked state */
   .custom-radio input:checked + span {
     border-color: #D29429;
     background-color: #e6f0ff;
   }
-  
+
   .custom-radio input:checked + span::after {
     opacity: 1;
   }
-  
-  
+
+

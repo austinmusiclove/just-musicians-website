@@ -55,6 +55,7 @@ function login_google(){
 
         // check if user email already registered
         if(!email_exists($userData['email'])){
+            print_r('sign up');
             // generate password
             $bytes = openssl_random_pseudo_bytes(2);
             $password = md5(bin2hex($bytes));
@@ -75,14 +76,15 @@ function login_google(){
                   )
                 )
             );
+            print_r($new_user_id);
             if($new_user_id) {
                 // send an email to the admin
                 wp_new_user_notification($new_user_id);
 
                 // log the new user in
-                do_action('wp_login', $user_login, $userData['email']);
                 wp_set_current_user($new_user_id);
                 wp_set_auth_cookie($new_user_id, true);
+                //do_action('wp_login', $user_login, $userData['email']);
 
                 // send the newly created user to the home page after login
                 wp_redirect(home_url()); exit;
@@ -90,14 +92,13 @@ function login_google(){
         }else{
             //if user already registered than we are just loggin in the user
             $user = get_user_by( 'email', $userData['email'] );
-            do_action('wp_login', $user->user_login, $user->user_email);
-            wp_set_current_user($user->ID);
             wp_set_auth_cookie($user->ID, true);
+            wp_set_current_user($user->ID, $user->user_login);
+            //do_action('wp_login', $user->user_login, $user);
             wp_redirect(home_url()); exit;
         }
 
 
-        //var_dump($userData);
     }else{
         wp_redirect(home_url());
         exit();

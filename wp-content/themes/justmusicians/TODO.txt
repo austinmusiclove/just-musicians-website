@@ -1,5 +1,4 @@
 Milestones
-    get all profiles up
     *log in
     *profile edit
     inquiries
@@ -8,17 +7,21 @@ Milestones
     artist reviews
     venue applications
 Data
-    add tags for each listing manually
-    regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
-    check social links and youtube videos for 404s
-    fix tiktok urls; need @ in front of handle in url
+    *search algorithm to rank up complete profiles
+    add logo profiles
+    *regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
+    *check social links and youtube videos for 404s
+    *fix tiktok urls; need @ in front of handle in url
     *support youtu.be urls and m.youtube and when v is the second query param instead of the first
+    *add listing status for incomplete listings
+    *add completeness ranking
 UX
     media slider
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
         don't load iframes until hover maybe
         video seeking
+        maybe always show arrows on mobile? Check with fiverr
     Filters
         *show all selected filters in side bar not just 4
         *add ensemble size
@@ -59,13 +62,13 @@ Back End
 Security
     audit rest api inputs and html api inputs
 Deploy
-    when updates go up, it does not update immediately for others; maybe they get new html but not new css or something; probably just need to update version and rebuild with new version and make sure those files get version numbers
+    *when updates go up, it does not update immediately for others; maybe they get new html but not new css or something; probably just need to update version and rebuild with new version and make sure those files get version numbers
     dedicated server
 Performance
     first 5 results without second trip to server
     only swap out the filter section that was altered
-    reduce size of image retrieved for listings in active search options
-    use webp for images
+    *reduce size of image retrieved for listings in active search options
+    *use webp for images
 Future
     location filtering
 Quirks

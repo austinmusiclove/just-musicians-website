@@ -49,6 +49,8 @@ module.exports = {
 		'./searchform.php',
 		'./template-home.php',
 		'./single.php',
+		'./page-*',
+		'./page-request-password-reset.php',
 		// Lib
 		'./lib/blocks/*.{php,js}',
 		'./lib/inc/*.{php,js}',
@@ -64,6 +66,8 @@ module.exports = {
 		'./template-parts/filters/elements/*.{php,js}',
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
+		'./template-parts/login/*.{php,js}',
+		'./template-parts/html-api/*.{php,js}',
 		// Other
 		'./templates/**/*.{php,js}',
 		'./tailwind/missing.php',

@@ -2,8 +2,11 @@
 
 // Register menus
 register_nav_menus( array(
-  'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
-  'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
+    'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
+    'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
+    'footer-menu-1' => __( 'Footer Menu 1' ),
+    'footer-menu-2' => __( 'Footer Menu 2' ),
+    'footer-menu-3' => __( 'Footer Menu 3' ),
 ) );
 
 

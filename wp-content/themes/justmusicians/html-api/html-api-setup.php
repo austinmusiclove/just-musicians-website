@@ -30,9 +30,6 @@ function html_api_v1_template_redirects() {
     } else if ($path == 'register-user') {
         include_once get_template_directory() . '/html-api/register-user.php';
         exit;
-    } else if ($path == 'activate-account') {
-        include_once get_template_directory() . '/html-api/activate-account.php';
-        exit;
     }
 }
 add_action('template_redirect', 'html_api_v1_template_redirects');

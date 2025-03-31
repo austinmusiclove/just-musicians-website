@@ -13,11 +13,11 @@ if ( ! function_exists( 'JustMusicians_setup' ) ) :
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-			add_image_size('full-screen', 2000, '', true); // Large Thumbnail
-			add_image_size('extra-large', 1500, '', true); // Large Thumbnail
-			add_image_size('large', 1200, '', true); // Large Thumbnail
+        add_image_size('full-screen', 2000, '', true); // Large Thumbnail
+        add_image_size('extra-large', 1500, '', true); // Large Thumbnail
+        add_image_size('large', 1200, '', true); // Large Thumbnail
 	    add_image_size('medium', 900, '', true); // Medium Thumbnail
-			add_image_size('medium-small', 600, '', true); // Medium Small Thumbnail
+        add_image_size('medium-small', 600, '', true); // Medium Small Thumbnail
 	    add_image_size('small', 300, '', true); // Small Thumbnail
 		add_theme_support( 'html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
 		add_theme_support( 'customize-selective-refresh-widgets' );
@@ -43,15 +43,15 @@ function justmusicians_scripts() {
 		//wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
 		// Utilities
-    wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
-    wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
-    wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
-    wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', ['alpinejs-resize', 'alpinejs-focus'], $pkg->version, true);
+        wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
+        wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', ['alpinejs-resize', 'alpinejs-focus'], $pkg->version, true);
 
 
 		// Home
 		if (is_front_page() ) {
-        wp_enqueue_script('youtube-iframe-api', 'https://www.youtube.com/iframe_api', [], null, true);
+            wp_enqueue_script('youtube-iframe-api', 'https://www.youtube.com/iframe_api', [], null, true);
 		}
 
 		// Archive
@@ -61,10 +61,6 @@ function justmusicians_scripts() {
 		// Article and Page
 		if ( is_singular(array( 'post')) || is_page() ) {
 		}
-
-
-
-
 
 
 }
@@ -78,6 +74,9 @@ require get_template_directory() . '/lib/inc/posts.php';
 require get_template_directory() . '/lib/inc/blocks.php';
 require get_template_directory() . '/lib/inc/shortcodes.php';
 require get_template_directory() . '/lib/inc/comments.php';
+require get_template_directory() . '/lib/inc/helper.php';
+require get_template_directory() . '/html-api/html-api-setup.php';
+require get_template_directory() . '/lib/inc/user-mgmt.php';
 
 
 // Plugins
@@ -123,22 +122,3 @@ add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 show_admin_bar(false);
 
 
-// Helper functions
-include_once 'lib/inc/helper.php';
-
-
-// HTML APIs
-include_once 'html-api/html-api-setup.php';
-
-
-// Nav Menus
-function register_my_menus() {
-  register_nav_menus(
-    array(
-      'footer-menu-1' => __( 'Footer Menu 1' ),
-      'footer-menu-2' => __( 'Footer Menu 2' ),
-      'footer-menu-3' => __( 'Footer Menu 3' ),
-     )
-   );
- }
-add_action( 'init', 'register_my_menus' );
