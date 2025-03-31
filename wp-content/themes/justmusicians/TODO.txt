@@ -1,5 +1,5 @@
 Milestones
-    *log in
+    *claim profile sign up
     *profile edit
     inquiries
     messaging
@@ -7,8 +7,8 @@ Milestones
     artist reviews
     venue applications
 Data
-    *search algorithm to rank up complete profiles
     add logo profiles
+    *search algorithm to rank up complete profiles
     *regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     *check social links and youtube videos for 404s
     *fix tiktok urls; need @ in front of handle in url
@@ -39,7 +39,6 @@ Sign up
 UI
     1280-1300 screen size long listing name gets in the way of favorite button; move sidebar down at 1300
 Devon
-    get other verified icon
     i broke the sticky filter side bar
     podcast - get violotor-blog svg
     new pages
@@ -48,7 +47,6 @@ Devon
         listing landing page
         create/edit listing
     display number of results
-    No search results with personality
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
 Paid features
     Advanced search filters
