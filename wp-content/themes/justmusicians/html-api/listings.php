@@ -56,11 +56,11 @@ if (count($listings) > 0) {
         ]);
     }
 
-} else if ($next_page == 2) { 
-    get_template_part( 'template-parts/content/no-more-results'); 
+} else if ($next_page == 2) {
+    get_template_part( 'template-parts/content/no-search-results');
 } else {
-    get_template_part( 'template-parts/content/no-search-results'); 
-} 
+    get_template_part( 'template-parts/content/no-more-results');
+}
 
 
 
