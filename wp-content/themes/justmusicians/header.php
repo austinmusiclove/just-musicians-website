@@ -41,7 +41,7 @@
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
         x-data="{
             width: 0,
-            redirectHome() { console.log('here'); window.location.href='/'; },
+            redirectHome() { window.location.href='/'; },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
             showPassword: false,
             showFavModal: false,
