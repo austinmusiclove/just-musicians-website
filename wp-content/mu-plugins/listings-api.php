@@ -112,7 +112,7 @@ function get_listings($args) {
         $youtube_video_ids = [];
         if ($youtube_video_urls) {
             foreach($youtube_video_urls as $url) {
-              if (preg_match('/(?:https?:\/\/(?:www\.)?youtube\.com(?:\/[^\/]+)?\?v=([a-zA-Z0-9_-]+))/', $url, $matches)) { array_push($youtube_video_ids, $matches[1]); }
+                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { array_push($youtube_video_ids, $matches[1]); }
             }
         }
 
