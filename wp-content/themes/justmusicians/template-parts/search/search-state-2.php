@@ -40,7 +40,7 @@
         $search_term = stripslashes($listing['name']); ?>
         <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qsearch=" . $search_term; ?>" x-on:click="showSearchOptions = false;" >
             <div class="w-6 aspect-square shrink-0">
-                <img class="w-full h-full object-cover" src="<?php echo $listing['thumbnail_url']; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $listing['tiny_thumbnail_url']; ?>" />
             </div>
             <?php echo $listing['name']; ?>
         </a>

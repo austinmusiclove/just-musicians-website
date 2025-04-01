@@ -4,3 +4,4 @@ wp-config.php
 .DS_Store
 wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
 wp-content/uploads
+local-phpinfo.php

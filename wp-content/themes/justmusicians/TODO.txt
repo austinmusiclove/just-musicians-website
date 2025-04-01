@@ -8,13 +8,15 @@ Milestones
     venue applications
 Data
     add logo profiles
-    *search algorithm to rank up complete profiles
     *regenerate content of each post regularly or when they change it so that it includes new taxonomies and description updates so that they will come up in search for those things
     *check social links and youtube videos for 404s
     *fix tiktok urls; need @ in front of handle in url
-    *support youtu.be urls and m.youtube and when v is the second query param instead of the first
     *add listing status for incomplete listings
     *add completeness ranking
+    *search algorithm to rank up complete profiles
+    program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
+    handle venue aliases
+    change venue in venue review to post object
 UX
     media slider
         pause if window is not in focus? or when change tab? check fiverr
@@ -22,6 +24,8 @@ UX
         don't load iframes until hover maybe
         video seeking
         maybe always show arrows on mobile? Check with fiverr
+        swipe on mobile
+        arrow on left side on mobile; might be css issue
     Filters
         *show all selected filters in side bar not just 4
         *add ensemble size
@@ -65,7 +69,6 @@ Deploy
 Performance
     first 5 results without second trip to server
     only swap out the filter section that was altered
-    *reduce size of image retrieved for listings in active search options
     *use webp for images
 Future
     location filtering

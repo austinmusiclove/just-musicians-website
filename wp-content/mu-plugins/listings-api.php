@@ -46,10 +46,10 @@ function get_listings($args) {
             'value' => $verified,
         ]);
     }
-    $query_args['meta_query'] = count($meta_queries) == 0 ? null : count($meta_queries) == 1 ? [...$meta_queries] : [
+    $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
         'relation' => 'AND',
         ...$meta_queries,
-    ];
+    ]);
     $tax_queries = [];
     if (!empty($valid_categories)) {
         array_push($tax_queries, [
@@ -99,10 +99,10 @@ function get_listings($args) {
             'compare' => 'IN',
         ]);
     }
-    $query_args['tax_query'] = count($tax_queries) == 0 ? null : count($tax_queries) == 1 ? [...$tax_queries] : [
+    $query_args['tax_query'] = count($tax_queries) == 0 ? null : (count($tax_queries) == 1 ? [...$tax_queries] : [
         'relation' => 'AND',
         ...$tax_queries,
-    ];
+    ]);
     $query = new WP_Query($query_args);
     while ($query->have_posts()) {
         $query->the_post();
@@ -123,7 +123,8 @@ function get_listings($args) {
             'state' => get_field('state'),
             'description' => get_field('description'),
             'genre' => get_the_terms(get_the_ID(), 'genre'),
-            'thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'small'),
+            'thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
+            'tiny_thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'tiny'),
             'website' => get_field('website'),
             'facebook_url' => get_field('facebook_url'),
             'instagram_url' => get_field('instagram_url'),

@@ -19,6 +19,8 @@ if ( ! function_exists( 'JustMusicians_setup' ) ) :
 	    add_image_size('medium', 900, '', true); // Medium Thumbnail
         add_image_size('medium-small', 600, '', true); // Medium Small Thumbnail
 	    add_image_size('small', 300, '', true); // Small Thumbnail
+	    add_image_size('standard-listing', 400, 300, false); // Standard listing
+	    add_image_size('tiny', 23, 23, true); // Standard listing
 		add_theme_support( 'html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
 		add_theme_support( 'customize-selective-refresh-widgets' );
 		add_theme_support( 'custom-logo', array(
