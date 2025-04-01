@@ -26,6 +26,10 @@ function get_listings($args) {
         $query_args['s'] = $args['search'];
     }
     $meta_queries = [];
+    array_push($meta_queries, [
+        'key' => 'status',
+        'value' => 'Complete',
+    ]);
     if (!empty($name_search_term)) {
         array_push($meta_queries, [
             'key' => 'name',

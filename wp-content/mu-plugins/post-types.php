@@ -60,7 +60,7 @@ function register_post_types() {
     register_post_type('listing', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'thumbnail'),
+        'supports' => array('title', 'thumbnail', 'editor'),
         'labels' => array(
           'name' => 'Listing',
           'add_new_item' => 'Add New Listing',

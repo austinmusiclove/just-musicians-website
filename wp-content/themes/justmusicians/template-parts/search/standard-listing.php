@@ -161,7 +161,7 @@
             <?php } if (!empty($args['x_url'])) { ?>
                 <a target="_blank" href="<?php echo $args['x_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" /></a>
             <?php } if (!empty($args['tiktok_url'])) { ?>
-                <!--<a target="_blank" href="<?php echo $args['tiktok_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" /></a>-->
+                <a target="_blank" href="<?php echo $args['tiktok_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" /></a>
             <?php } if (!empty($args['bandcamp_url'])) { ?>
                 <a target="_blank" href="<?php echo $args['bandcamp_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" /></a>
             <?php } if (!empty($args['spotify_artist_url'])) { ?>
