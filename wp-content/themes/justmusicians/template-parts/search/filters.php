@@ -4,70 +4,40 @@
         'id' => 'category-filters',
         'title' => 'Categories',
         'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('category', 0),
-        'tag_2' => get_default_option('category', 1),
-        'tag_3' => get_default_option('category', 2),
-        'tag_4' => get_default_option('category', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
+        'default_tags' => get_default_options('category'),
+        'tags' => [],
         'show_modal_var' => 'showCategoryModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
         'title' => 'Genre',
         'input_name' => 'genres', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('genre', 0),
-        'tag_2' => get_default_option('genre', 1),
-        'tag_3' => get_default_option('genre', 2),
-        'tag_4' => get_default_option('genre', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
+        'default_tags' => get_default_options('genre'),
+        'tags' => [],
         'show_modal_var' => 'showGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
         'title' => 'Sub Genre',
         'input_name' => 'subgenres', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('subgenre', 0),
-        'tag_2' => get_default_option('subgenre', 1),
-        'tag_3' => get_default_option('subgenre', 2),
-        'tag_4' => get_default_option('subgenre', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
+        'default_tags' => get_default_options('subgenre'),
+        'tags' => [],
         'show_modal_var' => 'showSubGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
         'title' => 'Instrumentation',
         'input_name' => 'instrumentations', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('instrumentation', 0),
-        'tag_2' => get_default_option('instrumentation', 1),
-        'tag_3' => get_default_option('instrumentation', 2),
-        'tag_4' => get_default_option('instrumentation', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
+        'default_tags' => get_default_options('instrumentation'),
+        'tags' => [],
         'show_modal_var' => 'showInstrumentationModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
         'title' => 'Settings',
         'input_name' => 'settings', // should match the input name used for the tag modal checkboxes
-        'tag_1' => get_default_option('setting', 0),
-        'tag_2' => get_default_option('setting', 1),
-        'tag_3' => get_default_option('setting', 2),
-        'tag_4' => get_default_option('setting', 3),
-        'tag_1_selected' => false,
-        'tag_2_selected' => false,
-        'tag_3_selected' => false,
-        'tag_4_selected' => false,
+        'default_tags' => get_default_options('setting'),
+        'tags' => [],
         'show_modal_var' => 'showSettingModal'
     ));
     //echo get_template_part('template-parts/filters/location', '', array());
