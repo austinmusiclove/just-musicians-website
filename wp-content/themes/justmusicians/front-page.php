@@ -54,8 +54,8 @@ get_header();
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
-                <div class="hidden md:block md:col-span-3 border-r border-black/20 pr-8">
-                    <div class="sticky pt-24 pb-24">
+                <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
+                    <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 self-end bottom-0 shrink-0 w-full">
                       <div class="mb-8 min-h-16">
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
