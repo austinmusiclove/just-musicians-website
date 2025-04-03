@@ -40,9 +40,8 @@ function update_search_rank($posts) {
         // Loop through fields to check if they have a value
         $fields_to_check = [
             'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size', 'draw', 'email', 'phone',
-            'website', 'instagram_handle', 'instagram_url', 'tiktok_handle', 'tiktok_url', 'x_handle', 'x_url',
-            'facebook_url', 'youtube_url', 'bandcamp_url', 'spotify_artist_url', 'spotify_artist_id', 'apple_music_artist_url',
-            'soundcloud_url', 'youtube_video_urls', 'venues_played_verified'
+            'website', 'instagram_handle', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'spotify_artist_id',
+            'apple_music_artist_url', 'youtube_video_urls', 'venues_played_verified'
         ];
         foreach ( $fields_to_check as $field ) {
             if ( ! empty( get_post_meta( $post->ID, $field, true ) ) ) {

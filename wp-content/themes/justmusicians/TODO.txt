@@ -6,7 +6,6 @@ Milestones
             landing page
             basic edit screen
             full edit screen design
-        dedicated server
     Artist announce and invite new profiles
         use webp images
         auto optimize uploaded images and test big file upload
@@ -72,6 +71,7 @@ Security
 Performance
     prefetch on mouse down
     first 5 results without second trip to server
+    dedicated server
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
 Document
