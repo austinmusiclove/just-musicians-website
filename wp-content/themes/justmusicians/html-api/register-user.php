@@ -60,7 +60,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             // log the new user in
             wp_set_auth_cookie($new_user_id, $remember);
             wp_set_current_user($new_user_id, $user_login);
-            echo '<span x-init="redirectHome();"></span>';
+            echo '<span x-init="redirect();"></span>';
         }
     } else {
         foreach($errors as $error) {
