@@ -1,7 +1,30 @@
 <?php
 /**
- * Plugin Name: User Management
+ * Plugin Name: Just Musicians User Management API
+ * Description: A custom plugin to expose REST APIs for doing user management operations
+ * Version: 1.0
+ * Author: John Filippone
 **/
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Rest APIs
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'users/register', [
+        'methods' => 'POST',
+        'callback' => 'add_new_user',
+    ]);
+    register_rest_route('user/v1', 'email-verified', array(
+        'methods' => WP_REST_SERVER::READABLE,
+        'callback' => 'is_email_verified'
+    ));
+    register_rest_route('user/v1', 'profiles', array(
+        'methods' => WP_REST_SERVER::READABLE,
+        'callback' => 'getUserProfiles'
+    ));
+});
+
 
 // User Registration
 function add_new_user() {
@@ -70,10 +93,7 @@ function add_new_user() {
     }
     return new WP_Error(500, 'User Registration failed', array('status' => 500, 'errors' => $errors));
 }
-function jm_errors(){
-    static $wp_error; // global variable handle
-    return isset($wp_error) ? $wp_error : ($wp_error = new WP_Error(null, null, null));
-}
+
 function send_account_activation_link($email, $account_identifier) {
     $link = site_url() . "/email-verification/?aci=" . $account_identifier;
     $message = 'Thank you for creating an account with Just Musicians. Please click this link to verify your email and activate you account: ' . $link;
@@ -96,10 +116,38 @@ function activate_account($account_identifier) {
     }
 }
 
-// Rest APIs
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'users/register', [
-        'methods' => 'POST',
-        'callback' => 'add_new_user',
-    ]);
-});
+// is current user email verified
+function is_email_verified() {
+    $email_verified = get_user_meta(wp_get_current_user()->ID, "email_verified");
+    return $email_verified[0];
+    if (!isset($email_verified) || is_null($email_verified) || !is_array($email_verified)) {
+        return false;
+    } else {
+        return $email_verified[0];
+    }
+}
+
+// get current user profiles
+function getUserProfiles() {
+    $results = array();
+    $user_profiles = get_user_meta(wp_get_current_user()->ID, "profiles");
+    if (!isset($user_profiles) || is_null($user_profiles) || !is_array($user_profiles)) {
+        return $results;
+    } else {
+        // for each profile get name
+        for ($index = 0; $index < count($user_profiles[0]); $index++) {
+            $profile_post_id = $user_profiles[0][$index];
+
+            // if status not publish, skip
+            $post_status = get_post_status($profile_post_id);
+            if ($post_status != "publish") { continue; }
+
+            $name = get_post_meta($profile_post_id, "name")[0];
+            array_push($results, array(
+                "post_id" => $profile_post_id,
+                "name" => $name
+            ));
+        }
+        return $results;
+    }
+}

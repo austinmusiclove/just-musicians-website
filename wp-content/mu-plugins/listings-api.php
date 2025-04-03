@@ -1,5 +1,37 @@
 <?php
+/**
+ * Plugin Name: Just Musicians Listings API
+ * Description: A custom plugin to expose REST APIs for managing listing posts
+ * Version: 1.0
+ * Author: John Filippone
+ */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Register REST API Routes
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'listings', [
+        'methods' => 'GET',
+        'callback' => 'get_listings_request_handler',
+    ]);
+});
+
+
+function get_listings_request_handler($request) {
+    return get_listings([
+        'search' => $request['s'],
+        'types' => $request['types'],
+        'categories' => $request['categories'],
+        'genres' => $request['genres'],
+        'subgenres' => $request['subgenres'],
+        'instrumentation' => $request['instrumentation'],
+        'settings' => $request['settings'],
+        'tags' => $request['tags'],
+        'verified' => $request['verified'],
+        'page' => $request['page'],
+    ]);
+}
 function get_listings($args) {
     $results = [];
     $search_term = sanitize_text_field($args['search']);
@@ -21,6 +53,9 @@ function get_listings($args) {
         'post_type' => 'listing',
         'posts_per_page' => 10,
         'paged' => $page,
+        'order' => 'DEC',
+        'orderby' => 'meta_value_num',
+        'meta_key' => 'rank',
     ];
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
@@ -172,23 +207,3 @@ function validate_tax_input($tax_input, $taxonomy) {
     return $valid_input;
 }
 
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'listings', [
-        'methods' => 'GET',
-        'callback' => 'get_listings_request_handler',
-    ]);
-});
-function get_listings_request_handler($request) {
-    return get_listings([
-        'search' => $request['s'],
-        'types' => $request['types'],
-        'categories' => $request['categories'],
-        'genres' => $request['genres'],
-        'subgenres' => $request['subgenres'],
-        'instrumentation' => $request['instrumentation'],
-        'settings' => $request['settings'],
-        'tags' => $request['tags'],
-        'verified' => $request['verified'],
-        'page' => $request['page'],
-    ]);
-}

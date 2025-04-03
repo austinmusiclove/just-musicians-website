@@ -1,50 +1,61 @@
 Milestones
-    *claim profile sign up
-    *profile edit
-    inquiries
-    messaging
-    venue reviews
-    artist reviews
-    venue applications
+    Artist push to edit and complete profiles
+        *add logo profiles
+        *claim profile sign up flow
+        *profile edit
+            landing page
+            basic edit screen
+            full edit screen design
+        dedicated server
+    Artist announce and invite new profiles
+        use webp images
+        auto optimize uploaded images and test big file upload
+        video order depending on search criteria
+        start at timestamp for videos
+        check social links and youtube videos for 404s
+        program to move unofficial tags to official if added
+    Free lance booker testing
+        ensemble size filter
+        "Request Quote" or "Contact Directly" modal
+        Inquiry form copy and flow
+        media slider performance optimization
+            pause if window is not in focus? or when change tab? check fiverr
+            pre buffer youtube videos
+            don't load iframes until hover maybe
+    Free lance booker testing 2
+        click tracking
+        user recording software
+        messaging
+    Venue testing
+        venue applications
 Data
-    add logo profiles
-    *check social links and youtube videos for 404s
-    *add completeness ranking
-    *search algorithm to rank up complete profiles
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
     change venue in venue review to post object
 UX
     media slider
-        pause if window is not in focus? or when change tab? check fiverr
-        pre buffer youtube videos
-        don't load iframes until hover maybe
         video seeking
         maybe always show arrows on mobile? Check with fiverr
         swipe on mobile
-        arrow on left side on mobile; might be css issue
+        bigger screen
     Filters
-        *add ensemble size
         add something about providing sound equipment
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
-    inquiry questions and actual flow
-    "Request Quote" or "Contact Directly" modal
-    Inquiry form copy and flow
     bug: sometimes active search options don't come up
-Sign up
-    check for 404s on links
-    test big file upload for thumbnails
+Features
+    venue reviews
+    artist reviews
 UI
     1280-1300 screen size long listing name gets in the way of favorite button; move sidebar down at 1300
 Devon
-    *make filters sticky to the top as you scroll down
     podcast - get violotor-blog svg
     new pages
         log in modal
         logged in state for header
         listing landing page
         create/edit listing
+        404 page
     display number of results
     Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
 Paid features
@@ -58,15 +69,11 @@ Back End
     Allow modifying default filters from the theme customizor
 Security
     audit rest api inputs and html api inputs
-Deploy
-    dedicated server
 Performance
+    prefetch on mouse down
     first 5 results without second trip to server
-    *use webp for images
-Future
-    location filtering
 Quirks
-    there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids an out of band swap both
+    there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
 Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin

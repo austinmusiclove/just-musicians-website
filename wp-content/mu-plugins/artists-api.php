@@ -1,4 +1,31 @@
 <?php
+/**
+ * Plugin Name: Just Musicians Artists API
+ * Description: A custom plugin to expose REST APIs for managing artist posts
+ * Version: 1.0
+ * Author: John Filippone
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Register REST API Routes
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'artists/post_id', [
+        'methods' => 'GET',
+        'callback' => 'get_artist_post_id',
+    ]);
+    register_rest_route( 'v1', 'artists/uuid', [
+        'methods' => 'GET',
+        'callback' => 'get_artist_uuid',
+    ]);
+    register_rest_route( 'v1', 'artists', [
+        'methods' => 'GET',
+        'callback' => 'get_artist',
+    ]);
+});
+
+
 function get_artist_post_id() {
     $artist_id = $_GET['artist_id'];
 
@@ -15,6 +42,7 @@ function get_artist_post_id() {
     }
     return 0;
 }
+
 function get_artist_uuid() {
     $artist_id = $_GET['artist_id'];
 
@@ -31,6 +59,7 @@ function get_artist_uuid() {
     }
     return 0;
 }
+
 function get_artist() {
     $artist_uuid = $_GET['artist_uuid'];
 
@@ -72,21 +101,3 @@ function get_artist() {
     }
     return 0;
 }
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'artists/post_id', [
-        'methods' => 'GET',
-        'callback' => 'get_artist_post_id',
-    ]);
-});
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'artists/uuid', [
-        'methods' => 'GET',
-        'callback' => 'get_artist_uuid',
-    ]);
-});
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'artists', [
-        'methods' => 'GET',
-        'callback' => 'get_artist',
-    ]);
-});
