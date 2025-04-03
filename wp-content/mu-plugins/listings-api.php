@@ -52,9 +52,9 @@ function get_listings($args) {
     $query_args = [
         'post_type' => 'listing',
         'posts_per_page' => 10,
+        'post_status' => 'publish',
         'paged' => $page,
-        'order' => 'DEC',
-        'orderby' => 'meta_value_num',
+        'orderby' => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
         'meta_key' => 'rank',
     ];
     if (!empty($search_term)) {
