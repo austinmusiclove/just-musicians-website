@@ -3,6 +3,12 @@ Milestones
         *profile edit
             basic edit screen
             full edit screen design
+        bug: slider on mobile
+            dad say sound not work
+            chrome mobile
+                play button not work at first
+                play button refreshing page
+                slide right button cause cant open this page error
     Artist announce and invite new profiles
         use webp images
         auto optimize uploaded images and test big file upload
