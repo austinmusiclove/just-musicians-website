@@ -28,7 +28,7 @@ $gClient->setClientSecret($GOOGLE_CLIENT_SECRET);
 $gClient->setApplicationName($GOOGLE_APPLICATION_NAME);
 $gClient->setRedirectUri($GOOGLE_REDIRECT_URI);
 $gClient->addScope($GOOGLE_SCOPES);
-$gClient->setState(sanitize_text_field($_GET['lic']));
+$gClient->setState(sanitize_text_field($_SERVER['REQUEST_URI']));
 
 // login URL
 $login_url = $gClient->createAuthUrl();
@@ -86,11 +86,7 @@ function login_google(){
                 //do_action('wp_login', $user_login, $userData['email']);
 
                 // send the newly created user to the home page after login
-                if (!empty($_GET['state'])) {
-                    wp_redirect(site_url('/listings?lic=' . $_GET['state'])); exit;
-                } else {
-                    wp_redirect(site_url()); exit;
-                }
+                wp_redirect(site_url($_GET['state'])); exit;
             }
         }else{
             //if user already registered than we are just loggin in the user
@@ -98,11 +94,7 @@ function login_google(){
             wp_set_auth_cookie($user->ID, true);
             wp_set_current_user($user->ID, $user->user_login);
             //do_action('wp_login', $user->user_login, $user);
-            if (!empty($_GET['state'])) {
-                wp_redirect(site_url('/listings?lic=' . $_GET['state'])); exit;
-            } else {
-                wp_redirect(site_url()); exit;
-            }
+            wp_redirect(site_url($_GET['state'])); exit;
         }
 
 

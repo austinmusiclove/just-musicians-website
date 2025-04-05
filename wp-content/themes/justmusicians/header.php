@@ -46,7 +46,7 @@
             showPassword: false,
             showFavModal: false,
             showLoginModal: false,
-            showSignupModal: <?php echo (isset($_GET['mdl']) and $_GET['mdl'] == 'signup') ? 'true' : 'false'; ?>,
+            showSignupModal: false,
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showInquiryModalPlaceholder: false,

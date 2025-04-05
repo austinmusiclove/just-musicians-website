@@ -1,8 +1,5 @@
 Milestones
     Artist push to edit and complete profiles
-        *claim profile sign up flow
-            google reg err
-            google reg success
         *profile edit
             basic edit screen
             full edit screen design

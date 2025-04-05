@@ -19,8 +19,8 @@ get_header();
 
     <?php if (is_user_logged_in()) {
         if (isset($_GET['lic'])) {
-            // send listing invitation validation with redirect without the param in url to avoid infinite loop
             $success = add_listing_by_invitation_code($_GET['lic']);
+            // if success, redirect back to the same page but remove query params to avoid an infinite loop
             if ($success and !is_wp_error($success)) { ?>
                 <div x-init="redirect('<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>')"></div>
             <?php } else { ?>
@@ -28,7 +28,6 @@ get_header();
             <?php }
         } ?>
 
-        <h2>Listings</h2>
         <button type="button" href="" class="mb-8 border bg-yellow hover:bg-navy hover:text-white">Create Listing</button>
 
 
@@ -64,7 +63,9 @@ get_header();
             echo '<p>You don\'t have any listings associated with your account.</p>';
         }
     } else {
-        if (isset($_GET['lic'])) { ?>
+        if (!empty($_GET['lic']) and !empty($_GET['mdl']) and $_GET['mdl'] == 'signup') { ?>
+            <span x-init="showLoginModal = false; showSignupModal = true; signupModalMessage = 'Sign up to activate this listing invitation link';"></span>
+        <?php } else if (isset($_GET['lic'])) { ?>
             <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to activate this listing invitation link';"></span>
         <?php } else { ?>
             <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to see your listings';"></span>
