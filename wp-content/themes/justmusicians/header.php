@@ -41,12 +41,14 @@
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
         x-data="{
             width: 0,
-            redirect() { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>'; },
+            redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
             showPassword: false,
             showFavModal: false,
             showLoginModal: false,
-            showSignupModal: false,
+            showSignupModal: <?php echo (isset($_GET['mdl']) and $_GET['mdl'] == 'signup') ? 'true' : 'false'; ?>,
+            loginModalMessage: 'Sign in to your account',
+            signupModalMessage: 'Sign up for an account',
             showInquiryModalPlaceholder: false,
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
@@ -148,15 +150,9 @@
 
     <?php wp_body_open(); ?>
     <?php
-        echo get_template_part('template-parts/global/mobile-menu', '', array());
-        echo get_template_part('template-parts/login/login-modal', '', [
-            'alpine_login_show_var' => 'showLoginModal',
-            'alpine_signup_show_var' => 'showSignupModal',
-        ]);
-        echo get_template_part('template-parts/login/signup-modal', '', [
-            'alpine_login_show_var' => 'showLoginModal',
-            'alpine_signup_show_var' => 'showSignupModal',
-        ]);
+        echo get_template_part('template-parts/global/mobile-menu', '', []);
+        echo get_template_part('template-parts/login/login-modal', '', []);
+        echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/global/modal', '', [
             'alpine_show_var' => 'showFavModal',
             'heading' => 'Coming Soon',

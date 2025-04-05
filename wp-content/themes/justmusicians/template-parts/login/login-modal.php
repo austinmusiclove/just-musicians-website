@@ -1,13 +1,13 @@
-<div data-popup="quote" class="popup-wrapper pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="<?php echo $args['alpine_login_show_var']; ?>" x-cloak>
+<div data-popup="quote" class="popup-wrapper pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showLoginModal" x-cloak>
     <!-- TODO need to go to slide 5 if not done or just close it all if done and if got o slide 5 need to remember what slide they were on to return to it -->
     <div data-trigger="quote" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
-        x-on:click="<?php echo $args['alpine_login_show_var']; ?> = false"
+        x-on:click="showLoginModal = false"
     ></div>
 
     <div class="bg-white relative w-full h-full md:w-auto md:h-auto flex items-center justify-center" style="max-width: 780px;">
 
     <img data-trigger="quote" class="close-button opacity-60 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
-        x-on:click="<?php echo $args['alpine_login_show_var']; ?> = false;" />
+        x-on:click="showLoginModal = false;" />
 
     <div class="slide w-[32rem] pb-8 grow">
 
@@ -15,7 +15,7 @@
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md">
                 <img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">
-                <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight">Sign in to your account</h2>
+                <h2 x-text="loginModalMessage" class="mt-6 text-2xl font-bold leading-9 tracking-tight">Sign in to your account</h2>
             </div>
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div class="bg-white px-6 pb-12 shadow sm:rounded-lg sm:px-12">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline cursor-pointer" x-on:click="<?php echo $args['alpine_login_show_var']; ?> = false; <?php echo $args['alpine_signup_show_var']; ?> = true;">Sign up here</span></p>
+            <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline cursor-pointer" x-on:click="showLoginModal = false; showSignupModal = true;">Sign up here</span></p>
         </div>
 
     </div>

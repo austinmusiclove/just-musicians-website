@@ -130,6 +130,22 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-microphone'
     ));
+
+    // Listing Invitation Code
+    register_post_type('tmp_code', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'show_in_menu' => true,
+        'labels' => array(
+          'name' => 'Temporary Code',
+          'add_new_item' => 'Add New Temporary Code',
+          'edit_item' => 'Edit Temporary Code',
+          'all_items' => 'All Temporary Codes',
+          'singular_name' => 'Temporary Code'
+        ),
+        'menu_icon' => 'dashicons-editor-code'
+    ));
 }
 
 function register_taxonomies() {

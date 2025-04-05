@@ -11,10 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Rest APIs
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'users/register', [
-        'methods' => 'POST',
-        'callback' => 'add_new_user',
-    ]);
     register_rest_route('user/v1', 'email-verified', array(
         'methods' => WP_REST_SERVER::READABLE,
         'callback' => 'is_email_verified'
@@ -25,74 +21,6 @@ add_action('rest_api_init', function () {
     ));
 });
 
-
-// User Registration
-function add_new_user() {
-    $user_email = isset($_POST["user_email"]) ? $_POST["user_email"] : '';
-    $user_pass = isset($_POST["user_pass"]) ? $_POST["user_pass"] : '';
-    $pass_confirm = isset($_POST["user_pass_conf"]) ? $_POST["user_pass_conf"] : '';
-    $remember = isset($_POST['rememberme']) ? $_POST["rememberme"] : false;
-    $errors = array();
-
-    // Username already registered
-    if(username_exists($user_email)) {
-        array_push($errors, __('Username already taken'));
-    }
-    // invalid username
-    if(!validate_username($user_email)) {
-        array_push($errors, __('Invalid username'));
-    }
-    // empty username
-    if($user_email == '') {
-        array_push($errors, __('Please enter an email'));
-    }
-    //invalid email
-    if(!is_email($user_email)) {
-        array_push($errors, __('Invalid email'));
-    }
-    //Email address already registered
-    if(email_exists($user_email)) {
-        array_push($errors, __('Email already registered'));
-    }
-    // password empty
-    if($user_pass == '') {
-        array_push($errors, __('Please enter a password'));
-    }
-    // passwords do not match
-    if($user_pass != $pass_confirm) {
-        array_push($errors, __('Passwords do not match'));
-    }
-
-    // if no errors then cretate user
-    if(empty($errors)) {
-        $account_identifier = md5(rand()); // secret used to verifiy email
-        $new_user_id = wp_insert_user(array(
-                'user_login' => $user_email,
-                'user_pass' => $user_pass,
-                'user_email' => $user_email,
-                'user_registered' => date('Y-m-d H:i:s'),
-                'role' => 'subscriber',
-                'meta_input' => array('email_verified' => false, 'account_identifier' => $account_identifier)
-            )
-        );
-        if($new_user_id) {
-            // send an email to the admin
-            //wp_new_user_notification($new_user_id);
-
-            // send email verification email
-            send_account_activation_link($user_email, $account_identifier);
-
-            // log the new user in
-            wp_set_auth_cookie($new_user_id, $remember);
-            wp_set_current_user($new_user_id, $user_email);
-            do_action('wp_login', $user_email);
-        } else {
-            array_push($errors, $new_user_id);
-        }
-        return;
-    }
-    return new WP_Error(500, 'User Registration failed', array('status' => 500, 'errors' => $errors));
-}
 
 function send_account_activation_link($email, $account_identifier) {
     $link = site_url() . "/email-verification/?aci=" . $account_identifier;
@@ -150,4 +78,63 @@ function getUserProfiles() {
         }
         return $results;
     }
+}
+
+function add_listing_by_invitation_code($listing_invitation_code) {
+    // Validate listing invitation code
+    $code_post = validate_temporary_code($listing_invitation_code);
+    if (is_wp_error($code_post)) {
+        if ($code_post->get_error_code() == 'invalid_code') { return WP_Error('invalid_link', 'Invalid listing invitation link'); }
+        if ($code_post->get_error_code() == 'expired_code') { return WP_Error('expired_link', 'Expired listing invitation link'); }
+        return $code_post;
+    }
+
+    // Check if the user is logged in
+    if (!is_user_logged_in()) {
+        return new WP_Error('user_not_logged_in', 'You must be logged in to use this code.');
+    }
+
+    // Get the listings (array of post IDs) from the tmp_code post
+    $listing_ids = get_post_meta($code_post->ID, 'listings', true);
+
+    // Check if listings are found in the tmp_code post
+    if (empty($listing_ids) || !is_array($listing_ids)) {
+        return new WP_Error('no_listings', 'No listings associated with this code.');
+    }
+
+    // Add the listings to the current user's meta field
+    $current_user = wp_get_current_user();
+    $current_listings = get_user_meta($current_user->ID, 'listings', true);
+    if (empty($current_listings)) { $current_listings = array(); }
+    $current_listings = array_merge($current_listings, $listing_ids);
+    $current_listings = array_unique($current_listings);
+
+    // Save the updated listings to the user meta
+    update_user_meta($current_user->ID, 'listings', $current_listings);
+
+    return true; // Success
+}
+
+function validate_temporary_code($temporary_code) {
+    // Get temporary code
+    $args = array(
+        'post_type' => 'tmp_code',
+        'meta_key' => 'code',
+        'meta_value' => $temporary_code,
+        'compare' => '=',
+        'posts_per_page' => 1,
+    );
+    $tmp_code_query = new WP_Query($args);
+    if (!$tmp_code_query->have_posts()) {
+        return new WP_Error('invalid_code', 'Invalid Code');
+    }
+    $tmp_code_post = $tmp_code_query->posts[0];
+
+    // Check if the code has expired
+    $expiration_timestamp = get_post_meta($tmp_code_post->ID, 'expiration_timestamp', true);
+    if ($expiration_timestamp && $expiration_timestamp < time()) {
+        return new WP_Error('expired_code', 'This code has expired.');
+    }
+
+    return $tmp_code_post;
 }

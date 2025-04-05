@@ -1,9 +1,9 @@
 Milestones
     Artist push to edit and complete profiles
-        *add logo profiles
         *claim profile sign up flow
+            google reg err
+            google reg success
         *profile edit
-            landing page
             basic edit screen
             full edit screen design
     Artist announce and invite new profiles
@@ -74,6 +74,7 @@ Performance
     dedicated server
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
+    when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
 Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
