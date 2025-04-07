@@ -451,7 +451,7 @@ form textarea {
   transform: rotate(-45deg);
 }
 
-.login-error, .signup-error {
+.login-error, .signup-error, .request-password-reset-message, .password-reset-error-message {
   background-color: rgba(237, 212, 169, 0.5);
   padding: 0.5rem 1rem;
   border-radius: 2px;

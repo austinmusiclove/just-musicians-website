@@ -45,6 +45,7 @@ module.exports = {
 		'./header.php',
 		'./index.php',
 		'./page.php',
+		'./page-password-reset.php',
 		'./search.php',
 		'./searchform.php',
 		'./template-home.php',
@@ -68,6 +69,7 @@ module.exports = {
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
 		'./template-parts/login/*.{php,js}',
+		'./template-parts/login/forms/*.{php,js}',
 		'./template-parts/html-api/*.{php,js}',
 		// Other
 		'./templates/**/*.{php,js}',

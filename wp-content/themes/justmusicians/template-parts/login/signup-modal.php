@@ -4,18 +4,18 @@
         x-on:click="<?php echo $args['alpine_signup_show_var']; ?> = false"
     ></div>
 
-    <div class="bg-white relative w-full h-full md:w-auto md:h-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
+    <div class="bg-white relative w-full h-auto md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
     <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
         x-on:click="<?php echo $args['alpine_signup_show_var']; ?> = false;" />
 
-    <div class="slide w-[32rem] pb-8 grow">
+    <div class="slide w-[32rem] grow">
 
 
         <div class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
             <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
                 <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
-                <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12">Sign up for an account</h2>
+                <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign up for an account</h2>
             </div>
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div class="bg-white px-6 pb-4 sm:px-12">

@@ -42,7 +42,7 @@ function justmusicians_scripts() {
 		// Core
 		wp_enqueue_style('justmusicians-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
 		wp_enqueue_style('justmusicians-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
-		//wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
+		wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
 		// Utilities
 		wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);

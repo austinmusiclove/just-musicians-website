@@ -52,12 +52,12 @@ get_header();
 
 
 <header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
-    <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">
+    <div class="container text-center">
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
     </div>
 </header>
-<div class="container lg:grid lg:grid-cols-10 gap-24 py-8 min-h-[500px]">
-    <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
+<div class="container py-8 flex justify-center">
+    <div class="article-body mb-8 max-w-[400px] px-4 w-full">
 
 
         <form class="space-y-6" action="" method="POST">
@@ -66,7 +66,8 @@ get_header();
             <div>
                 <label for="new_password" class="block text-sm font-medium leading-6 mt-4">New Password</label>
                 <div class="mt-2">
-                    <input id="user_pass" name="new_password" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-brown-light-3">
+                    <input id="user_pass" name="new_password" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required 
+                        class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
                     <span class="float-right right-[10px] mt-[-30px] relative">
                         <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
                         <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
@@ -75,7 +76,10 @@ get_header();
             </div>
             <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Reset Password</button>
         </form>
-        <div class="mt-4"><?php echo $error_message; ?></div>
+
+        <?php if ($error_message) : ?>
+            <div class="password-reset-error-message mt-4 text-center text-14"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
 
     </div>
