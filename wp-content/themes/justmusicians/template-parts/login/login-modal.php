@@ -47,10 +47,10 @@
                             <div class="text-sm leading-6"><a href="<?php echo get_site_url() . '/request-password-reset'; ?>" class="underline opacity-50 hover:opacity-100">Forgot password?</a>
                             </div>
                         </div>
-                        <div id="login-result" class="flex items-center text-14 justify-between"></div>
                         <div>
                             <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign in</button>
                         </div>
+                        <div id="login-result" class="flex items-center text-14 justify-between"></div>
                     </form>
                     <div>
                         <div class="relative mt-4">
