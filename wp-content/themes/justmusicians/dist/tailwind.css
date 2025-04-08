@@ -754,10 +754,6 @@ video {
   grid-column: span 4 / span 4;
 }
 
-.col-start-2 {
-  grid-column-start: 2;
-}
-
 .float-right {
   float: right;
 }
@@ -1066,16 +1062,12 @@ video {
   max-width: 48rem;
 }
 
-.max-w-\[780px\] {
-  max-width: 780px;
-}
-
-.max-w-\[360px\] {
-  max-width: 360px;
-}
-
 .max-w-\[400px\] {
   max-width: 400px;
+}
+
+.max-w-\[780px\] {
+  max-width: 780px;
 }
 
 .shrink-0 {
@@ -2275,10 +2267,6 @@ video {
 
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
-  }
-
-  .lg\:col-span-6 {
-    grid-column: span 6 / span 6;
   }
 
   .lg\:col-span-7 {
