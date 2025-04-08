@@ -1,12 +1,31 @@
 // replaced with alpinejs and htmx
 // TODO remove data triggers and data element attributes from html or leave it in to use this as a fall back in case i move away from alpine and htmx
 // TODO finish flow for the inquiry modal
+
+
 (function($) {
 
 // show/hide mobile or desktop search bar based on screen size
 // show/hide autocomplete elements based on click, focus, user input
 // replace with htmx active search for autocomplete options and alpine for basic options display
+
+/*
+const $passwordResetForm = $('[data-slide="request-password-reset"]');
+const $loginForm = $('[data-slide="login-form"]');
+
+window.showResetForm = function () {
+  $passwordResetForm.removeClass('hidden');
+  $loginForm.addClass('hidden');
+};
+
+window.showLoginForm = function () {
+  $passwordResetForm.addClass('hidden');
+  $loginForm.removeClass('hidden');
+};
+*/
+
   $(document).ready(function() {
+
 
 
     // replace with alpine

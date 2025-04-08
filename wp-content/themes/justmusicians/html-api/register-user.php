@@ -78,7 +78,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
         }
     } else {
         foreach($errors as $error) {
-            echo $error . '<br>';
+            echo '<div class="signup-error">'. $error . '</div>';
         }
     }
 }

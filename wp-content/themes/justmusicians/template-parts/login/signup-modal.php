@@ -1,55 +1,55 @@
-<div data-popup="quote" class="popup-wrapper pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showSignupModal" x-cloak>
-    <!-- TODO need to go to slide 5 if not done or just close it all if done and if got o slide 5 need to remember what slide they were on to return to it -->
+<div data-popup="quote" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4" x-show="showSignupModal" x-cloak>
     <div data-trigger="quote" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
         x-on:click="showSignupModal = false"
     ></div>
 
-    <div class="bg-white relative w-full h-full md:w-auto md:h-auto flex items-center justify-center" style="max-width: 780px;">
+    <div class="bg-white relative w-full h-auto md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
     <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
         x-on:click="showSignupModal = false;" />
 
-    <div class="slide w-[32rem] pb-8 grow">
+    <div class="slide w-[32rem] grow">
 
 
         <div class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
             <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
-                <img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">
-                <h2 x-text="signupModalMessage" class="mt-6 text-2xl font-bold leading-9 tracking-tight">Sign up for an account</h2>
+                <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
+                <h2 x-text="signupModalMessage" class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign up for an account</h2>
             </div>
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
-                <div class="bg-white px-6 pb-12 shadow sm:rounded-lg sm:px-12">
-                    <form class="space-y-6" action="" method="POST"
+                <div class="bg-white px-6 pb-4 sm:px-12">
+                    <form class="space-y-2" action="" method="POST"
                         hx-post="/wp-html/v1/register-user"
                         hx-target="#sign-up-result">
-                        <div id="sign-up-result" class="flex items-center justify-between min-h-8"></div>
                         <div>
-                            <label for="email" class="block text-sm font-medium leading-6 mt-4">Email Address</label>
+                            <label for="email" class="block text-sm font-medium leading-6">Email Address</label>
                             <div class="mt-2">
-                                <input id="email" name="r_user_email" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 bg-brown-light-3">
+                                <input id="email" name="r_user_email" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="password" class="block text-sm font-medium leading-6 mt-4">Password</label>
+                            <label for="password" class="block text-sm font-medium leading-6">Password</label>
                             <div class="mt-2">
-                                <input id="password" name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-brown-light-3">
-                                <span class="float-right right-[10px] mt-[-30px] relative">
-                                    <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
-                                    <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
+                                <input id="password" name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+                                <span class="float-right right-[12px] mt-[-29px] relative">
+                                    <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
+                                    <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
                                 </span>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between mt-4">
+                        <div class="flex items-center justify-between pb-6">
                             <div class="flex items-center">
                                 <input id="r_rememberme" name="r_rememberme" type="checkbox" class="h-4 w-4 rounded">
-                                <label for="r_rememberme" class="ml-4 block text-sm leading-6">Remember Me</label>
+                                <label for="r_rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                             </div>
                         </div>
                         <?php if (isset($_GET['lic'])) { ?><input type="hidden" name="lic" value="<?php echo $_GET['lic']; ?>"><?php } ?>
                         <input type="hidden" name="r_csrf" value="<?php echo wp_create_nonce('r-csrf'); ?>">
                         <div>
-                            <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign Up</button>
+                            <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign up</button>
                         </div>
+                        <div id="sign-up-result" class="flex items-center text-14 justify-between"></div>
+
                     </form>
                     <div>
                         <div class="relative mt-4">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline cursor-pointer" x-on:click="showSignupModal = false; showLoginModal = true;">Sign in here</span></p>
+            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showSignupModal = false; showLoginModal = true;">Sign in here</span></p>
         </div>
 
 
