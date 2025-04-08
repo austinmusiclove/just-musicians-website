@@ -138,7 +138,32 @@
             </div>
             <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
             <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showSignupModal = !showSignupModal">Sign Up</button>
-            <a href="<?php echo wp_logout_url('/'); ?>"><button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="loggedIn">Log Out</button></a>
+
+            <!-- Logged in Menu -->
+            <span class="font-sun-motter text-18 flex items-center gap-2 relative group" x-cloak x-show="loggedIn">
+              <a href="#">My Account</a>
+              <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+              <!-- Dropdown menu -->
+              <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
+                  Profile
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+                  Collections
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  Listings
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
+                  Log Out
+                </a>
+              </div>
+            </span>
+
           </div>
 
         </div>
