@@ -35,8 +35,6 @@ get_header();
         // Get listings
         $current_user = wp_get_current_user();
         $listing_ids = get_user_meta($current_user->ID, 'listings', true);
-
-
         if ($listing_ids && is_array($listing_ids)) {
             $args = array(
                 'post_type' => 'listing',
@@ -49,9 +47,9 @@ get_header();
                 <?php while ($query->have_posts()) {
 
 
-                    // Display listings
-                    $query->the_post(); ?>
-                    <div><?php the_title(); ?></div>
+                // Display listings
+                $query->the_post(); ?>
+                <br><a href="listing-form/?lid=<?php the_ID(); ?>"><?php the_title(); ?></a>
 
 
                 <?php }

@@ -133,10 +133,10 @@ function register_post_types() {
 
     // Listing Invitation Code
     register_post_type('tmp_code', array(
-        'public' => true,
+        'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
-        'show_in_menu' => true,
         'labels' => array(
           'name' => 'Temporary Code',
           'add_new_item' => 'Add New Temporary Code',

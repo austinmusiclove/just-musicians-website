@@ -1,8 +1,17 @@
 Milestones
     Artist push to edit and complete profiles
         *profile edit
-            basic edit screen
+            full functionality
+                verify nonce
+                make sure non admin and admin have permission to use the form appropriately
+                make html api
+                sort checkbox items to put selected boxes first
+                non taxonomy checkbox
+                custom tags input
+                image upload and display
+                video link and display
             full edit screen design
+            add permissions to writing posts apis
         bug: slider on mobile
             dad say sound not work
             chrome mobile
@@ -16,6 +25,7 @@ Milestones
         start at timestamp for videos
         check social links and youtube videos for 404s
         program to move unofficial tags to official if added
+        artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         ensemble size filter
         "Request Quote" or "Contact Directly" modal
@@ -25,6 +35,7 @@ Milestones
             pre buffer youtube videos
             don't load iframes until hover maybe
     Free lance booker testing 2
+        add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
         user recording software
         messaging
