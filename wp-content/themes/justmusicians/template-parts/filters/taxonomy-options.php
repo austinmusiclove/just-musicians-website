@@ -15,8 +15,8 @@
                     'name' => $args['input_name'],
                     'x-model' => $args['input_x_model'],
                     'x-ref' => get_checkbox_ref_string($args['input_name'], $term),
-                    'x-show' => "showOption('" . str_replace(["'", '"', chr(130), chr(145), chr(146)], '', $term) . "')",
-                    'x-disabled' => $args['input_x_model'] . ".length >= 6 && !" . $args['input_x_model'] . ".includes('" . $term . "')",
+                    'x-show' => "showOption('" . str_replace(["'", '"'], '', $term) . "')",
+                    'x-disabled' => $args['input_x_model'] . ".length >= 6 && !" . $args['input_x_model'] . ".map((term) => term.replace(/'/g, '')).includes('" . str_replace(["'", '"'], '', $term) . "')",
                     'is_array' => true,
                     'checked' => false,
                 ]);

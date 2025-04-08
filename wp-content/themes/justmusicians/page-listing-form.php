@@ -23,39 +23,28 @@ Fields to cover
 
 Basic
     Type (only new post)
-    *Name
-    *Description
-    *City
-    *State
-    *Zip Code
-    *Bio
     Ensemble Size
 Contact
-    Email
-    Phone
-    Website
-    Instagram Handle (make sure not private)
-    Instagram URL
-    Tiktok Handle
-    Tiktok URL
-    X Handle
-    X URL
-    Facebook URL
-    Youtube URL
-    Bandcamp URL
-    Spotiy Artist URL
-    Spotify Artist ID
-    Apple Music Artist URL
-    Soundcloud URL
+    *Email
+    *Phone
+    *Website
+    *Instagram Handle (make sure not private)
+    *Instagram URL
+    *Tiktok Handle
+    *Tiktok URL
+    *X Handle
+    *X URL
+    *Facebook URL
+    *Youtube URL
+    *Bandcamp URL
+    *Spotiy Artist URL
+    *Spotify Artist ID
+    *Apple Music Artist URL
+    *Soundcloud URL
 Taxonomy
-    Category
-    *Genre
-    Subgenre
-    Instrumentation
-    Setting
     Unofficial tags
 Media
-    Thumbnail
+    *Thumbnail
     Gallery Images
     Youtube Video URLs
         start at

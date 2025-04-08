@@ -2,12 +2,12 @@ Milestones
     Artist push to edit and complete profiles
         *profile edit
             full functionality
-                verify nonce
-                make sure non admin and admin have permission to use the form appropriately
-                make html api
-                sort checkbox items to put selected boxes first
-                non taxonomy checkbox
-                custom tags input
+                authentication
+                    verify nonce
+                    make sure non admin and admin have permission to use the form appropriately
+                    make html api?
+                non taxonomy checkbox component
+                custom tags input component
                 image upload and display
                 video link and display
             full edit screen design
