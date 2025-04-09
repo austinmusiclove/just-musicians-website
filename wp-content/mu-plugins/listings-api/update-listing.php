@@ -6,9 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 function update_listing($args) {
 
     // err if no id
-    // put valid args into correct input
-    // update post
-    // add status complete or incomplete
 
     $listing_post = array(
         'ID'           => sanitize_text_field($args['post_id']),
@@ -53,6 +50,7 @@ function update_listing($args) {
     // soundcloud_url
     // youtube_video_urls
     // unofficial_tags
+    // add status complete or incomplete
 
     // Taxonomy Input
     //if (!empty($args['genres'])) { $listing_post['tax_input']['genre'] = $args['genres']; }
@@ -62,7 +60,31 @@ function update_listing($args) {
     wp_set_post_terms($args['post_id'], $args['instrumentations'], 'instrumentation');
     wp_set_post_terms($args['post_id'], $args['settings'], 'setting');
 
-    // handle thumbnail
+    // Add featured image and don't show error if thumbnail fails
+    if (!empty($args['thumbnail_file'])) {
+        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        $thumbnail_upload = wp_handle_upload($args['thumbnail_file'], ['test_form' => false]);
+        if (isset($thumbnail_upload['file'])) {
+            // Set attachment data
+            $attachment = array(
+                'post_mime_type' => $thumbnail_upload['type'],
+                'post_title'     => sanitize_file_name( $thumbnail_upload['file'] ),
+                'post_content'   => '',
+                'post_status'    => 'inherit'
+            );
+
+            // Create the attachment
+            $attachment_id = wp_insert_attachment( $attachment, $thumbnail_upload['file'], $args['post_id'] );
+            if( !is_wp_error( $attachment_id ) ) {
+                require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                $attachment_metadata = wp_generate_attachment_metadata( $attachment_id, $thumbnail_upload['file'] );
+                wp_update_attachment_metadata( $attachment_id, $attachment_metadata );
+                set_post_thumbnail($args['post_id'], $attachment_id);
+            }
+        }
+    }
+    echo '<h2>Thank you for your submission!</h2>';
+    echo '<p>Your listing has been submitted successfully.</p>';
 
 
     $result = wp_update_post($listing_post, true);

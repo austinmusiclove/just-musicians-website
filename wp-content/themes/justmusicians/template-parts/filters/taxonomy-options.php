@@ -1,4 +1,4 @@
-<div class="my-8" x-data='{
+<div class="my-4" x-data='{
     searchQuery: "",
     showOption(option) { return this.searchQuery === "" || option.toLowerCase().includes(this.searchQuery.toLowerCase()); },
 }'>

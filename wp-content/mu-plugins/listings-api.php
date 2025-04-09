@@ -57,17 +57,18 @@ function get_listing_args() {
     $instrumentations = (isset($_POST['instrumentations'])) ? array_filter(array_map('sanitize_text_field', $_POST['instrumentations'])) : [];
     $settings = (isset($_POST['settings'])) ? array_filter(array_map('sanitize_text_field', $_POST['settings'])) : [];
     return [
-        'post_id'          => !empty($_POST['post_id'])        ? $_POST['post_id']        : null,
-        'name'             => !empty($_POST['performer_name']) ? $_POST['performer_name'] : null,
-        'description'      => !empty($_POST['description'])    ? $_POST['description']    : null,
-        'city'             => !empty($_POST['city'])           ? $_POST['city']           : null,
-        'state'            => !empty($_POST['state'])          ? $_POST['state']          : null,
-        'zip_code'         => !empty($_POST['zip_code'])       ? $_POST['zip_code']       : null,
-        'bio'              => !empty($_POST['bio'])            ? $_POST['bio']            : null,
-        'categories'       => !empty($categories)              ? $categories              : null,
-        'genres'           => !empty($genres)                  ? $genres                  : null,
-        'subgenres'        => !empty($subgenres)               ? $subgenres               : null,
-        'instrumentations' => !empty($instrumentations)        ? $instrumentations        : null,
-        'settings'         => !empty($settings)                ? $settings                : null,
+        'post_id'          => !empty($_POST['post_id'])            ? $_POST['post_id']            : null,
+        'name'             => !empty($_POST['performer_name'])     ? $_POST['performer_name']     : null,
+        'description'      => !empty($_POST['description'])        ? $_POST['description']        : null,
+        'city'             => !empty($_POST['city'])               ? $_POST['city']               : null,
+        'state'            => !empty($_POST['state'])              ? $_POST['state']              : null,
+        'zip_code'         => !empty($_POST['zip_code'])           ? $_POST['zip_code']           : null,
+        'bio'              => !empty($_POST['bio'])                ? $_POST['bio']                : null,
+        'categories'       => !empty($categories)                  ? $categories                  : null,
+        'genres'           => !empty($genres)                      ? $genres                      : null,
+        'subgenres'        => !empty($subgenres)                   ? $subgenres                   : null,
+        'instrumentations' => !empty($instrumentations)            ? $instrumentations            : null,
+        'settings'         => !empty($settings)                    ? $settings                    : null,
+        'thumbnail_file'   => !empty($_FILES['cropped-thumbnail']) ? $_FILES['cropped-thumbnail'] : null,
     ];
 }

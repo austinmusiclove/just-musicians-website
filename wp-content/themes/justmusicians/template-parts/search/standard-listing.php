@@ -126,7 +126,7 @@
 
         <div class="w-full sm:w-56 shrink-0">
             <div class="bg-yellow-light aspect-4/3">
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
+            <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['thumbnail_src_bind_var']) { echo 'x-bind:src="' . $args['thumbnail_src_bind_var'] . '"'; } ?>/>
             </div>
         </div>
 

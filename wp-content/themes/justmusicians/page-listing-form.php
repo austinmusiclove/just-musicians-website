@@ -89,7 +89,9 @@ Calculated Unseen
         instrumentationsCheckboxes: <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo json_encode($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
         settingsCheckboxes: <?php if (!empty($listing_data["taxonomies"]["setting"])) { echo json_encode($listing_data["taxonomies"]["setting"]); } else { echo '[]'; } ?>,
         showGenre(term) { return this.genresCheckboxes.includes(term); },
+        previewThumbnailSrc: "<?php if (!empty($listing_data['thumbnail_url'])) { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>",
     }'
+    x-on:updatethumbnail.window="previewThumbnailSrc = $event.detail;;"
 >
     <div class="col-span-12 lg:col-span-6">
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
@@ -101,7 +103,7 @@ Calculated Unseen
             -->
 
             <!------------ Basic Information ----------------->
-            <h2 class="font-bold text-24 md:text-36 lg:text-40">Basic Information</h2>
+            <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Basic Information</h2>
 
             <!-- Listing type -->
             <!--
@@ -151,7 +153,7 @@ Calculated Unseen
             <textarea id="bio" name="bio" class="w-full h-32"><?php if ($listing_data) { echo $listing_data['post_meta']['bio'][0]; } ?></textarea></div>
 
             <!------------ Taxonomies ----------------->
-            <h2 class="font-bold text-24 md:text-36 lg:text-40">Search Optimization</h2>
+            <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Search Optimization</h2>
             <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                 'title' => 'Categories',
                 'terms' => $categories,
@@ -312,14 +314,25 @@ Calculated Unseen
             -->
 
             <!------------ Media ----------------->
-            <h2 class="font-bold text-24 md:text-36 lg:text-40">Media</h2>
+            <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Media</h2>
             <!-- Thumbnail -->
             <label for="thumbnail">Thumbnail</label><br>
-            <div>This is your main thumbnail image. It's the first thing people will see as they are scrolling listings.</div><br>
-            <input id="thumbnail" name="thumbnail" type="file" accept="image/*">
-            <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*">
-            <div style="max-width: 500px; margin: 20px 0;">
-                <img id="thumbnail-display" style="display: none; max-width: 100%;" />
+            <div x-data="{
+                    cropper: null,
+                    _initCropper(displayElement, croppedImageInput) {
+                        initCropper(this, displayElement, croppedImageInput);
+                    },
+                    _initCropperFromFile(event, displayElement, croppedImageInput) {
+                        initCropperFromFile(this, event, displayElement, croppedImageInput);
+                    },
+                }">
+                <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg"
+                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput);"
+                >
+                <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*" x-ref="croppedImageInput">
+                <div class="my-4 max-h-[400px]" >
+                    <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" x-init="_initCropper($el, $refs.croppedImageInput)" />
+                </div>
             </div>
 
             <!-- Youtube links -->
@@ -337,13 +350,14 @@ Calculated Unseen
     </div>
     <div class="hidden lg:block md:col-span-1"></div>
     <div class="hidden lg:block md:col-span-5 sticky h-64 top-24">
-        <h2 class="font-bold text-24 md:text-36 lg:text-40">Preview</h2>
+        <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Preview</h2>
         <?php echo get_template_part('template-parts/search/standard-listing', '', [
             'name' => ($listing_data != null) ? $listing_data['post_meta']['name'][0] : 'Performer Name',
             'location' => ($listing_data != null) ? $listing_data['post_meta']['city'][0] . ', ' . $listing_data['post_meta']['state'][0] : 'City, State',
             'description' => ($listing_data != null) ? $listing_data['post_meta']['description'][0] : 'Description',
             'genres' => $genres,
             'thumbnail_url' => $listing_data['thumbnail_url'],
+            'thumbnail_src_bind_var' => 'previewThumbnailSrc',
             'verified' => $listing_data['post_meta']['verified'][0],
             'website' => $listing_data['post_meta']['website'][0],
             'facebook_url' => $listing_data['post_meta']['facebook_url'][0],

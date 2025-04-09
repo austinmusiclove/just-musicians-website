@@ -1,17 +1,31 @@
 Milestones
     Artist push to edit and complete profiles
         *profile edit
-            full functionality
+            parity functionality
                 authentication
                     verify nonce
                     make sure non admin and admin have permission to use the form appropriately
-                    make html api?
-                non taxonomy checkbox component
-                custom tags input component
+                    eliminate test_form override in the wp_handle_upload for thumbnail? or maybe it is ok that way
+                images
+                    mind the name of images
+                    recycling for old unlinked images
+                    err handling for image upload
+                    turn off zoomable
+                    test upload big file
+                    test upload jpeg, jpg, png, webp, avif
+                non taxonomy checkbox component (ensemble size)
+                contact and links
+                venues
+                other tags and keywords
                 image upload and display
                 video link and display
+                status
+                content
+                rank
+                mind update response and myabe make it an html api
+                generalize get listing args in listings-api.php so that i dont have to add every arg
             full edit screen design
-            add permissions to writing posts apis
+            add permissions to all writing posts apis
         bug: slider on mobile
             dad say sound not work
             chrome mobile
@@ -47,10 +61,12 @@ Data
     change venue in venue review to post object
 UX
     media slider
+        only load iframes after hover
         video seeking
         maybe always show arrows on mobile? Check with fiverr
         swipe on mobile
         bigger screen
+        move javascript out to its own file
     Filters
         add something about providing sound equipment
         add location
