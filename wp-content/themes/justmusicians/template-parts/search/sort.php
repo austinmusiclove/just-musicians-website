@@ -31,11 +31,12 @@
     </div>
 
     <!-- Number of Results -->
-
-    <div class="flex items-center gap-2">
-        <div class="h-5 w-px bg-black/20"></div>
-        <span>42 results</span>
-    </div>
+    <?php if ($args['show_number'] == true) : ?>
+        <div class="flex items-center gap-2">
+            <div class="h-5 w-px bg-black/20"></div>
+            <span>42 results</span>
+        </div>
+    <?php endif; ?>
 
 
 </div>

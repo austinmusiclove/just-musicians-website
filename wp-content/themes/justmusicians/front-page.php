@@ -72,7 +72,9 @@ get_header();
 
                     <div class="flex items-center justify-between md:justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
-                        <?php echo get_template_part('template-parts/search/sort', '', array()); ?>
+                        <?php echo get_template_part('template-parts/search/sort', '', array(
+                            'show_number' => true
+                        )); ?>
                     </div>
 
                     <script>
