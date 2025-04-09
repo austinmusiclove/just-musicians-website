@@ -96,6 +96,7 @@ Calculated Unseen
     <div class="col-span-12 lg:col-span-6">
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
             hx-post="<?php echo site_url('wp-json/v1/listings'); ?>"
+            hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
             hx-target="#result">
             <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
             <!--

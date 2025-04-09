@@ -31,7 +31,28 @@ add_action('rest_api_init', function () {
                 return post_listing($args);
             }
         },
-        //'permission_callback' => function() { return true; return current_user_can('read'); }
+        'permission_callback' => function() {
+            // User must be logged in
+            if (!is_user_logged_in()) {
+                return false;
+            }
+
+            // Admin can create or edit any post
+            if (current_user_can('administrator')) {
+                return true;
+            }
+
+            // Any user can create a listing
+            if (empty($_POST['post_id'])) {
+                return true;
+            }
+
+            // User can only edit their own listing
+            if (!empty($_POST['post_id'])) {
+                $user_listings = get_user_meta(get_current_user_id(), 'listings', true);
+                return in_array($_POST['post_id'], $user_listings);
+            }
+        }
     ]);
 });
 

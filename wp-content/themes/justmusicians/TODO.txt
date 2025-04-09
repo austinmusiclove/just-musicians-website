@@ -3,14 +3,13 @@ Milestones
         *profile edit
             parity functionality
                 authentication
-                    verify nonce
                     make sure non admin and admin have permission to use the form appropriately
                     eliminate test_form override in the wp_handle_upload for thumbnail? or maybe it is ok that way
+                mind update response and myabe make it an html api
                 images
                     mind the name of images
                     recycling for old unlinked images
                     err handling for image upload
-                    turn off zoomable
                     test upload big file
                     test upload jpeg, jpg, png, webp, avif
                 non taxonomy checkbox component (ensemble size)
@@ -22,7 +21,6 @@ Milestones
                 status
                 content
                 rank
-                mind update response and myabe make it an html api
                 generalize get listing args in listings-api.php so that i dont have to add every arg
             full edit screen design
             add permissions to all writing posts apis
@@ -45,9 +43,6 @@ Milestones
         "Request Quote" or "Contact Directly" modal
         Inquiry form copy and flow
         media slider performance optimization
-            pause if window is not in focus? or when change tab? check fiverr
-            pre buffer youtube videos
-            don't load iframes until hover maybe
     Free lance booker testing 2
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
@@ -67,6 +62,10 @@ UX
         swipe on mobile
         bigger screen
         move javascript out to its own file
+        pause if window is not in focus? or when change tab? check fiverr
+        pre buffer youtube videos
+        don't load iframes until hover maybe
+        fix the things also on page-listings.php
     Filters
         add something about providing sound equipment
         add location

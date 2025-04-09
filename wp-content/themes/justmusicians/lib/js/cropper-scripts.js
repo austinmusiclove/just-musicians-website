@@ -27,6 +27,7 @@ function initCropper(alpineComponent, displayElement, croppedImageInput) {
         aspectRatio: 4 / 3,
         viewMode: 1,
         autoCropArea: 1,
+        zoomable: 0,
         ready: function() { handleCropEnd(alpineComponent, displayElement, croppedImageInput) },
         cropend: function() { handleCropEnd(alpineComponent, displayElement, croppedImageInput) },
     });
