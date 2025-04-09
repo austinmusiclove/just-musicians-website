@@ -63,7 +63,7 @@ function update_listing($args) {
     // Add featured image and don't show error if thumbnail fails
     if (!empty($args['thumbnail_file'])) {
         require_once( ABSPATH . 'wp-admin/includes/file.php' );
-        $thumbnail_upload = wp_handle_upload($args['thumbnail_file'], ['test_form' => false]);
+        $thumbnail_upload = wp_handle_upload($args['thumbnail_file']);
         if (isset($thumbnail_upload['file'])) {
             // Set attachment data
             $attachment = array(

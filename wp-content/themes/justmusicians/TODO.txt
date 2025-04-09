@@ -2,9 +2,6 @@ Milestones
     Artist push to edit and complete profiles
         *profile edit
             parity functionality
-                authentication
-                    make sure non admin and admin have permission to use the form appropriately
-                    eliminate test_form override in the wp_handle_upload for thumbnail? or maybe it is ok that way
                 mind update response and myabe make it an html api
                 images
                     mind the name of images
