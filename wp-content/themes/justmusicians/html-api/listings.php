@@ -19,6 +19,9 @@ $valid_subgenres = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
 $valid_settings = $result['valid_settings'];
 $valid_tags = $result['valid_tags'];
+$max_num_results = $result['max_num_results'];
+$max_num_pages = $result['max_num_pages'];
+$is_last_page = $page == $max_num_pages;
 $next_page = $result['next_page'];
 
 // Render listings
@@ -52,17 +55,17 @@ if (count($listings) > 0) {
             'verified' => $listing['verified'],
             'lazyload_thumbnail' => $index >= 3,
             'last' => $index == array_key_last($listings),
+            'is_last_page' => $is_last_page,
             'next_page' => $next_page,
         ]);
     }
 
 } else if ($page == 1) {
     get_template_part( 'template-parts/content/no-search-results');
-} else {
+}
+if ($is_last_page) {
     get_template_part( 'template-parts/content/no-more-results');
 }
-
-
 
 
 // Render Filters
@@ -109,3 +112,11 @@ if ($page == 1) {
         'show_modal_var' => 'showSettingModal'
     ));
 }
+
+// Render total resutls count
+?><span id="max_num_results" hx-swap-oob="outerHTML"><?php
+    echo $max_num_results;
+    if ($max_num_results == 1) { echo ' result'; } else { echo ' results'; }?>
+</span><?php
+
+

@@ -114,6 +114,8 @@ function get_listings($args) {
         ...$tax_queries,
     ]);
     $query = new WP_Query($query_args);
+    $max_num_results = $query->found_posts;
+    $max_num_pages = $query->max_num_pages;
     while ($query->have_posts()) {
         $query->the_post();
 
@@ -160,6 +162,8 @@ function get_listings($args) {
         'valid_instrumentations' => $valid_instrumentations,
         'valid_settings' => $valid_settings,
         'valid_tags' => $valid_tags,
+        'max_num_results' => $max_num_results,
+        'max_num_pages' => $max_num_pages,
         'next_page' => $next_page,
     ];
 }

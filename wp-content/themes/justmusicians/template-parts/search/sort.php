@@ -34,7 +34,7 @@
 
     <div class="flex items-center gap-2">
         <div class="h-5 w-px bg-black/20"></div>
-        <span>42 results</span>
+        <span id="max_num_results" hx-swap-oob="outerHTML"></span>
     </div>
 
 

@@ -1,6 +1,6 @@
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
-    <?php if ($args['last']) { // infinite scroll ?>
+    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
     hx-get="/wp-html/v1/listings/?page=<?php echo $args['next_page']; ?>"
     hx-trigger="revealed once"
     hx-swap="beforeend"
