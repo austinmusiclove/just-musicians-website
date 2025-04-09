@@ -76,7 +76,7 @@
           </a>
         </div>
 
-        <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-12 justify-between">
+        <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-6 lg:gap-12 justify-between">
 
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow w-full flex items-stretch">
             <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
@@ -132,16 +132,41 @@
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
-            <div class="flex items-center mr-4">
+            <div class="flex items-center">
               <div data-trigger="mobile-menu" class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 -translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>
               </div>
             </div>
-            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
+            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3 ml-4" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
             <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showSignupModal = !showSignupModal">Sign Up</button>
-            <a href="<?php echo wp_logout_url('/'); ?>"><button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="loggedIn">Log Out</button></a>
+
+            <!-- Logged in Menu -->
+            <span class="font-sun-motter text-18 items-center gap-2 relative group hidden lg:flex" x-cloak x-show="loggedIn">
+              <a href="#">My Account</a>
+              <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+              <!-- Dropdown menu -->
+              <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
+                  Profile
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+                  Collections
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  Listings
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
+                  Log Out
+                </a>
+              </div>
+            </span>
+
           </div>
 
         </div>
