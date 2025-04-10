@@ -11,6 +11,21 @@ get_header();
 
 <div id="page" class="flex flex-col grow">
 
+<!-- handle listing invitiation -->
+<?php if (is_user_logged_in()) {
+     if (isset($_GET['lic'])) {
+         // send listing invitation validation with redirect without the param in url to avoid infinite loop
+         $success = add_listing_by_invitation_code($_GET['lic']);
+         // if success, redirect back to the same page but remove query params to avoid an infinite loop
+         if ($success and !is_wp_error($success)) { ?>
+             <div x-init="redirect('<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>')"></div>
+         <?php } else { ?>
+             <p>Failed to add listing from invitation link with error: <span class="text-yellow"><?php echo $success->get_error_message(); ?></span></p>
+         <?php }
+     }
+} ?>
+
+
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
