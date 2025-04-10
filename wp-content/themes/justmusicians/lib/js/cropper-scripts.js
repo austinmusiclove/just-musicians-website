@@ -8,7 +8,7 @@ function handleCropEnd(alpineComponent, displayElement, croppedImageInput) {
 
         croppedCanvas.toBlob((blob) => {
             if (blob) {
-                var file = new File([blob], 'cropped-image.webp', { type: 'image/webp' });
+                var file = new File([blob], `${alpineComponent.filenamePrefix}.webp`, { type: 'image/webp' });
                 var dataTransfer = new DataTransfer();
                 dataTransfer.items.add(file);
                 croppedImageInput.files = dataTransfer.files;

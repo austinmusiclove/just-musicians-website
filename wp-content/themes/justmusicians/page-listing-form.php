@@ -14,6 +14,8 @@ $genres = array_map(function($term) { return $term->name; }, get_terms(array( 't
 $subgenres = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'subgenre', 'hide_empty' => false,)));
 $instrumentations = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'instrumentation', 'hide_empty' => false,)));
 $settings = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'setting', 'hide_empty' => false,)));
+$filename_prefix = get_current_user_id() . '_' . time() . '_' . (!empty($listing_data['post_meta']['name'][0]) ? sanitize_title($listing_data['post_meta']['name'][0]) : '');
+
 
 get_header();
 
@@ -120,8 +122,8 @@ Calculated Unseen
             -->
 
             <!-- Performer Name -->
-            <div><label for="performer_name">Performer or Band Name</label><br>
-            <input type="text" id="performer_name" name="performer_name" autocomplete="off" x-model="listingName"></div>
+            <div><label for="listing_name">Performer or Band Name</label><br>
+            <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="listingName"></div>
 
             <!-- Description -->
             <div><label for="description">40 Character Description. This will appear just below your name in your listing.</label>
@@ -130,15 +132,15 @@ Calculated Unseen
                 i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
             </span><br>
             -->
-            <input type="text" id="description" name="description" maxlength="40" placeholder="5-piece Country Band" x-model="listingDescription"></div>
+            <input type="text" id="description" name="description" maxlength="40" placeholder="5-piece Country Band" required x-model="listingDescription"></div>
 
             <!-- City -->
             <div><label for="city">City (This would be where you consider yourself to be "based out of" not where you are from)</label>
-            <input type="text" id="city" name="city" x-model="listingCity"></div>
+            <input type="text" id="city" name="city" required x-model="listingCity"></div>
 
             <!-- State -->
             <div><label for="state">State</label><br>
-            <input type="text" id="state" name="state" x-model="listingState"></div>
+            <input type="text" id="state" name="state" required x-model="listingState"></div>
 
             <!-- Zip Code -->
             <div><label for="zip_code">Zip Code</label>
@@ -321,6 +323,8 @@ Calculated Unseen
             <label for="thumbnail">Thumbnail</label><br>
             <div x-data="{
                     cropper: null,
+                    filenamePrefix: '<?php echo $filename_prefix; ?>',
+                    showCropButton: <?php if (!empty($listing_data['thumbnail_url'])) { echo 'true'; } else { echo 'false'; } ?>,
                     _initCropper(displayElement, croppedImageInput) {
                         initCropper(this, displayElement, croppedImageInput);
                     },
@@ -329,11 +333,14 @@ Calculated Unseen
                     },
                 }">
                 <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg"
-                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput);"
+                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"
                 >
+                <br>
+                <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button" x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput)" x-show="showCropButton" x-cloak>Crop Current Thumbnail</button>
                 <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*" x-ref="croppedImageInput">
                 <div class="my-4 max-h-[400px]" >
-                    <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" x-init="_initCropper($el, $refs.croppedImageInput)" />
+                    <!--<img id="thumbnail-display" <?php //if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" x-init="_initCropper($el, $refs.croppedImageInput)" />-->
+                    <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" />
                 </div>
             </div>
 
@@ -354,7 +361,7 @@ Calculated Unseen
     <div class="hidden lg:block md:col-span-5 sticky h-64 top-24">
         <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Preview</h2>
         <?php echo get_template_part('template-parts/search/standard-listing', '', [
-            'name' => ($listing_data != null) ? $listing_data['post_meta']['name'][0] : 'Performer Name',
+            'name' => ($listing_data != null) ? $listing_data['post_meta']['name'][0] : 'Name',
             'location' => ($listing_data != null) ? $listing_data['post_meta']['city'][0] . ', ' . $listing_data['post_meta']['state'][0] : 'City, State',
             'description' => ($listing_data != null) ? $listing_data['post_meta']['description'][0] : 'Description',
             'genres' => $genres,

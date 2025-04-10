@@ -3,10 +3,6 @@ Milestones
         *profile edit
             parity functionality
                 images
-                    make sure the form doesnt create a new image if the image was not edited in the form
-                    mind the name of images
-                    choose webp or avif
-                    should i be pulling the 400x300 image for the preview??
                     recycling for old unlinked images
                     test upload big file
                     test upload jpeg, jpg, png, webp, avif
@@ -23,6 +19,8 @@ Milestones
                 create listing
                     add new listing to users listings
                     pending review? or let them publish
+                    redirect to update version of form after create
+                    mind the name of images
             full edit screen design
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
         bug: slider on mobile
