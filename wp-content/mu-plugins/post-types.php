@@ -153,6 +153,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Category',
       'add_new_item' => 'Add New Category',
@@ -165,6 +166,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Genres',
       'add_new_item' => 'Add New Genre',
@@ -177,6 +179,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Sub Genres',
       'add_new_item' => 'Add New Sub Genre',
@@ -189,6 +192,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Instrumentations',
       'add_new_item' => 'Add New Instrumentation',
@@ -201,6 +205,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Settings',
       'add_new_item' => 'Add New Setting',

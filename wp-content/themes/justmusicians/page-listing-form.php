@@ -95,7 +95,7 @@ Calculated Unseen
 >
     <div class="col-span-12 lg:col-span-6">
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
-            hx-post="<?php echo site_url('wp-json/v1/listings'); ?>"
+            hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
             hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
             hx-target="#result">
             <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
@@ -166,6 +166,7 @@ Calculated Unseen
                 'terms' => $genres,
                 'input_name' => 'genres',
                 'input_x_model' => 'genresCheckboxes',
+                'max_options' => 6,
             ]); ?>
             <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                 'title' => 'Sub-Genres',
@@ -422,76 +423,4 @@ get_footer();
                         $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
                         $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_url', $_POST['media'])) : array();
 
-                        $listing_post = array(
-                            'post_title'   => $performer_name,
-                            'post_status'  => 'pending',
-                            'post_type'    => 'listing',
-                            'meta_input'   => array(
-                                'type' => sanitize_text_field($_POST['listing-type']),
-                                'name' => $performer_name,
-                                'artist_uuid' => sanitize_text_field($_POST['artist-uuid']),
-                                'artist_post' => sanitize_text_field($_POST['artist-post-id']),
-                                'description' => sanitize_text_field($_POST['description']),
-                                'city' => sanitize_text_field($_POST['city']),
-                                'state' => sanitize_text_field($_POST['state']),
-                                'zip_code' => sanitize_text_field($_POST['zip-code']),
-                                'bio' => sanitize_text_field($_POST['bio']),
-                                'ensemble_size' => $ensemble_size,
-                                'venues_played_verified' => $verified_venues,
-                                'venues_played_unverified_strings' => $venues_strings,
-                                //'draw' => sanitize_text_field($_POST['draw']),
-                                'email' => sanitize_text_field($_POST['listing-email']),
-                                'phone' => sanitize_text_field($_POST['phone']),
-                                'website' => sanitize_url($_POST['website']),
-                                'instagram_handle' => $instagram_handle,
-                                'instagram_url' => $instagram_url,
-                                // instagram is private
-                                'tiktok_handle' => $tiktok_handle,
-                                'tiktok_url' => $tiktok_url,
-                                'x_handle' => $x_handle,
-                                'x_url' => $x_url,
-                                'facebook_url' => sanitize_url($_POST['facebook-url']),
-                                'youtube_url' => sanitize_url($_POST['youtube-url']),
-                                'bandcamp_url' => sanitize_url($_POST['bandcamp-url']),
-                                'spotify_artist_url' => $spotify_artist_url,
-                                'spotify_artist_id' => $spotify_artist_id,
-                                'apple_music_artist_url' => sanitize_url($_POST['apple-music-url']),
-                                'soundcloud_url' => sanitize_url($_POST['soundcloud-url']),
-                                'youtube_video_urls' => $youtube_video_urls,
-                                'unofficial_tags' => $unofficial_tags,
-                            ),
-                            'tax_input' => array(
-                                'tag' => $tags,
-                                'genre' => $macro_genres,
-                            ),
-                        );
-
-                        $post_id = wp_insert_post($listing_post);
-                        if (is_wp_error($post_id)) {
-                            echo '<h2>There was an error saving your submission. Please try again or contact the adminstrator at john@justmusicians.com.</h2>';
-                        } else {
-                            // Set taxonomy
-                            wp_set_post_terms($post_id, $macro_genres, 'genre');
-                            wp_set_post_terms($post_id, $tags, 'tag');
-
-                            // Add featured image and don't show error if thumbnail fails
-                            $thumbnail_upload = wp_handle_upload($_FILES['cropped-thumbnail'], ['test_form' => false]);
-                            if (isset($thumbnail_upload['file'])) {
-                                // Set attachment data
-                                $attachment = array(
-                                    'post_mime_type' => $thumbnail_upload['type'],
-                                    'post_title'     => sanitize_file_name( $thumbnail_upload['file'] ),
-                                    'post_content'   => '',
-                                    'post_status'    => 'inherit'
-                                );
-
-                                // Create the attachment
-                                $attachment_id = wp_insert_attachment( $attachment, $thumbnail_upload['file'], $post_id );
-                                if( !is_wp_error( $attachment_id ) ) {
-                                    set_post_thumbnail($post_id, $attachment_id);
-                                }
-                            }
-                            echo '<h2>Thank you for your submission!</h2>';
-                            echo '<p>Your listing has been submitted successfully.</p>';
-                        }
  */

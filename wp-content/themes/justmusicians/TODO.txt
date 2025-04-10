@@ -2,25 +2,29 @@ Milestones
     Artist push to edit and complete profiles
         *profile edit
             parity functionality
-                mind update response and myabe make it an html api
                 images
+                    make sure the form doesnt create a new image if the image was not edited in the form
                     mind the name of images
+                    choose webp or avif
+                    should i be pulling the 400x300 image for the preview??
                     recycling for old unlinked images
-                    err handling for image upload
                     test upload big file
                     test upload jpeg, jpg, png, webp, avif
                 non taxonomy checkbox component (ensemble size)
                 contact and links
                 venues
                 other tags and keywords
-                image upload and display
                 video link and display
                 status
                 content
                 rank
-                generalize get listing args in listings-api.php so that i dont have to add every arg
+                edit listing
+                    send save automatically after input
+                create listing
+                    add new listing to users listings
+                    pending review? or let them publish
             full edit screen design
-            add permissions to all writing posts apis
+            add permissions to all writing apis (venue reviews stats, venues stats, collections)
         bug: slider on mobile
             dad say sound not work
             chrome mobile
@@ -28,6 +32,10 @@ Milestones
                 play button refreshing page
                 slide right button cause cant open this page error
     Artist announce and invite new profiles
+        create special link to sign up and create listing
+            make sure if link is used again that it doesn't create a new listing, it updates
+            create the listings for them before they sign up instead of allowing new listing creating with the link
+            if they are not in my db, no invite, they go through the normal way or i add them to db and do the invite
         use webp images
         auto optimize uploaded images and test big file upload
         video order depending on search criteria
@@ -76,13 +84,11 @@ UI
 Devon
     podcast - get violotor-blog svg
     new pages
-        log in modal
-        logged in state for header
         listing landing page
         create/edit listing
+        listing post page
         404 page
-    display number of results
-    Ask about "<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">"
+        collections page
 Paid features
     Advanced search filters
         venues played
