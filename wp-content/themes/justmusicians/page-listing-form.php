@@ -85,6 +85,7 @@ Calculated Unseen
         listingCity: "<?php if ($listing_data) { echo $listing_data["post_meta"]["city"][0]; } ?>",
         listingState: "<?php if ($listing_data) { echo $listing_data["post_meta"]["state"][0]; } ?>",
         getListingLocation() { return this.listingCity && this.listingState ? `${this.listingCity}, ${this.listingState}` : this.listingCity || this.listingState || ""; },
+        listingWebsite: "<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>",
         categoriesCheckboxes: <?php if (!empty($listing_data["taxonomies"]["mcategory"])) { echo json_encode($listing_data["taxonomies"]["mcategory"]); } else { echo '[]'; }?>,
         genresCheckboxes: <?php if (!empty($listing_data["taxonomies"]["genre"])) { echo json_encode($listing_data["taxonomies"]["genre"]); } else { echo '[]'; } ?>,
         subgenresCheckboxes: <?php if (!empty($listing_data["taxonomies"]["subgenre"])) { echo json_encode($listing_data["taxonomies"]["subgenre"]); } else { echo '[]'; } ?>,
@@ -155,6 +156,107 @@ Calculated Unseen
             <div><label for="bio">Bio</label><br>
             <textarea id="bio" name="bio" class="w-full h-32"><?php if ($listing_data) { echo $listing_data['post_meta']['bio'][0]; } ?></textarea></div>
 
+            <!-- Ensemble Size -->
+            <!--
+            <label for="ensemble-size">How many performers in your group? If you perform with different ensemble sizes, check all that apply.</label><br>
+            <input class="button-input" value="1" type="checkbox" name="ensemble_size[]" id="ensemble-size-1"/>
+            <label class="button-label" for="ensemble-size-1">1</label><br>
+            <input class="button-input" value="2" type="checkbox" name="ensemble_size[]" id="ensemble-size-2"/>
+            <label class="button-label" for="ensemble-size-2">2</label><br>
+            <input class="button-input" value="3" type="checkbox" name="ensemble_size[]" id="ensemble-size-3"/>
+            <label class="button-label" for="ensemble-size-3">3</label><br>
+            <input class="button-input" value="4" type="checkbox" name="ensemble_size[]" id="ensemble-size-4"/>
+            <label class="button-label" for="ensemble-size-4">4</label><br>
+            <input class="button-input" value="5" type="checkbox" name="ensemble_size[]" id="ensemble-size-5"/>
+            <label class="button-label" for="ensemble-size-5">5</label><br>
+            <input class="button-input" value="6" type="checkbox" name="ensemble_size[]" id="ensemble-size-6"/>
+            <label class="button-label" for="ensemble-size-6">6</label><br>
+            <input class="button-input" value="7" type="checkbox" name="ensemble_size[]" id="ensemble-size-7"/>
+            <label class="button-label" for="ensemble-size-7">7</label><br>
+            <input class="button-input" value="8" type="checkbox" name="ensemble_size[]" id="ensemble-size-8"/>
+            <label class="button-label" for="ensemble-size-8">8</label><br>
+            <input class="button-input" value="9" type="checkbox" name="ensemble_size[]" id="ensemble-size-9"/>
+            <label class="button-label" for="ensemble-size-9">9</label><br>
+            <input class="button-input" value="10+" type="checkbox" name="ensemble_size[]" id="ensemble-size-10"/>
+            <label class="button-label" for="ensemble-size-10">10+</label><br>
+            -->
+
+            <!------------ Contact and Links ----------------->
+            <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Contact and Links</h2>
+            <!-- Email -->
+            <!--
+            <div><label for="listing-email">Email</label><br>
+            <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com" placeholder="example@example.com"></div>
+            -->
+            <!-- Phone -->
+            <!--
+            <div><label for="phone">Phone</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" title="Format: (555) 555-5555"></div>
+            -->
+            <!-- Website -->
+            <div><label for="website">Website</label><br>
+            <input type="url" id="website" name="website" placeholder="https://" <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['website'][0] . '"'; } ?> x-model="listingWebsite" ></div>
+            <!-- Instagram -->
+            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['instagram_handle'][0] : '' ?>' }">
+                <label for="instagram_handle">Instagram Handle</label><br>
+                <input type="text" id="instagram_handle" name="instagram_handle"
+                    pattern="^[A-Za-zA-Z0-9_\.]{1,30}$"
+                    title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
+                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['instagram_handle'][0] . '"' : ''; ?>
+                    x-model="handle">
+                <input type="hidden" id="instagram_url" name="instagram_url" x-bind:value="handle ? 'https://instagram.com/' + handle : ''">
+            </div>
+            <!-- Tiktok -->
+            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['tiktok_handle'][0] : ''; ?>' }">
+                <label for="tiktok_handle">Tiktok Handle</label><br>
+                <input type="text" id="tiktok_handle" name="tiktok_handle"
+                    pattern="^[a-zA-Z0-9_.]+$"
+                    title="Handle can only contain letters, numbers, underscores, and periods. No @ sign."
+                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['tiktok_handle'][0] . '"' : ''; ?>
+                    x-model="handle">
+                <input type="hidden" id="tiktok_url" name="tiktok_url" x-bind:value="handle ? 'https://tiktok.com/@' + handle : ''">
+            </div>
+            <!-- X -->
+            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['x_handle'][0] : ''; ?>' }">
+                <label for="x_handle">X Handle</label><br>
+                <input type="text" id="x_handle" name="x_handle"
+                    pattern="^[A-Za-zA-Z0-9_\.]{1,15}$"
+                    title="X handle must be 1-15 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
+                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['x_handle'][0] . '"' : ''; ?>
+                    x-model="handle">
+                <input type="hidden" id="x_url" name="x_url" x-bind:value="handle ? 'https://x.com/@' + handle : ''">
+            </div>
+            <!-- Facebook -->
+            <div><label for="facebook_url">Facebook URL</label><br>
+            <input type="url" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['facebook_url'][0] . '"' : ''; ?> ></div>
+            <!-- Youtube -->
+            <div><label for="youtube_url">Youtube Channel URL</label><br>
+            <input type="url" id="youtube_url" name="youtube_url"   <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['youtube_url'][0]  . '"' : ''; ?> ></div>
+            <!-- Bandcamp -->
+            <div><label for="bandcamp_url">Bandcamp URL</label><br>
+            <input type="url" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['bandcamp_url'][0] . '"' : ''; ?> ></div>
+            <!-- Spotify -->
+            <div x-data="{
+                spotifyUrl: '<?php echo $listing_data ? $listing_data['post_meta']['spotify_artist_url'][0] : ''; ?>',
+                spotifyArtistId: '',
+                setSpotifyArtistId() { this.spotifyArtistId = this.spotifyUrl.match(/artist\/([a-zA-Z0-9]+)/) ? this.spotifyUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
+            }">
+                <label for="spotify_artist_url">Spotify Artist URL</label><br>
+                <input type="url" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
+                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['spotify_artist_url'][0] . '"' : ''; ?>
+                    x-init="setSpotifyArtistId()"
+                    x-on:input="setSpotifyArtistId()"
+                    x-model="spotifyUrl"
+                >
+                <input type="hidden" id="spotify_artist_id" name="spotify_artist_id" x-bind:value="spotifyArtistId">
+            </div>
+            <!-- Apple Music -->
+            <div><label for="apple_music_artist_url">Apple Music Artist URL</label><br>
+            <input type="url" id="apple_music_artist_url" name="apple_music_artist_url" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['apple_music_artist_url'][0] . '"' : ''; ?> ></div>
+            <!-- Soundcloud -->
+            <div><label for="soundcloud_url">Soundcloud URL</label><br>
+            <input type="url" id="soundcloud_url" name="soundcloud_url" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['soundcloud_url'][0] . '"' : ''; ?> ></div>
+
             <!------------ Taxonomies ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Search Optimization</h2>
             <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
@@ -188,38 +290,7 @@ Calculated Unseen
                 'input_name' => 'settings',
                 'input_x_model' => 'settingsCheckboxes',
             ]); ?>
-
-            <!-- Ensemble Size -->
-            <!--
-            <label for="ensemble-size">How many performers in your group? If you perform with different ensemble sizes, check all that apply.</label><br>
-            <input class="button-input" value="1" type="checkbox" name="ensemble_size[]" id="ensemble-size-1"/>
-            <label class="button-label" for="ensemble-size-1">1</label><br>
-            <input class="button-input" value="2" type="checkbox" name="ensemble_size[]" id="ensemble-size-2"/>
-            <label class="button-label" for="ensemble-size-2">2</label><br>
-            <input class="button-input" value="3" type="checkbox" name="ensemble_size[]" id="ensemble-size-3"/>
-            <label class="button-label" for="ensemble-size-3">3</label><br>
-            <input class="button-input" value="4" type="checkbox" name="ensemble_size[]" id="ensemble-size-4"/>
-            <label class="button-label" for="ensemble-size-4">4</label><br>
-            <input class="button-input" value="5" type="checkbox" name="ensemble_size[]" id="ensemble-size-5"/>
-            <label class="button-label" for="ensemble-size-5">5</label><br>
-            <input class="button-input" value="6" type="checkbox" name="ensemble_size[]" id="ensemble-size-6"/>
-            <label class="button-label" for="ensemble-size-6">6</label><br>
-            <input class="button-input" value="7" type="checkbox" name="ensemble_size[]" id="ensemble-size-7"/>
-            <label class="button-label" for="ensemble-size-7">7</label><br>
-            <input class="button-input" value="8" type="checkbox" name="ensemble_size[]" id="ensemble-size-8"/>
-            <label class="button-label" for="ensemble-size-8">8</label><br>
-            <input class="button-input" value="9" type="checkbox" name="ensemble_size[]" id="ensemble-size-9"/>
-            <label class="button-label" for="ensemble-size-9">9</label><br>
-            <input class="button-input" value="10+" type="checkbox" name="ensemble_size[]" id="ensemble-size-10"/>
-            <label class="button-label" for="ensemble-size-10">10+</label><br>
-            -->
-
-            <!-- Taxonomies -->
-            <!-- Category -->
-            <!-- Subgenre -->
-            <!-- Instrumentation -->
-            <!-- Setting -->
-            <!-- Other -->
+            <!-- Other Keywords -->
             <!--
             <label for="tags">Keywords</label>
             <span class="tooltip">
@@ -243,78 +314,6 @@ Calculated Unseen
             <div id="selected-venues"></div>
             <input type="text" id="venues-input"/>
             <div style="display:none;" class="dropdown" id="venue-options"></div>
-            -->
-
-            <!-- Draw -->
-            <!--
-            <label for="draw"></label><br>
-            <textarea id="draw" name="draw"></textarea><br><br>
-            -->
-
-            <!------------ Contact and Links ----------------->
-            <!-- Email -->
-            <!--
-            <div><label for="listing-email">Email</label><br>
-            <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com" placeholder="example@example.com"></div>
-            -->
-            <!-- Phone -->
-            <!--
-            <div><label for="phone">Phone</label><br>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" title="Format: (555) 555-5555"></div>
-            -->
-            <!-- Website -->
-            <!--
-            <div><label for="website">Website</label><br>
-            <input type="url" id="website" name="website" placeholder="https://" ></div>
-            -->
-            <!-- Instagram -->
-            <!--
-            <div><label for="instagram-handle">Instagram Handle</label><br>
-            <input type="text" id="instagram-handle" name="instagram-handle" pattern="^[A-Za-zA-Z0-9_\.]{1,30}$" title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign.">
-            <input type="hidden" id="instagram-url" name="instagram-url"></div>
-            -->
-            <!-- Tiktok -->
-            <!--
-            <div><label for="tiktok-handle">Tiktok Handle</label><br>
-            <input type="text" id="tiktok-handle" name="tiktok-handle" pattern="^[a-zA-Z0-9_.]+$" title="Handle can only contain letters, numbers, underscores, and periods. No @ sign.">
-            <input type="hidden" id="tiktok-url" name="tiktok-url"></div>
-            -->
-            <!-- X -->
-            <!--
-            <div><label for="x-handle">X Handle</label><br>
-            <input type="text" id="x-handle" name="x-handle">
-            <input type="hidden" id="x-url" name="x-url"></div>
-            -->
-            <!-- Facebook -->
-            <!--
-            <div><label for="facebook-url">Facebook URL</label><br>
-            <input type="url" id="facebook-url" name="facebook-url"></div>
-            -->
-            <!-- Youtube -->
-            <!--
-            <div><label for="youtube-url">Youtube Channel URL</label><br>
-            <input type="url" id="youtube-url" name="youtube-url"></div>
-            -->
-            <!-- Bandcamp -->
-            <!--
-            <div><label for="bandcamp-url">Bandcamp URL</label><br>
-            <input type="url" id="bandcamp-url" name="bandcamp-url"></div>
-            -->
-            <!-- Spotify -->
-            <!--
-            <div><label for="spotify-artist-url">Spotify Artist URL</label><br>
-            <input type="url" id="spotify-artist-url" name="spotify-artist-url">
-            <input type="hidden" id="spotify-artist-id" name="spotify-artist-id"></div>
-            -->
-            <!-- Apple Music -->
-            <!--
-            <div><label for="apple-music-url">Apple Music Artist URL</label><br>
-            <input type="url" id="apple-music-url" name="apple-music-url"></div>
-            -->
-            <!-- Soundcloud -->
-            <!--
-            <div><label for="soundcloud-url">Soundcloud URL</label><br>
-            <input type="url" id="soundcloud-url" name="soundcloud-url"></div>
             -->
 
             <!------------ Media ----------------->
@@ -364,7 +363,7 @@ Calculated Unseen
             'name' => ($listing_data != null) ? $listing_data['post_meta']['name'][0] : 'Name',
             'location' => ($listing_data != null) ? $listing_data['post_meta']['city'][0] . ', ' . $listing_data['post_meta']['state'][0] : 'City, State',
             'description' => ($listing_data != null) ? $listing_data['post_meta']['description'][0] : 'Description',
-            'genres' => $genres,
+            'genres' => $genres, // pass all genres; alpine_show_genre func will show the selected options
             'thumbnail_url' => $listing_data['thumbnail_url'],
             'thumbnail_src_bind_var' => 'previewThumbnailSrc',
             'verified' => $listing_data['post_meta']['verified'][0],
@@ -383,10 +382,11 @@ Calculated Unseen
             'youtube_player_ids' => [], //array_map(fn($video_id, $video_index) => $video_id . '-' . $result_id . '-' . $video_index, $listing_data['post_meta']['youtube_video_ids'], array_keys($listing_data['post_meta']['youtube_video_ids'])),
             'lazyload_thumbnail' => false,
             'last' => false,
-            'name_x_text' => 'listingName',
-            'location_x_text' => 'getListingLocation()',
-            'description_x_text' => 'listingDescription',
-            'genre_show_func' => 'showGenre',
+            'alpine_name' => 'listingName',
+            'alpine_location' => 'getListingLocation()',
+            'alpine_description' => 'listingDescription',
+            'alpine_website' => 'listingWebsite',
+            'alpine_show_genre' => 'showGenre',
         ]); ?>
     </div>
 </div>

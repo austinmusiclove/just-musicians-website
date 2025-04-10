@@ -133,9 +133,11 @@
     <?php } ?>
 
     <div class="py-2 flex flex-col gap-y-2">
+
+        <!-- Name and verification badge -->
         <div class="flex flex-row">
             <h2 class="text-22 font-bold">
-                <a href="#" <?php if (!empty($args['name_x_text'])) { echo 'x-text="' . $args['name_x_text'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['name_x_text'] . '"'; } ?>>
+                <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>>
                     <?php echo $args['name']; ?>
                 </a>
             </h2>
@@ -143,43 +145,51 @@
                 <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
             <?php } ?>
         </div>
+
+        <!-- Location -->
         <span class="text-14 flex items-center">
             <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-            <span <?php if (!empty($args['location_x_text'])) { echo 'x-text="' . $args['location_x_text'] . ' === \'\' ? \'' . $args['location'] . '\' : ' . $args['location_x_text'] . '"'; } ?>><?php echo $args['location']; ?></span>
+            <span <?php if (!empty($args['alpine_location'])) { echo 'x-text="' . $args['alpine_location'] . ' === \'\' ? \'' . $args['location'] . '\' : ' . $args['alpine_location'] . '"'; } ?>><?php echo $args['location']; ?></span>
         </span>
-        <p class="text-14" <?php if (!empty($args['description_x_text'])) { echo 'x-text="' . $args['description_x_text'] . ' === \'\' ? \'' . $args['description'] . '\' : ' . $args['description_x_text'] . '"'; } ?>><?php echo $args['description']; ?></p>
+
+        <!-- Description -->
+        <p class="text-14" <?php if (!empty($args['alpine_description'])) { echo 'x-text="' . $args['alpine_description'] . ' === \'\' ? \'' . $args['description'] . '\' : ' . $args['alpine_description'] . '"'; } ?>><?php echo $args['description']; ?></p>
+
+        <!-- Genres -->
         <div class="flex items-center gap-1 flex-wrap">
-            <?php if (!empty($args['genre_show_func'])) {
-                foreach ($args['genres'] as $term) { ?>
-                    <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block" x-show="<?php echo $args['genre_show_func']; ?>('<?php echo $term; ?>')"><?php echo $term; ?></span>
-                <?php }
-            } else {
-            foreach((array) $args['genres'] as $genre) { ?>
-                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"><?php echo $genre; ?></span>
-            <?php }
-            } ?>
+            <?php foreach ($args['genres'] as $term) { ?>
+                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light hover:bg-yellow cursor-pointer inline-block"
+                    x-show="<?php if (!empty($args['alpine_show_genre'])) { echo $args['alpine_show_genre'] . "('" . $term . "')"; } else { echo 'true'; } ?>"><?php echo $term; ?>
+                </span>
+            <?php } ?>
         </div>
+
+        <!-- Links -->
         <div class="flex items-center gap-1">
-            <?php if (!empty($args['website'])) { ?>
-                <a target="_blank" href="<?php echo $args['website']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Website.svg'; ?>" /></a>
+            <?php if (!empty($args['website']) or !empty($args['alpine_website'])) { ?>
+                <a target="_blank"
+                    <?php if (!empty($args['alpine_website'])) { echo 'x-bind:href="' . $args['alpine_website'] . '"'; } else { echo 'href="' . $args['website'] . '"'; } ?>
+                    x-show="<?php echo $args['alpine_website']; ?>">
+                    <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Website.svg'; ?>" />
+                </a>
             <?php } if (!empty($args['instagram_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['instagram_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['instagram_url']; ?>"         ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" /></a>
             <?php } if (!empty($args['facebook_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['facebook_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['facebook_url']; ?>"          ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" /></a>
             <?php } if (!empty($args['youtube_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['youtube_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['youtube_url']; ?>"           ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" /></a>
             <?php } if (!empty($args['x_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['x_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['x_url']; ?>"                 ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" /></a>
             <?php } if (!empty($args['tiktok_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['tiktok_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['tiktok_url']; ?>"            ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" /></a>
             <?php } if (!empty($args['bandcamp_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['bandcamp_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['bandcamp_url']; ?>"          ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" /></a>
             <?php } if (!empty($args['spotify_artist_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['spotify_artist_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['spotify_artist_url']; ?>"    ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" /></a>
             <?php } if (!empty($args['apple_music_artist_url'])) { ?>
                 <a target="_blank" href="<?php echo $args['apple_music_artist_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_AppleMusic.svg'; ?>" /></a>
             <?php } if (!empty($args['soundcloud_url'])) { ?>
-                <a target="_blank" href="<?php echo $args['soundcloud_url']; ?>"><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" /></a>
+                <a target="_blank" href="<?php echo $args['soundcloud_url']; ?>"        ><img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" /></a>
             <?php } ?>
         </div>
     </div>
