@@ -80,12 +80,12 @@ Calculated Unseen
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
     x-data="{
-        listingName: '<?php if ($listing_data) { echo $listing_data["post_meta"]["name"][0]; } ?>',
-        listingDescription: '<?php if ($listing_data) { echo $listing_data["post_meta"]["description"][0]; } ?>',
-        listingCity: '<?php if ($listing_data) { echo $listing_data["post_meta"]["city"][0]; } ?>',
-        listingState: '<?php if ($listing_data) { echo $listing_data["post_meta"]["state"][0]; } ?>',
+        listingName:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
+        listingDescription:  '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
+        listingCity:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
+        listingState:        '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
         getListingLocation() { return this.listingCity && this.listingState ? `${this.listingCity}, ${this.listingState}` : this.listingCity || this.listingState || ''; },
-        listingWebsite: '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
+        listingWebsite:      '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
         categoriesCheckboxes: <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
         genresCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
         subgenresCheckboxes:  <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
