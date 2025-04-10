@@ -90,6 +90,7 @@ require get_template_directory() . '/lib/inc/comments.php';
 require get_template_directory() . '/lib/inc/helper.php';
 require get_template_directory() . '/html-api/html-api-setup.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
+require get_template_directory() . '/lib/inc/admin-panel.php';
 
 
 // Plugins
@@ -128,10 +129,3 @@ function mind_defer_scripts( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
-
-
-
-// Disable admin bar for all users
-show_admin_bar(false);
-
-

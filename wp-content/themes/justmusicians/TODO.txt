@@ -31,6 +31,7 @@ Milestones
                     redirect to update version of form after create
                     mind the name of images
                     need to test odd artist names with odd characters
+                show err if htmx request fails and never gets to server
                 sanitize filename for thumbnail
                 test apostrophes everywhere
             full edit screen design
