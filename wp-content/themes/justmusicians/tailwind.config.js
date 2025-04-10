@@ -66,6 +66,7 @@ module.exports = {
 		'./template-parts/filters/**/*.{php,js}',
 		'./template-parts/global/**/*.{php,js}',
 		'./template-parts/filters/elements/*.{php,js}',
+		'./template-parts/account/*.{php,js}',
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
 		'./template-parts/login/*.{php,js}',
@@ -96,6 +97,7 @@ module.exports = {
 			// Yellow
 			'yellow': '#D29429',
 			'yellow-light': '#EDD4A9',
+			'yellow-light-50': '#F6E9D4',
 			// Other
 			'navy': '#0F384C'
 		},
