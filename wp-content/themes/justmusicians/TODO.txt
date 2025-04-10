@@ -32,6 +32,7 @@ Milestones
                     mind the name of images
                     need to test odd artist names with odd characters
                 sanitize filename for thumbnail
+                test apostrophes everywhere
             full edit screen design
                 should we have preview or just link to actual page
                 figure out how to do venues

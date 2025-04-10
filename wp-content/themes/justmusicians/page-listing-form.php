@@ -79,21 +79,21 @@ Calculated Unseen
 </header>
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
-    x-data='{
-        listingName: "<?php if ($listing_data) { echo $listing_data["post_meta"]["name"][0]; } ?>",
-        listingDescription: "<?php if ($listing_data) { echo $listing_data["post_meta"]["description"][0]; } ?>",
-        listingCity: "<?php if ($listing_data) { echo $listing_data["post_meta"]["city"][0]; } ?>",
-        listingState: "<?php if ($listing_data) { echo $listing_data["post_meta"]["state"][0]; } ?>",
-        getListingLocation() { return this.listingCity && this.listingState ? `${this.listingCity}, ${this.listingState}` : this.listingCity || this.listingState || ""; },
-        listingWebsite: "<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>",
-        categoriesCheckboxes: <?php if (!empty($listing_data["taxonomies"]["mcategory"])) { echo json_encode($listing_data["taxonomies"]["mcategory"]); } else { echo '[]'; }?>,
-        genresCheckboxes: <?php if (!empty($listing_data["taxonomies"]["genre"])) { echo json_encode($listing_data["taxonomies"]["genre"]); } else { echo '[]'; } ?>,
-        subgenresCheckboxes: <?php if (!empty($listing_data["taxonomies"]["subgenre"])) { echo json_encode($listing_data["taxonomies"]["subgenre"]); } else { echo '[]'; } ?>,
-        instrumentationsCheckboxes: <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo json_encode($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
-        settingsCheckboxes: <?php if (!empty($listing_data["taxonomies"]["setting"])) { echo json_encode($listing_data["taxonomies"]["setting"]); } else { echo '[]'; } ?>,
+    x-data="{
+        listingName: '<?php if ($listing_data) { echo $listing_data["post_meta"]["name"][0]; } ?>',
+        listingDescription: '<?php if ($listing_data) { echo $listing_data["post_meta"]["description"][0]; } ?>',
+        listingCity: '<?php if ($listing_data) { echo $listing_data["post_meta"]["city"][0]; } ?>',
+        listingState: '<?php if ($listing_data) { echo $listing_data["post_meta"]["state"][0]; } ?>',
+        getListingLocation() { return this.listingCity && this.listingState ? `${this.listingCity}, ${this.listingState}` : this.listingCity || this.listingState || ''; },
+        listingWebsite: '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
+        categoriesCheckboxes: <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
+        genresCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
+        subgenresCheckboxes:  <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
+        instCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
+        settingsCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
         showGenre(term) { return this.genresCheckboxes.includes(term); },
-        previewThumbnailSrc: "<?php if (!empty($listing_data['thumbnail_url'])) { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>",
-    }'
+        previewThumbnailSrc: '<?php if (!empty($listing_data['thumbnail_url'])) { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
+    }"
     x-on:updatethumbnail.window="previewThumbnailSrc = $event.detail;;"
 >
     <div class="col-span-12 lg:col-span-6">
@@ -282,7 +282,7 @@ Calculated Unseen
                 'title' => 'Instrumentation',
                 'terms' => $instrumentations,
                 'input_name' => 'instrumentations',
-                'input_x_model' => 'instrumentationsCheckboxes',
+                'input_x_model' => 'instCheckboxes',
             ]); ?>
             <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                 'title' => 'Settings',
