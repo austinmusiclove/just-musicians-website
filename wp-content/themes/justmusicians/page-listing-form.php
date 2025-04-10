@@ -332,7 +332,7 @@ Calculated Unseen
                         initCropperFromFile(this, event, displayElement, croppedImageInput);
                     },
                 }">
-                <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg"
+                <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
                     x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"
                 >
                 <br>

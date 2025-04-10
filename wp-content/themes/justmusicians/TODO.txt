@@ -2,12 +2,8 @@ Milestones
     Artist push to edit and complete profiles
         *profile edit
             parity functionality
-                images
-                    recycling for old unlinked images
-                    test upload big file
-                    test upload jpeg, jpg, png, webp, avif
-                non taxonomy checkbox component (ensemble size)
                 contact and links
+                non taxonomy checkbox component (ensemble size)
                 venues
                 other tags and keywords
                 video link and display
@@ -17,12 +13,14 @@ Milestones
                 edit listing
                     send save automatically after input
                 create listing
+                    make it work at all
                     add new listing to users listings
                     pending review? or let them publish
                     redirect to update version of form after create
                     mind the name of images
             full edit screen design
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
+            recycling for old unlinked images
         bug: slider on mobile
             dad say sound not work
             chrome mobile
