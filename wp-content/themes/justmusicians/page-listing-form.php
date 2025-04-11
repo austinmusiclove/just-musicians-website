@@ -26,27 +26,9 @@ Fields to cover
 Basic
     Type (only new post)
     Ensemble Size
-Contact
-    *Email
-    *Phone
-    *Website
-    *Instagram Handle (make sure not private)
-    *Instagram URL
-    *Tiktok Handle
-    *Tiktok URL
-    *X Handle
-    *X URL
-    *Facebook URL
-    *Youtube URL
-    *Bandcamp URL
-    *Spotiy Artist URL
-    *Spotify Artist ID
-    *Apple Music Artist URL
-    *Soundcloud URL
 Taxonomy
     Unofficial tags
 Media
-    *Thumbnail
     Gallery Images
     Youtube Video URLs
         start at
@@ -162,7 +144,11 @@ Calculated Unseen
                 i<span class="tooltip-text">This will be used to help match buyers with musicians who are broadly geographically near by.</span>
             </span><br>
             -->
-            <input type="text" id="zip_code" name="zip_code" pattern="^\d{5}(-\d{4})?$" title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)." <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['zip_code'][0] . '"'; } ?>></div>
+            <input type="text" id="zip_code" name="zip_code"
+                pattern="^\d{5}(-\d{4})?$"
+                title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)."
+                <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['zip_code'][0] . '"'; } ?>>
+            </div>
 
             <!-- Bio -->
             <div><label for="bio">Bio</label><br>
@@ -204,9 +190,11 @@ Calculated Unseen
             </div>
             <!-- Phone -->
             <div><label for="phone">Phone</label><br>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14"
+                <input type="tel" id="phone" name="phone"
+                    placeholder="(555) 555-5555" maxlength="14"
                     pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
                     title="Format: (555) 555-5555"
+                    x-mask="(999) 999-9999"
                     <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['phone'][0] . '"'; } ?>>
             </div>
             <!-- Instagram -->

@@ -3,7 +3,6 @@ Milestones
         *profile edit
             parity functionality
                 contact and links
-                    phone mask
                     show error for formatting
                     regex front end check that they are url for the correct site
                     front end check for 404
@@ -32,6 +31,7 @@ Milestones
                 sanitize filename for thumbnail
                 test apostrophes everywhere
             full edit screen design
+                tooltips to explain things
                 should we have preview or just link to actual page
                 figure out how to do venues
                 figure out how to do youtube links with tags
