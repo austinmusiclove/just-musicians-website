@@ -80,21 +80,33 @@ Calculated Unseen
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
     x-data="{
-        listingName:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
-        listingDescription:  '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
-        listingCity:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
-        listingState:        '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
-        getListingLocation() { return this.listingCity && this.listingState ? `${this.listingCity}, ${this.listingState}` : this.listingCity || this.listingState || ''; },
-        listingWebsite:      '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
-        categoriesCheckboxes: <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
-        genresCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
-        subgenresCheckboxes:  <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
-        instCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
-        settingsCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
-        showGenre(term) { return this.genresCheckboxes.includes(term); },
-        previewThumbnailSrc: '<?php if (!empty($listing_data['thumbnail_url'])) { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
+        pName:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
+        pDescription:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
+        pCity:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
+        pState:               '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
+        pInstagramHandle:     '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_handle"][0]; } ?>',
+        pInstagramUrl:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_url"][0]; } ?>',
+        pTiktokHandle:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_handle"][0]; } ?>',
+        pTiktokUrl:           '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_url"][0]; } ?>',
+        pXHandle:             '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_handle"][0]; } ?>',
+        pXUrl:                '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_url"][0]; } ?>',
+        pWebsite:             '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
+        pFacebookUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["facebook_url"][0]; } ?>',
+        pYoutubeUrl:          '<?php if ($listing_data) { echo $listing_data["post_meta"]["youtube_url"][0]; } ?>',
+        pBandcampUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["bandcamp_url"][0]; } ?>',
+        pSpotifyArtistUrl:    '<?php if ($listing_data) { echo $listing_data["post_meta"]["spotify_artist_url"][0]; } ?>',
+        pAppleMusicArtistUrl: '<?php if ($listing_data) { echo $listing_data["post_meta"]["apple_music_artist_url"][0]; } ?>',
+        pSoundcloudUrl:       '<?php if ($listing_data) { echo $listing_data["post_meta"]["soundcloud_url"][0]; } ?>',
+        pThumbnailSrc:        '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
+        categoriesCheckboxes:  <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
+        genresCheckboxes:      <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
+        subgenresCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
+        instCheckboxes:        <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
+        settingsCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
+        getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
+        showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
-    x-on:updatethumbnail.window="previewThumbnailSrc = $event.detail;;"
+    x-on:updatethumbnail.window="pThumbnailSrc = $event.detail;"
 >
     <div class="col-span-12 lg:col-span-6">
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
@@ -124,7 +136,7 @@ Calculated Unseen
 
             <!-- Performer Name -->
             <div><label for="listing_name">Performer or Band Name</label><br>
-            <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="listingName"></div>
+            <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName"></div>
 
             <!-- Description -->
             <div><label for="description">40 Character Description. This will appear just below your name in your listing.</label>
@@ -133,15 +145,15 @@ Calculated Unseen
                 i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
             </span><br>
             -->
-            <input type="text" id="description" name="description" maxlength="40" placeholder="5-piece Country Band" required x-model="listingDescription"></div>
+            <input type="text" id="description" name="description" maxlength="40" placeholder="5-piece Country Band" required x-model="pDescription"></div>
 
             <!-- City -->
             <div><label for="city">City (This would be where you consider yourself to be "based out of" not where you are from)</label>
-            <input type="text" id="city" name="city" required x-model="listingCity"></div>
+            <input type="text" id="city" name="city" required x-model="pCity"></div>
 
             <!-- State -->
             <div><label for="state">State</label><br>
-            <input type="text" id="state" name="state" required x-model="listingState"></div>
+            <input type="text" id="state" name="state" required x-model="pState"></div>
 
             <!-- Zip Code -->
             <div><label for="zip_code">Zip Code</label>
@@ -184,78 +196,96 @@ Calculated Unseen
             <!------------ Contact and Links ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Contact and Links</h2>
             <!-- Email -->
-            <!--
-            <div><label for="listing-email">Email</label><br>
-            <input type="email" id="listing-email" name="listing-email" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" title="example@example.com" placeholder="example@example.com"></div>
-            -->
+            <div><label for="listing_email">Email</label><br>
+                <input type="email" id="listing_email" name="listing_email" placeholder="example@example.com"
+                    pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+                    title="example@example.com"
+                    <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['email'][0] . '"'; } ?>>
+            </div>
             <!-- Phone -->
-            <!--
             <div><label for="phone">Phone</label><br>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" title="Format: (555) 555-5555"></div>
-            -->
-            <!-- Website -->
-            <div><label for="website">Website</label><br>
-            <input type="url" id="website" name="website" placeholder="https://" <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['website'][0] . '"'; } ?> x-model="listingWebsite" ></div>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="14"
+                    pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+                    title="Format: (555) 555-5555"
+                    <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['phone'][0] . '"'; } ?>>
+            </div>
             <!-- Instagram -->
-            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['instagram_handle'][0] : '' ?>' }">
+            <div>
                 <label for="instagram_handle">Instagram Handle</label><br>
-                <input type="text" id="instagram_handle" name="instagram_handle"
-                    pattern="^[A-Za-zA-Z0-9_\.]{1,30}$"
-                    title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
-                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['instagram_handle'][0] . '"' : ''; ?>
-                    x-model="handle">
-                <input type="hidden" id="instagram_url" name="instagram_url" x-bind:value="handle ? 'https://instagram.com/' + handle : ''">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-grey pointer-events-none">@</span>
+                    <input class="!pl-7 w-full px-3 py-2" type="text" id="instagram_handle" name="instagram_handle"
+                        pattern="^[A-Za-zA-Z0-9_\.]{1,30}$"
+                        title="Instagram handle must be 1-30 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
+                        <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['instagram_handle'][0] . '"' : ''; ?>
+                        x-model="pInstagramHandle">
+                </div>
+                <input type="hidden" id="instagram_url" name="instagram_url"
+                    x-init="$watch('pInstagramHandle', value => pInstagramUrl = value ? 'https://instagram.com/' + value : '')"
+                    x-model="pInstagramUrl">
             </div>
             <!-- Tiktok -->
-            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['tiktok_handle'][0] : ''; ?>' }">
+            <div>
                 <label for="tiktok_handle">Tiktok Handle</label><br>
-                <input type="text" id="tiktok_handle" name="tiktok_handle"
-                    pattern="^[a-zA-Z0-9_.]+$"
-                    title="Handle can only contain letters, numbers, underscores, and periods. No @ sign."
-                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['tiktok_handle'][0] . '"' : ''; ?>
-                    x-model="handle">
-                <input type="hidden" id="tiktok_url" name="tiktok_url" x-bind:value="handle ? 'https://tiktok.com/@' + handle : ''">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-grey pointer-events-none">@</span>
+                    <input class="!pl-7 w-full px-3 py-2" type="text" id="tiktok_handle" name="tiktok_handle"
+                        pattern="^[a-zA-Z0-9_.]+$"
+                        title="Handle can only contain letters, numbers, underscores, and periods. No @ sign."
+                        <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['tiktok_handle'][0] . '"' : ''; ?>
+                        x-model="pTiktokHandle">
+                </div>
+                <input type="hidden" id="tiktok_url" name="tiktok_url"
+                    x-init="$watch('pTiktokHandle', value => pTiktokUrl = value ? 'https://tiktok.com/@' + value : '')"
+                    x-model="pTiktokUrl">
             </div>
             <!-- X -->
-            <div x-data="{ handle: '<?php echo $listing_data ? $listing_data['post_meta']['x_handle'][0] : ''; ?>' }">
+            <div>
                 <label for="x_handle">X Handle</label><br>
-                <input type="text" id="x_handle" name="x_handle"
-                    pattern="^[A-Za-zA-Z0-9_\.]{1,15}$"
-                    title="X handle must be 1-15 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
-                    <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['x_handle'][0] . '"' : ''; ?>
-                    x-model="handle">
-                <input type="hidden" id="x_url" name="x_url" x-bind:value="handle ? 'https://x.com/@' + handle : ''">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-grey pointer-events-none">@</span>
+                    <input class="!pl-7 w-full px-3 py-2" type="text" id="x_handle" name="x_handle"
+                        pattern="^[A-Za-zA-Z0-9_\.]{1,15}$"
+                        title="X handle must be 1-15 characters long and can only include letters, numbers, underscores, or periods. No @ sign."
+                        <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['x_handle'][0] . '"' : ''; ?>
+                        x-model="pXHandle">
+                </div>
+                <input type="hidden" id="x_url" name="x_url"
+                    x-init="$watch('pXHandle', value => pXUrl = value ? 'https://x.com/@' + value : '')"
+                    x-model="pXUrl">
             </div>
+            <!-- Website -->
+            <div><label for="website">Website</label><br>
+            <input type="url" id="website" name="website" placeholder="https://" x-model="pWebsite" <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['website'][0] . '"'; } ?> ></div>
             <!-- Facebook -->
             <div><label for="facebook_url">Facebook URL</label><br>
-            <input type="url" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['facebook_url'][0] . '"' : ''; ?> ></div>
+            <input type="url" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/"      x-model="pFacebookUrl" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['facebook_url'][0] . '"' : ''; ?> ></div>
             <!-- Youtube -->
             <div><label for="youtube_url">Youtube Channel URL</label><br>
-            <input type="url" id="youtube_url" name="youtube_url"   <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['youtube_url'][0]  . '"' : ''; ?> ></div>
+            <input type="url" id="youtube_url"  name="youtube_url"  placeholder="https://www.youtube.com/@"      x-model="pYoutubeUrl"  <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['youtube_url'][0]  . '"' : ''; ?> ></div>
             <!-- Bandcamp -->
             <div><label for="bandcamp_url">Bandcamp URL</label><br>
-            <input type="url" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['bandcamp_url'][0] . '"' : ''; ?> ></div>
+            <input type="url" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" x-model="pBandcampUrl" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['bandcamp_url'][0] . '"' : ''; ?> ></div>
             <!-- Spotify -->
             <div x-data="{
-                spotifyUrl: '<?php echo $listing_data ? $listing_data['post_meta']['spotify_artist_url'][0] : ''; ?>',
                 spotifyArtistId: '',
-                setSpotifyArtistId() { this.spotifyArtistId = this.spotifyUrl.match(/artist\/([a-zA-Z0-9]+)/) ? this.spotifyUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
+                setSpotifyArtistId() { this.spotifyArtistId = pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/) ? pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
             }">
                 <label for="spotify_artist_url">Spotify Artist URL</label><br>
                 <input type="url" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
                     <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['spotify_artist_url'][0] . '"' : ''; ?>
                     x-init="setSpotifyArtistId()"
                     x-on:input="setSpotifyArtistId()"
-                    x-model="spotifyUrl"
+                    x-model="pSpotifyArtistUrl"
                 >
                 <input type="hidden" id="spotify_artist_id" name="spotify_artist_id" x-bind:value="spotifyArtistId">
             </div>
             <!-- Apple Music -->
             <div><label for="apple_music_artist_url">Apple Music Artist URL</label><br>
-            <input type="url" id="apple_music_artist_url" name="apple_music_artist_url" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['apple_music_artist_url'][0] . '"' : ''; ?> ></div>
+            <input type="url" id="apple_music_artist_url" name="apple_music_artist_url" placeholder="https://music.apple.com/us/artist/" x-model="pAppleMusicArtistUrl"  <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['apple_music_artist_url'][0] . '"' : ''; ?> ></div>
             <!-- Soundcloud -->
             <div><label for="soundcloud_url">Soundcloud URL</label><br>
-            <input type="url" id="soundcloud_url" name="soundcloud_url" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['soundcloud_url'][0] . '"' : ''; ?> ></div>
+            <input type="url" id="soundcloud_url" name="soundcloud_url" placeholder="https://soundcloud.com/" x-model="pSoundcloudUrl" <?php echo $listing_data ? 'value="' . $listing_data['post_meta']['soundcloud_url'][0] . '"' : ''; ?> ></div>
 
             <!------------ Taxonomies ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Search Optimization</h2>
@@ -365,7 +395,7 @@ Calculated Unseen
             'description' => ($listing_data != null) ? $listing_data['post_meta']['description'][0] : 'Description',
             'genres' => $genres, // pass all genres; alpine_show_genre func will show the selected options
             'thumbnail_url' => $listing_data['thumbnail_url'],
-            'thumbnail_src_bind_var' => 'previewThumbnailSrc',
+            'alpine_thumbnail_src' => 'pThumbnailSrc',
             'verified' => $listing_data['post_meta']['verified'][0],
             'website' => $listing_data['post_meta']['website'][0],
             'facebook_url' => $listing_data['post_meta']['facebook_url'][0],
@@ -382,10 +412,19 @@ Calculated Unseen
             'youtube_player_ids' => [], //array_map(fn($video_id, $video_index) => $video_id . '-' . $result_id . '-' . $video_index, $listing_data['post_meta']['youtube_video_ids'], array_keys($listing_data['post_meta']['youtube_video_ids'])),
             'lazyload_thumbnail' => false,
             'last' => false,
-            'alpine_name' => 'listingName',
+            'alpine_name' => 'pName',
             'alpine_location' => 'getListingLocation()',
-            'alpine_description' => 'listingDescription',
-            'alpine_website' => 'listingWebsite',
+            'alpine_description' => 'pDescription',
+            'alpine_instagram_url' => 'pInstagramUrl',
+            'alpine_tiktok_url' => 'pTiktokUrl',
+            'alpine_x_url' => 'pXUrl',
+            'alpine_website' => 'pWebsite',
+            'alpine_facebook_url' => 'pFacebookUrl',
+            'alpine_youtube_url' => 'pYoutubeUrl',
+            'alpine_bandcamp_url' => 'pBandcampUrl',
+            'alpine_spotify_artist_url' => 'pSpotifyArtistUrl',
+            'alpine_apple_music_artist_url' => 'pAppleMusicArtistUrl',
+            'alpine_soundcloud_url' => 'pSoundcloudUrl',
             'alpine_show_genre' => 'showGenre',
         ]); ?>
     </div>
