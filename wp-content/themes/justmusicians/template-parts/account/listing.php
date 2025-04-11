@@ -3,7 +3,7 @@
 
     <div class="w-24 md:w-32 shrink-0">
         <div class="bg-yellow-light aspect-4/3">
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . $args['thumbnail_url']; ?>" />
+            <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" />
         </div>
     </div>
 
@@ -19,8 +19,8 @@
     </div>
 
     <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
-    </button>       
+        <a href="/listing-form/?lid=<?php echo $args['post_id']; ?>"><img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" /></a>
+    </button>
 
 
 </div>
