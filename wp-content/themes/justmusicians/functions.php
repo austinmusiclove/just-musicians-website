@@ -44,7 +44,9 @@ function justmusicians_scripts() {
 
 		// Home
 		if (is_front_page() ) {
-            wp_enqueue_script('youtube-iframe-api', 'https://www.youtube.com/iframe_api', [], null, true);
+            wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
+            wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
+            wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api'], $pkg->version, true);
 		}
 
 		// Archive

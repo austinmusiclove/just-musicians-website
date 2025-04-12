@@ -73,7 +73,6 @@ UX
         maybe always show arrows on mobile? Check with fiverr
         swipe on mobile
         bigger screen
-        move javascript out to its own file
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
         don't load iframes until hover maybe

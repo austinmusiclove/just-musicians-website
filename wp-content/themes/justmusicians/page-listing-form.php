@@ -24,7 +24,6 @@ get_header();
 Fields to cover
 
 Basic
-    Type (only new post)
     Ensemble Size
 Taxonomy
     Unofficial tags
@@ -38,14 +37,6 @@ Venues
     Venues Verified
     Venues Played Unverified
     Venues Played Unverified Strings
-Other
-    Offers Sound Setup
-    Pricing?
-    Accepted payment methods
-    Service area
-    Show dates and availability
-    Press Mentions
-    Bands you have played or would play with
 Calculated Unseen
     Status
     Content
@@ -337,6 +328,7 @@ Calculated Unseen
             <!------------ Media ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Media</h2>
             <!-- Thumbnail -->
+            <!-- Utilizes cropper-scripts.js and cropper.1.6.2.min.js -->
             <label for="thumbnail">Thumbnail</label><br>
             <div x-data="{
                     cropper: null,
@@ -356,7 +348,6 @@ Calculated Unseen
                 <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button" x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput)" x-show="showCropButton" x-cloak>Crop Current Thumbnail</button>
                 <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*" x-ref="croppedImageInput">
                 <div class="my-4 max-h-[400px]" >
-                    <!--<img id="thumbnail-display" <?php //if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" x-init="_initCropper($el, $refs.croppedImageInput)" />-->
                     <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" />
                 </div>
             </div>
@@ -420,41 +411,3 @@ Calculated Unseen
 
 <?php
 get_footer();
-
-
-
-/*
-                    function get_spotify_artist_id_from_url($spotify_artist_url) {
-                        if (preg_match('/\/artist\/([A-Za-z0-9]{22})/', $spotify_artist_url, $matches)) {
-                            return $matches[1];
-                        } else {
-                            return '';
-                        }
-                    }
-
-                    $url_path = wp_make_link_relative(get_permalink());
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $valid_nonce = wp_verify_nonce($_POST['lfs-nonce'], 'listing-form-submission');
-
-                        $performer_name = sanitize_text_field($_POST['performer_name']);
-                        $ensemble_size = (isset($_POST['ensemble_size'])) ? array_filter(array_map('sanitize_text_field', $_POST['ensemble_size'])) : array();
-                        $venues_strings = (isset($_POST['venues'])) ? array_filter(array_map('sanitize_text_field', $_POST['venues'])) : array();
-                        $verified_venues = (isset($_POST['verified-venues'])) ? array_filter(array_map('sanitize_text_field', explode(',', $_POST['verified-venues']))) : array();
-                        $instagram_handle = preg_replace('/^@/', '', sanitize_text_field($_POST['instagram-handle']));
-                        $instagram_url = !empty($instagram_handle) ? $instagram_url_prefix . $instagram_handle : '';
-                        $tiktok_handle = preg_replace('/^@/', '', sanitize_text_field($_POST['tiktok-handle']));
-                        $tiktok_url = !empty($tiktok_handle) ? $tiktok_url_prefix . $tiktok_handle : '';
-                        $x_handle = preg_replace('/^@/', '', sanitize_text_field($_POST['x-handle']));
-                        $x_url = !empty($x_handle) ? $x_url_prefix . $x_handle : '';
-                        $spotify_artist_url = sanitize_url($_POST['spotify-artist-url']);
-                        $spotify_artist_id = get_spotify_artist_id_from_url($spotify_artist_url);
-                        $tag_terms = array_map(function ($item) { return $item->name; }, get_terms(array( 'taxonomy' => 'tag', 'hide_empty' => false)));
-                        function is_tag_term($term) { global $tag_terms; return in_array($term, $tag_terms, true); }
-                        function is_not_tag_term($term) { global $tag_terms; return !in_array($term, $tag_terms, true); }
-                        $all_tags = (isset($_POST['tags'])) ? array_filter(array_map('sanitize_text_field', $_POST['tags'])) : array();
-                        $unofficial_tags = array_filter($all_tags, 'is_not_tag_term');
-                        $tags = array_filter($all_tags, 'is_tag_term');
-                        $macro_genres = (isset($_POST['genres'])) ? array_filter(array_map('sanitize_text_field', $_POST['genres'])) : array();
-                        $youtube_video_urls = (isset($_POST['media'])) ? array_filter(array_map('sanitize_url', $_POST['media'])) : array();
-
- */
