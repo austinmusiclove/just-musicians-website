@@ -45,7 +45,7 @@
             </div>
 
             <!--<label for="zipcode" class="hidden">Enter zipcode</label>-->
-            <input type="number" id="zipcode" placeholder="Enter zip code" />
+            <input type="number" name="zipcode" placeholder="Enter zip code" />
 
         </fieldset>
 

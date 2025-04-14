@@ -33,6 +33,7 @@ Milestones
         recycling for old unlinked images
         make files pretty page-listing-form standard-listing listings-api
         organize template parts
+        personally invite Charlie Marlow and other users that made accounts
     Artist announce and invite new profiles
         venues
         other tags and keywords
