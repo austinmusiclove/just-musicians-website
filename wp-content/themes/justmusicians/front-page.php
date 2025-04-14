@@ -86,16 +86,15 @@ get_header();
                             players: {},
                             playersMuted: true,
                             playersPaused: false,
-                            _initPlayerFromIframe(playerId) { initPlayerFromIframe(this, playerId); },
-                            _pausePlayer(playerId)          { pausePlayer(this, playerId); },
-                            _playPlayer(playerId)           { playPlayer(this, playerId); },
-                            _toggleMute()                   { toggleMute(this); },
+                            _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
+                            _pausePlayer(playerId)         { pausePlayer(this, playerId); },
+                            _playPlayer(playerId)          { playPlayer(this, playerId); },
+                            _toggleMute()                  { toggleMute(this); },
                         }'
-                        x-on:init-youtube-player="_initPlayerFromIframe($event.detail.playerId);"
+                        x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
                         x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                         x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
-                        x-on:mute-youtube-players="_toggleMute()"
-                    >
+                        x-on:mute-youtube-players="_toggleMute()">
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
                             echo get_template_part('template-parts/search/standard-listing-skeleton');

@@ -1,21 +1,12 @@
-function listenForYoutubeIframeApiReady(alpineComponent) {
-    document.addEventListener('youtube-api-ready', () => {
-        alpineComponent.playerIds.forEach((playerId) => {
-            if (playerId) { alpineComponent.$dispatch('init-youtube-player', {'playerId': playerId}); }
-        });
-    }, {once: true});
-    if (typeof YT != 'undefined') {
-        alpineComponent.$dispatch('youtube-api-ready');
-    }
-}
-
-function initPlayerFromIframe(alpineComponent, playerId) {
+function initPlayer(alpineComponent, playerId, videoId) {
     if (playerId) {
         var player = new YT.Player(playerId, {
+            videoId: videoId, // remove this to init from iframe
             playerVars: {
                 controls: 0,
-                origin: "<?php echo site_url(); ?>",
+                origin: siteData.siteUrl,
                 enablejsapi: 1,
+                mute: 1,
             },
             events: {
                 "onReady": () => {
@@ -26,11 +17,15 @@ function initPlayerFromIframe(alpineComponent, playerId) {
                     alpineComponent.players[playerId].state = event.data;
                     if (event.data == 1) { alpineComponent.players[playerId].isPaused = false; } // 1 is playing
                     if (event.data == 2) { alpineComponent.players[playerId].isPaused = true; } // 2 is paused
+                },
+                "onError": (event) => {
+                    //console.error(event.data);
                 }
             }
         });
         alpineComponent.players[playerId] = player;
     }
+
 }
 
 

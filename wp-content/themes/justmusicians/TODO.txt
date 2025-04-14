@@ -6,6 +6,7 @@ Milestones
                 play button not work at first
                 play button refreshing page
                 slide right button cause cant open this page error
+            somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         profile edit
             non taxonomy checkbox component (ensemble size)
             video link and display
@@ -69,14 +70,12 @@ Data
     check for 404s in links in regular procedure to update content and rank
 UX
     media slider
-        only load iframes after hover or when enter viewport for mobile
         video seeking
         maybe always show arrows on mobile? Check with fiverr
         swipe on mobile
         bigger screen
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
-        don't load iframes until hover maybe
         fix the things also on page-listings.php
     Filters
         add something about providing sound equipment
@@ -117,3 +116,4 @@ Quirks
 Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
+    media slider videos load when they enter viewport

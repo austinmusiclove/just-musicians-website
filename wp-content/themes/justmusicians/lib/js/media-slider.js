@@ -39,3 +39,13 @@ function updateIndex(alpineComponent, newIndex) {
     alpineComponent.currentIndex = newIndex;                      // Update to the new index
 }
 
+function initSliderYoutubePlayers(alpineComponent) {
+    alpineComponent.playerIds.forEach((playerId, index) => {
+        if (playerId) {
+            alpineComponent.$dispatch('init-youtube-player', {
+                'playerId': playerId,
+                'videoId': alpineComponent.videoIds[index]
+            });
+        }
+    });
+}
