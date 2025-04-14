@@ -1,6 +1,5 @@
 Milestones
     Artist push to edit and complete profiles
-        hide listing create
         bug: slider on mobile
             dad say sound not work
             chrome mobile
