@@ -694,6 +694,10 @@ video {
   top: 50%;
 }
 
+.top-16 {
+  top: 4rem;
+}
+
 .top-2 {
   top: 0.5rem;
 }
@@ -712,22 +716,6 @@ video {
 
 .top-full {
   top: 100%;
-}
-
-.top-20 {
-  top: 5rem;
-}
-
-.top-16 {
-  top: 4rem;
-}
-
-.top-12 {
-  top: 3rem;
-}
-
-.top-14 {
-  top: 3.5rem;
 }
 
 .z-0 {
@@ -795,10 +783,6 @@ video {
 
 .mb-12 {
   margin-bottom: 3rem;
-}
-
-.mb-14 {
-  margin-bottom: 3.5rem;
 }
 
 .mb-16 {
@@ -977,17 +961,17 @@ video {
   height: auto;
 }
 
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-full {
   height: 100%;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .max-h-\[500px\] {
@@ -1912,10 +1896,6 @@ video {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.hover\:border-black\/40:hover {
-  border-color: rgb(0 0 0 / 0.4);
-}
-
 .hover\:bg-navy:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(15 56 76 / var(--tw-bg-opacity));
@@ -1967,11 +1947,6 @@ video {
 
 .hover\:opacity-60:hover {
   opacity: 0.6;
-}
-
-.hover\:drop-shadow-sm:hover {
-  --tw-drop-shadow: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .hover\:drop-shadow:hover {
@@ -2148,12 +2123,12 @@ video {
     font-size: 1.120rem;
   }
 
-  .sm\:text-25 {
-    font-size: 1.440rem;
-  }
-
   .sm\:text-22 {
     font-size: 1.280rem;
+  }
+
+  .sm\:text-25 {
+    font-size: 1.440rem;
   }
 
   .sm\:leading-6 {
@@ -2182,12 +2157,12 @@ video {
     grid-column: span 6 / span 6;
   }
 
-  .md\:mt-16 {
-    margin-top: 4rem;
-  }
-
   .md\:mb-14 {
     margin-bottom: 3.5rem;
+  }
+
+  .md\:mt-16 {
+    margin-top: 4rem;
   }
 
   .md\:block {
@@ -2222,12 +2197,12 @@ video {
     max-height: 550px;
   }
 
-  .md\:w-auto {
-    width: auto;
-  }
-
   .md\:w-32 {
     width: 8rem;
+  }
+
+  .md\:w-auto {
+    width: auto;
   }
 
   .md\:grid-cols-2 {
@@ -2347,10 +2322,6 @@ video {
 
   .md\:text-40 {
     font-size: 2.312rem;
-  }
-
-  .md\:text-25 {
-    font-size: 1.440rem;
   }
 }
 
