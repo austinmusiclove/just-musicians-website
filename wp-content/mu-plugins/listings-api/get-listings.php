@@ -173,11 +173,7 @@ function validate_listing_types($types) {
 }
 function validate_tax_input($tax_input, $taxonomy) {
     $input = rest_sanitize_array($tax_input);
-    $terms = get_terms([
-        'taxonomy' => $taxonomy,
-        'fields' => 'names',
-        'hide_empty' => false,
-    ]);
-    $valid_input = array_map('stripslashes', array_filter($input, fn($item) => in_array(stripslashes($item), array_map('html_entity_decode', $terms), true)));
+    $terms = get_terms_decoded($taxonomy, 'names');
+    $valid_input = array_map('stripslashes', array_filter($input, fn($item) => in_array(stripslashes($item), $terms, true)));
     return $valid_input;
 }

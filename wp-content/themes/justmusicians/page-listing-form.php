@@ -9,11 +9,11 @@ $listing_data = null;
 if (!empty($_GET['lid'])) {
     $listing_data = get_listing(['post_id' => $_GET['lid']]);
 }
-$categories = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'mcategory', 'hide_empty' => false,)));
-$genres = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'genre', 'hide_empty' => false,)));
-$subgenres = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'subgenre', 'hide_empty' => false,)));
-$instrumentations = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'instrumentation', 'hide_empty' => false,)));
-$settings = array_map(function($term) { return $term->name; }, get_terms(array( 'taxonomy' => 'setting', 'hide_empty' => false,)));
+$categories = get_terms_decoded('mcategory', 'names');
+$genres = get_terms_decoded('genre', 'names');
+$subgenres = get_terms_decoded('subgenre', 'names');
+$instrumentations = get_terms_decoded('instrumentation', 'names');
+$settings = get_terms_decoded('setting', 'names');
 $filename_prefix = get_current_user_id() . '_' . time() . '_' . (!empty($listing_data['post_meta']['name'][0]) ? sanitize_title($listing_data['post_meta']['name'][0]) : '');
 
 
