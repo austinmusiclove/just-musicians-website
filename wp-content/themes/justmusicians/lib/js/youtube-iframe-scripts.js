@@ -14,9 +14,23 @@ function initPlayer(alpineComponent, playerId, videoId) {
                     if (!alpineComponent.playersMuted) { alpineComponent.players[playerId].unMute(); }
                 },
                 "onStateChange": (event) => {
-                    alpineComponent.players[playerId].state = event.data;
-                    if (event.data == 1) { alpineComponent.players[playerId].isPaused = false; } // 1 is playing
-                    if (event.data == 2) { alpineComponent.players[playerId].isPaused = true; } // 2 is paused
+                    /*
+                    if (event.data == YT.PlayerState.UNSTARTED) { console.log('new state unstarted');}
+                    if (event.data == YT.PlayerState.ENDED)     { console.log('new state ended');}
+                    if (event.data == YT.PlayerState.PLAYING)   { console.log('new state playing');}
+                    if (event.data == YT.PlayerState.PAUSED)    { console.log('new state paused');}
+                    if (event.data == YT.PlayerState.BUFFERING) { console.log('new state buffering');}
+                    if (event.data == YT.PlayerState.CUED)      { console.log('new state cued');}
+                    */
+
+                    if (event.data == YT.PlayerState.PAUSED)  { alpineComponent.players[playerId].isPaused = true; }
+                    if (event.data == YT.PlayerState.PLAYING) { alpineComponent.players[playerId].isPaused = false; }
+                    if (event.data == YT.PlayerState.PLAYING) {
+                        if ( alpineComponent.players[playerId].pauseNextPlay ) {
+                            alpineComponent.players[playerId].pauseVideo();
+                            alpineComponent.players[playerId].pauseNextPlay = false;
+                        }
+                    }
                 },
                 "onError": (event) => {
                     //console.error(event.data);
@@ -31,9 +45,12 @@ function initPlayer(alpineComponent, playerId, videoId) {
 
 function pausePlayer(alpineComponent, playerId) {
     if (playerId && alpineComponent.players[playerId] && alpineComponent.players[playerId].isReady) {
-        var playerState = alpineComponent.players[playerId].state;
-        if (playerState == -1 || playerState == 3) { // -1 is unstarted and 3 is buffering
-            alpineComponent.players[playerId].stopVideo();
+        var playerState = alpineComponent.players[playerId].getPlayerState();
+        if (playerState == YT.PlayerState.UNSTARTED ||
+            playerState == YT.PlayerState.CUED      ||
+            playerState == YT.PlayerState.BUFFERING
+        ) {
+            alpineComponent.players[playerId].pauseNextPlay = true;
         } else {
             alpineComponent.players[playerId].pauseVideo();
         }

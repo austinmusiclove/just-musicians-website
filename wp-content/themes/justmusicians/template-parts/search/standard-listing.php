@@ -19,10 +19,13 @@
             x-data="{
                 previousIndex: 0,
                 currentIndex: 0,
+                touchStartX: 0,
+                touchEndX: 0,
                 totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
                 showArrows: false,
                 playerIds: <?php echo array_2_doublequote_str($args['youtube_player_ids']); ?>,
                 videoIds:  <?php echo array_2_doublequote_str($args['youtube_video_ids']); ?>,
+                _updateIndex(newIndex)      { updateIndex(this, newIndex); },
                 _pausePreviousSlide()       { pausePreviousSlide(this); },
                 _pauseCurrentSlide()        { pauseCurrentSlide(this); },
                 _playCurrentSlide()         { playCurrentSlide(this); },
@@ -30,15 +33,20 @@
                 _isPaused()                 { return isPaused(this); },
                 _enterSlider()              { enterSlider(this); },
                 _leaveSlider()              { leaveSlider(this); },
-                _updateIndex(newIndex)      { updateIndex(this, newIndex); },
+                _handleTouchStart(event)    { handleTouchStart(this, event); },
+                _handleTouchEnd(event)      { handleTouchEnd(this, event); },
                 _initSliderYoutubePlayers() { initSliderYoutubePlayers(this); },
             }"
             x-intersect.once="_initSliderYoutubePlayers()"
+            x-on:touchstart="_handleTouchStart($event)"
+            x-on:touchend="_handleTouchEnd($event)"
             x-on:mouseleave="_leaveSlider()"
             x-on:mouseenter="_enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
-                x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
+                x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();"
+            >
+
                 <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="_updateIndex(1)" />
 
                 <?php foreach($args['youtube_player_ids'] as $index=>$player_id) { ?>
