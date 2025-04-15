@@ -1,3 +1,4 @@
+
 function initSliderYoutubePlayers(alpineComponent) {
     alpineComponent.playerIds.forEach((playerId, index) => {
         if (playerId) {

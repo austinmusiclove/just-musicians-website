@@ -48,7 +48,6 @@ Milestones
         ensemble size filter
         "Request Quote" or "Contact Directly" modal
         Inquiry form copy and flow
-        media slider performance optimization
     Free lance booker testing 2
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
@@ -66,7 +65,6 @@ UX
         bug: slider on mobile
             dad say sound not work
             somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
-        pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
         video seeking
         swipe on mobile
@@ -109,4 +107,3 @@ Quirks
 Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
-    media slider videos load when they enter viewport

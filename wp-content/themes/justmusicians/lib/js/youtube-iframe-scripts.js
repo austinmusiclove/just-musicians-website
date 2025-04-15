@@ -33,6 +33,20 @@ function initPlayer(alpineComponent, playerId, videoId) {
 
 }
 
+function setupVisibilityListener(alpineComponent) {
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            alpineComponent.$dispatch('pause-all-youtube-players');
+        }
+    });
+}
+
+function pauseAllPlayers(alpineComponent) {
+    Object.values(alpineComponent.players).forEach((player) => {
+        if (player.isReady) { player.pauseVideo(); }
+    });
+}
+
 
 function pausePlayer(alpineComponent, playerId) {
     if (playerId && alpineComponent.players[playerId] && alpineComponent.players[playerId].isReady) {
