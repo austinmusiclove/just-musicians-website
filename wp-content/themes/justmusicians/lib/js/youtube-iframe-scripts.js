@@ -14,15 +14,6 @@ function initPlayer(alpineComponent, playerId, videoId) {
                     if (!alpineComponent.playersMuted) { alpineComponent.players[playerId].unMute(); }
                 },
                 "onStateChange": (event) => {
-                    /*
-                    if (event.data == YT.PlayerState.UNSTARTED) { console.log('new state unstarted');}
-                    if (event.data == YT.PlayerState.ENDED)     { console.log('new state ended');}
-                    if (event.data == YT.PlayerState.PLAYING)   { console.log('new state playing');}
-                    if (event.data == YT.PlayerState.PAUSED)    { console.log('new state paused');}
-                    if (event.data == YT.PlayerState.BUFFERING) { console.log('new state buffering');}
-                    if (event.data == YT.PlayerState.CUED)      { console.log('new state cued');}
-                    */
-
                     if (event.data == YT.PlayerState.PAUSED)  { alpineComponent.players[playerId].isPaused = true; }
                     if (event.data == YT.PlayerState.PLAYING) { alpineComponent.players[playerId].isPaused = false; }
                     if (event.data == YT.PlayerState.PLAYING) {

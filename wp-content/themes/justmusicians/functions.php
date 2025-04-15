@@ -40,7 +40,7 @@ function justmusicians_scripts() {
     global $post;
 
     // Alpine
-    $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus'];
+    $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
 
     // Home
     if (is_front_page() ) {
@@ -77,11 +77,13 @@ function justmusicians_scripts() {
     }
 
     // Core
+
     wp_enqueue_style('justmusicians-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
     wp_enqueue_style('justmusicians-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
     //wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
     // Utilities
+    wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, true);
     wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);

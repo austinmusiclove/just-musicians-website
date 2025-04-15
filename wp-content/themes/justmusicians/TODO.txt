@@ -66,12 +66,10 @@ UX
         bug: slider on mobile
             dad say sound not work
             somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
-        maybe always show arrows on mobile? Check with fiverr
         pause if window is not in focus? or when change tab? check fiverr
         pre buffer youtube videos
-        swipe on mobile
         video seeking
-        bigger screen
+        swipe on mobile
     Filters
         add something about providing sound equipment
         add location

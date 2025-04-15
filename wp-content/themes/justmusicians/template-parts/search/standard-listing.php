@@ -19,12 +19,10 @@
             x-data="{
                 previousIndex: 0,
                 currentIndex: 0,
-                touchStartX: 0,
-                touchEndX: 0,
+                showArrows: isTouchDevice,
                 totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
-                showArrows: false,
-                playerIds: <?php echo array_2_doublequote_str($args['youtube_player_ids']); ?>,
-                videoIds:  <?php echo array_2_doublequote_str($args['youtube_video_ids']); ?>,
+                playerIds:   <?php echo array_2_doublequote_str($args['youtube_player_ids']); ?>,
+                videoIds:    <?php echo array_2_doublequote_str($args['youtube_video_ids']); ?>,
                 _updateIndex(newIndex)      { updateIndex(this, newIndex); },
                 _pausePreviousSlide()       { pausePreviousSlide(this); },
                 _pauseCurrentSlide()        { pauseCurrentSlide(this); },
@@ -33,13 +31,9 @@
                 _isPaused()                 { return isPaused(this); },
                 _enterSlider()              { enterSlider(this); },
                 _leaveSlider()              { leaveSlider(this); },
-                _handleTouchStart(event)    { handleTouchStart(this, event); },
-                _handleTouchEnd(event)      { handleTouchEnd(this, event); },
                 _initSliderYoutubePlayers() { initSliderYoutubePlayers(this); },
             }"
             x-intersect.once="_initSliderYoutubePlayers()"
-            x-on:touchstart="_handleTouchStart($event)"
-            x-on:touchend="_handleTouchEnd($event)"
             x-on:mouseleave="_leaveSlider()"
             x-on:mouseenter="_enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
