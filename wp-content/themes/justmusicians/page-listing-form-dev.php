@@ -14,7 +14,7 @@ $genres = get_terms_decoded('genre', 'names');
 $subgenres = get_terms_decoded('subgenre', 'names');
 $instrumentations = get_terms_decoded('instrumentation', 'names');
 $settings = get_terms_decoded('setting', 'names');
-$filename_prefix = get_current_user_id() . '_' . time() . '_' . (!empty($listing_data['post_meta']['name'][0]) ? sanitize_title($listing_data['post_meta']['name'][0]) : '');
+$filename_prefix = get_current_user_id() . '_' . time();
 
 
 get_header();
@@ -311,7 +311,9 @@ Calculated Unseen
             <label for="thumbnail">Thumbnail</label><br>
             <div x-data="{
                     cropper: null,
+                    listingName: '',
                     filenamePrefix: '<?php echo $filename_prefix; ?>',
+                    getFilenamePrefix() { return `${this.filenamePrefix}_${this.listingName}`; },
                     showCropButton: <?php if (!empty($listing_data['thumbnail_url'])) { echo 'true'; } else { echo 'false'; } ?>,
                     _initCropper(displayElement, croppedImageInput) {
                         initCropper(this, displayElement, croppedImageInput);
@@ -319,7 +321,9 @@ Calculated Unseen
                     _initCropperFromFile(event, displayElement, croppedImageInput) {
                         initCropperFromFile(this, event, displayElement, croppedImageInput);
                     },
-                }">
+                }"
+                x-init="$watch('pName', value => { listingName = value; })"
+            >
                 <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
                     <?php if (empty($_GET['lid'])) { echo 'required'; } ?>
                     x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"

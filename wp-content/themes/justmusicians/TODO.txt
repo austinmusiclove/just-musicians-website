@@ -1,7 +1,7 @@
 Milestones
     Artist push to edit and complete profiles
+        test &, ', ", and more special chars in name in create post
         status
-        sanitize filename for thumbnail
         allow create page to be used
     Artist announce and invite new profiles
         contact and links

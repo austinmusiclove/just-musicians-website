@@ -63,7 +63,6 @@ function get_sanitized_listing_args() {
         'post_status'     => 'publish',
         'meta_input'      => [],
         'tax_input'       => [],
-        '_thumbnail_file' => isset($_FILES['cropped-thumbnail']) ? $_FILES['cropped-thumbnail'] : null,
     ];
     // Post Id
     if (isset($_POST['post_id']))                { $sanitized_args['ID']                                   = sanitize_text_field($_POST['post_id']); }
@@ -103,8 +102,17 @@ function get_sanitized_listing_args() {
     if (isset($_POST['instrumentations']))       { $sanitized_args['tax_input']['instrumentation']         = array_filter(array_map('sanitize_text_field', $_POST['instrumentations'])); }
     if (isset($_POST['settings']))               { $sanitized_args['tax_input']['setting']                 = array_filter(array_map('sanitize_text_field', $_POST['settings'])); }
 
+    // Files
+    if (isset($_FILES['cropped-thumbnail']))     { $sanitized_args['_thumbnail_file']                      = sanitize_file($_FILES['cropped-thumbnail']); }
+
 
     return $sanitized_args;
+}
+
+
+function sanitize_file($file) {
+    $file['name'] = sanitize_file_name($file['name']);
+    return $file;
 }
 
 
