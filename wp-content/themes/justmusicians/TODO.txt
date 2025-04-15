@@ -1,33 +1,35 @@
 Milestones
     Artist push to edit and complete profiles
+        create listing
+            *make it work at all
+            *add new listing to users listings
+            *redirect to update version of form after create
+            *allow create page to be used
+        *sanitize filename for thumbnail
         profile edit
+            contact and links
+                *regex front end check that they are url for the correct site
+                front end check for 404
+                *clear off query args from urls except id or something from fb?
+        *add permissions to all writing apis (venue reviews stats, venues stats, collections)
+        after design
             non taxonomy checkbox component (ensemble size)
             video link and display
-            contact and links
-                regex front end check that they are url for the correct site
-                front end check for 404
-                clear off query args from urls except id or something from fb?
             submit
                 move inputs to forms template parts
                 hide crop thumbnail button after pressed
                 if you hit submit too fast after crop, it does not send file
                 send save automatically after input
-        create listing
-            make it work at all
-            add new listing to users listings
-            pending review? or let them publish
-            redirect to update version of form after create
+            housekeeping
+                recycling for old unlinked images
+                make files pretty page-listing-form standard-listing listings-api
+                organize template parts
+                personally invite Charlie Marlow and other users that made accounts
             mind the name of images
-            need to test odd artist names with odd characters
-        show err if htmx request fails and never gets to server
-        sanitize filename for thumbnail
-        test apostrophes everywhere
-        add permissions to all writing apis (venue reviews stats, venues stats, collections)
-        make sure people cant upload inappropriate images
-        recycling for old unlinked images
-        make files pretty page-listing-form standard-listing listings-api
-        organize template parts
-        personally invite Charlie Marlow and other users that made accounts
+            test
+                need to test odd artist names with odd characters
+                show err if htmx request fails and never gets to server
+                test apostrophes everywhere
     Artist announce and invite new profiles
         venues
         other tags and keywords
@@ -60,6 +62,7 @@ Data
     handle venue aliases
     change venue in venue review to post object
     check for 404s in links in regular procedure to update content and rank
+    content moderation for images
 UX
     media slider
         dad say sound not work on mobile
