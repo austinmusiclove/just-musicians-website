@@ -61,5 +61,3 @@ function _update_listing($args) {
 
 
 
-
-

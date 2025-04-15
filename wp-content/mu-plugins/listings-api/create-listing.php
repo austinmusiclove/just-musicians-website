@@ -5,6 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function _create_listing($args) {
 
+    // Insert post; this returns post_id on success and WP_Error on failure
+    $post_id = wp_insert_post($args, true);
+    if( is_wp_error( $post_id ) ) { return $post_id; exit; }
+
     // Thumbnail Image
     if (!empty($args['_thumbnail_file'])) {
 
@@ -24,7 +28,7 @@ function _create_listing($args) {
         );
 
         // Create the attachment
-        $attachment_id = wp_insert_attachment( $attachment, $thumbnail_upload['file'], $args['ID'] );
+        $attachment_id = wp_insert_attachment( $attachment, $thumbnail_upload['file'], $post_id );
         if( is_wp_error( $attachment_id ) ) {
             return $attachment_id;
         }
@@ -35,13 +39,8 @@ function _create_listing($args) {
         wp_update_attachment_metadata( $attachment_id, $attachment_metadata );
 
         // Set post thumbnail
-        set_post_thumbnail($args['ID'], $attachment_id);
+        set_post_thumbnail($post_id, $attachment_id);
     }
-
-
-    // Insert post; this returns post_id on success and WP_Error on failure
-    $post_id = wp_insert_post($args, true);
-    if( is_wp_error( $post_id ) ) { return $post_id; exit; }
 
     // Add post to user listings
     add_listing_to_current_user($post_id);

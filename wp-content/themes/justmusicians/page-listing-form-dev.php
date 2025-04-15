@@ -321,6 +321,7 @@ Calculated Unseen
                     },
                 }">
                 <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
+                    <?php if (empty($_GET['lid'])) { echo 'required'; } ?>
                     x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"
                 >
                 <br>
