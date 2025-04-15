@@ -25,6 +25,10 @@ function array_2_doublequote_str($arr) {
     return str_replace('"', "'", str_replace("'", "\'", json_encode($arr)));
 }
 
+function str_2_doublequote_str($string) {
+    return htmlspecialchars(str_replace("'", "\'", $string));
+}
+
 function get_terms_decoded($taxonomy, $fields, $search=false) {
     $args = [
         'taxonomy' => $taxonomy,

@@ -9,12 +9,18 @@ $listing_data = null;
 if (!empty($_GET['lid'])) {
     $listing_data = get_listing(['post_id' => $_GET['lid']]);
 }
-$categories = get_terms_decoded('mcategory', 'names');
-$genres = get_terms_decoded('genre', 'names');
-$subgenres = get_terms_decoded('subgenre', 'names');
-$instrumentations = get_terms_decoded('instrumentation', 'names');
-$settings = get_terms_decoded('setting', 'names');
-$filename_prefix = get_current_user_id() . '_' . time();
+$clean_name        = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["name"][0])        : null;
+$clean_description = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["description"][0]) : null;
+$clean_city        = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["city"][0])        : null;
+$clean_state       = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["state"][0])       : null;
+$clean_ens_size    = maybe_unserialize($listing_data["post_meta"]["ensemble_size"][0]);
+$categories        = get_terms_decoded('mcategory', 'names');
+$genres            = get_terms_decoded('genre', 'names');
+$subgenres         = get_terms_decoded('subgenre', 'names');
+$instrumentations  = get_terms_decoded('instrumentation', 'names');
+$settings          = get_terms_decoded('setting', 'names');
+$filename_prefix   = get_current_user_id() . '_' . time();
+$ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
 
 get_header();
@@ -53,10 +59,10 @@ Calculated Unseen
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
     x-data="{
-        pName:                 '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
-        pDescription:          '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
-        pCity:                 '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
-        pState:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
+        pName:                 '<?php if ($listing_data) { echo $clean_name; } ?>',
+        pDescription:          '<?php if ($listing_data) { echo $clean_description; } ?>',
+        pCity:                 '<?php if ($listing_data) { echo $clean_city; } ?>',
+        pState:                '<?php if ($listing_data) { echo $clean_state; } ?>',
         pInstagramHandle:      '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_handle"][0]; } ?>',
         pInstagramUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_url"][0]; } ?>',
         pTiktokHandle:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_handle"][0]; } ?>',
@@ -70,13 +76,13 @@ Calculated Unseen
         pSpotifyArtistUrl:     '<?php if ($listing_data) { echo $listing_data["post_meta"]["spotify_artist_url"][0]; } ?>',
         pAppleMusicArtistUrl:  '<?php if ($listing_data) { echo $listing_data["post_meta"]["apple_music_artist_url"][0]; } ?>',
         pSoundcloudUrl:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["soundcloud_url"][0]; } ?>',
-        pThumbnailSrc:         '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
-        ensembleSizeCheckboxes: <?php if (!empty($listing_data["post_meta"]["ensemble_size"][0]))    { echo array_2_doublequote_str(maybe_unserialize($listing_data["post_meta"]["ensemble_size"][0])); } else { echo '[]'; } ?>,
-        categoriesCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);                       } else { echo '[]'; }?>,
-        genresCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);                           } else { echo '[]'; } ?>,
-        subgenresCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);                        } else { echo '[]'; } ?>,
-        instCheckboxes:         <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]);                 } else { echo '[]'; } ?>,
-        settingsCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);                         } else { echo '[]'; } ?>,
+        pThumbnailSrc:         '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo $ph_thumbnail; } ?>',
+        ensembleSizeCheckboxes: <?php if (!empty($listing_data["post_meta"]["ensemble_size"][0])) { echo array_2_doublequote_str($clean_ens_size);                                } else { echo '[]'; } ?>,
+        categoriesCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
+        genresCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
+        subgenresCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
+        instCheckboxes:         <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
+        settingsCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
         showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
@@ -353,42 +359,42 @@ Calculated Unseen
     <div class="hidden lg:block md:col-span-5 sticky h-64 top-24">
         <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Preview</h2>
         <?php echo get_template_part('template-parts/search/standard-listing', '', [
-            'name' => ($listing_data != null) ? $listing_data['post_meta']['name'][0] : 'Name',
-            'location' => ($listing_data != null) ? $listing_data['post_meta']['city'][0] . ', ' . $listing_data['post_meta']['state'][0] : 'City, State',
-            'description' => ($listing_data != null) ? $listing_data['post_meta']['description'][0] : 'Description',
-            'genres' => $genres, // pass all genres; alpine_show_genre func will show the selected options
-            'thumbnail_url' => $listing_data['thumbnail_url'],
-            'alpine_thumbnail_src' => 'pThumbnailSrc',
-            'verified' => $listing_data['post_meta']['verified'][0],
-            'website' => $listing_data['post_meta']['website'][0],
-            'facebook_url' => $listing_data['post_meta']['facebook_url'][0],
-            'instagram_url' => $listing_data['post_meta']['instagram_url'][0],
-            'x_url' => $listing_data['post_meta']['x_url'][0],
-            'youtube_url' => $listing_data['post_meta']['youtube_url'][0],
-            'tiktok_url' => $listing_data['post_meta']['tiktok_url'][0],
-            'bandcamp_url' => $listing_data['post_meta']['bandcamp_url'][0],
-            'spotify_artist_url' => $listing_data['post_meta']['spotify_artist_url'][0],
-            'apple_music_artist_url' => $listing_data['post_meta']['apple_music_artist_url'][0],
-            'soundcloud_url' => $listing_data['post_meta']['soundcloud_url'][0],
-            'youtube_video_urls' => $listing_data['post_meta']['youtube_video_urls'][0],
-            'youtube_video_ids' => $listing_data['post_meta']['youtube_video_ids'][0],
-            'youtube_player_ids' => [], //array_map(fn($video_id, $video_index) => $video_id . '-' . $result_id . '-' . $video_index, $listing_data['post_meta']['youtube_video_ids'], array_keys($listing_data['post_meta']['youtube_video_ids'])),
-            'lazyload_thumbnail' => false,
-            'last' => false,
-            'alpine_name' => 'pName',
-            'alpine_location' => 'getListingLocation()',
-            'alpine_description' => 'pDescription',
-            'alpine_instagram_url' => 'pInstagramUrl',
-            'alpine_tiktok_url' => 'pTiktokUrl',
-            'alpine_x_url' => 'pXUrl',
-            'alpine_website' => 'pWebsite',
-            'alpine_facebook_url' => 'pFacebookUrl',
-            'alpine_youtube_url' => 'pYoutubeUrl',
-            'alpine_bandcamp_url' => 'pBandcampUrl',
-            'alpine_spotify_artist_url' => 'pSpotifyArtistUrl',
+            'name'                          => $listing_data ? $clean_name : 'Name',
+            'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
+            'description'                   => $listing_data ? $clean_description : 'Description',
+            'genres'                        => $genres, // pass all genres; alpine_show_genre func will show the selected options
+            'thumbnail_url'                 => $listing_data['thumbnail_url'],
+            'verified'                      => $listing_data['post_meta']['verified'][0],
+            'website'                       => $listing_data['post_meta']['website'][0],
+            'facebook_url'                  => $listing_data['post_meta']['facebook_url'][0],
+            'instagram_url'                 => $listing_data['post_meta']['instagram_url'][0],
+            'x_url'                         => $listing_data['post_meta']['x_url'][0],
+            'youtube_url'                   => $listing_data['post_meta']['youtube_url'][0],
+            'tiktok_url'                    => $listing_data['post_meta']['tiktok_url'][0],
+            'bandcamp_url'                  => $listing_data['post_meta']['bandcamp_url'][0],
+            'spotify_artist_url'            => $listing_data['post_meta']['spotify_artist_url'][0],
+            'apple_music_artist_url'        => $listing_data['post_meta']['apple_music_artist_url'][0],
+            'soundcloud_url'                => $listing_data['post_meta']['soundcloud_url'][0],
+            'youtube_video_urls'            => $listing_data['post_meta']['youtube_video_urls'][0],
+            'youtube_video_ids'             => $listing_data['post_meta']['youtube_video_ids'][0],
+            'youtube_player_ids'            => [],
+            'lazyload_thumbnail'            => false,
+            'last'                          => false,
+            'alpine_name'                   => 'pName',
+            'alpine_location'               => 'getListingLocation()',
+            'alpine_description'            => 'pDescription',
+            'alpine_instagram_url'          => 'pInstagramUrl',
+            'alpine_tiktok_url'             => 'pTiktokUrl',
+            'alpine_x_url'                  => 'pXUrl',
+            'alpine_website'                => 'pWebsite',
+            'alpine_facebook_url'           => 'pFacebookUrl',
+            'alpine_youtube_url'            => 'pYoutubeUrl',
+            'alpine_bandcamp_url'           => 'pBandcampUrl',
+            'alpine_spotify_artist_url'     => 'pSpotifyArtistUrl',
             'alpine_apple_music_artist_url' => 'pAppleMusicArtistUrl',
-            'alpine_soundcloud_url' => 'pSoundcloudUrl',
-            'alpine_show_genre' => 'showGenre',
+            'alpine_soundcloud_url'         => 'pSoundcloudUrl',
+            'alpine_show_genre'             => 'showGenre',
+            'alpine_thumbnail_src'          => 'pThumbnailSrc',
         ]); ?>
     </div>
 </div>

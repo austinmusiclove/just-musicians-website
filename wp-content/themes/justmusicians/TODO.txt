@@ -1,10 +1,10 @@
 Milestones
     Artist push to edit and complete profiles
-        test &, ', ", and more special chars in name in create post
         status
             filter for listings with media and basic info instead of using status
             decide if allow editing name and other fields to blank
         save indicator for edit
+        clean city name to be the right capitalization
         allow create page to be used
     Artist announce and invite new profiles
         contact and links
