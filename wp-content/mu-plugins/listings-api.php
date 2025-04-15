@@ -59,6 +59,8 @@ function post_listing_request_handler($request) {
 // for taxonomy args you can pass in [""] if you want to remove all terms; omitting the arg will not alter the terms
 function get_sanitized_listing_args() {
     $sanitized_args = [
+        'post_type'       => 'listing',
+        'post_status'     => 'publish',
         'meta_input'      => [],
         'tax_input'       => [],
         '_thumbnail_file' => isset($_FILES['cropped-thumbnail']) ? $_FILES['cropped-thumbnail'] : null,
@@ -92,6 +94,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['spotify_artist_id']))      { $sanitized_args['meta_input']['spotify_artist_id']      = sanitize_text_field($_POST['spotify_artist_id']); }
     if (isset($_POST['apple_music_artist_url'])) { $sanitized_args['meta_input']['apple_music_artist_url'] = sanitize_url($_POST['apple_music_artist_url']); }
     if (isset($_POST['soundcloud_url']))         { $sanitized_args['meta_input']['soundcloud_url']         = sanitize_url($_POST['soundcloud_url']); }
+    if (isset($_POST['ensemble_size']))          { $sanitized_args['meta_input']['ensemble_size']          = array_filter(rest_sanitize_array($_POST['ensemble_size'])); }
 
     // Taxonomies
     if (isset($_POST['categories']) )            { $sanitized_args['tax_input']['mcategory']               = array_filter(array_map('sanitize_text_field', $_POST['categories'])); }
@@ -99,6 +102,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['subgenres']))              { $sanitized_args['tax_input']['subgenre']                = array_filter(array_map('sanitize_text_field', $_POST['subgenres'])); }
     if (isset($_POST['instrumentations']))       { $sanitized_args['tax_input']['instrumentation']         = array_filter(array_map('sanitize_text_field', $_POST['instrumentations'])); }
     if (isset($_POST['settings']))               { $sanitized_args['tax_input']['setting']                 = array_filter(array_map('sanitize_text_field', $_POST['settings'])); }
+
 
     return $sanitized_args;
 }

@@ -13,8 +13,9 @@ if ( is_wp_error($is_authorized) ) {
 
 // Create Listing
 if ( empty( $args['ID'] )) {
-    $result = _create_listing($args);
-    if ( is_wp_error($result) ) { echo 'Error: ' . $result->get_error_message(); exit; }
+    $post_id = _create_listing($args);
+    if ( is_wp_error($post_id) ) { echo 'Error: ' . $post_id->get_error_message(); exit; }
+    echo '<span x-init="redirect(\'/listing-form-dev/?lid=' . $post_id . '\');"></span>';
     echo 'Listing Created Successfully';
 
 

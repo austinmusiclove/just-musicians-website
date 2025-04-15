@@ -1,9 +1,6 @@
 Milestones
     Artist push to edit and complete profiles
         create listing
-            *make it work at all
-            *add new listing to users listings
-            *redirect to update version of form after create
             *allow create page to be used
         *sanitize filename for thumbnail
         profile edit
@@ -13,7 +10,6 @@ Milestones
                 *clear off query args from urls except id or something from fb?
         *add permissions to all writing apis (venue reviews stats, venues stats, collections)
         after design
-            non taxonomy checkbox component (ensemble size)
             video link and display
             submit
                 move inputs to forms template parts
@@ -24,7 +20,7 @@ Milestones
                 recycling for old unlinked images
                 make files pretty page-listing-form standard-listing listings-api
                 organize template parts
-                personally invite Charlie Marlow and other users that made accounts
+                personally invite Charlie Marlow and other users that made accounts; check users for new accounts and blog posts for listings create attempts
             mind the name of images
             test
                 need to test odd artist names with odd characters

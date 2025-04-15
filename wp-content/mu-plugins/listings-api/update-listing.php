@@ -9,32 +9,6 @@ function _update_listing($args) {
         return new WP_Error(400, 'Cannot update listing with out post id');
     }
 
-    // ensemble_size
-    // venues_played_verified
-    // venues_played_unverified_strings
-    // draw
-    // email
-    // phone
-    // website
-    // instagram_handle
-    // instagram_url
-    // instagram is private
-    // tiktok_handle
-    // tiktok_url
-    // x_handle
-    // x_url
-    // facebook_url
-    // youtube_url
-    // bandcamp_url
-    // spotify_artist_url
-    // spotify_artist_id
-    // apple_music_artist_url
-    // soundcloud_url
-    // youtube_video_urls
-    // unofficial_tags
-    // add status complete or incomplete
-
-
     // Thumbnail Image
     if (!empty($args['_thumbnail_file'])) {
 

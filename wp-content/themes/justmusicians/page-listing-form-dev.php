@@ -53,29 +53,30 @@ Calculated Unseen
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
     x-data="{
-        pName:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
-        pDescription:         '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
-        pCity:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
-        pState:               '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
-        pInstagramHandle:     '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_handle"][0]; } ?>',
-        pInstagramUrl:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_url"][0]; } ?>',
-        pTiktokHandle:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_handle"][0]; } ?>',
-        pTiktokUrl:           '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_url"][0]; } ?>',
-        pXHandle:             '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_handle"][0]; } ?>',
-        pXUrl:                '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_url"][0]; } ?>',
-        pWebsite:             '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
-        pFacebookUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["facebook_url"][0]; } ?>',
-        pYoutubeUrl:          '<?php if ($listing_data) { echo $listing_data["post_meta"]["youtube_url"][0]; } ?>',
-        pBandcampUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["bandcamp_url"][0]; } ?>',
-        pSpotifyArtistUrl:    '<?php if ($listing_data) { echo $listing_data["post_meta"]["spotify_artist_url"][0]; } ?>',
-        pAppleMusicArtistUrl: '<?php if ($listing_data) { echo $listing_data["post_meta"]["apple_music_artist_url"][0]; } ?>',
-        pSoundcloudUrl:       '<?php if ($listing_data) { echo $listing_data["post_meta"]["soundcloud_url"][0]; } ?>',
-        pThumbnailSrc:        '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
-        categoriesCheckboxes:  <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
-        genresCheckboxes:      <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
-        subgenresCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
-        instCheckboxes:        <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
-        settingsCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
+        pName:                 '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["name"][0]); } ?>',
+        pDescription:          '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["description"][0]); } ?>',
+        pCity:                 '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["city"][0]); } ?>',
+        pState:                '<?php if ($listing_data) { echo str_replace("'", "\'", $listing_data["post_meta"]["state"][0]); } ?>',
+        pInstagramHandle:      '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_handle"][0]; } ?>',
+        pInstagramUrl:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["instagram_url"][0]; } ?>',
+        pTiktokHandle:         '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_handle"][0]; } ?>',
+        pTiktokUrl:            '<?php if ($listing_data) { echo $listing_data["post_meta"]["tiktok_url"][0]; } ?>',
+        pXHandle:              '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_handle"][0]; } ?>',
+        pXUrl:                 '<?php if ($listing_data) { echo $listing_data["post_meta"]["x_url"][0]; } ?>',
+        pWebsite:              '<?php if ($listing_data) { echo $listing_data["post_meta"]["website"][0]; } ?>',
+        pFacebookUrl:          '<?php if ($listing_data) { echo $listing_data["post_meta"]["facebook_url"][0]; } ?>',
+        pYoutubeUrl:           '<?php if ($listing_data) { echo $listing_data["post_meta"]["youtube_url"][0]; } ?>',
+        pBandcampUrl:          '<?php if ($listing_data) { echo $listing_data["post_meta"]["bandcamp_url"][0]; } ?>',
+        pSpotifyArtistUrl:     '<?php if ($listing_data) { echo $listing_data["post_meta"]["spotify_artist_url"][0]; } ?>',
+        pAppleMusicArtistUrl:  '<?php if ($listing_data) { echo $listing_data["post_meta"]["apple_music_artist_url"][0]; } ?>',
+        pSoundcloudUrl:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["soundcloud_url"][0]; } ?>',
+        pThumbnailSrc:         '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; } ?>',
+        ensembleSizeCheckboxes: <?php if (!empty($listing_data["post_meta"]["ensemble_size"][0]))    { echo array_2_doublequote_str(maybe_unserialize($listing_data["post_meta"]["ensemble_size"][0])); } else { echo '[]'; } ?>,
+        categoriesCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);                       } else { echo '[]'; }?>,
+        genresCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);                           } else { echo '[]'; } ?>,
+        subgenresCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);                        } else { echo '[]'; } ?>,
+        instCheckboxes:         <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]);                 } else { echo '[]'; } ?>,
+        settingsCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);                         } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
         showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
@@ -94,31 +95,18 @@ Calculated Unseen
             <!------------ Basic Information ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Basic Information</h2>
 
-            <!-- Listing type -->
-            <!--
-            <label for="listing-type">Listing Type. Chose the option that best describes your act. If you do multiple things, you may submit multiple listings.</label><br>
-            <input class="button-input" value="Musician" type="radio" name="listing-type" id="musician"/>
-            <label class="button-label" for="musician">Musician</label>
-            <input class="button-input" value="Band" type="radio" name="listing-type" id="band"/>
-            <label class="button-label" for="band">Band</label>
-            <input class="button-input" value="DJ" type="radio" name="listing-type" id="dj"/>
-            <label class="button-label" for="dj">DJ</label>
-            <input class="button-input" value="Artist" type="radio" name="listing-type" id="artist"/>
-            <label class="button-label" for="artist">Artist</label>
-            -->
-
             <!-- Performer Name -->
             <div><label for="listing_name">Performer or Band Name</label><br>
             <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName"></div>
 
             <!-- Description -->
-            <div><label for="description">40 Character Description. This will appear just below your name in your listing.</label>
+            <div><label for="description">35 Character Description. This will appear just below your name in your listing.</label>
             <!--
             <span class="tooltip">
                 i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
             </span><br>
             -->
-            <input type="text" id="description" name="description" maxlength="40" placeholder="5-piece Country Band" required x-model="pDescription"></div>
+            <input type="text" id="description" name="description" maxlength="35" placeholder="5-piece Country Band" required x-model="pDescription"></div>
 
             <!-- City -->
             <div><label for="city">City (This would be where you consider yourself to be "based out of" not where you are from)</label>
@@ -136,7 +124,7 @@ Calculated Unseen
             </span><br>
             -->
             <input type="text" id="zip_code" name="zip_code"
-                pattern="^\d{5}(-\d{4})?$"
+                pattern="^\d{5}(-\d{4})?$" maxlength="5"
                 title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)."
                 <?php if ($listing_data) { echo 'value="' . $listing_data['post_meta']['zip_code'][0] . '"'; } ?>>
             </div>
@@ -146,29 +134,20 @@ Calculated Unseen
             <textarea id="bio" name="bio" class="w-full h-32"><?php if ($listing_data) { echo $listing_data['post_meta']['bio'][0]; } ?></textarea></div>
 
             <!-- Ensemble Size -->
-            <!--
-            <label for="ensemble-size">How many performers in your group? If you perform with different ensemble sizes, check all that apply.</label><br>
-            <input class="button-input" value="1" type="checkbox" name="ensemble_size[]" id="ensemble-size-1"/>
-            <label class="button-label" for="ensemble-size-1">1</label><br>
-            <input class="button-input" value="2" type="checkbox" name="ensemble_size[]" id="ensemble-size-2"/>
-            <label class="button-label" for="ensemble-size-2">2</label><br>
-            <input class="button-input" value="3" type="checkbox" name="ensemble_size[]" id="ensemble-size-3"/>
-            <label class="button-label" for="ensemble-size-3">3</label><br>
-            <input class="button-input" value="4" type="checkbox" name="ensemble_size[]" id="ensemble-size-4"/>
-            <label class="button-label" for="ensemble-size-4">4</label><br>
-            <input class="button-input" value="5" type="checkbox" name="ensemble_size[]" id="ensemble-size-5"/>
-            <label class="button-label" for="ensemble-size-5">5</label><br>
-            <input class="button-input" value="6" type="checkbox" name="ensemble_size[]" id="ensemble-size-6"/>
-            <label class="button-label" for="ensemble-size-6">6</label><br>
-            <input class="button-input" value="7" type="checkbox" name="ensemble_size[]" id="ensemble-size-7"/>
-            <label class="button-label" for="ensemble-size-7">7</label><br>
-            <input class="button-input" value="8" type="checkbox" name="ensemble_size[]" id="ensemble-size-8"/>
-            <label class="button-label" for="ensemble-size-8">8</label><br>
-            <input class="button-input" value="9" type="checkbox" name="ensemble_size[]" id="ensemble-size-9"/>
-            <label class="button-label" for="ensemble-size-9">9</label><br>
-            <input class="button-input" value="10+" type="checkbox" name="ensemble_size[]" id="ensemble-size-10"/>
-            <label class="button-label" for="ensemble-size-10">10+</label><br>
-            -->
+            <label>How many performers in your group? If you perform with different ensemble sizes, check all that apply.</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
+                <input type="hidden" name="ensemble_size[]" >
+                <?php $ensemble_size_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
+                foreach ($ensemble_size_options as $option) {
+                    echo get_template_part('template-parts/filters/elements/checkbox', '', [
+                        'label' => $option,
+                        'value' => $option,
+                        'name' => 'ensemble_size',
+                        'x-model' => 'ensembleSizeCheckboxes',
+                        'is_array' => true,
+                    ]);
+                } ?>
+            </div>
 
             <!------------ Contact and Links ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Contact and Links</h2>

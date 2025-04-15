@@ -39,7 +39,27 @@ function _create_listing($args) {
     }
 
 
-    // Update post; this returns post_id on success and WP_Error on failure
-    return wp_insert_post($args, true);
+    // Insert post; this returns post_id on success and WP_Error on failure
+    $post_id = wp_insert_post($args, true);
+    if( is_wp_error( $post_id ) ) { return $post_id; exit; }
+
+    // Add post to user listings
+    add_listing_to_current_user($post_id);
+
+    return $post_id;
 }
 
+function add_listing_to_current_user($post_id) {
+    // Get current user ID
+    $user_id = get_current_user_id();
+
+    // Get current listings for the user
+    $listings = get_user_meta($user_id, 'listings', true);
+    if (!is_array($listings)) { $listings = []; }
+
+    // Avoid duplicates
+    if (!in_array($post_id, $listings)) {
+        $listings[] = $post_id;
+        update_user_meta($user_id, 'listings', $listings);
+    }
+}

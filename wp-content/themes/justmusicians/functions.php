@@ -63,7 +63,7 @@ function justmusicians_scripts() {
     }
 
     // Listing form
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing-form')) {
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing-form') or str_starts_with($_SERVER['REQUEST_URI'], '/listing-form-dev')) {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, true);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
@@ -74,7 +74,7 @@ function justmusicians_scripts() {
         wp_enqueue_script('alpinejs-mask', get_template_directory_uri() . '/lib/js/alpine.mask.min.js', [], $pkg->version, true);
         wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-mask';
-        $alpine_dependencies[] = 'alpine-intersect';
+        $alpine_dependencies[] = 'alpinejs-intersect';
     }
 
     // Core
