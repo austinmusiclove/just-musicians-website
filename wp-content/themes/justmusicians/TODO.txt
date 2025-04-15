@@ -62,10 +62,9 @@ Data
     check for 404s in links in regular procedure to update content and rank
 UX
     media slider
-        bug: slider on mobile
-            dad say sound not work
-            somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
-        pre buffer youtube videos
+        dad say sound not work on mobile
+        somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
+        somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
         video seeking
         swipe on mobile
     Filters

@@ -7,6 +7,8 @@ function initPlayer(alpineComponent, playerId, videoId) {
                 origin: siteData.siteUrl,
                 enablejsapi: 1,
                 mute: 1,
+                autoplay: 0,
+                rel: 0,
             },
             events: {
                 "onReady": () => {
@@ -14,6 +16,15 @@ function initPlayer(alpineComponent, playerId, videoId) {
                     if (!alpineComponent.playersMuted) { alpineComponent.players[playerId].unMute(); }
                 },
                 "onStateChange": (event) => {
+                    /*
+                    if (event.data == YT.PlayerState.UNSTARTED) { console.log('unstarted'); }
+                    if (event.data == YT.PlayerState.ENDED)     { console.log('ended'); }
+                    if (event.data == YT.PlayerState.PLAYING)   { console.log('playing'); }
+                    if (event.data == YT.PlayerState.PAUSED)    { console.log('paused'); }
+                    if (event.data == YT.PlayerState.BUFFERING) { console.log('buffering'); }
+                    if (event.data == YT.PlayerState.CUED)      { console.log('cued'); }
+                    */
+
                     if (event.data == YT.PlayerState.PAUSED)  { alpineComponent.players[playerId].isPaused = true; }
                     if (event.data == YT.PlayerState.PLAYING) { alpineComponent.players[playerId].isPaused = false; }
                     if (event.data == YT.PlayerState.PLAYING) {
