@@ -106,3 +106,4 @@ Quirks
 Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
+    no <> allowed in name, description, bio

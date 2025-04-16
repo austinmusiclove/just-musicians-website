@@ -93,28 +93,35 @@ function get_sanitized_listing_args() {
     if (isset($_POST['spotify_artist_id']))      { $sanitized_args['meta_input']['spotify_artist_id']      = sanitize_text_field($_POST['spotify_artist_id']); }
     if (isset($_POST['apple_music_artist_url'])) { $sanitized_args['meta_input']['apple_music_artist_url'] = sanitize_url($_POST['apple_music_artist_url']); }
     if (isset($_POST['soundcloud_url']))         { $sanitized_args['meta_input']['soundcloud_url']         = sanitize_url($_POST['soundcloud_url']); }
-    if (isset($_POST['ensemble_size']))          { $sanitized_args['meta_input']['ensemble_size']          = array_filter(rest_sanitize_array($_POST['ensemble_size'])); }
+    if (isset($_POST['ensemble_size']))          { $sanitized_args['meta_input']['ensemble_size']          = custom_sanitize_array($_POST['ensemble_size']); }
 
     // Taxonomies
-    if (isset($_POST['categories']) )            { $sanitized_args['tax_input']['mcategory']               = array_filter(array_map('sanitize_text_field', $_POST['categories'])); }
-    if (isset($_POST['genres']))                 { $sanitized_args['tax_input']['genre']                   = array_filter(array_map('sanitize_text_field', $_POST['genres'])); }
-    if (isset($_POST['subgenres']))              { $sanitized_args['tax_input']['subgenre']                = array_filter(array_map('sanitize_text_field', $_POST['subgenres'])); }
-    if (isset($_POST['instrumentations']))       { $sanitized_args['tax_input']['instrumentation']         = array_filter(array_map('sanitize_text_field', $_POST['instrumentations'])); }
-    if (isset($_POST['settings']))               { $sanitized_args['tax_input']['setting']                 = array_filter(array_map('sanitize_text_field', $_POST['settings'])); }
+    if (isset($_POST['categories']) )            { $sanitized_args['tax_input']['mcategory']               = custom_sanitize_array($_POST['categories']); }
+    if (isset($_POST['genres']))                 { $sanitized_args['tax_input']['genre']                   = custom_sanitize_array($_POST['genres']); }
+    if (isset($_POST['subgenres']))              { $sanitized_args['tax_input']['subgenre']                = custom_sanitize_array($_POST['subgenres']); }
+    if (isset($_POST['instrumentations']))       { $sanitized_args['tax_input']['instrumentation']         = custom_sanitize_array($_POST['instrumentations']); }
+    if (isset($_POST['settings']))               { $sanitized_args['tax_input']['setting']                 = custom_sanitize_array($_POST['settings']); }
 
     // Files
-    if (isset($_FILES['cropped-thumbnail']))     { $sanitized_args['_thumbnail_file']                      = sanitize_file($_FILES['cropped-thumbnail']); }
+    if (isset($_FILES['cropped-thumbnail']))     { $sanitized_args['_thumbnail_file']                      = custom_sanitize_file($_FILES['cropped-thumbnail']); }
 
 
     return $sanitized_args;
 }
 
 
-function sanitize_file($file) {
+// Cleans name property of file
+function custom_sanitize_file($file) {
     $file['name'] = sanitize_file_name($file['name']);
     return $file;
 }
 
+// sanitize array, remove blank values with array_filter, reindex array with array_values
+// useful with array inputs where i always pass a blank so that the user has a way to erase all options; otherwise no argument is passed to the back end and no edit happens
+// reindexing is useful so that json_encode turns it into an array instead of an object
+function custom_sanitize_array($arr) {
+    return array_values(array_filter(rest_sanitize_array($arr)));
+}
 
 
 function check_post_listing_auth() {

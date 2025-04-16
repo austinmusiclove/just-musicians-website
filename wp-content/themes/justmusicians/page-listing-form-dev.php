@@ -9,11 +9,10 @@ $listing_data = null;
 if (!empty($_GET['lid'])) {
     $listing_data = get_listing(['post_id' => $_GET['lid']]);
 }
-$clean_name        = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["name"][0])        : null;
-$clean_description = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["description"][0]) : null;
-$clean_city        = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["city"][0])        : null;
-$clean_state       = $listing_data ? str_2_doublequote_str($listing_data["post_meta"]["state"][0])       : null;
-$clean_ens_size    = maybe_unserialize($listing_data["post_meta"]["ensemble_size"][0]);
+$clean_name        = $listing_data ? clean_str_for_doublequotes($listing_data["post_meta"]["name"][0])        : null;
+$clean_description = $listing_data ? clean_str_for_doublequotes($listing_data["post_meta"]["description"][0]) : null;
+$clean_city        = $listing_data ? clean_str_for_doublequotes($listing_data["post_meta"]["city"][0])        : null;
+$clean_state       = $listing_data ? clean_str_for_doublequotes($listing_data["post_meta"]["state"][0])       : null;
 $categories        = get_terms_decoded('mcategory', 'names');
 $genres            = get_terms_decoded('genre', 'names');
 $subgenres         = get_terms_decoded('subgenre', 'names');
@@ -29,8 +28,6 @@ get_header();
 /*
 Fields to cover
 
-Basic
-    Ensemble Size
 Taxonomy
     Unofficial tags
 Media
@@ -77,12 +74,12 @@ Calculated Unseen
         pAppleMusicArtistUrl:  '<?php if ($listing_data) { echo $listing_data["post_meta"]["apple_music_artist_url"][0]; } ?>',
         pSoundcloudUrl:        '<?php if ($listing_data) { echo $listing_data["post_meta"]["soundcloud_url"][0]; } ?>',
         pThumbnailSrc:         '<?php if (!empty($listing_data['thumbnail_url']))                 { echo $listing_data['thumbnail_url']; } else { echo $ph_thumbnail; } ?>',
-        ensembleSizeCheckboxes: <?php if (!empty($listing_data["post_meta"]["ensemble_size"][0])) { echo array_2_doublequote_str($clean_ens_size);                                } else { echo '[]'; } ?>,
-        categoriesCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo array_2_doublequote_str($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
-        genresCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo array_2_doublequote_str($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
-        subgenresCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo array_2_doublequote_str($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
-        instCheckboxes:         <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo array_2_doublequote_str($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
-        settingsCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo array_2_doublequote_str($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
+        ensembleSizeCheckboxes: <?php if (!empty($listing_data["post_meta"]["ensemble_size"][0])) { echo clean_arr_for_doublequotes($listing_data["post_meta"]["ensemble_size"][0]); } else { echo '[]'; } ?>,
+        categoriesCheckboxes:   <?php if (!empty($listing_data["taxonomies"]["mcategory"]))       { echo clean_arr_for_doublequotes($listing_data["taxonomies"]["mcategory"]);       } else { echo '[]'; }?>,
+        genresCheckboxes:       <?php if (!empty($listing_data["taxonomies"]["genre"]))           { echo clean_arr_for_doublequotes($listing_data["taxonomies"]["genre"]);           } else { echo '[]'; } ?>,
+        subgenresCheckboxes:    <?php if (!empty($listing_data["taxonomies"]["subgenre"]))        { echo clean_arr_for_doublequotes($listing_data["taxonomies"]["subgenre"]);        } else { echo '[]'; } ?>,
+        instCheckboxes:         <?php if (!empty($listing_data["taxonomies"]["instrumentation"])) { echo clean_arr_for_doublequotes($listing_data["taxonomies"]["instrumentation"]); } else { echo '[]'; } ?>,
+        settingsCheckboxes:     <?php if (!empty($listing_data["taxonomies"]["setting"]))         { echo clean_arr_for_doublequotes($listing_data["taxonomies"]["setting"]);         } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
         showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
