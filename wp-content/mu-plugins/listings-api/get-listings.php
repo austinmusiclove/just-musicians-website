@@ -32,29 +32,30 @@ function get_listings($args) {
         $query_args['s'] = $args['search'];
     }
     $meta_queries = [];
-    array_push($meta_queries, [
-        'key' => 'status',
-        'value' => 'Complete',
-    ]);
+    $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];
+    $meta_queries[] = [ 'key' => 'name', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'description', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'city', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'state', 'value' => '', 'compare' => '!=' ];
     if (!empty($name_search_term)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'name',
             'value' => $name_search_term,
             'compare' => 'LIKE',
-        ]);
+        ];
     }
     if (!empty($types)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'type',
             'value' => $valid_types,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($verified)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'verified',
             'value' => $verified,
-        ]);
+        ];
     }
     $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
         'relation' => 'AND',
@@ -62,52 +63,52 @@ function get_listings($args) {
     ]);
     $tax_queries = [];
     if (!empty($valid_categories)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'mcategory',
             'field' => 'name',
             'terms' => $valid_categories,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_genres)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'genre',
             'field' => 'name',
             'terms' => $valid_genres,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_subgenres)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'subgenre',
             'field' => 'name',
             'terms' => $valid_subgenres,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_instrumentations)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'instrumentation',
             'field' => 'name',
             'terms' => $valid_instrumentations,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_settings)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'setting',
             'field' => 'name',
             'terms' => $valid_settings,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_tags)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'tag',
             'field' => 'name',
             'terms' => $valid_tags,
             'compare' => 'IN',
-        ]);
+        ];
     }
     $query_args['tax_query'] = count($tax_queries) == 0 ? null : (count($tax_queries) == 1 ? [...$tax_queries] : [
         'relation' => 'AND',
@@ -124,11 +125,11 @@ function get_listings($args) {
         $youtube_video_ids = [];
         if ($youtube_video_urls) {
             foreach($youtube_video_urls as $url) {
-                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { array_push($youtube_video_ids, $matches[1]); }
+                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { $youtube_video_ids[] = $matches[1]; }
             }
         }
 
-        array_push($results, [
+        $results[] = [
             'title' => get_the_title(),
             'name' => get_field('name'),
             'city' => get_field('city'),
@@ -150,7 +151,7 @@ function get_listings($args) {
             'verified' => get_field('verified'),
             'youtube_video_urls' => get_field('youtube_video_urls'),
             'youtube_video_ids' => $youtube_video_ids,
-        ]);
+        ];
     }
 
     return [
