@@ -14,15 +14,27 @@ if ( is_wp_error($is_authorized) ) {
 // Create Listing
 if ( empty( $args['ID'] )) {
     $post_id = _create_listing($args);
-    if ( is_wp_error($post_id) ) { echo 'Error: ' . $post_id->get_error_message(); exit; }
-    echo '<span x-init="redirect(\'/listing-form-dev/?lid=' . $post_id . '\');"></span>';
-    echo 'Listing Created Successfully';
+    if ( is_wp_error($post_id) ) {
+        echo get_template_part('template-parts/global/toasts/error-toast', '', [
+            'message' => 'Error: ' . $post_id->get_error_message(),
+        ]);
+        exit;
+    }
+    echo '<span x-init="redirect(\'/listing-form-dev/?lid=' . $post_id . '&toast=create\');"></span>';
+
 
 
 // Update Listing
 } else {
     $result = _update_listing($args);
-    if ( is_wp_error($result) ) { echo 'Error: ' . $result->get_error_message(); exit; }
-    echo 'Listing Updated Successfully';
+    if ( is_wp_error($result) ) {
+        echo get_template_part('template-parts/global/toasts/error-toast', '', [
+            'message' => 'Error: ' . $result->get_error_message(),
+        ]);
+        exit;
+    }
+    echo get_template_part('template-parts/global/toasts/success-toast', '', [
+        'message' => 'Listing Updated Successfully'
+    ]);
 }
 

@@ -96,6 +96,15 @@ Calculated Unseen
             <input type="hidden" id="verified-venues" name="verified-venues">
             -->
 
+            <!------------ Toasts ----------------->
+            <div id="toasts">
+                <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') {
+                    echo get_template_part('template-parts/global/toasts/success-toast', '', [
+                        'message' => 'Listing Created Successfully'
+                    ]);
+                } ?>
+            </div>
+
             <!------------ Basic Information ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Basic Information</h2>
 
@@ -358,7 +367,7 @@ Calculated Unseen
                     </svg>
                 </span>
             </button>
-            <div id="result"></div>
+            <div id="result" class="h-20"></div>
         </form>
     </div>
     <div class="hidden lg:block md:col-span-1"></div>
