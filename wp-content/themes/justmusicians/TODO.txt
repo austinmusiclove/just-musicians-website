@@ -1,7 +1,7 @@
 Milestones
     Artist push to edit and complete profiles
-        save indicator for edit
-        clean city name to be the right capitalization
+        make message fade after a few seconds after request returns
+        add youtube links
         allow create page to be used
     Artist announce and invite new profiles
         contact and links
@@ -40,6 +40,8 @@ Milestones
         check social links and youtube videos for 404s
         program to move unofficial tags to official if added
         artist pages that will get you listed on google as a musician by using schema
+        clean city name to be the right capitalization
+        success message when redirected from create to update page after successful create listing
     Free lance booker testing
         ensemble size filter
         "Request Quote" or "Contact Directly" modal

@@ -127,3 +127,7 @@ form {
   }
 
 
+  /* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
+  .htmx-request .htmx-indicator-replace {
+    opacity: 0;
+  }

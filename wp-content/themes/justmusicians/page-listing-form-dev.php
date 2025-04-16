@@ -89,7 +89,8 @@ Calculated Unseen
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
             hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
             hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
-            hx-target="#result">
+            hx-target="#result"
+            hx-indicator="#htmx-submit-button">
             <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
             <!--
             <input type="hidden" id="verified-venues" name="verified-venues">
@@ -348,7 +349,15 @@ Calculated Unseen
             <div class="media-container" id="selected-media"></div>
             -->
 
-            <input class="my-4 border p-4 bg-yellow hover:bg-navy hover:text-white" type="submit" value="Submit">
+            <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white">
+                <span class="htmx-indicator-replace">Submit</span>
+                <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
+                    <svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                    </svg>
+                </span>
+            </button>
             <div id="result"></div>
         </form>
     </div>
