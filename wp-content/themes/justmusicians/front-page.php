@@ -77,10 +77,6 @@ get_header();
                         )); ?>
                     </div>
 
-                    <script>
-                        window.onYouTubeIframeAPIReady = function () { document.dispatchEvent(new Event('youtube-api-ready')); };
-                    </script>
-
                     <span id="results"
                         x-data='{
                             players: {},

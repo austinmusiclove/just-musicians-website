@@ -22,7 +22,7 @@ function get_checkbox_ref_string($input_name, $label) {
 // Modifies an array so that it can be injected into doublequotes in an html attribute
 // unserialize, json encode, then encode only " and '
 function clean_arr_for_doublequotes($arr) {
-    return html_entity_decode(htmlspecialchars(json_encode(maybe_unserialize($arr)), ENT_QUOTES , 'UTF-8'), ENT_NOQUOTES, 'UTF-8');
+    return html_entity_decode(htmlspecialchars(json_encode(maybe_unserialize($arr), JSON_UNESCAPED_SLASHES), ENT_QUOTES , 'UTF-8'), ENT_NOQUOTES, 'UTF-8');
 }
 
 // Modifies a string so that it can be injected into doublequotes in an html attribute

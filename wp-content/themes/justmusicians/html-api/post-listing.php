@@ -7,7 +7,10 @@ $args = get_sanitized_listing_args();
 // Check if user is authorized
 $is_authorized = check_post_listing_auth();
 if ( is_wp_error($is_authorized) ) {
-    echo 'Unauthorized: ' . $is_authorized->get_error_message(); exit;
+    echo get_template_part('template-parts/global/toasts/error-toast', '', [
+        'message' => 'Unauthorized: ' . $is_authorized->get_error_message(),
+    ]);
+    echo  exit;
 }
 
 

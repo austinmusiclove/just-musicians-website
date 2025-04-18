@@ -13,27 +13,32 @@
     </button>
 
     <?php
-    if (count($args['youtube_player_ids']) > 0) { ?>
+    if (count($args['youtube_video_ids']) > 0 or !empty($args['alpine_video_ids'])) { ?>
 
-        <div class="w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
+        <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
             x-data="{
                 previousIndex: 0,
                 currentIndex: 0,
                 showArrows: isTouchDevice,
-                totalSlides: <?php echo (count($args['youtube_player_ids']) + 1); ?>,
-                playerIds:   <?php echo clean_arr_for_doublequotes($args['youtube_player_ids']); ?>,
-                videoIds:    <?php echo clean_arr_for_doublequotes($args['youtube_video_ids']); ?>,
-                _updateIndex(newIndex)      { updateIndex(this, newIndex); },
-                _pausePreviousSlide()       { pausePreviousSlide(this); },
-                _pauseCurrentSlide()        { pauseCurrentSlide(this); },
-                _playCurrentSlide()         { playCurrentSlide(this); },
-                _toggleMuteAllVideos()      { toggleMuteAllVideos(this); },
-                _isPaused()                 { return isPaused(this); },
-                _enterSlider()              { enterSlider(this); },
-                _leaveSlider()              { leaveSlider(this); },
-                _initSliderYoutubePlayers() { initSliderYoutubePlayers(this); },
+                totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?>,
+                videoIds:    <?php if (!empty($args['alpine_video_ids'])) { echo $args['alpine_video_ids']; } else { echo clean_arr_for_doublequotes($args['youtube_video_ids']); } ?>,
+                playerIds: {},
+                _updateIndex(newIndex)  { updateIndex(this, newIndex); },
+                _pausePreviousSlide()   { pausePreviousSlide(this); },
+                _pauseCurrentSlide()    { pauseCurrentSlide(this); },
+                _playCurrentSlide()     { playCurrentSlide(this); },
+                _toggleMuteAllVideos()  { toggleMuteAllVideos(this); },
+                _isPaused()             { return isPaused(this); },
+                _enterSlider()          { enterSlider(this); },
+                _leaveSlider()          { leaveSlider(this); },
+                _updateVideos(videoIds) {
+                    // Slide left if the current slide is the last one and a slide is getting destroyed to avoid user seeing a blank slide
+                    if (this.totalSlides > videoIds.length + 1 && this.currentIndex == this.totalSlides -1 ) { this._updateIndex(this.currentIndex-1); }
+                    this.videoIds = videoIds;
+                    this.totalSlides = videoIds.length + 1;
+                },
             }"
-            x-intersect.once="_initSliderYoutubePlayers()"
+            <?php if (!empty($args['alpine_video_ids'])) { ?> x-init="$watch('<?php echo $args['alpine_video_ids']; ?>', value => _updateVideos(value) )" <?php } ?>
             x-on:mouseleave="_leaveSlider()"
             x-on:mouseenter="_enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
@@ -41,37 +46,57 @@
                 x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();"
             >
 
-                <img <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?> class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" @click="_updateIndex(1)" />
+                <img class="w-full h-full object-cover"
+                    <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
+                    src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+                    x-on:click="_updateIndex(1)"
+                />
 
-                <?php foreach($args['youtube_player_ids'] as $index=>$player_id) { ?>
-                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover">
-                        <div id="<?php echo $player_id; ?>" class="aspect-4/3 w-full h-full object-cover"></div>
+                <template
+                    x-for="(videoId, index) in videoIds"
+                    :key="videoId + index"
+                >
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
+                        x-id="['playerId']"
+                        <?php if (!empty($args['alpine_video_ids'])) { ?>
+                            x-init="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                        <?php } else { ?>
+                            x-intersect.once="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                        <?php } ?>
+                    >
+                        <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"
+                        ></div>
                     </div>
-                <?php } ?>
+                </template>
 
             </div>
 
 
             <!-- Video player buttons -->
+            <!-- Play -->
             <div class="absolute transform left-2 bottom-2"
                 @click="_updateIndex(1)"
                 x-show="currentIndex == 0">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
             </div>
+            <!-- Pause -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 x-show="currentIndex > 0 && _isPaused()">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
             </div>
+            <!-- Mute -->
             <div class="absolute transform left-2 bottom-2"
                 @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && playersMuted">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
             </div>
+            <!-- Unmute -->
             <div class="absolute transform left-2 bottom-2"
                 @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && !playersMuted">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
             </div>
+            <!-- Left Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
                 @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
                 x-show="currentIndex > 0 && showArrows"
@@ -82,6 +107,7 @@
                 <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
                 </span>
             </div>
+            <!-- Right Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
                 @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
                 x-show="currentIndex < totalSlides - 1 && showArrows"
@@ -99,7 +125,10 @@
 
         <div class="w-full sm:w-56 shrink-0">
             <div class="bg-yellow-light aspect-4/3">
-            <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>/>
+            <img class="w-full h-full object-cover"
+                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
+                src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+            />
             </div>
         </div>
 

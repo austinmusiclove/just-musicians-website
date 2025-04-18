@@ -1,6 +1,10 @@
 Milestones
     Artist push to edit and complete profiles
         add youtube links
+            allow reordering
+            validate input before adding to x-data array
+                don't allow duplicate url
+                only allow youtube links m.youtube youtu.be youtube
         allow create page to be used
     Artist announce and invite new profiles
         contact and links
@@ -105,3 +109,7 @@ Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio
+    allowed youtube link formats to test
+        https://m.youtube.com/watch?v=w7lX4VUOecw
+        https://www.youtube.com/watch?v=mKnrqEUu1Wo
+        https://youtu.be/5U7HVkjEg1I

@@ -94,6 +94,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['apple_music_artist_url'])) { $sanitized_args['meta_input']['apple_music_artist_url'] = sanitize_url($_POST['apple_music_artist_url']); }
     if (isset($_POST['soundcloud_url']))         { $sanitized_args['meta_input']['soundcloud_url']         = sanitize_url($_POST['soundcloud_url']); }
     if (isset($_POST['ensemble_size']))          { $sanitized_args['meta_input']['ensemble_size']          = custom_sanitize_array($_POST['ensemble_size']); }
+    if (isset($_POST['youtube_video_urls']))     { $sanitized_args['meta_input']['youtube_video_urls']     = custom_sanitize_array($_POST['youtube_video_urls']); }
 
     // Taxonomies
     if (isset($_POST['categories']) )            { $sanitized_args['tax_input']['mcategory']               = custom_sanitize_array($_POST['categories']); }
@@ -145,7 +146,7 @@ function check_post_listing_auth() {
         $user_listings = get_user_meta(get_current_user_id(), 'listings', true);
 
         // User can only edit their own listing
-        if (in_array($_POST['post_id'], $user_listings)) {
+        if (is_array($user_listings) and in_array($_POST['post_id'], $user_listings)) {
             return true;
         } else {
             return new WP_Error(401, 'You are not authorized to edit this listing');

@@ -12,6 +12,7 @@ function get_listing($args) {
     }
 
     // Retrieve the post object to check if the post exists
+    global $post;
     $post = get_post($post_id);
 
     // If the post does not exist, return an error
@@ -27,17 +28,44 @@ function get_listing($args) {
     // Get all post meta fields
     $post_meta = get_post_meta($post_id);
 
-    // Get all taxonomies associated with the post
-    $taxonomies = get_object_taxonomies(get_post_type($post_id), 'objects');
+    // Get youtube links
+    $youtube_video_urls = get_field('youtube_video_urls');
+    $youtube_video_ids = [];
+    if ($youtube_video_urls and is_array($youtube_video_urls)) {
+        foreach($youtube_video_urls as $url) {
+            if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { $youtube_video_ids[] = $matches[1]; }
+        }
+    }
 
     // Array to store post meta and taxonomy data
-    $result = array();
+    $result = [
+        'name'                   => get_field('name'),
+        'description'            => get_field('description'),
+        'city'                   => get_field('city'),
+        'state'                  => get_field('state'),
+        'zip_code'               => get_field('zip_code'),
+        'ensemble_size'          => get_field('ensemble_size'),
+        'website'                => get_field('website'),
+        'facebook_url'           => get_field('facebook_url'),
+        'instagram_handle'       => get_field('instagram_handle'),
+        'instagram_url'          => get_field('instagram_url'),
+        'x_handle'               => get_field('x_handle'),
+        'x_url'                  => get_field('x_url'),
+        'tiktok_handle'          => get_field('tiktok_handle'),
+        'tiktok_url'             => get_field('tiktok_url'),
+        'youtube_url'            => get_field('youtube_url'),
+        'bandcamp_url'           => get_field('bandcamp_url'),
+        'spotify_artist_url'     => get_field('spotify_artist_url'),
+        'apple_music_artist_url' => get_field('apple_music_artist_url'),
+        'soundcloud_url'         => get_field('soundcloud_url'),
+        'verified'               => get_field('verified'),
+        'youtube_video_urls'     => $youtube_video_urls,
+        'youtube_video_ids'      => $youtube_video_ids,
+        'thumbnail_url'          => get_the_post_thumbnail_url($post_id, 'standard-listing'),
+    ];
 
-    // Add post meta data to the array
-    $result['post_meta'] = $post_meta;
-
-    // Add thumbnail url
-    $result['thumbnail_url'] = get_the_post_thumbnail_url($post);
+    // Get all taxonomies associated with the post
+    $taxonomies = get_object_taxonomies('listing', 'objects');
 
     // Add taxonomy data to the array
     foreach ($taxonomies as $taxonomy) {
@@ -45,13 +73,15 @@ function get_listing($args) {
 
         // If terms exist for this taxonomy, add them to the result array
         if (!is_wp_error($terms) && !empty($terms)) {
-            $result['taxonomies'][$taxonomy->name] = array();
+            $result[$taxonomy->name] = array();
             foreach ($terms as $term) {
-                $result['taxonomies'][$taxonomy->name][] = $term->name; // Store the term name
+                $result[$taxonomy->name][] = $term->name; // Store the term name
             }
         }
     }
 
+
     // Return the complete data
+    wp_reset_postdata();
     return $result;
 }

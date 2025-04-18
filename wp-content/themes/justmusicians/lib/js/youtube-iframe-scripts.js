@@ -1,4 +1,33 @@
+// Watch for api ready
+var youtubeIframeApiReady = false;
+var initQueue = [];
+window.onYouTubeIframeAPIReady = function () {
+    youtubeIframeApiReady = true;
+    clearInitQueue();
+    setTimeout(clearInitQueue(), 1000); // empty queue again to avoid race condition of something being added after the queue is cleared the first time
+};
+
+
+// Init players that were ready for init before the api was ready
+var clearingQueue = false;
+function clearInitQueue() {
+    if (clearingQueue) { return; } else { clearingQueue = true; } // don't allow this function to run twice at the same time
+
+    // clear the queue
+    while (initQueue.length > 0) {
+        var queueItem = initQueue.shift();
+        initPlayer(queueItem.alpineComponent, queueItem.playerId, queueItem.videoId);
+    }
+    clearingQueue = false;
+}
+
+
 function initPlayer(alpineComponent, playerId, videoId) {
+    if (!youtubeIframeApiReady) {
+        // If the api is not ready, add this init call to a queue
+        initQueue.push({ alpineComponent, playerId, videoId });
+        return;
+    }
     if (playerId) {
         var player = new YT.Player(playerId, {
             videoId: videoId, // remove this to init from iframe
@@ -44,6 +73,35 @@ function initPlayer(alpineComponent, playerId, videoId) {
 
 }
 
+
+function getVideoIdsFromUrls(urls) {
+    var videoIds = [];
+
+    urls.forEach(url => {
+        try {
+            var parsedUrl = new URL(url);
+
+            // Handle youtube.com/watch?v=...
+            if (parsedUrl.hostname.includes('youtube.com')) {
+                var videoId = parsedUrl.searchParams.get('v');
+                if (videoId) videoIds.push(videoId);
+            }
+
+            // Handle youtu.be/VIDEO_ID
+            else if (parsedUrl.hostname.includes('youtu.be')) {
+                var id = parsedUrl.pathname.split('/')[1];
+                if (id) videoIds.push(id);
+            }
+        } catch (e) {
+            // skip invalid URLs
+            console.warn(`Invalid URL skipped: ${url}`);
+        }
+    });
+
+    return videoIds;
+}
+
+
 function setupVisibilityListener(alpineComponent) {
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -51,6 +109,7 @@ function setupVisibilityListener(alpineComponent) {
         }
     });
 }
+
 
 function pauseAllPlayers(alpineComponent) {
     Object.values(alpineComponent.players).forEach((player) => {
