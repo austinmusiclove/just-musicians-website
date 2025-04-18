@@ -1,10 +1,5 @@
 Milestones
     Artist push to edit and complete profiles
-        add youtube links
-            allow reordering
-            validate input before adding to x-data array
-                don't allow duplicate url
-                only allow youtube links m.youtube youtu.be youtube
         allow create page to be used
     Artist announce and invite new profiles
         contact and links
@@ -102,6 +97,9 @@ Performance
     prefetch on mouse down
     first 5 results without second trip to server
     dedicated server
+Bugs
+    listing form: if you go back to create listing page after creating and the thumbnail input is filled, there is no cropped image and submit will be allowed without thumbnail
+    listing form: if you choose a file then you hit choose file again but hit cancel, the file clears from the input and since it is required you cannot submit even though there is a cropper displaying and an image in the preview
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
@@ -109,7 +107,11 @@ Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio
-    allowed youtube link formats to test
+    allowed youtube link formats to test all in Dietrich Calhoun profile in local host mac mini
         https://m.youtube.com/watch?v=w7lX4VUOecw
         https://www.youtube.com/watch?v=mKnrqEUu1Wo
         https://youtu.be/5U7HVkjEg1I
+    not supported youtube formats (v must be first param)
+        https://www.youtube.com/watch?app=desktoppp=ygUQRGlldHJpY2ggY2FsaG91bg%3D%3D&abc=123&v=I7LAnAszeJc&abcd=1234
+        https://www.youtube.com/watch?app=desktop&v=I7LAnAszeJc
+        https://www.youtube.com/watch?v=I7LAnAszeJc&app=desktop

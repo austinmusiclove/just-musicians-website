@@ -1,3 +1,6 @@
+<?php
+$is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
+?>
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
@@ -8,9 +11,11 @@
     <?php } ?>
 >
 
+    <?php if (!$is_preview) { ?>
     <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105" x-on:click="showFavModal = ! showFavModal">
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
     </button>
+    <?php } ?>
 
     <?php
     if (count($args['youtube_video_ids']) > 0 or !empty($args['alpine_video_ids'])) { ?>
@@ -49,7 +54,7 @@
                 <img class="w-full h-full object-cover"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
                     src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
-                    x-on:click="_updateIndex(1)"
+                    x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
 
                 <template
@@ -76,7 +81,7 @@
             <!-- Play -->
             <div class="absolute transform left-2 bottom-2"
                 @click="_updateIndex(1)"
-                x-show="currentIndex == 0">
+                x-show="currentIndex == 0 && totalSlides > 1">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
             </div>
             <!-- Pause -->

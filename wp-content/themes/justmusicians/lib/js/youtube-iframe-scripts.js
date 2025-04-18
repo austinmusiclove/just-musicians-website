@@ -74,34 +74,6 @@ function initPlayer(alpineComponent, playerId, videoId) {
 }
 
 
-function getVideoIdsFromUrls(urls) {
-    var videoIds = [];
-
-    urls.forEach(url => {
-        try {
-            var parsedUrl = new URL(url);
-
-            // Handle youtube.com/watch?v=...
-            if (parsedUrl.hostname.includes('youtube.com')) {
-                var videoId = parsedUrl.searchParams.get('v');
-                if (videoId) videoIds.push(videoId);
-            }
-
-            // Handle youtu.be/VIDEO_ID
-            else if (parsedUrl.hostname.includes('youtu.be')) {
-                var id = parsedUrl.pathname.split('/')[1];
-                if (id) videoIds.push(id);
-            }
-        } catch (e) {
-            // skip invalid URLs
-            console.warn(`Invalid URL skipped: ${url}`);
-        }
-    });
-
-    return videoIds;
-}
-
-
 function setupVisibilityListener(alpineComponent) {
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {

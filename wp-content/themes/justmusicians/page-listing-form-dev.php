@@ -78,12 +78,10 @@ get_header();
             <input type="hidden" id="verified-venues" name="verified-venues">
             -->
 
-            <!------------ Toasts ----------------->
-            <div id="toasts">
+            <!------------ Page Load Toasts ----------------->
+            <div>
                 <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') {
-                    echo get_template_part('template-parts/global/toasts/success-toast', '', [
-                        'message' => 'Listing Created Successfully'
-                    ]);
+                    echo get_template_part('template-parts/global/toasts/success-toast', '', [ 'message' => 'Listing Created Successfully' ]);
                 } ?>
             </div>
 
@@ -333,34 +331,36 @@ get_header();
 
 
             <!-- Youtube links -->
+            <!-- Utilizes youtube-urls-input-scripts.js -->
             <h2 class="font-bold text-22">Youtube Video Links</h2>
             <p>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</p>
             <div x-data="{
                 tags: youtubeVideoUrls,
-                addUrl(event) {
-                    this.tags.push(event.target.value.trim());
-                    event.target.value = '';
-                    pVideoIds = getVideoIdsFromUrls(this.tags);
-                },
-                removeUrl(index) {
-                    this.tags.splice(index, 1);
-                    pVideoIds = getVideoIdsFromUrls(this.tags);
-                },
+                _addYoutubeUrl(event)    { addYoutubeUrl(this, event); },
+                _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
             }">
                 <input type="hidden" name="youtube_video_urls" x-bind:value="tags"/>
                 <div>
                     <input id="youtubeLink" type="text" placeholder="Paste YouTube link here"
                         class="w-full"
-                        x-on:keydown.enter="$event.preventDefault(); addUrl($event)"
-                        x-on:paste="$el.addEventListener('input', function() { addUrl($event); }, {once: true})">
+                        x-on:keydown.enter="$event.preventDefault(); _addYoutubeUrl($event)"
+                        x-on:paste="$el.addEventListener('input', function() { _addYoutubeUrl($event); }, {once: true})">
                 </div>
 
-                <div class="space-y-2">
+                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'youtube-url-error-toast']); ?>
+
+                <div x-data="{
+                        reorderTags(fromIndex, toIndex) {
+                            tags.splice(toIndex, 0, tags.splice(fromIndex, 1)[0]);
+                            pVideoIds = getVideoIdsFromUrls(tags);
+                        }
+                    }"
+                    x-sort="reorderTags($item, $position);" class="space-y-2">
                     <!-- Display YouTube links -->
-                    <template x-for="(url, index) in tags" :key="index">
-                        <div class="flex items-center bg-yellow-light-50 p-2 rounded-md">
+                    <template x-for="(url, index) in tags" :key="index + url">
+                        <div x-sort:item="index" class="flex items-center bg-yellow-light-50 p-2 rounded-md cursor-grab">
                             <span x-text="url" class="text-sm max-w-s"></span>
-                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="removeUrl(index)">
+                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="_removeYoutubeUrl(index)">
                                 <span class="font-bold">X</span>
                             </button>
                         </div>
@@ -379,7 +379,13 @@ get_header();
                     </svg>
                 </span>
             </button>
-            <div id="result" class="h-20"></div>
+            <div id="result"></div>
+
+            <!------------ Form Submit Toasts ----------------->
+            <div class="h-20">
+                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'post-error-toast']); ?>
+                <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'post-success-toast']); ?>
+            </div>
         </form>
     </div>
     <div class="hidden lg:block md:col-span-1"></div>
@@ -420,10 +426,11 @@ get_header();
             'spotify_artist_url'            => $listing_data['spotify_artist_url'],
             'apple_music_artist_url'        => $listing_data['apple_music_artist_url'],
             'soundcloud_url'                => $listing_data['soundcloud_url'],
-            'youtube_video_ids'             => $listing_data['youtube_video_ids'],
+            'youtube_video_ids'             => $listing_data ? $listing_data['youtube_video_ids'] : [],
             'youtube_player_ids'            => $listing_data['youtube_player_ids'],
             'lazyload_thumbnail'            => false,
             'last'                          => false,
+            'is_preview'                    => true,
             'alpine_name'                   => 'pName',
             'alpine_location'               => 'getListingLocation()',
             'alpine_description'            => 'pDescription',

@@ -45,6 +45,8 @@ function get_listing($args) {
         'state'                  => get_field('state'),
         'zip_code'               => get_field('zip_code'),
         'ensemble_size'          => get_field('ensemble_size'),
+        'email'                  => get_field('email'),
+        'phone'                  => get_field('phone'),
         'website'                => get_field('website'),
         'facebook_url'           => get_field('facebook_url'),
         'instagram_handle'       => get_field('instagram_handle'),

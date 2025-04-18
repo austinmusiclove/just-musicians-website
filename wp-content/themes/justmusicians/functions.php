@@ -73,15 +73,20 @@ function justmusicians_scripts() {
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
+        // Youtube Urls Input
+        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, true);
+
         // Alpine Intersect
         wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-intersect';
 
         // Alpine Mask
         wp_enqueue_script('alpinejs-mask', get_template_directory_uri() . '/lib/js/alpine.mask.min.js', [], $pkg->version, true);
-        wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-mask';
-        $alpine_dependencies[] = 'alpinejs-intersect';
+
+        // Alpine Sort
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-sort';
 
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, true);
