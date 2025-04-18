@@ -1,6 +1,7 @@
 Milestones
     Artist push to edit and complete profiles
-        allow create page to be used
+        soft test with some ppl
+        program to fire out to everyone
     Artist announce and invite new profiles
         contact and links
             regex front end check that they are url for the correct site

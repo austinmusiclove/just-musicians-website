@@ -83,19 +83,21 @@ get_header();
                             if ($query->have_posts()) { ?>
 
                                 <!-- Display user's listings -->
+                                <!--
                                 <div class="flex items-center justify-between md:justify-start">
-                                    <?php echo get_template_part('template-parts/search/sort', '', [
-                                        'show_number' => false
-                                    ]); ?>
+                                    <?php //echo get_template_part('template-parts/search/sort', '', [ 'show_number' => false ]); ?>
                                 </div>
+                                -->
 
                                 <?php while ($query->have_posts()) {
                                     $query->the_post();
                                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
+                                    $listing_genres = get_the_terms(get_the_ID(), 'genre');
+                                    $genres = $listing_genres ? array_map(function($term) { return $term->name; }, $listing_genres) : [];
                                     echo get_template_part('template-parts/account/listing', '', [
                                         'post_id' => get_the_ID(),
                                         'name' => get_post_meta(get_the_ID(), 'name', true),
-                                        'genres' => array_map(function($term) { return $term->name; }, get_the_terms(get_the_ID(), 'genre')),
+                                        'genres' => $genres,
                                         'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
                                     ]);
                                 } ?>
