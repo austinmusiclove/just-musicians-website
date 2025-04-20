@@ -93,7 +93,7 @@ get_header();
             <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName"></div>
 
             <!-- Description -->
-            <div><label for="description">35 Character Description. This will appear just below your name in your listing.</label>
+            <div><label for="description">35 Character Description.</label>
             <!--
             <span class="tooltip">
                 i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
@@ -102,7 +102,7 @@ get_header();
             <input type="text" id="description" name="description" maxlength="35" placeholder="5-piece Country Band" required x-model="pDescription"></div>
 
             <!-- City -->
-            <div><label for="city">City (This would be where you consider yourself to be "based out of" not where you are from)</label>
+            <div><label for="city">City (This is where you consider yourself to be "based out of" not where you are from)</label>
             <input type="text" id="city" name="city" required x-model="pCity"></div>
 
             <!-- State -->
@@ -145,14 +145,14 @@ get_header();
             <!------------ Contact and Links ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Contact and Links</h2>
             <!-- Email -->
-            <div><label for="listing_email">Email</label><br>
+            <div><label for="listing_email">Email (not publicly displayed)</label><br>
                 <input type="email" id="listing_email" name="listing_email" placeholder="example@example.com"
                     pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
                     title="example@example.com"
                     <?php if ($listing_data) { echo 'value="' . $listing_data['email'] . '"'; } ?>>
             </div>
             <!-- Phone -->
-            <div><label for="phone">Phone</label><br>
+            <div><label for="phone">Phone (not publicly displayed)</label><br>
                 <input type="tel" id="phone" name="phone"
                     placeholder="(555) 555-5555" maxlength="14"
                     pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"

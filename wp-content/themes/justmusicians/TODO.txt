@@ -1,10 +1,9 @@
 Milestones
     Artist push to edit and complete profiles
-        add instructions for form
         add keywords input
         soft test with some ppl
-        program to fire out to everyone
         bug: if you hit submit too fast after crop, it does not send file
+        program to fire out to everyone
     Artist announce and invite new profiles
         contact and links
             regex front end check that they are url for the correct site
