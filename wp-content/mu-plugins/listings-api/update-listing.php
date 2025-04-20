@@ -42,9 +42,14 @@ function _update_listing($args) {
         set_post_thumbnail($args['ID'], $attachment_id);
     }
 
-
     // Update post; this returns post_id on success and WP_Error on failure
-    return wp_update_post($args, true);
+    $post_id = wp_update_post($args, true);
+    if (is_wp_error($post_id)) {
+        return $post_id;
+    }
+
+    // Update search rank
+    update_search_rank($post_id);
 }
 
 

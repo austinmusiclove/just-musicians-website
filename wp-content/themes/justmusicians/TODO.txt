@@ -1,9 +1,6 @@
 Milestones
     Artist push to edit and complete profiles
-        get youtu.be links to work when returned from get_listings
-            https://youtu.be/6x1MoHwQLlg?si=AAZImp_a95d3kZig
-            https://youtu.be/07oVq9KR6UU?si=oQVh7sDDlVdqq6Vl
-        add taxonomies
+        add more taxonomies options espeically sub genres
         add instructions for form
         add keywords input
         soft test with some ppl
@@ -31,7 +28,6 @@ Milestones
                 test apostrophes everywhere
             venues
             content
-            rank
         create special link to sign up and create listing
             make sure if link is used again that it doesn't create a new listing, it updates
             create the listings for them before they sign up instead of allowing new listing creating with the link

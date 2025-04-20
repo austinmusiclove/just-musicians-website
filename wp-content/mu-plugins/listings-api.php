@@ -154,3 +154,22 @@ function check_post_listing_auth() {
 
     }
 }
+
+
+function update_search_rank($post_id) {
+    $rank = 0;
+
+    // Loop through fields to check if they have a value
+    $fields_to_check = [
+        'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size', 'email', 'phone',
+        'website', 'instagram_handle', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'spotify_artist_id',
+        'apple_music_artist_url', 'youtube_video_urls', 'venues_played_verified'
+    ];
+    foreach ( $fields_to_check as $field ) {
+        if ( ! empty( get_post_meta( $post_id, $field, true ) ) ) {
+            $rank++;
+        }
+    }
+
+    update_post_meta( $post_id, 'rank', $rank );
+}
