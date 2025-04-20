@@ -36,32 +36,33 @@ get_header();
 
 <div class="container md:grid md:grid-cols-12 py-8 min-h-[500px]"
     x-data="{
-        pName:                 '<?php if ($listing_data) { echo $clean_name; } ?>',
-        pDescription:          '<?php if ($listing_data) { echo $clean_description; } ?>',
-        pCity:                 '<?php if ($listing_data) { echo $clean_city; } ?>',
-        pState:                '<?php if ($listing_data) { echo $clean_state; } ?>',
-        pInstagramHandle:      '<?php if ($listing_data) { echo $listing_data["instagram_handle"]; } ?>',
-        pInstagramUrl:         '<?php if ($listing_data) { echo $listing_data["instagram_url"]; } ?>',
-        pTiktokHandle:         '<?php if ($listing_data) { echo $listing_data["tiktok_handle"]; } ?>',
-        pTiktokUrl:            '<?php if ($listing_data) { echo $listing_data["tiktok_url"]; } ?>',
-        pXHandle:              '<?php if ($listing_data) { echo $listing_data["x_handle"]; } ?>',
-        pXUrl:                 '<?php if ($listing_data) { echo $listing_data["x_url"]; } ?>',
-        pWebsite:              '<?php if ($listing_data) { echo $listing_data["website"]; } ?>',
-        pFacebookUrl:          '<?php if ($listing_data) { echo $listing_data["facebook_url"]; } ?>',
-        pYoutubeUrl:           '<?php if ($listing_data) { echo $listing_data["youtube_url"]; } ?>',
-        pBandcampUrl:          '<?php if ($listing_data) { echo $listing_data["bandcamp_url"]; } ?>',
-        pSpotifyArtistUrl:     '<?php if ($listing_data) { echo $listing_data["spotify_artist_url"]; } ?>',
-        pAppleMusicArtistUrl:  '<?php if ($listing_data) { echo $listing_data["apple_music_artist_url"]; } ?>',
-        pSoundcloudUrl:        '<?php if ($listing_data) { echo $listing_data["soundcloud_url"]; } ?>',
-        pThumbnailSrc:         '<?php if (!empty($listing_data['thumbnail_url']))      { echo $listing_data['thumbnail_url'];                                  } else { echo $ph_thumbnail; } ?>',
-        ensembleSizeCheckboxes: <?php if (!empty($listing_data["ensemble_size"]))      { echo clean_arr_for_doublequotes($listing_data["ensemble_size"]);      } else { echo '[]'; } ?>,
-        categoriesCheckboxes:   <?php if (!empty($listing_data["mcategory"]))          { echo clean_arr_for_doublequotes($listing_data["mcategory"]);          } else { echo '[]'; }?>,
-        genresCheckboxes:       <?php if (!empty($listing_data["genre"]))              { echo clean_arr_for_doublequotes($listing_data["genre"]);              } else { echo '[]'; } ?>,
-        subgenresCheckboxes:    <?php if (!empty($listing_data["subgenre"]))           { echo clean_arr_for_doublequotes($listing_data["subgenre"]);           } else { echo '[]'; } ?>,
-        instCheckboxes:         <?php if (!empty($listing_data["instrumentation"]))    { echo clean_arr_for_doublequotes($listing_data["instrumentation"]);    } else { echo '[]'; } ?>,
-        settingsCheckboxes:     <?php if (!empty($listing_data["setting"]))            { echo clean_arr_for_doublequotes($listing_data["setting"]);            } else { echo '[]'; } ?>,
-        youtubeVideoUrls:       <?php if (!empty($listing_data["youtube_video_urls"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_urls"]); } else { echo '[]'; } ?>,
-        pVideoIds:              <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
+        pName:                  '<?php if ($listing_data) { echo $clean_name; } ?>',
+        pDescription:           '<?php if ($listing_data) { echo $clean_description; } ?>',
+        pCity:                  '<?php if ($listing_data) { echo $clean_city; } ?>',
+        pState:                 '<?php if ($listing_data) { echo $clean_state; } ?>',
+        pInstagramHandle:       '<?php if ($listing_data) { echo $listing_data["instagram_handle"]; } ?>',
+        pInstagramUrl:          '<?php if ($listing_data) { echo $listing_data["instagram_url"]; } ?>',
+        pTiktokHandle:          '<?php if ($listing_data) { echo $listing_data["tiktok_handle"]; } ?>',
+        pTiktokUrl:             '<?php if ($listing_data) { echo $listing_data["tiktok_url"]; } ?>',
+        pXHandle:               '<?php if ($listing_data) { echo $listing_data["x_handle"]; } ?>',
+        pXUrl:                  '<?php if ($listing_data) { echo $listing_data["x_url"]; } ?>',
+        pWebsite:               '<?php if ($listing_data) { echo $listing_data["website"]; } ?>',
+        pFacebookUrl:           '<?php if ($listing_data) { echo $listing_data["facebook_url"]; } ?>',
+        pYoutubeUrl:            '<?php if ($listing_data) { echo $listing_data["youtube_url"]; } ?>',
+        pBandcampUrl:           '<?php if ($listing_data) { echo $listing_data["bandcamp_url"]; } ?>',
+        pSpotifyArtistUrl:      '<?php if ($listing_data) { echo $listing_data["spotify_artist_url"]; } ?>',
+        pAppleMusicArtistUrl:   '<?php if ($listing_data) { echo $listing_data["apple_music_artist_url"]; } ?>',
+        pSoundcloudUrl:         '<?php if ($listing_data) { echo $listing_data["soundcloud_url"]; } ?>',
+        pThumbnailSrc:          '<?php if (!empty($listing_data['thumbnail_url']))      { echo $listing_data['thumbnail_url'];                                  } else { echo $ph_thumbnail; } ?>',
+        ensembleSizeCheckboxes:  <?php if (!empty($listing_data["ensemble_size"]))      { echo clean_arr_for_doublequotes($listing_data["ensemble_size"]);      } else { echo '[]'; } ?>,
+        categoriesCheckboxes:    <?php if (!empty($listing_data["mcategory"]))          { echo clean_arr_for_doublequotes($listing_data["mcategory"]);          } else { echo '[]'; }?>,
+        genresCheckboxes:        <?php if (!empty($listing_data["genre"]))              { echo clean_arr_for_doublequotes($listing_data["genre"]);              } else { echo '[]'; } ?>,
+        subgenresCheckboxes:     <?php if (!empty($listing_data["subgenre"]))           { echo clean_arr_for_doublequotes($listing_data["subgenre"]);           } else { echo '[]'; } ?>,
+        instCheckboxes:          <?php if (!empty($listing_data["instrumentation"]))    { echo clean_arr_for_doublequotes($listing_data["instrumentation"]);    } else { echo '[]'; } ?>,
+        settingsCheckboxes:      <?php if (!empty($listing_data["setting"]))            { echo clean_arr_for_doublequotes($listing_data["setting"]);            } else { echo '[]'; } ?>,
+        keywords:                <?php if (!empty($listing_data["keyword"]))            { echo clean_arr_for_doublequotes($listing_data["keyword"]);            } else { echo '[]'; } ?>,
+        youtubeVideoUrls:        <?php if (!empty($listing_data["youtube_video_urls"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_urls"]); } else { echo '[]'; } ?>,
+        pVideoIds:               <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
         showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
@@ -93,7 +94,7 @@ get_header();
             <input type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName"></div>
 
             <!-- Description -->
-            <div><label for="description">35 Character Description. This will appear just below your name in your listing.</label>
+            <div><label for="description">35 Character Description.</label>
             <!--
             <span class="tooltip">
                 i<span class="tooltip-text">Examples: Psych rock band, Cello player, 90s cover band</span>
@@ -102,7 +103,7 @@ get_header();
             <input type="text" id="description" name="description" maxlength="35" placeholder="5-piece Country Band" required x-model="pDescription"></div>
 
             <!-- City -->
-            <div><label for="city">City (This would be where you consider yourself to be "based out of" not where you are from)</label>
+            <div><label for="city">City (This is where you consider yourself to be "based out of" not where you are from)</label>
             <input type="text" id="city" name="city" required x-model="pCity"></div>
 
             <!-- State -->
@@ -145,14 +146,14 @@ get_header();
             <!------------ Contact and Links ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Contact and Links</h2>
             <!-- Email -->
-            <div><label for="listing_email">Email</label><br>
+            <div><label for="listing_email">Email (not publicly displayed)</label><br>
                 <input type="email" id="listing_email" name="listing_email" placeholder="example@example.com"
                     pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
                     title="example@example.com"
                     <?php if ($listing_data) { echo 'value="' . $listing_data['email'] . '"'; } ?>>
             </div>
             <!-- Phone -->
-            <div><label for="phone">Phone</label><br>
+            <div><label for="phone">Phone (not publicly displayed)</label><br>
                 <input type="tel" id="phone" name="phone"
                     placeholder="(555) 555-5555" maxlength="14"
                     pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
@@ -272,30 +273,45 @@ get_header();
                 'input_x_model' => 'settingsCheckboxes',
             ]); ?>
             <!-- Other Keywords -->
-            <!--
-            <label for="tags">Keywords</label>
-            <span class="tooltip">
-                i<span class="tooltip-text">Type a keyword and press enter to add it</span>
-            </span><br>
-            <div>Enter any key words that you would want to appear in search results for. i.e. wedding band, cover band etc.</div>
-            <div class="error-container" id="tag-input-error"></div><br>
-            <div id="selected-tags"></div>
-            <input type="text" id="tags-input"/>
-            <div style="display:none;" class="dropdown" id="tag-options"></div>
-            -->
+            <h2 class="font-bold text-22">Other Keywords</h2>
+            <p>Did we miss anything? Add any categories, genres, subgenres, instruments, or settings that you'd like your listing to be serchable by.</p>
+            <div x-data="{
+                tags: keywords,
+                addTag(event)    {
+                    var value = event.target.value.trim();
+                    if (value == '') { return; }
+                    if (this.tags.includes(value)) {
+                        $dispatch('keyword-error-toast', {'message': 'This keyword has already been added'});
+                    } else {
+                        this.tags.push(value);
+                    }
+                    event.target.value = '';
+                },
+                removeTag(index) {
+                    this.tags.splice(index, 1);
+                },
+            }">
+                <input type="hidden" name="keywords[]" x-bind:value="tags"/>
+                <div>
+                    <input type="text" placeholder="Type keyword and hit enter" class="w-full"
+                        x-on:keydown.enter="$event.preventDefault(); addTag($event)"
+                        x-on:paste="$el.addEventListener('input', function() { addTag($event); }, {once: true})">
+                </div>
 
-            <!-- Venues Played -->
-            <!--
-            <label for="venues">Venues</label>
-            <span class="tooltip">
-                i<span class="tooltip-text">Type a venue name and press enter to add it</span>
-            </span><br>
-            <div>Enter any venues you have played that you would like to be listed on your profile</div>
-            <div class="error-container" id="venue-input-error"></div><br>
-            <div id="selected-venues"></div>
-            <input type="text" id="venues-input"/>
-            <div style="display:none;" class="dropdown" id="venue-options"></div>
-            -->
+                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
+
+                <div class="space-y-2">
+                    <!-- Display Tags -->
+                    <template x-for="(tag, index) in tags" :key="index + tag">
+                        <div class="flex items-center bg-yellow-light-50 p-2 rounded-md">
+                            <span x-text="tag" class="text-sm max-w-s"></span>
+                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="removeTag(index)">
+                                <span class="font-bold">X</span>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
 
             <!------------ Media ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Media</h2>
@@ -341,21 +357,21 @@ get_header();
             }">
                 <input type="hidden" name="youtube_video_urls" x-bind:value="tags"/>
                 <div>
-                    <input id="youtubeLink" type="text" placeholder="Paste YouTube link here"
-                        class="w-full"
+                    <input type="text" placeholder="Paste YouTube link here" class="w-full"
                         x-on:keydown.enter="$event.preventDefault(); _addYoutubeUrl($event)"
                         x-on:paste="$el.addEventListener('input', function() { _addYoutubeUrl($event); }, {once: true})">
                 </div>
 
                 <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'youtube-url-error-toast']); ?>
 
-                <div x-data="{
+                <div class="space-y-2"
+                    x-data="{
                         reorderTags(fromIndex, toIndex) {
                             tags.splice(toIndex, 0, tags.splice(fromIndex, 1)[0]);
                             pVideoIds = getVideoIdsFromUrls(tags);
                         }
                     }"
-                    x-sort="reorderTags($item, $position);" class="space-y-2">
+                    x-sort="reorderTags($item, $position);">
                     <!-- Display YouTube links -->
                     <template x-for="(url, index) in tags" :key="index + url">
                         <div x-sort:item="index" class="flex items-center bg-yellow-light-50 p-2 rounded-md cursor-grab">

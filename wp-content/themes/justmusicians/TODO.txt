@@ -1,8 +1,7 @@
 Milestones
     Artist push to edit and complete profiles
-        add keywords input
-        soft test with some ppl
         bug: if you hit submit too fast after crop, it does not send file
+        soft test with some ppl
         program to fire out to everyone
     Artist announce and invite new profiles
         contact and links

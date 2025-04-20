@@ -102,6 +102,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['subgenres']))              { $sanitized_args['tax_input']['subgenre']                = custom_sanitize_array($_POST['subgenres']); }
     if (isset($_POST['instrumentations']))       { $sanitized_args['tax_input']['instrumentation']         = custom_sanitize_array($_POST['instrumentations']); }
     if (isset($_POST['settings']))               { $sanitized_args['tax_input']['setting']                 = custom_sanitize_array($_POST['settings']); }
+    if (isset($_POST['keywords']))               { $sanitized_args['tax_input']['keyword']                 = custom_sanitize_array($_POST['keywords']); }
 
     // Files
     if (isset($_FILES['cropped-thumbnail']))     { $sanitized_args['_thumbnail_file']                      = custom_sanitize_file($_FILES['cropped-thumbnail']); }
@@ -161,8 +162,8 @@ function update_search_rank($post_id) {
 
     // Loop through fields to check if they have a value
     $fields_to_check = [
-        'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size', 'email', 'phone',
-        'website', 'instagram_handle', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'spotify_artist_id',
+        'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
+        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url',
         'apple_music_artist_url', 'youtube_video_urls', 'venues_played_verified'
     ];
     foreach ( $fields_to_check as $field ) {

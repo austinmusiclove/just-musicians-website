@@ -21,7 +21,7 @@ if ( empty( $args['ID'] )) {
         echo '<span x-init="$dispatch(\'post-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
         exit;
     }
-    echo '<span x-init="redirect(\'/listing-form-dev/?lid=' . $post_id . '&toast=create\');"></span>';
+    echo '<span x-init="redirect(\'/listing-form/?lid=' . $post_id . '&toast=create\');"></span>';
 
 
 

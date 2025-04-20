@@ -214,16 +214,17 @@ function register_taxonomies() {
       'singular_name' => 'Setting'
     )
   ));
-  register_taxonomy('tag', array('listing', 'artist'), array(
+  register_taxonomy('keyword', array('listing', 'artist'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
-      'name' => 'Tags',
-      'add_new_item' => 'Add New Tag',
-      'edit_item' => 'Edit Tag',
-      'all_items' => 'All Tags',
-      'singular_name' => 'Tag'
+      'name' => 'Keywords',
+      'add_new_item' => 'Add New Keyword',
+      'edit_item' => 'Edit Keyword',
+      'all_items' => 'All Keywords',
+      'singular_name' => 'Keyword'
     )
   ));
 }
