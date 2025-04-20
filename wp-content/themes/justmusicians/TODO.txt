@@ -1,6 +1,5 @@
 Milestones
     Artist push to edit and complete profiles
-        add more taxonomies options espeically sub genres
         add instructions for form
         add keywords input
         soft test with some ppl

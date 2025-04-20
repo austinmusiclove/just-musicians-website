@@ -30,11 +30,11 @@ function clean_str_for_doublequotes($string) {
     return str_replace("'", "\'", str_replace("\\", "\\\\", htmlspecialchars($string, ENT_COMPAT, 'UTF-8')));
 }
 
-function get_terms_decoded($taxonomy, $fields, $search=false) {
+function get_terms_decoded($taxonomy, $fields, $search=false, $hide_empty=false) {
     $args = [
         'taxonomy' => $taxonomy,
         'fields' => 'names',
-        'hide_empty' => false,
+        'hide_empty' => $hide_empty,
     ];
     if ($search) { $args['search'] = $search; }
     $terms = get_terms($args);

@@ -128,7 +128,7 @@ get_header();
 
                 <!-- Modals -->
                 <?php
-                    $categories = get_terms_decoded('mcategory', 'names');
+                    $categories = get_terms_decoded('mcategory', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Category',
                         'labels' => $categories,
@@ -137,7 +137,7 @@ get_header();
                         'x-show' => 'showCategoryModal',
                         'has_search_bar' => true,
                     ]);
-                    $genres = get_terms_decoded('genre', 'names');
+                    $genres = get_terms_decoded('genre', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Genre',
                         'labels' => $genres,
@@ -146,7 +146,7 @@ get_header();
                         'x-show' => 'showGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $subgenres = get_terms_decoded('subgenre', 'names');
+                    $subgenres = get_terms_decoded('subgenre', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Sub Genre',
                         'labels' => $subgenres,
@@ -155,7 +155,7 @@ get_header();
                         'x-show' => 'showSubGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $instrumentation = get_terms_decoded('instrumentation', 'names');
+                    $instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Instrumentation',
                         'labels' => $instrumentation,
@@ -164,7 +164,7 @@ get_header();
                         'x-show' => 'showInstrumentationModal',
                         'has_search_bar' => true,
                     ]);
-                    $settings = get_terms_decoded('setting', 'names');
+                    $settings = get_terms_decoded('setting', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Setting',
                         'labels' => $settings,
