@@ -73,6 +73,7 @@ get_header();
             hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
             hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
             hx-target="#result"
+            hx-ext="disable-element" hx-disable-element="#htmx-submit-button"
             hx-indicator="#htmx-submit-button">
             <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
             <!--

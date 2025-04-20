@@ -73,6 +73,7 @@ get_header();
             hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
             hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
             hx-target="#result"
+            hx-ext="disable-element" hx-disable-element="#htmx-submit-button"
             hx-indicator="#htmx-submit-button">
             <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
             <!--
@@ -273,29 +274,19 @@ get_header();
                 'input_x_model' => 'settingsCheckboxes',
             ]); ?>
             <!-- Other Keywords -->
+            <!-- Depends on tag-input-scripts.js -->
             <h2 class="font-bold text-22">Other Keywords</h2>
             <p>Did we miss anything? Add any categories, genres, subgenres, instruments, or settings that you'd like your listing to be serchable by.</p>
             <div x-data="{
                 tags: keywords,
-                addTag(event)    {
-                    var value = event.target.value.trim();
-                    if (value == '') { return; }
-                    if (this.tags.includes(value)) {
-                        $dispatch('keyword-error-toast', {'message': 'This keyword has already been added'});
-                    } else {
-                        this.tags.push(value);
-                    }
-                    event.target.value = '';
-                },
-                removeTag(index) {
-                    this.tags.splice(index, 1);
-                },
+                _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
+                _removeTag(index) { removeTag(this, index); },
             }">
-                <input type="hidden" name="keywords[]" x-bind:value="tags"/>
+                <input type="hidden" name="keywords[]"/>
                 <div>
                     <input type="text" placeholder="Type keyword and hit enter" class="w-full"
-                        x-on:keydown.enter="$event.preventDefault(); addTag($event)"
-                        x-on:paste="$el.addEventListener('input', function() { addTag($event); }, {once: true})">
+                        x-on:keydown.enter="$event.preventDefault(); _addTag($event)"
+                        x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
                 </div>
 
                 <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
@@ -305,9 +296,10 @@ get_header();
                     <template x-for="(tag, index) in tags" :key="index + tag">
                         <div class="flex items-center bg-yellow-light-50 p-2 rounded-md">
                             <span x-text="tag" class="text-sm max-w-s"></span>
-                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="removeTag(index)">
+                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="_removeTag(index)">
                                 <span class="font-bold">X</span>
                             </button>
+                            <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                         </div>
                     </template>
                 </div>
@@ -316,38 +308,52 @@ get_header();
             <!------------ Media ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Media</h2>
             <!-- Thumbnail -->
-            <!-- Utilizes cropper-scripts.js and cropper.1.6.2.min.js -->
+            <!-- Depends on cropper-scripts.js and cropper.1.6.2.min.js -->
             <h2 class="font-bold text-22">Thumbnail</h2>
             <div x-data="{
                     cropper: null,
                     listingName: '',
+                    showImageProcessingSpinner: false,
                     filenamePrefix: '<?php echo $filename_prefix; ?>',
                     getFilenamePrefix() { return `${this.filenamePrefix}_${this.listingName}`; },
                     showCropButton: <?php if (!empty($listing_data['thumbnail_url'])) { echo 'true'; } else { echo 'false'; } ?>,
-                    _initCropper(displayElement, croppedImageInput) {
-                        initCropper(this, displayElement, croppedImageInput);
+                    _initCropper(displayElement, croppedImageInput, submitButton) {
+                        initCropper(this, displayElement, croppedImageInput, submitButton);
                     },
-                    _initCropperFromFile(event, displayElement, croppedImageInput) {
-                        initCropperFromFile(this, event, displayElement, croppedImageInput);
+                    _initCropperFromFile(event, displayElement, croppedImageInput, submitButton) {
+                        initCropperFromFile(this, event, displayElement, croppedImageInput, submitButton);
                     },
                 }"
                 x-init="$watch('pName', value => { listingName = value; })"
             >
                 <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
                     <?php if (empty($_GET['lid'])) { echo 'required'; } ?>
-                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"
+                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput, $refs.submitButton); showCropButton = false;"
                 >
                 <br>
-                <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button" x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput)" x-show="showCropButton" x-cloak>Crop Current Thumbnail</button>
+                <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button"
+                    x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput, $refs.submitButton); showCropButton = false;"
+                    x-show="showCropButton" x-cloak >
+                    Crop Current Thumbnail
+                </button>
                 <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*" x-ref="croppedImageInput">
                 <div class="my-4 max-h-[600px]" >
                     <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" />
+                </div>
+                <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
+                    <span class="flex mr-4 mt-1">
+                        <svg class="animate-spin h-4 w-4 text-grey" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                    </span>
+                    <span>Processing image...</span>
                 </div>
             </div>
 
 
             <!-- Youtube links -->
-            <!-- Utilizes youtube-urls-input-scripts.js -->
+            <!-- Depends on youtube-urls-input-scripts.js -->
             <h2 class="font-bold text-22">Youtube Video Links</h2>
             <p>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</p>
             <div x-data="{
@@ -386,7 +392,7 @@ get_header();
 
 
 
-            <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white">
+            <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white disabled:bg-grey disabled:text-white" x-ref="submitButton">
                 <span class="htmx-indicator-replace">Submit</span>
                 <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
                     <svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">

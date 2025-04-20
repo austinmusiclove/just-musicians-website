@@ -1,6 +1,5 @@
 Milestones
     Artist push to edit and complete profiles
-        need to disable submit while in flight
         soft test with some ppl
         program to fire out to everyone
             get published listings
