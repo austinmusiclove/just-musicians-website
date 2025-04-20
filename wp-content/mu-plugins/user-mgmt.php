@@ -84,8 +84,8 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     // Validate listing invitation code
     $code_post = validate_temporary_code($listing_invitation_code);
     if (is_wp_error($code_post)) {
-        if ($code_post->get_error_code() == 'invalid_code') { return WP_Error('invalid_link', 'Invalid listing invitation link'); }
-        if ($code_post->get_error_code() == 'expired_code') { return WP_Error('expired_link', 'Expired listing invitation link'); }
+        if ($code_post->get_error_code() == 'invalid_code') { return new WP_Error('invalid_link', 'Invalid listing invitation link'); }
+        if ($code_post->get_error_code() == 'expired_code') { return new WP_Error('expired_link', 'Expired listing invitation link'); }
         return $code_post;
     }
 

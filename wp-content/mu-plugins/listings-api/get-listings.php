@@ -125,7 +125,8 @@ function get_listings($args) {
         $youtube_video_ids = [];
         if ($youtube_video_urls) {
             foreach($youtube_video_urls as $url) {
-                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { $youtube_video_ids[] = $matches[1]; }
+                $video_id = get_youtube_video_id($url);
+                if ($video_id) { $youtube_video_ids[] = $video_id; }
             }
         }
 

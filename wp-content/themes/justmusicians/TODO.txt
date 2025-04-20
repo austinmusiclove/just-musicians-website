@@ -1,7 +1,14 @@
 Milestones
     Artist push to edit and complete profiles
+        get youtu.be links to work when returned from get_listings
+            https://youtu.be/6x1MoHwQLlg?si=AAZImp_a95d3kZig
+            https://youtu.be/07oVq9KR6UU?si=oQVh7sDDlVdqq6Vl
+        add taxonomies
+        add instructions for form
+        add keywords input
         soft test with some ppl
         program to fire out to everyone
+        bug: if you hit submit too fast after crop, it does not send file
     Artist announce and invite new profiles
         contact and links
             regex front end check that they are url for the correct site
@@ -13,20 +20,16 @@ Milestones
             submit
                 move inputs to forms template parts
                 hide crop thumbnail button after pressed
-                if you hit submit too fast after crop, it does not send file
                 send save automatically after input
             housekeeping
                 recycling for old unlinked images
                 make files pretty page-listing-form standard-listing listings-api
                 organize template parts
-                personally invite Charlie Marlow and other users that made accounts; check users for new accounts and blog posts for listings create attempts
             mind the name of images
             test
-                need to test odd artist names with odd characters
                 show err if htmx request fails and never gets to server
                 test apostrophes everywhere
             venues
-            other tags and keywords
             content
             rank
         create special link to sign up and create listing

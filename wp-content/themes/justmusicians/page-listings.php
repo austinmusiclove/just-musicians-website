@@ -11,20 +11,6 @@ get_header();
 
 <div id="page" class="flex flex-col grow">
 
-        <!-- handle listing invitiation -->
-        <?php if (is_user_logged_in()) {
-            if (isset($_GET['lic'])) {
-                // send listing invitation validation with redirect without the param in url to avoid infinite loop
-                $success = add_listing_by_invitation_code($_GET['lic']);
-                // if success, redirect back to the same page but remove query params to avoid an infinite loop
-                if ($success and !is_wp_error($success)) { ?>
-                    <div x-init="redirect('<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>')"></div>
-                <?php } else { ?>
-                    <p>Failed to add listing from invitation link with error: <span class="text-yellow"><?php echo $success->get_error_message(); ?></span></p>
-                <?php }
-            }
-        } ?>
-
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
@@ -39,6 +25,27 @@ get_header();
                         <h1 class="font-bold text-22 sm:text-25">My Listings</h1>
                         <?php if (is_user_logged_in()) { ?><a href="/listing-form"><button class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer">Add +</button></a><?php } ?>
                     </div>
+
+
+                    <!------------ Listing invitation code Toasts ----------------->
+                    <div>
+                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'lic-error-toast']); ?>
+                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'lic-success-toast']); ?>
+                    </div>
+                    <!-- handle listing invitiation -->
+                    <?php if (is_user_logged_in()) {
+                        if (isset($_GET['lic'])) {
+                            // send listing invitation validation with redirect without the param in url to avoid infinite loop
+                            $success = add_listing_by_invitation_code($_GET['lic']);
+                            // if success, redirect back to the same page but remove query params to avoid an infinite loop
+                            if ($success and !is_wp_error($success)) { ?>
+                                <span x-init="$dispatch('lic-success-toast', {'message': 'Listing invitation link processed successfully'})"></span>
+                            <?php } else { ?>
+                                <span x-init="$dispatch('lic-error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
+                            <?php }
+                        }
+                    } ?>
+
 
 
                     <!-- Logged out -->

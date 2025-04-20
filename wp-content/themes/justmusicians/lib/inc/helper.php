@@ -40,4 +40,30 @@ function get_terms_decoded($taxonomy, $fields, $search=false) {
     $terms = get_terms($args);
     return array_map(function($term) { return html_entity_decode($term, ENT_QUOTES | ENT_HTML5, 'UTF-8'); }, $terms);
 }
+
+function get_youtube_video_id($url) {
+    if (empty($url) || !is_string($url)) {
+        return false;
+    }
+
+    $parsed_url = parse_url($url);
+
+    // Check for youtu.be format
+    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtu.be') !== false) {
+        return ltrim($parsed_url['path'], '/');
+    }
+
+    // Check for youtube.com format with query params
+    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtube.com') !== false) {
+        if (isset($parsed_url['query'])) {
+            parse_str($parsed_url['query'], $query_vars);
+            if (isset($query_vars['v']) && preg_match('/^[\w-]{11}$/', $query_vars['v'])) {
+                return $query_vars['v'];
+            }
+        }
+    }
+
+    return false;
+}
+
 ?>
