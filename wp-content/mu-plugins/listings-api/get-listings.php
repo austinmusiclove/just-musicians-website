@@ -14,7 +14,6 @@ function get_listings($args) {
     $valid_subgenres = validate_tax_input($args['subgenres'], 'subgenre');
     $valid_instrumentations = validate_tax_input($args['instrumentations'], 'instrumentation');
     $valid_settings = validate_tax_input($args['settings'], 'setting');
-    $valid_tags = validate_tax_input($args['tags'], 'tag');
     $verified = rest_sanitize_boolean($args['verified']);
     $sanitized_page = sanitize_text_field($args['page']);
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
