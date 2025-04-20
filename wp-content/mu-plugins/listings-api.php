@@ -122,7 +122,7 @@ function custom_sanitize_file($file) {
 // useful with array inputs where i always pass a blank so that the user has a way to erase all options; otherwise no argument is passed to the back end and no edit happens
 // reindexing is useful so that json_encode turns it into an array instead of an object
 function custom_sanitize_array($arr) {
-    return array_values(array_filter(rest_sanitize_array($arr)));
+    return array_values(array_filter(array_map('sanitize_text_field', rest_sanitize_array($arr))));
 }
 
 

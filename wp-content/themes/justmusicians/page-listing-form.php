@@ -279,7 +279,7 @@ get_header();
             <div x-data="{
                 tags: keywords,
                 _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
-                _removeTag(index) { removeTag(this, event); },
+                _removeTag(index) { removeTag(this, index); },
             }">
                 <input type="hidden" name="keywords[]"/>
                 <div>
