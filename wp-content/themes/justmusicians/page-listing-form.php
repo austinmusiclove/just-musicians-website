@@ -273,29 +273,19 @@ get_header();
                 'input_x_model' => 'settingsCheckboxes',
             ]); ?>
             <!-- Other Keywords -->
+            <!-- Depends on tag-input-scripts.js -->
             <h2 class="font-bold text-22">Other Keywords</h2>
             <p>Did we miss anything? Add any categories, genres, subgenres, instruments, or settings that you'd like your listing to be serchable by.</p>
             <div x-data="{
                 tags: keywords,
-                addTag(event)    {
-                    var value = event.target.value.trim();
-                    if (value == '') { return; }
-                    if (this.tags.includes(value)) {
-                        $dispatch('keyword-error-toast', {'message': 'This keyword has already been added'});
-                    } else {
-                        this.tags.push(value);
-                    }
-                    event.target.value = '';
-                },
-                removeTag(index) {
-                    this.tags.splice(index, 1);
-                },
+                _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
+                _removeTag(index) { removeTag(this, event); },
             }">
-                <input type="hidden" name="keywords[]" x-bind:value="tags"/>
+                <input type="hidden" name="keywords[]"/>
                 <div>
                     <input type="text" placeholder="Type keyword and hit enter" class="w-full"
-                        x-on:keydown.enter="$event.preventDefault(); addTag($event)"
-                        x-on:paste="$el.addEventListener('input', function() { addTag($event); }, {once: true})">
+                        x-on:keydown.enter="$event.preventDefault(); _addTag($event)"
+                        x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
                 </div>
 
                 <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
@@ -305,9 +295,10 @@ get_header();
                     <template x-for="(tag, index) in tags" :key="index + tag">
                         <div class="flex items-center bg-yellow-light-50 p-2 rounded-md">
                             <span x-text="tag" class="text-sm max-w-s"></span>
-                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="removeTag(index)">
+                            <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="_removeTag(index)">
                                 <span class="font-bold">X</span>
                             </button>
+                            <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                         </div>
                     </template>
                 </div>
@@ -316,7 +307,7 @@ get_header();
             <!------------ Media ----------------->
             <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Media</h2>
             <!-- Thumbnail -->
-            <!-- Utilizes cropper-scripts.js and cropper.1.6.2.min.js -->
+            <!-- Depends on cropper-scripts.js and cropper.1.6.2.min.js -->
             <h2 class="font-bold text-22">Thumbnail</h2>
             <div x-data="{
                     cropper: null,
@@ -347,7 +338,7 @@ get_header();
 
 
             <!-- Youtube links -->
-            <!-- Utilizes youtube-urls-input-scripts.js -->
+            <!-- Depends on youtube-urls-input-scripts.js -->
             <h2 class="font-bold text-22">Youtube Video Links</h2>
             <p>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</p>
             <div x-data="{

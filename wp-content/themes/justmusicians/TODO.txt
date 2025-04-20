@@ -3,6 +3,13 @@ Milestones
         bug: if you hit submit too fast after crop, it does not send file
         soft test with some ppl
         program to fire out to everyone
+            get published listings
+            check if they all have emails or if i need to cross reference with artist id
+            for each listing
+                create temporary code post for each one with a random code, expires in one month, and has their listing in it
+                create a link for the temporary code
+                create email template and send email
+            test by sending out emails to aml
     Artist announce and invite new profiles
         contact and links
             regex front end check that they are url for the correct site
