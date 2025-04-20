@@ -312,27 +312,41 @@ get_header();
             <div x-data="{
                     cropper: null,
                     listingName: '',
+                    showImageProcessingSpinner: false,
                     filenamePrefix: '<?php echo $filename_prefix; ?>',
                     getFilenamePrefix() { return `${this.filenamePrefix}_${this.listingName}`; },
                     showCropButton: <?php if (!empty($listing_data['thumbnail_url'])) { echo 'true'; } else { echo 'false'; } ?>,
-                    _initCropper(displayElement, croppedImageInput) {
-                        initCropper(this, displayElement, croppedImageInput);
+                    _initCropper(displayElement, croppedImageInput, submitButton) {
+                        initCropper(this, displayElement, croppedImageInput, submitButton);
                     },
-                    _initCropperFromFile(event, displayElement, croppedImageInput) {
-                        initCropperFromFile(this, event, displayElement, croppedImageInput);
+                    _initCropperFromFile(event, displayElement, croppedImageInput, submitButton) {
+                        initCropperFromFile(this, event, displayElement, croppedImageInput, submitButton);
                     },
                 }"
                 x-init="$watch('pName', value => { listingName = value; })"
             >
                 <input id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
                     <?php if (empty($_GET['lid'])) { echo 'required'; } ?>
-                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput); showCropButton = false;"
+                    x-on:change="_initCropperFromFile($event, $refs.thumbnailDisplay, $refs.croppedImageInput, $refs.submitButton); showCropButton = false;"
                 >
                 <br>
-                <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button" x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput)" x-show="showCropButton" x-cloak>Crop Current Thumbnail</button>
+                <button class="text-16 mt-4 px-2 py-1 bg-yellow border border-black rounded text-sm cursor-pointer hover:bg-navy hover:text-white" type="button"
+                    x-on:click="_initCropper($refs.thumbnailDisplay, $refs.croppedImageInput, $refs.submitButton); showCropButton = false;"
+                    x-show="showCropButton" x-cloak >
+                    Crop Current Thumbnail
+                </button>
                 <input id="cropped-thumbnail" name="cropped-thumbnail" type="file" style="display:none" accept="image/*" x-ref="croppedImageInput">
                 <div class="my-4 max-h-[600px]" >
                     <img id="thumbnail-display" <?php if (!empty($listing_data['thumbnail_url'])) { echo 'src="' . $listing_data['thumbnail_url'] . '"'; } ?> x-ref="thumbnailDisplay" />
+                </div>
+                <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
+                    <span class="flex mr-4 mt-1">
+                        <svg class="animate-spin h-4 w-4 text-grey" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                    </span>
+                    <span>Processing image...</span>
                 </div>
             </div>
 
@@ -377,7 +391,7 @@ get_header();
 
 
 
-            <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white">
+            <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white disabled:bg-grey disabled:text-white" x-ref="submitButton">
                 <span class="htmx-indicator-replace">Submit</span>
                 <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
                     <svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
