@@ -47,15 +47,17 @@
             </div>
             <!-- Dropdown menu -->
             <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown" x-transition x-cloak>
+                <!--
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
+                    <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
                     Profile
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+                    <img class="h-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                     Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                -->
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
                     Listings
                 </a>
