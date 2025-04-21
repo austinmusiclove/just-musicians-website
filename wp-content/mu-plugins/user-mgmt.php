@@ -86,6 +86,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     if (is_wp_error($code_post)) {
         if ($code_post->get_error_code() == 'invalid_code') { return new WP_Error('invalid_link', 'Invalid listing invitation link'); }
         if ($code_post->get_error_code() == 'expired_code') { return new WP_Error('expired_link', 'Expired listing invitation link'); }
+        exit;
         return $code_post;
     }
 
@@ -119,10 +120,15 @@ function validate_temporary_code($temporary_code) {
     // Get temporary code
     $args = array(
         'post_type' => 'tmp_code',
-        'meta_key' => 'code',
-        'meta_value' => $temporary_code,
-        'compare' => '=',
+        'post_status' => 'publish',
         'posts_per_page' => 1,
+        'meta_query' => [
+            [
+                'key' => 'code',
+                'value' => $temporary_code,
+                'compare' => '=',
+            ]
+        ],
     );
     $tmp_code_query = new WP_Query($args);
     if (!$tmp_code_query->have_posts()) {
