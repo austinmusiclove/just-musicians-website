@@ -21,6 +21,10 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'get_listings_request_handler',
     ]);
+    register_rest_route( 'v1', 'listings/(?P<auuid>[a-zA-Z0-9-]+)', [
+        'methods' => 'GET',
+        'callback' => 'get_listing_by_auuid_request_handler',
+    ]);
     register_rest_route( 'v1', 'listings', [
         'methods' => 'POST',
         'callback' => 'post_listing_request_handler',
@@ -41,6 +45,11 @@ function get_listings_request_handler($request) {
         'verified' => $request['verified'],
         'page' => $request['page'],
     ]);
+}
+
+function get_listing_by_auuid_request_handler($request) {
+    $auuid = $request['auuid'];
+    return get_listings_by_auuid($auuid);
 }
 
 function post_listing_request_handler($request) {

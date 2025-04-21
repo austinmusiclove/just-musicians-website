@@ -87,3 +87,30 @@ function get_listing($args) {
     wp_reset_postdata();
     return $result;
 }
+
+
+function get_listings_by_auuid($auuid) {
+    $listings = [];
+    $query = new WP_Query(array(
+        'post_type'      => 'listing', // Change to your actual post type
+        'meta_query' => [
+            [
+                'key' => 'artist_uuid',
+                'value' => $auuid,
+                'compare' => '=',
+            ]
+        ],
+    ));
+
+    if ($query->have_posts()) {
+        while($query->have_posts()) {
+            $query->the_post();
+            $listings[] = [
+                'id'    => get_the_ID(),
+                'title' => get_the_title(),
+            ];
+        }
+    }
+
+    return $listings;
+}
