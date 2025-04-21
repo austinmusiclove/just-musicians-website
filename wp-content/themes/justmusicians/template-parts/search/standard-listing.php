@@ -144,7 +144,9 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
         <!-- Name and verification badge -->
         <div class="flex flex-row">
             <h2 class="text-22 font-bold">
-                <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>>
+                <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
+                    x-on:click="showArtistPageModal = true"
+                >
                     <?php echo $args['name']; ?>
                 </a>
             </h2>
