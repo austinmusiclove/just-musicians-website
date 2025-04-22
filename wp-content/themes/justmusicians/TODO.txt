@@ -1,5 +1,4 @@
 Milestones
-    allow delete listing
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -56,6 +55,7 @@ UX
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
+    better confirm delete listing dialog
 Features
     venue reviews
     artist reviews
@@ -64,11 +64,12 @@ UI
 Devon
     podcast - get violotor-blog svg
     new pages
-        listing landing page
         create/edit listing
         listing post page
         404 page
         collections page
+    trash icon
+    indicator on infinite scroll and listing form
 Paid features
     Advanced search filters
         venues played

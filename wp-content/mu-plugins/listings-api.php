@@ -14,21 +14,27 @@ require_once 'listings-api/get-listing.php';
 require_once 'listings-api/get-listings.php';
 require_once 'listings-api/create-listing.php';
 require_once 'listings-api/update-listing.php';
+require_once 'listings-api/delete-listing.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'listings', [
+    register_rest_route( 'v1/listings', '', [
         'methods' => 'GET',
         'callback' => 'get_listings_request_handler',
     ]);
-    register_rest_route( 'v1', 'listings/(?P<auuid>[a-zA-Z0-9-]+)', [
+    register_rest_route( 'v1/listings', '/(?P<auuid>[a-zA-Z0-9-]+)', [
         'methods' => 'GET',
         'callback' => 'get_listing_by_auuid_request_handler',
     ]);
-    register_rest_route( 'v1', 'listings', [
+    register_rest_route( 'v1/listings', '', [
         'methods' => 'POST',
         'callback' => 'post_listing_request_handler',
         'permission_callback' => 'check_post_listing_auth',
+    ]);
+    register_rest_route( 'v1/listings', '/(?P<post_id>\d+)', [
+        'methods' => 'DELETE',
+        'callback' => 'delete_listing_request_handler',
+        'permission_callback' => 'check_delete_listing_auth',
     ]);
 });
 
@@ -61,6 +67,9 @@ function post_listing_request_handler($request) {
     }
 }
 
+function delete_listing_request_handler($request) {
+    return _delete_listing(['post_id' => $request['post_id']]);
+}
 
 
 // parses args from the request, sanitizes them, and returns args ready for wp_insert_post or wp_update_post
@@ -163,6 +172,36 @@ function check_post_listing_auth() {
         }
 
     }
+}
+
+
+function check_delete_listing_auth($request) {
+    // User must be logged in
+    if (!is_user_logged_in()) {
+        return new WP_Error(401, 'Must be logged in to perform this action');
+    }
+
+    // Admin can delete any post
+    if (current_user_can('administrator')) {
+        return true;
+    }
+
+    // Any user can create a listing
+    $post_id = isset($request['post_id']) ? intval($request['post_id']) : 0;
+    if (!$post_id || get_post_type($post_id) !== 'listing') {
+        return new WP_Error(400, 'Invalid listing ID');
+    }
+
+    // Check current user's listings
+    $user_listings = get_user_meta(get_current_user_id(), 'listings', true);
+
+    // User can only delete their own listing
+    if (is_array($user_listings) and in_array($post_id, $user_listings)) {
+        return true;
+    } else {
+        return new WP_Error(401, 'You are not authorized to delete this listing');
+    }
+
 }
 
 

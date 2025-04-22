@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 function _update_listing($args) {
 
     if (empty($args['ID'])) {
-        return new WP_Error(400, 'Cannot update listing with out post id');
+        return new WP_Error(400, 'Cannot update listing without post id');
     }
 
     // Thumbnail Image
@@ -51,18 +51,3 @@ function _update_listing($args) {
     // Update search rank
     update_search_rank($post_id);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

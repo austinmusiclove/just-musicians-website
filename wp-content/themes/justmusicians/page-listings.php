@@ -27,6 +27,14 @@ get_header();
                     </div>
 
 
+                    <!------------ Delete Post Toasts ----------------->
+                    <div class="h-4" x-on:remove-listing-card="$refs[$event.detail.post_id].style.display = 'none'" >
+                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'delete-error-toast']); ?>
+                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'delete-success-toast']); ?>
+                        <div id="result"></div>
+                    </div>
+
+
                     <!------------ Listing invitation code Toasts ----------------->
                     <div>
                         <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'lic-error-toast']); ?>

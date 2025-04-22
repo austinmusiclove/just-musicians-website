@@ -4,6 +4,11 @@ function html_api_rewrite_rules() {
     add_rewrite_rule(
         '^wp-html/v1/([^/]+)/?',  // The URL pattern to match (e.g., /special-url/)
         'index.php?wp-html-v1=$matches[1]&' . $_SERVER['QUERY_STRING'],  // The query variable that WordPress will use to trigger custom logic
+        'bottom'
+    );
+    add_rewrite_rule(
+        '^wp-html/v1/listings/?([0-9]+)?/?$',
+        'index.php?wp-html-v1=listings&listing-id=$matches[1]&' . $_SERVER['QUERY_STRING'],
         'top'
     );
 }
@@ -11,6 +16,7 @@ add_action('init', 'html_api_rewrite_rules');
 
 function register_html_api_query_vars($vars) {
     $vars[] = 'wp-html-v1';  // Register the query variable
+    $vars[] = 'listing-id';  // Register the query variable
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');
@@ -23,6 +29,8 @@ function html_api_v1_template_redirects() {
             include_once get_template_directory() . '/html-api/listings.php'; exit;
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include_once get_template_directory() . '/html-api/post-listing.php'; exit;
+        } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+            include_once get_template_directory() . '/html-api/delete-listing.php'; exit;
         }
     } else if ($path == 'search-options') {
         include_once get_template_directory() . '/html-api/search-options.php'; exit;

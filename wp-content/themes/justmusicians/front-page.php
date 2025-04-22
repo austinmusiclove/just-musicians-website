@@ -50,7 +50,7 @@ get_header();
         hx-get="wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
         hx-target="#results"
-        hx-indicator="#spinner">
+        hx-indicator="#spinner"
     >
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
