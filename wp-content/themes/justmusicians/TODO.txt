@@ -1,5 +1,8 @@
 Milestones
+    allow delete listing
+    move verified only to the top
     Artist announce and invite new profiles
+        limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
         validation contact and links
             regex front end check that they are url for the correct site

@@ -50,6 +50,7 @@ get_header();
         hx-get="wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
         hx-target="#results"
+        hx-indicator="#spinner">
     >
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
@@ -104,6 +105,14 @@ get_header();
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
                         ?>
                     </span>
+
+
+                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                        <svg class="animate-spin h-8 w-8 text-navy" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                    </div>
 
 
                     <div class="xl:hidden">
