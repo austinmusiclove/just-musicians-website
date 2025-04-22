@@ -1,4 +1,9 @@
 Milestones
+    learnings from first round of accounts
+        filter invalid post ids in temporary code execution
+        make deleted listings go to trash not gone forever
+        figure out how duplicates happened
+        filter out spotify links that are not artist links
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -26,6 +31,8 @@ Milestones
         program to move unofficial tags to official if added
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
+        collections
+            when listing is deleted remove it from collections or filter invalid post ids
         auto pause when you scroll away from listing; especially for mobile
         ensemble size filter
         "Request Quote" or "Contact Directly" modal

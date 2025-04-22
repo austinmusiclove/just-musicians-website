@@ -33,12 +33,15 @@ function show_listings_count_column($value, $column_name, $user_id) {
         $listings = get_field('listings', 'user_' . $user_id);
 
         if (!empty($listings) && is_array($listings)) {
+            // Get only valid listings (still existing + published)
+            $valid_listings = array_filter($listings, function ($post_id) {
+                $post = get_post($post_id);
+                return $post && $post->post_status === 'publish';
+            });
             return count($listings);
         }
-
         return 0;
     }
-
     return $value;
 }
 
