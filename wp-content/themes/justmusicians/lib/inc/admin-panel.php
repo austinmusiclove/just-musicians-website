@@ -26,7 +26,6 @@ function add_listings_count_column($columns) {
     $columns['listings_count'] = 'Listings';
     return $columns;
 }
-
 add_action('manage_users_custom_column', 'show_listings_count_column', 10, 3);
 function show_listings_count_column($value, $column_name, $user_id) {
     if ($column_name === 'listings_count') {
@@ -42,3 +41,29 @@ function show_listings_count_column($value, $column_name, $user_id) {
 
     return $value;
 }
+
+
+// Sort users by date registered
+add_filter('manage_users_columns', function($columns) {
+    $columns['registered'] = 'Registered';
+    return $columns;
+});
+add_filter('manage_users_custom_column', function($output, $column_name, $user_id) {
+    if ($column_name === 'registered') {
+        $user = get_userdata($user_id);
+        return date('Y-m-d H:i', strtotime($user->user_registered));
+    }
+    return $output;
+}, 10, 3);
+add_filter('manage_users_sortable_columns', function($columns) {
+    $columns['registered'] = 'user_registered';
+    return $columns;
+});
+add_action('pre_get_users', function($query) {
+    if (!is_admin()) return;
+
+    if ($query->get('orderby') === 'user_registered') {
+        $query->set('orderby', 'user_registered');
+    }
+});
+
