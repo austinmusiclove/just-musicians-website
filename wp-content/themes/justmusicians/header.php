@@ -83,7 +83,7 @@
             <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
                 x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
-                x-on:keyup.enter="location.href = '/?qsearch=' + $el.value"
+                x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
                 hx-get="<?php echo get_site_url(); ?>/wp-html/v1/search-options"
