@@ -1,6 +1,4 @@
 Milestones
-    fix & in search query
-    add verification badge in active search
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
