@@ -32,11 +32,11 @@ function show_listings_count_column($value, $column_name, $user_id) {
         // Get ACF user meta field named 'listings' (array of post IDs)
         $listings = get_field('listings', 'user_' . $user_id);
 
-        if (!empty($listings) && is_array($listings)) {
+        if (!empty($listings) and is_array($listings)) {
             // Get only valid listings (still existing + published)
             $valid_listings = array_filter($listings, function ($post_id) {
                 $post = get_post($post_id);
-                return $post && $post->post_status === 'publish';
+                return $post and $post->post_status === 'publish';
             });
             return count($listings);
         }
