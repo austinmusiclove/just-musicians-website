@@ -342,10 +342,7 @@ get_header();
                 </div>
                 <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
                     <span class="flex mr-4 mt-1">
-                        <svg class="animate-spin h-4 w-4 text-grey" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                        </svg>
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?>
                     </span>
                     <span>Processing image...</span>
                 </div>
@@ -395,10 +392,7 @@ get_header();
             <button id="htmx-submit-button" type="submit" class="relative my-4 border p-4 bg-yellow hover:bg-navy hover:text-white disabled:bg-grey disabled:text-white" x-ref="submitButton">
                 <span class="htmx-indicator-replace">Submit</span>
                 <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
-                    <svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                    </svg>
+                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
                 </span>
             </button>
             <div id="result"></div>

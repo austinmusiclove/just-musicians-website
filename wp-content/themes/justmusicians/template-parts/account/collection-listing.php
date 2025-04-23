@@ -12,11 +12,13 @@
             <h2 class="text-18 sm:text-20 font-semibold"><a href="#"><?php echo $args['name']; ?></a></h2>
         </div>
         <div class="flex items-center gap-1 flex-wrap">
+            <?php $num_listings_label = $args['num_listings'] == 1 ? 'Listing' : 'Listings'; ?>
+            <p class="text-14"><?php echo $args['num_listings'] . ' ' . $num_listings_label; ?></p>
         </div>
     </div>
 
     <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
-        <a href="/favorites"><img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" /></a>
+        <a href="/collections/<?php echo $args['post_id']; ?>"><img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" /></a>
     </button>
     <?php if ($args['allow_delete']) { ?>
         <button class="absolute p-2 top-10 right-2 opacity-50 hover:opacity-100"

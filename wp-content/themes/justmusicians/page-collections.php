@@ -53,53 +53,31 @@ get_header();
 
 
                     <!-- Logged in -->
-                    <?php } else {
+                    <?php } else { ?>
 
-                        $current_user_id = get_current_user_id();
+                        <div
+                            hx-get="/wp-html/v1/collections"
+                            hx-trigger="load"
+                            hx-target="#results"
+                            hx-indicator="#spinner"
+                        ></div>
+
+                        <div id="results">
+                            <?php
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            ?>
+                        </div>
+
+                        <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                        </div>
 
 
-                        // Show Favorites collection
-
-                        // Get thumbnail for favorites
-                        $thumbnail_url = null;
-                        echo get_template_part('template-parts/account/collection-listing', '', [
-                            'post_id' => '',
-                            'name' => 'Favorites',
-                            'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
-                            'allow_delete' => false,
-                        ]);
-
-
-                        // Show User Collections
-                        $collections = get_user_meta($current_user_id, 'collections', true);
-                        if ( $collections and count($collections) > 0 ) {
-
-                            // Query the posts
-                            $args = [
-                                'post_type'      => 'collection',
-                                'post__in'       => $collections,
-                                'post_status'    => 'publish',
-                                'orderby'        => 'post__in',
-                                'posts_per_page' => -1
-                            ];
-                            $query = new WP_Query($args);
-                            if ($query->have_posts()) { ?>
-
-                                <!-- Display user's collections -->
-
-                                <?php while ($query->have_posts()) {
-                                    $query->the_post();
-                                    $thumbnail_url = null; //get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
-                                    echo get_template_part('template-parts/account/collection-listing', '', [
-                                        'post_id' => get_the_ID(),
-                                        'name' => get_post_meta(get_the_ID(), 'name', true),
-                                        'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
-                                        'allow_delete' => true,
-                                    ]);
-                                }
-                            }
-                        }
-                    } ?>
+                    <?php } ?>
 
 
                 </div>

@@ -1,5 +1,7 @@
 Milestones
+    bug: & in search term not working
     Artist announce and invite new profiles
+        make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
         validation contact and links
@@ -30,7 +32,23 @@ Milestones
     Free lance booker testing
         collections
             favorites only
+                collections apis
+                    create
+                    delete
+                    add listing
+                    remove listing
+                    get collection
+                    get collections
+                    handle auth
+                    html api files
+                        create
+                        delete
+                        add listing
+                        remove listing
+                        get collection
+                        get collections
                 show number of listings in favorites
+                eliminate page-favorites in favor of single-collection for favs and collections
                 favorites page that displays listings
                     favorite button adds to favorites
                     favorite button removes from favorites

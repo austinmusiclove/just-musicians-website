@@ -47,7 +47,7 @@ get_header();
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
         }"
-        hx-get="wp-html/v1/listings/"
+        hx-get="/wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
         hx-target="#results"
         hx-indicator="#spinner"
@@ -108,10 +108,7 @@ get_header();
 
 
                     <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
-                        <svg class="animate-spin h-8 w-8 text-navy" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                        </svg>
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                     </div>
 
 
