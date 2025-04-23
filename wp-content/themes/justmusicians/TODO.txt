@@ -1,9 +1,8 @@
 Milestones
     learnings from first round of accounts
         filter invalid post ids in temporary code execution
-        make deleted listings go to trash not gone forever
-        figure out how duplicates happened
-        filter out spotify links that are not artist links
+        ilter out spotify links that are not artist links
+        ffigure out how duplicates happened
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)

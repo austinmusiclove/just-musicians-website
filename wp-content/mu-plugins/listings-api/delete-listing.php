@@ -10,6 +10,6 @@ function _delete_listing($args) {
     }
 
     // Delete post
-    return wp_delete_post($args['post_id'], false);
+    return wp_trash_post($args['post_id']);
 
 }
