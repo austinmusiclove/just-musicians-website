@@ -114,13 +114,7 @@ function get_listings($args) {
 
         // Get valid video links for this listing
         $youtube_video_urls = get_field('youtube_video_urls');
-        $youtube_video_ids = [];
-        if ($youtube_video_urls) {
-            foreach($youtube_video_urls as $url) {
-                $video_id = get_youtube_video_id($url);
-                if ($video_id) { $youtube_video_ids[] = $video_id; }
-            }
-        }
+        $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
 
         $results[] = [
             'title' => get_the_title(),

@@ -66,4 +66,15 @@ function get_youtube_video_id($url) {
     return false;
 }
 
+function get_youtube_video_ids($urls) {
+    $youtube_video_ids = [];
+    if ($urls) {
+        foreach($urls as $url) {
+            $video_id = get_youtube_video_id($url);
+            if ($video_id) { $youtube_video_ids[] = $video_id; }
+        }
+    }
+    return $youtube_video_ids;
+}
+
 ?>

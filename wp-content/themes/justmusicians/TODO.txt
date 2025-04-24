@@ -9,6 +9,7 @@ Milestones
             clear off query args from urls except id or something from fb?
             clean city name to be the right capitalization
         after design
+            switch out toasts to new design
             send save automatically after input
             housekeeping
                 move inputs to forms template parts
@@ -28,7 +29,20 @@ Milestones
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         collections
-            when listing is deleted remove it from collections or filter invalid post ids
+            favorites only
+                show number of listings in favorites
+                favorites page that displays listings
+                    favorite button adds to favorites
+                    favorite button removes from favorites
+                    display total number of listings
+                    infinite scroll
+                    sortable
+                favorties thumbnail of first listing in favorites or symbol
+                ignore showing posts with ids that are not valid because they are deleted or not published
+            add collections
+                collection post type
+                pull in collections from user profile
+                when listing is deleted remove it from collections or filter invalid post ids
         auto pause when you scroll away from listing; especially for mobile
         ensemble size filter
         "Request Quote" or "Contact Directly" modal

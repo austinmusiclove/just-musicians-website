@@ -56,7 +56,8 @@
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile() { return this.showSearchOptions && this.width < 768 },
             showMobileMenu: false,
-            showMobileMenuDropdown: false,
+            showMobileMenuDropdown1: false,
+            showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
         }"
@@ -82,7 +83,7 @@
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow w-full flex items-stretch">
             <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
-                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
+                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
                 x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
@@ -154,11 +155,11 @@
                   <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
                   Profile
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="h-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+-->
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
+                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
--->
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
                   My Listings
