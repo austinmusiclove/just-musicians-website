@@ -5,17 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
     $results = [];
-    $search_term = sanitize_text_field($args['search']);
-    $name_search_term = sanitize_text_field($args['name_search']);
-    $types = rest_sanitize_array($args['types']);
-    $valid_types = validate_listing_types($types);
-    $valid_categories = validate_tax_input($args['categories'], 'mcategory');
-    $valid_genres = validate_tax_input($args['genres'], 'genre');
-    $valid_subgenres = validate_tax_input($args['subgenres'], 'subgenre');
-    $valid_instrumentations = validate_tax_input($args['instrumentations'], 'instrumentation');
-    $valid_settings = validate_tax_input($args['settings'], 'setting');
-    $verified = rest_sanitize_boolean($args['verified']);
-    $sanitized_page = sanitize_text_field($args['page']);
+    $search_term            = (!empty($args['search']))           ? sanitize_text_field($args['search'])                             : null;
+    $name_search_term       = (!empty($args['name_search']))      ? sanitize_text_field($args['name_search'])                        : null;
+    $verified               = (!empty($args['verified']))         ? rest_sanitize_boolean($args['verified'])                         : null;
+    $sanitized_page         = (!empty($args['page']))             ? sanitize_text_field($args['page'])                               : null;
+    $types                  = (!empty($args['types']))            ? rest_sanitize_array($args['types'])                              : [];
+    $valid_categories       = (!empty($args['categories']))       ? validate_tax_input($args['categories'], 'mcategory')             : [];
+    $valid_genres           = (!empty($args['genres']))           ? validate_tax_input($args['genres'], 'genre')                     : [];
+    $valid_subgenres        = (!empty($args['subgenres']))        ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
+    $valid_instrumentations = (!empty($args['instrumentations'])) ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
+    $valid_settings         = (!empty($args['settings']))         ? validate_tax_input($args['settings'], 'setting')                 : [];
+    $valid_types            = validate_listing_types($types);
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page = $page + 1;
 
@@ -100,14 +100,6 @@ function get_listings($args) {
             'compare' => 'IN',
         ];
     }
-    if (!empty($valid_tags)) {
-        $tax_queries[] = [
-            'taxonomy' => 'tag',
-            'field' => 'name',
-            'terms' => $valid_tags,
-            'compare' => 'IN',
-        ];
-    }
     $query_args['tax_query'] = count($tax_queries) == 0 ? null : (count($tax_queries) == 1 ? [...$tax_queries] : [
         'relation' => 'AND',
         ...$tax_queries,
@@ -161,7 +153,6 @@ function get_listings($args) {
         'valid_subgenres' => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
         'valid_settings' => $valid_settings,
-        'valid_tags' => $valid_tags,
         'max_num_results' => $max_num_results,
         'max_num_pages' => $max_num_pages,
         'next_page' => $next_page,

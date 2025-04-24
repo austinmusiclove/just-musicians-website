@@ -2,8 +2,8 @@
 
 // If search term is provided sort is done by relevance then by rank then by post id
 // If search term is not provided sort is done by rank then by post id
-// Required index (run this once on db): SET SESSION sql_mode='NO_ENGINE_SUBSTITUTION'; ALTER TABLE wp_posts ADD FULLTEXT(post_content);
-// If need to reverse this operation do: SET SESSION sql_mode='NO_ENGINE_SUBSTITUTION'; ALTER TABLE wp_posts DROP INDEX post_content;
+// Required index (run this once on db): SET SESSION sql_mode='NO_ENGINE_SUBSTITUTION'; ALTER TABLE wp_posts ADD FULLTEXT(post_title, post_content); SHOW CREATE TABLE wp_posts;
+// If need to reverse this operation do: SET SESSION sql_mode='NO_ENGINE_SUBSTITUTION'; ALTER TABLE wp_posts DROP INDEX post_content; SHOW CREATE TABLE wp_posts;
 
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -55,4 +55,3 @@ function listings_search_algo_disable_default_search($search, $query) {
     if (!is_a($query, 'WP_Query') || !$query->get('use_listings_search_algo')) return $search;
     return ''; // Bypass WP's default search
 }
-

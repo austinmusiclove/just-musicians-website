@@ -45,9 +45,6 @@ function _create_listing($args) {
     // Add post to user listings
     add_listing_to_current_user($post_id);
 
-    // Update search rank
-    update_search_rank($post_id);
-
     return $post_id;
 }
 

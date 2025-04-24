@@ -44,6 +44,7 @@ function get_listing($args) {
         'city'                   => get_field('city'),
         'state'                  => get_field('state'),
         'zip_code'               => get_field('zip_code'),
+        'bio'                    => get_field('bio'),
         'ensemble_size'          => get_field('ensemble_size'),
         'email'                  => get_field('email'),
         'phone'                  => get_field('phone'),

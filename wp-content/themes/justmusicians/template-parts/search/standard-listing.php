@@ -53,7 +53,7 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
 
                 <img class="w-full h-full object-cover"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                    src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+                    src="<?php echo $args['thumbnail_url']; ?>" <?php if (!empty($args['alpine_thumbnail_src'])) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
                     x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
 
@@ -132,7 +132,7 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
             <div class="bg-yellow-light aspect-4/3">
             <img class="w-full h-full object-cover"
                 <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                src="<?php echo $args['thumbnail_url']; ?>" <?php if ($args['alpine_thumbnail_src']) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+                src="<?php echo $args['thumbnail_url']; ?>" <?php if (!empty($args['alpine_thumbnail_src'])) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
             />
             </div>
         </div>

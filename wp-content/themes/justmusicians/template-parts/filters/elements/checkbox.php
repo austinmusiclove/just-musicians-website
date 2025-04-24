@@ -14,7 +14,7 @@
         if (!empty($args['x-model'])) { echo ' x-model="' . $args['x-model'] . '"'; }
         if (!empty($args['x-ref'])) { echo ' x-ref="' . $args['x-ref'] . '"'; }
         if (!empty($args['x-disabled'])) { echo ' x-bind:disabled="' . $args['x-disabled'] . '"'; }
-        if ($args['checked']) { echo ' checked'; }
+        if (!empty($args['checked'])) { echo ' checked'; }
     ?>
     />
 <span class="checkmark"></span><?php echo $args['label']; ?></label>

@@ -12,7 +12,7 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="<?php echo $scroll_pt; ?>">
+<html <?php language_attributes(); ?> class="<?php //echo $scroll_pt; ?>">
 <head>
 
 

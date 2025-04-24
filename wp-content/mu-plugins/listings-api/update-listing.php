@@ -47,7 +47,4 @@ function _update_listing($args) {
     if (is_wp_error($post_id)) {
         return $post_id;
     }
-
-    // Update search rank
-    update_search_rank($post_id);
 }

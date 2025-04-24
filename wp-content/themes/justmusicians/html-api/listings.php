@@ -1,16 +1,15 @@
 <?php
 // Get listings
-$page = $_GET['page'] ?: 1;
+$page = !empty($_GET['page']) ?: 1;
 $result = get_listings([
-    'search' => $_GET['search'],
-    'categories' => $_GET['categories'],
-    'genres' => $_GET['genres'],
-    'subgenres' => $_GET['subgenres'],
-    'instrumentations' => $_GET['instrumentations'],
-    'settings' => $_GET['settings'],
-    'tags' => $_GET['tags'],
-    'verified' => $_GET['verified'],
-    'page' => $page,
+    'search'           => !empty($_GET['search']) ? $_GET['search'] : '',
+    'categories'       => !empty($_GET['categories']) ? $_GET['categories'] : [],
+    'genres'           => !empty($_GET['genres']) ? $_GET['genres'] : [],
+    'subgenres'        => !empty($_GET['subgenres']) ? $_GET['subgenres'] : [],
+    'instrumentations' => !empty($_GET['instrumentations']) ? $_GET['instrumentations'] : [],
+    'settings'         => !empty($_GET['settings']) ? $_GET['settings'] : [],
+    'verified'         => !empty($_GET['verified']) ? $_GET['verified'] : null,
+    'page'             => $page,
 ]);
 $listings = $result['listings'];
 $valid_categories = $result['valid_categories'];
@@ -18,7 +17,6 @@ $valid_genres = $result['valid_genres'];
 $valid_subgenres = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
 $valid_settings = $result['valid_settings'];
-$valid_tags = $result['valid_tags'];
 $max_num_results = $result['max_num_results'];
 $max_num_pages = $result['max_num_pages'];
 $is_last_page = $page == $max_num_pages;

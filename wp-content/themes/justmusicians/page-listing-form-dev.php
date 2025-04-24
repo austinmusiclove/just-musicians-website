@@ -28,7 +28,7 @@ get_header();
 ?>
 
 
-<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php echo $header_padding; ?>">
+<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php //echo $header_padding; ?>">
     <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
     </div>
@@ -436,20 +436,20 @@ get_header();
             'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
             'description'                   => $listing_data ? $clean_description : 'Description',
             'genres'                        => $genres, // pass all genres; alpine_show_genre func will show the selected options
-            'thumbnail_url'                 => $listing_data['thumbnail_url'],
-            'verified'                      => $listing_data['verified'],
-            'website'                       => $listing_data['website'],
-            'facebook_url'                  => $listing_data['facebook_url'],
-            'instagram_url'                 => $listing_data['instagram_url'],
-            'x_url'                         => $listing_data['x_url'],
-            'youtube_url'                   => $listing_data['youtube_url'],
-            'tiktok_url'                    => $listing_data['tiktok_url'],
-            'bandcamp_url'                  => $listing_data['bandcamp_url'],
-            'spotify_artist_url'            => $listing_data['spotify_artist_url'],
-            'apple_music_artist_url'        => $listing_data['apple_music_artist_url'],
-            'soundcloud_url'                => $listing_data['soundcloud_url'],
-            'youtube_video_ids'             => $listing_data ? $listing_data['youtube_video_ids'] : [],
-            'youtube_player_ids'            => $listing_data['youtube_player_ids'],
+            'thumbnail_url'                 => $listing_data ? $listing_data['thumbnail_url']          : '',
+            'verified'                      => $listing_data ? $listing_data['verified']               : false,
+            'website'                       => $listing_data ? $listing_data['website']                : '',
+            'facebook_url'                  => $listing_data ? $listing_data['facebook_url']           : '',
+            'instagram_url'                 => $listing_data ? $listing_data['instagram_url']          : '',
+            'x_url'                         => $listing_data ? $listing_data['x_url']                  : '',
+            'youtube_url'                   => $listing_data ? $listing_data['youtube_url']            : '',
+            'tiktok_url'                    => $listing_data ? $listing_data['tiktok_url']             : '',
+            'bandcamp_url'                  => $listing_data ? $listing_data['bandcamp_url']           : '',
+            'spotify_artist_url'            => $listing_data ? $listing_data['spotify_artist_url']     : '',
+            'apple_music_artist_url'        => $listing_data ? $listing_data['apple_music_artist_url'] : '',
+            'soundcloud_url'                => $listing_data ? $listing_data['soundcloud_url']         : '',
+            'youtube_video_ids'             => $listing_data ? $listing_data['youtube_video_ids']      : [],
+            'youtube_player_ids'            => $listing_data ? $listing_data['youtube_video_ids']      : [],
             'lazyload_thumbnail'            => false,
             'last'                          => false,
             'is_preview'                    => true,
