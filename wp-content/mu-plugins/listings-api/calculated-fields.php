@@ -13,10 +13,8 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
     // Don't run on auto save
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
-    // Avoid infinite loop: Only schedule cron if this is not a cron job
-    if (did_action('listing_calc_content_cron' . $post_id)) {
-        return null;
-    } else {
+    // Avoid infinite loop: Only schedule cron if this is not an internal calc operation
+    if (!did_action('listing_calc_content' . $post_id)) {
 
         // Schedle cron if there isn't one already scheduled for this post
         if (!wp_next_scheduled('listing_calc_content_event', [$post_id])) {
@@ -24,10 +22,8 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
         }
     }
 
-    // Avoid infinite loop: Only schedule cron if this is not a cron job
-    if (did_action('listing_calc_rank_cron' . $post_id)) {
-        return null;
-    } else {
+    // Avoid infinite loop: Only schedule cron if this is not an internal calc operation
+    if (!did_action('listing_calc_rank' . $post_id)) {
 
         // Schedule a one-time cron job to update the rank
         if (!wp_next_scheduled('listing_calc_rank_event', [$post_id])) {
@@ -35,11 +31,13 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
         }
     }
 
+    return null;
+
 }, 10, 3);
 
 // Cron job for updating content
 add_action('listing_calc_content_event', function($post_id) {
-    do_action('listing_calc_content_cron' . $post_id); // Avoid infinite loop
+    do_action('listing_calc_content' . $post_id); // Avoid infinite loop
 
     // Make sure post exist
     $post = get_post($post_id);
@@ -51,7 +49,7 @@ add_action('listing_calc_content_event', function($post_id) {
 
 // Cron job for updating rank
 add_action('listing_calc_rank_event', function($post_id) {
-    do_action('listing_calc_rank_cron' . $post_id); // Avoid infinite loop
+    do_action('listing_calc_rank' . $post_id); // Avoid infinite loop
 
     // Make sure post exist
     $post = get_post($post_id);
