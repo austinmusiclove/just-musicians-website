@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
-require_once 'listings-api/search-algo.php';
+//require_once 'listings-api/search-algo.php'; // Failed experiement
 require_once 'listings-api/calculated-fields.php';
 require_once 'listings-api/parse-args.php';
 require_once 'listings-api/authorization.php';

@@ -20,14 +20,16 @@ function get_listings($args) {
     $next_page = $page + 1;
 
     $query_args = [
-        'post_type'                => 'listing',
-        'post_status'              => 'publish',
-        'paged'                    => $page,
-        'posts_per_page'           => 10,
-        'use_listings_search_algo' => true,
+        'post_type'      => 'listing',
+        'post_status'    => 'publish',
+        'paged'          => $page,
+        'posts_per_page' => 10,
+        'orderby'        => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
+        'meta_key'       => 'rank',
     ];
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
+        $query_args['orderby'] = 'relevance';
     }
     $meta_queries = [];
     $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];

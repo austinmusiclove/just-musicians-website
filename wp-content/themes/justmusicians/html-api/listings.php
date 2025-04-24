@@ -1,6 +1,6 @@
 <?php
 // Get listings
-$page = !empty($_GET['page']) ?: 1;
+$page = $_GET['page'] ?? 1;
 $result = get_listings([
     'search'           => !empty($_GET['search']) ? $_GET['search'] : '',
     'categories'       => !empty($_GET['categories']) ? $_GET['categories'] : [],

@@ -1,5 +1,4 @@
 Milestones
-    DiscoTex does not come up for "disco" search
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
