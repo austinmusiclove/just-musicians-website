@@ -15,7 +15,7 @@
 get_header();
 
 ?>
-<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php echo $header_padding; ?>">
+<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
     <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
     </div>

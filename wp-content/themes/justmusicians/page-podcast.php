@@ -7,7 +7,7 @@
 get_header();
 ?>
 
-<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php echo $header_padding; ?>">
+<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
 
     <!--<img class="w-32 absolute top-0 right-0 z-10" src="<?php echo get_template_directory_uri() . '/lib/images/other/violator-blog.svg'; ?>" />-->
     <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">

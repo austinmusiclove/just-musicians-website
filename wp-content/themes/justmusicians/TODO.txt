@@ -46,6 +46,7 @@ Data
     change venue in venue review to post object
     check for 404s in links in regular procedure to update content and rank
     content moderation for images
+    garbage collector for images that are no longer linked to profiles
 UX
     media slider
         dad say sound not work on mobile
