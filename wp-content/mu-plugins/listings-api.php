@@ -10,6 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
+require_once 'listings-api/search-algo.php';
 require_once 'listings-api/get-listing.php';
 require_once 'listings-api/get-listings.php';
 require_once 'listings-api/create-listing.php';

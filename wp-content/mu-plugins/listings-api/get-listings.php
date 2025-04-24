@@ -20,12 +20,11 @@ function get_listings($args) {
     $next_page = $page + 1;
 
     $query_args = [
-        'post_type' => 'listing',
-        'posts_per_page' => 10,
-        'post_status' => 'publish',
-        'paged' => $page,
-        'orderby' => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
-        'meta_key' => 'rank',
+        'post_type'                => 'listing',
+        'post_status'              => 'publish',
+        'paged'                    => $page,
+        'posts_per_page'           => 10,
+        'use_listings_search_algo' => true,
     ];
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];

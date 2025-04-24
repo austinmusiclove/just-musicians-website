@@ -1,4 +1,5 @@
 Milestones
+    move calc rank and content to some kind of update post hook
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -59,6 +60,7 @@ UX
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog
+    add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
 Features
     venue reviews
     artist reviews
