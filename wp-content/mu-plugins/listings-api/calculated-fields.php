@@ -1,14 +1,14 @@
 <?php
 // Handles populating calculated fields upon every save of a listing post
 
-// delay between scheduling and cron job execution
-$cron_delay = 300; // schedule cron jobs 5 min later so there is time for image processing and other post updates to fully happen and to cut back on the amount of crons happening in an update session
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // When post gets updated call the calc content api and avoid infinite loop when the post gets updated by the calc api
 add_action('save_post_listing', function ($post_id, $post, $update) {
+    // delay between scheduling and cron job execution
+    $cron_delay = 300; // schedule cron jobs 5 min later so there is time for image processing and other post updates to fully happen and to cut back on the amount of crons happening in an update session
 
     // Don't run on auto save
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
@@ -63,8 +63,6 @@ add_action('listing_calc_rank_event', function($post_id) {
 
 
 function update_search_rank($post_id) {
-    $cur_rank = get_post_meta( $post_id, 'rank', true );
-
     $rank = 0;
 
     // Loop through fields to check if they have a value
@@ -82,10 +80,8 @@ function update_search_rank($post_id) {
     // Boost by admin defined amount
     $boost = get_post_meta( $post_id, 'rank_boost', true );
     $rank += $boost ? $boost : 0;
-    error_log('Rank :: ' . $rank);
 
     $result = update_post_meta( $post_id, 'rank', $rank );
-    $cur_rank = get_post_meta( $post_id, 'rank', true );
 }
 
 

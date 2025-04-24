@@ -1,5 +1,4 @@
 Milestones
-    move calc rank and content to some kind of update post hook
     Artist announce and invite new profiles
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
