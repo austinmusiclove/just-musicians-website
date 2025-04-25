@@ -15,7 +15,7 @@ get_header();
 ?>
 
 <div id="page" class="flex flex-col grow">
-    <form id="listing-form"
+    <form id="hx-form"
         x-data="{
             showCategoryModal: false,
             showGenreModal: false,
@@ -96,7 +96,7 @@ get_header();
                         x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
                         x-on:mute-youtube-players="_toggleMute()"
                         x-init="_setupVisibilityListener()"
-                        >
+                    >
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
                             echo get_template_part('template-parts/search/standard-listing-skeleton');

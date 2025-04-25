@@ -17,10 +17,11 @@
             } ?>
         </div>
     </div>
-
-    <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
-        <a href="/listing-form/?lid=<?php echo $args['post_id']; ?>"><img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" /></a>
-    </button>
+    <a href="/listing-form/?lid=<?php echo $args['post_id']; ?>">
+        <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
+            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
+        </button>
+    </a>
     <button class="absolute p-2 top-10 right-2 opacity-50 hover:opacity-100"
         hx-delete="/wp-html/v1/listings/<?php echo $args['post_id']; ?>"
         hx-confirm="Are you sure you want to delete this listing?"

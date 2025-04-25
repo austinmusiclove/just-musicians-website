@@ -99,8 +99,8 @@ function justmusicians_scripts() {
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
-    // Favorites and collections pages
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/favorites')) {
+    // Collections pages
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/collection/')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);

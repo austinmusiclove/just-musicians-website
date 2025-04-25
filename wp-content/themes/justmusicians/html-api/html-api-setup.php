@@ -12,13 +12,17 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
-        //'^wp-html/v1/collections/?([0-9]+)?/?$',
+        '^wp-html/v1/listings-by-id$',
+        'index.php?wp-html-v1=listings-by-id&' . $_SERVER['QUERY_STRING'],
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/collections(?:/([0-9]+))?/?$',
         'index.php?wp-html-v1=collections&collection-id=$matches[1]&' . $_SERVER['QUERY_STRING'],
         'top'
     );
     add_rewrite_rule(
-        '^collections/favorites/?$',
+        '^collection/favorites/?$',
         'index.php?wp-html-v1=favorites',
         'top'
     );
@@ -46,14 +50,10 @@ function html_api_v1_template_redirects() {
         } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             include_once get_template_directory() . '/html-api/delete-listing.php'; exit;
         }
+    } else if ($path == 'listings-by-id') {
+        include_once get_template_directory() . '/html-api/get-listings-by-id.php'; exit;
     } else if ($path == 'collections') {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if ($collection_id) {
-                include_once get_template_directory() . '/html-api/get-collection.php'; exit;
-            } else {
-                include_once get_template_directory() . '/html-api/get-collections.php'; exit;
-            }
-        }
+        include_once get_template_directory() . '/html-api/get-collections.php'; exit;
     } else if ($path == 'favorites') {
         include_once get_template_directory() . '/single-collection.php'; exit;
     } else if ($path == 'search-options') {

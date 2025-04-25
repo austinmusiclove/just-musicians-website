@@ -22,7 +22,7 @@ get_header();
                 <div class="col md:col-span-6 py-6 md:py-12">
 
                     <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                        <h1 class="font-bold text-22 sm:text-25">My Collections</h1>
+                        <a href="/collections"><h1 class="font-bold text-22 sm:text-25">My Collections</h1></a>
                     </div>
 
 
@@ -62,7 +62,7 @@ get_header();
                             hx-indicator="#spinner"
                         ></div>
 
-                        <div id="results">
+                        <span id="results">
                             <?php
                                 echo get_template_part('template-parts/search/standard-listing-skeleton');
                                 echo get_template_part('template-parts/search/standard-listing-skeleton');
@@ -70,7 +70,7 @@ get_header();
                                 echo get_template_part('template-parts/search/standard-listing-skeleton');
                                 echo get_template_part('template-parts/search/standard-listing-skeleton');
                             ?>
-                        </div>
+                        </span>
 
                         <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
                             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>

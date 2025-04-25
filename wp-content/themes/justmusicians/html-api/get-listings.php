@@ -1,4 +1,5 @@
 <?php
+
 // Get listings
 $page = $_GET['page'] ?? 1;
 $result = get_listings([
@@ -11,16 +12,16 @@ $result = get_listings([
     'verified'         => !empty($_GET['verified']) ? $_GET['verified'] : null,
     'page'             => $page,
 ]);
-$listings = $result['listings'];
-$valid_categories = $result['valid_categories'];
-$valid_genres = $result['valid_genres'];
-$valid_subgenres = $result['valid_subgenres'];
+$listings               = $result['listings'];
+$valid_categories       = $result['valid_categories'];
+$valid_genres           = $result['valid_genres'];
+$valid_subgenres        = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
-$valid_settings = $result['valid_settings'];
-$max_num_results = $result['max_num_results'];
-$max_num_pages = $result['max_num_pages'];
-$is_last_page = $page == $max_num_pages;
-$next_page = $result['next_page'];
+$valid_settings         = $result['valid_settings'];
+$max_num_results        = $result['max_num_results'];
+$max_num_pages          = $result['max_num_pages'];
+$is_last_page           = $page == $max_num_pages;
+$next_page              = $result['next_page'];
 
 // Render listings
 if (count($listings) > 0) {
@@ -31,28 +32,28 @@ if (count($listings) > 0) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
         get_template_part('template-parts/search/standard-listing', '', [
-            'name' => $listing['name'],
-            'location' => $listing['city'] . ', ' . $listing['state'],
-            'description' => $listing['description'],
-            'genres' => $genres,
-            'thumbnail_url' => $listing['thumbnail_url'],
-            'website' => $listing['website'],
-            'facebook_url' => $listing['facebook_url'],
-            'instagram_url' => $listing['instagram_url'],
-            'x_url' => $listing['x_url'],
-            'youtube_url' => $listing['youtube_url'],
-            'tiktok_url' => $listing['tiktok_url'],
-            'bandcamp_url' => $listing['bandcamp_url'],
-            'spotify_artist_url' => $listing['spotify_artist_url'],
+            'name'                   => $listing['name'],
+            'location'               => $listing['city'] . ', ' . $listing['state'],
+            'description'            => $listing['description'],
+            'genres'                 => $genres,
+            'thumbnail_url'          => $listing['thumbnail_url'],
+            'website'                => $listing['website'],
+            'facebook_url'           => $listing['facebook_url'],
+            'instagram_url'          => $listing['instagram_url'],
+            'x_url'                  => $listing['x_url'],
+            'youtube_url'            => $listing['youtube_url'],
+            'tiktok_url'             => $listing['tiktok_url'],
+            'bandcamp_url'           => $listing['bandcamp_url'],
+            'spotify_artist_url'     => $listing['spotify_artist_url'],
             'apple_music_artist_url' => $listing['apple_music_artist_url'],
-            'soundcloud_url' => $listing['soundcloud_url'],
-            'youtube_video_urls' => $listing['youtube_video_urls'],
-            'youtube_video_ids' => $listing['youtube_video_ids'],
-            'verified' => $listing['verified'],
-            'lazyload_thumbnail' => $index >= 3,
-            'last' => $index == array_key_last($listings),
-            'is_last_page' => $is_last_page,
-            'next_page' => $next_page,
+            'soundcloud_url'         => $listing['soundcloud_url'],
+            'youtube_video_urls'     => $listing['youtube_video_urls'],
+            'youtube_video_ids'      => $listing['youtube_video_ids'],
+            'verified'               => $listing['verified'],
+            'lazyload_thumbnail'     => $index >= 3,
+            'last'                   => $index == array_key_last($listings),
+            'is_last_page'           => $is_last_page,
+            'next_page'              => $next_page,
         ]);
     }
 

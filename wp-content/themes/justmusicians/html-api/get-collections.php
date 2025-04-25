@@ -1,60 +1,27 @@
 <?php
-$collections = get_collections();
 
-foreach ($collections as $collection) {
-    echo get_template_part('template-parts/account/collection-listing', '', [
-        'post_id'       => $collection['post_id'],
-        'name'          => 'Favorites',
-        'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
-        'num_listings'  => count($collection['listings']),
-        'edit_url'      => $collection['post_id'] == 'favorites' ? '/favorites' : '/collections/' . $collection['post_id'],
-        'allow_delete'  => $collection['post_id'] != 'favorites',
-    ]);
-}
-
-exit;
-
-// Show Favorites collection
-
-// Get thumbnail for favorites
-$thumbnail_url = null;
-echo get_template_part('template-parts/account/collection-listing', '', [
-    'post_id' => '',
-    'name' => 'Favorites',
-    'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
-    'num_listings' => 1,
-    'allow_delete' => false,
+// Get Collections
+$page = $_GET['page'] ?? 1;
+$result = get_collections([
+    'page' => $page,
 ]);
 
+$max_num_results = $result['max_num_results'];
+$max_num_pages   = $result['max_num_pages'];
+$is_last_page    = $page == $max_num_pages;
+$next_page       = $result['next_page'];
+$collections     = $result['collections'];
 
-// Show User Collections
-$current_user_id = get_current_user_id();
-$collections = get_user_meta($current_user_id, 'collections', true);
-if ( $collections and count($collections) > 0 ) {
-
-    // Query the posts
-    $args = [
-        'post_type'      => 'collection',
-        'post__in'       => $collections,
-        'post_status'    => 'publish',
-        'orderby'        => 'post__in',
-        'posts_per_page' => -1
-    ];
-    $query = new WP_Query($args);
-    if ($query->have_posts()) { ?>
-
-        <!-- Display user's collections -->
-
-        <?php while ($query->have_posts()) {
-            $query->the_post();
-            $thumbnail_url = null; //get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
-            echo get_template_part('template-parts/account/collection-listing', '', [
-                'post_id' => get_the_ID(),
-                'name' => get_post_meta(get_the_ID(), 'name', true),
-                'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
-                'num_listings' => 0,
-                'allow_delete' => true,
-            ]);
-        }
-    }
+foreach ($collections as $index => $collection) {
+    echo get_template_part('template-parts/account/collection-listing', '', [
+        'post_id'        => $collection['post_id'],
+        'name'           => $collection['name'],
+        'thumbnail_urls' => $collection['thumbnail_urls'],
+        'num_listings'   => count($collection['listings']),
+        'permalink'      => $collection['permalink'],
+        'allow_delete'   => $collection['post_id'] != 'favorites',
+        'last'           => $index == array_key_last($collections),
+        'is_last_page'   => $is_last_page,
+        'next_page'      => $next_page,
+    ]);
 }

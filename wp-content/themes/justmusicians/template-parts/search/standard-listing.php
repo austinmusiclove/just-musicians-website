@@ -1,13 +1,15 @@
 <?php
+
 $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
+
 ?>
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
-    hx-get="/wp-html/v1/listings/?page=<?php echo $args['next_page']; ?>"
+    hx-get="/wp-html/v1/<?php echo !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>/?page=<?php echo $args['next_page']; ?>"
     hx-trigger="revealed once"
     hx-swap="beforeend"
-    hx-include="#listing-form"
+    hx-include="#hx-form"
     <?php } ?>
 >
 
