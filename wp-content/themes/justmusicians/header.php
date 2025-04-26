@@ -185,11 +185,6 @@
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showFavModal',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'Favorites and the ability to create custom lists are both coming soon for signed in users.',
-        ]);
-        echo get_template_part('template-parts/global/modal', '', [
             'alpine_show_var' => 'showInquiryModalPlaceholder',
             'heading' => 'Coming Soon',
             'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',

@@ -30,31 +30,26 @@ Milestones
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         collections
-            favorites only
-                collections apis
+            v1
+                when on non fav single-collection page make add remove work
+                ask user to sing up / log in to use fav button if not logged in
+                ignore showing posts with ids that are not valid because they are deleted or not published
+                when listing is deleted remove it from collections or filter invalid post ids
+                check auth from json api
+            v2
+                create UI for favorite button
+                    expanded heart button UI
+                    drop down UI
+                    expand on hover
+                    empty heart click adds to favorites and opens drop down
+                    clicking drop arrow opens drop down
+                    allow create new
+                collections apis and html apis
                     create
                     delete
-                    add listing
-                    remove listing
-                    handle auth
-                    html api files
-                        create
-                        delete
-                        add listing
-                        remove listing
-                show number of listings in favorites
-                eliminate page-favorites in favor of single-collection for favs and collections
-                favorites page that displays listings
-                    favorite button adds to favorites
-                    favorite button removes from favorites
-                    display total number of listings
-                    infinite scroll
-                    sortable
-                ignore showing posts with ids that are not valid because they are deleted or not published
-            add collections
-                collection post type
-                pull in collections from user profile
-                when listing is deleted remove it from collections or filter invalid post ids
+                sortable listings in single-collection.php
+            v3
+                devon design
         auto pause when you scroll away from listing; especially for mobile
         ensemble size filter
         "Request Quote" or "Contact Directly" modal
@@ -101,6 +96,7 @@ Devon
         collections page
     trash icon
     indicator on infinite scroll and listing form
+    handle long names on listings
 Paid features
     Advanced search filters
         venues played
@@ -114,7 +110,8 @@ Security
     audit rest api inputs and html api inputs
 Performance
     prefetch on mouse down
-    first 5 results without second trip to server
+    first page of results without second trip to server
+    load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
 Bugs
     listing form: if you go back to create listing page after creating and the thumbnail input is filled, there is no cropped image and submit will be allowed without thumbnail

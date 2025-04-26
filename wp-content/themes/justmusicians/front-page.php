@@ -11,6 +11,10 @@
  *
  * @package JustMuscians
  */
+
+// Get user favorites and collections
+$saved_listings = get_users_saved_listings();
+
 get_header();
 ?>
 
@@ -69,7 +73,19 @@ get_header();
 
                     </div>
                 </div>
+
+
+
+
                 <div class="col md:col-span-6 py-6 md:py-4">
+
+
+                    <!------------ Toasts ----------------->
+                    <div class="h-4">
+                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
+                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', []); ?>
+                    </div>
+
 
                     <div class="flex items-center justify-between md:justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
@@ -80,6 +96,11 @@ get_header();
 
                     <span id="results"
                         x-data='{
+                            saved_listings: <?php echo clean_arr_for_doublequotes($saved_listings); ?>,
+                            _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
+                            _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
+                            _addToFavorites(postId)           { return addToFavorites(this, postId); },
+                            _removeFromFavorites(postId)      { return removeFromFavorites(this, postId); },
                             players: {},
                             playersMuted: true,
                             playersPaused: false,

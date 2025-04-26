@@ -32,6 +32,7 @@ if (count($listings) > 0) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
         get_template_part('template-parts/search/standard-listing', '', [
+            'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],

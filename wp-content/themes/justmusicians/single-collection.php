@@ -14,7 +14,7 @@ if ($is_favorites) {
     $listings = get_field('listings');
 }
 $listings = !empty($listings) ? $listings : [];
-
+$saved_listings = get_users_saved_listings();
 
 get_header();
 
@@ -32,6 +32,11 @@ get_header();
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12"
                     x-data='{
+                        saved_listings: <?php echo clean_arr_for_doublequotes($saved_listings); ?>,
+                        _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
+                        _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
+                        _addToFavorites(postId)           { return addToFavorites(this, postId); },
+                        _removeFromFavorites(postId)      { return removeFromFavorites(this, postId); },
                         players: {},
                         playersMuted: true,
                         playersPaused: false,
@@ -63,10 +68,10 @@ get_header();
                     </div>
 
 
-                    <!------------ Delete Toasts ----------------->
-                    <div class="h-4" x-on:remove-listing-card="$refs[$event.detail.post_id].style.display = 'none'" >
-                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'delete-error-toast']); ?>
-                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'delete-success-toast']); ?>
+                    <!------------ Toasts ----------------->
+                    <div class="h-4">
+                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
+                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', []); ?>
                         <div id="result"></div>
                     </div>
 

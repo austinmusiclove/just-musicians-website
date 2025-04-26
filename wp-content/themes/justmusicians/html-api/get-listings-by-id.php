@@ -21,6 +21,7 @@ if (count($listings) > 0) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
         get_template_part('template-parts/search/standard-listing', '', [
+            'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
@@ -41,6 +42,7 @@ if (count($listings) > 0) {
             'verified'               => $listing['verified'],
             'lazyload_thumbnail'     => $index >= 3,
             'hx-request_path'        => 'listings-by-id',
+            'allow_hide'             => true,
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,

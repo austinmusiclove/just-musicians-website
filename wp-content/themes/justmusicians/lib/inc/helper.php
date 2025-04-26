@@ -32,8 +32,8 @@ function clean_str_for_doublequotes($string) {
 
 function get_terms_decoded($taxonomy, $fields, $search=false, $hide_empty=false) {
     $args = [
-        'taxonomy' => $taxonomy,
-        'fields' => 'names',
+        'taxonomy'   => $taxonomy,
+        'fields'     => 'names',
         'hide_empty' => $hide_empty,
     ];
     if ($search) { $args['search'] = $search; }

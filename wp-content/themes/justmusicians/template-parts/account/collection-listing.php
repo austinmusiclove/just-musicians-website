@@ -30,7 +30,7 @@
 
     <div class="py-2 flex flex-col gap-y-2">
         <div class="flex flex-row">
-            <h2 class="text-18 sm:text-20 font-semibold"><a href="#"><?php echo $args['name']; ?></a></h2>
+            <a href="<?php echo $args['permalink']; ?>"><h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo $args['name']; ?></h2></a>
         </div>
         <div class="flex items-center gap-1 flex-wrap">
             <?php $num_listings_label = $args['num_listings'] == 1 ? 'Listing' : 'Listings'; ?>

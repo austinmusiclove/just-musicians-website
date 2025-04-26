@@ -23,4 +23,4 @@ if ( is_wp_error($post) ) {
 
 // Success Response
 echo '<span x-init="$dispatch(\'delete-success-toast\', { \'message\': \'' . 'Listing Deleted Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'remove-listing-card\', { \'post_id\': \'' . $post_id . '-listing\'})"></span>';
+echo '<span x-init="$dispatch(\'hide-listing\')"></span>';

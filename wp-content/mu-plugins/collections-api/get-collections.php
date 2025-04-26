@@ -3,6 +3,8 @@
 function get_collections($args) {
 
     // Handle paging
+    $nothumbnails = (!empty($args['nothumbnails'])) ? rest_sanitize_boolean($args['nothumbnails']) : false;
+    $nopaging = (!empty($args['nopaging'])) ? rest_sanitize_boolean($args['nopaging']) : false;
     $sanitized_page = (!empty($args['page'])) ? sanitize_text_field($args['page']) : null;
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page = $page + 1;
@@ -16,10 +18,10 @@ function get_collections($args) {
     // Get Favorites on page 1 only
     if ($page == 1) {
         $favorites = get_user_meta($current_user_id, 'favorites', true);
-        $favorites = !empty($favorites) ? $favorites : [];
+        $favorites = is_array($favorites) ? array_map(fn($post_id) => strval($post_id), $favorites) : [];
 
         // Get favorites thumbnail(s)
-        $thumbnails = get_thumbnails_from_listings($favorites);
+        $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($favorites);
 
         $collections[] = [
             'post_id'        => 'favorites',
@@ -33,14 +35,20 @@ function get_collections($args) {
     // Get Collections
     $user_collections = get_user_meta($current_user_id, 'collections', true);
     if ( $user_collections and count($user_collections) > 0 ) {
-        $query = new WP_Query([
+
+        $query_args = [
             'post_type'      => 'collection',
             'post__in'       => $user_collections,
             'post_status'    => 'publish',
             'orderby'        => 'post__in',
-            'paged'          => $page,
-            'posts_per_page' => 10,
-        ]);
+        ];
+        if ($nopaging) {
+            $query_args['nopaging'] = true;
+        } else {
+            $query_args['paged']          = $page;
+            $query_args['posts_per_page'] = 10;
+        }
+        $query = new WP_Query($query_args);
         $max_num_results = $query->found_posts + 1;
         $max_num_pages = $query->max_num_pages;
 
@@ -49,8 +57,8 @@ function get_collections($args) {
 
             // Get thumbnail(s)
             $listings = get_field('listings') ?? [];
-            $listings = !empty($listings) ? $listings : [];
-            $thumbnails = get_thumbnails_from_listings($listings);
+            $listings = is_array($listings) ? array_map(fn($post_id) => strval($post_id), $listings) : [];
+            $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listings);
 
             $collections[] = [
                 'post_id'        => get_the_ID(),

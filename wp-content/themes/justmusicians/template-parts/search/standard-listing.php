@@ -5,6 +5,8 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
 ?>
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
+    x-data="{ showListing: true }"
+    x-show="showListing" x-cloak
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
     hx-get="/wp-html/v1/<?php echo !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>/?page=<?php echo $args['next_page']; ?>"
     hx-trigger="revealed once"
@@ -14,9 +16,30 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
 >
 
     <?php if (!$is_preview) { ?>
-    <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105" x-on:click="showFavModal = ! showFavModal">
-        <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
-    </button>
+    <span id="favorite-button-<?php echo $args['post_id']; ?>"
+        <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="showListing = false;"<?php } ?>
+    >
+        <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
+            x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+            x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
+            hx-post="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+            hx-trigger="click"
+            hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+        >
+            <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
+        </button>
+        <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
+            x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+            x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
+            hx-delete="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+            hx-trigger="click"
+        >
+            <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite-red.svg'; ?>" />
+        </button>
+        <span id="favorites-result-<?php echo $args['post_id']; ?>"></span>
+    </span>
     <?php } ?>
 
     <?php
