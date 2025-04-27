@@ -136,6 +136,7 @@ function validate_temporary_code($temporary_code) {
     );
     $tmp_code_query = new WP_Query($args);
     if (!$tmp_code_query->have_posts()) {
+        wp_reset_postdata();
         return new WP_Error('invalid_code', 'Invalid Code');
     }
     $tmp_code_post = $tmp_code_query->posts[0];
@@ -143,8 +144,10 @@ function validate_temporary_code($temporary_code) {
     // Check if the code has expired
     $expiration_timestamp = get_post_meta($tmp_code_post->ID, 'expiration_timestamp', true);
     if ($expiration_timestamp and $expiration_timestamp < time()) {
+        wp_reset_postdata();
         return new WP_Error('expired_code', 'This code has expired.');
     }
 
+    wp_reset_postdata();
     return $tmp_code_post;
 }

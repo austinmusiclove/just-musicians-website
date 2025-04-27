@@ -142,6 +142,7 @@ function get_listings($args) {
         ];
     }
 
+    wp_reset_postdata();
     return [
         'listings' => $results,
         'valid_types' => $valid_types,

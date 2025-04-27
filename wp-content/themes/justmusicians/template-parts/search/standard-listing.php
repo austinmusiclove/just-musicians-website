@@ -1,6 +1,8 @@
 <?php
 
-$is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
+$is_preview    = !empty($args['is_preview']) ? $args['is_preview'] : false;
+$collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
+error_log('std listing: ' . $collection_id)
 
 ?>
 
@@ -22,7 +24,7 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
         <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
             x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
             x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
-            hx-post="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+            hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
             hx-trigger="click"
             hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
@@ -32,7 +34,7 @@ $is_preview = !empty($args['is_preview']) ? $args['is_preview'] : false;
         <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
             x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
             x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
-            hx-delete="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+            hx-delete="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
             hx-trigger="click"
         >

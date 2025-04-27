@@ -1,16 +1,20 @@
 <?php
 
 // Get listings
-$page = $_GET['page'] ?? 1;
+$page          = $_GET['page']          ?? 1;
+$collection_id = $_GET['collection_id'] ?? 0;
 $result = get_listings_by_id([
     'listing_ids' => !empty($_GET['listing_ids']) ? $_GET['listing_ids'] : [],
     'page'        => $page,
 ]);
+
+
 $listings        = $result['listings'];
 $max_num_results = $result['max_num_results'];
 $max_num_pages   = $result['max_num_pages'];
 $is_last_page    = $page == $max_num_pages;
 $next_page       = $result['next_page'];
+
 
 // Render listings
 if (count($listings) > 0) {
@@ -43,6 +47,7 @@ if (count($listings) > 0) {
             'lazyload_thumbnail'     => $index >= 3,
             'hx-request_path'        => 'listings-by-id',
             'allow_hide'             => true,
+            'collection_id'          => $collection_id,
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,
@@ -50,5 +55,5 @@ if (count($listings) > 0) {
     }
 
 } else if ($page == 1) {
-    get_template_part( 'template-parts/content/no-search-results');
+    get_template_part( 'template-parts/content/no-collection-listings');
 }

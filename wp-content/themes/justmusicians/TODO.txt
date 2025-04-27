@@ -26,15 +26,12 @@ Milestones
             video order depending on search criteria
             start at timestamp for videos
         create the listings for them before they sign up instead of allowing new listing creating with the link
-        program to move unofficial tags to official if added
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         collections
             v1
-                when on non fav single-collection page make add remove work
                 ask user to sing up / log in to use fav button if not logged in
-                ignore showing posts with ids that are not valid because they are deleted or not published
-                when listing is deleted remove it from collections or filter invalid post ids
+                when listing is deleted filter invalid post ids in collections page and collection page
                 check auth from json api
             v2
                 create UI for favorite button
@@ -50,10 +47,16 @@ Milestones
                 sortable listings in single-collection.php
             v3
                 devon design
+        basic inquiries
+            inquire button that sends an email
+        advanced inquiries
+            quiz to get gig details
+            send out to artist by email and send to more as well
+            allow adding artists to an inquiry similar to adding to collection
+            manage your inquiries in the back end
+            manage inquiries sent to you in the back end
         auto pause when you scroll away from listing; especially for mobile
         ensemble size filter
-        "Request Quote" or "Contact Directly" modal
-        Inquiry form copy and flow
     Free lance booker testing 2
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
@@ -68,9 +71,9 @@ Data
     check for 404s in links in regular procedure to update content and rank
     content moderation for images
     garbage collector for images that are no longer linked to profiles
+    program to move unofficial tags to official if added
 UX
     media slider
-        dad say sound not work on mobile
         somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
         video seeking

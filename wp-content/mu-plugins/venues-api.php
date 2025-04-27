@@ -63,10 +63,12 @@ function get_venues() {
             ));
         }
     }
+    wp_reset_postdata();
     return $result;
 }
 
 function get_venue_post_id_by_name() {
+    $result = 0;
     $venue_name = stripslashes($_GET['venue_name']);
 
     $args = array(
@@ -83,8 +85,10 @@ function get_venue_post_id_by_name() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return get_the_ID();
+        $result = get_the_ID();
     }
+    wp_reset_postdata();
+    return $result;
 }
 function get_venues_by_post_id_batch() {
     $result = array();
@@ -108,6 +112,7 @@ function get_venues_by_post_id_batch() {
             ));
         }
     }
+    wp_reset_postdata();
     return $result;
 }
 
@@ -177,10 +182,12 @@ function update_venue_stats() {
             );
             $update_result = wp_update_post( wp_slash($update_args), true );
             if( is_wp_error( $update_result ) ) {
+                wp_reset_postdata();
                 return $update_result->get_error_message();
             }
         }
     }
+    wp_reset_postdata();
     return;
 }
 

@@ -70,6 +70,8 @@ function get_collections($args) {
         }
     }
 
+    wp_reset_postdata();
+
     return [
         'collections'     => $collections,
         'max_num_results' => $max_num_results,

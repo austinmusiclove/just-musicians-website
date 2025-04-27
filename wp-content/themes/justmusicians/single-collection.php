@@ -5,18 +5,22 @@
  * @package JustMusicians
  */
 
+get_header();
+
 $path = get_query_var('wp-html-v1');
 $is_favorites = $path == 'favorites';
 $listings = [];
+$collection_id = 0;
 if ($is_favorites) {
     $listings = get_user_meta(get_current_user_id(), 'favorites', true);
 } else {
     $listings = get_field('listings');
+    $collection_id = get_the_ID();
 }
 $listings = !empty($listings) ? $listings : [];
+$listing_count = count($listings);
+$listing_count_descriptor = $listing_count == 1 ? ' Listing' : ' Listings';
 $saved_listings = get_users_saved_listings();
-
-get_header();
 
 ?>
 
@@ -63,7 +67,7 @@ get_header();
                         <h2 class="font-bold text-18 sm:text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-px bg-black/20"></div>
-                            <span id="max_num_results" hx-swap-oob="outerHTML"><?php echo count($listings) . ' Listings'; ?></span>
+                            <span id="max_num_results" hx-swap-oob="outerHTML"><?php echo $listing_count . $listing_count_descriptor; ?></span>
                         </div>
                     </div>
 
@@ -105,6 +109,7 @@ get_header();
                         >
 
                             <input type="hidden" name="listing_ids" value="<?php echo implode(',', $listings); ?>" />
+                            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>" />
 
                             <span id="results">
                                 <?php

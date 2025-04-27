@@ -113,5 +113,6 @@ function get_listings_by_auuid($auuid) {
         }
     }
 
+    wp_reset_postdata();
     return $listings;
 }

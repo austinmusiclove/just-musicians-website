@@ -73,6 +73,7 @@ function get_venue_reviews() {
             ));
         }
     }
+    wp_reset_postdata();
     return $result;
 }
 
@@ -127,6 +128,7 @@ function get_venue_reviews_batch() {
             ));
         }
     }
+    wp_reset_postdata();
     return $result;
 }
 
@@ -166,6 +168,7 @@ function get_venue_reviews_csv() {
             $result = $result . implode(',', $row) . "\n";
         }
     }
+    wp_reset_postdata();
     return $result;
 }
 
@@ -203,10 +206,12 @@ function update_venue_review_stats() {
             );
             $update_result = wp_update_post( wp_slash($update_args), true );
             if( is_wp_error( $update_result ) ) {
+                wp_reset_postdata();
                 return $venue_post_id->get_error_message();
             }
         }
     }
+    wp_reset_postdata();
     return;
 }
 
