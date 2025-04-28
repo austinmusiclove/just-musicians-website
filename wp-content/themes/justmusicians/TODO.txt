@@ -41,7 +41,9 @@ Milestones
                     create
                     delete
                         garbage collect from the user's list after delete similar to listing garbage collect
+                on single-collection favorite button defaults to the collection it is on not to favorites and favorites get included in the list below
                 sortable listings in single-collection.php
+                add animations
             v3
                 devon design
         basic inquiries
@@ -97,6 +99,7 @@ Devon
     trash icon
     indicator on infinite scroll and listing form
     handle long names on listings
+    placement of heart on mobile
 Paid features
     Advanced search filters
         venues played

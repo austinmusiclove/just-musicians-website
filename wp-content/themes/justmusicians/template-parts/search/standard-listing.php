@@ -20,7 +20,7 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
     <span id="favorite-button-<?php echo $args['post_id']; ?>"
         <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="showListing = false;"<?php } ?>
     >
-        <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
+        <button type="button" class="absolute sm:top-7 top-10 sm:right-3 right-5 sm:opacity-60 opacity-100 hover:opacity-100 hover:scale-105 z-10"
             <?php if (is_user_logged_in()) { ?>
                 x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
                 x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
@@ -34,7 +34,7 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
         >
             <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
         </button>
-        <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
+        <button type="button" class="absolute sm:top-7 top-10 sm:right-3 right-5 sm:opacity-60 opacity-100 hover:opacity-100 hover:scale-105 z-10"
             x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
             x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
             hx-delete="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
