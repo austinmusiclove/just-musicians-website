@@ -5,9 +5,6 @@ $listing_id    = get_query_var('listing-id');
 $args = ['collection_id' => $collection_id];
 
 
-// Check if logged in and collection id belongs to user
-
-
 // Check if user is authorized
 $is_authorized = user_owns_collection($args);
 if ( is_wp_error($is_authorized) ) {

@@ -17,16 +17,27 @@ function get_collections($args) {
 
     // Get Favorites on page 1 only
     if ($page == 1) {
-        $favorites = get_user_meta($current_user_id, 'favorites', true);
-        $favorites = is_array($favorites) ? array_map(fn($post_id) => strval($post_id), $favorites) : [];
+        $listing_ids = get_user_meta($current_user_id, 'favorites', true);
+        $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
 
         // Get favorites thumbnail(s)
-        $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($favorites);
+        $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listing_ids);
+
+        // Filter out listings are not published
+        $the_post = $GLOBALS['post'];
+        $listings_by_id_result = get_listings_by_id([
+            'listing_ids' => $listing_ids,
+            'nopaging'    => true,
+        ]);
+        $GLOBALS['post'] = $the_post;
+        $listings = $listings_by_id_result['listings'];
+        $listing_ids = array_filter(array_column($listings, 'post_id'));
+        $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
 
         $collections[] = [
             'post_id'        => 'favorites',
             'name'           => 'Favorites',
-            'listings'       => $favorites,
+            'listings'       => $listing_ids,
             'thumbnail_urls' => $thumbnails,
             'permalink'      => '/collection/favorites',
         ];
@@ -46,8 +57,10 @@ function get_collections($args) {
             $query_args['nopaging'] = true;
         } else {
             $query_args['paged']          = $page;
-            $query_args['posts_per_page'] = 10;
+            $query_args['posts_per_page'] = 6;
         }
+
+
         $query = new WP_Query($query_args);
         $max_num_results = $query->found_posts + 1;
         $max_num_pages = $query->max_num_pages;
@@ -56,14 +69,26 @@ function get_collections($args) {
             $query->the_post();
 
             // Get thumbnail(s)
-            $listings = get_field('listings') ?? [];
-            $listings = is_array($listings) ? array_map(fn($post_id) => strval($post_id), $listings) : [];
-            $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listings);
+            $listing_ids = get_field('listings') ?? [];
+            $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
+            $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listing_ids);
+
+            // Filter out listings are not published
+            $the_post = $GLOBALS['post'];
+            $listings_by_id_result = get_listings_by_id([
+                'listing_ids' => $listing_ids,
+                'nopaging'    => true,
+            ]);
+            $GLOBALS['post'] = $the_post;
+
+            $listings = $listings_by_id_result['listings'];
+            $listing_ids = array_filter(array_column($listings, 'post_id'));
+            $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
 
             $collections[] = [
                 'post_id'        => get_the_ID(),
                 'name'           => get_field('name'),
-                'listings'       => $listings,
+                'listings'       => $listing_ids,
                 'thumbnail_urls' => $thumbnails,
                 'permalink'      => get_the_permalink(),
             ];
@@ -81,15 +106,14 @@ function get_collections($args) {
 }
 
 function get_thumbnails_from_listings($listing_post_ids) {
+    $thumbnails = [];
     if (count($listing_post_ids) >= 4) {
-        return [
-            get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing'),
-            get_the_post_thumbnail_url($listing_post_ids[1], 'standard-listing'),
-            get_the_post_thumbnail_url($listing_post_ids[2], 'standard-listing'),
-            get_the_post_thumbnail_url($listing_post_ids[3], 'standard-listing'),
-        ];
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[1], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[2], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[3], 'standard-listing');
     } else if (count($listing_post_ids) >= 1) {
-        return [ get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing') ];
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
     }
-    return [];
+    return array_filter($thumbnails);
 }

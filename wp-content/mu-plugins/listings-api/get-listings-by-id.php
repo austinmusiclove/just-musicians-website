@@ -7,6 +7,7 @@ function get_listings_by_id($args) {
     $results = [];
     $listing_ids    = (!empty($args['listing_ids'])) ? rest_sanitize_array($args['listing_ids']) : [];
     $sanitized_page = (!empty($args['page']))        ? sanitize_text_field($args['page'])        : null;
+    $nopaging       = (!empty($args['nopaging']))    ? rest_sanitize_boolean($args['nopaging'])  : false;
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page       = $page + 1;
     $max_num_results = 0;
@@ -17,11 +18,15 @@ function get_listings_by_id($args) {
         $query_args = [
             'post_type'      => 'listing',
             'post_status'    => 'publish',
-            'paged'          => $page,
-            'posts_per_page' => 10,
             'post__in'       => $listing_ids,
             'orderby'        => 'post__in',
         ];
+        if ($nopaging) {
+            $query_args['nopaging'] = true;
+        } else {
+            $query_args['paged']          = $page;
+            $query_args['posts_per_page'] = 10;
+        }
         $query = new WP_Query($query_args);
         $max_num_results = $query->found_posts;
         $max_num_pages = $query->max_num_pages;

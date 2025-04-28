@@ -17,9 +17,21 @@ if ($is_favorites) {
     $listings = get_field('listings');
     $collection_id = get_the_ID();
 }
-$listings = !empty($listings) ? $listings : [];
+
+// Filter out listings are not published
+$listings_by_id_result = get_listings_by_id([
+    'listing_ids' => $listings,
+    'nopaging'    => true,
+]);
+$listings = $listings_by_id_result['listings'];
+$listings = array_filter(array_column($listings, 'post_id'));
+$listings = is_array($listings) ? array_map(fn($post_id) => strval($post_id), $listings) : [];
+
+// Get listing count
 $listing_count = count($listings);
 $listing_count_descriptor = $listing_count == 1 ? ' Listing' : ' Listings';
+
+// Get all user saved listings
 $saved_listings = get_users_saved_listings();
 
 ?>

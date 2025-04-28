@@ -30,8 +30,7 @@ Milestones
     Free lance booker testing
         collections
             v1
-                ask user to sing up / log in to use fav button if not logged in
-                when listing is deleted filter invalid post ids in collections page and collection page
+                check deleting collections and maybe garbage collect from the user's list
                 check auth from json api
             v2
                 create UI for favorite button

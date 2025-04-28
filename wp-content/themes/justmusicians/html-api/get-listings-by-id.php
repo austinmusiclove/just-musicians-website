@@ -18,6 +18,8 @@ $next_page       = $result['next_page'];
 
 // Render listings
 if (count($listings) > 0) {
+    $listing_count = count($listings);
+    $listing_count_descriptor = $listing_count == 1 ? ' Listing' : ' Listings';
     foreach($listings as $index => $listing) {
         $genres = [];
         $listing['genre'] ??= [];
@@ -53,6 +55,7 @@ if (count($listings) > 0) {
             'next_page'              => $next_page,
         ]);
     }
+    echo '<span id="max_num_results" hx-swap-oob="outerHTML">' . $listing_count . $listing_count_descriptor . '</span>';
 
 } else if ($page == 1) {
     get_template_part( 'template-parts/content/no-collection-listings');

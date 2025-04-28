@@ -2,7 +2,6 @@
 
 $is_preview    = !empty($args['is_preview']) ? $args['is_preview'] : false;
 $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
-error_log('std listing: ' . $collection_id)
 
 ?>
 
@@ -22,12 +21,16 @@ error_log('std listing: ' . $collection_id)
         <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="showListing = false;"<?php } ?>
     >
         <button type="button" class="absolute top-7 right-3 opacity-60 hover:opacity-100 hover:scale-105"
-            x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-            x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
-            hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
-            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
-            hx-trigger="click"
-            hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+            <?php if (is_user_logged_in()) { ?>
+                x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
+                x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+                hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
+                hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+                hx-trigger="click"
+                hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+            <?php } else { ?>
+                x-on:click="showSignupModal = true; signupModalMessage = 'Sign up for an account to save listings'"
+            <?php } ?>
         >
             <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
         </button>
