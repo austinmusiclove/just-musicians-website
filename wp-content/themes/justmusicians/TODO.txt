@@ -29,9 +29,6 @@ Milestones
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         collections
-            v1
-                check deleting collections and maybe garbage collect from the user's list
-                check auth from json api
             v2
                 create UI for favorite button
                     expanded heart button UI
@@ -43,6 +40,7 @@ Milestones
                 collections apis and html apis
                     create
                     delete
+                        garbage collect from the user's list after delete similar to listing garbage collect
                 sortable listings in single-collection.php
             v3
                 devon design

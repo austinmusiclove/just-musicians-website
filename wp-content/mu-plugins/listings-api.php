@@ -23,20 +23,20 @@ require_once 'listings-api/delete-listing.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1/listings', '', [
+    register_rest_route( 'v1', '/listings', [
         'methods' => 'GET',
         'callback' => 'get_listings_request_handler',
     ]);
-    register_rest_route( 'v1/listings', '/(?P<auuid>[a-zA-Z0-9-]+)', [
+    register_rest_route( 'v1', '/listings/(?P<auuid>[a-zA-Z0-9-]+)', [
         'methods' => 'GET',
         'callback' => 'get_listing_by_auuid_request_handler',
     ]);
-    register_rest_route( 'v1/listings', '', [
+    register_rest_route( 'v1', 'listings', [
         'methods' => 'POST',
         'callback' => 'post_listing_request_handler',
         'permission_callback' => 'check_post_listing_auth',
     ]);
-    register_rest_route( 'v1/listings', '/(?P<post_id>\d+)', [
+    register_rest_route( 'v1', '/listings/(?P<post_id>\d+)', [
         'methods' => 'DELETE',
         'callback' => 'delete_listing_request_handler',
         'permission_callback' => 'check_delete_listing_auth',

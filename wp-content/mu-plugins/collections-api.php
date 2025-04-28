@@ -19,27 +19,27 @@ require_once 'collections-api/remove-listing-from-collection.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1/collections', '', [
+    register_rest_route( 'v1', '/collections', [
         'methods' => 'GET',
         'callback' => 'get_collections_request_handler',
         'permission_callback' => 'user_logged_in',
     ]);
-    register_rest_route( 'v1/collections', '', [
+    register_rest_route( 'v1', '/collections', [
         'methods' => 'POST',
         'callback' => 'create_collection',
         'permission_callback' => 'user_logged_in',
     ]);
-    register_rest_route( 'v1/collections', '/(?P<collection_id>\d+)', [
+    register_rest_route( 'v1', '/collections/(?P<collection_id>\d+)', [
         'methods' => 'DELETE',
         'callback' => 'delete_collection',
         'permission_callback' => 'user_owns_collection',
     ]);
-    register_rest_route('v1/collections', '/(?P<collection_id>[a-zA-Z0-9_-]+)/listings', [
+    register_rest_route('v1', '/collections/(?P<collection_id>[a-zA-Z0-9_-]+)/listings', [
         'methods' => 'POST',
         'callback' => 'add_listing_to_collection_request_handler',
         'permission_callback' => 'user_owns_collection',
     ]);
-    register_rest_route('v1/collections', '/(?P<collection_id>[a-zA-Z0-9_-]+)/listings/(?P<listing_id>\d+)', [
+    register_rest_route('v1', '/collections/(?P<collection_id>[a-zA-Z0-9_-]+)/listings/(?P<listing_id>\d+)', [
         'methods' => 'DELETE',
         'callback' => 'remove_listing_from_collection_request_handler',
         'permission_callback' => 'user_owns_collection',
