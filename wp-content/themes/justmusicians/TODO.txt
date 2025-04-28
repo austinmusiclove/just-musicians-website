@@ -30,6 +30,7 @@ Milestones
     Free lance booker testing
         collections
             v2
+                move favorites heart to in line with title on mobile
                 create UI for favorite button
                     expanded heart button UI
                     drop down UI
