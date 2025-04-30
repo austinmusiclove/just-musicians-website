@@ -30,7 +30,6 @@ Milestones
     Free lance booker testing
         collections
             v2
-                move favorites heart to in line with title on mobile
                 create UI for favorite button
                     expanded heart button UI
                     drop down UI
@@ -88,8 +87,6 @@ UX
 Features
     venue reviews
     artist reviews
-UI
-    1280-1300 screen size long listing name gets in the way of favorite button; move sidebar down at 1300
 Devon
     podcast - get violotor-blog svg
     new pages

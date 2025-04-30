@@ -16,36 +16,6 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
     <?php } ?>
 >
 
-    <?php if (!$is_preview) { ?>
-    <span id="favorite-button-<?php echo $args['post_id']; ?>"
-        <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="showListing = false;"<?php } ?>
-    >
-        <button type="button" class="absolute sm:top-7 top-10 sm:right-3 right-5 sm:opacity-60 opacity-100 hover:opacity-100 hover:scale-105 z-10"
-            <?php if (is_user_logged_in()) { ?>
-                x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
-                x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-                hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
-                hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
-                hx-trigger="click"
-                hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
-            <?php } else { ?>
-                x-on:click="showSignupModal = true; signupModalMessage = 'Sign up for an account to save listings'"
-            <?php } ?>
-        >
-            <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
-        </button>
-        <button type="button" class="absolute sm:top-7 top-10 sm:right-3 right-5 sm:opacity-60 opacity-100 hover:opacity-100 hover:scale-105 z-10"
-            x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-            x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
-            hx-delete="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
-            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
-            hx-trigger="click"
-        >
-            <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite-red.svg'; ?>" />
-        </button>
-        <span id="favorites-result-<?php echo $args['post_id']; ?>"></span>
-    </span>
-    <?php } ?>
 
     <?php
     if (count($args['youtube_video_ids']) > 0 or !empty($args['alpine_video_ids'])) { ?>
@@ -169,19 +139,51 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : 0;
 
     <?php } ?>
 
-    <div class="py-2 flex flex-col gap-y-2">
+    <div class="py-2 flex flex-col gap-y-2 w-full">
 
         <!-- Name and verification badge -->
-        <div class="flex flex-row">
-            <h2 class="text-22 font-bold">
-                <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
-                    x-on:click="showArtistPageModal = true"
+        <div class="flex flex-row justify-between items-center w-full">
+            <div class="flex items-center">
+                <h2 class="text-22 font-bold">
+                    <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
+                        x-on:click="showArtistPageModal = true"
+                    >
+                        <?php echo $args['name']; ?>
+                    </a>
+                </h2>
+                <?php if ($args['verified']) { ?>
+                    <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
+                <?php } ?>
+            </div>
+            <?php if (!$is_preview) { ?>
+                <span id="favorite-button-<?php echo $args['post_id']; ?>" class="flex items-center space-x-2 ml-2 min-w-fit"
+                    <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="showListing = false;"<?php } ?>
                 >
-                    <?php echo $args['name']; ?>
-                </a>
-            </h2>
-            <?php if ($args['verified']) { ?>
-                <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
+                    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105 z-10"
+                        <?php if (is_user_logged_in()) { ?>
+                            x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
+                            x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+                            hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
+                            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+                            hx-trigger="click"
+                            hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+                        <?php } else { ?>
+                            x-on:click="showSignupModal = true; signupModalMessage = 'Sign up for an account to save listings'"
+                        <?php } ?>
+                    >
+                        <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
+                    </button>
+                    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105 z-10"
+                        x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+                        x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
+                        hx-delete="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/<?php echo $args['post_id']; ?>"
+                        hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+                        hx-trigger="click"
+                    >
+                        <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite-red.svg'; ?>" />
+                    </button>
+                    <span id="favorites-result-<?php echo $args['post_id']; ?>"></span>
+                </span>
             <?php } ?>
         </div>
 
