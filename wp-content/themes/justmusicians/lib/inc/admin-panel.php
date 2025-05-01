@@ -89,10 +89,17 @@ add_filter('manage_users_columns', 'add_user_columns');
 add_action('manage_users_custom_column', 'show_user_columns', 10, 3);
 function add_user_columns($columns) {
     $columns['favorites_count'] = 'Favorites';
+    $columns['email_verified'] = 'Email Verified';
     $columns['collections_count'] = 'Collections';
     return $columns;
 }
 function show_user_columns($value, $column_name, $user_id) {
+    if ($column_name === 'email_verified') {
+        // Get ACF user meta field for 'email_verified' (boolean)
+        $verified = get_user_meta($user_id, 'email_verified', true);
+        return $verified ? '1' : '0';
+    }
+
     if ($column_name === 'favorites_count') {
         // Get ACF user meta field for 'favorites' (array of post IDs)
         $favorites = get_user_meta($user_id, 'favorites', true);
