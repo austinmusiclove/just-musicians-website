@@ -12,10 +12,13 @@
  * @package JustMuscians
  */
 
-// Get user favorites and collections
-$saved_listings     = get_users_saved_listings();
-$all_saved_listings = $saved_listings['all_saved_listings'];
-$user_collections   = $saved_listings['collections'];
+// Get user collections
+$collections_result = get_user_collections([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$collections_map = array_column($collections_result['collections'], null, 'post_id');
+
 
 get_header();
 ?>
@@ -98,12 +101,13 @@ get_header();
 
                     <span id="results"
                         x-data='{
-                            collections: <?php echo clean_arr_for_doublequotes($user_collections); ?>,
-                            saved_listings: <?php echo clean_arr_for_doublequotes($all_saved_listings); ?>,
-                            _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
-                            _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
-                            _addToFavorites(postId)           { return addToFavorites(this, postId); },
-                            _removeFromFavorites(postId)      { return removeFromFavorites(this, postId); },
+                            collections: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                            _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
+                            _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
+                            _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
+                            _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+                            _addToCollection(collectionId, listingId)            { return addToCollection(this, collectionId, listingId); },
+                            _removeFromCollection(collectionId, listingId)       { return removeFromCollection(this, collectionId, listingId); },
                             players: {},
                             playersMuted: true,
                             playersPaused: false,

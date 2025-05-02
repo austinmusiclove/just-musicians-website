@@ -50,9 +50,14 @@ function create_user_collection($collection_name, $listing_id = null) {
     $user_collections[] = $collection_id;
     update_user_meta($user_id, 'collections', $user_collections);
 
+
+    // Get permalink
+    $permalink = get_permalink($collection_id);
+
     return [
-        'post_id'  => $collection_id,
-        'name'     => $collection_name,
-        'listings' => $listings,
+        'post_id'   => $collection_id,
+        'name'      => $collection_name,
+        'listings'  => $listings,
+        'permalink' => $permalink,
     ];
 }

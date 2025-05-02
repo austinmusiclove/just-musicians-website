@@ -23,8 +23,5 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-$listing_count = count($result->data['listings']);
-$listing_count_descriptor = $listing_count == 1 ? ' Listing' : ' Listings';
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Removed Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'hide-listing\')"></span>';
-echo '<span id="max_num_results" hx-swap-oob="outerHTML">' . $listing_count . $listing_count_descriptor . '</span>';
+echo '<span x-init="$dispatch(\'remove-listing\', {\'collection_id\': \'' . $collection_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';

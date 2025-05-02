@@ -1,6 +1,5 @@
 <?php
 
-
 // Ensure the user is logged in
 if (!is_user_logged_in()) {
     $message = 'Unauthorized: Must be logged in to create a collection';
@@ -22,4 +21,4 @@ if ( is_wp_error($result) ) {
 
 // Success Response
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Collection Created Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'add-collection\', {\'post_id\': \'' . $result['post_id'] . '\', \'name\': \'' . $result['name'] . '\', \'listings\': ' . clean_arr_for_doublequotes($result['listings']) . ' })"></span>';
+echo '<span x-init="$dispatch(\'add-collection\', {\'post_id\': \'' . $result['post_id'] . '\', \'name\': \'' . $result['name'] . '\', \'listings\': ' . clean_arr_for_doublequotes($result['listings']) . ', \'permalink\': \'' . $result['permalink'] . '\' })"></span>';

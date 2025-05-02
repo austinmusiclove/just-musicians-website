@@ -2,27 +2,23 @@
 
 <span id="favorite-button-<?php echo $args['post_id']; ?>" class="flex items-center ml-2 min-w-6 min-h-6"
     x-data="{
-        showCollectionsOptions: false,
+        showCollectionsPopup: false,
         showCreateCollectionInput: false,
         collectionSearchQuery: '',
-        resetCollectionPopup() {
-            this.showCollectionsOptions = false;
-            this.showCreateCollectionInput = false;
-            this.collectionSearchQuery = '';
-            $refs.newCollectionInput<?php echo $args['post_id']; ?>.value = '';
-        },
-        _addCollection(post_id, name, listings) { return addCollection(this, post_id, name, listings); },
+        _handleFilledFavoriteButtonClick(listing_id)      { return handleFilledFavoriteButtonClick(this, listing_id); },
+        _addCollection(postId, name, listings, permalink) { return addCollection(this, postId, name, listings, permalink); },
+        _addToCollection(collectionId, listingId)         { return addToCollection(this, collectionId, listingId); },
+        _removeFromCollection(collectionId, listingId)    { return removeFromCollection(this, collectionId, listingId); },
+        _resetCollectionsPopup()                          { return resetCollectionsPopup(this, '<?php echo $args['post_id']; ?>'); },
     }"
-    x-on:add-collection="_addCollection($event.detail.post_id, $event.detail.name, $event.detail.listings)"
-    <?php if (!empty($args['allow_hide']) and $args['allow_hide']) { ?>x-on:hide-listing="console.log('hid'); showListing = false;"<?php } ?>
+    x-on:add-collection="_addCollection($event.detail.post_id, $event.detail.name, $event.detail.listings, $event.detail.permalink)"
+    x-on:add-listing="_addToCollection($event.detail.collection_id, $event.detail.listing_id)"
+    x-on:remove-listing="_removeFromCollection($event.detail.collection_id, $event.detail.listing_id)"
 >
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
         <?php if (is_user_logged_in()) { ?>
-            x-on:click="_addToFavorites('<?php echo $args['post_id']; ?>')"
-            x-show="_showAddFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-            x-on:mouseenter="showCollectionsOptions = true"
-            x-on:mouseleave="resetCollectionPopup()"
-            hx-post="/wp-html/v1/collections/<?php echo $args['collection_id']; ?>/listings/<?php echo $args['post_id']; ?>"
+            x-show="_showEmptyFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+            hx-post="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
             hx-trigger="click"
             hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
@@ -33,13 +29,11 @@
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
     </button>
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
-        x-show="_showRemoveFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-        x-on:mouseenter="showCollectionsOptions = true"
-        x-on:mouseleave="resetCollectionPopup()"
-        x-on:click="_removeFromFavorites('<?php echo $args['post_id']; ?>')"
-        hx-delete="/wp-html/v1/collections/<?php echo $args['collection_id']; ?>/listings/<?php echo $args['post_id']; ?>"
+        x-show="_showFilledFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
+        x-on:click="_handleFilledFavoriteButtonClick('<?php echo $args['post_id']; ?>')"
+        hx-delete="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
         hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
-        hx-trigger="click"
+        hx-trigger="remove-from-favorites"
     >
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite-red.svg'; ?>" />
     </button>
@@ -50,10 +44,10 @@
 
         <!-- Dropdown Panel -->
         <div class="absolute top-2 right-0 z-10 mt-2 w-64 origin-top-right bg-white border border-gray-200 rounded-lg shadow-lg p-4 space-y-3"
-            x-show="showCollectionsOptions" x-cloak
-            x-transition x-on:click.away="showCollectionsOptions = false"
-            x-on:mouseenter="showCollectionsOptions = true"
-            x-on:mouseleave="resetCollectionPopup()"
+            x-show="showCollectionsPopup" x-cloak
+            x-transition x-on:click.away="_resetCollectionsPopup()"
+            x-on:mouseenter="showCollectionsPopup = true"
+            x-on:mouseleave="_resetCollectionsPopup()"
         >
 
             <!-- Search Bar -->
@@ -61,15 +55,32 @@
                 class="w-full px-3 py-1.5 border border-gray-300 rounded focus:outline-none focus:ring focus:border-black text-sm" />
 
             <!-- Scrollable List of Collections -->
-            <div class="max-h-40 overflow-y-auto space-y-2">
+            <div x-ref="collectionsList<?php echo $args['post_id']; ?>" class="max-h-40 overflow-y-auto space-y-2">
                 <template x-for="collection in collections" :key="collection.post_id">
-                    <div class="flex items-center justify-between hover:bg-gray-50 px-2 py-1 rounded cursor-pointer" x-show="collection.name.toLowerCase().includes(collectionSearchQuery)" x-cloak >
-                        <span x-text="collection.name" class="text-sm"></span>
-                        <button class="text-gray-500 hover:text-black">
-                            <!-- You can swap this icon for a filled state -->
+                    <div class="flex items-center justify-between px-2 py-1 rounded cursor-pointer" x-show="collection.name.toLowerCase().includes(collectionSearchQuery)" x-cloak >
+                        <a class="w-full" x-bind:href="collection.permalink"><span x-text="collection.name"></span></a>
+                        <!-- Empty bookmark state -->
+                        <button type="button" class="mr-2"
+                            x-show="_showEmptyCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
+                            x-bind:hx-post="'/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+                            hx-trigger="click"
+                            hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+                        >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M5 5v14l7-5 7 5V5a2 2 0 00-2-2H7a2 2 0 00-2 2z" />
+                            </svg>
+                        </button>
+                        <!-- Filled bookmark state -->
+                        <button type="button" class="mr-2"
+                            x-show="_showFilledCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
+                            x-bind:hx-delete="'/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                            hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
+                            hx-trigger="click"
+                        >
+                            <svg class="w-4 h-4 fill-yellow" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5 3a2 2 0 00-2 2v16l9-6 9 6V5a2 2 0 00-2-2H5z" />
                             </svg>
                         </button>
                     </div>

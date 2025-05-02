@@ -1,6 +1,6 @@
 <?php
 
-function get_collections($args) {
+function get_user_collections($args) {
 
     // Handle paging
     $nothumbnails = (!empty($args['nothumbnails'])) ? rest_sanitize_boolean($args['nothumbnails']) : false;
@@ -35,7 +35,7 @@ function get_collections($args) {
         $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
 
         $collections[] = [
-            'post_id'        => 'favorites',
+            'post_id'        => 0,
             'name'           => 'Favorites',
             'listings'       => $listing_ids,
             'thumbnail_urls' => $thumbnails,

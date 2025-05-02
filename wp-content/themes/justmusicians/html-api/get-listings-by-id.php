@@ -47,14 +47,12 @@ if (count($listings) > 0) {
             'verified'               => $listing['verified'],
             'lazyload_thumbnail'     => $index >= 3,
             'hx-request_path'        => 'listings-by-id',
-            'allow_hide'             => true,
             'collection_id'          => $collection_id,
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,
         ]);
     }
-    echo '<span id="max_num_results" hx-swap-oob="outerHTML">' . $max_num_results . $results_label . '</span>';
 
 } else if ($page == 1) {
     get_template_part( 'template-parts/content/no-collection-listings');

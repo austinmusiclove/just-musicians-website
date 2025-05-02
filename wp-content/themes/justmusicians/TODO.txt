@@ -30,16 +30,10 @@ Milestones
     Free lance booker testing
         collections
             v2
-                add permalink to newly created collection in front end collections $data
-                add and remove from collection with button in drop down
-                put current collection at top of list in single collection page
-                handle different states
-                    if no fav or col, add to fav
-                    if fav no col, unfav
-                    if col, show options
                 delete
                     basic delete functionality from front end
                     garbage collect from the user's list after delete similar to listing garbage collect
+                put current collection at top of list in single collection page
                 sortable listings in single-collection.php
                 add animations
                 test special characters

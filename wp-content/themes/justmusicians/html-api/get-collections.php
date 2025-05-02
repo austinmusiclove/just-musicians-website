@@ -2,7 +2,7 @@
 
 // Get Collections
 $page = $_GET['page'] ?? 1;
-$result = get_collections([
+$result = get_user_collections([
     'page' => $page,
 ]);
 

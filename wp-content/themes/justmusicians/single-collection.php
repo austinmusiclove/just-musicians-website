@@ -18,10 +18,12 @@ if ($is_favorites) {
     $collection_id = get_the_ID();
 }
 
-// Get all user saved listings
-$saved_listings     = get_users_saved_listings();
-$all_saved_listings = $saved_listings['all_saved_listings'];
-$user_collections   = $saved_listings['collections'];
+// Get user collections
+$collections_result = get_user_collections([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$collections_map = array_column($collections_result['collections'], null, 'post_id');
 
 ?>
 
@@ -37,12 +39,13 @@ $user_collections   = $saved_listings['collections'];
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12"
                     x-data='{
-                        collections: <?php echo clean_arr_for_doublequotes($user_collections); ?>,
-                        saved_listings: <?php echo clean_arr_for_doublequotes($all_saved_listings); ?>,
-                        _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
-                        _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
-                        _addToFavorites(postId)           { return addToFavorites(this, postId); },
-                        _removeFromFavorites(postId)      { return removeFromFavorites(this, postId); },
+                        collections: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                        _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
+                        _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
+                        _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
+                        _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+                        _addToCollection(collectionId, listingId)            { return addToCollection(this, collectionId, listingId); },
+                        _removeFromCollection(collectionId, listingId)       { return removeFromCollection(this, collectionId, listingId); },
                         players: {},
                         playersMuted: true,
                         playersPaused: false,
@@ -69,7 +72,7 @@ $user_collections   = $saved_listings['collections'];
                         <h2 class="font-bold text-18 sm:text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-px bg-black/20"></div>
-                            <span id="max_num_results" hx-swap-oob="outerHTML"></span>
+                            <span x-text="collections['<?php echo $collection_id; ?>'].listings.length + ' ' + (collections['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
                         </div>
                     </div>
 
