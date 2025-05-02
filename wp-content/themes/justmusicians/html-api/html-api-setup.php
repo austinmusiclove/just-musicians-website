@@ -19,7 +19,7 @@ function html_api_rewrite_rules() {
     add_rewrite_rule(
         '^wp-html/v1/collections(?:/([0-9]+))?/?$',
         'index.php?wp-html-v1=collections&collection-id=$matches[1]&' . $_SERVER['QUERY_STRING'],
-        'bottom'
+        'top'
     );
     add_rewrite_rule(
         '^wp-html/v1/collections/([0-9]+)/listings/([0-9]+)/?$',
@@ -47,6 +47,9 @@ function html_api_v1_template_redirects() {
     $path = get_query_var('wp-html-v1');
     $listing_id = get_query_var('listing-id');
     $collection_id = get_query_var('collection-id');
+
+
+    // Listings
     if ($path == 'listings') {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             include_once get_template_directory() . '/html-api/get-listings.php'; exit;
@@ -57,20 +60,32 @@ function html_api_v1_template_redirects() {
         }
     } else if ($path == 'listings-by-id') {
         include_once get_template_directory() . '/html-api/get-listings-by-id.php'; exit;
+
+
+    // Collections
     } else if ($path == 'collections') {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             include_once get_template_directory() . '/html-api/get-collections.php'; exit;
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            include_once get_template_directory() . '/html-api/add-listing-to-collection.php'; exit;
+            if (!empty($collection_id)) {
+                include_once get_template_directory() . '/html-api/add-listing-to-collection.php'; exit;
+            } else {
+                include_once get_template_directory() . '/html-api/create-collection.php'; exit;
+            }
         } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             include_once get_template_directory() . '/html-api/remove-listing-from-collection.php'; exit;
         }
     } else if ($path == 'favorites') {
         include_once get_template_directory() . '/single-collection.php'; exit;
+
+
+    // Active Search
     } else if ($path == 'search-options') {
         include_once get_template_directory() . '/html-api/search-options.php'; exit;
     } else if ($path == 'search-options-mobile') {
         include_once get_template_directory() . '/html-api/search-options-mobile.php'; exit;
+
+    // Register User
     } else if ($path == 'register-user') {
         include_once get_template_directory() . '/html-api/register-user.php'; exit;
     }

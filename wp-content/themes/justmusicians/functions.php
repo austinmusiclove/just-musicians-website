@@ -55,9 +55,9 @@ function justmusicians_scripts() {
         wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-intersect';
 
-        // Favorites
-        wp_enqueue_script('favorites-scripts-js', get_template_directory_uri() . '/lib/js/favorites-scripts.js', [], $pkg->version, true);
-        $alpine_dependencies[] = 'favorites-scripts-js';
+        // Collections
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'collections-scripts-js';
     }
 
     // Archive
@@ -120,9 +120,9 @@ function justmusicians_scripts() {
         wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-sort';
 
-        // Favorites
-        wp_enqueue_script('favorites-scripts-js', get_template_directory_uri() . '/lib/js/favorites-scripts.js', [], $pkg->version, true);
-        $alpine_dependencies[] = 'favorites-scripts-js';
+        // Collections
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'collections-scripts-js';
     }
 
 

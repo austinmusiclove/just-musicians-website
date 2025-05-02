@@ -30,20 +30,20 @@ Milestones
     Free lance booker testing
         collections
             v2
-                create UI for favorite button
-                    expanded heart button UI
-                    drop down UI
-                    expand on hover
-                    empty heart click adds to favorites and opens drop down
-                    clicking drop arrow opens drop down
-                    allow create new
-                collections apis and html apis
-                    create
-                    delete
-                        garbage collect from the user's list after delete similar to listing garbage collect
-                on single-collection favorite button defaults to the collection it is on not to favorites and favorites get included in the list below
+                add permalink to newly created collection in front end collections $data
+                add and remove from collection with button in drop down
+                put current collection at top of list in single collection page
+                handle different states
+                    if no fav or col, add to fav
+                    if fav no col, unfav
+                    if col, show options
+                delete
+                    basic delete functionality from front end
+                    garbage collect from the user's list after delete similar to listing garbage collect
                 sortable listings in single-collection.php
                 add animations
+                test special characters
+                test mobile and desktop
             v3
                 devon design
         basic inquiries

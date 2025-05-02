@@ -13,7 +13,9 @@
  */
 
 // Get user favorites and collections
-$saved_listings = get_users_saved_listings();
+$saved_listings     = get_users_saved_listings();
+$all_saved_listings = $saved_listings['all_saved_listings'];
+$user_collections   = $saved_listings['collections'];
 
 get_header();
 ?>
@@ -96,7 +98,8 @@ get_header();
 
                     <span id="results"
                         x-data='{
-                            saved_listings: <?php echo clean_arr_for_doublequotes($saved_listings); ?>,
+                            collections: <?php echo clean_arr_for_doublequotes($user_collections); ?>,
+                            saved_listings: <?php echo clean_arr_for_doublequotes($all_saved_listings); ?>,
                             _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
                             _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
                             _addToFavorites(postId)           { return addToFavorites(this, postId); },

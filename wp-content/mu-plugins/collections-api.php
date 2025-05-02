@@ -12,9 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 // Include
 require_once 'collections-api/authorization.php';
 require_once 'collections-api/get-collections.php';
-require_once 'collections-api/get-users-saved-listings.php';
+require_once 'collections-api/create-collection.php';
 require_once 'collections-api/add-listing-to-collection.php';
 require_once 'collections-api/remove-listing-from-collection.php';
+require_once 'collections-api/get-users-saved-listings.php';
 
 
 // Register REST API Routes
@@ -26,7 +27,7 @@ add_action('rest_api_init', function () {
     ]);
     register_rest_route( 'v1', '/collections', [
         'methods' => 'POST',
-        'callback' => 'create_collection',
+        'callback' => 'create_collection_request_handler',
         'permission_callback' => 'user_logged_in',
     ]);
     register_rest_route( 'v1', '/collections/(?P<collection_id>\d+)', [
@@ -51,17 +52,19 @@ function get_collections_request_handler($request) {
     return get_collections([ 'page' => $request['page'], ]);
 }
 
-function create_collection($request) {
+function create_collection_request_handler($request) {
+    $collection_name = $request->get_param('collection_name');
+    return create_user_collection($collection_name);
 }
 function delete_collection($request) {
 }
 function add_listing_to_collection_request_handler($request) {
     $collection_id = $request->get_param('collection_id');
     $listing_id    = $request->get_param('listing_id');
-    add_listing_to_collection($collection_id, $listing_id);
+    return add_listing_to_collection($collection_id, $listing_id);
 }
 function remove_listing_from_collection_request_handler($request) {
     $collection_id = $request->get_param('collection_id');
     $listing_id    = $request->get_param('listing_id');
-    remove_listing_from_collection($collection_id, $listing_id);
+    return remove_listing_from_collection($collection_id, $listing_id);
 }

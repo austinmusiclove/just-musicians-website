@@ -1,5 +1,5 @@
 
-// Handles front end favorites buttons interactions
+// Handles front end collections buttons interactions
 // Server interaction handled by htmx
 
 
@@ -19,4 +19,13 @@ function addToFavorites(alpineComponent, postId) {
 
 function removeFromFavorites(alpineComponent, postId) {
     alpineComponent.saved_listings = alpineComponent.saved_listings.filter(id => id !== postId);
+}
+
+function addCollection(alpineComponent, post_id, name, listings) {
+    addToFavorites(alpineComponent, post_id);
+    alpineComponent.$data.collections.push({
+        'post_id':  post_id,
+        'name':     name,
+        'listings': listings,
+    });
 }

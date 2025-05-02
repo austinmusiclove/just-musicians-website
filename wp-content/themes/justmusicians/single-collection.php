@@ -7,10 +7,10 @@
 
 get_header();
 
-$path = get_query_var('wp-html-v1');
-$is_favorites = $path == 'favorites';
+$is_favorites = get_query_var('wp-html-v1') == 'favorites';
 $listings = [];
 $collection_id = 0;
+
 if ($is_favorites) {
     $listings = get_user_meta(get_current_user_id(), 'favorites', true);
 } else {
@@ -18,21 +18,10 @@ if ($is_favorites) {
     $collection_id = get_the_ID();
 }
 
-// Filter out listings are not published
-$listings_by_id_result = get_listings_by_id([
-    'listing_ids' => $listings,
-    'nopaging'    => true,
-]);
-$listings = $listings_by_id_result['listings'];
-$listings = array_filter(array_column($listings, 'post_id'));
-$listings = is_array($listings) ? array_map(fn($post_id) => strval($post_id), $listings) : [];
-
-// Get listing count
-$listing_count = count($listings);
-$listing_count_descriptor = $listing_count == 1 ? ' Listing' : ' Listings';
-
 // Get all user saved listings
-$saved_listings = get_users_saved_listings();
+$saved_listings     = get_users_saved_listings();
+$all_saved_listings = $saved_listings['all_saved_listings'];
+$user_collections   = $saved_listings['collections'];
 
 ?>
 
@@ -48,7 +37,8 @@ $saved_listings = get_users_saved_listings();
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12"
                     x-data='{
-                        saved_listings: <?php echo clean_arr_for_doublequotes($saved_listings); ?>,
+                        collections: <?php echo clean_arr_for_doublequotes($user_collections); ?>,
+                        saved_listings: <?php echo clean_arr_for_doublequotes($all_saved_listings); ?>,
                         _showAddFavoriteButton(postId)    { return showAddFavoriteButton(this, postId); },
                         _showRemoveFavoriteButton(postId) { return showRemoveFavoriteButton(this, postId); },
                         _addToFavorites(postId)           { return addToFavorites(this, postId); },
@@ -79,7 +69,7 @@ $saved_listings = get_users_saved_listings();
                         <h2 class="font-bold text-18 sm:text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-px bg-black/20"></div>
-                            <span id="max_num_results" hx-swap-oob="outerHTML"><?php echo $listing_count . $listing_count_descriptor; ?></span>
+                            <span id="max_num_results" hx-swap-oob="outerHTML"></span>
                         </div>
                     </div>
 
