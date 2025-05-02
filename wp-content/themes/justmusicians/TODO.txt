@@ -30,9 +30,6 @@ Milestones
     Free lance booker testing
         collections
             v2
-                delete
-                    basic delete functionality from front end
-                    garbage collect from the user's list after delete similar to listing garbage collect
                 put current collection at top of list in single collection page
                 sortable listings in single-collection.php
                 add animations

@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once 'collections-api/authorization.php';
 require_once 'collections-api/get-collections.php';
 require_once 'collections-api/create-collection.php';
+require_once 'collections-api/delete-collection.php';
 require_once 'collections-api/add-listing-to-collection.php';
 require_once 'collections-api/remove-listing-from-collection.php';
 
@@ -57,6 +58,7 @@ function create_collection_request_handler($request) {
 }
 function delete_collection_request_handler($request) {
     $collection_id = $request->get_param('collection_id');
+    return delete_collection($collection_id);
 }
 function add_listing_to_collection_request_handler($request) {
     $collection_id = $request->get_param('collection_id');

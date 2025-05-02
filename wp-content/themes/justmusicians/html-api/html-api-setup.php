@@ -67,14 +67,17 @@ function html_api_v1_template_redirects() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             include_once get_template_directory() . '/html-api/get-collections.php'; exit;
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            error_log($collection_id);
             if (!empty($collection_id) or $collection_id == '0') {
                 include_once get_template_directory() . '/html-api/add-listing-to-collection.php'; exit;
             } else {
                 include_once get_template_directory() . '/html-api/create-collection.php'; exit;
             }
         } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-            include_once get_template_directory() . '/html-api/remove-listing-from-collection.php'; exit;
+            if (!empty($collection_id)) {
+                include_once get_template_directory() . '/html-api/delete-collection.php'; exit;
+            } else {
+                include_once get_template_directory() . '/html-api/remove-listing-from-collection.php'; exit;
+            }
         }
     } else if ($path == 'favorites') {
         include_once get_template_directory() . '/single-collection.php'; exit;
