@@ -89,14 +89,19 @@
 
             <!-- Create New Collection -->
             <div class="pt-3 border-t border-gray-200">
-                <button type="button" x-on:click="showCreateCollectionInput = true" x-show="!showCreateCollectionInput" class="text-sm text-black font-medium hover:underline">+ Create new collection</button>
+                <button type="button" class="text-sm text-black font-medium hover:underline"
+                    x-show="!showCreateCollectionInput"
+                    x-on:click="showCreateCollectionInput = true; $nextTick(() => $refs.newCollectionInput<?php echo $args['post_id']; ?>.focus());"
+                >
+                    + Create new collection
+                </button>
 
                 <div x-show="showCreateCollectionInput" class="space-y-2">
                     <form
                         hx-post="/wp-html/v1/collections/"
                         hx-target="#create-collection-result-<?php echo $args['post_id']; ?>"
                     >
-                        <input type="text" name="collection_name" class="w-full px-3 py-1.5 border border-gray-300 rounded focus:outline-none focus:ring focus:border-black text-sm" placeholder="Collection name" x-ref="newCollectionInput<?php echo $args['post_id']; ?>" />
+                        <input type="text" name="collection_name" class="w-full mb-2 px-3 py-1.5 border border-gray-300 rounded focus:outline-none focus:ring focus:border-black text-sm" placeholder="Collection name" x-ref="newCollectionInput<?php echo $args['post_id']; ?>" />
                         <input type="hidden" name="listing_id" value="<?php echo $args['post_id']; ?>" />
                         <button type="submit" class="w-full text-center text-sm text-white bg-black py-1.5 rounded hover:bg-gray-800">Create</button>
                         <span id="create-collection-result-<?php echo $args['post_id']; ?>"></span>
