@@ -30,7 +30,6 @@ Milestones
     Free lance booker testing
         collections
             v2
-                put current collection at top of list in single collection page
                 sortable listings in single-collection.php
                 add animations
                 test special characters

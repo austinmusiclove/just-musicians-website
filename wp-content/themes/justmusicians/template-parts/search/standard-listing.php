@@ -7,7 +7,7 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : null;
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
     <?php if (!empty($collection_id)) { ?>
-        x-show="collections['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
+        x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
     <?php } ?>
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
     hx-get="/wp-html/v1/<?php echo !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>/?page=<?php echo $args['next_page']; ?>"

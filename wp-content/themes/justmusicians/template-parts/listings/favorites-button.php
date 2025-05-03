@@ -56,7 +56,7 @@
 
             <!-- Scrollable List of Collections -->
             <div x-ref="collectionsList<?php echo $args['post_id']; ?>" class="max-h-40 overflow-y-auto space-y-2">
-                <template x-for="collection in collections" :key="collection.post_id">
+                <template x-for="collection in sortedCollections" :key="collection.post_id">
                     <div class="flex items-center justify-between px-2 py-1 rounded cursor-pointer" x-show="collection.name.toLowerCase().includes(collectionSearchQuery)" x-cloak >
                         <a class="w-full" x-bind:href="collection.permalink"><span x-text="collection.name"></span></a>
                         <!-- Empty bookmark state -->

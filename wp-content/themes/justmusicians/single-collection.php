@@ -25,6 +25,16 @@ $collections_result = get_user_collections([
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
+error_log(print_r($collections_map, true));
+// Move the current collection to the front
+if (isset($collections_map[$collection_id])) {
+    error_log($collection_id);
+    $selected = [$collection_id => $collections_map[$collection_id]];
+    unset($collections_map[$collection_id]); // Remove from current position
+    $collections_map = $selected + $collections_map; // Merge with the rest
+}
+error_log(print_r($collections_map, true));
+
 ?>
 
 <div id="page" class="flex flex-col grow">
@@ -38,8 +48,9 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                     </div>
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12"
-                    x-data='{
-                        collections: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                    x-data="{
+                        collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                        get sortedCollections()                              { return getSortedCollections(this, <?php echo $collection_id; ?>); },
                         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
                         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
@@ -55,7 +66,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         _playPlayer(playerId)          { playPlayer(this, playerId); },
                         _toggleMute()                  { toggleMute(this); },
                         _setupVisibilityListener()     { setupVisibilityListener(this); },
-                    }'
+                    }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
@@ -72,7 +83,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         <h2 class="font-bold text-18 sm:text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-px bg-black/20"></div>
-                            <span x-text="collections['<?php echo $collection_id; ?>'].listings.length + ' ' + (collections['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
+                            <span x-text="collectionsMap['<?php echo $collection_id; ?>'].listings.length + ' ' + (collectionsMap['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
                         </div>
                     </div>
 

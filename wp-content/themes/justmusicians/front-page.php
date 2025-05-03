@@ -101,7 +101,8 @@ get_header();
 
                     <span id="results"
                         x-data='{
-                            collections: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                            collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                            get sortedCollections()                              { return getSortedCollections(this, 0); },
                             _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
                             _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                             _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
