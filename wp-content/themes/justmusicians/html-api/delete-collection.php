@@ -12,7 +12,6 @@ if ( is_wp_error($is_authorized) ) {
     exit;
 }
 
-
 // Delete Collection
 $delete_result = delete_collection($collection_id);
 if ( is_wp_error($delete_result) ) {

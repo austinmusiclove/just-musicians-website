@@ -25,16 +25,6 @@ $collections_result = get_user_collections([
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
-error_log(print_r($collections_map, true));
-// Move the current collection to the front
-if (isset($collections_map[$collection_id])) {
-    error_log($collection_id);
-    $selected = [$collection_id => $collections_map[$collection_id]];
-    unset($collections_map[$collection_id]); // Remove from current position
-    $collections_map = $selected + $collections_map; // Merge with the rest
-}
-error_log(print_r($collections_map, true));
-
 ?>
 
 <div id="page" class="flex flex-col grow">
@@ -55,8 +45,6 @@ error_log(print_r($collections_map, true));
                         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                         _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
-                        _addToCollection(collectionId, listingId)            { return addToCollection(this, collectionId, listingId); },
-                        _removeFromCollection(collectionId, listingId)       { return removeFromCollection(this, collectionId, listingId); },
                         players: {},
                         playersMuted: true,
                         playersPaused: false,

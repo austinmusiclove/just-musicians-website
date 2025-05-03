@@ -1,12 +1,12 @@
 <?php
 
-$is_preview    = !empty($args['is_preview']) ? $args['is_preview'] : false;
-$collection_id = !empty($args['collection_id']) ? $args['collection_id'] : null;
+$is_preview    = isset($args['is_preview']) ? $args['is_preview'] : false;
+$collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
 
 ?>
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
-    <?php if (!empty($collection_id)) { ?>
+    <?php if (!is_null($collection_id)) { ?>
         x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
     <?php } ?>
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
@@ -159,7 +159,6 @@ $collection_id = !empty($args['collection_id']) ? $args['collection_id'] : null;
             <?php if (!$is_preview) {
                 get_template_part('template-parts/listings/favorites-button', '', [
                     'post_id'       => $args['post_id'],
-                    'collection_id' => $collection_id,
                 ]);
             } ?>
         </div>

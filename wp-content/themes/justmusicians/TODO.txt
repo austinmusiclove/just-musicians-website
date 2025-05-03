@@ -28,14 +28,6 @@ Milestones
         create the listings for them before they sign up instead of allowing new listing creating with the link
         artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
-        collections
-            v2
-                sortable listings in single-collection.php
-                add animations
-                test special characters
-                test mobile and desktop
-            v3
-                devon design
         basic inquiries
             inquire button that sends an email
         advanced inquiries
@@ -62,6 +54,9 @@ Data
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
 UX
+    collections
+        add animations
+        devon design
     media slider
         somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
@@ -74,20 +69,19 @@ UX
     bug: sometimes active search options don't come up
     better confirm delete listing dialog
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
+    sortable listings in single-collection.php
 Features
     venue reviews
     artist reviews
 Devon
-    podcast - get violotor-blog svg
     new pages
         create/edit listing
         listing post page
         404 page
-        collections page
+    collections page and favorites buttons
     trash icon
     indicator on infinite scroll and listing form
-    handle long names on listings
-    placement of heart on mobile
+    podcast - get violotor-blog svg
 Paid features
     Advanced search filters
         venues played

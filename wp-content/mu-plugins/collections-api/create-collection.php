@@ -13,6 +13,11 @@ function create_user_collection($collection_name, $listing_id = null) {
         return new WP_Error('invalid_character', 'Collection name cannot contain double quotes.');
     }
 
+    // Disallow back slash
+    if (strpos($collection_name, '\\') !== false) {
+        return new WP_Error('invalid_character', 'Collection name cannot contain back slash.');
+    }
+
     // Get user's existing collection IDs
     $user_collections = get_user_meta($user_id, 'collections', true);
     if (!is_array($user_collections)) {
@@ -21,7 +26,7 @@ function create_user_collection($collection_name, $listing_id = null) {
 
     // Check if user already has a collection with the same name
     foreach ($user_collections as $collection_id) {
-        if (get_post_meta($collection_id, 'name', true) === $collection_name) {
+        if (stripslashes(get_post_meta($collection_id, 'name', true)) === stripslashes($collection_name)) {
             return new WP_Error('duplicate_name', 'You already have a collection with that name.');
         }
     }

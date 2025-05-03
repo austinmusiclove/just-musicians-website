@@ -73,10 +73,10 @@ function html_api_v1_template_redirects() {
                 include_once get_template_directory() . '/html-api/create-collection.php'; exit;
             }
         } else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-            if (!empty($collection_id)) {
-                include_once get_template_directory() . '/html-api/delete-collection.php'; exit;
-            } else {
+            if (!empty($listing_id)) {
                 include_once get_template_directory() . '/html-api/remove-listing-from-collection.php'; exit;
+            } else {
+                include_once get_template_directory() . '/html-api/delete-collection.php'; exit;
             }
         }
     } else if ($path == 'favorites') {

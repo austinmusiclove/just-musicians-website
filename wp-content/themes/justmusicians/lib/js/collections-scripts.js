@@ -17,16 +17,6 @@ function showFilledCollectionButton(alpineComponent, collectionId, listingId) {
     return alpineComponent.$data.collectionsMap[collectionId].listings.includes(listingId);
 }
 
-// if listing in any collection other than favorites open the popup so that user can manage collections
-// else remove from favorites
-function handleFilledFavoriteButtonClick(alpineComponent, listingId) {
-    if (Object.values(alpineComponent.$data.collectionsMap).filter(collection => collection.post_id !== 0).some(collection => collection.listings.includes(listingId))) {
-        alpineComponent.showCollectionsPopup = true;
-    } else {
-        alpineComponent.$dispatch('remove-from-favorites');
-    }
-}
-
 function addToCollection(alpineComponent, collectionId, listingId) {
     var collection = alpineComponent.$data.collectionsMap[collectionId];
     if (collection && !collection.listings.includes(listingId)) {

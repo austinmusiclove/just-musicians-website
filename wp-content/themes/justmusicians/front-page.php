@@ -107,8 +107,6 @@ get_header();
                             _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                             _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                             _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
-                            _addToCollection(collectionId, listingId)            { return addToCollection(this, collectionId, listingId); },
-                            _removeFromCollection(collectionId, listingId)       { return removeFromCollection(this, collectionId, listingId); },
                             players: {},
                             playersMuted: true,
                             playersPaused: false,

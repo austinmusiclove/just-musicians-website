@@ -13,7 +13,6 @@ if ( is_wp_error($is_authorized) ) {
     exit;
 }
 
-
 // Add listing to collection
 $result = add_listing_to_collection($collection_id, $listing_id);
 if ( is_wp_error($result) ) {
