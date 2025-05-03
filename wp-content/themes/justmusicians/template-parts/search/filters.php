@@ -12,6 +12,12 @@
     </div>
 
 <?php
+    /*
+    echo get_template_part('template-parts/filters/elements/range-input', '', [
+        'id' => 'ensemble-size',
+        'title' => 'Ensemble Size',
+    ]);
+    */
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
