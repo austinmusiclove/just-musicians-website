@@ -1,4 +1,6 @@
 Milestones
+    fix login creds don't work after update
+    fix login leads to nowhere
     Artist announce and invite new profiles
         make it invite only
         limit access until you verify email

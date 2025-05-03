@@ -22,3 +22,4 @@ if ( is_wp_error($result) ) {
 // Success Response
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Collection Created Successfully' . '\'})"></span>';
 echo '<span x-init="$dispatch(\'add-collection\', {\'post_id\': \'' . $result['post_id'] . '\', \'name\': \'' . $result['name'] . '\', \'listings\': ' . clean_arr_for_doublequotes($result['listings']) . ', \'permalink\': \'' . $result['permalink'] . '\' })"></span>';
+echo '<span x-init="$refs.newCollectionInput' . $listing_id . '.value = \'\';"></span>';

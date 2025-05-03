@@ -111,7 +111,7 @@
                         hx-target="#create-collection-result-<?php echo $args['post_id']; ?>"
                         hx-indicator="#decoy-indicator"
                     >
-                        <input type="text" name="collection_name" class="w-full mb-2 px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm" placeholder="Collection name" x-ref="newCollectionInput<?php echo $args['post_id']; ?>" />
+                        <input type="text" name="collection_name" class="w-full mb-2 px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black" placeholder="Collection name" x-ref="newCollectionInput<?php echo $args['post_id']; ?>" />
                         <input type="hidden" name="listing_id" value="<?php echo $args['post_id']; ?>" />
                         <button type="submit" class="w-full text-center text-sm text-white bg-black py-1.5 rounded">Create</button>
                         <span id="create-collection-result-<?php echo $args['post_id']; ?>"></span>
