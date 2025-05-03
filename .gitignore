@@ -6,3 +6,4 @@ wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
 wp-content/uploads
 local-phpinfo.php
 wp-content/debug.log
+.htaccess
