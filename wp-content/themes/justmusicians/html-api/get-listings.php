@@ -3,14 +3,16 @@
 // Get listings
 $page = $_GET['page'] ?? 1;
 $result = get_listings([
-    'search'           => !empty($_GET['search']) ? $_GET['search'] : '',
-    'categories'       => !empty($_GET['categories']) ? $_GET['categories'] : [],
-    'genres'           => !empty($_GET['genres']) ? $_GET['genres'] : [],
-    'subgenres'        => !empty($_GET['subgenres']) ? $_GET['subgenres'] : [],
-    'instrumentations' => !empty($_GET['instrumentations']) ? $_GET['instrumentations'] : [],
-    'settings'         => !empty($_GET['settings']) ? $_GET['settings'] : [],
-    'verified'         => !empty($_GET['verified']) ? $_GET['verified'] : null,
-    'page'             => $page,
+    'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
+    'categories'        => !empty($_GET['categories']) ? $_GET['categories'] : [],
+    'genres'            => !empty($_GET['genres']) ? $_GET['genres'] : [],
+    'subgenres'         => !empty($_GET['subgenres']) ? $_GET['subgenres'] : [],
+    'instrumentations'  => !empty($_GET['instrumentations']) ? $_GET['instrumentations'] : [],
+    'settings'          => !empty($_GET['settings']) ? $_GET['settings'] : [],
+    'verified'          => !empty($_GET['verified']) ? $_GET['verified'] : null,
+    'min_ensemble_size' => !empty($_GET['min_ensemble_size']) ? $_GET['min_ensemble_size'] : null,
+    'max_ensemble_size' => !empty($_GET['max_ensemble_size']) ? $_GET['max_ensemble_size'] : null,
+    'page'              => $page,
 ]);
 $listings               = $result['listings'];
 $valid_categories       = $result['valid_categories'];
@@ -18,6 +20,8 @@ $valid_genres           = $result['valid_genres'];
 $valid_subgenres        = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
 $valid_settings         = $result['valid_settings'];
+$min_ensemble_size      = $result['min_ensemble_size'];
+$max_ensemble_size      = $result['max_ensemble_size'];
 $max_num_results        = $result['max_num_results'];
 $max_num_pages          = $result['max_num_pages'];
 $is_last_page           = $page == $max_num_pages;
@@ -109,6 +113,17 @@ if ($page == 1) {
         'tags' => $valid_settings,
         'show_modal_var' => 'showSettingModal'
     ));
+    echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [
+        'min_value'         => $min_ensemble_size ? $min_ensemble_size : 1,
+        'max_value'         => $max_ensemble_size ? $max_ensemble_size : 10,
+        'min_input_name'    => 'min_ensemble_size',
+        'max_input_name'    => 'max_ensemble_size',
+        'min_input_x_model' => 'minEnsembleSize',
+        'max_input_x_model' => 'maxEnsembleSize',
+        'min_input_x_ref'   => 'minEnsembleSize',
+        'max_input_x_ref'   => 'maxEnsembleSize',
+        'on_change_event'   => 'filterupdate',
+    ]);
 }
 
 // Render total resutls count

@@ -12,12 +12,6 @@
     </div>
 
 <?php
-    /*
-    echo get_template_part('template-parts/filters/elements/range-input', '', [
-        'id' => 'ensemble-size',
-        'title' => 'Ensemble Size',
-    ]);
-    */
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
@@ -58,6 +52,17 @@
         'tags' => [],
         'show_modal_var' => 'showSettingModal'
     ));
+    echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [
+        'min_value'         => 1,
+        'max_value'         => 10,
+        'min_input_name'    => 'min_ensemble_size',
+        'max_input_name'    => 'max_ensemble_size',
+        'min_input_x_model' => 'minEnsembleSize',
+        'max_input_x_model' => 'maxEnsembleSize',
+        'min_input_x_ref'   => 'minEnsembleSize',
+        'max_input_x_ref'   => 'maxEnsembleSize',
+        'on_change_event'   => 'filterupdate',
+    ]);
     //echo get_template_part('template-parts/filters/location', '', array());
 
     ?>

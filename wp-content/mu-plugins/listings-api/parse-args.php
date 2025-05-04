@@ -47,6 +47,8 @@ function get_sanitized_listing_args() {
     if (isset($_POST['soundcloud_url']))         { $sanitized_args['meta_input']['soundcloud_url']         = sanitize_url($_POST['soundcloud_url']); }
     if (isset($_POST['ensemble_size']))          { $sanitized_args['meta_input']['ensemble_size']          = custom_sanitize_array($_POST['ensemble_size']); }
     if (isset($_POST['youtube_video_urls']))     { $sanitized_args['meta_input']['youtube_video_urls']     = custom_sanitize_array($_POST['youtube_video_urls']); }
+    if (isset($_POST['min_ensemble_size']))      { $sanitized_args['meta_input']['min_ensemble_size']      = sanitize_text_field($_POST['min_ensemble_size']); }
+    if (isset($_POST['max_ensemble_size']))      { $sanitized_args['meta_input']['max_ensemble_size']      = sanitize_text_field($_POST['max_ensemble_size']); }
 
     // Taxonomies
     if (isset($_POST['categories']) )            { $sanitized_args['tax_input']['mcategory']               = custom_sanitize_array($_POST['categories']); }

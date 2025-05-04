@@ -5,16 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
     $results = [];
-    $search_term            = (!empty($args['search']))           ? sanitize_text_field($args['search'])                             : null;
-    $name_search_term       = (!empty($args['name_search']))      ? sanitize_text_field($args['name_search'])                        : null;
-    $verified               = (!empty($args['verified']))         ? rest_sanitize_boolean($args['verified'])                         : null;
-    $sanitized_page         = (!empty($args['page']))             ? sanitize_text_field($args['page'])                               : null;
-    $types                  = (!empty($args['types']))            ? rest_sanitize_array($args['types'])                              : [];
-    $valid_categories       = (!empty($args['categories']))       ? validate_tax_input($args['categories'], 'mcategory')             : [];
-    $valid_genres           = (!empty($args['genres']))           ? validate_tax_input($args['genres'], 'genre')                     : [];
-    $valid_subgenres        = (!empty($args['subgenres']))        ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
-    $valid_instrumentations = (!empty($args['instrumentations'])) ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
-    $valid_settings         = (!empty($args['settings']))         ? validate_tax_input($args['settings'], 'setting')                 : [];
+    $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
+    $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
+    $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
+    $min_ensemble_size      = (!empty($args['min_ensemble_size'])) ? sanitize_text_field($args['min_ensemble_size'])                  : null;
+    $max_ensemble_size      = (!empty($args['max_ensemble_size'])) ? sanitize_text_field($args['max_ensemble_size'])                  : null;
+    $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
+    $types                  = (!empty($args['types']))             ? rest_sanitize_array($args['types'])                              : [];
+    $valid_categories       = (!empty($args['categories']))        ? validate_tax_input($args['categories'], 'mcategory')             : [];
+    $valid_genres           = (!empty($args['genres']))            ? validate_tax_input($args['genres'], 'genre')                     : [];
+    $valid_subgenres        = (!empty($args['subgenres']))         ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
+    $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
+    $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_types            = validate_listing_types($types);
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page = $page + 1;
@@ -57,6 +59,26 @@ function get_listings($args) {
             'value' => $verified,
         ];
     }
+    // Ensemble Size
+    if ($min_ensemble_size or $max_ensemble_size) {
+        $ensemble_size_values = [];
+        for ($option = $min_ensemble_size; $option <= min($max_ensemble_size, 9); $option++) {
+            $ensemble_size_values[] = (string)$option;
+        }
+        if ($max_ensemble_size >= 10) {
+            $ensemble_size_values[] = '10+';
+        }
+        $ensemble_size_query = [ 'relation' => 'OR' ];
+        foreach ($ensemble_size_values as $value) {
+            $ensemble_size_query[] = [
+                'key'     => 'ensemble_size',
+                'value'   => '"' . $value . '"',
+                'compare' => 'LIKE',
+            ];
+        }
+        $meta_queries[] = $ensemble_size_query;
+    }
+
     $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
         'relation' => 'AND',
         ...$meta_queries,
@@ -144,16 +166,18 @@ function get_listings($args) {
 
     wp_reset_postdata();
     return [
-        'listings' => $results,
-        'valid_types' => $valid_types,
-        'valid_categories' => $valid_categories,
-        'valid_genres' => $valid_genres,
-        'valid_subgenres' => $valid_subgenres,
+        'listings'               => $results,
+        'valid_types'            => $valid_types,
+        'valid_categories'       => $valid_categories,
+        'valid_genres'           => $valid_genres,
+        'valid_subgenres'        => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
-        'valid_settings' => $valid_settings,
-        'max_num_results' => $max_num_results,
-        'max_num_pages' => $max_num_pages,
-        'next_page' => $next_page,
+        'valid_settings'         => $valid_settings,
+        'min_ensemble_size'      => $min_ensemble_size,
+        'max_ensemble_size'      => $max_ensemble_size,
+        'max_num_results'        => $max_num_results,
+        'max_num_pages'          => $max_num_pages,
+        'next_page'              => $next_page,
     ];
 }
 function validate_listing_types($types) {

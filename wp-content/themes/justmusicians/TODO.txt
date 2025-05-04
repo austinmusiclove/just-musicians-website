@@ -37,7 +37,6 @@ Milestones
             manage your inquiries in the back end
             manage inquiries sent to you in the back end
         auto pause when you scroll away from listing; especially for mobile
-        ensemble size filter
     Free lance booker testing 2
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
@@ -79,6 +78,7 @@ Devon
         listing post page
         404 page
     collections page and favorites buttons
+    ensemble size filter
     trash icon
     indicator on infinite scroll and listing form
     podcast - get violotor-blog svg

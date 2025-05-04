@@ -45,11 +45,13 @@ get_header();
             settingsCheckboxes: [<?php if (!empty($_GET['qsetting'])) { echo "'" . $_GET['qsetting'] . "'"; } ?>],
             tagsCheckboxes: [<?php if (!empty($_GET['qtag'])) { echo "'" . $_GET['qtag'] . "'"; } ?>],
             verifiedCheckbox: false,
+            minEnsembleSize: 1,
+            maxEnsembleSize: 10,
             get selectedFilters() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).length;
             },
             tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
             showTagModalOption(option) {
@@ -69,7 +71,9 @@ get_header();
                       <div class="mb-8 min-h-16">
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
-                              <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate') });">clear all</button>
+                              <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14"
+                                  x-on:click="$nextTick(() => { searchInput = ''; $refs.minEnsembleSize.value = 1; $refs.maxEnsembleSize.value = 10; $dispatch('filterupdate') });"
+                              >clear all</button>
                           </div>
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
