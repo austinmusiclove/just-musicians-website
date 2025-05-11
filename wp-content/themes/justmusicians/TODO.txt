@@ -25,13 +25,18 @@ Milestones
             content
             video order depending on search criteria
             start at timestamp for videos
+            alter search algorithm to favor relevant media
         create the listings for them before they sign up instead of allowing new listing creating with the link
-        artist pages that will get you listed on google as a musician by using schema
     Free lance booker testing
         basic inquiries
-            inquire button that sends an email
-        advanced inquiries
+            basics
+                add quiz slides for side bar
+                create inquiry post type
+                create inquiry from quiz form
+            inquire button that opens quiz with listing context
+            side bar opens same quiz with no listing context
             quiz to get gig details
+            create inquiry post type or gig
             send out to artist by email and send to more as well
             allow adding artists to an inquiry similar to adding to collection
             manage your inquiries in the back end
@@ -42,7 +47,9 @@ Milestones
         click tracking
         user recording software
         messaging
+        inquire without logging in
     Venue testing
+        open calendar
         venue applications
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
@@ -62,6 +69,7 @@ UX
         video seeking
         swipe on mobile
     Filters
+        add length of set
         add something about providing sound equipment
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
@@ -91,6 +99,7 @@ Paid features
     Verification
 Back End
     Allow modifying default filters from the theme customizor
+    artist pages that will get you listed on google as a musician by using schema
 Security
     audit rest api inputs and html api inputs
 Performance
@@ -98,6 +107,7 @@ Performance
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
+    image sprites
 Bugs
     listing form: if you go back to create listing page after creating and the thumbnail input is filled, there is no cropped image and submit will be allowed without thumbnail
     listing form: if you choose a file then you hit choose file again but hit cancel, the file clears from the input and since it is required you cannot submit even though there is a cropper displaying and an image in the preview

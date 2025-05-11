@@ -259,5 +259,7 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         </div>
     </div>
 
-    <!--<button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-4 rounded-sm font-sun-motter text-12 inline-block">Send Inquiry</button>-->
+    <button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-12 inline-block"
+        x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>');"
+    >Send Inquiry</button>
 </div>

@@ -71,6 +71,21 @@ function register_post_types() {
         'menu_icon' => 'dashicons-id-alt'
     ));
 
+    // Inquiry
+    register_post_type('inquiry', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Inquiry',
+          'add_new_item' => 'Add New Inquiry',
+          'edit_item' => 'Edit Inquiry',
+          'all_items' => 'All Inquiries',
+          'singular_name' => 'Inquiry'
+        ),
+        'menu_icon' => 'dashicons-editor-help'
+    ));
+
     // Collections
     register_post_type('collection', array(
         'public' => true,

@@ -1,12 +1,13 @@
 <div class="border border-black/20 p-8 <?php echo $args['responsive']; ?>">
 
     <h3 class="font-sun-motter text-20 mb-3">Request a quote from a local musician</h3>
-    <p class="text-16 text-brown-dark-1 leading-tight mb-6">Tell us about your business or occasion to receive quotes from up to three local musicians.</p>
+    <p class="text-16 text-brown-dark-1 leading-tight mb-6">Tell us about your occasion to receive quotes from musicians near you.</p>
 
     <form method="post">
 
         <fieldset class="flex flex-col gap-y-2 mb-6">
 
+            <!--
             <div class="pseudo-select relative"
                 x-data="{
                     showOptions: false,
@@ -17,7 +18,9 @@
                     <span class="flex items-center gap-2" data-value="selected" x-ref="defaultOption" x-html="selectedOption">What do you need?</span>
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
                 </div>
+                -->
                 <!-- Options -->
+                <!--
                 <div data-element="what-do-you-need" class="absolute top-full w-full left-0 px-4 py-4 bg-white font-regular border border-black/20 font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10"
                     x-show="showOptions" x-cloak
                     x-on:click.outside="showOptions = false"
@@ -43,14 +46,20 @@
                     </span>
                 </div>
             </div>
+            -->
 
-            <!--<label for="zipcode" class="hidden">Enter zipcode</label>-->
-            <input type="number" name="zipcode" placeholder="Enter zip code" />
+            <input type="date" name="event_date" x-bind:class="{'text-grey': !inquiryDate, 'text-black': inquiryDate}" x-model="inquiryDate">
+            <input type="text" name="event_zipcode"
+                maxlength="5"
+                pattern="^\d{5}(-\d{4})?$"
+                title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)."
+                placeholder="Your event zip code"
+                x-model="inquiryZipCode"
+            />
 
         </fieldset>
 
+        <button type="button" data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="_openInquiryModal('')">Get Started</button>
+
     </form>
-    <!-- Moved outside of form element to prevent form submission -->
-    <!-- <button type="button" data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="showInquiryModal = true; showSlide1 = true;">Get Started</button> -->
-    <button type="button" data-trigger="quote" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3" x-on:click="showInquiryModalPlaceholder = true;">Get Started</button>
 </div>
