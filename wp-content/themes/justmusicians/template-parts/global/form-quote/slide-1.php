@@ -36,7 +36,7 @@
         </form>
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
-        <button data-trigger="slide-2" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2" x-on:click="showSlide2 = true; showSlide1 = false;">Next</button>
+        <button type="button" data-trigger="slide-2" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2" x-on:click="showSlide2 = true; showSlide1 = false;">Next</button>
     </div>
 
 </div>

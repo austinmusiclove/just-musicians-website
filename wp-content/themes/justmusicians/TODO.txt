@@ -17,7 +17,9 @@ Milestones
         click tracking
         user recording software
         messaging
+        inquire without logging in
     Venue testing
+        open calendar
         venue applications
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
@@ -38,6 +40,7 @@ UX
         video seeking
         swipe on mobile
     Filters
+        add length of set
         add something about providing sound equipment
         add location
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
@@ -75,6 +78,7 @@ Devon
     podcast - get violotor-blog svg
 Back End
     Allow modifying default filters from the theme customizor
+    artist pages that will get you listed on google as a musician by using schema
 Security
     audit rest api inputs and html api inputs
 Performance
@@ -82,6 +86,7 @@ Performance
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
+    image sprites
 Bugs
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
 Quirks

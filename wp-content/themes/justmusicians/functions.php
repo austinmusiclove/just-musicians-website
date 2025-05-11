@@ -59,14 +59,21 @@ function hmm_scripts() {
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
+
+        // Inquiry Modal
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
     }
 
     // Archive
     if (is_archive()) {
+        // Inquiry Modal
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
     }
 
     // Article and Page
     if ( is_singular(array( 'post')) || is_page() ) {
+        // Inquiry Modal
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
     }
 
     // Listing form

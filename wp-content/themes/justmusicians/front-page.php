@@ -31,12 +31,6 @@ get_header();
             showSubGenreModal: false,
             showInstrumentationModal: false,
             showSettingModal: false,
-            showInquiryModal: false,
-            showSlide1: false,
-            showSlide2: false,
-            showSlide3: false,
-            showSlide4: false,
-            showSlide5: false,
             searchVal: searchInput,
             categoriesCheckboxes: [<?php if (!empty($_GET['qcategory'])) { echo "'" . $_GET['qcategory'] . "'"; } ?>],
             genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
@@ -204,7 +198,6 @@ get_header();
                         'x-show' => 'showSettingModal',
                         'has_search_bar' => true,
                     ]);
-                    echo get_template_part('template-parts/global/form-quote/popup', '', []);
                 ?>
 
             </div>

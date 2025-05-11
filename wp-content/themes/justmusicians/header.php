@@ -50,10 +50,22 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            showInquiryModalPlaceholder: false,
+            showInquiryModal: false,
+            currentInquirySlide: '',
+            showDateSlide: true,
+            showLocationSlide: false,
+            showDetailsSlide: false,
+            showEmailSlide: false,
+            showDiscardSlide: false,
+            showThankYouSlide: false,
+            inquiryDate: '',
+            inquiryZipCode: '',
+            _clearInquiryForm()          { clearInquiryForm(this); },
+            _showInquirySlide(slide)     { showInquirySlide(this, slide); },
+            _openInquiryModal(listingId) { openInquiryModal(this, listingId); },
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
-            getShowDefaultSearchOptionsMobile() { return this.showSearchOptions && this.width < 768 },
+            getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
             showMobileMenu: false,
             showMobileMenuDropdown1: false,
             showMobileMenuDropdown2: false,
@@ -193,9 +205,5 @@
         echo get_template_part('template-parts/login/login-modal', '', []);
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
-        echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showInquiryModalPlaceholder',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',
-        ]);
+        echo get_template_part('template-parts/global/form-quote/popup', '', []);
     ?>
