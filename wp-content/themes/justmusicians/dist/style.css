@@ -387,6 +387,11 @@ form textarea {
   opacity: 1;
 }
 
+/* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
+.htmx-request .htmx-indicator-replace {
+  opacity: 0;
+}
+
 .tooltip::after {
   content: "";
   position: absolute;

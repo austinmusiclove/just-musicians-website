@@ -27,6 +27,7 @@ add_action('rest_api_init', function () {
 
 
 function get_performance_id() {
+    $result = 0;
     $performance_date = $_GET['performance_date'];
     $performing_act_name = stripslashes($_GET['performing_act_name']);
     $venue_name = stripslashes($_GET['venue_name']);
@@ -57,12 +58,14 @@ function get_performance_id() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return get_the_ID();
+        $result = get_the_ID();
     }
-    return 0;
+    wp_reset_postdata();
+    return $result;
 }
 
 function get_performance_by_performance_id() {
+    $result = 0;
     $performance_id = $_GET['performance_id'];
     $args = array(
         'post_type' => 'performance',
@@ -78,7 +81,7 @@ function get_performance_by_performance_id() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return array(
+        $result = array(
             'id' => get_the_ID(),
             'venue' => get_field('venue'),
             'venue_name' => get_field('venue_name'),
@@ -86,7 +89,8 @@ function get_performance_by_performance_id() {
             'performance_date' => get_field('performance_date'),
         );
     }
-    return 0;
+    wp_reset_postdata();
+    return $result;
 }
 
 function get_performances_by_performer() {
@@ -131,5 +135,6 @@ function get_performances_by_performer() {
             ));
         }
     }
+    wp_reset_postdata();
     return $result;
 }

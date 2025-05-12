@@ -26,6 +26,13 @@ function custom_login_failed($username) {
 }
 add_action('wp_login_failed', 'custom_login_failed');
 function custom_login_success($username) {
+    // Check if the referer was the default wp-login.php (backend login)
+    $referer = $_SERVER['HTTP_REFERER'] ?? '';
+
+    if (strpos($referer, 'wp-login.php') !== false || strpos($referer, 'wp-admin') !== false) {
+        return; // Skip if it's the default WP login page or wp-admin
+    }
+
     echo '<span x-init="redirect();"></span>';
     exit;  // Stop further processing
 }

@@ -17,7 +17,7 @@ add_action('rest_api_init', function () {
     ));
     register_rest_route('user/v1', 'profiles', array(
         'methods' => WP_REST_SERVER::READABLE,
-        'callback' => 'getUserProfiles'
+        'callback' => 'get_urser_profiles'
     ));
 });
 
@@ -48,7 +48,7 @@ function activate_account($account_identifier) {
 function is_email_verified() {
     $email_verified = get_user_meta(wp_get_current_user()->ID, "email_verified");
     return $email_verified[0];
-    if (!isset($email_verified) || is_null($email_verified) || !is_array($email_verified)) {
+    if (!isset($email_verified) or is_null($email_verified) or !is_array($email_verified)) {
         return false;
     } else {
         return $email_verified[0];
@@ -56,10 +56,10 @@ function is_email_verified() {
 }
 
 // get current user profiles
-function getUserProfiles() {
+function get_urser_profiles() {
     $results = array();
     $user_profiles = get_user_meta(wp_get_current_user()->ID, "profiles");
-    if (!isset($user_profiles) || is_null($user_profiles) || !is_array($user_profiles)) {
+    if (!isset($user_profiles) or is_null($user_profiles) or !is_array($user_profiles)) {
         return $results;
     } else {
         // for each profile get name
@@ -84,8 +84,9 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     // Validate listing invitation code
     $code_post = validate_temporary_code($listing_invitation_code);
     if (is_wp_error($code_post)) {
-        if ($code_post->get_error_code() == 'invalid_code') { return WP_Error('invalid_link', 'Invalid listing invitation link'); }
-        if ($code_post->get_error_code() == 'expired_code') { return WP_Error('expired_link', 'Expired listing invitation link'); }
+        if ($code_post->get_error_code() == 'invalid_code') { return new WP_Error('invalid_link', 'Invalid listing invitation link'); }
+        if ($code_post->get_error_code() == 'expired_code') { return new WP_Error('expired_link', 'Expired listing invitation link'); }
+        exit;
         return $code_post;
     }
 
@@ -96,9 +97,13 @@ function add_listing_by_invitation_code($listing_invitation_code) {
 
     // Get the listings (array of post IDs) from the tmp_code post
     $listing_ids = get_post_meta($code_post->ID, 'listings', true);
+    $valid_listings = (empty($listing_ids) or !is_array($listing_ids)) ? [] : array_filter($listing_ids, function ($listing) {
+        $post = get_post($listing);
+        return $post and $post->post_status === 'publish';
+    });
 
     // Check if listings are found in the tmp_code post
-    if (empty($listing_ids) || !is_array($listing_ids)) {
+    if (empty($valid_listings) or !is_array($valid_listings)) {
         return new WP_Error('no_listings', 'No listings associated with this code.');
     }
 
@@ -106,7 +111,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     $current_user = wp_get_current_user();
     $current_listings = get_user_meta($current_user->ID, 'listings', true);
     if (empty($current_listings)) { $current_listings = array(); }
-    $current_listings = array_merge($current_listings, $listing_ids);
+    $current_listings = array_merge($current_listings, $valid_listings);
     $current_listings = array_unique($current_listings);
 
     // Save the updated listings to the user meta
@@ -119,10 +124,15 @@ function validate_temporary_code($temporary_code) {
     // Get temporary code
     $args = array(
         'post_type' => 'tmp_code',
-        'meta_key' => 'code',
-        'meta_value' => $temporary_code,
-        'compare' => '=',
+        'post_status' => 'publish',
         'posts_per_page' => 1,
+        'meta_query' => [
+            [
+                'key' => 'code',
+                'value' => $temporary_code,
+                'compare' => '=',
+            ]
+        ],
     );
     $tmp_code_query = new WP_Query($args);
     if (!$tmp_code_query->have_posts()) {
@@ -132,7 +142,7 @@ function validate_temporary_code($temporary_code) {
 
     // Check if the code has expired
     $expiration_timestamp = get_post_meta($tmp_code_post->ID, 'expiration_timestamp', true);
-    if ($expiration_timestamp && $expiration_timestamp < time()) {
+    if ($expiration_timestamp and $expiration_timestamp < time()) {
         return new WP_Error('expired_code', 'This code has expired.');
     }
 

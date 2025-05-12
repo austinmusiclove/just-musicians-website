@@ -1,18 +1,19 @@
+
 function pausePreviousSlide(alpineComponent) {
     if (alpineComponent.previousIndex > 0) {
-        alpineComponent.$dispatch('pause-youtube-player', {'playerId': alpineComponent.playerIds[alpineComponent.previousIndex - 1]});
+        alpineComponent.$dispatch('pause-youtube-player', {'playerId': getPreviousPlayerId(alpineComponent)});
     }
 }
 
 function pauseCurrentSlide(alpineComponent) {
     if (alpineComponent.currentIndex > 0) {
-        alpineComponent.$dispatch('pause-youtube-player', {'playerId': alpineComponent.playerIds[alpineComponent.currentIndex - 1]});
+        alpineComponent.$dispatch('pause-youtube-player', {'playerId': getCurrentPlayerId(alpineComponent)});
     }
 }
 
 function playCurrentSlide(alpineComponent) {
     if (alpineComponent.currentIndex > 0) {
-        alpineComponent.$dispatch('play-youtube-player', {'playerId': alpineComponent.playerIds[alpineComponent.currentIndex - 1]});
+        alpineComponent.$dispatch('play-youtube-player', {'playerId': getCurrentPlayerId(alpineComponent)});
     }
 }
 
@@ -21,7 +22,7 @@ function toggleMuteAllVideos(alpineComponent) {
 }
 
 function isPaused(alpineComponent) {
-    return alpineComponent.currentIndex > 0 && alpineComponent.players[alpineComponent.playerIds[alpineComponent.currentIndex - 1]].isPaused;
+    return alpineComponent.currentIndex > 0 && alpineComponent.players[getCurrentPlayerId(alpineComponent)].isPaused;
 }
 
 function enterSlider(alpineComponent) {
@@ -39,3 +40,10 @@ function updateIndex(alpineComponent, newIndex) {
     alpineComponent.currentIndex = newIndex;                      // Update to the new index
 }
 
+function getCurrentPlayerId(alpineComponent) {
+    return alpineComponent.playerIds[alpineComponent.currentIndex - 1];
+}
+
+function getPreviousPlayerId(alpineComponent) {
+    return alpineComponent.playerIds[alpineComponent.previousIndex - 1];
+}

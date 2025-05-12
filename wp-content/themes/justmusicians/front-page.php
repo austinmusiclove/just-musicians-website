@@ -11,11 +11,20 @@
  *
  * @package JustMuscians
  */
+
+// Get user collections
+$collections_result = get_user_collections([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$collections_map = array_column($collections_result['collections'], null, 'post_id');
+
+
 get_header();
 ?>
 
 <div id="page" class="flex flex-col grow">
-    <form id="listing-form"
+    <form id="hx-form"
         x-data="{
             showCategoryModal: false,
             showGenreModal: false,
@@ -36,20 +45,23 @@ get_header();
             settingsCheckboxes: [<?php if (!empty($_GET['qsetting'])) { echo "'" . $_GET['qsetting'] . "'"; } ?>],
             tagsCheckboxes: [<?php if (!empty($_GET['qtag'])) { echo "'" . $_GET['qtag'] . "'"; } ?>],
             verifiedCheckbox: false,
+            minEnsembleSize: 1,
+            maxEnsembleSize: 10,
             get selectedFilters() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).length;
             },
             tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
         }"
-        hx-get="wp-html/v1/listings/"
+        hx-get="/wp-html/v1/listings/"
         hx-trigger="load, filterupdate"
         hx-target="#results"
+        hx-indicator="#spinner"
     >
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
@@ -59,7 +71,9 @@ get_header();
                       <div class="mb-8 min-h-16">
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
-                              <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate') });">clear all</button>
+                              <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14"
+                                  x-on:click="$nextTick(() => { searchInput = ''; $refs.minEnsembleSize.value = 1; $refs.maxEnsembleSize.value = 10; $dispatch('filterupdate') });"
+                              >clear all</button>
                           </div>
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
@@ -68,7 +82,19 @@ get_header();
 
                     </div>
                 </div>
+
+
+
+
                 <div class="col md:col-span-6 py-6 md:py-4">
+
+
+                    <!------------ Toasts ----------------->
+                    <div class="h-4">
+                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
+                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', []); ?>
+                    </div>
+
 
                     <div class="flex items-center justify-between md:justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
@@ -77,24 +103,30 @@ get_header();
                         )); ?>
                     </div>
 
-                    <script>
-                        window.onYouTubeIframeAPIReady = function () { document.dispatchEvent(new Event('youtube-api-ready')); };
-                    </script>
-
                     <span id="results"
                         x-data='{
+                            collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                            get sortedCollections()                              { return getSortedCollections(this, 0); },
+                            _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
+                            _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
+                            _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
+                            _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
                             players: {},
                             playersMuted: true,
                             playersPaused: false,
-                            _initPlayerFromIframe(playerId) { initPlayerFromIframe(this, playerId); },
-                            _pausePlayer(playerId)          { pausePlayer(this, playerId); },
-                            _playPlayer(playerId)           { playPlayer(this, playerId); },
-                            _toggleMute()                   { toggleMute(this); },
+                            _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
+                            _pauseAllPlayers()             { pauseAllPlayers(this); },
+                            _pausePlayer(playerId)         { pausePlayer(this, playerId); },
+                            _playPlayer(playerId)          { playPlayer(this, playerId); },
+                            _toggleMute()                  { toggleMute(this); },
+                            _setupVisibilityListener()     { setupVisibilityListener(this); },
                         }'
-                        x-on:init-youtube-player="_initPlayerFromIframe($event.detail.playerId);"
+                        x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
+                        x-on:pause-all-youtube-players="_pauseAllPlayers()"
                         x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                         x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
                         x-on:mute-youtube-players="_toggleMute()"
+                        x-init="_setupVisibilityListener()"
                     >
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
@@ -104,6 +136,11 @@ get_header();
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
                         ?>
                     </span>
+
+
+                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                    </div>
 
 
                     <div class="xl:hidden">
@@ -128,7 +165,7 @@ get_header();
 
                 <!-- Modals -->
                 <?php
-                    $categories = get_terms_decoded('mcategory', 'names');
+                    $categories = get_terms_decoded('mcategory', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Category',
                         'labels' => $categories,
@@ -137,7 +174,7 @@ get_header();
                         'x-show' => 'showCategoryModal',
                         'has_search_bar' => true,
                     ]);
-                    $genres = get_terms_decoded('genre', 'names');
+                    $genres = get_terms_decoded('genre', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Genre',
                         'labels' => $genres,
@@ -146,7 +183,7 @@ get_header();
                         'x-show' => 'showGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $subgenres = get_terms_decoded('subgenre', 'names');
+                    $subgenres = get_terms_decoded('subgenre', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Sub Genre',
                         'labels' => $subgenres,
@@ -155,7 +192,7 @@ get_header();
                         'x-show' => 'showSubGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $instrumentation = get_terms_decoded('instrumentation', 'names');
+                    $instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Instrumentation',
                         'labels' => $instrumentation,
@@ -164,7 +201,7 @@ get_header();
                         'x-show' => 'showInstrumentationModal',
                         'has_search_bar' => true,
                     ]);
-                    $settings = get_terms_decoded('setting', 'names');
+                    $settings = get_terms_decoded('setting', 'names', false, true);
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Setting',
                         'labels' => $settings,

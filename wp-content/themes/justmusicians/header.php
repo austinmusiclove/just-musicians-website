@@ -12,7 +12,7 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="<?php echo $scroll_pt; ?>">
+<html <?php language_attributes(); ?> >
 <head>
 
 
@@ -47,6 +47,7 @@
             showFavModal: false,
             showLoginModal: false,
             showSignupModal: false,
+            showArtistPageModal: false,
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
@@ -55,7 +56,8 @@
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile() { return this.showSearchOptions && this.width < 768 },
             showMobileMenu: false,
-            showMobileMenuDropdown: false,
+            showMobileMenuDropdown1: false,
+            showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
         }"
@@ -81,8 +83,8 @@
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow w-full flex items-stretch">
             <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
-                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
-                x-on:keyup.enter="location.href = '/?qsearch=' + $el.value"
+                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
+                x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
                 hx-get="<?php echo get_site_url(); ?>/wp-html/v1/search-options"
@@ -153,15 +155,15 @@
                   <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
                   Profile
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="h-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+-->
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
+                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
-                  <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
                   My Listings
                 </a>
--->
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
                   Log Out
@@ -183,13 +185,13 @@
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showFavModal',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'Favorites and the ability to create custom lists are both coming soon for signed in users.',
-        ]);
-        echo get_template_part('template-parts/global/modal', '', [
             'alpine_show_var' => 'showInquiryModalPlaceholder',
             'heading' => 'Coming Soon',
             'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',
+        ]);
+        echo get_template_part('template-parts/global/modal', '', [
+            'alpine_show_var' => 'showArtistPageModal',
+            'heading' => 'Coming Soon',
+            'paragraph' => 'The artist page, containing all the details about each artist, is currently under construction and coming soon.',
         ]);
     ?>

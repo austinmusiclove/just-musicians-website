@@ -44,6 +44,7 @@
                     <img class="w-full h-full object-cover" src="<?php echo $listing['tiny_thumbnail_url']; ?>" />
                 </div>
                 <?php echo $listing['name']; ?>
+                <?php if ($listing['verified']) { ?><img class="h-4 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" /><?php } ?>
             </a>
         <?php } ?>
     </div>

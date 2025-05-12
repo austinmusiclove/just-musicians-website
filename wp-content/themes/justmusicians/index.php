@@ -14,7 +14,7 @@
 get_header();
 ?>
 
-<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden <?php echo $header_padding; ?>">
+<header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
     <?php
     $featured_query = new WP_Query([
         'category_name' => 'Featured',

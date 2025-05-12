@@ -9,68 +9,64 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+// Include
+require_once 'collections-api/authorization.php';
+require_once 'collections-api/get-collections.php';
+require_once 'collections-api/create-collection.php';
+require_once 'collections-api/delete-collection.php';
+require_once 'collections-api/add-listing-to-collection.php';
+require_once 'collections-api/remove-listing-from-collection.php';
+
+
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'collections', [
+    register_rest_route( 'v1', '/collections', [
         'methods' => 'GET',
-        'callback' => 'get_collections',
+        'callback' => 'get_collections_request_handler',
+        'permission_callback' => 'user_logged_in',
     ]);
-    register_rest_route( 'v1', 'collections', [
+    register_rest_route( 'v1', '/collections', [
         'methods' => 'POST',
-        'callback' => 'create_collection',
+        'callback' => 'create_collection_request_handler',
+        'permission_callback' => 'user_logged_in',
     ]);
-    register_rest_route( 'v1', 'collections', [
+    register_rest_route( 'v1', '/collections/(?P<collection_id>\d+)', [
         'methods' => 'DELETE',
-        'callback' => 'delete_collection',
+        'callback' => 'delete_collection_request_handler',
+        'permission_callback' => 'user_owns_collection',
     ]);
-    register_rest_route( 'v1', 'collections', [
-        'methods' => 'PUT',
-        'callback' => 'remove_listing_from_collection',
+    register_rest_route('v1', '/collections/(?P<collection_id>[a-zA-Z0-9_-]+)/listings', [
+        'methods' => 'POST',
+        'callback' => 'add_listing_to_collection_request_handler',
+        'permission_callback' => 'user_owns_collection',
     ]);
-    register_rest_route( 'v1', 'collections', [
-        'methods' => 'PUT',
-        'callback' => 'add_listing_to_collection',
+    register_rest_route('v1', '/collections/(?P<collection_id>[a-zA-Z0-9_-]+)/listings/(?P<listing_id>\d+)', [
+        'methods' => 'DELETE',
+        'callback' => 'remove_listing_from_collection_request_handler',
+        'permission_callback' => 'user_owns_collection',
     ]);
 });
 
 
-function get_collections() {
-    $result = array();
-    $user_id = $_GET['user_id'];
-    $args = array(
-        'post_type' => 'collection',
-        'nopaging' => true,
-        'meta_query' => array(
-            array(
-                'key' => 'user',
-                'value' => $user_id,
-            )
-        ),
-    );
-    $query = new WP_Query($args);
-    if ($query->have_posts()) {
-        while( $query->have_posts() ) {
-            $query->the_post();
-            array_push($result, array(
-                'ID' => get_the_ID(),
-                'name' => get_field('name'),
-                'user' => get_field('user'),
-                'listings' => get_field('listings'),
-            ));
-        }
-    }
-    $favorites = get_user_meta($user_id, 'favorites', false);
-    array_push($result, array(
-        'name' => 'Favorites',
-        'listings' => $favorites
-    ));
-    return $result;
+function get_collections_request_handler($request) {
+    return get_user_collections([ 'page' => $request['page'], ]);
 }
-function create_collection() {
+
+function create_collection_request_handler($request) {
+    $collection_name = $request->get_param('collection_name');
+    return create_user_collection($collection_name);
 }
-function delete_collection() {
+function delete_collection_request_handler($request) {
+    $collection_id = $request->get_param('collection_id');
+    return delete_collection($collection_id);
 }
-function remove_listing_from_collection() {
+function add_listing_to_collection_request_handler($request) {
+    $collection_id = $request->get_param('collection_id');
+    $listing_id    = $request->get_param('listing_id');
+    return add_listing_to_collection($collection_id, $listing_id);
 }
-function add_listing_to_collection() {
+function remove_listing_from_collection_request_handler($request) {
+    $collection_id = $request->get_param('collection_id');
+    $listing_id    = $request->get_param('listing_id');
+    return remove_listing_from_collection($collection_id, $listing_id);
 }

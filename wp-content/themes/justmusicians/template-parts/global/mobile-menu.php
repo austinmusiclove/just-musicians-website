@@ -7,12 +7,12 @@
         <!-- Live Music -->
         <div class="<?php echo $class; ?>">
 
-            <div data-trigger="mobile-menu-dropdown" class="flex justify-between items-center" x-on:click="showMobileMenuDropdown = ! showMobileMenuDropdown">
+            <div data-trigger="mobile-menu-dropdown" class="flex justify-between items-center" x-on:click="showMobileMenuDropdown1 = ! showMobileMenuDropdown1">
                 <a class="font-sun-motter" href="#">Live Music</a>
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
             </div>
             <!-- Dropdown menu -->
-            <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown" x-transition x-cloak>
+            <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown1" x-transition x-cloak>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Band">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                     Bands
@@ -41,23 +41,25 @@
         <!-- Logged In Menu -->
         <div class="<?php echo $class; ?>" x-cloak x-show="loggedIn">
 
-            <div data-trigger="mobile-menu-dropdown" class="flex justify-between items-center" x-on:click="showMobileMenuDropdown = ! showMobileMenuDropdown">
+            <div data-trigger="mobile-menu-dropdown" class="flex justify-between items-center" x-on:click="showMobileMenuDropdown2 = ! showMobileMenuDropdown2">
                 <a class="font-sun-motter" href="#">My Account</a>
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
             </div>
             <!-- Dropdown menu -->
-            <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown" x-transition x-cloak>
+            <div data-element="mobile-menu-dropdown" class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown2" x-transition x-cloak>
+                <!--
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
+                    <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
                     Profile
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                -->
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                     Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
-                    Listings
+                    My Listings
                 </a>
             </div>
 

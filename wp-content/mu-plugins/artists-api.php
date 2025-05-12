@@ -27,6 +27,7 @@ add_action('rest_api_init', function () {
 
 
 function get_artist_post_id() {
+    $result = 0;
     $artist_id = $_GET['artist_id'];
 
     $args = array(
@@ -38,12 +39,15 @@ function get_artist_post_id() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return get_the_ID();
+        $result = get_the_ID();
     }
-    return 0;
+
+    wp_reset_postdata();
+    return $result;
 }
 
 function get_artist_uuid() {
+    $result = 0;
     $artist_id = $_GET['artist_id'];
 
     $args = array(
@@ -55,12 +59,15 @@ function get_artist_uuid() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return get_field('artist_uuid');
+        $result = get_field('artist_uuid');
     }
-    return 0;
+
+    wp_reset_postdata();
+    return $result;
 }
 
 function get_artist() {
+    $result = 0;
     $artist_uuid = $_GET['artist_uuid'];
 
     $args = array(
@@ -72,7 +79,7 @@ function get_artist() {
     $query = new WP_Query($args);
     if ($query->have_posts()) {
         $query->the_post();
-        return array(
+        $result = array(
             'ID' => get_the_ID(),
             'artist_uuid' => get_field('artist_uuid'),
             'artist_id' => get_field('artist_id'),
@@ -99,5 +106,6 @@ function get_artist() {
             'venues_played_verified' => get_post_meta(get_the_ID(), 'venues_played_verified', true), // returns array of venue post ids
         );
     }
-    return 0;
+    wp_reset_postdata();
+    return $result;
 }

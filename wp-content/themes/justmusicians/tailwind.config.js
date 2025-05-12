@@ -67,6 +67,7 @@ module.exports = {
 		'./template-parts/global/**/*.{php,js}',
 		'./template-parts/filters/elements/*.{php,js}',
 		'./template-parts/account/*.{php,js}',
+		'./template-parts/listings/*.{php,js}',
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
 		'./template-parts/login/*.{php,js}',
@@ -85,7 +86,7 @@ module.exports = {
 			},
 		},
 		colors: {
-			// Neutrals
+			// Standard
 			white: '#FFFFFF',
 			black: '#000000',
             grey: '#808080',
@@ -100,7 +101,7 @@ module.exports = {
 			'yellow-light': '#EDD4A9',
 			'yellow-light-50': '#F6E9D4',
 			// Other
-			'navy': '#0F384C'
+			'navy': '#0F384C',
 		},
 		fontFamily: {
 			sans: ['Poppins', 'sans-serif'],
@@ -116,6 +117,9 @@ module.exports = {
 				'4/3': '4 / 3',
 			},
             minHeight: (theme) => ({
+                ...theme('spacing'),
+            }),
+            minWidth: (theme) => ({
                 ...theme('spacing'),
             }),
 		},

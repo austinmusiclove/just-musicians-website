@@ -5,109 +5,124 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
     $results = [];
-    $search_term = sanitize_text_field($args['search']);
-    $name_search_term = sanitize_text_field($args['name_search']);
-    $types = rest_sanitize_array($args['types']);
-    $valid_types = validate_listing_types($types);
-    $valid_categories = validate_tax_input($args['categories'], 'mcategory');
-    $valid_genres = validate_tax_input($args['genres'], 'genre');
-    $valid_subgenres = validate_tax_input($args['subgenres'], 'subgenre');
-    $valid_instrumentations = validate_tax_input($args['instrumentations'], 'instrumentation');
-    $valid_settings = validate_tax_input($args['settings'], 'setting');
-    $valid_tags = validate_tax_input($args['tags'], 'tag');
-    $verified = rest_sanitize_boolean($args['verified']);
-    $sanitized_page = sanitize_text_field($args['page']);
+    $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
+    $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
+    $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
+    $min_ensemble_size      = (!empty($args['min_ensemble_size'])) ? sanitize_text_field($args['min_ensemble_size'])                  : null;
+    $max_ensemble_size      = (!empty($args['max_ensemble_size'])) ? sanitize_text_field($args['max_ensemble_size'])                  : null;
+    $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
+    $types                  = (!empty($args['types']))             ? rest_sanitize_array($args['types'])                              : [];
+    $valid_categories       = (!empty($args['categories']))        ? validate_tax_input($args['categories'], 'mcategory')             : [];
+    $valid_genres           = (!empty($args['genres']))            ? validate_tax_input($args['genres'], 'genre')                     : [];
+    $valid_subgenres        = (!empty($args['subgenres']))         ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
+    $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
+    $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
+    $valid_types            = validate_listing_types($types);
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page = $page + 1;
 
     $query_args = [
-        'post_type' => 'listing',
+        'post_type'      => 'listing',
+        'post_status'    => 'publish',
+        'paged'          => $page,
         'posts_per_page' => 10,
-        'post_status' => 'publish',
-        'paged' => $page,
-        'orderby' => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
-        'meta_key' => 'rank',
+        'orderby'        => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
+        'meta_key'       => 'rank',
     ];
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
+        $query_args['orderby'] = 'relevance';
     }
     $meta_queries = [];
-    array_push($meta_queries, [
-        'key' => 'status',
-        'value' => 'Complete',
-    ]);
+    $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];
+    $meta_queries[] = [ 'key' => 'name', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'description', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'city', 'value' => '', 'compare' => '!=' ];
+    $meta_queries[] = [ 'key' => 'state', 'value' => '', 'compare' => '!=' ];
     if (!empty($name_search_term)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'name',
             'value' => $name_search_term,
             'compare' => 'LIKE',
-        ]);
+        ];
     }
     if (!empty($types)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'type',
             'value' => $valid_types,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($verified)) {
-        array_push($meta_queries, [
+        $meta_queries[] = [
             'key' => 'verified',
             'value' => $verified,
-        ]);
+        ];
     }
+    // Ensemble Size
+    if ($min_ensemble_size or $max_ensemble_size) {
+        $ensemble_size_values = [];
+        for ($option = $min_ensemble_size; $option <= min($max_ensemble_size, 9); $option++) {
+            $ensemble_size_values[] = (string)$option;
+        }
+        if ($max_ensemble_size >= 10) {
+            $ensemble_size_values[] = '10+';
+        }
+        $ensemble_size_query = [ 'relation' => 'OR' ];
+        foreach ($ensemble_size_values as $value) {
+            $ensemble_size_query[] = [
+                'key'     => 'ensemble_size',
+                'value'   => '"' . $value . '"',
+                'compare' => 'LIKE',
+            ];
+        }
+        $meta_queries[] = $ensemble_size_query;
+    }
+
     $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
         'relation' => 'AND',
         ...$meta_queries,
     ]);
     $tax_queries = [];
     if (!empty($valid_categories)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'mcategory',
             'field' => 'name',
             'terms' => $valid_categories,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_genres)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'genre',
             'field' => 'name',
             'terms' => $valid_genres,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_subgenres)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'subgenre',
             'field' => 'name',
             'terms' => $valid_subgenres,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_instrumentations)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'instrumentation',
             'field' => 'name',
             'terms' => $valid_instrumentations,
             'compare' => 'IN',
-        ]);
+        ];
     }
     if (!empty($valid_settings)) {
-        array_push($tax_queries, [
+        $tax_queries[] = [
             'taxonomy' => 'setting',
             'field' => 'name',
             'terms' => $valid_settings,
             'compare' => 'IN',
-        ]);
-    }
-    if (!empty($valid_tags)) {
-        array_push($tax_queries, [
-            'taxonomy' => 'tag',
-            'field' => 'name',
-            'terms' => $valid_tags,
-            'compare' => 'IN',
-        ]);
+        ];
     }
     $query_args['tax_query'] = count($tax_queries) == 0 ? null : (count($tax_queries) == 1 ? [...$tax_queries] : [
         'relation' => 'AND',
@@ -121,50 +136,48 @@ function get_listings($args) {
 
         // Get valid video links for this listing
         $youtube_video_urls = get_field('youtube_video_urls');
-        $youtube_video_ids = [];
-        if ($youtube_video_urls) {
-            foreach($youtube_video_urls as $url) {
-                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { array_push($youtube_video_ids, $matches[1]); }
-            }
-        }
+        $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
 
-        array_push($results, [
-            'title' => get_the_title(),
-            'name' => get_field('name'),
-            'city' => get_field('city'),
-            'state' => get_field('state'),
-            'description' => get_field('description'),
-            'genre' => get_the_terms(get_the_ID(), 'genre'),
-            'thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
-            'tiny_thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'tiny'),
-            'website' => get_field('website'),
-            'facebook_url' => get_field('facebook_url'),
-            'instagram_url' => get_field('instagram_url'),
-            'x_url' => get_field('x_url'),
-            'youtube_url' => get_field('youtube_url'),
-            'tiktok_url' => get_field('tiktok_url'),
-            'bandcamp_url' => get_field('bandcamp_url'),
-            'spotify_artist_url' => get_field('spotify_artist_url'),
+        $results[] = [
+            'post_id'                => get_the_ID(),
+            'title'                  => get_the_title(),
+            'name'                   => get_field('name'),
+            'city'                   => get_field('city'),
+            'state'                  => get_field('state'),
+            'description'            => get_field('description'),
+            'genre'                  => get_the_terms(get_the_ID(), 'genre'),
+            'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
+            'tiny_thumbnail_url'     => get_the_post_thumbnail_url(get_the_ID(), 'tiny'),
+            'website'                => get_field('website'),
+            'facebook_url'           => get_field('facebook_url'),
+            'instagram_url'          => get_field('instagram_url'),
+            'x_url'                  => get_field('x_url'),
+            'youtube_url'            => get_field('youtube_url'),
+            'tiktok_url'             => get_field('tiktok_url'),
+            'bandcamp_url'           => get_field('bandcamp_url'),
+            'spotify_artist_url'     => get_field('spotify_artist_url'),
             'apple_music_artist_url' => get_field('apple_music_artist_url'),
-            'soundcloud_url' => get_field('soundcloud_url'),
-            'verified' => get_field('verified'),
-            'youtube_video_urls' => get_field('youtube_video_urls'),
-            'youtube_video_ids' => $youtube_video_ids,
-        ]);
+            'soundcloud_url'         => get_field('soundcloud_url'),
+            'verified'               => get_field('verified'),
+            'youtube_video_urls'     => get_field('youtube_video_urls'),
+            'youtube_video_ids'      => $youtube_video_ids,
+        ];
     }
 
+    wp_reset_postdata();
     return [
-        'listings' => $results,
-        'valid_types' => $valid_types,
-        'valid_categories' => $valid_categories,
-        'valid_genres' => $valid_genres,
-        'valid_subgenres' => $valid_subgenres,
+        'listings'               => $results,
+        'valid_types'            => $valid_types,
+        'valid_categories'       => $valid_categories,
+        'valid_genres'           => $valid_genres,
+        'valid_subgenres'        => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
-        'valid_settings' => $valid_settings,
-        'valid_tags' => $valid_tags,
-        'max_num_results' => $max_num_results,
-        'max_num_pages' => $max_num_pages,
-        'next_page' => $next_page,
+        'valid_settings'         => $valid_settings,
+        'min_ensemble_size'      => $min_ensemble_size,
+        'max_ensemble_size'      => $max_ensemble_size,
+        'max_num_results'        => $max_num_results,
+        'max_num_pages'          => $max_num_pages,
+        'next_page'              => $next_page,
     ];
 }
 function validate_listing_types($types) {

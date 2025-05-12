@@ -31,7 +31,7 @@
                         <input id="rememberme" name="rememberme" type="checkbox" class="h-4 w-4 rounded">
                         <label for="rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                     </div>
-                    <div class="text-sm leading-6"><button type="button" x-on:click="showPasswordResetModal = true; showLoginModal = false;" class="underline opacity-50 hover:opacity-100">Forgot password?</button></div>
+                    <div class="text-sm leading-6"><button type="button" x-on:click="showPasswordResetModal = true; showLoginModal = false; loginModalMessage = 'Sign in to your account'" class="underline opacity-50 hover:opacity-100">Forgot password?</button></div>
                 </div>
                 <div>
                     <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign in</button>
@@ -49,5 +49,5 @@
             </div>
         </div>
     </div>
-    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showLoginModal = false; showSignupModal = true;">Sign up here</span></p>
+    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showLoginModal = false; loginModalMessage = 'Sign in to your account'; showSignupModal = true;">Sign up here</span></p>
 </div>

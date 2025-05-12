@@ -1,12 +1,12 @@
 <div data-popup="quote" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4" x-show="showSignupModal" x-cloak>
     <div data-trigger="quote" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
-        x-on:click="showSignupModal = false"
+        x-on:click="showSignupModal = false; signupModalMessage = 'Sign up for an account'; "
     ></div>
 
     <div class="bg-white relative w-full h-auto md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
     <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
-        x-on:click="showSignupModal = false;" />
+        x-on:click="showSignupModal = false; signupModalMessage = 'Sign up for an account'; " />
 
     <div class="slide w-[32rem] grow">
 
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showSignupModal = false; showLoginModal = true;">Sign in here</span></p>
+            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showSignupModal = false; signupModalMessage = 'Sign up for an account'; showLoginModal = true;">Sign in here</span></p>
         </div>
 
 

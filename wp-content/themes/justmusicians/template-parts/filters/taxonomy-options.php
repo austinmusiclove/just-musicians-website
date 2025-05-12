@@ -18,7 +18,7 @@
                     'x-model' => $args['input_x_model'],
                     'x-ref' => get_checkbox_ref_string($args['input_name'], $term),
                     'x-show' => "showOption('" . str_replace(["'", '"'], '', $term) . "')",
-                    'x-disabled' => ($args['max_options']) ? $args['input_x_model'] . ".length >= " . $args['max_options'] . " && !" . $args['input_x_model'] . ".map((term) => term.replace(/'/g, '')).includes('" . str_replace(["'", '"'], '', $term) . "')" : null,
+                    'x-disabled' => (!empty($args['max_options'])) ? $args['input_x_model'] . ".length >= " . $args['max_options'] . " && !" . $args['input_x_model'] . ".map((term) => term.replace(/'/g, '')).includes('" . str_replace(["'", '"'], '', $term) . "')" : null,
                     'is_array' => true,
                     'checked' => false,
                 ]);
