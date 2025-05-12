@@ -1,10 +1,10 @@
 <div class="text-16 py-2 flex items-center gap-2">
 
     <!-- Sort -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 ">
         <div class="flex items-center gap-1.5 group relative h-50">
             <div id="tooltip-sort" class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-64 -top-[65px] -right-28 md:right-auto">
-            Learn more about the default Just Musicians search algorithm <a class="text-yellow underline" href="#">here</a>.
+            Learn more about the default Just Musicians search algorithm <a class="text-yellow underline" href="<?php echo site_url('/search-algorithm'); ?>">here</a>.
             </div>
             <img id="info-sort" class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
         </div>
@@ -31,12 +31,12 @@
     </div>
 
     <!-- Number of Results -->
-    <?php if ($args['show_number'] == true) : ?>
+    <?php if (!empty($args['show_number']) and $args['show_number']) { ?>
         <div class="flex items-center gap-2">
             <div class="h-5 w-px bg-black/20"></div>
-            <span>42 results</span>
+            <span id="max_num_results" hx-swap-oob="outerHTML"></span>
         </div>
-    <?php endif; ?>
+    <?php } ?>
 
 
 </div>

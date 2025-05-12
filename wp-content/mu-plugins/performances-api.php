@@ -1,4 +1,30 @@
 <?php
+/**
+ * Plugin Name: Just Musicians Performances API
+ * Description: A custom plugin to expose REST APIs for managing performance posts
+ * Version: 1.0
+ * Author: John Filippone
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Register REST API Routes
+add_action('rest_api_init', function () {
+    register_rest_route( 'v1', 'performances', [
+        'methods' => 'GET',
+        'callback' => 'get_performance_id',
+    ]);
+    register_rest_route( 'v1', 'performances/id', [
+        'methods' => 'GET',
+        'callback' => 'get_performance_by_performance_id',
+    ]);
+    register_rest_route( 'v1', 'performances/performer', [
+        'methods' => 'GET',
+        'callback' => 'get_performances_by_performer',
+    ]);
+});
+
 
 function get_performance_id() {
     $performance_date = $_GET['performance_date'];
@@ -36,14 +62,6 @@ function get_performance_id() {
     return 0;
 }
 
-
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'performances', [
-        'methods' => 'GET',
-        'callback' => 'get_performance_id',
-    ]);
-});
-
 function get_performance_by_performance_id() {
     $performance_id = $_GET['performance_id'];
     $args = array(
@@ -70,13 +88,6 @@ function get_performance_by_performance_id() {
     }
     return 0;
 }
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'performances/id', [
-        'methods' => 'GET',
-        'callback' => 'get_performance_by_performance_id',
-    ]);
-});
-
 
 function get_performances_by_performer() {
     $result = array();
@@ -122,9 +133,3 @@ function get_performances_by_performer() {
     }
     return $result;
 }
-add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'performances/performer', [
-        'methods' => 'GET',
-        'callback' => 'get_performances_by_performer',
-    ]);
-});

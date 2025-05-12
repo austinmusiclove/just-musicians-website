@@ -86,59 +86,15 @@ get_header();
                             players: {},
                             playersMuted: true,
                             playersPaused: false,
-                            initPlayerFromIframe(playerId) {
-                                if (playerId) {
-                                    var player = new YT.Player(playerId, {
-                                        playerVars: {
-                                            controls: 0,
-                                            origin: "<?php echo site_url(); ?>",
-                                            enablejsapi: 1,
-                                        },
-                                        events: {
-                                            "onReady": () => {
-                                                this.players[playerId].isReady = true;
-                                                if (!this.playersMuted) { this.players[playerId].unMute(); }
-                                            },
-                                            "onStateChange": (event) => {
-                                                this.players[playerId].state = event.data;
-                                                if (event.data == 1) { this.players[playerId].isPaused = false; } // 1 is playing
-                                                if (event.data == 2) { this.players[playerId].isPaused = true; } // 2 is paused
-                                            }
-                                        }
-                                    });
-                                    this.players[playerId] = player;
-                                }
-                            },
-                            pausePlayer(playerId) {
-                                if (playerId && this.players[playerId] && this.players[playerId].isReady) {
-                                    var playerState = this.players[playerId].state;
-                                    if (playerState == -1 || playerState == 3) { // -1 is unstarted and 3 is buffering
-                                        this.players[playerId].stopVideo();
-                                    } else {
-                                        this.players[playerId].pauseVideo();
-                                    }
-                                    this.players[playerId].isPaused = true; // redundant but this usually fires before onStateChange creating a snappier UX
-                                }
-                            },
-                            playPlayer(playerId) {
-                                if (playerId && this.players[playerId] && this.players[playerId].isReady) {
-                                    this.players[playerId].playVideo();
-                                    this.players[playerId].isPaused = false; // redundant but this usually fires before onStateChange creating a snappier UX
-                                }
-                            },
-                            toggleMute() {
-                                if (this.playersMuted) {
-                                    Object.values(this.players).forEach((player) => {if (player.isReady) { player.unMute(); }});
-                                } else {
-                                    Object.values(this.players).forEach((player) => {if (player.isReady) { player.mute(); }});
-                                }
-                                this.playersMuted = !this.playersMuted;
-                            },
+                            _initPlayerFromIframe(playerId) { initPlayerFromIframe(this, playerId); },
+                            _pausePlayer(playerId)          { pausePlayer(this, playerId); },
+                            _playPlayer(playerId)           { playPlayer(this, playerId); },
+                            _toggleMute()                   { toggleMute(this); },
                         }'
-                        x-on:init-youtube-player="initPlayerFromIframe($event.detail.playerId);"
-                        x-on:pause-youtube-player="pausePlayer($event.detail.playerId)"
-                        x-on:play-youtube-player="playPlayer($event.detail.playerId)"
-                        x-on:mute-youtube-players="toggleMute()"
+                        x-on:init-youtube-player="_initPlayerFromIframe($event.detail.playerId);"
+                        x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
+                        x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
+                        x-on:mute-youtube-players="_toggleMute()"
                     >
                         <?php
                             echo get_template_part('template-parts/search/standard-listing-skeleton');
@@ -172,7 +128,7 @@ get_header();
 
                 <!-- Modals -->
                 <?php
-                    $categories = get_terms([ 'taxonomy' => 'mcategory', 'fields' => 'names', 'hide_empty' => false, ]);
+                    $categories = get_terms_decoded('mcategory', 'names');
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Category',
                         'labels' => $categories,
@@ -181,7 +137,7 @@ get_header();
                         'x-show' => 'showCategoryModal',
                         'has_search_bar' => true,
                     ]);
-                    $genres = get_terms([ 'taxonomy' => 'genre', 'fields' => 'names', 'hide_empty' => false, ]);
+                    $genres = get_terms_decoded('genre', 'names');
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Genre',
                         'labels' => $genres,
@@ -190,7 +146,7 @@ get_header();
                         'x-show' => 'showGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $subgenres = get_terms([ 'taxonomy' => 'subgenre', 'fields' => 'names', 'hide_empty' => false, ]);
+                    $subgenres = get_terms_decoded('subgenre', 'names');
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Sub Genre',
                         'labels' => $subgenres,
@@ -199,7 +155,7 @@ get_header();
                         'x-show' => 'showSubGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $instrumentation = get_terms([ 'taxonomy' => 'instrumentation', 'fields' => 'names', 'hide_empty' => false, ]);
+                    $instrumentation = get_terms_decoded('instrumentation', 'names');
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Instrumentation',
                         'labels' => $instrumentation,
@@ -208,7 +164,7 @@ get_header();
                         'x-show' => 'showInstrumentationModal',
                         'has_search_bar' => true,
                     ]);
-                    $settings = get_terms([ 'taxonomy' => 'setting', 'fields' => 'names', 'hide_empty' => false, ]);
+                    $settings = get_terms_decoded('setting', 'names');
                     echo get_template_part('template-parts/filters/tag-modal', '', [
                         'title' => 'Setting',
                         'labels' => $settings,

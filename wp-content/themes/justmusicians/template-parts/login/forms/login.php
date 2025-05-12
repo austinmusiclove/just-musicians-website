@@ -1,5 +1,5 @@
-    <div data-slide="login-form">
-    
+<div data-slide="login-form">
+
     <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
         <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
         <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign in to your account</h2>
@@ -31,8 +31,7 @@
                         <input id="rememberme" name="rememberme" type="checkbox" class="h-4 w-4 rounded">
                         <label for="rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                     </div>
-                    <div class="text-sm leading-6"><button onclick="showResetForm()" class="underline opacity-50 hover:opacity-100">Forgot password?</button>
-                    </div>
+                    <div class="text-sm leading-6"><button type="button" x-on:click="showPasswordResetModal = true; showLoginModal = false;" class="underline opacity-50 hover:opacity-100">Forgot password?</button></div>
                 </div>
                 <div>
                     <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign in</button>
@@ -50,5 +49,5 @@
             </div>
         </div>
     </div>
-    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="<?php echo $args['alpine_login_show_var']; ?> = false; <?php echo $args['alpine_signup_show_var']; ?> = true;">Sign up here</span></p>
+    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showLoginModal = false; showSignupModal = true;">Sign up here</span></p>
 </div>

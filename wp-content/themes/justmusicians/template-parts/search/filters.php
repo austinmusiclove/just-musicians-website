@@ -51,6 +51,7 @@
             'name' => 'verified',
             'value' => 'Verified',
             'x-model' => 'verifiedCheckbox',
+            'on_change_event' => 'filterupdate',
         )); ?>
     </div>
 </div>

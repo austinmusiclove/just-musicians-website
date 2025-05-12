@@ -1,13 +1,12 @@
-<div data-popup="quote" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4" x-show="<?php echo $args['alpine_signup_show_var']; ?>" x-cloak>
-    <!-- TODO need to go to slide 5 if not done or just close it all if done and if got o slide 5 need to remember what slide they were on to return to it -->
+<div data-popup="quote" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4" x-show="showSignupModal" x-cloak>
     <div data-trigger="quote" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
-        x-on:click="<?php echo $args['alpine_signup_show_var']; ?> = false"
+        x-on:click="showSignupModal = false"
     ></div>
 
     <div class="bg-white relative w-full h-auto md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
     <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
-        x-on:click="<?php echo $args['alpine_signup_show_var']; ?> = false;" />
+        x-on:click="showSignupModal = false;" />
 
     <div class="slide w-[32rem] grow">
 
@@ -15,14 +14,13 @@
         <div class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
             <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
                 <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
-                <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign up for an account</h2>
+                <h2 x-text="signupModalMessage" class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign up for an account</h2>
             </div>
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div class="bg-white px-6 pb-4 sm:px-12">
                     <form class="space-y-2" action="" method="POST"
                         hx-post="/wp-html/v1/register-user"
-                        hx-target="#sign-up-result"
-                    >
+                        hx-target="#sign-up-result">
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6">Email Address</label>
                             <div class="mt-2">
@@ -45,6 +43,7 @@
                                 <label for="r_rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                             </div>
                         </div>
+                        <?php if (isset($_GET['lic'])) { ?><input type="hidden" name="lic" value="<?php echo $_GET['lic']; ?>"><?php } ?>
                         <input type="hidden" name="r_csrf" value="<?php echo wp_create_nonce('r-csrf'); ?>">
                         <div>
                             <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign up</button>
@@ -64,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline underline cursor-pointer" x-on:click="<?php echo $args['alpine_signup_show_var']; ?> = false; <?php echo $args['alpine_login_show_var']; ?> = true;">Sign in here</span></p>
+            <p class="text-center text-sm mt-4">Already have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showSignupModal = false; showLoginModal = true;">Sign in here</span></p>
         </div>
 
 

@@ -26,7 +26,7 @@ function custom_login_failed($username) {
 }
 add_action('wp_login_failed', 'custom_login_failed');
 function custom_login_success($username) {
-    echo '<span x-init="redirectHome();"></span>';
+    echo '<span x-init="redirect();"></span>';
     exit;  // Stop further processing
 }
 add_action('wp_login', 'custom_login_success');

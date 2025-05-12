@@ -1,66 +1,63 @@
 <?php
 /**
  * Plugin Name: Just Musicians Data Management API
- * Description: A custom plugin to expose REST APIs for doing data operations.
+ * Description: A custom plugin to expose REST APIs for doing data operations
  * Version: 1.0
  * Author: John Filippone
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Register REST API Routes
-function custom_listing_api_routes() {
-    register_rest_route( 'datamgmt/v1', '/set-status', [
+add_action('rest_api_init', function () {
+    register_rest_route( 'datamgmt/v1', '/listing-metadata', [
         'methods' => 'POST',
-        'callback' => 'set_listing_status_to_complete',
+        'callback' => 'update_listings_meta_data',
+        'permission_callback' => 'is_admin_jwt',
     ]);
+});
 
-    register_rest_route( 'datamgmt/v1', '/update-content', [
-        'methods' => 'POST',
-        'callback' => 'update_listing_content_with_meta_and_taxonomy',
-    ]);
 
-    register_rest_route( 'datamgmt/v1', '/update-tiktok-url', [
-        'methods' => 'POST',
-        'callback' => 'update_listing_tiktok_url',
-    ]);
-}
-
-add_action( 'rest_api_init', 'custom_listing_api_routes' );
-
-// Function 1: Set 'status' meta key to 'Complete' for all 'listing' posts.
-function set_listing_status_to_complete() {
-    $args = [
-        'post_type' => 'listing',
-        'posts_per_page' => -1,  // Get all posts.
-        'post_status' => 'publish', // You can modify this to include drafts if needed.
-    ];
-
-    $listing_posts = get_posts( $args );
-
-    foreach ( $listing_posts as $post ) {
-        update_post_meta( $post->ID, 'status', 'Complete' );
-    }
-
-    return new WP_REST_Response( 'Status set to Complete for all listings.', 200 );
-}
-
-// Function 2: Combine meta fields and taxonomy terms into post content.
-function update_listing_content_with_meta_and_taxonomy() {
-    $args = [
+// Updates content so that listings are searchable by all metafields and taxonomies
+// Updates search rank
+function update_listings_meta_data() {
+    $listing_posts = get_posts( [
         'post_type' => 'listing',
         'posts_per_page' => -1,
         'post_status' => 'publish',
-    ];
+    ]);
 
-    $listing_posts = get_posts( $args );
+    update_search_rank($listing_posts);
+    update_post_content($listing_posts);
 
-    foreach ( $listing_posts as $post ) {
+    return new WP_REST_Response( 'Listing posts updated', 200 );
+}
+function update_search_rank($posts) {
+    foreach( $posts as $post) {
+        $rank = 0;
+
+        // Loop through fields to check if they have a value
+        $fields_to_check = [
+            'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size', 'draw', 'email', 'phone',
+            'website', 'instagram_handle', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'spotify_artist_id',
+            'apple_music_artist_url', 'youtube_video_urls', 'venues_played_verified'
+        ];
+        foreach ( $fields_to_check as $field ) {
+            if ( ! empty( get_post_meta( $post->ID, $field, true ) ) ) {
+                $rank++;
+            }
+        }
+
+        update_post_meta( $post->ID, 'rank', $rank );
+    }
+}
+function update_post_content($posts) {
+    foreach ( $posts as $post ) {
         // Get all meta fields for the post.
-        $meta_fields = get_post_meta( $post->ID );
+        // filter out keys that start with _
+        // remove duplicate values
+        $meta_fields = array_map(function($value_array) { return array_values(array_unique($value_array)); }, array_filter(get_post_meta( $post->ID ), function($key) { return !str_starts_with($key, '_'); }, ARRAY_FILTER_USE_KEY));
 
         // Get all taxonomy terms for the 'listing' post type.
         $taxonomies = get_object_taxonomies( 'listing' );
@@ -96,29 +93,4 @@ function update_listing_content_with_meta_and_taxonomy() {
             'post_content' => $combined_content,
         ]);
     }
-
-    return new WP_REST_Response( 'Content updated for all listings with meta and taxonomy terms.', 200 );
 }
-
-// Function 3: Update TikTok URL.
-function update_listing_tiktok_url() {
-    $args = [
-        'post_type' => 'listing',
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-    ];
-
-    $listing_posts = get_posts( $args );
-
-    foreach ( $listing_posts as $post ) {
-        $tiktok_handle = get_post_meta( $post->ID, 'tiktok_handle', true );
-
-        if ( $tiktok_handle ) {
-            $tiktok_url = 'https://www.tiktok.com/@' . $tiktok_handle;
-            update_post_meta( $post->ID, 'tiktok_url', $tiktok_url );
-        }
-    }
-
-    return new WP_REST_Response( 'TikTok URL updated for all listings.', 200 );
-}
-

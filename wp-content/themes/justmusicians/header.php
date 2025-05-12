@@ -19,11 +19,11 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">
-  <link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/lib/images/favicon/safari-pinned-tab.svg" color="#989572">
+  <!--<link rel="apple-touch-icon" sizes="180x180" href="<?php //echo get_template_directory_uri(); ?>/lib/images/favicon/apple-touch-icon.png">-->
+  <!--<link rel="icon" type="image/png" sizes="32x32" href="<?php //echo get_template_directory_uri(); ?>/lib/images/favicon/favicon-32x32.png">-->
+  <!--<link rel="icon" type="image/png" sizes="16x16" href="<?php //echo get_template_directory_uri(); ?>/lib/images/favicon/favicon-16x16.png">-->
+  <!--<link rel="manifest" href="<?php //echo get_template_directory_uri(); ?>/lib/images/favicon/site.webmanifest">-->
+  <!--<link rel="mask-icon" href="<?php //echo get_template_directory_uri(); ?>/lib/images/favicon/safari-pinned-tab.svg" color="#989572">-->
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
 
@@ -41,12 +41,15 @@
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
         x-data="{
             width: 0,
-            redirectHome() { window.location.href='/'; },
+            redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
             showPassword: false,
             showFavModal: false,
             showLoginModal: false,
             showSignupModal: false,
+            loginModalMessage: 'Sign in to your account',
+            signupModalMessage: 'Sign up for an account',
+            showPasswordResetModal: false,
             showInquiryModalPlaceholder: false,
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
@@ -145,18 +148,20 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
+<!--
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
+                  <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
                   Profile
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+                  <img class="h-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
-                  Listings
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
+                  <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  My Listings
                 </a>
+-->
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
                   Log Out
@@ -173,15 +178,10 @@
 
     <?php wp_body_open(); ?>
     <?php
-        echo get_template_part('template-parts/global/mobile-menu', '', array());
-        echo get_template_part('template-parts/login/login-modal', '', [
-            'alpine_login_show_var' => 'showLoginModal',
-            'alpine_signup_show_var' => 'showSignupModal',
-        ]);
-        echo get_template_part('template-parts/login/signup-modal', '', [
-            'alpine_login_show_var' => 'showLoginModal',
-            'alpine_signup_show_var' => 'showSignupModal',
-        ]);
+        echo get_template_part('template-parts/global/mobile-menu', '', []);
+        echo get_template_part('template-parts/login/login-modal', '', []);
+        echo get_template_part('template-parts/login/signup-modal', '', []);
+        echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/global/modal', '', [
             'alpine_show_var' => 'showFavModal',
             'heading' => 'Coming Soon',

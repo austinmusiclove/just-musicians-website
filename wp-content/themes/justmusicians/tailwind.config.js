@@ -88,6 +88,7 @@ module.exports = {
 			// Neutrals
 			white: '#FFFFFF',
 			black: '#000000',
+            grey: '#808080',
 			// Browns
 			'brown-dark-1': '#312922',
 			'brown-dark-2': '#5B4A38',
@@ -122,7 +123,8 @@ module.exports = {
 	plugins: [
 		plugin(function({ addVariant }) {
 		  addVariant('hocus', ['&:hover', '&:focus']),
-		  addVariant("group-hocus", [".group:hover &", ".group:focus &"]);
+		  addVariant("group-hocus", [".group:hover &", ".group:focus &"]),
+		  addVariant("has-disabled", `&:has(input:is(:disabled),button:is(:disabled))`);
 		}),
 		function ({ addComponents }) {
 			addComponents({

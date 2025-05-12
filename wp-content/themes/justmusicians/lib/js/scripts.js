@@ -9,6 +9,7 @@
 // show/hide autocomplete elements based on click, focus, user input
 // replace with htmx active search for autocomplete options and alpine for basic options display
 
+/*
 const $passwordResetForm = $('[data-slide="request-password-reset"]');
 const $loginForm = $('[data-slide="login-form"]');
 
@@ -21,7 +22,7 @@ window.showLoginForm = function () {
   $passwordResetForm.addClass('hidden');
   $loginForm.removeClass('hidden');
 };
-
+*/
 
   $(document).ready(function() {
 

@@ -60,7 +60,7 @@ function register_post_types() {
     register_post_type('listing', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'thumbnail', 'editor'),
+        'supports' => array('title', 'thumbnail'),
         'labels' => array(
           'name' => 'Listing',
           'add_new_item' => 'Add New Listing',
@@ -130,6 +130,22 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-microphone'
     ));
+
+    // Listing Invitation Code
+    register_post_type('tmp_code', array(
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Temporary Code',
+          'add_new_item' => 'Add New Temporary Code',
+          'edit_item' => 'Edit Temporary Code',
+          'all_items' => 'All Temporary Codes',
+          'singular_name' => 'Temporary Code'
+        ),
+        'menu_icon' => 'dashicons-editor-code'
+    ));
 }
 
 function register_taxonomies() {
@@ -137,6 +153,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Category',
       'add_new_item' => 'Add New Category',
@@ -149,6 +166,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Genres',
       'add_new_item' => 'Add New Genre',
@@ -161,6 +179,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Sub Genres',
       'add_new_item' => 'Add New Sub Genre',
@@ -173,6 +192,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Instrumentations',
       'add_new_item' => 'Add New Instrumentation',
@@ -185,6 +205,7 @@ function register_taxonomies() {
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
     'labels' => array(
       'name' => 'Settings',
       'add_new_item' => 'Add New Setting',

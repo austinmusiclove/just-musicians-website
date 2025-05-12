@@ -25,6 +25,7 @@
                     'x-show' => $args['has_search_bar'] ? "showTagModalOption('" . str_replace(["'", '"'], '', $label) . "')" : '',
                     'is_array' => true,
                     'checked' => false,
+                    'on_change_event' => 'filterupdate',
                 ]);
             }
         ?>

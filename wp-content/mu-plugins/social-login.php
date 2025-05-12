@@ -28,6 +28,7 @@ $gClient->setClientSecret($GOOGLE_CLIENT_SECRET);
 $gClient->setApplicationName($GOOGLE_APPLICATION_NAME);
 $gClient->setRedirectUri($GOOGLE_REDIRECT_URI);
 $gClient->addScope($GOOGLE_SCOPES);
+$gClient->setState(sanitize_text_field($_SERVER['REQUEST_URI']));
 
 // login URL
 $login_url = $gClient->createAuthUrl();
@@ -55,7 +56,6 @@ function login_google(){
 
         // check if user email already registered
         if(!email_exists($userData['email'])){
-            print_r('sign up');
             // generate password
             $bytes = openssl_random_pseudo_bytes(2);
             $password = md5(bin2hex($bytes));
@@ -76,7 +76,6 @@ function login_google(){
                   )
                 )
             );
-            print_r($new_user_id);
             if($new_user_id) {
                 // send an email to the admin
                 wp_new_user_notification($new_user_id);
@@ -87,7 +86,7 @@ function login_google(){
                 //do_action('wp_login', $user_login, $userData['email']);
 
                 // send the newly created user to the home page after login
-                wp_redirect(home_url()); exit;
+                wp_redirect(site_url($_GET['state'])); exit;
             }
         }else{
             //if user already registered than we are just loggin in the user
@@ -95,7 +94,7 @@ function login_google(){
             wp_set_auth_cookie($user->ID, true);
             wp_set_current_user($user->ID, $user->user_login);
             //do_action('wp_login', $user->user_login, $user);
-            wp_redirect(home_url()); exit;
+            wp_redirect(site_url($_GET['state'])); exit;
         }
 
 

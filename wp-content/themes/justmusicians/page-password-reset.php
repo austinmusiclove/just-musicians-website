@@ -66,7 +66,7 @@ get_header();
             <div>
                 <label for="new_password" class="block text-sm font-medium leading-6 mt-4">New Password</label>
                 <div class="mt-2">
-                    <input id="user_pass" name="new_password" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required 
+                    <input id="user_pass" name="new_password" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required
                         class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
                     <span class="float-right right-[10px] mt-[-30px] relative">
                         <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
