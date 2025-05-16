@@ -10,7 +10,7 @@
             x-on:click="_showInquirySlide(''); _clearInquiryForm();"
             >
         Discard</button>
-        <button type="button" data-trigger="slide-4" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide(currentInquirySlide);">Continue</button>
+        <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide(currentInquirySlide);">Continue</button>
     </div>
 
 </div>

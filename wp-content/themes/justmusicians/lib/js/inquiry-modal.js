@@ -1,40 +1,64 @@
 
 // Handles Inquiry Modal front end interaction
 
-function clearInquiryForm(alpineComponent) {
-    alpineComponent.$refs.inquiryForm.reset();
-    alpineComponent.$refs.inquiryListing.value = '';
-    alpineComponent.inquiryDate = '';
-    alpineComponent.inquiryZipCode = '';
+function clearInquiryForm(alco) {
+    alco.$refs.inquiryForm.reset();
+    alco.inquiryListing = '';
+    alco.inquiryListingName = '';
+    alco.inquiryDateType = '';
+    alco.inquiryZipCode = '';
+    alco.inquiryProgress = 0;
 }
 
-function showInquirySlide(alpineComponent, slide) {
+function showInquirySlide(alco, slide) {
     if (slide) {
-        alpineComponent.showInquiryModal  = true;
-        alpineComponent.showDateSlide     = false;
-        alpineComponent.showLocationSlide = false;
-        alpineComponent.showDetailsSlide  = false;
-        alpineComponent.showEmailSlide    = false;
-        alpineComponent.showDiscardSlide  = false;
-        alpineComponent.showThankYouSlide = false;
-        if (slide == 'date')     { alpineComponent.showDateSlide     = true; alpineComponent.currentInquirySlide = 'date'; }
-        if (slide == 'location') { alpineComponent.showLocationSlide = true; alpineComponent.currentInquirySlide = 'location';}
-        if (slide == 'details')  { alpineComponent.showDetailsSlide  = true; alpineComponent.currentInquirySlide = 'details';}
-        if (slide == 'email')    { alpineComponent.showEmailSlide    = true; alpineComponent.currentInquirySlide = 'email';}
-        if (slide == 'thankyou') { alpineComponent.showThankYouSlide = true; alpineComponent.currentInquirySlide = 'thankyou';}
-        if (slide == 'discard')  { alpineComponent.showDiscardSlide  = true; }
+        alco.showInquiryModal   = true;
+        alco.showDateSlide      = false;
+        alco.showLocationSlide  = false;
+        alco.showDurationSlide  = false;
+        alco.showGenreSlide  = false;
+        alco.showPerformersSlide  = false;
+        alco.showEquipmentSlide = false;
+        alco.showDetailsSlide   = false;
+        alco.showQuoteSlide     = false;
+        alco.showDiscardSlide   = false;
+        alco.showThankYouSlide  = false;
+        alco.showErrorSlide  = false;
+        if (slide == 'date')       { alco.showDateSlide       = true; alco.currentInquirySlide = 'date';       alco.$nextTick(() => { alco.inquiryProgress = Math.round((1/9) * 100); }); }
+        if (slide == 'location')   { alco.showLocationSlide   = true; alco.currentInquirySlide = 'location';   alco.$nextTick(() => { alco.inquiryProgress = Math.round((2/9) * 100); alco.$refs.inquiryZipCodeInput.focus(); });  }
+        if (slide == 'duration')   { alco.showDurationSlide   = true; alco.currentInquirySlide = 'duration';   alco.$nextTick(() => { alco.inquiryProgress = Math.round((3/9) * 100); }); }
+        if (slide == 'genre')      { alco.showGenreSlide      = true; alco.currentInquirySlide = 'genre';      alco.$nextTick(() => { alco.inquiryProgress = Math.round((4/9) * 100); }); }
+        if (slide == 'performers') { alco.showPerformersSlide = true; alco.currentInquirySlide = 'performers'; alco.$nextTick(() => { alco.inquiryProgress = Math.round((5/9) * 100); }); }
+        if (slide == 'equipment')  { alco.showEquipmentSlide  = true; alco.currentInquirySlide = 'equipment';  alco.$nextTick(() => { alco.inquiryProgress = Math.round((6/9) * 100); }); }
+        if (slide == 'details')    { alco.showDetailsSlide    = true; alco.currentInquirySlide = 'details';    alco.$nextTick(() => { alco.inquiryProgress = Math.round((7/9) * 100); alco.$refs.inquiryDetails.focus(); }); }
+        if (slide == 'quotes')     { alco.showQuoteSlide      = true; alco.currentInquirySlide = 'quotes';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((8/9) * 100); }); }
+        if (slide == 'thankyou')   { alco.showThankYouSlide   = true; alco.currentInquirySlide = 'thankyou';   alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
+        if (slide == 'error')      { alco.showErrorSlide      = true; alco.currentInquirySlide = 'error';      alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
+        if (slide == 'discard')    { alco.showDiscardSlide    = true; }
     } else {
-        alpineComponent.showInquiryModal  = false;
+        alco.showInquiryModal  = false;
     }
 }
 
-function openInquiryModal(alpineComponent, listingId) {
-    alpineComponent.$refs.inquiryListing.value = listingId;
-    if (!alpineComponent.inquiryDate) {
-        showInquirySlide(alpineComponent, 'date');
-    } else if (!alpineComponent.inquiryZipCode) {
-        showInquirySlide(alpineComponent, 'location');
+function openInquiryModal(alco, listingId, listingName) {
+    alco.inquiryListing = listingId;
+    alco.inquiryListingName = listingName;
+    showInquirySlide(alco, 'date');
+}
+
+function exitInquiryModal(alco) {
+    if (alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error') {
+        showInquirySlide(alco, '');
     } else {
-        showInquirySlide(alpineComponent, 'details');
+        showInquirySlide(alco, 'discard');
     }
+}
+
+function handleCreateInquirySuccess(alco) {
+    showInquirySlide(alco, 'thankyou');
+    clearInquiryForm(alco);
+}
+function handleCreateInquiryError(alco) {
+    showInquirySlide(alco, 'error');
+    clearInquiryForm(alco);
 }

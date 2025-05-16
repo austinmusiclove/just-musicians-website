@@ -100,6 +100,7 @@ module.exports = {
 			white: '#FFFFFF',
 			black: '#000000',
             grey: '#808080',
+            red: '#FF0000',
 			// Browns
 			'brown-dark-1': '#312922',
 			'brown-dark-2': '#5B4A38',

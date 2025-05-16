@@ -31,6 +31,11 @@ function html_api_rewrite_rules() {
         'index.php?wp-html-v1=favorites',
         'top'
     );
+    add_rewrite_rule(
+        '^wp-html/v1/inquiries',
+        'index.php?wp-html-v1=inquiries' . $_SERVER['QUERY_STRING'],
+        'top'
+    );
 }
 add_action('init', 'html_api_rewrite_rules');
 
@@ -81,6 +86,10 @@ function html_api_v1_template_redirects() {
         }
     } else if ($path == 'favorites') {
         include_once get_template_directory() . '/single-collection.php'; exit;
+
+    // Inquiries
+    } else if ($path == 'inquiries') {
+        include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
 
 
     // Active Search

@@ -50,19 +50,33 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
+            inquiryProgress: 0,
             showInquiryModal: false,
             currentInquirySlide: '',
             showDateSlide: true,
             showLocationSlide: false,
+            showDurationSlide: false,
+            showGenreSlide: false,
+            showPerformersSlide: false,
+            showEquipmentSlide: false,
             showDetailsSlide: false,
-            showEmailSlide: false,
+            showQuoteSlide: false,
             showDiscardSlide: false,
             showThankYouSlide: false,
-            inquiryDate: '',
+            showErrorSlide: false,
+            inquiryListing: '',
+            inquiryListingName: '',
+            inquiryDateType: '',
             inquiryZipCode: '',
-            _clearInquiryForm()          { clearInquiryForm(this); },
-            _showInquirySlide(slide)     { showInquirySlide(this, slide); },
-            _openInquiryModal(listingId) { openInquiryModal(this, listingId); },
+            inquiryLocationDetails: '',
+            inquiryDetails: '',
+            _clearInquiryForm()                       { clearInquiryForm(this); },
+            _showInquirySlide(slide)                  { showInquirySlide(this, slide); },
+            _openInquiryModal(listingId, listingName) { openInquiryModal(this, listingId, listingName); },
+            _exitInquiryModal()                       { exitInquiryModal(this); },
+            _submitInquiry()                          { submitInquiry(this); },
+            _handleCreateInquirySuccess()             { handleCreateInquirySuccess(this); },
+            _handleCreateInquiryError()               { handleCreateInquiryError(this); },
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
@@ -151,7 +165,7 @@
 
           <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center">
-              <div data-trigger="mobile-menu" class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
+              <div class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 -translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>

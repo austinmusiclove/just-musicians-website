@@ -13,7 +13,7 @@ $error_event     = !empty($_POST['error_event']) ? $_POST['error_event'] : 'erro
 $success_event   = !empty($_POST['success_event']) ? $_POST['success_event'] : 'success-toast';
 
 
-// Add listing to collection
+// Create user collection
 $result = create_user_collection($collection_name, $listing_id);
 if ( is_wp_error($result) ) {
     $message = 'Error: ' . $result->get_error_message();

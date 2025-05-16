@@ -3,6 +3,29 @@ Milestones
         basic inquiries
             quiz to get gig details
             send out to artists by email
+            basics
+                create inquiry from quiz form
+                create inquiry post type fields
+                    event type drop down
+                    date, start time, duration
+                    venue, address, setting
+                    genre, number of performers
+                    sound equipment
+                    budget
+                    number of guests
+                    details
+                    how many quotes would you like to receive
+                add listing to inquiry
+                    front end
+                    api
+                quiz
+                    add button to inquiries back end on the thank you slide
+                    thank you slide that explains requesting quotes for this inquiry
+                inquiries archive page
+                requests archive page
+                single inquiry page
+                message board page
+            send out to artist by email and send to more as well
             allow adding artists to an inquiry similar to adding to collection
             manage your inquiries in the back end
             manage inquiries sent to you in the back end
@@ -13,14 +36,13 @@ Milestones
         change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
         video order depending on search criteria
     Free lance booker testing 2
+        inquiries
+            allow create inquiry if not logged in
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
         user recording software
-        messaging
-        inquire without logging in
     Venue testing
-        open calendar
-        venue applications
+        open calendar or venue applications
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
@@ -68,6 +90,14 @@ UX
 Features
     venue reviews
     artist reviews
+Search Algorithm
+    1 - Relevant Media
+    2 - Response Time
+    3 - Requests/Views/Clicks
+    4 - Profile Completeness
+    5 - Profile Age (post_id tie breaker)
+    reviews/rating
+    relevant clicks
 Devon
     venue page
     venues search
@@ -92,7 +122,17 @@ Bugs
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
+Accessibility
+    Need full audit
+Testing
+    Test specific devices with AWS or other service
 Document
+    Dev Principles
+        No js for first paint
+        CDN for js, images, files, and pre built HTML
+        Separate Json and HTML api
+        Code splitting in functions.php
+        Locality of behavior through HTML and AlpineJs
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio

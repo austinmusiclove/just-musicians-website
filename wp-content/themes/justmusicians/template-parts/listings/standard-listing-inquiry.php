@@ -260,6 +260,11 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
     </div>
 
     <button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-12 inline-block"
-        x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>');"
-    >Send Inquiry</button>
+        x-show="!loggedIn" x-cloak
+        x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to request quotes from musicians'"
+    >Request Quote</button>
+    <button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-12 inline-block"
+        x-show="loggedIn" x-cloak
+        x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
+    >Request Quote</button>
 </div>
