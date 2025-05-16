@@ -5,13 +5,13 @@
     <p class="text-16 mt-4 mb-8">Check any and all ensemble sizes you would consider for your event. If you are booking for multiple performances, this is the number of performers you need per performance.</p>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
-        <input type="hidden" name="ensemble_size[]" >
+        <input type="hidden" name="inquiry_ensemble_size[]" >
         <?php $ensemble_size_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
         foreach ($ensemble_size_options as $option) {
             echo get_template_part('template-parts/filters/elements/checkbox', '', [
                 'label' => $option,
                 'value' => $option,
-                'name' => 'ensemble_size',
+                'name' => 'inquiry_ensemble_size',
                 'x-model' => 'numPerformers',
                 'is_array' => true,
             ]);

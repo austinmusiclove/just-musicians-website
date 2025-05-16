@@ -18,10 +18,10 @@
 
     <span x-show="inquiryDateType == 'single-date'" x-cloak>
         <p>Date</p>
-        <input type="date" name="event_date" class="mb-4">
+        <input type="date" name="inquiry_date" class="mb-4">
 
         <p>Performance Time</p>
-        <input type="time" name="event_time" class="mb-4">
+        <input type="time" name="inquiry_time" class="mb-4">
     </span>
 
     <span x-show="inquiryDateType == 'multi-date'" x-cloak>

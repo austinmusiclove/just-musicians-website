@@ -48,11 +48,11 @@
         <button type="button" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
             x-show="!loggedIn" x-cloak
             x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to request quotes from musicians'"
-        >Get Started</button>
+        >Get Quotes</button>
         <button type="button" class="<?php echo $args['button_color']; ?> shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
             x-show="loggedIn" x-cloak
             x-on:click="_openInquiryModal('', '')"
-        >Get Started</button>
+        >Get Quotes</button>
 
     </form>
 </div>

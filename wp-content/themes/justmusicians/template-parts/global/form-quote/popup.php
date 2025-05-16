@@ -23,7 +23,7 @@
             hx-target="#inquiry-result"
             hx-ext="disable-element" hx-disable-element=".inquiry-submit-button"
         >
-            <input type="hidden" name="inquiry_listing" x-model="inquiryListing" />
+            <input type="hidden" name="inquiry_listing" x-model="inquiryListing" x-ref="inquiryListingInput" />
             <?php echo get_template_part('template-parts/global/form-quote/date-slide',            '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/location-slide',        '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/duration-slide',        '', []); ?>

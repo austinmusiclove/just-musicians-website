@@ -5,12 +5,12 @@
 
     <fieldset class="radio-buttons custom-radio">
         <div>
-            <input type="radio" id="equipment-all" name="inquiry_equipment" x-model="inquiryEquipment" value="Yes, they must be able to bring and set up all sound equipment.">
+            <input type="radio" id="equipment-all" name="inquiry_equipment_requirement" x-model="inquiryEquipment" value="Musicians must be able to bring and set up all sound equipment">
             <span></span>
             <label class="text-16" for="equipment-all">Musicians must be able to bring and set up all sound equipment.</label>
         </div>
         <div>
-            <input type="radio" id="equipment-some" name="inquiry_equipment" x-model="inquiryEquipment" value="Some or all sound equipment will be provided.">
+            <input type="radio" id="equipment-some" name="inquiry_equipment_requirement" x-model="inquiryEquipment" value="Some or all sound equipment will be provided to musicians">
             <span></span>
             <label class="text-16" for="equipment-some">Some or all sound equipment will be provided to musicians.</label>
         </div>

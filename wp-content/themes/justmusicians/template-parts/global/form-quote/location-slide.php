@@ -3,8 +3,8 @@
 
     <h2 class="font-bold font-poppins text-20 mb-8">Where is your event?</h2>
 
-    <p>Zip Code <span class="text-red">*</span></p>
-    <input type="text" name="event_zipcode" x-ref="inquiryZipCodeInput"
+    <p><span class="text-red">* </span>Zip Code</p>
+    <input type="text" name="inquiry_zip_code" x-ref="inquiryZipCodeInput"
         autocomplete="postal-code"
         maxlength="5"
         placeholder="Your event zip code"

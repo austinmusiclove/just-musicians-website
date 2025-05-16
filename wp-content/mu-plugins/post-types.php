@@ -192,7 +192,7 @@ function register_taxonomies() {
       'singular_name' => 'Category'
     )
   ));
-  register_taxonomy('genre', array('listing', 'artist'), array(
+  register_taxonomy('genre', array('listing', 'artist', 'inquiry'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,

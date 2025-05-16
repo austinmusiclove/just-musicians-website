@@ -4,7 +4,7 @@ Milestones
             quiz to get gig details
             send out to artists by email
             basics
-                create inquiry from quiz form
+                focus on zip and subject when you hit disabled next button
                 create inquiry post type fields
                     event type drop down
                     date, start time, duration
@@ -18,6 +18,8 @@ Milestones
                 add listing to inquiry
                     front end
                     api
+                    increment quotes requested
+                    add listing to invite list
                 quiz
                     add button to inquiries back end on the thank you slide
                     thank you slide that explains requesting quotes for this inquiry
@@ -29,6 +31,8 @@ Milestones
             allow adding artists to an inquiry similar to adding to collection
             manage your inquiries in the back end
             manage inquiries sent to you in the back end
+            make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
+            make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
     Search algo update
         ensemble size taxonomy
         locaiton filter
