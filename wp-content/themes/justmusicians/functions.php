@@ -168,7 +168,6 @@ function hmm_scripts() {
     }
 
     // Core
-
     wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
     wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
     //wp_enqueue_script('hmm-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
@@ -179,6 +178,7 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
+    wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
 
 
 

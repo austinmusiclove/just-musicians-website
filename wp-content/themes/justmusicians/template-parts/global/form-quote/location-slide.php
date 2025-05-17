@@ -9,6 +9,7 @@
         maxlength="5"
         placeholder="Your event zip code"
         x-model="inquiryZipCode"
+        :class="{ 'shake': shakeElements.has('inquiryZipCode') }"
     />
 
     <p class="text-16 mt-8">Include any details you'd like about the location(s).</p>
@@ -16,8 +17,13 @@
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('date')">Back</button>
-        <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2 disabled:bg-grey disabled:text-white"
-            x-bind:disabled="inquiryZipCode.length < 5"
+        <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
+            x-show="inquiryZipCode.length < 5" x-cloak
+            x-text="inquiryZipCode || inquiryLocationDetails ? 'Next' : 'Skip'"
+            x-on:click="_emphasizeElm($refs.inquiryZipCodeInput, 'inquiryZipCode')"
+        >Next</button>
+        <button type="button" class="bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2"
+            x-show="inquiryZipCode.length >= 5" x-cloak
             x-text="inquiryZipCode || inquiryLocationDetails ? 'Next' : 'Skip'"
             x-on:click="_showInquirySlide('duration')"
         >Next</button>

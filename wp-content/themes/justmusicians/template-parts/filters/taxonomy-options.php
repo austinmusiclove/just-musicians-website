@@ -3,7 +3,7 @@
     showOption(option) { return this.searchQuery === "" || option.toLowerCase().includes(this.searchQuery.toLowerCase()); },
 }'>
     <?php if (!empty($args['title'])) { ?><h2 class="font-bold text-22"><?php echo $args['title']; ?></h2><?php } ?>
-    <input type='text' class="my-6" placeholder="search..." x-model="searchQuery"></input>
+    <?php if (!empty($args['show_search_bar']) and $args['show_search_bar']) {?><input type='text' class="my-6" placeholder="search..." x-model="searchQuery"></input><?php } ?>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox overflow-scroll h-[9.1rem]">
     <!-- This hidden input insures that this input data gets sent as [""] if no checkboxes are set instead of omitting it from the post body -->

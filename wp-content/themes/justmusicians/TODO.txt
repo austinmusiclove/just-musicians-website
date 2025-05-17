@@ -1,20 +1,10 @@
 Milestones
+    invite mnnatx@gmail.com to make a listing
     Free lance booker testing
         basic inquiries
             quiz to get gig details
             send out to artists by email
             basics
-                focus on zip and subject when you hit disabled next button
-                create inquiry post type fields
-                    event type drop down
-                    date, start time, duration
-                    venue, address, setting
-                    genre, number of performers
-                    sound equipment
-                    budget
-                    number of guests
-                    details
-                    how many quotes would you like to receive
                 add listing to inquiry
                     front end
                     api
@@ -26,10 +16,9 @@ Milestones
                 inquiries archive page
                 requests archive page
                 single inquiry page
+                    test special chars in all fields going into inquiry creation and make sure they display correctly
                 message board page
-            send out to artist by email and send to more as well
-            allow adding artists to an inquiry similar to adding to collection
-            manage your inquiries in the back end
+            auto email when you get a new request as a musician
             manage inquiries sent to you in the back end
             make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
             make sure to add DEFAULT_QUOTES_REQUESTED prod wp config

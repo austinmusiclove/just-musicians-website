@@ -7,7 +7,7 @@ function clearInquiryForm(alco) {
     alco.inquiryListingName  = '';
     alco.inquiryDateType     = '';
     alco.inquiryZipCode      = '';
-    alco.inquiryErrorMsg = '';
+    alco.inquiryErrorMsg     = '';
     alco.inquiryProgress     = 0;
 }
 
