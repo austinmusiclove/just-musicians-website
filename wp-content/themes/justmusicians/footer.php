@@ -19,7 +19,7 @@
 
         <div class="col md:col-span-2 lg:col-span-3 justify-center hidden md:flex">
             <a href="#">
-                <img class="w-40" src="<?php echo get_template_directory_uri() . '/lib/images/logos/logo-white.svg'; ?>" />
+                <img class="w-40" src="<?php echo get_template_directory_uri() . '/lib/images/logos/hmm-logo-white.svg'; ?>" />
             </a>
         </div>
 
