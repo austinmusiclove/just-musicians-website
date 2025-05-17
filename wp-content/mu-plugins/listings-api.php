@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Just Musicians Listings API
+ * Plugin Name: Hire More Musicians Listings API
  * Description: A custom plugin to expose REST APIs for managing listing posts
  * Version: 1.0
  * Author: John Filippone

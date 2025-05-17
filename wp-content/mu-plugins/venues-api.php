@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Just Musicians Venues API
+ * Plugin Name: Hire More Musicians Venues API
  * Description: A custom plugin to expose REST APIs for managing venue posts
  * Version: 1.0
  * Author: John Filippone

@@ -7,8 +7,8 @@
  * @package JustMusicians
  */
 
-if ( ! function_exists( 'JustMusicians_setup' ) ) :
-	function JustMusicians_setup() {
+if ( ! function_exists( 'hmm_setup' ) ) :
+	function hmm_setup() {
 		load_theme_textdomain( 'JustMusicians', get_template_directory() . '/languages' );
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
@@ -31,11 +31,11 @@ if ( ! function_exists( 'JustMusicians_setup' ) ) :
 		) );
 	}
 endif;
-add_action( 'after_setup_theme', 'JustMusicians_setup' );
+add_action( 'after_setup_theme', 'hmm_setup' );
 
 
 // Enqueue Scripts and Styles
-function justmusicians_scripts() {
+function hmm_scripts() {
     $pkg = json_decode(file_get_contents('package.json', true));
     global $post;
 
@@ -128,9 +128,9 @@ function justmusicians_scripts() {
 
     // Core
 
-    wp_enqueue_style('justmusicians-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
-    wp_enqueue_style('justmusicians-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
-    //wp_enqueue_script('justmusicians-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
+    wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
+    wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
+    //wp_enqueue_script('hmm-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
     // Utilities
     wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, true);
@@ -142,7 +142,7 @@ function justmusicians_scripts() {
 
 
 }
-add_action( 'wp_enqueue_scripts', 'justmusicians_scripts' );
+add_action( 'wp_enqueue_scripts', 'hmm_scripts' );
 
 // Include
 require get_template_directory() . '/lib/inc/template-functions.php';

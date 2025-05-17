@@ -12,7 +12,7 @@ function custom_password_reset_email($message, $key, $user_login, $user_data) {
     $message .= "We received a request to reset your password. Please click the link below to reset your password:\n\n";
     $message .= $reset_url . "\n\n";
     $message .= "If you didn't request this, you can safely ignore this email.\n\n";
-    $message .= "Thanks,\nJust Musicians";
+    $message .= "Thanks,\nHire More Musicians";
 
     return $message;
 }

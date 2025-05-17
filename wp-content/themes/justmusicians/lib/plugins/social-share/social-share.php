@@ -13,8 +13,8 @@ function un_social_buttons() {
     $class = "bg-black w-10 h-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-105";
 
     // Email content
-    $subject = 'Just Musicians: '.$title;
-    $body = "I'd like to share this article I found at Just Musicians: ".$permalink;
+    $subject = 'Hire More Musicians: '.$title;
+    $body = "I'd like to share this article I found at Hire More Musicians: ".$permalink;
 
 
     $content = '<div class="social-buttons flex xl:flex-col items-center xl:space-y-2">

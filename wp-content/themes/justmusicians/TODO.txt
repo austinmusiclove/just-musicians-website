@@ -1,8 +1,7 @@
 Milestones
     New brand name
-        fix google log in
+        fix smtp server
         redirect justmusicians to new site
-        change old name references in code, pages, posts, and local env
         hook up google analytics and search console
     Artist announce and invite new profiles
         make it invite only

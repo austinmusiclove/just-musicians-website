@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Just Musicians Performances API
+ * Plugin Name: Hire More Musicians Performances API
  * Description: A custom plugin to expose REST APIs for managing venue_review posts
  * Version: 1.0
  * Author: John Filippone
