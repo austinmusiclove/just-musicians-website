@@ -60,8 +60,9 @@ function hmm_scripts() {
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
 
-        // Inquiry Modal
+        // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -69,7 +70,7 @@ function hmm_scripts() {
 
     // Archive
     if (is_archive()) {
-        // Inquiry Modal
+        // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
 
         // HTMX Extensions
@@ -78,8 +79,9 @@ function hmm_scripts() {
 
     // Article and Page
     if ( is_singular(array( 'post')) || is_page() ) {
-        // Inquiry Modal
+        // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -147,6 +149,10 @@ function hmm_scripts() {
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
+
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
     }
 
     // Listing pages

@@ -18,6 +18,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
+// Get user inquiries
+$inquiries_result = get_user_inquiries([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
 
 get_header();
@@ -51,12 +57,19 @@ get_header();
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
+            inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
+            get sortedInquiries()                                { return getSortedInquiries(this); },
+            _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
+            _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
+            _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
+        x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
         hx-trigger="load, filterupdate"
         hx-target="#results"
         hx-indicator="#spinner"
     >
+        <span id="inquiry-result"></span>
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">

@@ -104,16 +104,3 @@ function get_user_collections($args) {
         'next_page'       => $next_page,
     ];
 }
-
-function get_thumbnails_from_listings($listing_post_ids) {
-    $thumbnails = [];
-    if (count($listing_post_ids) >= 4) {
-        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
-        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[1], 'standard-listing');
-        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[2], 'standard-listing');
-        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[3], 'standard-listing');
-    } else if (count($listing_post_ids) >= 1) {
-        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
-    }
-    return array_filter($thumbnails);
-}

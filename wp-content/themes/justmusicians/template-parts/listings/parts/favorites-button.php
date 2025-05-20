@@ -11,9 +11,11 @@
         _resetCollectionsPopup()                          { return resetCollectionsPopup(this, '<?php echo $args['post_id']; ?>'); },
     }"
     x-on:add-collection="_addCollection($event.detail.post_id, $event.detail.name, $event.detail.listings, $event.detail.permalink)"
-    x-on:add-listing="_addToCollection($event.detail.collection_id, $event.detail.listing_id)"
-    x-on:remove-listing="_removeFromCollection($event.detail.collection_id, $event.detail.listing_id)"
+    x-on:add-listing-to-collection="_addToCollection($event.detail.collection_id, $event.detail.listing_id)"
+    x-on:remove-listing-from-collection="_removeFromCollection($event.detail.collection_id, $event.detail.listing_id)"
 >
+
+    <!-- hollow heart button -->
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
         <?php if (is_user_logged_in()) { ?>
             x-show="_showEmptyFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
@@ -28,6 +30,8 @@
     >
         <img class="h-6 w-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/favorite.svg'; ?>" />
     </button>
+
+    <!-- Full heart button -->
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
         x-show="_showFilledFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
         x-on:click="showCollectionsPopup = true"

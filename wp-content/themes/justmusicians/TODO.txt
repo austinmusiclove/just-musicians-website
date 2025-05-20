@@ -6,10 +6,13 @@ Milestones
             send out to artists by email
             basics
                 add listing to inquiry
-                    front end
-                    api
-                    increment quotes requested
-                    add listing to invite list
+                    add inidcator
+                    add inidcator in collections too
+                    make it look nicer
+                    only open menu is user has at least one inquiry
+                    make sure you can add listing to inquriy on collection pages
+                    disable button on listing form preview
+                    disable fav button on preview
                 quiz
                     add button to inquiries back end on the thank you slide
                     thank you slide that explains requesting quotes for this inquiry
@@ -18,6 +21,8 @@ Milestones
                 single inquiry page
                     test special chars in all fields going into inquiry creation and make sure they display correctly
                 message board page
+                get user collections and inquiries after page load to make it faster
+                reorganize alpine component vars and methods
             auto email when you get a new request as a musician
             manage inquiries sent to you in the back end
             make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
@@ -47,8 +52,8 @@ Data
 Testing
     test apostrophes everywhere
 UX
-    collections
-        add animations
+    corrected new logos
+    add collections animations
     media slider
         somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
@@ -96,6 +101,7 @@ Devon
     venues search
     404 page
     collections page and favorites buttons
+    request quote pop up
     trash icon
     indicator on infinite scroll and listing form
     podcast - get violotor-blog svg

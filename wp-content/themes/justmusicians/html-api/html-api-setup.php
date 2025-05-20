@@ -32,8 +32,13 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
-        '^wp-html/v1/inquiries',
-        'index.php?wp-html-v1=inquiries' . $_SERVER['QUERY_STRING'],
+        '^wp-html/v1/inquiries/?$',
+        'index.php?wp-html-v1=inquiries',
+        'top'
+    );
+    add_rewrite_rule(
+        '^wp-html/v1/inquiries/([0-9]+)/listings/([0-9]+)/?$',
+        'index.php?wp-html-v1=inquiries&inquiry-id=$matches[1]&listing-id=$matches[2]',
         'top'
     );
 }
@@ -43,6 +48,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'wp-html-v1';
     $vars[] = 'listing-id';
     $vars[] = 'collection-id';
+    $vars[] = 'inquiry-id';
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');
@@ -52,6 +58,7 @@ function html_api_v1_template_redirects() {
     $path = get_query_var('wp-html-v1');
     $listing_id = get_query_var('listing-id');
     $collection_id = get_query_var('collection-id');
+    $inquiry_id = get_query_var('inquiry-id');
 
 
     // Listings
@@ -89,7 +96,11 @@ function html_api_v1_template_redirects() {
 
     // Inquiries
     } else if ($path == 'inquiries') {
-        include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
+        if (!empty($inquiry_id)) {
+            include_once get_template_directory() . '/html-api/add-listing-to-inquiry.php'; exit;
+        } else {
+            include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
+        }
 
 
     // Active Search

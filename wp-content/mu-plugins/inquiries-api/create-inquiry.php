@@ -16,7 +16,13 @@ function create_user_inquiry($args) {
     $user_inquiries[] = $inquiry_id;
     update_user_meta($user_id, 'inquiries', $user_inquiries);
 
+    // Get permalink
+    $permalink = get_permalink($inquiry_id);
+
     return [
         'post_id'   => $inquiry_id,
+        'subject'   => $args['meta_input']['subject'],
+        'listings'  => $args['meta_input']['listings_invited'],
+        'permalink' => $permalink,
     ];
 }

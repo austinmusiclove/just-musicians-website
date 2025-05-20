@@ -18,3 +18,16 @@ function custom_sanitize_file($file) {
 function custom_sanitize_array($arr) {
     return array_values(array_filter(array_map('sanitize_text_field', rest_sanitize_array($arr))));
 }
+
+function get_thumbnails_from_listings($listing_post_ids) {
+    $thumbnails = [];
+    if (count($listing_post_ids) >= 4) {
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[1], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[2], 'standard-listing');
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[3], 'standard-listing');
+    } else if (count($listing_post_ids) >= 1) {
+        $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
+    }
+    return array_filter($thumbnails);
+}

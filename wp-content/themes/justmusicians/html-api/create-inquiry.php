@@ -13,3 +13,5 @@ if ( is_wp_error($result) ) {
 
 // Success Response
 echo '<span x-init="_handleCreateInquirySuccess()"></span>';
+echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Inquiry Created Successfully' . '\'})"></span>';
+echo '<span x-init="$dispatch(\'add-inquiry\', {\'post_id\': \'' . $result['post_id'] . '\', \'subject\': \'' . $result['subject'] . '\', \'listings\': ' . clean_arr_for_doublequotes($result['listings']) . ', \'permalink\': \'' . $result['permalink'] . '\' })"></span>';

@@ -35,7 +35,7 @@ function showInquirySlide(alco, slide) {
         if (slide == 'quotes')     { alco.showQuoteSlide      = true; alco.currentInquirySlide = 'quotes';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((8/9) * 100); }); }
         if (slide == 'thankyou')   { alco.showThankYouSlide   = true; alco.currentInquirySlide = 'thankyou';   alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
         if (slide == 'error')      { alco.showErrorSlide      = true; alco.currentInquirySlide = 'error';      alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
-        if (slide == 'discard')    { alco.showDiscardSlide    = true; alco.currentInquirySlide = 'discard'; }
+        if (slide == 'discard')    { alco.showDiscardSlide    = true; }
     } else {
         alco.showInquiryModal  = false;
     }
@@ -48,13 +48,16 @@ function openInquiryModal(alco, listingId, listingName) {
     showInquirySlide(alco, 'date');
 }
 
-function exitInquiryModal(alco) {
-    if (alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error' || alco.currentInquirySlide == 'discard') {
-        showInquirySlide(alco, '');
-        clearInquiryForm(alco);
+function tryExitInquiryModal(alco) {
+    if (alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error') {
+        exitInquiryModal(alco);
     } else {
         showInquirySlide(alco, 'discard');
     }
+}
+function exitInquiryModal(alco) {
+    showInquirySlide(alco, '');
+    clearInquiryForm(alco);
 }
 
 function handleCreateInquirySuccess(alco) {

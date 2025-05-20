@@ -1,0 +1,90 @@
+
+<!-- Request a quote buttons -->
+
+<span id="request-quote-button-<?php echo $args['post_id']; ?>" class="sm:absolute sm:right-0 sm:bottom-3 w-full sm:w-fit"
+    x-data="{
+        showInquiriesMenu: false,
+        inquirySearchQuery: '',
+        _addToInquiry(inquiryId, listingId) { return addToInquiry(this, inquiryId, listingId); },
+        _resetInquiriesMenu()               { return resetInquiriesMenu(this, '<?php echo $args['post_id']; ?>'); },
+    }"
+    x-on:add-listing-to-inquiry="_addToInquiry($event.detail.inquiry_id, $event.detail.listing_id)"
+>
+
+    <!-- For not logged in users; button directs users to create an account -->
+    <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-12 inline-block w-full sm:w-fit"
+        x-show="!loggedIn" x-cloak
+        x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to request quotes from musicians'"
+    >Request Quote</button>
+
+    <!-- For logged in users; opens inquiry modal -->
+    <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-12 inline-block w-full sm:w-fit"
+        x-show="loggedIn" x-cloak
+        x-on:click="showInquiriesMenu = true;"
+    >Request Quote</button>
+    <span id="inquiry-menu-result-<?php echo $args['post_id']; ?>"></span>
+
+    <!-- Inquiries Menu -->
+    <div class="relative inline-block text-left">
+
+        <!-- Dropdown Panel -->
+        <div class="absolute origin-top-right sm:right-0 sm:top-2 w-80 sm:w-96 z-10 mt-2 bg-white border rounded-lg shadow-lg p-4 space-y-3"
+            x-show="showInquiriesMenu" x-cloak
+            x-transition
+            x-on:mouseenter="showInquiriesMenu = true"
+            x-on:mouseleave="_resetInquiriesMenu()"
+            x-on:click.away="_resetInquiriesMenu()"
+            x-intersect:leave="_resetInquiriesMenu()"
+        >
+            <!-- heading -->
+            <!-- <h3 class="font-bold text-18 pt-4 pb-2 border-b">Add to an existing request</h3> -->
+
+            <!-- Search Bar -->
+            <input type="text" placeholder="Search my existing requests..." class="w-full px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm"
+                x-model="inquirySearchQuery"
+            />
+
+
+            <!-- Scrollable List of Inquiries -->
+            <div x-ref="inquiriesList<?php echo $args['post_id']; ?>" class="max-h-40 overflow-y-auto space-y-2">
+                <template x-for="inquiry in sortedInquiries" :key="inquiry.post_id">
+                    <div class="flex items-center justify-between px-2 py-1 rounded cursor-pointer"
+                        x-show="inquiry.subject.toLowerCase().includes(inquirySearchQuery)" x-cloak
+                        x-init="$nextTick(() => htmx.process($el))";
+                    >
+                        <a class="flex-1 min-w-0" x-bind:href="inquiry.permalink"><span x-text="inquiry.subject.length > 30 ? inquiry.subject.slice(0,30) + '...' : inquiry.subject" x-bind:title="inquiry.subject"></span></a>
+
+                        <!-- Add listing to inquiry button -->
+                        <button type="button" class="mr-2 border border-navy text-navy bg-white text-sm px-4 py-2 rounded-full hover:bg-navy hover:text-white"
+                            x-show="_showAddListingToInquiryButton(inquiry.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
+                            x-bind:hx-post="'/wp-html/v1/inquiries/' + inquiry.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                            hx-target="#inquiry-menu-result-<?php echo $args['post_id']; ?>"
+                            hx-trigger="click"
+                            hx-indicator="#decoy-indicator"
+                            hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
+                        >
+                            Add +
+                        </button>
+
+                        <!-- Already added state -->
+                        <button type="button" class="mr-2 border border-navy text-white bg-navy text-sm px-4 py-2 rounded-full"
+                            x-show="_showListingInInquiry(inquiry.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
+                        >
+                            Added
+                        </button>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Create New Inquiry -->
+            <div class="pt-3 border-t">
+                <button type="button" class="text-sm text-black font-medium hover:underline"
+                    x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
+                >+ Create new request</button>
+            </div>
+        </div>
+    </div>
+    <span id="decoy-indicator"></span>
+
+</span>
+
