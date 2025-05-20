@@ -156,11 +156,13 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
                     <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
                 <?php } ?>
             </div>
-            <?php if (!$is_preview) {
-                get_template_part('template-parts/listings/favorites-button', '', [
-                    'post_id'       => $args['post_id'],
-                ]);
-            } ?>
+
+            <!-- Favorite/collections button -->
+            <?php get_template_part('template-parts/listings/favorites-button', '', [
+                'post_id'  => $args['post_id'],
+                'disabled' => $is_preview,
+            ]); ?>
+
         </div>
 
         <!-- Location -->
@@ -259,9 +261,11 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         </div>
     </div>
 
+    <!-- Request quote button -->
     <?php get_template_part('template-parts/listings/request-quote-button', '', [
-        'post_id' => $args['post_id'],
-        'name'    => $args['name'], ]);
-    ?>
+        'post_id'  => $args['post_id'],
+        'name'     => $args['name'],
+        'disabled' => $is_preview,
+    ]); ?>
 
 </div>

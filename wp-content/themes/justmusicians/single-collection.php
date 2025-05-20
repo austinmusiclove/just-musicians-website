@@ -24,6 +24,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
+// Get user inquiries
+$inquiries_result = get_user_inquiries([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
 ?>
 
@@ -48,6 +54,12 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                         _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
 
+                        inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
+                        get sortedInquiries()                                { return getSortedInquiries(this); },
+                        _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
+                        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
+                        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+
                         players: {},
                         playersMuted: true,
                         playersPaused: false,
@@ -59,12 +71,14 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
+                    x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
                     x-on:mute-youtube-players="_toggleMute()"
                     x-init="_setupVisibilityListener()"
                 >
+                    <span id="inquiry-result"></span>
 
                     <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                         <a href="/collections"><h1 class="font-bold text-22 sm:text-25">My Collections</h1></a>

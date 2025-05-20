@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <input type="text" name="event_zipcode"
+            <input type="text" name="inquiry_zip_code"
                 autocomplete="postal-code"
                 maxlength="5"
                 placeholder="Your event zip code"
