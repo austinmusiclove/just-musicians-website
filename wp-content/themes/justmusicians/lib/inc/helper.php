@@ -77,4 +77,58 @@ function get_youtube_video_ids($urls) {
     return $youtube_video_ids;
 }
 
-?>
+function generate_calendar_grid($month, $year, $event_day) {
+    $month = (int)$month;
+    $year = (int)$year;
+    if ($event_day != null) {
+        $event_day = (int)$event_day;
+    } 
+
+    // First day of the month
+    $firstDayOfMonth = strtotime("$year-$month-01");
+    $daysInMonth = (int)date('t', $firstDayOfMonth);
+
+    // Day of the week the month starts on (0 = Sunday)
+    $startWeekday = (int)date('w', $firstDayOfMonth);
+
+    // Start the calendar on the Sunday before the first day
+    $calendarStart = strtotime("-$startWeekday days", $firstDayOfMonth);
+
+    // Day headers
+    $dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    $calendarHTML = "<div class=\"grid grid-cols-7 uppercase text-center text-14 mb-4\">\n";
+    foreach ($dayNames as $day) {
+        $calendarHTML .= "<div class=\"day-header\">$day</div>\n";
+    }
+    $calendarHTML .= "</div>\n";
+
+
+    // Calendar days (5 rows x 7 = 35 days)
+    $calendarHTML .= "<div class=\"grid grid-cols-7\">\n";
+    for ($i = 0; $i < 35; $i++) {
+        $currentDate = strtotime("+$i days", $calendarStart);
+        $currentMonth = (int)date('n', $currentDate);
+        $displayDay = date('j', $currentDate);
+
+        $isInMonth = $currentMonth === $month;
+        $classes = 'aspect-square flex items-center justify-center relative';
+        if ($event_day != null && $i == $event_day) {
+            $classes .= ' bg-yellow rounded-full group';
+        }
+        //$classes .= $isInMonth ? '' : ' opacity-50';
+
+        $calendarHTML .= "<div class=\"$classes\">$displayDay";
+        if ($event_day != null && $i == $event_day) {
+            ob_start();
+            get_template_part('template-parts/global/event-tooltip', '', array());
+            $calendarHTML .= ob_get_clean();
+        }
+        $calendarHTML .= "</div>\n";
+    }
+    $calendarHTML .= "</div>\n";
+
+    return $calendarHTML;
+}
+
+
+

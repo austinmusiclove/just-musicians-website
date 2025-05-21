@@ -408,6 +408,10 @@ form textarea {
     margin-left: 108px;
   }
 }
+.tooltip.tooltip-event::after {
+  left: 2rem !important;
+}
+
 .pagination {
   margin-bottom: 2rem;
 }
@@ -462,6 +466,12 @@ form textarea {
   border-radius: 2px;
   width: 100%;
   text-align: center;
+}
+
+.media-tabs .tab-heading.active,
+.calendar-tab.active {
+  font-weight: bold;
+  border-bottom: 3px solid black;
 }
 
 /*Overwrites*/

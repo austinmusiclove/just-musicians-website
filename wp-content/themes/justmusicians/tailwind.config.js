@@ -14,6 +14,7 @@ const applyMultiplier = (values, multiplier) => {
   // https://www.modularscale.com/?14&px&1.125
 	const baseSpacing = {
 		0: '0rem',
+		9: '.6rem',
 		12: '.89rem',
 		14: '1rem',
 		16: '1.13rem',
@@ -65,6 +66,7 @@ module.exports = {
 		'./template-parts/filters/*.{php,js}',
 		'./template-parts/filters/**/*.{php,js}',
 		'./template-parts/global/**/*.{php,js}',
+		'./template-parts/global/calendar.php',
 		'./template-parts/filters/elements/*.{php,js}',
 		'./template-parts/account/*.{php,js}',
 		'./template-parts/listings/*.{php,js}',
