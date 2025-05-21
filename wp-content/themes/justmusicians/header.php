@@ -191,13 +191,21 @@
                   Profile
                 </a>
 -->
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
+                  My Listings
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/requests">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  Requests
+                </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
                   <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/inquiries">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
-                  My Listings
+                  My Inquiries
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />

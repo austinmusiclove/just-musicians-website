@@ -8,8 +8,8 @@ function get_user_inquiries($args) {
     $sanitized_page  = (!empty($args['page'])) ? sanitize_text_field($args['page']) : null;
     $page            = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page       = $page + 1;
-    $max_num_results = 1;
-    $max_num_pages   = 1;
+    $max_num_results = 0;
+    $max_num_pages   = 0;
 
     // Set up
     $inquiries = [];
@@ -17,6 +17,7 @@ function get_user_inquiries($args) {
 
     // Get inquiries
     $user_inquiries = get_user_meta($current_user_id, 'inquiries', true);
+    $user_inquiries = is_array($user_inquiries) ? array_map('strval', $user_inquiries) : [];
     if ( $user_inquiries and count($user_inquiries) > 0 ) {
 
         $query_args = [

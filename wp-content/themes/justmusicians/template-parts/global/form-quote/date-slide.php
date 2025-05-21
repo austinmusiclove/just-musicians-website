@@ -5,18 +5,18 @@
 
     <fieldset class="radio-buttons custom-radio">
         <div>
-            <input type="radio" id="single_date" name="inquiry_date_type" x-model="inquiryDateType" value="single-date">
+            <input type="radio" id="single_date" name="inquiry_date_type" x-model="inquiryDateType" value="Single Date">
             <span></span>
             <label class="text-16" for="single_date">I am booking for one date</label>
         </div>
         <div>
-            <input type="radio" id="multi_date" name="inquiry_date_type" x-model="inquiryDateType" value="multi-date">
+            <input type="radio" id="multi_date" name="inquiry_date_type" x-model="inquiryDateType" value="Multiple Dates">
             <span></span>
             <label class="text-16" for="multi_date">I am booking music for multiple dates</label>
         </div>
     </fieldset>
 
-    <span x-show="inquiryDateType == 'single-date'" x-cloak>
+    <span x-show="inquiryDateType == 'Single Date'" x-cloak>
         <p>Date</p>
         <input type="date" name="inquiry_date" class="mb-4">
 
@@ -24,7 +24,7 @@
         <input type="time" name="inquiry_time" class="mb-4">
     </span>
 
-    <span x-show="inquiryDateType == 'multi-date'" x-cloak>
+    <span x-show="inquiryDateType == 'Multiple Dates'" x-cloak>
         <p class="text-16 mt-8">Include any details you'd like about the dates and times you are booking for.</p>
         <textarea class="w-full h-40 mb-6" name="inquiry_date_time_details"></textarea>
     </span>

@@ -41,6 +41,11 @@ function html_api_rewrite_rules() {
         'index.php?wp-html-v1=inquiries&inquiry-id=$matches[1]&listing-id=$matches[2]',
         'top'
     );
+    add_rewrite_rule(
+        '^wp-html/v1/requests/?$',
+        'index.php?wp-html-v1=requests',
+        'top'
+    );
 }
 add_action('init', 'html_api_rewrite_rules');
 
@@ -96,12 +101,19 @@ function html_api_v1_template_redirects() {
 
     // Inquiries
     } else if ($path == 'inquiries') {
-        if (!empty($inquiry_id)) {
-            include_once get_template_directory() . '/html-api/add-listing-to-inquiry.php'; exit;
-        } else {
-            include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            include_once get_template_directory() . '/html-api/get-inquiries.php'; exit;
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (!empty($inquiry_id) && !empty($listing_id)) {
+                include_once get_template_directory() . '/html-api/add-listing-to-inquiry.php'; exit;
+            } else {
+                include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
+            }
         }
 
+    // Requests
+    } else if ($path == 'requests') {
+        include_once get_template_directory() . '/html-api/get-requests.php'; exit;
 
     // Active Search
     } else if ($path == 'search-options') {

@@ -5,18 +5,31 @@ Milestones
             quiz to get gig details
             send out to artists by email
             basics
-                inquiries archive page
-                requests archive page
                 single inquiry page
+                    show all details
+                    allow details edit
                     test special chars in all fields going into inquiry creation and make sure they display correctly
-                message board page
+                    make sure only inquiry owner can see the page
+                    show suggestions
+                change inquiry inputs
+                    change button to contact
+                    add what kind of inquiry is this
+                        general inquiry
+                        request for quote
+                        gig opportunity (i have a budget)
+                    make more slides required like date type should be required
+                    add budget slide if applicable
+                    simplify inquiries to put equipment, duration, and other things in catch all details
+                    add contact method to inquiries
+                send users to inquiry page right after creation with suggestions of who to invite
                 get user collections and inquiries after page load to make it faster
                 reorganize alpine component vars and methods
+                sort requests and inquiries by publish date/time
+                change listings-by-id path to specific to collections only and get collection id in path
                 quiz
                     add button to inquiries back end on the thank you slide
                     thank you slide that explains requesting quotes for this inquiry
             auto email when you get a new request as a musician
-            manage inquiries sent to you in the back end
             make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
             make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
     Search algo update
@@ -79,6 +92,7 @@ UX
         click to copy email on listing page
         artist pages that will get you listed on google as a musician by using schema
 Features
+    messages for inquiries
     venue reviews
     artist reviews
 Search Algorithm
