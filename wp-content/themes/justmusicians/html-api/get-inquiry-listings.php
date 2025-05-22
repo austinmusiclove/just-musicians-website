@@ -1,8 +1,8 @@
 <?php
 
 // Get listings
-$page          = $_GET['page']          ?? 1;
-$collection_id = $_GET['collection_id'] ?? 0;
+$page       = $_GET['page']       ?? 1;
+$inquiry_id = get_query_var('inquiry-id') ?? 0;
 $result = get_listings_by_id([
     'listing_ids' => !empty($_GET['listing_ids']) ? $_GET['listing_ids'] : [],
     'page'        => $page,
@@ -25,7 +25,7 @@ if (count($listings) > 0) {
         if (!empty($listing['genre'])) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
-        get_template_part('template-parts/listings/standard-listing', '', [
+        get_template_part('template-parts/search/standard-listing', '', [
             'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
@@ -42,12 +42,11 @@ if (count($listings) > 0) {
             'spotify_artist_url'     => $listing['spotify_artist_url'],
             'apple_music_artist_url' => $listing['apple_music_artist_url'],
             'soundcloud_url'         => $listing['soundcloud_url'],
-            'youtube_video_data'     => $listing['youtube_video_data'],
+            'youtube_video_urls'     => $listing['youtube_video_urls'],
+            'youtube_video_ids'      => $listing['youtube_video_ids'],
             'verified'               => $listing['verified'],
-            'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,
-            'hx-request_path'        => 'listings-by-id',
-            'collection_id'          => $collection_id,
+            'hx-request_path'        => 'inquiries/' . $inquiry_id . '/listings',
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,

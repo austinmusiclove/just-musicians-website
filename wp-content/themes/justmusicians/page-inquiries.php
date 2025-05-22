@@ -58,7 +58,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                     <?php } else { ?>
 
                         <div
-                            hx-get="/wp-html/v1/inquiries"
+                            hx-get="/wp-html/v1/inquiries/"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"

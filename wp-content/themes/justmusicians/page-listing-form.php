@@ -5,6 +5,7 @@
  * @package JustMusicians
  */
 
+$post_id = null;
 $listing_data = null;
 if (!is_user_logged_in()) { wp_redirect(site_url()); }                          // Don't allow non logged in users to use the form
 if (!empty($_GET['lid'])) {

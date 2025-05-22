@@ -53,6 +53,7 @@ module.exports = {
 		'./searchform.php',
 		'./template-home.php',
 		'./single.php',
+		'./single-*',
 		'./page-*',
 		'./single-*',
 		'./page-request-password-reset.php',

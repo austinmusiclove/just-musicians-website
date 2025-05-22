@@ -116,14 +116,13 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                     <?php } else { ?>
 
                         <form id="hx-form"
-                            hx-get="<?php echo site_url('/wp-html/v1/listings-by-id'); ?>"
+                            hx-get="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"
                         >
 
                             <input type="hidden" name="listing_ids" value="<?php echo implode(',', $listings); ?>" />
-                            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>" />
 
                             <span id="results">
                                 <?php

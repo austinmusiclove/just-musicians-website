@@ -8,6 +8,7 @@ function get_listings($args) {
     $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
     $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
     $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
+    $ensemble_size          = get_ensemble_size_values($args);
     $min_ensemble_size      = (!empty($args['min_ensemble_size'])) ? sanitize_text_field($args['min_ensemble_size'])                  : null;
     $max_ensemble_size      = (!empty($args['max_ensemble_size'])) ? sanitize_text_field($args['max_ensemble_size'])                  : null;
     $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
@@ -66,11 +67,8 @@ function get_listings($args) {
     // Ensemble Size
     if (($min_ensemble_size or $max_ensemble_size) and ($min_ensemble_size != 1 or $max_ensemble_size != 10)) {
         $ensemble_size_values = [];
-        for ($option = $min_ensemble_size; $option <= min($max_ensemble_size, 9); $option++) {
+        foreach ($ensemble_size as $option) {
             $ensemble_size_values[] = (string)$option;
-        }
-        if ($max_ensemble_size >= 10) {
-            $ensemble_size_values[] = '10+';
         }
         $ensemble_size_query = [ 'relation' => 'OR' ];
         foreach ($ensemble_size_values as $value) {
@@ -182,6 +180,7 @@ function get_listings($args) {
         'valid_subgenres'        => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
         'valid_settings'         => $valid_settings,
+        'ensemble_size'          => $ensemble_size,
         'min_ensemble_size'      => $min_ensemble_size,
         'max_ensemble_size'      => $max_ensemble_size,
         'max_num_results'        => $max_num_results,
@@ -198,4 +197,43 @@ function validate_tax_input($tax_input, $taxonomy) {
     $terms = get_terms_decoded($taxonomy, 'names');
     $valid_input = array_map('stripslashes', array_filter($input, fn($item) => in_array(stripslashes($item), $terms, true)));
     return $valid_input;
+}
+
+// Handle min/max ensemble size filters and specific ensemble sizes filter
+function get_ensemble_size_values($args) {
+    $ensemble_size_values = [];
+
+    // Convert single or multiple values into an array
+    $direct_ensemble_sizes = isset($args['ensemble_size']) ? (array) $args['ensemble_size'] : [];
+
+    foreach ($direct_ensemble_sizes as $value) {
+        $value = (int) $value;
+        if ($value >= 10) {
+            $ensemble_size_values[] = '10+';
+        } elseif ($value > 0) {
+            $ensemble_size_values[] = (string) $value;
+        }
+    }
+
+    // Add values from min/max ensemble size range if they are set and not default 1–10
+    $min = isset($args['min_ensemble_size']) ? (int) $args['min_ensemble_size'] : null;
+    $max = isset($args['max_ensemble_size']) ? (int) $args['max_ensemble_size'] : null;
+
+    if (
+        (is_int($min) || is_int($max)) &&
+        !($min === 1 && $max === 10)
+    ) {
+        $min = $min ?? 1;
+        $max = $max ?? 10;
+
+        for ($option = $min; $option <= min($max, 9); $option++) {
+            $ensemble_size_values[] = (string) $option;
+        }
+        if ($max >= 10) {
+            $ensemble_size_values[] = '10+';
+        }
+    }
+
+    // Remove duplicates
+    return array_values(array_unique($ensemble_size_values));
 }

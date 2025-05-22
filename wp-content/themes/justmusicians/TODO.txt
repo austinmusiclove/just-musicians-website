@@ -5,12 +5,6 @@ Milestones
             quiz to get gig details
             send out to artists by email
             basics
-                single inquiry page
-                    show all details
-                    allow details edit
-                    test special chars in all fields going into inquiry creation and make sure they display correctly
-                    make sure only inquiry owner can see the page
-                    show suggestions
                 change inquiry inputs
                     change button to contact
                     add what kind of inquiry is this
@@ -21,17 +15,20 @@ Milestones
                     add budget slide if applicable
                     simplify inquiries to put equipment, duration, and other things in catch all details
                     add contact method to inquiries
-                send users to inquiry page right after creation with suggestions of who to invite
-                get user collections and inquiries after page load to make it faster
-                reorganize alpine component vars and methods
                 sort requests and inquiries by publish date/time
-                change listings-by-id path to specific to collections only and get collection id in path
-                quiz
-                    add button to inquiries back end on the thank you slide
-                    thank you slide that explains requesting quotes for this inquiry
+                check console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
+            add button to inquiries back end on the thank you slide
             auto email when you get a new request as a musician
             make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
             make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
+            make sure to add inquiries and requests page
+        second iteration
+            allow inquiry details edit
+            figure out why initial load is slow
+            get user collections and inquiries after page load to make it faster
+            reorganize alpine component vars and methods
+            change listings page to html api
+            maybe: thank you slide that explains requesting quotes for this inquiry
     Search algo update
         ensemble size taxonomy
         locaiton filter
@@ -68,7 +65,7 @@ UX
     Filters
         add length of set
         add something about providing sound equipment
-        add location
+        add location in main filter and inquiry suggestions
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog

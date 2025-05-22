@@ -5,8 +5,10 @@
  * @package JustMusicians
  */
 
+$post_id = null;
 $listing_data = null;
 if (!empty($_GET['lid'])) {
+    $post_id = $_GET['lid'];
     $listing_data = get_listing(['post_id' => $_GET['lid']]);
 }
 $clean_name        = $listing_data ? clean_str_for_doublequotes($listing_data["name"])        : null;
@@ -70,7 +72,7 @@ get_header();
 >
     <div class="col-span-12 lg:col-span-6">
         <form action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
-            hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
+            hx-post="<?php echo site_url('wp-html/v1/listings/'); ?>"
             hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
             hx-target="#result"
             hx-ext="disable-element" hx-disable-element="#htmx-submit-button"
@@ -431,9 +433,10 @@ get_header();
 
         <h2 class="mt-8 font-bold text-24 md:text-36 lg:text-40">Preview</h2>
         <?php echo get_template_part('template-parts/search/standard-listing', '', [
-            'name'                          => $listing_data ? $clean_name : 'Name',
+            'post_id'                       => $listing_data ? $post_id                          : '',
+            'name'                          => $listing_data ? $clean_name                       : 'Name',
             'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
-            'description'                   => $listing_data ? $clean_description : 'Description',
+            'description'                   => $listing_data ? $clean_description                : 'Description',
             'genres'                        => $genres, // pass all genres; alpine_show_genre func will show the selected options
             'thumbnail_url'                 => $listing_data ? $listing_data['thumbnail_url']          : '',
             'verified'                      => $listing_data ? $listing_data['verified']               : false,

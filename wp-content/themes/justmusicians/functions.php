@@ -173,6 +173,28 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-collapse';
     }
 
+    // Single Inquiries pages
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/inquiry/')) {
+        // Media Slider
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, true);
+        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
+        $alpine_dependencies[] = 'youtube-iframe-scripts-js';
+
+        // Alpine Intersect
+        wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-intersect';
+
+        // Collections
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'collections-scripts-js';
+
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
+    }
+
     // Core
     wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
     wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
@@ -200,7 +222,8 @@ require get_template_directory() . '/lib/inc/blocks.php';
 require get_template_directory() . '/lib/inc/shortcodes.php';
 require get_template_directory() . '/lib/inc/comments.php';
 require get_template_directory() . '/lib/inc/helper.php';
-require get_template_directory() . '/html-api/html-api-setup.php';
+require get_template_directory() . '/html-api/html-api-rewrite-rules.php';
+require get_template_directory() . '/html-api/html-api-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
 

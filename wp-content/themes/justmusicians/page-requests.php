@@ -49,7 +49,7 @@ get_header();
                     <?php } else { ?>
 
                         <div
-                            hx-get="/wp-html/v1/requests"
+                            hx-get="/wp-html/v1/inquiries/requests/"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"
