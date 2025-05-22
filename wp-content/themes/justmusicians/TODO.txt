@@ -5,6 +5,8 @@ Milestones
             quiz to get gig details
             send out to artists by email
             basics
+                single inquiry page
+                    exclude listings in the inquiry from suggestions
                 change inquiry inputs
                     change button to contact
                     add what kind of inquiry is this
