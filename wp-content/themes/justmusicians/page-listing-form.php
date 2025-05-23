@@ -463,6 +463,7 @@ get_header();
             'alpine_show_genre'             => 'showGenre',
             'alpine_thumbnail_src'          => 'pThumbnailSrc',
             'alpine_video_ids'              => 'pVideoIds',
+            'permalink'                     => '#',
         ]); ?>
     </div>
 </div>

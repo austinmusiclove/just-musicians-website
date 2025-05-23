@@ -59,6 +59,7 @@ function get_listings_by_id($args) {
                 'verified'               => get_field('verified'),
                 'youtube_video_urls'     => get_field('youtube_video_urls'),
                 'youtube_video_ids'      => $youtube_video_ids,
+                'permalink'              => get_permalink(),
             ];
         }
         wp_reset_postdata();

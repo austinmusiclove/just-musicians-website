@@ -146,8 +146,9 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         <div class="flex flex-row justify-between items-center w-full">
             <div class="flex items-center">
                 <h2 class="text-22 font-bold">
-                    <a href="#" <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
-                        x-on:click="showArtistPageModal = true"
+                    <a href="<?php echo $args['permalink']; ?>"
+                        <?php if (!$is_preview) { ?> target="_blank" <?php } ?>
+                        <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
                     >
                         <?php echo $args['name']; ?>
                     </a>

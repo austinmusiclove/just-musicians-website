@@ -55,6 +55,7 @@ if (count($listings) > 0) {
             'youtube_video_urls'     => $listing['youtube_video_urls'],
             'youtube_video_ids'      => $listing['youtube_video_ids'],
             'verified'               => $listing['verified'],
+            'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,

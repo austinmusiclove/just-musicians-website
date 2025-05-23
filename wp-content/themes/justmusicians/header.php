@@ -47,7 +47,6 @@
             showFavModal: false,
             showLoginModal: false,
             showSignupModal: false,
-            showArtistPageModal: false,
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
@@ -188,10 +187,5 @@
             'alpine_show_var' => 'showInquiryModalPlaceholder',
             'heading' => 'Coming Soon',
             'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',
-        ]);
-        echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showArtistPageModal',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'The artist page, containing all the details about each artist, is currently under construction and coming soon.',
         ]);
     ?>
