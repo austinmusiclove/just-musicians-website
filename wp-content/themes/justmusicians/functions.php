@@ -41,6 +41,7 @@ function hmm_scripts() {
 
     // Alpine
     $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
+    
 
     // Home
     if (is_front_page() ) {
