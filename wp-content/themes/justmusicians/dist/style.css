@@ -266,7 +266,8 @@ body.frozen {
 }
 
 /*Utility*/
-form input[type=text], form input[type=number], form select, form .pseudo-select, form input[type=url], form input[type=email], form input[type=tel] {
+form input[type=text]:not(.no-formatting), form input[type=number]:not(.no-formatting), form select:not(.no-formatting), form .pseudo-select:not(.no-formatting), form input[type=url]:not(.no-formatting), form input[type=email]:not(.no-formatting), form input[type=tel]:not(.no-formatting),
+form .has-border:not(.no-formatting) {
   display: block;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -274,12 +275,21 @@ form input[type=text], form input[type=number], form select, form .pseudo-select
   font-size: 1rem;
   padding: 0.5rem 0.75rem;
 }
+form input[type=text].has-icon, form input[type=number].has-icon, form select.has-icon, form .pseudo-select.has-icon, form input[type=url].has-icon, form input[type=email].has-icon, form input[type=tel].has-icon,
+form .has-border.has-icon {
+  padding-left: 2.5rem;
+}
+form input[type=text].rounded-tl-none, form input[type=number].rounded-tl-none, form select.rounded-tl-none, form .pseudo-select.rounded-tl-none, form input[type=url].rounded-tl-none, form input[type=email].rounded-tl-none, form input[type=tel].rounded-tl-none,
+form .has-border.rounded-tl-none {
+  border-top-left-radius: 0 !important;
+}
 form fieldset.radio-buttons div {
   margin-bottom: 1rem;
 }
-form textarea {
+form textarea:not(.no-formatting) {
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 /* Base styles */
@@ -305,7 +315,7 @@ form textarea {
   border-radius: 0.25rem;
   background-color: white;
   position: absolute;
-  top: 0.25rem;
+  top: 0.16rem;
   left: 0;
   flex-shrink: 0;
 }

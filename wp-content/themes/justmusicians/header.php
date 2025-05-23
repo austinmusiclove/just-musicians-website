@@ -69,7 +69,7 @@
         "
     >
       <!-- Setting a fixed height allows us to position the popups on mobile -->
-    <header class="bg-brown-light-3 md:px-6 py-2 sticky top-0 z-50 h-28 md:h-auto">
+    <header class="bg-brown-light-3 md:px-6 py-2 sticky top-0 z-50 h-28 md:h-16">
       <div class="container flex flex-row md:grid grid-cols-12 gap-2 md:gap-4 lg:gap-12">
 
         <div class="w-32 md:w-auto col-span-2 relative">

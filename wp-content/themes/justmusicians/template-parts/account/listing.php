@@ -17,7 +17,7 @@
         </div>
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach((array) $args['genres'] as $genre) { ?>
-            <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light-50 hover:bg-yellow-light cursor-pointer inline-block"><?php echo $genre; ?></span><?php
+            <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block"><?php echo $genre; ?></span><?php
             } ?>
         </div>
     </div>

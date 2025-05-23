@@ -14,7 +14,7 @@
 
 <?php wp_footer(); ?>
 
-<footer class="bg-brown-dark-2 py-16">
+<footer class="bg-brown-dark-2 py-16 z-10 relative">
     <div class="container grid md:grid-cols-6 lg:grid-cols-12 gap-20">
 
         <div class="col md:col-span-2 lg:col-span-3 justify-center hidden md:flex">

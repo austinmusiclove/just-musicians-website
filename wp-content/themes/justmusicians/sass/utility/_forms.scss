@@ -1,18 +1,28 @@
 form {
-	input[type="text"], input[type="number"], select, .pseudo-select, input[type="url"], input[type="email"], input[type="tel"] {
-		display: block;
-		width: 100%;
-		border: 1px solid rgba(0,0,0,.4);
-		border-radius: .25rem;
-		font-size: 1rem;
-		padding: .5rem .75rem;
+	input[type="text"], input[type="number"], select, .pseudo-select, input[type="url"], input[type="email"], input[type="tel"],
+  .has-border {
+    &:not(.no-formatting){
+      display: block;
+      width: 100%;
+      border: 1px solid rgba(0,0,0,.4);
+      border-radius: .25rem;
+      font-size: 1rem;
+      padding: .5rem .75rem;
+    }
+    &.has-icon {
+      padding-left: 2.5rem;
+    }
+    &.rounded-tl-none {
+      border-top-left-radius: 0!important;
+    }
 	}
 	fieldset.radio-buttons div {
 		margin-bottom: 1rem;
 	}
-	textarea {
+	textarea:not(.no-formatting) {
 		border: 1px solid rgba(0,0,0,.2);
 		padding: .5rem;
+    border-radius: .25rem
 	}
 }
 
@@ -42,7 +52,7 @@ form {
     border-radius: .25rem;
     background-color: white;
     position: absolute;
-    top: .25rem;
+    top: .16rem;
     left: 0;
     flex-shrink: 0;
   }
@@ -130,4 +140,8 @@ form {
   /* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
   .htmx-request .htmx-indicator-replace {
     opacity: 0;
+  }
+
+  #listing-form {
+
   }

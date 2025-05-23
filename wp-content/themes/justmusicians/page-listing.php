@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="flex flex-col gap-4">
 
             <div class="sidebar-module border border-black/40 rounded overflow-hidden">
-                    <h3 class="bg-yellow-light-50 font-bold py-2 px-3">Contact Information</h3>
+                    <h3 class="bg-yellow-50 font-bold py-2 px-3">Contact Information</h3>
                     <div class="p-4 flex flex-col gap-4">
                         <?php $taxonomy_tag_classes = 'bg-yellow-light cursor-pointer hover:bg-yellow px-2 py-0.5 rounded-full text-12'; ?>
                         <div class="grid grid-cols-[auto_auto] gap-x-12 gap-y-4 w-fit"> <!-- Start contact info -->
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div> <!-- End sidebar module -->
 
                 <div class="sidebar-module border border-black/40 rounded overflow-hidden">
-                    <div data-toggle="taxonomies" class="flex items-center justify-between bg-yellow-light-50 font-bold py-2 px-3 cursor-pointer">
+                    <div data-toggle="taxonomies" class="flex items-center justify-between bg-yellow-50 font-bold py-2 px-3 cursor-pointer">
                         <h3>Taxonomies</h3>
                         <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" />
                     </div>
