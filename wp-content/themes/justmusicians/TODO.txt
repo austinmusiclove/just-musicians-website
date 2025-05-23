@@ -64,6 +64,7 @@ UX
     Filters
         add something about providing sound equipment
         add location
+        get rid of horizontal scroll in home search filter tag modals
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog
