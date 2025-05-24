@@ -17,6 +17,6 @@
             <img class="<?php echo $arrow_right_class; ?> h-6 absolute bottom-2 right-0 z-0 cursor-pointer -rotate-90" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" />
     </div>
     <div class="w-full">
-        <?php echo generate_calendar_grid($args['month'], $args['year'], $args['event_day']); ?>
+        <?php echo generate_calendar_grid($args['month'], $args['year'], $args['event_day'], $args['instance']); ?>
     </div>
 </div>

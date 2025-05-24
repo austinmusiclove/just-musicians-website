@@ -1,13 +1,13 @@
-<section class="w-full"> <!-- Start calendar -->
-    <div class="flex items-center gap-2 mb-5">
-        <img class="h-8" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
-        <h2 class="text-25 font-bold">Calendar</h2>
+<section class="flex flex-col gap-5 w-full"> <!-- Start calendar -->
+    <div class="flex items-center gap-2">
+        <img class="h-7 sm:h-8 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
+        <h2 class="text-20 sm:text-25 font-bold">Calendar</h2>
     </div>
     <div class="border border-black/40 rounded w-full"> 
         <div class="flex justify-between items-center border-b border-black/40 pl-4 pr-2">
             <div class="pt-3 sm:pt-4 flex gap-4 sm:gap-6 items-start">
                 <?php 
-                    $button_class = 'calendar-tab pb-2 flex items-center gap-2 text-14 sm:text-16'; 
+                    $button_class = 'calendar-tab pb-2 flex items-center gap-2 text-12 sm:text-16 leading-tight'; 
                     $dot_class = 'h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full mx-1 md:mx-1.5';
                 ?>
                 <button class="<?php echo $button_class; ?> active">
@@ -30,15 +30,17 @@
                 'month' => 'April',
                 'year' => '2025',
                 'order' => 1,
-                'responsive' => '',
-                'event_day' => null
+                'responsive' => 'z-10',
+                'event_day' => 20,
+                'instance' => 'listing-form'
             )); ?>
             <?php echo get_template_part('template-parts/global/calendar', '', array(
                 'month' => 'May',
                 'year' => '2025',
                 'order' => 2,
-                'responsive' => 'hidden sm:block',
-                'event_day' => null
+                'responsive' => 'hidden sm:block z-0',
+                'event_day' => null,
+                'instance' => 'listing-form'
             )); ?>
         </div>
     </div>

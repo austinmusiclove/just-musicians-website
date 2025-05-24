@@ -64,6 +64,7 @@ module.exports = {
 		'./lib/plugins/**/*.{php,js}',
 		'./template-parts/*.{php,js}',
 		'./template-parts/**/*.{php,js}',
+		'./template-parts/listing-form/**/*.{php,js}',
 		'./template-parts/content/*.{php,js}',
 		'./template-parts/filters/*.{php,js}',
 		'./template-parts/filters/**/*.{php,js}',

@@ -283,6 +283,10 @@ form input[type=text].rounded-tl-none, form input[type=number].rounded-tl-none, 
 form .has-border.rounded-tl-none {
   border-top-left-radius: 0 !important;
 }
+form input[type=text].p-0, form input[type=number].p-0, form select.p-0, form .pseudo-select.p-0, form input[type=url].p-0, form input[type=email].p-0, form input[type=tel].p-0,
+form .has-border.p-0 {
+  padding: 0;
+}
 form fieldset.radio-buttons div {
   margin-bottom: 1rem;
 }
@@ -315,7 +319,7 @@ form textarea:not(.no-formatting) {
   border-radius: 0.25rem;
   background-color: white;
   position: absolute;
-  top: 0.16rem;
+  top: 0.12rem;
   left: 0;
   flex-shrink: 0;
 }
@@ -479,9 +483,19 @@ form textarea:not(.no-formatting) {
 }
 
 .media-tabs .tab-heading.active,
-.calendar-tab.active {
+.calendar-tab.active,
+.preview-tab.active {
   font-weight: bold;
   border-bottom: 3px solid black;
+}
+
+[data-tab-heading].active {
+  background-color: white;
+  border-bottom-color: white;
+}
+
+.sidebar.collapsed .hide-if-collapsed {
+  display: none;
 }
 
 /*Overwrites*/

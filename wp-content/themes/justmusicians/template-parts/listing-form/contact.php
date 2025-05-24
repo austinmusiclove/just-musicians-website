@@ -1,16 +1,16 @@
 
-<section class="flex flex-col gap-4">
+<section class="flex flex-col gap-5">
 
-<div class="flex items-center gap-2 mb-5">
-    <img class="h-8" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
-    <h2 class="text-25 font-bold">Contact Information and Links</h2>
+<div class="flex items-center gap-2">
+    <img class="h-7 sm:h-8 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+    <h2 class="text-20 sm:text-25 font-bold">Contact Information and Links</h2>
 </div>
 
 
 <div>
 
-<fieldgroup class="block border-b border-black/20 pb-8 mb-4">
-    <div class="flex items-center gap-2">
+<fieldgroup class="block border-b border-black/20 pb-6">
+    <div class="grid sm:grid-cols-3 gap-2">
         <!-- Email -->
         <div class="grow relative">
             <label for="listing_email" class="mb-1 inline-block">Email (not public)<span class="text-red">*</span></label>
@@ -41,7 +41,7 @@
     </div>
 </fieldgroup>
 
-<fieldgroup class="flex items-center gap-2">
+<fieldgroup class="grid sm:grid-cols-3 gap-2">
     <!-- Instagram -->
     <div>
         <label class="mb-1 inline-block" for="instagram_handle">Instagram Handle</label><br>
@@ -90,7 +90,7 @@
 
 </fieldgroup>
     
-<fieldgroup class="flex items-center gap-2">  
+<fieldgroup class="grid sm:grid-cols-3 gap-2">  
     <!-- Facebook -->
     <div class="grow"><label class="mb-1 inline-block" for="facebook_url">Facebook URL</label><br>
     <input type="url" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/"      x-model="pFacebookUrl" <?php echo $listing_data ? 'value="' . $listing_data['facebook_url'] . '"' : ''; ?> ></div>
@@ -102,7 +102,7 @@
     <input type="url" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" x-model="pBandcampUrl" <?php echo $listing_data ? 'value="' . $listing_data['bandcamp_url'] . '"' : ''; ?> ></div>
 </fieldgroup>   
 
-<fieldgroup class="flex items-center gap-2">  
+<fieldgroup class="grid sm:grid-cols-3 gap-2">  
     <!-- Spotify -->
     <div class="grow" x-data="{
             spotifyArtistId: '',

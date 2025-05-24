@@ -15,6 +15,9 @@ form {
     &.rounded-tl-none {
       border-top-left-radius: 0!important;
     }
+    &.p-0 {
+      padding: 0;
+    }
 	}
 	fieldset.radio-buttons div {
 		margin-bottom: 1rem;
@@ -52,7 +55,7 @@ form {
     border-radius: .25rem;
     background-color: white;
     position: absolute;
-    top: .16rem;
+    top: .12rem;
     left: 0;
     flex-shrink: 0;
   }

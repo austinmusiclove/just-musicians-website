@@ -4,14 +4,14 @@ if ( ! isset( $args['title'] ) ) {
 	return;
 }
 
-$classes = 'px-2 py-2 border border-black/40 rounded-t text-14 font-medium flex cursor-pointer items-center leading-tight';
+$classes = 'px-2 py-2 border border-black/40 rounded-t text-14 font-medium flex cursor-pointer items-center leading-tight bg-yellow-10 text-grey hover:text-black/40';
 $classes .= $args['active']
-	? ' bg-white border-b-white'
-	: ' bg-yellow-10 text-grey hover:text-black/40';
+	? ' active'
+	: '';
 
 ?>
 
-<div class="<?php echo esc_attr( $classes ); ?>">
+<div data-tab-heading="<?php echo esc_attr(sanitize_title( $args['title'] )); ?>" class="<?php echo esc_attr( $classes ); ?>">
 	<span><?php 
 		echo esc_html( $args['title'] ); 
 		if ($args['required'] == true) {
