@@ -38,7 +38,7 @@ document.addEventListener('click', function (e) {
 </div>
 
 <div class="tabs-container z-0 relative">
-    <div class="flex flex-wrap items-stretch gap-x-1 z-10 relative" style="row-gap: -2px">
+    <div class="flex max-sm:flex-wrap items-stretch gap-x-1 z-10 relative" style="row-gap: -2px">
         <?php
             get_template_part(
                 'template-parts/components/tab',
