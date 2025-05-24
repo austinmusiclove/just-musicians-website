@@ -14,12 +14,30 @@ $instrumentations  = get_the_terms(get_the_ID(), 'instrumentation');
 $settings          = get_the_terms(get_the_ID(), 'setting');
 $keywords          = get_the_terms(get_the_ID(), 'keyword');
 
+$venues_combined  = [];
+$verified_ids     = get_field('venues_played_verified') ?: [];
+$unverified_ids   = get_field('venues_played_unverified') ?: [];
+$verified_posts   = array_map('get_post', $verified_ids);
+$unverified_posts = array_map('get_post', $unverified_ids);
+foreach (array_merge($verified_posts, $unverified_posts) as $venue) {
+    if ($venue && $venue->post_type === 'venue') {
+        $venues_combined[] = [
+            'name'             => get_field('name', $venue->ID),
+            'street_address'   => get_field('street_address', $venue->ID),
+            'address_locality' => get_field('address_locality', $venue->ID),
+            'postal_code'      => get_field('postal_code', $venue->ID),
+            'address_region'   => get_field('address_region', $venue->ID),
+        ];
+    }
+}
+
 ?>
 
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
 
 // Sidebar toggle
+  /*
   document.querySelectorAll('[data-toggle]').forEach(function (toggleBtn) {
     toggleBtn.addEventListener('click', function () {
       const targetSelector = this.getAttribute('data-toggle');
@@ -60,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         this.classList.add('active');
     });
     });
+  */
 
 });
 </script>
@@ -69,16 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="container grid lg:grid-cols-2">
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
             <img class="w-full h-full object-cover" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" />
-            <div class="block lg:hidden absolute top-2 right-2 sm:top-4 sm:right-4">
-                <?php echo $availability_html; ?>
-            </div>
+            <!--<div class="block lg:hidden absolute top-2 right-2 sm:top-4 sm:right-4"><div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div></div>-->
         </div>
 
         <!-- Content -->
         <div class="flex flex-col gap-12 lg:px-16 py-4 lg:py-10 items-end">
-            <div class="hidden lg:block">
-                <?php echo $availability_html; ?>
-            </div>
+            <!--<div class="hidden lg:block"><div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div></div>-->
             <div class="flex flex-col gap-5 w-full">
                 <div class="flex items-center gap-2">
                     <h1 class="text-32 font-bold"><?php echo get_field('name'); ?></h1>
@@ -108,35 +123,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <section class="container flex flex-col-reverse lg:grid grid-cols-8 gap-8 xl:gap-24 mb-20">
     <div class="col-span-5 flex flex-col gap-8 items-start">
+        <?php if (!empty(get_field('bio'))) { ?>
         <div id="biography">
             <h2 class="text-25 font-bold mb-5">Biography</h2>
             <p class="mb-4"><?php echo get_field('bio'); ?></p>
         </div>
+        <?php } ?>
+        <?php if (!empty($venues_combined)) { ?>
         <div id="venues"> <!-- Start venues -->
             <h2 class="text-22 font-bold mb-5">Venues played</h2>
             <div class="flex items-center gap-2 flex-wrap">
-                <?php $venue_classes = 'bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5'; ?>
-                <div class="<?php echo $venue_classes;?>">
-                   <span class="font-bold">Emo's Austin</span>
-                   <span>2015 E Riverside Dr<br/>Austin, TX 78741</span>
+                <?php foreach($venues_combined as $venue) { ?>
+                <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
+                    <span class="font-bold"><?php echo $venue['name']; ?></span>
+                    <span><?php echo $venue['street_address']; ?><br/><?php echo $venue['address_locality'] . ', ' . $venue['address_region'] . ' ' . $venue['postal_code']; ?></span>
                 </div>
-                <div class="<?php echo $venue_classes;?>">
-                   <span class="font-bold">Skylark Lounge</span>
-                   <span>2039 Airport Blvd<br />Austin, TX 78722</span>
-                </div>
+                <?php } ?>
             </div>
         </div> <!-- End venues -->
+        <?php } ?>
         <!-- Start media -->
-        <div class="w-full">
+        <div class="w-full" x-data="{
+            showImageTab: true,
+            showVideoTab: false,
+            showStagePlotTab: false,
+            hideTabs() {
+                console.log('hide');
+                showImageTab = false;
+                showVideoTab = false;
+                showStagePlotTab = false;
+            },
+        }">
             <h2 class="text-25 font-bold mb-5">Media</h2>
             <div class="flex items-start gap-4 media-tabs mb-2.5">
-                <?php $button_class = 'text-14 sm:text-16 tab-heading pb-1 cursor-pointer'; ?>
-                <div data-tab="images" class="<?php echo $button_class; ?> active">Images</div>
-                <div data-tab="videos" class="<?php echo $button_class; ?>">Videos</div>
-                <div data-tab="stage-plots" class="<?php echo $button_class; ?>">Stage Plots</div>
+                <div data-tab="images" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showImageTab}" x-on:click="hideTabs(); showImageTab = true;">Images</div>
+                <div data-tab="videos" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showVideoTab}" x-on:click="hideTabs(); showVideoTab = true;">Videos</div>
+                <div data-tab="stage-plots" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showStagePlotTab}" x-on:click="hideTabs(); showStagePlotTab = true;">Stage Plots</div>
             </div>
             <!-- Image -->
-            <div data-tab-target="images" class="bg-black aspect-video flex items-center justify-center relative">
+            <div data-tab-target="images" class="bg-black aspect-video flex items-center justify-center relative" x-show="showImageTab" x-cloak>
                <img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/indoor-creature-2.jpg'; ?>" />
                <!-- Left Arrow -->
                <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -159,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                  <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12">1/6</div>
             </div>
             <!-- Video -->
-            <div data-tab-target="videos" class="bg-black aspect-video flex items-center justify-center relative hidden">
+            <div data-tab-target="videos" class="bg-black aspect-video flex items-center justify-center relative" x-show="showVideoTab" x-cloak>
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S3VOtKRNybg?si=wNTtAB3c-ZpUl0NT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                <!-- Left Arrow -->
                <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -180,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
             <!-- Stage Plots -->
-            <div data-tab-target="stage-plots" class="flex flex-col gap-1 hidden">
+            <div data-tab-target="stage-plots" class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak>
                 <div class="border border-black/20 overflow-hidden rounded-sm aspect-video flex items-center justify-center relative">
                     <img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg'; ?>" />
                     <!-- Left Arrow -->
@@ -257,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="col-span-3">
         <div class="sticky top-20 flex flex-col gap-8">
-            <button x-on:click="showLoginModal = true;" type="button" data-trigger="quote" class="bg-yellow w-full shadow-black-offset border-2 border-black font-sun-motter text-18 px-2 py-2">Request a Quote</button>
+            <!--<button type="button" data-trigger="quote" class="bg-yellow w-full shadow-black-offset border-2 border-black font-sun-motter text-18 px-2 py-2">Request a Quote</button>-->
             <div class="flex flex-col gap-4">
 
             <div class="sidebar-module border border-black/40 rounded overflow-hidden">
@@ -290,13 +315,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Website</h4>
                                 </div>
-                                <?php
-                                    $website = get_field('website');
-                                    $host = parse_url($website, PHP_URL_HOST);
-                                    $host = preg_replace('/^www\./', '', $host);
-                                ?>
                                 <span class="text-14 text-yellow underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis block">
-                                    <a href="<?php echo $website; ?>" title="<?php echo $website; ?>" target="_blank"><?php echo $host; ?></a>
+                                    <a href="<?php echo get_field('website'); ?>" title="<?php echo get_field('website'); ?>" target="_blank"><?php echo clean_url_for_display(get_field('website')); ?></a>
                                 </span>
                             </div>
                             <?php } ?>
@@ -316,26 +336,36 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div>
                             <h4 class="text-16 mb-3 font-bold">Socials</h4>
                             <div class="grid grid-cols-2 gap-x-6 gap-y-3 w-fit text-14">
+                                <?php if (!empty(get_field('instagram_handle'))) { ?>
                                 <a class="flex items-center gap-2" href="<?php echo get_field('instagram_url'); ?>" target="_blank">
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" />
                                     <span class="whitespace-nowrap overflow-hidden text-ellipsis">@<?php echo get_field('instagram_handle'); ?></span>
                                 </a>
+                                <?php } ?>
+                                <?php if (!empty(get_field('spotify_url'))) { ?>
                                 <a class="flex items-center gap-2" href="<?php echo get_field('spotify_url'); ?>" target="_blank">
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" />
                                     <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('name'); ?></span>
                                 </a>
+                                <?php } ?>
+                                <?php if (!empty(get_field('tiktok_url'))) { ?>
                                 <a class="flex items-center gap-2" href="<?php echo get_field('tiktok_url'); ?>" target="_blank">
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" />
                                     <span class="whitespace-nowrap overflow-hidden text-ellipsis">@<?php echo get_field('tiktok_handle'); ?></span>
                                 </a>
+                                <?php } ?>
+                                <?php if (!empty(get_field('youtube_url'))) { ?>
                                 <a class="flex items-center gap-2" href="<?php echo get_field('youtube_url'); ?>" target="_blank">
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('youtube_url'); ?></span>
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo clean_url_for_display(get_field('youtube_url')); ?></span>
                                 </a>
+                                <?php } ?>
+                                <?php if (!empty(get_field('facebook_url'))) { ?>
                                 <a class="flex items-center gap-2" href="<?php echo get_field('facebook_url'); ?>" target="_blank">
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" />
                                     <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('name'); ?></span>
                                 </a>
+                                <?php } ?>
                             </div>
                         </div> <!-- End social media -->
                     </div>

@@ -77,12 +77,18 @@ function get_youtube_video_ids($urls) {
     return $youtube_video_ids;
 }
 
+function clean_url_for_display($url) {
+    $url = preg_replace('#^https?://#', '', $url);
+    $url = preg_replace('#^www\.#', '', $url);
+    return $url;
+}
+
 function generate_calendar_grid($month, $year, $event_day) {
     $month = (int)$month;
     $year = (int)$year;
     if ($event_day != null) {
         $event_day = (int)$event_day;
-    } 
+    }
 
     // First day of the month
     $firstDayOfMonth = strtotime("$year-$month-01");

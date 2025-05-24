@@ -1,4 +1,12 @@
 Milestones
+    Artist page
+        media slide show
+            connect images
+            connect videos
+        hide stage plots if none
+        add ensemble size to top
+        hide phone and email if not logged in
+        show no contact info available if none available
     Artist announce and invite new profiles
         make it invite only
         limit access until you verify email
