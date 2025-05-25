@@ -275,6 +275,176 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
     </div>
 </div>
 
+<!-- Cover image popup -->
+<div data-parent-tab="cover" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
+    <div data-show="cover-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+
+        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+
+        <div class="px-6 pt-4">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-bold text-25 w-full">Crop your thumbnail</h4>
+                <img data-show="cover-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+            </div>
+
+            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/cropper.jpg' ;?>">
+        </div>
+
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+            <span class="text-16">Image must be cropped into 4:3 aspect ratio.</span>
+            <button data-show="cover-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Thumbnail popup -->
+<div data-parent-tab="thumbnails" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
+    <div data-show="thumbnails-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+
+        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+
+        <div class="px-6 pt-4">
+            <div class="flex items-center justify-between mb-6">
+                <h4 class="font-bold text-25 w-full">Crop your thumbnail</h4>
+                <img data-show="thumbnails-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+            </div>
+            <div class="grid grid-cols-2">
+                <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/cropper.jpg' ;?>">
+                <div class="px-10 py-4">
+                    <h5 class="font-bold text-18 mb-3">Link taxonomy terms</h5>
+                    <p class="mb-4 text-16">Thumbnails you upload will be listed in order of their relevance to the current search term</p>
+
+                    <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
+                        <!-- Tag 1 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">gospel choir</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 2 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">live looper</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 3 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">orchestra</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 4 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">psychedelic steam punk</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 5 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">world music</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-14 text-grey">2/8 terms selected</p>
+                </div>
+            </div>  
+        </div>
+
+        
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+            <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
+            <button data-show="thumbnails-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Youtube link popup -->
+<div data-parent-tab="youtube-links" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center">
+    <div data-show="youtube-links-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+
+        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+
+        <div class="px-6 pt-4">
+            <div class="flex items-center justify-between mb-6">
+                <h4 class="font-bold text-25 w-full">Add a YouTube video</h4>
+                <img data-show="youtube-links-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+            </div>
+            <div>
+                <div class="mb-6">
+                    <form class="grid grid-cols-4 gap-2">
+                        <div class="col-span-3">
+                            <label class="mb-1 inline-block">Video url<span class="text-red">*</span></label>
+                            <input class="mb-2" type="text" placeholder="https://" required/>
+                        </div>
+                        <div class="col-span-1">
+                            <label class="mb-1 inline-block">Start time</label>
+                            <input type="text" placeholder="e.g. 40"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="border-t border-black/20 -mx-6 pt-4 px-6">
+                    <h5 class="font-bold text-18 mb-4">Link taxonomy terms</h5>
+
+                    <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
+                        <!-- Tag 1 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">gospel choir</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 2 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">live looper</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 3 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">orchestra</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 4 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">psychedelic steam punk</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                        <!-- Tag 5 -->
+                        <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                            <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
+                                <span class="text-14 w-fit">world music</span>
+                                <input type="hidden" name="keywords[]" x-bind:value="tag"/>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-14 text-grey">2/8 terms selected</p>
+                </div>
+            </div>  
+        </div>
+
+        
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+            <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
+            <button data-show="youtube-links-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
+        </div>
+
+    </div>
+</div>
+
+
 <?php
 get_footer();
 

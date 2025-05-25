@@ -28,6 +28,30 @@ document.addEventListener('click', function (e) {
         preview.classList.add('active');
     }
 });
+
+
+document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('[data-show]');
+    if (!trigger) return;
+
+    e.preventDefault();
+
+    const dataShow = trigger.getAttribute('data-show');
+    const lastHyphenIndex = dataShow.lastIndexOf('-');
+    const name = dataShow.substring(0, lastHyphenIndex);
+    const number = dataShow.substring(lastHyphenIndex + 1);
+
+    const target = document.querySelector(`[data-parent-tab="${name}"][data-screen="${number}"]`);
+    if (target && target.getAttribute('data-type') !== 'popup') {
+        document.querySelectorAll(`[data-parent-tab="${name}"]`).forEach(el => {
+            el.classList.add('hidden');
+        });
+        target.classList.remove('hidden');
+    } else {
+        target.classList.remove('hidden');
+    }
+
+});
 </script>
 
 
@@ -36,6 +60,9 @@ document.addEventListener('click', function (e) {
     <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/media.svg'; ?>" />
     <h2 class="text-20 sm:text-25 font-bold">Media</h2>
 </div>
+
+
+
 
 <div class="tabs-container z-0 relative">
     <div class="flex max-sm:flex-wrap items-stretch gap-x-1 z-10 relative" style="row-gap: -2px">

@@ -8,9 +8,9 @@
             <img id="info-sort" class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
         </div>-->
     </h3>
-    <div class="flex flex-col items-center justify-center grow">
+    <div data-parent-tab="thumbnails" data-screen="1" class="flex flex-col items-center justify-center grow">
         <div class="font-bold">At least one thumbnail is required.</div>
         <div>Add your first.</div>
-        <button class="w-fit rounded text-14 mt-4 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Upload +</button>
+        <button data-show="thumbnails-2" class="w-fit rounded text-14 mt-4 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Upload +</button>
     </div>
 </div>

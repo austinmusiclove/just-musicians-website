@@ -107,6 +107,7 @@ module.exports = {
 			'yellow-light': '#EDD4A9',
 			'yellow-60': '#E4BF7F',
 			'yellow-50': '#F6E9D4',
+			'yellow-40': '#EDD4A9',
 			'yellow-20': '#F6EAD4',
 			'yellow-10': '#FAF4EA',
 			// Other
