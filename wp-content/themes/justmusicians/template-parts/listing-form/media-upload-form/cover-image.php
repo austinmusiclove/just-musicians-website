@@ -1,6 +1,6 @@
 <div data-media-tab="cover-image" class="hidden flex flex-col h-full p-2 overflow-hidden">
     
-<div class="flex justify-between items-center w-full">
+<div class="relative -mx-2 sm:mx-0 pt-1">
     <h3 class="font-bold text-18">Cover Image</h3>
 </div>
 
@@ -11,10 +11,12 @@
 </div>
 
 <!-- State 2 -->
-<div data-parent-tab="cover" data-screen="3" class="hidden flex items-center justify-center grow">
+<div data-parent-tab="cover" data-screen="3" class="hidden flex items-center justify-center grow mt-4 pb-2">
     <div class="grid grid-cols-2 gap-2">
-        <div class="aspect-4/3 w-full">
-            <img class="h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/indoor-creature.jpg' ;?>">
+        <div>
+            <div class="aspect-4/3 w-full max-w-full max-h-full">
+                <img class="h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/indoor-creature.jpg' ;?>">
+            </div>
         </div>
         <div class="flex items-center flex-col justify-center gap-4 px-4">
             <!--<div class="text-center text-14">The large image that appears at the top of your profile page.</div>-->

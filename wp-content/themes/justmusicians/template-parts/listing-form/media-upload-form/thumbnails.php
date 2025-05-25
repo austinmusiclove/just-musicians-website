@@ -1,5 +1,5 @@
 <div data-media-tab="thumbnails" class="flex flex-col h-full p-2">
-    <div class="relative">
+    <div class="relative -mx-2 sm:mx-0 pt-1">
             <h3 class="font-bold text-18 flex items-center gap-1">
             Thumbnails<span class="text-red">*</span>
             </h3>
@@ -44,19 +44,19 @@
         ];
         ?>
         <?php foreach ($items as $item): ?>
-            <div class="flex items-center justify-between gap-6 pl-3 pr-2 py-2 border-b border-black/20 last:border-none w-full">
-                <div class="flex items-center gap-4">
+            <div class="flex min-w-0 items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full">
+                <div class="flex items-center gap-4 min-w-0">
                     <label class="custom-checkbox -mt-1">
                         <input type="checkbox"/>
                         <span class="checkmark"></span>
                     </label>
-                    <div class="aspect-4/3 w-16">
+                    <div class="aspect-4/3 w-16 shrink-0">
                         <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/'.esc_attr($item['image']); ?>'">
                     </div>
-                    <div class="tags flex gap-1">
+                    <div class="tags flex gap-1 overflow-hidden min-w-0">
                         <?php foreach ($item['tags'] as $tag): ?>
-                            <div class="w-fit flex items-center bg-yellow-20 px-3 h-6 rounded-full">
-                                <span class="text-14 w-fit"><?= esc_html($tag); ?></span>
+                            <div class="w-fit flex items-center text-14 whitespace-nowrap bg-yellow-20 px-3 h-6 rounded-full">
+                                <?= esc_html($tag); ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

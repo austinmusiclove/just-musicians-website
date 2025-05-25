@@ -1,5 +1,5 @@
 <div data-media-tab="youtube-videos" class="hidden flex flex-col h-full w-full p-2">
-    <div class="relative">
+    <div class="relative -mx-2 sm:mx-0 pt-1">
         <h3 class="font-bold text-18">YouTube Videos</h3>
             <!-- Buttons - screen 3 -->
             <div data-parent-tab="youtube-videos" data-screen="3" class="hidden flex gap-2 items-center absolute right-0 top-0">
@@ -21,7 +21,6 @@
             [
                 'image' => 'calliope-musicals.jpg',
                 'url' => 'https://www.youtube.com/watch?v=S3VOtKRNybg',
-                'starttime' => ':24'
                 //'tags' => ['live looper', 'orchestra', 'world music']
             ],
             [
@@ -31,7 +30,6 @@
             [
                 'image' => 'kiltro.jpeg',
                 'url' => 'https://www.youtube.com/watch?v=S3VOasdfRNg',
-                'starttime' => ':32'
             ],
             [
                 'image' => 'riders-against-the-storm.jpg',
@@ -44,8 +42,8 @@
         ];
         ?>
         <?php foreach ($items as $item): ?>
-            <div class="flex items-center justify-between gap-6 pl-3 pr-2 py-2 border-b border-black/20 last:border-none w-full">
-                <div class="flex items-center gap-4 grow">
+            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full">
+                <div class="flex items-center gap-4 grow min-w-0">
                     <label class="custom-checkbox -mt-1">
                         <input type="checkbox"/>
                         <span class="checkmark"></span>
@@ -56,11 +54,6 @@
                     <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0">
                         <?php echo esc_html($item['url']); ?>
                     </div>
-                    <?php if (!empty($item['starttime'])) : ?>
-                        <div class="text-14 text-grey shrink-0">
-                            <?php echo esc_html($item['starttime']); ?>
-                        </div>
-                    <?php endif; ?>
                 </div>
                 <button data-show="youtube-videos-2" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Edit</button>
             </div>

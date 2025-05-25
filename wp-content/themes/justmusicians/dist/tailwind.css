@@ -827,10 +827,6 @@ video {
   top: 100%;
 }
 
-.-top-2 {
-  top: -0.5rem;
-}
-
 .z-0 {
   z-index: 0;
 }
@@ -938,6 +934,10 @@ video {
 
 .-mr-3 {
   margin-right: -0.75rem;
+}
+
+.-mt-1 {
+  margin-top: -0.25rem;
 }
 
 .mb-1 {
@@ -1050,10 +1050,6 @@ video {
 
 .mt-\[-30px\] {
   margin-top: -30px;
-}
-
-.-mt-1 {
-  margin-top: -0.25rem;
 }
 
 .block {
@@ -1185,10 +1181,6 @@ video {
   height: 100vh;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .max-h-32 {
   max-height: 8rem;
 }
@@ -1207,6 +1199,10 @@ video {
 
 .max-h-\[600px\] {
   max-height: 600px;
+}
+
+.max-h-full {
+  max-height: 100%;
 }
 
 .min-h-16 {
@@ -1301,6 +1297,10 @@ video {
   width: 32rem;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -1318,16 +1318,12 @@ video {
   width: 100vw;
 }
 
-.w-auto {
-  width: auto;
+.min-w-0 {
+  min-width: 0px;
 }
 
 .min-w-6 {
   min-width: 1.5rem;
-}
-
-.min-w-0 {
-  min-width: 0px;
 }
 
 .max-w-3xl {
@@ -1342,16 +1338,16 @@ video {
   max-width: 780px;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.shrink-0 {
-  flex-shrink: 0;
+.max-w-full {
+  max-width: 100%;
 }
 
 .shrink {
   flex-shrink: 1;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
 }
 
 .grow {
@@ -1929,11 +1925,6 @@ video {
   padding-right: 0.375rem;
 }
 
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -2170,10 +2161,6 @@ video {
 
 .pt-6 {
   padding-top: 1.5rem;
-}
-
-.pt-8 {
-  padding-top: 2rem;
 }
 
 .text-left {
@@ -2700,10 +2687,6 @@ video {
 }
 
 @media not all and (min-width: 640px) {
-  .max-sm\:flex {
-    display: flex;
-  }
-
   .max-sm\:flex-wrap {
     flex-wrap: wrap;
   }
@@ -2758,6 +2741,11 @@ video {
   .sm\:mx-auto {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .sm\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .sm\:mb-12 {
@@ -2825,10 +2813,6 @@ video {
     width: 100%;
   }
 
-  .sm\:w-48 {
-    width: 12rem;
-  }
-
   .sm\:max-w-\[480px\] {
     max-width: 480px;
   }
@@ -2841,16 +2825,16 @@ video {
     grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
-  }
-
-  .sm\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
@@ -2874,6 +2858,11 @@ video {
     padding-right: 3rem;
   }
 
+  .sm\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -2889,18 +2878,20 @@ video {
     padding-bottom: 5rem;
   }
 
-  .sm\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+  .sm\:pb-0 {
+    padding-bottom: 0px;
   }
 
-  .sm\:px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .sm\:pl-3 {
+    padding-left: 0.75rem;
   }
 
   .sm\:pr-0 {
     padding-right: 0px;
+  }
+
+  .sm\:pr-2 {
+    padding-right: 0.5rem;
   }
 
   .sm\:pt-20 {
@@ -2909,10 +2900,6 @@ video {
 
   .sm\:pt-4 {
     padding-top: 1rem;
-  }
-
-  .sm\:pb-0 {
-    padding-bottom: 0px;
   }
 
   .sm\:text-16 {
@@ -3108,6 +3095,11 @@ video {
     padding: 5rem;
   }
 
+  .md\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .md\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -3136,11 +3128,6 @@ video {
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
-  }
-
-  .md\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   }
 
   .md\:pb-12 {
@@ -3177,6 +3164,14 @@ video {
 
   .md\:text-40 {
     font-size: 2.312rem;
+  }
+
+  .md\:text-32 {
+    font-size: 1.840rem;
+  }
+
+  .md\:text-28 {
+    font-size: 1.600rem;
   }
 }
 
@@ -3292,6 +3287,10 @@ video {
   .lg\:text-40 {
     font-size: 2.312rem;
   }
+
+  .lg\:text-32 {
+    font-size: 1.840rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -3356,6 +3355,10 @@ video {
 
   .xl\:pt-32 {
     padding-top: 8rem;
+  }
+
+  .xl\:text-32 {
+    font-size: 1.840rem;
   }
 
   .xl\:text-black {

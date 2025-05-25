@@ -89,7 +89,7 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
             <div class="mx-auto" style="max-width: 48rem">
 
                 <header class="pt-4 sm:pt-20 xl:pt-32 mb-4 sm:mb-12 gap-12 sm:gap-4 flex flex-col-reverse sm:flex-row justify-between sm:items-center">
-                    <h1 class="font-bold text-28 sm:text-32 w-full">Create a Listing</h1>
+                    <h1 class="font-bold text-28 sm:text-32 md:text-28 xl:text-32 w-full">Create a Listing</h1>
                     <!------------ Submit Buttons ----------------->
                     <?php echo get_template_part('template-parts/listing-form/submit-buttons', '', []); ?>
                 </header>

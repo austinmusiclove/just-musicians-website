@@ -1,5 +1,5 @@
 <div data-media-tab="profile-images" class="hidden flex flex-col h-full p-2">
-    <div class="relative">
+    <div class="relative -mx-2 sm:mx-0 pt-1">
         <h3 class="font-bold text-18">Profile Images</h3>
         <!-- Buttons - screen 2 -->
         <div data-parent-tab="profile-images" data-screen="2" class="hidden flex gap-2 items-center absolute right-0 top-0">
@@ -36,13 +36,13 @@
         ];
         ?>
         <?php foreach ($items as $item): ?>
-            <div class="flex items-center justify-between gap-6 pl-3 pr-2 py-2 border-b border-black/20 last:border-none w-full">
+            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full">
                 <div class="flex items-center gap-4">
                     <label class="custom-checkbox -mt-1">
                         <input type="checkbox"/>
                         <span class="checkmark"></span>
                     </label>
-                    <div class="w-16">
+                    <div class="w-16 shrink-0">
                         <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/'.esc_attr($item['image']); ?>'">
                     </div>
                     <div class="text-14 text-grey">

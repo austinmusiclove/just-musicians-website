@@ -1,5 +1,5 @@
 <div data-media-tab="stage-plot-images" class="hidden flex flex-col h-full p-2">
-    <div class="relative">
+    <div class="relative -mx-2 sm:mx-0 pt-1">
             <h3 class="font-bold text-18 flex items-center gap-1">Stage Plot Images</h3>
             <!-- Buttons - screen 3 -->
             <div data-parent-tab="stage-plot-images" data-screen="3" class="hidden flex gap-2 items-center absolute right-0 top-0">
@@ -37,8 +37,8 @@
         ];
         ?>
         <?php foreach ($items as $item): ?>
-            <div class="flex items-center justify-between gap-6 pl-3 pr-2 py-2 border-b border-black/20 last:border-none w-full">
-                <div class="flex items-center gap-4 grow">
+            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full">
+                <div class="flex items-center gap-4 grow min-w-0">
                     <label class="custom-checkbox -mt-1">
                         <input type="checkbox"/>
                         <span class="checkmark"></span>
