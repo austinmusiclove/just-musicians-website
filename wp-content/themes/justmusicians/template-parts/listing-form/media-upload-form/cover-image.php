@@ -11,7 +11,7 @@
 </div>
 
 <!-- State 2 -->
-<div data-parent-tab="cover" data-screen="3" class="hidden flex items-center justify-center grow mt-4 pb-2">
+<div data-parent-tab="cover" data-screen="3" class="hidden overflow-hidden flex items-center justify-center grow mt-4 pb-2">
     <div class="grid grid-cols-2 gap-2">
         <div>
             <div class="aspect-4/3 w-full max-w-full max-h-full">
