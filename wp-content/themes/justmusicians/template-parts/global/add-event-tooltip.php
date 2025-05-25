@@ -1,20 +1,31 @@
 <div class="absolute -left-2 bottom-full hidden group-hover:block mb-1 rounded-md">
-    <div class="bg-black rounded-sm p-4 flex flex-col gap-4 tooltip tooltip-event" style="width: 244px">
+    <div class="bg-black rounded-sm p-4 flex flex-col gap-4 tooltip tooltip-event" style="width: 400px">
         <div class="text-white flex flex-col gap-4">
-            <h4 class="font-bold text-16 py-0.5">Gig Details</h4>
-            <div class="font-bold text-12">Emo Niasdfsdfght</div>
-            <div class="flex gap-4 text-12">
-                <div class="pr-4 border-r border-white/20">
-                Emo’s Austin<br />2015 E Riverside Dr<br />Austin, TX 78741
+            <h4 class="font-bold text-20 py-0.5">Gig Details</h4>
+
+            <form>
+
+                <div class="grid grid-cols-2 gap-y-2 gap-x-4">
+                    <?php 
+                        $fields = ['Event Name', 'Venue', 'Time', 'Link'];
+                        foreach ($fields as $field) { 
+                    ?>
+                        <div class="border-b border-white/40 text-white">
+                            <div class="mb-1"><?php echo $field; ?>:</div>
+                            <input class="text-grey no-formatting bg-black w-full inline-block" />
+                        </div>
+                    <?php } ?>
                 </div>
                 <div>
-                April 20, 2025<br />6-9pm
+                    <label class="mb-1 inline-block">Other notes:</label>
+                    <textarea class="border border-white/40 p-1 h-20 w-full text-grey no-formatting rounded-sm bg-black"></textarea>
                 </div>
-            </div>
-            <div class="text-12">Family-friendly venue</div>
+            </form>
+
         </div>
-        <div>
-            <button class="bg-yellow font-bold text-12 font-black p-2 rounded-sm cursor-pointer">More information</button>
+        <div class="flex items-center justify-between font-bold text-16">
+            <button class="bg-yellow px-2 py-1 rounded-sm cursor-pointer">Save</button>
+            <button class="text-grey hover:text-red cursor-pointer">Delete</button>
         </div>
     </div>
 </div>
