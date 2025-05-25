@@ -276,21 +276,21 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
 </div>
 
 <!-- Cover image popup -->
-<div data-parent-tab="cover" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
+<div data-parent-tab="cover" data-type="popup" data-screen="2" class="hidden popup-wrapper px-2 pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
     <div data-show="cover-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
 
         <div class="px-6 pt-4">
             <div class="flex items-center justify-between mb-4">
-                <h4 class="font-bold text-25 w-full">Crop your thumbnail</h4>
+                <h4 class="font-bold text-25 w-full">Crop your cover image</h4>
                 <img data-show="cover-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
             </div>
 
             <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/cropper.jpg' ;?>">
         </div>
 
-        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Image must be cropped into 4:3 aspect ratio.</span>
             <button data-show="cover-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
         </div>
@@ -299,19 +299,19 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
 </div>
 
 <!-- Thumbnail popup -->
-<div data-parent-tab="thumbnails" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
+<div data-parent-tab="thumbnails" data-type="popup" data-screen="2" class="hidden popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center">
     <div data-show="thumbnails-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
 
         <div class="px-6 pt-4">
             <div class="flex items-center justify-between mb-6">
                 <h4 class="font-bold text-25 w-full">Crop your thumbnail</h4>
                 <img data-show="thumbnails-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
             </div>
-            <div class="grid grid-cols-2">
-                <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/cropper.jpg' ;?>">
-                <div class="px-10 py-4">
+            <div class="grid sm:grid-cols-2">
+                <img class="w-full h-full object-cover mx-auto" style="max-width: 28rem" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/cropper.jpg' ;?>">
+                <div class="sm:px-4 md:px-10 py-4">
                     <h5 class="font-bold text-18 mb-3">Link taxonomy terms</h5>
                     <p class="mb-4 text-16">Thumbnails you upload will be listed in order of their relevance to the current search term</p>
 
@@ -358,7 +358,7 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
         </div>
 
         
-        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
             <button data-show="thumbnails-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
         </div>
@@ -367,19 +367,19 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
 </div>
 
 <!-- Youtube link popup -->
-<div data-parent-tab="youtube-links" data-type="popup" data-screen="2" class="hidden popup-wrapper pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center">
-    <div data-show="youtube-links-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+<div data-parent-tab="youtube-videos" data-type="popup" data-screen="2" class="hidden px-4 pt-12 popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center">
+    <div data-show="youtube-videos-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-        <div class="bg-white relative w-full h-full md:w-auto md:h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
 
         <div class="px-6 pt-4">
             <div class="flex items-center justify-between mb-6">
                 <h4 class="font-bold text-25 w-full">Add a YouTube video</h4>
-                <img data-show="youtube-links-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+                <img data-show="youtube-videos-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
             </div>
             <div>
                 <div class="mb-6">
-                    <form class="grid grid-cols-4 gap-2">
+                    <form class="sm:grid grid-cols-4 gap-2">
                         <div class="col-span-3">
                             <label class="mb-1 inline-block">Video url<span class="text-red">*</span></label>
                             <input class="mb-2" type="text" placeholder="https://" required/>
@@ -390,7 +390,7 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                         </div>
                     </form>
                 </div>
-                <div class="border-t border-black/20 -mx-6 pt-4 px-6">
+                <div class="border-t border-black/20 -mx-6 pt-6 sm:pt-4 pb-2 sm:pb-0 px-6">
                     <h5 class="font-bold text-18 mb-4">Link taxonomy terms</h5>
 
                     <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
@@ -436,9 +436,49 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
         </div>
 
         
-        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-2">
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
-            <button data-show="youtube-links-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
+            <button data-show="youtube-videos-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Stage Plot popup -->
+<div data-parent-tab="stage-plot-images" data-type="popup" data-screen="2" class="hidden px-4 popup-wrapper pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center">
+    <div data-show="stage-plot-images-1" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+
+        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;">
+
+        <div class="px-6 pt-4">
+            <div class="flex items-center justify-between mb-6">
+                <h4 class="font-bold text-25 w-full">Add a stage plot image</h4>
+                <img data-show="stage-plot-images-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+            </div>
+            <div>
+                <div class="mb-6 grid sm:grid-cols-2 gap-2">
+                    <div class="aspect-4/3 w-48 border border-black/20 mx-auto">
+                        <img class="h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg' ;?>">
+                    </div>
+                    <div class="max-w-1/2 break-all text-center flex items-center flex-col justify-center gap-4 px-4 text-center text-grey">
+                        stage-plot-1.jpg
+                    </div>
+                </div>
+                <div class="border-t border-black/20 -mx-6 pt-4 px-6">
+                    <form>
+                        <label class="mb-1 inline-block">Caption</label>
+                        <input type="text"/>
+                    </form>
+                </div>
+
+            </div>  
+        </div>
+
+        
+        <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
+            <span class="text-16">Let potential clients know what this is.</span>
+            <button data-show="stage-plot-images-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
         </div>
 
     </div>

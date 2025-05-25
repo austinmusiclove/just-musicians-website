@@ -349,7 +349,7 @@ get_header();
             </div>
 
 
-            <!-- Youtube links -->
+            <!-- YouTube Videos -->
             <!-- Depends on youtube-urls-input-scripts.js -->
             <h2 class="font-bold text-22">Youtube Video Links</h2>
             <p>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</p>
@@ -375,7 +375,7 @@ get_header();
                         }
                     }"
                     x-sort="reorderTags($item, $position);">
-                    <!-- Display YouTube links -->
+                    <!-- Display YouTube Videos -->
                     <template x-for="(url, index) in tags" :key="index + url">
                         <div x-sort:item="index" class="flex items-center bg-yellow-50 p-2 rounded-md cursor-grab">
                             <span x-text="url" class="text-sm max-w-s"></span>

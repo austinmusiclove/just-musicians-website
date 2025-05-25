@@ -41,12 +41,15 @@ document.addEventListener('click', function (e) {
     const name = dataShow.substring(0, lastHyphenIndex);
     const number = dataShow.substring(lastHyphenIndex + 1);
 
-    const target = document.querySelector(`[data-parent-tab="${name}"][data-screen="${number}"]`);
+    target = document.querySelector(`[data-parent-tab="${name}"][data-screen="${number}"]`);
     if (target && target.getAttribute('data-type') !== 'popup') {
+
         document.querySelectorAll(`[data-parent-tab="${name}"]`).forEach(el => {
             el.classList.add('hidden');
         });
-        target.classList.remove('hidden');
+        document.querySelectorAll(`[data-parent-tab="${name}"][data-screen="${number}"]`).forEach((el) => {
+            el.classList.remove('hidden');
+        });
     } else {
         target.classList.remove('hidden');
     }
@@ -82,7 +85,7 @@ document.addEventListener('click', function (e) {
                 'template-parts/components/tab',
                 null,
                 [
-                    'title'  => 'YouTube Links',
+                    'title'  => 'YouTube Videos',
                     'number' => null,
                     'active' => false,
                     'required' => false
@@ -129,7 +132,7 @@ document.addEventListener('click', function (e) {
         get_template_part('template-parts/listing-form/media-upload-form/thumbnails', null,[] );
         ?>
         <?php
-        get_template_part('template-parts/listing-form/media-upload-form/youtube-links', null,[] );
+        get_template_part('template-parts/listing-form/media-upload-form/youtube-videos', null,[] );
         ?>
         <?php
         get_template_part('template-parts/listing-form/media-upload-form/cover-image', null,[] );
