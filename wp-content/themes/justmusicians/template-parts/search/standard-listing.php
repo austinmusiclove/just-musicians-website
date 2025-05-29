@@ -58,20 +58,16 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
                     x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
 
-                <template
-                    x-for="(videoId, index) in videoIds"
-                    :key="videoId + index"
-                >
+                <template x-for="(videoId, index) in videoIds" :key="videoId + index">
                     <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
                         x-id="['playerId']"
                         <?php if (!empty($args['alpine_video_ids'])) { ?>
-                            x-init="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                            x-init="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
                         <?php } else { ?>
-                            x-intersect.once="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                            x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }); console.log(playerIds); })"
                         <?php } ?>
                     >
-                        <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"
-                        ></div>
+                        <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
                     </div>
                 </template>
 
@@ -111,7 +107,6 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
                 x-transition:leave-start="translate-x-0 opacity-100"
                 x-transition:leave-end="-translate-x-full opacity-0" >
                 <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                </span>
             </div>
             <!-- Right Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"

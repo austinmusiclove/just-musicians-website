@@ -31,57 +31,10 @@ foreach (array_merge($verified_posts, $unverified_posts) as $venue) {
     }
 }
 
+$youtube_video_urls = get_field('youtube_video_urls');
+$youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
 ?>
 
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function () {
-
-// Sidebar toggle
-  /*
-  document.querySelectorAll('[data-toggle]').forEach(function (toggleBtn) {
-    toggleBtn.addEventListener('click', function () {
-      const targetSelector = this.getAttribute('data-toggle');
-      const target = document.querySelector(`[data-toggle-target="${targetSelector}"]`);
-
-      if (target) {
-        target.classList.toggle('hidden');
-      }
-
-      const img = this.querySelector('img');
-      if (img) {
-        img.classList.toggle('rotate-180');
-      }
-    });
-  });
-  // Tabs
-  document.querySelectorAll('[data-tab]').forEach(function (tabBtn) {
-    tabBtn.addEventListener('click', function () {
-        const targetSelector = this.getAttribute('data-tab');
-        const target = document.querySelector(`[data-tab-target="${targetSelector}"]`);
-
-        // Hide all tab contents
-        document.querySelectorAll('[data-tab-target]').forEach(function (tab) {
-        tab.classList.add('hidden');
-        });
-
-        // Show the selected tab content
-        if (target) {
-        target.classList.remove('hidden');
-        }
-
-        // Remove 'active' class from all tab buttons
-        document.querySelectorAll('[data-tab]').forEach(function (btn) {
-        btn.classList.remove('active');
-        });
-
-        // Add 'active' class to the clicked tab button
-        this.classList.add('active');
-    });
-    });
-  */
-
-});
-</script>
 
 <section class="my-4 lg:my-16">
 
@@ -106,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
                     <span><?php echo get_field('city') . ', ' . get_field('state'); ?></span>
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex flex-wrap items-center gap-1">
                     <?php
                     if (!empty($genres) && !is_wp_error($genres)) {
                         foreach ($genres as $genre) { ?>
@@ -114,6 +67,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         <?php }
                     } ?>
                 </div>
+                <?php if (!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) { ?>
+                <div>
+                    <div class="flex items-center gap-1">
+                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" />
+                        <h4 class="text-16 font-semibold">Ensemble size</h4>
+                    </div>
+                    <span class="text-14 v"><?php echo implode(', ', get_field('ensemble_size')); ?></span>
+                </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -147,24 +109,41 @@ document.addEventListener('DOMContentLoaded', function () {
             showImageTab: true,
             showVideoTab: false,
             showStagePlotTab: false,
+            hasVideo: <?php echo (count($youtube_video_ids) > 0) ? 'true' : 'false'; ?>,
             hideTabs() {
-                console.log('hide');
-                showImageTab = false;
-                showVideoTab = false;
-                showStagePlotTab = false;
+                this.showImageTab = false;
+                this.showVideoTab = false;
+                this.showStagePlotTab = false;
             },
         }">
             <h2 class="text-25 font-bold mb-5">Media</h2>
             <div class="flex items-start gap-4 media-tabs mb-2.5">
-                <div data-tab="images" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showImageTab}" x-on:click="hideTabs(); showImageTab = true;">Images</div>
-                <div data-tab="videos" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showVideoTab}" x-on:click="hideTabs(); showVideoTab = true;">Videos</div>
-                <div data-tab="stage-plots" class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showStagePlotTab}" x-on:click="hideTabs(); showStagePlotTab = true;">Stage Plots</div>
+                <div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showImageTab}" x-on:click="hideTabs(); showImageTab = true;">Images</div>
+                <div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showVideoTab}" x-show="hasVideo" x-cloak x-on:click="hideTabs(); showVideoTab = true;">Videos</div>
+                <!--<div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showStagePlotTab}" x-on:click="hideTabs(); showStagePlotTab = true;">Stage Plots</div>-->
             </div>
             <!-- Image -->
-            <div data-tab-target="images" class="bg-black aspect-video flex items-center justify-center relative" x-show="showImageTab" x-cloak>
-               <img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/indoor-creature-2.jpg'; ?>" />
-               <!-- Left Arrow -->
-               <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden" x-show="showImageTab" x-cloak
+                x-data="{
+                    previousIndex: 0,
+                    currentIndex: 0,
+                    showArrows: isTouchDevice,
+                    totalSlides: 1,
+                    _updateIndex(newIndex)  { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
+                }"
+                x-on:mouseleave="showArrows = false;"
+                x-on:mouseenter="showArrows = true"
+            >
+                <div class="aspect-video flex transition-transform duration-500 ease-in-out"
+                    x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
+                >
+                    <span class="aspect-video flex items-center justify-center"><img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" /></span>
+
+                </div>
+                <!-- Left Arrow -->
+                <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+                    @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                    x-show="currentIndex > 0 && showArrows"
                     x-transition:enter-start="-translate-x-full opacity-0"
                     x-transition:enter-end="translate-x-0 opacity-100"
                     x-transition:leave-start="translate-x-0 opacity-100"
@@ -174,6 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <!-- Right Arrow -->
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                    @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                    x-show="currentIndex < totalSlides - 1 && showArrows"
                     x-transition:enter-start="translate-x-full opacity-0"
                     x-transition:enter-end="translate-x-0 opacity-100"
                     x-transition:leave-start="translate-x-0 opacity-100"
@@ -181,10 +162,100 @@ document.addEventListener('DOMContentLoaded', function () {
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
                 </div>
                 <!-- Gallery Count -->
-                 <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12">1/6</div>
+                <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides">1/6</div>
             </div>
             <!-- Video -->
-            <div data-tab-target="videos" class="bg-black aspect-video flex items-center justify-center relative" x-show="showVideoTab" x-cloak>
+            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden" x-show="showVideoTab" x-cloak
+                x-data='{
+                    players: {},
+                    playersMuted: true,
+                    playersPaused: false,
+                    _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
+                    _pauseAllPlayers()             { pauseAllPlayers(this); },
+                    _pausePlayer(playerId)         { pausePlayer(this, playerId); },
+                    _playPlayer(playerId)          { playPlayer(this, playerId); },
+                    _toggleMute()                  { toggleMute(this); },
+                    _setupVisibilityListener()     { setupVisibilityListener(this); },
+                    previousIndex: 0,
+                    currentIndex: 0,
+                    showArrows: isTouchDevice,
+                    totalSlides: <?php echo (count($youtube_video_ids)); ?>,
+                    videoIds:    <?php echo clean_arr_for_doublequotes($youtube_video_ids); ?>,
+                    playerIds: {},
+                    _updateIndex(newIndex)  { updateIndex(this, newIndex); },
+                    _pausePreviousSlide()   { pausePreviousSlide(this); },
+                    _pauseCurrentSlide()    { pauseCurrentSlide(this); },
+                    _playCurrentSlide()     { playCurrentSlide(this); },
+                    _toggleMuteAllVideos()  { toggleMuteAllVideos(this); },
+                    _isPaused()             { return isPaused(this); },
+                    _enterSlider()          { enterSlider(this); },
+                    _leaveSlider()          { leaveSlider(this); },
+                }'
+                x-on:mouseleave="_leaveSlider()"
+                x-on:mouseenter="_enterSlider()"
+                x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
+                x-on:pause-all-youtube-players="_pauseAllPlayers()"
+                x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
+                x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
+                x-on:mute-youtube-players="_toggleMute()"
+                x-init="_setupVisibilityListener()">
+
+                <div class="bg-yellow-light aspect-video flex transition-transform duration-500 ease-in-out w-full h-full"
+                    x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
+                    x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
+
+                    <template x-for="(videoId, index) in videoIds" :key="videoId + index">
+                        <div class="bg-yellow-light aspect-video w-full h-full object-cover"
+                            x-id="['playerId']"
+                            x-init="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                        >
+                            <div x-bind:id="$id('playerId')" class="aspect-video w-full h-full object-cover"></div>
+                        </div>
+                    </template>
+
+                </div>
+
+
+                <!-- Video player buttons -->
+                <!-- Pause -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    x-show="_isPaused()">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
+                </div>
+                <!-- Mute -->
+                <div class="absolute transform left-2 bottom-2"
+                    @click="_toggleMuteAllVideos()"
+                    x-show="playersMuted">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+                </div>
+                <!-- Unmute -->
+                <div class="absolute transform left-2 bottom-2"
+                    @click="_toggleMuteAllVideos()"
+                    x-show="!playersMuted">
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+                </div>
+                <!-- Left Arrow -->
+                <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+                    @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                    x-show="currentIndex > 0 && showArrows"
+                    x-transition:enter-start="-translate-x-full opacity-0"
+                    x-transition:enter-end="translate-x-0 opacity-100"
+                    x-transition:leave-start="translate-x-0 opacity-100"
+                    x-transition:leave-end="-translate-x-full opacity-0" >
+                    <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                </div>
+                <!-- Right Arrow -->
+                <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                    @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                    x-show="currentIndex < totalSlides - 1 && showArrows"
+                    x-transition:enter-start="translate-x-full opacity-0"
+                    x-transition:enter-end="translate-x-0 opacity-100"
+                    x-transition:leave-start="translate-x-0 opacity-100"
+                    x-transition:leave-end="translate-x-full opacity-0" >
+                    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                </div>
+            </div>
+            <div class="bg-black aspect-video flex items-center justify-center relative" x-show="false" x-cloak>
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S3VOtKRNybg?si=wNTtAB3c-ZpUl0NT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                <!-- Left Arrow -->
                <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -193,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     x-transition:leave-start="translate-x-0 opacity-100"
                     x-transition:leave-end="-translate-x-full opacity-0" >
                     <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-                    </span>
                 </div>
                 <!-- Right Arrow -->
                 <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
@@ -205,29 +275,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
             <!-- Stage Plots -->
-            <div data-tab-target="stage-plots" class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak>
-                <div class="border border-black/20 overflow-hidden rounded-sm aspect-video flex items-center justify-center relative">
-                    <img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg'; ?>" />
+            <div class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak>
+                <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden"
+                    x-data="{
+                        previousIndex: 0,
+                        currentIndex: 0,
+                        showArrows: isTouchDevice,
+                        totalSlides: 1,
+                        _updateIndex(newIndex)  { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
+                    }"
+                    x-on:mouseleave="showArrows = false;"
+                    x-on:mouseenter="showArrows = true"
+                >
+                    <div class="aspect-video flex transition-transform duration-500 ease-in-out"
+                        x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
+                    >
+                        <span class="aspect-video flex items-center justify-center"><img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg'; ?>" /></span>
+
+                    </div>
                     <!-- Left Arrow -->
                     <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
-                            x-transition:enter-start="-translate-x-full opacity-0"
-                            x-transition:enter-end="translate-x-0 opacity-100"
-                            x-transition:leave-start="translate-x-0 opacity-100"
-                            x-transition:leave-end="-translate-x-full opacity-0" >
-                            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow-inverted.svg'; ?>" />
-                            </span>
-                        </div>
-                        <!-- Right Arrow -->
-                        <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
-                            x-transition:enter-start="translate-x-full opacity-0"
-                            x-transition:enter-end="translate-x-0 opacity-100"
-                            x-transition:leave-start="translate-x-0 opacity-100"
-                            x-transition:leave-end="translate-x-full opacity-0" >
-                            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow-inverted.svg'; ?>" />
-                        </div>
-                        <!-- Gallery Count -->
-                        <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12">1/6</div>
-                 </div>
+                        @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                        x-show="currentIndex > 0 && showArrows"
+                        x-transition:enter-start="-translate-x-full opacity-0"
+                        x-transition:enter-end="translate-x-0 opacity-100"
+                        x-transition:leave-start="translate-x-0 opacity-100"
+                        x-transition:leave-end="-translate-x-full opacity-0" >
+                        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                    </div>
+                    <!-- Right Arrow -->
+                    <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                        @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                        x-show="currentIndex < totalSlides - 1 && showArrows"
+                        x-transition:enter-start="translate-x-full opacity-0"
+                        x-transition:enter-end="translate-x-0 opacity-100"
+                        x-transition:leave-start="translate-x-0 opacity-100"
+                        x-transition:leave-end="translate-x-full opacity-0" >
+                        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                    </div>
+                    <!-- Gallery Count -->
+                    <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides">1/6</div>
+                </div>
                  <div class="text-14">Stage plot image  1</div>
             </div>
         </div>
@@ -297,7 +385,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Phone</h4>
                                 </div>
-                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('phone'); ?></span>
+                                <?php if (is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('phone'); ?></span><?php } ?>
+                                <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
                             </div>
                             <?php } ?>
                             <?php if (!empty(get_field('email'))) { ?>
@@ -306,7 +395,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Email</h4>
                                 </div>
-                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"><?php echo get_field('email'); ?></span>
+                                <?php if (is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"><?php echo get_field('email'); ?></span><?php } ?>
+                                <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
                             </div>
                             <?php } ?>
                             <?php if (!empty(get_field('website'))) { ?>
@@ -320,13 +410,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                 </span>
                             </div>
                             <?php } ?>
-                            <?php if (!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) { ?>
+                            <?php if (empty(get_field('phone')) and empty(get_field('email')) and empty(get_field('website'))) { ?>
                             <div>
                                 <div class="flex items-center gap-1">
-                                    <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" />
-                                    <h4 class="text-16 font-semibold">Ensemble size</h4>
+                                    <h4 class="text-16 font-semibold">No Contact Info Available</h4>
                                 </div>
-                                <span class="text-14 v"><?php echo implode(', ', get_field('ensemble_size')); ?></span>
                             </div>
                             <?php } ?>
                         </div> <!-- End contact info -->
@@ -371,12 +459,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div> <!-- End sidebar module -->
 
-                <div class="sidebar-module border border-black/40 rounded overflow-hidden">
-                    <div data-toggle="taxonomies" class="flex items-center justify-between bg-yellow-light-50 font-bold py-2 px-3 cursor-pointer">
+                <div class="sidebar-module border border-black/40 rounded" x-data="{ showClassifications: false }">
+                    <div class="flex items-center justify-between bg-yellow-light-50 font-bold py-2 px-3 cursor-pointer" x-on:click="showClassifications = !showClassifications;">
                         <h3>Classifications</h3>
                         <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" />
                     </div>
-                    <div data-toggle-target="taxonomies" class="p-4 flex flex-col gap-4 hidden">
+                    <div class="p-4 flex flex-col gap-4 max-h-96" x-show="showClassifications" x-collapse x-cloak>
                         <?php if (!empty($genres) && !is_wp_error($genres)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">Genres</h4>

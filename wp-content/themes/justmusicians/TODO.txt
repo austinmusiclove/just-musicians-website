@@ -1,13 +1,6 @@
 Milestones
-    Artist page
-        media slide show
-            connect images
-            connect videos
-        hide stage plots if none
-        add ensemble size to top
-        hide phone and email if not logged in
-        show no contact info available if none available
     Artist announce and invite new profiles
+        click to copy email on listing page
         make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -35,6 +28,9 @@ Milestones
             start at timestamp for videos
         create the listings for them before they sign up instead of allowing new listing creating with the link
         artist pages that will get you listed on google as a musician by using schema
+    Advanced artist page
+        see more bio
+        see more venues played
     Free lance booker testing
         basic inquiries
             inquire button that sends an email

@@ -1,49 +1,56 @@
-
-function pausePreviousSlide(alpineComponent) {
-    if (alpineComponent.previousIndex > 0) {
-        alpineComponent.$dispatch('pause-youtube-player', {'playerId': getPreviousPlayerId(alpineComponent)});
+function pausePreviousSlide(alco) {
+    if (getPreviousPlayerId(alco)) {
+        alco.$dispatch('pause-youtube-player', {'playerId': getPreviousPlayerId(alco)});
     }
 }
 
-function pauseCurrentSlide(alpineComponent) {
-    if (alpineComponent.currentIndex > 0) {
-        alpineComponent.$dispatch('pause-youtube-player', {'playerId': getCurrentPlayerId(alpineComponent)});
+function pauseCurrentSlide(alco) {
+    if (getCurrentPlayerId(alco)) {
+        alco.$dispatch('pause-youtube-player', {'playerId': getCurrentPlayerId(alco)});
     }
 }
 
-function playCurrentSlide(alpineComponent) {
-    if (alpineComponent.currentIndex > 0) {
-        alpineComponent.$dispatch('play-youtube-player', {'playerId': getCurrentPlayerId(alpineComponent)});
+function playCurrentSlide(alco) {
+    if (getCurrentPlayerId(alco)) {
+        alco.$dispatch('play-youtube-player', {'playerId': getCurrentPlayerId(alco)});
     }
 }
 
-function toggleMuteAllVideos(alpineComponent) {
-    alpineComponent.$dispatch('mute-youtube-players');
+function toggleMuteAllVideos(alco) {
+    alco.$dispatch('mute-youtube-players');
 }
 
-function isPaused(alpineComponent) {
-    return alpineComponent.currentIndex > 0 && alpineComponent.players[getCurrentPlayerId(alpineComponent)].isPaused;
+function isPaused(alco) {
+    return alco.currentIndex > 0 && alco.players[getCurrentPlayerId(alco)].isPaused;
 }
 
-function enterSlider(alpineComponent) {
-    playCurrentSlide(alpineComponent);
-    alpineComponent.showArrows = true;
+function enterSlider(alco) {
+    playCurrentSlide(alco);
+    alco.showArrows = true;
 }
 
-function leaveSlider(alpineComponent) {
-    pauseCurrentSlide(alpineComponent);
-    alpineComponent.showArrows = false;
+function leaveSlider(alco) {
+    pauseCurrentSlide(alco);
+    alco.showArrows = false;
 }
 
-function updateIndex(alpineComponent, newIndex) {
-    alpineComponent.previousIndex = alpineComponent.currentIndex; // Save the previous index before updating
-    alpineComponent.currentIndex = newIndex;                      // Update to the new index
+function updateIndex(alco, newIndex) {
+    alco.previousIndex = alco.currentIndex;
+    alco.currentIndex = newIndex;
 }
 
-function getCurrentPlayerId(alpineComponent) {
-    return alpineComponent.playerIds[alpineComponent.currentIndex - 1];
+function getCurrentPlayerId(alco) {
+    if (alco.currentIndex in alco.playerIds) {
+        return alco.playerIds[alco.currentIndex];
+    } else {
+        return false;
+    }
 }
 
-function getPreviousPlayerId(alpineComponent) {
-    return alpineComponent.playerIds[alpineComponent.previousIndex - 1];
+function getPreviousPlayerId(alco) {
+    if (alco.previousIndex in alco.playerIds) {
+        return alco.playerIds[alco.previousIndex];
+    } else {
+        return false;
+    }
 }

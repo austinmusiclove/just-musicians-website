@@ -41,7 +41,7 @@ function hmm_scripts() {
 
     // Alpine
     $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
-    
+
 
     // Home
     if (is_front_page() ) {
@@ -104,7 +104,7 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
-    // Collections pages
+    // Collection pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/collection/')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
@@ -126,6 +126,23 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'collections-scripts-js';
     }
 
+    // Listing pages
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing/')) {
+        // Media Slider
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, true);
+        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
+        $alpine_dependencies[] = 'youtube-iframe-scripts-js';
+
+        // Alpine Intersect
+        wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-intersect';
+
+        // Alpine Collapse
+        wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-collapse';
+    }
 
     // Core
 
