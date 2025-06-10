@@ -89,13 +89,6 @@ get_header();
                 <div class="col md:col-span-6 py-6 md:py-4">
 
 
-                    <!------------ Toasts ----------------->
-                    <div class="h-4">
-                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
-                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', []); ?>
-                    </div>
-
-
                     <div class="flex items-center justify-between md:justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', array()); ?>
                         <?php echo get_template_part('template-parts/search/sort', '', array(

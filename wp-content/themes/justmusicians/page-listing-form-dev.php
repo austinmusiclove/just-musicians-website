@@ -27,17 +27,6 @@ get_header();
 
 ?>
 
-<!-- Error messages
-<div class="top-28 md:top-16 text-16 sm:text-18 bg-red-60 p-2 text-center sticky z-20 relative">
-    Form submission unsuccessful. Please try again.
-    <img class="close-button opacity-60 hover:opacity-100 absolute top-0.5 right-0.5 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" />
-</div> -->
-
-<div class="top-28 md:top-16 text-16 sm:text-18 bg-yellow-60 p-2 text-center sticky z-20 relative">
-Form submission successful! <a href="#" class="underline">View your listing.</a>
-    <img class="close-button opacity-60 hover:opacity-100 absolute top-0.5 right-0.5 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" />
-</div>
-
 <div class="hidden lg:block fixed top-0 left-1/2 w-1/2 bg-yellow-10 z-0 h-screen"></div>
 
 <div id="sticky-sidebar" class="hidden xl:block fixed top-0 z-10 left-0 bg-white h-screen dropshadow-md px-3 w-fit pt-40 border-r border-black/20">
@@ -117,18 +106,18 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
 
                         <!------------ Basic Information ----------------->
                         <?php echo get_template_part('template-parts/listing-form/basic-info', '', []); ?>
-                        
+
                         <!------------ Contact and Links ----------------->
                         <?php echo get_template_part('template-parts/listing-form/contact', '', []); ?>
 
                         <!------------ Search Optimization / Taxonomies ----------------->
                         <?php echo get_template_part('template-parts/listing-form/search-optimization', '', []); ?>
-                        
+
                         <!------------ Media ----------------->
                         <?php echo get_template_part('template-parts/listing-form/media', '', []); ?>
-                        
+
                         <!------------ Calendar ----------------->
-                        <?php echo get_template_part('template-parts/listing-form/calendar', '', []); ?>
+                        <?php //echo get_template_part('template-parts/listing-form/calendar', '', []); ?>
 
                         <!------------ Venues Played ----------------->
                         <?php echo get_template_part('template-parts/listing-form/venues', '', []); ?>
@@ -146,7 +135,7 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                         <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'post-success-toast']); ?>
                     </div>
                 </form>
-            </div>  
+            </div>
         </div>
     </div>
 
@@ -190,7 +179,7 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                 </div>
             </div>
 
-            
+
             <div data-preview="listing-page" class="hidden">
                 <!-- Hero -->
                 <?php echo get_template_part('template-parts/listing/hero', '', array(
@@ -263,9 +252,9 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                     ]); ?>
 
                     <div class="opacity-50">
-                        <?php 
-                            echo get_template_part('template-parts/search/standard-listing-skeleton', '', []); 
-                            echo get_template_part('template-parts/search/standard-listing-skeleton', '', []); 
+                        <?php
+                            echo get_template_part('template-parts/search/standard-listing-skeleton', '', []);
+                            echo get_template_part('template-parts/search/standard-listing-skeleton', '', []);
                         ?>
                     </div>
 
@@ -354,10 +343,10 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                     </div>
                     <p class="text-14 text-grey">2/8 terms selected</p>
                 </div>
-            </div>  
+            </div>
         </div>
 
-        
+
         <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
             <button data-show="thumbnails-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
@@ -432,10 +421,10 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                     </div>
                     <p class="text-14 text-grey">2/8 terms selected</p>
                 </div>
-            </div>  
+            </div>
         </div>
 
-        
+
         <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
             <button data-show="youtube-videos-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
@@ -472,10 +461,10 @@ Form submission successful! <a href="#" class="underline">View your listing.</a>
                     </form>
                 </div>
 
-            </div>  
+            </div>
         </div>
 
-        
+
         <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Let potential clients know what this is.</span>
             <button data-show="stage-plot-images-3" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>

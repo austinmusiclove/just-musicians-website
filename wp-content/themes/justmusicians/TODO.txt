@@ -10,7 +10,6 @@ Milestones
             clear off query args from urls except id or something from fb?
             clean city name to be the right capitalization
         after design
-            switch out toasts to new design
             send save automatically after input
             housekeeping
                 move inputs to forms template parts

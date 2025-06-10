@@ -78,13 +78,6 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                     </div>
 
 
-                    <!------------ Toasts ----------------->
-                    <div class="h-4">
-                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
-                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', []); ?>
-                        <div id="result"></div>
-                    </div>
-
 
                     <!-- Logged out -->
                     <?php if (!is_user_logged_in()) { ?>

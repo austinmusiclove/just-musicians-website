@@ -29,19 +29,10 @@ get_header();
                     </div>
 
 
-                    <!------------ Delete Post Toasts ----------------->
-                    <div class="h-4" x-on:remove-listing-card="$refs[$event.detail.post_id].style.display = 'none'" >
-                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'delete-error-toast']); ?>
-                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'delete-success-toast']); ?>
-                        <div id="result"></div>
-                    </div>
+                    <!------------ Hide Deleted ----------------->
+                    <div class="h-4" x-on:remove-listing-card="$refs[$event.detail.post_id].style.display = 'none'" ></div>
 
 
-                    <!------------ Listing invitation code Toasts ----------------->
-                    <div>
-                        <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'lic-error-toast']); ?>
-                        <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'lic-success-toast']); ?>
-                    </div>
                     <!-- handle listing invitiation -->
                     <?php if (is_user_logged_in()) {
                         if (isset($_GET['lic'])) {
@@ -49,9 +40,9 @@ get_header();
                             $success = add_listing_by_invitation_code($_GET['lic']);
                             // if success, redirect back to the same page but remove query params to avoid an infinite loop
                             if ($success and !is_wp_error($success)) { ?>
-                                <span x-init="$dispatch('lic-success-toast', {'message': 'Listing invitation link processed successfully'})"></span>
+                                <span x-init="$dispatch('success-toast', {'message': 'Listing invitation link processed successfully'})"></span>
                             <?php } else { ?>
-                                <span x-init="$dispatch('lic-error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
+                                <span x-init="$dispatch('error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
                             <?php }
                         }
                     } ?>

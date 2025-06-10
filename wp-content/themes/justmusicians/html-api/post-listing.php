@@ -8,7 +8,7 @@ $args = get_sanitized_listing_args();
 $is_authorized = check_post_listing_auth();
 if ( is_wp_error($is_authorized) ) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
-    echo '<span x-init="$dispatch(\'post-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
 }
 
@@ -18,7 +18,7 @@ if ( empty( $args['ID'] )) {
     $post_id = _create_listing($args);
     if ( is_wp_error($post_id) ) {
         $message = 'Error: ' . $post_id->get_error_message();
-        echo '<span x-init="$dispatch(\'post-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+        echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
         exit;
     }
     echo '<span x-init="redirect(\'/listing-form/?lid=' . $post_id . '&toast=create\');"></span>';
@@ -30,9 +30,9 @@ if ( empty( $args['ID'] )) {
     $result = _update_listing($args);
     if ( is_wp_error($result) ) {
         $message = 'Error: ' . $result->get_error_message();
-        echo '<span x-init="$dispatch(\'post-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+        echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
         exit;
     }
-    echo '<span x-init="$dispatch(\'post-success-toast\', { \'message\': \'Listing Updated Successfully\'})"></span>';
+    echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Listing Updated Successfully\'})"></span>';
 }
 

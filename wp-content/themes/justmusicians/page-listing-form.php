@@ -82,9 +82,9 @@ get_header();
 
             <!------------ Page Load Toasts ----------------->
             <div>
-                <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') {
-                    echo get_template_part('template-parts/global/toasts/success-toast', '', [ 'message' => 'Listing Created Successfully' ]);
-                } ?>
+                <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?>
+                    <span x-init="$dispatch('success-toast', {'message': 'Listing Created Successfully'});"></span>
+                <?php } ?>
             </div>
 
             <!------------ Basic Information ----------------->
@@ -279,7 +279,7 @@ get_header();
             <p>Did we miss anything? Add any categories, genres, subgenres, instruments, or settings that you'd like your listing to be serchable by.</p>
             <div x-data="{
                 tags: keywords,
-                _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
+                _addTag(event)    { addTag(this, event, 'error-toast'); },
                 _removeTag(index) { removeTag(this, index); },
             }">
                 <input type="hidden" name="keywords[]"/>
@@ -289,7 +289,7 @@ get_header();
                         x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
                 </div>
 
-                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
+                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
 
                 <div class="space-y-2">
                     <!-- Display Tags -->
@@ -365,7 +365,7 @@ get_header();
                         x-on:paste="$el.addEventListener('input', function() { _addYoutubeUrl($event); }, {once: true})">
                 </div>
 
-                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'youtube-url-error-toast']); ?>
+                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', []); ?>
 
                 <div class="space-y-2"
                     x-data="{
@@ -397,11 +397,6 @@ get_header();
             </button>
             <div id="result"></div>
 
-            <!------------ Form Submit Toasts ----------------->
-            <div class="h-20">
-                <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'post-error-toast']); ?>
-                <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'post-success-toast']); ?>
-            </div>
         </form>
     </div>
     <div class="hidden lg:block md:col-span-1"></div>

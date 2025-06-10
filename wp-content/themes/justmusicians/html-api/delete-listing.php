@@ -8,7 +8,7 @@ $args = ['post_id' => $post_id];
 $is_authorized = check_delete_listing_auth($args);
 if ( is_wp_error($is_authorized) ) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
-    echo '<span x-init="$dispatch(\'delete-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
 }
 
@@ -17,10 +17,10 @@ if ( is_wp_error($is_authorized) ) {
 $post = _delete_listing($args);
 if ( is_wp_error($post) ) {
     $message = 'Error: ' . $post->get_error_message();
-    echo '<span x-init="$dispatch(\'delete-error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'delete-success-toast\', { \'message\': \'' . 'Listing Deleted Successfully' . '\'})"></span>';
+echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Deleted Successfully' . '\'})"></span>';
 echo '<span x-init="$dispatch(\'hide-listing\')"></span>';

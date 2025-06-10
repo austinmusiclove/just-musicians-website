@@ -4,7 +4,7 @@ function addYoutubeUrl(alpineComponent, event) {
 
     // Check for duplicate urls
     if (alpineComponent.tags.includes(value)) {
-        alpineComponent.$dispatch('youtube-url-error-toast', {'message': 'This url has already been added'});
+        alpineComponent.$dispatch('error-toast', {'message': 'This url has already been added'});
         event.target.value = '';
         return;
     }
@@ -16,7 +16,7 @@ function addYoutubeUrl(alpineComponent, event) {
         event.target.value = '';
         alpineComponent.pVideoIds = getVideoIdsFromUrls(alpineComponent.tags);
     } else {
-        alpineComponent.$dispatch('youtube-url-error-toast', {'message': validation});
+        alpineComponent.$dispatch('error-toast', {'message': validation});
     }
 }
 
