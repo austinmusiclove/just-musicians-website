@@ -294,7 +294,7 @@ get_header();
                 <div class="space-y-2">
                     <!-- Display Tags -->
                     <template x-for="(tag, index) in tags" :key="index + tag">
-                        <div class="flex items-center bg-yellow-light-50 p-2 rounded-md">
+                        <div class="flex items-center bg-yellow-50 p-2 rounded-md">
                             <span x-text="tag" class="text-sm max-w-s"></span>
                             <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="_removeTag(index)">
                                 <span class="font-bold">X</span>
@@ -349,7 +349,7 @@ get_header();
             </div>
 
 
-            <!-- Youtube links -->
+            <!-- YouTube Videos -->
             <!-- Depends on youtube-urls-input-scripts.js -->
             <h2 class="font-bold text-22">Youtube Video Links</h2>
             <p>This is your chance to show your stuff to talent buyers. Paste a Youtube video link into the box. Add as many as you wish. Listings with video will rank higher in search than those with only images.</p>
@@ -375,9 +375,9 @@ get_header();
                         }
                     }"
                     x-sort="reorderTags($item, $position);">
-                    <!-- Display YouTube links -->
+                    <!-- Display YouTube Videos -->
                     <template x-for="(url, index) in tags" :key="index + url">
-                        <div x-sort:item="index" class="flex items-center bg-yellow-light-50 p-2 rounded-md cursor-grab">
+                        <div x-sort:item="index" class="flex items-center bg-yellow-50 p-2 rounded-md cursor-grab">
                             <span x-text="url" class="text-sm max-w-s"></span>
                             <button type="button" class="text-gray hover:text-black ml-auto" x-on:click="_removeYoutubeUrl(index)">
                                 <span class="font-bold">X</span>

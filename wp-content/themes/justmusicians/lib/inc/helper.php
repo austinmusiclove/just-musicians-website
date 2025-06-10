@@ -83,7 +83,7 @@ function clean_url_for_display($url) {
     return $url;
 }
 
-function generate_calendar_grid($month, $year, $event_day) {
+function generate_calendar_grid($month, $year, $event_day, $instance) {
     $month = (int)$month;
     $year = (int)$year;
     if ($event_day != null) {
@@ -126,7 +126,11 @@ function generate_calendar_grid($month, $year, $event_day) {
         $calendarHTML .= "<div class=\"$classes\">$displayDay";
         if ($event_day != null && $i == $event_day) {
             ob_start();
-            get_template_part('template-parts/global/event-tooltip', '', array());
+            if ($instance == 'listing-page') {
+                get_template_part('template-parts/global/event-tooltip', '', array());
+            } else {
+                get_template_part('template-parts/global/add-event-tooltip', '', array());
+            }
             $calendarHTML .= ob_get_clean();
         }
         $calendarHTML .= "</div>\n";

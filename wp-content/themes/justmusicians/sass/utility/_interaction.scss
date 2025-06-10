@@ -77,7 +77,19 @@
 }
 
 .media-tabs .tab-heading.active,
-.calendar-tab.active {
+.calendar-tab.active,
+.preview-tab.active {
   font-weight: bold;
   border-bottom: 3px solid black;
+}
+
+[data-tab-heading].active {
+  background-color: white;
+  border-bottom-color: white;
+}
+
+.sidebar.collapsed {
+  .hide-if-collapsed {
+    display: none;
+  }
 }

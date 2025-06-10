@@ -1,4 +1,4 @@
-<div class="absolute left-0 bottom-full hidden group-hover:block mb-1">
+<div class="absolute -left-2 bottom-full hidden group-hover:block mb-1 rounded-md">
     <div class="bg-black rounded-sm p-4 flex flex-col gap-4 tooltip tooltip-event" style="width: 244px">
         <div class="text-white flex flex-col gap-4">
             <h4 class="font-bold text-16 py-0.5">Gig Details</h4>
@@ -7,7 +7,7 @@
                 <div class="pr-4 border-r border-white/20">
                 Emo’s Austin<br />2015 E Riverside Dr<br />Austin, TX 78741
                 </div>
-                <div class="pr-4 border-r border-white/20">
+                <div>
                 April 20, 2025<br />6-9pm
                 </div>
             </div>

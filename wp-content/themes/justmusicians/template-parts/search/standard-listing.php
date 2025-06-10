@@ -171,7 +171,7 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         <!-- Genres -->
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach ($args['genres'] as $term) { ?>
-                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-light-50 hover:bg-yellow-light cursor-pointer inline-block"
+                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block"
                     x-show="<?php if (!empty($args['alpine_show_genre'])) { echo $args['alpine_show_genre'] . "('" . $term . "')"; } else { echo 'true'; } ?>"
                     x-cloak >
                     <?php echo $term; ?>
