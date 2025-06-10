@@ -468,7 +468,7 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
                         <?php if (!empty($genres) && !is_wp_error($genres)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">Genres</h4>
-                            <div class="flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($genres as $term) { ?>
                                     <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12"><?php echo $term->name; ?></span>
                                 <?php } ?>
@@ -478,7 +478,7 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
                         <?php if (!empty($subgenres) && !is_wp_error($subgenres)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">Sub-genres</h4>
-                            <div class="flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($subgenres as $term) { ?>
                                     <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12"><?php echo $term->name; ?></span>
                                 <?php } ?>
@@ -488,7 +488,7 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
                         <?php if (!empty($instrumentations) && !is_wp_error($instrumentations)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">Instrumentation</h4>
-                            <div class="flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($instrumentations as $term) { ?>
                                     <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12"><?php echo $term->name; ?></span>
                                 <?php } ?>
@@ -498,7 +498,7 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
                         <?php if (!empty($settings) && !is_wp_error($settings)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">Settings</h4>
-                            <div class="flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($settings as $term) { ?>
                                     <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12"><?php echo $term->name; ?></span>
                                 <?php } ?>
@@ -508,7 +508,7 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
                         <?php if (!empty($keywords) && !is_wp_error($keywords)) { ?>
                         <div>
                             <h4 class="text-16 mb-3">More keywords</h4>
-                            <div class="flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($keywords as $term) { ?>
                                     <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12"><?php echo $term->name; ?></span>
                                 <?php } ?>

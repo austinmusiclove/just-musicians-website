@@ -1,6 +1,5 @@
 Milestones
     Artist announce and invite new profiles
-        click to copy email on listing page
         make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -31,6 +30,7 @@ Milestones
     Advanced artist page
         see more bio
         see more venues played
+        click to copy email on listing page
     Free lance booker testing
         basic inquiries
             inquire button that sends an email
@@ -81,10 +81,7 @@ Features
     venue reviews
     artist reviews
 Devon
-    new pages
-        create/edit listing
-        listing post page
-        404 page
+    404 page
     collections page and favorites buttons
     ensemble size filter
     trash icon
