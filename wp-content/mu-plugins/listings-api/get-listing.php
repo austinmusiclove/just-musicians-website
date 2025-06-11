@@ -65,6 +65,8 @@ function get_listing($args) {
         'youtube_video_urls'     => $youtube_video_urls,
         'youtube_video_ids'      => $youtube_video_ids,
         'thumbnail_url'          => get_the_post_thumbnail_url($post_id, 'standard-listing'),
+        'permalink'              => get_permalink($post_id),
+        'post_status'            => get_post_status($post_id),
     ];
 
     // Get all taxonomies associated with the post

@@ -1,5 +1,6 @@
 Milestones
     Artist announce and invite new profiles
+        make independent scroll for preview and form
         make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -76,6 +77,9 @@ UX
     password reset
         use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
         password reset page needs min height
+    listing form
+        active search for cities
+        better looking disabled and spinner state for submit buttons
 Features
     venue reviews
     artist reviews

@@ -18,43 +18,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <section class="flex flex-col gap-5">
 
-<div class="flex items-center gap-2">
-    <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-    <h2 class="text-25 font-bold">Venues Played</h2>
-</div>
+    <div class="flex items-center gap-2">
+        <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
+        <h2 class="text-25 font-bold">Venues Played</h2>
+    </div>
 
-<div class="relative z-0">    
-    <!-- Venues Played -->
-    <!-- Depends on tag-input-scripts.js -->
-    <div>
+    <div class="relative z-0">
+        <!-- Venues Played -->
+        <!-- Depends on tag-input-scripts.js -->
         <div x-data="{
             tags: keywords,
-            _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
+            _addTag(event)    { addTag(this, event, 'error-toast'); },
             _removeTag(index) { removeTag(this, index); },
         }">
-        <div class="relative">
-            <input type="hidden" name="keywords[]"/>
             <div class="relative">
-                <input type="text" id="venues" placeholder="Search for venues" class="w-full"
-                    x-on:keydown.enter="$event.preventDefault(); _addTag($event)"
-                    x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
+                <input type="hidden" name="keywords[]"/>
+                <div class="relative">
+                    <input type="text" id="venues" placeholder="Search for venues" class="w-full"
+                        x-on:keydown.enter="$event.preventDefault(); _addTag($event)"
+                        x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
 
-                    <button class="absolute top-3 right-3 opacity-50 hover:opacity-100" x-ref="submitButton">
-                        <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
-                    </button>
+                        <button class="absolute top-3 right-3 opacity-50 hover:opacity-100" x-ref="submitButton">
+                            <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                        </button>
+                </div>
+                <ul id="venue-dropdown" class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-32 overflow-y-scroll hidden" style="margin-top: -1px">
+                    <li class="p-2 hover:bg-yellow-10 cursor-pointer">Victory East <span class="opacity-50">| 1104 E. 11th St, Austin, Texas</span></li>
+                    <li class="p-2 hover:bg-yellow-10 cursor-pointer">Vito’s Vault <span class="opacity-50">| 5901 W Lawrence Ave, Chicago, IL 60630</span></li>
+                </ul>
             </div>
-            <ul id="venue-dropdown" class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-32 overflow-y-scroll hidden" style="margin-top: -1px">
-                <li class="p-2 hover:bg-yellow-10 cursor-pointer">Victory East <span class="opacity-50">| 1104 E. 11th St, Austin, Texas</span></li>
-                <li class="p-2 hover:bg-yellow-10 cursor-pointer">Vito’s Vault <span class="opacity-50">| 5901 W Lawrence Ave, Chicago, IL 60630</span></li>
-            </ul>
-        </div>
-            
-
-            <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
 
 
             <div class="gap-1 mt-4 flex flex-wrap gap-2">
                 <!-- Tag 1 -->
+                <!--
                 <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
                     <div class="flex items-start bg-yellow-50 pl-2 py-1 pr-8 relative rounded-md">
                         <div class="text-14 w-fit">
@@ -68,7 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                     </div>
                 </div>
+                -->
                 <!-- Tag 2 -->
+                <!--
                 <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
                     <div class="flex items-start bg-yellow-50 pl-2 py-1 pr-8 relative rounded-md">
                         <div class="text-14 w-fit">
@@ -82,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                     </div>
                 </div>
+                -->
                 <!-- Alpine template w/classes of tags above -->
                 <template class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
                     <div class="flex items-start bg-yellow-50 pl-2 py-1 pr-8 relative rounded-md">

@@ -54,6 +54,7 @@ module.exports = {
 		'./template-home.php',
 		'./single.php',
 		'./page-*',
+		'./single-*',
 		'./page-request-password-reset.php',
 		// Lib
 		'./lib/blocks/*.{php,js}',
@@ -104,12 +105,13 @@ module.exports = {
 			'brown-light-3': '#F8F3DD',
 			// Yellow
 			'yellow': '#D29429',
-			'yellow-light': '#EDD4A9',
 			'yellow-60': '#E4BF7F',
 			'yellow-50': '#F6E9D4',
 			'yellow-40': '#EDD4A9',
 			'yellow-20': '#F6EAD4',
 			'yellow-10': '#FAF4EA',
+			'yellow-light': '#EDD4A9',
+            'yellow-light-50': '#F6E9D4',
 			// Other
 			'navy': '#0F384C',
 			'red': '#C23D28',

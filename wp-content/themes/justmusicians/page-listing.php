@@ -18,7 +18,7 @@ get_header();
 
     <!-- Content -->
     <?php echo get_template_part('template-parts/listing/content', '', array(
-               'instance' => 'listing-page'
+       'instance' => 'listing-page'
     )); ?>
 
 

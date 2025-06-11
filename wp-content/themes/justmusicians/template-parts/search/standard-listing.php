@@ -1,6 +1,6 @@
 <?php
 
-$is_preview    = isset($args['is_preview']) ? $args['is_preview'] : false;
+$is_preview    = isset($args['instance']) ? $args['instance'] == 'listing-form' : false;
 $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
 
 ?>
@@ -141,7 +141,7 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         <div class="flex flex-row justify-between items-center w-full">
             <div class="flex items-center">
                 <h2 class="text-22 font-bold">
-                    <a href="<?php echo $args['permalink']; ?>"
+                    <a href="<?php if (!$is_preview) { echo $args['permalink']; } ?>"
                         <?php if (!$is_preview) { ?> target="_blank" <?php } ?>
                         <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
                     >

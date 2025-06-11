@@ -19,6 +19,9 @@ function get_sanitized_listing_args() {
     // Post Id
     if (isset($_POST['post_id']))                { $sanitized_args['ID']                                   = sanitize_text_field($_POST['post_id']); }
 
+    // Post Status
+    if (!empty($_POST['post_status']))           { $sanitized_args['post_status']                          = sanitize_text_field($_POST['post_status']); }
+
     // Name
     if (isset($_POST['listing_name']))           { $sanitized_args['post_title']                           = sanitize_text_field($_POST['listing_name']); }
     if (isset($_POST['listing_name']))           { $sanitized_args['meta_input']['name']                   = sanitize_text_field($_POST['listing_name']); }

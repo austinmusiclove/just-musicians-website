@@ -2,6 +2,7 @@
  * Handles interfacing with cropper.js 1.6.2
  *
  */
+// TODO disable multiple submit buttons
 function handleCropEnd(alpineComponent, displayElement, croppedImageInput, submitButton) {
 
     // Disable submit button until image processing is complete
