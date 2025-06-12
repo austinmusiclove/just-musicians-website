@@ -1,5 +1,6 @@
 Milestones
     Artist announce and invite new profiles
+        organize listing form page into template parts
         make independent scroll for preview and form
         make it invite only
         limit access until you verify email

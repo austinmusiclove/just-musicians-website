@@ -1,5 +1,7 @@
 
 <?php
+$is_preview = $args['instance'] == 'listing-form';
+
 if ($args['instance'] == 'listing-form') {
     $theme = [
         'wrapper_class' => 'py-4',
@@ -36,19 +38,21 @@ if ($args['instance'] == 'listing-form') {
             </div>
             <div class="flex flex-col gap-5 w-full">
                 <div class="flex items-center gap-2">
-                    <h1 class="text-32 font-bold"
-                        <?php if (!empty($args['alpine_name'])) { echo 'x-text="' . $args['alpine_name'] . ' === \'\' ? \'' . $args['name'] . '\' : ' . $args['alpine_name'] . '"'; } ?>
-                    >
-                        <?php echo get_field('name'); ?>
+                    <h1 class="text-32 font-bold" <?php if ($is_preview) { ?> x-text="pName === '' ? 'Performer or Band Name' : pName" <?php } ?> >
+                        <?php if (!$is_preview) { echo get_field('name'); } ?>
                     </h1>
                     <?php if (get_field('verified') === true) { ?>
                         <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
                     <?php } ?>
                 </div>
-                <p class="text-18" <?php if (!empty($args['alpine_description'])) { echo 'x-text="' . $args['alpine_description'] . ' === \'\' ? \'' . $args['description'] . '\' : ' . $args['alpine_description'] . '"'; } ?>><?php echo get_field('description'); ?></p>
+                <p class="text-18" <?php if ($is_preview) { ?> x-text="pDescription === '' ? 'Description' : pDescription" <?php } ?> >
+                    <?php if (!$is_preview) { echo get_field('description'); } ?>
+                </p>
                 <div class="flex gap-2 items-center">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-                    <span <?php if (!empty($args['alpine_location'])) { echo 'x-text="' . $args['alpine_location'] . ' === \'\' ? \'' . $args['location'] . '\' : ' . $args['alpine_location'] . '"'; } ?>><?php echo get_field('city') . ', ' . get_field('state'); ?></span>
+                    <span <?php if ($is_preview) { ?> x-text="getListingLocation() === '' ? 'City, State' : getListingLocation()" <?php } ?> >
+                        <?php if (!$is_preview) { echo get_field('city') . ', ' . get_field('state'); } ?>
+                    </span>
                 </div>
                 <div class="flex flex-wrap items-center gap-1">
                     <?php

@@ -49,6 +49,8 @@ get_header();
         pState:                 '<?php if ($listing_data) { echo $clean_state; } ?>',
         pZipCode:               '<?php if ($listing_data) { echo $listing_data["zip_code"]; } ?>',
         pBio:                   '<?php if ($listing_data) { echo clean_str_for_doublequotes($listing_data["bio"]); } ?>',
+        pEmail:                 '<?php if ($listing_data) { echo $listing_data["email"]; } ?>',
+        pPhone:                 '<?php if ($listing_data) { echo $listing_data["phone"]; } ?>',
         pInstagramHandle:       '<?php if ($listing_data) { echo $listing_data["instagram_handle"]; } ?>',
         pInstagramUrl:          '<?php if ($listing_data) { echo $listing_data["instagram_url"]; } ?>',
         pTiktokHandle:          '<?php if ($listing_data) { echo $listing_data["tiktok_handle"]; } ?>',
@@ -122,7 +124,7 @@ get_header();
                         <?php echo get_template_part('template-parts/listing-form/basic-info', '', []); ?>
 
                         <!------------ Contact and Links ----------------->
-                        <?php //echo get_template_part('template-parts/listing-form/contact', '', []); ?>
+                        <?php echo get_template_part('template-parts/listing-form/contact', '', []); ?>
 
                         <!------------ Search Optimization / Taxonomies ----------------->
                         <?php //echo get_template_part('template-parts/listing-form/search-optimization', '', []); ?>
@@ -177,18 +179,11 @@ get_header();
                     <!-- Hero -->
                     <?php echo get_template_part('template-parts/listing/hero', '', array(
                         'instance'                      => 'listing-form',
-                        'name'                          => $listing_data ? $clean_name : 'Performer or Band Name',
-                        'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
-                        'description'                   => $listing_data ? $clean_description : 'Description',
-                        'alpine_name'                   => 'pName',
-                        'alpine_location'               => 'getListingLocation()',
-                        'alpine_description'            => 'pDescription',
                     )); ?>
 
                     <!-- Content -->
                     <?php echo get_template_part('template-parts/listing/content', '', array(
                         'instance'                      => 'listing-form',
-                        'alpine_bio'                    => 'pBio',
                         'youtube_video_ids'             => [],
                     )); ?>
                 </div>

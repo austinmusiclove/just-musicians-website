@@ -13,20 +13,23 @@
 ?>
 <section class="<?php echo $theme['container_class']; ?>">
     <div class="col-span-5 flex flex-col gap-8 items-start">
+
+        <!-- Bio -->
         <?php if (!empty(get_field('bio'))) { ?>
         <div id="biography">
             <h2 class="text-25 font-bold mb-5">Biography</h2>
             <p class="mb-4"><?php echo get_field('bio'); ?></p>
         </div>
-        <?php } ?>
-        <?php if ($is_preview and !empty($args['alpine_bio'])) { ?>
-        <div id="biography" <?php echo 'x-show="' . $args['alpine_bio'] . '.length > 0"'; ?> x-cloak >
+        <?php } else if ($is_preview) { ?>
+        <div id="biography" x-show="pBio.length > 0" x-cloak >
             <h2 class="text-25 font-bold mb-5">Biography</h2>
-            <p class="mb-4" <?php echo 'x-text="' . $args['alpine_bio'] . '"'; ?> ></p>
+            <p class="mb-4" x-text="pBio"</p>
         </div>
         <?php } ?>
+
+        <!-- Start venues -->
         <?php if (!empty($args['venues_combined'])) { ?>
-        <div id="venues"> <!-- Start venues -->
+        <div id="venues">
             <h2 class="text-22 font-bold mb-5">Venues played</h2>
             <div class="flex items-center gap-2 flex-wrap">
                 <?php foreach($args['venues_combined'] as $venue) { ?>
@@ -36,8 +39,9 @@
                 </div>
                 <?php } ?>
             </div>
-        </div> <!-- End venues -->
+        </div>
         <?php } ?>
+
         <!-- Start media -->
         <div class="w-full" x-data="{
             showImageTab: true,
@@ -313,39 +317,58 @@
                         <!-- Start contact info -->
                         <div class="grid grid-cols-2 gap-x-12 gap-y-4 w-full">
 
-                            <?php if (!empty(get_field('phone'))) { ?>
-                            <div>
+                            <!-- Phone -->
+                            <?php if (!empty(get_field('phone')) or $is_preview) { ?>
+                            <div <?php if ($is_preview) { ?>x-show="pPhone" x-cloak <?php } ?>>
                                 <div class="flex items-center gap-1">
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Phone</h4>
                                 </div>
-                                <?php if (is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('phone'); ?></span><?php } ?>
+                                <?php if (is_user_logged_in()) { ?>
+                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" <?php if ($is_preview) { ?>x-text="pPhone"<?php } ?>>
+                                    <?php if (!$is_preview) { echo get_field('phone'); } ?>
+                                </span>
+                                <?php } ?>
                                 <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
                             </div>
                             <?php } ?>
-                            <?php if (!empty(get_field('email'))) { ?>
-                            <div>
+
+                            <!-- Email -->
+                            <?php if (!empty(get_field('email')) or $is_preview) { ?>
+                            <div <?php if ($is_preview) { ?>x-show="pEmail" x-cloak <?php } ?>>
                                 <div class="flex items-center gap-1">
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Email</h4>
                                 </div>
-                                <?php if (is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"><?php echo get_field('email'); ?></span><?php } ?>
+                                <?php if (is_user_logged_in()) { ?>
+                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" <?php if ($is_preview) { ?>x-text="pEmail"<?php } ?>>
+                                    <?php if (!$is_preview) { echo get_field('email'); } ?>
+                                </span>
+                                <?php } ?>
                                 <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
+
                             </div>
                             <?php } ?>
-                            <?php if (!empty(get_field('website'))) { ?>
-                            <div>
+
+                            <!-- Website -->
+                            <?php if (!empty(get_field('website')) or $is_preview) { ?>
+                            <div <?php if ($is_preview) { ?>x-show="pWebsite" x-cloak <?php } ?>>
                                 <div class="flex items-center gap-1">
                                     <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" />
                                     <h4 class="text-16 font-semibold">Website</h4>
                                 </div>
                                 <span class="text-14 text-yellow underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis block">
-                                    <a href="<?php echo get_field('website'); ?>" title="<?php echo get_field('website'); ?>" target="_blank"><?php echo clean_url_for_display(get_field('website')); ?></a>
+                                    <a href="<?php echo get_field('website'); ?>" title="<?php echo get_field('website'); ?>" target="_blank" <?php if ($is_preview) { ?>x-text="pWebsite"<?php } ?>>
+                                        <?php if (!$is_preview) { echo clean_url_for_display(get_field('website')); } ?>
+                                    </a>
                                 </span>
                             </div>
                             <?php } ?>
-                            <?php if (empty(get_field('phone')) and empty(get_field('email')) and empty(get_field('website'))) { ?>
-                            <div>
+
+
+                            <!-- No Contact Info -->
+                            <?php if ((empty(get_field('phone')) and empty(get_field('email')) and empty(get_field('website'))) or $is_preview) { ?>
+                            <div <?php if ($is_preview) { ?>x-show="!pPhone & !pEmail & !pWebsite" x-cloak <?php } ?>>
                                 <div class="flex items-center gap-1">
                                     <h4 class="text-16 font-semibold">No Contact Info Available</h4>
                                 </div>
@@ -358,36 +381,115 @@
                         <div>
                             <h4 class="text-16 mb-3 font-bold">Socials</h4>
                             <div class="grid grid-cols-2 gap-x-6 gap-y-3 w-fit text-14">
-                                <?php if (!empty(get_field('instagram_handle'))) { ?>
-                                <a class="flex items-center gap-2" href="<?php echo get_field('instagram_url'); ?>" target="_blank">
+
+                                <!-- Instagram -->
+                                <?php if (!empty(get_field('instagram_handle')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pInstagramHandle" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pInstagramUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('instagram_url'); ?>" <?php } ?>
+                                >
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis">@<?php echo get_field('instagram_handle'); ?></span>
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="'@' + pInstagramHandle" <?php } ?>>@<?php if (!$is_preview) { echo get_field('instagram_handle'); } ?></span>
                                 </a>
                                 <?php } ?>
-                                <?php if (!empty(get_field('spotify_url'))) { ?>
-                                <a class="flex items-center gap-2" href="<?php echo get_field('spotify_url'); ?>" target="_blank">
-                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('name'); ?></span>
+
+                                <!-- X -->
+                                <?php if (!empty(get_field('x_handle')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pXHandle" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pXUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('x_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="'@' + pXHandle" <?php } ?>>@<?php if (!$is_preview) { echo get_field('x_handle'); } ?></span>
                                 </a>
                                 <?php } ?>
-                                <?php if (!empty(get_field('tiktok_url'))) { ?>
-                                <a class="flex items-center gap-2" href="<?php echo get_field('tiktok_url'); ?>" target="_blank">
+
+                                <!-- Tiktok -->
+                                <?php if (!empty(get_field('tiktok_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pTiktokUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pTiktokUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('tiktok_url'); ?>" <?php } ?>
+                                >
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis">@<?php echo get_field('tiktok_handle'); ?></span>
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="'@' + pTiktokHandle" <?php } ?>>@<?php if (!$is_preview) { echo get_field('tiktok_handle'); } ?></span>
                                 </a>
                                 <?php } ?>
-                                <?php if (!empty(get_field('youtube_url'))) { ?>
-                                <a class="flex items-center gap-2" href="<?php echo get_field('youtube_url'); ?>" target="_blank">
-                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo clean_url_for_display(get_field('youtube_url')); ?></span>
-                                </a>
-                                <?php } ?>
-                                <?php if (!empty(get_field('facebook_url'))) { ?>
-                                <a class="flex items-center gap-2" href="<?php echo get_field('facebook_url'); ?>" target="_blank">
+
+                                <!-- Facebook -->
+                                <?php if (!empty(get_field('facebook_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pFacebookUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pFacebookUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('facebook_url'); ?>" <?php } ?>
+                                >
                                     <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" />
-                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis"><?php echo get_field('name'); ?></span>
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pName" <?php } ?>><?php if (!$is_preview) { echo get_field('name'); } ?></span>
                                 </a>
                                 <?php } ?>
+
+                                <!-- Youtube -->
+                                <?php if (!empty(get_field('youtube_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pYoutubeUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pYoutubeUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('youtube_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pYoutubeUrl" <?php } ?>><?php if (!$is_preview) { echo clean_url_for_display(get_field('youtube_url')); } ?></span>
+                                </a>
+                                <?php } ?>
+
+                                <!-- Bandcamp -->
+                                <?php if (!empty(get_field('bandcamp_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pBandcampUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pBandcampUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('bandcamp_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pBandcampUrl" <?php } ?>><?php if (!$is_preview) { echo clean_url_for_display(get_field('bandcamp_url')); } ?></span>
+                                </a>
+                                <?php } ?>
+
+                                <!-- Spotify -->
+                                <?php if (!empty(get_field('spotify_artist_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pSpotifyArtistUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pSpotifyArtistUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('spotify_artist_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pName" <?php } ?>><?php if (!$is_preview) { echo get_field('name'); } ?></span>
+                                </a>
+                                <?php } ?>
+
+                                <!-- Apple -->
+                                <?php if (!empty(get_field('apple_music_artist_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pAppleMusicArtistUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pAppleMusicArtistUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('apple_music_artist_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_AppleMusic.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pName" <?php } ?>><?php if (!$is_preview) { echo get_field('name'); } ?></span>
+                                </a>
+                                <?php } ?>
+
+                                <!-- Soundcloud -->
+                                <?php if (!empty(get_field('soundcloud_url')) or $is_preview) { ?>
+                                <a class="flex items-center gap-2" target="_blank"
+                                    <?php if ($is_preview)  { ?> x-show="pSoundcloudUrl" x-cloak <?php } ?>
+                                    <?php if ($is_preview)  { ?> x-bind:href="pSoundcloudUrl" <?php } ?>
+                                    <?php if (!$is_preview) { ?> href="<?php echo get_field('soundcloud_url'); ?>" <?php } ?>
+                                >
+                                    <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" />
+                                    <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($is_preview) { ?> x-text="pSoundcloudUrl" <?php } ?>><?php if (!$is_preview) { echo clean_url_for_display(get_field('soundcloud_url')); } ?></span>
+                                </a>
+                                <?php } ?>
+
                             </div>
                         </div> <!-- End social media -->
                     </div>

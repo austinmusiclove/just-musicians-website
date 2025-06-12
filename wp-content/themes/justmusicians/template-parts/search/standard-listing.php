@@ -195,20 +195,6 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
                     x-cloak >
                     <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" />
                 </a>
-            <?php } if (!empty($args['facebook_url'] or !empty($args['alpine_facebook_url']))) { ?>
-                <a target="_blank"
-                    <?php if (!empty($args['alpine_facebook_url'])) { echo 'x-bind:href="' . $args['alpine_facebook_url'] . '"'; } else { echo 'href="' . $args['facebook_url'] . '"'; } ?>
-                    x-show="<?php if (!empty($args['alpine_facebook_url'])) { echo $args['alpine_facebook_url']; } else { echo 'true'; } ?>"
-                    x-cloak >
-                    <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" />
-                </a>
-            <?php } if (!empty($args['youtube_url'] or !empty($args['alpine_youtube_url']))) { ?>
-                <a target="_blank"
-                    <?php if (!empty($args['alpine_youtube_url'])) { echo 'x-bind:href="' . $args['alpine_youtube_url'] . '"'; } else { echo 'href="' . $args['youtube_url'] . '"'; } ?>
-                    x-show="<?php if (!empty($args['alpine_youtube_url'])) { echo $args['alpine_youtube_url']; } else { echo 'true'; } ?>"
-                    x-cloak >
-                    <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
-                </a>
             <?php } if (!empty($args['x_url'] or !empty($args['alpine_x_url']))) { ?>
                 <a target="_blank"
                     <?php if (!empty($args['alpine_x_url'])) { echo 'x-bind:href="' . $args['alpine_x_url'] . '"'; } else { echo 'href="' . $args['x_url'] . '"'; } ?>
@@ -222,6 +208,20 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
                     x-show="<?php if (!empty($args['alpine_tiktok_url'])) { echo $args['alpine_tiktok_url']; } else { echo 'true'; } ?>"
                     x-cloak >
                     <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" />
+                </a>
+            <?php } if (!empty($args['facebook_url'] or !empty($args['alpine_facebook_url']))) { ?>
+                <a target="_blank"
+                    <?php if (!empty($args['alpine_facebook_url'])) { echo 'x-bind:href="' . $args['alpine_facebook_url'] . '"'; } else { echo 'href="' . $args['facebook_url'] . '"'; } ?>
+                    x-show="<?php if (!empty($args['alpine_facebook_url'])) { echo $args['alpine_facebook_url']; } else { echo 'true'; } ?>"
+                    x-cloak >
+                    <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" />
+                </a>
+            <?php } if (!empty($args['youtube_url'] or !empty($args['alpine_youtube_url']))) { ?>
+                <a target="_blank"
+                    <?php if (!empty($args['alpine_youtube_url'])) { echo 'x-bind:href="' . $args['alpine_youtube_url'] . '"'; } else { echo 'href="' . $args['youtube_url'] . '"'; } ?>
+                    x-show="<?php if (!empty($args['alpine_youtube_url'])) { echo $args['alpine_youtube_url']; } else { echo 'true'; } ?>"
+                    x-cloak >
+                    <img class="h-4 opacity-20 hover:opacity-60 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
                 </a>
             <?php } if (!empty($args['bandcamp_url'] or !empty($args['alpine_bandcamp_url']))) { ?>
                 <a target="_blank"
