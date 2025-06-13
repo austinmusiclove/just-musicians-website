@@ -75,6 +75,7 @@ get_header();
         youtubeVideoUrls:        <?php if (!empty($listing_data["youtube_video_urls"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_urls"]); } else { echo '[]'; } ?>,
         pVideoIds:               <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
+        showCategory(term)   { return this.categoriesCheckboxes.includes(term); },
         showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
     x-on:updatethumbnail.window="pThumbnailSrc = $event.detail;"
@@ -127,7 +128,13 @@ get_header();
                         <?php echo get_template_part('template-parts/listing-form/contact', '', []); ?>
 
                         <!------------ Search Optimization / Taxonomies ----------------->
-                        <?php //echo get_template_part('template-parts/listing-form/search-optimization', '', []); ?>
+                        <?php echo get_template_part('template-parts/listing-form/search-optimization', '', [
+                            'categories'       => $categories,
+                            'genres'           => $genres,
+                            'subgenres'        => $subgenres,
+                            'instrumentations' => $instrumentations,
+                            'settings'         => $settings,
+                        ]); ?>
 
                         <!------------ Media ----------------->
                         <?php //echo get_template_part('template-parts/listing-form/media', '', []); ?>
@@ -178,13 +185,19 @@ get_header();
                 <div x-show="showPageTab" x-cloak >
                     <!-- Hero -->
                     <?php echo get_template_part('template-parts/listing/hero', '', array(
-                        'instance'                      => 'listing-form',
+                        'instance'          => 'listing-form',
+                        'genres'            => $genres,
                     )); ?>
 
                     <!-- Content -->
                     <?php echo get_template_part('template-parts/listing/content', '', array(
-                        'instance'                      => 'listing-form',
-                        'youtube_video_ids'             => [],
+                        'instance'          => 'listing-form',
+                        'categories'        => $categories,
+                        'genres'            => $genres,
+                        'subgenres'         => $subgenres,
+                        'instrumentations'  => $instrumentations,
+                        'settings'          => $settings,
+                        'youtube_video_ids' => [],
                     )); ?>
                 </div>
 
@@ -211,7 +224,7 @@ get_header();
                         'name'                          => $listing_data ? $clean_name : 'Performer or Band Name',
                         'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
                         'description'                   => $listing_data ? $clean_description : 'Description',
-                        'genres'                        => $genres, // pass all genres; alpine_show_genre func will show the selected options
+                        'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
                         'thumbnail_url'                 => $listing_data ? $listing_data['thumbnail_url']          : '',
                         'verified'                      => $listing_data ? $listing_data['verified']               : false,
                         'website'                       => $listing_data ? $listing_data['website']                : '',
@@ -242,7 +255,6 @@ get_header();
                         'alpine_spotify_artist_url'     => 'pSpotifyArtistUrl',
                         'alpine_apple_music_artist_url' => 'pAppleMusicArtistUrl',
                         'alpine_soundcloud_url'         => 'pSoundcloudUrl',
-                        'alpine_show_genre'             => 'showGenre',
                         'alpine_thumbnail_src'          => 'pThumbnailSrc',
                         'alpine_video_ids'              => 'pVideoIds',
                     ]); ?>

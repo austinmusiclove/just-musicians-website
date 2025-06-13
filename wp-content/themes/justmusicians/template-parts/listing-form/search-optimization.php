@@ -6,143 +6,96 @@
         <h2 class="text-20 sm:text-25 font-bold">Search Optimization</h2>
     </div>
 
-    <div class="tabs-container relative z-0">
+    <div class="tabs-container relative z-0" x-data="{
+        showTab1: true,
+        showTab2: false,
+        showTab3: false,
+        showTab4: false,
+        showTab5: false,
+        hideTabs() {
+            this.showTab1 = false;
+            this.showTab2 = false;
+            this.showTab3 = false;
+            this.showTab4 = false;
+            this.showTab5 = false;
+        },
+    }">
         <div class="flex flex-wrap items-stretch gap-x-1 z-10 relative">
             <?php
-                get_template_part(
-                    'template-parts/components/tab',
-                    null,
-                    [
-                        'title'  => 'Categories',
-                        'number' => 5,
-                        'active' => true,
-                        'required' => false
-                    ]
-                );
-
-                get_template_part(
-                    'template-parts/components/tab',
-                    null,
-                    [
-                        'title'  => 'Genres',
-                        'number' => null,
-                        'active' => false,
-                        'required' => false
-                    ]
-                );
-
-                get_template_part(
-                    'template-parts/components/tab',
-                    null,
-                    [
-                        'title'  => 'Subgenres',
-                        'number' => null,
-                        'active' => false,
-                        'required' => false
-                    ]
-                );
-
-                get_template_part(
-                    'template-parts/components/tab',
-                    null,
-                    [
-                        'title'  => 'Instrumentation',
-                        'number' => 3,
-                        'active' => false,
-                        'required' => false
-                    ]
-                );
-
-                get_template_part(
-                    'template-parts/components/tab',
-                    null,
-                    [
-                        'title'  => 'Settings',
-                        'number' => 1,
-                        'active' => false,
-                        'required' => false
-                    ]
-                );
-
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => "Categories",
+                    'required' => false,
+                    'show_exp' => "showTab1",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "categoriesCheckboxes.length > 0 ? categoriesCheckboxes.length : ''",
+                ]);
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => 'Genres',
+                    'required' => false,
+                    'show_exp' => "showTab2",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "genresCheckboxes.length > 0 ? genresCheckboxes.length : ''",
+                ]);
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => 'Subgenres',
+                    'required' => false,
+                    'show_exp' => "showTab3",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "subgenresCheckboxes.length > 0 ? subgenresCheckboxes.length : ''",
+                ]);
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => 'Instruments',
+                    'required' => false,
+                    'show_exp' => "showTab4",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "instCheckboxes.length > 0 ? instCheckboxes.length : ''",
+                ]);
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => 'Settings',
+                    'required' => false,
+                    'show_exp' => "showTab5",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "settingsCheckboxes.length > 0 ? settingsCheckboxes.length : ''",
+                ]);
             ?>
         </div>
         <fieldgroup class="has-border px-4 py-8 relative h-64 relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-10 py-2 custom-checkbox">
-        <?php
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Acoustic'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Blues'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Bluegrass'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Cover Band'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Country'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'DJ/Producer'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Electronic/EDM'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Experimental'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Folk'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Gospel Choir'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Indie'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Jazz Band'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Latin'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Metal'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Orchestra'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Pop'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Punk'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Reggae'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'R&B/Soul'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Ska'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Solo Artist'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Tribute Band'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'Wedding Band'
-            ));
-            echo get_template_part('template-parts/filters/elements/checkbox', '', array(
-                'label' => 'World Music'
-            ));
-        ?>
-        </div>
+            <div x-show="showTab1" x-cloak>
+                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                    'terms' => $args['categories'],
+                    'input_name' => 'categories',
+                    'input_x_model' => 'categoriesCheckboxes',
+                ]); ?>
+            </div>
+            <div x-show="showTab2" x-cloak>
+                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                    'terms' => $args['genres'],
+                    'input_name' => 'genres',
+                    'input_x_model' => 'genresCheckboxes',
+                    'max_options' => 6,
+                ]); ?>
+            </div>
+            <div x-show="showTab3" x-cloak>
+                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                    'terms' => $args['subgenres'],
+                    'input_name' => 'subgenres',
+                    'input_x_model' => 'subgenresCheckboxes',
+                ]); ?>
+            </div>
+            <div x-show="showTab4" x-cloak>
+                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                    'terms' => $args['instrumentations'],
+                    'input_name' => 'instrumentations',
+                    'input_x_model' => 'instCheckboxes',
+                ]); ?>
+            </div>
+            <div x-show="showTab5" x-cloak>
+                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                    'terms' => $args['settings'],
+                    'input_name' => 'settings',
+                    'input_x_model' => 'settingsCheckboxes',
+                ]); ?>
+            </div>
         </fieldgroup>
     </div>
 
@@ -152,48 +105,26 @@
     <!-- Depends on tag-input-scripts.js -->
     <div>
         <h2 class="font-bold text-20 mb-2">Other Keywords</h2>
-        <p class="mb-4 text-14">Did we miss anything? Add any categories, genres, subgenres, instruments, or settings that you'd like your listing to be serchable by.</p>
+        <p class="mb-4 text-14">Did we miss anything? Add any categories, genres, subgenres, instruments, settings, or other keywords that you'd like your listing to be serchable by.</p>
         <div x-data="{
             tags: keywords,
-            _addTag(event)    { addTag(this, event, 'keyword-error-toast'); },
+            _addTag(input)    { addTag(this, input, 'error-toast'); },
             _removeTag(index) { removeTag(this, index); },
         }">
             <input type="hidden" name="keywords[]"/>
             <div class="relative">
                 <input type="text" placeholder="Type your keyword" class="w-full"
-                    x-on:keydown.enter="$event.preventDefault(); _addTag($event)"
-                    x-on:paste="$el.addEventListener('input', function() { _addTag($event); }, {once: true})">
-                    <button class="absolute top-2 right-2 w-fit rounded text-12 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black text-grey hover:text-black disabled:bg-grey disabled:text-white" x-ref="submitButton">Add +</button>
+                    x-ref="tagInput"
+                    x-on:keydown.enter="$event.preventDefault(); _addTag($refs.tagInput)"
+                    x-on:paste="$el.addEventListener('input', function() { _addTag($refs.tagInput); }, {once: true})">
+                    <button type="button" class="absolute top-2 right-2 w-fit rounded text-12 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black text-grey hover:text-black"
+                        x-on:click="_addTag($refs.tagInput)"
+                    >
+                        Add +
+                    </button>
             </div>
 
-            <?php echo get_template_part('template-parts/global/toasts/error-toast', '', ['event_name' => 'keyword-error-toast']); ?>
-
-
             <div class="gap-1 mt-4 flex flex-wrap gap-2">
-                <!-- Tag 1 -->
-                <!--
-                <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                    <div class="flex items-center bg-yellow-50 pl-3 pr-1 py-0.5 rounded-full">
-                        <span class="text-14 w-fit">live looper</span>
-                        <button type="button" class="opacity-50 hover:opacity-100 ml-auto" x-on:click="_removeTag(index)">
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
-                        </button>
-                        <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                    </div>
-                </div>
-                -->
-                <!-- Tag 2 -->
-                <!--
-                <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                    <div class="flex items-center bg-yellow-50 pl-3 pr-1 py-0.5 rounded-full">
-                        <span class="text-14 w-fit">psychedelic steam punk</span>
-                        <button type="button" class="opacity-50 hover:opacity-100 ml-auto" x-on:click="_removeTag(index)">
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
-                        </button>
-                        <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                    </div>
-                </div>
-                -->
                 <!-- Alpine template w/classes of tags above -->
                 <template class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
                     <div class="flex items-center bg-yellow-50 pl-3 pr-1 py-0.5 rounded-full">

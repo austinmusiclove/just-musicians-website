@@ -7,11 +7,12 @@
 
 get_header();
 
-$genres            = get_the_terms(get_the_ID(), 'genre');
-$subgenres         = get_the_terms(get_the_ID(), 'subgenre');
-$instrumentations  = get_the_terms(get_the_ID(), 'instrumentation');
-$settings          = get_the_terms(get_the_ID(), 'setting');
-$keywords          = get_the_terms(get_the_ID(), 'keyword');
+$categories        = wp_list_pluck(get_the_terms(get_the_ID(), 'mcategory')       ?: [], 'name');
+$genres            = wp_list_pluck(get_the_terms(get_the_ID(), 'genre')           ?: [], 'name');
+$subgenres         = wp_list_pluck(get_the_terms(get_the_ID(), 'subgenre')        ?: [], 'name');
+$instrumentations  = wp_list_pluck(get_the_terms(get_the_ID(), 'instrumentation') ?: [], 'name');
+$settings          = wp_list_pluck(get_the_terms(get_the_ID(), 'setting')         ?: [], 'name');
+$keywords          = wp_list_pluck(get_the_terms(get_the_ID(), 'keyword')         ?: [], 'name');
 
 $venues_combined  = [];
 $verified_ids     = get_field('venues_played_verified') ?: [];
@@ -44,6 +45,7 @@ echo get_template_part('template-parts/listing/hero', '', array(
 // Content
 echo get_template_part('template-parts/listing/content', '', array(
    'instance'          => 'listing-page',
+   'categories'        => $categories,
    'genres'            => $genres,
    'subgenres'         => $subgenres,
    'instrumentations'  => $instrumentations,

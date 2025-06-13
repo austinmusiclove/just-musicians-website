@@ -56,19 +56,25 @@ if ($args['instance'] == 'listing-form') {
                 </div>
                 <div class="flex flex-wrap items-center gap-1">
                     <?php
-                    if (!empty($args['genres']) && !is_wp_error($args['genres'])) {
-                        foreach ($args['genres'] as $genre) { ?>
-                            <span class="bg-yellow-light cursor-pointer hover:bg-yellow px-2 py-0.5 rounded-full font-bold text-12"><?php echo $genre->name; ?></span>
+                    if (!empty($args['genres']) and !is_wp_error($args['genres'])) {
+                        foreach ($args['genres'] as $term) { ?>
+                            <span class="bg-yellow-light cursor-pointer hover:bg-yellow px-2 py-0.5 rounded-full font-bold text-12" <?php if ($is_preview) { ?>x-show="genresCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                <?php echo $term; ?>
+                            </span>
                         <?php }
                     } ?>
                 </div>
-                <?php if (!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) { ?>
-                <div>
+                <?php if ((!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) or $is_preview) { ?>
+                <div <?php if ($is_preview) { ?> x-show="ensembleSizeCheckboxes.length > 0" x-cloak <?php } ?>>
                     <div class="flex items-center gap-1">
                         <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" />
                         <h4 class="text-16 font-semibold">Ensemble size</h4>
                     </div>
-                    <span class="text-14 v"><?php echo implode(', ', get_field('ensemble_size')); ?></span>
+                    <span class="text-14 v"
+                        <?php if ($is_preview) { ?> x-text="ensembleSizeCheckboxes.join(', ')" <?php } ?>
+                    >
+                        <?php if (!$is_preview) { echo implode(', ', get_field('ensemble_size')); } ?>
+                    </span>
                 </div>
                 <?php } ?>
             </div>

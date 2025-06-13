@@ -1,5 +1,6 @@
 Milestones
     Artist announce and invite new profiles
+        remove alpine_ vars from std listing by just putting in the names of the vars hard coded
         organize listing form page into template parts
         make independent scroll for preview and form
         make it invite only

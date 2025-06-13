@@ -1,12 +1,12 @@
-function addTag(alpineComponent, event, errorEventName)    {
-    var value = event.target.value.trim();
+function addTag(alco, input, errorEventName)    {
+    var value = input.value.trim();
 
     // Handle empty
     if (value == '' || value == '/' || value == "'") { return; }
 
     // Leading or trailing '
     if (value.startsWith("'") || value.endsWith("'")) {
-        alpineComponent.$dispatch(errorEventName, {'message': 'Cannot start or end with \''});
+        alco.$dispatch(errorEventName, {'message': 'Cannot start or end with \''});
         return;
     }
 
@@ -14,23 +14,23 @@ function addTag(alpineComponent, event, errorEventName)    {
     var disallowedChars = ['[', ']', '{', '}', '|', '\\', ';', ':', '"', ',', '?', '<', '>'];
     for (let char of disallowedChars) {
         if (value.includes(char)) {
-            alpineComponent.$dispatch(errorEventName, {'message': `Remove disallowed characters: ${disallowedChars.join(' ')}`});
+            alco.$dispatch(errorEventName, {'message': `Remove disallowed characters: ${disallowedChars.join(' ')}`});
             return;
         }
     }
 
     // Handle duplicate
-    if (alpineComponent.tags.includes(value)) {
-        alpineComponent.$dispatch(errorEventName, {'message': 'No duplicates allowed'});
+    if (alco.tags.includes(value)) {
+        alco.$dispatch(errorEventName, {'message': 'No duplicates allowed'});
         return;
     }
 
     // Add tag
-    alpineComponent.tags.push(value);
-    event.target.value = '';
+    alco.tags.push(value);
+    input.value = '';
 
 }
 
-function removeTag(alpineComponent, index) {
-    alpineComponent.tags.splice(index, 1);
+function removeTag(alco, index) {
+    alco.tags.splice(index, 1);
 }
