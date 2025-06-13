@@ -88,6 +88,8 @@ function html_api_v1_template_redirects() {
         include_once get_template_directory() . '/html-api/search-options.php'; exit;
     } else if ($path == 'search-options-mobile') {
         include_once get_template_directory() . '/html-api/search-options-mobile.php'; exit;
+    } else if ($path == 'venue-search-options') {
+        include_once get_template_directory() . '/html-api/venue-search-options.php'; exit;
 
     // Register User
     } else if ($path == 'register-user') {

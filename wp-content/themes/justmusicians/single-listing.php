@@ -15,21 +15,17 @@ $settings          = wp_list_pluck(get_the_terms(get_the_ID(), 'setting')       
 $keywords          = wp_list_pluck(get_the_terms(get_the_ID(), 'keyword')         ?: [], 'name');
 
 $venues_combined  = [];
-$verified_ids     = get_field('venues_played_verified') ?: [];
-$unverified_ids   = get_field('venues_played_unverified') ?: [];
-$verified_posts   = array_map('get_post', $verified_ids);
-$unverified_posts = array_map('get_post', $unverified_ids);
-foreach (array_merge($verified_posts, $unverified_posts) as $venue) {
-    if ($venue && $venue->post_type === 'venue') {
-        $venues_combined[] = [
-            'name'             => get_field('name', $venue->ID),
-            'street_address'   => get_field('street_address', $venue->ID),
-            'address_locality' => get_field('address_locality', $venue->ID),
-            'postal_code'      => get_field('postal_code', $venue->ID),
-            'address_region'   => get_field('address_region', $venue->ID),
-        ];
-    }
-}
+$verified_venue_ids     = get_field('venues_played_verified') ?: [];
+$unverified_venue_ids   = get_field('venues_played_unverified') ?: [];
+foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) as $venue_id) {
+    $venues_combined[] = [
+        'ID'               => $venue_id,
+        'name'             => get_field('name',             $venue_id),
+        'street_address'   => get_field('street_address',   $venue_id),
+        'address_locality' => get_field('address_locality', $venue_id),
+        'postal_code'      => get_field('postal_code',      $venue_id),
+        'address_region'   => get_field('address_region',   $venue_id),
+];}
 
 $youtube_video_urls = get_field('youtube_video_urls');
 $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);

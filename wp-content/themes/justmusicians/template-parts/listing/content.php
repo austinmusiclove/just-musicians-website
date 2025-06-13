@@ -15,28 +15,36 @@
     <div class="col-span-5 flex flex-col gap-8 items-start">
 
         <!-- Bio -->
-        <?php if (!empty(get_field('bio'))) { ?>
-        <div id="biography">
+        <?php if (!empty(get_field('bio')) or $is_preview) { ?>
+        <div id="biography" <?php if ($is_preview) { ?>x-show="pBio.length > 0" x-cloak <?php } ?> >
             <h2 class="text-25 font-bold mb-5">Biography</h2>
-            <p class="mb-4"><?php echo get_field('bio'); ?></p>
-        </div>
-        <?php } else if ($is_preview) { ?>
-        <div id="biography" x-show="pBio.length > 0" x-cloak >
-            <h2 class="text-25 font-bold mb-5">Biography</h2>
-            <p class="mb-4" x-text="pBio"</p>
+            <p class="mb-4"
+                <?php if ($is_preview) { ?> x-text="pBio" <?php } ?>>
+                <?php if (!$is_preview) { echo get_field('bio'); } ?>
+            </p>
         </div>
         <?php } ?>
 
         <!-- Start venues -->
-        <?php if (!empty($args['venues_combined'])) { ?>
-        <div id="venues">
+        <?php if (!empty($args['venues_combined']) or $is_preview) { ?>
+        <div id="venues" <?php if ($is_preview) { ?> x-show="all_venues_played.length > 0" x-cloak <?php } ?> >
             <h2 class="text-22 font-bold mb-5">Venues played</h2>
             <div class="flex items-center gap-2 flex-wrap">
-                <?php foreach($args['venues_combined'] as $venue) { ?>
-                <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
-                    <span class="font-bold"><?php echo $venue['name']; ?></span>
-                    <span><?php echo $venue['street_address']; ?><br/><?php echo $venue['address_locality'] . ', ' . $venue['address_region'] . ' ' . $venue['postal_code']; ?></span>
-                </div>
+                <?php if ($is_preview) { ?>
+                    <template x-for="(venue, index) in all_venues_played" :key="index">
+                        <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
+                            <span class="font-bold" x-text="venue['name']"></span>
+                            <span x-text="venue['street_address']"></span>
+                            <span x-text="venue['address_locality'] + ', ' + venue['address_region'] + ' ' + venue['postal_code']"></span>
+                        </div>
+                    </template>
+                <?php } else {
+                    foreach($args['venues_combined'] as $venue) { ?>
+                        <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
+                            <span class="font-bold"><?php echo $venue['name']; ?></span>
+                            <span><?php echo $venue['street_address']; ?><br/><?php echo $venue['address_locality'] . ', ' . $venue['address_region'] . ' ' . $venue['postal_code']; ?></span>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div>
@@ -507,7 +515,7 @@
                             <h4 class="text-16 mb-3">Categories</h4>
                             <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($args['categories'] as $term) { ?>
-                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="categoriesCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="categoriesCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
                                         <?php echo $term; ?>
                                     </span>
                                 <?php } ?>
@@ -519,7 +527,7 @@
                             <h4 class="text-16 mb-3">Genres</h4>
                             <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($args['genres'] as $term) { ?>
-                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="genresCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
                                         <?php echo $term; ?>
                                     </span>
                                 <?php } ?>
@@ -531,7 +539,7 @@
                             <h4 class="text-16 mb-3">Subgenres</h4>
                             <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($args['subgenres'] as $term) { ?>
-                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="subgenresCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="subgenresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
                                         <?php echo $term; ?>
                                     </span>
                                 <?php } ?>
@@ -543,7 +551,7 @@
                             <h4 class="text-16 mb-3">Instrumentation</h4>
                             <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($args['instrumentations'] as $term) { ?>
-                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="instCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="instCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
                                         <?php echo $term; ?>
                                     </span>
                                 <?php } ?>
@@ -555,7 +563,7 @@
                             <h4 class="text-16 mb-3">Settings</h4>
                             <div class="flex flex-wrap items-center gap-1">
                                 <?php foreach ($args['settings'] as $term) { ?>
-                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="settingsCheckboxes.includes('<?php echo $term; ?>')" x-cloak <?php } ?> >
+                                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($is_preview) { ?> x-show="settingsCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
                                         <?php echo $term; ?>
                                     </span>
                                 <?php } ?>

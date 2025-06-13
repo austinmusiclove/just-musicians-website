@@ -29,6 +29,7 @@ Milestones
             start at timestamp for videos
         create the listings for them before they sign up instead of allowing new listing creating with the link
         artist pages that will get you listed on google as a musician by using schema
+        change venues verified and venues unverified return type to id not post
     Advanced artist page
         see more bio
         see more venues played

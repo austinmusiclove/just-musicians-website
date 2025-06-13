@@ -30,36 +30,54 @@ add_action('rest_api_init', function () {
 });
 
 
-function get_venues() {
-    $min_review_count = (isset($_GET['min_review_count'])) ? stripslashes($_GET['min_review_count']) : 1;
+function get_venues($args) {
+    $name_search_term = (!empty($args['name_search']))     ? sanitize_text_field($args['name_search']) : null;
+    $min_review_count = (isset($_GET['min_review_count'])) ? stripslashes($_GET['min_review_count'])   : null;
     $result = array();
-    $args = array(
+    $query_args = array(
         'post_type' => 'venue',
         'nopaging' => true,
-        'meta_query' => array(
-            array(
-                'key' => '_stats_review_count',
-                'value' => $min_review_count,
-                'compare' => '>='
-            )
-        ),
-        'order' => 'DEC',
-        'orderby' => 'meta_value_num',
-        'meta_key' => '_average_earnings'
     );
-    $query = new WP_Query($args);
+    $meta_queries = [];
+    if (!empty($min_review_count)) {
+        $meta_queries[] = [
+            'key' => '_stats_review_count',
+            'value' => $min_review_count,
+            'compare' => '>=',
+        ];
+        $query_args['order']    = 'DEC';
+        $query_args['orderby']  = 'meta_value_num';
+        $query_args['meta_key'] = '_average_earnings';
+    }
+    if (!empty($name_search_term)) {
+        $meta_queries[] = [
+            'key' => 'name',
+            'value' => $name_search_term,
+            'compare' => 'LIKE',
+        ];
+        $query_args['orderby'] = 'relevance';
+    }
+    $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
+        'relation' => 'AND',
+        ...$meta_queries,
+    ]);
+    $query = new WP_Query($query_args);
     if ($query->have_posts()) {
         while( $query->have_posts() ) {
             $query->the_post();
             array_push($result, array(
-                'ID' => get_the_ID(),
-                'name' => get_field('name'),
-                'latitude' => get_field('latitude'),
-                'longitude' => get_field('longitude'),
+                'ID'               => get_the_ID(),
+                'name'             => get_field('name'),
+                'latitude'         => get_field('latitude'),
+                'longitude'        => get_field('longitude'),
+                'street_address'   => get_field('street_address'),
+                'address_locality' => get_field('address_locality'),
+                'postal_code'      => get_field('postal_code'),
+                'address_region'   => get_field('address_region'),
                 'average_earnings' => get_field('_average_earnings'),
-                'review_count' => get_field('_review_count'),
-                'overall_rating' => get_field('_overall_rating'),
-                'permalink' => get_the_permalink(),
+                'review_count'     => get_field('_review_count'),
+                'overall_rating'   => get_field('_overall_rating'),
+                'permalink'        => get_the_permalink(),
             ));
         }
     }
@@ -136,7 +154,7 @@ function update_venue_stats() {
             // Get reviews for this venue
             $venues_query->the_post();
             $venue_post_id = get_the_ID();
-            $args = array(
+            $query_args = array(
                 'post_type' => 'venue_review',
                 'nopaging' => true,
                 'post_status' => 'publish',
@@ -148,7 +166,7 @@ function update_venue_stats() {
                     )
                 )
             );
-            $venue_reviews_query = new WP_Query($args);
+            $venue_reviews_query = new WP_Query($query_args);
             if ($venue_reviews_query->have_posts()) {
 
                 while( $venue_reviews_query->have_posts() ) {

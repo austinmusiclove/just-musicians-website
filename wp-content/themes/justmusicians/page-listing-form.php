@@ -7,22 +7,37 @@
 
 $listing_data = null;
 if (!empty($_GET['lid'])) {
-    $listing_data = get_listing(['post_id' => $_GET['lid']]);
+    $listing_data     = get_listing(['post_id' => $_GET['lid']]);
 }
-$is_update         = !is_null($listing_data);
-$is_published      = (!is_null($listing_data) and $listing_data['post_status'] == 'publish');
-$clean_name        = $listing_data ? clean_str_for_doublequotes($listing_data["name"])        : null;
-$clean_description = $listing_data ? clean_str_for_doublequotes($listing_data["description"]) : null;
-$clean_city        = $listing_data ? clean_str_for_doublequotes($listing_data["city"])        : null;
-$clean_state       = $listing_data ? clean_str_for_doublequotes($listing_data["state"])       : null;
-$categories        = get_terms_decoded('mcategory', 'names');
-$genres            = get_terms_decoded('genre', 'names');
-$subgenres         = get_terms_decoded('subgenre', 'names');
-$instrumentations  = get_terms_decoded('instrumentation', 'names');
-$settings          = get_terms_decoded('setting', 'names');
-$filename_prefix   = get_current_user_id() . '_' . time();
-$ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
+$is_update            = !is_null($listing_data);
+$is_published         = (!is_null($listing_data) and $listing_data['post_status'] == 'publish');
+$clean_name           = $listing_data ? clean_str_for_doublequotes($listing_data["name"])        : null;
+$clean_description    = $listing_data ? clean_str_for_doublequotes($listing_data["description"]) : null;
+$clean_city           = $listing_data ? clean_str_for_doublequotes($listing_data["city"])        : null;
+$clean_state          = $listing_data ? clean_str_for_doublequotes($listing_data["state"])       : null;
+$verified_venue_ids   = $listing_data ? $listing_data['venues_played_verified']                  : [];
+$unverified_venue_ids = $listing_data ? $listing_data['venues_played_unverified']                : [];
+$categories           = get_terms_decoded('mcategory', 'names');
+$genres               = get_terms_decoded('genre', 'names');
+$subgenres            = get_terms_decoded('subgenre', 'names');
+$instrumentations     = get_terms_decoded('instrumentation', 'names');
+$settings             = get_terms_decoded('setting', 'names');
+$filename_prefix      = get_current_user_id() . '_' . time();
+$ph_thumbnail         = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
+// Get venues post data
+$all_venues_played = [];
+if ($listing_data) {
+    foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) as $venue_id) {
+        $all_venues_played[] = [
+            'ID'               => $venue_id,
+            'name'             => get_field('name',             $venue_id),
+            'street_address'   => get_field('street_address',   $venue_id),
+            'address_locality' => get_field('address_locality', $venue_id),
+            'postal_code'      => get_field('postal_code',      $venue_id),
+            'address_region'   => get_field('address_region',   $venue_id),
+    ];}
+}
 
 get_header();
 
@@ -72,11 +87,12 @@ get_header();
         instCheckboxes:          <?php if (!empty($listing_data["instrumentation"]))    { echo clean_arr_for_doublequotes($listing_data["instrumentation"]);    } else { echo '[]'; } ?>,
         settingsCheckboxes:      <?php if (!empty($listing_data["setting"]))            { echo clean_arr_for_doublequotes($listing_data["setting"]);            } else { echo '[]'; } ?>,
         keywords:                <?php if (!empty($listing_data["keyword"]))            { echo clean_arr_for_doublequotes($listing_data["keyword"]);            } else { echo '[]'; } ?>,
+        all_venues_played:       <?php if (!empty($all_venues_played))                  { echo clean_arr_for_doublequotes($all_venues_played);                  } else { echo '[]'; } ?>,
+        verified_venue_ids:      <?php if (!empty($verified_venue_ids))                 { echo clean_arr_for_doublequotes($verified_venue_ids);                 } else { echo '[]'; } ?>,
+        unverified_venue_ids:    <?php if (!empty($unverified_venue_ids))               { echo clean_arr_for_doublequotes($unverified_venue_ids);               } else { echo '[]'; } ?>,
         youtubeVideoUrls:        <?php if (!empty($listing_data["youtube_video_urls"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_urls"]); } else { echo '[]'; } ?>,
         pVideoIds:               <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
-        showCategory(term)   { return this.categoriesCheckboxes.includes(term); },
-        showGenre(term)      { return this.genresCheckboxes.includes(term); },
     }"
     x-on:updatethumbnail.window="pThumbnailSrc = $event.detail;"
 >
@@ -107,9 +123,7 @@ get_header();
 
                     <input type="hidden" name="post_status" x-model="postStatus" />
                     <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
-                    <!--
-                    <input type="hidden" id="verified-venues" name="verified-venues">
-                    -->
+
 
                     <!------------ Page Load Toasts ----------------->
                     <div>
@@ -143,7 +157,7 @@ get_header();
                         <?php //echo get_template_part('template-parts/listing-form/calendar', '', []); ?>
 
                         <!------------ Venues Played ----------------->
-                        <?php //echo get_template_part('template-parts/listing-form/venues', '', []); ?>
+                        <?php echo get_template_part('template-parts/listing-form/venues', '', []); ?>
 
                         <!------------ Submit Buttons ----------------->
                         <div class="mt-8">

@@ -2,7 +2,7 @@
     searchQuery: "",
     showOption(option) { return this.searchQuery === "" || option.toLowerCase().includes(this.searchQuery.toLowerCase()); },
 }'>
-    <h2 class="font-bold text-22"><?php echo $args['title']; ?></h2>
+    <?php if (!empty($args['title'])) { ?><h2 class="font-bold text-22"><?php echo $args['title']; ?></h2><?php } ?>
     <input type='text' class="my-6" placeholder="search..." x-model="searchQuery"></input>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">

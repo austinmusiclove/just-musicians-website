@@ -172,7 +172,7 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach ($args['genres'] as $term) { ?>
                 <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block"
-                    x-show="showGenre('<?php echo $term; ?>')"
+                    x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')"
                     x-cloak >
                     <?php echo $term; ?>
                 </span>
