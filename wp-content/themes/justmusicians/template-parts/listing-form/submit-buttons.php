@@ -11,7 +11,9 @@
             </span>
         </button>
     </a>
-    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:bg-grey disabled:text-white" x-ref="updateBtn<?php echo $args['instance']; ?>">
+    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:bg-grey disabled:text-white"
+        x-ref="updateBtn<?php echo $args['instance']; ?>"
+    >
         <span class="htmx-indicator-replace">Update Listing</span>
         <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
@@ -25,7 +27,8 @@
 
  <!-- Submit Buttons -->
 <div class="flex items-center gap-2 justify-end shrink-0">
-    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 border border-black/20 font-bold py-2 px-3 hover:border-black text-grey hover:text-black disabled:bg-grey disabled:text-white" x-ref="saveDraftBtn<?php echo $args['instance']; ?>"
+    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 border border-black/20 font-bold py-2 px-3 hover:border-black text-grey hover:text-black disabled:bg-grey disabled:text-white"
+        x-ref="saveDraftBtn<?php echo $args['instance']; ?>"
         x-on:click="postStatus = 'draft'"
     >
         <span class="htmx-indicator-replace">Save draft</span>
@@ -33,7 +36,8 @@
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
         </span>
     </button>
-    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:bg-grey disabled:text-white" x-ref="publishBtn<?php echo $args['instance']; ?>"
+    <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:bg-grey disabled:text-white"
+        x-ref="publishBtn<?php echo $args['instance']; ?>"
         x-on:click="postStatus = 'publish'"
     >
         <span class="htmx-indicator-replace">Publish listing</span>

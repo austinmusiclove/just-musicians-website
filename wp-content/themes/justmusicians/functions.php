@@ -70,7 +70,7 @@ function hmm_scripts() {
     }
 
     // Listing form
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing-form') or str_starts_with($_SERVER['REQUEST_URI'], '/listing-form-dev')) {
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing-form')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
@@ -106,6 +106,9 @@ function hmm_scripts() {
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
         wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'cropper-1.6-js';
+
+        // Listing Form Image Upload handling
+        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, true);
     }
 
     // Collection pages

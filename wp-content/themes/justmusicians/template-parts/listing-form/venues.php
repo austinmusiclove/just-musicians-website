@@ -53,7 +53,6 @@
                         <button type="button" class="absolute top-0 right-0 opacity-50 hover:opacity-100" x-on:click="_removeTag(index)">
                             <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
                         </button>
-                        <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                     </div>
                 </template>
 

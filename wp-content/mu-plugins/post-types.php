@@ -227,6 +227,19 @@ function register_taxonomies() {
       'singular_name' => 'Keyword'
     )
   ));
+  register_taxonomy('mediatag', array('listing', 'attachment'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
+    'labels' => array(
+      'name' => 'Media Tag',
+      'add_new_item' => 'Add New Media Tag',
+      'edit_item' => 'Edit Media Tag',
+      'all_items' => 'All Media Tags',
+      'singular_name' => 'Media Tag'
+    )
+  ));
 }
 
 add_action('init', 'register_post_types');

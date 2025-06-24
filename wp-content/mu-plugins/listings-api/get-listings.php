@@ -18,8 +18,9 @@ function get_listings($args) {
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_types            = validate_listing_types($types);
-    $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
-    $next_page = $page + 1;
+    $media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
+    $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
+    $next_page              = $page + 1;
 
     $query_args = [
         'post_type'      => 'listing',
@@ -32,6 +33,9 @@ function get_listings($args) {
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
         $query_args['orderby'] = 'relevance';
+    } else {
+        //error_log('user listing search algo');
+        //$query_args['use_listings_search_algo'] = true;
     }
     $meta_queries = [];
     $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];
@@ -60,7 +64,7 @@ function get_listings($args) {
         ];
     }
     // Ensemble Size
-    if ($min_ensemble_size or $max_ensemble_size) {
+    if (($min_ensemble_size or $max_ensemble_size) and ($min_ensemble_size != 1 or $max_ensemble_size != 10)) {
         $ensemble_size_values = [];
         for ($option = $min_ensemble_size; $option <= min($max_ensemble_size, 9); $option++) {
             $ensemble_size_values[] = (string)$option;
@@ -128,7 +132,12 @@ function get_listings($args) {
         'relation' => 'AND',
         ...$tax_queries,
     ]);
+
+    // Media Tags
+    $query_args['media_tags'] = $media_tags;
+
     $query = new WP_Query($query_args);
+    global $wpdb;
     $max_num_results = $query->found_posts;
     $max_num_pages = $query->max_num_pages;
     while ($query->have_posts()) {

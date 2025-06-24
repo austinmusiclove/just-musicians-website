@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
-//require_once 'listings-api/search-algo.php'; // Failed experiement
+require_once 'listings-api/search-algo.php';
 require_once 'listings-api/calculated-fields.php';
 require_once 'listings-api/parse-args.php';
 require_once 'listings-api/authorization.php';
@@ -20,6 +20,7 @@ require_once 'listings-api/get-listings-by-id.php';
 require_once 'listings-api/create-listing.php';
 require_once 'listings-api/update-listing.php';
 require_once 'listings-api/delete-listing.php';
+require_once 'upload-attachment.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
@@ -45,16 +46,16 @@ add_action('rest_api_init', function () {
 
 function get_listings_request_handler($request) {
     return get_listings([
-        'search' => $request['s'],
-        'types' => $request['types'],
-        'categories' => $request['categories'],
-        'genres' => $request['genres'],
-        'subgenres' => $request['subgenres'],
+        'search'          => $request['s'],
+        'types'           => $request['types'],
+        'categories'      => $request['categories'],
+        'genres'          => $request['genres'],
+        'subgenres'       => $request['subgenres'],
         'instrumentation' => $request['instrumentation'],
-        'settings' => $request['settings'],
-        'tags' => $request['tags'],
-        'verified' => $request['verified'],
-        'page' => $request['page'],
+        'settings'        => $request['settings'],
+        'tags'            => $request['tags'],
+        'verified'        => $request['verified'],
+        'page'            => $request['page'],
     ]);
 }
 

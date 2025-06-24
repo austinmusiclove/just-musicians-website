@@ -37,6 +37,11 @@ function get_listing($args) {
         }
     }
 
+    // Get thumbnail filename
+    $thumbnail_filename = '';
+    $thumbnail_id = get_post_thumbnail_id($post_id);
+    if ($thumbnail_id) { $thumbnail_filename = basename(get_attached_file($thumbnail_id)); }
+
     // Array to store post meta and taxonomy data
     $result = [
         'name'                     => get_field('name'),
@@ -66,7 +71,14 @@ function get_listing($args) {
         'verified'                 => get_field('verified'),
         'youtube_video_urls'       => $youtube_video_urls,
         'youtube_video_ids'        => $youtube_video_ids,
+        'thumbnail_filename'       => $thumbnail_filename,
+        'thumbnail_id'             => $thumbnail_id,
         'thumbnail_url'            => get_the_post_thumbnail_url($post_id, 'standard-listing'),
+        'thumbnail_terms'          => get_attachment_mediatags(get_post_thumbnail_id($post_id)),
+        'listing_images'           => get_field('listing_images'),
+        'listing_images_data'      => get_image_data($post_id, 'listing_images'),
+        'stage_plots'              => get_field('stage_plots'),
+        'stage_plots_data'         => get_image_data($post_id, 'stage_plots'),
         'permalink'                => get_permalink($post_id),
         'post_status'              => get_post_status($post_id),
     ];
@@ -119,4 +131,41 @@ function get_listings_by_auuid($auuid) {
 
     wp_reset_postdata();
     return $listings;
+}
+
+function get_image_data($post_id, $image_field) {
+    $images = [];
+
+    // Get post meta which contains an array of attachment IDs (assuming it's stored that way)
+    $attachment_ids = get_post_meta($post_id, $image_field, true);
+
+    if (!is_array($attachment_ids)) {
+        $attachment_ids = [$attachment_ids];
+    }
+
+    foreach ($attachment_ids as $index => $attachment_id) {
+        if (!$attachment_id || !get_post($attachment_id)) {
+            continue; // skip invalid or non-existent attachments
+        }
+
+        $images[$attachment_id] = [
+            'postition'     => $index,
+            'attachment_id' => $attachment_id,
+            'caption'       => get_the_excerpt($attachment_id),
+            'url'           => wp_get_attachment_url($attachment_id),
+            'filename'      => basename(get_attached_file($attachment_id)),
+            'mediatags'     => get_attachment_mediatags($attachment_id),
+        ];
+    }
+
+    return $images;
+}
+
+function get_attachment_mediatags($attachment_id) {
+    $mediatags = [];
+    $terms = get_the_terms($attachment_id, 'mediatag');
+    if (!is_wp_error($terms) && !empty($terms)) {
+        foreach ($terms as $term) { $mediatags[] = str_replace("\'", "'", $term->name); }
+    }
+    return $mediatags;
 }

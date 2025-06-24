@@ -62,20 +62,90 @@ function get_sanitized_listing_args() {
     if (isset($_POST['instrumentations']))         { $sanitized_args['tax_input']['instrumentation']           = custom_sanitize_array($_POST['instrumentations']); }
     if (isset($_POST['settings']))                 { $sanitized_args['tax_input']['setting']                   = custom_sanitize_array($_POST['settings']); }
     if (isset($_POST['keywords']))                 { $sanitized_args['tax_input']['keyword']                   = custom_sanitize_array($_POST['keywords']); }
+    if (isset($_POST['mediatags']))                { $sanitized_args['tax_input']['mediatag']                  = custom_sanitize_array($_POST['mediatags']); }
 
     // Files
-    if (isset($_FILES['cropped-thumbnail']))       { $sanitized_args['_thumbnail_file']                        = custom_sanitize_file($_FILES['cropped-thumbnail']); }
+    if (isset($_POST['cover_image_meta']))         { $sanitized_args['cover_image']                            = custom_parse_file( $_POST['cover_image_meta'], 'cover_image'); }
+    if (isset($_POST['listing_images_meta']) and
+        isset($_POST['ordered_listing_images']))   { $sanitized_args['listing_images']                         = custom_parse_ordered_files($_POST['listing_images_meta'], custom_sanitize_array($_POST['ordered_listing_images']), 'listing_images'); }
+    if (isset($_POST['stage_plots_meta']) and
+        isset($_POST['ordered_stage_plots']))      { $sanitized_args['stage_plots']                            = custom_parse_ordered_files($_POST['stage_plots_meta'], custom_sanitize_array($_POST['ordered_stage_plots']), 'stage_plots'); }
 
 
     return $sanitized_args;
 }
 
 
-// Cleans name property of file
-function custom_sanitize_file($file) {
-    $file['name'] = sanitize_file_name($file['name']);
-    return $file;
+// Parse files and file meta data
+function custom_parse_file($data, $file_index) {
+    $data = json_decode(stripslashes($data), true);
+    if (isset($_FILES[$file_index])) {
+        $file['name'] = sanitize_file_name($_FILES[$file_index]['name']);
+        $data['file'] = $_FILES[$file_index];
+    }
+    return $data;
 }
+function custom_parse_ordered_files($data, $ordered_ids, $file_index) {
+    $ordered_files = [];
+    $data = json_decode(stripslashes($data), true);
+    $parsed_files = parse_files($file_index);
+
+    foreach ($ordered_ids as $image_id) {
+        $image_data = $data[$image_id];
+        $image_data['image_id'] = $image_id;
+        // if has upload index add file from that index
+        if (isset($image_data['upload_index']) and is_int($image_data['upload_index']) and $image_data['upload_index'] < count($parsed_files)) {
+            $image_data['file'] = $parsed_files[$image_data['upload_index']];
+        }
+        $ordered_files[] = $image_data;
+    }
+    return $ordered_files;
+}
+function parse_files($file_index) {
+    $parsed_files = [];;
+    if (isset($_FILES[$file_index])) {
+        $files = $_FILES[$file_index];
+        $count = count($files['name']);
+        for ($iter = 0; $iter < $count; $iter++) {
+            $parsed_files[] = [
+                'name'     => sanitize_file_name($files['name'][$iter]),
+                'type'     => $files['type'][$iter],
+                'tmp_name' => $files['tmp_name'][$iter],
+                'error'    => $files['error'][$iter],
+                'size'     => $files['size'][$iter],
+            ];
+        }
+    }
+    return $parsed_files;
+}
+/*
+function custom_parse_files($data, $file_index) {
+    $data = json_decode(stripslashes($data), true);
+
+    $parsed_files = [];
+    if (isset($_FILES[$file_index])) {
+        $files = $_FILES[$file_index];
+        $count = count($files['name']);
+        for ($iter = 0; $iter < $count; $iter++) {
+            $parsed_files[] = [
+                'name'     => sanitize_file_name($files['name'][$iter]),
+                'type'     => $files['type'][$iter],
+                'tmp_name' => $files['tmp_name'][$iter],
+                'error'    => $files['error'][$iter],
+                'size'     => $files['size'][$iter],
+            ];
+        }
+
+        foreach ($data as $image_id => $image_data) {
+            if (isset($image_data['upload_index']) and count($parsed_files) > $image_data['upload_index']) {
+                $data[$image_id]['file'] = $parsed_files[$image_data['upload_index']];
+            }
+        }
+    }
+    return $data;
+}
+ */
+
 
 // sanitize array, remove blank values with array_filter, reindex array with array_values
 // useful with array inputs where i always pass a blank so that the user has a way to erase all options; otherwise no argument is passed to the back end and no edit happens

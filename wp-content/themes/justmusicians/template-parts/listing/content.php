@@ -1,5 +1,10 @@
 <?php
-    $is_preview = $args['instance'] == 'listing-form';
+    $is_preview    = $args['instance'] == 'listing-form';
+    $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
+    if (!$is_preview) {
+        $listing_image_ids = is_array(get_field('listing_images')) ? get_field('listing_images') : [];
+        $stage_plot_ids = is_array(get_field('stage_plots')) ? get_field('stage_plots') : [];
+    }
 
     if ($args['instance'] == 'listing-form') {
         $theme = [
@@ -52,38 +57,69 @@
 
         <!-- Start media -->
         <div class="w-full" x-data="{
-            showImageTab: true,
-            showVideoTab: false,
-            showStagePlotTab: false,
-            hasVideo: <?php echo (count($args['youtube_video_ids']) > 0) ? 'true' : 'false'; ?>,
-            hideTabs() {
-                this.showImageTab = false;
-                this.showVideoTab = false;
-                this.showStagePlotTab = false;
-            },
-        }">
+                showImageTab: true,
+                showVideoTab: false,
+                showStagePlotTab: false,
+                hasStagePlot: <?php if ($is_preview) { echo "orderedImages['stage_plots'].length > 0"; } else { echo (count($stage_plot_ids) > 0) ? 'true' : 'false'; } ?>,
+                hasVideo: <?php echo (count($args['youtube_video_ids']) > 0) ? 'true' : 'false'; ?>,
+                hideTabs() {
+                    this.showImageTab = false;
+                    this.showVideoTab = false;
+                    this.showStagePlotTab = false;
+                },
+            }"
+            <?php if ($is_preview) { ?>x-init="$watch('imageData', value => {  hasStagePlot = orderedImages['stage_plots'].length > 0; hideTabs(); showImageTab = true;})"<?php } ?>
+        >
             <h2 class="text-25 font-bold mb-5">Media</h2>
             <div class="flex items-start gap-4 media-tabs mb-2.5">
                 <div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showImageTab}" x-on:click="hideTabs(); showImageTab = true;">Images</div>
                 <div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showVideoTab}" x-show="hasVideo" x-cloak x-on:click="hideTabs(); showVideoTab = true;">Videos</div>
-                <!--<div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showStagePlotTab}" x-on:click="hideTabs(); showStagePlotTab = true;">Stage Plots</div>-->
+                <div class="text-14 sm:text-16 tab-heading pb-1 cursor-pointer" :class="{'active': showStagePlotTab}" x-show="hasStagePlot" x-cloak x-on:click="hideTabs(); showStagePlotTab = true;">Stage Plots</div>
             </div>
             <!-- Image -->
-            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden" x-show="showImageTab" x-cloak
+            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden mb-[21px]" x-show="showImageTab" x-cloak
                 x-data="{
                     previousIndex: 0,
                     currentIndex: 0,
                     showArrows: isTouchDevice,
-                    totalSlides: 1,
-                    _updateIndex(newIndex)  { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
+                    totalSlides: <?php if (!$is_preview) { echo count($listing_image_ids) > 0 ? count($listing_image_ids) : 1; } else { echo "orderedImages['listing_images'].length"; } ?>,
+                    _updateIndex(newIndex) { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
                 }"
+                <?php if ($is_preview) { ?>x-init="$watch('orderedImages', value => { totalSlides = orderedImages['listing_images'].length == 0 ? 1 : orderedImages['listing_images'].length; _updateIndex(0); })"<?php } ?>
                 x-on:mouseleave="showArrows = false;"
                 x-on:mouseenter="showArrows = true"
             >
                 <div class="aspect-video flex transition-transform duration-500 ease-in-out"
                     x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
                 >
-                    <span class="aspect-video flex items-center justify-center"><img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" /></span>
+                    <span class="aspect-video flex items-center justify-center">
+                        <?php if ($is_preview)  { ?>
+                            <template x-for="imageId in orderedImages['listing_images']" :key="imageId">
+                                <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                    <img class="h-full" x-bind:src="imageData['listing_images'][imageId]?.url" />
+                                </div>
+                            </template>
+                            <template x-if="orderedImages['listing_images'].length == 0">
+                                <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                    <img class="h-full" x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'" />
+                                </div>
+                            </template>
+                        <?php } ?>
+                        <?php if (!$is_preview and count($listing_image_ids) > 0) {
+                            foreach ($listing_image_ids as $image_id) {
+                                $img_url = wp_get_attachment_image_url($image_id, 'medium');
+                                if ($img_url) { ?>
+                                    <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                        <img class="h-full" src="<?php echo esc_url($img_url); ?>" />
+                                    </div><?php
+                                }
+                            }
+                        } else if (!$is_preview and count($listing_image_ids) == 0) { ?>
+                            <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                <img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" />
+                            </div>
+                        <?php } ?>
+                    </span>
 
                 </div>
                 <!-- Left Arrow -->
@@ -111,7 +147,7 @@
                 <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides">1/6</div>
             </div>
             <!-- Video -->
-            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden" x-show="showVideoTab" x-cloak
+            <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden mb-[21px]" x-show="showVideoTab" x-cloak
                 x-data='{
                     players: {},
                     playersMuted: true,
@@ -162,8 +198,7 @@
                 </div>
 
 
-                <!-- Video player buttons -->
-                <!-- Pause -->
+                <!-- Video player buttons --> <!-- Pause -->
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     x-show="_isPaused()">
                     <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
@@ -221,24 +256,43 @@
                 </div>
             </div>
             <!-- Stage Plots -->
-            <div class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak>
-                <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden"
-                    x-data="{
-                        previousIndex: 0,
-                        currentIndex: 0,
-                        showArrows: isTouchDevice,
-                        totalSlides: 1,
-                        _updateIndex(newIndex)  { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
-                    }"
-                    x-on:mouseleave="showArrows = false;"
-                    x-on:mouseenter="showArrows = true"
-                >
+            <div class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak
+                x-data="{
+                    previousIndex: 0,
+                    currentIndex: 0,
+                    showArrows: isTouchDevice,
+                    totalSlides: <?php if (!$is_preview) { echo count($stage_plot_ids); } else { echo "orderedImages['stage_plots'].length"; } ?>,
+                    _updateIndex(newIndex)  { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
+                }"
+                <?php if ($is_preview) { ?>x-init="$watch('orderedImages', value => { totalSlides = orderedImages['stage_plots'].length == 0 ? 1 : orderedImages['stage_plots'].length; _updateIndex(0); })"<?php } ?>
+                x-on:mouseleave="showArrows = false;"
+                x-on:mouseenter="showArrows = true"
+            >
+                <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden">
                     <div class="aspect-video flex transition-transform duration-500 ease-in-out"
                         x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
                     >
-                        <span class="aspect-video flex items-center justify-center"><img class="h-full z-0" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg'; ?>" /></span>
-
+                        <span class="aspect-video flex items-center justify-center">
+                            <?php if ($is_preview) { ?>
+                                <template x-for="imageId in orderedImages['stage_plots']" :key="imageId">
+                                    <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                        <img class="h-full" x-bind:src="imageData['stage_plots'][imageId]?.url" />
+                                    </div>
+                                </template>
+                            <?php } ?>
+                            <?php if (!$is_preview) {
+                                foreach ($stage_plot_ids as $image_id) {
+                                    $img_url = wp_get_attachment_image_url($image_id, 'medium');
+                                    if ($img_url) { ?>
+                                        <div class="flex justify-center aspect-video w-full h-full object-cover">
+                                            <img class="h-full" src="<?php echo esc_url($img_url); ?>" />
+                                        </div><?php
+                                    }
+                                }
+                            } ?>
+                        </span>
                     </div>
+
                     <!-- Left Arrow -->
                     <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
                         @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
@@ -262,7 +316,17 @@
                     <!-- Gallery Count -->
                     <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides">1/6</div>
                 </div>
-                 <div class="text-14">Stage plot image  1</div>
+                <?php if ($is_preview) { ?>
+                    <template x-for="(imageId, index) in orderedImages['stage_plots']" :key="imageId">
+                        <div class="text-14" x-show="currentIndex == index" x-cloak x-text="imageData['stage_plots'][imageId]?.caption"></div>
+                    </template>
+                <?php } ?>
+                <?php if (!$is_preview) {
+                    foreach ($stage_plot_ids as $index => $image_id) {
+                        $caption = get_post_field('post_excerpt', $image_id); ?>
+                        <div class="text-14" x-show="currentIndex == <?php echo $index; ?>" x-cloak><?php echo esc_html($caption); ?></div><?php
+                    }
+                } ?>
             </div>
         </div>
         <!-- Start calendar -->

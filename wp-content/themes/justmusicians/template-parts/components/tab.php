@@ -7,7 +7,7 @@ if ( ! isset( $args['title'] ) ) {
 ?>
 
 <div class="pl-2 py-2 border border-black/40 rounded-t text-12 font-medium flex cursor-pointer items-center leading-tight bg-yellow-10 text-grey hover:text-black/40"
-data-tab-heading="<?php echo esc_attr(sanitize_title( $args['title'] )); ?>"
+    data-tab-heading="<?php echo esc_attr(sanitize_title( $args['title'] )); ?>"
     :class="{'active': <?php echo $args['show_exp']; ?>}"
     x-on:click="
         <?php echo $args['hide_exp']; ?>;

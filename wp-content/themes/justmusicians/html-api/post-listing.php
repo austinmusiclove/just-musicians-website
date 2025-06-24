@@ -10,6 +10,15 @@ if ( is_wp_error($is_authorized) ) {
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
 }
 
+// Check for required fields
+if (empty($args['cover_image']['attachment_id']) and empty($args['cover_image']['file'])) {
+    $message = 'Error: Cover image required';
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
+}
+if (empty($args['meta_input']['state'])) {
+    $message = 'Error: State required';
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
+}
 
 // Create Listing Draft
 if ( empty($args['ID']) and $args['post_status'] == 'draft' ) {
@@ -40,7 +49,8 @@ if ( !empty($args['ID']) and get_post_status($args['ID']) == 'draft' and $args['
         $message = 'Error: ' . $result->get_error_message();
         echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
     }
-    echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Listing Draft Updated Successfully\'})"></span>';
+    echo '<span x-init="$dispatch(\'updateimageids\', ' . clean_arr_for_doublequotes($result['attachment_ids']) . ')"></span>';
+    echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Listing Draft Updated Successfully\'})"></span>'; exit;
 }
 
 
@@ -51,7 +61,7 @@ if ( !empty($args['ID']) and get_post_status($args['ID']) == 'draft' and $args['
         $message = 'Error: ' . $result->get_error_message();
         echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
     }
-    echo '<span x-init="redirect(\'/listing-form/?lid=' . $args['ID'] . '&toast=publish-draft\');"></span>';
+    echo '<span x-init="redirect(\'/listing-form/?lid=' . $args['ID'] . '&toast=publish-draft\');"></span>'; exit;
 }
 
 
@@ -62,5 +72,6 @@ if ( !empty($args['ID']) and get_post_status($args['ID']) == 'publish' and $args
         $message = 'Error: ' . $result->get_error_message();
         echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
     }
-    echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Listing Updated Successfully\'})"></span>';
+    echo '<span x-init="$dispatch(\'updateimageids\', ' . clean_arr_for_doublequotes($result['attachment_ids']) . ')"></span>';
+    echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Listing Updated Successfully\'})"></span>'; exit;
 }

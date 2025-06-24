@@ -2,6 +2,7 @@
 
 $is_preview    = isset($args['instance']) ? $args['instance'] == 'listing-form' : false;
 $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
+$ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
 ?>
 
@@ -54,7 +55,8 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
 
                 <img class="w-full h-full object-cover"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                    src="<?php echo $args['thumbnail_url']; ?>" <?php if (!empty($args['alpine_thumbnail_src'])) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+                    <?php if (!$is_preview) { ?>src="<?php echo $args['thumbnail_url']; ?>"                  <?php } ?>
+                    <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'" <?php } ?>
                     x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
 
@@ -128,7 +130,8 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
             <div class="bg-yellow-light aspect-4/3">
             <img class="w-full h-full object-cover"
                 <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                src="<?php echo $args['thumbnail_url']; ?>" <?php if (!empty($args['alpine_thumbnail_src'])) { echo 'x-bind:src="' . $args['alpine_thumbnail_src'] . '"'; } ?>
+                <?php if (!$is_preview) { ?>src="<?php echo $args['thumbnail_url']; ?>"                  <?php } ?>
+                <?php if ($is_preview)  { ?> x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"<?php } ?>
             />
             </div>
         </div>
@@ -172,8 +175,8 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach ($args['genres'] as $term) { ?>
                 <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block"
-                    x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')"
-                    x-cloak >
+                    <?php if ($is_preview) { ?> x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?>
+                >
                     <?php echo $term; ?>
                 </span>
             <?php } ?>

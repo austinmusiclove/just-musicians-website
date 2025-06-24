@@ -7,44 +7,66 @@ function _create_listing($args) {
 
     // Insert post; this returns post_id on success and WP_Error on failure
     $post_id = wp_insert_post($args, true);
-    if( is_wp_error( $post_id ) ) { return $post_id; exit; }
-
-    // Thumbnail Image
-    if (!empty($args['_thumbnail_file'])) {
-
-        // Upload
-        require_once( ABSPATH . 'wp-admin/includes/file.php' );
-        $thumbnail_upload = wp_handle_upload($args['_thumbnail_file'], ['test_form' => false]);
-        if (!isset($thumbnail_upload['file'])) {
-            return new WP_Error(500, 'Failed to upload image');
-        }
-
-        // Set attachment data
-        $attachment = array(
-            'post_mime_type' => $thumbnail_upload['type'],
-            'post_title'     => sanitize_file_name( $thumbnail_upload['file'] ),
-            'post_content'   => '',
-            'post_status'    => 'inherit'
-        );
-
-        // Create the attachment
-        $attachment_id = wp_insert_attachment( $attachment, $thumbnail_upload['file'], $post_id );
-        if( is_wp_error( $attachment_id ) ) {
-            return $attachment_id;
-        }
-
-        // Set attachment meta data
-        require_once( ABSPATH . 'wp-admin/includes/image.php' );
-        $attachment_metadata = wp_generate_attachment_metadata( $attachment_id, $thumbnail_upload['file'] );
-        wp_update_attachment_metadata( $attachment_id, $attachment_metadata );
-
-        // Set post thumbnail
-        set_post_thumbnail($post_id, $attachment_id);
+    if( is_wp_error( $post_id ) ) {
+        return $post_id;
     }
 
     // Add post to user listings
     add_listing_to_current_user($post_id);
 
+    $attachment_ids = [
+        'cover_image'    => '',
+        'listing_images' => [],
+        'stage_plots'    => [],
+    ];
+    $listing_images_ids = [];
+    $stage_plots_ids    = [];
+    $update_args        = ['ID' => $post_id, 'meta_input' => []];
+
+    // cover image
+    if (!empty($args['cover_image']) and is_array($args['cover_image'])) {
+        if (!empty($args['cover_image']['file']) and empty($args['cover_image']['attachment_id'])) {
+            $attachment_id = upload_attachment($args['cover_image']['file'], $args['cover_image']['filename'], $post_id, '', $args['cover_image']['mediatags']);
+            if ( is_wp_error( $attachment_id ) ) {
+                return $attachment_id;
+            }
+            set_post_thumbnail($post_id, $attachment_id);
+            $attachment_ids['cover_image'] = $attachment_id;
+        }
+    }
+    // listing images
+    if (!empty($args['listing_images']) and is_array($args['listing_images'])) {
+        foreach ($args['listing_images'] as $image_data) {
+            if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
+                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, '', $image_data['mediatags']);
+                if ( is_wp_error( $attachment_id ) ) {
+                    return $attachment_id;
+                }
+                $attachment_ids['listing_images'][$image_data['image_id']] = $attachment_id;
+                $listing_images_ids[] = $attachment_id;
+            }
+        }
+    }
+    // stage plots
+    if (!empty($args['stage_plots']) and is_array($args['stage_plots'])) {
+        foreach ($args['stage_plots'] as $image_data) {
+            if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
+                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, $image_data['caption'], $image_data['mediatags']);
+                if ( is_wp_error( $attachment_id ) ) {
+                    return $attachment_id;
+                }
+                $attachment_ids['stage_plots'][$image_data['image_id']] = $attachment_id;
+                $stage_plots_ids[] = $attachment_id;
+            }
+        }
+    }
+
+    $update_args['meta_input']['listing_images'] = $listing_images_ids;
+    $update_args['meta_input']['stage_plots'] = $stage_plots_ids;
+    $post_id = wp_update_post($update_args, true);
+    if (is_wp_error($post_id)) {
+        return $post_id;
+    }
     return $post_id;
 }
 

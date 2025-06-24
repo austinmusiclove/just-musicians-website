@@ -1,6 +1,7 @@
 
 <?php
-$is_preview = $args['instance'] == 'listing-form';
+$is_preview    = $args['instance'] == 'listing-form';
+$ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
 if ($args['instance'] == 'listing-form') {
     $theme = [
@@ -25,7 +26,11 @@ if ($args['instance'] == 'listing-form') {
 
     <div class="<?php echo $theme['container_class']; ?>">
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
-            <img class="w-full h-full object-cover" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" />
+            <img class="w-full h-full object-cover"
+                <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" <?php } ?>
+                <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"            <?php } ?>
+            />
+
             <div class="<?php echo $theme['availability_wrapper_1']; ?>">
                 <!--<div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div>-->
             </div>

@@ -2,7 +2,6 @@ Milestones
     Artist announce and invite new profiles
         remove alpine_ vars from std listing by just putting in the names of the vars hard coded
         organize listing form page into template parts
-        make independent scroll for preview and form
         make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
@@ -12,28 +11,30 @@ Milestones
             front end check for 404
             clear off query args from urls except id or something from fb?
             clean city name to be the right capitalization
-        after design
-            send save automatically after input
-            housekeeping
-                move inputs to forms template parts
-                recycling for old unlinked images
-                make files pretty page-listing-form standard-listing listings-api
-                organize template parts
-            mind the name of images
-            test
-                show err if htmx request fails and never gets to server
-                test apostrophes everywhere
-            venues
-            content
-            video order depending on search criteria
-            start at timestamp for videos
+        housekeeping
+            recycling for old unlinked images
+        test
+            show err if htmx request fails and never gets to server
+            test apostrophes everywhere
+        ACF
+            change venues verified and venues unverified return type to id not post
+            add listing_images and stage_plots to ACF with same return type as local env
         create the listings for them before they sign up instead of allowing new listing creating with the link
-        artist pages that will get you listed on google as a musician by using schema
-        change venues verified and venues unverified return type to id not post
+        advanced
+            disable input until change made or auto save after input
+            allow adding venue
+            make independent scroll for preview and form
+            scroll preview to section when corresponding input is focused
+            scroll to required field if submit fails due to missing field
+        bug
+            cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
     Advanced artist page
         see more bio
         see more venues played
         click to copy email on listing page
+        artist pages that will get you listed on google as a musician by using schema
+        new search algo
+            video order depending on search criteria
     Free lance booker testing
         basic inquiries
             inquire button that sends an email
@@ -83,6 +84,7 @@ UX
     listing form
         active search for cities
         better looking disabled and spinner state for submit buttons
+        upload multiple images at once
 Features
     venue reviews
     artist reviews

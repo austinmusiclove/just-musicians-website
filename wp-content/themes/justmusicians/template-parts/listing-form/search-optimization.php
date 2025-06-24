@@ -3,7 +3,7 @@
 
     <div class="flex items-center gap-2">
         <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
-        <h2 class="text-20 sm:text-25 font-bold">Search Optimization</h2>
+        <h2 class="text-20 sm:text-25 font-bold">Search Terms</h2>
     </div>
 
     <div class="tabs-container relative z-0" x-data="{
@@ -126,7 +126,7 @@
 
             <div class="gap-1 mt-4 flex flex-wrap gap-2">
                 <!-- Alpine template w/classes of tags above -->
-                <template class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
+                <template class="w-fit" x-for="(tag, index) in tags" :key="index">
                     <div class="flex items-center bg-yellow-50 pl-3 pr-1 py-0.5 rounded-full">
                         <span x-text="tag" class="text-14 w-fit"></span>
                         <button type="button" class="opacity-50 hover:opacity-100 ml-auto" x-on:click="_removeTag(index)">
