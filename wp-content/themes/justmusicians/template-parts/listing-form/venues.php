@@ -9,19 +9,19 @@
         <!-- Venues Played -->
 
         <input type="hidden" name="venues_played_unverified[]">
-        <template x-for="(venue, index) in all_venues_played" :key="index">
+        <template x-for="(venue, index) in allVenuesPlayed" :key="index">
             <input type="hidden" name="venues_played_unverified[]" x-bind:value="venue.ID" />
         </template>
         <input type="hidden" name="venues_played_verified[]">
-        <template x-for="(venue_id, index) in verified_venue_ids" :key="index">
-            <template x-if="all_venues_played.some(venue => venue.ID === venue_id)">
+        <template x-for="(venue_id, index) in verifiedVenueIds" :key="index">
+            <template x-if="allVenuesPlayed.some(venue => venue.ID === venue_id)">
                 <input type="hidden" name="venues_played_verified[]" :value="venue_id" />
             </template>
         </template>
 
         <!-- Depends on tag-input-scripts.js -->
         <div x-data="{
-            tags: all_venues_played,
+            tags: allVenuesPlayed,
             _addTag(input, value)    { addTag(this, input, value, 'error-toast'); },
             _removeTag(index) { removeTag(this, index); },
             showOptions: false,

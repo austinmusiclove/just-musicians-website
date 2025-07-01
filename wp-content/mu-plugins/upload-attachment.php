@@ -35,7 +35,7 @@ function upload_attachment($file, $filename, $post_id, $caption, $mediatags) {
 }
 
 function update_attachment_mediatags($attachment_id, $mediatags) {
-    if (!empty($mediatags) && is_array($mediatags)) {
+    if (is_array($mediatags)) {
         wp_set_object_terms($attachment_id, $mediatags, 'mediatag');
     }
 }

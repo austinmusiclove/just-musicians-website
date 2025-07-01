@@ -50,14 +50,14 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         players: {},
                         playersMuted: true,
                         playersPaused: false,
-                        _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
-                        _pauseAllPlayers()             { pauseAllPlayers(this); },
-                        _pausePlayer(playerId)         { pausePlayer(this, playerId); },
-                        _playPlayer(playerId)          { playPlayer(this, playerId); },
-                        _toggleMute()                  { toggleMute(this); },
-                        _setupVisibilityListener()     { setupVisibilityListener(this); },
+                        _initPlayer(playerId, videoData) { initPlayer(this, playerId, videoData); },
+                        _pauseAllPlayers()               { pauseAllPlayers(this); },
+                        _pausePlayer(playerId)           { pausePlayer(this, playerId); },
+                        _playPlayer(playerId)            { playPlayer(this, playerId); },
+                        _toggleMute()                    { toggleMute(this); },
+                        _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
-                    x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
+                    x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"

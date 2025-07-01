@@ -1,6 +1,7 @@
 Milestones
     Artist announce and invite new profiles
         remove alpine_ vars from std listing by just putting in the names of the vars hard coded
+        maybe remove underscore alpine pass through functions to reduce code
         organize listing form page into template parts
         make it invite only
         limit access until you verify email
@@ -19,6 +20,7 @@ Milestones
         ACF
             change venues verified and venues unverified return type to id not post
             add listing_images and stage_plots to ACF with same return type as local env
+            add youtube video field group and youtube videos field to listings
         create the listings for them before they sign up instead of allowing new listing creating with the link
         advanced
             disable input until change made or auto save after input
@@ -28,6 +30,7 @@ Milestones
             scroll to required field if submit fails due to missing field
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
+        check for todos in files
     Advanced artist page
         see more bio
         see more venues played

@@ -108,20 +108,18 @@
         <p class="mb-4 text-14">Did we miss anything? Add any categories, genres, subgenres, instruments, settings, or other keywords that you'd like your listing to be serchable by.</p>
         <div x-data="{
             tags: keywords,
-            _addTag(input, value)    { addTag(this, input, value, 'error-toast'); },
-            _removeTag(index) { removeTag(this, index); },
+            _addTag(input, value) { addTag(this, input, value, 'error-toast'); },
+            _removeTag(index)     { removeTag(this, index); },
         }">
             <input type="hidden" name="keywords[]"/>
             <div class="relative">
-                <input type="text" placeholder="Type your keyword" class="w-full"
+                <input type="text" placeholder="Type your keyword" class="w-full !pr-16"
                     x-ref="keywordsInput"
                     x-on:keydown.enter="$event.preventDefault(); _addTag($refs.keywordsInput, $refs.keywordsInput.value)"
                     x-on:paste="$el.addEventListener('input', function() { _addTag($refs.keywordsInput, $refs.keywordsInput.value); }, {once: true})">
-                    <button type="button" class="absolute top-2 right-2 w-fit rounded text-12 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black text-grey hover:text-black"
-                        x-on:click="_addTag($refs.keywordsInput, $refs.keywordsInput.value)"
-                    >
-                        Add +
-                    </button>
+                <button type="button" class="absolute top-2 right-2 w-fit rounded text-12 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black text-grey hover:text-black"
+                    x-on:click="_addTag($refs.keywordsInput, $refs.keywordsInput.value)"
+                >Add +</button>
             </div>
 
             <div class="gap-1 mt-4 flex flex-wrap gap-2">

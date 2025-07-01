@@ -29,11 +29,14 @@ function get_listing($args) {
     $post_meta = get_post_meta($post_id);
 
     // Get youtube links
-    $youtube_video_urls = get_field('youtube_video_urls');
+    $youtube_video_post_ids = get_field('youtube_videos');
+    $youtube_video_data = get_youtube_video_data($youtube_video_post_ids);
     $youtube_video_ids = [];
-    if ($youtube_video_urls and is_array($youtube_video_urls)) {
-        foreach($youtube_video_urls as $url) {
-            if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) { $youtube_video_ids[] = $matches[1]; }
+    if ($youtube_video_data and is_array($youtube_video_data)) {
+        foreach($youtube_video_data as $video_data) {
+            if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $video_data['url'], $matches)) {
+                $youtube_video_ids[] = $matches[1];
+            }
         }
     }
 
@@ -69,15 +72,15 @@ function get_listing($args) {
         'apple_music_artist_url'   => get_field('apple_music_artist_url'),
         'soundcloud_url'           => get_field('soundcloud_url'),
         'verified'                 => get_field('verified'),
-        'youtube_video_urls'       => $youtube_video_urls,
         'youtube_video_ids'        => $youtube_video_ids,
+        'youtube_video_data'       => $youtube_video_data,
         'thumbnail_filename'       => $thumbnail_filename,
         'thumbnail_id'             => $thumbnail_id,
         'thumbnail_url'            => get_the_post_thumbnail_url($post_id, 'standard-listing'),
-        'thumbnail_terms'          => get_attachment_mediatags(get_post_thumbnail_id($post_id)),
+        'thumbnail_terms'          => get_mediatags(get_post_thumbnail_id($post_id)),
         'listing_images'           => get_field('listing_images'),
-        'listing_images_data'      => get_image_data($post_id, 'listing_images'),
         'stage_plots'              => get_field('stage_plots'),
+        'listing_images_data'      => get_image_data($post_id, 'listing_images'),
         'stage_plots_data'         => get_image_data($post_id, 'stage_plots'),
         'permalink'                => get_permalink($post_id),
         'post_status'              => get_post_status($post_id),
@@ -148,20 +151,37 @@ function get_image_data($post_id, $image_field) {
             continue; // skip invalid or non-existent attachments
         }
 
-        $images[$attachment_id] = [
-            'postition'     => $index,
-            'attachment_id' => $attachment_id,
-            'caption'       => get_the_excerpt($attachment_id),
+        $images[] = [
+            'image_id'      => strval($attachment_id),
+            'attachment_id' => strval($attachment_id),
             'url'           => wp_get_attachment_url($attachment_id),
             'filename'      => basename(get_attached_file($attachment_id)),
-            'mediatags'     => get_attachment_mediatags($attachment_id),
+            'caption'       => get_the_excerpt($attachment_id),
+            'mediatags'     => get_mediatags($attachment_id),
         ];
     }
 
     return $images;
 }
 
-function get_attachment_mediatags($attachment_id) {
+function get_youtube_video_data($post_ids) {
+    if (!is_array($post_ids)) { return []; }
+    $posts = [];
+
+    foreach ($post_ids as $video_post_id) {
+        $posts[] = [
+            'post_id'    => $video_post_id,
+            'url'        => get_post_meta($video_post_id, 'url', true),
+            'video_id'   => get_post_meta($video_post_id, 'video_id', true),
+            'start_time' => get_post_meta($video_post_id, 'start_time', true),
+            'mediatags'  => get_mediatags($video_post_id),
+        ];
+    }
+
+    return $posts;
+}
+
+function get_mediatags($attachment_id) {
     $mediatags = [];
     $terms = get_the_terms($attachment_id, 'mediatag');
     if (!is_wp_error($terms) && !empty($terms)) {

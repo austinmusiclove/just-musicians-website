@@ -34,29 +34,29 @@
                     'required' => false,
                     'show_exp' => "showTab2",
                     'hide_exp' => "hideTabs()",
-                    'count_exp' => "youtubeVideoUrls.length > 0 ? youtubeVideoUrls.length : ''",
-                ]);
-                get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => 'Stage Plot Images',
-                    'required' => false,
-                    'show_exp' => "showTab3",
-                    'hide_exp' => "hideTabs()",
-                    'count_exp' => "''",
+                    'count_exp' => "orderedImageData['listing_images'].length > 0 ? orderedImageData['listing_images'].length : ''",
                 ]);
                 get_template_part( 'template-parts/components/tab', null, [
                     'title'  => 'YouTube Videos',
                     'required' => false,
+                    'show_exp' => "showTab3",
+                    'hide_exp' => "hideTabs()",
+                    'count_exp' => "youtubeVideoData.length > 0 ? youtubeVideoData.length : ''",
+                ]);
+                get_template_part( 'template-parts/components/tab', null, [
+                    'title'  => 'Stage Plot Images',
+                    'required' => false,
                     'show_exp' => "showTab4",
                     'hide_exp' => "hideTabs()",
-                    'count_exp' => "''",
+                    'count_exp' => "orderedImageData['stage_plots'].length > 0 ? orderedImageData['stage_plots'].length : ''",
                 ]);
             ?>
         </div>
         <fieldgroup class="has-border block relative h-80 relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
             <span x-show="showTab1" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/cover-image', null,[] ); ?>      </span>
             <span x-show="showTab2" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/listing-images', null,[] ); ?>   </span>
-            <span x-show="showTab3" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/stage-plot-images', null,[] ); ?></span>
-            <span x-show="showTab4" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/youtube-videos', null,[] ); ?>   </span>
+            <span x-show="showTab3" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/youtube-videos', null,[] ); ?>   </span>
+            <span x-show="showTab4" x-cloak><?php get_template_part('template-parts/listing-form/media-upload-form/stage-plot-images', null,[] ); ?></span>
         </fieldgroup>
     </div>
 </section>

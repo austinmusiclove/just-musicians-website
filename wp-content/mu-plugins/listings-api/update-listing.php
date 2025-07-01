@@ -16,6 +16,7 @@ function _update_listing($args) {
     ];
     $listing_images_ids = [];
     $stage_plots_ids    = [];
+    $youtube_video_ids  = [];
 
     // cover image
     if (!empty($args['cover_image']) and is_array($args['cover_image'])) {
@@ -47,7 +48,6 @@ function _update_listing($args) {
             }
         }
     }
-    $args['meta_input']['listing_images'] = $listing_images_ids;
     // stage plots
     if (!empty($args['stage_plots']) and is_array($args['stage_plots'])) {
         foreach ($args['stage_plots'] as $image_data) {
@@ -66,8 +66,27 @@ function _update_listing($args) {
             }
         }
     }
-    $args['meta_input']['stage_plots'] = $stage_plots_ids;
-
+    // youtube videos
+    if (!empty($args['youtube_videos']) and is_array($args['youtube_videos'])) {
+        foreach ($args['youtube_videos'] as $video_data) {
+            if (empty($video_data['post_id'])) {
+                $video_post_id = insert_youtube_video($video_data , true);
+                if ( is_wp_error( $video_post_id ) ) {
+                    return $video_post_id;
+                }
+                $attachment_ids['youtube_videos'][$video_data['video_id']] = $video_post_id;
+                $youtube_video_ids[] = $video_post_id;
+            } else {
+                if (array_key_exists('mediatags', $video_data))  { update_attachment_mediatags($video_data['post_id'], $video_data['mediatags']); }
+                if (array_key_exists('start_time', $video_data)) { update_post_meta($video_data['post_id'], 'start_time', $video_data['start_time']); }
+                $attachment_ids['youtube_videos'][$video_data['video_id']] = $video_data['post_id'];
+                $youtube_video_ids[] = $video_data['post_id'];
+            }
+        }
+    }
+    $args['meta_input']['listing_images'] = $listing_images_ids;
+    $args['meta_input']['stage_plots']    = $stage_plots_ids;
+    $args['meta_input']['youtube_videos'] = $youtube_video_ids;
 
     // Update post; this returns post_id on success and WP_Error on failure
     $post_id = wp_update_post($args, true);

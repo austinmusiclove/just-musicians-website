@@ -89,30 +89,25 @@ get_header();
         instCheckboxes:          <?php if (!empty($listing_data["instrumentation"]))    { echo clean_arr_for_doublequotes($listing_data["instrumentation"]);    } else { echo '[]'; } ?>,
         settingsCheckboxes:      <?php if (!empty($listing_data["setting"]))            { echo clean_arr_for_doublequotes($listing_data["setting"]);            } else { echo '[]'; } ?>,
         keywords:                <?php if (!empty($listing_data["keyword"]))            { echo clean_arr_for_doublequotes($listing_data["keyword"]);            } else { echo '[]'; } ?>,
-        all_venues_played:       <?php if (!empty($all_venues_played))                  { echo clean_arr_for_doublequotes($all_venues_played);                  } else { echo '[]'; } ?>,
-        verified_venue_ids:      <?php if (!empty($verified_venue_ids))                 { echo clean_arr_for_doublequotes($verified_venue_ids);                 } else { echo '[]'; } ?>,
-        unverified_venue_ids:    <?php if (!empty($unverified_venue_ids))               { echo clean_arr_for_doublequotes($unverified_venue_ids);               } else { echo '[]'; } ?>,
-        youtubeVideoUrls:        <?php if (!empty($listing_data["youtube_video_urls"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_urls"]); } else { echo '[]'; } ?>,
+        allVenuesPlayed:         <?php if (!empty($all_venues_played))                  { echo clean_arr_for_doublequotes($all_venues_played);                  } else { echo '[]'; } ?>,
+        verifiedVenueIds:        <?php if (!empty($verified_venue_ids))                 { echo clean_arr_for_doublequotes($verified_venue_ids);                 } else { echo '[]'; } ?>,
+        unverifiedVenueIds:      <?php if (!empty($unverified_venue_ids))               { echo clean_arr_for_doublequotes($unverified_venue_ids);               } else { echo '[]'; } ?>,
+        youtubeVideoData:        <?php if (!empty($listing_data["youtube_video_data"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_data"]); } else { echo '[]'; } ?>,
         pVideoIds:               <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
-        imageData: {
-            'cover_image': {
-                'cover_image': {
+        orderedImageData: {
+            'cover_image': [
+                {
+                    'image_id':      'cover_image',
                     'attachment_id': '<?php if (!empty($listing_data['thumbnail_id']))        { echo $listing_data['thumbnail_id'];                                                } else { echo ''; } ?>',
                     'url':           '<?php if (!empty($listing_data['thumbnail_url']))       { echo $listing_data['thumbnail_url'];                                               } else { echo ''; } ?>',
                     'filename':      '<?php if (!empty($listing_data['thumbnail_filename']))  { echo $listing_data['thumbnail_filename'];                                          } else { echo ''; } ?>',
                     'mediatags':      <?php if (!empty($listing_data["thumbnail_terms"]))     { echo clean_arr_for_doublequotes($listing_data["thumbnail_terms"]);                 } else { echo '[]'; } ?>,
                 },
-            },
-            'listing_images':         <?php if (!empty($listing_data["listing_images_data"])) { echo clean_arr_for_doublequotes($listing_data["listing_images_data"]);             } else { echo '{}'; } ?>,
-            'stage_plots':            <?php if (!empty($listing_data["stage_plots_data"]))    { echo clean_arr_for_doublequotes($listing_data["stage_plots_data"]);                } else { echo '{}'; } ?>,
+            ],
+            'listing_images':         <?php if (!empty($listing_data["listing_images_data"])) { echo clean_arr_for_doublequotes($listing_data["listing_images_data"]);               } else { echo '[]'; } ?>,
+            'stage_plots':            <?php if (!empty($listing_data["stage_plots_data"]))    { echo clean_arr_for_doublequotes($listing_data["stage_plots_data"]);                  } else { echo '[]'; } ?>,
         },
-        orderedImages: {
-            'cover_image':            ['cover_image'],
-            'listing_images':         <?php if (!empty($listing_data["listing_images"]))      { echo clean_arr_for_doublequotes($listing_data["listing_images"]) . '.map(String)'; } else { echo '[]'; } ?>,
-            'stage_plots':            <?php if (!empty($listing_data["stage_plots"]))         { echo clean_arr_for_doublequotes($listing_data["stage_plots"]) . '.map(String)';    } else { echo '[]'; } ?>,
-        },
-        listingImages:                <?php if (!empty($listing_data["listing_images"]))      { echo clean_arr_for_doublequotes($listing_data["listing_images"]) . '.map(String)'; } else { echo '[]'; } ?>,
-        stagePlots:                   <?php if (!empty($listing_data["stage_plots"]))         { echo clean_arr_for_doublequotes($listing_data["stage_plots"]) . '.map(String)';    } else { echo '[]'; } ?>,
+
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
         submitButtons: [$refs.updateBtnTop, $refs.updateBtnBottom, $refs.saveDraftBtnTop, $refs.saveDraftBtnBottom, $refs.publishBtnTop, $refs.publishBtnBottom ],
 
@@ -122,7 +117,10 @@ get_header();
         _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId, this.submitButtons); },
 
         currentImageId: 'cover_image',
+        currentYtIndex:  -1,
+        _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
         _toggleImageTerm(imageType, imageId, term)                    { toggleImageTerm(this, imageType, imageId, term); },
+        _toggleYoutubeLinkTerm(index, term)                           { toggleYoutubeLinkTerm(this, index, term); },
         _addImage(imageType, imageId, imageData)                      { addImage(this, imageType, imageId, imageData); },
         _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
         _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
@@ -130,6 +128,9 @@ get_header();
         _updateImage(imageType, imageId, url, file, wasCropped)       { updateImage(this, imageType, imageId, url, file, wasCropped); },
         _updateFileInputs()                                           { updateFileInputs(this); },
         _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
+
+        _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
+        _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
     }"
     x-on:updateimageids.window="_updateAttachmentIds($event.detail)"
 >
@@ -158,7 +159,6 @@ get_header();
                     </header>
 
                     <input type="hidden" name="post_status" x-model="postStatus" />
-                    <input type="hidden" name="mediatags[]">
                     <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
 
 
@@ -247,7 +247,6 @@ get_header();
                             'subgenres'         => $subgenres,
                             'instrumentations'  => $instrumentations,
                             'settings'          => $settings,
-                            'youtube_video_ids' => [],
                         )); ?>
                     </div>
 
@@ -256,14 +255,14 @@ get_header();
                             players: {},
                             playersMuted: true,
                             playersPaused: false,
-                            _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
-                            _pauseAllPlayers()             { pauseAllPlayers(this); },
-                            _pausePlayer(playerId)         { pausePlayer(this, playerId); },
-                            _playPlayer(playerId)          { playPlayer(this, playerId); },
-                            _toggleMute()                  { toggleMute(this); },
-                            _setupVisibilityListener()     { setupVisibilityListener(this); },
+                            _initPlayer(playerId, videoData) { initPlayer(this, playerId, videoData); },
+                            _pauseAllPlayers()               { pauseAllPlayers(this); },
+                            _pausePlayer(playerId)           { pausePlayer(this, playerId); },
+                            _playPlayer(playerId)            { playPlayer(this, playerId); },
+                            _toggleMute()                    { toggleMute(this); },
+                            _setupVisibilityListener()       { setupVisibilityListener(this); },
                         }'
-                        x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoId);"
+                        x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
                         x-on:pause-all-youtube-players="_pauseAllPlayers()"
                         x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                         x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
@@ -305,7 +304,6 @@ get_header();
                             'alpine_spotify_artist_url'     => 'pSpotifyArtistUrl',
                             'alpine_apple_music_artist_url' => 'pAppleMusicArtistUrl',
                             'alpine_soundcloud_url'         => 'pSoundcloudUrl',
-                            'alpine_video_ids'              => 'pVideoIds',
                         ]); ?>
 
                         <div class="opacity-50">
@@ -320,38 +318,35 @@ get_header();
             </div>
         </div>
 
-    <!-- Image edit popup -->
-    <div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showImageEditPopup" x-cloak>
-        <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+        <!-- Image edit popup -->
+        <div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showImageEditPopup" x-cloak>
+            <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-            <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showImageEditPopup = false">
+                <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showImageEditPopup = false">
 
-            <div class="px-6 pt-4">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="font-bold text-25 w-full">Crop your image</h4>
-                    <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showImageEditPopup = false"/>
-                </div>
-                <div class="grid sm:grid-cols-2">
-                    <div class="my-4 max-h-[600px]" >
-                        <img class="block max-w-full" x-ref="cropperDisplay" />
-                        <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
-                            <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
-                            <span>Processing image...</span>
-                        </div>
+                <div class="px-6 pt-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="font-bold text-25 w-full">Crop your image</h4>
+                        <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showImageEditPopup = false"/>
                     </div>
-                    <div class="sm:px-4 md:px-10 py-4">
-                        <h5 class="font-bold text-18 mb-3">Link search terms</h5>
-                        <p class="mb-4 text-16">Tag your images with the appropriate search terms to help us show the most appropriate media to buyers.</p>
-                        <template x-for="mediatag in _getAllMediatags()" :key="mediatag">
-                            <input type="hidden" name="mediatags[]" x-bind:value="mediatag">
-                        </template>
+                    <div class="grid sm:grid-cols-2">
+                        <div class="my-4 max-h-[600px]" >
+                            <img class="block max-w-full" x-ref="cropperDisplay" />
+                            <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
+                                <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
+                                <span>Processing image...</span>
+                            </div>
+                        </div>
+                        <div class="sm:px-4 md:px-10 py-4">
+                            <h5 class="font-bold text-18 mb-3">Link search terms</h5>
+                            <p class="mb-4 text-16">Tag your images with the appropriate search terms to help us show the most appropriate media to buyers.</p>
+                            <input type="hidden" name="mediatags" x-bind:value="_getAllMediatags()">
 
-                        <template x-for="imageType in Object.keys(imageData)" :key="imageType">
-                            <template x-if="['cover_image', 'listing_images'].includes(imageType)">
-                                <template x-for="imageId in Object.keys(imageData[imageType])" :key="imageId">
-                                    <span x-show="imageId == currentImageId">
+                            <template x-for="imageType in ['cover_image', 'listing_images']" :key="imageType">
+                                <template x-for="data in orderedImageData[imageType]" :key="data.image_id">
+                                    <span x-show="data.image_id == currentImageId">
                                         <p class="text-14 text-grey mb-2">
-                                            <span x-text="imageData[imageType][imageId]?.mediatags.length"></span>/
+                                            <span x-text="_getImageData(imageType, data.image_id)?.mediatags.length"></span>/
                                             <span x-text="categoriesCheckboxes.length + instCheckboxes.length + settingsCheckboxes.length"></span>
                                             <span> terms selected</span>
                                         </p>
@@ -370,14 +365,16 @@ get_header();
                                                     <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
                                                         <?php foreach ($group['all'] as $term) { ?>
                                                             <div class="w-fit cursor-pointer"
-                                                                x-show="<?php echo $group['selected']; ?>.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak
-                                                                x-on:click="_toggleImageTerm(imageType, imageId, '<?php echo clean_str_for_doublequotes($term); ?>')"
+                                                                x-show="<?php echo $group['selected']; ?>.includes('<?php echo clean_str_for_doublequotes($term); ?>') ||
+                                                                        _getImageData(imageType, data.image_id)?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>')"
+                                                                x-cloak
+                                                                x-on:click="_toggleImageTerm(imageType, data.image_id, '<?php echo clean_str_for_doublequotes($term); ?>')"
                                                             >
                                                                 <div class="flex items-center border border-black/20 px-3 h-7 rounded-full" :class="{
-                                                                    'bg-yellow-40':     imageData[imageType][imageId]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
-                                                                    'font-bold':        imageData[imageType][imageId]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
-                                                                    'border':          !imageData[imageType][imageId]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
-                                                                    'border-black/20': !imageData[imageType][imageId]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'bg-yellow-40':     _getImageData(imageType, data.image_id)?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'font-bold':        _getImageData(imageType, data.image_id)?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'border':          !_getImageData(imageType, data.image_id)?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'border-black/20': !_getImageData(imageType, data.image_id)?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
                                                                 }">
                                                                     <span class="text-14 w-fit"><?php echo $term; ?></span>
                                                                 </div>
@@ -390,166 +387,187 @@ get_header();
                                     </span>
                                 </template>
                             </template>
-                        </template>
 
+                        </div>
                     </div>
                 </div>
+
+
+                <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
+                    <span class="text-16">Add more search terms to your listing to see more options.</span>
+                    <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showImageEditPopup = false">Apply</button>
+                </div>
+
             </div>
-
-
-            <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
-                <span class="text-16">Add more search terms to your listing to see more options.</span>
-                <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showImageEditPopup = false">Apply</button>
-            </div>
-
         </div>
-    </div>
 
-    <!-- Stage Plot popup -->
-    <div class="px-4 popup-wrapper pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showStagePlotPopup" x-cloak>
-        <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+        <!-- Stage Plot popup -->
+        <div class="px-4 popup-wrapper pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showStagePlotPopup" x-cloak>
+            <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showStagePlotPopup = false">
+            <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showStagePlotPopup = false">
 
-            <div class="px-6 pt-4">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="font-bold text-25 w-full">Add a stage plot image</h4>
-                    <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showStagePlotPopup = false"/>
-                </div>
-                <div>
-                    <div class="mb-6 grid sm:grid-cols-2 gap-2">
-                        <!--
-                        <div class="aspect-4/3 w-48 border border-black/20 mx-auto">
-                            <img class="h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg' ;?>">
-                        </div>
-                        <div class="max-w-1/2 break-all text-center flex items-center flex-col justify-center gap-4 px-4 text-center text-grey">
-                            stage-plot-1.jpg
-                        </div>
-                        -->
-                        <!--<div class="aspect-4/3 w-48 border border-black/20 mx-auto">-->
-                        <div class="my-4 max-h-[600px]" >
-                            <img x-ref="stagePlotCropperDisplay" />
-                            <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
-                                <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
-                                <span>Processing image...</span>
-                            </div>
-                        </div>
-                        <template x-for="imageId in orderedImages['stage_plots']" :key="imageId">
-                            <div class="max-w-1/2 break-all text-center flex items-center flex-col justify-center gap-4 px-4 text-center text-grey"
-                                x-show="imageId == currentImageId"
-                                x-text="imageData['stage_plots'][imageId]?.filename">
-                            </div>
-                        </template>
+                <div class="px-6 pt-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="font-bold text-25 w-full">Add a stage plot image</h4>
+                        <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showStagePlotPopup = false"/>
                     </div>
-                    <div class="border-t border-black/20 -mx-6 pt-4 px-6">
-                        <label class="mb-1 inline-block">Caption</label>
-                        <template x-for="imageId in orderedImages['stage_plots']" :key="imageId">
-                            <input type="text" name="stage_plot_caption"
-                                x-show="imageId == currentImageId"
-                                x-on:change="imageData['stage_plots'][imageId].caption = $event.target.value" x-text="imageData['stage_plots'][imageId]?.caption"
-                            />
-                        </template>
+                    <div>
+                        <div class="mb-6 grid sm:grid-cols-2 gap-2">
+                            <!--
+                            <div class="aspect-4/3 w-48 border border-black/20 mx-auto">
+                                <img class="h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/stage-plot.jpg' ;?>">
+                            </div>
+                            <div class="max-w-1/2 break-all text-center flex items-center flex-col justify-center gap-4 px-4 text-center text-grey">
+                                stage-plot-1.jpg
+                            </div>
+                            -->
+                            <!--<div class="aspect-4/3 w-48 border border-black/20 mx-auto">-->
+                            <div class="my-4 max-h-[600px]" >
+                                <img x-ref="stagePlotCropperDisplay" />
+                                <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
+                                    <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
+                                    <span>Processing image...</span>
+                                </div>
+                            </div>
+                            <template x-for="data in orderedImageData['stage_plots']" :key="data.image_id">
+                                <div class="max-w-1/2 break-all text-center flex items-center flex-col justify-center gap-4 px-4 text-center text-grey"
+                                    x-show="data.image_id == currentImageId"
+                                    x-text="_getImageData('stage_plots', data.image_id)?.filename">
+                                </div>
+                            </template>
+                        </div>
+                        <div class="border-t border-black/20 -mx-6 pt-4 px-6">
+                            <label class="mb-1 inline-block">Caption</label>
+                            <template x-for="data in orderedImageData['stage_plots']" :key="data.image_id">
+                                <input type="text" name="stage_plot_caption"
+                                    x-show="data.image_id == currentImageId"
+                                    x-bind:value="_getImageData('stage_plots', data.image_id)?.caption"
+                                    x-on:change="_getImageData('stage_plots', data.image_id).caption = $event.target.value"
+                                />
+                            </template>
+                        </div>
+
                     </div>
-
                 </div>
+
+
+                <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
+                    <span class="text-16">Let potential clients know what this is.</span>
+                    <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showStagePlotPopup = false">Apply</button>
+                </div>
+
             </div>
-
-
-            <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
-                <span class="text-16">Let potential clients know what this is.</span>
-                <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showStagePlotPopup = false">Apply</button>
-            </div>
-
         </div>
-    </div>
 
-    <!-- Youtube link popup -->
-    <div class="px-4 pt-12 popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showYoutubeLinkPopup" x-cloak>
-        <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+        <!-- Youtube link popup -->
+        <div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showYoutubeLinkPopup" x-cloak>
+            <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
 
-        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
+            <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
 
-            <div class="px-6 pt-4">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="font-bold text-25 w-full">Add a YouTube video</h4>
-                    <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showYoutubeLinkPopup = false" />
-                </div>
-                <div>
-                    <div class="mb-6">
-                        <form class="sm:grid grid-cols-4 gap-2">
-                            <div class="col-span-3">
-                                <label class="mb-1 inline-block">Video url<span class="text-red">*</span></label>
-                                <!--<input class="mb-2" type="text" placeholder="https://" required/>-->
-                            </div>
-                            <!-- <div class="col-span-1">
-                                <label class="mb-1 inline-block">Start time</label>
-                                <input type="text" placeholder="e.g. 40"/>
-                            </div> -->
-                        </form>
+                <div class="px-6 pt-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="font-bold text-25 w-full" x-show="currentYtIndex < 0" x-cloak>Add a YouTube video</h4>
+                        <h4 class="font-bold text-25 w-full" x-show="currentYtIndex >= 0" x-cloak>Edit YouTube video settings</h4>
+                        <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showYoutubeLinkPopup = false"/>
                     </div>
-                    <div class="border-t border-black/20 -mx-6 pt-6 sm:pt-4 pb-2 sm:pb-0 px-6">
-                        <h5 class="font-bold text-18 mb-4">Link taxonomy terms</h5>
-
-                        <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
-                            <!-- Tag 1 -->
-                            <!--
-                            <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                                <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
-                                    <span class="text-14 w-fit">gospel choir</span>
-                                    <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                                </div>
-                            </div>
-                            -->
-                            <!-- Tag 2 -->
-                            <!--
-                            <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                                <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
-                                    <span class="text-14 w-fit">live looper</span>
-                                    <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                                </div>
-                            </div>
-                            -->
-                            <!-- Tag 3 -->
-                            <!--
-                            <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                                <div class="flex items-center bg-yellow-40 font-bold px-3 h-7 rounded-full">
-                                    <span class="text-14 w-fit">orchestra</span>
-                                    <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                                </div>
-                            </div>
-                            -->
-                            <!-- Tag 4 -->
-                            <!--
-                            <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                                <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
-                                    <span class="text-14 w-fit">psychedelic steam punk</span>
-                                    <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                                </div>
-                            </div>
-                            -->
-                            <!-- Tag 5 -->
-                            <!--
-                            <div class="w-fit" x-for="(tag, index) in tags" :key="index + tag">
-                                <div class="flex items-center border border-black/20 px-3 h-7 rounded-full">
-                                    <span class="text-14 w-fit">world music</span>
-                                    <input type="hidden" name="keywords[]" x-bind:value="tag"/>
-                                </div>
-                            </div>
-                            -->
+                    <div class="min-h-10">
+                        <?php
+                        echo get_template_part('template-parts/global/toasts/success-toast', '', ['customEvent' => 'success-toast-youtube-link']);
+                        echo get_template_part('template-parts/global/toasts/error-toast',   '', ['customEvent' => 'error-toast-youtube-link']);
+                        ?>
+                    </div>
+                    <div class="sm:min-w-[500px] mb-10" x-show="currentYtIndex < 0" x-cloak>
+                        <label class="mb-1 inline-block">Video url</label>
+                        <div class="relative">
+                            <input class="w-full mb-2 !pr-16" type="text" placeholder="https://"
+                                x-ref="ytInput"
+                                x-on:keydown.enter="$event.preventDefault(); _addYoutubeUrl($el)">
+                            <button type="button" class="absolute top-2 right-2 w-fit rounded text-12 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black text-grey hover:text-black"
+                                x-on:click="_addYoutubeUrl($refs.ytInput)"
+                            >Add +</button>
                         </div>
-                        <p class="text-14 text-grey">2/8 terms selected</p>
                     </div>
+                    <template x-for="(videoData, index) in youtubeVideoData" :key="index">
+                        <div class="grid sm:grid-cols-2" x-show="currentYtIndex >= 0 && index == currentYtIndex" x-cloak>
+                            <div class="my-4 max-h-[600px]" >
+                                <img class="w-full" x-bind:src="`https://img.youtube.com/vi/${videoData.video_id}/mqdefault.jpg`">
+                                <div class="mt-6">
+                                    <label class="mb-1 inline-block">Video Url</label>
+                                    <div class="text-14 text-grey break-words whitespace-normal" x-text="videoData.url"></div>
+                                </div>
+                                <div class="mt-6" x-data="{
+                                    calcStartTime() { return parseInt($refs.startMinute?.value || 0) * 60 + parseInt($refs.startSecond?.value || 0); },
+                                }">
+                                    <label class="mb-1 inline-block">Start time</label><br>
+                                    <label class="mb-1 inline-block text-14">Minute</label>
+                                    <input class="w-full" type="number" min="0" x-ref="startMinute"
+                                        x-on:change="youtubeVideoData[index].start_time = calcStartTime()"
+                                        x-bind:value="Math.floor(videoData.start_time / 60)"
+                                    />
+                                    <label class="mb-1 inline-block text-14">Second</label>
+                                    <input class="w-full" type="number" min="0" max="59" x-ref="startSecond"
+                                        x-on:change="youtubeVideoData[index].start_time = calcStartTime()"
+                                        x-bind:value="videoData.start_time % 60"
+                                    />
+                                </div>
+                            </div>
+                            <div class="sm:px-4 md:px-10 py-4">
+                                <div class="-mx-6 pb-2 sm:pb-0 px-6">
+                                    <h5 class="font-bold text-18 mb-4">Link search terms</h5>
+                                    <p class="mb-4 text-16">Tag your videos with the appropriate search terms to help us show the most appropriate media to buyers.</p>
+                                    <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
+                                        <div class="overflow-y-scroll max-h-[300px]">
+                                            <?php $term_groups = [
+                                                [ 'title' => 'Categories',      'selected' => 'categoriesCheckboxes', 'all' => $categories,       ],
+                                                [ 'title' => 'Instrumentation', 'selected' => 'instCheckboxes',       'all' => $instrumentations, ],
+                                                [ 'title' => 'Settings',        'selected' => 'settingsCheckboxes',   'all' => $settings,         ],
+                                                [ 'title' => 'Genres',          'selected' => 'genresCheckboxes',     'all' => $genres,           ],
+                                                [ 'title' => 'Subgenres',       'selected' => 'subgenresCheckboxes',  'all' => $subgenres,        ],
+                                            ];
+                                            foreach ($term_groups as $group) { ?>
+                                                <div x-show="<?php echo $group['selected']; ?>.length > 0">
+                                                    <h4 class="text-16 mb-3"><?php echo $group['title']; ?></h4>
+                                                    <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
+                                                        <?php foreach ($group['all'] as $term) { ?>
+                                                            <div class="w-fit cursor-pointer"
+                                                                x-show="<?php echo $group['selected']; ?>.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak
+                                                                x-on:click="_toggleYoutubeLinkTerm(index, '<?php echo clean_str_for_doublequotes($term); ?>')"
+                                                            >
+                                                                <div class="flex items-center border border-black/20 px-3 h-7 rounded-full" :class="{
+                                                                    'bg-yellow-40':     youtubeVideoData[index]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'font-bold':        youtubeVideoData[index]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'border':          !youtubeVideoData[index]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                    'border-black/20': !youtubeVideoData[index]?.mediatags.includes('<?php echo clean_str_for_doublequotes($term); ?>'),
+                                                                }">
+                                                                    <span class="text-14 w-fit"><?php echo $term; ?></span>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="text-14 text-grey mb-2">
+                                            <span x-text="youtubeVideoData[index]?.mediatags.length"></span>/
+                                            <span x-text="categoriesCheckboxes.length + genresCheckboxes.length + subgenresCheckboxes.length + instCheckboxes.length + settingsCheckboxes.length"></span>
+                                            <span> terms selected</span>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4" x-show="currentYtIndex >= 0" x-cloak>
+                    <span class="text-16">Add more search terms to your listing to see more options.</span>
+                    <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showYoutubeLinkPopup = false">Apply</button>
                 </div>
             </div>
-
-
-            <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
-                <span class="text-16">Add more taxonomy terms to your profile to see more options.</span>
-                <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Apply</button>
-            </div>
-
         </div>
-    </div>
 
     </form>
 

@@ -13,7 +13,7 @@ function handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, 
 
         croppedCanvas.toBlob((blob) => {
             if (blob) {
-                var filename = `${alco.imageData[imageType][imageId]['filename'].replace(/\.[^/.]+$/, '')}.webp`;
+                var filename = `${alco._getImageData(imageType, imageId)['filename'].replace(/\.[^/.]+$/, '')}.webp`;
                 var file = new File([blob], filename, { type: 'image/webp' });
                 var croppedImageUrl = URL.createObjectURL(blob);
                 alco._updateImage(imageType, imageId, croppedImageUrl, file, isCropEnd);
@@ -57,6 +57,7 @@ function initCropperFromFile(alco, event, displayElement, imageType, imageId, su
             imageId = generateRandomId();
         }
         var newImageData = {
+            'image_id':  imageId,
             'file':      files[0],
             'filename':  files[0].name,
             'url':       '',

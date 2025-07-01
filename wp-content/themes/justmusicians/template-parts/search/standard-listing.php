@@ -20,15 +20,15 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
 
     <?php
-    if (count($args['youtube_video_ids']) > 0 or !empty($args['alpine_video_ids'])) { ?>
+    if (count($args['youtube_video_ids']) > 0 or $is_preview) { ?>
 
         <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
             x-data="{
                 previousIndex: 0,
                 currentIndex: 0,
                 showArrows: isTouchDevice,
-                totalSlides: <?php echo (count($args['youtube_video_ids']) + 1); ?>,
-                videoIds:    <?php if (!empty($args['alpine_video_ids'])) { echo $args['alpine_video_ids']; } else { echo clean_arr_for_doublequotes($args['youtube_video_ids']); } ?>,
+                totalSlides: <?php if ($is_preview) { echo 'youtubeVideoData.length'; } else { echo (count($args['youtube_video_ids']) + 1); } ?>,
+                videoData:   <?php if ($is_preview) { echo 'youtubeVideoData'; } else { echo clean_arr_for_doublequotes($args['youtube_video_data']); } ?>,
                 playerIds: {},
                 _updateIndex(newIndex)  { updateIndex(this, newIndex); },
                 _pausePreviousSlide()   { pausePreviousSlide(this); },
@@ -38,14 +38,13 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                 _isPaused()             { return isPaused(this); },
                 _enterSlider()          { enterSlider(this); },
                 _leaveSlider()          { leaveSlider(this); },
-                _updateVideos(videoIds) {
-                    // Slide left if the current slide is the last one and a slide is getting destroyed to avoid user seeing a blank slide
-                    if (this.totalSlides > videoIds.length + 1 && this.currentIndex == this.totalSlides -1 ) { this._updateIndex(this.currentIndex-1); }
-                    this.videoIds = videoIds;
-                    this.totalSlides = videoIds.length + 1;
+                _updateVideoData(videoData) {
+                    this._updateIndex(0);
+                    this.videoData = videoData;
+                    this.totalSlides = videoData.length + 1;
                 },
             }"
-            <?php if (!empty($args['alpine_video_ids'])) { ?> x-init="$watch('<?php echo $args['alpine_video_ids']; ?>', value => _updateVideos(value) )" <?php } ?>
+            <?php if ($is_preview) { ?> x-init="$watch('youtubeVideoData', value => _updateVideoData(value) )" <?php } ?>
             x-on:mouseleave="_leaveSlider()"
             x-on:mouseenter="_enterSlider()">
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
@@ -60,13 +59,13 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                     x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
 
-                <template x-for="(videoId, index) in videoIds" :key="videoId + index">
+                <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
                     <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
                         x-id="['playerId']"
-                        <?php if (!empty($args['alpine_video_ids'])) { ?>
-                            x-init="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }) })"
+                        <?php if ($is_preview) { ?>
+                            x-init="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }) })"
                         <?php } else { ?>
-                            x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoId': videoId }); console.log(playerIds); })"
+                            x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
                         <?php } ?>
                     >
                         <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>

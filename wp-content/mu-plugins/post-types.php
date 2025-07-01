@@ -86,6 +86,21 @@ function register_post_types() {
         'menu_icon' => 'dashicons-list-view'
     ));
 
+    // Youtube Videos
+    register_post_type('youtubevideo', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Youtube Video',
+          'add_new_item' => 'Add New Youtube Video',
+          'edit_item' => 'Edit Youtube Video',
+          'all_items' => 'All Youtube Videos',
+          'singular_name' => 'Youtube Video'
+        ),
+        'menu_icon' => 'dashicons-video-alt3'
+    ));
+
     // Performance
     register_post_type('performance', array(
         'public' => true,
@@ -227,7 +242,7 @@ function register_taxonomies() {
       'singular_name' => 'Keyword'
     )
   ));
-  register_taxonomy('mediatag', array('listing', 'attachment'), array(
+  register_taxonomy('mediatag', array('listing', 'attachment', 'youtubevideo'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,

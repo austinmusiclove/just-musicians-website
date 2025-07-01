@@ -1,29 +1,38 @@
 
-function addYoutubeUrl(alpineComponent, event) {
-    var value = event.target.value.trim();
+function addYoutubeUrl(alco, input) {
+    var value = input.value.trim();
 
     // Check for duplicate urls
-    if (alpineComponent.tags.includes(value)) {
-        alpineComponent.$dispatch('error-toast', {'message': 'This url has already been added'});
-        event.target.value = '';
+    if (alco.youtubeVideoData.map(data => data.url).includes(value)) {
+        alco.$dispatch('error-toast-youtube-link', {'message': 'This url has already been added'});
+        input.value = '';
         return;
     }
 
     // Check for proper url format
     var validation = validateYoutubeUrl(value);
-    if (validation === true) {
-        alpineComponent.tags.push(value);
-        event.target.value = '';
-        alpineComponent.pVideoIds = getVideoIdsFromUrls(alpineComponent.tags);
-    } else {
-        alpineComponent.$dispatch('error-toast', {'message': validation});
+    if (validation !== true) {
+        alco.$dispatch('error-toast-youtube-link', {'message': validation});
+        input.value = '';
+        return;
     }
+
+    input.value = '';
+    alco.youtubeVideoData.push({
+        url:        value,
+        mediatags:  [],
+        start_time: 0,
+        video_id:   getVideoIdFromUrl(value),
+    });
+    alco.currentYtIndex = alco.youtubeVideoData.length-1;
+    alco.pVideoIds = getVideoIdsFromVideoData(alco.youtubeVideoData);
+    alco.$dispatch('success-toast-youtube-link', {'message': 'Successfully added YouTube video'});
 }
 
 
-function removeYoutubeUrl(alpineComponent, index) {
-    alpineComponent.tags.splice(index, 1);
-    alpineComponent.pVideoIds = getVideoIdsFromUrls(alpineComponent.tags);
+function removeYoutubeUrl(alco, index) {
+    alco.youtubeVideoData.splice(index, 1);
+    alco.pVideoIds = getVideoIdsFromVideoData(alco.youtubeVideoData);
 }
 
 
@@ -70,30 +79,41 @@ function validateYoutubeUrl(url) {
 }
 
 
-function getVideoIdsFromUrls(urls) {
+function getVideoIdsFromVideoData(videoData) {
     var videoIds = [];
 
-    urls.forEach(url => {
-        try {
-            var parsedUrl = new URL(url);
-
-            // Handle youtube.com/watch?v=...
-            if (parsedUrl.hostname.includes('youtube.com')) {
-                var videoId = parsedUrl.searchParams.get('v');
-                if (videoId) videoIds.push(videoId);
-            }
-
-            // Handle youtu.be/VIDEO_ID
-            else if (parsedUrl.hostname.includes('youtu.be')) {
-                var id = parsedUrl.pathname.split('/')[1];
-                if (id) videoIds.push(id);
-            }
-        } catch (e) {
-            // skip invalid URLs
-            console.warn(`Invalid URL skipped: ${url}`);
-        }
+    videoData.forEach(data => {
+        var videoId = getVideoIdFromUrl(data.url);
+        if (videoId) { videoIds.push(videoId); }
     });
 
     return videoIds;
 }
+function getVideoIdFromUrl(url) {
+    try {
+        var parsedUrl = new URL(url);
 
+        // Handle youtube.com/watch?v=...
+        if (parsedUrl.hostname.includes('youtube.com')) {
+            var videoId = parsedUrl.searchParams.get('v');
+            if (videoId) { return videoId; }
+        }
+
+        // Handle youtu.be/VIDEO_ID
+        else if (parsedUrl.hostname.includes('youtu.be')) {
+            var id = parsedUrl.pathname.split('/')[1];
+            if (id) { return id; }
+        }
+    } catch (e) {
+        return null;
+    }
+}
+
+function toggleYoutubeLinkTerm(alco, index, term) {
+    var termIndex = alco.youtubeVideoData[index].mediatags.indexOf(term);
+    if (termIndex == -1) {
+        alco.youtubeVideoData[index].mediatags.push(term);
+    } else {
+        alco.youtubeVideoData[index].mediatags.splice(termIndex, 1);
+    }
+}

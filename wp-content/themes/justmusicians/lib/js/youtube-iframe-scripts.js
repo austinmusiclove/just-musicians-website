@@ -16,21 +16,21 @@ function clearInitQueue() {
     // clear the queue
     while (initQueue.length > 0) {
         var queueItem = initQueue.shift();
-        initPlayer(queueItem.alpineComponent, queueItem.playerId, queueItem.videoId);
+        initPlayer(queueItem.alpineComponent, queueItem.playerId, queueItem.videoData);
     }
     clearingQueue = false;
 }
 
 
-function initPlayer(alpineComponent, playerId, videoId) {
+function initPlayer(alpineComponent, playerId, videoData) {
     if (!youtubeIframeApiReady) {
         // If the api is not ready, add this init call to a queue
-        initQueue.push({ alpineComponent, playerId, videoId });
+        initQueue.push({ alpineComponent, playerId, videoData });
         return;
     }
     if (playerId) {
         var player = new YT.Player(playerId, {
-            videoId: videoId, // remove this to init from iframe
+            videoId: videoData.video_id, // remove this to init from iframe
             playerVars: {
                 controls: 0,
                 origin: siteData.siteUrl,
@@ -38,6 +38,7 @@ function initPlayer(alpineComponent, playerId, videoId) {
                 mute: 1,
                 autoplay: 0,
                 rel: 0,
+                start: videoData?.start_time || 0,
             },
             events: {
                 "onReady": () => {

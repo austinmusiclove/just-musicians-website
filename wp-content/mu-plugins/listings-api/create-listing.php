@@ -21,6 +21,7 @@ function _create_listing($args) {
     ];
     $listing_images_ids = [];
     $stage_plots_ids    = [];
+    $youtube_video_ids  = [];
     $update_args        = ['ID' => $post_id, 'meta_input' => []];
 
     // cover image
@@ -60,9 +61,23 @@ function _create_listing($args) {
             }
         }
     }
+    // youtube videos
+    if (!empty($args['youtube_video_data']) and is_array($args['youtube_video_data'])) {
+        foreach ($args['youtube_video_data'] as $video_data) {
+            if (empty($video_data['post_id'])) {
+                $video_post_id = insert_youtube_video($video_data , true);
+                if ( is_wp_error( $video_post_id ) ) {
+                    return $video_post_id;
+                }
+                $attachment_ids['youtube_videos'][$video_data['video_id']] = $video_post_id;
+                $youtube_video_ids[] = $video_post_id;
+            }
+        }
+    }
 
     $update_args['meta_input']['listing_images'] = $listing_images_ids;
-    $update_args['meta_input']['stage_plots'] = $stage_plots_ids;
+    $update_args['meta_input']['stage_plots']    = $stage_plots_ids;
+    $update_args['meta_input']['youtube_videos'] = $youtube_video_ids;
     $post_id = wp_update_post($update_args, true);
     if (is_wp_error($post_id)) {
         return $post_id;
