@@ -143,9 +143,18 @@ function get_listings($args) {
     while ($query->have_posts()) {
         $query->the_post();
 
-        // Get valid video links for this listing
-        $youtube_video_urls = get_field('youtube_video_urls');
-        $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
+        // Get youtube links
+        $youtube_video_post_ids = get_field('youtube_videos');
+        $youtube_video_data = get_youtube_video_data($youtube_video_post_ids);
+        $youtube_video_ids = [];
+        if ($youtube_video_data and is_array($youtube_video_data)) {
+            foreach($youtube_video_data as $video_data) {
+                error_log(print_r($video_data, true));
+                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $video_data['url'], $matches)) {
+                    $youtube_video_ids[] = $matches[1];
+                }
+            }
+        }
 
         $results[] = [
             'post_id'                => get_the_ID(),
@@ -168,8 +177,8 @@ function get_listings($args) {
             'apple_music_artist_url' => get_field('apple_music_artist_url'),
             'soundcloud_url'         => get_field('soundcloud_url'),
             'verified'               => get_field('verified'),
-            'youtube_video_urls'     => get_field('youtube_video_urls'),
             'youtube_video_ids'      => $youtube_video_ids,
+            'youtube_video_data'     => $youtube_video_data,
             'permalink'              => get_permalink(),
         ];
     }

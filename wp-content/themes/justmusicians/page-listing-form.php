@@ -108,7 +108,7 @@ get_header();
             'stage_plots':            <?php if (!empty($listing_data["stage_plots_data"]))    { echo clean_arr_for_doublequotes($listing_data["stage_plots_data"]);                  } else { echo '[]'; } ?>,
         },
 
-        getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState || ''; },
+        getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState ? this.pCity || this.pState || '' : 'City, State'; },
         submitButtons: [$refs.updateBtnTop, $refs.updateBtnBottom, $refs.saveDraftBtnTop, $refs.saveDraftBtnBottom, $refs.publishBtnTop, $refs.publishBtnBottom ],
 
         cropper:                    null,
@@ -234,13 +234,13 @@ get_header();
 
                     <div x-show="showPageTab" x-cloak >
                         <!-- Hero -->
-                        <?php echo get_template_part('template-parts/listing/hero', '', array(
+                        <?php echo get_template_part('template-parts/listing-page/hero', '', array(
                             'instance'          => 'listing-form',
                             'genres'            => $genres,
                         )); ?>
 
                         <!-- Content -->
-                        <?php echo get_template_part('template-parts/listing/content', '', array(
+                        <?php echo get_template_part('template-parts/listing-page/content', '', array(
                             'instance'          => 'listing-form',
                             'categories'        => $categories,
                             'genres'            => $genres,
@@ -269,47 +269,19 @@ get_header();
                         x-on:mute-youtube-players="_toggleMute()"
                         x-init="_setupVisibilityListener()">
 
-                        <?php echo get_template_part('template-parts/search/standard-listing', '', [
-                            'name'                          => $listing_data ? $clean_name : 'Performer or Band Name',
-                            'location'                      => $listing_data ? $clean_city . ', ' . $clean_state : 'City, State',
-                            'description'                   => $listing_data ? $clean_description : 'Description',
+                        <?php echo get_template_part('template-parts/listings/standard-listing', '', [
                             'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
-                            'thumbnail_url'                 => $listing_data ? $listing_data['thumbnail_url']          : '',
                             'verified'                      => $listing_data ? $listing_data['verified']               : false,
-                            'website'                       => $listing_data ? $listing_data['website']                : '',
-                            'facebook_url'                  => $listing_data ? $listing_data['facebook_url']           : '',
-                            'instagram_url'                 => $listing_data ? $listing_data['instagram_url']          : '',
-                            'x_url'                         => $listing_data ? $listing_data['x_url']                  : '',
-                            'youtube_url'                   => $listing_data ? $listing_data['youtube_url']            : '',
-                            'tiktok_url'                    => $listing_data ? $listing_data['tiktok_url']             : '',
-                            'bandcamp_url'                  => $listing_data ? $listing_data['bandcamp_url']           : '',
-                            'spotify_artist_url'            => $listing_data ? $listing_data['spotify_artist_url']     : '',
-                            'apple_music_artist_url'        => $listing_data ? $listing_data['apple_music_artist_url'] : '',
-                            'soundcloud_url'                => $listing_data ? $listing_data['soundcloud_url']         : '',
                             'youtube_video_ids'             => $listing_data ? $listing_data['youtube_video_ids']      : [],
-                            'youtube_player_ids'            => $listing_data ? $listing_data['youtube_video_ids']      : [],
                             'lazyload_thumbnail'            => false,
                             'last'                          => false,
                             'instance'                      => 'listing-form',
-                            'alpine_name'                   => 'pName',
-                            'alpine_location'               => 'getListingLocation()',
-                            'alpine_description'            => 'pDescription',
-                            'alpine_instagram_url'          => 'pInstagramUrl',
-                            'alpine_tiktok_url'             => 'pTiktokUrl',
-                            'alpine_x_url'                  => 'pXUrl',
-                            'alpine_website'                => 'pWebsite',
-                            'alpine_facebook_url'           => 'pFacebookUrl',
-                            'alpine_youtube_url'            => 'pYoutubeUrl',
-                            'alpine_bandcamp_url'           => 'pBandcampUrl',
-                            'alpine_spotify_artist_url'     => 'pSpotifyArtistUrl',
-                            'alpine_apple_music_artist_url' => 'pAppleMusicArtistUrl',
-                            'alpine_soundcloud_url'         => 'pSoundcloudUrl',
                         ]); ?>
 
                         <div class="opacity-50">
                             <?php
-                                echo get_template_part('template-parts/search/standard-listing-skeleton', '', []);
-                                echo get_template_part('template-parts/search/standard-listing-skeleton', '', []);
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton', '', []);
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton', '', []);
                             ?>
                         </div>
 

@@ -104,6 +104,7 @@ get_header();
                             _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                             _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                             _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+
                             players: {},
                             playersMuted: true,
                             playersPaused: false,
@@ -122,11 +123,11 @@ get_header();
                         x-init="_setupVisibilityListener()"
                     >
                         <?php
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
                         ?>
                     </span>
 

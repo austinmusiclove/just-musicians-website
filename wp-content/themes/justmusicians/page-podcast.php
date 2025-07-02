@@ -41,7 +41,7 @@ get_header();
         if ($query->have_posts()) :
             while ( $query->have_posts() ) : $query->the_post();
         ?>
-            <?php echo get_template_part('template-parts/search/audio-listing', '', array(
+            <?php echo get_template_part('template-parts/listings/audio-listing', '', array(
                 'name' => get_the_title(),
                 'date' => get_the_date(),
                 'excerpt' => get_the_excerpt(),

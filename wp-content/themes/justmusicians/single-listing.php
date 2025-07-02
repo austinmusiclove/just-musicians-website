@@ -33,13 +33,13 @@ $youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
 
 
 // Hero
-echo get_template_part('template-parts/listing/hero', '', array(
+echo get_template_part('template-parts/listing-page/hero', '', array(
    'instance' => 'listing-page',
    'genres'   => $genres,
 ));
 
 // Content
-echo get_template_part('template-parts/listing/content', '', array(
+echo get_template_part('template-parts/listing-page/content', '', array(
    'instance'          => 'listing-page',
    'categories'        => $categories,
    'genres'            => $genres,

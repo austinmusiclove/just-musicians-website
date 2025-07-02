@@ -62,11 +62,11 @@ get_header();
 
                         <span id="results">
                             <?php
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                echo get_template_part('template-parts/listings/standard-listing-skeleton');
                             ?>
                         </span>
 

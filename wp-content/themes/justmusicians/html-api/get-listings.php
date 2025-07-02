@@ -35,7 +35,7 @@ if (count($listings) > 0) {
         if (!empty($listing['genre'])) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
-        get_template_part('template-parts/search/standard-listing', '', [
+        get_template_part('template-parts/listings/standard-listing', '', [
             'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
@@ -52,8 +52,8 @@ if (count($listings) > 0) {
             'spotify_artist_url'     => $listing['spotify_artist_url'],
             'apple_music_artist_url' => $listing['apple_music_artist_url'],
             'soundcloud_url'         => $listing['soundcloud_url'],
-            'youtube_video_urls'     => $listing['youtube_video_urls'],
             'youtube_video_ids'      => $listing['youtube_video_ids'],
+            'youtube_video_data'     => $listing['youtube_video_data'],
             'verified'               => $listing['verified'],
             'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,

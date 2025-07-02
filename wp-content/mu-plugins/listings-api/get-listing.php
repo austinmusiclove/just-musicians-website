@@ -34,6 +34,7 @@ function get_listing($args) {
     $youtube_video_ids = [];
     if ($youtube_video_data and is_array($youtube_video_data)) {
         foreach($youtube_video_data as $video_data) {
+            error_log(print_r($video_data, true));
             if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $video_data['url'], $matches)) {
                 $youtube_video_ids[] = $matches[1];
             }
