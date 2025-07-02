@@ -29,7 +29,7 @@
         }"
     >
         <template x-for="(videoData, index) in youtubeVideoData" :key="index + videoData.url">
-            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full" x-sort:item="index">
+            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
                 <div class="flex items-center gap-4 grow min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
                     <div class="aspect-video w-16 shrink-0">

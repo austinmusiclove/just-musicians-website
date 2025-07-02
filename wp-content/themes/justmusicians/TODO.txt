@@ -1,7 +1,5 @@
 Milestones
     Artist announce and invite new profiles
-        organize listing form page into template parts
-        remove pass through _ functions maybe
         make it invite only
         limit access until you verify email
         add permissions to all writing apis (venue reviews stats, venues stats, collections)
