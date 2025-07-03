@@ -13,6 +13,7 @@
     </a>
     <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:bg-grey disabled:text-white"
         x-ref="updateBtn<?php echo $args['instance']; ?>"
+        x-on:click="postStatus = 'publish'"
     >
         <span class="htmx-indicator-replace">Update Listing</span>
         <span class="absolute inset-0 flex items-center justify-center htmx-indicator">

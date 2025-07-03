@@ -60,7 +60,7 @@
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
         }"
-        x-init="width = window.innerWidth"
+        x-init="width = window.innerWidth; document.body.addEventListener('htmx:responseError', (event) => { if (event.detail.xhr.status === 404) { $dispatch('error-toast', {'message': 'HTMX Error: 404'}); } })"
         x-resize.document="
             width = $width;
             showMobileMenu = false;

@@ -6,7 +6,7 @@ function insert_youtube_video($video_data) {
     $args = [
         'post_type'   => 'youtubevideo',
         'post_status' => 'publish',
-        'post_title'  => $video_data['video_id'],
+        'post_title'  => $video_data['url'],
         'meta_input'  => [
             'url'         => $video_data['url'],
             'video_id'    => $video_data['video_id'],

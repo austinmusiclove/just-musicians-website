@@ -25,14 +25,12 @@ function addYoutubeUrl(alco, input) {
         video_id:   getVideoIdFromUrl(value),
     });
     alco.currentYtIndex = alco.youtubeVideoData.length-1;
-    alco.pVideoIds = getVideoIdsFromVideoData(alco.youtubeVideoData);
     alco.$dispatch('success-toast-youtube-link', {'message': 'Successfully added YouTube video'});
 }
 
 
 function removeYoutubeUrl(alco, index) {
     alco.youtubeVideoData.splice(index, 1);
-    alco.pVideoIds = getVideoIdsFromVideoData(alco.youtubeVideoData);
 }
 
 
@@ -79,16 +77,6 @@ function validateYoutubeUrl(url) {
 }
 
 
-function getVideoIdsFromVideoData(videoData) {
-    var videoIds = [];
-
-    videoData.forEach(data => {
-        var videoId = getVideoIdFromUrl(data.url);
-        if (videoId) { videoIds.push(videoId); }
-    });
-
-    return videoIds;
-}
 function getVideoIdFromUrl(url) {
     try {
         var parsedUrl = new URL(url);

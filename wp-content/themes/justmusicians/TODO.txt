@@ -1,32 +1,26 @@
 Milestones
     Artist announce and invite new profiles
-        make it invite only
-        limit access until you verify email
-        add permissions to all writing apis (venue reviews stats, venues stats, collections)
-        validation contact and links
-            filter out spotify links that are not artist links
-            regex front end check that they are url for the correct site
-            front end check for 404
-            clear off query args from urls except id or something from fb?
-            clean city name to be the right capitalization
-        housekeeping
-            recycling for old unlinked images
-        test
-            big user testing
-            show err if htmx request fails and never gets to server
-            test apostrophes everywhere
+        create the listings for them before they sign up instead of allowing new listing creating with the link
         ACF
             change venues verified and venues unverified return type to id not post
             add listing_images and stage_plots to ACF with same return type as local env
             add youtube video field group and youtube videos field to listings
             run api to populate data in youtube video posts instead of youtube video urls
-        create the listings for them before they sign up instead of allowing new listing creating with the link
         advanced
+            add permissions to all writing apis (venue reviews stats, venues stats, collections)
+            add spinner behind iframes before they are there
             disable input until change made or auto save after input
             allow adding venue
-            make independent scroll for preview and form
             scroll preview to section when corresponding input is focused
             scroll to required field if submit fails due to missing field
+            validation contact and links
+                filter out spotify links that are not artist links
+                regex front end check that they are url for the correct site
+                front end check for 404
+                clear off query args from urls except id or something from fb?
+                clean city name to be the right capitalization
+            limit access until you verify email
+            make it invite only
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         check for todos in files
@@ -55,6 +49,7 @@ Milestones
     Venue testing
         venue applications
 Data
+    recycling for old unlinked images
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
     change venue in venue review to post object
@@ -62,6 +57,8 @@ Data
     content moderation for images
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
+Testing
+    test apostrophes everywhere
 UX
     collections
         add animations

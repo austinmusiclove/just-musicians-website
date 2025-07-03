@@ -61,7 +61,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['instrumentations']))         { $sanitized_args['tax_input']['instrumentation']           = custom_sanitize_array($_POST['instrumentations']); }
     if (isset($_POST['settings']))                 { $sanitized_args['tax_input']['setting']                   = custom_sanitize_array($_POST['settings']); }
     if (isset($_POST['keywords']))                 { $sanitized_args['tax_input']['keyword']                   = custom_sanitize_array($_POST['keywords']); }
-    if (isset($_POST['mediatags']))                { $sanitized_args['tax_input']['mediatag']                  = custom_sanitize_array($_POST['mediatags']); }
+    if (isset($_POST['mediatags']))                { $sanitized_args['tax_input']['mediatag']                  = custom_parse_json($_POST['mediatags']); }
 
     // Media
     if (isset($_POST['cover_image_meta']))         { $sanitized_args['cover_image']                            = custom_parse_file($_POST['cover_image_meta'], 'cover_image'); }
@@ -120,6 +120,18 @@ function custom_parse_youtube_video_data($json) {
     // TODO check youtube url validity
     // TODO generate video id from valid urls
     // TODO check post id matches other data or populate data from post id if exists
+    // this is the way i was getting the id from url and there is another way in helper.php
+    /*
+    $youtube_video_ids = [];
+    if ($youtube_video_data and is_array($youtube_video_data)) {
+        foreach($youtube_video_data as $video_data) {
+            error_log(print_r($video_data, true));
+            if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $video_data['url'], $matches)) {
+                $youtube_video_ids[] = $matches[1];
+            }
+        }
+    }
+    */
     return custom_parse_json($json);
 }
 function custom_parse_json($json) {

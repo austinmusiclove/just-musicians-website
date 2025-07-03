@@ -11,8 +11,8 @@ if (!empty($_GET['lid'])) {
 }
 $is_update            = !is_null($listing_data);
 $is_published         = (!is_null($listing_data) and $listing_data['post_status'] == 'publish');
-$verified_venue_ids   = $listing_data ? $listing_data['venues_played_verified']                  : [];
-$unverified_venue_ids = $listing_data ? $listing_data['venues_played_unverified']                : [];
+$verified_venue_ids   = ($listing_data and is_array($listing_data['venues_played_verified']))   ? $listing_data['venues_played_verified']   : [];
+$unverified_venue_ids = ($listing_data and is_array($listing_data['venues_played_unverified'])) ? $listing_data['venues_played_unverified'] : [];
 $categories           = get_terms_decoded('mcategory', 'names');
 $genres               = get_terms_decoded('genre', 'names');
 $subgenres            = get_terms_decoded('subgenre', 'names');
@@ -53,7 +53,7 @@ get_header();
         showImageEditPopup:     false,
         showStagePlotPopup:     false,
         showYoutubeLinkPopup:   false,
-        postStatus:             '',
+        postStatus:             '<?php if ($listing_data) { echo $listing_data['post_status']; } else { echo 'draft'; } ?>',
         pName:                  '<?php if ($listing_data) { echo clean_str_for_doublequotes($listing_data["name"]); } ?>',
         pDescription:           '<?php if ($listing_data) { echo clean_str_for_doublequotes($listing_data["description"]); } ?>',
         pCity:                  '<?php if ($listing_data) { echo clean_str_for_doublequotes($listing_data["city"]); } ?>',
@@ -87,7 +87,6 @@ get_header();
         verifiedVenueIds:        <?php if (!empty($verified_venue_ids))                 { echo clean_arr_for_doublequotes($verified_venue_ids);                 } else { echo '[]'; } ?>,
         unverifiedVenueIds:      <?php if (!empty($unverified_venue_ids))               { echo clean_arr_for_doublequotes($unverified_venue_ids);               } else { echo '[]'; } ?>,
         youtubeVideoData:        <?php if (!empty($listing_data["youtube_video_data"])) { echo clean_arr_for_doublequotes($listing_data["youtube_video_data"]); } else { echo '[]'; } ?>,
-        pVideoIds:               <?php if (!empty($listing_data["youtube_video_ids"]))  { echo clean_arr_for_doublequotes($listing_data["youtube_video_ids"]);  } else { echo '[]'; } ?>,
         orderedImageData: {
             'cover_image': [
                 {
@@ -117,17 +116,17 @@ get_header();
         _addImage(imageType, imageId, imageData)                      { addImage(this, imageType, imageId, imageData); },
         _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
         _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
-        _getAllMediatags()                                            { return getAllMediatags(this); },
         _updateImage(imageType, imageId, url, file, wasCropped)       { updateImage(this, imageType, imageId, url, file, wasCropped); },
         _updateFileInputs()                                           { updateFileInputs(this); },
         _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
+        _getAllMediatags()                                            { return getAllMediatags(this); },
 
         _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
         _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
     }"
     x-on:updateimageids.window="_updateAttachmentIds($event.detail)"
 >
-    <form id="listing-form" action="/wp-json/v1/listings" enctype="multipart/form-data" class="flex flex-col gap-4"
+    <form id="listing-form" enctype="multipart/form-data" class="flex flex-col gap-4"
         hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
         hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
         hx-target="#result"
@@ -153,8 +152,9 @@ get_header();
                     </header>
 
                     <!-- Hidden inputs -->
-                    <input type="hidden" name="post_status" x-model="postStatus" />
                     <?php if ($listing_data) { ?><input type="hidden" id="post_id" name="post_id" value="<?php echo $_GET['lid']; ?>"><?php } ?>
+                    <input type="hidden" name="post_status" x-model="postStatus" />
+                    <input type="hidden" name="mediatags" x-bind:value="JSON.stringify(_getAllMediatags())">
 
 
                     <!------------ Page Load Toasts ----------------->
@@ -229,18 +229,20 @@ get_header();
 
 
                     <!-- Full page preview -->
-                    <div x-show="showPageTab" x-cloak >
+                    <div class="overflow-scroll max-h-[80vh]" x-show="showPageTab" x-cloak >
                         <?php echo get_template_part('template-parts/listing-page/hero', '', array(
                             'instance'          => 'listing-form',
                             'genres'            => $genres,
                         )); ?>
                         <?php echo get_template_part('template-parts/listing-page/content', '', array(
-                            'instance'          => 'listing-form',
-                            'categories'        => $categories,
-                            'genres'            => $genres,
-                            'subgenres'         => $subgenres,
-                            'instrumentations'  => $instrumentations,
-                            'settings'          => $settings,
+                            'instance'           => 'listing-form',
+                            'categories'         => $categories,
+                            'genres'             => $genres,
+                            'subgenres'          => $subgenres,
+                            'instrumentations'   => $instrumentations,
+                            'settings'           => $settings,
+                            'youtube_video_data' => null,
+                            'venues_combined'    => null,
                         )); ?>
                     </div>
 
@@ -267,7 +269,6 @@ get_header();
                         <?php echo get_template_part('template-parts/listings/standard-listing', '', [
                             'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
                             'verified'                      => $listing_data ? $listing_data['verified']               : false,
-                            'youtube_video_ids'             => $listing_data ? $listing_data['youtube_video_ids']      : [],
                             'lazyload_thumbnail'            => false,
                             'last'                          => false,
                             'instance'                      => 'listing-form',

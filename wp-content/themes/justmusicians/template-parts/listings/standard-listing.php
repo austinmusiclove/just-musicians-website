@@ -24,7 +24,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             previousIndex: 0,
             currentIndex: 0,
             showArrows: isTouchDevice,
-            totalSlides: <?php if ($is_preview) { echo 'youtubeVideoData.length + 1'; } else { echo (count($args['youtube_video_ids']) + 1); } ?>,
+            totalSlides: <?php if ($is_preview) { echo 'youtubeVideoData.length + 1'; } else { echo (count($args['youtube_video_data']) + 1); } ?>,
             videoData:   <?php if ($is_preview) { echo 'youtubeVideoData';            } else { echo clean_arr_for_doublequotes($args['youtube_video_data']); } ?>,
             playerIds: {},
             _updateIndex(newIndex)  { updateIndex(this, newIndex); },
@@ -42,7 +42,6 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             },
         }"
         <?php if ($is_preview) { ?> x-init="$watch('youtubeVideoData', value => _updateVideoData(value) )" <?php } ?>
-        x-init="console.log(totalSlides)"
         x-on:mouseleave="_leaveSlider()"
         x-on:mouseenter="_enterSlider()">
         <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
@@ -130,8 +129,8 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             <!-- Name and verification badge -->
             <?php get_template_part('template-parts/listings/parts/listing-name', '', [
                 'is_preview' => $is_preview,
-                'name'       => $args['name'],
-                'permalink'  => $args['permalink'],
+                'name'       => $is_preview ? '' : $args['name'],
+                'permalink'  => $is_preview ? '' : $args['permalink'],
                 'verified'   => $args['verified'],
             ]); ?>
 
@@ -168,16 +167,17 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Links -->
         <?php get_template_part('template-parts/listings/parts/link-icons', '', [
-            'website'                => $args['website'],
-            'instagram_url'          => $args['instagram_url'],
-            'x_url'                  => $args['x_url'],
-            'tiktok_url'             => $args['tiktok_url'],
-            'facebook_url'           => $args['facebook_url'],
-            'youtube_url'            => $args['youtube_url'],
-            'bandcamp_url'           => $args['bandcamp_url'],
-            'spotify_artist_url'     => $args['spotify_artist_url'],
-            'apple_music_artist_url' => $args['apple_music_artist_url'],
-            'soundcloud_url'         => $args['soundcloud_url'],
+            'is_preview'             => $is_preview,
+            'website'                => $is_preview ? '' : $args['website'],
+            'instagram_url'          => $is_preview ? '' : $args['instagram_url'],
+            'x_url'                  => $is_preview ? '' : $args['x_url'],
+            'tiktok_url'             => $is_preview ? '' : $args['tiktok_url'],
+            'facebook_url'           => $is_preview ? '' : $args['facebook_url'],
+            'youtube_url'            => $is_preview ? '' : $args['youtube_url'],
+            'bandcamp_url'           => $is_preview ? '' : $args['bandcamp_url'],
+            'spotify_artist_url'     => $is_preview ? '' : $args['spotify_artist_url'],
+            'apple_music_artist_url' => $is_preview ? '' : $args['apple_music_artist_url'],
+            'soundcloud_url'         => $is_preview ? '' : $args['soundcloud_url'],
         ]);?>
     </div>
 

@@ -21,8 +21,13 @@ function toggleImageTerm(alco, imageType, imageId, term) {
 
 function addImage(alco, imageType, imageId, imageData) {
     alco.currentImageId = imageId;
-    alco.orderedImageData[imageType].push(imageData);
+    if (imageType == 'cover_image') {
+        alco.orderedImageData['cover_image'] = [imageData];
+    } else {
+        alco.orderedImageData[imageType].push(imageData);
+    }
 }
+
 function removeImage(alco, imageType, imageId) {
     if (imageType == 'cover_image') { alco.pThumbnailSrc = ''; }
 
@@ -33,15 +38,18 @@ function removeImage(alco, imageType, imageId) {
     alco.orderedImageData[imageType] = list            // update data;
 }
 
-
 function getAllMediatags(alco) {
     var tagsSet = new Set();
-    for (var imageType in alco.orderedImageData) {
-        var images = alco.orderedImageData[imageType];
-        for (var image in images) {
+    for (var imageType of Object.keys(alco.orderedImageData)) {
+        for (var image of alco.orderedImageData[imageType]) {
             if (Array.isArray(image.mediatags)) {
                 image.mediatags.forEach(tag => tagsSet.add(tag));
             }
+        }
+    }
+    for (var videoData of alco.youtubeVideoData) {
+        if (Array.isArray(videoData.mediatags)) {
+            videoData.mediatags.forEach(tag => tagsSet.add(tag));
         }
     }
     return Array.from(tagsSet);

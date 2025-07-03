@@ -23,7 +23,6 @@
                 <div class="sm:px-4 md:px-10 py-4">
                     <h5 class="font-bold text-18 mb-3">Link search terms</h5>
                     <p class="mb-4 text-16">Tag your images with the appropriate search terms to help us show the most appropriate media to buyers.</p>
-                    <input type="hidden" name="mediatags" x-bind:value="_getAllMediatags()">
 
                     <template x-for="imageType in ['cover_image', 'listing_images']" :key="imageType">
                         <template x-for="data in orderedImageData[imageType]" :key="data.image_id">

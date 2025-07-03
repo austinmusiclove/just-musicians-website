@@ -5,17 +5,17 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
 if ($args['instance'] == 'listing-form') {
     $theme = [
-        'wrapper_class' => 'py-4',
-        'container_class' => '',
-        'title_wrapper' => 'py-4',
+        'wrapper_class'          => 'py-4',
+        'container_class'        => '',
+        'title_wrapper'          => 'py-4',
         'availability_wrapper_1' => 'block absolute sm:top-4 sm:right-4',
         'availability_wrapper_2' => 'hidden'
     ];
 } else {
     $theme = [
-        'wrapper_class' => 'my-4 lg:my-16',
-        'container_class' => 'container grid lg:grid-cols-2',
-        'title_wrapper' => 'lg:px-16 py-4 lg:py-10',
+        'wrapper_class'          => 'my-4 lg:my-16',
+        'container_class'        => 'container grid lg:grid-cols-2',
+        'title_wrapper'          => 'lg:px-16 py-4 lg:py-10',
         'availability_wrapper_1' => 'block lg:hidden absolute top-2 right-2 sm:top-4 sm:right-4',
         'availability_wrapper_2' => 'hidden lg:block'
     ];
@@ -26,22 +26,28 @@ if ($args['instance'] == 'listing-form') {
 
     <div class="<?php echo $theme['container_class']; ?>">
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
+
+            <!-- Cover image -->
             <img class="w-full h-full object-cover"
                 <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"            <?php } ?>
             />
 
-            <div class="<?php echo $theme['availability_wrapper_1']; ?>">
-                <!--<div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div>-->
-            </div>
+            <!-- <div class="<?php echo $theme['availability_wrapper_1']; ?>">
+                <div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div>
+            </div> -->
         </div>
 
         <!-- Content -->
         <div class="flex flex-col gap-12 items-end <?php echo $theme['title_wrapper']; ?>">
-            <div class="<?php echo $theme['availability_wrapper_2']; ?>">
-                <!--<div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div>-->
-            </div>
+
+            <!-- <div class="<?php echo $theme['availability_wrapper_2']; ?>">
+                <div class="bg-navy text-white rounded-full font-bold py-1 px-3 uppercase text-14 w-fit">Available</div>
+            </div> -->
+
             <div class="flex flex-col gap-5 w-full">
+
+                <!-- Name and verified badge -->
                 <div class="flex items-center gap-2">
                     <h1 class="text-32 font-bold" <?php if ($is_preview) { ?> x-text="pName === '' ? 'Performer or Band Name' : pName" <?php } ?> >
                         <?php if (!$is_preview) { echo get_field('name'); } ?>
@@ -50,15 +56,21 @@ if ($args['instance'] == 'listing-form') {
                         <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
                     <?php } ?>
                 </div>
+
+                <!-- Description -->
                 <p class="text-18" <?php if ($is_preview) { ?> x-text="pDescription === '' ? 'Description' : pDescription" <?php } ?> >
                     <?php if (!$is_preview) { echo get_field('description'); } ?>
                 </p>
+
+                <!-- Location -->
                 <div class="flex gap-2 items-center">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
                     <span <?php if ($is_preview) { ?> x-text="getListingLocation() === '' ? 'City, State' : getListingLocation()" <?php } ?> >
                         <?php if (!$is_preview) { echo get_field('city') . ', ' . get_field('state'); } ?>
                     </span>
                 </div>
+
+                <!-- Genres -->
                 <div class="flex flex-wrap items-center gap-1">
                     <?php
                     if (!empty($args['genres']) and !is_wp_error($args['genres'])) {
@@ -69,6 +81,8 @@ if ($args['instance'] == 'listing-form') {
                         <?php }
                     } ?>
                 </div>
+
+                <!-- Ensemble Sizes -->
                 <?php if ((!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) or $is_preview) { ?>
                 <div <?php if ($is_preview) { ?> x-show="ensembleSizeCheckboxes.length > 0" x-cloak <?php } ?>>
                     <div class="flex items-center gap-1">
@@ -82,9 +96,8 @@ if ($args['instance'] == 'listing-form') {
                     </span>
                 </div>
                 <?php } ?>
+
             </div>
         </div>
-
     </div>
-
 </section>

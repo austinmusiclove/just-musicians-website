@@ -24,7 +24,6 @@
         x-data="{
             reorder(fromIndex, toIndex) {
                 youtubeVideoData.splice(toIndex, 0, youtubeVideoData.splice(fromIndex, 1)[0]);
-                pVideoIds= getVideoIdsFromVideoData(youtubeVideoData);
             }
         }"
     >
@@ -33,7 +32,7 @@
                 <div class="flex items-center gap-4 grow min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
                     <div class="aspect-video w-16 shrink-0">
-                        <img class="w-full h-full object-cover" x-bind:src="`https://img.youtube.com/vi/${pVideoIds[index]}/default.jpg`">
+                        <img class="w-full h-full object-cover" x-bind:src="`https://img.youtube.com/vi/${videoData.video_id}/default.jpg`">
                     </div>
                     <div class="overflow-hidden">
                         <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0" x-text="videoData.url"></div>

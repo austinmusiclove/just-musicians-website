@@ -14,9 +14,12 @@ $instrumentations  = wp_list_pluck(get_the_terms(get_the_ID(), 'instrumentation'
 $settings          = wp_list_pluck(get_the_terms(get_the_ID(), 'setting')         ?: [], 'name');
 $keywords          = wp_list_pluck(get_the_terms(get_the_ID(), 'keyword')         ?: [], 'name');
 
-$venues_combined  = [];
-$verified_venue_ids     = get_field('venues_played_verified') ?: [];
-$unverified_venue_ids   = get_field('venues_played_unverified') ?: [];
+$youtube_video_post_ids = get_field('youtube_videos');
+$youtube_video_data     = get_youtube_video_data($youtube_video_post_ids);
+
+$venues_combined      = [];
+$verified_venue_ids   = get_field('venues_played_verified') ?: [];
+$unverified_venue_ids = get_field('venues_played_unverified') ?: [];
 foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) as $venue_id) {
     $venues_combined[] = [
         'ID'               => $venue_id,
@@ -26,9 +29,6 @@ foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) a
         'postal_code'      => get_field('postal_code',      $venue_id),
         'address_region'   => get_field('address_region',   $venue_id),
 ];}
-
-$youtube_video_urls = get_field('youtube_video_urls');
-$youtube_video_ids = get_youtube_video_ids($youtube_video_urls);
 
 
 
@@ -48,7 +48,7 @@ echo get_template_part('template-parts/listing-page/content', '', array(
    'settings'          => $settings,
    'keywords'          => $keywords,
    'venues_combined'   => $venues_combined,
-   'youtube_video_ids' => $youtube_video_ids,
+   'youtube_video_data' => $youtube_video_data,
 ));
 
 get_footer();

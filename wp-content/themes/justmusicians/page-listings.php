@@ -83,7 +83,7 @@ get_header();
                             $args = [
                                 'post_type'      => 'listing',
                                 'post__in'       => $user_listings,
-                                'post_status'    => 'publish',
+                                'post_status'    => ['publish', 'draft'],
                                 'orderby'        => 'post__in',
                                 'posts_per_page' => -1
                             ];
@@ -91,20 +91,19 @@ get_header();
                             if ($query->have_posts()) { ?>
 
                                 <!-- Display user's listings -->
-                                <!--
-                                <div class="flex items-center justify-between md:justify-start">
-                                    <?php //echo get_template_part('template-parts/search/sort', '', [ 'show_number' => false ]); ?>
-                                </div>
-                                -->
+                                <!-- <div class="flex items-center justify-between md:justify-start"> <?php //echo get_template_part('template-parts/search/sort', '', [ 'show_number' => false ]); ?> </div> -->
 
                                 <?php while ($query->have_posts()) {
                                     $query->the_post();
-                                    $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
+                                    $post_status    = get_post_status();
+                                    $listing_name   = get_post_meta(get_the_ID(), 'name', true);
+                                    $listing_title  = $post_status == 'draft' ? $listing_name . ' (Draft)' : $listing_name;
+                                    $thumbnail_url  = get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
                                     $listing_genres = get_the_terms(get_the_ID(), 'genre');
                                     $genres = $listing_genres ? array_map(function($term) { return $term->name; }, $listing_genres) : [];
                                     echo get_template_part('template-parts/account/listing', '', [
                                         'post_id' => get_the_ID(),
-                                        'name' => get_post_meta(get_the_ID(), 'name', true),
+                                        'name' => $listing_title,
                                         'genres' => $genres,
                                         'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
                                     ]);
