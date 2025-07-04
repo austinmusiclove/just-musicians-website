@@ -1,12 +1,17 @@
 Milestones
-    Artist announce and invite new profiles
-        create the listings for them before they sign up instead of allowing new listing creating with the link
+    Release new form
         ACF
             change venues verified and venues unverified return type to id not post
             add listing_images and stage_plots to ACF with same return type as local env
             add youtube video field group and youtube videos field to listings
             run api to populate data in youtube video posts instead of youtube video urls
+            add artists to temporary code
+            update venues on prod
+            update artists on prod
+    Artist announce and invite new profiles
+        create the listings for them before they sign up instead of allowing new listing creating with the link
         advanced
+            change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
             add spinner behind iframes before they are there
             disable input until change made or auto save after input
@@ -23,7 +28,6 @@ Milestones
             make it invite only
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
-        check for todos in files
     Advanced artist page
         see more bio
         see more venues played
@@ -90,7 +94,6 @@ Features
 Devon
     404 page
     collections page and favorites buttons
-    ensemble size filter
     trash icon
     indicator on infinite scroll and listing form
     podcast - get violotor-blog svg

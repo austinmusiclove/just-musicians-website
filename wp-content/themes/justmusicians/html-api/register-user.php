@@ -6,8 +6,9 @@ $errors = array();
 if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf')) {
     $user_login = isset($_POST["r_user_email"]) ? $_POST['r_user_email'] : '';
     $user_email = isset($_POST["r_user_email"]) ? $_POST['r_user_email'] : '';
-    $user_pass = isset($_POST["r_user_pass"]) ? $_POST['r_user_pass'] : '';
-    $remember = isset($_POST['rememberme']) ? $_POST['rememberme'] : false;
+    $user_pass  = isset($_POST["r_user_pass"])  ? $_POST['r_user_pass']  : '';
+    $remember   = isset($_POST['rememberme'])   ? $_POST['rememberme']   : false;
+    $artist_invitation_code  = isset($_POST['aic']) ? $_POST["aic"] : false;
     $listing_invitation_code = isset($_POST['lic']) ? $_POST["lic"] : false;
 
     //if(username_exists($user_login)) {
@@ -38,13 +39,22 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
         // passwords do not match
         //array_push($errors, 'Passwords do not match');
     //}
+    // Validate artist invitation code
+    if ($artist_invitation_code) {
+        $code_post = validate_temporary_code($artist_invitation_code);
+        if (is_wp_error($code_post)) {
+            if      ($code_post->get_error_code() == 'invalid_code') { array_push($errors, 'Invalid sign up link'); }
+            else if ($code_post->get_error_code() == 'expired_code') { array_push($errors, 'Expired sign up link'); }
+            else                                                     { array_push($errors, $code_post->get_error_message()); }
+        }
+    }
     // Validate listing invitation code
     if ($listing_invitation_code) {
         $code_post = validate_temporary_code($listing_invitation_code);
         if (is_wp_error($code_post)) {
-            if ($code_post->get_error_code() == 'invalid_code') { array_push($errors, 'Invalid sign up link'); }
+            if      ($code_post->get_error_code() == 'invalid_code') { array_push($errors, 'Invalid sign up link'); }
             else if ($code_post->get_error_code() == 'expired_code') { array_push($errors, 'Expired sign up link'); }
-            else { array_push($errors, $code_post->get_error_message()); }
+            else                                                     { array_push($errors, $code_post->get_error_message()); }
         }
     }
 
@@ -70,7 +80,13 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             // log the new user in
             wp_set_auth_cookie($new_user_id, $remember);
             wp_set_current_user($new_user_id, $user_login);
-            if ($listing_invitation_code) {
+
+            // Redirect
+            if ($listing_invitation_code and $artist_invitation_code) {
+                echo '<span x-init="redirect(\'/listings/?aic=' . $artist_invitation_code . '&lic=' . $listing_invitation_code . '\');"></span>';
+            } else if ($artist_invitation_code) {
+                echo '<span x-init="redirect(\'/listings/?aic=' . $artist_invitation_code . '\');"></span>';
+            } else if ($listing_invitation_code) {
                 echo '<span x-init="redirect(\'/listings/?lic=' . $listing_invitation_code . '\');"></span>';
             } else {
                 echo '<span x-init="redirect();"></span>';

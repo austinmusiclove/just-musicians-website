@@ -45,6 +45,16 @@ get_header();
                                 <span x-init="$dispatch('error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
                             <?php }
                         }
+                        if (isset($_GET['aic'])) {
+                            // send listing invitation validation with redirect without the param in url to avoid infinite loop
+                            $success = create_listing_by_artist_invitation_code($_GET['aic']);
+                            // if success, redirect back to the same page but remove query params to avoid an infinite loop
+                            if ($success and !is_wp_error($success)) { ?>
+                                <span x-init="$dispatch('success-toast', {'message': 'Artist invitation link processed successfully'})"></span>
+                            <?php } else { ?>
+                                <span x-init="$dispatch('error-toast', {'message': 'Failed to add listing from artist invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
+                            <?php }
+                        }
                     } ?>
 
 
@@ -55,6 +65,10 @@ get_header();
                             <span x-init="showLoginModal = false; showSignupModal = true; signupModalMessage = 'Sign up to activate this listing invitation link';"></span>
                         <?php } else if (isset($_GET['lic'])) { ?>
                             <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to activate this listing invitation link';"></span>
+                        <?php } else if (!empty($_GET['aic']) and !empty($_GET['mdl']) and $_GET['mdl'] == 'signup') { ?>
+                            <span x-init="showLoginModal = false; showSignupModal = true; signupModalMessage = 'Sign up to activate this artist invitation link';"></span>
+                        <?php } else if (isset($_GET['aic'])) { ?>
+                            <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to activate this artist invitation link';"></span>
                         <?php } else { ?>
                             <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to see your listings';"></span>
                         <?php } ?>

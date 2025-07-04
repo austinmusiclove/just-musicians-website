@@ -103,8 +103,9 @@ function get_listing($args) {
 function get_listings_by_auuid($auuid) {
     $listings = [];
     $query = new WP_Query(array(
-        'post_type'      => 'listing',
-        'meta_query' => [
+        'post_type'   => 'listing',
+        'post_status' => ['publish', 'draft'],
+        'meta_query'  => [
             [
                 'key' => 'artist_uuid',
                 'value' => $auuid,

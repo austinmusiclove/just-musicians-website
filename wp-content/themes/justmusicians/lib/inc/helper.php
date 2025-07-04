@@ -140,5 +140,20 @@ function generate_calendar_grid($month, $year, $event_day, $instance) {
     return $calendarHTML;
 }
 
-
+function get_instagram_url_from_handle($handle) {
+    $instagram_url_prefix = 'https://instagram.com/';
+    return !empty($handle) ? $instagram_url_prefix . $handle : '';
+}
+function get_tiktok_url_from_handle($handle) {
+    $tiktok_url_prefix = 'https://tiktok.com/';
+    return !empty($handle) ? $tiktok_url_prefix . $handle : '';
+}
+function get_x_url_from_handle($handle) {
+    $x_url_prefix = 'https://x.com/';
+    return !empty($handle) ? $x_url_prefix . $handle : '';
+}
+function get_spotify_artist_url_from_id($id) {
+    $spotify_artist_url_prefix = 'https://open.spotify.com/artist/';
+    return !empty($id) ? $spotify_artist_url_prefix . $id : '';
+}
 
