@@ -1,8 +1,6 @@
 Milestones
     Release new form
         ACF
-            change venues verified and venues unverified return type to id not post
-            add listing_images and stage_plots to ACF with same return type as local env
             add youtube video field group and youtube videos field to listings
             run api to populate data in youtube video posts instead of youtube video urls
             add artists to temporary code
