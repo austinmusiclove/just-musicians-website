@@ -27,7 +27,7 @@ function clean_arr_for_doublequotes($arr) {
 
 // Modifies a string so that it can be injected into doublequotes in an html attribute
 function clean_str_for_doublequotes($string) {
-    return str_replace("'", "\'", str_replace("\\", "\\\\", htmlspecialchars($string, ENT_COMPAT, 'UTF-8')));
+    return str_replace("\t", "\\t", str_replace("\r", "\\r", str_replace("\n", "\\n", str_replace("'", "\'", str_replace("\\", "\\\\", htmlspecialchars($string, ENT_COMPAT, 'UTF-8'))))));
 }
 
 function get_terms_decoded($taxonomy, $fields, $search=false, $hide_empty=false) {

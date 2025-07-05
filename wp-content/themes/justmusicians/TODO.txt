@@ -1,13 +1,5 @@
 Milestones
-    Release new form
-        ACF
-            add youtube video field group and youtube videos field to listings
-            run api to populate data in youtube video posts instead of youtube video urls
-            add artists to temporary code
-            update venues on prod
-            update artists on prod
     Artist announce and invite new profiles
-        create the listings for them before they sign up instead of allowing new listing creating with the link
         advanced
             change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
