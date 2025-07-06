@@ -18,8 +18,8 @@
         <div id="biography" <?php if ($is_preview) { ?>x-show="pBio.length > 0" x-cloak <?php } ?> >
             <h2 class="text-25 font-bold mb-5">Biography</h2>
             <p class="mb-4"
-                <?php if ($is_preview) { ?> x-text="pBio" <?php } ?>>
-                <?php if (!$is_preview) { echo get_field('bio'); } ?>
+                <?php if ($is_preview) { ?> x-html="pBio.replace(/\n/g, '<br>')" <?php } ?>>
+                <?php if (!$is_preview) { echo nl2br(get_field('bio')); } ?>
             </p>
         </div>
         <?php } ?>
