@@ -43,7 +43,7 @@ get_header();
 <div class="hidden lg:block fixed top-0 left-1/2 w-1/2 bg-yellow-10 z-0 h-screen"></div>
 
 <div id="sticky-sidebar" class="hidden xl:block fixed top-0 z-10 left-0 bg-white h-screen dropshadow-md px-3 w-fit pt-40 border-r border-black/20">
-    <div class="sidebar collapsed">
+    <div class="sidebar">
         <?php echo get_template_part('template-parts/account/sidebar', '', [
             'collapsible' => true
         ]); ?>
