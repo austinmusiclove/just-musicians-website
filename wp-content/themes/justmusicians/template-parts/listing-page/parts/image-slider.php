@@ -3,7 +3,7 @@
         previousIndex: 0,
         currentIndex: 0,
         showArrows: isTouchDevice,
-        totalSlides: <?php if (!$args['is_preview']) { echo count($args['listing_image_ids']) > 0 ? count($args['listing_image_ids']) : 1; } else { echo "orderedImageData['listing_images'].length > 0 ? orderedImageData['listing_images'] : 1"; } ?>,
+        totalSlides: <?php if (!$args['is_preview']) { echo count($args['listing_image_ids']) > 0 ? count($args['listing_image_ids']) : 1; } else { echo "orderedImageData['listing_images'].length > 0 ? orderedImageData['listing_images'].length : 1"; } ?>,
         _updateIndex(newIndex) { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
     }"
     <?php if ($args['is_preview']) { ?>x-init="$watch('orderedImageData', value => { totalSlides = orderedImageData['listing_images'].length == 0 ? 1 : orderedImageData['listing_images'].length; _updateIndex(0); })"<?php } ?>

@@ -1,8 +1,8 @@
 <?php
     $is_preview        = $args['instance'] == 'listing-form';
     $ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
-    $listing_image_ids = $is_preview ? is_array(get_field('listing_images')) ? get_field('listing_images') : [] : [];
-    $stage_plot_ids    = $is_preview ? is_array(get_field('stage_plots'))    ? get_field('stage_plots')    : [] : [];
+    $listing_image_ids = $is_preview ? [] : is_array(get_field('listing_images')) ? get_field('listing_images') : [];
+    $stage_plot_ids    = $is_preview ? [] : is_array(get_field('stage_plots'))    ? get_field('stage_plots')    : [];
 
     $theme = $is_preview ?
         [ 'container_class' => 'flex flex-col-reverse gap-8 pb-8', ] :
