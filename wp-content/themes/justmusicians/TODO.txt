@@ -1,30 +1,35 @@
 Milestones
     Artist announce and invite new profiles
         advanced
-            change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
-            add permissions to all writing apis (venue reviews stats, venues stats, collections)
-            add spinner behind iframes before they are there
-            disable input until change made or auto save after input
-            allow adding venue
-            scroll preview to section when corresponding input is focused
-            scroll to required field if submit fails due to missing field
             validation contact and links
+                website is url
                 filter out spotify links that are not artist links
                 regex front end check that they are url for the correct site
                 front end check for 404
                 clear off query args from urls except id or something from fb?
                 clean city name to be the right capitalization
+            add permissions to all writing apis (venue reviews stats, venues stats, collections)
+            add spinner behind iframes before they are there
+            allow adding venue
+            scroll preview to section when corresponding input is focused
+            scroll to required field if submit fails due to missing field
+            disable input until change made or auto save after input
             limit access until you verify email
             make it invite only
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
+            website does not work if you don't have https; need to change input to text and do validation on back end and return error; same with other urls and stuff
+            bug: youtu.be urls not recognized and were not converted to posts in the data conversion; example: jessica healey
+            youtube video upload not work for arron mcdonell
+            publish creating new post instead of publishing existing draft; arron mcdonnel
     Advanced artist page
         see more bio
         see more venues played
         click to copy email on listing page
         artist pages that will get you listed on google as a musician by using schema
-        new search algo
-            video order depending on search criteria
+    Search algo update
+        change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
+        video order depending on search criteria
     Free lance booker testing
         basic inquiries
             inquire button that sends an email

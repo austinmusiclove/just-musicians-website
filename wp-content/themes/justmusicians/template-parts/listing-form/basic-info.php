@@ -56,7 +56,7 @@
                     pState = state;
                 }
             }">
-                <label for="state" class="mb-1 inline-block">State</label><br>
+                <label for="state" class="mb-1 inline-block">State<span class="text-red">*</span></label><br>
                 <div class="relative flex items-center justify-between">
                     <button type="button" class="inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"
                         x-on:click="showDropdown = true"
