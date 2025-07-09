@@ -37,7 +37,9 @@
             <div class="relative">
                 <label for="city" class="mb-1 inline-block">City<span class="text-red">*</span></label>
                 <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <input class="has-icon" type="text" id="city" name="city" required x-model="pCity">
+                <input class="has-icon" type="text" id="city" name="city" required x-model="pCity"
+                  x-on:input="pCity = pCity.replace(/\b\w/g, char => char.toUpperCase()).toLowerCase().replace(/\b\w/g, char => char.toUpperCase())"
+                >
             </div>
             <!-- State -->
             <div x-data="{
@@ -56,7 +58,7 @@
                     pState = state;
                 }
             }">
-                <label for="state" class="mb-1 inline-block">State<span class="text-red">*</span></label><br>
+                <label id="state" for="state" class="mb-1 inline-block">State<span class="text-red">*</span></label><br>
                 <div class="relative flex items-center justify-between">
                     <button type="button" class="inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"
                         x-on:click="showDropdown = true"

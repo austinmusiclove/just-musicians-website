@@ -10,6 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 // if an arg is omitted in $_POST, it will be ommitted in the sanitized_args and therefore not altered in wp_update_post or wp_insert_post
 // for taxonomy args you can pass in [""] if you want to remove all terms; omitting the arg will not alter the terms
 function get_sanitized_listing_args() {
+
+    $validation = validate_listing_args();
+    if ( is_wp_error($validation) ) {
+        return $validation;
+    }
+
     $sanitized_args = [
         'post_type'       => 'listing',
         'post_status'     => 'publish',
@@ -35,22 +41,22 @@ function get_sanitized_listing_args() {
     if (isset($_POST['listing_email']))            { $sanitized_args['meta_input']['email']                    = sanitize_email($_POST['listing_email']); }
     if (isset($_POST['phone']))                    { $sanitized_args['meta_input']['phone']                    = sanitize_text_field($_POST['phone']); }
     if (isset($_POST['instagram_handle']))         { $sanitized_args['meta_input']['instagram_handle']         = sanitize_text_field($_POST['instagram_handle']); }
-    if (isset($_POST['instagram_url']))            { $sanitized_args['meta_input']['instagram_url']            = sanitize_url($_POST['instagram_url']); }
     if (isset($_POST['tiktok_handle']))            { $sanitized_args['meta_input']['tiktok_handle']            = sanitize_text_field($_POST['tiktok_handle']); }
-    if (isset($_POST['tiktok_url']))               { $sanitized_args['meta_input']['tiktok_url']               = sanitize_url($_POST['tiktok_url']); }
     if (isset($_POST['x_handle']))                 { $sanitized_args['meta_input']['x_handle']                 = sanitize_text_field($_POST['x_handle']); }
-    if (isset($_POST['x_url']))                    { $sanitized_args['meta_input']['x_url']                    = sanitize_url($_POST['x_url']); }
-    if (isset($_POST['website']))                  { $sanitized_args['meta_input']['website']                  = sanitize_url($_POST['website']); }
-    if (isset($_POST['facebook_url']))             { $sanitized_args['meta_input']['facebook_url']             = sanitize_url($_POST['facebook_url']); }
-    if (isset($_POST['youtube_url']))              { $sanitized_args['meta_input']['youtube_url']              = sanitize_url($_POST['youtube_url']); }
-    if (isset($_POST['bandcamp_url']))             { $sanitized_args['meta_input']['bandcamp_url']             = sanitize_url($_POST['bandcamp_url']); }
-    if (isset($_POST['spotify_artist_url']))       { $sanitized_args['meta_input']['spotify_artist_url']       = sanitize_url($_POST['spotify_artist_url']); }
+    if (isset($_POST['instagram_url']))            { $sanitized_args['meta_input']['instagram_url']            = sanitize_url($_POST['instagram_url'],          ['https', 'http']); }
+    if (isset($_POST['tiktok_url']))               { $sanitized_args['meta_input']['tiktok_url']               = sanitize_url($_POST['tiktok_url'],             ['https', 'http']); }
+    if (isset($_POST['x_url']))                    { $sanitized_args['meta_input']['x_url']                    = sanitize_url($_POST['x_url'],                  ['https', 'http']); }
+    if (isset($_POST['website']))                  { $sanitized_args['meta_input']['website']                  = sanitize_url($_POST['website'],                ['https', 'http']); }
+    if (isset($_POST['facebook_url']))             { $sanitized_args['meta_input']['facebook_url']             = sanitize_url($_POST['facebook_url'],           ['https', 'http']); }
+    if (isset($_POST['youtube_url']))              { $sanitized_args['meta_input']['youtube_url']              = sanitize_url($_POST['youtube_url'],            ['https', 'http']); }
+    if (isset($_POST['bandcamp_url']))             { $sanitized_args['meta_input']['bandcamp_url']             = sanitize_url($_POST['bandcamp_url'],           ['https', 'http']); }
+    if (isset($_POST['apple_music_artist_url']))   { $sanitized_args['meta_input']['apple_music_artist_url']   = sanitize_url($_POST['apple_music_artist_url'], ['https', 'http']); }
+    if (isset($_POST['soundcloud_url']))           { $sanitized_args['meta_input']['soundcloud_url']           = sanitize_url($_POST['soundcloud_url'],         ['https', 'http']); }
+    if (isset($_POST['spotify_artist_url']))       { $sanitized_args['meta_input']['spotify_artist_url']       = sanitize_url($_POST['spotify_artist_url'],     ['https', 'http']); }
     if (isset($_POST['spotify_artist_id']))        { $sanitized_args['meta_input']['spotify_artist_id']        = sanitize_text_field($_POST['spotify_artist_id']); }
-    if (isset($_POST['apple_music_artist_url']))   { $sanitized_args['meta_input']['apple_music_artist_url']   = sanitize_url($_POST['apple_music_artist_url']); }
-    if (isset($_POST['soundcloud_url']))           { $sanitized_args['meta_input']['soundcloud_url']           = sanitize_url($_POST['soundcloud_url']); }
-    if (isset($_POST['ensemble_size']))            { $sanitized_args['meta_input']['ensemble_size']            = custom_sanitize_array($_POST['ensemble_size']); }
     if (isset($_POST['min_ensemble_size']))        { $sanitized_args['meta_input']['min_ensemble_size']        = sanitize_text_field($_POST['min_ensemble_size']); }
     if (isset($_POST['max_ensemble_size']))        { $sanitized_args['meta_input']['max_ensemble_size']        = sanitize_text_field($_POST['max_ensemble_size']); }
+    if (isset($_POST['ensemble_size']))            { $sanitized_args['meta_input']['ensemble_size']            = custom_sanitize_array($_POST['ensemble_size']); }
     if (isset($_POST['venues_played_verified']))   { $sanitized_args['meta_input']['venues_played_verified']   = custom_sanitize_array($_POST['venues_played_verified']); }
     if (isset($_POST['venues_played_unverified'])) { $sanitized_args['meta_input']['venues_played_unverified'] = custom_sanitize_array($_POST['venues_played_unverified']); }
 

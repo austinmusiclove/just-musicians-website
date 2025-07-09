@@ -59,6 +59,10 @@
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
+            focusElm(id) {
+                var elm = document.getElementById(id);
+                if (elm) { elm.scrollIntoView({ behavior: 'smooth', block: 'center' }); elm.focus(); }
+            }
         }"
         x-init="width = window.innerWidth; document.body.addEventListener('htmx:responseError', (event) => { if (event.detail.xhr.status === 404) { $dispatch('error-toast', {'message': 'HTMX Error: 404'}); } })"
         x-resize.document="
@@ -66,6 +70,7 @@
             showMobileMenu = false;
             showSearchOptions = false;
         "
+        x-on:focus-elm="focusElm($event.detail.id)"
     >
       <!-- Setting a fixed height allows us to position the popups on mobile -->
     <header class="bg-brown-light-3 sticky top-0 z-50 h-28 md:h-16">

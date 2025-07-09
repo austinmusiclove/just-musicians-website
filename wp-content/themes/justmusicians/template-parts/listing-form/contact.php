@@ -35,7 +35,7 @@
             <div class="grow relative">
                 <label for="zip_code" class="mb-1 inline-block">Website</label>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" />
-                <input class="has-icon" type="url" id="website" name="website" placeholder="https://" x-model="pWebsite" >
+                <input class="has-icon" type="text" id="website" name="website" placeholder="https://" x-model="pWebsite" >
 
             </div>
         </div>
@@ -90,13 +90,13 @@
     <fieldgroup class="grid sm:grid-cols-3 gap-2">
         <!-- Facebook -->
         <div class="grow"><label class="mb-1 inline-block" for="facebook_url">Facebook URL</label><br>
-        <input type="url" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/"      x-model="pFacebookUrl"></div>
+        <input type="text" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/"      x-model="pFacebookUrl"></div>
         <!-- Youtube -->
         <div class="grow"><label class="mb-1 inline-block" for="youtube_url">Youtube Channel URL</label><br>
-        <input type="url" id="youtube_url"  name="youtube_url"  placeholder="https://www.youtube.com/@"      x-model="pYoutubeUrl" ></div>
+        <input type="text" id="youtube_url"  name="youtube_url"  placeholder="https://www.youtube.com/@"      x-model="pYoutubeUrl" ></div>
         <!-- Bandcamp -->
         <div class="grow"><label class="mb-1 inline-block" for="bandcamp_url">Bandcamp URL</label><br>
-        <input type="url" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" x-model="pBandcampUrl"></div>
+        <input type="text" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" x-model="pBandcampUrl"></div>
     </fieldgroup>
 
     <fieldgroup class="grid sm:grid-cols-3 gap-2">
@@ -106,7 +106,7 @@
                 setSpotifyArtistId() { this.spotifyArtistId = pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/) ? pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
             }">
                 <label class="mb-1 inline-block" for="spotify_artist_url">Spotify Artist URL</label><br>
-                <input type="url" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
+                <input type="text" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
                     x-init="setSpotifyArtistId()"
                     x-on:input="setSpotifyArtistId()"
                     x-model="pSpotifyArtistUrl"
@@ -115,10 +115,10 @@
             </div>
         <!-- Apple Music -->
         <div class="grow"><label class="mb-1 inline-block" for="apple_music_artist_url">Apple Music Artist URL</label><br>
-        <input type="url" id="apple_music_artist_url" name="apple_music_artist_url" placeholder="https://music.apple.com/us/artist/" x-model="pAppleMusicArtistUrl"></div>
+        <input type="text" id="apple_music_artist_url" name="apple_music_artist_url" placeholder="https://music.apple.com/us/artist/" x-model="pAppleMusicArtistUrl"></div>
         <!-- Soundcloud -->
         <div class="grow"><label class="mb-1 inline-block" for="soundcloud_url">Soundcloud URL</label><br>
-        <input type="url" id="soundcloud_url" name="soundcloud_url" placeholder="https://soundcloud.com/" x-model="pSoundcloudUrl"></div>
+        <input type="text" id="soundcloud_url" name="soundcloud_url" placeholder="https://soundcloud.com/" x-model="pSoundcloudUrl"></div>
     </fieldgroup>
 
 

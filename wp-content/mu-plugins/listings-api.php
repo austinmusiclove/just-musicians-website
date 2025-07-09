@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once 'listings-api/search-algo.php';
 require_once 'listings-api/calculated-fields.php';
 require_once 'listings-api/parse-args.php';
+require_once 'listings-api/validate-args.php';
 require_once 'listings-api/authorization.php';
 require_once 'listings-api/get-listing.php';
 require_once 'listings-api/get-listings.php';

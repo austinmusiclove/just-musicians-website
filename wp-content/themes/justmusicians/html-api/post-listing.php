@@ -2,23 +2,67 @@
 
 // Get sanitized args from request
 $args = get_sanitized_listing_args();
+if ( is_wp_error($args) ) {
+    $message = $args->get_error_message();
+    $code = $args->get_error_code();
+    switch ($code) {
+        case 'missing_cover_image':
+            $message = 'Cover Image Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'cover-image\'})"></span>';
+            break;
+        case 'missing_state':
+            $message = 'State Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'state\'})"></span>';
+            break;
+        case 'invalid_website':
+            $message = 'Website Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'website\'})"></span>';
+            break;
+        case 'invalid_facebook_url':
+            $message = 'Facebook Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'facebook_url\'})"></span>';
+            break;
+        case 'invalid_instagram_url':
+            $message = 'Instagram Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'instagram_url\'})"></span>';
+            break;
+        case 'invalid_tiktok_url':
+            $message = 'Tiktok Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'tiktok_url\'})"></span>';
+            break;
+        case 'invalid_x_url':
+            $message = 'X Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'x_url\'})"></span>';
+            break;
+        case 'invalid_youtube_url':
+            $message = 'Youtube Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'youtube_url\'})"></span>';
+            break;
+        case 'invalid_bandcamp_url':
+            $message = 'Bandcamp Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'bandcamp_url\'})"></span>';
+            break;
+        case 'invalid_apple_music_artist_url':
+            $message = 'Apple Music Artist Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'apple_music_artist_url\'})"></span>';
+            break;
+        case 'invalid_soundcloud_url':
+            $message = 'Soundcloud Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'soundcloud_url\'})"></span>';
+            break;
+        case 'invalid_spotify_artist_url':
+            $message = 'Spotify Artist Url Error :: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'spotify_artist_url\'})"></span>';
+            break;
+    }
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
+}
 
 
 // Check if user is authorized
 $is_authorized = check_post_listing_auth();
 if ( is_wp_error($is_authorized) ) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
-    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
-}
-
-
-// Check for required fields
-if (empty($args['cover_image']['attachment_id']) and empty($args['cover_image']['file'])) {
-    $message = 'Error: Cover image required';
-    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
-}
-if (empty($args['meta_input']['state'])) {
-    $message = 'Error: State required';
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
 }
 

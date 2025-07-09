@@ -9,7 +9,7 @@
         <input name="cover_image_meta" type="hidden" x-bind:value="JSON.stringify(_getImageData('cover_image', 'cover_image'))">
     </div>
 
-    <div class="relative -mx-2 sm:mx-0 pt-1">
+    <div id="cover-image" class="relative -mx-2 sm:mx-0 pt-1">
         <h3 class="font-bold text-18">Cover Image</h3>
     </div>
 
