@@ -34,6 +34,14 @@ function removeYoutubeUrl(alco, index) {
 }
 
 
+/*** Valid URL formats
+https://youtube.com/watch?v=Pr0UgL4N5Dk&si=eb4LAWGomEOfzTz4
+https://www.youtube.com/watch?v=v9C3UHya0EY
+https://youtu.be/qzAZgdrNttY
+https://youtu.be/zMgyVfpxJpE?si=j2KgWyFT4gc5XU0X
+https://m.youtube.com/watch?v=w7lX4VUOecw
+https://m.youtube.com/watch?v=jAWWcnpc_RY&pp=ygUQRGlldHJpY2ggY2FsaG91bg%3D%3D
+*/
 function validateYoutubeUrl(url) {
     if (typeof url !== 'string' || url.trim() === '') {
         return 'URL must be a non-empty string';

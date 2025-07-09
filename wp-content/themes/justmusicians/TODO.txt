@@ -2,7 +2,6 @@ Milestones
     Artist announce and invite new profiles
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
-            bug: youtu.be urls not recognized and were not converted to posts in the data conversion; example: jessica healey
             youtube video upload not work for arron mcdonell
             publish creating new post instead of publishing existing draft; arron mcdonnel
         advanced

@@ -18,7 +18,7 @@ add_action('rest_api_init', function () {
     ]);
     register_rest_route( 'datamgmt/v1', '/listing-youtube-posts', [
         'methods' => 'POST',
-        'callback' => 'update_listings_youtube_videos',
+        'callback' => 'print_listings_youtube_urls',
         'permission_callback' => 'is_admin_jwt',
     ]);
 });
@@ -55,7 +55,7 @@ function update_post_content_multiple($posts) {
 
 
 // Create youtube posts from youtube urls
-function update_listings_youtube_videos() {
+function print_listings_youtube_urls() {
     $listing_ids = get_posts([
         'post_type'      => 'listing',
         'posts_per_page' => -1,
@@ -64,9 +64,18 @@ function update_listings_youtube_videos() {
     ]);
 
     foreach ($listing_ids as $post_id) {
-        update_listing_youtube_videos($post_id);
+        print_listing_youtube_urls($post_id);
     }
 }
+function print_listing_youtube_urls($post_id) {
+    $youtube_urls = get_post_meta($post_id, 'youtube_video_urls', true);
+    if (empty($youtube_urls) || !is_array($youtube_urls)) { return; }
+
+    foreach ($youtube_urls as $url) {
+        error_log($url);
+    }
+}
+
 
 function update_listing_youtube_videos($post_id) {
     $youtube_post_ids = [];
@@ -81,7 +90,6 @@ function update_listing_youtube_videos($post_id) {
         // Create the YouTube video post if video id can be found
         if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $url, $matches)) {
             $video_id = $matches[1];
-            /*
             $new_post_id = wp_insert_post([
                 'post_type'   => 'youtubevideo',
                 'post_status' => 'publish',
@@ -96,13 +104,10 @@ function update_listing_youtube_videos($post_id) {
             if (!is_wp_error($new_post_id)) {
                 $youtube_post_ids[] = $new_post_id;
             }
-            */
-        } else {
-            error_log($post_id . ' :: ' . $url);
         }
     }
 
     // Update the listing's youtube_videos field with the array of post IDs
-    //update_post_meta($post_id, 'youtube_videos', $youtube_post_ids);
+    update_post_meta($post_id, 'youtube_videos', $youtube_post_ids);
 }
 

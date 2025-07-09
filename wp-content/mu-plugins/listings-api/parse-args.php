@@ -128,6 +128,7 @@ function custom_parse_youtube_video_data($json) {
     // TODO check post id matches other data or populate data from post id if exists
     // this is the way i was getting the id from url and there is another way in helper.php
     /*
+    $youtube_video_data = custom_parse_json($json);
     $youtube_video_ids = [];
     if ($youtube_video_data and is_array($youtube_video_data)) {
         foreach($youtube_video_data as $video_data) {
@@ -137,6 +138,7 @@ function custom_parse_youtube_video_data($json) {
             }
         }
     }
+    error_log(print_r($youtube_video_ids, true));
     */
     return custom_parse_json($json);
 }
