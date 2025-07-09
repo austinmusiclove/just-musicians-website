@@ -23,8 +23,45 @@ get_header();
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12">
 
+
                     <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                         <a href="/collections"><h1 class="font-bold text-22 sm:text-25">My Collections</h1></a>
+                        <?php if (is_user_logged_in()) { ?><button data-target="add-listing" class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer">Add +</button><?php } ?>
+                    </div>
+
+
+                      <script>
+                            document.addEventListener('click', function (e) {
+                                const button = e.target.closest('[data-target]');
+                                if (!button) return;
+
+                                const target = button.getAttribute('data-target');
+
+                                document.querySelector('[data-popup='+target+']').classList.remove('hidden');
+
+                            });
+                        </script>
+
+                     <!-- Add listing popup -->
+                    <div data-popup="add-listing" class="hidden popup-wrapper px-2 pt-28 md:pt-0 w-screen h-screen  fixed top-0 left-0 z-50 flex items-center justify-center">
+                        <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
+                            <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center pb-6 px-6 pt-4" style="max-width: 780px;">
+
+                                <div>
+
+                                    <div class="w-full flex items-center justify-between mb-8">
+                                        <h4 class="font-bold text-25 w-full">Create a new collection</h4>
+                                        <img data-show="cover-1" class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"/>
+                                    </div>
+
+                                    <form class="w-full flex items-stretch gap-2 mb-4">
+                                        <input class="w-full" placeholder="Collection name" type="text" id="name" name="name" required x-model="pCollectionName">
+                                        <button class="shrink-0 rounded text-14 bg-yellow hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-4 hover:border-black disabled:bg-grey disabled:text-white">Create</button>
+                                    </form>
+                                    <div class="bg-yellow-20 p-2 text-16">A collection with this name already exists. Please choose a different one.</div>
+
+                                </div>
+                        </div>
                     </div>
 
 
@@ -34,6 +71,8 @@ get_header();
                         <?php echo get_template_part('template-parts/global/toasts/success-toast', '', ['event_name' => 'delete-success-toast']); ?>
                         <div id="result"></div>
                     </div>
+
+                    
 
 
                     <!-- Logged out -->
