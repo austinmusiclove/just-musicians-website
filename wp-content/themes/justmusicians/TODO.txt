@@ -1,5 +1,10 @@
 Milestones
     Artist announce and invite new profiles
+        bug
+            cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
+            bug: youtu.be urls not recognized and were not converted to posts in the data conversion; example: jessica healey
+            youtube video upload not work for arron mcdonell
+            publish creating new post instead of publishing existing draft; arron mcdonnel
         advanced
             validation contact and links
                 filter out spotify links that are not artist links
@@ -13,11 +18,6 @@ Milestones
             disable input until change made or auto save after input
             limit access until you verify email
             make it invite only
-        bug
-            cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
-            bug: youtu.be urls not recognized and were not converted to posts in the data conversion; example: jessica healey
-            youtube video upload not work for arron mcdonell
-            publish creating new post instead of publishing existing draft; arron mcdonnel
     Advanced artist page
         see more bio
         see more venues played
