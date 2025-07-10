@@ -49,6 +49,7 @@
                 x-id="['playerId']"
                 x-init="$nextTick(() => { playerIds[index] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }) })"
             >
+                <div class="flex justify-center items-center h-full" :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}"><?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?></div>
                 <div x-bind:id="$id('playerId')" class="aspect-video w-full h-full object-cover"></div>
             </div>
         </template>

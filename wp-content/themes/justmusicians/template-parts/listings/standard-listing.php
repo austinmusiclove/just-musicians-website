@@ -67,6 +67,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                         x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
                     <?php } ?>
                 >
+                    <div class="flex justify-center items-center h-full" :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}"><?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?></div>
                     <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
                 </div>
             </template>

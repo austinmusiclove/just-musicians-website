@@ -1,21 +1,4 @@
 Milestones
-    Artist announce and invite new profiles
-        bug
-            cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
-        advanced
-            add permissions to all writing apis (venue reviews stats, venues stats, collections)
-            add spinner behind iframes before they are there
-            allow adding venue
-            scroll preview to section when corresponding input is focused
-            scroll to required field if submit fails due to missing field
-            disable input until change made or auto save after input
-            limit access until you verify email
-            make it invite only
-    Advanced artist page
-        see more bio
-        see more venues played
-        click to copy email on listing page
-        artist pages that will get you listed on google as a musician by using schema
     Search algo update
         change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
         video order depending on search criteria
@@ -72,6 +55,17 @@ UX
         active search for cities
         better looking disabled and spinner state for submit buttons
         upload multiple images at once
+        allow adding venue
+        scroll preview to section when corresponding input is focused
+        disable input until change made or auto save after input
+        bug: cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
+        limit access until you verify email
+        make form invite only
+    listing page
+        see more bio
+        see more venues played
+        click to copy email on listing page
+        artist pages that will get you listed on google as a musician by using schema
 Features
     venue reviews
     artist reviews
