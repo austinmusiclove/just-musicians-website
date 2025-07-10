@@ -7,51 +7,59 @@ if ( is_wp_error($args) ) {
     $code = $args->get_error_code();
     switch ($code) {
         case 'missing_cover_image':
-            $message = 'Cover Image Error :: ' . $message;
+            $message = 'Cover Image Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'cover-image\'})"></span>';
             break;
         case 'missing_state':
-            $message = 'State Error :: ' . $message;
+            $message = 'State Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'state\'})"></span>';
             break;
+        case 'invalid_email':
+            $message = 'Email Error: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'listing_email\'})"></span>';
+            break;
+        case 'invalid_phone':
+            $message = 'Phone Error: ' . $message;
+            echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'phone\'})"></span>';
+            break;
         case 'invalid_website':
-            $message = 'Website Error :: ' . $message;
+            $message = 'Website Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'website\'})"></span>';
             break;
         case 'invalid_facebook_url':
-            $message = 'Facebook Url Error :: ' . $message;
+            $message = 'Facebook Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'facebook_url\'})"></span>';
             break;
         case 'invalid_instagram_url':
-            $message = 'Instagram Url Error :: ' . $message;
+            $message = 'Instagram Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'instagram_url\'})"></span>';
             break;
         case 'invalid_tiktok_url':
-            $message = 'Tiktok Url Error :: ' . $message;
+            $message = 'Tiktok Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'tiktok_url\'})"></span>';
             break;
         case 'invalid_x_url':
-            $message = 'X Url Error :: ' . $message;
+            $message = 'X Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'x_url\'})"></span>';
             break;
         case 'invalid_youtube_url':
-            $message = 'Youtube Url Error :: ' . $message;
+            $message = 'Youtube Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'youtube_url\'})"></span>';
             break;
         case 'invalid_bandcamp_url':
-            $message = 'Bandcamp Url Error :: ' . $message;
+            $message = 'Bandcamp Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'bandcamp_url\'})"></span>';
             break;
         case 'invalid_apple_music_artist_url':
-            $message = 'Apple Music Artist Url Error :: ' . $message;
+            $message = 'Apple Music Artist Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'apple_music_artist_url\'})"></span>';
             break;
         case 'invalid_soundcloud_url':
-            $message = 'Soundcloud Url Error :: ' . $message;
+            $message = 'Soundcloud Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'soundcloud_url\'})"></span>';
             break;
         case 'invalid_spotify_artist_url':
-            $message = 'Spotify Artist Url Error :: ' . $message;
+            $message = 'Spotify Artist Url Error: ' . $message;
             echo '<span x-init="$dispatch(\'focus-elm\', { \'id\': \'spotify_artist_url\'})"></span>';
             break;
     }

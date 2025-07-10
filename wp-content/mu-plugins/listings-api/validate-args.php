@@ -10,17 +10,32 @@ function validate_listing_args() {
 
     // Cover image
     if (!isset($_POST['cover_image_meta'])) {
-        return new WP_Error('missing_cover_image', 'Error: Cover image required');
+        return new WP_Error('missing_cover_image', 'Cover image required');
     } else {
         $cover_image_data = custom_parse_file($_POST['cover_image_meta'], 'cover_image');
         if (empty($cover_image_data['attachment_id']) and empty($cover_image_data['file'])) {
-            return new WP_Error('missing_cover_image', 'Error: Cover image required');
+            return new WP_Error('missing_cover_image', 'Cover image required');
         }
     }
 
     // State
     if (isset($_POST['state']) and empty($_POST['state'])) {
-        return new WP_Error('missing_state', 'Error: State required');
+        return new WP_Error('missing_state', 'State required');
+    }
+
+    // Email
+    if (isset($_POST['listing_email']) and !empty($_POST['listing_email'])) {
+        if (!filter_var($_POST['listing_email'], FILTER_VALIDATE_EMAIL)) {
+            return new WP_Error('invalid_email', 'Invalid email format');
+        }
+    }
+
+    // Phone
+    if (isset($_POST['phone']) and !empty($_POST['phone'])) {
+        $phone_pattern = '/^\(\d{3}\) \d{3}-\d{4}$/';
+        if (!preg_match($phone_pattern, $_POST['phone'])) {
+            return new WP_Error('invalid_phone', 'Phone must be in the format (555) 555-5555');
+        }
     }
 
     // URLs
@@ -60,7 +75,7 @@ function validate_listing_args() {
     if ( is_wp_error($is_valid) ) {
         return new WP_Error('invalid_soundcloud_url', $is_valid->get_error_message());
     }
-    $is_valid = validate_url_input('spotify_artist_url', 'spotify.com');
+    $is_valid = is_spotify_artist_url('spotify_artist_url');
     if ( is_wp_error($is_valid) ) {
         return new WP_Error('invalid_spotify_artist_url', $is_valid->get_error_message());
     }
@@ -104,3 +119,30 @@ function validate_url_input($field, $domain = '') {
     return true;
 }
 
+function is_spotify_artist_url($field) {
+    $is_valid = validate_url_input($field, 'spotify.com');
+    if ( is_wp_error($is_valid) ) {
+        return new WP_Error('invalid_spotify_artist_url', $is_valid->get_error_message());
+    }
+
+    // Parse URL
+    $url = $_POST[$field];
+    $parsed_url = parse_url($url);
+    if (!isset($parsed_url['path'])) {
+        return new WP_Error('invalid_spotify_artist_url', 'Invalid Spotify URL format.');
+    }
+
+    // Check if it is an artist URL
+    $path_parts = explode('/', trim($parsed_url['path'], '/'));
+    if (count($path_parts) < 2 || $path_parts[0] !== 'artist') {
+        return new WP_Error('invalid_spotify_artist_url', 'Spotify Url is not a Spotify artist url. Make sure you did not enter a track or album link.');
+    }
+
+    // Validate the artist ID (usually 22 alphanumeric characters)
+    $artist_id = $path_parts[1];
+    if (!preg_match('/^[a-zA-Z0-9]{22}$/', $artist_id)) {
+        return new WP_Error('invalid_spotify_artist_url', 'Invalid Spotify artist ID in spotify Url');
+    }
+
+    return true;
+}

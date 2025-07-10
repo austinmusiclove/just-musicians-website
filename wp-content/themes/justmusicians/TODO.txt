@@ -3,9 +3,6 @@ Milestones
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         advanced
-            validation contact and links
-                filter out spotify links that are not artist links
-                phone and email
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
             add spinner behind iframes before they are there
             allow adding venue
