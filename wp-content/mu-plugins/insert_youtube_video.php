@@ -14,7 +14,6 @@ function insert_youtube_video($video_data) {
         ],
     ];
 
-    error_log(print_r($args, true));
     // Create the post
     $video_post_id = wp_insert_post($args, true);
     if( is_wp_error( $video_post_id ) ) {

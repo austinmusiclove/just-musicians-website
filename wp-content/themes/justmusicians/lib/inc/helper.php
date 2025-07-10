@@ -41,42 +41,6 @@ function get_terms_decoded($taxonomy, $fields, $search=false, $hide_empty=false)
     return array_map(function($term) { return html_entity_decode($term, ENT_QUOTES | ENT_HTML5, 'UTF-8'); }, $terms);
 }
 
-function get_youtube_video_id($url) {
-    if (empty($url) || !is_string($url)) {
-        return false;
-    }
-
-    $parsed_url = parse_url($url);
-
-    // Check for youtu.be format
-    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtu.be') !== false) {
-        return ltrim($parsed_url['path'], '/');
-    }
-
-    // Check for youtube.com format with query params
-    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtube.com') !== false) {
-        if (isset($parsed_url['query'])) {
-            parse_str($parsed_url['query'], $query_vars);
-            if (isset($query_vars['v']) && preg_match('/^[\w-]{11}$/', $query_vars['v'])) {
-                return $query_vars['v'];
-            }
-        }
-    }
-
-    return false;
-}
-
-function get_youtube_video_ids($urls) {
-    $youtube_video_ids = [];
-    if ($urls) {
-        foreach($urls as $url) {
-            $video_id = get_youtube_video_id($url);
-            if ($video_id) { $youtube_video_ids[] = $video_id; }
-        }
-    }
-    return $youtube_video_ids;
-}
-
 function clean_url_for_display($url) {
     $url = preg_replace('#^https?://#', '', $url);
     $url = preg_replace('#^www\.#', '', $url);

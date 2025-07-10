@@ -122,25 +122,21 @@ function parse_files($file_index) {
     }
     return $parsed_files;
 }
+// check youtube url validity
+// generate video id from valid urls and set video id using that in case the video id that was send in was wrong
 function custom_parse_youtube_video_data($json) {
-    // TODO check youtube url validity
-    // TODO generate video id from valid urls
-    // TODO check post id matches other data or populate data from post id if exists
-    // this is the way i was getting the id from url and there is another way in helper.php
-    /*
     $youtube_video_data = custom_parse_json($json);
     $youtube_video_ids = [];
     if ($youtube_video_data and is_array($youtube_video_data)) {
-        foreach($youtube_video_data as $video_data) {
-            error_log(print_r($video_data, true));
-            if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/.+\/|\S+\?)(?:[^&]*&)*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?=&|$)/', $video_data['url'], $matches)) {
-                $youtube_video_ids[] = $matches[1];
+        foreach($youtube_video_data as $index => $video_data) {
+            $video_id = get_youtube_video_id($video_data['url']);
+            if ($video_id) {
+                $youtube_video_ids[] = $video_id;
+                $youtube_video_data[$index]['video_id'] = $video_id;
             }
         }
     }
-    error_log(print_r($youtube_video_ids, true));
-    */
-    return custom_parse_json($json);
+    return $youtube_video_data;
 }
 function custom_parse_json($json) {
     return json_decode(stripslashes($json), true);

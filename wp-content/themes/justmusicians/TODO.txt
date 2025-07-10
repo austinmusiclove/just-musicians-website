@@ -2,12 +2,9 @@ Milestones
     Artist announce and invite new profiles
         bug
             cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
-            youtube video upload not work for arron mcdonell
-            publish creating new post instead of publishing existing draft; arron mcdonnel
         advanced
             validation contact and links
                 filter out spotify links that are not artist links
-                youtube video validation; allow multiple formats
                 phone and email
             add permissions to all writing apis (venue reviews stats, venues stats, collections)
             add spinner behind iframes before they are there

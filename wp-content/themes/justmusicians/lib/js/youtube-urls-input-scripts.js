@@ -10,9 +10,9 @@ function addYoutubeUrl(alco, input) {
     }
 
     // Check for proper url format
-    var validation = validateYoutubeUrl(value);
-    if (validation !== true) {
-        alco.$dispatch('error-toast-youtube-link', {'message': validation});
+    var isValid = isValidYoutubeUrl(value);
+    if (isValid !== true) {
+        alco.$dispatch('error-toast-youtube-link', {'message': isValid});
         input.value = '';
         return;
     }
@@ -34,15 +34,24 @@ function removeYoutubeUrl(alco, index) {
 }
 
 
-/*** Valid URL formats
-https://youtube.com/watch?v=Pr0UgL4N5Dk&si=eb4LAWGomEOfzTz4
+/*** Valid Youtube URL examples
+https://www.youtube.com/watch?time_continue=1&v=PsTm7r4Ijgc&embeds_referring_euri=https%3A%2F%2Fjimmyeatbrisket.com%2F&source_ve_path=Mjg2NjY
+https://www.youtube.com/watch?v=keKIhiCGl48&list=PLBJm7uMkVCGi7nXHCLr0ke4_bfD5Qf5Iv&index=8
+https://www.youtube.com/watch?list=PLBJm7uMkVCGi7nXHCLr0ke4_bfD5Qf5Iv&v=SnLHff64gNk
+https://www.youtube.com/watch?v=ivt9ypn_4kQ&ab_channel=AdamDodson
+https://www.youtube.com/watch?v=Onrg9ndx2Vs&feature=youtu.be
+https://www.youtube.com/watch?app=desktop&v=4GBwBY272nc
+https://www.youtube.com/watch?v=3TBAgTSqQuw&t=16s
 https://www.youtube.com/watch?v=v9C3UHya0EY
+https://youtube.com/watch?v=QhEOTjfa-wA&si=ep4Sz0B6tudIKRk5
 https://youtu.be/qzAZgdrNttY
+https://youtu.be/x-8zu6obNNA
+https://youtu.be/kNtVnhFNA-M?feature=shared
 https://youtu.be/zMgyVfpxJpE?si=j2KgWyFT4gc5XU0X
 https://m.youtube.com/watch?v=w7lX4VUOecw
 https://m.youtube.com/watch?v=jAWWcnpc_RY&pp=ygUQRGlldHJpY2ggY2FsaG91bg%3D%3D
 */
-function validateYoutubeUrl(url) {
+function isValidYoutubeUrl(url) {
     if (typeof url !== 'string' || url.trim() === '') {
         return 'URL must be a non-empty string';
     }
@@ -75,10 +84,12 @@ function validateYoutubeUrl(url) {
         return 'URL must contain a valid YouTube video ID';
     }
 
-    // Strict match against exact formats we support
-    var pattern = /^(https:\/\/)?(www\.|m\.)?(youtube\.com\/watch\?v=[\w-]{11}|youtu\.be\/[\w-]{11})([&?][^\s]*)?$/;
-    if (!pattern.test(url.trim())) {
-        return 'URL must be a valid YouTube video link';
+    // Check video id
+    var videoId = '';
+    if (isWatchWithId)     { videoId = parsedUrl.searchParams.get('v'); }
+    if (isShortLinkWithId) { videoId = parsedUrl.pathname.slice(1); }
+    if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+        return 'Youtu.be URL is missing valid video Id';
     }
 
     return true;
