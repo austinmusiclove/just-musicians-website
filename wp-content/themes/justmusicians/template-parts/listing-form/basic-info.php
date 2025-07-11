@@ -118,7 +118,7 @@
             } ?>
         </div>
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
-            <span class="font-bold">Ensemble size</span>
+            <span class="font-bold">Ensemble size <span class="text-14 font-normal">(select all that apply)</span></span>
             <div class="group relative">
                 <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[100px] -right-28 md:right-auto">
                 How many performers in your group? If you perform with different ensemble sizes, include all that apply.
