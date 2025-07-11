@@ -213,8 +213,8 @@ get_header();
             <!-- Preview -->
             <div class="bg-yellow-10 hidden lg:block md:col-span-6 pb-4">
                 <div class="sticky top-36" x-data="{
-                    showSearchResultTab: true,
-                    showPageTab: false,
+                    showSearchResultTab: false,
+                    showPageTab: true,
                     hideTabs() {
                         this.showSearchResultTab = false;
                         this.showPageTab = false;
@@ -225,8 +225,8 @@ get_header();
                     <div class="flex items-start justify-between mb-6 border-b border-black/20">
                         <h2 class="text-25 font-bold">Preview</h2>
                         <div class="flex gap-6 items-start">
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showSearchResultTab}" x-on:click="hideTabs(); showSearchResultTab = true;">Search Results</div>
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showPageTab}" x-on:click="hideTabs(); showPageTab = true;">Listing Page</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showSearchResultTab}" x-on:click="hideTabs(); showSearchResultTab = true;">Search Results</div>
                         </div>
                     </div>
 
