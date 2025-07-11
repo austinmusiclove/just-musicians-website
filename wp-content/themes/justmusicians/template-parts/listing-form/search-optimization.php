@@ -60,14 +60,14 @@
             ?>
         </div>
         <fieldgroup class="has-border px-4 py-8 relative h-64 relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
-            <div x-show="showTab1" x-cloak>
+            <div class="h-[14.75rem] overflow-hidden" x-show="showTab1" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                     'terms' => $args['categories'],
                     'input_name' => 'categories',
                     'input_x_model' => 'categoriesCheckboxes',
                 ]); ?>
             </div>
-            <div x-show="showTab2" x-cloak>
+            <div class="h-[14.75rem] overflow-hidden" x-show="showTab2" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                     'terms' => $args['genres'],
                     'input_name' => 'genres',
@@ -75,21 +75,21 @@
                     'max_options' => 6,
                 ]); ?>
             </div>
-            <div x-show="showTab3" x-cloak>
+            <div class="h-[14.75rem] overflow-hidden" x-show="showTab3" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                     'terms' => $args['subgenres'],
                     'input_name' => 'subgenres',
                     'input_x_model' => 'subgenresCheckboxes',
                 ]); ?>
             </div>
-            <div x-show="showTab4" x-cloak>
+            <div class="h-[14.75rem] overflow-hidden" x-show="showTab4" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                     'terms' => $args['instrumentations'],
                     'input_name' => 'instrumentations',
                     'input_x_model' => 'instCheckboxes',
                 ]); ?>
             </div>
-            <div x-show="showTab5" x-cloak>
+            <div class="h-[14.75rem] overflow-hidden" x-show="showTab5" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
                     'terms' => $args['settings'],
                     'input_name' => 'settings',

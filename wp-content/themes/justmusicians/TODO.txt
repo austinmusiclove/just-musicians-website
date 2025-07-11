@@ -1,5 +1,7 @@
 Milestones
     Search algo update
+        faster queries with current structure
+        include media relevance in search algo
         change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
         video order depending on search criteria
     Free lance booker testing
@@ -61,6 +63,7 @@ UX
         bug: cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         limit access until you verify email
         make form invite only
+        accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
     listing page
         see more bio
         see more venues played
