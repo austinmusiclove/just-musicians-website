@@ -1,19 +1,17 @@
 Milestones
-    Search algo update
-        faster queries with current structure
-        include media relevance in search algo
-        change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
-        video order depending on search criteria
     Free lance booker testing
         basic inquiries
-            inquire button that sends an email
-        advanced inquiries
             quiz to get gig details
-            send out to artist by email and send to more as well
+            send out to artists by email
             allow adding artists to an inquiry similar to adding to collection
             manage your inquiries in the back end
             manage inquiries sent to you in the back end
-        auto pause when you scroll away from listing; especially for mobile
+    Search algo update
+        ensemble size taxonomy
+        locaiton filter
+        include media relevance in search algo
+        change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
+        video order depending on search criteria
     Free lance booker testing 2
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
@@ -22,7 +20,6 @@ Milestones
     Venue testing
         venue applications
 Data
-    recycling for old unlinked images
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
     change venue in venue review to post object
@@ -35,7 +32,6 @@ Testing
 UX
     collections
         add animations
-        devon design
     media slider
         somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
@@ -44,7 +40,6 @@ UX
     Filters
         add something about providing sound equipment
         add location
-        get rid of horizontal scroll in home search filter tag modals
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog
@@ -73,18 +68,13 @@ Features
     venue reviews
     artist reviews
 Devon
+    venue page
+    venues search
     404 page
     collections page and favorites buttons
     trash icon
     indicator on infinite scroll and listing form
     podcast - get violotor-blog svg
-Paid features
-    Advanced search filters
-        venues played
-        instagram followers
-        spotify monthly listeners
-        tiktok followers
-    Verification
 Back End
     Allow modifying default filters from the theme customizor
 Security
@@ -95,8 +85,7 @@ Performance
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
 Bugs
-    listing form: if you go back to create listing page after creating and the thumbnail input is filled, there is no cropped image and submit will be allowed without thumbnail
-    listing form: if you choose a file then you hit choose file again but hit cancel, the file clears from the input and since it is required you cannot submit even though there is a cropper displaying and an image in the preview
+    listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
@@ -104,11 +93,4 @@ Document
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio
-    allowed youtube link formats to test all in Dietrich Calhoun profile in local host mac mini
-        https://m.youtube.com/watch?v=w7lX4VUOecw
-        https://www.youtube.com/watch?v=mKnrqEUu1Wo
-        https://youtu.be/5U7HVkjEg1I
-    not supported youtube formats (v must be first param)
-        https://www.youtube.com/watch?app=desktoppp=ygUQRGlldHJpY2ggY2FsaG91bg%3D%3D&abc=123&v=I7LAnAszeJc&abcd=1234
-        https://www.youtube.com/watch?app=desktop&v=I7LAnAszeJc
-        https://www.youtube.com/watch?v=I7LAnAszeJc&app=desktop
+    allowed youtube link formats to test all in Dietrich Calhoun profile in local host mac mini; find the formats in code where the youtube video id parsing functions are in js and php
