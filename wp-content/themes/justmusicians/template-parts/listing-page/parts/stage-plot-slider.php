@@ -57,7 +57,7 @@
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
         </div>
         <!-- Gallery Count -->
-        <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides">1/6</div>
+        <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides"></div>
     </div>
     <?php if ($args['is_preview']) { ?>
         <div class="min-h-[18px]">
