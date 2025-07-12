@@ -14,7 +14,7 @@ get_header();
     </div>
 </header>
 
-<div class="container py-8 flex justify-center">
+<div class="container py-8 flex justify-center min-h-[500px]">
     <div class="article-body mb-8 max-w-[400px] px-4 w-full">
         <p><?php the_content(); ?></p>
         <p><?php

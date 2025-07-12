@@ -56,7 +56,7 @@ get_header();
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
     </div>
 </header>
-<div class="container py-8 flex justify-center">
+<div class="container py-8 flex justify-center min-h-[500px]">
     <div class="article-body mb-8 max-w-[400px] px-4 w-full">
 
 

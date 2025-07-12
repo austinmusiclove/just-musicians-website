@@ -45,9 +45,7 @@ UX
     better confirm delete listing dialog
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
     sortable listings in single-collection.php
-    password reset
-        use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
-        password reset page needs min height
+    password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
     listing form
         active search for cities
         better looking disabled and spinner state for submit buttons
