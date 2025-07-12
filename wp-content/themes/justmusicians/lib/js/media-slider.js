@@ -21,7 +21,12 @@ function toggleMuteAllVideos(alco) {
 }
 
 function isPaused(alco) {
-    return alco.currentIndex > 0 && alco.players[getCurrentPlayerId(alco)].isPaused;
+    var currentPlayerId = getCurrentPlayerId(alco);
+    if (currentPlayerId && currentPlayerId in alco.players) {
+        return alco.currentIndex > 0 && alco.players[getCurrentPlayerId(alco)].isPaused;
+    } else {
+        return false;
+    }
 }
 
 function enterSlider(alco) {

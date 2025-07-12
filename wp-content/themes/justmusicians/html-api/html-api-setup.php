@@ -1,5 +1,6 @@
 <?php
 // This file handles routing custom paths to templates to provide a library of GET APIs for web front end
+/*
 function html_api_rewrite_rules() {
     add_rewrite_rule(
         '^wp-html/v1/([^/]+)/?',  // The URL pattern to match (e.g., /special-url/)
@@ -130,3 +131,4 @@ function html_api_v1_template_redirects() {
 }
 add_action('template_redirect', 'html_api_v1_template_redirects');
 
+*/

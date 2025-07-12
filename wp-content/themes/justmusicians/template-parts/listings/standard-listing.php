@@ -184,5 +184,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         ]);?>
     </div>
 
-    <!--<button type="button" class="sm:absolute sm:right-3 sm:bottom-3 w-full sm:w-fit hover:bg-yellow-light bg-yellow px-3 py-4 rounded-sm font-sun-motter text-12 inline-block">Send Inquiry</button>-->
+    <!-- Request quote button -->
+    <?php get_template_part('template-parts/listings/parts/request-quote-button', '', [
+        'post_id'  => $args['post_id'],
+        'name'     => $args['name'],
+        'disabled' => $is_preview,
+    ]); ?>
 </div>
