@@ -24,10 +24,12 @@
         <input type="time" name="inquiry_time" class="mb-4">
     </span>
 
+<!--
     <span x-show="inquiryDateType == 'Multiple Dates'" x-cloak>
         <p class="text-16 mt-8">Include any details you'd like about the dates and times you are booking for.</p>
         <textarea class="w-full h-40 mb-6" name="inquiry_date_time_details"></textarea>
     </span>
+-->
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2"

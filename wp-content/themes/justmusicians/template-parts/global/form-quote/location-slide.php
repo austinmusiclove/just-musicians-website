@@ -12,8 +12,10 @@
         :class="{ 'shake': shakeElements.has('inquiryZipCode') }"
     />
 
+<!--
     <p class="text-16 mt-8">Include any details you'd like about the location(s).</p>
     <textarea class="w-full h-40 mb-6" name="inquiry_location_details" x-model="inquiryLocationDetails"></textarea>
+-->
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('date')">Back</button>
@@ -25,7 +27,7 @@
         <button type="button" class="bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2"
             x-show="inquiryZipCode.length >= 5" x-cloak
             x-text="inquiryZipCode || inquiryLocationDetails ? 'Next' : 'Skip'"
-            x-on:click="_showInquirySlide('duration')"
+            x-on:click="_showInquirySlide('details')"
         >Next</button>
     </div>
 

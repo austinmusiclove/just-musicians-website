@@ -15,7 +15,7 @@
     <textarea class="w-full h-40 mb-6" name="inquiry_details"></textarea>
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
-        <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('equipment')">Back</button>
+        <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('location')">Back</button>
         <span x-show="inquiryListing" x-cloak>
             <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
                 x-show="inquirySubject.length < 15" x-cloak

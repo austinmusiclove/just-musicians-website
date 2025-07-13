@@ -1,18 +1,18 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            modify quiz
-                remove location details
-                remove date details
-                remove sound equipment
-                remove duration
-                slides
-                    zip code
-                    date maybe
-                    subject details
-                    contact method
-                add button to inquiries back end on the thank you slide
             combined inquiries requests page
+                header menu
+                mobile menu
+                account sidebar
+                tab layout on inquiries page
+            modify quiz
+                skip date and location when using contact button
+                add button to inquiries back end on the thank you slide
+                add date option for TBD
+            add city state to inquiry which is derived from zip code
+            contact down arrow for adding to existing inquiry
+            fix add to inquiry menu UI
             inquiry display design
             request display design
             sort requests and inquiries by publish date/time
@@ -27,14 +27,14 @@ Milestones
             modify quiz
                 general inquiry
                     subject and details
-                    contact method
+                    contact method so that non logged in users can send inquiry
                 request quote
                     date
                     zip
                     genre
                     ensemble size
                     subject and details
-                    contact method
+                    contact method so that non logged in users can send inquiry
                 i have budget; check availability
                     budget
                     date
@@ -42,7 +42,7 @@ Milestones
                     genre
                     ensemble size
                     subject and details
-                    contact method
+                    contact method so that non logged in users can send inquiry
                 add button to inquiries back end on the thank you slide
             figure out why initial load is slow
             get user collections and inquiries after page load to make it faster
