@@ -1,11 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            combined inquiries requests page
-                header menu
-                mobile menu
-                account sidebar
-                tab layout on inquiries page
             modify quiz
                 skip date and location when using contact button
                 add button to inquiries back end on the thank you slide

@@ -14,23 +14,22 @@
             <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
             Profile
         </a>
--->
-
-        <!-- Musicians -->
         <h2 class="font-bold text-20 my-4" x-show="showSidebar" x-collapse x-cloak>For Musicians</h2>
+-->
 
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/listings">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-collapse x-cloak>My Listings</span>
         </a>
+<!--
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/requests">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-collapse x-cloak>Requests</span>
         </a>
-
-
-        <!-- Talent Buyers -->
         <h2 class="font-bold text-20 my-4" x-show="showSidebar" x-collapse x-cloak>For Talent Buyers</h2>
+-->
+
+
 
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/collections">
             <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
@@ -42,12 +41,12 @@
         </a>
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/inquiries">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
-            <span class="inline-block pr-6" x-show="showSidebar" x-collapse x-cloak>My Inquiries</span>
+            <span class="inline-block pr-6" x-show="showSidebar" x-collapse x-cloak>Inquiries</span>
         </a>
 
 
         <!-- Account -->
-        <h2 class="font-bold text-20 my-4" x-show="showSidebar" x-collapse x-cloak>Account</h2>
+        <!--<h2 class="font-bold text-20 my-4" x-show="showSidebar" x-collapse x-cloak>Account</h2>-->
 
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo wp_logout_url('/'); ?>">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
