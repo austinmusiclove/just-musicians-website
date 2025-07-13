@@ -1,36 +1,55 @@
 Milestones
-    invite mnnatx@gmail.com to make a listing
     Free lance booker testing
         basic inquiries
-            quiz to get gig details
-            send out to artists by email
-            basics
-                single inquiry page
-                    exclude listings in the inquiry from suggestions
-                change inquiry inputs
-                    change button to contact
-                    add what kind of inquiry is this
-                        general inquiry
-                        request for quote
-                        gig opportunity (i have a budget)
-                    make more slides required like date type should be required
-                    add budget slide if applicable
-                    simplify inquiries to put equipment, duration, and other things in catch all details
-                    add contact method to inquiries
-                sort requests and inquiries by publish date/time
-                check console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
-            add button to inquiries back end on the thank you slide
+            modify quiz
+                remove location details
+                remove date details
+                remove sound equipment
+                remove duration
+                slides
+                    zip code
+                    date maybe
+                    subject details
+                    contact method
+                add button to inquiries back end on the thank you slide
+            combined inquiries requests page
+            inquiry display design
+            request display design
+            sort requests and inquiries by publish date/time
             auto email when you get a new request as a musician
-            make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
-            make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
-            make sure to add inquiries and requests page
+            show current list of listings requested in inquiry
+            suggestions for listings to invite
+            Prod deployment
+                check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
+                make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
+                make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
         second iteration
-            allow inquiry details edit
+            modify quiz
+                general inquiry
+                    subject and details
+                    contact method
+                request quote
+                    date
+                    zip
+                    genre
+                    ensemble size
+                    subject and details
+                    contact method
+                i have budget; check availability
+                    budget
+                    date
+                    zip
+                    genre
+                    ensemble size
+                    subject and details
+                    contact method
+                add button to inquiries back end on the thank you slide
             figure out why initial load is slow
             get user collections and inquiries after page load to make it faster
             reorganize alpine component vars and methods
             change listings page to html api
-            maybe: thank you slide that explains requesting quotes for this inquiry
+            allow inquiry details edit
+        invite mnnatx@gmail.com to make a listing
     Search algo update
         ensemble size taxonomy
         locaiton filter

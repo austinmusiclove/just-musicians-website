@@ -6,14 +6,16 @@
         <span class="text-red">* </span>Choose at least one
     </p>
 
-    <?php
-    $genres = get_terms_decoded('genre', 'names');
-    echo get_template_part('template-parts/filters/taxonomy-options', '', [
-        'terms'           => $genres,
-        'input_name'      => 'inquiry_genres',
-        'input_x_model'   => 'inquiryGenres',
-        'show_search_bar' => false,
-    ]); ?>
+    <div class="h-64">
+        <?php
+        $genres = get_terms_decoded('genre', 'names');
+        echo get_template_part('template-parts/filters/taxonomy-options', '', [
+            'terms'           => $genres,
+            'input_name'      => 'inquiry_genres',
+            'input_x_model'   => 'inquiryGenres',
+            'show_search_bar' => false,
+        ]); ?>
+    </div>
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('duration')">Back</button>
