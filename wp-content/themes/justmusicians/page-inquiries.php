@@ -80,10 +80,10 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                                 <!-- Full page preview -->
                                 <div x-show="showIncoming" x-cloak>
                                     <div
-                                        hx-get="/wp-html/v1/inquiries/"
+                                        hx-get="/wp-html/v1/inquiries/requests/"
                                         hx-trigger="load"
                                         hx-target="#incoming-results"
-                                        hx-indicator="#spinner"
+                                        hx-indicator="#incoming-results"
                                     ></div>
 
                                     <span id="incoming-results">
@@ -96,7 +96,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                                         ?>
                                     </span>
 
-                                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                                    <div id="incoming-results" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
                                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                                     </div>
                                 </div>
@@ -104,10 +104,10 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                                 <!-- Search result preview -->
                                 <div x-show="showOutgoing" x-cloak>
                                     <div
-                                        hx-get="/wp-html/v1/inquiries/requests/"
+                                        hx-get="/wp-html/v1/inquiries/"
                                         hx-trigger="load"
                                         hx-target="#outgoing-results"
-                                        hx-indicator="#spinner"
+                                        hx-indicator="#outgoing-spinner"
                                     ></div>
 
                                     <span id="outgoing-results">
@@ -120,7 +120,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                                         ?>
                                     </span>
 
-                                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                                    <div id="outgoing-spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
                                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                                     </div>
                                 </div>

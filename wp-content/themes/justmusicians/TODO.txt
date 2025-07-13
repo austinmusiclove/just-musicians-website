@@ -1,25 +1,47 @@
 Milestones
     Free lance booker testing
         basic inquiries
+            messages
+                create messages post type
+                create messages page
+                allow send message
+                poll for new messages
+                support decline inquiry request
+                support read/unread messages
+                support mark as unread
+            inquiries page
+                replace incoming inquiries with just messages
+                remove requests apis
+                respond button takes you to messages
+                no inquiries state for inquiries
+                show current list of listings requested in inquiry
+                "new inquiry" button on inquiries page
+            inquiry page
+                inquiry page shows messages board for all invited to the inquiry and a tab for inquiry details like yelp
             modify quiz
-                skip date and location when using contact button
+                contact button opens slide that allows you to either send existing inquiry or create new
+                contact button goes straight to subject/details after offering to add to existing inquiry
+                location not required
                 add button to inquiries back end on the thank you slide
                 add date option for TBD
-            add city state to inquiry which is derived from zip code
-            contact down arrow for adding to existing inquiry
-            fix add to inquiry menu UI
-            inquiry display design
-            request display design
-            sort requests and inquiries by publish date/time
-            auto email when you get a new request as a musician
-            show current list of listings requested in inquiry
-            suggestions for listings to invite
-            Prod deployment
+                add genre, ensemble size when user uses the request quotes button
+            data
+                add city state to inquiry which is derived from zip code
+                sort requests and inquiries by publish date/time
+                make sure proper access is in place for viewing inquiries pages
+            email notifications
+                auto email when you get a new request as a musician
+                email when you have unresponded messages for a certain amount of time
+            Deployment
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
-        second iteration
+        advanced inquiries
+            suggestions for listings to invite
+            search bar for inquiries
+            allow inquiry details edit
             modify quiz
+                maybe: support different event types in quiz
                 general inquiry
                     subject and details
                     contact method so that non logged in users can send inquiry
@@ -39,11 +61,9 @@ Milestones
                     subject and details
                     contact method so that non logged in users can send inquiry
                 add button to inquiries back end on the thank you slide
-            figure out why initial load is slow
-            get user collections and inquiries after page load to make it faster
             reorganize alpine component vars and methods
             change listings page to html api
-            allow inquiry details edit
+            record response time
         invite mnnatx@gmail.com to make a listing
     Search algo update
         ensemble size taxonomy
@@ -104,10 +124,6 @@ UX
         see more venues played
         click to copy email on listing page
         artist pages that will get you listed on google as a musician by using schema
-Features
-    messages for inquiries
-    venue reviews
-    artist reviews
 Search Algorithm
     1 - Relevant Media
     2 - Response Time
