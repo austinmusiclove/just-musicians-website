@@ -125,6 +125,8 @@ function is_spotify_artist_url($field) {
         return new WP_Error('invalid_spotify_artist_url', $is_valid->get_error_message());
     }
 
+    if (!isset($_POST[$field]) or empty($_POST[$field])) { return; }
+
     // Parse URL
     $url = $_POST[$field];
     $parsed_url = parse_url($url);
