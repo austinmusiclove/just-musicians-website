@@ -24,6 +24,10 @@ function add_listing_to_inquiry($inquiry_id, $listing_id) {
         $updated = update_post_meta($inquiry_id, 'listings_invited', array_values($listings));
         if (!$updated) { return new WP_Error(500, 'Failed to update inquiry'); }
 
+        // Send message to invited listings
+        $user_id = get_current_user_id();
+        notify_listings_invited($user_id, $inquiry_id, [$listing_id]);
+
         // Increment quotes_requested
         $quotes_requested = (int) get_post_meta($inquiry_id, 'quotes_requested', true);
         $quotes_requested++;

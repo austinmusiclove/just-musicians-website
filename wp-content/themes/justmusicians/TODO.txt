@@ -2,8 +2,56 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                create messages post type
+                use cases
+                    start user to listing convo and don't duplicate conversations with same participants
+                    start user to user convo and don't duplicate conversations with same participants
+                    start convo with multi listings and users and don't duplicate conversations with same participants
+                    get messages for convo ordered by create_at
+                    edit message
+                    special inquiry message
+                    special offer message
+                    send attachment
+                    get conversations for a particular inquiry
+                    get conversations for a particular listing
+                    mark as unread
+                    set message to read
+                    mute conversation
+                    leave conversation
+                    get conversations of a user in order of most recently updated with most recent message of each conversation and it's read satus
+                data schema
+                    messages
+                        message_id      -> primary key
+                        conversation_id -> foreign key
+                        sender_id       -> foreign key (user)
+                        created_at      -> timestamp
+                        updated_at      -> timestamp
+                        content         -> text
+                        inquiry_id      -> foreign key
+                        offer_id        -> foreign key
+                        attachment_id   -> foreign key
+                    conversations
+                        conversation_id -> primary key
+                        created_at      -> timestamp
+                        updated_at      -> timestamp
+                    conversation_participants
+                        participant_id  -> primary_key
+                        conversation_id -> foreign key
+                        user_id         -> foreign key
+                        listing_id      -> foreign key
+                    read_receipts
+                        read_receipt_id -> message_id + user_id
+                        message_id      -> foreign key
+                        user_id         -> foreign key
+
+                queres
+                    get conversations for user
+                    get most recent messages in conversation
+                create messages
+                    send message when user invited to respond
+                    get conversations
                 create messages page
+                    send on enter
+                    auto scroll on new message
                 allow send message
                 poll for new messages
                 support decline inquiry request
@@ -11,7 +59,8 @@ Milestones
                 support mark as unread
             inquiries page
                 replace incoming inquiries with just messages
-                remove requests apis
+                comb through old code for unneeded stuff
+                remove requests apis and page
                 respond button takes you to messages
                 no inquiries state for inquiries
                 show current list of listings requested in inquiry
@@ -33,6 +82,8 @@ Milestones
                 auto email when you get a new request as a musician
                 email when you have unresponded messages for a certain amount of time
             Deployment
+                add messages page
+                add messages acf fields
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
@@ -172,3 +223,7 @@ Document
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio
     allowed youtube link formats to test all in Dietrich Calhoun profile in local host mac mini; find the formats in code where the youtube video id parsing functions are in js and php
+    new dev env set up
+        need social log in creds
+        need to do settings -> permalinks save to get apis to work
+        wp config constants

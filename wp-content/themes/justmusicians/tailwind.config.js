@@ -120,7 +120,8 @@ module.exports = {
 			// Other
 			'navy': '#0F384C',
 			'red': '#C23D28',
-			'red-60': '#DA8B7E'
+			'red-60': '#DA8B7E',
+            'grey-light': '#e3e3e3',
 		},
 		fontFamily: {
 			sans: ['Poppins', 'sans-serif'],
