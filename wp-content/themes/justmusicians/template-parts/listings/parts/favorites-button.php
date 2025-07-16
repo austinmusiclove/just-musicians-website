@@ -17,7 +17,7 @@
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
         <?php if (is_user_logged_in()) { ?>
             x-show="_showEmptyFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
-            hx-post="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+            hx-post="<?php echo site_url('/wp-html/v1/collections/0/listings/' . $args['post_id']); ?>"
             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
             hx-trigger="click"
             hx-indicator="#decoy-indicator"
@@ -31,7 +31,7 @@
     <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
         x-show="_showFilledFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
         x-on:click="showCollectionsPopup = true"
-        hx-delete="/wp-html/v1/collections/0/listings/<?php echo $args['post_id']; ?>"
+        hx-delete="<?php echo site_url('/wp-html/v1/collections/0/listings/' . $args['post_id']); ?>"
         hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
         hx-trigger="remove-from-favorites"
         hx-indicator="#decoy-indicator"
@@ -69,7 +69,7 @@
                         <!-- Empty bookmark state -->
                         <button type="button" class="mr-2"
                             x-show="_showEmptyCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
-                            x-bind:hx-post="'/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                            x-bind:hx-post="'<?php echo site_url(); ?>/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
                             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
                             hx-trigger="click"
                             hx-indicator="#decoy-indicator"
@@ -83,7 +83,7 @@
                         <!-- Filled bookmark state -->
                         <button type="button" class="mr-2"
                             x-show="_showFilledCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
-                            x-bind:hx-delete="'/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                            x-bind:hx-delete="'<?php echo site_url(); ?>/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id']; ?>'"
                             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
                             hx-trigger="click"
                             hx-indicator="#decoy-indicator"
@@ -107,7 +107,7 @@
 
                 <div x-show="showCreateCollectionInput" class="space-y-2">
                     <form
-                        hx-post="/wp-html/v1/collections/"
+                        hx-post="<?php echo site_url('/wp-html/v1/collections/'); ?>"
                         hx-target="#create-collection-result-<?php echo $args['post_id']; ?>"
                         hx-indicator="#decoy-indicator"
                     >

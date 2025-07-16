@@ -102,7 +102,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                     <?php } else { ?>
 
                         <form id="hx-form"
-                            hx-get="/wp-html/v1/listings-by-id"
+                            hx-get="<?php echo site_url('/wp-html/v1/listings-by-id'); ?>"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"

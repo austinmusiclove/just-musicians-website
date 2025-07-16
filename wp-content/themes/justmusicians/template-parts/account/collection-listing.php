@@ -4,7 +4,7 @@
     x-show="showCollection" x-cloak
     x-on:hide-collection="showCollection = false;"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
-    hx-get="/wp-html/v1/collections/?page=<?php echo $args['next_page']; ?>"
+    hx-get="<?php echo site_url('/wp-html/v1/collections/?page=' . $args['next_page']); ?>"
     hx-trigger="revealed once"
     hx-swap="beforeend"
     hx-target="#results"
@@ -48,7 +48,7 @@
     </a>
     <?php if ($args['allow_delete']) { ?>
         <button class="absolute p-2 top-10 right-2 opacity-50 hover:opacity-100"
-            hx-delete="/wp-html/v1/collections/<?php echo $args['post_id']; ?>"
+            hx-delete="<?php echo site_url('/wp-html/v1/collections/' . $args['post_id']); ?>"
             hx-confirm="Are you sure you want to delete this collection?"
             hx-target="#result-<?php echo $args['post_id']; ?>"
         >

@@ -10,11 +10,12 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     <?php if (!is_null($collection_id)) { ?>
         x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
     <?php } ?>
-    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
-    hx-get="/wp-html/v1/<?php echo !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>/?page=<?php echo $args['next_page']; ?>"
-    hx-trigger="revealed once"
-    hx-swap="beforeend"
-    hx-include="#hx-form"
+    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page
+        $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
+        hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
+        hx-trigger="revealed once"
+        hx-swap="beforeend"
+        hx-include="#hx-form"
     <?php } ?>
 >
 

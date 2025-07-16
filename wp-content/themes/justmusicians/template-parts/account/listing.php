@@ -27,7 +27,7 @@
         </button>
     </a>
     <button class="absolute p-2 top-10 right-2 opacity-50 hover:opacity-100"
-        hx-delete="/wp-html/v1/listings/<?php echo $args['post_id']; ?>"
+        hx-delete="<?php echo site_url('/wp-html/v1/listings/' . $args['post_id']); ?>"
         hx-confirm="Are you sure you want to delete this listing?"
         hx-target="#result-<?php echo $args['post_id']; ?>"
     >

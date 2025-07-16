@@ -48,7 +48,7 @@ get_header();
                                 </div>
 
                                 <form class="w-full flex items-stretch gap-2 mb-4"
-                                    hx-post="/wp-html/v1/collections/"
+                                    hx-post="<?php echo site_url('/wp-html/v1/collections/'); ?>"
                                     hx-target="#create-collection-result"
                                 >
                                     <input type="hidden" name="error_event" value="error-toast-add-collection">
@@ -96,7 +96,7 @@ get_header();
                     <?php } else { ?>
 
                         <div
-                            hx-get="/wp-html/v1/collections"
+                            hx-get="<?php echo site_url('/wp-html/v1/collections'); ?>"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"

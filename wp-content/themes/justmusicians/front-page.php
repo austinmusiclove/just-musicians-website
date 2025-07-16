@@ -58,7 +58,7 @@ get_header();
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
         }"
-        hx-get="/wp-html/v1/listings/"
+        hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-trigger="load, filterupdate"
         hx-target="#results"
         hx-indicator="#spinner"

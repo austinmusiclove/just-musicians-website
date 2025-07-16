@@ -91,7 +91,7 @@
                 x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
-                hx-get="<?php echo get_site_url(); ?>/wp-html/v1/search-options"
+                hx-get="<?php echo site_url('/wp-html/v1/search-options'); ?>"
                 hx-trigger="input changed delay:300ms, updatesearchoptions"
                 hx-target="#active-search-results-desktop"
               />

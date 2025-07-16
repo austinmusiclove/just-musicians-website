@@ -32,7 +32,7 @@
                         x-ref="venuesInput"
                         x-on:focus="showOptions = true; $dispatch('updatevenueoptions');"
                         x-on:click.away="showOptions = false"
-                        hx-get="<?php echo get_site_url(); ?>/wp-html/v1/venue-search-options"
+                        hx-get="<?php echo site_url('/wp-html/v1/venue-search-options'); ?>"
                         hx-trigger="input changed delay:300ms, updatevenueoptions"
                         hx-target="#venue-active-search-results"
                     />

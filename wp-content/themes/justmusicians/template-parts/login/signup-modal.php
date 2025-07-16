@@ -19,7 +19,7 @@
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div class="bg-white px-6 pb-4 sm:px-12">
                     <form class="space-y-2" action="" method="POST"
-                        hx-post="/wp-html/v1/register-user"
+                        hx-post="<?php echo site_url('/wp-html/v1/register-user'); ?>"
                         hx-target="#sign-up-result">
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6">Email Address</label>
