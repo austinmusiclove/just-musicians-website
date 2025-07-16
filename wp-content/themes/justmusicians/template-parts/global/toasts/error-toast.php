@@ -1,7 +1,7 @@
 <?php
     $toast_event = !empty($args['customEvent']) ? $args['customEvent'] : 'error-toast';
 ?>
-<div class="text-16 sm:text-18 bg-red-60 p-2 text-center sticky w-full"
+<div class="text-16 bg-red-60 p-2 pr-8 text-center sticky w-full"
     x-data="{ show: false, message: '' }"
     x-show="show" x-cloak
     x-transition:enter="transition ease-out duration-500"
