@@ -21,6 +21,11 @@ add_action('rest_api_init', function () {
         'callback' => 'print_listings_youtube_urls',
         'permission_callback' => 'is_admin_jwt',
     ]);
+    register_rest_route( 'datamgmt/v1', '/unassigned-listings', [
+        'methods' => 'GET',
+        'callback' => 'get_unassigned_listings',
+        'permission_callback' => 'is_admin_jwt',
+    ]);
 });
 
 
@@ -109,5 +114,49 @@ function update_listing_youtube_videos($post_id) {
 
     // Update the listing's youtube_videos field with the array of post IDs
     update_post_meta($post_id, 'youtube_videos', $youtube_post_ids);
+}
+
+function get_unassigned_listings() {
+    global $wpdb;
+
+    // Step 1: Get all published listing IDs and titles
+    $listings = $wpdb->get_results("
+        SELECT ID, post_title
+        FROM {$wpdb->posts}
+        WHERE post_type = 'listing' AND post_status = 'publish'
+    ");
+
+    // Step 2: Get all usermeta values for the 'listings' field
+    $usermeta = $wpdb->get_col("
+        SELECT meta_value
+        FROM {$wpdb->usermeta}
+        WHERE meta_key = 'listings'
+    ");
+
+    // Step 3: Extract all listing IDs from serialized data
+    $assigned_listing_ids = [];
+
+    foreach ($usermeta as $meta_value) {
+        $ids = maybe_unserialize($meta_value);
+        if (is_array($ids)) {
+            $assigned_listing_ids = array_merge($assigned_listing_ids, $ids);
+        }
+    }
+
+    $assigned_listing_ids = array_map('intval', array_unique($assigned_listing_ids));
+
+    // Step 4: Filter out listings that are assigned
+    $unassigned = [];
+
+    foreach ($listings as $listing) {
+        if (!in_array((int)$listing->ID, $assigned_listing_ids, true)) {
+            $unassigned[] = [
+                'ID' => (int)$listing->ID,
+                'title' => $listing->post_title
+            ];
+        }
+    }
+
+    return $unassigned;
 }
 
