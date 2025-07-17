@@ -1,9 +1,10 @@
 <div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showImageEditPopup" x-cloak>
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
-        <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showImageEditPopup = false">
+    <div class="bg-white relative w-full max-h-[calc(100vh-4rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="showImageEditPopup = false">
+
         <div class="px-6 pt-4">
 
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between my-6">
                 <h4 class="font-bold text-25 w-full">Crop your image</h4>
                 <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showImageEditPopup = false"/>
             </div>
@@ -11,7 +12,7 @@
             <div class="grid sm:grid-cols-2">
 
                 <!-- Cropper display -->
-                <div class="my-4 max-h-[600px]" >
+                <div class="my-4" >
                     <img class="block max-w-full" x-ref="cropperDisplay" />
                     <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
                         <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>

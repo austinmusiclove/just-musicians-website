@@ -1,17 +1,18 @@
 <div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showYoutubeLinkPopup" x-cloak>
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
-    <div class="bg-white relative w-auto h-auto gap-4 shadow-black-offset flex flex-col items-stretch justify-center" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
+    <div class="bg-white relative w-full max-h-[calc(100vh-4rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
+
         <div class="px-6 pt-4">
 
             <!-- Title -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between my-6">
                 <h4 class="font-bold text-25 w-full" x-show="currentYtIndex < 0" x-cloak>Add a YouTube video</h4>
                 <h4 class="font-bold text-25 w-full" x-show="currentYtIndex >= 0" x-cloak>Edit YouTube video settings</h4>
                 <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showYoutubeLinkPopup = false"/>
             </div>
 
             <!-- Toasts -->
-            <div class="min-h-10">
+            <div class="min-h-10" x-show="currentYtIndex < 0" x-cloak>
                 <?php
                 echo get_template_part('template-parts/global/toasts/success-toast', '', ['customEvent' => 'success-toast-youtube-link']);
                 echo get_template_part('template-parts/global/toasts/error-toast',   '', ['customEvent' => 'error-toast-youtube-link']);
@@ -34,7 +35,7 @@
             <!-- Edit youtube link settings -->
             <template x-for="(videoData, index) in youtubeVideoData" :key="index">
                 <div class="grid sm:grid-cols-2" x-show="currentYtIndex >= 0 && index == currentYtIndex" x-cloak>
-                    <div class="my-4 max-h-[600px]" >
+                    <div class="my-4" >
                         <img class="w-full" x-bind:src="`https://img.youtube.com/vi/${videoData.video_id}/mqdefault.jpg`">
                         <div class="mt-6">
                             <label class="mb-1 inline-block">Video Url</label>
