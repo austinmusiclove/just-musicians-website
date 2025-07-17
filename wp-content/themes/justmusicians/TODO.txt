@@ -82,6 +82,7 @@ Milestones
                 auto email when you get a new request as a musician
                 email when you have unresponded messages for a certain amount of time
             Deployment
+                add acf config file so i don't have to do any manual set up of ACF
                 add messages page
                 add messages acf fields
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
