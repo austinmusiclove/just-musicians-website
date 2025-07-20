@@ -202,6 +202,8 @@ class UserMessagesPlugin {
         $wpdb->update($tables['conversations'], [
             'updated_at' => $now
         ], ['id' => $conversation_id]);
+
+        return true;
     }
 
     // Gets user conversations, ordered by most recent message
@@ -263,7 +265,6 @@ class UserMessagesPlugin {
         ", $conversation_id));
 
         foreach ($participant_rows as $row) {
-            error_log(print_r($row, true));
             if ($row->user_id) {
                 if ($exclude_sender and $row->user_id == $sender_id) { continue; }
                 $name = $wpdb->get_var($wpdb->prepare("
@@ -275,7 +276,6 @@ class UserMessagesPlugin {
             } elseif ($row->listing_id) {
                 if ($exclude_sender) {
                     $listings = get_user_meta($sender_id, 'listings', true);
-                    error_log(print_r($listings, true));
                     if (is_array($listings) and in_array($row->listing_id, $listings)) {
                         continue;
                     }

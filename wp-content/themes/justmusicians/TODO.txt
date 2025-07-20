@@ -2,18 +2,21 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
+                show new lines
+                allow special characters in messages
+                clear input on send message
+                error checking on db errors
+                auto scroll on new message
                 access control for message plugin functions
-                when inquiry created, send message to listings
-                when listing added to inquiry, send message to listings
                 on contact button ask if they want to send a dm or do an inquiry
-                create messages page
-                    allow send message on enter and button click
-                    auto scroll on new message
+                get conversations pagination
+                get messages pagination
                 poll for new messages
                 support decline inquiry request
                 support read/unread messages
                 support mark as unread
-            inquiries page
+                don't show mb spinner on initial page load
+                inquiries page
                 replace incoming inquiries with just messages
                 comb through old code for unneeded stuff
                 remove requests apis and page

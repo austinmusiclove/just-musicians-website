@@ -7,7 +7,6 @@
 
 if (!is_user_logged_in()) { wp_redirect(site_url()); } // Don't allow non logged in users to see this page
 $conversations = $user_messages_plugin->get_user_conversations(get_current_user_id());
-error_log(print_r($conversations, true));
 get_header();
 
 
@@ -24,7 +23,8 @@ get_header();
 <div class="lg:container h-[69vh]" x-data="{
     conversation_id: -1,
     conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
-}">
+}"
+>
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
 
         <!-- Conversations Menu -->
@@ -41,7 +41,7 @@ get_header();
                 hx-indicator="#mb-spinner"
             >
                 <template x-for="conversation in conversations" :key="conversation.conversation_id">
-                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="conversation_id = conversation.conversation_id; $nextTick(() => { htmx.process($refs.getMessages); $dispatch('fetchmessages');} );">
+                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="conversation_id = conversation.conversation_id; $nextTick(() => { htmx.process($refs.getMessages); htmx.process($refs.sendMessage); $dispatch('fetchmessages');} );">
                         <h3 class="text-18 font-bold mb-2" x-text="conversation.participants.join(', ')"></h3>
                         <p class="w-full text-sm truncate" x-text="conversation.content"></p>
                     </div>
@@ -60,12 +60,26 @@ get_header();
 
             <!-- Message Input Area -->
             <div class="border-t border-black/20 px-4 pt-2">
-                <div class="flex items-end">
-                    <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="message" rows="1" placeholder="Please enter a message."
+                <form class="flex items-end"
+                    x-ref="sendMessage"
+                    x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/messages/' + conversation_id"
+                    hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
+                    hx-target="#message-board"
+                    hx-swap="beforeend"
+                    hx-ext="disable-element" hx-disable-element=".htmx-submit-button"
+                    hx-indicator=".htmx-submit-button"
+                >
+                    <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" rows="1" placeholder="Please enter a message."
                         x-on:input="$el.rows = $el.value.split(/\r\n|\r|\n/).length;"
+                        x-on:keydown="if ($event.key === 'Enter' && !$event.shiftKey) { console.log('in'); $event.preventDefault(); $refs.sendMessage.requestSubmit(); }"
                     ></textarea>
-                    <button type="button" class="ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">Send</button>
-                </div>
+                    <button type="submit" class="htmx-submit-button ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">
+                        <span class="htmx-indicator-replace">Send</span>
+                        <span class="flex items-center justify-center htmx-indicator">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
+                        </span>
+                    </button>
+                </form>
             </div>
 
         </div>
