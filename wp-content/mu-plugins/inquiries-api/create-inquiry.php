@@ -17,7 +17,7 @@ function create_user_inquiry($args) {
     update_user_meta($user_id, 'inquiries', $user_inquiries);
 
     // Send messages to invited listings
-    notify_listings_invited($user_id, $inquiry_id, $args['meta_input']['listings_invited']);
+    notify_listings_invited($user_id, $inquiry_id, $args['meta_input']['listings_invited'], $args['meta_input']['details']);
 
     // Get permalink
     $permalink = get_permalink($inquiry_id);

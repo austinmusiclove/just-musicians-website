@@ -2,57 +2,13 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                use cases
-                    start user to listing convo and don't duplicate conversations with same participants
-                    start user to user convo and don't duplicate conversations with same participants
-                    start convo with multi listings and users and don't duplicate conversations with same participants
-                    get messages for convo ordered by create_at
-                    edit message
-                    special inquiry message
-                    special offer message
-                    send attachment
-                    get conversations for a particular inquiry
-                    get conversations for a particular listing
-                    mark as unread
-                    set message to read
-                    mute conversation
-                    leave conversation
-                    get conversations of a user in order of most recently updated with most recent message of each conversation and it's read satus
-                data schema
-                    messages
-                        message_id      -> primary key
-                        conversation_id -> foreign key
-                        sender_id       -> foreign key (user)
-                        created_at      -> timestamp
-                        updated_at      -> timestamp
-                        content         -> text
-                        inquiry_id      -> foreign key
-                        offer_id        -> foreign key
-                        attachment_id   -> foreign key
-                    conversations
-                        conversation_id -> primary key
-                        created_at      -> timestamp
-                        updated_at      -> timestamp
-                    conversation_participants
-                        participant_id  -> primary_key
-                        conversation_id -> foreign key
-                        user_id         -> foreign key
-                        listing_id      -> foreign key
-                    read_receipts
-                        read_receipt_id -> message_id + user_id
-                        message_id      -> foreign key
-                        user_id         -> foreign key
-
-                queres
-                    get conversations for user
-                    get most recent messages in conversation
-                create messages
-                    send message when user invited to respond
-                    get conversations
+                access control for message plugin functions
+                when inquiry created, send message to listings
+                when listing added to inquiry, send message to listings
+                on contact button ask if they want to send a dm or do an inquiry
                 create messages page
-                    send on enter
+                    allow send message on enter and button click
                     auto scroll on new message
-                allow send message
                 poll for new messages
                 support decline inquiry request
                 support read/unread messages

@@ -26,7 +26,8 @@ function add_listing_to_inquiry($inquiry_id, $listing_id) {
 
         // Send message to invited listings
         $user_id = get_current_user_id();
-        notify_listings_invited($user_id, $inquiry_id, [$listing_id]);
+        $details = get_post_meta($inquiry_id, 'details', true);
+        notify_listings_invited($user_id, $inquiry_id, [$listing_id], $details);
 
         // Increment quotes_requested
         $quotes_requested = (int) get_post_meta($inquiry_id, 'quotes_requested', true);

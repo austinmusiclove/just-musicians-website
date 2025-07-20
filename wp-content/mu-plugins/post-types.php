@@ -176,22 +176,6 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-editor-code'
     ));
-
-    // Message
-    register_post_type('message', array(
-        'public' => false,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'supports' => [],
-        'labels' => array(
-          'name' => 'Message',
-          'add_new_item' => 'Add New Message',
-          'edit_item' => 'Edit Message',
-          'all_items' => 'All Messages',
-          'singular_name' => 'Message'
-        ),
-        'menu_icon' => 'dashicons-admin-comments'
-    ));
 }
 
 function register_taxonomies() {

@@ -1,7 +1,7 @@
 <?php
 
 $inquiry_id = get_query_var('inquiry-id');
-$listing_id    = get_query_var('listing-id');
+$listing_id = get_query_var('listing-id');
 $args = ['inquiry_id' => $inquiry_id];
 
 

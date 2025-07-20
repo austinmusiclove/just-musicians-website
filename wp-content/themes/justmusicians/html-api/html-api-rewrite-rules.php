@@ -62,6 +62,14 @@ function html_api_rewrite_rules() {
         'index.php?wp-html-v1=requests',
         'top'
     );
+
+    // Messages
+    add_rewrite_rule(
+        '^wp-html/v1/messages/([0-9]+)/?$',
+        'index.php?wp-html-v1=messages&conversation-id=$matches[1]',
+        'bottom'
+    );
+
 }
 add_action('init', 'html_api_rewrite_rules');
 
@@ -70,6 +78,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'listing-id';
     $vars[] = 'collection-id';
     $vars[] = 'inquiry-id';
+    $vars[] = 'conversation-id';
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');
