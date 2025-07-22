@@ -3,7 +3,6 @@ Milestones
         basic inquiries
             messages
                 poll for new messages/subscribe with websocket htmx
-                display timestamps in message board
                 get conversations pagination
                 error checking on db errors
                 send message animation
@@ -11,6 +10,8 @@ Milestones
                 support decline inquiry request
                 support read/unread messages
                 support mark as unread
+                organize plugin into directory with folders and files
+                see if i can have created at and updated at managed by mysql instead of setting it myself
             inquiries page
                 no inquiries state for inquiries
                 respond button takes you to messages

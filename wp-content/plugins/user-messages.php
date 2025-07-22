@@ -199,7 +199,7 @@ class UserMessagesPlugin {
             return $is_participant;
         }
 
-        $wpdb->insert($tables['messages'], [
+        $message = [
             'conversation_id' => $conversation_id,
             'sender_id'       => $sender_id,
             'content'         => $content,
@@ -208,13 +208,14 @@ class UserMessagesPlugin {
             'attachment_id'   => $attachment_id,
             'created_at'      => $now,
             'updated_at'      => $now,
-        ]);
+        ];
+        $wpdb->insert($tables['messages'], $message);
 
         $wpdb->update($tables['conversations'], [
             'updated_at' => $now
         ], ['id' => $conversation_id]);
 
-        return true;
+        return $message;
     }
 
     // Gets user conversations, ordered by most recent message
