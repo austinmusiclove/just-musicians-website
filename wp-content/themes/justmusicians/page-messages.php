@@ -20,16 +20,18 @@ get_header();
     </div>
 </div>
 
-<div class="lg:container h-[69vh]" x-data="{
-    conversation_id: -1,
-    conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
-    _afterMessageSend() {
-        console.log('after message send');
-        $refs.content.value = '';
-        $refs.content.rows = 1;
-        $refs.messageBoard.scrollTop = $refs.messageBoard.scrollHeight;
-    },
-}"
+<div class="lg:container h-[69vh]"
+    x-data="{
+        conversation_id: -1,
+        conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
+        _scrollToElement(id) { document.getElementById(id).scrollIntoView(); },
+        _afterMessageSend() {
+            $refs.content.value = '';
+            $refs.content.rows = 1;
+        },
+    }"
+    x-on:message-sent.window="_afterMessageSend()"
+    x-on:scroll-to.window="_scrollToElement($event.detail.id)"
 >
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
 
@@ -41,10 +43,11 @@ get_header();
             <!-- Get Conversations -->
             <div class="border-t border-black/20 h-full w-full"
                 x-ref="getMessages"
-                x-bind:hx-get="'<?php echo site_url(); ?>' + '/wp-html/v1/messages/' + conversation_id"
+                x-bind:hx-get="'<?php echo site_url(); ?>' + '/wp-html/v1/messages/' + conversation_id + '/'"
                 hx-trigger="fetchmessages"
                 hx-target="#message-board"
                 hx-indicator="#mb-spinner"
+                hx-swap="scroll:bottom"
             >
                 <template x-for="conversation in conversations" :key="conversation.conversation_id">
                     <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="conversation_id = conversation.conversation_id; $nextTick(() => { htmx.process($refs.getMessages); htmx.process($refs.sendMessage); $dispatch('fetchmessages');} );">
@@ -62,7 +65,7 @@ get_header();
             <div id="mb-spinner" class="my-8 flex items-center justify-center htmx-indicator">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
             </div>
-            <div id="message-board" class="flex-1 overflow-y-auto p-4 space-y-4" x-init="$el.scrollTop = $el.scrollHeight;" x-ref="messageBoard"></div>
+            <div id="message-board" class="flex-1 overflow-y-auto p-4 space-y-4" x-ref="messageBoard"></div>
 
             <!-- Message Input Area -->
             <div class="border-t border-black/20 px-4 pt-2">
@@ -71,10 +74,10 @@ get_header();
                     x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/messages/' + conversation_id"
                     hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
                     hx-target="#message-board"
-                    hx-swap="beforeend"
+                    hx-swap="beforeend scroll:bottom"
                     hx-ext="disable-element" hx-disable-element=".htmx-submit-button"
                     hx-indicator=".htmx-submit-button"
-                    x-init="window.addEventListener('htmx:afterRequest', () => { _afterMessageSend();  });"
+                    hx-on::after-request="if (event.detail.successful) { dispatchEvent(new CustomEvent('message-sent')); }"
                 >
                     <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" rows="1" placeholder="Please enter a message."
                         x-ref="content"

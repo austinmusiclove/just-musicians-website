@@ -2,35 +2,29 @@
 global $user_messages_plugin;
 
 // Get Messages
-$page = $_GET['page'] ?? 1;
+$cursor = $_GET['cursor'] ?? null;
 $user_id = get_current_user_id();
 $conversation_id = get_query_var('conversation-id') ?? 0;
 if (!$conversation_id) {
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'Failed to get messages for this conversation\'})"></span>'; exit;
 }
-$messages = $user_messages_plugin->get_conversation_messages($conversation_id);
+$messages = $user_messages_plugin->get_conversation_messages($conversation_id, 20, $cursor);
 
-/*
-$max_num_results = $result['max_num_results'];
-$max_num_pages   = $result['max_num_pages'];
-$is_last_page    = $page == $max_num_pages;
-$next_page       = $result['next_page'];
-*/
 
-if (count($messages) > 0) {
+// Display messages
+$num_messages = count($messages);
+if ($num_messages > 0) {
 
     // Traverse messages in reverse to display in chronological order
-    for ($iter = count($messages) - 1; $iter >= 0; $iter--) {
+    for ($iter = $num_messages - 1; $iter >= 0; $iter--) {
         $message = $messages[$iter];
         echo get_template_part('template-parts/messages/basic-message', '', [
-            'content'      => $message->content,
-            'is_outgoing'  => $message->sender_id == $user_id,
-            //'last'       => $i === 0,
-            //'is_last_page' => $is_last_page,
-            //'next_page'    => $next_page,
+            'content'         => $message->content,
+            'is_outgoing'     => $message->sender_id == $user_id,
+            'conversation_id' => $message->conversation_id,
+            'message_id'      => $message->id,
+            'last'            => $iter === $num_messages - 1,
         ]);
     }
 
-} else {
-    echo get_template_part('template-parts/messages/no-messages', '', []);
 }

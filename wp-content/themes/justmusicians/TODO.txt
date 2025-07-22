@@ -3,8 +3,13 @@ Milestones
         basic inquiries
             messages
                 error checking on db errors
-                get messages pagination
                 get conversations pagination
+                use email before @ as display name if no display name
+                handle conversation title when a user is in a conversation with their own listing
+                display user name next to messages
+                display timestamps in message board
+                display conversation title at top of message board
+                send message animation
                 special inquiry message UI
                 poll for new messages/subscribe with websocket htmx
                 support decline inquiry request
