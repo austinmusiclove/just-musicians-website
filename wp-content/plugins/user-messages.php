@@ -273,7 +273,8 @@ class UserMessagesPlugin {
     function get_conversation_participant_names($conversation_id, $sender_id, $exclude_sender=false) {
         global $wpdb;
         $tables = $this->tables;
-        $participants = [];
+        $user_participants = [];
+        $listing_participants = [];
 
         $participant_rows = $wpdb->get_results($wpdb->prepare("
             SELECT cp.user_id, cp.listing_id
@@ -288,15 +289,9 @@ class UserMessagesPlugin {
                     SELECT display_name FROM {$wpdb->users}
                     WHERE ID = %d
                 ", $row->user_id));
-                if ($name) { $participants[] = $name; }
+                if ($name) { $user_participants[] = $name; }
 
             } elseif ($row->listing_id) {
-                if ($exclude_sender) {
-                    $listings = get_user_meta($sender_id, 'listings', true);
-                    if (is_array($listings) and in_array($row->listing_id, $listings)) {
-                        continue;
-                    }
-                }
                 $name = $wpdb->get_var($wpdb->prepare("
                     SELECT pm.meta_value
                     FROM {$wpdb->posts} p
@@ -305,11 +300,11 @@ class UserMessagesPlugin {
                     LIMIT 1
                 ", $row->listing_id));
                 if (!$name) { $name = get_the_title($row->listing_id); } // Fallback to post title
-                $participants[] = $name;
+                $listing_participants[] = $name;
             }
         }
 
-        return $participants;
+        return array_merge($user_participants, $listing_participants);
     }
 
 
@@ -332,7 +327,9 @@ class UserMessagesPlugin {
             ", $cursor_id));
 
             $query = $wpdb->prepare("
-                SELECT * FROM {$tables['messages']}
+                SELECT m.*, u.display_name AS sender_name
+                FROM {$tables['messages']} m
+                LEFT JOIN {$wpdb->users} u ON m.sender_id = u.ID
                 WHERE conversation_id = %d
                   AND created_at < %s
                 ORDER BY created_at DESC
@@ -340,7 +337,9 @@ class UserMessagesPlugin {
             ", $conversation_id, $cursor_time, $limit);
         } else {
             $query = $wpdb->prepare("
-                SELECT * FROM {$tables['messages']}
+                SELECT m.*, u.display_name AS sender_name
+                FROM {$tables['messages']} m
+                LEFT JOIN {$wpdb->users} u ON m.sender_id = u.ID
                 WHERE conversation_id = %d
                 ORDER BY created_at DESC
                 LIMIT %d

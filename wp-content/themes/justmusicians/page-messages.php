@@ -23,11 +23,21 @@ get_header();
 <div class="lg:container h-[69vh]"
     x-data="{
         conversation_id: -1,
+        conversation_title: '',
         conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
         _scrollToElement(id) { document.getElementById(id).scrollIntoView(); },
         _afterMessageSend() {
             $refs.content.value = '';
             $refs.content.rows = 1;
+        },
+        _selectConversation(conversation) {
+            this.conversation_id    = conversation.conversation_id;
+            this.conversation_title = conversation.participants.join(', ');
+            $nextTick(() => {
+                htmx.process($refs.getMessages);
+                htmx.process($refs.sendMessage);
+                this.$dispatch('fetchmessages');
+            } );
         },
     }"
     x-on:message-sent.window="_afterMessageSend()"
@@ -50,7 +60,7 @@ get_header();
                 hx-swap="scroll:bottom"
             >
                 <template x-for="conversation in conversations" :key="conversation.conversation_id">
-                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="conversation_id = conversation.conversation_id; $nextTick(() => { htmx.process($refs.getMessages); htmx.process($refs.sendMessage); $dispatch('fetchmessages');} );">
+                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="_selectConversation(conversation);">
                         <h3 class="text-18 font-bold mb-2" x-text="conversation.participants.join(', ')"></h3>
                         <p class="w-full text-sm truncate" x-text="conversation.content"></p>
                     </div>
@@ -62,10 +72,13 @@ get_header();
         <div class="hidden pb-4 lg:flex flex-col lg:col-span-9 h-[69vh]">
 
             <!-- Message Bubbles -->
-            <div id="mb-spinner" class="my-8 flex items-center justify-center htmx-indicator">
+            <div>
+                <h2 class="my-8 font-bold text-22" x-text="conversation_title"></h2>
+            </div>
+            <div id="mb-spinner" class="flex items-center justify-center htmx-indicator">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
             </div>
-            <div id="message-board" class="flex-1 overflow-y-auto p-4 space-y-4" x-ref="messageBoard"></div>
+            <div id="message-board" class="flex-1 overflow-y-auto p-6 space-y-4" x-ref="messageBoard"></div>
 
             <!-- Message Input Area -->
             <div class="border-t border-black/20 px-4 pt-2">

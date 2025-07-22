@@ -18,8 +18,12 @@ if ($num_messages > 0) {
     // Traverse messages in reverse to display in chronological order
     for ($iter = $num_messages - 1; $iter >= 0; $iter--) {
         $message = $messages[$iter];
+        $display_name = filter_var($message->sender_name, FILTER_VALIDATE_EMAIL)
+                        ? explode('@', $message->sender_name)[0]
+                        : $message->sender_name;
         echo get_template_part('template-parts/messages/basic-message', '', [
             'content'         => $message->content,
+            'sender_name'     => $display_name,
             'is_outgoing'     => $message->sender_id == $user_id,
             'conversation_id' => $message->conversation_id,
             'message_id'      => $message->id,
