@@ -139,7 +139,7 @@ get_header();
                     </span>
 
 
-                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                     </div>
 

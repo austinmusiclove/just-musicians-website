@@ -23,6 +23,12 @@ get_header();
 <div class="lg:container h-[69vh]" x-data="{
     conversation_id: -1,
     conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
+    _afterMessageSend() {
+        console.log('after message send');
+        $refs.content.value = '';
+        $refs.content.rows = 1;
+        $refs.messageBoard.scrollTop = $refs.messageBoard.scrollHeight;
+    },
 }"
 >
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
@@ -53,7 +59,7 @@ get_header();
         <div class="hidden pb-4 lg:flex flex-col lg:col-span-9 h-[69vh]">
 
             <!-- Message Bubbles -->
-            <div id="mb-spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+            <div id="mb-spinner" class="my-8 flex items-center justify-center htmx-indicator">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
             </div>
             <div id="message-board" class="flex-1 overflow-y-auto p-4 space-y-4" x-init="$el.scrollTop = $el.scrollHeight;" x-ref="messageBoard"></div>
@@ -68,14 +74,16 @@ get_header();
                     hx-swap="beforeend"
                     hx-ext="disable-element" hx-disable-element=".htmx-submit-button"
                     hx-indicator=".htmx-submit-button"
+                    x-init="window.addEventListener('htmx:afterRequest', () => { _afterMessageSend();  });"
                 >
                     <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" rows="1" placeholder="Please enter a message."
+                        x-ref="content"
                         x-on:input="$el.rows = $el.value.split(/\r\n|\r|\n/).length;"
-                        x-on:keydown="if ($event.key === 'Enter' && !$event.shiftKey) { console.log('in'); $event.preventDefault(); $refs.sendMessage.requestSubmit(); }"
+                        x-on:keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); $refs.sendMessage.requestSubmit(); }"
                     ></textarea>
-                    <button type="submit" class="htmx-submit-button ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">
+                    <button type="submit" class="htmx-submit-button w-fit relative ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3 disabled:opacity-50">
                         <span class="htmx-indicator-replace">Send</span>
-                        <span class="flex items-center justify-center htmx-indicator">
+                        <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
                             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
                         </span>
                     </button>

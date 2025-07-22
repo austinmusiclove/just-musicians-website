@@ -2,31 +2,27 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                show new lines
-                allow special characters in messages
-                clear input on send message
                 error checking on db errors
-                auto scroll on new message
-                access control for message plugin functions
-                on contact button ask if they want to send a dm or do an inquiry
-                get conversations pagination
                 get messages pagination
-                poll for new messages
+                get conversations pagination
+                special inquiry message UI
+                poll for new messages/subscribe with websocket htmx
                 support decline inquiry request
                 support read/unread messages
                 support mark as unread
                 don't show mb spinner on initial page load
-                inquiries page
-                replace incoming inquiries with just messages
                 comb through old code for unneeded stuff
                 remove requests apis and page
                 respond button takes you to messages
                 no inquiries state for inquiries
+            inquiries page
+                replace incoming inquiries with just messages
                 show current list of listings requested in inquiry
                 "new inquiry" button on inquiries page
             inquiry page
                 inquiry page shows messages board for all invited to the inquiry and a tab for inquiry details like yelp
             modify quiz
+                on contact button ask if they want to send a dm or do an inquiry
                 contact button opens slide that allows you to either send existing inquiry or create new
                 contact button goes straight to subject/details after offering to add to existing inquiry
                 location not required

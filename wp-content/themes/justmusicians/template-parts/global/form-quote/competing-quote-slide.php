@@ -20,7 +20,7 @@
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('details')">Back</button>
-        <button type="submit" class="relative bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2 disabled:bg-grey disabled:text-white inquiry-submit-button"
+        <button type="submit" class="relative bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2 disabled:opacity-50 inquiry-submit-button"
             x-bind:disabled="!quotesRequested"
         >
             <span class="htmx-indicator-replace">Submit</span>

@@ -183,10 +183,21 @@ class UserMessagesPlugin {
 
     // Sends a message in an existing conversation
     function send_message($conversation_id, $sender_id, $content, $inquiry_id = null, $offer_id = null, $attachment_id = null) {
-        // TODO access control
         global $wpdb;
         $tables = $this->tables;
         $now = current_time('mysql');
+        $current_user_id = get_current_user_id();
+
+        // Access control: allow only if the sender is the current user or user is an admin
+        if ($current_user_id !== (int) $sender_id && !current_user_can('manage_options')) {
+            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', 403);
+        }
+
+        // Access control: Check logged in user is a participant in conversation_id
+        $is_participant = $this->user_is_participant(get_current_user_id(), $conversation_id);
+        if ( is_wp_error($is_participant) && !current_user_can('manage_options')) {
+            return $is_participant;
+        }
 
         $wpdb->insert($tables['messages'], [
             'conversation_id' => $conversation_id,
@@ -210,6 +221,12 @@ class UserMessagesPlugin {
     function get_user_conversations($user_id) {
         global $wpdb;
         $tables = $this->tables;
+        $current_user_id = get_current_user_id();
+
+        // Access control: allow only if the user_id is the current user or user is an admin
+        if ($current_user_id !== (int) $user_id && !current_user_can('manage_options')) {
+            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', 403);
+        }
 
         // Get listing IDs the user owns
         $listing_ids = get_user_meta($user_id, 'listings', true);
@@ -298,9 +315,14 @@ class UserMessagesPlugin {
 
     // Gets messages for a conversation, latest first
     function get_conversation_messages($conversation_id, $limit = 20, $cursor_id = null) {
-        // TODO access control
         global $wpdb;
         $tables = $this->tables;
+
+        // Access control: Check logged in user is a participant in conversation_id
+        $is_participant = $this->user_is_participant(get_current_user_id(), $conversation_id);
+        if ( is_wp_error($is_participant) && !current_user_can('manage_options')) {
+            return $is_participant;
+        }
 
         if ($cursor_id) {
             // Get timestamp of cursor message
@@ -326,6 +348,41 @@ class UserMessagesPlugin {
         }
 
         return $wpdb->get_results($query);
+    }
+
+    function user_is_participant($user_id, $conversation_id) {
+        global $wpdb;
+        $tables = $this->tables;
+
+        // Check if the sender is a user participant
+        $is_user_participant = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$tables['conversation_participants']}
+             WHERE conversation_id = %d AND user_id = %d",
+            $conversation_id,
+            $user_id
+        ));
+
+        // Check if any of the sender's listings are participants
+        $listing_ids = get_user_meta($user_id, 'listings', true);
+        if (!is_array($listing_ids)) { $listing_ids = []; }
+        $is_listing_participant = 0;
+        if (!empty($listing_ids)) {
+            // Prepare placeholders for IN clause
+            $placeholders = implode(',', array_fill(0, count($listing_ids), '%d'));
+            $sql = "
+                SELECT COUNT(*) FROM {$tables['conversation_participants']}
+                WHERE conversation_id = %d
+                AND listing_id IN ($placeholders)
+            ";
+            $values = array_merge([$conversation_id], $listing_ids);
+            $is_listing_participant = $wpdb->get_var($wpdb->prepare($sql, ...$values));
+        }
+
+        // Final access check
+        if (!$is_user_participant && !$is_listing_participant) {
+            return new WP_Error('forbidden', 'You are not a participant in this conversation.', 403);
+        }
+        return true;
     }
 
 }
