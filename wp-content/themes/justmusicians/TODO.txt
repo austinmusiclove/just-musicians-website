@@ -2,13 +2,16 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                error checking on db errors
                 websockets
                     poll for new messages/subscribe with websocket htmx
+                    send messages with websockets
                     support read/unread messages
                     support mark as unread
-                organize plugin into directory with folders and files
-                see if i can have created at and updated at managed by mysql instead of setting it myself
+                    move conversation to the top of list when message gets sent to client
+                plugin
+                    error checking on db errors
+                    organize plugin into directory with folders and files
+                    see if i can have created at and updated at managed by mysql instead of setting it myself
                 mobile view selecting conversations and switch back and forth between views
             inquiries page
                 no inquiries state for inquiries
