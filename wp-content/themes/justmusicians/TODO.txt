@@ -1,6 +1,5 @@
 Milestones
     Form bugs
-        focus cover image input when user clicks cover image preview
         safari image upload issues; slow; timeout; uploaded images as blank
     Free lance booker testing
         basic inquiries
@@ -60,6 +59,7 @@ UX
         limit access until you verify email
         make form invite only
         accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+        make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     listing page
         see more bio
         see more venues played

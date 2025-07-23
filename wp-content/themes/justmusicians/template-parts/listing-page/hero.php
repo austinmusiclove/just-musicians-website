@@ -69,15 +69,19 @@ if ($args['instance'] == 'listing-form') {
                 </p>
 
                 <!-- Location -->
-                <div class="flex gap-2 items-center">
+                <div class="flex gap-2 items-center"
+                    <?php if ($is_preview) { ?> x-on:click="focusElm('city')" <?php } ?>
+                >
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-                    <span <?php if ($is_preview) { ?> x-text="getListingLocation() === '' ? 'City, State' : getListingLocation()" <?php } ?> >
+                    <span <?php if ($is_preview)  { ?> x-text="getListingLocation() === '' ? 'City, State' : getListingLocation()" <?php } ?>>
                         <?php if (!$is_preview) { echo get_field('city') . ', ' . get_field('state'); } ?>
                     </span>
                 </div>
 
                 <!-- Genres -->
-                <div class="flex flex-wrap items-center gap-1">
+                <div class="flex flex-wrap items-center gap-1"
+                    <?php if ($is_preview) { ?> x-on:click="focusElm('search-optimization-terms')" <?php } ?>
+                >
                     <?php
                     if (!empty($args['genres']) and !is_wp_error($args['genres'])) {
                         foreach ($args['genres'] as $term) { ?>
@@ -90,7 +94,10 @@ if ($args['instance'] == 'listing-form') {
 
                 <!-- Ensemble Sizes -->
                 <?php if ((!empty(get_field('ensemble_size')) and is_array(get_field('ensemble_size'))) or $is_preview) { ?>
-                <div <?php if ($is_preview) { ?> x-show="ensembleSizeCheckboxes.length > 0" x-cloak <?php } ?>>
+                <div
+                    <?php if ($is_preview) { ?> x-show="ensembleSizeCheckboxes.length > 0" x-cloak <?php } ?>
+                    <?php if ($is_preview) { ?> x-on:click="focusElm('ensemble-size-input');" <?php } ?>
+                >
                     <div class="flex items-center gap-1">
                         <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" />
                         <h4 class="text-16 font-semibold">Ensemble size</h4>

@@ -1,5 +1,5 @@
 
-<section class="flex flex-col gap-5">
+<section id="search-optimization-terms" class="flex flex-col gap-5">
 
     <div class="flex items-center gap-2">
         <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
