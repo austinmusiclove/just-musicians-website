@@ -31,6 +31,7 @@ if ($args['instance'] == 'listing-form') {
             <img class="w-full h-full object-cover"
                 <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"            <?php } ?>
+                <?php if ($is_preview)  { ?>x-on:click="focusElm('cover-image')"                                    <?php } ?>
             />
 
             <!-- <div class="<?php echo $theme['availability_wrapper_1']; ?>">
@@ -48,7 +49,9 @@ if ($args['instance'] == 'listing-form') {
             <div class="flex flex-col gap-5 w-full">
 
                 <!-- Name and verified badge -->
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2"
+                    <?php if ($is_preview) { ?> x-on:click="focusElm('performer-name-input')"<?php } ?>
+                >
                     <h1 class="text-32 font-bold" <?php if ($is_preview) { ?> x-text="pName === '' ? 'Performer or Band Name' : pName" <?php } ?> >
                         <?php if (!$is_preview) { echo get_field('name'); } ?>
                     </h1>
@@ -58,7 +61,10 @@ if ($args['instance'] == 'listing-form') {
                 </div>
 
                 <!-- Description -->
-                <p class="text-18" <?php if ($is_preview) { ?> x-text="pDescription === '' ? 'Description' : pDescription" <?php } ?> >
+                <p class="text-18"
+                    <?php if ($is_preview) { ?> x-on:click="focusElm('description-input')"                  <?php } ?>
+                    <?php if ($is_preview) { ?> x-text="pDescription === '' ? 'Description' : pDescription" <?php } ?>
+                >
                     <?php if (!$is_preview) { echo get_field('description'); } ?>
                 </p>
 

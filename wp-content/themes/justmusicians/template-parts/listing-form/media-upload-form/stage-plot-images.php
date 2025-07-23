@@ -33,7 +33,7 @@
             <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
                 <div class="flex items-center gap-4 grow min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
-                    <div class="aspect-4/3 w-16 border border-black/20">
+                    <div class="aspect-4/3 w-16 border border-black/20 shrink-0">
                         <img class="w-full h-full object-cover" x-bind:src="_getImageData('stage_plots', data.image_id)?.url">
                     </div>
                     <div class="overflow-hidden">
