@@ -3,7 +3,6 @@ Milestones
         basic inquiries
             messages
                 error checking on db errors
-                send message animation
                 websockets
                     poll for new messages/subscribe with websocket htmx
                     support read/unread messages

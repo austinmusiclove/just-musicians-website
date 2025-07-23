@@ -15,9 +15,11 @@ $element_id = 'message-' . $args['conversation_id'] . '-' . $args['message_id'];
 >
 
     <!-- Timestamp -->
+    <?php if (isset($args['timestamp'])) { ?>
     <div class="text-center text-grey text-14" x-text="new Date('<?php echo $args['timestamp']; ?> UTC').toLocaleString()">
         <?php echo $args['timestamp']; ?>
     </div>
+    <?php } ?>
 
 
     <!-- Inquiry content -->

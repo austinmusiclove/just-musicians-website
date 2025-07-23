@@ -20,12 +20,12 @@ if (is_wp_error($result)) {
 // Handle success
 } else if ($result) {
     echo get_template_part('template-parts/messages/basic-message', '', [
-        'content'        => $content,
-        'is_outgoing'    => true,
+        'content'         => $content,
+        'is_outgoing'     => true,
         'sender_name'     => $display_name,
         'conversation_id' => $conversation_id,
         'message_id'      => $result['id'],
-        'timestamp'       => '', //$result['created_at'],
+        //'timestamp'       => $result['created_at'],
         'last'            => false,
     ]);
 }
