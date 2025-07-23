@@ -30,7 +30,7 @@
             </div>
             <div class="flex items-center flex-col justify-center gap-4 px-4">
                 <!--<div class="text-center text-14">The large image that appears at the top of your profile page.</div>-->
-                <div class="text-center text-grey" x-text="_getImageData('cover_image', 'cover_image')?.filename"></div>
+                <div class="text-center text-grey text-wrap break-all" x-text="_getImageData('cover_image', 'cover_image')?.filename"></div>
                 <div class="flex gap-2">
                     <button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white"
                         x-on:click="$refs.cropperDisplay.src = _getImageData('cover_image', 'cover_image')?.url; _initCropper($refs.cropperDisplay, 'cover_image', 'cover_image'); showImageEditPopup = true;"

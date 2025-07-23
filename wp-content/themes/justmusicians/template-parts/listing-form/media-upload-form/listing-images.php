@@ -37,7 +37,7 @@
                         <img class="w-full h-full object-cover" x-bind:src="_getImageData('listing_images', data.image_id)?.url">
                     </div>
                     <div class="overflow-hidden">
-                        <div class="text-14 text-grey mb-2" x-text="_getImageData('listing_images', data.image_id)?.filename"></div>
+                        <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('listing_images', data.image_id)?.filename"></div>
                         <div class="tags flex flex-wrap gap-1 min-w-0">
                             <template x-for="tag in _getImageData('listing_images', data.image_id)?.mediatags" :key="tag">
                                 <div class="w-fit flex items-center text-14 whitespace-nowrap bg-yellow-20 px-3 h-6 rounded-full" x-text="tag"></div>

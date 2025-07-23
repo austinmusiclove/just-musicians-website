@@ -37,7 +37,7 @@
                         <img class="w-full h-full object-cover" x-bind:src="_getImageData('stage_plots', data.image_id)?.url">
                     </div>
                     <div class="overflow-hidden">
-                        <div class="text-14 text-grey truncate whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('stage_plots', data.image_id)?.filename"></div>
+                        <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('stage_plots', data.image_id)?.filename"></div>
                         <div class="text-14 text-grey truncate whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('stage_plots', data.image_id)?.caption"></div>
                     </div>
                 </div>

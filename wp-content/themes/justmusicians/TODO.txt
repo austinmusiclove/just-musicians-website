@@ -1,4 +1,9 @@
 Milestones
+    Form bugs
+        photo upload timeout
+        safari much slower on image upload
+        image got uploaded blank on safari
+        focus cover image input when user clicks cover image preview
     Free lance booker testing
         basic inquiries
             quiz to get gig details
