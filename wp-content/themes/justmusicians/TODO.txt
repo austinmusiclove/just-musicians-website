@@ -2,16 +2,15 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                poll for new messages/subscribe with websocket htmx
-                get conversations pagination
                 error checking on db errors
                 send message animation
-                special inquiry message UI
-                support decline inquiry request
-                support read/unread messages
-                support mark as unread
+                websockets
+                    poll for new messages/subscribe with websocket htmx
+                    support read/unread messages
+                    support mark as unread
                 organize plugin into directory with folders and files
                 see if i can have created at and updated at managed by mysql instead of setting it myself
+                mobile view selecting conversations and switch back and forth between views
             inquiries page
                 no inquiries state for inquiries
                 respond button takes you to messages
@@ -26,6 +25,7 @@ Milestones
                 on contact button ask if they want to send a dm or do an inquiry
                 contact button opens slide that allows you to either send existing inquiry or create new
                 contact button goes straight to subject/details after offering to add to existing inquiry
+                show inquiries in contact button menu in order of newest inquiries
                 location not required
                 add button to inquiries back end on the thank you slide
                 add date option for TBD
@@ -45,6 +45,7 @@ Milestones
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
         advanced inquiries
+            inquiry response posts; show user all inquiry responses side by side
             suggestions for listings to invite
             search bar for inquiries
             allow inquiry details edit

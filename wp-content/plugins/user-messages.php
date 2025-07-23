@@ -188,6 +188,11 @@ class UserMessagesPlugin {
         $now = current_time('mysql');
         $current_user_id = get_current_user_id();
 
+        // Access control: check user logged in
+        if (!is_user_logged_in()) {
+            return new WP_Error('unauthorized', 'You are not allowed to send messages if you are not logged in.', 403);
+        }
+
         // Access control: allow only if the sender is the current user or user is an admin
         if ($current_user_id !== (int) $sender_id && !current_user_can('manage_options')) {
             return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', 403);
@@ -219,10 +224,15 @@ class UserMessagesPlugin {
     }
 
     // Gets user conversations, ordered by most recent message
-    function get_user_conversations($user_id) {
+    function get_user_conversations($user_id, $limit = 20, $cursor_id = null) {
         global $wpdb;
         $tables = $this->tables;
         $current_user_id = get_current_user_id();
+
+        // Access control: check user logged in
+        if (!is_user_logged_in()) {
+            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', 403);
+        }
 
         // Access control: allow only if the user_id is the current user or user is an admin
         if ($current_user_id !== (int) $user_id && !current_user_can('manage_options')) {
@@ -236,31 +246,91 @@ class UserMessagesPlugin {
         }
 
         // Build query
-        $query = "
-            SELECT c.id AS conversation_id,
-                   m.content,
-                   m.created_at,
-                   m.sender_id,
-                   m.id AS message_id,
-                   IF(rr.user_id IS NULL, 0, 1) AS is_read
-            FROM {$tables['conversations']} c
-            JOIN {$tables['conversation_participants']} cp
-                ON cp.conversation_id = c.id
-            LEFT JOIN {$tables['messages']} m
-                ON m.id = (
-                    SELECT id FROM {$tables['messages']}
-                    WHERE conversation_id = c.id
-                    ORDER BY created_at DESC LIMIT 1
-                )
-            LEFT JOIN {$tables['read_receipts']} rr
-                ON rr.message_id = m.id AND rr.user_id = %d
-            WHERE cp.user_id = %d" .
-            (!empty($listing_ids) ? " OR cp.listing_id IN (" . implode(',', array_map('intval', $listing_ids)) . ")" : "") . "
-            GROUP BY c.id
-            ORDER BY m.created_at DESC
-        ";
+        $placeholders = implode(',', array_fill(0, count($listing_ids), '%d'));
+        if ($cursor_id) {
+            // Get timestamp of cursor message
+            $cursor_time = $wpdb->get_var($wpdb->prepare("
+                SELECT m.created_at FROM {$tables['conversations']} c
+                LEFT JOIN {$tables['messages']} m
+                    ON m.id = (
+                        SELECT id FROM {$tables['messages']}
+                        WHERE conversation_id = c.id
+                        ORDER BY created_at DESC LIMIT 1
+                    )
+                WHERE c.id = %d
+            ", $cursor_id));
+            $query = "
+                SELECT c.id AS conversation_id,
+                       m.content,
+                       m.created_at,
+                       m.sender_id,
+                       m.id AS message_id,
+                       IF(rr.user_id IS NULL, 0, 1) AS is_read
+                FROM {$tables['conversations']} c
+                JOIN {$tables['conversation_participants']} cp
+                    ON cp.conversation_id = c.id
+                LEFT JOIN {$tables['messages']} m
+                    ON m.id = (
+                        SELECT id FROM {$tables['messages']}
+                        WHERE conversation_id = c.id
+                        ORDER BY created_at DESC LIMIT 1
+                    )
+                LEFT JOIN {$tables['read_receipts']} rr
+                    ON rr.message_id = m.id AND rr.user_id = %d
+                WHERE m.created_at < %s AND ( cp.user_id = %d";
 
-        $conversations = $wpdb->get_results($wpdb->prepare($query, $user_id, $user_id));
+            $query_params = [$user_id, $cursor_time, $user_id];
+            if (!empty($listing_ids)) {
+                $query .= " OR cp.listing_id IN ({$placeholders})";
+                $query_params = array_merge($query_params, $listing_ids);
+            }
+
+            $query .= ")
+                GROUP BY c.id
+                ORDER BY c.updated_at DESC
+                LIMIT %d";
+
+            $query_params[] = $limit;
+            $prepared_query = $wpdb->prepare($query, ...$query_params);
+            $conversations = $wpdb->get_results($prepared_query);
+
+        } else {
+            $query = "
+                SELECT c.id AS conversation_id,
+                       m.content,
+                       m.created_at,
+                       m.sender_id,
+                       m.id AS message_id,
+                       IF(rr.user_id IS NULL, 0, 1) AS is_read
+                FROM {$tables['conversations']} c
+                JOIN {$tables['conversation_participants']} cp
+                    ON cp.conversation_id = c.id
+                LEFT JOIN {$tables['messages']} m
+                    ON m.id = (
+                        SELECT id FROM {$tables['messages']}
+                        WHERE conversation_id = c.id
+                        ORDER BY created_at DESC LIMIT 1
+                    )
+                LEFT JOIN {$tables['read_receipts']} rr
+                    ON rr.message_id = m.id AND rr.user_id = %d
+                WHERE (cp.user_id = %d";
+
+            $query_params = [$user_id, $user_id];
+            if (!empty($listing_ids)) {
+                $query .= " OR cp.listing_id IN ({$placeholders})";
+                $query_params = array_merge($query_params, $listing_ids);
+            }
+
+            $query .= ")
+                GROUP BY c.id
+                ORDER BY c.updated_at DESC
+                LIMIT %d";
+
+            $query_params[] = $limit;
+            $prepared_query = $wpdb->prepare($query, ...$query_params);
+            $conversations = $wpdb->get_results($prepared_query);
+        }
+
 
         // Now add participant names
         foreach ($conversations as &$conv) {
@@ -270,7 +340,6 @@ class UserMessagesPlugin {
         return $conversations;
     }
 
-    // TODO handle someone sending their own lsiting an inquiry; need to return at least one name; probably the listing name
     function get_conversation_participant_names($conversation_id, $sender_id, $exclude_sender=false) {
         global $wpdb;
         $tables = $this->tables;
@@ -313,6 +382,11 @@ class UserMessagesPlugin {
     function get_conversation_messages($conversation_id, $limit = 20, $cursor_id = null) {
         global $wpdb;
         $tables = $this->tables;
+
+        // Access control: check user logged in
+        if (!is_user_logged_in()) {
+            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', 403);
+        }
 
         // Access control: Check logged in user is a participant in conversation_id
         $is_participant = $this->user_is_participant(get_current_user_id(), $conversation_id);

@@ -197,6 +197,10 @@ function hmm_scripts() {
 
     // Messages pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/messages/')) {
+        // Alpine Collapse
+        wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-collapse';
+
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }

@@ -60,6 +60,10 @@ function html_api_v1_template_redirects() {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-messages.php'; exit;
                 case 'POST'  : include_once get_template_directory() . '/html-api/send-message.php'; exit;
             }
+        case 'conversations':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'   : include_once get_template_directory() . '/html-api/get-conversations.php'; exit;
+            }
 
         // Active Search
         case 'search-options':

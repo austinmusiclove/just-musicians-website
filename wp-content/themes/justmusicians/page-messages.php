@@ -6,7 +6,10 @@
  */
 
 if (!is_user_logged_in()) { wp_redirect(site_url()); } // Don't allow non logged in users to see this page
-$conversations = $user_messages_plugin->get_user_conversations(get_current_user_id());
+//$conversations = $user_messages_plugin->get_user_conversations(get_current_user_id());
+/*
+        conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
+ */
 get_header();
 
 
@@ -24,15 +27,16 @@ get_header();
     x-data="{
         conversation_id: -1,
         conversation_title: '',
-        conversations: <?php if (!empty($conversations)) { echo clean_arr_for_doublequotes($conversations); } else { echo '[]'; } ?>,
+        conversations: [],
         _scrollToElement(id) { document.getElementById(id).scrollIntoView(); },
         _afterMessageSend() {
             $refs.content.value = '';
             $refs.content.rows = 1;
         },
-        _selectConversation(conversation) {
-            this.conversation_id    = conversation.conversation_id;
-            this.conversation_title = conversation.participants.join(', ');
+        _selectConversation(conversation_id, conversation_title) {
+            console.log(conversation_id);
+            this.conversation_id    = conversation_id;
+            this.conversation_title = conversation_title;
             $nextTick(() => {
                 htmx.process($refs.getMessages);
                 htmx.process($refs.sendMessage);
@@ -42,16 +46,21 @@ get_header();
     }"
     x-on:message-sent.window="_afterMessageSend()"
     x-on:scroll-to.window="_scrollToElement($event.detail.id)"
+    hx-get="<?php echo site_url('/wp-html/v1/conversations/'); ?>"
+    hx-trigger="load"
+    hx-target="#conversation-container"
+    hx-indicator="#cv-spinner"
 >
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
 
         <!-- Conversations Menu -->
-        <div class="col-span-12 lg:col-span-3 z-0 border-r border-black/20">
+        <div class="flex flex-col col-span-12 lg:col-span-3 z-0 border-r border-black/20 h-[69vh]">
             <header class="pt-4 sm:pt-20 xl:pt-32 mb-4 sm:mb-12 gap-12 sm:gap-4 flex flex-col-reverse sm:flex-row justify-between sm:items-center">
                 <h1 class="font-bold text-22 sm:text-25">Conversations</h1>
             </header>
+
             <!-- Get Conversations -->
-            <div class="border-t border-black/20 h-full w-full"
+            <div id="conversation-container" class="flex-1 border-t border-black/20 w-full overflow-y-scroll"
                 x-ref="getMessages"
                 x-bind:hx-get="'<?php echo site_url(); ?>' + '/wp-html/v1/messages/' + conversation_id + '/'"
                 hx-trigger="fetchmessages"
@@ -60,12 +69,18 @@ get_header();
                 hx-swap="scroll:bottom"
             >
                 <template x-for="conversation in conversations" :key="conversation.conversation_id">
-                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="_selectConversation(conversation);">
+                    <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10" x-on:click="_selectConversation(conversation.conversation_id, conversation.participants.join(', '));">
                         <h3 class="text-18 font-bold mb-2" x-text="conversation.participants.join(', ')"></h3>
                         <p class="w-full text-sm truncate" x-text="conversation.content"></p>
                     </div>
                 </template>
             </div>
+
+            <!-- Spinner -->
+            <div id="cv-spinner" class="flex items-center justify-center htmx-indicator">
+                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+            </div>
+
         </div>
 
         <!-- Messageing App -->
@@ -93,11 +108,14 @@ get_header();
                     hx-on::after-request="if (event.detail.successful) { dispatchEvent(new CustomEvent('message-sent')); }"
                 >
                     <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" rows="1" placeholder="Please enter a message."
+                        x-bind:disabled="conversation_id < 0"
                         x-ref="content"
                         x-on:input="$el.rows = $el.value.split(/\r\n|\r|\n/).length;"
                         x-on:keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); $refs.sendMessage.requestSubmit(); }"
                     ></textarea>
-                    <button type="submit" class="htmx-submit-button w-fit relative ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3 disabled:opacity-50">
+                    <button type="submit" class="htmx-submit-button w-fit relative ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3 disabled:opacity-50"
+                        x-bind:disabled="conversation_id < 0"
+                    >
                         <span class="htmx-indicator-replace">Send</span>
                         <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
                             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>

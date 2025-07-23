@@ -233,7 +233,7 @@ get_header();
 
 
                     <!-- Full page preview -->
-                    <div class="overflow-scroll max-h-[80vh]" x-show="showPageTab" x-cloak >
+                    <div class="overflow-scroll max-h-[76vh]" x-show="showPageTab" x-cloak >
                         <?php echo get_template_part('template-parts/listing-page/hero', '', array(
                             'instance'          => 'listing-form',
                             'genres'            => $genres,
