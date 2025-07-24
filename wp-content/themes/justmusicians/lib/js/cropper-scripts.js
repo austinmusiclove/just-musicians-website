@@ -11,44 +11,82 @@ function handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, 
     if (alco.cropper) {
         var croppedCanvas = alco.cropper.getCroppedCanvas();
 
-        croppedCanvas.toBlob((blob) => {
-            if (blob) {
-                var filename = `${alco._getImageData(imageType, imageId)['filename'].replace(/\.[^/.]+$/, '')}.webp`;
-                var file = new File([blob], filename, { type: 'image/webp' });
-                var croppedImageUrl = URL.createObjectURL(blob);
-                alco._updateImage(imageType, imageId, croppedImageUrl, file, isCropEnd);
+        // Use browser-native WebP if supported
+        if (browserSupportsWebPInCanvas()) {
+            croppedCanvas.toBlob((blob) => {
+                processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd);
+            }, 'image/webp');
 
-                // Enable submit button
-                enableButtons(submitButtons);
-                alco.showImageProcessingSpinner = false;
-            }
-        }, 'image/webp');
+        // Fallback for Safari: encode to WebP using libwebp-wasm
+        } else {
+            var imageData = croppedCanvas.getContext('2d').getImageData(0, 0, croppedCanvas.width, croppedCanvas.height);
+            WebPModule.encode(imageData.data, croppedCanvas.width, croppedCanvas.height, 75).then((webpBuffer) => {
+                var blob = new Blob([webpBuffer], { type: 'image/webp' });
+                processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd);
+            }).catch((err) => {
+                console.warn(err);
+            });
+        }
+    }
+
+    // Enable submit button
+    enableButtons(submitButtons);
+    alco.showImageProcessingSpinner = false;
+}
+function processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd) {
+    if (blob) {
+        var filename = `${alco._getImageData(imageType, imageId)['filename'].replace(/\.[^/.]+$/, '')}.webp`;
+        var file = new File([blob], filename, { type: 'image/webp' });
+        var croppedImageUrl = URL.createObjectURL(blob);
+        alco._updateImage(imageType, imageId, croppedImageUrl, file, isCropEnd);
     }
 }
-function initCropper(alco, displayElement, imageType, imageId, submitButtons) {
-    alco.currentImageId = imageId;
+function browserSupportsWebPInCanvas() {
+    var canvas = document.createElement('canvas');
+    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+}
 
+function initCropper(alco, displayElement, imageType, imageId, submitButtons, displaySrc) {
     // Disable submit button until image processing is complete
     disableButtons(submitButtons);
     alco.showImageProcessingSpinner = true;
+    alco.showCropperDisplay = false;
 
     // Destroy existing cropper if it exists
     if (alco.cropper) { alco.cropper.destroy(); }
 
-    alco.cropper = new Cropper(displayElement, {
-        aspectRatio: 4 / 3,
-        viewMode: 1,
-        autoCropArea: 1,
-        zoomable: 0,
-        ready: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, false) },
-        cropend: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, true) },
-    });
+    // Only init cropper after the display loads
+    displayElement.onload = function () {
+        alco.currentImageId = imageId;
+
+        // Destroy existing cropper if it exists
+        if (alco.cropper) { alco.cropper.destroy(); }
+
+        alco.cropper = new Cropper(displayElement, {
+            aspectRatio: 4 / 3,
+            viewMode: 1,
+            autoCropArea: 1,
+            zoomable: 0,
+            ready: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, false) },
+            cropend: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, true) },
+        });
+    };
+
+    alco.showCropperDisplay = true;
+    displayElement.src = displaySrc;
+
+    // If it's already loaded (cached), fire manually
+    if (displayElement.complete && displayElement.naturalWidth !== 0) {
+        displayElement.onload();
+    }
+
 }
 function initCropperFromFile(alco, event, displayElement, imageType, imageId, submitButtons) {
 
     // Disable submit button until image processing is complete
     disableButtons(submitButtons);
     alco.showImageProcessingSpinner = true;
+    alco.showCropperDisplay = false;
 
     var files = event.target.files;
 
@@ -68,8 +106,7 @@ function initCropperFromFile(alco, event, displayElement, imageType, imageId, su
 
         var reader = new FileReader();
         reader.onload = function (evnt) {
-            displayElement.src = evnt.target.result;
-            initCropper(alco, displayElement, imageType, imageId, submitButtons);
+            initCropper(alco, displayElement, imageType, imageId, submitButtons, evnt.target.result);
         };
 
         reader.readAsDataURL(files[0]);
@@ -94,7 +131,7 @@ function enableButtons(buttons) {
 }
 
 function generateRandomId() {
-    const array = new Uint8Array(16);
+    var array = new Uint8Array(16);
     window.crypto.getRandomValues(array);
     return Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
 }

@@ -12,8 +12,10 @@
             <div class="grid sm:grid-cols-2">
 
                 <!-- Cropper display -->
-                <div class="my-4" >
-                    <img class="block max-w-full" x-ref="cropperDisplay" />
+                <div class="my-4">
+                    <div class="w-full" x-show="showCropperDisplay" x-claok>
+                        <img class="block max-w-full" x-ref="cropperDisplay" />
+                    </div>
                     <div class="flex h-4" x-show="showImageProcessingSpinner" x-cloak>
                         <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
                         <span>Processing image...</span>

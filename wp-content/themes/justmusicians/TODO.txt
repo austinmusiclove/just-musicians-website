@@ -1,6 +1,4 @@
 Milestones
-    Form bugs
-        safari image upload issues; slow; timeout; uploaded images as blank
     Free lance booker testing
         basic inquiries
             quiz to get gig details
@@ -55,7 +53,6 @@ UX
         allow adding venue
         scroll preview to section when corresponding input is focused
         disable input until change made or auto save after input
-        bug: cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         limit access until you verify email
         make form invite only
         accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
@@ -85,6 +82,7 @@ Performance
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
+    spinner for processing image does not spin on safari and i think it is just because safari is siezing up when webp encoding is happening
 Bugs
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
 Quirks

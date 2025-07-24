@@ -121,7 +121,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                                 ?>
                             </span>
 
-                            <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                            <div id="spinner" class="my-8 inset-0 flex items-center justify-center opacity-0 htmx-indicator">
                                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
 

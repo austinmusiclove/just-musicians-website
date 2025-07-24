@@ -109,6 +109,7 @@ function hmm_scripts() {
 
         // Listing Form Image Upload handling
         wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, true);
+        wp_enqueue_script('webp-js', get_template_directory_uri() . '/dist/webp.js', [], $pkg->version, true);
     }
 
     // Collection pages

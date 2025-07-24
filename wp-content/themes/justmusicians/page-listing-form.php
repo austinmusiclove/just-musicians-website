@@ -106,9 +106,10 @@ get_header();
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState ? this.pCity || this.pState || '' : 'City, State'; },
 
         cropper:                    null,
+        showCropperDisplay:         true,
         submitButtons:              [$refs.updateBtnTop, $refs.updateBtnBottom, $refs.saveDraftBtnTop, $refs.saveDraftBtnBottom, $refs.publishBtnTop, $refs.publishBtnBottom ],
         showImageProcessingSpinner: false,
-        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this.submitButtons); },
+        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this.submitButtons, this._getImageData(imageType, imageId).url); },
         _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId, this.submitButtons); },
 
         currentImageId: 'cover_image',
