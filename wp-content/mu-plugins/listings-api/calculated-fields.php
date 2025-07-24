@@ -61,15 +61,23 @@ add_action('listing_calc_rank_event', function($post_id) {
 function update_search_rank($post_id) {
     $rank = 0;
 
-    // Loop through fields to check if they have a value
+    // Boost rank for every field they have filled out in the listing
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
-        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url',
-        'apple_music_artist_url', 'unofficial_tags', 'listing_images',
-        'stage_plots', 'youtube_videos', 'verified',
+        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'apple_music_artist_url',
+        'listing_images', 'stage_plots', 'youtube_videos', 'verified',
     ];
     foreach ( $fields_to_check as $field ) {
         if ( ! empty( get_post_meta( $post_id, $field, true ) ) ) {
+            $rank++;
+        }
+    }
+
+    // Boost rank for each taxonomy they have at least one term in
+    $taxonomies_to_check = [ 'mcategory', 'genre', 'subgenre', 'instrumentation', 'setting', 'keyword', 'mediatag', ];
+    foreach ( $taxonomies_to_check as $taxonomy ) {
+        $terms = get_the_terms( $post_id, $taxonomy );
+        if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
             $rank++;
         }
     }
