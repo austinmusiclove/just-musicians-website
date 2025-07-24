@@ -65,7 +65,8 @@ function update_search_rank($post_id) {
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
         'website', 'instagram_url', 'youtube_url', 'spotify_artist_url',
-        'apple_music_artist_url', 'youtube_video_urls',
+        'apple_music_artist_url', 'unofficial_tags', 'listing_images',
+        'stage_plots', 'youtube_videos', 'verified',
     ];
     foreach ( $fields_to_check as $field ) {
         if ( ! empty( get_post_meta( $post_id, $field, true ) ) ) {
