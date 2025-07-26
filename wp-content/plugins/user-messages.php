@@ -215,6 +215,7 @@ class UserMessagesPlugin {
             'updated_at'      => $now,
         ];
         $wpdb->insert($tables['messages'], $message);
+        $message['message_id'] = $wpdb->insert_id;
 
         $wpdb->update($tables['conversations'], [
             'updated_at' => $now

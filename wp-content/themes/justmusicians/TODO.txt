@@ -2,17 +2,33 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                websockets
-                    poll for new messages/subscribe with websocket htmx
-                    send messages with websockets
-                    support read/unread messages
-                    support mark as unread
-                    move conversation to the top of list when message gets sent to client
+                features
+                    polling
+                        poll conversations and merge conversations lists updating latest message, read status, and sorting
+                        long poll; ask for new messages after cursor message for all conversations currently in dom
+                    interactivity
+                        function to move conversation to the top of list when user sends a message in the convo
+                        add sent message to conversations latest message display
+                        every time get messages; update conversations data with the latest message and resort
+                    performance
+                        get messages preemptively before user clicks
+                    read receipts
+                        bulk mark as read periodically if new messages have been read
+                        mark as unread
+                bugfix
+                    don't clear message input on server error from send; implemented; need to test
+                    change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
+                    simulate errors from all rest apis for messages
+                    scroll to bottom not working when loads 3 messages where first 2 are inquiries; last message is just off the screen when scrolled to the top
+                clean up
+                    clean up messages-scripts
+                    split messages apis into their own function files
                 plugin
                     error checking on db errors
                     organize plugin into directory with folders and files
                     see if i can have created at and updated at managed by mysql instead of setting it myself
                 mobile view selecting conversations and switch back and forth between views
+                test on safari
             inquiries page
                 no inquiries state for inquiries
                 respond button takes you to messages
@@ -30,7 +46,7 @@ Milestones
                 show inquiries in contact button menu in order of newest inquiries
                 location not required
                 add button to inquiries back end on the thank you slide
-                add date option for TBD
+                add date option for tbd
                 add genre, ensemble size when user uses the request quotes button
             data
                 add city state to inquiry which is derived from zip code
@@ -39,7 +55,7 @@ Milestones
             email notifications
                 auto email when you get a new request as a musician
                 email when you have unresponded messages for a certain amount of time
-            Deployment
+            deployment
                 add acf config file so i don't have to do any manual set up of ACF
                 add messages page
                 add messages acf fields

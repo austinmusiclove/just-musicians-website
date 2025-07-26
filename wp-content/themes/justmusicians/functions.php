@@ -201,8 +201,20 @@ function hmm_scripts() {
         wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-collapse';
 
+        // Alpine Intersect
+        wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-intersect';
+
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+
+        // Messages
+        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', [], $pkg->version, true);
+        wp_localize_script('messages-js', 'siteData', [
+            'siteUrl' => site_url(),
+            'nonce'   => wp_create_nonce('wp_rest'),
+        ]);
+        $alpine_dependencies[] = 'messages-js';
     }
 
     // Core
