@@ -65,11 +65,21 @@ function update_search_rank($post_id) {
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
         'website', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'apple_music_artist_url',
+        'venues_played_verified', 'venues_played_unverified',
         'listing_images', 'stage_plots', 'youtube_videos', 'verified',
     ];
     foreach ( $fields_to_check as $field ) {
-        if ( ! empty( get_post_meta( $post_id, $field, true ) ) ) {
-            $rank++;
+        $meta = get_post_meta( $post_id, $field, true );
+        if ( ! empty($meta) ) {
+
+            // Add a point to rank for every image and video upto 3
+            if (is_array($meta) and $field == 'listing_images' or $field == 'youtube_videos') {
+                $rank += min(count($meta), 3);
+
+            // Add a point for having any value in the field
+            } else {
+                $rank++;
+            }
         }
     }
 
