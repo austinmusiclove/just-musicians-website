@@ -44,6 +44,9 @@ https://youtu.be/kNtVnhFNA-M?feature=shared
 https://youtu.be/zMgyVfpxJpE?si=j2KgWyFT4gc5XU0X
 https://m.youtube.com/watch?v=w7lX4VUOecw
 https://m.youtube.com/watch?v=jAWWcnpc_RY&pp=ygUQRGlldHJpY2ggY2FsaG91bg%3D%3D
+https://www.youtube.com/shorts/En9MaAJtc2I
+https://www.youtube.com/shorts/ljKzyzjtB8o?si=LtarNFxW6TF7gnf9
+https://youtube.com/shorts/pYWdyCHSy2o?si=ctLKAkHJO7_qxn-i
 */
 function get_youtube_video_id($url) {
     if (empty($url) || !is_string($url)) {
@@ -51,19 +54,27 @@ function get_youtube_video_id($url) {
     }
 
     $parsed_url = parse_url($url);
+    $host = $parsed_url['host'] ?? '';
+    $path = $parsed_url['path'] ?? '';
+    $query = $parsed_url['query'] ?? '';
+
 
     // Check for youtu.be format
-    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtu.be') !== false) {
-        return ltrim($parsed_url['path'], '/');
+    if (strpos($host, 'youtu.be') !== false) {
+        $id = ltrim($path, '/');
+        return preg_match('/^[\w-]{11}$/', $id) ? $id : false;
     }
 
-    // Check for youtube.com format with query params
-    if (isset($parsed_url['host']) && strpos($parsed_url['host'], 'youtube.com') !== false) {
-        if (isset($parsed_url['query'])) {
-            parse_str($parsed_url['query'], $query_vars);
-            if (isset($query_vars['v']) && preg_match('/^[\w-]{11}$/', $query_vars['v'])) {
-                return $query_vars['v'];
-            }
+    // Check for youtube.com/watch?v= format
+    if (strpos($host, 'youtube.com') !== false || strpos($host, 'm.youtube.com') !== false) {
+        parse_str($query, $query_vars);
+        if (isset($query_vars['v']) && preg_match('/^[\w-]{11}$/', $query_vars['v'])) {
+            return $query_vars['v'];
+        }
+
+        // Check for /shorts/{videoId} path
+        if (preg_match('#^/shorts/([\w-]{11})#', $path, $matches)) {
+            return $matches[1];
         }
     }
 

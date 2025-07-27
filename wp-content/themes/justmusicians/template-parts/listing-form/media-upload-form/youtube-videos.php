@@ -7,14 +7,18 @@
         <!-- Buttons - screen 3 -->
         <div class="flex gap-2 items-center absolute right-0 top-0" x-show="youtubeVideoData.length > 0" x-cloak>
             <!--<button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Bulk delete</button>-->
-            <button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="currentYtIndex = -1; showYoutubeLinkPopup = true">Upload +</button>
+            <button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white"
+                x-on:click="currentYtIndex = -1; showYoutubeLinkPopup = true; $nextTick(() => { $refs.ytInput.focus(); });"
+            >Upload +</button>
         </div>
     </div>
 
     <!-- Screen 1 -->
     <div class="flex flex-col items-center justify-center grow" x-show="youtubeVideoData.length == 0" x-cloak>
         <div class="text-center">No YouTube videos yet.</div>
-        <button type="button" class="w-fit rounded text-14 mt-4 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="currentYtIndex = -1; showYoutubeLinkPopup = true">Upload +</button>
+        <button type="button" class="w-fit rounded text-14 mt-4 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white"
+            x-on:click="currentYtIndex = -1; showYoutubeLinkPopup = true; $nextTick(() => { $refs.ytInput.focus(); });"
+        >Upload +</button>
     </div>
 
     <!-- Screen 3 -->
@@ -29,7 +33,9 @@
     >
         <template x-for="(videoData, index) in youtubeVideoData" :key="index + videoData.url">
             <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
-                <div class="flex items-center gap-4 grow min-w-0">
+                <div class="flex items-center gap-4 grow min-w-0"
+                    x-on:click="currentYtIndex = index; showYoutubeLinkPopup = true;"
+                >
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
                     <div class="aspect-video w-16 shrink-0">
                         <img class="w-full h-full object-cover" x-bind:src="`https://img.youtube.com/vi/${videoData.video_id}/default.jpg`">

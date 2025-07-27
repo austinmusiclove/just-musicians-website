@@ -31,7 +31,9 @@
     >
         <template x-for="(data, index) in orderedImageData['listing_images']" :key="index + data.image_id">
             <div class="flex min-w-0 items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
-                <div class="flex items-center gap-4 min-w-0">
+                <div class="flex items-center gap-4 min-w-0"
+                    x-on:click="$refs.cropperDisplay.src = _getImageData('listing_images', data.image_id)?.url; _initCropper($refs.cropperDisplay, 'listing_images', data.image_id); showImageEditPopup = true;"
+                >
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
                     <div class="aspect-4/3 w-16 shrink-0">
                         <img class="w-full h-full object-cover" x-bind:src="_getImageData('listing_images', data.image_id)?.url">
