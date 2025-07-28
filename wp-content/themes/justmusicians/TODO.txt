@@ -3,13 +3,6 @@ Milestones
         basic inquiries
             messages
                 features
-                    polling
-                        poll conversations and merge conversations lists updating latest message, read status, and sorting
-                        long poll; ask for new messages after cursor message for all conversations currently in dom
-                    interactivity
-                        function to move conversation to the top of list when user sends a message in the convo
-                        add sent message to conversations latest message display
-                        every time get messages; update conversations data with the latest message and resort
                     performance
                         get messages preemptively before user clicks
                     read receipts

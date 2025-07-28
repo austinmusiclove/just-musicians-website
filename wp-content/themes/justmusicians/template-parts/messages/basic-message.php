@@ -2,7 +2,7 @@
 <div class="min-h-[81px]" x-bind:id="_getMessageElmId(message.conversation_id, message.message_id)"
     <?php if ($args['is_last']) { // infinite scroll; include this on the last result of the page ?>
     x-show="showPaginationMessages" x-cloak
-    x-intersect="console.log('intersect basic'); $nextTick(() => { _getMessages(message.conversation_id, message.message_id); })"
+    x-intersect="$nextTick(() => { _getMessages(message.conversation_id, message.message_id); })"
     <?php } ?>
 >
 

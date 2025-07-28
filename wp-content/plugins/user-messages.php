@@ -225,7 +225,7 @@ class UserMessagesPlugin {
     }
 
     // Gets user conversations, ordered by most recent message
-    function get_user_conversations($user_id, $limit = 20, $cursor_id = null) {
+    function get_user_conversations($user_id, $limit = 20, $cursor_id = null, $get_newer = false) {
         global $wpdb;
         $tables = $this->tables;
         $current_user_id = get_current_user_id();
@@ -249,16 +249,12 @@ class UserMessagesPlugin {
         // Build query
         $placeholders = implode(',', array_fill(0, count($listing_ids), '%d'));
         if ($cursor_id) {
+            $cursor_comparison = $get_newer ? '>' : '<';
+
             // Get timestamp of cursor message
             $cursor_time = $wpdb->get_var($wpdb->prepare("
-                SELECT m.created_at FROM {$tables['conversations']} c
-                LEFT JOIN {$tables['messages']} m
-                    ON m.id = (
-                        SELECT id FROM {$tables['messages']}
-                        WHERE conversation_id = c.id
-                        ORDER BY created_at DESC LIMIT 1
-                    )
-                WHERE c.id = %d
+                SELECT created_at FROM {$tables['messages']}
+                WHERE id = %d
             ", $cursor_id));
             $query = "
                 SELECT c.id AS conversation_id,
@@ -278,7 +274,7 @@ class UserMessagesPlugin {
                     )
                 LEFT JOIN {$tables['read_receipts']} rr
                     ON rr.message_id = m.id AND rr.user_id = %d
-                WHERE m.created_at < %s AND ( cp.user_id = %d";
+                WHERE m.created_at {$cursor_comparison} %s AND ( cp.user_id = %d";
 
             $query_params = [$user_id, $cursor_time, $user_id];
             if (!empty($listing_ids)) {
@@ -380,7 +376,7 @@ class UserMessagesPlugin {
 
 
     // Gets messages for a conversation, latest first
-    function get_conversation_messages($conversation_id, $limit = 20, $cursor_id = null) {
+    function get_conversation_messages($conversation_id, $limit = 20, $cursor_id = null, $get_newer = false) {
         global $wpdb;
         $tables = $this->tables;
 
@@ -395,6 +391,8 @@ class UserMessagesPlugin {
             return $is_participant;
         }
 
+        $cursor_comparison = $get_newer ? '>' : '<';
+
         if ($cursor_id) {
             // Get timestamp of cursor message
             $cursor_time = $wpdb->get_var($wpdb->prepare("
@@ -407,7 +405,7 @@ class UserMessagesPlugin {
                 FROM {$tables['messages']} m
                 LEFT JOIN {$wpdb->users} u ON m.sender_id = u.ID
                 WHERE conversation_id = %d
-                  AND created_at < %s
+                  AND created_at {$cursor_comparison} %s
                 ORDER BY created_at DESC
                 LIMIT %d
             ", $conversation_id, $cursor_time, $limit);

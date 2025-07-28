@@ -4,7 +4,7 @@
     x-on:click="_selectConversation(conversation.conversation_id);"
 
     <?php if ($args['is_last']) { // infinite scroll; include this on the last result of the page ?>
-    x-intersect.once="_getConversations(conversation.conversation_id)"
+    x-intersect.once="_getConversations(conversation.latest_message_id)"
     <?php } ?>
 >
 

@@ -61,9 +61,10 @@ function get_user_conversations($request) {
     global $user_messages_plugin;
 
     // Get conversations
-    $cursor = $_GET['cursor'] ?? null;
-    $user_id = get_current_user_id();
-    $conversations = $user_messages_plugin->get_user_conversations($user_id, 20, $cursor);
+    $cursor        = $_GET['cursor'] ?? null;
+    $get_newer     = isset($_GET['update']);
+    $user_id       = get_current_user_id();
+    $conversations = $user_messages_plugin->get_user_conversations($user_id, 20, $cursor, $get_newer);
 
     // Handle error
     if (is_wp_error($conversations)) {
@@ -78,7 +79,7 @@ function get_user_conversations($request) {
                 'latest_message_content'    => $conversation->content,
                 'latest_message_created_at' => $conversation->created_at,
                 'latest_message_sender_id'  => $conversation->sender_id,
-                'latest_message_message_id' => $conversation->message_id,
+                'latest_message_id'         => $conversation->message_id,
                 'latest_message_is_read'    => $conversation->is_read,
                 'messages'                  => [],
             ];
@@ -94,8 +95,9 @@ function get_conversation_messages($request) {
 
     // Get messages
     $cursor          = $_GET['cursor'] ?? null;
+    $get_newer       = isset($_GET['update']);
     $conversation_id = $request['conversation_id'];
-    $messages        = $user_messages_plugin->get_conversation_messages($conversation_id, 20, $cursor);
+    $messages        = $user_messages_plugin->get_conversation_messages($conversation_id, 20, $cursor, $get_newer);
 
     // Handle error
     if (is_wp_error($messages)) {
