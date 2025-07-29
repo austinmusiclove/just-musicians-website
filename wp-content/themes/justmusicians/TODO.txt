@@ -2,7 +2,6 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                mobile view selecting conversations and switch back and forth between views
                 test on safari
             inquiries page
                 no inquiries state for inquiries

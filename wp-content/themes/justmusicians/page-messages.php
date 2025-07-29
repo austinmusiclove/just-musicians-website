@@ -18,11 +18,13 @@ get_header();
         conversationId: -1,
         conversations: [],
         conversationsMap: {},
+        conversationsView: true,
+        messagesView: false,
         showCvSpinner: false,
         showMbSpinner: false,
         messageInFlight: false,
-        messagePollingInterval: null,
         showPaginationMessages: true,
+        messagePollingInterval: null,
         _sendMessage(conversationId, message)       { sendMessage(this, conversationId, message); },
         _markAsRead(conversationId, messageId)      { markAsRead(this, conversationId, messageId); },
         _markAsUnread(conversationId, messageId)    { markAsUnread(this, conversationId, messageId); },
@@ -40,7 +42,9 @@ get_header();
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
 
         <!-- Conversations Menu -->
-        <div class="flex flex-col col-span-12 lg:col-span-3 z-0 border-r border-black/20 h-[69vh]">
+        <div class="flex-col lg:col-span-12 lg:col-span-3 z-0 border-r border-black/20 h-[85vh] lg:h-[69vh]"
+            :class="conversationsView ? 'flex' : 'hidden lg:flex'"
+        >
 
             <header class="pt-4 sm:pt-20 xl:pt-32 mb-4 sm:mb-12 gap-12 sm:gap-4 flex flex-col-reverse sm:flex-row justify-between sm:items-center">
                 <h1 class="font-bold text-22 sm:text-25">Conversations</h1>
@@ -57,10 +61,18 @@ get_header();
         </div>
 
         <!-- Message Board -->
-        <div class="hidden pb-4 lg:flex flex-col lg:col-span-9 h-[69vh]">
+        <div class="pb-4 flex-col lg:col-span-9 h-[85vh] lg:h-[69vh]"
+            :class="messagesView ? 'flex' : 'hidden lg:flex'"
+        >
 
             <!-- Conversation Title -->
-            <div><h2 class="my-8 font-bold text-22" x-text="(conversationId > 0) ? conversationsMap[conversationId].title : ''"></h2></div>
+            <div class="my-8">
+                <span class="flex opacity-50 lg:hidden cursor-pointer" x-on:click="messagesView = false; conversationsView = true;">
+                    <img class="mb-2 ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                    <span class="text-18" >Back</span>
+                </span>
+                <h2 class="font-bold text-22" x-text="(conversationId > 0) ? conversationsMap[conversationId].title : ''"></h2>
+            </div>
 
             <!-- Message board spinner -->
             <div class="flex items-center justify-center" x-show="showMbSpinner" x-cloak>
@@ -79,7 +91,10 @@ get_header();
     </div>
 </div>
 
+<span class="hidden lg:block">
 <?php
 get_footer();
+?>
+</span>
 
 

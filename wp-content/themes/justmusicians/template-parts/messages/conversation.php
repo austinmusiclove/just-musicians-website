@@ -1,6 +1,6 @@
 <div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10"
     :class="{ 'bg-yellow-10': conversationId == conversation.conversation_id }"
-    x-on:click="_selectConversation(conversation.conversation_id);"
+    x-on:click="_selectConversation(conversation.conversation_id); messagesView = true; conversationsView = false;"
 
     <?php if ($args['is_last']) { // infinite scroll; include this on the last result of the page ?>
     x-intersect.once="_getConversations(conversation.latest_message_id)"
