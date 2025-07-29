@@ -165,7 +165,7 @@
                 </a>
               </div>
             </span>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </div>
 
           <div class="flex items-center gap-2 shrink-0">

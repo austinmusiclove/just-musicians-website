@@ -1,5 +1,16 @@
 
-<div id="conversation-container" class="flex-1 border-t border-black/20 w-full overflow-y-scroll">
+<div id="conversation-container" class="flex-1 border-t border-black/20 w-full overflow-y-scroll"
+    x-data="{
+        openMenu: null,
+        toggleOpenMenu(conversationId) {
+            if (this.openMenu == conversationId) {
+                this.openMenu = null;
+            } else {
+                this.openMenu = conversationId;
+            }
+        },
+    }"
+>
 
 
     <template x-for="(conversation, index) in conversations" :key="index">

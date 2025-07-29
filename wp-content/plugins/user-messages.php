@@ -391,6 +391,7 @@ class UserMessagesPlugin {
             return $is_participant;
         }
 
+        $user_id = get_current_user_id();
         $cursor_comparison = $get_newer ? '>' : '<';
 
         if ($cursor_id) {
@@ -401,23 +402,33 @@ class UserMessagesPlugin {
             ", $cursor_id));
 
             $query = $wpdb->prepare("
-                SELECT m.*, u.display_name AS sender_name
+                SELECT
+                    m.*,
+                    u.display_name AS sender_name,
+                    rr.user_id IS NOT NULL AS is_read
                 FROM {$tables['messages']} m
                 LEFT JOIN {$wpdb->users} u ON m.sender_id = u.ID
-                WHERE conversation_id = %d
-                  AND created_at {$cursor_comparison} %s
-                ORDER BY created_at DESC
+                LEFT JOIN {$tables['read_receipts']} rr
+                    ON rr.message_id = m.id AND rr.user_id = %d
+                WHERE m.conversation_id = %d
+                  AND m.created_at {$cursor_comparison} %s
+                ORDER BY m.created_at DESC
                 LIMIT %d
-            ", $conversation_id, $cursor_time, $limit);
+            ", $user_id, $conversation_id, $cursor_time, $limit);
         } else {
             $query = $wpdb->prepare("
-                SELECT m.*, u.display_name AS sender_name
+                SELECT
+                    m.*,
+                    u.display_name AS sender_name,
+                    rr.user_id IS NOT NULL AS is_read
                 FROM {$tables['messages']} m
                 LEFT JOIN {$wpdb->users} u ON m.sender_id = u.ID
-                WHERE conversation_id = %d
-                ORDER BY created_at DESC
+                LEFT JOIN {$tables['read_receipts']} rr
+                    ON rr.message_id = m.id AND rr.user_id = %d
+                WHERE m.conversation_id = %d
+                ORDER BY m.created_at DESC
                 LIMIT %d
-            ", $conversation_id, $limit);
+            ", $user_id, $conversation_id, $limit);
         }
 
         return $wpdb->get_results($query);
@@ -457,6 +468,48 @@ class UserMessagesPlugin {
         }
         return true;
     }
+
+
+    function add_read_receipt($message_id, $user_id) {
+        global $wpdb;
+        $tables = $this->tables;
+
+        // Use $wpdb->replace to avoid duplicates (primary key on message_id + user_id)
+        $result = $wpdb->replace(
+            $tables['read_receipts'],
+            [
+                'message_id' => intval($message_id),
+                'user_id'    => intval($user_id),
+            ],
+            [
+                '%d', // message_id format
+                '%d', // user_id format
+            ]
+        );
+
+        return $result !== false;
+    }
+
+    function remove_read_receipt($message_id, $user_id) {
+        global $wpdb;
+        $tables = $this->tables;
+
+        $result = $wpdb->delete(
+            $tables['read_receipts'],
+            [
+                'message_id' => intval($message_id),
+                'user_id'    => intval($user_id),
+            ],
+            [
+                '%d', // message_id format
+                '%d', // user_id format
+            ]
+        );
+
+        return $result !== false;
+    }
+
+
 
 }
 

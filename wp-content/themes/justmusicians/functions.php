@@ -209,10 +209,13 @@ function hmm_scripts() {
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
 
         // Messages
-        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['promise-lock-js'], $pkg->version, true);
+        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['messages-api-js', 'messages-app-state-js'], $pkg->version, true);
+        wp_enqueue_script('messages-api-js', get_template_directory_uri() . '/lib/js/messages-api-scripts.js', [], $pkg->version, true);
+        wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, true);
         wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, true);
-        wp_localize_script('messages-js', 'siteData', [
+        wp_localize_script('messages-api-js', 'siteData', [
             'siteUrl' => site_url(),
+            'userId' => get_current_user_id(),
             'nonce'   => wp_create_nonce('wp_rest'),
         ]);
         $alpine_dependencies[] = 'messages-js';
@@ -289,3 +292,12 @@ function mind_defer_scripts( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
+
+
+// Req debug
+function log_incoming_request_url() {
+    $request_uri = $_SERVER['REQUEST_URI'];
+    error_log( 'Incoming Request URL: ' . $request_uri );
+}
+add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
+?>

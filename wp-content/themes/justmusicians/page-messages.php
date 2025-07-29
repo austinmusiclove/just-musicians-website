@@ -24,6 +24,8 @@ get_header();
         messagePollingInterval: null,
         showPaginationMessages: true,
         _sendMessage(conversationId, message)       { sendMessage(this, conversationId, message); },
+        _markAsRead(conversationId, messageId)      { markAsRead(this, conversationId, messageId); },
+        _markAsUnread(conversationId, messageId)    { markAsUnread(this, conversationId, messageId); },
         _getConversations(cursor)                   { getConversations(this, cursor); },
         _getMessages(conversationId, cursor)        { getMessages(this, conversationId, cursor); },
         _pollConversations()                        { pollConversations(this); },

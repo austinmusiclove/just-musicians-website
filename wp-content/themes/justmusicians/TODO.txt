@@ -2,20 +2,6 @@ Milestones
     Free lance booker testing
         basic inquiries
             messages
-                features
-                    performance
-                        get messages preemptively before user clicks
-                    read receipts
-                        bulk mark as read periodically if new messages have been read
-                        mark as unread
-                bugfix
-                    don't clear message input on server error from send; implemented; need to test
-                    change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
-                    simulate errors from all rest apis for messages
-                    scroll to bottom not working when loads 3 messages where first 2 are inquiries; last message is just off the screen when scrolled to the top
-                clean up
-                    clean up messages-scripts
-                    split messages apis into their own function files
                 plugin
                     error checking on db errors
                     organize plugin into directory with folders and files
@@ -33,6 +19,7 @@ Milestones
             inquiry page
                 inquiry page shows messages board for all invited to the inquiry and a tab for inquiry details like yelp
             modify quiz
+                change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
                 on contact button ask if they want to send a dm or do an inquiry
                 contact button opens slide that allows you to either send existing inquiry or create new
                 contact button goes straight to subject/details after offering to add to existing inquiry
