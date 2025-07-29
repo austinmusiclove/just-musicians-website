@@ -11,7 +11,9 @@ function get_conversation_messages($request) {
     if (is_wp_error($messages)) { return $messages; }
 
     $user_id = get_current_user_id();
-    return array_map('formatMessage', $messages, array_fill(0, count($messages), $user_id));
+    return array_map(function($message) use ($user_id) {
+        return formatMessage($message, $user_id);
+    }, $messages);
 }
 
 function formatMessage($message, $user_id) {

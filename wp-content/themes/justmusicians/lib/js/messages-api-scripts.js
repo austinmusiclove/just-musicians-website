@@ -28,7 +28,7 @@ function getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll) {
 }
 
 
-async function fetchResource(alco, method, url, resourceName = 'resource', inFlightFlag = null, showError = false, data = null) {
+async function fetchResource(alco, method, url, resourceName = 'resource', inFlightFlag = null, data = null) {
     if (inFlightFlag) { alco[inFlightFlag] = true; }
     var fetchOptions = {
         method,
@@ -42,13 +42,13 @@ async function fetchResource(alco, method, url, resourceName = 'resource', inFli
     return await fetch(url, fetchOptions)
     .then(response => {
         if (!response.ok) {
-            throw new Error(`HTTP error ${response.status} :: Failed to ${method} ${resourceName}`);
+            throw new Error(`HTTP error ${response.status} :: Failed to ${method} ${resourceName}`, { cause: response.status });
         }
         if (inFlightFlag) { alco[inFlightFlag] = false; }
         return response.json();
     })
     .catch(error => {
         if (inFlightFlag) { alco[inFlightFlag] = false; }
-        if (showError) { alco.$dispatch('error-toast', { message: error }); }
+        return error;
     });
 }

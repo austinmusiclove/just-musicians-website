@@ -1,12 +1,19 @@
 
 async function getConversations(alco, cursor) {
-    var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, false), 'conversations', 'showCvSpinner', true);
-    if (conversations) { await updateApplicationState(alco, conversations, null); }
+    var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, false), 'conversations', 'showCvSpinner');
+    if (conversations instanceof Error) {
+        alco.$dispatch('error-toast', { message: conversations.message });
+    } else if (conversations) {
+        await updateApplicationState(alco, conversations, null);
+    }
 }
 
 async function getMessages(alco, conversationId, cursor, isUpdate, isLongPoll) {
-    var messages = await fetchResource(alco, 'GET', getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll), 'messages', isUpdate ? '' : 'showMbSpinner', !isUpdate);
-    if (messages.length > 0) {
+    var messages = await fetchResource(alco, 'GET', getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll), 'messages', isUpdate ? '' : 'showMbSpinner');
+    if (messages instanceof Error && !isUpdate) {
+        alco.$dispatch('error-toast', { message: messages.message });
+        return messages;
+    } else if (messages.length > 0) {
         alco.showPaginationMessages = false; // Hide messages that trigger pagination on x-intersect
         await updateApplicationState(alco, null, { [conversationId]: messages });
 
@@ -16,16 +23,19 @@ async function getMessages(alco, conversationId, cursor, isUpdate, isLongPoll) {
             alco.showPaginationMessages = true;
         });
     }
+    return messages;
 }
 
 async function sendMessage(alco, conversationId, message) {
-    var message = await fetchResource(alco, 'POST', getSendMessageUrl(conversationId), 'message', 'messageInFlight', true, {'content': message});
-    if (message) {
-        await updateApplicationState(alco, null, { [conversationId]: [message] });
+    var newMessage = await fetchResource(alco, 'POST', getSendMessageUrl(conversationId), 'message', 'messageInFlight', {'content': message});
+    if (newMessage instanceof Error ) {
+        alco.$dispatch('error-toast', { message: newMessage.message });
+    } else if (newMessage) {
+        await updateApplicationState(alco, null, { [conversationId]: [newMessage] });
 
         // Scroll to bottom of message board and clear input
         alco.$nextTick(() => {
-            scrollToElement(alco, getMessageElmId(conversationId, message.message_id));
+            scrollToElement(alco, getMessageElmId(conversationId, newMessage.message_id));
             alco.$refs.messageInput.value = '';
             alco.$refs.messageInput.rows = 1;
             alco.$refs.messageInput.focus();
@@ -38,8 +48,8 @@ async function markAsRead(alco, conversationId, messageId) {
 
     // if unread, mark as read
     if (!message || (message && !message.is_read)) {
-        var result = await fetchResource(alco, 'POST', getMarkAsReadUrl(messageId), 'message', null, false, {'message_id': messageId});
-        if (result) {
+        var result = await fetchResource(alco, 'POST', getMarkAsReadUrl(messageId), 'message', null, {'message_id': messageId});
+        if (!(result instanceof Error)) {
             if (message) {
                 message.is_read = true;
                 await updateApplicationState(alco, null, { [conversationId]: [message] });
@@ -56,8 +66,8 @@ async function markAsUnread(alco, conversationId, messageId) {
 
     // if unread, mark as read
     if (!message || (message && message.is_read)) {
-        var result = await fetchResource(alco, 'DELETE', getMarkAsReadUrl(messageId), 'message', null, false, {'message_id': messageId});
-        if (result) {
+        var result = await fetchResource(alco, 'DELETE', getMarkAsReadUrl(messageId), 'message', null, {'message_id': messageId});
+        if (!(result instanceof Error)) {
             if (message) {
                 message.is_read = false;
                 await updateApplicationState(alco, null, { [conversationId]: [message] });
@@ -77,14 +87,12 @@ async function shortPollConversations(alco) {
     while (true) {
         await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before polling
         await new Promise(requestAnimationFrame);                // Pause while browser tab is inactive
-        try {
-            var cursor = alco.conversations[0].latest_message_id
-            var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, true), 'conversations', null, false);
-            if (conversations.length > 0) {
-                await updateApplicationState(alco, conversations, null);
-            }
-        } catch (err) {
-            console.error('Polling error:', err);
+        var cursor = alco.conversations[0].latest_message_id
+        var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, true), 'conversations', null);
+        if (conversations instanceof Error && conversations.cause == 403) {
+            break;
+        } else if (conversations.length > 0) {
+            await updateApplicationState(alco, conversations, null);
         }
     }
 }
@@ -97,7 +105,8 @@ async function shortPollMessages(alco, conversationId) {
 
         // Get messages
         var cursor = getLatestMessage(alco, conversationId).message_id;
-        await getMessages(alco, conversationId, cursor, true, false);
+        var result = await getMessages(alco, conversationId, cursor, true, false);
+        if (result instanceof Error && result.cause == 403) { stopPollingMessages(alco); }
     }, 5000);
 }
 function stopPollingMessages(alco) {
@@ -119,23 +128,26 @@ async function longPollMessages(alco, conversationId) {
 async function selectConversation(alco, conversationId) {
     alco.showPaginationMessages = false; // hide these when switching because the container is a different height before the switch and there could be an intersection of a pagination element right on the switch
     alco.conversationId = conversationId; // Set active conversation
+    var messages = null;
 
     // Get first page of messages if there are none yet; else get only newer messages
     if (alco.conversationsMap[conversationId].messages.length == 0) {
-        await getMessages(alco, conversationId);
+        messages = await getMessages(alco, conversationId);
     } else {
         var cursor = getLatestMessage(alco, conversationId).message_id;
-        await getMessages(alco, conversationId, cursor, true, false);
+        messages = await getMessages(alco, conversationId, cursor, true, false);
     }
 
     // Scroll to latest message
-    alco.$nextTick( async () => {
-        alco.showPaginationMessages = true;
-        scrollToElement(alco, getMessageElmId(conversationId, getLatestMessage(alco, conversationId).message_id));
+    if (!(messages instanceof Error)) {
+        alco.$nextTick( async () => {
+            alco.showPaginationMessages = true;
+            scrollToElement(alco, getMessageElmId(conversationId, getLatestMessage(alco, conversationId).message_id));
 
-        // Start polling for new messages on the active conversation
-        //shortPollMessages(alco, conversationId);
-    });
+            // Start polling for new messages on the active conversation
+            shortPollMessages(alco, conversationId);
+        });
+    }
 }
 
 

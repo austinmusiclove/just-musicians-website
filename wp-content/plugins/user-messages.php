@@ -136,34 +136,48 @@ class UserMessagesPlugin {
             WHERE participant_hash = %s
             LIMIT 1
         ", $participant_hash));
+        if ($existing_id === false) { return new WP_Error('db_insert_error', 'DB query error', [ 'status' => 500, ]); }
+        if ($existing_id) { return $existing_id; }
 
-        if ($existing_id) {
-            return $existing_id;
-        }
+        // Begin transaction
+        $wpdb->query('START TRANSACTION');
 
-        // Create new conversation
+        // Insert new conversation
         $now = current_time('mysql');
-        $wpdb->insert($tables['conversations'], [
+        $insert_convo_result = $wpdb->insert($tables['conversations'], [
             'participant_hash' => $participant_hash,
             'created_at'       => $now,
             'updated_at'       => $now
         ]);
+        if ($insert_convo_result === false) {
+            $wpdb->query('ROLLBACK');
+            return new WP_Error('db_insert_error', 'DB write error.', [ 'status' => 500, ]);
+        }
         $conversation_id = $wpdb->insert_id;
 
         // Insert participants
         foreach ($user_ids as $user_id) {
-            $wpdb->insert($tables['conversation_participants'], [
+            $result = $wpdb->insert($tables['conversation_participants'], [
                 'conversation_id' => $conversation_id,
                 'user_id'         => $user_id
             ]);
+            if ($result === false) {
+                $wpdb->query('ROLLBACK');
+                return new WP_Error('db_insert_error', 'DB write error', [ 'status' => 500, ]);
+            }
         }
         foreach ($listing_ids as $listing_id) {
-            $wpdb->insert($tables['conversation_participants'], [
+            $result = $wpdb->insert($tables['conversation_participants'], [
                 'conversation_id' => $conversation_id,
                 'listing_id'      => $listing_id
             ]);
+            if ($result === false) {
+                $wpdb->query('ROLLBACK');
+                return new WP_Error('db_insert_error', 'DB write error', [ 'status' => 500, ]);
+            }
         }
 
+        $wpdb->query('COMMIT');
         return $conversation_id;
     }
 
@@ -190,12 +204,12 @@ class UserMessagesPlugin {
 
         // Access control: check user logged in
         if (!is_user_logged_in()) {
-            return new WP_Error('unauthorized', 'You are not allowed to send messages if you are not logged in.', 403);
+            return new WP_Error('unauthorized', 'You are not allowed to send messages if you are not logged in.', [ 'status' => 403]);
         }
 
         // Access control: allow only if the sender is the current user or user is an admin
         if ($current_user_id !== (int) $sender_id && !current_user_can('manage_options')) {
-            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', 403);
+            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', [ 'status' => 403 ]);
         }
 
         // Access control: Check logged in user is a participant in conversation_id
@@ -203,6 +217,9 @@ class UserMessagesPlugin {
         if ( is_wp_error($is_participant) && !current_user_can('manage_options')) {
             return $is_participant;
         }
+
+        // Begin transaction
+        $wpdb->query('START TRANSACTION');
 
         $message = [
             'conversation_id' => $conversation_id,
@@ -214,13 +231,22 @@ class UserMessagesPlugin {
             'created_at'      => $now,
             'updated_at'      => $now,
         ];
-        $wpdb->insert($tables['messages'], $message);
+        $insert_result = $wpdb->insert($tables['messages'], $message);
+        if ($insert_result === false) {
+            $wpdb->query('ROLLBACK');
+            return new WP_Error('db_insert_error', 'Failed to insert message.', [ 'status' => 500, ]);
+        }
         $message['message_id'] = $wpdb->insert_id;
 
-        $wpdb->update($tables['conversations'], [
-            'updated_at' => $now
-        ], ['id' => $conversation_id]);
+        // Attempt to update conversation's updated_at
+        $update_result = $wpdb->update( $tables['conversations'], ['updated_at' => $now], ['id' => $conversation_id]);
+        if ($update_result === false) {
+            $wpdb->query('ROLLBACK');
+            return new WP_Error('db_update_error', 'DB update error', [ 'status' => 500, ]);
+        }
 
+        // All DB operations succeeded
+        $wpdb->query('COMMIT');
         return $message;
     }
 
@@ -232,12 +258,12 @@ class UserMessagesPlugin {
 
         // Access control: check user logged in
         if (!is_user_logged_in()) {
-            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', 403);
+            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', [ 'status' => 403 ]);
         }
 
         // Access control: allow only if the user_id is the current user or user is an admin
         if ($current_user_id !== (int) $user_id && !current_user_can('manage_options')) {
-            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', 403);
+            return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', [ 'status' => 403 ]);
         }
 
         // Get listing IDs the user owns
@@ -275,6 +301,7 @@ class UserMessagesPlugin {
                 LEFT JOIN {$tables['read_receipts']} rr
                     ON rr.message_id = m.id AND rr.user_id = %d
                 WHERE m.created_at {$cursor_comparison} %s AND ( cp.user_id = %d";
+            if ($cursor_time === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
             $query_params = [$user_id, $cursor_time, $user_id];
             if (!empty($listing_ids)) {
@@ -290,6 +317,7 @@ class UserMessagesPlugin {
             $query_params[] = $limit;
             $prepared_query = $wpdb->prepare($query, ...$query_params);
             $conversations = $wpdb->get_results($prepared_query);
+            if ($conversations === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
         } else {
             $query = "
@@ -326,6 +354,7 @@ class UserMessagesPlugin {
             $query_params[] = $limit;
             $prepared_query = $wpdb->prepare($query, ...$query_params);
             $conversations = $wpdb->get_results($prepared_query);
+            if ($conversations === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
         }
 
 
@@ -348,6 +377,7 @@ class UserMessagesPlugin {
             FROM {$tables['conversation_participants']} cp
             WHERE cp.conversation_id = %d
         ", $conversation_id));
+        if ($participant_rows === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
         foreach ($participant_rows as $row) {
             if ($row->user_id) {
@@ -356,6 +386,7 @@ class UserMessagesPlugin {
                     SELECT display_name FROM {$wpdb->users}
                     WHERE ID = %d
                 ", $row->user_id));
+                if ($name === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
                 if ($name) { $user_participants[] = $name; }
 
             } elseif ($row->listing_id) {
@@ -366,6 +397,7 @@ class UserMessagesPlugin {
                     WHERE p.ID = %d
                     LIMIT 1
                 ", $row->listing_id));
+                if ($name === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
                 if (!$name) { $name = get_the_title($row->listing_id); } // Fallback to post title
                 $listing_participants[] = $name;
             }
@@ -382,7 +414,7 @@ class UserMessagesPlugin {
 
         // Access control: check user logged in
         if (!is_user_logged_in()) {
-            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', 403);
+            return new WP_Error('unauthorized', 'You are not allowed to see messages if you are not logged in.', [ 'status' => 403 ]);
         }
 
         // Access control: Check logged in user is a participant in conversation_id
@@ -400,6 +432,7 @@ class UserMessagesPlugin {
                 SELECT created_at FROM {$tables['messages']}
                 WHERE id = %d
             ", $cursor_id));
+            if ($cursor_time === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
             $query = $wpdb->prepare("
                 SELECT
@@ -431,7 +464,9 @@ class UserMessagesPlugin {
             ", $user_id, $conversation_id, $limit);
         }
 
-        return $wpdb->get_results($query);
+        $result = $wpdb->get_results($query);
+        if ($result === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
+        return $result;
     }
 
     function user_is_participant($user_id, $conversation_id) {
@@ -445,6 +480,7 @@ class UserMessagesPlugin {
             $conversation_id,
             $user_id
         ));
+        if ($is_user_participant === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
         // Check if any of the sender's listings are participants
         $listing_ids = get_user_meta($user_id, 'listings', true);
@@ -460,11 +496,12 @@ class UserMessagesPlugin {
             ";
             $values = array_merge([$conversation_id], $listing_ids);
             $is_listing_participant = $wpdb->get_var($wpdb->prepare($sql, ...$values));
+            if ($is_listing_participant === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
         }
 
         // Final access check
         if (!$is_user_participant && !$is_listing_participant) {
-            return new WP_Error('forbidden', 'You are not a participant in this conversation.', 403);
+            return new WP_Error('forbidden', 'You are not a participant in this conversation.', [ 'status' => 403 ]);
         }
         return true;
     }
@@ -487,7 +524,10 @@ class UserMessagesPlugin {
             ]
         );
 
-        return $result !== false;
+        if ($result === false) {
+            return new WP_Error('db_error', 'DB write error', [ 'status' => 500 ]);
+        }
+        return true;
     }
 
     function remove_read_receipt($message_id, $user_id) {
@@ -506,7 +546,10 @@ class UserMessagesPlugin {
             ]
         );
 
-        return $result !== false;
+        if ($result === false) {
+            return new WP_Error('db_error', 'DB write error', [ 'status' => 500 ]);
+        }
+        return true;
     }
 
 
