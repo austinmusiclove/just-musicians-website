@@ -40,7 +40,7 @@ function updateConversationMessages(alco, currentConversationsMap, newMessagesMa
             var conversation = currentConversationsMap[conversationId];
             var latestMessage = conversation.messages[conversation.messages.length-1];
             if (new Date(latestMessage.created_at) >= new Date(conversation.latest_message_created_at)) {
-                currentConversationsMap[conversationId].latest_message_content    = latestMessage.content;
+                currentConversationsMap[conversationId].latest_message_content    = latestMessage.content.replace('<br />', '');
                 currentConversationsMap[conversationId].latest_message_created_at = latestMessage.created_at;
                 currentConversationsMap[conversationId].latest_message_is_read    = latestMessage.is_read;
                 currentConversationsMap[conversationId].latest_message_id         = latestMessage.message_id;

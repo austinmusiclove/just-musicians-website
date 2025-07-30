@@ -1,8 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            messages
-                test on safari
             inquiries page
                 no inquiries state for inquiries
                 respond button takes you to messages

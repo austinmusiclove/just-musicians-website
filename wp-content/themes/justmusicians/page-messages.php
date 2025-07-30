@@ -65,14 +65,17 @@ get_header();
             :class="messagesView ? 'flex' : 'hidden lg:flex'"
         >
 
-            <!-- Conversation Title -->
-            <div class="my-8">
+            <!-- Conversation Header -->
+            <div class="my-8 md:mt-20">
+                <!-- Back button -->
                 <span class="flex opacity-50 lg:hidden cursor-pointer" x-on:click="messagesView = false; conversationsView = true;">
                     <img class="mb-2 ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
                     <span class="text-18" >Back</span>
                 </span>
+                <!-- Conversation Title -->
                 <h2 class="font-bold text-22" x-text="(conversationId > 0) ? conversationsMap[conversationId].title : ''"></h2>
             </div>
+
 
             <!-- Message board spinner -->
             <div class="flex items-center justify-center" x-show="showMbSpinner" x-cloak>
