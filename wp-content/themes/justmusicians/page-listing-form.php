@@ -45,9 +45,7 @@ get_header();
 
 <div id="sticky-sidebar" class="hidden xl:block fixed top-0 z-10 left-0 bg-white h-screen dropshadow-md px-3 w-fit pt-40 border-r border-black/20">
     <div class="sidebar">
-        <?php echo get_template_part('template-parts/account/sidebar', '', [
-            'collapsible' => true
-        ]); ?>
+        <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => true ]); ?>
     </div>
 </div>
 

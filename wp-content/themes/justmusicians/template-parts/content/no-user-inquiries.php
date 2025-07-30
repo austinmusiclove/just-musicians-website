@@ -3,7 +3,7 @@
 
     <div class="pb-32 relative z-10">
         <span class="text-18 sm:text-22 block text-center mb-4">You haven't made any inquiries yet</span>
-        <button type="button" data-trigger="quote" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2"
+        <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2"
             x-on:click="_openInquiryModal('', '')"
         >Create your first</button>
     </div>

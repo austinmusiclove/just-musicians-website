@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once 'inquiries-api/authorization.php';
 require_once 'inquiries-api/parse-args.php';
 require_once 'inquiries-api/get-inquiries.php';
-require_once 'inquiries-api/get-requests.php';
 require_once 'inquiries-api/create-inquiry.php';
 require_once 'inquiries-api/add-listing-to-inquiry.php';
 require_once 'inquiries-api/notify-listings.php';

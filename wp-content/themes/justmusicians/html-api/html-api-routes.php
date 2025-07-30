@@ -49,10 +49,6 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;
             }
-        case 'requests':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'   : include_once get_template_directory() . '/html-api/get-requests.php'; exit;
-            }
 
         // Active Search
         case 'search-options':

@@ -7,13 +7,6 @@
 
 get_header();
 
-// Get user inquiries
-$inquiries_result = get_user_inquiries([
-    'nopaging'     => true,
-    'nothumbnails' => true,
-]);
-$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
-
 ?>
 
 <div id="page" class="flex flex-col grow"
@@ -21,16 +14,19 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 >
 
     <div id="content" class="grow flex flex-col relative">
-        <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
+        <div class="container md:grid md:grid-cols-9 gap-8 lg:gap-12">
             <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                 <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                  <?php echo get_template_part('template-parts/account/sidebar', '', []); ?>
+                  <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
             <div class="col md:col-span-6 py-6 md:py-12">
 
                 <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                     <a href="/inquiries"><h1 class="font-bold text-22 sm:text-25">Inquiries</h1></a>
+                    <?php if (is_user_logged_in()) { ?>
+                        <button class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer" x-on:click="_openInquiryModal('', '')" >Add +</button>
+                    <?php } ?>
                 </div>
 
 
@@ -57,73 +53,29 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
                     <!-- Show Inquiries -->
                     <div class="lg:block md:col-span-6 pb-4">
-                        <div class="sticky top-36" x-data="{
-                            showIncoming: true,
-                            showOutgoing: false,
-                            hideTabs() {
-                                this.showIncoming = false;
-                                this.showOutgoing = false;
-                            },
-                        }">
+                        <div>
+                            <div
+                                hx-get="/wp-html/v1/inquiries/"
+                                hx-trigger="load"
+                                hx-target="#results"
+                                hx-indicator="#spinner"
+                            ></div>
 
-                            <!-- Preview tabs -->
-                            <div class="flex items-start justify-between mb-6 border-b border-black/20">
-                                <div class="flex gap-6 items-start">
-                                    <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showIncoming}" x-on:click="hideTabs(); showIncoming = true;">Incoming</div>
-                                    <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showOutgoing}" x-on:click="hideTabs(); showOutgoing = true;">Outgoing</div>
-                                </div>
+                            <span id="results">
+                                <?php
+                                    echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                    echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                    echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                    echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                    echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                ?>
+                            </span>
+
+                            <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
-
-
-                            <!-- Full page preview -->
-                            <div x-show="showIncoming" x-cloak>
-                                <div
-                                    hx-get="/wp-html/v1/inquiries/requests/"
-                                    hx-trigger="load"
-                                    hx-target="#incoming-results"
-                                    hx-indicator="#incoming-spinner"
-                                ></div>
-
-                                <span id="incoming-results">
-                                    <?php
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                    ?>
-                                </span>
-
-                                <div id="incoming-spinner" class="my-8 flex items-center justify-center htmx-indicator">
-                                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                                </div>
-                            </div>
-
-                            <!-- Search result preview -->
-                            <div x-show="showOutgoing" x-cloak>
-                                <div
-                                    hx-get="/wp-html/v1/inquiries/"
-                                    hx-trigger="load"
-                                    hx-target="#outgoing-results"
-                                    hx-indicator="#outgoing-spinner"
-                                ></div>
-
-                                <span id="outgoing-results">
-                                    <?php
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                        echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                    ?>
-                                </span>
-
-                                <div id="outgoing-spinner" class="my-8 flex items-center justify-center htmx-indicator">
-                                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                                </div>
-                            </div>
-
                         </div>
+
                     </div>
 
 

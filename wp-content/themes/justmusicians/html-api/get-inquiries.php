@@ -18,6 +18,7 @@ if (count($inquiries) > 0) {
         echo get_template_part('template-parts/account/inquiry-listing', '', [
             'post_id'        => $inquiry['post_id'],
             'subject'        => $inquiry['subject'],
+            'details'        => $inquiry['details'],
             'thumbnail_urls' => $inquiry['thumbnail_urls'],
             'num_listings'   => count($inquiry['listings']),
             'permalink'      => $inquiry['permalink'],

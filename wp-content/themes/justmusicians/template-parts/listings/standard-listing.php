@@ -185,7 +185,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     </div>
 
     <!-- Request quote button -->
-    <?php get_template_part('template-parts/listings/parts/request-quote-button', '', [
+    <?php get_template_part('template-parts/listings/parts/contact-button', '', [
         'post_id'  => !$is_preview ? $args['post_id'] : '',
         'name'     => !$is_preview ? $args['name'] : '',
         'disabled' => $is_preview,

@@ -1,42 +1,43 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            inquiries page
-                no inquiries state for inquiries
-                respond button takes you to messages
-                comb through old code for unneeded stuff
-                remove requests apis and page
-                replace incoming inquiries with just messages
-                show current list of listings requested in inquiry
-                "new inquiry" button on inquiries page
-            inquiry page
-                inquiry page shows messages board for all invited to the inquiry and a tab for inquiry details like yelp
+            messages
+                if inquiry is deleted or not found, show just message content
+                inquiry page
+                    query var with inquiry id to load inquiry info
+                    change title from conversations to all conversations then for inquiry version it is giong to be inquiry responses with subject under it and arrow for all conversations above it
+                    tab interface to switch between inquriy details and messages
+                    add suggested listings below inquiry details
+                    remove single inquiry and anything linked in it like template parts that only are used there
+            account
+                edit screen name
             modify quiz
-                change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
-                on contact button ask if they want to send a dm or do an inquiry
-                contact button opens slide that allows you to either send existing inquiry or create new
-                contact button goes straight to subject/details after offering to add to existing inquiry
-                show inquiries in contact button menu in order of newest inquiries
-                location not required
-                add button to inquiries back end on the thank you slide
-                add date option for tbd
-                add genre, ensemble size when user uses the request quotes button
-            data
-                add city state to inquiry which is derived from zip code
-                sort requests and inquiries by publish date/time
-                make sure proper access is in place for viewing inquiries pages
+                contact button ux
+                    slide to select one of: DM, add to existing, new inquiry quiz
+                    DM slide
+                    add to existing slide
+                quiz
+                    no inputs on "get quotes button" in sidebar
+                    change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
+                    show inquiries in contact button menu in order of newest inquiries
+                    location not required
+                    add button to inquiry page back end on the thank you slide
+                    connect the add inquiry buttons on inquires page to new quiz (add at top, add at bottom of results, add in no results)
+                    (maybe) add genre, ensemble size when user uses the request quotes button
+                    (maybe) add city state to inquiry which is derived from zip code
+            make sure proper access is in place for viewing inquiries pages
             email notifications
-                auto email when you get a new request as a musician
-                email when you have unresponded messages for a certain amount of time
+                auto email when you get a new incoming inquiry as a musician
             deployment
                 add acf config file so i don't have to do any manual set up of ACF
                 add messages page
-                add messages acf fields
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
-                make sure to add DEFAULT_QUOTES_REQUESTED prod wp config
+                make sure to add DEFAULT_QUOTES_REQUESTED prod wp config and any other constants and tell devon about new constants
         advanced inquiries
+            email when you have unresponded messages for a certain amount of time
             inquiry response posts; show user all inquiry responses side by side
+            specific responses for inquiries like $ amount for quote or draw number
             suggestions for listings to invite
             search bar for inquiries
             allow inquiry details edit
@@ -64,6 +65,8 @@ Milestones
             reorganize alpine component vars and methods
             change listings page to html api
             record response time
+        advanced messages
+            show inquiry detail in right side panel
         invite mnnatx@gmail.com to make a listing
     Search algo update
         ensemble size taxonomy
@@ -89,6 +92,7 @@ Data
     program to move unofficial tags to official if added
 Testing
     test apostrophes everywhere
+    test when nonce expires and api does not return data
 UX
     corrected new logos
     add animation when add to collection/fav

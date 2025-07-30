@@ -57,11 +57,6 @@ function html_api_rewrite_rules() {
         'index.php?wp-html-v1=inquiry-listing&inquiry-id=$matches[1]&listing-id=$matches[2]',
         'top'
     );
-    add_rewrite_rule(
-        '^wp-html/v1/inquiries/requests/?$',
-        'index.php?wp-html-v1=requests',
-        'top'
-    );
 
 }
 add_action('init', 'html_api_rewrite_rules');

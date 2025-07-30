@@ -1,5 +1,5 @@
 
-<div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20 last:border-none"
+<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-6 relative border-b border-black/20 last:border-none"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
     hx-get="/wp-html/v1/inquiries/?page=<?php echo $args['next_page']; ?>"
     hx-trigger="revealed once"
@@ -10,48 +10,53 @@
 >
 
     <!-- Image -->
-    <div class="w-24 md:w-32 shrink-0">
+    <div class="w-full sm:w-44 bg-yellow-light shrink-0">
         <?php if (count($args['thumbnail_urls']) >= 4) { ?>
-            <div class="bg-yellow-light aspect-4/3 grid grid-cols-2 grid-rows-2 gap-0">
+            <div class="aspect-4/3 grid grid-cols-2 grid-rows-2 gap-0">
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" />
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][1]; ?>" />
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][2]; ?>" />
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][3]; ?>" />
             </div>
         <?php } else if (count($args['thumbnail_urls']) >= 1) { ?>
-            <div class="bg-yellow-light aspect-4/3">
+            <div class="aspect-4/3">
                 <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" />
             </div>
         <?php } else { ?>
-            <div class="bg-yellow-light aspect-4/3">
+            <div class="aspect-4/3">
                 <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; ?>" />
             </div>
         <?php } ?>
     </div>
 
     <!-- Info -->
-    <div class="py-2 flex flex-col gap-y-2">
+    <div class="py-2 flex flex-col gap-y-2 flex-1 min-w-0 w-full">
 
         <!-- Title -->
         <div class="flex flex-row">
-            <a href="<?php echo $args['permalink']; ?>"><h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo $args['subject']; ?></h2></a>
+            <a href="<?php echo site_url('/messages/?iid=' . $args['post_id']); ?>">
+                <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo $args['subject']; ?></h2>
+            </a>
         </div>
 
         <!-- Num quotes requested -->
         <div class="flex items-center gap-1 flex-wrap">
-            <?php $num_listings_label = $args['num_listings'] == 1 ? 'Quote Requested' : 'Quotes Requested'; ?>
-            <p class="text-14"><?php echo $args['num_listings'] . ' ' . $num_listings_label; ?></p>
+            <?php $num_listings_label = $args['num_listings'] == 1 ? 'listing' : 'listings'; ?>
+            <p class="text-14"><?php echo $args['num_listings'] . ' ' . $num_listings_label; ?> invited to respond</p>
         </div>
+
+        <!-- Details -->
+        <div class="flex items-center gap-1">
+            <p class="text-14 truncate"><?php echo $args['details']; ?></p>
+        </div>
+
+        <!-- See Responses -->
+        <a href="<?php echo site_url('/messages/?iid=' . $args['post_id']); ?>">
+            <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit">See Responses</button>
+        </a>
 
     </div>
 
-    <!-- Buttons -->
-    <a href="<?php echo $args['permalink']; ?>">
-        <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
-            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
-        </button>
-    </a>
 
 
 </div>
-

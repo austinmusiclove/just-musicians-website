@@ -24,7 +24,8 @@ function get_user_inquiries($args) {
             'post_type'      => 'inquiry',
             'post__in'       => $user_inquiries,
             'post_status'    => 'publish',
-            'orderby'        => 'post__in',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
         ];
         if ($nopaging) {
             $query_args['nopaging'] = true;
@@ -61,6 +62,7 @@ function get_user_inquiries($args) {
             $inquiries[] = [
                 'post_id'        => get_the_ID(),
                 'subject'        => get_field('subject'),
+                'details'        => get_field('details'),
                 'listings'       => $listing_ids,
                 'thumbnail_urls' => $thumbnails,
                 'permalink'      => get_the_permalink(),
