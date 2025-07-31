@@ -3,7 +3,7 @@
 function send_message(WP_REST_Request $request) {
     global $user_messages_plugin;
     $user_id = get_current_user_id();
-    $display_name = get_display_name($user_id);
+    $display_name = $user_messages_plugin->get_display_name($user_id);
     $conversation_id = $request['conversation_id'];
     $content = wp_kses_post(wp_unslash($request->get_json_params()['content']));
 

@@ -1,37 +1,27 @@
 
-<div id="message-board" class="flex-1 overflow-y-auto p-6 space-y-4" x-ref="messageBoard">
 
-    <template x-if="conversationId > 0">
+<!-- Conversation Header -->
+<div class="my-8 pt-4 md:pt-20">
 
+    <!-- Back button -->
+    <span class="flex opacity-50 lg:hidden cursor-pointer" x-on:click="messagesView = false; conversationsView = true;">
+        <img class="mb-2 ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+        <span class="text-18 hover:underline" >Back</span>
+    </span>
 
-        <template x-for="(message, index) in conversationsMap[conversationId].messages" :key="index">
-            <span>
-
-
-                <!-- Display Basic Message -->
-                <template x-if="index > 0 && !message.inquiry">
-                    <?php echo get_template_part('template-parts/messages/basic-message', '', ['is_last' => false]); ?>
-                </template>
-                <!-- Display Inquiry Message -->
-                <template x-if="index > 0 && message.inquiry">
-                    <?php echo get_template_part('template-parts/messages/inquiry-message', '', ['is_last' => false]); ?>
-                </template>
-
-                <!-- Display last message: distinct from other conversations for pagination purposes -->
-                <!-- Display Basic Message (last) -->
-                <template x-if="index == 0 && !message.inquiry">
-                    <?php echo get_template_part('template-parts/messages/basic-message', '', ['is_last' => true]); ?>
-                </template>
-                <!-- Display Inquiry Message (last) -->
-                <template x-if="index == 0 && message.inquiry">
-                    <?php echo get_template_part('template-parts/messages/inquiry-message', '', ['is_last' => true]); ?>
-                </template>
-
-
-            </span>
-        </template>
-
-
-    </template>
+    <!-- Conversation Title -->
+    <h2 class="font-bold text-22" x-text="(conversationId > 0) ? conversationsMap[conversationId].title : ''"></h2>
 
 </div>
+
+
+<!-- Message board spinner -->
+<div class="flex items-center justify-center" x-show="getMsgInFlight" x-cloak>
+    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+</div>
+
+<!-- Display messages -->
+<?php echo get_template_part('template-parts/messages/messages-display', '', []); ?>
+
+<!-- Message Input Area -->
+<?php echo get_template_part('template-parts/messages/message-input', '', []); ?>

@@ -1,6 +1,6 @@
 
-async function getConversations(alco, cursor) {
-    var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, false), 'conversations', 'showCvSpinner');
+async function getConversations(alco, cursor, inquiryId) {
+    var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, false, inquiryId), 'conversations', 'getCvInFlight');
     if (conversations instanceof Error) {
         alco.$dispatch('error-toast', { message: conversations.message });
     } else if (conversations) {
@@ -9,7 +9,7 @@ async function getConversations(alco, cursor) {
 }
 
 async function getMessages(alco, conversationId, cursor, isUpdate, isLongPoll) {
-    var messages = await fetchResource(alco, 'GET', getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll), 'messages', isUpdate ? '' : 'showMbSpinner');
+    var messages = await fetchResource(alco, 'GET', getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll), 'messages', isUpdate ? '' : 'getMsgInFlight');
     if (messages instanceof Error && !isUpdate) {
         alco.$dispatch('error-toast', { message: messages.message });
         return messages;
@@ -88,7 +88,8 @@ async function shortPollConversations(alco) {
         await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before polling
         await new Promise(requestAnimationFrame);                // Pause while browser tab is inactive
         var cursor = alco.conversations[0].latest_message_id
-        var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, true), 'conversations', null);
+        var inquiryId = alco.inquiry ? alco.inquiry.inquiry_id : null;
+        var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, true, inquiryId), 'conversations', null);
         if (conversations instanceof Error && conversations.cause == 403) {
             break;
         } else if (conversations.length > 0) {

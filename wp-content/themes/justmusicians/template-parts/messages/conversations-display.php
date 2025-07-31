@@ -1,5 +1,6 @@
 
-<div id="conversation-container" class="flex-1 border-t border-black/20 w-full overflow-y-scroll"
+<div class="flex-1 overflow-y-auto w-full"
+    x-show="!getCvInFlight || conversations.length > 0" x-cloak
     x-data="{
         openMenu: null,
         toggleOpenMenu(conversationId) {
@@ -12,6 +13,15 @@
     }"
 >
 
+    <!-- No conversations -->
+    <template x-if="!getCvInFlight && conversations.length == 0 && inquiry == null">
+        <div class="my-4">No Conversations</div>
+    </template>
+
+    <!-- No inquiry responses-->
+    <template x-if="!getCvInFlight && conversations.length == 0 && inquiry != null">
+        <div class="my-4">You have not yet invited any listings to respond to your inquiry</div>
+    </template>
 
     <template x-for="(conversation, index) in conversations" :key="index">
         <span>

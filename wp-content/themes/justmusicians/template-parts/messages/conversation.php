@@ -1,4 +1,4 @@
-<div class="px-3 py-4 border-b border-black/20 hover:bg-yellow-10"
+<div class="pr-3 py-4 border-b border-black/20 hover:bg-yellow-10"
     :class="{ 'bg-yellow-10': conversationId == conversation.conversation_id }"
     x-on:click="_selectConversation(conversation.conversation_id); messagesView = true; conversationsView = false;"
 
@@ -52,7 +52,7 @@
 
 
     <!-- Latest message preview -->
-    <p class="w-full text-12"
+    <p class="w-full text-14"
         :class="{ 'font-bold': !conversation.latest_message_is_read }"
     >
         <span class="flex items-center">

@@ -9,10 +9,11 @@ function getMarkAsReadUrl(message_id, user_id) {
 }
 
 
-function getConversationsUrl(cursor, isUpdate) {
+function getConversationsUrl(cursor, isUpdate, inquiryId) {
     let params = [];
     if (cursor) { params.push(`cursor=${encodeURIComponent(cursor)}`); }
     if (isUpdate) { params.push(`update=true`); }
+    if (inquiryId) { params.push(`inquiry_id=${inquiryId}`); }
     let query = params.length > 0 ? `?${params.join('&')}` : '';
     return `${siteData.siteUrl}/wp-json/v1/conversations/${query}`;
 }

@@ -1,17 +1,14 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            messages
-                if inquiry is deleted or not found, show just message content
-                inquiry page
-                    query var with inquiry id to load inquiry info
-                    change title from conversations to all conversations then for inquiry version it is giong to be inquiry responses with subject under it and arrow for all conversations above it
-                    tab interface to switch between inquriy details and messages
-                    add suggested listings below inquiry details
-                    remove single inquiry and anything linked in it like template parts that only are used there
+            ux
+                figure out ux for getting people to add listings to inquiry
             account
                 edit screen name
             modify quiz
+                get rid of permalink in inquiries drop down menu to add to inquiry; it leads to inquiry single which is broken
+                when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
+                submit button in quiz does not work in inquiries page
                 contact button ux
                     slide to select one of: DM, add to existing, new inquiry quiz
                     DM slide
@@ -29,6 +26,7 @@ Milestones
             email notifications
                 auto email when you get a new incoming inquiry as a musician
             deployment
+                add acf field for inquiry; expired
                 add acf config file so i don't have to do any manual set up of ACF
                 add messages page
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
@@ -65,6 +63,9 @@ Milestones
             reorganize alpine component vars and methods
             change listings page to html api
             record response time
+            suggestions
+                add suggested listings below inquiry details
+                show suggestions when there are no conversations
         advanced messages
             show inquiry detail in right side panel
         invite mnnatx@gmail.com to make a listing

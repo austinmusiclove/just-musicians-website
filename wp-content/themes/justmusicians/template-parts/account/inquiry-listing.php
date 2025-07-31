@@ -51,9 +51,9 @@
         </div>
 
         <!-- See Responses -->
-        <a href="<?php echo site_url('/messages/?iid=' . $args['post_id']); ?>">
+        <div><a href="<?php echo site_url('/messages/?iid=' . $args['post_id']); ?>">
             <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit">See Responses</button>
-        </a>
+        </a></div>
 
     </div>
 

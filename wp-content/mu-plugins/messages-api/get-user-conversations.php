@@ -6,8 +6,10 @@ function get_user_conversations($request) {
     // Get conversations
     $cursor        = $_GET['cursor'] ?? null;
     $get_newer     = isset($_GET['update']);
+    $inquiry_id    = $_GET['inquiry_id'] ?? null;
     $user_id       = get_current_user_id();
-    $conversations = $user_messages_plugin->get_user_conversations($user_id, 20, $cursor, $get_newer);
+    $limit         = 20;
+    $conversations = $user_messages_plugin->get_user_conversations($user_id, $limit, $cursor, $inquiry_id, $get_newer);
 
     // Handle error
     if (is_wp_error($conversations)) {

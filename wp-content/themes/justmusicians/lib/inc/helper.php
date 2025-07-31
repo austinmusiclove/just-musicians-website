@@ -120,12 +120,3 @@ function get_spotify_artist_url_from_id($id) {
     $spotify_artist_url_prefix = 'https://open.spotify.com/artist/';
     return !empty($id) ? $spotify_artist_url_prefix . $id : '';
 }
-
-function get_display_name($user_id) {
-    $display_name = get_userdata($user_id)->display_name;
-    return clean_display_name($display_name);
-}
-// Remove domain if display name is an email
-function clean_display_name($display_name) {
-    return filter_var($display_name, FILTER_VALIDATE_EMAIL) ? explode('@', $display_name)[0] : $display_name;
-}

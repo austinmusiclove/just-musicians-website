@@ -6,6 +6,9 @@
 */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+require_once 'queries/conversations-queries.php';
+
+
 class UserMessagesPlugin {
     private $charset;
     private $tables;
@@ -251,10 +254,12 @@ class UserMessagesPlugin {
     }
 
     // Gets user conversations, ordered by most recent message
-    function get_user_conversations($user_id, $limit = 20, $cursor_id = null, $get_newer = false) {
+    function get_user_conversations($user_id, $limit = 20, $cursor_id = null, $inquiry_id = null, $get_newer = false) {
         global $wpdb;
-        $tables = $this->tables;
-        $current_user_id = get_current_user_id();
+        $tables              = $this->tables;
+        $current_user_id     = get_current_user_id();
+        $user_listing_ids    = [];
+        $inquiry_listing_ids = [];
 
         // Access control: check user logged in
         if (!is_user_logged_in()) {
@@ -266,97 +271,36 @@ class UserMessagesPlugin {
             return new WP_Error('unauthorized', 'You are not allowed to send messages as this user.', [ 'status' => 403 ]);
         }
 
-        // Get listing IDs the user owns
-        $listing_ids = get_user_meta($user_id, 'listings', true);
-        if (!is_array($listing_ids)) {
-            $listing_ids = [];
+        // Get inquiry listing IDs if inquiry id provided
+        if ($inquiry_id) {
+            $inquiry_listing_ids = get_post_meta($inquiry_id, 'listings_invited', true);
+            if (!is_array($inquiry_listing_ids)) {
+                return [];
+            }
         }
 
-        // Build query
-        $placeholders = implode(',', array_fill(0, count($listing_ids), '%d'));
-        if ($cursor_id) {
-            $cursor_comparison = $get_newer ? '>' : '<';
+        // else Get listing IDs the user owns
+        $user_listing_ids = get_user_meta($user_id, 'listings', true);
+        if (!is_array($user_listing_ids)) {
+            $user_listing_ids = [];
+        }
 
-            // Get timestamp of cursor message
+        // Get cursor time if cursor provided
+        $cursor_time = null;
+        if ($cursor_id) {
             $cursor_time = $wpdb->get_var($wpdb->prepare("
                 SELECT created_at FROM {$tables['messages']}
                 WHERE id = %d
             ", $cursor_id));
-            $query = "
-                SELECT c.id AS conversation_id,
-                       m.content,
-                       m.created_at,
-                       m.sender_id,
-                       m.id AS message_id,
-                       IF(rr.user_id IS NULL, 0, 1) AS is_read
-                FROM {$tables['conversations']} c
-                JOIN {$tables['conversation_participants']} cp
-                    ON cp.conversation_id = c.id
-                LEFT JOIN {$tables['messages']} m
-                    ON m.id = (
-                        SELECT id FROM {$tables['messages']}
-                        WHERE conversation_id = c.id
-                        ORDER BY created_at DESC LIMIT 1
-                    )
-                LEFT JOIN {$tables['read_receipts']} rr
-                    ON rr.message_id = m.id AND rr.user_id = %d
-                WHERE m.created_at {$cursor_comparison} %s AND ( cp.user_id = %d";
             if ($cursor_time === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
-
-            $query_params = [$user_id, $cursor_time, $user_id];
-            if (!empty($listing_ids)) {
-                $query .= " OR cp.listing_id IN ({$placeholders})";
-                $query_params = array_merge($query_params, $listing_ids);
-            }
-
-            $query .= ")
-                GROUP BY c.id
-                ORDER BY c.updated_at DESC
-                LIMIT %d";
-
-            $query_params[] = $limit;
-            $prepared_query = $wpdb->prepare($query, ...$query_params);
-            $conversations = $wpdb->get_results($prepared_query);
-            if ($conversations === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
-
-        } else {
-            $query = "
-                SELECT c.id AS conversation_id,
-                       m.content,
-                       m.created_at,
-                       m.sender_id,
-                       m.id AS message_id,
-                       IF(rr.user_id IS NULL, 0, 1) AS is_read
-                FROM {$tables['conversations']} c
-                JOIN {$tables['conversation_participants']} cp
-                    ON cp.conversation_id = c.id
-                LEFT JOIN {$tables['messages']} m
-                    ON m.id = (
-                        SELECT id FROM {$tables['messages']}
-                        WHERE conversation_id = c.id
-                        ORDER BY created_at DESC LIMIT 1
-                    )
-                LEFT JOIN {$tables['read_receipts']} rr
-                    ON rr.message_id = m.id AND rr.user_id = %d
-                WHERE (cp.user_id = %d";
-
-            $query_params = [$user_id, $user_id];
-            if (!empty($listing_ids)) {
-                $query .= " OR cp.listing_id IN ({$placeholders})";
-                $query_params = array_merge($query_params, $listing_ids);
-            }
-
-            $query .= ")
-                GROUP BY c.id
-                ORDER BY c.updated_at DESC
-                LIMIT %d";
-
-            $query_params[] = $limit;
-            $prepared_query = $wpdb->prepare($query, ...$query_params);
-            $conversations = $wpdb->get_results($prepared_query);
-            if ($conversations === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
         }
 
+        $query = get_conversations_query($tables, $user_id, $cursor_time, $user_listing_ids, $inquiry_listing_ids, $get_newer, $limit);
+        $query_sql = $query['sql'];
+        $query_params = $query['args'];
+        $prepared_query = $wpdb->prepare($query_sql, ...$query_params);
+        $conversations = $wpdb->get_results($prepared_query);
+        if ($conversations === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
         // Now add participant names
         foreach ($conversations as &$conv) {
@@ -387,7 +331,9 @@ class UserMessagesPlugin {
                     WHERE ID = %d
                 ", $row->user_id));
                 if ($name === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
-                if ($name) { $user_participants[] = $name; }
+                if ($name) {
+                    $user_participants[] = $this->clean_display_name($name);
+                }
 
             } elseif ($row->listing_id) {
                 $name = $wpdb->get_var($wpdb->prepare("
@@ -553,6 +499,14 @@ class UserMessagesPlugin {
     }
 
 
+    function get_display_name($user_id) {
+        $display_name = get_userdata($user_id)->display_name;
+        return clean_display_name($display_name);
+    }
+    // Remove domain if display name is an email
+    function clean_display_name($display_name) {
+        return filter_var($display_name, FILTER_VALIDATE_EMAIL) ? explode('@', $display_name)[0] : $display_name;
+    }
 
 }
 
