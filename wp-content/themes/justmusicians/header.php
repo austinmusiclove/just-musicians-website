@@ -198,7 +198,7 @@
                   Collections
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
                   Messages
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/inquiries/'); ?>">
