@@ -147,19 +147,19 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Band">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Band'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                   Bands
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Solo Artist">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Solo Artist'); ?>">
                   <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
                   Solo Artists
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=DJ">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=DJ'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
                   DJs
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qsetting=Wedding">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qsetting=Wedding'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
                   Wedding Music
                 </a>
@@ -185,25 +185,23 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-<!--
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
-                  Profile
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/account/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+                  Account
                 </a>
--->
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/listings/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                   My Listings
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/collections/'); ?>">
                   <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/messages">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
                   Messages
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/inquiries">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/inquiries/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
                   Inquiries
                 </a>

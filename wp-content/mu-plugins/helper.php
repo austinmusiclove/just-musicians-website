@@ -102,3 +102,73 @@ function get_youtube_video_id($url) {
     return false;
 }
 
+function get_display_name($user_id) {
+    $display_name = get_userdata($user_id)->display_name;
+    return clean_display_name($display_name);
+}
+// Remove domain if display name is an email
+function clean_display_name($display_name) {
+    return filter_var($display_name, FILTER_VALIDATE_EMAIL) ? explode('@', $display_name)[0] : $display_name;
+}
+
+// Parse files and file meta data
+function custom_parse_file($data, $file_index) {
+    $data = custom_parse_json($data);
+    if (isset($_FILES[$file_index])) {
+        $file['name'] = sanitize_file_name($_FILES[$file_index]['name']);
+        $data['file'] = $_FILES[$file_index];
+    }
+    return $data;
+}
+function custom_parse_ordered_files($data, $file_index) {
+    $ordered_files = [];
+
+    // Parse meta data and files
+    $data = custom_parse_json($data);
+    $parsed_files = parse_files($file_index);
+
+    // if has upload index add file from that index
+    foreach ($data as $image_data) {
+        if (isset($image_data['upload_index']) and is_int($image_data['upload_index']) and $image_data['upload_index'] < count($parsed_files)) {
+            $image_data['file'] = $parsed_files[$image_data['upload_index']];
+        }
+        $ordered_files[] = $image_data;
+    }
+    return $ordered_files;
+}
+function parse_files($file_index) {
+    $parsed_files = [];;
+    if (isset($_FILES[$file_index])) {
+        $files = $_FILES[$file_index];
+        $count = count($files['name']);
+        for ($iter = 0; $iter < $count; $iter++) {
+            $parsed_files[] = [
+                'name'     => sanitize_file_name($files['name'][$iter]),
+                'type'     => $files['type'][$iter],
+                'tmp_name' => $files['tmp_name'][$iter],
+                'error'    => $files['error'][$iter],
+                'size'     => $files['size'][$iter],
+            ];
+        }
+    }
+    return $parsed_files;
+}
+// check youtube url validity
+// generate video id from valid urls and set video id using that in case the video id that was send in was wrong
+function custom_parse_youtube_video_data($json) {
+    $youtube_video_data = custom_parse_json($json);
+    $youtube_video_ids = [];
+    if ($youtube_video_data and is_array($youtube_video_data)) {
+        foreach($youtube_video_data as $index => $video_data) {
+            $video_id = get_youtube_video_id($video_data['url']);
+            if ($video_id) {
+                $youtube_video_ids[] = $video_id;
+                $youtube_video_data[$index]['video_id'] = $video_id;
+            }
+        }
+    }
+    return $youtube_video_data;
+}
+function custom_parse_json($json) {
+    return json_decode(stripslashes($json), true);
+}

@@ -332,7 +332,7 @@ class UserMessagesPlugin {
                 ", $row->user_id));
                 if ($name === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
                 if ($name) {
-                    $user_participants[] = $this->clean_display_name($name);
+                    $user_participants[] = clean_display_name($name);
                 }
 
             } elseif ($row->listing_id) {
@@ -496,16 +496,6 @@ class UserMessagesPlugin {
             return new WP_Error('db_error', 'DB write error', [ 'status' => 500 ]);
         }
         return true;
-    }
-
-
-    function get_display_name($user_id) {
-        $display_name = get_userdata($user_id)->display_name;
-        return clean_display_name($display_name);
-    }
-    // Remove domain if display name is an email
-    function clean_display_name($display_name) {
-        return filter_var($display_name, FILTER_VALIDATE_EMAIL) ? explode('@', $display_name)[0] : $display_name;
     }
 
 }

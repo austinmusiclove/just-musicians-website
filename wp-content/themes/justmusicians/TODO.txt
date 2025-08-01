@@ -1,13 +1,14 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            ux
-                figure out ux for getting people to add listings to inquiry
             account
-                edit screen name
+                add profile image to conversation and message
             modify quiz
-                get rid of permalink in inquiries drop down menu to add to inquiry; it leads to inquiry single which is broken
-                when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
+                figure out ux for getting people to add listings to inquiry
+                inqiury drop down
+                    figure out if i want to keep
+                    get rid of permalink in inquiries drop down menu to add to inquiry; it leads to inquiry single which is broken
+                    when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
                 submit button in quiz does not work in inquiries page
                 contact button ux
                     slide to select one of: DM, add to existing, new inquiry quiz
@@ -26,7 +27,9 @@ Milestones
             email notifications
                 auto email when you get a new incoming inquiry as a musician
             deployment
-                add acf field for inquiry; expired
+                add user profile image acf
+                add account page
+                add acf fields for inquiry; expired..and everything
                 add acf config file so i don't have to do any manual set up of ACF
                 add messages page
                 check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar

@@ -10,19 +10,23 @@
 
     <div class="bg-white font-regular font-sans text-16 flex flex-col -ml-2">
 
-        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/listings">
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/account/'); ?>">
+            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+            <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Account</span>
+        </a>
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/listings/'); ?>">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>My Listings</span>
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/collections">
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/collections/'); ?>">
             <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Collections</span>
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/messages">
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/messages/'); ?>">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Messages</span>
         </a>
-        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="/inquiries">
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/inquiries/'); ?>">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
             <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Inquiries</span>
         </a>

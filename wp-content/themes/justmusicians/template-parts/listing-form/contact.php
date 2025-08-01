@@ -28,7 +28,7 @@
             </div>
             <!-- Website -->
             <div class="grow relative">
-                <label for="zip_code" class="mb-1 inline-block">Website</label>
+                <label for="website" class="mb-1 inline-block">Website</label>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" />
                 <input class="has-icon" type="text" id="website" name="website" placeholder="https://" x-model="pWebsite" >
 

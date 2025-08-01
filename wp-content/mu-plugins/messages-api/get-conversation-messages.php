@@ -11,13 +11,13 @@ function get_conversation_messages($request) {
     if (is_wp_error($messages)) { return $messages; }
 
     $user_id = get_current_user_id();
-    return array_map(function($message) use ($user_id, $user_messages_plugin) {
-        return formatMessage($message, $user_id, $user_messages_plugin);
+    return array_map(function($message) use ($user_id) {
+        return formatMessage($message, $user_id);
     }, $messages);
 }
 
-function formatMessage($message, $user_id, $user_messages_plugin) {
-    $display_name = $user_messages_plugin->clean_display_name($message->sender_name);
+function formatMessage($message, $user_id) {
+    $display_name = clean_display_name($message->sender_name);
     $inquiry = null;
     if ($message->inquiry_id) {
         $inquiry = get_post_meta($message->inquiry_id);
