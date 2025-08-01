@@ -88,6 +88,9 @@ module.exports = {
 		'./templates/**/*.{php,js}',
 		'./tailwind/missing.php',
 	],
+    safelist: [
+        'flex-row-reverse',
+    ],
 	theme: {
 		fontSize: fontSizeWithMultiplier,
 		container: {

@@ -3,6 +3,7 @@
 if (!is_user_logged_in()) { wp_redirect(site_url()); } // Don't allow non logged in users to see this page
 get_header();
 
+$user_id = get_current_user_id();
 $inquiry_data = null;
 if (!empty($_GET['iid'])) {
     $inquiry_id = $_GET['iid'];
@@ -23,7 +24,7 @@ if (!empty($_GET['iid'])) {
         conversationId: -1,
         conversations: [],
         conversationsMap: {},
-        inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
+        inquiry:          <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
         conversationsView: true,
         messagesView: false,
         getCvInFlight: false,

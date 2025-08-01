@@ -14,80 +14,94 @@
     </template>
 
 
-    <!-- Sender name -->
-    <div class="text-14"
-        :class="{ 'text-right': message.is_outgoing, 'text-left': !message.is_outgoing }"
-        x-text="message.sender_name"
-    ></div>
-
-    <!-- Inquiry content -->
-    <div class="mb-8 sidebar-module border border-black/40 rounded overflow-hidden bg-white max-w-[300px]"
-        :class="{ 'ml-auto': message.is_outgoing }"
-        x-data="{ showDetails: false, }"
+     <!-- Message Wrapper -->
+    <div class="flex items-start gap-2"
+        :class="{ 'flex-row-reverse ml-auto': message.is_outgoing, 'flex-row': !message.is_outgoing }"
     >
 
-        <h3 class="bg-yellow-50 font-bold py-2 px-3 cursor-pointer" x-html="message.inquiry.subject"></h3>
-        <div class="p-4 flex flex-col gap-4">
-            <div class="grid gap-x-12 gap-y-4 w-full">
+        <!-- Profile image -->
+        <img class="w-8 h-8 rounded-full mt-1" alt="Profile image" x-bind:src="message.sender_profile_image_url">
 
-                <!-- Date -->
-                <template x-if="(message.inquiry.date_type && message.inquiry.date_type != '') || (message.inquiry.date && message.inquiry.date != '')">
-                    <div class="flex items-center gap-1">
-                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
-                        <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
-                            x-data="{
-                                showDate(inquiry) {
-                                    if (inquiry.date != '') {
-                                        return inquiry.date;
-                                    } else {
-                                        return inquiry.date_type;
-                                    }
-                                },
-                            }"
-                            x-text="showDate(message.inquiry)"
-                        ></span>
-                    </div>
-                </template>
+        <div>
 
-                <!-- Time -->
-                <template x-if="message.inquiry.time && message.inquiry.time != ''">
-                    <div class="flex items-center gap-1">
-                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clock.svg'; ?>" />
-                        <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.time"></span>
-                    </div>
-                </template>
+            <!-- Sender name -->
+            <div class="text-14"
+                :class="{ 'text-right': message.is_outgoing, 'text-left': !message.is_outgoing }"
+                x-text="message.sender_name"
+            ></div>
 
-                <!-- Zip code -->
-                <template x-if="message.inquiry.zip_code && message.inquiry.zip_code != ''">
-                    <div class="flex items-center gap-1">
-                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                        <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.zip_code"></span>
-                    </div>
-                </template>
+            <!-- Inquiry content -->
+            <div class="mb-8 sidebar-module border border-black/40 rounded overflow-hidden bg-white max-w-[300px]"
+                :class="{ 'ml-auto': message.is_outgoing }"
+                x-data="{ showDetails: false, }"
+            >
 
-            </div> <!-- End contact info -->
+                <h3 class="bg-yellow-50 font-bold py-2 px-3 cursor-pointer" x-html="message.inquiry.subject"></h3>
+                <div class="p-4 flex flex-col gap-4">
+                    <div class="grid gap-x-12 gap-y-4 w-full">
+
+                        <!-- Date -->
+                        <template x-if="(message.inquiry.date_type && message.inquiry.date_type != '') || (message.inquiry.date && message.inquiry.date != '')">
+                            <div class="flex items-center gap-1">
+                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
+                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
+                                    x-data="{
+                                        showDate(inquiry) {
+                                            if (inquiry.date != '') {
+                                                return inquiry.date;
+                                            } else {
+                                                return inquiry.date_type;
+                                            }
+                                        },
+                                    }"
+                                    x-text="showDate(message.inquiry)"
+                                ></span>
+                            </div>
+                        </template>
+
+                        <!-- Time -->
+                        <template x-if="message.inquiry.time && message.inquiry.time != ''">
+                            <div class="flex items-center gap-1">
+                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clock.svg'; ?>" />
+                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.time"></span>
+                            </div>
+                        </template>
+
+                        <!-- Zip code -->
+                        <template x-if="message.inquiry.zip_code && message.inquiry.zip_code != ''">
+                            <div class="flex items-center gap-1">
+                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
+                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.zip_code"></span>
+                            </div>
+                        </template>
+
+                    </div> <!-- End contact info -->
 
 
-            <!-- Details -->
-            <template x-if="message.inquiry.details && message.inquiry.details[0] != ''">
-                <span>
+                    <!-- Details -->
+                    <template x-if="message.inquiry.details && message.inquiry.details[0] != ''">
+                        <span>
 
-                    <div x-show="showDetails" x-cloak x-collapse x-html="message.inquiry.details"></div>
+                            <div x-show="showDetails" x-cloak x-collapse x-html="message.inquiry.details"></div>
 
-                    <div class="w-full bg-black/20 h-px my-4"></div>
-                    <div class="flex flex-row justify-evenly">
-                        <a class="font-bold hover:text-yellow cursor-pointer" x-show="!showDetails" x-cloak x-on:click="showDetails = true">Show Details</a>
-                        <a class="font-bold hover:text-yellow cursor-pointer" x-show="showDetails" x-cloak x-on:click="showDetails = false">Show Less</a>
-                        <!--<span class="border-r border-black/20"></span>
-                        <a class="font-bold hover:text-yellow cursor-pointer">Decline</a>-->
-                    </div>
+                            <div class="w-full bg-black/20 h-px my-4"></div>
+                            <div class="flex flex-row justify-evenly">
+                                <a class="font-bold hover:text-yellow cursor-pointer" x-show="!showDetails" x-cloak x-on:click="showDetails = true">Show Details</a>
+                                <a class="font-bold hover:text-yellow cursor-pointer" x-show="showDetails" x-cloak x-on:click="showDetails = false">Show Less</a>
+                                <!--<span class="border-r border-black/20"></span>
+                                <a class="font-bold hover:text-yellow cursor-pointer">Decline</a>-->
+                            </div>
 
-                </span>
-            </template>
+                        </span>
+                    </template>
 
+
+                </div>
+
+
+            </div>
 
         </div>
-
 
     </div>
 

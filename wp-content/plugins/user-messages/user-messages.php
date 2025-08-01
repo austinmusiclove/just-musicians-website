@@ -412,6 +412,27 @@ class UserMessagesPlugin {
 
         $result = $wpdb->get_results($query);
         if ($result === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
+
+        // Add sender profile image url
+        $profile_images = [];
+        foreach ($result as &$item) {
+            $sender_id = $item->sender_id ?? null;
+            if ($sender_id) {
+                // Check if we already fetched this sender's profile image
+                if (!isset($profile_images[$sender_id])) {
+                    $profile_image = get_profile_image($sender_id); // Assumes this returns ['url' => '...']
+                    $profile_images[$sender_id] = $profile_image['url'] ?? null;
+                }
+
+                // Assign the profile image URL to the result item
+                $item->sender_profile_image_url = $profile_images[$sender_id];
+            } else {
+                $item->sender_profile_image_url = null;
+            }
+        }
+        unset($item); // Best practice when modifying array items by reference
+
+
         return $result;
     }
 

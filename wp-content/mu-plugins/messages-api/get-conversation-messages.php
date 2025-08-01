@@ -24,15 +24,16 @@ function formatMessage($message, $user_id) {
         if (empty($inquiry)) { $inquiry = ['subject' => 'Inquiry Expired']; }
     }
     return [
-        'message_id'      => $message->id,
-        'conversation_id' => $message->conversation_id,
-        'sender_id'       => $message->sender_id,
-        'created_at'      => $message->created_at,
-        'updated_at'      => $message->updated_at,
-        'is_read'         => $message->is_read ? true : false,
-        'content'         => nl2br($message->content),
-        'inquiry'         => $inquiry,
-        'sender_name'     => $display_name,
-        'is_outgoing'     => $message->sender_id == $user_id,
+        'message_id'               => $message->id,
+        'conversation_id'          => $message->conversation_id,
+        'sender_id'                => $message->sender_id,
+        'created_at'               => $message->created_at,
+        'updated_at'               => $message->updated_at,
+        'is_read'                  => $message->is_read ? true : false,
+        'content'                  => nl2br($message->content),
+        'inquiry'                  => $inquiry,
+        'sender_name'              => $display_name,
+        'sender_profile_image_url' => $message->sender_profile_image_url,
+        'is_outgoing'              => $message->sender_id == $user_id,
     ];
 }

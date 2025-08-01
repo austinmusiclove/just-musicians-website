@@ -1,8 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            account
-                add profile image to conversation and message
             modify quiz
                 figure out ux for getting people to add listings to inquiry
                 inqiury drop down

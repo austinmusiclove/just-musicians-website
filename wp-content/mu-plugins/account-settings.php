@@ -17,6 +17,15 @@ function get_account_settings() {
     $user_info = get_userdata($user_id);
 
     // Attempt to get profile_image and fall back to gravatar
+    $profile_image = get_profile_image($user_id);
+
+    return [
+        'display_name'  => clean_display_name($user_info->display_name),
+        'profile_image' => $profile_image,
+    ];
+}
+
+function get_profile_image($user_id) {
     $profile_image = [
         'url'           => '',
         'filename'      => '',
@@ -35,10 +44,7 @@ function get_account_settings() {
         $profile_image['url'] = get_avatar_url($user_id);
     }
 
-    return [
-        'display_name'  => clean_display_name($user_info->display_name),
-        'profile_image' => $profile_image,
-    ];
+    return $profile_image;
 }
 
 function update_account_settings($args) {

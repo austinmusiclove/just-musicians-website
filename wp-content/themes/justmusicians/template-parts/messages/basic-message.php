@@ -10,32 +10,42 @@
 
     <!-- Timestamp -->
     <template x-if="message.created_at">
-        <div class="text-center text-grey text-14" x-text="new Date(message.created_at.replace(' ', 'T') + 'Z').toLocaleString()"></div>
+        <div class="text-center text-grey text-14 my-2" x-text="new Date(message.created_at.replace(' ', 'T') + 'Z').toLocaleString()"></div>
     </template>
 
 
-    <!-- Message -->
-    <div class="w-fit max-w-[75%]"
-        :class="{ 'ml-auto': message.is_outgoing }"
-        x-data="{ show: false }"
-        x-show="show" x-cloak
-        x-init="requestAnimationFrame(() => { show = true })"
-        x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="opacity-0 translate-y-6"
-        x-transition:enter-end="opacity-100 translate-y-0"
+     <!-- Message with profile image -->
+    <div class="flex items-start gap-2"
+        :class="{ 'flex-row-reverse ml-auto': message.is_outgoing, 'flex-row': !message.is_outgoing }"
     >
 
-
-        <!-- Sender name -->
-        <div class="text-14"
-            :class="{ 'text-right': message.is_outgoing, 'text-left': !message.is_outgoing }"
-            x-text="message.sender_name"
-        ></div>
+        <!-- Profile image -->
+        <img class="w-8 h-8 rounded-full mt-1" alt="Profile image" x-bind:src="message.sender_profile_image_url">
 
 
-        <!-- Message content -->
-        <div class="bg-yellow-light-50 rounded p-3 text-sm" x-html="message.content"></div>
+        <!-- Message -->
+        <div class="w-fit max-w-[75%]"
+            :class="{ 'ml-auto': message.is_outgoing }"
+            x-data="{ show: false }"
+            x-show="show" x-cloak
+            x-init="requestAnimationFrame(() => { show = true })"
+            x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="opacity-0 translate-y-6"
+            x-transition:enter-end="opacity-100 translate-y-0"
+        >
 
+            <!-- Sender name -->
+            <div class="text-14"
+                :class="{ 'text-right': message.is_outgoing, 'text-left': !message.is_outgoing }"
+                x-text="message.sender_name"
+            ></div>
+
+
+            <!-- Message content -->
+            <div class="bg-yellow-light-50 rounded p-3 text-sm" x-html="message.content"></div>
+
+
+        </div>
 
     </div>
 
