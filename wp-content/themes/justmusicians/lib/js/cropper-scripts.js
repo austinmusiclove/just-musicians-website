@@ -31,11 +31,16 @@ function processNewImage(alco, imageType, imageId, submitButtons) {
         templateDirectoryUri: siteData.templateDirectoryUri,
     }, [imageData.data.buffer]); // Transferable
 
-    worker.onmessage = function (e) {
+    worker.onmessage = async function (e) {
         if (e.data.success) {
-            processBlobAsWebp(e.data.blob, alco, imageType, imageId);
+            await processBlobAsWebp(e.data.blob, alco, imageType, imageId);
+            alco.$refs.listingForm.dispatchEvent( new Event('submit', { bubbles: true, cancelable: true }) ); // Submit form
         } else {
-            console.error('Worker error:', e.data.error);
+            alco.$dispatch('error-toast', { 'message': 'Failed to process image'});
+            // Remove image if it is newly uploaded image
+            if (alco._getImageData(imageType, imageId).url == '') {
+                removeImage(alco, imageType, imageId);
+            }
         }
         enableButtons(submitButtons);
         alco.showImageProcessingSpinner = false;
@@ -44,12 +49,12 @@ function processNewImage(alco, imageType, imageId, submitButtons) {
 
 }
 
-function processBlobAsWebp(blob, alco, imageType, imageId) {
+async function processBlobAsWebp(blob, alco, imageType, imageId) {
     if (blob) {
         var filename = `${alco._getImageData(imageType, imageId)['filename'].replace(/\.[^/.]+$/, '')}.webp`;
         var file = new File([blob], filename, { type: 'image/webp' });
         var croppedImageUrl = URL.createObjectURL(blob);
-        updateImage(alco, imageType, imageId, croppedImageUrl, file);
+        await updateImage(alco, imageType, imageId, croppedImageUrl, file);
     }
 }
 function browserSupportsWebPInCanvas() {

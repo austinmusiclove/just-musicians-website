@@ -133,6 +133,7 @@ get_header();
     x-on:updateimageids.window="_updateAttachmentIds($event.detail)"
 >
     <form id="listing-form" enctype="multipart/form-data" class="flex flex-col gap-4"
+        x-ref="listingForm"
         hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
         hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
         hx-target="#result"

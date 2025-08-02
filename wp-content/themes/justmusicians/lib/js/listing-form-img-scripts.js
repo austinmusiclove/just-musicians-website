@@ -55,16 +55,16 @@ function getAllMediatags(alco) {
     return Array.from(tagsSet);
 }
 
-function updateImage(alco, imageType, imageId, url, file) {
+async function updateImage(alco, imageType, imageId, url, file) {
     var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
     alco.orderedImageData[imageType][imageIndex]['url'] = url;
     alco.orderedImageData[imageType][imageIndex]['file'] = file;
     alco.orderedImageData[imageType][imageIndex]['attachment_id'] = '';
     if (imageId == 'cover_image') { alco.pThumbnailSrc = url; }
-    updateFileInputs(alco, imageType);
+    await updateFileInputs(alco, imageType);
 }
 
-function updateFileInputs(alco, imageType) {
+async function updateFileInputs(alco, imageType) {
     var dataTransfer = new DataTransfer();
 
     var uploadIndex = 0;
@@ -113,7 +113,6 @@ function exitCropperPopup(alco, popupShowVar) {
         if (alco.imageToProcess) {
             alco._processNewImage();
             alco.imageToProcess = false;
-            // TODO submit
         }
     });
 }
