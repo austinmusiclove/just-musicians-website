@@ -1,12 +1,12 @@
-<div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showImageEditPopup" x-cloak>
+<div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-start sm:items-center justify-center" x-show="showImageEditPopup" x-cloak>
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
-    <div class="bg-white relative w-full max-h-[calc(100vh-4rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="showImageEditPopup = false">
+    <div class="bg-white relative w-full max-h-[calc(100vh-8rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="_exitCropperPopup('showImageEditPopup');">
 
         <div class="px-6 pt-4">
 
             <div class="flex items-center justify-between my-6">
                 <h4 class="font-bold text-25 w-full">Crop your image</h4>
-                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showImageEditPopup = false"/>
+                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="_exitCropperPopup('showImageEditPopup');"/>
             </div>
 
             <div class="grid sm:grid-cols-2">
@@ -78,7 +78,7 @@
 
         <div class="bg-yellow-20 pl-4 py-2 pr-2 flex items-center justify-between gap-4">
             <span class="text-16">Add more search terms to your listing to see more options.</span>
-            <button class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="showImageEditPopup = false">Apply</button>
+            <button type="button" class="w-fit rounded text-14 bg-white hover:bg-navy hover:text-white group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white" x-on:click="_exitCropperPopup('showImageEditPopup');">Apply</button>
         </div>
 
     </div>

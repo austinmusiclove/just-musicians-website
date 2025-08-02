@@ -2,43 +2,54 @@
  * Handles interfacing with cropper.js 1.6.2
  *
  */
-function handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, isCropEnd) {
-
-    // Disable submit button until image processing is complete
+function processNewImage(alco, imageType, imageId, submitButtons) {
     disableButtons(submitButtons);
     alco.showImageProcessingSpinner = true;
 
-    if (alco.cropper) {
-        var croppedCanvas = alco.cropper.getCroppedCanvas();
+    if (!alco.cropper) return;
+    const croppedCanvas = alco.cropper.getCroppedCanvas();
+    var imageData = null;
+    var processingType = 'process-with-canvas';
 
-        // Use browser-native WebP if supported
-        if (browserSupportsWebPInCanvas()) {
-            croppedCanvas.toBlob((blob) => {
-                processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd);
-            }, 'image/webp');
+    if (browserSupportsWebPInCanvas()) {
+        // Use a worker to convert using OffscreenCanvas
+        const ctx = croppedCanvas.getContext('2d');
+        imageData = ctx.getImageData(0, 0, croppedCanvas.width, croppedCanvas.height);
 
-        // Fallback for Safari: encode to WebP using libwebp-wasm
-        } else {
-            var imageData = croppedCanvas.getContext('2d').getImageData(0, 0, croppedCanvas.width, croppedCanvas.height);
-            WebPModule.encode(imageData.data, croppedCanvas.width, croppedCanvas.height, 75).then((webpBuffer) => {
-                var blob = new Blob([webpBuffer], { type: 'image/webp' });
-                processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd);
-            }).catch((err) => {
-                console.warn(err);
-            });
-        }
+    } else {
+        // Use worker with wasm encoding
+        imageData = croppedCanvas.getContext('2d').getImageData(0, 0, croppedCanvas.width, croppedCanvas.height);
+        processingType = 'process-with-libwebp';
     }
 
-    // Enable submit button
-    enableButtons(submitButtons);
-    alco.showImageProcessingSpinner = false;
+    const worker = new Worker(`${siteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js`);
+    worker.postMessage({
+        type: processingType,
+        imageData: imageData.data.buffer,
+        width: croppedCanvas.width,
+        height: croppedCanvas.height,
+        templateDirectoryUri: siteData.templateDirectoryUri,
+    }, [imageData.data.buffer]); // Transferable
+
+    worker.onmessage = function (e) {
+        if (e.data.success) {
+            processBlobAsWebp(e.data.blob, alco, imageType, imageId);
+        } else {
+            console.error('Worker error:', e.data.error);
+        }
+        enableButtons(submitButtons);
+        alco.showImageProcessingSpinner = false;
+        alco.imageToProcess = false;
+    };
+
 }
-function processBlobAsWebp(blob, alco, imageType, imageId, isCropEnd) {
+
+function processBlobAsWebp(blob, alco, imageType, imageId) {
     if (blob) {
         var filename = `${alco._getImageData(imageType, imageId)['filename'].replace(/\.[^/.]+$/, '')}.webp`;
         var file = new File([blob], filename, { type: 'image/webp' });
         var croppedImageUrl = URL.createObjectURL(blob);
-        alco._updateImage(imageType, imageId, croppedImageUrl, file, isCropEnd);
+        updateImage(alco, imageType, imageId, croppedImageUrl, file);
     }
 }
 function browserSupportsWebPInCanvas() {
@@ -58,6 +69,7 @@ function initCropper(alco, displayElement, imageType, imageId, submitButtons, di
     // Only init cropper after the display loads
     displayElement.onload = function () {
         alco.currentImageId = imageId;
+        alco.currentImageType = imageType;
 
         // Destroy existing cropper if it exists
         if (alco.cropper) { alco.cropper.destroy(); }
@@ -67,8 +79,8 @@ function initCropper(alco, displayElement, imageType, imageId, submitButtons, di
             viewMode: 1,
             autoCropArea: 1,
             zoomable: 0,
-            ready: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, false) },
-            cropend: function() { handleCropEnd(alco, displayElement, imageType, imageId, submitButtons, true) },
+            ready: function() { alco.showImageProcessingSpinner = false; },
+            cropend: function() { alco.imageToProcess = true; },
         });
     };
 
@@ -87,6 +99,7 @@ function initCropperFromFile(alco, event, displayElement, imageType, imageId, su
     disableButtons(submitButtons);
     alco.showImageProcessingSpinner = true;
     alco.showCropperDisplay = false;
+    alco.imageToProcess = true;
 
     var files = event.target.files;
 
@@ -102,7 +115,7 @@ function initCropperFromFile(alco, event, displayElement, imageType, imageId, su
             'caption':   '',
             'mediatags': [],
         };
-        alco._addImage(imageType, imageId, newImageData);
+        addImage(alco, imageType, imageId, newImageData);
 
         var reader = new FileReader();
         reader.onload = function (evnt) {

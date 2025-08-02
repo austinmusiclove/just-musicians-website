@@ -5,7 +5,7 @@
             x-ref="stagePlotInput"
             x-on:change="if ($event.target.files.length > 0) { _initCropperFromFile($event, $refs.stagePlotCropperDisplay, 'stage_plots', ''); showStagePlotPopup = true; } $el.value = null;"
         >
-        <input name="stage_plots[]" type="file" accept="image/*" x-ref="stage_plots_file">
+        <input id="stage_plots_files" name="stage_plots[]" type="file" accept="image/*">
         <input name="stage_plots_meta" type="hidden" x-bind:value="JSON.stringify(orderedImageData['stage_plots'])">
     </div>
 
@@ -27,7 +27,7 @@
     <!-- Screen 3 -->
     <div class="flex flex-col grow -mx-2 mt-8"
         x-show="orderedImageData['stage_plots'].length > 0" x-cloak
-        x-sort="orderedImageData['stage_plots'].splice($position, 0, orderedImageData['stage_plots'].splice($item, 1)[0]); _updateFileInputs();"
+        x-sort="orderedImageData['stage_plots'].splice($position, 0, orderedImageData['stage_plots'].splice($item, 1)[0]); _updateFileInputs('stage_plots');"
     >
         <template x-for="(data, index) in orderedImageData['stage_plots']" :key="index + data.image_id">
             <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
@@ -35,10 +35,14 @@
                     x-on:click="$refs.stagePlotCropperDisplay.src = _getImageData('stage_plots', data.image_id)?.url; _initCropper($refs.stagePlotCropperDisplay, 'stage_plots', data.image_id); showStagePlotPopup = true;"
                 >
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
-                    <div class="aspect-4/3 w-16 border border-black/20 shrink-0">
-                        <img class="w-full h-full object-cover" x-bind:src="_getImageData('stage_plots', data.image_id)?.url">
+                    <div class="aspect-4/3 w-16 shrink-0">
+                        <img class="w-full h-full object-cover" x-bind:src="_getImageData('stage_plots', data.image_id)?.url" x-show="currentImageId != data.image_id || (!showImageProcessingSpinner && currentImageId == data.image_id)" x-cloak>
+                        <div class="flex h-4" x-show="showImageProcessingSpinner && currentImageId == data.image_id" x-cloak>
+                            <span class="flex mr-4 mt-1"> <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'grey']); ?> </span>
+                            <span>Processing image...</span>
+                        </div>
                     </div>
-                    <div class="overflow-hidden">
+                    <div class="overflow-hidden" x-show="currentImageId != data.image_id || (!showImageProcessingSpinner && currentImageId == data.image_id)" x-cloak>
                         <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('stage_plots', data.image_id)?.filename"></div>
                         <div class="text-14 text-grey truncate whitespace-nowrap grow-0 shrink min-w-0" x-text="_getImageData('stage_plots', data.image_id)?.caption"></div>
                     </div>

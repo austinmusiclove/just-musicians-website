@@ -1,4 +1,11 @@
 Milestones
+    Safari issues on mobile
+        only create webp on front end when cropper window closes
+            maybe submit form after closing popup
+            handle leaving pop up before initial load of cropper finishes
+            handle service worker error
+            handle uploading image while another is loading; need specific loader for each image
+        need to have a way to scroll on phone over images container when they can also be dragged; if there is more than 4, you'll drag when you want to scroll
     Free lance booker testing
         basic inquiries
             quiz to get gig details

@@ -55,33 +55,31 @@ function getAllMediatags(alco) {
     return Array.from(tagsSet);
 }
 
-function updateImage(alco, imageType, imageId, url, file, wasCropped) {
+function updateImage(alco, imageType, imageId, url, file) {
     var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
     alco.orderedImageData[imageType][imageIndex]['url'] = url;
     alco.orderedImageData[imageType][imageIndex]['file'] = file;
-    if (wasCropped) { alco.orderedImageData[imageType][imageIndex]['attachment_id'] = ''; }
+    alco.orderedImageData[imageType][imageIndex]['attachment_id'] = '';
     if (imageId == 'cover_image') { alco.pThumbnailSrc = url; }
-    updateFileInputs(alco);
+    updateFileInputs(alco, imageType);
 }
 
-function updateFileInputs(alco) {
-    var imageTypes = Object.keys(alco.orderedImageData);
-    imageTypes.forEach((imageType) => {
-        var dataTransfer = new DataTransfer();
+function updateFileInputs(alco, imageType) {
+    var dataTransfer = new DataTransfer();
 
-        var uploadIndex = 0;
-        alco.orderedImageData[imageType].forEach((data) => {
-            if (data.file) {
-                var imageIndex = getIndexOfId(alco.orderedImageData[imageType], data.image_id, 'image_id');
-                dataTransfer.items.add(data.file);
-                alco.orderedImageData[imageType][imageIndex].upload_index = uploadIndex;
-                uploadIndex++;
-            }
-        });
-
-        // Assign files to the file input
-        alco.$refs[`${imageType}_file`].files = dataTransfer.files;
+    var uploadIndex = 0;
+    alco.orderedImageData[imageType].forEach((data) => {
+        if (data.file) {
+            var imageIndex = getIndexOfId(alco.orderedImageData[imageType], data.image_id, 'image_id');
+            dataTransfer.items.add(data.file);
+            alco.orderedImageData[imageType][imageIndex].upload_index = uploadIndex;
+            uploadIndex++;
+        }
     });
+
+    // Assign files to the file input
+    var elm = document.getElementById(`${imageType}_files`);
+    if (elm) { elm.files = dataTransfer.files; }
 }
 
 // Triggered by html api response; updates attachmentIds for newly uploaded images
@@ -107,4 +105,15 @@ function updateAttachmentIds(alco, attachmentIds) {
             alco.youtubeVideoData[videoIndex]['post_id'] = attachmentIds['youtube_videos'][videoId];
         }
     }
+}
+
+function exitCropperPopup(alco, popupShowVar) {
+    alco[popupShowVar] = false;
+    alco.$nextTick(() => {
+        if (alco.imageToProcess) {
+            alco._processNewImage();
+            alco.imageToProcess = false;
+            // TODO submit
+        }
+    });
 }

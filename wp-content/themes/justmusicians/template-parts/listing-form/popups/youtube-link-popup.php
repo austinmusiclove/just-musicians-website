@@ -1,6 +1,6 @@
-<div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showYoutubeLinkPopup" x-cloak>
+<div class="popup-wrapper px-4 pt-12 w-screen h-screen fixed top-0 left-0 z-50 flex items-start sm:items-center justify-center" x-show="showYoutubeLinkPopup" x-cloak>
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"></div>
-    <div class="bg-white relative w-full max-h-[calc(100vh-4rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
+    <div class="bg-white relative w-full max-h-[calc(100vh-8rem)] overflow-y-auto shadow-black-offset flex flex-col items-stretch" style="max-width: 780px;" x-on:click.away="showYoutubeLinkPopup = false">
 
         <div class="px-6 pt-4">
 

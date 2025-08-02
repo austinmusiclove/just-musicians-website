@@ -11,13 +11,13 @@
         <div class="grid sm:grid-cols-3 gap-2">
             <!-- Email -->
             <div class="grow relative">
-                <label for="listing_email" class="mb-1 inline-block">Email (not public)<span class="text-red">*</span></label>
+                <label for="listing_email" class="mb-1 inline-block">Email (not public)</label>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
                 <input class="has-icon" type="text" id="listing_email" name="listing_email" placeholder="example@example.com" title="example@example.com" x-model="pEmail" >
             </div>
             <!-- Phone -->
             <div class="grow relative">
-                <label for="phone" class="mb-1 inline-block">Phone (not public)<span class="text-red">*</span></label><br>
+                <label for="phone" class="mb-1 inline-block">Phone (not public)</label><br>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" />
                 <input class="has-icon" type="tel" id="phone" name="phone"
                         placeholder="(555) 555-5555" maxlength="14"
