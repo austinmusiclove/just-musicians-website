@@ -1,8 +1,10 @@
 Milestones
     Free lance booker testing
         basic inquiries
+            pull in new image processing logic to profile page; also change isset to !empty before upload_attachment
             modify quiz
                 figure out ux for getting people to add listings to inquiry
+                change button to inquire not contact
                 inqiury drop down
                     figure out if i want to keep
                     get rid of permalink in inquiries drop down menu to add to inquiry; it leads to inquiry single which is broken
