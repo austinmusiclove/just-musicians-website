@@ -1,7 +1,4 @@
 Milestones
-    Safari issues on mobile
-        can't scroll in image lists on safari
-        entire element is sort handle instead of just grabber on image lists and link lists
     Free lance booker testing
         basic inquiries
             quiz to get gig details

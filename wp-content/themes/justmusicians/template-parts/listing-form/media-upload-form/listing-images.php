@@ -29,7 +29,7 @@
         x-show="orderedImageData['listing_images'].length > 0" x-cloak
         x-sort="orderedImageData['listing_images'].splice($position, 0, orderedImageData['listing_images'].splice($item, 1)[0]); _updateFileInputs('listing_images');"
     >
-        <template x-for="(data, index) in orderedImageData['listing_images']" :key="index + data.image_id">
+        <template x-for="(data, index) in orderedImageData['listing_images']" :key="index + data.image_id" x-sort:handle>
             <div class="flex min-w-0 items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full" x-sort:item="index">
                 <div class="flex items-center gap-4 min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->

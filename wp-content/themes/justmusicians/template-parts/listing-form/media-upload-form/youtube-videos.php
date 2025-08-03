@@ -31,7 +31,7 @@
             }
         }"
     >
-        <template x-for="(videoData, index) in youtubeVideoData" :key="index + videoData.url">
+        <template x-for="(videoData, index) in youtubeVideoData" :key="index + videoData.url" x-sort:handle>
             <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full" x-sort:item="index">
                 <div class="flex items-center gap-4 grow min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
