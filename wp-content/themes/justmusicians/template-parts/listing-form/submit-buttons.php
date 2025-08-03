@@ -12,7 +12,6 @@
         </button>
     </a>
     <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:opacity-50"
-        x-ref="updateBtn<?php echo $args['instance']; ?>"
         x-on:click="postStatus = 'publish'"
     >
         <span class="htmx-indicator-replace">Update Listing</span>
@@ -29,7 +28,6 @@
  <!-- Submit Buttons -->
 <div class="flex items-center gap-2 justify-end shrink-0">
     <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 border border-black/20 font-bold py-2 px-3 hover:border-black text-grey hover:text-black disabled:opacity-50"
-        x-ref="saveDraftBtn<?php echo $args['instance']; ?>"
         x-on:click="postStatus = 'draft'"
     >
         <span class="htmx-indicator-replace">Save draft</span>
@@ -38,7 +36,6 @@
         </span>
     </button>
     <button type="submit" class="htmx-submit-button w-fit relative rounded text-14 font-bold py-2 px-3 bg-navy text-white disabled:opacity-50"
-        x-ref="publishBtn<?php echo $args['instance']; ?>"
         x-on:click="postStatus = 'publish'"
     >
         <span class="htmx-indicator-replace">Publish listing</span>

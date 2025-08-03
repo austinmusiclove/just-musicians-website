@@ -34,7 +34,7 @@ function _update_listing($args) {
     // listing images
     if (!empty($args['listing_images']) and is_array($args['listing_images'])) {
         foreach ($args['listing_images'] as $image_data) {
-            if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
+            if (!empty($image_data['file']) and empty($image_data['attachment_id'])) {
                 $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $args['ID'], '', $image_data['mediatags']);
                 if ( is_wp_error( $attachment_id ) ) {
                     return $attachment_id;
@@ -51,7 +51,7 @@ function _update_listing($args) {
     // stage plots
     if (!empty($args['stage_plots']) and is_array($args['stage_plots'])) {
         foreach ($args['stage_plots'] as $image_data) {
-            if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
+            if (!empty($image_data['file']) and empty($image_data['attachment_id'])) {
                 $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $args['ID'], $image_data['caption'], $image_data['mediatags']);
                 if ( is_wp_error( $attachment_id ) ) {
                     return $attachment_id;

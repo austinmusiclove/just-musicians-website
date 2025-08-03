@@ -32,11 +32,10 @@
         }"
     >
         <template x-for="(videoData, index) in youtubeVideoData" :key="index + videoData.url">
-            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full cursor-grabbing" x-sort:item="index">
-                <div class="flex items-center gap-4 grow min-w-0"
-                    x-on:click="currentYtIndex = index; showYoutubeLinkPopup = true;"
-                >
+            <div class="flex items-center justify-between gap-6 sm:pl-3 sm:pr-2 py-2 border-b border-black/20 last:border-none w-full" x-sort:item="index">
+                <div class="flex items-center gap-4 grow min-w-0">
                     <!--<label class="custom-checkbox -mt-1"><input type="checkbox"/><span class="checkmark"></span></label>-->
+                    <div class="cursor-grabbing bg-gray-200 px-2 py-1" x-sort:handle>☰</div>
                     <div class="aspect-video w-16 shrink-0">
                         <img class="w-full h-full object-cover" x-bind:src="`https://img.youtube.com/vi/${videoData.video_id}/default.jpg`">
                     </div>
@@ -51,9 +50,11 @@
                 </div>
                 <div class="flex gap-2">
                     <button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white"
+                        x-on:touchend="$event.preventDefault(); currentYtIndex = index; showYoutubeLinkPopup = true;"
                         x-on:click="currentYtIndex = index; showYoutubeLinkPopup = true;"
                     >Edit</button>
                     <button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white"
+                        x-on:touchend="$event.preventDefault(); _removeYoutubeUrl(index)"
                         x-on:click="_removeYoutubeUrl(index)"
                     >Delete</button>
                 </div>

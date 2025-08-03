@@ -1,15 +1,7 @@
 Milestones
     Safari issues on mobile
-        only create webp on front end when cropper window closes
-            handle uploading image while another is loading; need specific loader for each image
-                separate data for each image
-            try to process after crop end instead of after window close
-                maybe stop the old service worker each time before starting a new one
-            handle delete image while it is processing
-                kill web worker or at least ignore result if image type and image id combo do not exist
-            handle leaving pop up before initial load of cropper finishes
-                maybe don't add image until ready and in onready check if popup is still open before adding
-        need to have a way to scroll on phone over images container when they can also be dragged; if there is more than 4, you'll drag when you want to scroll
+        can't scroll in image lists on safari
+        entire element is sort handle instead of just grabber on image lists and link lists
     Free lance booker testing
         basic inquiries
             quiz to get gig details

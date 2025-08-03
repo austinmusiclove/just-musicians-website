@@ -98,6 +98,8 @@ get_header();
                     'url':           '<?php if (!empty($listing_data['thumbnail_url']))       { echo $listing_data['thumbnail_url'];                                               } else { echo ''; } ?>',
                     'filename':      '<?php if (!empty($listing_data['thumbnail_filename']))  { echo $listing_data['thumbnail_filename'];                                          } else { echo ''; } ?>',
                     'mediatags':      <?php if (!empty($listing_data["thumbnail_terms"]))     { echo clean_arr_for_doublequotes($listing_data["thumbnail_terms"]);                 } else { echo '[]'; } ?>,
+                    'loading':       false,
+                    'worker':        null,
                 },
             ],
             'listing_images':         <?php if (!empty($listing_data["listing_images_data"])) { echo clean_arr_for_doublequotes($listing_data["listing_images_data"]);               } else { echo '[]'; } ?>,
@@ -107,16 +109,11 @@ get_header();
 
         cropper:                    null,
         showCropperDisplay:         true,
-        submitButtons:              [$refs.updateBtnTop, $refs.updateBtnBottom, $refs.saveDraftBtnTop, $refs.saveDraftBtnBottom, $refs.publishBtnTop, $refs.publishBtnBottom ],
-        showImageProcessingSpinner: false,
-        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this.submitButtons, this._getImageData(imageType, imageId).url); },
-        _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId, this.submitButtons); },
-        _exitCropperPopup(popupShowVar)                                 { exitCropperPopup(this, popupShowVar); },
-        _processNewImage()                                              { processNewImage(this, this.currentImageType, this.currentImageId, this.submitButtons); },
+        popupImageSpinner: false,
+        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this._getImageData(imageType, imageId).url, false); },
+        _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId); },
 
         currentImageId: 'cover_image',
-        currentImageType: 'cover_image',
-        imageToProcess: false,
         currentYtIndex:  -1,
         _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
         _toggleImageTerm(imageType, imageId, term)                    { toggleImageTerm(this, imageType, imageId, term); },
@@ -154,7 +151,6 @@ get_header();
                         <?php echo get_template_part('template-parts/listing-form/submit-buttons', '', [
                             'is_published' => $is_published,
                             'permalink'    => $listing_data ? $listing_data['permalink'] : '#',
-                            'instance'     => 'Top',
                         ]); ?>
                     </header>
 
@@ -203,7 +199,6 @@ get_header();
                             <?php echo get_template_part('template-parts/listing-form/submit-buttons', '', [
                                 'is_published' => $is_published,
                                 'permalink'    => $listing_data ? $listing_data['permalink'] : '#',
-                                'instance'     => 'Bottom',
                             ]); ?>
                         </div>
 

@@ -150,6 +150,8 @@ function get_image_data($post_id, $image_field) {
             'filename'      => basename(get_attached_file($attachment_id)),
             'caption'       => get_the_excerpt($attachment_id),
             'mediatags'     => get_mediatags($attachment_id),
+            'loading'       => false,
+            'worker'        => null,
         ];
     }
 
