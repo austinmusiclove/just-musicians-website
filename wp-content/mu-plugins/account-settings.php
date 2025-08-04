@@ -30,6 +30,7 @@ function get_profile_image($user_id) {
         'url'           => '',
         'filename'      => '',
         'attachment_id' => '',
+        'worker'        => null,
     ];
     $avatar = get_field('avatar', 'user_' . $user_id);
 

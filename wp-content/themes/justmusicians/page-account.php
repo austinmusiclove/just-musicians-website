@@ -12,12 +12,13 @@ get_header();
     x-data="{
         accountSettings: <?php if ($account_settings != null) { echo clean_arr_for_doublequotes($account_settings); } else { echo 'null'; } ?>,
         imageProcessing: false,
+        tmpImage: null,
         cropper: null,
-        _initCropper(displayElement)                { initCropper(this, displayElement, [$refs.submitButton]); },
+        _initCropper(displayElement)                { initCropper(this, displayElement, this.accountSettings.profile_image.url, [$refs.submitButton], false); },
         _initCropperFromFile(event, displayElement) { initCropperFromFile(this, event, displayElement, [$refs.submitButton]); },
-        _closeCropper()                             { closeCropper(this); },
+        _closeCropper()                             { closeCropper(this, [$refs.submitButton]); },
     }"
-    x-on:updateimageid="console.log('update aid'); console.log(accountSettings.profile_image); accountSettings.profile_image.attachment_id = $event.detail"
+    x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
 >
     <form enctype="multipart/form-data"
         hx-post="<?php echo site_url('wp-html/v1/account-settings'); ?>"
