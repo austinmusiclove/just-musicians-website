@@ -87,9 +87,10 @@ async function shortPollConversations(alco) {
     while (true) {
         await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before polling
         await new Promise(requestAnimationFrame);                // Pause while browser tab is inactive
-        var cursor = alco.conversations[0].latest_message_id
+        var cursor = alco.conversations.length > 0 ? alco.conversations[0].latest_message_id : null;
+        var isUpdate = alco.conversations.length > 0;
         var inquiryId = alco.inquiry ? alco.inquiry.inquiry_id : null;
-        var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, true, inquiryId), 'conversations', null);
+        var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, isUpdate, inquiryId), 'conversations', null);
         if (conversations instanceof Error && conversations.cause == 403) {
             break;
         } else if (conversations.length > 0) {

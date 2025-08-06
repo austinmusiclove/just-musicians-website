@@ -17,13 +17,14 @@ function send_message(WP_REST_Request $request) {
     // Handle success
     } else if ($message) {
         return [
-            'inquiry'         => null,
-            'content'         => nl2br($message['content']),
-            'is_outgoing'     => true,
-            'sender_name'     => $display_name,
-            'conversation_id' => $message['conversation_id'],
-            'message_id'      => (string) $message['message_id'],
-            'created_at'      => $message['created_at'],
+            'inquiry'                  => null,
+            'content'                  => nl2br($message['content']),
+            'is_outgoing'              => true,
+            'sender_name'              => $display_name,
+            'sender_profile_image_url' => $message['sender_profile_image_url'],
+            'conversation_id'          => $message['conversation_id'],
+            'message_id'               => (string) $message['message_id'],
+            'created_at'               => $message['created_at'],
         ];
     }
 }

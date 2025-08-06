@@ -3,10 +3,10 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-function get_user_inquiry($args) {
+function get_inquiry($args) {
     $post_id = $args['post_id'];
 
-    // Check if the post ID is valid and if the post exists
+    // Check if the post ID is valid
     if (empty($post_id) || !is_numeric($post_id)) {
         return new WP_Error('invalid_post_id', 'Invalid post ID.');
     }
@@ -21,12 +21,6 @@ function get_user_inquiry($args) {
     // Check if the post is of type 'inquiry'
     if ($post->post_type !== 'inquiry') {
         return new WP_Error('invalid_post_type', 'The post is not of type "inquiry".');
-    }
-
-    // Check that the the inquiry belongs to the logged in user
-    $user_inquiries = get_user_meta(get_current_user_id(), 'inquiries', true);
-    if (!in_array($post_id, $user_inquiries)) {
-        return new WP_Error('unauthorized', 'The inquiry does not belong to this user');
     }
 
     // Array to store post meta and taxonomy data

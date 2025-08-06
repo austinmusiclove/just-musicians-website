@@ -6,6 +6,11 @@
     <?php } else { ?>
     x-intersect="$nextTick(() => { if (!message.is_read) { _markAsRead(message.conversation_id, message.message_id); } })"
     <?php } ?>
+    x-data="{
+        _showDate(inquiry)   { return showDate(inquiry); },
+        _showTime(inquiry)   { return showTime(inquiry); },
+        _showBudget(inquiry) { return showBudget(inquiry); },
+    }"
 >
 
     <!-- Timestamp -->
@@ -32,48 +37,39 @@
 
             <!-- Inquiry content -->
             <div class="mb-8 sidebar-module border border-black/40 rounded overflow-hidden bg-white max-w-[300px]"
-                :class="{ 'ml-auto': message.is_outgoing }"
+                :class="{ 'ml-auto': message.is_outgoing, 'opacity-50': message.inquiry.expired }"
                 x-data="{ showDetails: false, }"
             >
 
                 <h3 class="bg-yellow-50 font-bold py-2 px-3 cursor-pointer" x-html="message.inquiry.subject"></h3>
-                <div class="p-4 flex flex-col gap-4">
+                <div class="p-4 flex flex-col gap-4" x-show="!message.inquiry.expired">
                     <div class="grid gap-x-12 gap-y-4 w-full">
 
                         <!-- Date -->
-                        <template x-if="(message.inquiry.date_type && message.inquiry.date_type != '') || (message.inquiry.date && message.inquiry.date != '')">
-                            <div class="flex items-center gap-1">
-                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
-                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
-                                    x-data="{
-                                        showDate(inquiry) {
-                                            if (inquiry.date != '') {
-                                                return inquiry.date;
-                                            } else {
-                                                return inquiry.date_type;
-                                            }
-                                        },
-                                    }"
-                                    x-text="showDate(message.inquiry)"
-                                ></span>
-                            </div>
-                        </template>
+                        <div class="flex items-center gap-1">
+                            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
+                            <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
+                                x-text="_showDate(message.inquiry)"
+                            ></span>
+                        </div>
 
                         <!-- Time -->
-                        <template x-if="message.inquiry.time && message.inquiry.time != ''">
-                            <div class="flex items-center gap-1">
-                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clock.svg'; ?>" />
-                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.time"></span>
-                            </div>
-                        </template>
+                        <div class="flex items-center gap-1">
+                            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clock.svg'; ?>" />
+                            <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="_showTime(message.inquiry)"></span>
+                        </div>
 
                         <!-- Zip code -->
-                        <template x-if="message.inquiry.zip_code && message.inquiry.zip_code != ''">
-                            <div class="flex items-center gap-1">
-                                <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                                <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.zip_code"></span>
-                            </div>
-                        </template>
+                        <div class="flex items-center gap-1">
+                            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
+                            <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.zip_code"></span>
+                        </div>
+
+                        <!-- Budget -->
+                        <div class="flex items-center gap-1">
+                            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/dollar.svg'; ?>" />
+                            <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="_showBudget(message.inquiry)"></span>
+                        </div>
 
                     </div> <!-- End contact info -->
 

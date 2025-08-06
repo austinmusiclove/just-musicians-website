@@ -24,7 +24,7 @@ if (!empty($_GET['iid'])) {
         conversationId: -1,
         conversations: [],
         conversationsMap: {},
-        inquiry:          <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
+        inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
         conversationsView: true,
         messagesView: false,
         getCvInFlight: false,

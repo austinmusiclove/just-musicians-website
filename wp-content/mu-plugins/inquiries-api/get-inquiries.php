@@ -65,7 +65,7 @@ function get_user_inquiries($args) {
                 'details'        => get_field('details'),
                 'listings'       => $listing_ids,
                 'thumbnail_urls' => $thumbnails,
-                'permalink'      => get_the_permalink(),
+                'permalink'      => site_url('/messages/?iid=' . get_the_ID()),
             ];
         }
     }

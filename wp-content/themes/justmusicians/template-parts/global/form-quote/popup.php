@@ -26,10 +26,11 @@
             <input type="hidden" name="inquiry_listing" x-model="inquiryListing" x-ref="inquiryListingInput" />
             <?php echo get_template_part('template-parts/global/form-quote/date-slide',            '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/location-slide',        '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/duration-slide',        '', []); ?>
+            <?php echo get_template_part('template-parts/global/form-quote/budget-slide',          '', []); ?>
+            <?php //echo get_template_part('template-parts/global/form-quote/duration-slide',        '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/genre-slide',           '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/performers-slide',      '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/equipment-slide',       '', []); ?>
+            <?php //echo get_template_part('template-parts/global/form-quote/equipment-slide',       '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/details-slide',         '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/competing-quote-slide', '', []); ?>
             <?php echo get_template_part('template-parts/global/form-quote/discard-slide',         '', []); ?>

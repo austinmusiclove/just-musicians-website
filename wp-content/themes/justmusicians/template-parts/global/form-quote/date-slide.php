@@ -1,3 +1,4 @@
+
 <div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showDateSlide" x-cloak>
 
 
@@ -7,12 +8,17 @@
         <div>
             <input type="radio" id="single_date" name="inquiry_date_type" x-model="inquiryDateType" value="Single Date">
             <span></span>
-            <label class="text-16" for="single_date">I am booking for one date</label>
+            <label class="text-16" for="single_date">I already have a set date for my event</label>
         </div>
         <div>
             <input type="radio" id="multi_date" name="inquiry_date_type" x-model="inquiryDateType" value="Multiple Dates">
             <span></span>
-            <label class="text-16" for="multi_date">I am booking music for multiple dates</label>
+            <label class="text-16" for="multi_date">I am booking live music for multiple dates</label>
+        </div>
+        <div>
+            <input type="radio" id="tbd_date" name="inquiry_date_type" x-model="inquiryDateType" value="TBD" checked>
+            <span></span>
+            <label class="text-16" for="tbd_date">TBD</label>
         </div>
     </fieldset>
 
@@ -23,13 +29,6 @@
         <p>Performance Time</p>
         <input type="time" name="inquiry_time" class="mb-4">
     </span>
-
-<!--
-    <span x-show="inquiryDateType == 'Multiple Dates'" x-cloak>
-        <p class="text-16 mt-8">Include any details you'd like about the dates and times you are booking for.</p>
-        <textarea class="w-full h-40 mb-6" name="inquiry_date_time_details"></textarea>
-    </span>
--->
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
         <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2"

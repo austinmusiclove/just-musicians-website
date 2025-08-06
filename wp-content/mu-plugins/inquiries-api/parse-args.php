@@ -26,15 +26,19 @@ function get_sanitized_inquiry_args() {
     if (isset($_POST['inquiry_date_type']))                   { $sanitized_args['meta_input']['date_type']                   = sanitize_text_field($_POST['inquiry_date_type']); }
     if (isset($_POST['inquiry_date']))                        { $sanitized_args['meta_input']['date']                        = sanitize_text_field($_POST['inquiry_date']); }
     if (isset($_POST['inquiry_time']))                        { $sanitized_args['meta_input']['time']                        = sanitize_text_field($_POST['inquiry_time']); }
-    if (isset($_POST['inquiry_zip_code']))                     { $sanitized_args['meta_input']['zip_code']                     = sanitize_text_field($_POST['inquiry_zip_code']); }
-    if (isset($_POST['inquiry_duration']))                    { $sanitized_args['meta_input']['duration']                    = sanitize_text_field($_POST['inquiry_duration']); }
-    if (isset($_POST['inquiry_equipment_requirement']))       { $sanitized_args['meta_input']['equipment_requirement']       = sanitize_text_field($_POST['inquiry_equipment_requirement']); }
-    if (isset($_POST['inquiry_equipment_details']))           { $sanitized_args['meta_input']['equipment_details']           = sanitize_text_field($_POST['inquiry_equipment_details']); }
-    if (isset($_POST['inquiry_quotes_requested']))            { $sanitized_args['meta_input']['quotes_requested']            = sanitize_text_field($_POST['inquiry_quotes_requested']); }
-    if (!isset($_POST['inquiry_quotes_requested']))           { $sanitized_args['meta_input']['quotes_requested']            = DEFAULT_QUOTES_REQUESTED; }
+    if (isset($_POST['inquiry_zip_code']))                    { $sanitized_args['meta_input']['zip_code']                    = sanitize_text_field($_POST['inquiry_zip_code']); }
+    if (isset($_POST['inquiry_budget_type']))                 { $sanitized_args['meta_input']['budget_type']                 = sanitize_text_field($_POST['inquiry_budget_type']); }
+    if (isset($_POST['inquiry_budget']))                      { $sanitized_args['meta_input']['budget']                      = sanitize_text_field($_POST['inquiry_budget']); }
+    if (isset($_POST['inquiry_percent_of_door']))             { $sanitized_args['meta_input']['percent_of_door']             = sanitize_text_field($_POST['inquiry_percent_of_door']); }
+    if (isset($_POST['inquiry_percent_of_bar']))              { $sanitized_args['meta_input']['percent_of_bar']              = sanitize_text_field($_POST['inquiry_percent_of_bar']); }
+    //if (isset($_POST['inquiry_duration']))                    { $sanitized_args['meta_input']['duration']                    = sanitize_text_field($_POST['inquiry_duration']); }
+    //if (isset($_POST['inquiry_equipment_requirement']))       { $sanitized_args['meta_input']['equipment_requirement']       = sanitize_text_field($_POST['inquiry_equipment_requirement']); }
+    //if (isset($_POST['inquiry_equipment_details']))           { $sanitized_args['meta_input']['equipment_details']           = sanitize_text_field($_POST['inquiry_equipment_details']); }
+    if (isset($_POST['inquiry_max_listing_invites']))         { $sanitized_args['meta_input']['max_listing_invites']         = sanitize_text_field($_POST['inquiry_max_listing_invites']); }
+    if (!isset($_POST['inquiry_max_listing_invites']))        { $sanitized_args['meta_input']['max_listing_invites']         = DEFAULT_QUOTES_REQUESTED; }
     if (isset($_POST['inquiry_ensemble_size']))               { $sanitized_args['meta_input']['ensemble_size']               = custom_sanitize_array($_POST['inquiry_ensemble_size']); }
-    if (isset($_POST['inquiry_date_time_details']))           { $sanitized_args['meta_input']['date_time_details']           = sanitize_textarea_field($_POST['inquiry_date_time_details']); }
-    if (isset($_POST['inquiry_location_details']))            { $sanitized_args['meta_input']['location_details']            = sanitize_textarea_field($_POST['inquiry_location_details']); }
+    //if (isset($_POST['inquiry_date_time_details']))           { $sanitized_args['meta_input']['date_time_details']           = sanitize_textarea_field($_POST['inquiry_date_time_details']); }
+    //if (isset($_POST['inquiry_location_details']))            { $sanitized_args['meta_input']['location_details']            = sanitize_textarea_field($_POST['inquiry_location_details']); }
     if (isset($_POST['inquiry_details']))                     { $sanitized_args['meta_input']['details']                     = sanitize_textarea_field($_POST['inquiry_details']); }
 
     // Taxonomies

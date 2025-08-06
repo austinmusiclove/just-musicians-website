@@ -32,5 +32,5 @@ function resetInquiriesMenu(alpineComponent, listingId) {
 }
 
 function getSortedInquiries(alpineComponent) {
-    return Object.values(alpineComponent.$data.inquiriesMap);
+    return Object.values(alpineComponent.$data.inquiriesMap).sort((a, b) => b.post_id - a.post_id);
 }

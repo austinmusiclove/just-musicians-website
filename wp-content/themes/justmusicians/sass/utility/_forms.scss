@@ -142,18 +142,14 @@ form {
 
   /* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
   .htmx-indicator {
-      //display: none;
       opacity: 0;
   }
   .htmx-request .htmx-indicator {
-      //display: flex;
       opacity: 1;
   }
   .htmx-indicator-replace {
-      //display: flex;
       opacity: 1;
   }
   .htmx-request .htmx-indicator-replace {
-      //display: none;
       opacity: 0;
   }

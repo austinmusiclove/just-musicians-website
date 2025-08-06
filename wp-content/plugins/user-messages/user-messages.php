@@ -241,6 +241,10 @@ class UserMessagesPlugin {
         }
         $message['message_id'] = $wpdb->insert_id;
 
+        // Set profile image
+        $profile_image = get_profile_image($sender_id);
+        $message['sender_profile_image_url'] = $profile_image['url'];
+
         // Attempt to update conversation's updated_at
         $update_result = $wpdb->update( $tables['conversations'], ['updated_at' => $now], ['id' => $conversation_id]);
         if ($update_result === false) {
@@ -420,7 +424,7 @@ class UserMessagesPlugin {
             if ($sender_id) {
                 // Check if we already fetched this sender's profile image
                 if (!isset($profile_images[$sender_id])) {
-                    $profile_image = get_profile_image($sender_id); // Assumes this returns ['url' => '...']
+                    $profile_image = get_profile_image($sender_id);
                     $profile_images[$sender_id] = $profile_image['url'] ?? null;
                 }
 

@@ -20,8 +20,16 @@ function formatMessage($message, $user_id) {
     $display_name = clean_display_name($message->sender_name);
     $inquiry = null;
     if ($message->inquiry_id) {
-        $inquiry = get_post_meta($message->inquiry_id);
-        if (empty($inquiry)) { $inquiry = ['subject' => 'Inquiry Expired']; }
+        $inquiry = get_inquiry(['post_id' => $message->inquiry_id]);
+
+        // Handle deleted or not found listing
+        if (empty($inquiry) or is_wp_error($inquiry)) {
+            $inquiry = [
+                'expired' => true,
+                'subject' => 'Inquiry Expired',
+            ];
+        }
+
     }
     return [
         'message_id'               => $message->id,

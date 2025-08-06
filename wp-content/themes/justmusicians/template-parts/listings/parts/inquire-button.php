@@ -5,7 +5,7 @@
 
     <!-- For previews and any time the button should do nothing -->
     <span class="sm:absolute sm:right-0 sm:bottom-3 w-full sm:w-fit">
-        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit" >Contact</button>
+        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit" >Inquire</button>
     </span>
 
 <?php } else { ?>
@@ -24,19 +24,19 @@
         <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
             x-show="!loggedIn" x-cloak
             x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to request quotes from musicians'"
-        >Contact</button>
+        >Inquire</button>
 
         <!-- For logged in users with existing inquiries; opens inquiry dropdown menu -->
         <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
             x-show="loggedIn && Object.keys(inquiriesMap).length > 0" x-cloak
             x-on:click="showInquiriesMenu = true;"
-        >Contact</button>
+        >Inquire</button>
 
         <!-- For logged in users with no existing inquiries; opens inquiry modal -->
         <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
             x-show="loggedIn && Object.keys(inquiriesMap).length == 0" x-cloak
             x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
-        >Contact</button>
+        >Inquire</button>
 
         <!-- Results from inquiries menu -->
         <span id="inquiry-menu-result-<?php echo $args['post_id']; ?>"></span>

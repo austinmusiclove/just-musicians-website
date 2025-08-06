@@ -29,10 +29,10 @@ function add_listing_to_inquiry($inquiry_id, $listing_id) {
         $details = get_post_meta($inquiry_id, 'details', true);
         notify_listings_invited($user_id, $inquiry_id, [$listing_id], $details);
 
-        // Increment quotes_requested
-        $quotes_requested = (int) get_post_meta($inquiry_id, 'quotes_requested', true);
-        $quotes_requested++;
-        update_post_meta($inquiry_id, 'quotes_requested', $quotes_requested);
+        // Increment max_listing_invites
+        $max_listing_invites = (int) get_post_meta($inquiry_id, 'max_listing_invites', true);
+        $max_listing_invites++;
+        update_post_meta($inquiry_id, 'max_listing_invites', $max_listing_invites);
     }
 
     return new WP_REST_Response(['success' => true, 'listings' => $listings], 200);

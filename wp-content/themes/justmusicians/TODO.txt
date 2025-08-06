@@ -1,31 +1,29 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            pull in new image processing logic to profile page; also change isset to !empty before upload_attachment
             modify quiz
-                figure out ux for getting people to add listings to inquiry
-                change button to inquire not contact
-                inqiury drop down
-                    figure out if i want to keep
-                    get rid of permalink in inquiries drop down menu to add to inquiry; it leads to inquiry single which is broken
-                    when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
-                submit button in quiz does not work in inquiries page
-                contact button ux
-                    slide to select one of: DM, add to existing, new inquiry quiz
-                    DM slide
-                    add to existing slide
-                quiz
+                sidebar
+                    connect sidebar form quote element "when do you need music" or remove (probably need to match options to new date options)
                     no inputs on "get quotes button" in sidebar
-                    change date type options to tbd, multi date, or select actual date; only use single date type if they select a date
-                    show inquiries in contact button menu in order of newest inquiries
-                    location not required
-                    add button to inquiry page back end on the thank you slide
-                    connect the add inquiry buttons on inquires page to new quiz (add at top, add at bottom of results, add in no results)
-                    (maybe) add genre, ensemble size when user uses the request quotes button
-                    (maybe) add city state to inquiry which is derived from zip code
+                    sidebar copy
+                quiz
+                    use form on different pages
+                        connect the add inquiry buttons on inquires page to new quiz (add at top, add at bottom of results, add in no results)
+                        submit button in quiz does not work in inquiries page; check the quiz works on all pages it appears
+                    use listing inquire button from different pages
+                inquiry page
+                    show suggestions if there are less than 6 conversations
+                    show suggestions link if 6+ conversations
+                    show button to let platform send more invites
+                inqiury drop down
+                    when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
+                    make it look better
+                fix tempalte part locations for form quotes
             make sure proper access is in place for viewing inquiries pages
             email notifications
+                auto send to listing suggestions when there are more quotes requested than invites upon creation
                 auto email when you get a new incoming inquiry as a musician
+                listing notified when listing added to inquiry manually
             deployment
                 add user profile image acf
                 add account page
@@ -36,6 +34,8 @@ Milestones
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config and any other constants and tell devon about new constants
         advanced inquiries
+            allow inquiry when not logged in
+            see quotes side by side with media
             email when you have unresponded messages for a certain amount of time
             inquiry response posts; show user all inquiry responses side by side
             specific responses for inquiries like $ amount for quote or draw number

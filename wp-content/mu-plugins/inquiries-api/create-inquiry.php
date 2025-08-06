@@ -12,8 +12,11 @@ function create_user_inquiry($args) {
     $user_inquiries = get_user_meta($user_id, 'inquiries', true);
     if (!is_array($user_inquiries)) { $user_inquiries = []; }
 
-    // Add new inquiry ID to user's inquiries meta
-    $user_inquiries[] = $inquiry_id;
+    // Prepend inquiry ID to user's inquiries meta (keeps them in order of latest first)
+    array_unshift($user_inquiries, $inquiry_id);
+    $user_inquiries = array_unique($user_inquiries);
+
+    // Save inquiries to user meta
     update_user_meta($user_id, 'inquiries', $user_inquiries);
 
     // Send messages to invited listings
@@ -25,7 +28,7 @@ function create_user_inquiry($args) {
     return [
         'post_id'   => $inquiry_id,
         'subject'   => $args['meta_input']['subject'],
-        'listings'  => $args['meta_input']['listings_invited'],
-        'permalink' => $permalink,
+        'listings'  => $args['meta_input']['listings_invited'] ? $args['meta_input']['listings_invited'] : [],
+        'permalink' => site_url('/messages/?iid=' . $inquiry_id),
     ];
 }
