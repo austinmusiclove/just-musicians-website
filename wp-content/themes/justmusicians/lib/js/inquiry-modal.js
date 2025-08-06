@@ -47,6 +47,8 @@ function openInquiryModal(alco, listingId, listingName) {
 function tryExitInquiryModal(alco) {
     if (alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error') {
         exitInquiryModal(alco);
+    } else if (alco.showDiscardSlide == true) {
+        showInquirySlide(alco, alco.currentInquirySlide);
     } else {
         showInquirySlide(alco, 'discard');
     }

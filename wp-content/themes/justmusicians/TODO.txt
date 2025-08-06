@@ -1,24 +1,22 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            modify quiz
-                sidebar
-                    connect sidebar form quote element "when do you need music" or remove (probably need to match options to new date options)
-                    no inputs on "get quotes button" in sidebar
-                    sidebar copy
-                quiz
-                    use form on different pages
-                        connect the add inquiry buttons on inquires page to new quiz (add at top, add at bottom of results, add in no results)
-                        submit button in quiz does not work in inquiries page; check the quiz works on all pages it appears
-                    use listing inquire button from different pages
-                inquiry page
-                    show suggestions if there are less than 6 conversations
-                    show suggestions link if 6+ conversations
-                    show button to let platform send more invites
-                inqiury drop down
-                    when adding inquiry, without refreshing the add to inquiry drop down is broken. does not show button to add to inquiry for the new inquiry
-                    make it look better
-                fix tempalte part locations for form quotes
+            collections broken; adding and removing collection broken
+            fix tempalte part locations for form quotes
+            test pages
+                sidebar home
+                sidebar blog
+                sidebar about
+                sidebar podcast
+                inquire button home
+                inquire button single collection
+                add button inquiries page (submit not work)
+                add button bottom of inquiries page (need to add this)
+                add button in no results inquiries page (need to add this)
+            inquiry page
+                show suggestions if there are less than 6 conversations
+                show suggestions link if 6+ conversations
+                show button to let platform send more invites
             make sure proper access is in place for viewing inquiries pages
             email notifications
                 auto send to listing suggestions when there are more quotes requested than invites upon creation
@@ -34,6 +32,8 @@ Milestones
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config and any other constants and tell devon about new constants
         advanced inquiries
+            paginate inquiries instead of getting all at once in php for inquiriesMap
+            only get non expired listings for inquiriesMap
             allow inquiry when not logged in
             see quotes side by side with media
             email when you have unresponded messages for a certain amount of time
