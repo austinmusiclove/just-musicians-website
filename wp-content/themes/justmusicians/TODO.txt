@@ -1,18 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            collections broken; adding and removing collection broken
-            fix tempalte part locations for form quotes
-            test pages
-                sidebar home
-                sidebar blog
-                sidebar about
-                sidebar podcast
-                inquire button home
-                inquire button single collection
-                add button inquiries page (submit not work)
-                add button bottom of inquiries page (need to add this)
-                add button in no results inquiries page (need to add this)
             inquiry page
                 show suggestions if there are less than 6 conversations
                 show suggestions link if 6+ conversations

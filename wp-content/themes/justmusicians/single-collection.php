@@ -76,7 +76,6 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                     x-on:mute-youtube-players="_toggleMute()"
                     x-init="_setupVisibilityListener()"
                 >
-                    <span id="inquiry-result"></span>
 
                     <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                         <a href="/collections"><h1 class="font-bold text-22 sm:text-25">My Collections</h1></a>

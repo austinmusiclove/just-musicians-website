@@ -231,5 +231,5 @@
         echo get_template_part('template-parts/login/login-modal', '', []);
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
-        echo get_template_part('template-parts/global/form-quote/popup', '', []);
+        echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
     ?>

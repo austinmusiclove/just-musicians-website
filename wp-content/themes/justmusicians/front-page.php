@@ -69,7 +69,6 @@ get_header();
         hx-target="#results"
         hx-indicator="#spinner"
     >
-        <span id="inquiry-result"></span>
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
@@ -147,7 +146,7 @@ get_header();
                     <div class="xl:hidden">
                         <?php
                         // Mobile form - moves to right column at lg breakpoint
-                        echo get_template_part('template-parts/global/form-quote', '', array(
+                        echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
                             'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
                             'responsive' => 'xl:border-none xl:p-0'
                         ));
@@ -157,7 +156,7 @@ get_header();
 
                 <div class="hidden xl:block col-span-3 relative py-8">
                     <div class="sticky top-24">
-                        <?php echo get_template_part('template-parts/global/form-quote', '', array(
+                        <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
                             'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
                             'responsive' => 'xl:border-none xl:p-0'
                         )); ?>

@@ -24,19 +24,18 @@
             hx-ext="disable-element" hx-disable-element=".inquiry-submit-button"
         >
             <input type="hidden" name="inquiry_listing" x-model="inquiryListing" x-ref="inquiryListingInput" />
-            <?php echo get_template_part('template-parts/global/form-quote/date-slide',            '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/location-slide',        '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/budget-slide',          '', []); ?>
-            <?php //echo get_template_part('template-parts/global/form-quote/duration-slide',        '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/genre-slide',           '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/performers-slide',      '', []); ?>
-            <?php //echo get_template_part('template-parts/global/form-quote/equipment-slide',       '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/details-slide',         '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/competing-quote-slide', '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/discard-slide',         '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/thank-you-slide',       '', []); ?>
-            <?php echo get_template_part('template-parts/global/form-quote/error-slide',           '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/date-slide',            '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/location-slide',        '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/budget-slide',          '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/genre-slide',           '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/performers-slide',      '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/details-slide',         '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/competing-quote-slide', '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/discard-slide',         '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/thank-you-slide',       '', []); ?>
+            <?php echo get_template_part('template-parts/inquiries/popup-slides/error-slide',           '', []); ?>
         </form>
+        <span id="inquiry-result"></span>
 
 
     </div>

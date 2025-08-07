@@ -74,6 +74,14 @@ get_header();
                             <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
                                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
+
+                            <!-- Removed because it appears also on no results state when it is placed here; which is redundant since the no results content has an add button; and it is not needed -->
+                            <!--
+                            <div class="py-12 text-center">
+                                <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2" x-on:click="_openInquiryModal('', '')">Create New Inquiry</button>
+                            </div>
+                            -->
+
                         </div>
 
                     </div>
