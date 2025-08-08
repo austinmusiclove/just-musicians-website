@@ -1,8 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            auto send inquiries when inquiry created with max inquries > listings invited
-            adjust size of conversations menu
             email notifications
                 auto send to listing suggestions when there are more quotes requested than invites upon creation
                 auto email when you get a new incoming inquiry as a musician

@@ -1,6 +1,28 @@
 <?php
 function create_user_inquiry($args) {
 
+    // Auto invite listings
+    $max_listing_invites = $args['meta_input']['max_listing_invites'];
+    $listings_invited    = $args['meta_input']['listings_invited'];
+    if (count($listings_invited) < $max_listing_invites) {
+
+        // Get suggestions
+        $ensemble_size  = $args['meta_input']['ensemble_size'];
+        $inquiry_genres = $args['tax_input']['genre'];
+        $result = get_listings([
+            'ensemble_size' => $ensemble_size,
+            'genres'        => $inquiry_genres,
+            'exclude'       => $listings_invited,
+        ]);
+        $suggestions = array_column($result['listings'], 'post_id');
+
+        // update listings_invited
+        $remaining_slots = $max_listing_invites - count($listings_invited);
+        $new_invites = array_slice($suggestions, 0, $remaining_slots);
+        $listings_invited = array_merge($listings_invited, $new_invites);
+        $args['meta_input']['listings_invited'] = $listings_invited;
+    }
+
     // Create post
     $inquiry_id = wp_insert_post($args);
     if (is_wp_error($inquiry_id) || !$inquiry_id) {
@@ -20,7 +42,7 @@ function create_user_inquiry($args) {
     update_user_meta($user_id, 'inquiries', $user_inquiries);
 
     // Send messages to invited listings
-    notify_listings_invited($user_id, $inquiry_id, $args['meta_input']['listings_invited'], $args['meta_input']['details']);
+    notify_listings_invited($user_id, $inquiry_id, $listings_invited, $args['meta_input']['subject']);
 
     // Get permalink
     $permalink = get_permalink($inquiry_id);
@@ -28,7 +50,7 @@ function create_user_inquiry($args) {
     return [
         'post_id'   => $inquiry_id,
         'subject'   => $args['meta_input']['subject'],
-        'listings'  => $args['meta_input']['listings_invited'] ? $args['meta_input']['listings_invited'] : [],
+        'listings'  => $listings_invited,
         'permalink' => site_url('/messages/?iid=' . $inquiry_id),
     ];
 }

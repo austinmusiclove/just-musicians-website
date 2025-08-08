@@ -278,7 +278,7 @@ class UserMessagesPlugin {
         // Get inquiry listing IDs if inquiry id provided
         if ($inquiry_id) {
             $inquiry_listing_ids = get_post_meta($inquiry_id, 'listings_invited', true);
-            if (!is_array($inquiry_listing_ids)) {
+            if (!is_array($inquiry_listing_ids) or empty($inquiry_listing_ids)) {
                 return [];
             }
         }

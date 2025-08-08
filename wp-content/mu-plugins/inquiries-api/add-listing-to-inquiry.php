@@ -26,8 +26,8 @@ function add_listing_to_inquiry($inquiry_id, $listing_id) {
 
         // Send message to invited listings
         $user_id = get_current_user_id();
-        $details = get_post_meta($inquiry_id, 'details', true);
-        notify_listings_invited($user_id, $inquiry_id, [$listing_id], $details);
+        $subject = get_post_meta($inquiry_id, 'subject', true);
+        notify_listings_invited($user_id, $inquiry_id, [$listing_id], $subject);
 
         // Increment max_listing_invites
         $max_listing_invites = (int) get_post_meta($inquiry_id, 'max_listing_invites', true);

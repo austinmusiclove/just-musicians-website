@@ -36,7 +36,7 @@
             ></div>
 
             <!-- Inquiry content -->
-            <div class="mb-8 sidebar-module border border-black/40 rounded overflow-hidden bg-white max-w-[320px]"
+            <div class="mb-8 sidebar-module border border-black/40 rounded overflow-hidden bg-white sm:min-w-[320px] max-w-[320px]"
                 :class="{ 'ml-auto': message.is_outgoing, 'opacity-50': message.inquiry.expired }"
                 x-data="{ showDetails: false, }"
             >
