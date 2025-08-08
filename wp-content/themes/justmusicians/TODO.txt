@@ -1,9 +1,8 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            email to all invited listing account owners
             email to inquiry owner when someone responds
-            run listing notification function when listing added to inquiry manually
+                create a cron task from send message api that will check if the previous message is inquiry and if so send owner a message
             deployment
                 acf
                     add user profile image acf
