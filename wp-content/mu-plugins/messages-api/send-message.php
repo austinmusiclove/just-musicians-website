@@ -16,6 +16,8 @@ function send_message(WP_REST_Request $request) {
 
     // Handle success
     } else if ($message) {
+        // Create cron task to send notifications
+
         return [
             'inquiry'                  => null,
             'content'                  => nl2br($message['content']),
