@@ -1,22 +1,22 @@
 Milestones
     Free lance booker testing
         basic inquiries
+            don't allow letters in zip code input
             email notifications
-                auto send to listing suggestions when there are more quotes requested than invites upon creation
-                auto email when you get a new incoming inquiry as a musician
-                listing notified when listing added to inquiry manually
-                send email to admin
-                send email to inquiry creator when inquiry created
-                email to inquiry owner when they get a response
+                run listing notification function when listing added to inquiry manually
+                by action
+                    new inquiry
+                        to admin
+                        to owner
+                        to all invited listing account owners
+                    inquiry response
+                        to owner
             deployment
-                add user profile image acf
-                add account page
-                add acf fields for inquiry; expired..and everything
-                add acf config file so i don't have to do any manual set up of ACF
-                add messages page
-                check for console errors and php error logs on every page; inquiries, requests, inquiry single, home, blog with side bar, blog archive side bar
-                make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
-                make sure to add DEFAULT_QUOTES_REQUESTED prod wp config and any other constants and tell devon about new constants
+                acf
+                    add user profile image acf
+                    add acf fields for inquiry; expired..and everything
+                    add acf config file so i don't have to do any manual set up of ACF
+                    make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
         advanced inquiries
             add settings to quiz
             paginate inquiries instead of getting all at once in php for inquiriesMap
@@ -58,6 +58,7 @@ Milestones
                 show suggestions when there are no conversations
         advanced messages
             show inquiry detail in right side panel
+            profile image(s) in conversation next to title
         invite mnnatx@gmail.com to make a listing
     Search algo update
         ensemble size taxonomy

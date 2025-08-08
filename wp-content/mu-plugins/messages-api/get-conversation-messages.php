@@ -11,9 +11,10 @@ function get_conversation_messages($request) {
     if (is_wp_error($messages)) { return $messages; }
 
     $user_id = get_current_user_id();
-    return array_map(function($message) use ($user_id) {
+    $formatted = array_map(function($message) use ($user_id) {
         return formatMessage($message, $user_id);
     }, $messages);
+    return array_values(array_filter($formatted));
 }
 
 function formatMessage($message, $user_id) {
@@ -24,10 +25,7 @@ function formatMessage($message, $user_id) {
 
         // Handle deleted or not found listing
         if (empty($inquiry) or is_wp_error($inquiry)) {
-            $inquiry = [
-                'expired' => true,
-                'subject' => 'Inquiry Expired',
-            ];
+            return null;
         }
 
     }

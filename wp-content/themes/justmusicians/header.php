@@ -72,7 +72,7 @@
             inquiryGenres: [],
             inquirySubject: '',
             inquiryBudgetType: 'Request Quotes',
-            quotesRequested: '6',
+            quotesRequested: '<?php echo DEFAULT_QUOTES_REQUESTED; ?>',
             inquiryErrorMsg: '',
             newInquiryId: '',
             _clearInquiryForm()                                  { clearInquiryForm(this); },

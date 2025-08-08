@@ -6,7 +6,7 @@
 
     <fieldset class="radio-buttons custom-radio">
         <div>
-            <input type="radio" id="send-me-quotes" name="inquiry_max_listing_invites" value="6" x-model="quotesRequested" checked>
+            <input type="radio" id="send-me-quotes" name="inquiry_max_listing_invites" value="<?php echo DEFAULT_QUOTES_REQUESTED; ?>" x-model="quotesRequested" checked>
             <span></span>
             <label for="send-me-quotes">Yes, please send this inquiry to other similar musicians.</label>
         </div>
