@@ -29,6 +29,11 @@ function get_user_inquiry($args) {
         return new WP_Error('unauthorized', 'The inquiry does not belong to this user');
     }
 
+    // Listings
+    $listings = get_field('listings_invited');
+    $listings = is_array($listings) ? $listings : [];
+
+
     // Array to store post meta and taxonomy data
     $result = [
         'inquiry_id'      => $post_id,
@@ -42,6 +47,7 @@ function get_user_inquiry($args) {
         'budget'          => get_field('budget'),
         'percent_of_door' => get_field('percent_of_door'),
         'percent_of_bar'  => get_field('percent_of_bar'),
+        'listings'        => $listings,
     ];
 
 

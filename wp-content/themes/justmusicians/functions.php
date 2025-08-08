@@ -174,6 +174,14 @@ function hmm_scripts() {
 
     // Messages pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/messages/')) {
+
+        // Media Slider
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, true);
+        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
+        $alpine_dependencies[] = 'youtube-iframe-scripts-js';
+
         // Alpine Collapse
         wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-collapse';
@@ -187,6 +195,7 @@ function hmm_scripts() {
 
         // Inquiries
         wp_enqueue_script('inquiry-js', get_template_directory_uri() . '/lib/js/inquiry.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
 
         // Messages
         wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['messages-api-js', 'messages-app-state-js'], $pkg->version, true);
@@ -199,6 +208,7 @@ function hmm_scripts() {
             'nonce'   => wp_create_nonce('wp_rest'),
         ]);
         $alpine_dependencies[] = 'messages-js';
+
     }
 
     // Account page

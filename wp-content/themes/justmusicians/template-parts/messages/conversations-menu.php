@@ -41,7 +41,7 @@
 
 
         <!-- Show Conversations -->
-        <?php echo get_template_part('template-parts/messages/conversations-display', '', []); ?>
+        <?php echo get_template_part('template-parts/messages/conversations-display', '', [ 'inquiry_id' => $args['inquiry_id'] ]); ?>
 
         <!-- Spinner -->
         <div class="flex items-center justify-center" x-show="getCvInFlight" x-cloak>
@@ -55,8 +55,6 @@
 
         <!-- Inquiry details -->
         <?php echo get_template_part('template-parts/messages/inquiry-detail', '', []); ?>
-
-        <!-- Inquiry suggestions -->
 
     </div>
 

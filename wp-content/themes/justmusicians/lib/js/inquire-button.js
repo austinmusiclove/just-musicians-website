@@ -1,23 +1,23 @@
 // Handles front end inquire buttons interactions
 // Server interaction handled by htmx
 
-function showAddListingToInquiryButton(alpineComponent, inquiryId, listingId) {
-    return !alpineComponent.$data.inquiriesMap[inquiryId].listings.includes(listingId);
+function showAddListingToInquiryButton(alco, inquiryId, listingId) {
+    return !alco.$data.inquiriesMap[inquiryId].listings.includes(listingId);
 }
 
-function showListingInInquiry(alpineComponent, inquiryId, listingId) {
-    return alpineComponent.$data.inquiriesMap[inquiryId].listings.includes(listingId);
+function showListingInInquiry(alco, inquiryId, listingId) {
+    return alco.$data.inquiriesMap[inquiryId].listings.includes(listingId);
 }
 
-function addToInquiry(alpineComponent, inquiryId, listingId) {
-    var inquiry = alpineComponent.$data.inquiriesMap[inquiryId];
+function addToInquiry(alco, inquiryId, listingId) {
+    var inquiry = alco.$data.inquiriesMap[inquiryId];
     if (inquiry && !inquiry.listings.includes(listingId)) {
-        alpineComponent.$data.inquiriesMap[inquiryId].listings.push(listingId);
+        alco.$data.inquiriesMap[inquiryId].listings.push(listingId);
     }
 }
 
-function addInquiry(alpineComponent, post_id, subject, listings, permalink) {
-    alpineComponent.$data.inquiriesMap[post_id] = {
+function addInquiry(alco, post_id, subject, listings, permalink) {
+    alco.$data.inquiriesMap[post_id] = {
         'post_id':   post_id,
         'subject':   subject,
         'listings':  listings,
@@ -25,12 +25,12 @@ function addInquiry(alpineComponent, post_id, subject, listings, permalink) {
     };
 }
 
-function resetInquiriesMenu(alpineComponent, listingId) {
-    alpineComponent.showInquiriesMenu = false;
-    alpineComponent.inquirySearchQuery = '';
-    alpineComponent.$refs['inquiriesList' + listingId].scrollTop = 0;
+function resetInquiriesMenu(alco, listingId) {
+    alco.showInquiriesMenu = false;
+    alco.inquirySearchQuery = '';
+    alco.$refs['inquiriesList' + listingId].scrollTop = 0;
 }
 
-function getSortedInquiries(alpineComponent) {
-    return Object.values(alpineComponent.$data.inquiriesMap).sort((a, b) => b.post_id - a.post_id);
+function getSortedInquiries(alco) {
+    return Object.values(alco.$data.inquiriesMap).sort((a, b) => b.post_id - a.post_id);
 }

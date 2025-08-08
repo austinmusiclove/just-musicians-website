@@ -1,5 +1,3 @@
-<!-- Request a quote buttons -->
-
 
 <?php if (!empty($args['disabled']) and $args['disabled']) { ?>
 
@@ -73,9 +71,9 @@
                             <a class="flex-1 min-w-0 text-16" x-bind:href="inquiry.permalink"><span x-text="inquiry.subject.length > 50 ? inquiry.subject.slice(0,50) + '...' : inquiry.subject" x-bind:title="inquiry.subject"></span></a>
 
                             <!-- Add listing to inquiry button -->
-                            <button type="button" class="mr-2 ml-4 border border-navy text-navy bg-white text-sm px-3 py-1 rounded-full hover:bg-navy hover:text-white hover:opacity-50"
+                            <button type="button" class="ml-4 border border-navy text-navy bg-white text-sm px-3 py-1 rounded-full hover:bg-navy hover:text-white hover:opacity-50"
                                 x-show="_showAddListingToInquiryButton(inquiry.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
-                                x-bind:hx-post="'/wp-html/v1/inquiries/' + inquiry.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                                x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/inquiries/' + inquiry.post_id + '/listings/<?php echo $args['post_id']; ?>'"
                                 hx-target="#inquiry-menu-result-<?php echo $args['post_id']; ?>"
                                 hx-trigger="click"
                                 hx-indicator="#decoy-indicator<?php echo $args['post_id']; ?>"
@@ -83,7 +81,7 @@
                             >Send</button>
 
                             <!-- Already requested state -->
-                            <button type="button" class="mr-2 ml-4 border border-2 border-navy text-white bg-navy text-sm px-3 py-1 rounded-full"
+                            <button type="button" class="ml-4 border border-2 border-navy text-white bg-navy text-sm px-3 py-1 rounded-full"
                                 x-show="_showListingInInquiry(inquiry.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
                             >Sent</button>
 

@@ -1,15 +1,15 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            inquiry page
-                show suggestions if there are less than 6 conversations
-                show suggestions link if 6+ conversations
-                show button to let platform send more invites
-            make sure proper access is in place for viewing inquiries pages
+            auto send inquiries when inquiry created with max inquries > listings invited
+            adjust size of conversations menu
             email notifications
                 auto send to listing suggestions when there are more quotes requested than invites upon creation
                 auto email when you get a new incoming inquiry as a musician
                 listing notified when listing added to inquiry manually
+                send email to admin
+                send email to inquiry creator when inquiry created
+                email to inquiry owner when they get a response
             deployment
                 add user profile image acf
                 add account page
@@ -20,6 +20,7 @@ Milestones
                 make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 make sure to add DEFAULT_QUOTES_REQUESTED prod wp config and any other constants and tell devon about new constants
         advanced inquiries
+            add settings to quiz
             paginate inquiries instead of getting all at once in php for inquiriesMap
             only get non expired listings for inquiriesMap
             allow inquiry when not logged in

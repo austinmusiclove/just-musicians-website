@@ -38,6 +38,12 @@ function get_listings($args) {
         //error_log('user listing search algo');
         //$query_args['use_listings_search_algo'] = true;
     }
+
+    // Exclude listings
+    if (!empty($args['exclude'])) {
+        $query_args['post__not_in'] = $args['exclude'];
+    }
+
     $meta_queries = [];
     $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];
     $meta_queries[] = [ 'key' => 'name', 'value' => '', 'compare' => '!=' ];
@@ -65,7 +71,7 @@ function get_listings($args) {
         ];
     }
     // Ensemble Size
-    if (($min_ensemble_size or $max_ensemble_size) and ($min_ensemble_size != 1 or $max_ensemble_size != 10)) {
+    if ((($min_ensemble_size or $max_ensemble_size) and ($min_ensemble_size != 1 or $max_ensemble_size != 10)) or !empty($ensemble_size)) {
         $ensemble_size_values = [];
         foreach ($ensemble_size as $option) {
             $ensemble_size_values[] = (string)$option;

@@ -23,4 +23,4 @@ if ( is_wp_error($result) ) {
 
 // Success Response
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Removed Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'remove-listing\', {\'collection_id\': \'' . $collection_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';
+echo '<span x-init="$dispatch(\'remove-listing-from-collection\', {\'collection_id\': \'' . $collection_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';

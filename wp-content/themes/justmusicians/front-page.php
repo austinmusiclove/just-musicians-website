@@ -57,6 +57,7 @@ get_header();
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
+
             inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
             get sortedInquiries()                                { return getSortedInquiries(this); },
             _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
