@@ -1,7 +1,7 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            don't allow letters in zip code input
+            disable enter to submit inquiry
             email notifications
                 run listing notification function when listing added to inquiry manually
                 by action

@@ -4,12 +4,14 @@
     <h2 class="font-bold font-poppins text-20 mb-8">Where is your event?</h2>
 
     <p><span class="text-red">* </span>Zip Code</p>
-    <input type="text" name="inquiry_zip_code" x-ref="inquiryZipCodeInput"
+    <input type="text" name="inquiry_zip_code"
         autocomplete="postal-code"
         maxlength="5"
         placeholder="Your event zip code"
-        x-model="inquiryZipCode"
         :class="{ 'shake': shakeElements.has('inquiryZipCode') }"
+        x-ref="inquiryZipCodeInput"
+        x-model="inquiryZipCode"
+        x-on:input="inquiryZipCode = inquiryZipCode.replace(/\D/g, '')"
     />
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
