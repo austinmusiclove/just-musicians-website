@@ -1,15 +1,9 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            email notifications
-                run listing notification function when listing added to inquiry manually
-                by action
-                    new inquiry
-                        to admin
-                        to owner
-                        to all invited listing account owners
-                    inquiry response
-                        to owner
+            email to all invited listing account owners
+            email to inquiry owner when someone responds
+            run listing notification function when listing added to inquiry manually
             deployment
                 acf
                     add user profile image acf

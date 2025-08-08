@@ -44,13 +44,23 @@ function create_user_inquiry($args) {
     // Send messages to invited listings
     notify_listings_invited($user_id, $inquiry_id, $listings_invited, $args['meta_input']['subject']);
 
-    // Get permalink
-    $permalink = get_permalink($inquiry_id);
+    // Get inquiry page link
+    $inquiry_link = site_url('/messages?iid=' . $inquiry_id);
+
+    // Notify inquiry creator about thier new inquiry
+    $user_data = get_userdata($user_id);
+    $owner_email = $user_data->user_email;
+    $message = 'Thank you for creating an inquiry on HireMoreMusicians.com. You can see responses to your inquiry here: ' . $inquiry_link;
+    wp_mail($owner_email, 'Your inquiry has been created!', $message);
+
+    // Notify admin about new inquiry
+    $message = 'New inquiry has been created by ' . $owner_email . '. Subject: ' . $args['meta_input']['subject'];
+    wp_mail(ADMIN_NOTIFICATION_EMAIL, 'New Inquiry by ' . $owner_email, $message);
 
     return [
         'post_id'   => $inquiry_id,
         'subject'   => $args['meta_input']['subject'],
         'listings'  => $listings_invited,
-        'permalink' => site_url('/messages/?iid=' . $inquiry_id),
+        'permalink' => $inquiry_link,
     ];
 }

@@ -17,6 +17,9 @@ function notify_listings_invited($user_id, $inquiry_id, $listing_ids, $content) 
             null,             // No offer
             null              // No attachment
         );
+
+        // Get listing owner ids
+        // for each owner email notify them
+
     }
 }
-
