@@ -22,6 +22,7 @@
             hx-post="/wp-html/v1/inquiries/"
             hx-target="#inquiry-result"
             hx-ext="disable-element" hx-disable-element=".inquiry-submit-button"
+            x-on:keydown.enter.prevent
         >
             <input type="hidden" name="inquiry_listing" x-model="inquiryListing" x-ref="inquiryListingInput" />
             <?php echo get_template_part('template-parts/inquiries/popup-slides/date-slide',            '', []); ?>

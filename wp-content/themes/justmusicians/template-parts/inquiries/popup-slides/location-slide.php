@@ -12,6 +12,7 @@
         x-ref="inquiryZipCodeInput"
         x-model="inquiryZipCode"
         x-on:input="inquiryZipCode = inquiryZipCode.replace(/\D/g, '')"
+        x-on:keydown.enter.prevent
     />
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">

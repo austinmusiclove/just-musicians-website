@@ -1,7 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            disable enter to submit inquiry
             email notifications
                 run listing notification function when listing added to inquiry manually
                 by action
