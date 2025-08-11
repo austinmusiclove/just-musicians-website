@@ -18,11 +18,12 @@ function get_user_conversations($request) {
     // Return formatted conversations
     } else {
         $formatted = array_map('formatConversation', $conversations);
-        return $formatted;
+        return array_values(array_filter($formatted));
     }
 }
 
 function formatConversation($conversation) {
+    if (empty($conversation->participants)) { return null; } // Don't show conversations that don't have any other participants anymore; could happen if others leave convo or listings are deleted
     return [
         'conversation_id'           => $conversation->conversation_id,
         'title'                     => htmlspecialchars_decode(implode(', ', $conversation->participants)),

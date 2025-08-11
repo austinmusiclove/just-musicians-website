@@ -1,8 +1,6 @@
 Milestones
     Free lance booker testing
         basic inquiries
-            handle conversation with deleted listing
-                currently has no title but does show messages (at least to deleted listing)
             deployment
                 acf
                     add acf file
@@ -16,7 +14,7 @@ Milestones
                 merge inquiries into master
                 deploy to staging
                 test log in
-                update wordpress on master branch
+                update wordpress on master branch; update plugins
                 deploy to staging
                 update wordpress
         advanced inquiries

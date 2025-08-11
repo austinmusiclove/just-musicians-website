@@ -349,7 +349,7 @@ class UserMessagesPlugin {
                 ", $row->listing_id));
                 if ($name === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
                 if (!$name) { $name = get_the_title($row->listing_id); } // Fallback to post title
-                $listing_participants[] = $name;
+                if ($name) { $listing_participants[] = $name; }
             }
         }
 
