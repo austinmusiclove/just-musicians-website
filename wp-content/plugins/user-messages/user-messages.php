@@ -356,6 +356,37 @@ class UserMessagesPlugin {
         return array_merge($user_participants, $listing_participants);
     }
 
+    // Returns user_ids of every user participant and every listing owner of each listing participant in a conversation
+    function get_conversation_participants_user_ids($conversation_id, $sender_id, $exclude_sender=false) {
+        global $wpdb;
+        $tables = $this->tables;
+        $user_ids = [];
+
+        $participant_rows = $wpdb->get_results($wpdb->prepare("
+            SELECT cp.user_id, cp.listing_id
+            FROM {$tables['conversation_participants']} cp
+            WHERE cp.conversation_id = %d
+        ", $conversation_id));
+        if ($participant_rows === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
+
+        foreach ($participant_rows as $row) {
+            if ($row->user_id) {
+                if ($exclude_sender and $row->user_id == $sender_id) { continue; }
+                $user_ids[] = $row->user_id;
+
+            } elseif ($row->listing_id) {
+                $listing_owners = get_listing_owners($row->listing_id);
+                foreach ($listing_owners as $user_id) {
+                    if ($exclude_sender and $sender_id == $user_id) { continue; }
+                    $user_ids[] = $user_id;
+                }
+            }
+        }
+
+        // Avoid duplicates
+        $user_ids = array_values(array_unique($user_ids));
+        return $user_ids;
+    }
 
     // Gets messages for a conversation, latest first
     function get_conversation_messages($conversation_id, $limit = 20, $cursor_id = null, $get_newer = false) {
@@ -522,6 +553,25 @@ class UserMessagesPlugin {
         }
         return true;
     }
+
+    function is_read($message_id, $user_id) {
+        global $wpdb;
+        $tables = $this->tables;
+
+        // Make sure both IDs are valid integers
+        $message_id = (int) $message_id;
+        $user_id    = (int) $user_id;
+
+        $query = $wpdb->prepare("
+            SELECT 1
+            FROM {$tables['read_receipts']}
+            WHERE message_id = %d AND user_id = %d
+            LIMIT 1
+        ", $message_id, $user_id);
+
+        return (bool) $wpdb->get_var($query);
+    }
+
 
 }
 

@@ -21,6 +21,7 @@ require_once 'listings-api/get-listings-by-id.php';
 require_once 'listings-api/create-listing.php';
 require_once 'listings-api/update-listing.php';
 require_once 'listings-api/delete-listing.php';
+require_once 'listings-api/listing-owners.php';
 require_once 'upload-attachment.php';
 
 // Register REST API Routes

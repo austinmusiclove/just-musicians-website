@@ -20,51 +20,17 @@ function notify_listings_invited($user_id, $inquiry_id, $listing_ids, $inquiry_s
 
         // Notify all listing owners via email
         $listing_owners = get_listing_owners($listing_id);
-        foreach ($listing_owners as $owner) {
-            send_new_inquiry_notification($owner['email'], $inquiry_subject);
+        foreach ($listing_owners as $user_id) {
+            send_new_inquiry_notification($user_id, $inquiry_subject);
         }
 
     }
 }
 
-function get_listing_owners($listing_id) {
-    global $wpdb;
-    $confirmed_users = [];
-
-    if (empty($listing_id) || !is_numeric($listing_id)) {
-        return [];
-    }
-
-    // Prepare the serialized search pattern
-    $pattern = '%:' . strlen($listing_id) . ':"' . $listing_id . '";%';
-
-    // Query: Get user ID and email where meta_key = 'listings' and value matches
-    $query = $wpdb->prepare("
-        SELECT u.ID as user_id, u.user_email, um.meta_value
-        FROM {$wpdb->users} u
-        INNER JOIN {$wpdb->usermeta} um ON u.ID = um.user_id
-        WHERE um.meta_key = 'listings'
-        AND um.meta_value LIKE %s
-    ", $pattern);
-
-    $results = $wpdb->get_results($query);
-
-    foreach ($results as $row) {
-        $listings = maybe_unserialize($row->meta_value);
-
-        if (is_array($listings) && in_array((int)$listing_id, array_map('intval', $listings))) {
-            $confirmed_users[] = [
-                'user_id' => (int) $row->user_id,
-                'email'   => $row->user_email,
-            ];
-        }
-    }
-
-    return $confirmed_users;
-}
-
-function send_new_inquiry_notification($email, $subject) {
-    $email_subject = 'You have a new inquiry! ' . $subject;
+function send_new_inquiry_notification($user_id, $message_subject) {
+    $user = get_userdata($user_id);
+    $email = $user->user_email;
+    $subject = 'You have a new inquiry! ' . $message_subject;
     $message = 'Congratulations! You have a new inquiry in your inbox. Visit ' . site_url('/messages') . ' to check your messages.';
-    wp_mail($email, $email_subject, $message);
+    wp_mail($email, $subject, $message);
 }

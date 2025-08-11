@@ -16,18 +16,41 @@ function send_message(WP_REST_Request $request) {
 
     // Handle success
     } else if ($message) {
-        // Create cron task to send notifications
-
-        return [
+        $message = [
             'inquiry'                  => null,
             'content'                  => nl2br($message['content']),
             'is_outgoing'              => true,
+            'sender_id'                => $message['sender_id'],
             'sender_name'              => $display_name,
             'sender_profile_image_url' => $message['sender_profile_image_url'],
-            'conversation_id'          => $message['conversation_id'],
             'message_id'               => (string) $message['message_id'],
+            'conversation_id'          => (string) $message['conversation_id'],
             'created_at'               => $message['created_at'],
         ];
+
+        // Create cron task to send notifications
+        if (!wp_next_scheduled('send_notifications_after_message_send', [$message])) {
+            wp_schedule_single_event(time() + NEW_MESSAGE_NOTIFICATION_DELAY, 'send_notifications_after_message_send', [$message]);
+        }
+
+        return $message;
     }
 }
 
+// check if message has been read by each user participant user and if not, notify them via email
+add_action('send_notifications_after_message_send', function($message) {
+    global $user_messages_plugin;
+    $participants = $user_messages_plugin->get_conversation_participants_user_ids($message['conversation_id'], $message['sender_id'], true);
+    foreach ($participants as $user_id) {
+        $is_read = $user_messages_plugin->is_read($message['message_id'], $user_id);
+        if (!$is_read) { send_new_message_notification($user_id); }
+    }
+});
+
+function send_new_message_notification($user_id) {
+    $user = get_userdata($user_id);
+    $email = $user->user_email;
+    $subject = 'You have a new message!';
+    $message = 'You have a new message in your inbox. Visit ' . site_url('/messages') . ' to check your messages.';
+    wp_mail($email, $subject, $message);
+}
