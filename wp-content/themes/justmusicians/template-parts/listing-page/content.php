@@ -15,7 +15,10 @@
 
         <!-- Bio -->
         <?php if (!empty(get_field('bio')) or $is_preview) { ?>
-        <div id="biography" <?php if ($is_preview) { ?>x-show="pBio.length > 0" x-cloak <?php } ?> >
+        <div id="biography"
+            <?php if ($is_preview) { ?> x-show="pBio.length > 0" x-cloak <?php } ?>
+            <?php if ($is_preview) { ?> x-on:click="focusElm('bio')" <?php } ?>
+        >
             <h2 class="text-25 font-bold mb-5">Biography</h2>
             <p class="mb-4"
                 <?php if ($is_preview) { ?> x-html="pBio.replace(/\n/g, '<br>')" <?php } ?>>

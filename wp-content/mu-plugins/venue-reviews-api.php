@@ -14,18 +14,22 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venue_reviews', [
         'methods' => 'GET',
         'callback' => 'get_venue_reviews',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'venue_reviews/batch', [
         'methods' => 'GET',
         'callback' => 'get_venue_reviews_batch',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'venue_reviews/csv', [
         'methods' => 'GET',
         'callback' => 'get_venue_reviews_csv',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'venue_review/stats', [
         'methods' => 'GET',
         'callback' => 'update_venue_review_stats',
+        'permission_callback' => '__return_true',
     ]);
 });
 

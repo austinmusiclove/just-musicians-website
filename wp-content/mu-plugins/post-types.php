@@ -286,5 +286,6 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'taxonomies/terms', [
         'methods' => 'GET',
         'callback' => 'get_taxonomy_terms',
+        'permission_callback' => '__return_true',
     ]);
 });

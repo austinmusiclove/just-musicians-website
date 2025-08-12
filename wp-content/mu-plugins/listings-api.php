@@ -29,10 +29,12 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', '/listings', [
         'methods' => 'GET',
         'callback' => 'get_listings_request_handler',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', '/listings/(?P<auuid>[a-zA-Z0-9-]+)', [
         'methods' => 'GET',
         'callback' => 'get_listing_by_auuid_request_handler',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'listings', [
         'methods' => 'POST',

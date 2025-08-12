@@ -14,18 +14,22 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venues', [
         'methods' => 'GET',
         'callback' => 'get_venues',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'venues/id', [
         'methods' => 'GET',
         'callback' => 'get_venue_post_id_by_name',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'venues/batch', [
         'methods' => 'GET',
         'callback' => 'get_venues_by_post_id_batch',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'venues/v1', 'stats', [
         'methods' => 'GET',
         'callback' => 'update_venue_stats',
+        'permission_callback' => '__return_true',
     ]);
 });
 

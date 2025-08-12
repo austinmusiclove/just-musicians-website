@@ -110,10 +110,10 @@ UX
         allow adding venue
         scroll preview to section when corresponding input is focused
         disable input until change made or auto save after input
-        bug: cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         limit access until you verify email
         make form invite only
         accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+        make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     listing page
         see more bio
         see more venues played

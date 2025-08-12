@@ -11,13 +11,13 @@
         <div class="grid sm:grid-cols-3 gap-2">
             <!-- Email -->
             <div class="grow relative">
-                <label for="listing_email" class="mb-1 inline-block">Email (not public)<span class="text-red">*</span></label>
+                <label for="listing_email" class="mb-1 inline-block">Email (not public)</label>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
                 <input class="has-icon" type="text" id="listing_email" name="listing_email" placeholder="example@example.com" title="example@example.com" x-model="pEmail" >
             </div>
             <!-- Phone -->
             <div class="grow relative">
-                <label for="phone" class="mb-1 inline-block">Phone (not public)<span class="text-red">*</span></label><br>
+                <label for="phone" class="mb-1 inline-block">Phone (not public)</label><br>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" />
                 <input class="has-icon" type="tel" id="phone" name="phone"
                         placeholder="(555) 555-5555" maxlength="14"
@@ -84,13 +84,13 @@
 
     <fieldgroup class="grid sm:grid-cols-3 gap-2">
         <!-- Facebook -->
-        <div class="grow"><label class="mb-1 inline-block" for="facebook_url">Facebook URL</label><br>
-        <input type="text" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/"      x-model="pFacebookUrl"></div>
+        <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="facebook_url">Facebook URL</label><br>
+        <input type="text" id="facebook_url" name="facebook_url" placeholder="https://www.facebook.com/" x-model="pFacebookUrl"></div>
         <!-- Youtube -->
-        <div class="grow"><label class="mb-1 inline-block" for="youtube_url">Youtube Channel URL</label><br>
-        <input type="text" id="youtube_url"  name="youtube_url"  placeholder="https://www.youtube.com/@"      x-model="pYoutubeUrl" ></div>
+        <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="youtube_url">Youtube Channel URL</label><br>
+        <input type="text" id="youtube_url"  name="youtube_url"  placeholder="https://www.youtube.com/@" x-model="pYoutubeUrl" ></div>
         <!-- Bandcamp -->
-        <div class="grow"><label class="mb-1 inline-block" for="bandcamp_url">Bandcamp URL</label><br>
+        <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="bandcamp_url">Bandcamp URL</label><br>
         <input type="text" id="bandcamp_url" name="bandcamp_url" placeholder="https://bandname.bandcamp.com/" x-model="pBandcampUrl"></div>
     </fieldgroup>
 
@@ -100,7 +100,7 @@
                 spotifyArtistId: '',
                 setSpotifyArtistId() { this.spotifyArtistId = pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/) ? pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
             }">
-                <label class="mb-1 inline-block" for="spotify_artist_url">Spotify Artist URL</label><br>
+                <label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="spotify_artist_url">Spotify Artist URL</label><br>
                 <input type="text" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
                     x-init="setSpotifyArtistId()"
                     x-on:input="setSpotifyArtistId()"
@@ -109,10 +109,10 @@
                 <input type="hidden" id="spotify_artist_id" name="spotify_artist_id" x-bind:value="spotifyArtistId">
             </div>
         <!-- Apple Music -->
-        <div class="grow"><label class="mb-1 inline-block" for="apple_music_artist_url">Apple Music Artist URL</label><br>
+        <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="apple_music_artist_url">Apple Music Artist URL</label><br>
         <input type="text" id="apple_music_artist_url" name="apple_music_artist_url" placeholder="https://music.apple.com/us/artist/" x-model="pAppleMusicArtistUrl"></div>
         <!-- Soundcloud -->
-        <div class="grow"><label class="mb-1 inline-block" for="soundcloud_url">Soundcloud URL</label><br>
+        <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="soundcloud_url">Soundcloud URL</label><br>
         <input type="text" id="soundcloud_url" name="soundcloud_url" placeholder="https://soundcloud.com/" x-model="pSoundcloudUrl"></div>
     </fieldgroup>
 

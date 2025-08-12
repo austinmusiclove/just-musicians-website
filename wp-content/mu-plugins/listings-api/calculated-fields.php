@@ -61,14 +61,33 @@ add_action('listing_calc_rank_event', function($post_id) {
 function update_search_rank($post_id) {
     $rank = 0;
 
-    // Loop through fields to check if they have a value
+    // Boost rank for every field they have filled out in the listing
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
-        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url',
-        'apple_music_artist_url', 'youtube_video_urls',
+        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'apple_music_artist_url',
+        'venues_played_verified', 'venues_played_unverified',
+        'listing_images', 'stage_plots', 'youtube_videos', 'verified',
     ];
     foreach ( $fields_to_check as $field ) {
-        if ( ! empty( get_post_meta( $post_id, $field, true ) ) ) {
+        $meta = get_post_meta( $post_id, $field, true );
+        if ( ! empty($meta) ) {
+
+            // Add a point to rank for every image and video upto 3
+            if (is_array($meta) and $field == 'listing_images' or $field == 'youtube_videos') {
+                $rank += min(count($meta), 3);
+
+            // Add a point for having any value in the field
+            } else {
+                $rank++;
+            }
+        }
+    }
+
+    // Boost rank for each taxonomy they have at least one term in
+    $taxonomies_to_check = [ 'mcategory', 'genre', 'subgenre', 'instrumentation', 'setting', 'keyword', 'mediatag', ];
+    foreach ( $taxonomies_to_check as $taxonomy ) {
+        $terms = get_the_terms( $post_id, $taxonomy );
+        if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
             $rank++;
         }
     }

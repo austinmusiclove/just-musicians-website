@@ -3,7 +3,7 @@
     <fieldgroup class="has-border p-4 relative">
         <!-- Performer Name -->
         <label class="hidden" for="listing_name">Performer or Band Name</label>
-        <input class="no-formatting block w-full text-20 py-2 border-b border-black/20" placeholder="Performer or band name*" type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName">
+        <input id="performer-name-input" class="no-formatting block w-full text-20 py-2 border-b border-black/20" placeholder="Performer or band name*" type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName">
         <!-- Description -->
         <div class="flex gap-1 mt-2">
             <label for="description" class="flex items-center gap-1">
@@ -16,7 +16,7 @@
                 </div>
             </label>
         </div>
-        <textarea class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription" ></textarea>
+        <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription" ></textarea>
         <div class="bg-yellow-20 absolute bottom-2 right-2 text-14 text-grey px-1 py-0.5 rounded-sm"><span x-text="pDescription.length">0</span>/40 char</div>
     </fieldgroup>
 
@@ -117,7 +117,7 @@
                 ]);
             } ?>
         </div>
-        <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
+        <label id="ensemble-size-input" class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Ensemble size <span class="text-14 font-normal">(select all that apply)</span></span>
             <div class="group relative">
                 <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[100px] -right-28 md:right-auto">

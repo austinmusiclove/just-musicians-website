@@ -97,6 +97,8 @@ get_header();
                     'url':           '<?php if (!empty($listing_data['thumbnail_url']))       { echo $listing_data['thumbnail_url'];                                               } else { echo ''; } ?>',
                     'filename':      '<?php if (!empty($listing_data['thumbnail_filename']))  { echo $listing_data['thumbnail_filename'];                                          } else { echo ''; } ?>',
                     'mediatags':      <?php if (!empty($listing_data["thumbnail_terms"]))     { echo clean_arr_for_doublequotes($listing_data["thumbnail_terms"]);                 } else { echo '[]'; } ?>,
+                    'loading':       false,
+                    'worker':        null,
                 },
             ],
             'listing_images':         <?php if (!empty($listing_data["listing_images_data"])) { echo clean_arr_for_doublequotes($listing_data["listing_images_data"]);               } else { echo '[]'; } ?>,
@@ -105,21 +107,19 @@ get_header();
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState ? this.pCity || this.pState || '' : 'City, State'; },
 
         cropper:                    null,
-        submitButtons:              [$refs.updateBtnTop, $refs.updateBtnBottom, $refs.saveDraftBtnTop, $refs.saveDraftBtnBottom, $refs.publishBtnTop, $refs.publishBtnBottom ],
-        showImageProcessingSpinner: false,
-        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this.submitButtons); },
-        _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId, this.submitButtons); },
+        showCropperDisplay:         true,
+        popupImageSpinner: false,
+        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this._getImageData(imageType, imageId).url, false); },
+        _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId); },
 
         currentImageId: 'cover_image',
         currentYtIndex:  -1,
         _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
         _toggleImageTerm(imageType, imageId, term)                    { toggleImageTerm(this, imageType, imageId, term); },
         _toggleYoutubeLinkTerm(index, term)                           { toggleYoutubeLinkTerm(this, index, term); },
-        _addImage(imageType, imageId, imageData)                      { addImage(this, imageType, imageId, imageData); },
         _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
         _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
-        _updateImage(imageType, imageId, url, file, wasCropped)       { updateImage(this, imageType, imageId, url, file, wasCropped); },
-        _updateFileInputs()                                           { updateFileInputs(this); },
+        _updateFileInputs(imageType)                                  { updateFileInputs(this, imageType); },
         _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
         _getAllMediatags()                                            { return getAllMediatags(this); },
 
@@ -129,6 +129,7 @@ get_header();
     x-on:updateimageids.window="_updateAttachmentIds($event.detail)"
 >
     <form id="listing-form" enctype="multipart/form-data" class="flex flex-col gap-4"
+        x-ref="listingForm"
         hx-post="<?php echo site_url('wp-html/v1/listings'); ?>"
         hx-headers='{"X-WP-Nonce": "<?php echo wp_create_nonce('wp_rest'); ?>" }'
         hx-target="#result"
@@ -149,7 +150,6 @@ get_header();
                         <?php echo get_template_part('template-parts/listing-form/submit-buttons', '', [
                             'is_published' => $is_published,
                             'permalink'    => $listing_data ? $listing_data['permalink'] : '#',
-                            'instance'     => 'Top',
                         ]); ?>
                     </header>
 
@@ -198,7 +198,6 @@ get_header();
                             <?php echo get_template_part('template-parts/listing-form/submit-buttons', '', [
                                 'is_published' => $is_published,
                                 'permalink'    => $listing_data ? $listing_data['permalink'] : '#',
-                                'instance'     => 'Bottom',
                             ]); ?>
                         </div>
 
