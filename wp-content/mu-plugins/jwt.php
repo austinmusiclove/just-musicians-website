@@ -14,6 +14,7 @@ add_action('rest_api_init', function () {
     register_rest_route('jwt-auth/v1', '/token', [
         'methods' => 'POST',
         'callback' => 'generate_jwt_token',
+        'permission_callback' => '__return_true',
     ]);
 });
 

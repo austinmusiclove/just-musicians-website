@@ -14,14 +14,17 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'performances', [
         'methods' => 'GET',
         'callback' => 'get_performance_id',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'performances/id', [
         'methods' => 'GET',
         'callback' => 'get_performance_by_performance_id',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'performances/performer', [
         'methods' => 'GET',
         'callback' => 'get_performances_by_performer',
+        'permission_callback' => '__return_true',
     ]);
 });
 
