@@ -2,19 +2,19 @@ Milestones
     Free lance booker testing
         basic inquiries
             deployment
-                acf
-                    add user profile image acf
-                    add acf fields for inquiry; expired..and everything
-                    make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
-                try logging into staging
-                push master to staging and test log in
                 merge master in to inquiries
                 merge inquiries into master
+                untrack wp files
                 deploy to staging
-                test log in
-                update wordpress on master branch; update plugins
-                deploy to staging
-                update wordpress
+                    add inquiries post type to user inquiries list
+                    add inquiries acf
+                    test log in
+                    update wordpress on master branch
+                    update plugins
+                    activate user message plugin
+                    test
+                deploy to live
+                    same steps
         advanced inquiries
             allow delete/expire listing
             allow edit inquiry
