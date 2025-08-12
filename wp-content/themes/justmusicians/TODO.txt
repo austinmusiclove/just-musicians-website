@@ -3,10 +3,8 @@ Milestones
         basic inquiries
             deployment
                 acf
-                    add acf file
                     add user profile image acf
                     add acf fields for inquiry; expired..and everything
-                    add acf config file so i don't have to do any manual set up of ACF
                     make sure to add inquiries to users acf in prod and check options (left it created with no inquiries because post type not extist yet)
                 try logging into staging
                 push master to staging and test log in
