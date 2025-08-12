@@ -1,6 +1,7 @@
 <?php
 
 // Register menus
+/*
 register_nav_menus( array(
     'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
     'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
@@ -36,3 +37,4 @@ function start_el( &$output, $data_object, $depth = 0, $args = NULL, $current_ob
     endif;
   }
 }
+*/
