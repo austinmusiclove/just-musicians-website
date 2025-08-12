@@ -10,7 +10,7 @@ wp-content/plugins/*
 !wp-content/plugins/user-mgmt.php
 wp-content/uploads
 wp-content/debug.log
-wp-includes
+#wp-includes
 #wp-admin
 #index.php
 #wp-activate.php
