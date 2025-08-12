@@ -4,7 +4,6 @@ Milestones
             deployment
                 merge master in to inquiries
                 merge inquiries into master
-                untrack wp files
                 deploy to staging
                     add inquiries post type to user inquiries list
                     add inquiries acf
