@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 add_action('rest_api_init', function () {
     register_rest_route('user/v1', 'email-verified', array(
         'methods' => WP_REST_SERVER::READABLE,
-        'callback' => 'is_email_verified'
+        'callback' => 'is_email_verified',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('user/v1', 'profiles', array(
         'methods' => WP_REST_SERVER::READABLE,
-        'callback' => 'get_urser_profiles'
+        'callback' => 'get_urser_profiles',
         'permission_callback' => '__return_true',
     ));
 });
