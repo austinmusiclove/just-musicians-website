@@ -5,11 +5,11 @@ node_modules
 ai1wm-backups
 wp-config.php
 wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
-wp-content/plugins/*
-!wp-content/plugins/user-messages/
-!wp-content/plugins/user-mgmt.php
 wp-content/uploads
 wp-content/debug.log
+#wp-content/plugins/*
+#!wp-content/plugins/user-messages/
+#!wp-content/plugins/user-mgmt.php
 #wp-includes
 #wp-admin
 #index.php
