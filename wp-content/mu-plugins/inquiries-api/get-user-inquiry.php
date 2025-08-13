@@ -39,6 +39,7 @@ function get_user_inquiry($args) {
         'inquiry_id'      => $post_id,
         'subject'         => get_field('subject'),
         'details'         => nl2br(get_field('details')),
+        'genres'          => wp_get_post_terms($post_id, 'genre', ['fields' => 'names']),
         'date'            => get_field('date'),
         'date_type'       => get_field('date_type'),
         'zip_code'        => get_field('zip_code'),
