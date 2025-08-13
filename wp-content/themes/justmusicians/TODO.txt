@@ -1,5 +1,9 @@
 Milestones
     Free lance booker testing
+        bugs
+            messages got send from wrong person as inquiry invites
+            suggestions showing another set of 10 that is malformed
+            fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
         testing
         marketing
             invite mnnatx@gmail.com to make a listing

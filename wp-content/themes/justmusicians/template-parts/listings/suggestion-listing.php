@@ -1,23 +1,5 @@
-<?php
 
-$is_preview    = isset($args['instance']) ? $args['instance'] == 'listing-form' : false;
-$collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
-$ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
-
-?>
-
-<div class="py-4 relative flex flex-col items-start gap-3 relative"
-    <?php if (!is_null($collection_id)) { ?>
-        x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
-    <?php } ?>
-    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page
-        $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
-        hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
-        hx-trigger="revealed once"
-        hx-swap="beforeend"
-        hx-include="#hx-form"
-    <?php } ?>
->
+<div class="py-4 relative flex flex-col items-start gap-3 relative">
 
 
     <div class="bg-yellow-light w-full shrink-0 relative max-w-3xl overflow-hidden"

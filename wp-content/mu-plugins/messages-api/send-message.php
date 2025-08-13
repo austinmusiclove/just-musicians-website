@@ -52,5 +52,9 @@ function send_new_message_notification($user_id) {
     $email = $user->user_email;
     $subject = 'You have a new message!';
     $message = 'You have a new message in your inbox. Visit ' . site_url('/messages') . ' to check your messages.';
-    wp_mail($email, $subject, $message);
+    if (EMAIL_TEST_MODE) {
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
+    } else {
+        wp_mail($email, $subject, $message);
+    }
 }

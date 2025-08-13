@@ -50,8 +50,13 @@ function create_user_inquiry($args) {
     // Notify inquiry creator about thier new inquiry
     $user_data = get_userdata($user_id);
     $owner_email = $user_data->user_email;
+    $subject = 'Your inquiry has been created!';
     $message = 'Thank you for creating an inquiry on HireMoreMusicians.com. You can see responses to your inquiry here: ' . $inquiry_link;
-    wp_mail($owner_email, 'Your inquiry has been created!', $message);
+    if (EMAIL_TEST_MODE) {
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $owner_email . ') ' . $subject, $message);
+    } else {
+        wp_mail($owner_email, $subject, $message);
+    }
 
     // Notify admin about new inquiry
     $message = 'New inquiry has been created by ' . $owner_email . '. Subject: ' . $args['meta_input']['subject'];
