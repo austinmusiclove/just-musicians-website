@@ -39,10 +39,12 @@ function get_profile_image($user_id) {
         $profile_image['url']           = esc_url($avatar['url']);
         $profile_image['filename']      = $avatar['filename'];
         $profile_image['attachment_id'] = $avatar['ID'];
+        $profile_image['is_default']    = false;
 
     // Fallback to Gravatar
     } else {
-        $profile_image['url'] = get_avatar_url($user_id);
+        $profile_image['url']        = get_avatar_url($user_id);
+        $profile_image['is_default'] = true;
     }
 
     return $profile_image;

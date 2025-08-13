@@ -114,10 +114,11 @@ function initCropperFromFile(alco, event, displayElement, submitButtons) {
         alco.imageProcessing = true;
 
         var newImageData = {
-            'file':      files[0],
-            'filename':  files[0].name,
-            'url':       '',
-            'worker':    null,
+            'file':       files[0],
+            'filename':   files[0].name,
+            'url':        '',
+            'worker':     null,
+            'is_default': false,
         };
         alco.accountSettings.profile_image = newImageData;
 
