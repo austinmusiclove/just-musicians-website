@@ -575,4 +575,5 @@ class UserMessagesPlugin {
 
 }
 
+register_activation_hook(__FILE__, [new UserMessagesPlugin(), 'onActivate']);
 $user_messages_plugin = new UserMessagesPlugin();
