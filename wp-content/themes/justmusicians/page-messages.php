@@ -65,7 +65,7 @@ get_header();
         </div>
 
         <!-- Message Board -->
-        <div class="pb-24 sm:pb-4 flex-col lg:col-span-8 h-[85vh] lg:h-[92vh]"
+        <div class="pb-8 sm:pb-4 flex-col lg:col-span-8 h-[85vh] lg:h-[92vh]"
             :class="messagesView ? 'flex' : 'hidden lg:flex'"
         >
             <?php echo get_template_part('template-parts/messages/message-board', '', []); ?>

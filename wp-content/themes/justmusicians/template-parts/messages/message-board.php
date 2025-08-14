@@ -1,7 +1,7 @@
 
 
 <!-- Conversation Header -->
-<div class="my-8 pt-4 md:pt-20">
+<div class="my-8 md:pt-20">
 
     <!-- Back button -->
     <span class="flex opacity-50 lg:hidden cursor-pointer" x-on:click="messagesView = false; conversationsView = true;">
