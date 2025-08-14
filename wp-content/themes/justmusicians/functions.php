@@ -254,6 +254,7 @@ require get_template_directory() . '/html-api/html-api-rewrite-rules.php';
 require get_template_directory() . '/html-api/html-api-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
+require get_template_directory() . '/lib/inc/sitemap.php';
 
 
 
@@ -296,6 +297,7 @@ function mind_defer_scripts( $tag, $handle, $src ) {
 add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 
 
+
 // Req debug
 function log_incoming_request_url() {
     $request_uri = $_SERVER['REQUEST_URI'];
@@ -303,4 +305,3 @@ function log_incoming_request_url() {
 }
 add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
 ?>
-
