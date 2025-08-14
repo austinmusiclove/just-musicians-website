@@ -59,6 +59,7 @@
             x-intersect:leave="_resetCollectionsPopup()"
         >
 
+            <!-- Title -->
             <div class="flex items-center justify-between pr-3">
                 <span class="font-bold text-20">Add to collection</span>
                 <a href="<?php echo site_url('/collections/'); ?>">
@@ -68,6 +69,7 @@
                     </svg>
                 </a>
             </div>
+
             <!-- Search Bar -->
             <input type="text" placeholder="Search collections..." class="w-full px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm"
                 x-model="collectionSearchQuery"
@@ -116,7 +118,7 @@
                     x-show="!showCreateCollectionInput"
                     x-on:click="showCreateCollectionInput = true; $nextTick(() => $refs.newCollectionInput<?php echo $args['post_id']; ?>.focus());"
                 >
-                    <span class="w-full flex items-center justify-between pr-4">
+                    <span class="w-full flex items-center justify-between pr-4 hover:underline">
                         <span>Create new collection</span>
                         <span>+</span>
                     </span>
