@@ -19,19 +19,19 @@
     >
 
         <!-- For not logged in users; button directs users to create an account -->
-        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
+        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 sm:text-12 inline-block w-full sm:w-fit"
             x-show="!loggedIn" x-cloak
-            x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to request quotes from musicians'"
+            x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to send inquiries to musicians'"
         >Send Inquiry</button>
 
         <!-- For logged in users with existing inquiries; opens inquiry dropdown menu -->
-        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
+        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 sm:text-12 inline-block w-full sm:w-fit"
             x-show="loggedIn && Object.keys(inquiriesMap).length > 0" x-cloak
             x-on:click="showInquiriesMenu = true;"
         >Send Inquiry</button>
 
         <!-- For logged in users with no existing inquiries; opens inquiry modal -->
-        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 inline-block w-full sm:w-fit"
+        <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 sm:text-12 inline-block w-full sm:w-fit"
             x-show="loggedIn && Object.keys(inquiriesMap).length == 0" x-cloak
             x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
         >Send Inquiry</button>
@@ -51,8 +51,6 @@
                 x-on:click.away="_resetInquiriesMenu()"
                 x-intersect:leave="_resetInquiriesMenu()"
             >
-                <!-- heading -->
-                <!-- <h3 class="font-bold text-18 pt-4 pb-2 border-b">Add to an existing request</h3> -->
 
                 <!-- Search Bar -->
                 <input type="text" placeholder="Search my existing inquiries..." class="w-full px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm"
@@ -80,7 +78,7 @@
                                 hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
                             >Send</button>
 
-                            <!-- Already requested state -->
+                            <!-- Already sent state -->
                             <button type="button" class="ml-4 border border-2 border-navy text-white bg-navy text-sm px-3 py-1 rounded-full"
                                 x-show="_showListingInInquiry(inquiry.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
                             >Sent</button>
