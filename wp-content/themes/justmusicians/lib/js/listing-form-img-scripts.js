@@ -4,6 +4,11 @@ function getImageData(alco, imageType, imageId) {
     return group.find(item => item.image_id === imageId) || null;
 }
 
+function setImageData(alco, imageType, imageId, property, value) {
+    var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
+    alco.orderedImageData[imageType][imageIndex][property] = value;
+}
+
 function getIndexOfId(arr, id, idName) {
     return arr.findIndex(item => item[idName] === id);
 }
@@ -33,6 +38,12 @@ function removeImage(alco, imageType, imageId) {
 
     var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
     if (imageIndex === -1) { return; }
+
+    // terminate any existing web worker
+    if (alco.orderedImageData[imageType][imageIndex].worker) {
+        alco.orderedImageData[imageType][imageIndex].worker.terminate();
+    }
+
     var list = [...alco.orderedImageData[imageType]];  // copy list
     list.splice(imageIndex, 1);                        // remove item
     alco.orderedImageData[imageType] = list            // update data;
@@ -55,33 +66,32 @@ function getAllMediatags(alco) {
     return Array.from(tagsSet);
 }
 
-function updateImage(alco, imageType, imageId, url, file, wasCropped) {
+async function updateImage(alco, imageType, imageId, url, file) {
     var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
+    if (imageIndex === -1) { return; }
     alco.orderedImageData[imageType][imageIndex]['url'] = url;
     alco.orderedImageData[imageType][imageIndex]['file'] = file;
-    if (wasCropped) { alco.orderedImageData[imageType][imageIndex]['attachment_id'] = ''; }
+    alco.orderedImageData[imageType][imageIndex]['attachment_id'] = '';
     if (imageId == 'cover_image') { alco.pThumbnailSrc = url; }
-    updateFileInputs(alco);
+    await updateFileInputs(alco, imageType);
 }
 
-function updateFileInputs(alco) {
-    var imageTypes = Object.keys(alco.orderedImageData);
-    imageTypes.forEach((imageType) => {
-        var dataTransfer = new DataTransfer();
+async function updateFileInputs(alco, imageType) {
+    var dataTransfer = new DataTransfer();
 
-        var uploadIndex = 0;
-        alco.orderedImageData[imageType].forEach((data) => {
-            if (data.file) {
-                var imageIndex = getIndexOfId(alco.orderedImageData[imageType], data.image_id, 'image_id');
-                dataTransfer.items.add(data.file);
-                alco.orderedImageData[imageType][imageIndex].upload_index = uploadIndex;
-                uploadIndex++;
-            }
-        });
-
-        // Assign files to the file input
-        alco.$refs[`${imageType}_file`].files = dataTransfer.files;
+    var uploadIndex = 0;
+    alco.orderedImageData[imageType].forEach((data) => {
+        if (data.file) {
+            var imageIndex = getIndexOfId(alco.orderedImageData[imageType], data.image_id, 'image_id');
+            dataTransfer.items.add(data.file);
+            alco.orderedImageData[imageType][imageIndex].upload_index = uploadIndex;
+            uploadIndex++;
+        }
     });
+
+    // Assign files to the file input
+    var elm = document.getElementById(`${imageType}_files`);
+    if (elm) { elm.files = dataTransfer.files; }
 }
 
 // Triggered by html api response; updates attachmentIds for newly uploaded images
@@ -107,4 +117,10 @@ function updateAttachmentIds(alco, attachmentIds) {
             alco.youtubeVideoData[videoIndex]['post_id'] = attachmentIds['youtube_videos'][videoId];
         }
     }
+}
+
+function generateRandomId() {
+    var array = new Uint8Array(16);
+    window.crypto.getRandomValues(array);
+    return Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
 }

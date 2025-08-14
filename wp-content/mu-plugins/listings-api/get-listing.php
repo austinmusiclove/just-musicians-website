@@ -14,8 +14,6 @@ function get_listing($args) {
     // Retrieve the post object to check if the post exists
     global $post;
     $post = get_post($post_id);
-
-    // If the post does not exist, return an error
     if (!$post) {
         return new WP_Error('post_not_found', 'Post not found.');
     }
@@ -24,9 +22,6 @@ function get_listing($args) {
     if ($post->post_type !== 'listing') {
         return new WP_Error('invalid_post_type', 'The post is not of type "listing".');
     }
-
-    // Get all post meta fields
-    $post_meta = get_post_meta($post_id);
 
     // Get youtube links
     $youtube_video_post_ids = get_field('youtube_videos');
@@ -150,6 +145,8 @@ function get_image_data($post_id, $image_field) {
             'filename'      => basename(get_attached_file($attachment_id)),
             'caption'       => get_the_excerpt($attachment_id),
             'mediatags'     => get_mediatags($attachment_id),
+            'loading'       => false,
+            'worker'        => null,
         ];
     }
 

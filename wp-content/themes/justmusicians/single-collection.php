@@ -24,6 +24,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
+// Get user inquiries
+$inquiries_result = get_user_inquiries([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
 ?>
 
@@ -34,9 +40,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
                 <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                     <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                      <?php echo get_template_part('template-parts/account/sidebar', '', [
-                        'collapsible' => false
-                      ]); ?>
+                      <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                     </div>
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12"
@@ -47,6 +51,12 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                         _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+
+                        inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
+                        get sortedInquiries()                                { return getSortedInquiries(this); },
+                        _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
+                        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
+                        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
 
                         players: {},
                         playersMuted: true,
@@ -59,6 +69,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                         _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
+                    x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
@@ -102,14 +113,13 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                     <?php } else { ?>
 
                         <form id="hx-form"
-                            hx-get="<?php echo site_url('/wp-html/v1/listings-by-id'); ?>"
+                            hx-get="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/"
                             hx-trigger="load"
                             hx-target="#results"
                             hx-indicator="#spinner"
                         >
 
                             <input type="hidden" name="listing_ids" value="<?php echo implode(',', $listings); ?>" />
-                            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>" />
 
                             <span id="results">
                                 <?php
@@ -121,7 +131,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                                 ?>
                             </span>
 
-                            <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                            <div id="spinner" class="my-8 inset-0 flex items-center justify-center opacity-0 htmx-indicator">
                                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
 

@@ -1,5 +1,5 @@
 
-<section class="flex flex-col gap-5">
+<section id="search-optimization-terms" class="flex flex-col gap-5">
 
     <div class="flex items-center gap-2">
         <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
@@ -23,77 +23,82 @@
         <div class="flex flex-wrap items-stretch gap-x-1 z-10 relative">
             <?php
                 get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => "Categories",
-                    'required' => false,
-                    'show_exp' => "showTab1",
-                    'hide_exp' => "hideTabs()",
+                    'title'     => "Categories",
+                    'required'  => false,
+                    'show_exp'  => "showTab1",
+                    'hide_exp'  => "hideTabs()",
                     'count_exp' => "categoriesCheckboxes.length > 0 ? categoriesCheckboxes.length : ''",
                 ]);
                 get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => 'Genres',
-                    'required' => false,
-                    'show_exp' => "showTab2",
-                    'hide_exp' => "hideTabs()",
+                    'title'     => 'Genres',
+                    'required'  => false,
+                    'show_exp'  => "showTab2",
+                    'hide_exp'  => "hideTabs()",
                     'count_exp' => "genresCheckboxes.length > 0 ? genresCheckboxes.length : ''",
                 ]);
                 get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => 'Subgenres',
-                    'required' => false,
-                    'show_exp' => "showTab3",
-                    'hide_exp' => "hideTabs()",
+                    'title'     => 'Subgenres',
+                    'required'  => false,
+                    'show_exp'  => "showTab3",
+                    'hide_exp'  => "hideTabs()",
                     'count_exp' => "subgenresCheckboxes.length > 0 ? subgenresCheckboxes.length : ''",
                 ]);
                 get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => 'Instruments',
-                    'required' => false,
-                    'show_exp' => "showTab4",
-                    'hide_exp' => "hideTabs()",
+                    'title'     => 'Instruments',
+                    'required'  => false,
+                    'show_exp'  => "showTab4",
+                    'hide_exp'  => "hideTabs()",
                     'count_exp' => "instCheckboxes.length > 0 ? instCheckboxes.length : ''",
                 ]);
                 get_template_part( 'template-parts/components/tab', null, [
-                    'title'  => 'Settings',
-                    'required' => false,
-                    'show_exp' => "showTab5",
-                    'hide_exp' => "hideTabs()",
+                    'title'     => 'Settings',
+                    'required'  => false,
+                    'show_exp'  => "showTab5",
+                    'hide_exp'  => "hideTabs()",
                     'count_exp' => "settingsCheckboxes.length > 0 ? settingsCheckboxes.length : ''",
                 ]);
             ?>
         </div>
-        <fieldgroup class="has-border px-4 py-8 relative h-64 relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
-            <div class="h-[14.75rem] overflow-hidden" x-show="showTab1" x-cloak>
+        <fieldgroup class="has-border px-4 py-8 relative h-[17rem] relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
+            <div class="overflow-hidden" x-show="showTab1" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
-                    'terms' => $args['categories'],
-                    'input_name' => 'categories',
-                    'input_x_model' => 'categoriesCheckboxes',
+                    'terms'           => $args['categories'],
+                    'input_name'      => 'categories',
+                    'input_x_model'   => 'categoriesCheckboxes',
+                    'show_search_bar' => true,
                 ]); ?>
             </div>
-            <div class="h-[14.75rem] overflow-hidden" x-show="showTab2" x-cloak>
+            <div class="overflow-hidden" x-show="showTab2" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
-                    'terms' => $args['genres'],
-                    'input_name' => 'genres',
-                    'input_x_model' => 'genresCheckboxes',
-                    'max_options' => 6,
+                    'terms'           => $args['genres'],
+                    'input_name'      => 'genres',
+                    'input_x_model'   => 'genresCheckboxes',
+                    'show_search_bar' => true,
+                    'max_options'     => 6,
                 ]); ?>
             </div>
-            <div class="h-[14.75rem] overflow-hidden" x-show="showTab3" x-cloak>
+            <div class="overflow-hidden" x-show="showTab3" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
-                    'terms' => $args['subgenres'],
-                    'input_name' => 'subgenres',
-                    'input_x_model' => 'subgenresCheckboxes',
+                    'terms'           => $args['subgenres'],
+                    'input_name'      => 'subgenres',
+                    'input_x_model'   => 'subgenresCheckboxes',
+                    'show_search_bar' => true,
                 ]); ?>
             </div>
-            <div class="h-[14.75rem] overflow-hidden" x-show="showTab4" x-cloak>
+            <div class="overflow-hidden" x-show="showTab4" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
-                    'terms' => $args['instrumentations'],
-                    'input_name' => 'instrumentations',
-                    'input_x_model' => 'instCheckboxes',
+                    'terms'           => $args['instrumentations'],
+                    'input_name'      => 'instrumentations',
+                    'input_x_model'   => 'instCheckboxes',
+                    'show_search_bar' => true,
                 ]); ?>
             </div>
-            <div class="h-[14.75rem] overflow-hidden" x-show="showTab5" x-cloak>
+            <div class="overflow-hidden" x-show="showTab5" x-cloak>
                 <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
-                    'terms' => $args['settings'],
-                    'input_name' => 'settings',
-                    'input_x_model' => 'settingsCheckboxes',
+                    'terms'           => $args['settings'],
+                    'input_name'      => 'settings',
+                    'input_x_model'   => 'settingsCheckboxes',
+                    'show_search_bar' => true,
                 ]); ?>
             </div>
         </fieldgroup>

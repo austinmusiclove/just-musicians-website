@@ -1,6 +1,11 @@
 <?php
 
+// Commented out after upgrading to WP 6.8.2 because esc_html__(..., 'JustMusicians') causes an issue since it gets called before load_theme_textdomain( 'JustMusicians', ..) is called in functins.php
+
+
+
 // Register menus
+/*
 register_nav_menus( array(
     'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
     'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
@@ -36,3 +41,4 @@ function start_el( &$output, $data_object, $depth = 0, $args = NULL, $current_ob
     endif;
   }
 }
+*/

@@ -53,6 +53,7 @@ module.exports = {
 		'./searchform.php',
 		'./template-home.php',
 		'./single.php',
+		'./single-*',
 		'./page-*',
 		'./single-*',
 		'./page-request-password-reset.php',
@@ -87,6 +88,9 @@ module.exports = {
 		'./templates/**/*.{php,js}',
 		'./tailwind/missing.php',
 	],
+    safelist: [
+        'flex-row-reverse',
+    ],
 	theme: {
 		fontSize: fontSizeWithMultiplier,
 		container: {
@@ -100,6 +104,7 @@ module.exports = {
 			white: '#FFFFFF',
 			black: '#000000',
             grey: '#808080',
+            red: '#FF0000',
 			// Browns
 			'brown-dark-1': '#312922',
 			'brown-dark-2': '#5B4A38',
@@ -118,7 +123,8 @@ module.exports = {
 			// Other
 			'navy': '#0F384C',
 			'red': '#C23D28',
-			'red-60': '#DA8B7E'
+			'red-60': '#DA8B7E',
+            'grey-light': '#e3e3e3',
 		},
 		fontFamily: {
 			sans: ['Poppins', 'sans-serif'],

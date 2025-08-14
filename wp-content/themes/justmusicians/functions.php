@@ -59,14 +59,31 @@ function hmm_scripts() {
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
+
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }
 
     // Archive
     if (is_archive()) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }
 
     // Article and Page
-    if ( is_singular(array( 'post')) || is_page() ) {
+    if ( is_singular(['post']) or is_page() or str_starts_with($_SERVER['REQUEST_URI'], '/blog') or str_starts_with($_SERVER['REQUEST_URI'], '/blog') ) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }
 
     // Listing form
@@ -105,6 +122,7 @@ function hmm_scripts() {
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, true);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
         wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, true);
+        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
@@ -131,6 +149,10 @@ function hmm_scripts() {
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
+
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
     }
 
     // Listing pages
@@ -151,8 +173,57 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-collapse';
     }
 
-    // Core
+    // Messages pages
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/messages/')) {
 
+        // Media Slider
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, true);
+        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
+        $alpine_dependencies[] = 'youtube-iframe-scripts-js';
+
+        // Alpine Collapse
+        wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-collapse';
+
+        // Alpine Intersect
+        wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-intersect';
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+
+        // Inquiries
+        wp_enqueue_script('inquiry-js', get_template_directory_uri() . '/lib/js/inquiry.js', [], $pkg->version, true);
+        wp_enqueue_script('inquiry-button-js', get_template_directory_uri() . '/lib/js/inquire-button.js', [], $pkg->version, true);
+
+        // Messages
+        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['messages-api-js', 'messages-app-state-js'], $pkg->version, true);
+        wp_enqueue_script('messages-api-js', get_template_directory_uri() . '/lib/js/messages-api-scripts.js', [], $pkg->version, true);
+        wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, true);
+        wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, true);
+        wp_localize_script('messages-api-js', 'siteData', [
+            'siteUrl' => site_url(),
+            'userId' => get_current_user_id(),
+            'nonce'   => wp_create_nonce('wp_rest'),
+        ]);
+        $alpine_dependencies[] = 'messages-js';
+
+    }
+
+    // Account page
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/account/')) {
+        // Cropper.js
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, true);
+        wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
+        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, true);
+        wp_localize_script('account-cropper-scripts-js', 'siteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        $alpine_dependencies[] = 'cropper-1.6-js';
+    }
+
+
+    // Core
     wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
     wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
     //wp_enqueue_script('hmm-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
@@ -163,6 +234,7 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
+    wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
 
 
 
@@ -178,7 +250,8 @@ require get_template_directory() . '/lib/inc/blocks.php';
 require get_template_directory() . '/lib/inc/shortcodes.php';
 require get_template_directory() . '/lib/inc/comments.php';
 require get_template_directory() . '/lib/inc/helper.php';
-require get_template_directory() . '/html-api/html-api-setup.php';
+require get_template_directory() . '/html-api/html-api-rewrite-rules.php';
+require get_template_directory() . '/html-api/html-api-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
 
@@ -221,3 +294,13 @@ function mind_defer_scripts( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
+
+
+// Req debug
+function log_incoming_request_url() {
+    $request_uri = $_SERVER['REQUEST_URI'];
+    error_log( 'Incoming Request URL: ' . $request_uri );
+}
+add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
+?>
+

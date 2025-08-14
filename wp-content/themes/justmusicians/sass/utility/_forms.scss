@@ -1,5 +1,5 @@
 form {
-	input[type="text"], input[type="number"], select, .pseudo-select, input[type="url"], input[type="email"], input[type="tel"],
+	input[type="text"], input[type="number"], select, .pseudo-select, input[type="url"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"],
   .has-border {
     &:not(.no-formatting){
       display: block;
@@ -141,10 +141,15 @@ form {
 
 
   /* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
-  .htmx-request .htmx-indicator-replace {
-    opacity: 0;
+  .htmx-indicator {
+      opacity: 0;
   }
-
-  #listing-form {
-
+  .htmx-request .htmx-indicator {
+      opacity: 1;
+  }
+  .htmx-indicator-replace {
+      opacity: 1;
+  }
+  .htmx-request .htmx-indicator-replace {
+      opacity: 0;
   }

@@ -120,4 +120,3 @@ function get_spotify_artist_url_from_id($id) {
     $spotify_artist_url_prefix = 'https://open.spotify.com/artist/';
     return !empty($id) ? $spotify_artist_url_prefix . $id : '';
 }
-

@@ -43,6 +43,8 @@
             width: 0,
             redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
+            shakeElements: new Set(),
+            _emphasizeElm(elm, elmId) { emphasizeElm(this, elm, elmId); },
             showPassword: false,
             showFavModal: false,
             showLoginModal: false,
@@ -50,10 +52,40 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            showInquiryModalPlaceholder: false,
+            inquiryProgress: 0,
+            showInquiryModal: false,
+            currentInquirySlide: '',
+            showDateSlide: true,
+            showLocationSlide: false,
+            showBudgetSlide: false,
+            showGenreSlide: false,
+            showPerformersSlide: false,
+            showDetailsSlide: false,
+            showQuoteSlide: false,
+            showDiscardSlide: false,
+            showThankYouSlide: false,
+            showErrorSlide: false,
+            inquiryListing: '',
+            inquiryListingName: '',
+            inquiryDateType: 'TBD',
+            inquiryZipCode: '',
+            inquiryGenres: [],
+            inquirySubject: '',
+            inquiryBudgetType: 'Request Quotes',
+            quotesRequested: '<?php echo DEFAULT_QUOTES_REQUESTED; ?>',
+            inquiryErrorMsg: '',
+            newInquiryId: '',
+            _clearInquiryForm()                                  { clearInquiryForm(this); },
+            _showInquirySlide(slide)                             { showInquirySlide(this, slide); },
+            _openInquiryModal(listingId, listingName)            { openInquiryModal(this, listingId, listingName); },
+            _tryExitInquiryModal()                               { tryExitInquiryModal(this); },
+            _exitInquiryModal()                                  { exitInquiryModal(this); },
+            _submitInquiry()                                     { submitInquiry(this); },
+            _handleCreateInquirySuccess(inquiryId)               { handleCreateInquirySuccess(this, inquiryId); },
+            _handleCreateInquiryError(message)                   { handleCreateInquiryError(this, message); },
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
-            getShowDefaultSearchOptionsMobile() { return this.showSearchOptions && this.width < 768 },
+            getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
             showMobileMenu: false,
             showMobileMenuDropdown1: false,
             showMobileMenuDropdown2: false,
@@ -116,30 +148,30 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Band">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Band'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
                   Bands
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=Solo Artist">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Solo Artist'); ?>">
                   <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
                   Solo Artists
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qcategory=DJ">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=DJ'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
                   DJs
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/?qsetting=Wedding">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qsetting=Wedding'); ?>">
                   <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
                   Wedding Music
                 </a>
               </div>
             </span>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center">
-              <div data-trigger="mobile-menu" class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
+              <div class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 -translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 transform transition duration-500 ease-in-out"></div>
                 <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>
@@ -154,19 +186,25 @@
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
               <!-- Dropdown menu -->
               <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-<!--
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">
-                  <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/user-solid.svg'; ?>" />
-                  Profile
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/account/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+                  Account
                 </a>
--->
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/collections">
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/listings/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
+                  My Listings
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/collections/'); ?>">
                   <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                   Collections
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="/listings">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/list-solid.svg'; ?>" />
-                  My Listings
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/inquiries/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                  Inquiries
+                </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
+                  Messages
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo wp_logout_url('/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
@@ -193,9 +231,5 @@
         echo get_template_part('template-parts/login/login-modal', '', []);
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
-        echo get_template_part('template-parts/global/modal', '', [
-            'alpine_show_var' => 'showInquiryModalPlaceholder',
-            'heading' => 'Coming Soon',
-            'paragraph' => 'Looking to send an inquiry to multiple musicians at once? Inquiries are coming soon. Once live, this feature will allow you to enter the details of your gig once and send them over to multiple musicians without re-enterng details. Musicians will then be able to provide a quote, availability or other answer to your inquiry.',
-        ]);
+        echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
     ?>

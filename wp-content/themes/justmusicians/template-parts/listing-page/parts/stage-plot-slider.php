@@ -1,5 +1,4 @@
-
-<div class="flex flex-col gap-1" x-show="showStagePlotTab" x-cloak
+<span
     x-data="{
         previousIndex: 0,
         currentIndex: 0,
@@ -11,11 +10,11 @@
     x-on:mouseleave="showArrows = false;"
     x-on:mouseenter="showArrows = true"
 >
-    <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden">
-        <div class="aspect-video flex transition-transform duration-500 ease-in-out"
+    <div class="bg-black aspect-video flex flex-col items-center justify-center relative overflow-hidden mb-[21px]" x-show="showStagePlotTab" x-cloak>
+        <div class="aspect-video flex transition-transform duration-500 ease-in-out w-full"
             x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
         >
-            <span class="aspect-video flex items-center justify-center">
+            <span class="aspect-video flex w-full">
                 <?php if ($args['is_preview']) { ?>
                     <template x-for="data in orderedImageData['stage_plots']" :key="data.image_id">
                         <div class="flex justify-center aspect-video w-full h-full object-cover">
@@ -58,20 +57,24 @@
         </div>
         <!-- Gallery Count -->
         <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides"></div>
+
     </div>
-    <?php if ($args['is_preview']) { ?>
-        <div class="min-h-[18px]">
+
+    <!-- Caption -->
+    <div class="min-h-[18px]">
+        <?php if ($args['is_preview']) { ?>
             <template x-for="(data, index) in orderedImageData['stage_plots']" :key="data.image_id">
-                <div class="text-14" x-show="currentIndex == index" x-cloak x-text="_getImageData('stage_plots', data.image_id)?.caption"></div>
+                <template x-if="showStagePlotTab && currentIndex == index">
+                    <div class="text-14" x-text="_getImageData('stage_plots', data.image_id)?.caption"></div>
+                </template>
             </template>
-        </div>
-    <?php } ?>
-    <?php if (!$args['is_preview']) { ?>
-        <div class="min-h-[18px]">
-        <?php foreach ($args['stage_plot_ids'] as $index => $image_id) {
-            $caption = get_post_field('post_excerpt', $image_id); ?>
-            <div class="text-14" x-show="currentIndex == <?php echo $index; ?>" x-cloak><?php echo esc_html($caption); ?></div><?php
-        } ?>
-        </div>
-    <?php } ?>
-</div>
+        <?php } ?>
+        <?php if (!$args['is_preview']) { ?>
+            <?php foreach ($args['stage_plot_ids'] as $index => $image_id) {
+                $caption = get_post_field('post_excerpt', $image_id); ?>
+                <div class="text-14" x-show="showStagePlotTab && currentIndex == <?php echo $index; ?>" x-cloak><?php echo esc_html($caption); ?></div><?php
+            } ?>
+        <?php } ?>
+    </div>
+
+</span>

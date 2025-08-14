@@ -25,10 +25,3 @@ function user_owns_collection($request) {
 
     return true;
 }
-
-function user_logged_in() {
-    if (!is_user_logged_in()) {
-        return new WP_Error('unauthorized', 'You must be logged in to perform this action.', ['status' => 401]);
-    }
-    return true;
-}

@@ -171,6 +171,7 @@ add_action('rest_api_init', function () {
   register_rest_route( 'insert-post/v1', 'posts', [
     'methods' => 'POST',
     'callback' => 'insert_post',
+    'permission_callback' => '__return_true',
   ]);
 });
 
@@ -178,6 +179,7 @@ add_action('rest_api_init', function () {
  register_rest_route( 'update-post/v1', 'posts', [
     'methods' => 'PUT',
     'callback' => 'update_post',
+    'permission_callback' => '__return_true',
   ]);
 });
 

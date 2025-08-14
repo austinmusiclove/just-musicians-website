@@ -71,6 +71,21 @@ function register_post_types() {
         'menu_icon' => 'dashicons-id-alt'
     ));
 
+    // Inquiry
+    register_post_type('inquiry', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Inquiry',
+          'add_new_item' => 'Add New Inquiry',
+          'edit_item' => 'Edit Inquiry',
+          'all_items' => 'All Inquiries',
+          'singular_name' => 'Inquiry'
+        ),
+        'menu_icon' => 'dashicons-editor-help'
+    ));
+
     // Collections
     register_post_type('collection', array(
         'public' => true,
@@ -177,7 +192,7 @@ function register_taxonomies() {
       'singular_name' => 'Category'
     )
   ));
-  register_taxonomy('genre', array('listing', 'artist'), array(
+  register_taxonomy('genre', array('listing', 'artist', 'inquiry'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
@@ -271,5 +286,6 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'taxonomies/terms', [
         'methods' => 'GET',
         'callback' => 'get_taxonomy_terms',
+        'permission_callback' => '__return_true',
     ]);
 });

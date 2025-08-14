@@ -4,7 +4,10 @@
         <h3>Classifications</h3>
         <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" />
     </div>
-    <div class="p-4 flex flex-col gap-4 max-h-96 overflow-scroll" x-show="showClassifications" x-collapse x-cloak >
+    <div class="p-4 flex flex-col gap-4 max-h-96 overflow-scroll"
+        x-show="showClassifications" x-collapse x-cloak
+        <?php if ($args['is_preview']) { ?> x-on:click="focusElm('search-optimization-terms')" <?php } ?>
+    >
         <?php if ((!empty($args['categories']) && !is_wp_error($args['categories'])) or $args['is_preview']) { ?>
         <div <?php if ($args['is_preview']) { ?> x-show="categoriesCheckboxes.length > 0" x-cloak <?php } ?> >
             <h4 class="text-16 mb-3">Categories</h4>

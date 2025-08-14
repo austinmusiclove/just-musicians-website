@@ -30,7 +30,7 @@
                         <div>
                             <label for="password" class="block text-sm font-medium leading-6">Password</label>
                             <div class="mt-2">
-                                <input id="password" name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+                                <input id="password" name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
                                 <span class="float-right right-[12px] mt-[-29px] relative">
                                     <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
                                     <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>

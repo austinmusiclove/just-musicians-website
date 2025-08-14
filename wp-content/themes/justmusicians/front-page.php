@@ -18,6 +18,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
+// Get user inquiries
+$inquiries_result = get_user_inquiries([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
 
 get_header();
@@ -31,12 +37,6 @@ get_header();
             showSubGenreModal: false,
             showInstrumentationModal: false,
             showSettingModal: false,
-            showInquiryModal: false,
-            showSlide1: false,
-            showSlide2: false,
-            showSlide3: false,
-            showSlide4: false,
-            showSlide5: false,
             searchVal: searchInput,
             categoriesCheckboxes: [<?php if (!empty($_GET['qcategory'])) { echo "'" . $_GET['qcategory'] . "'"; } ?>],
             genresCheckboxes: [<?php if (!empty($_GET['qgenre'])) { echo "'" . $_GET['qgenre'] . "'"; } ?>],
@@ -57,8 +57,15 @@ get_header();
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
+
+            inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
+            get sortedInquiries()                                { return getSortedInquiries(this); },
+            _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
+            _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
+            _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
+        x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
         hx-trigger="load, filterupdate"
         hx-target="#results"
         hx-indicator="#spinner"
@@ -132,7 +139,7 @@ get_header();
                     </span>
 
 
-                    <div id="spinner" class="my-8 inset-0 flex items-center justify-center htmx-indicator">
+                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                     </div>
 
@@ -140,7 +147,7 @@ get_header();
                     <div class="xl:hidden">
                         <?php
                         // Mobile form - moves to right column at lg breakpoint
-                        echo get_template_part('template-parts/global/form-quote', '', array(
+                        echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
                             'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
                             'responsive' => 'xl:border-none xl:p-0'
                         ));
@@ -150,7 +157,7 @@ get_header();
 
                 <div class="hidden xl:block col-span-3 relative py-8">
                     <div class="sticky top-24">
-                        <?php echo get_template_part('template-parts/global/form-quote', '', array(
+                        <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
                             'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
                             'responsive' => 'xl:border-none xl:p-0'
                         )); ?>
@@ -204,7 +211,6 @@ get_header();
                         'x-show' => 'showSettingModal',
                         'has_search_bar' => true,
                     ]);
-                    echo get_template_part('template-parts/global/form-quote/popup', '', []);
                 ?>
 
             </div>

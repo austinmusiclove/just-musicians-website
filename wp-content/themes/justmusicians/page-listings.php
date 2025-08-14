@@ -16,9 +16,7 @@ get_header();
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
                 <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                     <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                      <?php echo get_template_part('template-parts/account/sidebar', '', [
-                        'collapsible' => false
-                      ]); ?>
+                      <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                     </div>
                 </div>
                 <div class="col md:col-span-6 py-6 md:py-12">
@@ -77,7 +75,7 @@ get_header();
 
                             <div class="pb-32 relative z-10">
                                 <span class="text-18 sm:text-22 block text-center mb-4">Log in to see your listings</span>
-                                <button x-on:click="showLoginModal = true;" type="button" data-trigger="quote" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Log In</button>
+                                <button x-on:click="showLoginModal = true;" type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Log In</button>
                             </div>
 
                             <img class="w-40 absolute bottom-0 left-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
@@ -124,47 +122,17 @@ get_header();
                                 } ?>
 
                                 <div class="py-12 text-center">
-                                    <a href="/listing-form"><button type="button" data-trigger="quote" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create New Listing</button></a>
+                                    <a href="/listing-form"><button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create New Listing</button></a>
                                 </div>
 
 
-                            <?php } else { ?>
+                            <?php } else {
+                              echo get_template_part('template-parts/content/no-user-listings', '', []);
+                            }
 
-
-                                <!-- Logged in no listings state -->
-                                <div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
-
-                                    <div class="pb-32 relative z-10">
-                                        <span class="text-18 sm:text-22 block text-center mb-4">You don't have any listings yet</span>
-                                        <a href="/listing-form"><button type="button" data-trigger="quote" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create your first</button></a>
-                                    </div>
-
-                                    <img class="w-40 absolute bottom-0 left-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
-                                    <img class="w-40 absolute bottom-0 right-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/tumbleweed.svg'; ?>" />
-
-                                </div>
-
-                            <?php }
-
-
-                        } else { ?>
-
-
-                            <!-- Logged in no listings state -->
-                            <div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
-
-                                <div class="pb-32 relative z-10">
-                                    <span class="text-18 sm:text-22 block text-center mb-4">You don't have any listings yet</span>
-                                    <a href="/listing-form"><button type="button" data-trigger="quote" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create your first</button></a>
-                                </div>
-
-                                <img class="w-40 absolute bottom-0 left-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
-                                <img class="w-40 absolute bottom-0 right-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/tumbleweed.svg'; ?>" />
-
-                            </div>
-
-
-                        <?php }
+                        } else {
+                          echo get_template_part('template-parts/content/no-user-listings', '', []);
+                        }
                     } ?>
 
 

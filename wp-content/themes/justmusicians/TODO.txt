@@ -1,11 +1,54 @@
 Milestones
     Free lance booker testing
-        basic inquiries
-            quiz to get gig details
-            send out to artists by email
-            allow adding artists to an inquiry similar to adding to collection
-            manage your inquiries in the back end
-            manage inquiries sent to you in the back end
+        bugs
+            fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
+        testing
+        marketing
+            invite mnnatx@gmail.com to make a listing
+    advanced inquiries
+        allow delete/expire listing
+        allow edit inquiry
+        add settings to quiz
+        paginate inquiries instead of getting all at once in php for inquiriesMap
+        only get non expired listings for inquiriesMap
+        allow inquiry when not logged in
+        see quotes side by side with media
+        email when you have unresponded messages for a certain amount of time
+        inquiry response posts; show user all inquiry responses side by side
+        specific responses for inquiries like $ amount for quote or draw number
+        suggestions for listings to invite
+        search bar for inquiries
+        allow inquiry details edit
+        modify quiz
+            maybe: support different event types in quiz
+            general inquiry
+                subject and details
+                contact method so that non logged in users can send inquiry
+            request quote
+                date
+                zip
+                genre
+                ensemble size
+                subject and details
+                contact method so that non logged in users can send inquiry
+            i have budget; check availability
+                budget
+                date
+                zip
+                genre
+                ensemble size
+                subject and details
+                contact method so that non logged in users can send inquiry
+            add button to inquiries back end on the thank you slide
+        reorganize alpine component vars and methods
+        change listings page to html api
+        record response time
+        suggestions
+            add suggested listings below inquiry details
+            show suggestions when there are no conversations
+    advanced messages
+        show inquiry detail in right side panel
+        profile image(s) in conversation next to title
     Search algo update
         ensemble size taxonomy
         locaiton filter
@@ -13,12 +56,13 @@ Milestones
         change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
         video order depending on search criteria
     Free lance booker testing 2
+        inquiries
+            allow create inquiry if not logged in
         add "Best Country Bands Near Austin" type headlines that will get placed on google
         click tracking
         user recording software
-        messaging
     Venue testing
-        venue applications
+        open calendar or venue applications
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
@@ -29,17 +73,20 @@ Data
     program to move unofficial tags to official if added
 Testing
     test apostrophes everywhere
+    test when nonce expires and api does not return data
 UX
-    collections
-        add animations
+    corrected new logos
+    add animation when add to collection/fav
+    add animation when add to inquiry
     media slider
         somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
         somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
         video seeking
         swipe on mobile
     Filters
+        add length of set
         add something about providing sound equipment
-        add location
+        add location in main filter and inquiry suggestions
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog
@@ -53,28 +100,35 @@ UX
         allow adding venue
         scroll preview to section when corresponding input is focused
         disable input until change made or auto save after input
-        bug: cropper display shows previous cropped image before new one loads; noticable when image takes a while to load
         limit access until you verify email
         make form invite only
         accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+        make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     listing page
         see more bio
         see more venues played
         click to copy email on listing page
         artist pages that will get you listed on google as a musician by using schema
-Features
-    venue reviews
-    artist reviews
+Search Algorithm
+    1 - Relevant Media
+    2 - Response Time
+    3 - Requests/Views/Clicks
+    4 - Profile Completeness
+    5 - Profile Age (post_id tie breaker)
+    reviews/rating
+    relevant clicks
 Devon
     venue page
     venues search
     404 page
     collections page and favorites buttons
+    request quote pop up
     trash icon
     indicator on infinite scroll and listing form
     podcast - get violotor-blog svg
 Back End
     Allow modifying default filters from the theme customizor
+    artist pages that will get you listed on google as a musician by using schema
 Security
     audit rest api inputs and html api inputs
 Performance
@@ -82,13 +136,28 @@ Performance
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
+    image sprites
 Bugs
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
+Accessibility
+    Need full audit
+Testing
+    Test specific devices with AWS or other service
 Document
+    Dev Principles
+        No js for first paint
+        CDN for js, images, files, and pre built HTML
+        Separate Json and HTML api
+        Code splitting in functions.php
+        Locality of behavior through HTML and AlpineJs
     no taxonomy terms with " in them
     if the listing results are showing the blog landing page insead of search results, likely you need to go to settings->Permalinks and hit save in the wp admin
     no <> allowed in name, description, bio
     allowed youtube link formats to test all in Dietrich Calhoun profile in local host mac mini; find the formats in code where the youtube video id parsing functions are in js and php
+    new dev env set up
+        need social log in creds
+        need to do settings -> permalinks save to get apis to work
+        wp config constants

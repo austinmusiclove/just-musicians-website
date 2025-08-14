@@ -2,6 +2,8 @@
 
 // Get listings
 $page = $_GET['page'] ?? 1;
+
+
 $result = get_listings([
     'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
     'categories'        => !empty($_GET['categories']) ? $_GET['categories'] : [],
@@ -20,6 +22,7 @@ $valid_genres           = $result['valid_genres'];
 $valid_subgenres        = $result['valid_subgenres'];
 $valid_instrumentations = $result['valid_instrumentations'];
 $valid_settings         = $result['valid_settings'];
+$ensemble_size          = $result['ensemble_size'];
 $min_ensemble_size      = $result['min_ensemble_size'];
 $max_ensemble_size      = $result['max_ensemble_size'];
 $max_num_results        = $result['max_num_results'];
@@ -131,5 +134,3 @@ if ($page == 1) {
     echo $max_num_results;
     if ($max_num_results == 1) { echo ' result'; } else { echo ' results'; }?>
 </span><?php
-
-

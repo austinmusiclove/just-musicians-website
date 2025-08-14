@@ -14,14 +14,17 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'artists/post_id', [
         'methods' => 'GET',
         'callback' => 'get_artist_post_id',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'artists/uuid', [
         'methods' => 'GET',
         'callback' => 'get_artist_uuid',
+        'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'v1', 'artists', [
         'methods' => 'GET',
         'callback' => 'get_artist_by_uuid',
+        'permission_callback' => '__return_true',
     ]);
 });
 
