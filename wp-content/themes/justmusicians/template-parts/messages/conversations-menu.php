@@ -4,7 +4,7 @@
 
     <!-- Back button -->
     <span class="opacity-50 cursor-pointer" x-show="inquiry != null" x-cloak>
-        <a class="flex hover:underline" href="/inquiries">
+        <a class="flex hover:underline" href="<?php echo site_url('/inquiries/'); ?>">
             <img class="ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
             <span class="text-18" >Back to inquiries</span>
         </a>

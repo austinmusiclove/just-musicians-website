@@ -26,7 +26,7 @@ get_header();
                 <div class="col md:col-span-6 py-6 md:py-12">
 
                     <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                        <a href="/collections"><h1 class="font-bold text-22 sm:text-25">Collections</h1></a>
+                        <a href="<?php echo site_url('/collections/'); ?>"><h1 class="font-bold text-25">Collections</h1></a>
                         <?php if (is_user_logged_in()) { ?>
                             <button class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer" x-on:click="showAddCollectionPopup = true">Add +</button>
                         <?php } ?>

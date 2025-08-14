@@ -1,10 +1,8 @@
 Milestones
     Free lance booker testing
-        bugs
-            fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
-        testing
-        marketing
-            invite mnnatx@gmail.com to make a listing
+        fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
+        testing with dad
+        invite mnnatx@gmail.com to make a listing
     advanced inquiries
         allow delete/expire listing
         allow edit inquiry

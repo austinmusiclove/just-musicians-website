@@ -43,7 +43,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                       <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                     </div>
                 </div>
-                <div class="col md:col-span-6 py-6 md:py-12"
+                <div class="col md:col-span-6 py-8 md:py-12"
                     x-data="{
                         collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                         get sortedCollections()                              { return getSortedCollections(this, <?php echo $collection_id; ?>); },
@@ -77,12 +77,16 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                     x-init="_setupVisibilityListener()"
                 >
 
-                    <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                        <a href="/collections"><h1 class="font-bold text-22 sm:text-25">My Collections</h1></a>
-                    </div>
+                    <!-- Back button -->
+                    <span class="block sm:hidden py-2 opacity-50 cursor-pointer">
+                        <a class="flex hover:underline" href="<?php echo site_url('/collections/'); ?>">
+                            <img class="ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                            <span class="text-18" >Back to Collections</span>
+                        </a>
+                    </span>
 
                     <div class="mb-2 md:mb-2 flex justify-start items-center flex-row gap-2">
-                        <h2 class="font-bold text-18 sm:text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
+                        <h2 class="font-bold text-25"><?php if ($is_favorites) { echo 'Favorites'; } else { the_title(); } ?></h2>
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-px bg-black/20"></div>
                             <span x-text="collectionsMap['<?php echo $collection_id; ?>'].listings.length + ' ' + (collectionsMap['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
