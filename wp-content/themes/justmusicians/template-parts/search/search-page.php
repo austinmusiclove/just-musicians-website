@@ -64,7 +64,7 @@
 
                 <div class="col md:col-span-6 py-6 md:py-4">
 
-                    <?php if (isset($args['title'])) { ?><h1 class="py-4 text-25 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
+                    <?php if (isset($args['title'])) { ?><h1 class="py-4 text-28 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
 
                     <div class="flex items-center justify-between md:justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', []); ?>

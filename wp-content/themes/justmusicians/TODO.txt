@@ -1,4 +1,7 @@
 Milestones
+    SEO
+        add musician schema
+        remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     Free lance booker testing
         fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
         testing with dad

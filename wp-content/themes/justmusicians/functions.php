@@ -44,7 +44,7 @@ function hmm_scripts() {
 
 
     // Home
-    if (is_front_page() ) {
+    if (is_front_page() or str_starts_with($_SERVER['REQUEST_URI'], '/top')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
@@ -257,6 +257,8 @@ require get_template_directory() . '/lib/inc/admin-panel.php';
 require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/seo/seo-rewrite-rules.php';
 require get_template_directory() . '/seo/seo-routes.php';
+require get_template_directory() . '/seo/title-tags.php';
+require get_template_directory() . '/seo/meta-descriptions.php';
 
 
 

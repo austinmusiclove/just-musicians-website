@@ -78,7 +78,11 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
     public function get_url_list( $page_num, $post_type = '' ) {
         $urls = [];
 
-        $categories = [ 'country-bands', 'rock-bands', 'cover-bands' ];
+        $categories = [
+            'country-band', 'cover-band', 'dj', 'funk-band', 'jam-band', 'jazz-trio', 'party-band',
+            'punk-band', 'rapper', 'rock-band', 'singer-songwriter', 'solo-artist', 'tribute-band',
+            'wedding-band'
+        ];
         $locations  = [ 'austin-tx' ];
 
         foreach ( $categories as $category ) {
