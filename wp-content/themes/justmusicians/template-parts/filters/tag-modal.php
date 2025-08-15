@@ -13,7 +13,7 @@
         <input type='text' class="mb-6" placeholder="search..." <?php if ($args['has_search_bar']) { ?> x-model="tagModalSearchQuery" <?php } ?>></input>
         <?php } ?>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
         <?php
             foreach((array) $args['labels'] as $label) {
                 echo get_template_part('template-parts/filters/elements/checkbox', '', [

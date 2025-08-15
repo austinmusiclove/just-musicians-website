@@ -64,3 +64,40 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
     return $args;
 }
 add_filter( 'wp_sitemaps_posts_query_args', 'exclude_pages_by_slug_from_sitemap', 10, 2 );
+
+// Top [category] in [location] pages
+add_action( 'init', function() {
+    wp_register_sitemap_provider( 'featuredlistings', new Featured_Listing_Sitemap_Provider() );
+} );
+class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
+    public function __construct() {
+        $this->name = 'featuredlistings';
+        $this->object_type = 'featuredlistings';
+    }
+
+    public function get_url_list( $page_num, $post_type = '' ) {
+        $urls = [];
+
+        $categories = [ 'country-bands', 'rock-bands', 'cover-bands' ];
+        $locations  = [ 'austin-tx' ];
+
+        foreach ( $categories as $category ) {
+            foreach ( $locations as $location ) {
+                $url = home_url( "/top/{$category}/{$location}" );
+                $urls[] = [
+                    'loc' => $url,
+                    'lastmod' => current_time( 'Y-m-d\TH:i:sP' ),
+                    'changefreq' => 'weekly',
+                    'priority' => 0.8,
+                ];
+            }
+        }
+
+        return $urls;
+    }
+
+    public function get_max_num_pages($object_subtype = '') {
+        return 1;
+    }
+
+}

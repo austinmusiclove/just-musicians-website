@@ -255,6 +255,8 @@ require get_template_directory() . '/html-api/html-api-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
 require get_template_directory() . '/lib/inc/sitemap.php';
+require get_template_directory() . '/seo/seo-rewrite-rules.php';
+require get_template_directory() . '/seo/seo-routes.php';
 
 
 
