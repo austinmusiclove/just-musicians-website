@@ -121,7 +121,7 @@ function get_unassigned_listings() {
 
     // Step 1: Get all published listing IDs and titles
     $listings = $wpdb->get_results("
-        SELECT ID, post_title
+        SELECT ID, post_title, post_status
         FROM {$wpdb->posts}
         WHERE post_type = 'listing' AND post_status = 'publish'
     ");
@@ -152,7 +152,8 @@ function get_unassigned_listings() {
         if (!in_array((int)$listing->ID, $assigned_listing_ids, true)) {
             $unassigned[] = [
                 'ID' => (int)$listing->ID,
-                'title' => $listing->post_title
+                'title' => $listing->post_title,
+                'status' => $listing->post_status,
             ];
         }
     }

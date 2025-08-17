@@ -1,5 +1,14 @@
 Milestones
     Emails
+        methods
+            by listing
+                draft listings
+                unassigned listings
+                assigned listings
+            by user
+                draft listings
+                assigned listings
+            by db entry
         Send listings page to draft listings
         Send LIC to hard coded list of listings that are unassigned
         Send AIC to others
