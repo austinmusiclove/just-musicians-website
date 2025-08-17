@@ -1,4 +1,8 @@
 Milestones
+    Emails
+        Send listings page to draft listings
+        Send LIC to hard coded list of listings that are unassigned
+        Send AIC to others
     Free lance booker testing
         testing with dad
         invite mnnatx@gmail.com to make a listing

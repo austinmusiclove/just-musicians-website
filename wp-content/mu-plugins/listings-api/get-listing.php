@@ -113,8 +113,9 @@ function get_listings_by_auuid($auuid) {
         while($query->have_posts()) {
             $query->the_post();
             $listings[] = [
-                'id'    => get_the_ID(),
-                'title' => get_the_title(),
+                'id'     => get_the_ID(),
+                'title'  => get_the_title(),
+                'status' => get_post_status(get_the_ID()),
             ];
         }
     }
