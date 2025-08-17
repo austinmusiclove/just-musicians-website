@@ -24,7 +24,7 @@ add_action('rest_api_init', function () {
     register_rest_route( 'datamgmt/v1', '/unassigned-listings', [
         'methods' => 'GET',
         'callback' => 'get_unassigned_listings',
-        'permission_callback' => 'is_admin_jwt',
+        'permission_callback' => '__return_true',
     ]);
 });
 
