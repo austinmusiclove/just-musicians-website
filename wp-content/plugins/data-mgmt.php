@@ -150,10 +150,12 @@ function get_unassigned_listings() {
 
     foreach ($listings as $listing) {
         if (!in_array((int)$listing->ID, $assigned_listing_ids, true)) {
+            $auuid = get_post_meta($listing->ID, 'artist_uuid', true);
             $unassigned[] = [
                 'ID' => (int)$listing->ID,
                 'title' => $listing->post_title,
                 'status' => $listing->post_status,
+                'artist_auuid' => $auuid,
             ];
         }
     }
