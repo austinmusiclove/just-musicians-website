@@ -79,9 +79,9 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
         $urls = [];
 
         $categories = [
-            'country-band', 'cover-band', 'dj', 'funk-band', 'jam-band', 'jazz-trio', 'party-band',
-            'punk-band', 'rapper', 'rock-band', 'singer-songwriter', 'solo-artist', 'tribute-band',
-            'wedding-band'
+            'country-band', 'cover-band', 'dj', 'funk-band', 'jam-band', 'jazz-trio', 'metal-band',
+            'party-band', 'punk-band', 'rapper', 'rock-band', 'singer-songwriter', 'solo-artist',
+            'tribute-band', 'wedding-band',
         ];
         $locations  = [ 'austin-tx' ];
 
