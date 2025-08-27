@@ -9,7 +9,12 @@ function noindex_specific_post_type($robots) {
         is_singular('performance') or
         is_singular('venue') or
         is_singular('venue_review') or
-        is_singular('review_submission')
+        is_singular('review_submission') or
+        is_page('account') or
+        is_page('listings') or
+        is_page('collections') or
+        is_page('inquiries') or
+        is_page('messages')
     ) {
         $robots['index'] = 'noindex';
     }
