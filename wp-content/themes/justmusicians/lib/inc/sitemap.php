@@ -87,7 +87,7 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
 
         foreach ( $categories as $category ) {
             foreach ( $locations as $location ) {
-                $url = home_url( "/top/{$category}/{$location}" );
+                $url = home_url( "/top/{$category}/{$location}/" );
                 $urls[] = [
                     'loc' => $url,
                     'lastmod' => current_time( 'Y-m-d\TH:i:sP' ),
