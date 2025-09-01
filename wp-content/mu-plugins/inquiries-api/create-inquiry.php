@@ -55,7 +55,8 @@ function create_user_inquiry($args) {
     if (EMAIL_TEST_MODE) {
         wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $owner_email . ') ' . $subject, $message);
     } else {
-        wp_mail($owner_email, $subject, $message);
+       wp_mail($owner_email, $subject, $message);
+       wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $owner_email . ') ' . $subject, $message);
     }
 
     // Notify admin about new inquiry

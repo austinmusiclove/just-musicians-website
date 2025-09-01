@@ -37,5 +37,6 @@ function send_new_inquiry_notification($user_id, $message_subject) {
         wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
     } else {
         wp_mail($email, $subject, $message);
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
     }
 }
