@@ -36,6 +36,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 get_header();
 
 echo get_template_part('template-parts/search/search-page', '', [
+    'send_first_page'  => true,
     'title'            => $title,
     'inquiries_map'    => $inquiries_map,
     'collections_map'  => $collections_map,

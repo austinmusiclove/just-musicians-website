@@ -81,30 +81,30 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         <!-- Play -->
         <div class="absolute transform left-2 bottom-2"
             @click="_updateIndex(1)"
-            x-show="currentIndex == 0 && totalSlides > 1">
+            x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
         </div>
         <!-- Pause -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            x-show="currentIndex > 0 && _isPaused()">
+            x-show="currentIndex > 0 && _isPaused()" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
         </div>
         <!-- Mute -->
         <div class="absolute transform left-2 bottom-2"
             @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && playersMuted">
+            x-show="currentIndex > 0 && playersMuted" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
         </div>
         <!-- Unmute -->
         <div class="absolute transform left-2 bottom-2"
             @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && !playersMuted">
+            x-show="currentIndex > 0 && !playersMuted" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
         </div>
         <!-- Left Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
             @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-            x-show="currentIndex > 0 && showArrows"
+            x-show="currentIndex > 0 && showArrows" x-cloak
             x-transition:enter-start="-translate-x-full opacity-0"
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
@@ -114,7 +114,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         <!-- Right Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
             @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-            x-show="currentIndex < totalSlides - 1 && showArrows"
+            x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
             x-transition:enter-start="translate-x-full opacity-0"
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"

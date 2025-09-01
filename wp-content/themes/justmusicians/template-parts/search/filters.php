@@ -17,7 +17,7 @@
         'title' => 'Categories',
         'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('category'),
-        'tags' => [],
+        'tags' => isset($args['categories']) ? $args['categories'] : [],
         'show_modal_var' => 'showCategoryModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -25,7 +25,7 @@
         'title' => 'Genre',
         'input_name' => 'genres', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('genre'),
-        'tags' => [],
+        'tags' => isset($args['genres']) ? $args['genres'] : [],
         'show_modal_var' => 'showGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -33,7 +33,7 @@
         'title' => 'Sub Genre',
         'input_name' => 'subgenres', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('subgenre'),
-        'tags' => [],
+        'tags' => isset($args['subgenres']) ? $args['subgenres'] : [],
         'show_modal_var' => 'showSubGenreModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -41,7 +41,7 @@
         'title' => 'Instrumentation',
         'input_name' => 'instrumentations', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('instrumentation'),
-        'tags' => [],
+        'tags' => isset($args['instrumentations']) ? $args['instrumentations'] : [],
         'show_modal_var' => 'showInstrumentationModal'
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
@@ -49,7 +49,7 @@
         'title' => 'Settings',
         'input_name' => 'settings', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('setting'),
-        'tags' => [],
+        'tags' => isset($args['settings']) ? $args['settings'] : [],
         'show_modal_var' => 'showSettingModal'
     ));
     echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [

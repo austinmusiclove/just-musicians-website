@@ -1,3 +1,34 @@
+<?php
+
+$categories       = !empty($args['qcategory'])        ? [$args['qcategory']]        : [];
+$genres           = !empty($args['qgenre'])           ? [$args['qgenre']]           : [];
+$subgenres        = !empty($args['qsubgenre'])        ? [$args['qsubgenre']]        : [];
+$instrumentations = !empty($args['qinstrumentation']) ? [$args['qinstrumentation']] : [];
+$settings         = !empty($args['qsetting'])         ? [$args['qsetting']]         : [];
+
+// Get listings
+$result = null;
+if ($args['send_first_page']) {
+    $result = get_listings([
+        'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
+        'categories'        => $categories,
+        'genres'            => $genres,
+        'subgenres'         => $subgenres,
+        'instrumentations'  => $instrumentations,
+        'settings'          => $settings,
+        'verified'          => false,
+        'min_ensemble_size' => null,
+        'max_ensemble_size' => null,
+        'page'              => 1,
+    ]);
+}
+$listings        = $result ? $result['listings']        : null;
+$max_num_results = $result ? $result['max_num_results'] : null;
+$max_num_pages   = $result ? $result['max_num_pages']   : null;
+$is_last_page    = $result ? 1 == $max_num_pages        : null;
+$next_page       = $result ? $result['next_page']       : null;
+
+?>
 
 <div id="page" class="flex flex-col grow">
     <form id="hx-form"
@@ -35,9 +66,13 @@
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
-        hx-trigger="load, filterupdate"
         hx-target="#results"
         hx-indicator="#spinner"
+        <?php if ($args['send_first_page']) { ?>
+            hx-trigger="filterupdate"
+        <?php } else { ?>
+            hx-trigger="load, filterupdate"
+        <?php } ?>
     >
         <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
@@ -54,7 +89,13 @@
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
 
-                      <?php echo get_template_part('template-parts/search/filters', '', []); ?>
+                      <?php echo get_template_part('template-parts/search/filters', '', [
+                          'categories'       => $categories,
+                          'genres'           => $genres,
+                          'subgenres'        => $subgenres,
+                          'instrumentations' => $instrumentations,
+                          'settings'         => $settings,
+                      ]); ?>
 
                     </div>
                 </div>
@@ -67,9 +108,16 @@
                     <?php if (isset($args['title'])) { ?><h1 class="py-4 text-28 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
 
                     <div class="flex items-center justify-between md:justify-start">
-                        <?php echo get_template_part('template-parts/search/mobile-filter', '', []); ?>
+                        <?php echo get_template_part('template-parts/search/mobile-filter', '', [
+                            'categories'       => $categories,
+                            'genres'           => $genres,
+                            'subgenres'        => $subgenres,
+                            'instrumentations' => $instrumentations,
+                            'settings'         => $settings,
+                        ]); ?>
                         <?php echo get_template_part('template-parts/search/sort', '', [
-                            'show_number' => true
+                            'show_number'     => true,
+                            'max_num_results' => $max_num_results,
                         ]); ?>
                     </div>
 
@@ -99,13 +147,58 @@
                         x-on:mute-youtube-players="_toggleMute()"
                         x-init="_setupVisibilityListener()"
                     >
-                        <?php
+                    <?php
+                        if ($args['send_first_page']) {
+                            // Render listings
+                            if (count($listings) > 0) {
+                                foreach($listings as $index => $listing) {
+                                    $genres = [];
+                                    $listing['genre'] ??= [];
+                                    if (!empty($listing['genre'])) {
+                                        $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
+                                    }
+                                    get_template_part('template-parts/listings/standard-listing', '', [
+                                        'post_id'                => $listing['post_id'],
+                                        'name'                   => $listing['name'],
+                                        'location'               => $listing['city'] . ', ' . $listing['state'],
+                                        'description'            => $listing['description'],
+                                        'genres'                 => $genres,
+                                        'thumbnail_url'          => $listing['thumbnail_url'],
+                                        'website'                => $listing['website'],
+                                        'facebook_url'           => $listing['facebook_url'],
+                                        'instagram_url'          => $listing['instagram_url'],
+                                        'x_url'                  => $listing['x_url'],
+                                        'youtube_url'            => $listing['youtube_url'],
+                                        'tiktok_url'             => $listing['tiktok_url'],
+                                        'bandcamp_url'           => $listing['bandcamp_url'],
+                                        'spotify_artist_url'     => $listing['spotify_artist_url'],
+                                        'apple_music_artist_url' => $listing['apple_music_artist_url'],
+                                        'soundcloud_url'         => $listing['soundcloud_url'],
+                                        'youtube_video_data'     => $listing['youtube_video_data'],
+                                        'verified'               => $listing['verified'],
+                                        'permalink'              => $listing['permalink'],
+                                        'lazyload_thumbnail'     => $index >= 3,
+                                        'last'                   => $index == array_key_last($listings),
+                                        'is_last_page'           => $is_last_page,
+                                        'next_page'              => $next_page,
+                                    ]);
+                                }
+
+                            } else {
+                                get_template_part( 'template-parts/content/no-search-results');
+                            }
+                            if ($is_last_page) {
+                                get_template_part( 'template-parts/content/no-more-results');
+                            }
+                        } else {
+                            // Render placeholder listings
                             echo get_template_part('template-parts/listings/standard-listing-skeleton');
                             echo get_template_part('template-parts/listings/standard-listing-skeleton');
                             echo get_template_part('template-parts/listings/standard-listing-skeleton');
                             echo get_template_part('template-parts/listings/standard-listing-skeleton');
                             echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                        ?>
+                        }
+                    ?>
                     </span>
 
 

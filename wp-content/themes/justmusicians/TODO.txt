@@ -45,6 +45,8 @@ SEO
     add musician schema
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
 Listing form
+    when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
+    when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
     active search for cities
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
@@ -61,6 +63,8 @@ Listing page
     see more venues played
     click to copy email on listing page
     artist pages that will get you listed on google as a musician by using schema
+    Add send inquiry button on listing page
+    add spotify playlist
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady

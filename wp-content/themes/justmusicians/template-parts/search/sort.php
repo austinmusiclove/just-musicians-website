@@ -34,7 +34,20 @@
     <?php if (!empty($args['show_number']) and $args['show_number']) { ?>
         <div class="flex items-center gap-2">
             <div class="h-5 w-px bg-black/20"></div>
-            <span id="max_num_results" hx-swap-oob="outerHTML"></span>
+
+            <span id="max_num_results" hx-swap-oob="outerHTML"><?php
+
+                if (!empty($args['max_num_results'])) {
+                    echo $args['max_num_results'];
+                    if ($args['max_num_results'] == 1) {
+                        echo ' result'; }
+                    else {
+                        echo ' results';
+                    }
+                }
+
+            ?></span>
+
         </div>
     <?php } ?>
 
