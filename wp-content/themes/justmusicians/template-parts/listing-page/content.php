@@ -138,6 +138,11 @@
                     'settings'         => $args['settings'],
                 ]); ?>
 
+                <!-- Spotify artist playlist -->
+                <?php echo get_template_part('template-parts/listing-page/parts/spotify-playlist', '', [
+                    'is_preview'       => $is_preview,
+                ]); ?>
+
 
             </div>
         </div>

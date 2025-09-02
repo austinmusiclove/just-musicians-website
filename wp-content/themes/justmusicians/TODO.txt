@@ -59,7 +59,7 @@ Listing form
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
-    add spotify playlist
+    add spotify playlist - test what happens if user not logged into spotify
     allow play with mouse off iframe for videos
     add seek in video
     see more bio

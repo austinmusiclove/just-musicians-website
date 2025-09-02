@@ -22,6 +22,7 @@ $genres               = get_terms_decoded('genre', 'names');
 $subgenres            = get_terms_decoded('subgenre', 'names');
 $instrumentations     = get_terms_decoded('instrumentation', 'names');
 $settings             = get_terms_decoded('setting', 'names');
+$spotify_artist_id    = $listing_data['spotify_artist_id'];
 $ph_thumbnail         = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
 // Get venues post data
@@ -75,6 +76,7 @@ get_header();
         pYoutubeUrl:            '<?php if ($listing_data) { echo $listing_data["youtube_url"]; } ?>',
         pBandcampUrl:           '<?php if ($listing_data) { echo $listing_data["bandcamp_url"]; } ?>',
         pSpotifyArtistUrl:      '<?php if ($listing_data) { echo $listing_data["spotify_artist_url"]; } ?>',
+        pSpotifyArtistId:       '<?php if ($listing_data) { echo $listing_data["spotify_artist_id"]; } ?>',
         pAppleMusicArtistUrl:   '<?php if ($listing_data) { echo $listing_data["apple_music_artist_url"]; } ?>',
         pSoundcloudUrl:         '<?php if ($listing_data) { echo $listing_data["soundcloud_url"]; } ?>',
         pThumbnailSrc:          '<?php if (!empty($listing_data['thumbnail_url']))      { echo $listing_data['thumbnail_url'];                                  } else { echo $ph_thumbnail; } ?>',
@@ -244,6 +246,7 @@ get_header();
                             'settings'           => $settings,
                             'youtube_video_data' => null,
                             'venues_combined'    => null,
+                            'spotify_artist_id'  => $spotify_artist_id,
                         )); ?>
                     </div>
 

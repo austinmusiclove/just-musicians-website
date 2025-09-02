@@ -97,8 +97,7 @@
     <fieldgroup class="grid sm:grid-cols-3 gap-2">
         <!-- Spotify -->
         <div class="grow" x-data="{
-                spotifyArtistId: '',
-                setSpotifyArtistId() { this.spotifyArtistId = pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/) ? pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
+                setSpotifyArtistId() { pSpotifyArtistId = pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/) ? pSpotifyArtistUrl.match(/artist\/([a-zA-Z0-9]+)/)[1] : ''; },
             }">
                 <label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="spotify_artist_url">Spotify Artist URL</label><br>
                 <input type="text" id="spotify_artist_url" name="spotify_artist_url" placeholder="https://open.spotify.com/artist/"
@@ -106,7 +105,7 @@
                     x-on:input="setSpotifyArtistId()"
                     x-model="pSpotifyArtistUrl"
                 >
-                <input type="hidden" id="spotify_artist_id" name="spotify_artist_id" x-bind:value="spotifyArtistId">
+                <input type="hidden" id="spotify_artist_id" name="spotify_artist_id" x-bind:value="pSpotifyArtistId">
             </div>
         <!-- Apple Music -->
         <div class="grow"><label class="mb-1 inline-block text-18 lg:text-16 xl:text-18" for="apple_music_artist_url">Apple Music Artist URL</label><br>
