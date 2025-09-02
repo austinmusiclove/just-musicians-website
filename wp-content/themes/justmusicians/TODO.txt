@@ -59,12 +59,13 @@ Listing form
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
+    add spotify playlist
+    allow play with mouse off iframe for videos
+    add seek in video
     see more bio
     see more venues played
     click to copy email on listing page
     artist pages that will get you listed on google as a musician by using schema
-    Add send inquiry button on listing page
-    add spotify playlist
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady

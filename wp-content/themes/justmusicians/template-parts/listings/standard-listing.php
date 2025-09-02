@@ -184,7 +184,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         ]);?>
     </div>
 
-    <!-- Request quote button -->
+    <!-- Inquire button -->
     <?php get_template_part('template-parts/listings/parts/inquire-button', '', [
         'post_id'  => !$is_preview ? $args['post_id'] : '',
         'name'     => !$is_preview ? $args['name'] : '',

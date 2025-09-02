@@ -22,7 +22,17 @@ if ($args['instance'] == 'listing-form') {
 }
 ?>
 
-<section class="<?php echo $theme['wrapper_class']; ?>">
+<section class="<?php echo $theme['wrapper_class']; ?>"
+    x-data="{
+        collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
+        get sortedCollections()                              { return getSortedCollections(this, 0); },
+        _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
+        _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
+        _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
+        _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+    }"
+>
+
 
     <div class="<?php echo $theme['container_class']; ?>">
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
@@ -48,16 +58,25 @@ if ($args['instance'] == 'listing-form') {
 
             <div class="flex flex-col gap-5 w-full">
 
-                <!-- Name and verified badge -->
-                <div class="flex items-center gap-2"
-                    <?php if ($is_preview) { ?> x-on:click="focusElm('performer-name-input')"<?php } ?>
-                >
-                    <h1 class="text-32 font-bold" <?php if ($is_preview) { ?> x-text="pName === '' ? 'Performer or Band Name' : pName" <?php } ?> >
-                        <?php if (!$is_preview) { echo get_field('name'); } ?>
-                    </h1>
-                    <?php if (get_field('verified') === true) { ?>
-                        <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
-                    <?php } ?>
+                <div class="flex flex-row justify-between">
+
+                    <!-- Name and verified badge -->
+                    <div class="flex items-center gap-2"
+                        <?php if ($is_preview) { ?> x-on:click="focusElm('performer-name-input')"<?php } ?>
+                    >
+                        <h1 class="text-32 font-bold" <?php if ($is_preview) { ?> x-text="pName === '' ? 'Performer or Band Name' : pName" <?php } ?> >
+                            <?php if (!$is_preview) { echo get_field('name'); } ?>
+                        </h1>
+                        <?php if (get_field('verified') === true) { ?>
+                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" />
+                        <?php } ?>
+                    </div>
+
+                    <!-- Collections button -->
+                    <?php if (!$is_preview) { get_template_part('template-parts/listings/parts/favorites-button', '', [
+                        'post_id' => get_the_ID(),
+                    ]);} ?>
+
                 </div>
 
                 <!-- Description -->

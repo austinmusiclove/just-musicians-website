@@ -1,4 +1,5 @@
 <?php
+    error_log(print_r($args['inquiries_map'], true));
     $is_preview        = $args['instance'] == 'listing-form';
     $ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
     $listing_image_ids = $is_preview ? [] : (is_array(get_field('listing_images')) ? get_field('listing_images') : []);
@@ -9,7 +10,15 @@
         [ 'container_class' => 'container flex flex-col-reverse lg:grid grid-cols-8 gap-8 xl:gap-24 mb-20', ];
 ?>
 
-<section class="<?php echo $theme['container_class']; ?>">
+<section class="<?php echo $theme['container_class']; ?>"
+    x-data="{
+        inquiriesMap: <?php echo clean_arr_for_doublequotes($args['inquiries_map']); ?>,
+        get sortedInquiries()                                { return getSortedInquiries(this); },
+        _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
+        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
+        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+    }"
+>
     <div class="col-span-5 flex flex-col gap-8 items-start">
 
 
@@ -88,7 +97,14 @@
 
     <div class="col-span-3">
         <div class="sticky top-20 flex flex-col gap-8">
-            <!--<button type="button" data-trigger="quote" class="bg-yellow w-full shadow-black-offset border-2 border-black font-sun-motter text-18 px-2 py-2">Request a Quote</button>-->
+
+            <!-- Inquire button -->
+            <?php get_template_part('template-parts/listing-page/parts/inquire-button', '', [
+                'post_id'  => !$is_preview ? get_the_ID() : '',
+                'name'     => !$is_preview ? get_field('name') : '',
+                'disabled' => $is_preview,
+            ]); ?>
+
             <div class="flex flex-col gap-4">
 
                 <div class="sidebar-module border border-black/40 rounded overflow-hidden bg-white">

@@ -7,6 +7,21 @@
 
 get_header();
 
+// Get user collections
+$collections_result = get_user_collections([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$collections_map = array_column($collections_result['collections'], null, 'post_id');
+
+// Get user inquiries
+$inquiries_result = get_user_inquiries([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
+error_log(print_r($inquiries_map, true));
+
 $categories        = wp_list_pluck(get_the_terms(get_the_ID(), 'mcategory')       ?: [], 'name');
 $genres            = wp_list_pluck(get_the_terms(get_the_ID(), 'genre')           ?: [], 'name');
 $subgenres         = wp_list_pluck(get_the_terms(get_the_ID(), 'subgenre')        ?: [], 'name');
@@ -30,25 +45,25 @@ foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) a
         'address_region'   => get_field('address_region',   $venue_id),
 ];}
 
-
-
 // Hero
 echo get_template_part('template-parts/listing-page/hero', '', array(
-   'instance' => 'listing-page',
-   'genres'   => $genres,
+   'instance'        => 'listing-page',
+   'genres'          => $genres,
+   'collections_map' => $collections_map,
 ));
 
 // Content
 echo get_template_part('template-parts/listing-page/content', '', array(
-   'instance'          => 'listing-page',
-   'categories'        => $categories,
-   'genres'            => $genres,
-   'subgenres'         => $subgenres,
-   'instrumentations'  => $instrumentations,
-   'settings'          => $settings,
-   'keywords'          => $keywords,
-   'venues_combined'   => $venues_combined,
+   'instance'           => 'listing-page',
+   'categories'         => $categories,
+   'genres'             => $genres,
+   'subgenres'          => $subgenres,
+   'instrumentations'   => $instrumentations,
+   'settings'           => $settings,
+   'keywords'           => $keywords,
+   'venues_combined'    => $venues_combined,
    'youtube_video_data' => $youtube_video_data,
+   'inquiries_map'      => $inquiries_map,
 ));
 
 get_footer();
