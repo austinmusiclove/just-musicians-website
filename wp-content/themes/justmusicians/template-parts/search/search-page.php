@@ -160,6 +160,8 @@ $next_page       = $result ? $result['next_page']       : null;
                                     get_template_part('template-parts/listings/standard-listing', '', [
                                         'post_id'                => $listing['post_id'],
                                         'name'                   => $listing['name'],
+                                        'city'                   => $listing['city'],
+                                        'state'                  => $listing['state'],
                                         'location'               => $listing['city'] . ', ' . $listing['state'],
                                         'description'            => $listing['description'],
                                         'genres'                 => $genres,

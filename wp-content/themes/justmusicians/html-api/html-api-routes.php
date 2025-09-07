@@ -41,10 +41,6 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/add-listing-to-inquiry.php'; exit;
             }
-        case 'inquiry-listings':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiry-listings.php'; exit;
-            }
         case 'inquiry-suggestions':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;

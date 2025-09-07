@@ -20,7 +20,6 @@ $inquiries_result = get_user_inquiries([
     'nothumbnails' => true,
 ]);
 $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
-error_log(print_r($inquiries_map, true));
 
 $categories        = wp_list_pluck(get_the_terms(get_the_ID(), 'mcategory')       ?: [], 'name');
 $genres            = wp_list_pluck(get_the_terms(get_the_ID(), 'genre')           ?: [], 'name');
@@ -46,14 +45,14 @@ foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) a
 ];}
 
 // Hero
-echo get_template_part('template-parts/listing-page/hero', '', array(
+echo get_template_part('template-parts/listing-page/hero', '', [
    'instance'        => 'listing-page',
    'genres'          => $genres,
    'collections_map' => $collections_map,
-));
+]);
 
 // Content
-echo get_template_part('template-parts/listing-page/content', '', array(
+echo get_template_part('template-parts/listing-page/content', '', [
    'instance'           => 'listing-page',
    'categories'         => $categories,
    'genres'             => $genres,
@@ -64,6 +63,17 @@ echo get_template_part('template-parts/listing-page/content', '', array(
    'venues_combined'    => $venues_combined,
    'youtube_video_data' => $youtube_video_data,
    'inquiries_map'      => $inquiries_map,
-));
+]);
+
+echo get_template_part('template-parts/listing-page/music-group-schema', '', [
+    'name'        => get_field('name'),
+    'description' => get_field('description'),
+    'website'     => get_field('website'),
+    'genres'      => implode(', ', $genres),
+    'url'         => get_permalink(),
+    'image'       => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
+    'city'        => get_field('city'),
+    'state'       => get_field('state'),
+]);
 
 get_footer();

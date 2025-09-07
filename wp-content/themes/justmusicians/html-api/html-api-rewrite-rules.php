@@ -43,11 +43,6 @@ function html_api_rewrite_rules() {
         'bottom'
     );
     add_rewrite_rule(
-        '^wp-html/v1/inquiries/([0-9]+)/listings/?$',
-        'index.php?wp-html-v1=inquiry-listings&inquiry-id=$matches[1]',
-        'top'
-    );
-    add_rewrite_rule(
         '^wp-html/v1/inquiries/([0-9]+)/suggestions/?$',
         'index.php?wp-html-v1=inquiry-suggestions&inquiry-id=$matches[1]',
         'top'

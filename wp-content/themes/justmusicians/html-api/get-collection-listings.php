@@ -28,6 +28,8 @@ if (count($listings) > 0) {
         get_template_part('template-parts/listings/standard-listing', '', [
             'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
+            'city'                   => $listing['city'],
+            'state'                  => $listing['state'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
             'genres'                 => $genres,

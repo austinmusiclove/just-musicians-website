@@ -1,18 +1,31 @@
+Critical Bugs
+    firefox not showing thumbnail and showing blank last slide
+    email not sending to listing owners and maybe not for unread messages
+    send message input does not save context depending on conversation
+SEO
+    remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
+    indexing
+        add listing titles in meta description
+        add internal linking for featured pages
+        maybe add artist bios
+        maybe add some kind of page blurb
 Reviews
     add reviews post types for artist, booker, venue, gd-venue
-    artist review form
-    booker review form
-    venue review form
-    gb-venue review form
+    artist review form with simple rating and review
     display reviews on artist page
-    add regular email to invite artists to solicit reviews and to write venue and gb-venue reviews
-    create venue page with venue reviews and compensation data on it
+    booker review form with simple rating and review
     display booker reviews on inquiries
-Free lance booker testing
-    testing with dad
-    direct sales to buyers
-    invite mnnatx@gmail.com to make a listing
+    venue review form with simple rating and review
+    gb-venue review form with structured comp data
+    create venue page with venue reviews and compensation data on it
+    add regular email to invite artists to write venue and gb-venue reviews
+    add regular email to invite artists to solicit reviews from bookers
+        booker gets email requesting review, makes account, writes review
+        invite artist to review booker
+    make sure reviews can only be done by invite
 Advanced inquiries
+    can't shift enter to make new line in inquiry details
+    military time in inquiry details
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     allow edit inquiry
@@ -27,6 +40,11 @@ Advanced inquiries
 Advanced messages
     show inquiry detail in right side panel
     profile image(s) in conversation next to title
+    different color for incoming/outgoing messages
+    show read receipt
+    show notifications bubble in menus for new messages
+    prompt to add profile image and name with notification bubble
+    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate
 Search algo update
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
@@ -41,9 +59,6 @@ Search algo update
             3 - Reviews/Rating score
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
-SEO
-    add musician schema
-    remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
 Listing form
     when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
@@ -59,7 +74,6 @@ Listing form
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
-    add spotify playlist - test what happens if user not logged into spotify
     allow play with mouse off iframe for videos
     add seek in video
     see more bio
