@@ -166,6 +166,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'description'            => $listing['description'],
                                         'genres'                 => $genres,
                                         'thumbnail_url'          => $listing['thumbnail_url'],
+                                        'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
                                         'website'                => $listing['website'],
                                         'facebook_url'           => $listing['facebook_url'],
                                         'instagram_url'          => $listing['instagram_url'],

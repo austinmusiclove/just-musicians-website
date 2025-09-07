@@ -3,9 +3,10 @@
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "<?php echo $args['name']; ?>",
+    "@id": "<?php echo $args['url']; ?>",
     <?php if (!empty($args['website'])) { ?>"sameAs": "<?php echo $args['website']; ?>",<?php } ?>
     "description": "<?php echo $args['description']; ?>",
-    "genre": "<?php echo $args['genres']; ?>",
+    <?php if (!empty($args['genres'])) { ?>"genre": "<?php echo html_entity_decode(implode(', ', $args['genres'])); ?>",<?php } ?>
     "url": "<?php echo $args['url']; ?>",
     "image": "<?php echo $args['image']; ?>",
     "areaServed": {
@@ -14,7 +15,7 @@
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "<?php echo $args['city']; ?>",
-            "addressRegion": "<?php echo $args['state']; ?>",
+            "addressRegion": "<?php echo get_state_code($args['state']); ?>",
             "addressCountry": "US"
         }
     }

@@ -65,11 +65,12 @@ echo get_template_part('template-parts/listing-page/content', '', [
    'inquiries_map'      => $inquiries_map,
 ]);
 
-echo get_template_part('template-parts/listing-page/music-group-schema', '', [
+echo get_template_part('template-parts/schema/local-business-schema', '', [
     'name'        => get_field('name'),
     'description' => get_field('description'),
     'website'     => get_field('website'),
-    'genres'      => implode(', ', $genres),
+    'phone'       => get_field('phone'),
+    'genres'      => $genres,
     'url'         => get_permalink(),
     'image'       => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
     'city'        => get_field('city'),

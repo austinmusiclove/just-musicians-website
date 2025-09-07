@@ -1,5 +1,4 @@
 <?php
-    error_log(print_r($args['inquiries_map'], true));
     $is_preview        = $args['instance'] == 'listing-form';
     $ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
     $listing_image_ids = $is_preview ? [] : (is_array(get_field('listing_images')) ? get_field('listing_images') : []);

@@ -193,13 +193,14 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 </div>
 
 <?php
-// MusicGroup Schema
+// Local Business Schema
 if (!$is_preview) {
-    echo get_template_part('template-parts/listing-page/music-group-schema', '', [
+    echo get_template_part('template-parts/schema/local-business-schema', '', [
         'name'        => $args['name'],
         'description' => $args['description'],
         'website'     => $args['website'],
-        'genres'      => implode(', ', $args['genres']),
+        'phone'       => $args['phone'],
+        'genres'      => $args['genres'],
         'url'         => $args['permalink'],
         'image'       => $args['thumbnail_url'],
         'city'        => $args['city'],
