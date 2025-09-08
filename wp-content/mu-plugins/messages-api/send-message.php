@@ -55,6 +55,7 @@ function send_new_message_notification($user_id) {
     if (EMAIL_TEST_MODE) {
         wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
     } else {
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
         wp_mail($email, $subject, $message);
     }
 }

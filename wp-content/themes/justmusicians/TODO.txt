@@ -1,7 +1,9 @@
 Critical Bugs
+    need way to monitor conversations
     firefox not showing thumbnail and showing blank last slide
-    email not sending to listing owners and maybe not for unread messages
     send message input does not save context depending on conversation
+    inquiries listing in inquiries page shows subject twice instead of details; need to make it work if there are no details
+    one of the inquiries in local host is failing to show image on inquiries page; not sure why
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing

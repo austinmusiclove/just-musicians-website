@@ -10,7 +10,7 @@ function get_listing_owners($listing_id) {
 
     // Prepare the serialized search pattern
     $listing_id = (int) $listing_id;
-    $pattern = '%:' . strlen($listing_id) . ':"' . $listing_id . '";%';
+    $pattern = '%' . $listing_id . '%';
 
     // Query: Get user ID where meta_key = 'listings' and value matches the given id
     $query = $wpdb->prepare("
