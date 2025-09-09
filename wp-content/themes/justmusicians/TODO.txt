@@ -5,7 +5,8 @@ Critical Bugs
     firefox not showing thumbnail and showing blank last slide
     send message input does not save context depending on conversation
     inquiries listing in inquiries page shows subject twice instead of details; need to make it work if there are no details
-    one of the inquiries in local host is failing to show image on inquiries page; not sure why
+    military time in inquiry details
+    can't shift enter to make new line in inquiry details
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
@@ -28,8 +29,6 @@ Reviews
         invite artist to review booker
     make sure reviews can only be done by invite
 Advanced inquiries
-    can't shift enter to make new line in inquiry details
-    military time in inquiry details
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     allow edit inquiry

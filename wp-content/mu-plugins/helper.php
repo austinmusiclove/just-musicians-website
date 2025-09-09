@@ -30,7 +30,7 @@ function get_thumbnails_from_listings($listing_post_ids) {
     } else if (count($listing_post_ids) >= 1) {
         $thumbnails[] = get_the_post_thumbnail_url($listing_post_ids[0], 'standard-listing');
     }
-    return array_filter($thumbnails);
+    return array_values(array_filter($thumbnails));
 }
 function is_valid_url($url) {
     // Trim whitespace
