@@ -1,11 +1,17 @@
 
 <div class="border-t border-black/20 px-4 pt-2">
     <form class="flex items-end">
-        <textarea class="p-2 w-full border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" rows="1" placeholder="Please enter a message."
+        <textarea class="no-formatting p-2 w-full h-auto border border-black/20 rounded resize-none overflow-hidden focus:outline-none" name="content" placeholder="Please enter a message." rows="1"
             x-ref="messageInput"
             x-bind:disabled="conversationId < 0 || messageInFlight"
-            x-on:input="$el.rows = $el.value.split(/\r\n|\r|\n/).length;"
             x-on:keydown="if ($event.key === 'Enter' && !$event.shiftKey) { $event.preventDefault(); _sendMessage(conversationId, $el.value); }"
+            x-on:input="
+                $el.style.height = 'auto';
+                let lineHeight = parseInt(getComputedStyle($el).lineHeight, 10);
+                let maxHeight = lineHeight * 8; // 8 lines max
+                $el.style.height = Math.min($el.scrollHeight, maxHeight) + 'px';
+                $el.style.overflowY = $el.scrollHeight > maxHeight ? 'auto' : 'hidden';
+            "
         ></textarea>
         <button type="button" class="w-fit relative ml-2 bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3 disabled:opacity-50"
             x-bind:disabled="conversationId < 0 || messageInFlight"

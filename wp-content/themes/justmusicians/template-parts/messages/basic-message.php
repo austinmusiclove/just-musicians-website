@@ -42,7 +42,7 @@
 
 
             <!-- Message content -->
-            <div class="bg-yellow-light-50 rounded p-3 text-sm" x-html="message.content"></div>
+            <div class="bg-yellow-light-50 rounded p-3 text-sm break-words whitespace-normal" x-html="message.content"></div>
 
 
         </div>

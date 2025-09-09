@@ -1,10 +1,10 @@
 Critical Bugs
-    can't shift enter to make new line in inquiry details
-    could not send message on phone bigger than text box (safari probably)
     send message input does not save context depending on conversation
+    can't shift enter to make new line in inquiry details
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
     need way to monitor conversations
     firefox not showing thumbnail and showing blank last slide
+    would be nice to see inquiry subject without clicking inquiry details in inquiry messages page
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing

@@ -37,7 +37,7 @@ async function sendMessage(alco, conversationId, message) {
         alco.$nextTick(() => {
             scrollToElement(alco, getMessageElmId(conversationId, newMessage.message_id));
             alco.$refs.messageInput.value = '';
-            alco.$refs.messageInput.rows = 1;
+            alco.$refs.messageInput.style.height = 'auto';
             alco.$refs.messageInput.focus();
         });
     }
