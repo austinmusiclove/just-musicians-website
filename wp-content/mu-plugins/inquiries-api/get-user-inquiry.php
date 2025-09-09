@@ -23,11 +23,15 @@ function get_user_inquiry($args) {
         return new WP_Error('invalid_post_type', 'The post is not of type "inquiry".');
     }
 
-    // Check that the the inquiry belongs to the logged in user
+    // Check that the inquiry belongs to the logged-in user OR the user is an admin
     $user_inquiries = get_user_meta(get_current_user_id(), 'inquiries', true);
-    if (!in_array($post_id, $user_inquiries)) {
+    if (
+        !current_user_can('manage_options') // admins pass
+        && (!is_array($user_inquiries) || !in_array($post_id, $user_inquiries)) // normal users must own it
+    ) {
         return new WP_Error('unauthorized', 'The inquiry does not belong to this user');
     }
+
 
     // Listings
     $listings = get_field('listings_invited');
