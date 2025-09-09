@@ -1,5 +1,4 @@
 Critical Bugs
-    active search listing should open listing page not enter search term
     can't shift enter to make new line in inquiry details
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
     need way to monitor conversations
