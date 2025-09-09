@@ -22,5 +22,5 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Added Successfully' . '\'})"></span>';
+echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Inquiry Sent Successfully' . '\'})"></span>';
 echo '<span x-init="$dispatch(\'add-listing-to-inquiry\', {\'inquiry_id\': \'' . $inquiry_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';
