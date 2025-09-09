@@ -1,5 +1,4 @@
 Critical Bugs
-    military time in inquiry details
     can't shift enter to make new line in inquiry details
     could not send message on phone bigger than text box (safari probably)
     send message input does not save context depending on conversation

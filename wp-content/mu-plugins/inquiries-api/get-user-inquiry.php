@@ -33,6 +33,9 @@ function get_user_inquiry($args) {
     $listings = get_field('listings_invited');
     $listings = is_array($listings) ? $listings : [];
 
+    // Formatted time
+    $time = get_field('time', false, false);            // raw value (military)
+    $formatted_time = date("g:i A", strtotime($time));  // convert to 12-hour
 
     // Array to store post meta and taxonomy data
     $result = [
@@ -43,7 +46,7 @@ function get_user_inquiry($args) {
         'date'            => get_field('date'),
         'date_type'       => get_field('date_type'),
         'zip_code'        => get_field('zip_code'),
-        'time'            => get_field('time'),
+        'time'            => $formatted_time,
         'budget_type'     => get_field('budget_type'),
         'budget'          => get_field('budget'),
         'percent_of_door' => get_field('percent_of_door'),
