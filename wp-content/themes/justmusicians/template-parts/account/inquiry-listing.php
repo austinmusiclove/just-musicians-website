@@ -48,8 +48,8 @@
             </div>
 
             <!-- Details -->
-            <div class="flex items-center gap-1">
-                <p class="text-14 truncate"><?php echo $args['subject']; ?></p>
+            <div class="flex items-center gap-1 min-h-[1.5rem]">
+                <p class="text-14 truncate"><?php echo $args['details']; ?></p>
             </div>
 
             <!-- See Responses -->

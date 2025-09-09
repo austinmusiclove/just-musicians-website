@@ -1,12 +1,11 @@
 Critical Bugs
+    military time in inquiry details
+    can't shift enter to make new line in inquiry details
     could not send message on phone bigger than text box (safari probably)
+    send message input does not save context depending on conversation
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
     need way to monitor conversations
     firefox not showing thumbnail and showing blank last slide
-    send message input does not save context depending on conversation
-    inquiries listing in inquiries page shows subject twice instead of details; need to make it work if there are no details
-    military time in inquiry details
-    can't shift enter to make new line in inquiry details
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
