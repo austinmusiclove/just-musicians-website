@@ -33,12 +33,13 @@ async function sendMessage(alco, conversationId, message) {
     } else if (newMessage) {
         await updateApplicationState(alco, null, { [conversationId]: [newMessage] });
 
-        // Scroll to bottom of message board and clear input
+        // Scroll to bottom of message board, and clear input, and clear draft if any
         alco.$nextTick(() => {
             scrollToElement(alco, getMessageElmId(conversationId, newMessage.message_id));
             alco.$refs.messageInput.value = '';
             alco.$refs.messageInput.style.height = 'auto';
             alco.$refs.messageInput.focus();
+            alco.conversationsMap[conversationId].draft = '';
         });
     }
 }
@@ -128,11 +129,27 @@ async function longPollMessages(alco, conversationId) {
 */
 
 async function selectConversation(alco, conversationId) {
-    alco.showPaginationMessages = false; // hide these when switching because the container is a different height before the switch and there could be an intersection of a pagination element right on the switch
-    alco.conversationId = conversationId; // Set active conversation
-    var messages = null;
+    // hide these when switching because the container is a different height before the switch and there could be an intersection of a pagination element right on the switch
+    alco.showPaginationMessages = false;
+
+    // save draft message
+    if (alco.conversationId > 0) {
+        alco.conversationsMap[alco.conversationId].draft = alco.$refs.messageInput.value;
+    }
+
+    // Set active conversation
+    alco.conversationId = conversationId;
+
+    // Set input value to existing draft if any or clear input
+    if (alco.conversationsMap[conversationId].hasOwnProperty('draft')) {
+        alco.$refs.messageInput.value = alco.conversationsMap[conversationId].draft;
+    } else {
+        alco.$refs.messageInput.value = '';
+    }
+    setMessageInputHeight(alco);
 
     // Get first page of messages if there are none yet; else get only newer messages
+    var messages = null;
     if (alco.conversationsMap[conversationId].messages.length == 0) {
         messages = await getMessages(alco, conversationId);
     } else {
@@ -152,7 +169,15 @@ async function selectConversation(alco, conversationId) {
     }
 }
 
-
+function setMessageInputHeight(alco) {
+    let messageInput = alco.$refs.messageInput;
+    messageInput.style.height = 'auto';
+    let lineHeight = parseInt(getComputedStyle(messageInput).lineHeight, 10);
+    let maxHeight = lineHeight * 8; // 8 lines max
+    let baseHeight = messageInput.scrollHeight || 38;
+    messageInput.style.height = Math.min(baseHeight, maxHeight) + 'px';
+    messageInput.style.overflowY = messageInput.scrollHeight > maxHeight ? 'auto' : 'hidden';
+}
 
 function scrollToElement(alco, id, delay=0, behavior="instant") {
     requestAnimationFrame(() => {

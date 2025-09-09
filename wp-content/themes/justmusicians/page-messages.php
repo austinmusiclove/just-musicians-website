@@ -46,6 +46,7 @@ get_header();
         _pollMessages(conversationId, cursor)       { pollMessages(this, conversationId, cursor); },
         _selectConversation(conersationId)          { selectConversation(this, conersationId); },
         _getMessageElmId(conversationId, messageId) { return getMessageElmId(conversationId, messageId); },
+        _setMessageInputHeight()                    { setMessageInputHeight(this); },
 
         inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
         _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },

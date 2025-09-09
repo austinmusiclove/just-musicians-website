@@ -1,6 +1,6 @@
 
 <!-- Header -->
-<header class="pt-4 md:pt-20 mb-12 mt-8 gap-2 flex flex-col">
+<header class="pt-4 md:pt-20 mb-4 mt-8 gap-2 flex flex-col">
 
     <!-- Back button -->
     <span class="opacity-50 cursor-pointer" x-show="inquiry != null" x-cloak>

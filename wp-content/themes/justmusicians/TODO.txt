@@ -1,5 +1,5 @@
 Critical Bugs
-    send message input does not save context depending on conversation
+    active search listing should open listing page not enter search term
     can't shift enter to make new line in inquiry details
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
     need way to monitor conversations
@@ -72,6 +72,8 @@ Listing form
     limit access until you verify email
     make form invite only
     accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    accept pdf for stage plots
+    accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
