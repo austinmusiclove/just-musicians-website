@@ -62,7 +62,10 @@ get_header();
         <div class="flex-col col-span-12 lg:col-span-4 z-0 border-r border-black/20 h-[85vh] lg:h-[92vh] lg:pl-[2rem] xl:pl-0"
             :class="conversationsView ? 'flex' : 'hidden lg:flex'"
         >
-            <?php echo get_template_part('template-parts/messages/conversations-menu', '', [ 'inquiry_id' => $inquiry_id ]); ?>
+            <?php echo get_template_part('template-parts/messages/conversations-menu', '', [
+                'inquiry_id'   => $inquiry_id,
+                'inquiry_data' => $inquiry_data
+            ]); ?>
         </div>
 
         <!-- Message Board -->

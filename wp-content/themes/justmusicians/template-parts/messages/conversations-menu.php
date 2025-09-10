@@ -4,16 +4,17 @@
 
     <!-- Back button -->
     <span class="opacity-50 cursor-pointer" x-show="inquiry != null" x-cloak>
-        <a class="flex hover:underline" href="<?php echo site_url('/inquiries/'); ?>">
-            <img class="ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
-            <span class="text-18" >Back to inquiries</span>
+        <a class="flex items-center hover:underline" href="<?php echo site_url('/messages/'); ?>">
+            <svg width="16" height="16" class="icon_svg"><path d="M12.75 7.25H5.038l1.747-1.78a.75.75 0 0 0-1.07-1.05l-3 3.055a.75.75 0 0 0 0 1.05l3 3.055a.75.75 0 0 0 1.07-1.05L5.038 8.75h7.712a.75.75 0 1 0 0-1.5Z"></path></svg>
+            <span class="ml-2 text-18">All Messages</span>
         </a>
     </span>
 
     <!-- Title -->
-    <h1 class="font-bold text-25" x-show="inquiry == null" x-cloak>All Conversations</h1>
-    <span x-show="inquiry != null" x-cloak>
-        <h1 class="font-bold text-25">Inquiry Responses</h1>
+    <h1 class="font-bold text-25" x-show="inquiry == null" x-cloak>All Messages</h1>
+    <span class="flex flex-col gap-1 my-4" x-show="inquiry != null" x-cloak>
+        <h1 class="text-16 opacity-80 text-grey">Responses For:</h1>
+        <h2 class="font-bold text-25"><?php echo $args['inquiry_data'] ? $args['inquiry_data']['subject'] : ''; ?></h2>
     </span>
 
 </header>
