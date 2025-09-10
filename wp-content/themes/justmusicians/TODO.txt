@@ -1,5 +1,11 @@
 Critical Bugs
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
+    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate
+Next Improvements
+    show read receipt
+    show notifications bubble in menus for new messages
+    prompt to add profile image and name with notification bubble
+    profile image(s) in conversation next to title
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
@@ -26,7 +32,7 @@ Advanced inquiries
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     allow edit inquiry
     allow delete/expire inquiry
-    add settings to quiz
+    add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
     paginate inquiries instead of getting all at once in php for inquiriesMap
     only get non expired listings for inquiriesMap
@@ -35,12 +41,6 @@ Advanced inquiries
     change listings page to html api
 Advanced messages
     show inquiry detail in right side panel
-    profile image(s) in conversation next to title
-    different color for incoming/outgoing messages
-    show read receipt
-    show notifications bubble in menus for new messages
-    prompt to add profile image and name with notification bubble
-    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate
 Search algo update
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
@@ -83,7 +83,7 @@ Media slider
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
     video seeking
     swipe on mobile
-    somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case
+    somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases

@@ -16,7 +16,7 @@
 
      <!-- Message with profile image -->
     <div class="flex items-start gap-2"
-        :class="{ 'flex-row-reverse ml-auto': message.is_outgoing, 'flex-row': !message.is_outgoing }"
+        :class="{ 'flex-row-reverse ml-auto': message.is_outgoing, 'flex-row': !message.is_outgoing, }"
     >
 
         <!-- Profile image -->
@@ -42,7 +42,13 @@
 
 
             <!-- Message content -->
-            <div class="bg-yellow-light-50 rounded p-3 text-sm break-words whitespace-normal" x-html="message.content"></div>
+            <div class="rounded p-2 text-16 font-thin break-words whitespace-normal"
+                :class="{
+                    'bg-yellow text-white': message.is_outgoing,
+                    'bg-grey-light-50': !message.is_outgoing,
+                }"
+                x-html="message.content"
+            ></div>
 
 
         </div>

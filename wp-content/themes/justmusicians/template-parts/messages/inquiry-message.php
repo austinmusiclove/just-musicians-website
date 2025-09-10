@@ -41,7 +41,7 @@
                 x-data="{ showDetails: false, }"
             >
 
-                <h3 class="bg-yellow-50 font-bold py-2 px-3 cursor-pointer" x-html="message.inquiry.subject"></h3>
+                <h3 class="bg-yellow text-white py-2 px-3 cursor-pointer" x-html="message.inquiry.subject"></h3>
                 <div class="p-4 flex flex-col gap-4" x-show="!message.inquiry.expired">
                     <div class="grid gap-x-12 gap-y-4 w-full">
 
