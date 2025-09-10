@@ -8,7 +8,7 @@ function seo_pages_title_tags( $title_parts ) {
 
         $term = get_term_by('slug', $category, 'mcategory');
         if ( $term and !is_wp_error( $term ) ) {
-            $title_parts['title'] = 'Top ' . $term->name . 's in Austin, Texas';
+            $title_parts['title'] = $term->name . 's in Austin, Texas';
         }
 
     }

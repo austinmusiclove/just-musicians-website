@@ -7,7 +7,7 @@ function custom_meta_descriptions() {
 
         $term = get_term_by('slug', $category, 'mcategory');
         if ( $term and !is_wp_error( $term ) ) {
-            $description = 'Discover the best ' . $term->name . 's in Austin, Texas. Find local artists to hire for your next live music event.';
+            $description = 'Discover ' . $term->name . 's in Austin, Texas. Find local artists to hire for your next live music event.';
             echo '<meta name="description" content="' . esc_attr( $description ) . '" />' . "\n";
         }
 

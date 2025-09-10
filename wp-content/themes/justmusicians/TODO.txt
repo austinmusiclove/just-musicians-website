@@ -3,8 +3,14 @@ Critical Bugs
     weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate
 Next Improvements
     show read receipt
+        in get_conversation_messages() in user-messages.php
+        TODO add read by other party receipt
+        Get other participants
+        Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
+        alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     show notifications bubble in menus for new messages
     prompt to add profile image and name with notification bubble
+    on mobile its kind of hard to tell you can scroll up to hit back to get to conversations list when in the conversation
     profile image(s) in conversation next to title
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
@@ -13,6 +19,7 @@ SEO
         add internal linking for featured pages
         maybe add artist bios
         maybe add some kind of page blurb
+    add best x in x listacle blog posts
 Reviews
     add reviews post types for artist, booker, venue, gd-venue
     artist review form with simple rating and review

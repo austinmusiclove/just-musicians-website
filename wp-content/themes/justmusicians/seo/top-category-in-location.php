@@ -9,7 +9,7 @@ $category_name = '';
 $term = get_term_by('slug', $category, 'mcategory');
 if ( $term and !is_wp_error( $term ) ) {
     $category_name = $term->name;
-    $title = 'Top ' . $category_name . 's in Austin, Texas';
+    $title = $category_name . 's in Austin, Texas';
 
 // If the term doesn't exist or there was an error, just redirect to home page
 } else {
