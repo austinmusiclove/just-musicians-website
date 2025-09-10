@@ -51,7 +51,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         >
 
             <!-- Thumbnail -->
-            <img class="w-full h-full object-cover"
+            <img class="w-auto h-full object-cover"
                 <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
                 <?php if (!$is_preview) { ?>src="<?php echo $args['thumbnail_url']; ?>"                  <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'" <?php } ?>

@@ -32,7 +32,7 @@
         >
 
             <!-- Thumbnail -->
-            <img class="w-full h-full object-cover"
+            <img class="w-auto h-full object-cover"
                 <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
                 src="<?php echo $args['thumbnail_url']; ?>"
                 x-on:click="if (totalSlides > 1) { _updateIndex(1) }"

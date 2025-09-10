@@ -1,5 +1,4 @@
 Critical Bugs
-    firefox not showing thumbnail and showing blank last slide
     would be nice to see inquiry subject without clicking inquiry details in inquiry messages page
     after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
 SEO
