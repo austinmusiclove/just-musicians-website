@@ -572,8 +572,73 @@ class UserMessagesPlugin {
         return (bool) $wpdb->get_var($query);
     }
 
+    /**
+     * Returns the number of conversations where the latest message is unread by the given user.
+     *
+     * @param int $user_id The ID of the user.
+     * @return int|WP_Error Number of conversations with unread latest messages, or WP_Error on failure.
+     */
+    public function get_unread_conversation_count($user_id) {
+        global $wpdb;
+        $tables = $this->tables;
 
+        // Access control: Ensure user is logged in
+        if (!is_user_logged_in()) {
+            return new WP_Error('unauthorized', 'You must be logged in.', ['status' => 403]);
+        }
+        // Access control: Allow only if the user_id is the current user or user is an admin
+        $current_user_id = get_current_user_id();
+        if ($current_user_id !== (int) $user_id && !current_user_can('manage_options')) {
+            return new WP_Error('unauthorized', 'Cannot view another user\'s conversations.', ['status' => 403]);
+        }
+
+        // Get listing IDs the user owns (for conversation participation)
+        $user_listing_ids = get_user_meta($user_id, 'listings', true);
+        if (!is_array($user_listing_ids)) {
+            $user_listing_ids = [];
+        }
+
+        // Build SQL
+        $listing_placeholders = '';
+        $listing_params = [];
+        if (!empty($user_listing_ids)) {
+            $listing_placeholders = implode(',', array_fill(0, count($user_listing_ids), '%d'));
+            $listing_params = $user_listing_ids;
+        }
+
+        $sql = "
+            SELECT COUNT(*)
+            FROM wp_um_conversations c
+            INNER JOIN (
+                SELECT DISTINCT conversation_id
+                FROM wp_um_conversation_participants
+                WHERE (user_id = %d " . (!empty($listing_placeholders) ? " OR listing_id IN ($listing_placeholders)" : "") . ")
+            ) AS cp ON cp.conversation_id = c.id
+            INNER JOIN wp_um_messages m
+                ON m.id = (
+                    SELECT id
+                    FROM wp_um_messages
+                    WHERE conversation_id = c.id
+                    ORDER BY created_at DESC
+                    LIMIT 1
+                )
+            LEFT JOIN wp_um_read_receipts rr
+                ON rr.message_id = m.id AND rr.user_id = 1
+            WHERE rr.user_id IS NULL;
+        ";
+
+
+        $params = array_merge([$user_id], $listing_params, [$user_id]);
+        $prepared_sql = $wpdb->prepare($sql, ...$params);
+
+        $count = $wpdb->get_var($prepared_sql);
+        if ($count === false) {
+            return new WP_Error('db_error', 'Failed to fetch unread conversation count.', ['status' => 500]);
+        }
+        return (int) $count;
+    }
 }
+
 
 register_activation_hook(__FILE__, [new UserMessagesPlugin(), 'onActivate']);
 $user_messages_plugin = new UserMessagesPlugin();

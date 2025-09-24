@@ -1,7 +1,5 @@
 Next Improvements
-    show notifications bubble in menus for new messages
     prompt to add profile image and name with notification bubble
-    on mobile its kind of hard to tell you can scroll up to hit back to get to conversations list when in the conversation
     profile image(s) in conversation next to title
     click empty profile image takes you to settings to add image
 SEO
