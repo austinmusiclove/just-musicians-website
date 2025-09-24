@@ -103,6 +103,12 @@ async function shortPollMessages(alco, conversationId) {
     stopPollingMessages(alco); // Kill any existing interval first
 
     alco.messagePollingInterval = setInterval(async () => {
+
+        // Check if the tab is visible before polling
+        if (document.visibilityState !== "visible") {
+            return; // skip this iteration entirely
+        }
+
         // Pause while browser tab is inactive
         await new Promise(requestAnimationFrame);
 

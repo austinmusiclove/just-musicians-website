@@ -1,7 +1,4 @@
 Critical Bugs
-    sometimes the app sends requests for messages very fast without getting the response in a loop and then just breaks at some point and behaves normally
-        when i opened the app after a long time i went to a convo and it started spinning but the request was for a different conversation and it was sending that request in a loop until it finally sent the request for the right convo and it worked
-        this blocks the 403 redirect it seems because somehwo redir is interupted by another request
     weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate; happens after sending a message in my deer fellow convo in prod
 Next Improvements
     show notifications bubble in menus for new messages
