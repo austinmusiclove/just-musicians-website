@@ -43,6 +43,10 @@ async function fetchResource(alco, method, url, resourceName = 'resource', inFli
     return await fetch(url, fetchOptions)
     .then(response => {
         if (!response.ok) {
+            // Fallback to page refresh if nonce fails to refresh
+            if (response.status == 403) {
+                alco.redirect();
+            }
             throw new Error(`HTTP error ${response.status} :: Failed to ${method} ${resourceName}`, { cause: response.status });
         }
         if (inFlightFlag) { alco[inFlightFlag] = false; }

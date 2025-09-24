@@ -212,10 +212,12 @@ function hmm_scripts() {
         wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, true);
         wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, true);
         wp_localize_script('messages-api-js', 'siteData', [
-            'siteUrl' => site_url(),
-            'userId' => get_current_user_id(),
-            'nonce'   => wp_create_nonce('wp_rest'),
+            'siteUrl'              => site_url(),
+            'userId'               => get_current_user_id(),
+            'nonce'                => wp_create_nonce('wp_rest'),
+            'nonceRefreshInterval' => NONCE_REFRESH_INTERVAL,
         ]);
+        wp_enqueue_script('nonce-refresh-js', get_template_directory_uri() . '/lib/js/nonce-refresh.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'messages-js';
 
     }
@@ -317,4 +319,11 @@ function log_incoming_request_url() {
     error_log( 'Incoming Request URL: ' . $request_uri );
 }
 add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
+
+
+// Change nonce lifetime for testing only
+//add_filter( 'nonce_life', function( $seconds ) {
+    //return 20; // seconds
+//});
+
 ?>

@@ -1,17 +1,14 @@
 Critical Bugs
-    after leaving browser idle on messages page for hours, it fails to get messages; probably a session thing or nonce thing
-    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate
+    sometimes the app sends requests for messages very fast without getting the response in a loop and then just breaks at some point and behaves normally
+        when i opened the app after a long time i went to a convo and it started spinning but the request was for a different conversation and it was sending that request in a loop until it finally sent the request for the right convo and it worked
+        this blocks the 403 redirect it seems because somehwo redir is interupted by another request
+    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate; happens after sending a message in my deer fellow convo in prod
 Next Improvements
-    show read receipt
-        in get_conversation_messages() in user-messages.php
-        TODO add read by other party receipt
-        Get other participants
-        Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
-        alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     show notifications bubble in menus for new messages
     prompt to add profile image and name with notification bubble
     on mobile its kind of hard to tell you can scroll up to hit back to get to conversations list when in the conversation
     profile image(s) in conversation next to title
+    click empty profile image takes you to settings to add image
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
@@ -48,6 +45,12 @@ Advanced inquiries
     change listings page to html api
 Advanced messages
     show inquiry detail in right side panel
+    show read receipt
+        in get_conversation_messages() in user-messages.php
+        TODO add read by other party receipt
+        Get other participants
+        Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
+        alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
