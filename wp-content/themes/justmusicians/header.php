@@ -104,7 +104,8 @@
         "
         x-on:focus-elm="focusElm($event.detail.id)"
     >
-      <!-- Setting a fixed height allows us to position the popups on mobile -->
+    <!-- Setting a fixed height allows us to position the popups on mobile -->
+    <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->
     <header class="bg-brown-light-3 sticky top-0 z-50 h-28 md:h-16">
       <div class="container flex flex-row md:grid grid-cols-12 gap-2 md:gap-4 lg:gap-12 md:px-6 my-2">
 

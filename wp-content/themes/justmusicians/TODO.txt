@@ -1,5 +1,3 @@
-Critical Bugs
-    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate; happens after sending a message in my deer fellow convo in prod
 Next Improvements
     show notifications bubble in menus for new messages
     prompt to add profile image and name with notification bubble
@@ -136,6 +134,7 @@ Performance
 Bugs
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
     fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)
+    weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate; happens after sending a message in my deer fellow convo in prod
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen

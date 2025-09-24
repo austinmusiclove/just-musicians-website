@@ -24,7 +24,8 @@ get_header();
     </div>
 </div>
 
-<div class="lg:container h-[85vh] lg:h-[92vh]"
+<!-- Height calculation is to account for the header which is h-28 and md:h-16 -->
+<div class="lg:container h-[calc(100vh-7rem)] md:h-[calc(100vh-4rem)]"
     x-data="{
         conversationId: -1,
         conversations: [],
@@ -59,7 +60,8 @@ get_header();
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
 
         <!-- Conversations Menu -->
-        <div class="flex-col col-span-12 lg:col-span-4 z-0 border-r border-black/20 h-[85vh] lg:h-[92vh] lg:pl-[2rem] xl:pl-0"
+        <!-- Height calculation is to account for the header which is h-28 and md:h-16 -->
+        <div class="flex-col col-span-12 lg:col-span-4 z-0 border-r border-black/20 lg:pl-[2rem] xl:pl-0 h-[calc(100vh-7rem)] md:h-[calc(100vh-4rem)]"
             :class="conversationsView ? 'flex' : 'hidden lg:flex'"
         >
             <?php echo get_template_part('template-parts/messages/conversations-menu', '', [
@@ -69,7 +71,8 @@ get_header();
         </div>
 
         <!-- Message Board -->
-        <div class="pb-8 sm:pb-4 flex-col lg:col-span-8 h-[85vh] lg:h-[92vh]"
+        <!-- Height calculation is to account for the header which is h-28 and md:h-16 -->
+        <div class="pb-8 sm:pb-4 flex-col lg:col-span-8 h-[calc(100vh-7rem)] md:h-[calc(100vh-4rem)]"
             :class="messagesView ? 'flex' : 'hidden lg:flex'"
         >
             <?php echo get_template_part('template-parts/messages/message-board', '', []); ?>
