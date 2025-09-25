@@ -137,44 +137,95 @@ function get_venue_reviews_batch() {
 }
 
 function get_venue_reviews_csv() {
-    $result = "id,Venue Post Id,Overall Rating,Hours Performed,Total Performers,Comp Structure String,Guarantee Promise,Guarantee Eearnings,Door Earnings,Door Percentage,Bar Earnings,Bar Percentage,Tips Earnings,Total Earnings,Payment Speed,Payment Method,Backline,Review,end\n";
-    $args = array(
-        'post_type' => 'venue_review',
-        'nopaging' => true,
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="venue_reviews.csv"');
+
+    $fh = fopen('php://output', 'w');
+
+    // header row
+    fputcsv($fh, [
+        'id','Venue Name','Venue Post Id','Performing Act Name','Middle Man',
+        'Gig Type','Performance Date','Performance Start Time','Minutes Performed',
+        'Hours Performed','Total Performers','Total Acts','Recommend To Others',
+        'Overall Rating','Communication Rating','Sound Rating','Safety Rating',
+        'Comp Structure','Comp Structure String','Versus Comp 1','Versus Comp 2',
+        'Guarantee Promise','Guarantee Earnings','Door Percentage','Door Earnings',
+        'Bar Percentage','Bar Earnings','Tips Earnings','Production Cost',
+        'Production Cost Type','Other Comp Structure','Total Earnings','Payment Speed',
+        'Payment Method','Provided Sound Engineer','Backline','Verified',
+        'Performance','Author Email','Author Contact','Notes','_Earnings Per Performer',
+        '_Earnings Per Hour','_Earnings Per Performer Per Hour','Exclude From Stats','Review'
+    ]);
+
+    $args = [
+        'post_type'   => 'venue_review',
+        'nopaging'    => true,
         'post_status' => 'publish',
-    );
+    ];
     $query = new WP_Query($args);
+
     if ($query->have_posts()) {
-        while( $query->have_posts() ) {
+        while ($query->have_posts()) {
             $query->the_post();
-            $row = array(
+
+            $row = [
                 get_the_ID(),
+                get_field('venue_name'),
                 get_field('venue_post_id'),
-                get_field('overall_rating'),
+                get_field('performing_act_name'),
+                get_field('middle_man'),
+                get_field('gig_type'),
+                get_field('performance_date'),
+                get_field('performance_start_time'),
+                get_field('minutes_performed'),
                 get_field('hours_performed'),
                 get_field('total_performers'),
+                get_field('total_acts'),
+                get_field('recommend_to_others'),
+                get_field('overall_rating'),
+                get_field('communication_rating'),
+                get_field('sound_rating'),
+                get_field('safety_rating'),
+                is_array(get_field('comp_structure')) ? implode(',', get_field('comp_structure')) : get_field('comp_structure'),
                 get_field('_comp_structure_string'),
+                get_field('versus_comp_1'),
+                get_field('versus_comp_2'),
                 get_field('guarantee_promise'),
                 get_field('guarantee_earnings'),
-                get_field('door_earnings'),
                 get_field('door_percentage'),
-                get_field('bar_earnings'),
+                get_field('door_earnings'),
                 get_field('bar_percentage'),
+                get_field('bar_earnings'),
                 get_field('tips_earnings'),
+                get_field('production_cost'),
+                get_field('production_cost_type'),
+                get_field('other_comp_structure'),
                 get_field('total_earnings'),
                 get_field('payment_speed'),
                 get_field('payment_method'),
-                get_field('backline'),
-                get_field('review'),
+                get_field('provided_sound_engineer'),
+                is_array(get_field('backline')) ? implode(',', get_field('backline')) : get_field('backline'),
+                get_field('verified'),
+                get_field('performance'),
+                get_field('author_email'),
+                get_field('author_contact'),
+                get_field('notes'),
+                get_field('_earnings_per_performer'),
+                get_field('_earnings_per_hour'),
+                get_field('_earnings_per_performer_per_hour'),
                 get_field('exclude_from_stats'),
-                "end",
-            );
-            $result = $result . implode(',', $row) . "\n";
+                get_field('review'),
+            ];
+
+            fputcsv($fh, $row);
         }
     }
     wp_reset_postdata();
-    return $result;
+
+    fclose($fh);
+    exit; // stop WP from appending anything
 }
+
 
 function update_venue_review_stats() {
     // get venues

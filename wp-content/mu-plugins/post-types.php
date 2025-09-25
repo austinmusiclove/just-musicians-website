@@ -26,6 +26,36 @@ function register_post_types() {
         'menu_icon' => 'dashicons-store'
     ));
 
+    // Listing Review
+    register_post_type('listing_review', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Listing Review',
+          'add_new_item' => 'Add New Listing Review',
+          'edit_item' => 'Edit Listing Review',
+          'all_items' => 'All Listing Reviews',
+          'singular_name' => 'Listing Review'
+        ),
+        'menu_icon' => 'dashicons-star-empty'
+    ));
+
+    // Buyer Review
+    register_post_type('buyer_review', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Buyer Review',
+          'add_new_item' => 'Add New Buyer Review',
+          'edit_item' => 'Edit Buyer Review',
+          'all_items' => 'All Buyer Reviews',
+          'singular_name' => 'Buyer Review'
+        ),
+        'menu_icon' => 'dashicons-star-empty'
+    ));
+
     // Venue Review
     register_post_type('venue_review', array(
         'public' => true,
@@ -176,6 +206,7 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-editor-code'
     ));
+
 }
 
 function register_taxonomies() {
