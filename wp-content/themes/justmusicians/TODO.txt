@@ -1,13 +1,3 @@
-Next Improvements
-    click empty profile image takes you to settings to add image
-SEO
-    remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
-    indexing
-        add listing titles in meta description
-        add internal linking for featured pages
-        maybe add artist bios
-        maybe add some kind of page blurb
-    add best x in x listacle blog posts
 Reviews
     add reviews post types for artist, booker, venue, gd-venue
     artist review form with simple rating and review
@@ -15,7 +5,7 @@ Reviews
     booker review form with simple rating and review
     display booker reviews on inquiries
     venue review form with simple rating and review
-    gb-venue review form with structured comp data
+    gd-venue review form with structured comp data
     create venue page with venue reviews and compensation data on it
     add regular email to invite artists to write venue and gb-venue reviews
     add regular email to invite artists to solicit reviews from bookers
@@ -34,6 +24,14 @@ Advanced inquiries
     search bar for inquiries
     record response time
     change listings page to html api
+SEO
+    remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
+    indexing
+        add listing titles in meta description
+        add internal linking for featured pages
+        maybe add artist bios
+        maybe add some kind of page blurb
+    add best x in x listacle blog posts
 Advanced messages
     show inquiry detail in right side panel
     profile image(s) in conversation next to title
