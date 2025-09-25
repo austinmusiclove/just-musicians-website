@@ -1,6 +1,4 @@
 Next Improvements
-    prompt to add profile image and name with notification bubble
-    profile image(s) in conversation next to title
     click empty profile image takes you to settings to add image
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
@@ -38,6 +36,7 @@ Advanced inquiries
     change listings page to html api
 Advanced messages
     show inquiry detail in right side panel
+    profile image(s) in conversation next to title
     show read receipt
         in get_conversation_messages() in user-messages.php
         TODO add read by other party receipt
@@ -99,6 +98,7 @@ Testing
     test apostrophes everywhere
     test when nonce expires and api does not return data
 UX
+    prompt to add profile image and name with notification bubble
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
