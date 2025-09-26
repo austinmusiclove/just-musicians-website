@@ -1,19 +1,4 @@
 Reviews
-    add reviews post types for artist, booker, venue, gd-venue
-        staging
-            pull master
-            wp cli to change slug
-            check acf and change post type and field group name for field group
-            flush permalinks
-            check data is there
-            add acf for listing_review, buyer_review, venue_review
-        master
-            pull master
-            wp cli to change slug
-            check acf and change post type and field group name for field group
-            flush permalinks
-            check data is there
-            add acf for listing_review, buyer_review, venue_review
     artist review form with simple rating and review
     display reviews on artist page
     booker review form with simple rating and review
