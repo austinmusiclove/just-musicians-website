@@ -53,6 +53,13 @@ function html_api_rewrite_rules() {
         'top'
     );
 
+    // Reviews
+    add_rewrite_rule(
+        '^wp-html/v1/reviews/listing/([0-9]+)/?$',
+        'index.php?wp-html-v1=listing-reviews&listing-id=$matches[1]',
+        'bottom'
+    );
+
 }
 add_action('init', 'html_api_rewrite_rules');
 

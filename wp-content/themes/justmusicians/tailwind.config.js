@@ -79,6 +79,7 @@ module.exports = {
 		'./template-parts/listings/*.{php,js}',
 		'./template-parts/listings/**/*.{php,js}',
 		'./template-parts/listing-page/*.{php,js}',
+		'./template-parts/listing-page/**/*.{php,js}',
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
 		'./template-parts/login/*.{php,js}',

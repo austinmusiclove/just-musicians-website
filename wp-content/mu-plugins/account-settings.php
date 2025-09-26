@@ -22,6 +22,8 @@ function get_account_settings() {
     return [
         'display_name'  => clean_display_name($user_info->display_name),
         'profile_image' => $profile_image,
+        'organization'  => get_field('organization', 'user_' . $user_id),
+        'position'      => get_field('position', 'user_' . $user_id),
     ];
 }
 
@@ -56,13 +58,19 @@ function update_account_settings($args) {
     $user_id = get_current_user_id();
     if (!$user_id) { return $result; }
 
-    // Update display name
+    // Update display name, position, organization
     if (!empty($args['display_name'])) {
         wp_update_user([
             'ID'           => $user_id,
-            'display_name' => $args['display_name']
+            'display_name' => $args['display_name'],
+            'meta_input'   => [
+                'organization' => $args['organization'],
+                'position'     => $args['position'],
+            ],
         ]);
         $result['display_name'] = $args['display_name'];
+        $result['organization'] = $args['organization'];
+        $result['position']     = $args['position'];
     }
 
     // Handle profile image upload
@@ -87,6 +95,8 @@ function get_post_account_settings_args() {
     $sanitized_args = [];
 
     if (isset($_POST['display_name']))       { $sanitized_args['display_name']  = sanitize_text_field($_POST['display_name']); }
+    if (isset($_POST['organization']))       { $sanitized_args['organization']  = sanitize_text_field($_POST['organization']); }
+    if (isset($_POST['position']))           { $sanitized_args['position']      = sanitize_text_field($_POST['position']); }
     if (isset($_POST['profile_image_meta'])) { $sanitized_args['profile_image'] = custom_parse_file($_POST['profile_image_meta'], 'profile_image'); }
 
     return $sanitized_args;

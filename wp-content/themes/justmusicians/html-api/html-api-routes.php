@@ -46,6 +46,12 @@ function html_api_v1_template_redirects() {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;
             }
 
+        // Reviews
+        case 'listing-reviews':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'   : include_once get_template_directory() . '/html-api/get-listing-reviews.php'; exit;
+            }
+
         // Active Search
         case 'search-options':
             switch ($_SERVER['REQUEST_METHOD']) {

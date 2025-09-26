@@ -50,6 +50,12 @@ get_header();
                         <!-- Display Name -->
                         <?php echo get_template_part('template-parts/account/settings/display-name', '', []); ?>
 
+                        <!-- Organization -->
+                        <?php echo get_template_part('template-parts/account/settings/organization', '', []); ?>
+
+                        <!-- Position -->
+                        <?php echo get_template_part('template-parts/account/settings/position', '', []); ?>
+
                         <!-- Profile Image -->
                         <?php echo get_template_part('template-parts/account/settings/profile-image', '', []); ?>
 
