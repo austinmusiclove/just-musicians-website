@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Hire More Musicians Performances API
- * Description: A custom plugin to expose REST APIs for managing venue_review posts
+ * Description: A custom plugin to expose REST APIs for managing compensation_report posts
  * Version: 1.0
  * Author: John Filippone
  */
@@ -11,33 +11,33 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', 'venue_reviews', [
+    register_rest_route( 'v1', 'compensation_reports', [
         'methods' => 'GET',
-        'callback' => 'get_venue_reviews',
+        'callback' => 'get_compensation_reports',
         'permission_callback' => '__return_true',
     ]);
-    register_rest_route( 'v1', 'venue_reviews/batch', [
+    register_rest_route( 'v1', 'compensation_reports/batch', [
         'methods' => 'GET',
-        'callback' => 'get_venue_reviews_batch',
+        'callback' => 'get_compensation_reports_batch',
         'permission_callback' => '__return_true',
     ]);
-    register_rest_route( 'v1', 'venue_reviews/csv', [
+    register_rest_route( 'v1', 'compensation_reports/csv', [
         'methods' => 'GET',
-        'callback' => 'get_venue_reviews_csv',
+        'callback' => 'get_compensation_reports_csv',
         'permission_callback' => '__return_true',
     ]);
-    register_rest_route( 'v1', 'venue_review/stats', [
+    register_rest_route( 'v1', 'compensation_report/stats', [
         'methods' => 'GET',
-        'callback' => 'update_venue_review_stats',
+        'callback' => 'update_compensation_report_stats',
         'permission_callback' => '__return_true',
     ]);
 });
 
-function get_venue_reviews() {
+function get_compensation_reports() {
     $venue_id = sanitize_text_field($_GET['venue_id']);
     $result = array();
     $args = array(
-        'post_type' => 'venue_review',
+        'post_type' => 'compensation_report',
         'nopaging' => true,
         'post_status' => 'publish',
         'meta_key' => 'venue_post_id',
@@ -81,14 +81,14 @@ function get_venue_reviews() {
     return $result;
 }
 
-function get_venue_reviews_batch() {
+function get_compensation_reports_batch() {
     $result = array();
     $venue_ids = $_GET['venue_ids'];
     $venue_ids_array =  array_filter(explode(',', $venue_ids));
     if (count($venue_ids_array) == 0) {return $result;}
 
     $args = array(
-        'post_type' => 'venue_review',
+        'post_type' => 'compensation_report',
         'nopaging' => true,
         'post_status' => 'publish',
         'meta_query' => array(
@@ -136,9 +136,9 @@ function get_venue_reviews_batch() {
     return $result;
 }
 
-function get_venue_reviews_csv() {
+function get_compensation_reports_csv() {
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="venue_reviews.csv"');
+    header('Content-Disposition: attachment; filename="compensation_reports.csv"');
 
     $fh = fopen('php://output', 'w');
 
@@ -158,7 +158,7 @@ function get_venue_reviews_csv() {
     ]);
 
     $args = [
-        'post_type'   => 'venue_review',
+        'post_type'   => 'compensation_report',
         'nopaging'    => true,
         'post_status' => 'publish',
     ];
@@ -227,10 +227,10 @@ function get_venue_reviews_csv() {
 }
 
 
-function update_venue_review_stats() {
+function update_compensation_report_stats() {
     // get venues
     $args = array(
-        'post_type' => 'venue_review',
+        'post_type' => 'compensation_report',
         'nopaging' => true,
     );
     $venues_query = new WP_Query($args);
@@ -240,7 +240,7 @@ function update_venue_review_stats() {
         while( $venues_query->have_posts() ) {
             $venues_query->the_post();
             $venue = get_field('venue');
-            $venue_review_post_id = get_the_ID();
+            $compensation_report_post_id = get_the_ID();
             $total_earnings = (float)get_post_meta(get_the_ID(), 'total_earnings' , true);
             $total_performers = (int)get_post_meta(get_the_ID(), 'total_performers' , true);
             $hours_performed = (float)get_post_meta(get_the_ID(), 'hours_performed' , true);
@@ -250,7 +250,7 @@ function update_venue_review_stats() {
 
             // update venue review meta data
             $update_args = array(
-                'ID' => $venue_review_post_id,
+                'ID' => $compensation_report_post_id,
                 'meta_input' => array(
                     'venue_name' => $venue[0]->name,
                     'venue_post_id' => $venue[0]->ID,

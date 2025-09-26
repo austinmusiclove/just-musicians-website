@@ -1,6 +1,19 @@
 Reviews
     add reviews post types for artist, booker, venue, gd-venue
-        download venue reviews and venue review submissions (as a backup for the original submitted data)
+        staging
+            pull master
+            wp cli to change slug
+            check acf and change post type and field group name for field group
+            flush permalinks
+            check data is there
+            add acf for listing_review, buyer_review, venue_review
+        master
+            pull master
+            wp cli to change slug
+            check acf and change post type and field group name for field group
+            flush permalinks
+            check data is there
+            add acf for listing_review, buyer_review, venue_review
     artist review form with simple rating and review
     display reviews on artist page
     booker review form with simple rating and review
@@ -13,8 +26,6 @@ Reviews
         booker gets email requesting review, makes account, writes review
         invite artist to review booker
     make sure reviews can only be done by invite
-    deploy
-        add acf for listing_review, buyer_review
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side

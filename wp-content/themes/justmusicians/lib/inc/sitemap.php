@@ -15,8 +15,11 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['artist'] );
     unset( $post_types['performance'] );
     unset( $post_types['venue'] );
+    unset( $post_types['listing_review'] );
+    unset( $post_types['buyer_review'] );
     unset( $post_types['venue_review'] );
-    unset( $post_types['review_submission'] );
+    unset( $post_types['compensation_report'] );
+    unset( $post_types['review_submission'] ); // Keep this old post type unless all review submission posts are deleted
 
     return $post_types;
 }

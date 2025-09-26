@@ -159,7 +159,7 @@ function update_venue_stats() {
             $venues_query->the_post();
             $venue_post_id = get_the_ID();
             $query_args = array(
-                'post_type' => 'venue_review',
+                'post_type' => 'compensation_report',
                 'nopaging' => true,
                 'post_status' => 'publish',
                 'meta_query' => array(
@@ -170,11 +170,11 @@ function update_venue_stats() {
                     )
                 )
             );
-            $venue_reviews_query = new WP_Query($query_args);
-            if ($venue_reviews_query->have_posts()) {
+            $comp_report_query = new WP_Query($query_args);
+            if ($comp_report_query->have_posts()) {
 
-                while( $venue_reviews_query->have_posts() ) {
-                    $venue_reviews_query->the_post();
+                while( $comp_report_query->have_posts() ) {
+                    $comp_report_query->the_post();
                     $review_count++;
                     if (!get_field('exclude_from_stats')) {
                         $stats_review_count++;

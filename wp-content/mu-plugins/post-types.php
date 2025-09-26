@@ -71,7 +71,23 @@ function register_post_types() {
         'menu_icon' => 'dashicons-star-empty'
     ));
 
+    // Compensation Report
+    register_post_type('comp_report', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Compensation Report',
+          'add_new_item' => 'Add New Compensation Report',
+          'edit_item' => 'Edit Compensation Report',
+          'all_items' => 'All Compensation Reports',
+          'singular_name' => 'Compensation Report'
+        ),
+        'menu_icon' => 'dashicons-clipboard'
+    ));
+
     // Venue Review Submission
+    /*
     register_post_type('review_submission', array(
         'public' => true,
         'show_in_rest' => true,
@@ -85,6 +101,7 @@ function register_post_types() {
         ),
         'menu_icon' => 'dashicons-clipboard'
     ));
+    */
 
     // Listing
     register_post_type('listing', array(
