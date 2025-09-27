@@ -27,6 +27,7 @@
 		"url": "https://dbussell@bitbucket.org/dbussell/justmusicians.git"
 	},
 	"dependencies": {
+		"@tailwindcss/line-clamp": "^0.4.4",
 		"libwebp-wasm": "^0.1.6",
 		"wasm-webp": "^0.0.2"
 	}

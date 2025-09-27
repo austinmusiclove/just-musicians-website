@@ -3,17 +3,10 @@ Improvements
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
     notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
 Reviews
-    deploy
-        add author to acf
-        add organization and position to user meta in acf
-    display reviews on artist page
-        move reviews templates to their own folder with the stars as well
-        create test data for listing
-        get reviews function in mu-plugins
-        user get reviews function in html api to return html for all reviews
-        add slider capability
+    add first reviews on live site
+    add lisitng review pagination on listing page
     artist review form with simple rating and review
-        add button to write a review
+        add button to write a review (and make the one in the new reviews state work)
         on click prompt to log in if not already
         on click bring up modal with simple review form
     booker review form with simple rating and review

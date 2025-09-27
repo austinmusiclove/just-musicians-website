@@ -80,6 +80,8 @@ module.exports = {
 		'./template-parts/listings/**/*.{php,js}',
 		'./template-parts/listing-page/*.{php,js}',
 		'./template-parts/listing-page/**/*.{php,js}',
+		'./template-parts/reviews/*.{php,js}',
+		'./template-parts/reviews/**/*.{php,js}',
 		'./template-parts/search/*.{php,js}',
 		'./template-parts/search/sort.php',
 		'./template-parts/login/*.{php,js}',
@@ -140,6 +142,7 @@ module.exports = {
 			},
 			aspectRatio: {
 				'4/3': '4 / 3',
+				'9/16': '9 / 16',
 			},
             minHeight: (theme) => ({
                 ...theme('spacing'),
@@ -177,6 +180,7 @@ module.exports = {
 				},
 			  }
 			})
-		  }
+		  },
+        require('@tailwindcss/line-clamp'),
 	  ],
 }

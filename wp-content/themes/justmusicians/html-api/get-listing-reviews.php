@@ -1,30 +1,36 @@
 <?php
 
-// Get reviews
 
-$reviews = [];
-$review_count = 6;
-$average_rating = 2.3;
+$listing_id = get_query_var('listing-id');
+$reviews = get_listing_reviews($listing_id);
+$review_count = count($reviews);
+$average_rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
+
+
+// Return reviews or no review state
+if (count($reviews) > 0) {
+    foreach($reviews as $review) {
+        echo get_template_part('template-parts/reviews/listing-review', '', [
+            'rating'              => $review['rating'],
+            'review'              => $review['review'],
+            'author_name'         => $review['author_name'],
+            'author_organization' => $review['author_organization'],
+            'author_position'     => $review['author_position'],
+            'author_image_url'    => $review['author_image_url'],
+        ]);
+    }
+} else {
+    echo get_template_part('template-parts/reviews/no-listing-reviews', '', [] );
+}
 
 ?>
 
+
+<!-- Return review count -->
 <span id="review-count" hx-swap-oob="outerHTML"><?php echo $review_count; ?></span>
+
+
+<!-- Return average rating stars -->
 <div id="average-rating" class="flex gap-x-1 text-yellow w-24" hx-swap-oob="outerHTML">
-    <?php echo get_template_part('template-parts/global/ratings/rating-stars', '', [ 'rating' => $average_rating, ]); ?>
+    <?php echo get_template_part('template-parts/reviews/rating-stars', '', [ 'rating' => $average_rating, ]); ?>
 </div>
-
-
-<?php
-
-// Iterate reviews
-// Or no reviews state if no reviews
-
-echo get_template_part('template-parts/global/review', '', [
-    'rating'           => 3.5,
-    'review'           => 'Qui dolor enim consectetur do et non ex amet culpa sint in ea non dolore. Enim minim magna anim id minim eu cillum sunt dolore aliquip. Amet elit laborum culpa irure incididunt adipisicing culpa amet officia exercitation. Eu non aute velit id velit Lorem elit anim pariatur.',
-    'author'           => 'John Filippone',
-    'author_title'     => 'Talent Buyer at Austin Music Love',
-    'author_image_url' => 'https://hiremoremusicians.com/wp-content/uploads/2025/09/instagram-small.webp',
-]);
-
-?>
