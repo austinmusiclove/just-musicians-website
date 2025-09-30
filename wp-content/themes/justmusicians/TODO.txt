@@ -1,14 +1,14 @@
 Improvements
-    not able to use inquiry modal on mobile chrome; next button not on screen
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
     notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
 Reviews
-    add first reviews on live site
     add lisitng review pagination on listing page
     artist review form with simple rating and review
+        modal on listing page (allow mdl query arg to open review when link is followed)
         add button to write a review (and make the one in the new reviews state work)
         on click prompt to log in if not already
         on click bring up modal with simple review form
+        review form has rating, review, name, org, position and user's info is included and updated for name, org, position (maybe image too)
     booker review form with simple rating and review
     display booker reviews on inquiries
     venue review form with simple rating and review

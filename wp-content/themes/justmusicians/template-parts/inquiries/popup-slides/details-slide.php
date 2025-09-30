@@ -1,4 +1,4 @@
-<div data-slide="2" class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showDetailsSlide" x-cloak >
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showDetailsSlide" x-cloak >
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Your Message to the musicians</h2>
@@ -12,7 +12,7 @@
     />
 
     <p class="text-16 mt-8 mb-4">Enter any other relevant details about your event that a musician would need to give you a quote.</p>
-    <textarea class="w-full h-40 mb-6" name="inquiry_details"></textarea>
+    <textarea class="w-full h-24 sm:h-40 mb-6" name="inquiry_details"></textarea>
 
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
 
