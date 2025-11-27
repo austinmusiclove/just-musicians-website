@@ -23,7 +23,7 @@ get_header();
         <div class="sm:col-span-4 flex flex-col gap-y-6 justify-center">
             <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
             <?php the_content(); ?>
-            <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold">Hosted by <?php the_author(); ?></div>
+            <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold">Hosted by John Filippone</div>
         </div>
 
 
