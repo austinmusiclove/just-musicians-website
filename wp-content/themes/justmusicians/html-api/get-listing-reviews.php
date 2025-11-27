@@ -1,5 +1,7 @@
 <?php
 
+$MAX_REVIEWS_TO_DISPLAY = 10; // Remove after pagination is implemented for reviews on listing pages
+
 
 $listing_id = get_query_var('listing-id');
 $reviews = get_listing_reviews($listing_id);
@@ -9,15 +11,17 @@ $average_rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')
 
 // Return reviews or no review state
 if (count($reviews) > 0) {
-    foreach($reviews as $review) {
-        echo get_template_part('template-parts/reviews/listing-review', '', [
-            'rating'              => $review['rating'],
-            'review'              => $review['review'],
-            'author_name'         => $review['author_name'],
-            'author_organization' => $review['author_organization'],
-            'author_position'     => $review['author_position'],
-            'author_image_url'    => $review['author_image_url'],
-        ]);
+    foreach($reviews as $index => $review) {
+        if ($index < $MAX_REVIEWS_TO_DISPLAY) {
+            echo get_template_part('template-parts/reviews/listing-review', '', [
+                'rating'              => $review['rating'],
+                'review'              => $review['review'],
+                'author_name'         => $review['author_name'],
+                'author_organization' => $review['author_organization'],
+                'author_position'     => $review['author_position'],
+                'author_image_url'    => $review['author_image_url'],
+            ]);
+        }
     }
 } else {
     echo get_template_part('template-parts/reviews/no-listing-reviews', '', [] );
