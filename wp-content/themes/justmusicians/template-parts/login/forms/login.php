@@ -2,7 +2,7 @@
 
     <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
         <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
-        <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign in to your account</h2>
+        <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight" x-text="loginModalMessage">Sign in to your account</h2>
     </div>
     <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div class="bg-white px-6 pb-4 sm:px-12">
@@ -49,5 +49,5 @@
             </div>
         </div>
     </div>
-    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showLoginModal = false; loginModalMessage = 'Sign in to your account'; showSignupModal = true;">Sign up here</span></p>
+    <p class="text-center text-sm mt-4">Don't have an account? <span class="hover:underline underline cursor-pointer" x-on:click="showLoginModal = false; showSignupModal = true;">Sign up here</span></p>
 </div>
