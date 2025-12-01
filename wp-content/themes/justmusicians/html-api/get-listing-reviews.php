@@ -23,6 +23,7 @@ if (count($reviews) > 0) {
             ]);
         }
     }
+    echo get_template_part('template-parts/reviews/write-review-button', '', []);
 } else {
     echo get_template_part('template-parts/reviews/no-listing-reviews', '', [] );
 }

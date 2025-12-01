@@ -4,11 +4,15 @@ Improvements
     notification bubble not showing up on home page; only in account pages
 Reviews
     artist review form with simple rating and review
-        modal on listing page (allow mdl query arg to open review when link is followed)
-        add button to write a review (and make the one in the new reviews state work)
-        on click prompt to log in if not already
-        on click bring up modal with simple review form
-        review form has rating, review, name, org, position and user's info is included and updated for name, org, position (maybe image too)
+        create modal component for review
+        write review buttons
+            open review modal on click write review button when logged in
+            create link for reviewing an artist that opens the correct modal depending on if the user is logged in
+        submit review
+            include rating, review, name, org, position, image
+            autofill name, org, position, image from user data
+            create review on submit
+            update user info on submit as well
     booker review form with simple rating and review
     display booker reviews on inquiries
     venue review form with simple rating and review
