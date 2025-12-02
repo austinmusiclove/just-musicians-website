@@ -1,5 +1,7 @@
 
-<div class="w-full">
+<div class="w-full"
+    x-init="revieweeName = '<?php echo get_field('name'); ?>'"
+>
 
     <!-- Heading -->
     <h2 class="text-22 font-bold mb-5 flex gap-2">Reviews

@@ -53,6 +53,15 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
+            reviewProgress: 0,
+            currentReviewSlide: '',
+            showReviewModal: false,
+            showReviewSlide: true,
+            showReviewUserInfoSlide: false,
+            showReviewThankYouSlide: false,
+            showReviewErrorSlide: false,
+            revieweeName: '',
+            reviewBody: '',
             inquiryProgress: 0,
             showInquiryModal: false,
             currentInquirySlide: '',
@@ -79,6 +88,7 @@
             _clearInquiryForm()                                  { clearInquiryForm(this); },
             _showInquirySlide(slide)                             { showInquirySlide(this, slide); },
             _openInquiryModal(listingId, listingName)            { openInquiryModal(this, listingId, listingName); },
+            _openReviewModal(reviewType, revieweeId)             { openReviewModal(this, reviewType, revieweeId); },
             _tryExitInquiryModal()                               { tryExitInquiryModal(this); },
             _exitInquiryModal()                                  { exitInquiryModal(this); },
             _submitInquiry()                                     { submitInquiry(this); },
@@ -240,4 +250,5 @@
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
+        echo get_template_part('template-parts/reviews/review-popup', '', []);
     ?>

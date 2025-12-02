@@ -7,4 +7,5 @@
 <!-- Logged In Write Review Button -->
 <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2"
     x-show="loggedIn" x-cloak
+    x-on:click="_openReviewModal('', '')"
 >Write a Review</button>
