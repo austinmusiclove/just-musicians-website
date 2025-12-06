@@ -1,13 +1,25 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showReviewSlide" x-cloak >
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showReviewSlide" x-cloak>
 
 
     <!-- Heading -->
     <h2 class="font-bold font-poppins text-20 mb-8 sm:mb-16">Tell us about your experience with <span x-text="revieweeName"></span></h2>
 
 
-    <!-- Rating Stars -->
-    <div class="flex gap-x-1 text-yellow w-48 sm:w-64 my-4 sm:my-8">
-        <?php echo get_template_part('template-parts/reviews/rating-stars-input', '', []); ?>
+    <!-- Rating Stars Input -->
+    <div class="flex gap-x-1 text-yellow w-48 sm:w-64 my-4 sm:my-8"
+        :class="{ 'shake': shakeElements.has('reviewRatingInput') }"
+        x-ref="reviewRating"
+    >
+        <div
+            class="flex gap-x-1 text-yellow w-48 sm:w-64 my-4 sm:my-8 cursor-pointer"
+            x-on:mouseleave="mouseoverRating = 0"
+        >
+            <?php for ($rating_val = 1; $rating_val <= 5; $rating_val++) {
+                echo get_template_part('template-parts/reviews/stars/interactive-rating-star', '', [ 'rating_val' => $rating_val ]);
+            } ?>
+        </div>
+
+        <input type="hidden" name="rating" id="rating-input" x-model="rating">
     </div>
 
 
@@ -24,13 +36,17 @@
     <!-- Submit Button -->
     <div class="absolute bottom-10 right-10 flex flex-row gap-1">
 
-        <!-- If no listing has been selected, show submit button -->
+        <!-- If rating has been selected and body is long enough, show submit button; else show disabled button that waggles the required input -->
         <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
-            x-show="reviewBody.length < 50" x-cloak
+            x-show="rating == 0" x-cloak
+            x-on:click.prevent="_emphasizeElm($refs.reviewRating, 'reviewRatingInput')"
+        >Submit</button>
+        <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
+            x-show="rating > 0 && reviewBody.length < 50" x-cloak
             x-on:click.prevent="_emphasizeElm($refs.reviewBody, 'reviewBodyInput')"
         >Submit</button>
         <button type="submit" class="flex justify-center items-center bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2 w-[82px] h-[40px]"
-            x-show="reviewBody.length >= 50" x-cloak
+            x-show="rating > 0 && reviewBody.length >= 50" x-cloak
         >
             <span class="absolute htmx-indicator-replace">Submit</span>
             <span class="absolute flex items-center justify-center htmx-indicator">

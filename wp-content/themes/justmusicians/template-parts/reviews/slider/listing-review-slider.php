@@ -14,7 +14,7 @@
         <!-- Slides -->
         <?php
         foreach($args['reviews'] as $review) {
-            echo get_template_part('template-parts/reviews/listing-review-slide', '', [
+            echo get_template_part('template-parts/reviews/slider/listing-review-slide', '', [
                 'rating'              => $review['rating'],
                 'review'              => $review['review'],
                 'author_name'         => $review['author_name'],

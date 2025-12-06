@@ -1,12 +1,18 @@
+Local Macbook Env
+    Fix ACF fields and groups
+    import listings
+    import media
+    import inquiries
+    import users
 Improvements
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
     notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
     notification bubble not showing up on home page; only in account pages
 Reviews
     artist review form with simple rating and review
-        match js to current paradigm instead of using event handlers in review-modal.js
         create link for reviewing an artist that opens the correct modal depending on if the user is logged in
         submit review
+            only allow submit when rating has been selected
             pass in review type (listing)
             pass in reviewee id (listing post id)
             include rating, review, name, org, position, image
@@ -15,6 +21,7 @@ Reviews
             update user info on submit as well
         thank you slide
         error slide
+        make progress 25 on open, 50 when adding one field; 75 when adding the other; 100 on thank you
     booker review form with simple rating and review
     display booker reviews on inquiries
     create venue page with venue reviews and compensation data on it

@@ -21,39 +21,3 @@ function openReviewModal(alco, reviewType, revieweeId) {
     // set reviewee Id
     showReviewSlide(alco, 'review');
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const starContainer = document.getElementById("rating-stars");
-    const stars = starContainer.querySelectorAll(".star");
-    const ratingInput = document.getElementById("rating-input");
-
-    function fillStars(amount) {
-        stars.forEach((star, index) => {
-            const svg = star.querySelector("svg");
-            const fill = (index < amount) ? 100 : 0;
-
-            // Update the clip-path % of the foreground path
-            const fillGroup = svg.querySelector("g");
-            fillGroup.style.clipPath = `inset(0 ${100 - fill}% 0 0)`;
-        });
-    }
-
-    stars.forEach(star => {
-        star.addEventListener("mouseover", () => {
-            const hoverValue = parseInt(star.dataset.value, 10);
-            fillStars(hoverValue);
-        });
-
-        star.addEventListener("click", () => {
-            const clickedValue = parseInt(star.dataset.value, 10);
-            starContainer.dataset.selected = clickedValue;
-            ratingInput.value = clickedValue;
-            fillStars(clickedValue);
-        });
-    });
-
-    starContainer.addEventListener("mouseleave", () => {
-        const selected = parseInt(starContainer.dataset.selected, 10);
-        fillStars(selected);
-    });
-});
