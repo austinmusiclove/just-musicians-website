@@ -14,7 +14,7 @@
 
         <!-- Stars -->
         <div class="flex gap-x-1 text-yellow w-24 sm:w-32">
-            <?php echo get_template_part('template-parts/reviews/rating-stars', '', [ 'rating' => $args['rating'], ]); ?>
+            <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => $args['rating'], ]); ?>
         </div>
 
         <!-- Review -->

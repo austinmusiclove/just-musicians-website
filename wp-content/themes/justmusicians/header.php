@@ -250,5 +250,5 @@
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
-        echo get_template_part('template-parts/reviews/review-popup', '', []);
+        echo get_template_part('template-parts/reviews/popup/review-popup', '', []);
     ?>
