@@ -77,4 +77,13 @@ echo get_template_part('template-parts/schema/local-business-schema', '', [
     'state'       => get_field('state'),
 ]);
 
+// Show review modal popup on page load when mdl=review in url
+if (!empty($_GET['mdl']) and $_GET['mdl'] == 'review') {
+    if (is_user_logged_in()) { ?>
+        <span x-init="_openReviewModal('', '')"></span>
+    <?php } else { ?>
+        <span x-init="showSignupModal = true; signupModalMessage = 'Sign up to write a review'; loginModalMessage = 'Sign in to write a review';"></span>
+    <?php }
+}
+
 get_footer();

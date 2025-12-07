@@ -10,7 +10,6 @@ Improvements
     notification bubble not showing up on home page; only in account pages
 Reviews
     artist review form with simple rating and review
-        create link for reviewing an artist that opens the correct modal depending on if the user is logged in
         submit review
             only allow submit when rating has been selected
             pass in review type (listing)
