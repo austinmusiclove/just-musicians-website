@@ -11,3 +11,5 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
 require_once 'reviews-api/get-listing-reviews.php';
+require_once 'reviews-api/parse-args.php';
+require_once 'reviews-api/create-review.php';

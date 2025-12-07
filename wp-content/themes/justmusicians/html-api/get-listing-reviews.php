@@ -3,7 +3,7 @@
 $MAX_REVIEWS_TO_DISPLAY = 10; // Remove after pagination is implemented for reviews on listing pages
 
 
-$listing_id = get_query_var('listing-id');
+$listing_id = get_query_var('reviewee-id');
 $reviews = get_listing_reviews($listing_id);
 $review_count = count($reviews);
 $average_rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;

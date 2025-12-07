@@ -5,21 +5,15 @@ Local Macbook Env
     import inquiries
     import users
 Improvements
+    Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
     notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
     notification bubble not showing up on home page; only in account pages
 Reviews
     artist review form with simple rating and review
-        submit review
-            only allow submit when rating has been selected
-            pass in review type (listing)
-            pass in reviewee id (listing post id)
-            include rating, review, name, org, position, image
+        user info slide
             autofill name, org, position, image from user data
-            create review on submit
-            update user info on submit as well
-        thank you slide
-        error slide
+            submit to update name, org, position, image
         make progress 25 on open, 50 when adding one field; 75 when adding the other; 100 on thank you
     booker review form with simple rating and review
     display booker reviews on inquiries

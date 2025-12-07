@@ -5,9 +5,11 @@ function get_listing_reviews($listing_id) {
         'post_type'      => 'listing_review',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
         'meta_query'     => [
             [
-                'key'   => 'listing',
+                'key'   => 'reviewee',
                 'value' => $listing_id,
                 'compare' => '='
             ]

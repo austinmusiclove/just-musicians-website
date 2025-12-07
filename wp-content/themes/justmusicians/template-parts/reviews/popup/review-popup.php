@@ -1,10 +1,11 @@
 <div class="popup-wrapper pb-8 pt-28 md:pt-0 w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="showReviewModal" x-cloak
     x-data="{
+        reviewBody: '',
         rating: 0,
         mouseoverRating: 0,
     }"
 >
-    <!-- TODO need to go to slide 5 if not done or just close it all if done and if got o slide 5 need to remember what slide they were on to return to it -->
+
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
         x-on:click="showReviewModal = false; $refs.reviewForm.reset(); rating = 0; mouseoverRating = 0;"
     ></div>
@@ -26,8 +27,10 @@
 
         <!-- Review Popup Form -->
         <!-- Prevent submitting form with Enter button but allow shift+enter in textarea -->
-        <form x-ref="reviewForm"
-            hx-post="/wp-html/v1/reviews/"
+        <form
+            x-ref="reviewForm"
+            x-init="$nextTick(() => htmx.process($el))";
+            x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/reviews/' + reviewPostType + '/' + revieweeId"
             hx-target="#review-result"
             hx-ext="disable-element" hx-disable-element=".review-submit-button"
             x-on:keydown.enter="
@@ -37,10 +40,7 @@
             "
         >
 
-            <!--
-            <input type="hidden" name="review_type" x-model="reviewType" x-ref="reviewTypeInput" />
-            <input type="hidden" name="reviewee_id" x-model="revieweeId" x-ref="revieweeIdInput" />
-            -->
+            <input type="hidden" name="author" value="<?php echo get_current_user_id(); ?>" />
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/review-slide',    '', []); ?>
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/user-info-slide', '', []); ?>
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/thank-you-slide', '', []); ?>

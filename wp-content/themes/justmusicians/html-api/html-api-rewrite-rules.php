@@ -55,8 +55,8 @@ function html_api_rewrite_rules() {
 
     // Reviews
     add_rewrite_rule(
-        '^wp-html/v1/reviews/listing/([0-9]+)/?$',
-        'index.php?wp-html-v1=listing-reviews&listing-id=$matches[1]',
+        '^wp-html/v1/reviews/([^/]+)/([0-9]+)/?$',
+        'index.php?wp-html-v1=reviews&review-post-type=$matches[1]&reviewee-id=$matches[2]',
         'bottom'
     );
 
@@ -69,6 +69,8 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'collection-id';
     $vars[] = 'inquiry-id';
     $vars[] = 'conversation-id';
+    $vars[] = 'review-post-type';
+    $vars[] = 'reviewee-id';
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');

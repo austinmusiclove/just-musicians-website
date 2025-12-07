@@ -1,6 +1,10 @@
 
 <div class="w-full"
-    x-init="revieweeName = '<?php echo get_field('name'); ?>'"
+    x-init="
+        reviewPostType = 'listing_review';
+        revieweeId     = '<?php echo get_the_ID(); ?>';
+        revieweeName   = '<?php echo get_field('name'); ?>';
+    "
 >
 
     <!-- Heading -->
@@ -11,8 +15,8 @@
 
     <!-- Reviews -->
     <div
-        hx-get="<?php echo site_url('/wp-html/v1/reviews/listing/' . $args['post_id']); ?>"
-        hx-trigger="load"
+        hx-get="<?php echo site_url('/wp-html/v1/reviews/listing_review/' . $args['post_id']); ?>"
+        hx-trigger="load, fetch-reviews from:window"
     ></div>
 
 

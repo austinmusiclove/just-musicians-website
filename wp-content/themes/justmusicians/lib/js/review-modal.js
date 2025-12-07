@@ -16,8 +16,14 @@ function showReviewSlide(alco, slide) {
 }
 
 function openReviewModal(alco, reviewType, revieweeId) {
-    //alco.$refs.inquiryListingInput.value = listingId;
-    // set review type
-    // set reviewee Id
     showReviewSlide(alco, 'review');
+}
+
+function handleCreateReviewSuccess(alco) {
+    showReviewSlide(alco, 'thankyou');
+}
+
+function handleCreateReviewError(alco, message) {
+    alco.reviewErrorMsg = message;
+    showReviewSlide(alco, 'error');
 }
