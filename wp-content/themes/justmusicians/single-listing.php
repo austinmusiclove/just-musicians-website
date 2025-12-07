@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying the listing form
+ * The template for displaying listing pages
  *
  * @package JustMusicians
  */

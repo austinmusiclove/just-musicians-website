@@ -78,7 +78,16 @@ function hmm_scripts() {
     }
 
     // Article and Page
-    if ( is_singular(['post']) or is_page() or str_starts_with($_SERVER['REQUEST_URI'], '/blog') or str_starts_with($_SERVER['REQUEST_URI'], '/blog') ) {
+    if ( is_singular(['post']) or is_page() or str_starts_with($_SERVER['REQUEST_URI'], '/blog') ) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+    }
+
+    // Venue Pages
+    if ( str_starts_with($_SERVER['REQUEST_URI'], '/venues') ) {
         // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
 
