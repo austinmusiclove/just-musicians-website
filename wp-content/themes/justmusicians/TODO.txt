@@ -12,13 +12,12 @@ Improvements
 Reviews
     venue reviews
         create venue page with venue reviews and compensation data on it
-            description
+            reviews
             genres
             tags
-            map
-            reviews
             comp data
         venue review form with simple rating and review
+        add venues to sitemap
     artist review form with simple rating and review
         user info slide
             autofill name, org, position, image from user data

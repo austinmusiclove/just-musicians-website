@@ -34,9 +34,16 @@ if (has_post_thumbnail()) {
 
             <!-- Socials and contact -->
             <div class="flex items-center gap-3 <?php echo $social_icons_responsive; ?>">
-                <img class="h-8 cursor-pointer hover:scale-105" src="<?php echo get_template_directory_uri() . '/lib/images/icons/share/facebook.svg'; ?>" />
-                <img class="h-8 cursor-pointer hover:scale-105" src="<?php echo get_template_directory_uri() . '/lib/images/icons/share/x.svg'; ?>" />
-                <img class="h-8 cursor-pointer hover:scale-105" src="<?php echo get_template_directory_uri() . '/lib/images/icons/share/email.svg'; ?>" />
+                <?php if (!empty(get_field('facebook_url'))) { ?>
+                    <a href="<?php echo get_field('facebook_url'); ?>" target="_blank">
+                        <img class="h-8 cursor-pointer hover:scale-105" src="<?php echo get_template_directory_uri() . '/lib/images/icons/share/facebook.svg'; ?>" />
+                    </a>
+                <?php } ?>
+                <?php if (!empty(get_field('twitter_url'))) { ?>
+                    <a href="<?php echo get_field('twitter_url'); ?>" target="_blank">
+                        <img class="h-8 cursor-pointer hover:scale-105" src="<?php echo get_template_directory_uri() . '/lib/images/icons/share/x.svg'; ?>" />
+                    </a>
+                <?php } ?>
             </div>
 
         </div>
