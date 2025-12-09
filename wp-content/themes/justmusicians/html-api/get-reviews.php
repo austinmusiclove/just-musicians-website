@@ -34,6 +34,10 @@ if (count($reviews) > 0) {
 <!-- Return review count -->
 <span id="review-count" hx-swap-oob="outerHTML"><?php echo $review_count; ?></span>
 
+<!-- Return average rating stars in heading -->
+<div id="hero-average-rating" class="flex gap-x-1 text-yellow w-32 mb-4" hx-swap-oob="outerHTML">
+    <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => $average_rating, ]); ?>
+</div>
 
 <!-- Return average rating stars -->
 <div id="average-rating" class="flex gap-x-1 text-yellow w-24" hx-swap-oob="outerHTML">

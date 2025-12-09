@@ -28,8 +28,8 @@ if (has_post_thumbnail()) {
             </div>
 
             <!-- Rating Stars -->
-            <div class="flex gap-x-1 text-yellow w-32 mb-4">
-                <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => get_field('_overall_rating') ]); ?>
+            <div id="hero-average-rating" class="flex gap-x-1 text-yellow w-32 mb-4" hx-swap-oob="outerHTML">
+                <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => 0 ]); ?>
             </div>
 
             <!-- Socials and contact -->
