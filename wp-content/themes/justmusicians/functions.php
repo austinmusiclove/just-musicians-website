@@ -93,6 +93,9 @@ function hmm_scripts() {
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+
+        // Reviews
+        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, true);
     }
 
     // Listing form

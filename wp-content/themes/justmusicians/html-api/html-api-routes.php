@@ -49,7 +49,7 @@ function html_api_v1_template_redirects() {
         // Reviews
         case 'reviews':
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'   : include_once get_template_directory() . '/html-api/get-listing-reviews.php'; exit;
+                case 'GET'   : include_once get_template_directory() . '/html-api/get-reviews.php'; exit;
                 case 'POST'  : include_once get_template_directory() . '/html-api/create-review.php'; exit;
             }
 

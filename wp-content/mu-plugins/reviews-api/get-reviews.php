@@ -1,8 +1,8 @@
 <?php
 
-function get_listing_reviews($listing_id) {
+function get_reviews($review_post_type, $reviewee_id) {
     $args = [
-        'post_type'      => 'listing_review',
+        'post_type'      => $review_post_type,
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'orderby'        => 'date',
@@ -10,7 +10,7 @@ function get_listing_reviews($listing_id) {
         'meta_query'     => [
             [
                 'key'   => 'reviewee',
-                'value' => $listing_id,
+                'value' => $reviewee_id,
                 'compare' => '='
             ]
         ]

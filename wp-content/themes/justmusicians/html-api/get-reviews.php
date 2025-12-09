@@ -1,10 +1,10 @@
 <?php
 
-$MAX_REVIEWS_TO_DISPLAY = 10; // Remove after pagination is implemented for reviews on listing pages
+$MAX_REVIEWS_TO_DISPLAY = 10; // Remove after pagination is implemented for reviews on listing pages and venue pages
 
 
-$listing_id = get_query_var('reviewee-id');
-$reviews = get_listing_reviews($listing_id);
+$reviewee_id = get_query_var('reviewee-id');
+$reviews = get_reviews(get_query_var('review-post-type'), $reviewee_id);
 $review_count = count($reviews);
 $average_rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
 
@@ -13,7 +13,7 @@ $average_rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')
 if (count($reviews) > 0) {
     foreach($reviews as $index => $review) {
         if ($index < $MAX_REVIEWS_TO_DISPLAY) {
-            echo get_template_part('template-parts/reviews/listing-review', '', [
+            echo get_template_part('template-parts/reviews/basic-review', '', [
                 'rating'              => $review['rating'],
                 'review'              => $review['review'],
                 'author_name'         => $review['author_name'],
@@ -25,7 +25,7 @@ if (count($reviews) > 0) {
     }
     echo get_template_part('template-parts/reviews/write-review-button', '', []);
 } else {
-    echo get_template_part('template-parts/reviews/no-listing-reviews', '', [] );
+    echo get_template_part('template-parts/reviews/no-reviews', '', [] );
 }
 
 ?>
