@@ -14,7 +14,6 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['youtubevideo'] );
     unset( $post_types['artist'] );
     unset( $post_types['performance'] );
-    unset( $post_types['venue'] );
     unset( $post_types['listing_review'] );
     unset( $post_types['buyer_review'] );
     unset( $post_types['venue_review'] );

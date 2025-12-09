@@ -11,7 +11,6 @@ Improvements
     notification bubble not showing up on home page; only in account pages
 Reviews
     venue reviews
-        add venues to sitemap
         create venue page with venue reviews and compensation data on it
             genres
             tags
