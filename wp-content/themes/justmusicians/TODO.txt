@@ -11,11 +11,11 @@ Improvements
     notification bubble not showing up on home page; only in account pages
 Reviews
     venue reviews
+        venue browse map
         create venue page with venue reviews and compensation data on it
             genres
             tags
             comp data
-        venue browse map
     artist review form with simple rating and review
         user info slide
             autofill name, org, position, image from user data
