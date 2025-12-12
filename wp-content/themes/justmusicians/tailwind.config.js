@@ -40,6 +40,7 @@ module.exports = {
 		// Root
 		'./404.php',
 		'./archive.php',
+		'./archive-*',
 		'./author.php',
 		'./footer.php',
 		'./front-page.php',

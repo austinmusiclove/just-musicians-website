@@ -9,6 +9,9 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+// Include
+require_once 'venues-api/get-venues-in-bounds.php';
+
 // Register REST API Routes
 add_action('rest_api_init', function () {
     register_rest_route( 'v1', 'venues', [
@@ -29,6 +32,11 @@ add_action('rest_api_init', function () {
     register_rest_route( 'venues/v1', 'stats', [
         'methods' => 'GET',
         'callback' => 'update_venue_stats',
+        'permission_callback' => '__return_true',
+    ]);
+    register_rest_route( 'venues/v1', 'bounds', [
+        'methods' => 'GET',
+        'callback' => 'get_venues_in_bounds',
         'permission_callback' => '__return_true',
     ]);
 });

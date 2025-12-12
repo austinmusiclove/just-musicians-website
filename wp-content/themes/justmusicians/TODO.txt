@@ -12,6 +12,9 @@ Improvements
 Reviews
     venue reviews
         venue browse map
+            disable scroll and drag on map when navigating page
+            add more info to popup
+            show/hide popup on hover
         create venue page with venue reviews and compensation data on it
             genres
             tags
