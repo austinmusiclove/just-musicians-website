@@ -96,6 +96,12 @@ function hmm_scripts() {
 
         // Reviews
         wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, true);
+
+        // Map
+        wp_enqueue_script('maplibre-gl.5.14.0-js', get_template_directory_uri() . '/lib/js/maplibre-gl.5.14.0.js', [], $pkg->version, true);
+        wp_enqueue_style( 'maplibre-gl.5.14.0-css', get_template_directory_uri() . '/lib/css/maplibre-gl.5.14.0.css', [], $pkg->version);
+        wp_enqueue_script('maplibre-js', get_template_directory_uri() . '/lib/js/maplibre.js', [], $pkg->version, true);
+        wp_localize_script('maplibre-js', 'siteData', [ 'siteUrl' => site_url() ]);
     }
 
     // Listing form
@@ -261,6 +267,7 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
     wp_enqueue_script('notifications-js', get_template_directory_uri() . '/lib/js/notifications.js', [], $pkg->version, true);
+    wp_localize_script('notifications-js', 'siteData', [ 'nonce' => wp_create_nonce('wp_rest') ]);
 
 
 
