@@ -20,10 +20,33 @@ get_header();
 
 
 <div class="container lg:grid lg:grid-cols-10 gap-24 py-8">
-    <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
+    <div class="col lg:col-span-7 article-body mb-8 lg:mb-0"
+        x-data="{
+            showScrollHint: false,
+            _disableScrollZoom()        { disableScrollZoom(); },
+            _handleMapWheelEvent(event) { handleMapWheelEvent(this, event); },
+        }"
+    >
 
 
-        <div id="map" class="h-[500px]"></div>
+        <div
+            id="maplibre-overlay"
+            class="hidden sm:block relative top-16 left-1/2 -translate-x-1/2 bg-grey text-white px-3.5 py-2 rounded text-[13px] z-[99] pointer-events-none max-w-[260px] text-center leading-tight"
+            x-show="showScrollHint" x-cloak
+            x-transition:enter="transition-opacity duration-200 ease-out"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity duration-200 ease-in"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+        >
+            <span>Hold <strong>⌘</strong> and scroll to zoom</span>
+        </div>
+        <div id="map" class="h-[300px] sm:h-[500px]"
+            x-on:wheel="_handleMapWheelEvent($event)"
+            x-on:mouseleave="_disableScrollZoom()"
+        >
+        </div>
 
 
     </div>
@@ -36,6 +59,7 @@ get_header();
         </div>
     </div>
 </div>
+
 
 
 <?php

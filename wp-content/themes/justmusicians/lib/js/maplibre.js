@@ -11,6 +11,63 @@ var map = new maplibregl.Map({
     zoom: 12, // starting zoom
 });
 
+// Add zoom buttons
+map.addControl(new maplibregl.NavigationControl({
+    showCompass: false
+}), 'top-right');
+
+// Disable default zooming
+map.scrollZoom.disable();
+
+// Handle scroll event in the map
+function handleMapWheelEvent(alco, event) {
+    // CMD (Mac) / Windows key
+    if (event.metaKey) {
+        // Stop page scroll
+        event.preventDefault();
+
+        // Enable zoom while CMD is pressed
+        enableScrollZoom();
+
+        hideHint(alco);
+    } else {
+        // Disable zoom & show hint
+        disableScrollZoom();
+        showHint(alco);
+    }
+}
+
+// Disable zoom when modifier key is released to avoid issue where second zoom does not work
+window.addEventListener("keyup", (e) => {
+    if (e.key === "Meta") {
+        map.scrollZoom.disable();
+    }
+});
+
+// Show overlay helper
+function showHint(alco) {
+    alco.showScrollHint = true;
+    clearTimeout(window._overlayTimeout);
+    window._overlayTimeout = setTimeout(() => {
+        hideHint(alco);
+    }, 3000);
+}
+function hideHint(alco) {
+    alco.showScrollHint = false;
+}
+
+function enableScrollZoom() {
+    if (!map.scrollZoom.isEnabled()) {
+        map.scrollZoom.enable();
+    }
+}
+function disableScrollZoom() {
+    map.scrollZoom.disable();
+}
+
+
+
+
 
 // On load and moveend, get bounds and fetch venues
 map.on('load', () => { updateMarkers(); });
