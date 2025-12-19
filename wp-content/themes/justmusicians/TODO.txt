@@ -9,8 +9,16 @@ Improvements
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
     notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
     notification bubble not showing up on home page; only in account pages
+    remove notifications api call when not logged in; returning 401
 Reviews
     venue reviews
+        make sure venues in bounds api is not called a ton of times when moving and zooming the map
+        write venue review from UI
+        user info slide
+            autofill name, org, position, image from user data
+            submit to update name, org, position, image
+            make progress 33 on review then 66 on user info then 100 on thank you
+            make sure it works on artists listing pages
         venue browse map
             add more info to popup
             show/hide popup on hover
@@ -18,11 +26,6 @@ Reviews
             genres
             tags
             comp data
-    artist review form with simple rating and review
-        user info slide
-            autofill name, org, position, image from user data
-            submit to update name, org, position, image
-            make progress 33 on review then 66 on user info then 100 on thank you
     booker review form with simple rating and review
     display booker reviews on inquiries
     gd-venue review form with structured comp data
