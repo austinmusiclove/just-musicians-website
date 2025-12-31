@@ -35,6 +35,12 @@ Reviews
         invite artist to review booker
     make sure reviews can only be done by invite
     add lisitng review pagination on listing page
+Venue pages
+    Compensation data on venue pages
+    Add artists recently played to venue pages
+Venue Browsing Page
+    Filter venues by genres they play
+    Filter venues that played certian artists
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
