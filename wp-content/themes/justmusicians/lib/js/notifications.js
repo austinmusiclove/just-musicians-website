@@ -4,7 +4,7 @@ async function get_notification_count() {
     const res = await fetch('/wp-json/v1/notifications_count', {
         headers: {
             'Content-Type': 'application/json',
-            'X-WP-Nonce': siteData.nonce,
+            'X-WP-Nonce': notificationsSiteData.nonce,
         },
     });
 

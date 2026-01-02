@@ -140,7 +140,7 @@ function hmm_scripts() {
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, true);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
         wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, true);
-        wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
@@ -232,13 +232,17 @@ function hmm_scripts() {
         wp_enqueue_script('messages-api-js', get_template_directory_uri() . '/lib/js/messages-api-scripts.js', [], $pkg->version, true);
         wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, true);
         wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, true);
-        wp_localize_script('messages-api-js', 'siteData', [
+        wp_localize_script('messages-api-js', 'messagesSiteData', [
             'siteUrl'              => site_url(),
             'userId'               => get_current_user_id(),
             'nonce'                => wp_create_nonce('wp_rest'),
-            'nonceRefreshInterval' => NONCE_REFRESH_INTERVAL,
         ]);
         wp_enqueue_script('nonce-refresh-js', get_template_directory_uri() . '/lib/js/nonce-refresh.js', [], $pkg->version, true);
+        wp_localize_script('messages-api-js', 'nonceSiteData', [
+            'nonce'                => wp_create_nonce('wp_rest'),
+            'nonceRefreshInterval' => NONCE_REFRESH_INTERVAL,
+        ]);
+        wp_localize_script('nonce-refresh-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'messages-js';
 
     }
@@ -249,7 +253,7 @@ function hmm_scripts() {
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, true);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
         wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, true);
-        wp_localize_script('account-cropper-scripts-js', 'siteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
@@ -267,7 +271,7 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
     wp_enqueue_script('notifications-js', get_template_directory_uri() . '/lib/js/notifications.js', [], $pkg->version, true);
-    wp_localize_script('notifications-js', 'siteData', [ 'nonce' => wp_create_nonce('wp_rest') ]);
+    wp_localize_script('notifications-js', 'notificationsSiteData', [ 'nonce' => wp_create_nonce('wp_rest') ]);
 
 
 

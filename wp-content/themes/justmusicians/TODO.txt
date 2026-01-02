@@ -1,5 +1,10 @@
+Critical
+    Fix inquiries modal on mobile
+    notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
+    Make sure create inquiry works on live site
 Local Macbook Env
     Fix ACF fields and groups
+    Fix taxonomies like genre
     import listings
     import media
     import inquiries
@@ -7,7 +12,6 @@ Local Macbook Env
 Improvements
     Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
-    notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
     notification bubble not showing up on home page; only in account pages
     remove notifications api call when not logged in; returning 401
 Reviews
@@ -35,6 +39,8 @@ Reviews
         invite artist to review booker
     make sure reviews can only be done by invite
     add lisitng review pagination on listing page
+Compensation Reporting
+    Auto verify event from compensation report with event database
 Venue pages
     Compensation data on venue pages
     Add artists recently played to venue pages
@@ -101,6 +107,7 @@ Listing form
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
+    Add venue
 Listing page
     allow play with mouse off iframe for videos
     add seek in video

@@ -22,14 +22,14 @@ async function processNewImage(alco, submitButtons) {
         processingType = 'libwebp';
     }
 
-    const worker = new Worker(`${siteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js`);
+    const worker = new Worker(`${cropperSiteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js`);
     alco.accountSettings.profile_image.worker = worker;
     worker.postMessage({
         type:                 processingType,
         imageData:            imageData.data.buffer,
         width:                croppedCanvas.width,
         height:               croppedCanvas.height,
-        templateDirectoryUri: siteData.templateDirectoryUri,
+        templateDirectoryUri: cropperSiteData.templateDirectoryUri,
     }, [imageData.data.buffer]);
 
     worker.onmessage = async function (e) {

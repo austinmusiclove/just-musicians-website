@@ -1,11 +1,11 @@
 
 function getSendMessageUrl(conversationId) {
-    return `${siteData.siteUrl}/wp-json/v1/messages/${conversationId}`;
+    return `${messagesSiteData.siteUrl}/wp-json/v1/messages/${conversationId}`;
 }
 
 
 function getMarkAsReadUrl(message_id, user_id) {
-    return `${siteData.siteUrl}/wp-json/v1/read_receipts/${message_id}/${siteData.userId}`;
+    return `${messagesSiteData.siteUrl}/wp-json/v1/read_receipts/${message_id}/${messagesSiteData.userId}`;
 }
 
 
@@ -15,7 +15,7 @@ function getConversationsUrl(cursor, isUpdate, inquiryId) {
     if (isUpdate) { params.push(`update=true`); }
     if (inquiryId) { params.push(`inquiry_id=${inquiryId}`); }
     let query = params.length > 0 ? `?${params.join('&')}` : '';
-    return `${siteData.siteUrl}/wp-json/v1/conversations/${query}`;
+    return `${messagesSiteData.siteUrl}/wp-json/v1/conversations/${query}`;
 }
 
 
@@ -25,7 +25,7 @@ function getMessagesUrl(conversationId, cursor, isUpdate, isLongPoll) {
     if (isUpdate) { params.push(`update=true`); }
     if (isLongPoll) { params.push(`lp=true`); }
     let query = params.length > 0 ? `?${params.join('&')}` : '';
-    return `${siteData.siteUrl}/wp-json/v1/messages/${conversationId}/${query}`;
+    return `${messagesSiteData.siteUrl}/wp-json/v1/messages/${conversationId}/${query}`;
 }
 
 
@@ -35,7 +35,7 @@ async function fetchResource(alco, method, url, resourceName = 'resource', inFli
         method,
         headers: {
             'Content-Type': 'application/json',
-            'X-WP-Nonce': siteData.nonce,
+            'X-WP-Nonce': messagesSiteData.nonce,
         },
     };
     if (data) { fetchOptions.body = JSON.stringify(data); }
