@@ -238,11 +238,10 @@ function hmm_scripts() {
             'nonce'                => wp_create_nonce('wp_rest'),
         ]);
         wp_enqueue_script('nonce-refresh-js', get_template_directory_uri() . '/lib/js/nonce-refresh.js', [], $pkg->version, true);
-        wp_localize_script('messages-api-js', 'nonceSiteData', [
+        wp_localize_script('nonce-refresh-js', 'nonceSiteData', [
             'nonce'                => wp_create_nonce('wp_rest'),
             'nonceRefreshInterval' => NONCE_REFRESH_INTERVAL,
         ]);
-        wp_localize_script('nonce-refresh-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'messages-js';
 
     }
