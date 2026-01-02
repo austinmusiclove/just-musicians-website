@@ -270,7 +270,10 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
     wp_enqueue_script('notifications-js', get_template_directory_uri() . '/lib/js/notifications.js', [], $pkg->version, true);
-    wp_localize_script('notifications-js', 'notificationsSiteData', [ 'nonce' => wp_create_nonce('wp_rest') ]);
+    wp_localize_script('notifications-js', 'notificationsSiteData', [
+        'userLoggedIn' => is_user_logged_in(),
+        'nonce'        => wp_create_nonce('wp_rest'),
+    ]);
 
 
 

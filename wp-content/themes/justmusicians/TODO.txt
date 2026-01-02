@@ -1,6 +1,5 @@
 Critical
     Fix inquiries modal on mobile
-    notification api is returning 403 on single listing page while logged in; need to also check what happens with this when not logged in
     Make sure create inquiry works on live site
 Local Macbook Env
     Fix ACF fields and groups
@@ -12,8 +11,6 @@ Local Macbook Env
 Improvements
     Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
-    notification bubble not showing up on home page; only in account pages
-    remove notifications api call when not logged in; returning 401
 Reviews
     venue reviews
         make sure venues in bounds api is not called a ton of times when moving and zooming the map
