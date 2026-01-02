@@ -1,6 +1,3 @@
-Critical
-    Fix inquiries modal on mobile
-    Make sure create inquiry works on live site
 Local Macbook Env
     Fix ACF fields and groups
     Fix taxonomies like genre
