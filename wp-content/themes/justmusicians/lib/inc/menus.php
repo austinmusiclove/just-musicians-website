@@ -1,44 +1,39 @@
 <?php
 
-// Commented out after upgrading to WP 6.8.2 because esc_html__(..., 'JustMusicians') causes an issue since it gets called before load_theme_textdomain( 'JustMusicians', ..) is called in functins.php
-
-
 
 // Register menus
-/*
 register_nav_menus( array(
-    'header_menu_desktop' => esc_html__( 'Header', 'JustMusicians' ),
-    'footer_menu' => esc_html__( 'Footer', 'JustMusicians' ),
-    'footer-menu-1' => __( 'Footer Menu 1' ),
-    'footer-menu-2' => __( 'Footer Menu 2' ),
-    'footer-menu-3' => __( 'Footer Menu 3' ),
+    'footer-menu-1'       => __( 'Footer Menu 1' ),
+    'footer-menu-2'       => __( 'Footer Menu 2' ),
+    'footer-menu-3'       => __( 'Footer Menu 3' ),
 ) );
 
 
 // Footer menu classes
+/*
 class Footer_Menu_Walker extends Walker_Nav_Menu {
-function start_el( &$output, $data_object, $depth = 0, $args = NULL, $current_object_id = 0) {
+    function start_el( &$output, $data_object, $depth = 0, $args = NULL, $current_object_id = 0) {
 
-    if ($depth == 0 ):
-      if ( empty( $data_object->url ) || '#' === $data_object->url ) :
-          $output .= '<li class="mb-2 mt-5 pt-5 text-28 border-t font-caslon border-artichoke-100">';
-          $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
+        if ($depth == 0 ):
+          if ( empty( $data_object->url ) || '#' === $data_object->url ) :
+              $output .= '<li class="mb-2 mt-5 pt-5 text-28 border-t font-caslon border-artichoke-100">';
+              $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
+              $output .= '</li>';
+          else :
+            $output .= '<li><a href="'.$data_object->url.'" target="'.$data_object->target.'" class="inline-block max-md:opacity-50 text-23 md:text-19">';
+            $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
+            $output .= '</a></li>';
+          endif;
           $output .= '</li>';
-      else :
-        $output .= '<li><a href="'.$data_object->url.'" target="'.$data_object->target.'" class="inline-block max-md:opacity-50 text-23 md:text-19">';
-        $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
-        $output .= '</a></li>';
-      endif;
-      $output .= '</li>';
-    return $output;
+        return $output;
 
-    else:
-      $output .= '<li><a href="'.$data_object->url.'" target="'.$data_object->target.'" class="inline-block max-md:opacity-50 text-23 md:text-19 hover:underline">';
-      $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
-      $output .= '</a></li>';
-      return $output;
+        else:
+          $output .= '<li><a href="'.$data_object->url.'" target="'.$data_object->target.'" class="inline-block max-md:opacity-50 text-23 md:text-19 hover:underline">';
+          $output .= apply_filters( 'the_title', $data_object->title, $data_object->ID );
+          $output .= '</a></li>';
+          return $output;
 
-    endif;
-  }
+        endif;
+    }
 }
-*/
+ */
