@@ -26,7 +26,7 @@
     <!-- Review Body -->
     <p class="text-14"><span class="text-red">* </span>At least 50 characters (<span x-text="reviewBody.length">0</span>/50)</p>
     <textarea class="w-full h-48 sm:h-64 mb-6" name="review_body"
-        placeholder="example: Wedding ceremony music in Dripping Springs, TX"
+        x-bind:placeholder="`Tell us about ${revieweeName} in at least 50 characters`"
         :class="{ 'shake': shakeElements.has('reviewBodyInput') }"
         x-model="reviewBody"
         x-ref="reviewBody"
