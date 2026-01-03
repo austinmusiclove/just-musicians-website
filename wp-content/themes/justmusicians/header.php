@@ -57,7 +57,6 @@
             currentReviewSlide: '',
             showReviewModal: false,
             showReviewSlide: true,
-            showReviewUserInfoSlide: false,
             showReviewThankYouSlide: false,
             showReviewErrorSlide: false,
             reviewPostType: '',
