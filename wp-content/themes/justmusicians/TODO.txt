@@ -1,8 +1,3 @@
-Local Macbook Env
-    import listings
-    import media
-    import inquiries
-    import users
 Reviews
     artist reviews
         user info slide

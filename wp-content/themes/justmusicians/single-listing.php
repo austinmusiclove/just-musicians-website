@@ -32,8 +32,8 @@ $youtube_video_post_ids = get_field('youtube_videos');
 $youtube_video_data     = get_youtube_video_data($youtube_video_post_ids);
 
 $venues_combined      = [];
-$verified_venue_ids   = get_field('venues_played_verified') ?: [];
-$unverified_venue_ids = get_field('venues_played_unverified') ?: [];
+$verified_venue_ids   = get_field('venues_played_verified', false, false) ?: [];
+$unverified_venue_ids = get_field('venues_played_unverified', false, false) ?: [];
 foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) as $venue_id) {
     $venues_combined[] = [
         'ID'               => $venue_id,
