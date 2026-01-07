@@ -246,6 +246,18 @@ function hmm_scripts() {
 
     }
 
+    // Buyer pages
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/buyers/')) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+
+        // Reviews
+        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, true);
+    }
+
     // Account page
     if (str_starts_with($_SERVER['REQUEST_URI'], '/account/')) {
         // Cropper.js
@@ -291,6 +303,8 @@ require get_template_directory() . '/lib/inc/comments.php';
 require get_template_directory() . '/lib/inc/helper.php';
 require get_template_directory() . '/html-api/html-api-rewrite-rules.php';
 require get_template_directory() . '/html-api/html-api-routes.php';
+require get_template_directory() . '/template-routes/template-rewrite-rules.php';
+require get_template_directory() . '/template-routes/template-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
 require get_template_directory() . '/lib/inc/sitemap.php';

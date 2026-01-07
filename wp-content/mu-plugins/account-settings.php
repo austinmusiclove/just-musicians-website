@@ -10,8 +10,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-function get_account_settings() {
-    $user_id = get_current_user_id();
+function get_user_account_settings($user_id) {
     if (!$user_id) { return null; }
 
     $user_info = get_userdata($user_id);
@@ -25,6 +24,11 @@ function get_account_settings() {
         'organization'  => get_field('organization', 'user_' . $user_id),
         'position'      => get_field('position', 'user_' . $user_id),
     ];
+}
+
+function get_account_settings() {
+    $user_id = get_current_user_id();
+    return get_user_account_settings($user_id);
 }
 
 function get_profile_image($user_id) {

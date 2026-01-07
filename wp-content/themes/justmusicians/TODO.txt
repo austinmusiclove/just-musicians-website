@@ -1,10 +1,10 @@
 Reviews
     booker review
-        booker review form with simple rating and review
-        display booker reviews on inquiries
-    add lisitng review pagination on listing page
+        display buyer reviews on inquiries with link to see all reviews
+        php upgrade from 7.4.30 to 8.3 and permalink update on live site (was needed to make cli work)
+    add lisitng review pagination on listing page and venue page
     Emails
-        add regular email to invite artists to write venue and gb-venue reviews
+        add regular email to invite artists to write venue and gd-venue reviews
         add regular email to invite artists to solicit reviews from bookers
             booker gets email requesting review, makes account, writes review
             invite artist to review booker
@@ -37,6 +37,7 @@ Advanced inquiries
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
 Notifications
+    Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll ever 10 min or so
 Additional pages
     Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
@@ -110,6 +111,17 @@ Data
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
 Testing
+    set up testing with playwright with multiple browsers
+    user mgmt
+        user registration
+        user log in
+        update account info
+    listings
+        create listing
+    inquiries
+        create inquiry
+    collections
+        create collection
     test apostrophes everywhere
     test when nonce expires and api does not return data
 UX
@@ -138,6 +150,7 @@ Devon
     podcast - get violotor-blog svg
 Security
     audit rest api inputs and html api inputs
+    use temporary code for email verification instead of account identifier
 Performance
     prefetch on mouse down
     first page of results without second trip to server
@@ -153,8 +166,6 @@ Quirks
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
 Accessibility
     Need full audit
-Testing
-    Test specific devices with AWS or other service
 Document
     Dev Principles
         No js for first paint
