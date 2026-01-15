@@ -40,7 +40,11 @@ function formatMessage($message, $user_id) {
         'content'                  => nl2br($message->content),
         'inquiry'                  => $inquiry,
         'sender_name'              => $display_name,
+        'sender_position'          => $message->sender_position,
+        'sender_organization'      => $message->sender_organization,
         'sender_profile_image_url' => $message->sender_profile_image_url,
+        'sender_review_count'      => $message->sender_review_count,
+        'sender_avg_rating'        => $message->sender_avg_rating,
         'is_outgoing'              => $message->sender_id == $user_id,
     ];
 }

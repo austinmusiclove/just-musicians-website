@@ -448,24 +448,44 @@ class UserMessagesPlugin {
         $result = $wpdb->get_results($query);
         if ($result === false) { return new WP_Error('db_error', 'DB query error', [ 'status' => 500 ]); }
 
-        // Add sender profile image url
-        $profile_images = [];
+        // Add sender profile image, position, and organization
+        $sender_cache = [];
         foreach ($result as &$item) {
             $sender_id = $item->sender_id ?? null;
             if ($sender_id) {
-                // Check if we already fetched this sender's profile image
-                if (!isset($profile_images[$sender_id])) {
+
+                // Fetch sender data once per sender
+                if (!isset($sender_cache[$sender_id])) {
                     $profile_image = get_profile_image($sender_id);
-                    $profile_images[$sender_id] = $profile_image['url'] ?? null;
+                    $sender_cache[$sender_id] = [
+                        'profile_image_url' => $profile_image['url'] ?? null,
+                        'position'          => get_user_meta($sender_id, 'position', true) ?: null,
+                        'organization'      => get_user_meta($sender_id, 'organization', true) ?: null,
+                        'review_count'      => null,
+                        'average_rating'    => null,
+                    ];
+                    if (!is_null($item->inquiry_id)) {
+                        $reviews = get_reviews('buyer_review', $sender_id);
+                        $sender_cache[$sender_id]['review_count'] = count($reviews);
+                        $sender_cache[$sender_id]['average_rating'] = count($reviews) > 0 ? array_sum(array_column($reviews, 'rating')) / count($reviews) : 0;
+                    }
                 }
 
-                // Assign the profile image URL to the result item
-                $item->sender_profile_image_url = $profile_images[$sender_id];
+                // Assign cached values to item
+                $item->sender_profile_image_url = $sender_cache[$sender_id]['profile_image_url'];
+                $item->sender_position          = $sender_cache[$sender_id]['position'];
+                $item->sender_organization      = $sender_cache[$sender_id]['organization'];
+                $item->sender_review_count      = $sender_cache[$sender_id]['review_count'];
+                $item->sender_avg_rating        = $sender_cache[$sender_id]['average_rating'];
             } else {
                 $item->sender_profile_image_url = null;
+                $item->sender_position          = null;
+                $item->sender_organization      = null;
+                $item->sender_review_count      = null;
+                $item->sender_avg_rating        = null;
             }
         }
-        unset($item); // Best practice when modifying array items by reference
+        unset($item);
 
 
         return $result;

@@ -28,7 +28,7 @@ if (has_post_thumbnail()) {
 
 
             <!-- Headings -->
-            <div class="text-left sm:text-left">
+            <div class="text-left">
 
 
                 <!-- Title -->

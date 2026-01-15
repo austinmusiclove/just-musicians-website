@@ -1,8 +1,5 @@
 <?php
-
 $MAX_REVIEWS_TO_DISPLAY = 10; // Remove after pagination is implemented for reviews on listing pages and venue pages
-
-
 $reviewee_id = get_query_var('reviewee-id');
 $reviews = get_reviews(get_query_var('review-post-type'), $reviewee_id);
 $review_count = count($reviews);

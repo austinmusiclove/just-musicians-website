@@ -9,9 +9,7 @@
 >
 
     <!-- Timestamp -->
-    <template x-if="message.created_at">
-        <div class="text-center text-grey text-14 my-2" x-text="new Date(message.created_at.replace(' ', 'T') + 'Z').toLocaleString()"></div>
-    </template>
+    <?php echo get_template_part('template-parts/messages/parts/timestamp', '', []); ?>
 
 
      <!-- Message with profile image -->
@@ -20,10 +18,7 @@
     >
 
         <!-- Profile image -->
-        <a href="<?php echo site_url('/account'); ?>" x-show="message.is_outgoing" x-cloak>
-            <img class="w-8 h-8 rounded-full mt-1" alt="Profile image" x-bind:src="message.sender_profile_image_url">
-        </a>
-        <img class="w-8 h-8 rounded-full mt-1" alt="Profile image" x-bind:src="message.sender_profile_image_url" x-show="!message.is_outgoing" x-cloak>
+        <?php echo get_template_part('template-parts/messages/parts/profile-img', '', []); ?>
 
 
         <!-- Message -->
@@ -38,10 +33,7 @@
         >
 
             <!-- Sender name -->
-            <div class="text-14"
-                :class="{ 'text-right': message.is_outgoing, 'text-left': !message.is_outgoing }"
-                x-text="message.sender_name"
-            ></div>
+            <?php echo get_template_part('template-parts/messages/parts/sender-name', '', []); ?>
 
 
             <!-- Message content -->

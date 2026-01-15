@@ -1,6 +1,5 @@
 Reviews
     booker review
-        display buyer reviews on inquiries with link to see all reviews
         php upgrade from 7.4.30 to 8.3 and permalink update on live site (was needed to make cli work)
     add lisitng review pagination on listing page and venue page
     Emails
@@ -8,14 +7,15 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
             booker gets email requesting review, makes account, writes review
             invite artist to review booker
+    Don't allow reviewing yourself
+Compensation Reporting
+    gd-venue review form with structured comp data
+    Auto verify event from compensation report with event database
 Venue Browsing Page
     add more info to popup
     show/hide popup on hover
     Filter venues by genres they play
     Filter venues that played certian artists
-Compensation Reporting
-    gd-venue review form with structured comp data
-    Auto verify event from compensation report with event database
 Venue pages
     Compensation data on venue pages
     Add artists recently played to venue pages
@@ -151,6 +151,7 @@ Devon
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
+    make it so that logged out users and logged in users cant see inquiries pages unless they have access to the inquiry (right now you can see the inquiry details but not conversations if you put the url in)
 Performance
     prefetch on mouse down
     first page of results without second trip to server
