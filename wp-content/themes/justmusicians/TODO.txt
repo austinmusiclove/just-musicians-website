@@ -1,7 +1,7 @@
 Reviews
-    booker review
-        php upgrade from 7.4.30 to 8.3 and permalink update on live site (was needed to make cli work)
     add lisitng review pagination on listing page and venue page
+    buyer review
+        php upgrade from 7.4.30 to 8.3 and permalink update on live site (was needed to make cli work)
     Emails
         add regular email to invite artists to write venue and gd-venue reviews
         add regular email to invite artists to solicit reviews from bookers
@@ -10,6 +10,30 @@ Reviews
     Don't allow reviewing yourself
 Compensation Reporting
     gd-venue review form with structured comp data
+        add compensation report form page to live site and staging
+        fields
+            performing act name (connect to listing?)
+            performance
+                date
+                time
+                duration
+                number of performers
+                gig type (maybe)
+            total comp
+                production cost (ask them to bake this into their total comp number)
+            comp structure
+            payment speed
+            payment method
+            middle man (connect to buyer account or ask them to review them seperately)
+            written review
+                backline, sound engineer, communication, safety, recommend to others
+        make it only work if you are logged in
+        make it only work if the url bar has a valid performance id
+        add fields
+        allow add new venue
+    Display compensation data
+        on venue browsing page show blurred out and prompt to log in to view
+        on venue page
     Auto verify event from compensation report with event database
 Venue Browsing Page
     add more info to popup
@@ -182,3 +206,4 @@ Document
         need social log in creds
         need to do settings -> permalinks save to get apis to work
         wp config constants
+    you can't have a post with a field named the same as a post type; it causes 404

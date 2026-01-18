@@ -7,11 +7,11 @@
 
 $post_id = null;
 $listing_data = null;
-if (!is_user_logged_in()) { wp_redirect(site_url()); }                          // Don't allow non logged in users to use the form
+if (!is_user_logged_in()) { wp_redirect(site_url()); }                               // Don't allow non logged in users to use the form
 if (!empty($_GET['lid'])) {
-    $user_listings    = get_user_meta(get_current_user_id(), 'listings', true); // Get user's listings
-    if (!in_array($_GET['lid'], $user_listings)) { wp_redirect(site_url()); }   // Don't allow opening form for a listing that does not belong to the logged in user
-    $listing_data     = get_listing(['post_id' => $_GET['lid']]);               // Get listing data
+    $user_listings = (array) get_user_meta(get_current_user_id(), 'listings', true); // Get user's listings
+    if (!in_array($_GET['lid'], $user_listings)) { wp_redirect(site_url()); }        // Don't allow opening form for a listing that does not belong to the logged in user
+    $listing_data     = get_listing(['post_id' => $_GET['lid']]);                    // Get listing data
 }
 $is_update            = !is_null($listing_data);
 $is_published         = (!is_null($listing_data) and $listing_data['post_status'] == 'publish');
@@ -22,7 +22,6 @@ $genres               = get_terms_decoded('genre', 'names');
 $subgenres            = get_terms_decoded('subgenre', 'names');
 $instrumentations     = get_terms_decoded('instrumentation', 'names');
 $settings             = get_terms_decoded('setting', 'names');
-$spotify_artist_id    = $listing_data['spotify_artist_id'];
 $ph_thumbnail         = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
 
 // Get venues post data
@@ -236,6 +235,7 @@ get_header();
                         <?php echo get_template_part('template-parts/listing-page/hero', '', array(
                             'instance'          => 'listing-form',
                             'genres'            => $genres,
+                            'collections_map'   => [],
                         )); ?>
                         <?php echo get_template_part('template-parts/listing-page/content', '', array(
                             'instance'           => 'listing-form',
@@ -246,7 +246,7 @@ get_header();
                             'settings'           => $settings,
                             'youtube_video_data' => null,
                             'venues_combined'    => null,
-                            'spotify_artist_id'  => $spotify_artist_id,
+                            'inquiries_map'      => [],
                         )); ?>
                     </div>
 

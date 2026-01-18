@@ -78,6 +78,12 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/post-account-settings.php'; exit;
             }
+
+        // Compensation Reports
+        case 'compensation-reports':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : include_once get_template_directory() . '/html-api/post-compensation-report.php'; exit;
+            }
     }
 }
 add_action('template_redirect', 'html_api_v1_template_redirects');

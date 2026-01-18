@@ -268,6 +268,14 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
+    // Compensation Report Form page
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/compensation-report-form/')) {
+        // Input component scripts
+        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+    }
 
     // Core
     wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );

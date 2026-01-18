@@ -120,3 +120,38 @@ function get_spotify_artist_url_from_id($id) {
     $spotify_artist_url_prefix = 'https://open.spotify.com/artist/';
     return !empty($id) ? $spotify_artist_url_prefix . $id : '';
 }
+
+/**
+ * Convert an array of WP objects or IDs into an array of IDs.
+ *
+ * @param array|null $items Array of WP_Post / WP_Term / objects with ID, or IDs.
+ * @return array Array of integer IDs.
+ */
+function wp_objects_to_ids( $items ): array {
+    if ( empty( $items ) || ! is_array( $items ) ) {
+        return [];
+    }
+
+    // If it already looks like an array of IDs, return normalized ints
+    if ( is_numeric( reset( $items ) ) ) {
+        return array_values( array_map( 'intval', $items ) );
+    }
+
+    $ids = [];
+
+    foreach ( $items as $item ) {
+        if ( is_object( $item ) ) {
+            // WP_Post and most WP objects
+            if ( isset( $item->ID ) ) {
+                $ids[] = (int) $item->ID;
+            }
+            // WP_Term
+            elseif ( isset( $item->term_id ) ) {
+                $ids[] = (int) $item->term_id;
+            }
+        }
+    }
+
+    return array_values( array_unique( $ids ) );
+}
+

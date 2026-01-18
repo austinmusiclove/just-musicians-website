@@ -2,33 +2,29 @@
 
     <div class="flex items-center gap-2">
         <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-        <h2 class="text-25 font-bold">Venues Played</h2>
+        <h2 class="text-25 font-bold">Venue</h2>
         <span id="venue-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
         </span>
     </div>
 
-    <div class="relative z-0">
-        <!-- Venues Played -->
+    <div class="relative">
 
-        <input type="hidden" name="venues_played_unverified[]">
-        <template x-for="(venue, index) in allVenuesPlayed" :key="index">
-            <input type="hidden" name="venues_played_unverified[]" x-bind:value="venue.ID" />
-        </template>
-        <input type="hidden" name="venues_played_verified[]">
-        <template x-for="(venue_id, index) in verifiedVenueIds" :key="index">
-            <template x-if="allVenuesPlayed.some(venue => venue.ID === venue_id)">
-                <input type="hidden" name="venues_played_verified[]" :value="venue_id" />
-            </template>
-        </template>
 
-        <!-- Depends on tag-input-scripts.js -->
         <div x-data="{
-            tags: allVenuesPlayed,
-            _selectVenue(input, value) { addTag(this, input, value, 'error-toast'); },
-            _removeTag(index)          { removeTag(this, index); },
+            tags: [],
             showOptions: false,
+            _selectVenue(input, value) {
+                this.tags = [];
+                $refs.venueIdInput.value = value.ID;
+                addTag(this, input, value, 'error-toast');
+            },
+            _removeTag(index) {
+                $refs.venueIdInput.value = '';
+                removeTag(this, index);
+            },
         }">
+            <input type="hidden" name="venue_id" x-ref="venueIdInput">
             <div class="relative">
                 <div class="relative">
                     <input type="text" name="s" class="w-full" autocomplete="off" placeholder="Search for venues"
@@ -61,8 +57,7 @@
                 </template>
 
             </div>
+
         </div>
     </div>
-
-
 </section>
