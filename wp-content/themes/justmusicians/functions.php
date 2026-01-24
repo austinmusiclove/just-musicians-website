@@ -275,6 +275,7 @@ function hmm_scripts() {
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+        wp_enqueue_script('htmx-target-error-js', get_template_directory_uri() . '/lib/js/htmx.response-targets.2.0.4.js', ['htmx'], $pkg->version, true);
     }
 
     // Core

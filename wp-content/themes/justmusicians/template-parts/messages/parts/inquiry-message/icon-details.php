@@ -22,7 +22,7 @@
 
     <!-- Budget -->
     <div class="flex items-center gap-1">
-        <img style="height: 1.5rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/dollar.svg'; ?>" />
+        <img style="height: 1.5rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" />
         <span class="text-16 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="_showBudget(message.inquiry)"></span>
     </div>
 

@@ -1,40 +1,46 @@
+**Before push to master
+    php upgrade from 7.4.30 to 8.3 and permalink update on live site and staging (was needed to make cli work)
+    add compensation report form page to live site and staging
+    add show flier url field to compe report on live and staging
+Critical
+    messages with iid when not logged in is broken page
+    notification count is wrong on messages for tim
+    messages have issues loading if response doesnt come back before first update poll
+Compensation Reporting
+    gd-venue review form with structured comp data
+        *Copy
+            title
+            description under title
+            tooltip texts
+            review copy
+        make it only work if you are logged in
+        allow for using performance id in url
+            fill in and disable performance inputs
+            add performance id hidden field
+            clear performance id on submit
+    modify the existing data to work with new fields and remove old fields from acf
+    Display compensation data
+        create section for musician earnings data that is blurred and only accessible by users with a listing
+            payment method
+            payment speed
+            average earnings per performer per hour
+            typical ensemble size hired
+            typical genres hired
+        show avg comp per performer per hour
+        on venue browsing page show blurred out and prompt to log in to view
+        on venue page
+    allow connecting listing instead of performer name
+    Auto verify event from compensation report with event database
+    allow add new venue
 Reviews
+    need to easily be able to see which user authored each review so that i can contact them
     add lisitng review pagination on listing page and venue page
-    buyer review
-        php upgrade from 7.4.30 to 8.3 and permalink update on live site (was needed to make cli work)
     Emails
         add regular email to invite artists to write venue and gd-venue reviews
         add regular email to invite artists to solicit reviews from bookers
             booker gets email requesting review, makes account, writes review
             invite artist to review booker
     Don't allow reviewing yourself
-Compensation Reporting
-    gd-venue review form with structured comp data
-        add compensation report form page to live site and staging
-        fields
-            performing act name (connect to listing?)
-            performance
-                date
-                time
-                duration
-                number of performers
-                gig type (maybe)
-            total comp
-                production cost (ask them to bake this into their total comp number)
-            comp structure
-            payment speed
-            payment method
-            middle man (connect to buyer account or ask them to review them seperately)
-            written review
-                backline, sound engineer, communication, safety, recommend to others
-        make it only work if you are logged in
-        make it only work if the url bar has a valid performance id
-        add fields
-        allow add new venue
-    Display compensation data
-        on venue browsing page show blurred out and prompt to log in to view
-        on venue page
-    Auto verify event from compensation report with event database
 Venue Browsing Page
     add more info to popup
     show/hide popup on hover
@@ -83,6 +89,7 @@ Advanced messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
+    add profile pic and display name to things that increase search rank
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
     include media relevance in search algo
@@ -148,6 +155,7 @@ Testing
         create collection
     test apostrophes everywhere
     test when nonce expires and api does not return data
+    need to add proper status codes on html api errors like i have in compensation reports html api
 UX
     prompt to add profile image and name with notification bubble
     corrected new logos

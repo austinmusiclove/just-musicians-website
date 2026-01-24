@@ -2,7 +2,7 @@
 
     <div class="flex items-center gap-2">
         <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-        <h2 class="text-25 font-bold">Venue</h2>
+        <h2 class="text-25 font-bold">Venue <span class="text-red">*</span></h2>
         <span id="venue-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
         </span>
@@ -12,19 +12,22 @@
 
 
         <div x-data="{
-            tags: [],
-            showOptions: false,
-            _selectVenue(input, value) {
-                this.tags = [];
-                $refs.venueIdInput.value = value.ID;
-                addTag(this, input, value, 'error-toast');
-            },
-            _removeTag(index) {
-                $refs.venueIdInput.value = '';
-                removeTag(this, index);
-            },
-        }">
-            <input type="hidden" name="venue_id" x-ref="venueIdInput">
+                tags: [],
+                showOptions: false,
+                _selectVenue(input, value) {
+                    this.tags = [];
+                    $refs.venueIdInput.value = value.ID;
+                    addTag(this, input, value, 'error-toast');
+                },
+                _removeTag(index) {
+                    $refs.venueIdInput.value = '';
+                    removeTag(this, index);
+                },
+            }"
+            x-on:clear-form.window="_removeTag(0);"
+        >
+
+            <input id="venue_id_input" type="hidden" name="venue_id" x-ref="venueIdInput">
             <div class="relative">
                 <div class="relative">
                     <input type="text" name="s" class="w-full" autocomplete="off" placeholder="Search for venues"
@@ -38,7 +41,7 @@
                     />
                 </div>
                 <div id="venue-active-search-results" class="z-10" x-show="showOptions" x-cloak>
-                    <?php echo get_template_part('template-parts/search/venues-search-state-1', '', array()); ?>
+                    <?php echo get_template_part('template-parts/search/venues-search-state-1', '', []); ?>
                 </div>
             </div>
 

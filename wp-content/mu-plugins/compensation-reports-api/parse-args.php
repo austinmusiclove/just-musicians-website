@@ -22,21 +22,26 @@ function get_sanitized_compensation_report_args() {
         'meta_input'      => [],
         'tax_input'       => [],
     ];
+
     // Post Id
-    if (isset($_POST['post_id']))                  { $sanitized_args['ID']                                     = sanitize_text_field($_POST['post_id']); }
+    if (isset($_POST['post_id']))             { $sanitized_args['ID']                                = sanitize_text_field($_POST['post_id']); }
 
     // Post Status
-    if (!empty($_POST['post_status']))             { $sanitized_args['post_status']                            = sanitize_text_field($_POST['post_status']); }
+    if (!empty($_POST['post_status']))        { $sanitized_args['post_status']                       = sanitize_text_field($_POST['post_status']); }
 
     // Meta Fields
-    if (isset($_POST['venue_id']))                   { $sanitized_args['meta_input']['venue']                    = sanitize_text_field($_POST['venue_id']); }
-    if (isset($_POST['venue_id']))                   { $sanitized_args['meta_input']['venue_post_id']            = sanitize_text_field($_POST['venue_id']); }
-    //if (isset($_POST['description']))              { $sanitized_args['meta_input']['description']              = sanitize_text_field($_POST['description']); }
-    //if (isset($_POST['bio']))                      { $sanitized_args['meta_input']['bio']                      = sanitize_textarea_field($_POST['bio']); }
-    //if (isset($_POST['listing_email']))            { $sanitized_args['meta_input']['email']                    = sanitize_email($_POST['listing_email']); }
-    //if (isset($_POST['instagram_url']))            { $sanitized_args['meta_input']['instagram_url']            = sanitize_url($_POST['instagram_url'],          ['https', 'http']); }
-    //if (isset($_POST['ensemble_size']))            { $sanitized_args['meta_input']['ensemble_size']            = custom_sanitize_array($_POST['ensemble_size']); }
-
+    if (isset($_POST['venue_id']))            { $sanitized_args['meta_input']['venue']               = sanitize_text_field($_POST['venue_id']); }
+    if (isset($_POST['venue_id']))            { $sanitized_args['meta_input']['venue_post_id']       = sanitize_text_field($_POST['venue_id']); }
+    if (isset($_POST['total_earnings']))      { $sanitized_args['meta_input']['total_earnings']      = sanitize_text_field($_POST['total_earnings']); }
+    if (isset($_POST['minutes_performed']))   { $sanitized_args['meta_input']['minutes_performed']   = sanitize_text_field($_POST['minutes_performed']); }
+    if (isset($_POST['total_performers']))    { $sanitized_args['meta_input']['total_performers']    = sanitize_text_field($_POST['total_performers']); }
+    if (isset($_POST['comp_structure']))      { $sanitized_args['meta_input']['comp_structure']      = sanitize_text_field($_POST['comp_structure']); }
+    if (isset($_POST['payment_speed']))       { $sanitized_args['meta_input']['payment_speed']       = sanitize_text_field($_POST['payment_speed']); }
+    if (isset($_POST['payment_method']))      { $sanitized_args['meta_input']['payment_method']      = sanitize_text_field($_POST['payment_method']); }
+    if (isset($_POST['performing_act_name'])) { $sanitized_args['meta_input']['performing_act_name'] = sanitize_text_field($_POST['performing_act_name']); }
+    if (isset($_POST['performance_date']))    { $sanitized_args['meta_input']['performance_date']    = sanitize_text_field($_POST['performance_date']); }
+    if (isset($_POST['show_flier_url']))      { $sanitized_args['meta_input']['show_flier_url']      = sanitize_text_field($_POST['show_flier_url']); }
+    if (isset($_POST['performance']))         { $sanitized_args['meta_input']['performance']         = sanitize_text_field($_POST['performance']); }
 
     return $sanitized_args;
 }

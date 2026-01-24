@@ -30,7 +30,7 @@ function register_post_types() {
     register_post_type('listing_review', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Listing Review',
           'add_new_item' => 'Add New Listing Review',
@@ -45,7 +45,7 @@ function register_post_types() {
     register_post_type('buyer_review', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Buyer Review',
           'add_new_item' => 'Add New Buyer Review',
@@ -60,7 +60,7 @@ function register_post_types() {
     register_post_type('venue_review', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Venue Review',
           'add_new_item' => 'Add New Venue Review',
@@ -75,7 +75,7 @@ function register_post_types() {
     register_post_type('comp_report', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Compensation Report',
           'add_new_item' => 'Add New Compensation Report',
@@ -107,7 +107,7 @@ function register_post_types() {
     register_post_type('listing', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'thumbnail'),
+        'supports' => array('title', 'thumbnail', 'author'),
         'labels' => array(
           'name' => 'Listing',
           'add_new_item' => 'Add New Listing',
@@ -122,7 +122,7 @@ function register_post_types() {
     register_post_type('inquiry', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Inquiry',
           'add_new_item' => 'Add New Inquiry',
@@ -137,7 +137,7 @@ function register_post_types() {
     register_post_type('collection', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title'),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Collection',
           'add_new_item' => 'Add New Collection',
