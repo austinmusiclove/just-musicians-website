@@ -1,7 +1,3 @@
-**Before push to master
-    php upgrade from 7.4.30 to 8.3 and permalink update on live site and staging (was needed to make cli work)
-    add compensation report form page to live site and staging
-    add show flier url field to compe report on live and staging
 Critical
     messages with iid when not logged in is broken page
     notification count is wrong on messages for tim
