@@ -5,6 +5,7 @@
         <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/music.svg'; ?>" />
         <h2 class="text-25 font-bold">Performance</h2>
     </div>
+    <p class="text-18">Performance details are completely anonymous. This information is used to verify the authenticity of your submission.</p>
 
 
     <fieldgroup class="block border-b border-black/20 pb-6">
@@ -16,7 +17,7 @@
                 'input_name'    => 'performing_act_name',
                 'input_type'    => 'text',
                 'icon_filename' => 'icon-bands.svg',
-                'tooltip'       => 'Tooltip info',
+                'tooltip'       => 'Your band name or artist name as it appears on the show bill.',
                 'placeholder'   => 'Band Name',
                 'required'      => true,
             ]); ?>
@@ -27,7 +28,6 @@
                 'input_name'    => 'performance_date',
                 'input_type'    => 'date',
                 'icon_filename' => 'calendar.svg',
-                'tooltip'       => 'Tooltip info',
                 'placeholder'   => '',
                 'required'      => true,
             ]); ?>
@@ -38,7 +38,7 @@
                 'input_name'    => 'show_flier_url',
                 'input_type'    => 'url',
                 'icon_filename' => 'link.svg',
-                'tooltip'       => 'Tooltip info',
+                'tooltip'       => 'This could be a link to the venue website or a Facebook or Instagram post where the show is advertized. This is used to verify the authenticity of your contribution.',
                 'placeholder'   => 'https://',
                 'required'      => false,
             ]); ?>

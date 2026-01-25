@@ -8,8 +8,8 @@ get_header();
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden pb-6 md:pb-14">
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10"> <!--Look here -->
         <div class="sm:col-span-7 pr-8 sm:pr-0">
-            <h1 class="font-bold text-32 md:text-40 mb-6">Anonymous Musician Earnings Report Form</h1>
-            <p>This is an anonymous report. Your name, performance date, and any other identifiable informaiton will not be shared publically to ensure anonimity.</p>
+            <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to our Musician Earnings Database</h1>
+            <p class="text-18">This is a community effort to bring together anonymous information about musician earnings for the benefit of the musician community. Contributing information about how much you have earned as a live musician allows us to display compensation metrics for each venue like their average pay per gig, average pay per performer, and more. <br><br>Your contribution is completely anonymous. <br><br><a href="<?php echo site_url('/venues'); ?>" target="_blank" class="underline">Browse venues here</a> to view earnings data for each venue.</p>
         </div>
 
     </div>

@@ -2,12 +2,9 @@
 
     <!-- Sort -->
     <div class="flex items-center gap-2 ">
-        <div class="flex items-center gap-1.5 group relative h-50">
-            <div id="tooltip-sort" class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-64 -top-[65px] -right-28 md:right-auto">
-            Learn more about the default Hire More Musicians search algorithm <a class="text-yellow underline" href="<?php echo site_url('/search-algorithm'); ?>">here</a>.
-            </div>
-            <img id="info-sort" class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
-        </div>
+        <?php echo get_template_part('template-parts/global/tooltip', '', [
+            'tooltip' => 'Learn more about the default Hire More Musicians search algorithm <a class="text-yellow underline" target="_blank" href="' . site_url('/search-algorithm') . '">here</a>.'
+        ]); ?>
         <div class="flex items-center gap-1.5 group relative">
             Sort:
             <span class="font-bold flex items-center">

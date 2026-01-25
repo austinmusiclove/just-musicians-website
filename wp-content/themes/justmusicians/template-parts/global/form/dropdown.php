@@ -10,10 +10,13 @@
     }"
     x-on:clear-form.window="deselect();"
 >
-    <label id="<?php echo $args['input_name']; ?>" for="<?php echo $args['input_name']; ?>" class="mb-1 inline-block">
-        <?php echo $args['title']; ?>
-        <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
-    </label><br>
+    <div class="flex flex-row">
+        <label id="<?php echo $args['input_name']; ?>" for="<?php echo $args['input_name']; ?>" class="mb-1 mr-2 inline-block">
+            <?php echo $args['title']; ?>
+            <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
+        </label><br>
+        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
+    </div>
     <div class="relative flex items-center justify-between">
         <button type="button" class="inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"
             x-on:click="showDropdown = true"

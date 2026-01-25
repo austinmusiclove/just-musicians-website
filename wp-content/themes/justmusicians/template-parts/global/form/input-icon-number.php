@@ -4,10 +4,7 @@
             <?php echo $args['title']; ?>
             <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
         </label><br>
-        <div class="group relative">
-            <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[100px] -right-28 md:right-auto"><?php echo $args['tooltip']; ?></div>
-            <img class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
-        </div>
+        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
     </div>
     <div class="relative">
         <img class="h-5 absolute bottom-2.5 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/' . $args['icon_filename']; ?>" />

@@ -8,11 +8,6 @@ Critical
     messages have issues loading if response doesnt come back before first update poll
 Compensation Reporting
     gd-venue review form with structured comp data
-        *Copy
-            title
-            description under title
-            tooltip texts
-            review copy
         make it only work if you are logged in
         allow for using performance id in url
             fill in and disable performance inputs
@@ -33,6 +28,7 @@ Compensation Reporting
     Auto verify event from compensation report with event database
     allow add new venue
 Reviews
+    public venue review instructions
     need to easily be able to see which user authored each review so that i can contact them
     add lisitng review pagination on listing page and venue page
     Emails

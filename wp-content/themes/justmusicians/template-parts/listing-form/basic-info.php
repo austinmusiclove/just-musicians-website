@@ -8,12 +8,7 @@
         <div class="flex gap-1 mt-2">
             <label for="description" class="flex items-center gap-1">
                 Description<span class="text-red">*</span>
-                <div class="group relative">
-                    <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[45px] -right-28 md:right-auto">
-                    E.g., 5-piece Country Band
-                    </div>
-                    <img class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
-                </div>
+                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'E.g., 5-piece Country Band' ]); ?>
             </label>
         </div>
         <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription" ></textarea>
@@ -22,12 +17,7 @@
 
     <h2 class="flex items-center gap-1">
         <span class="font-bold text-18">Where are you based?</span>
-        <div class="group relative">
-            <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[82px] -right-28 md:right-auto">
-            This is where you consider yourself to be "based out of" not where you are from
-            </div>
-            <img class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
-        </div>
+        <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is where you consider yourself to be "based out of" not where you are from' ]); ?>
 
     </h2>
 
@@ -119,12 +109,7 @@
         </div>
         <label id="ensemble-size-input" class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Ensemble size <span class="text-14 font-normal">(select all that apply)</span></span>
-            <div class="group relative">
-                <div class="tooltip text-white bg-black px-4 py-3 text-14 rounded hidden group-hover:block absolute z-50 w-56 -top-[100px] -right-28 md:right-auto">
-                How many performers in your group? If you perform with different ensemble sizes, include all that apply.
-                </div>
-                <img class="opacity-40 h-4 cursor-pointer hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"/>
-            </div>
+            <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'How many performers in your group? If you perform with different ensemble sizes, include all that apply.' ]); ?>
         </label>
         <div class="p-2 flex gap-1 items-start flex-wrap h-20" x-data="{
             sizeOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'],
