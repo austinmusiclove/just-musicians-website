@@ -222,7 +222,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
 
 function validate_temporary_code($temporary_code) {
     // Get temporary code
-    $args = array(
+    $args = [
         'post_type' => 'tmp_code',
         'post_status' => 'publish',
         'posts_per_page' => 1,
@@ -233,7 +233,7 @@ function validate_temporary_code($temporary_code) {
                 'compare' => '=',
             ]
         ],
-    );
+    ];
     $tmp_code_query = new WP_Query($args);
     if (!$tmp_code_query->have_posts()) {
         return new WP_Error('invalid_code', 'Invalid Code');
@@ -247,4 +247,35 @@ function validate_temporary_code($temporary_code) {
     }
 
     return $tmp_code_post;
+}
+
+function create_temporary_code( $expiration, $data = [] ) {
+
+    // Ensure expiration is a valid timestamp
+    $expiration = is_numeric($expiration) ? (int) $expiration : strtotime($expiration);
+    if ( ! $expiration ) {
+        return new WP_Error('invalid_expiration', 'Invalid expiration value');
+    }
+
+    // Generate a unique temporary code
+    $tmp_code = wp_generate_password(32, false, false);
+
+    $post_id = wp_insert_post([
+        'post_type'   => 'tmp_code',
+        'post_status' => 'publish',
+        'post_title'  => $tmp_code,
+        'meta_input'  => array_merge(
+            [
+                'code'                 => $tmp_code,
+                'expiration_timestamp' => $expiration,
+            ],
+            $data
+        ),
+    ]);
+
+    if ( is_wp_error($post_id) ) {
+        return $post_id;
+    }
+
+    return $tmp_code;
 }

@@ -1,15 +1,14 @@
 Critical
-    messages with iid when not logged in is broken page
     notification count is wrong on messages for tim
     messages have issues loading if response doesnt come back before first update poll
+    messages with iid when not logged in is broken page
 Compensation Reporting
-    gd-venue review form with structured comp data
-        make it only work if you are logged in
-        allow for using performance id in url
-            fill in and disable performance inputs
-            add performance id hidden field
-            clear performance id on submit
     modify the existing data to work with new fields and remove old fields from acf
+    make it only work if you are logged in
+    allow for using performance id in url
+        fill in and disable performance inputs
+        add performance id hidden field
+        clear performance id on submit
     Display compensation data
         create section for musician earnings data that is blurred and only accessible by users with a listing
             payment method
@@ -20,19 +19,21 @@ Compensation Reporting
         show avg comp per performer per hour
         on venue browsing page show blurred out and prompt to log in to view
         on venue page
+    allow add new venue
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
-    allow add new venue
 Reviews
     public venue review instructions
     need to easily be able to see which user authored each review so that i can contact them
     add lisitng review pagination on listing page and venue page
-    Emails
-        add regular email to invite artists to write venue and gd-venue reviews
-        add regular email to invite artists to solicit reviews from bookers
-            booker gets email requesting review, makes account, writes review
-            invite artist to review booker
     Don't allow reviewing yourself
+    only allow writing buyer/listing review by invitation
+    annonymous 2 way review system
+        don't show review for 2 weeks to give the user time to review the buyer
+        show the review after buyer review is submitted
+    Emails
+        add regular email to invite artists to write earnings contributions
+        add regular email to invite artists to solicit reviews from bookers
 Venue Browsing Page
     add more info to popup
     show/hide popup on hover
@@ -43,7 +44,6 @@ Venue pages
     Add artists recently played to venue pages
     genres
     tags
-    comp data
     switch out google map with styled map
 Advanced inquiries
     allow inquiry when not logged in
@@ -149,7 +149,6 @@ Testing
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
 UX
-    prompt to add profile image and name with notification bubble
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
