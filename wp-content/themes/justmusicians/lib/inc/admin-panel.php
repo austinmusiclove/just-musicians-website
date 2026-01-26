@@ -133,4 +133,16 @@ function show_user_columns($value, $column_name, $user_id) {
     return $value;
 }
 
+// Add author id to author column
+add_filter( 'the_author', function( $display_name ) {
+    global $post;
+
+    if ( ! is_admin() || ! $post ) {
+        return $display_name;
+    }
+
+    $user_id = $post->post_author;
+
+    return "{$user_id} :: {$display_name}";
+});
 

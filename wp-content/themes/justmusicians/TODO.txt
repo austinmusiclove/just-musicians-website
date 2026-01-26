@@ -1,9 +1,5 @@
 Reviews
-    *only allow buyer review if logged in
-    *only allow listing review if logged in
-    *only allow venue review if logged in
     public venue review instructions
-    need to easily be able to see which user authored each review so that i can contact them
     add lisitng review pagination on listing page and venue page
     Don't allow reviewing yourself
     only allow writing buyer/listing review by invitation
