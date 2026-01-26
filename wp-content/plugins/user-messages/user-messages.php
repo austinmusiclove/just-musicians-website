@@ -643,7 +643,7 @@ class UserMessagesPlugin {
                     LIMIT 1
                 )
             LEFT JOIN wp_um_read_receipts rr
-                ON rr.message_id = m.id AND rr.user_id = 1
+                ON rr.message_id = m.id AND rr.user_id = %d
             WHERE rr.user_id IS NULL;
         ";
 
