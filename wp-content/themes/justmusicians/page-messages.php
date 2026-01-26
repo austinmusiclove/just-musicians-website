@@ -1,6 +1,6 @@
 <?php
 
-if (!is_user_logged_in()) { wp_redirect(site_url()); } // Don't allow non logged in users to see this page
+if (!is_user_logged_in()) { wp_redirect(site_url()); exit; } // Don't allow non logged in users to see this page
 
 $user_id = get_current_user_id();
 $inquiry_data = null;
@@ -11,6 +11,7 @@ if (!empty($_GET['iid'])) {
     $inquiry_data = get_user_inquiry(['post_id' => $inquiry_id]);
     if (is_wp_error($inquiry_data)) {
         wp_redirect(site_url('/messages'));
+        exit;
     }
     $inquiries_map = [ $inquiry_id => $inquiry_data ];
 }

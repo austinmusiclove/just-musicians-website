@@ -7,10 +7,10 @@
 
 $post_id = null;
 $listing_data = null;
-if (!is_user_logged_in()) { wp_redirect(site_url()); }                               // Don't allow non logged in users to use the form
+if (!is_user_logged_in()) { wp_redirect(site_url()); exit; }                               // Don't allow non logged in users to use the form
 if (!empty($_GET['lid'])) {
     $user_listings = (array) get_user_meta(get_current_user_id(), 'listings', true); // Get user's listings
-    if (!in_array($_GET['lid'], $user_listings)) { wp_redirect(site_url()); }        // Don't allow opening form for a listing that does not belong to the logged in user
+    if (!in_array($_GET['lid'], $user_listings)) { wp_redirect(site_url()); exit; }        // Don't allow opening form for a listing that does not belong to the logged in user
     $listing_data     = get_listing(['post_id' => $_GET['lid']]);                    // Get listing data
 }
 $is_update            = !is_null($listing_data);

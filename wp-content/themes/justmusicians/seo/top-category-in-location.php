@@ -14,6 +14,7 @@ if ( $term and !is_wp_error( $term ) ) {
 // If the term doesn't exist or there was an error, just redirect to home page
 } else {
     wp_redirect(site_url());
+    exit;
 }
 
 

@@ -1,7 +1,6 @@
 Critical
     notification count is wrong on messages for tim
     messages have issues loading if response doesnt come back before first update poll
-    messages with iid when not logged in is broken page
 Compensation Reporting
     modify the existing data to work with new fields and remove old fields from acf
     make it only work if you are logged in
