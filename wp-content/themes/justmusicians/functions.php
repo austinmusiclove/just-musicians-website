@@ -39,6 +39,9 @@ function hmm_scripts() {
     $pkg = json_decode(file_get_contents('package.json', true));
     global $post;
 
+    // Parse request uri
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
     // Alpine
     $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
 
@@ -86,8 +89,19 @@ function hmm_scripts() {
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }
 
-    // Venue Pages
-    if ( str_starts_with($_SERVER['REQUEST_URI'], '/venues') ) {
+    // Venue Browsing page
+    if (preg_match('#^/venues/?$#', $path)) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // Map
+        wp_enqueue_script('maplibre-gl.5.14.0-js', get_template_directory_uri() . '/lib/js/maplibre-gl.5.14.0.js', [], $pkg->version, true);
+        wp_enqueue_style( 'maplibre-gl.5.14.0-css', get_template_directory_uri() . '/lib/css/maplibre-gl.5.14.0.css', [], $pkg->version);
+        wp_enqueue_script('maplibre-js', get_template_directory_uri() . '/lib/js/maplibre.js', [], $pkg->version, true);
+        wp_localize_script('maplibre-js', 'siteData', [ 'siteUrl' => site_url() ]);
+
+    // Single Venue Pages
+    } elseif (preg_match('#^/venues/[^/]+/?$#', $path)) {
         // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
 
@@ -97,11 +111,9 @@ function hmm_scripts() {
         // Reviews
         wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, true);
 
-        // Map
-        wp_enqueue_script('maplibre-gl.5.14.0-js', get_template_directory_uri() . '/lib/js/maplibre-gl.5.14.0.js', [], $pkg->version, true);
-        wp_enqueue_style( 'maplibre-gl.5.14.0-css', get_template_directory_uri() . '/lib/css/maplibre-gl.5.14.0.css', [], $pkg->version);
-        wp_enqueue_script('maplibre-js', get_template_directory_uri() . '/lib/js/maplibre.js', [], $pkg->version, true);
-        wp_localize_script('maplibre-js', 'siteData', [ 'siteUrl' => site_url() ]);
+        // Chart.js
+        wp_enqueue_script('chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', [], $pkg->version, true);
+        wp_enqueue_script('bar-chart-js', get_template_directory_uri() . '/lib/js/charts/bar-chart.js', ['chart-js'], $pkg->version, true);
     }
 
     // Listing form

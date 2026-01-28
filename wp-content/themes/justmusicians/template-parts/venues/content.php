@@ -11,16 +11,7 @@
         <?php echo get_template_part('template-parts/venues/parts/description', '', []); ?>
 
         <!-- Genres -->
-        <!-- Tags -->
-        <!-- Musician Compensation -->
-            <!-- Num comp reports -->
-            <!-- Average total comp -->
-            <!-- Average total comp variance -->
-            <!-- Average total comp per performer -->
-            <!-- Average total comp per performer per hour -->
-            <!-- Payment type -->
-            <!-- Payment speed -->
-            <!-- Submit a Musician Compensation Report -->
+        <!-- Tags/Amenities for performers (sound engineer, green room, etc.) -->
 
         <!-- Map -->
         <?php echo get_template_part('template-parts/venues/parts/map', '', []); ?>

@@ -14,7 +14,7 @@
 
     <!-- Reviews -->
     <div
-        hx-get="<?php echo site_url('/wp-html/v1/reviews/venue_review/' . get_the_ID()); ?>"
+        hx-get="<?php echo site_url('/wp-html/v1/reviews/venue_review/' . get_the_ID() . '/'); ?>"
         hx-trigger="load, fetch-reviews from:window"
     ></div>
 

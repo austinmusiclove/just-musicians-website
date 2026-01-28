@@ -1,3 +1,42 @@
+Venue pages
+    *modify the existing comp report data to work with new fields and remove old fields from acf
+        add other options for pay method and speed (leave old ones for now)
+        add calculated venue fields in acf
+            add total comp reports
+            add count for each payment method and speed
+            add average performer count
+        go through each comp report and adjust the data
+        copy comp report data from live site to local
+        adjust calculated venue fields in code
+            add total comp reports
+            add count for each payment method and speed
+            add average performer count
+        remove other options for pay method and speed
+        clear unused fields in comp report and venue acf
+    *connect real data on venue pages
+    *make compensation data only visible to users who are logged in and have a listing
+    Add artists recently played to venue pages
+    typical ensemble size hired
+    typical genres hired
+    tags
+    add upcoming events
+    switch out google map with styled map
+Compensation Reporting
+    *make it only work if you are logged in
+    *allow for using performance id in url
+        fill in and disable performance inputs
+        add performance id hidden field
+        clear performance id on submit
+    allow add new venue
+    allow connecting listing instead of performer name
+    Auto verify event from compensation report with event database
+Venue Browsing Page
+    *add more info to popup
+    *show/hide popup on hover
+    *add venues listings next to map
+    *Sort venues by musician compensation metrics
+    Filter venues by genres they play
+    Filter venues that played certian artists
 Reviews
     public venue review instructions
     add lisitng review pagination on listing page and venue page
@@ -9,39 +48,9 @@ Reviews
     Emails
         add regular email to invite artists to write earnings contributions
         add regular email to invite artists to solicit reviews from bookers
-Venue pages
-    *Compensation data on venue pages
-    *switch out google map with styled map
-    Add artists recently played to venue pages
-    genres
-    tags
-Compensation Reporting
-    *modify the existing data to work with new fields and remove old fields from acf
-    *make it only work if you are logged in
-    *allow for using performance id in url
-        fill in and disable performance inputs
-        add performance id hidden field
-        clear performance id on submit
-    *Display compensation data
-        create section for musician earnings data that is blurred and only accessible by users with a listing
-            payment method
-            payment speed
-            average earnings per performer per hour
-            typical ensemble size hired
-            typical genres hired
-        show avg comp per performer per hour
-        on venue browsing page show blurred out and prompt to log in to view
-        on venue page
-    allow add new venue
-    allow connecting listing instead of performer name
-    Auto verify event from compensation report with event database
-Venue Browsing Page
-    *add more info to popup
-    *show/hide popup on hover
-    *add venues listings next to map
-    Filter venues by musician compensation metrics
-    Filter venues by genres they play
-    Filter venues that played certian artists
+Notifications
+    Create notification bubble to update display name and photo
+    Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
@@ -55,9 +64,6 @@ Advanced inquiries
     record response time
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
-Notifications
-    Create notification bubble to update display name and photo
-    Send notifications update when a new message comes in and maybe also poll ever 10 min or so
 Additional pages
     Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
 SEO
@@ -146,6 +152,7 @@ Testing
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
 UX
+    pop up on top right that prompts you to log in with google as soon as you open the site
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
@@ -161,12 +168,11 @@ UX
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
     make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
 Devon
-    venue page
+    venue page especially stats
     venues search
     404 page
     request quote pop up
-    trash icon
-    indicator on infinite scroll and listing form
+    indicator on infinite scroll and listing form (i like mine but could be something on brand)
     podcast - get violotor-blog svg
 Security
     audit rest api inputs and html api inputs
