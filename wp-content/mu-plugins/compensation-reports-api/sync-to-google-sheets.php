@@ -80,7 +80,9 @@ function sync_comp_reports_to_google_sheet() {
                     $row[] = $post->post_modified;
                     break;
                 case 'comp_structure':
-                    $row[] = implode(", ", get_post_meta($post->ID, $column, true));
+                    $value = get_post_meta($post->ID, $column, true);
+                    if (is_array($value)) { $value = implode(', ', $value); }
+                    $row[] = (string) $value;
                     break;
                 case 'performance_date':
                     $dt = DateTime::createFromFormat('Ymd', get_post_meta($post->ID, $column, true));
