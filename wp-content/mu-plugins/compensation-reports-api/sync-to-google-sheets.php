@@ -89,6 +89,11 @@ function sync_comp_reports_to_google_sheet() {
                     $formatted = $dt ? $dt->format('Y-m-d') : '';
                     $row[] = $formatted;
                     break;
+                case 'performance':
+                    $value = get_post_meta($post->ID, $column, true);
+                    if (is_array($value)) { $value = implode(', ', $value); }
+                    $row[] = (string) $value;
+                    break;
                 default:
                     $row[] = get_post_meta($post->ID, $column, true);
             }
