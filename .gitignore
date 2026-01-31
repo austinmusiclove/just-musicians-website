@@ -8,6 +8,7 @@ wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
 wp-content/uploads
 wp-content/cache
 wp-content/debug.log
+wp-content/mu-plugins/google-sheets/website-349104-9c7063841440.json
 #wp-content/plugins/*
 #!wp-content/plugins/user-messages/
 #!wp-content/plugins/user-mgmt.php
