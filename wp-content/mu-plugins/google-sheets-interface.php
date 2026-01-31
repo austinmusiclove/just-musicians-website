@@ -88,7 +88,7 @@ function gs_update_rows(array $updates, string $sheet_id, string $sheet_name) {
     $service = gs_get_service();
 
     foreach ($updates as $rowNumber => $values) {
-        sleep(1.1); // sleep to avoid rate limit of 60 req per minute
+        sleep(2); // sleep to avoid rate limit of 60 req per minute
         $range = $sheet_name . '!A' . $rowNumber;
 
         $body = new Google_Service_Sheets_ValueRange([
