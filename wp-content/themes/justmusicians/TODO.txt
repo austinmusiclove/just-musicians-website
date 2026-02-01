@@ -1,5 +1,28 @@
 Venue pages
     *modify the existing comp report data to work with new fields and remove old fields from acf
+        create legacy data sheet for reference
+            include old fields
+                middle man
+                gig type
+                performance start time
+                total acts
+                recommend to others
+                overall rating
+                communication rating
+                sound rating
+                safety rating
+                guarantee promise
+                guarantee earnings
+                door percentage
+                door earnings
+                bar percentage
+                bar earnings
+                tips earnings
+                production cost
+                production cost type
+                other comp structure
+                provided sound engineer
+                backline[]
         add other options for pay method and speed (leave old ones for now)
         add calculated venue fields in acf
             add total comp reports

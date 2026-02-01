@@ -16,14 +16,35 @@ $COMP_REPORT_COLUMNS = [
     'modified',
     'venue_name',
     'venue_post_id',
+    'recommend_to_others',
+    'overall_rating',
+    'communication_rating',
+    'sound_rating',
+    'safety_rating',
+    'provided_sound_engineer',
+    'backline',
+    'middle_man',
+    'gig_type',
     'total_earnings',
+    'guarantee_promise',
+    'guarantee_earnings',
+    'door_percentage',
+    'door_earnings',
+    'bar_percentage',
+    'bar_earnings',
+    'tips_earnings',
+    'production_cost',
+    'production_cost_type',
     'minutes_performed',
     'total_performers',
+    'total_acts',
     'comp_structure',
+    'other_comp_structure',
     'payment_speed',
     'payment_method',
     'performing_act_name',
     'performance_date',
+    'performance_start_time',
     'performance',
     'show_flier_url',
     'review',
@@ -80,6 +101,11 @@ function sync_comp_reports_to_google_sheet() {
                     $row[] = $post->post_modified;
                     break;
                 case 'comp_structure':
+                    $value = get_post_meta($post->ID, $column, true);
+                    if (is_array($value)) { $value = implode(', ', $value); }
+                    $row[] = (string) $value;
+                    break;
+                case 'backline':
                     $value = get_post_meta($post->ID, $column, true);
                     if (is_array($value)) { $value = implode(', ', $value); }
                     $row[] = (string) $value;
