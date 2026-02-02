@@ -1,8 +1,6 @@
 Venue pages
     *modify the existing comp report data to work with new fields and remove old fields from acf
         comp reports
-            adjust data for pay method, pay speed, and comp structure
-            add auth to comp report sync apis
             adjust form options
                 pay speed options
                 comp structure options

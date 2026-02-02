@@ -129,45 +129,29 @@ function sync_google_sheet_to_comp_reports() {
 
         // Make sure post_id is valid
         $post_id = intval($post_id);
-        if ($post_id <= 0) {
-            error_log('skip bad post id');
-            continue;
-        }
+        if ($post_id <= 0) { continue; }
 
         // Make sure the post exists
         $post = get_post($post_id);
-        if (!$post) {
-            error_log('skip not a post');
-            continue;
-        }
+        if (!$post) { continue; }
 
         // Make sure it's the correct post type
-        if ($post->post_type !== 'comp_report') {
-            error_log('skip not a comp_report');
-            continue;
-        }
+        if ($post->post_type !== 'comp_report') { continue; }
 
         // Only update specific meta fields if they exist in the row
-        error_log($post_id);
-        error_log(print_r($row['values'][12], true));
-        error_log(print_r($row['values'][13], true));
-        error_log(print_r($row['values'][14], true));
 
         // comp_structure
         if (isset($row['values'][12])) {
-            error_log('update comp structure');
             update_post_meta($post_id, 'comp_structure', sanitize_text_field($row['values'][12]));
         }
 
         // payment_speed
         if (isset($row['values'][13])) {
-            error_log('update payment speed');
             update_post_meta($post_id, 'payment_speed', sanitize_text_field($row['values'][13]));
         }
 
         // payment_method
         if (isset($row['values'][14])) {
-            error_log('update payment method');
             update_post_meta($post_id, 'payment_method', sanitize_text_field($row['values'][14]));
         }
     }

@@ -21,6 +21,7 @@ add_action('rest_api_init', function () {
     register_rest_route('comp_reports/v1', 'posts_to_sheets', [
         'methods' => WP_REST_SERVER::READABLE,
         'callback' => 'sync_comp_reports_to_google_sheet',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
 });
 
@@ -28,5 +29,6 @@ add_action('rest_api_init', function () {
     register_rest_route('comp_reports/v1', 'sheets_to_posts', [
         'methods' => WP_REST_SERVER::READABLE,
         'callback' => 'sync_google_sheet_to_comp_reports',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
 });
