@@ -12,7 +12,6 @@ $COMP_REPORT_COLUMNS = [
     'status',
     'author',
     'author_email',
-    'author_contact',
     'date',
     'modified',
     'venue_name',
