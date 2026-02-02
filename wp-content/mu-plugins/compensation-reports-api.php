@@ -27,7 +27,7 @@ add_action('rest_api_init', function () {
 
 add_action('rest_api_init', function () {
     register_rest_route('comp_reports/v1', 'sheets_to_posts', [
-        'methods' => WP_REST_SERVER::READABLE,
+        'methods' => WP_REST_SERVER::EDITABLE, // PUT / PATCH only
         'callback' => 'sync_google_sheet_to_comp_reports',
         'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
