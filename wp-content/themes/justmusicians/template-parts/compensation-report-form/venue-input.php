@@ -17,6 +17,7 @@
                 _selectVenue(input, value) {
                     this.tags = [];
                     $refs.venueIdInput.value = value.ID;
+                    $refs.venueNameInput.value = value.name;
                     addTag(this, input, value, 'error-toast');
                 },
                 _removeTag(index) {
@@ -28,6 +29,7 @@
         >
 
             <input id="venue_id_input" type="hidden" name="venue_id" x-ref="venueIdInput">
+            <input id="venue_name_input" type="hidden" name="venue_name" x-ref="venueNameInput">
             <div class="relative">
                 <div class="relative">
                     <input type="text" name="s" class="w-full" autocomplete="off" placeholder="Search for venues"

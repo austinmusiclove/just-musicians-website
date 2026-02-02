@@ -8,10 +8,14 @@ get_header();
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden pb-6 md:pb-14">
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10"> <!--Look here -->
         <div class="sm:col-span-7 pr-8 sm:pr-0">
-            <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to our Musician Earnings Database</h1>
-            <p class="text-18">This is a community effort to bring together anonymous information about musician earnings for the benefit of the musician community. Contributing information about how much you have earned as a live musician allows us to display compensation metrics for each venue like their average pay per gig, average pay per performer, and more. <br><br>Your contribution is completely anonymous. <br><br><a href="<?php echo site_url('/venues'); ?>" target="_blank" class="underline">Browse venues here</a> to view earnings data for each venue.</p>
+            <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to our Live Musician Earnings Database</h1>
+            <p class="text-18">
+                This is a community project to track how much music venues pay musicians.
+                <br><br>
+                All entries are completely anonymous. We will never share names, show dates, or other personal details. That information is only used to make sure the entry is real.
+                Each entry helps us publish useful facts about how you can expect to be paid by music venues as a musician.
+            </p>
         </div>
-
     </div>
 </header>
 
@@ -41,6 +45,9 @@ get_header();
 
         <!-- Performance Input Group -->
         <?php echo get_template_part('template-parts/compensation-report-form/performance-inputs', '', []); ?>
+
+        <!-- Review Input -->
+        <?php echo get_template_part('template-parts/compensation-report-form/review-input', '', []); ?>
 
         <!-- Submit button -->
         <?php echo get_template_part('template-parts/compensation-report-form/submit-button', '', []); ?>

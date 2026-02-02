@@ -1,17 +1,5 @@
 Venue pages
     *modify the existing comp report data to work with new fields and remove old fields from acf
-        comp reports
-            adjust form options
-                pay speed options
-                comp structure options
-                pay method options
-                add other payment method box that will still get put into same form field
-                add other compensation structure box that will still get put into same form field
-                add anonymous review for other contributors only to form
-            copy comp report acf to staging and local
-            copy comp report data from live site to staging and local
-            review all copy on comp report form
-            make sure i have all fields being updated from form submit that i need including author email
         venues
             add calculated venue fields in acf
                 add total comp reports
@@ -24,7 +12,6 @@ Venue pages
             clear unused fields in venue acf
     *connect real data on venue pages
         only display top 4-5 pay methods and speeds
-    *make compensation data only visible to users who are logged in and have a listing
     Add artists recently played to venue pages
     typical ensemble size hired
     typical genres hired
@@ -39,6 +26,7 @@ Compensation Reporting
         fill in and disable performance inputs
         add performance id hidden field
         clear performance id on submit
+        make show flier not required if peformance id exists
     allow add new venue
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
