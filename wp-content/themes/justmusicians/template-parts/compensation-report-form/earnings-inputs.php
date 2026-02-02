@@ -15,7 +15,7 @@
                 'title'         => 'Total Earnings',
                 'input_name'    => 'total_earnings',
                 'icon_filename' => 'money-bill.svg',
-                'tooltip'       => 'Enter the total amount of money that you, or your band, walked away with at the end of the gig after including tips and deducting any production costs you had to pay to pay the gig.',
+                'tooltip'       => 'Enter the total amount of money that you, or your band, walked away with at the end of the gig after including tips and deducting any production costs you had to pay to play the gig.',
                 'placeholder'   => '0',
                 'currency'      => '$',
                 'required'      => true,

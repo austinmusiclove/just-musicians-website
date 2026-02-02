@@ -1,48 +1,43 @@
 Venue pages
     *modify the existing comp report data to work with new fields and remove old fields from acf
-        create legacy data sheet for reference
-            include old fields
-                middle man
-                gig type
-                performance start time
-                total acts
-                recommend to others
-                overall rating
-                communication rating
-                sound rating
-                safety rating
-                guarantee promise
-                guarantee earnings
-                door percentage
-                door earnings
-                bar percentage
-                bar earnings
-                tips earnings
-                production cost
-                production cost type
-                other comp structure
-                provided sound engineer
-                backline[]
-        add other options for pay method and speed (leave old ones for now)
-        add calculated venue fields in acf
-            add total comp reports
-            add count for each payment method and speed
-            add average performer count
-        go through each comp report and adjust the data
-        copy comp report data from live site to local
-        adjust calculated venue fields in code
-            add total comp reports
-            add count for each payment method and speed
-            add average performer count
-        remove other options for pay method and speed
-        clear unused fields in comp report and venue acf
+        comp reports
+            pay method
+                add other options for pay method (gift card, separate apps, bill.com, others in current data; leave old ones for now)
+                adjust all pay methods
+                remove other options for pay method
+                adjust comp report form options
+                add other payment method box that will still get put into same form field
+            pay speed
+                add other options for pay speed (leave old ones for now)
+                adjust all pay speeds
+                remove other options for pay speed
+                adjust comp report form options
+            add anonymous review for other contributors only to form
+            add other compensation structure box that will still get put into same form field
+            copy comp report data from live site to local
+            clear unused fields in comp reports acf
+            review all copy on comp report form
+            make sure i have all fields being updated from form submit that i need including author email
+        venues
+            add calculated venue fields in acf
+                add total comp reports
+                add count for each payment method and speed as one field each that contains an associative array of keys and values
+                add average performer count
+            adjust calculated venue fields in code
+                add total comp reports
+                add count for each payment method and speed
+                add average performer count
+            clear unused fields in venue acf
     *connect real data on venue pages
+        only display top 4-5 pay methods and speeds
     *make compensation data only visible to users who are logged in and have a listing
     Add artists recently played to venue pages
     typical ensemble size hired
     typical genres hired
     tags
     add upcoming events
+    add amenities like bathrooms, dog friendly, food/drink, etc.
+    add musician amenities like green room, sound engineer, backline
     switch out google map with styled map
 Compensation Reporting
     *make it only work if you are logged in
@@ -61,7 +56,12 @@ Venue Browsing Page
     Filter venues by genres they play
     Filter venues that played certian artists
 Reviews
-    public venue review instructions
+    venue reviews
+        public venue review instructions
+        venue ameneties for musicians
+            backline
+            provide sound engineer
+            overall, communication, sound, safety ratings
     add lisitng review pagination on listing page and venue page
     Don't allow reviewing yourself
     only allow writing buyer/listing review by invitation
