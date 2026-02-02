@@ -1,21 +1,17 @@
 Venue pages
     *modify the existing comp report data to work with new fields and remove old fields from acf
         comp reports
-            pay method
-                add other options for pay method (gift card, separate apps, bill.com, others in current data; leave old ones for now)
-                adjust all pay methods
-                remove other options for pay method
-                adjust comp report form options
+            adjust data for pay method, pay speed, and comp structure
+            add auth to comp report sync apis
+            adjust form options
+                pay speed options
+                comp structure options
+                pay method options
                 add other payment method box that will still get put into same form field
-            pay speed
-                add other options for pay speed (leave old ones for now)
-                adjust all pay speeds
-                remove other options for pay speed
-                adjust comp report form options
-            add anonymous review for other contributors only to form
-            add other compensation structure box that will still get put into same form field
-            copy comp report data from live site to local
-            clear unused fields in comp reports acf
+                add other compensation structure box that will still get put into same form field
+                add anonymous review for other contributors only to form
+            copy comp report acf to staging and local
+            copy comp report data from live site to staging and local
             review all copy on comp report form
             make sure i have all fields being updated from form submit that i need including author email
         venues

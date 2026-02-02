@@ -110,3 +110,66 @@ function sync_comp_reports_to_google_sheet() {
     gs_update_rows($rows_to_update, $SHEET_ID, $SHEET_NAME);
 }
 
+function sync_google_sheet_to_comp_reports() {
+    global $SHEET_ID;
+    global $SHEET_NAME;
+
+    if (!function_exists('gs_get_all_rows_indexed_by_post_id')) {
+        error_log('Google Sheets helper plugin not loaded.');
+        return;
+    }
+
+    $existing_rows = gs_get_all_rows_indexed_by_post_id($SHEET_ID, $SHEET_NAME);
+
+    if (empty($existing_rows) || !is_array($existing_rows)) {
+        return;
+    }
+
+    foreach ($existing_rows as $post_id => $row) {
+
+        // Make sure post_id is valid
+        $post_id = intval($post_id);
+        if ($post_id <= 0) {
+            error_log('skip bad post id');
+            continue;
+        }
+
+        // Make sure the post exists
+        $post = get_post($post_id);
+        if (!$post) {
+            error_log('skip not a post');
+            continue;
+        }
+
+        // Make sure it's the correct post type
+        if ($post->post_type !== 'comp_report') {
+            error_log('skip not a comp_report');
+            continue;
+        }
+
+        // Only update specific meta fields if they exist in the row
+        error_log($post_id);
+        error_log(print_r($row['values'][12], true));
+        error_log(print_r($row['values'][13], true));
+        error_log(print_r($row['values'][14], true));
+
+        // comp_structure
+        if (isset($row['values'][12])) {
+            error_log('update comp structure');
+            update_post_meta($post_id, 'comp_structure', sanitize_text_field($row['values'][12]));
+        }
+
+        // payment_speed
+        if (isset($row['values'][13])) {
+            error_log('update payment speed');
+            update_post_meta($post_id, 'payment_speed', sanitize_text_field($row['values'][13]));
+        }
+
+        // payment_method
+        if (isset($row['values'][14])) {
+            error_log('update payment method');
+            update_post_meta($post_id, 'payment_method', sanitize_text_field($row['values'][14]));
+        }
+    }
+}
+
