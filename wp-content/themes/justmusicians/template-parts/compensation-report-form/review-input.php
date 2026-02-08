@@ -9,8 +9,7 @@
     <!-- Input -->
     <p class="text-18">
         What you write here will not be shared publicly.
-        This is your chance to tell other musicians about your experience.
-        This will be shared only in an anonymous way with other contributors.
+        This will only be shared anonymously with other contributors.
     </p>
     <textarea class="w-full h-48 sm:h-64 mb-6" name="review" placeholder="This is your chance to share more about your experience" ></textarea>
 

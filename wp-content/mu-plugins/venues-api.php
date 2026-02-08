@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
 require_once 'venues-api/get-venues-in-bounds.php';
+require_once 'venues-api/update-venue-stats.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
@@ -30,9 +31,9 @@ add_action('rest_api_init', function () {
         'permission_callback' => '__return_true',
     ]);
     register_rest_route( 'venues/v1', 'stats', [
-        'methods' => 'GET',
-        'callback' => 'update_venue_stats',
-        'permission_callback' => '__return_true',
+        'methods' => 'PUT',
+        'callback' => 'update_all_venue_stats',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
     register_rest_route( 'venues/v1', 'bounds', [
         'methods' => 'GET',
@@ -146,7 +147,7 @@ function get_venues_by_post_id_batch() {
     return $result;
 }
 
-function update_venue_stats() {
+function update_all_venue_stats() {
     // get venues
     $args = array(
         'post_type' => 'venue',
@@ -157,67 +158,11 @@ function update_venue_stats() {
 
         // for each venue get reviews and generate stats
         while( $venues_query->have_posts() ) {
-            $review_count = 0;
-            $stats_review_count = 0;
-            $rating_count = 0;
-            $overall_rating_sum = 0;
-            $earnings_sum = 0;
-
-            // Get reviews for this venue
             $venues_query->the_post();
             $venue_post_id = get_the_ID();
-            $query_args = array(
-                'post_type' => 'compensation_report',
-                'nopaging' => true,
-                'post_status' => 'publish',
-                'meta_query' => array(
-                    array(
-                        'key' => 'venue_post_id',
-                        'value' => $venue_post_id,
-                        'compare' => '='
-                    )
-                )
-            );
-            $comp_report_query = new WP_Query($query_args);
-            if ($comp_report_query->have_posts()) {
-
-                while( $comp_report_query->have_posts() ) {
-                    $comp_report_query->the_post();
-                    $review_count++;
-                    if (!get_field('exclude_from_stats')) {
-                        $stats_review_count++;
-                        $earnings_sum += (float)get_field('total_earnings');
-                    }
-                    $overall_rating = (int)get_field('overall_rating');
-                    if ($overall_rating > 0) {
-                        $rating_count ++;
-                        $overall_rating_sum += $overall_rating;
-                    }
-                }
-            }
-
-            // Calc averages
-            $overall_rating_average = round(($rating_count > 0) ? $overall_rating_sum/$rating_count : 0, 2);
-            $earnings_average = round(($stats_review_count > 0) ? $earnings_sum/$stats_review_count : 0, 2);
-
-            // update venue meta data
-            $update_args = array(
-                'ID' => $venue_post_id,
-                'meta_input' => array(
-                    '_review_count' => $review_count,
-                    '_stats_review_count' => $stats_review_count,
-                    '_overall_rating' => $overall_rating_average,
-                    '_average_earnings' => $earnings_average,
-                ),
-            );
-            $update_result = wp_update_post( wp_slash($update_args), true );
-            if( is_wp_error( $update_result ) ) {
-                wp_reset_postdata();
-                return $update_result->get_error_message();
-            }
+            update_venue_stats($venue_post_id);
         }
     }
     wp_reset_postdata();
     return;
 }
-

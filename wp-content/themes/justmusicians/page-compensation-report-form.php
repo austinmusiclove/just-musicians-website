@@ -47,7 +47,7 @@ get_header();
         <?php echo get_template_part('template-parts/compensation-report-form/performance-inputs', '', []); ?>
 
         <!-- Review Input -->
-        <?php echo get_template_part('template-parts/compensation-report-form/review-input', '', []); ?>
+        <?php //echo get_template_part('template-parts/compensation-report-form/review-input', '', []); ?>
 
         <!-- Submit button -->
         <?php echo get_template_part('template-parts/compensation-report-form/submit-button', '', []); ?>

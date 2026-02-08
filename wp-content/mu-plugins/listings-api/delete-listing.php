@@ -36,7 +36,7 @@ function delete_post_hook($post_id) {
 
     // Schedle cron if there isn't one already scheduled for this post
     if (!wp_next_scheduled('clean_listing_references_after_delete', [$post_id])) {
-        wp_schedule_single_event(time() + LISTING_CALC_DELAY, 'clean_listing_references_after_delete', [$post_id]);
+        wp_schedule_single_event(time() + CALC_DELAY, 'clean_listing_references_after_delete', [$post_id]);
     }
 }
 add_action('clean_listing_references_after_delete', function($post_id) {

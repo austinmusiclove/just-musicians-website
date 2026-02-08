@@ -20,7 +20,7 @@
     </div>
 
     <!-- Musician pay -->
-    <?php //echo get_template_part('template-parts/venues/parts/musician-pay', '', []); ?>
+    <?php echo get_template_part('template-parts/venues/parts/musician-pay', '', []); ?>
 
     <!-- Inquiry Form -->
     <div class="">

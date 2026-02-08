@@ -16,7 +16,7 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
 
         // Schedle cron if there isn't one already scheduled for this post
         if (!wp_next_scheduled('listing_calc_content_event', [$post_id])) {
-            wp_schedule_single_event(time() + LISTING_CALC_DELAY, 'listing_calc_content_event', [$post_id]);
+            wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_content_event', [$post_id]);
         }
     }
 
@@ -25,7 +25,7 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
 
         // Schedule a one-time cron job to update the rank
         if (!wp_next_scheduled('listing_calc_rank_event', [$post_id])) {
-            wp_schedule_single_event(time() + LISTING_CALC_DELAY, 'listing_calc_rank_event', [$post_id]);
+            wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_rank_event', [$post_id]);
         }
     }
 

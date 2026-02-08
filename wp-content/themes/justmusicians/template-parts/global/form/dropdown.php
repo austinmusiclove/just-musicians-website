@@ -47,7 +47,7 @@
             </svg>
         </button>
 
-        <ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-60 overflow-y-auto" style="margin-top: -1px"
+        <ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto" style="margin-top: -1px"
             x-show="showDropdown" x-cloak
             x-on:click.away="showDropdown = false"
         >

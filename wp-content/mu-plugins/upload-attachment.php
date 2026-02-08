@@ -26,7 +26,7 @@ function upload_attachment($file, $filename, $post_id, $caption, $mediatags) {
 
     // Set attachment meta data
     if (!wp_next_scheduled('update_attachment_metadata_event', [$attachment_id, $attachment_upload['file']])) {
-        wp_schedule_single_event(time() + LISTING_CALC_DELAY, 'update_attachment_metadata_event', [$attachment_id, $attachment_upload['file']]);
+        wp_schedule_single_event(time() + CALC_DELAY, 'update_attachment_metadata_event', [$attachment_id, $attachment_upload['file']]);
     }
 
     // Update media tags

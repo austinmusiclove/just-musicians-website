@@ -251,3 +251,22 @@ function send_email_safely($email, $subject, $message) {
         wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
     }
 }
+
+function sort_and_fill(array $values, array $defaults): array
+{
+    // Sort by value DESC, keep keys
+    arsort($values);
+
+    // Add missing defaults (with value 0) until counts match
+    foreach ($defaults as $default) {
+        if (count($values) >= count($defaults)) {
+            break;
+        }
+
+        if (!array_key_exists($default, $values)) {
+            $values[$default] = 0;
+        }
+    }
+
+    return $values;
+}

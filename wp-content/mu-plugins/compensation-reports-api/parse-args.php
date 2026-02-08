@@ -18,7 +18,7 @@ function get_sanitized_compensation_report_args() {
 
     $sanitized_args = [
         'post_type'       => 'comp_report',
-        'post_status'     => 'publish',
+        'post_status'     => 'pending',
         'meta_input'      => [],
         'tax_input'       => [],
     ];

@@ -43,7 +43,7 @@
                 'icon_filename' => 'link.svg',
                 'tooltip'       => 'This can be a link to the venue’s website or a Facebook or Instagram post that shows the event. We use this link only to verify your entry.',
                 'placeholder'   => 'https://',
-                'required'      => true,
+                'required'      => false,
             ]); ?>
 
         </div>
