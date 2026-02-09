@@ -1,8 +1,7 @@
 Deploy
-    Add calc delay live and staging
-    restart server live and staging
     update venue acf in staging and live
     update comp report acf in staging and live
+    update code
     watch logs during venue stats update api
     remove listing calc
 Venue pages
