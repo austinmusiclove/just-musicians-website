@@ -152,12 +152,14 @@ async function updateMarkers() {
         const props = f.properties;
 
         const html = `
-            <h2 style="font-size: 16px; margin-bottom: 2px;"><a href="${props.permalink}" target="_blank">${props.name}</a></h2>
-            <div style="display: flex; column-gap: 0.25rem; color: #facc15; width: 8rem;">
-                ${getRatingStars(props.rating)}
-                <span style="color: black; font-size: 12px; margin-bottom: 2px;">(${props.review_count})</span>
+            <h2 style="font-size: 16px; margin-bottom: 12px;"><a href="${props.permalink}" target="_blank">${props.name}</a></h2>
+            <div style="display: flex; column-gap: 0.25rem; margin-bottom: 12px;">
+                <div style="display: flex; column-gap: 0.25rem; color: #facc15; width: 8rem;">
+                    ${getRatingStars(props.rating)}
+                </div>
+                <span style="font-size: 12px;">(${props.review_count} reviews)</span>
             </div>
-            <p style="font-size: 14px; margin-bottom: 2px;">${props.address}</p>
+            <p style="font-size: 14px; margin-bottom: 12px;">${props.address}</p>
         `;
 
         new maplibregl.Popup()

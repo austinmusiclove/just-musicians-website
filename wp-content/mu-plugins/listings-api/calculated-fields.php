@@ -12,20 +12,11 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
     // Avoid infinite loop: Only schedule cron if this is not an internal calc operation
-    if (!did_action('listing_calc_content' . $post_id)) {
+    if (!did_action('listing_calc' . $post_id)) {
 
         // Schedle cron if there isn't one already scheduled for this post
-        if (!wp_next_scheduled('listing_calc_content_event', [$post_id])) {
-            wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_content_event', [$post_id]);
-        }
-    }
-
-    // Avoid infinite loop: Only schedule cron if this is not an internal calc operation
-    if (!did_action('listing_calc_rank' . $post_id)) {
-
-        // Schedule a one-time cron job to update the rank
-        if (!wp_next_scheduled('listing_calc_rank_event', [$post_id])) {
-            wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_rank_event', [$post_id]);
+        if (!wp_next_scheduled('listing_calc_event', [$post_id])) {
+            wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_event', [$post_id]);
         }
     }
 
@@ -33,30 +24,46 @@ add_action('save_post_listing', function ($post_id, $post, $update) {
 
 }, 10, 3);
 
-// Cron job for updating content
-add_action('listing_calc_content_event', function($post_id) {
-    do_action('listing_calc_content' . $post_id); // Avoid infinite loop
+// Cron job for updating listing calculated fields
+add_action('listing_calc_event', function($post_id) {
+    do_action('listing_calc' . $post_id); // Avoid infinite loop
 
     // Make sure post exist
     $post = get_post($post_id);
     if (! $post || $post->post_status !== 'publish') { return; }
 
-    // Update the content
     update_post_content($post_id);
-});
-
-// Cron job for updating rank
-add_action('listing_calc_rank_event', function($post_id) {
-    do_action('listing_calc_rank' . $post_id); // Avoid infinite loop
-
-    // Make sure post exist
-    $post = get_post($post_id);
-    if (! $post || $post->post_status !== 'publish') { return; }
-
-    // Update rank
     update_search_rank($post_id);
 });
 
+// When a listing review post gets updated call the calc rating api
+add_action('save_post_listing_review', function ($post_id, $post, $update) {
+
+    // Don't run on auto save
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    // Get listing post id
+    $listing_post_id = get_post_meta($post_id, 'reviewee', true);
+
+    // Schedle cron if there isn't one already scheduled for this post
+    if (!wp_next_scheduled('listing_calc_rating_event', [$listing_post_id])) {
+        wp_schedule_single_event(time() + CALC_DELAY, 'listing_calc_rating_event', [$listing_post_id]);
+    }
+
+    return null;
+
+}, 10, 3);
+
+// Cron job for updating listing rating
+add_action('listing_calc_rating_event', function($listing_post_id) {
+
+    // Make sure post exist
+    $post = get_post($listing_post_id);
+    if (! $post || $post->post_status !== 'publish') { return; }
+
+    update_listing_rating($listing_post_id);
+    update_search_rank($listing_post_id);
+});
 
 function update_search_rank($post_id) {
     $rank = 0;
@@ -91,6 +98,10 @@ function update_search_rank($post_id) {
             $rank++;
         }
     }
+
+    // Boost rank by number of reviews
+    $review_count = get_post_meta( $post_id, 'review_count', true );
+    $rank += $review_count;
 
     // Boost by admin defined amount
     $boost = get_post_meta( $post_id, 'rank_boost', true );
@@ -139,4 +150,43 @@ function update_post_content($post_id) {
         'ID' => $post_id,
         'post_content' => $combined_content,
     ]);
+}
+
+function update_listing_rating($listing_id) {
+    $listing_id = absint( $listing_id );
+    if ( ! $listing_id ) { return; }
+
+    $query = new WP_Query( [
+        'post_type'      => 'listing_review',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            [
+                'key'   => 'reviewee',
+                'value' => $listing_id,
+            ],
+        ],
+        'no_found_rows'  => true,
+    ] );
+
+    $review_ids = $query->posts;
+    $review_count = count( $review_ids );
+
+    if ( $review_count === 0 ) {
+        update_post_meta( $listing_id, 'rating', 0 );
+        update_post_meta( $listing_id, 'review_count', 0 );
+        return;
+    }
+
+    $total_rating = 0;
+    foreach ( $review_ids as $review_id ) {
+        $rating = get_post_meta( $review_id, 'rating', true );
+        $rating = floatval( $rating );
+        $total_rating += $rating;
+    }
+    $average_rating = round( $total_rating / $review_count, 1 );
+
+    update_post_meta( $listing_id, 'rating', $average_rating );
+    update_post_meta( $listing_id, 'review_count', $review_count );
 }

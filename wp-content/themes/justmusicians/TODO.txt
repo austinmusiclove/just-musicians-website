@@ -1,17 +1,10 @@
+Deploy
+    listing acf
+    save all existing listing reviews or one for each artist
 Account details
-    Create notification bubble to update display name and photo
-    add profile pic and display name to things that increase search rank
-Venue Browsing Page
-    *add venues listings next to map
-    *Sort venues by musician compensation metrics
-    Filter venues by genres they play
-    Filter venues that played certian artists
-    show/hide popup on hover
+    *Create notification bubble to update display name and photo
+    *add profile pic and display name to things that increase search rank
 Reviews
-    *listing reviews
-        add listing rating to standard search listing
-        add review count to search rank
-        update search rank when listing review is written
     venue reviews
         public venue review instructions
         venue ameneties for musicians
@@ -27,9 +20,16 @@ Reviews
     Emails
         add regular email to invite artists to write earnings contributions
         add regular email to invite artists to solicit reviews from bookers
+Venue Browsing Page
+    add venues listings next to map
+    Sort venues by musician compensation metrics
+    Filter venues by genres they play
+    Filter venues that played certian artists
+    show/hide popup on hover
 Venue pages
-    empty comp data state that invites you to contribute
+    *empty comp data state that invites you to contribute
     Add artists recently played to venue pages
+    median pay?
     typical ensemble size hired
     typical genres hired
     tags

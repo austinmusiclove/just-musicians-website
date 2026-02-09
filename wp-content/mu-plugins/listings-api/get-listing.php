@@ -35,6 +35,8 @@ function get_listing($args) {
     // Array to store post meta and taxonomy data
     $result = [
         'name'                     => get_field('name'),
+        'rating'                   => get_field('rating'),
+        'review_count'             => get_field('review_count'),
         'description'              => get_field('description'),
         'city'                     => get_field('city'),
         'state'                    => get_field('state'),

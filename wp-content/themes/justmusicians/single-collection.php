@@ -14,7 +14,7 @@ $collection_id = 0;
 if ($is_favorites) {
     $listings = get_user_meta(get_current_user_id(), 'favorites', true);
 } else {
-    $listings = get_field('listings');
+    $listings = get_field('listings') ?? [];
     $collection_id = get_the_ID();
 }
 

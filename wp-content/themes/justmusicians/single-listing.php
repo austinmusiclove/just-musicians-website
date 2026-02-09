@@ -49,6 +49,8 @@ echo get_template_part('template-parts/listing-page/hero', '', [
    'instance'        => 'listing-page',
    'genres'          => $genres,
    'collections_map' => $collections_map,
+   'rating'          => get_field('rating') ?? 0,
+   'review_count'    => get_field('review_count') ?? 0,
 ]);
 
 // Content

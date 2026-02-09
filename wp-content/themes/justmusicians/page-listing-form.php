@@ -236,6 +236,8 @@ get_header();
                             'instance'          => 'listing-form',
                             'genres'            => $genres,
                             'collections_map'   => [],
+                            'rating'            => $listing_data['rating']       ?? 0,
+                            'review_count'      => $listing_data['review_count'] ?? 0,
                         )); ?>
                         <?php echo get_template_part('template-parts/listing-page/content', '', array(
                             'instance'           => 'listing-form',
@@ -276,6 +278,8 @@ get_header();
                             'lazyload_thumbnail'            => false,
                             'last'                          => false,
                             'instance'                      => 'listing-form',
+                            'rating'                        => $listing_data['rating']       ?? 0,
+                            'review_count'                  => $listing_data['review_count'] ?? 0,
                         ]); ?>
 
                         <div class="opacity-50">

@@ -79,6 +79,12 @@ if ($args['instance'] == 'listing-form') {
 
                 </div>
 
+                <!-- Rating -->
+                <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+                    'rating'       => $args['rating'],
+                    'review_count' => $args['review_count'],
+                ]); ?>
+
                 <!-- Description -->
                 <p class="text-18"
                     <?php if ($is_preview) { ?> x-on:click="focusElm('description-input')"                  <?php } ?>

@@ -168,8 +168,17 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             <?php } ?>
         </div>
 
+        <!-- Rating -->
+        <?php if (true or $is_preview or $args['review_count'] > 0) {
+            echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+                'rating'       => $args['rating']       ?? 0,
+                'review_count' => $args['review_count'] ?? 0,
+            ]);
+        } ?>
+
         <!-- Links -->
-        <?php get_template_part('template-parts/listings/parts/link-icons', '', [
+        <?php /*
+        get_template_part('template-parts/listings/parts/link-icons', '', [
             'is_preview'             => $is_preview,
             'website'                => $is_preview ? '' : $args['website'],
             'instagram_url'          => $is_preview ? '' : $args['instagram_url'],
@@ -181,7 +190,8 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             'spotify_artist_url'     => $is_preview ? '' : $args['spotify_artist_url'],
             'apple_music_artist_url' => $is_preview ? '' : $args['apple_music_artist_url'],
             'soundcloud_url'         => $is_preview ? '' : $args['soundcloud_url'],
-        ]);?>
+        ]);
+        */ ?>
     </div>
 
     <!-- Inquire button -->

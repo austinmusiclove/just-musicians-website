@@ -41,6 +41,8 @@ function get_listings_by_id($args) {
                 'post_id'                => get_the_ID(),
                 'title'                  => get_the_title(),
                 'name'                   => get_field('name'),
+                'rating'                 => get_field('rating'),
+                'review_count'           => get_field('review_count'),
                 'city'                   => get_field('city'),
                 'state'                  => get_field('state'),
                 'description'            => get_field('description'),
