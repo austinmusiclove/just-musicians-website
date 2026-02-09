@@ -252,8 +252,7 @@ function send_email_safely($email, $subject, $message) {
     }
 }
 
-function sort_and_fill(array $values, array $defaults): array
-{
+function sort_and_fill(array $values, array $defaults): array {
     // Sort by value DESC, keep keys
     arsort($values);
 
@@ -269,4 +268,8 @@ function sort_and_fill(array $values, array $defaults): array
     }
 
     return $values;
+}
+
+function get_address_string($street_address, $address_locality, $address_region, $postal_code) {
+    return $street_address . ', ' . $address_locality . ', ' . $address_region . ' ' . $postal_code;
 }

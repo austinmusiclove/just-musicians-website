@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 // Include
 require_once 'venues-api/get-venues-in-bounds.php';
 require_once 'venues-api/update-venue-stats.php';
+require_once 'venues-api/calculated-fields.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {

@@ -26,7 +26,6 @@ function update_venue_stats($venue_id) {
     );
     $comp_report_query = new WP_Query($query_args);
     if ($comp_report_query->have_posts()) {
-
         while( $comp_report_query->have_posts() ) {
             $comp_report_query->the_post();
             $total_performers  = (float)get_field('total_performers');
@@ -49,6 +48,7 @@ function update_venue_stats($venue_id) {
             }
         }
     }
+    wp_reset_postdata();
 
     // Calc averages
     if ($comp_report_count > 0) {
@@ -59,10 +59,42 @@ function update_venue_stats($venue_id) {
         $average_ensemble_size                   = round($average_ensemble_size                   / $comp_report_count, 2);
     }
 
+    // Get venue_reviews for this venue
+    $rating = 0;
+    $review_count = 0;
+    $query_args = [
+        'post_type' => 'venue_review',
+        'nopaging' => true,
+        'post_status' => 'publish',
+        'meta_query' => [
+            [
+                'key' => 'reviewee',
+                'value' => $venue_id,
+                'compare' => '='
+            ]
+        ]
+    ];
+    $venue_review_query = new WP_Query($query_args);
+    if ($venue_review_query->have_posts()) {
+        while( $venue_review_query->have_posts() ) {
+            $venue_review_query->the_post();
+            $rating += get_field('rating');
+            $review_count += 1;
+        }
+    }
+    wp_reset_postdata();
+
+    // Calc average rating
+    if ($review_count > 0) {
+        $rating = round($rating / $review_count, 2);
+    }
+
     // update venue meta data
     $update_args = [
         'ID'         => $venue_id,
         'meta_input' => [
+            'rating'                                   => $rating,
+            'review_count'                             => $review_count,
             '_comp_report_count'                       => $comp_report_count,
             '_average_earnings'                        => $average_earnings_per_gig,
             '_average_earnings_per_hour'               => $average_earnings_per_hour,

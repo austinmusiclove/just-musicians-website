@@ -24,7 +24,7 @@ if (has_post_thumbnail()) {
             <!-- Address-->
             <div class="flex items-center gap-4 font-bold mb-4">
                 <!--<span class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block"></span>-->
-                <span class="text-20 uppercase text-brown-dark-1 opacity-50"><?php echo get_field('street_address') . ', ' . get_field('address_locality') . ', ' . get_field('address_region') . ' ' . get_field('postal_code'); ?></span>
+                <span class="text-20 uppercase text-brown-dark-1 opacity-50"><?php echo get_address_string(get_field('street_address'), get_field('address_locality'), get_field('address_region'), get_field('postal_code')); ?></span>
             </div>
 
             <!-- Rating Stars -->

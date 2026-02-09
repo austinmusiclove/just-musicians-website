@@ -148,9 +148,17 @@ async function updateMarkers() {
     // Click on individual marker → show popup
     map.on("click", "unclustered-point", (e) => {
         const f = e.features[0];
+        console.log(f);
         const props = f.properties;
 
-        const html = `<strong><a href="${props.permalink}" target="_blank">${props.name}</a></strong>`;
+        const html = `
+            <h2 style="font-size: 16px; margin-bottom: 2px;"><a href="${props.permalink}" target="_blank">${props.name}</a></h2>
+            <div style="display: flex; column-gap: 0.25rem; color: #facc15; width: 8rem;">
+                ${getRatingStars(props.rating)}
+                <span style="color: black; font-size: 12px; margin-bottom: 2px;">(${props.review_count})</span>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 2px;">${props.address}</p>
+        `;
 
         new maplibregl.Popup()
             .setLngLat(f.geometry.coordinates)
@@ -198,6 +206,7 @@ function getVisibleBounds() {
  * Convert WP venue objects → GeoJSON FeatureCollection
  */
 function venuesToGeoJSON(venues) {
+    console.log(venues);
     return {
         type: "FeatureCollection",
         features: venues.map(venue => ({
@@ -209,9 +218,37 @@ function venuesToGeoJSON(venues) {
             properties: {
                 id: venue.id,
                 name: venue.name,
-                permalink: venue.permalink
+                permalink: venue.permalink,
+                address: venue.address,
+                rating: venue.rating,
+                review_count: venue.review_count || '0',
             }
         }))
     };
 }
 
+function getRatingStars(rating) {
+    return `
+        ${getRatingStar(Math.min(100, Math.max(0, (rating - 0) * 100)))}
+        ${getRatingStar(Math.min(100, Math.max(0, (rating - 1) * 100)))}
+        ${getRatingStar(Math.min(100, Math.max(0, (rating - 2) * 100)))}
+        ${getRatingStar(Math.min(100, Math.max(0, (rating - 3) * 100)))}
+        ${getRatingStar(Math.min(100, Math.max(0, (rating - 4) * 100)))}
+    `;
+}
+
+function getRatingStar(fillPercentage) {
+    return `
+        <svg viewBox="0 0 20 20" class="size-10" xmlns="http://www.w3.org/2000/svg">
+          <!-- empty star (background) -->
+          <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                fill="white" stroke="currentColor"/>
+
+          <!-- filled star (foreground), but clipped inline -->
+          <g style="clip-path: inset(0 ${100 - fillPercentage}% 0 0);">
+            <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                  fill="currentColor" stroke="currentColor"/>
+          </g>
+        </svg>
+    `
+}

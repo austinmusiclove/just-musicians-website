@@ -69,11 +69,19 @@ function get_venues_in_bounds() {
     $venues = [];
     foreach ($query->posts as $post) {
         $venues[] = [
-            'id'        => $post->ID,
-            'name'      => get_post_meta($post->ID, 'name', true),
-            'latitude'  => floatval(get_post_meta($post->ID, 'latitude', true)),
-            'longitude' => floatval(get_post_meta($post->ID, 'longitude', true)),
-            'permalink' => get_permalink($post->ID)
+            'id'           => $post->ID,
+            'name'         => get_post_meta($post->ID, 'name', true),
+            'latitude'     => floatval(get_post_meta($post->ID, 'latitude', true)),
+            'longitude'    => floatval(get_post_meta($post->ID, 'longitude', true)),
+            'permalink'    => get_permalink($post->ID),
+            'address'      => get_address_string(
+                get_post_meta($post->ID, 'street_address', true),
+                get_post_meta($post->ID, 'address_locality', true),
+                get_post_meta($post->ID, 'address_region', true),
+                get_post_meta($post->ID, 'postal_code', true),
+            ),
+            'rating'       => get_post_meta($post->ID, 'rating', true),
+            'review_count' => get_post_meta($post->ID, 'review_count', true),
         ];
     }
 

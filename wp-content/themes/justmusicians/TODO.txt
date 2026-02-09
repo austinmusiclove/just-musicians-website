@@ -1,30 +1,12 @@
-Venue pages
-    empty comp data state that invites you to contribute
-    Add artists recently played to venue pages
-    typical ensemble size hired
-    typical genres hired
-    tags
-    add upcoming events
-    add amenities like bathrooms, dog friendly, food/drink, etc.
-    add musician amenities like green room, sound engineer, backline
-    switch out google map with styled map
-Compensation Reporting
-    *allow for using performance id in url
-        fill in and disable performance inputs
-        add performance id hidden field
-        clear performance id on submit
-        make show flier not required if peformance id exists
-    allow add new venue
-    allow connecting listing instead of performer name
-    Auto verify event from compensation report with event database
-    Create a way for people to edit and see their comp report submissions
+Deploy
+    venues acf
+    run venue stats api
 Venue Browsing Page
-    *add more info to popup
-    *show/hide popup on hover
     *add venues listings next to map
     *Sort venues by musician compensation metrics
     Filter venues by genres they play
     Filter venues that played certian artists
+    show/hide popup on hover
 Reviews
     *listing reviews
         add listing rating to standard search listing
@@ -45,6 +27,26 @@ Reviews
     Emails
         add regular email to invite artists to write earnings contributions
         add regular email to invite artists to solicit reviews from bookers
+Venue pages
+    empty comp data state that invites you to contribute
+    Add artists recently played to venue pages
+    typical ensemble size hired
+    typical genres hired
+    tags
+    add upcoming events
+    add amenities like bathrooms, dog friendly, food/drink, etc.
+    add musician amenities like green room, sound engineer, backline
+    switch out google map with styled map
+Compensation Reporting
+    allow for using performance id in url
+        fill in and disable performance inputs
+        add performance id hidden field
+        clear performance id on submit
+        make show flier not required if peformance id exists
+    allow add new venue
+    allow connecting listing instead of performer name
+    Auto verify event from compensation report with event database
+    Create a way for people to edit and see their comp report submissions
 Notifications
     Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
