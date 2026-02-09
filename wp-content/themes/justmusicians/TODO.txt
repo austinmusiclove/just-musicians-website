@@ -1,6 +1,6 @@
-Deploy
-    venues acf
-    run venue stats api
+Account details
+    Create notification bubble to update display name and photo
+    add profile pic and display name to things that increase search rank
 Venue Browsing Page
     *add venues listings next to map
     *Sort venues by musician compensation metrics
@@ -48,7 +48,6 @@ Compensation Reporting
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
-    Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
@@ -83,7 +82,6 @@ Advanced messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
-    add profile pic and display name to things that increase search rank
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
     include media relevance in search algo
