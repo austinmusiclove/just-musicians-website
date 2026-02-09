@@ -33,8 +33,7 @@ add_action('rest_api_init', function () {
     register_rest_route( 'venues/v1', 'stats', [
         'methods' => 'PUT',
         'callback' => 'update_all_venue_stats',
-        'permission_callback' => '__return_true',
-        //'permission_callback' => function () { return current_user_can('manage_options'); },
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
     register_rest_route( 'venues/v1', 'bounds', [
         'methods' => 'GET',

@@ -1,9 +1,3 @@
-Deploy
-    update venue acf in staging and live
-    update comp report acf in staging and live
-    update code
-    watch logs during venue stats update api
-    remove listing calc
 Venue pages
     empty comp data state that invites you to contribute
     Add artists recently played to venue pages

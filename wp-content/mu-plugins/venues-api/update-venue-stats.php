@@ -1,7 +1,6 @@
 <?php
 
 function update_venue_stats($venue_id) {
-    error_log('update venue stats: ' . $venue_id);
     $comp_report_count = 0;
     $average_earnings_per_gig = 0;
     $average_earnings_per_hour = 0;
