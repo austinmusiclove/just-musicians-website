@@ -1,17 +1,14 @@
-Account details
-    *Create notification bubble to update display name and photo
-    *add profile pic and display name to things that increase search rank
 Reviews
     listing reviews
-        make it so that when you add a review on the listing page, it updates the hero rating stars and count
+        *make it so that when you add a review on the listing page, it updates the hero rating stars and count
     venue reviews
-        public venue review instructions
+        *public venue review instructions
         venue ameneties for musicians
             backline
             provide sound engineer
             overall, communication, sound, safety ratings
-    add lisitng review pagination on listing page and venue page
-    Don't allow reviewing yourself
+    *add lisitng review pagination on listing page and venue page and buyer page
+    *Don't allow reviewing yourself
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
         don't show review for 2 weeks to give the user time to review the buyer
@@ -37,21 +34,22 @@ Venue pages
     add musician amenities like green room, sound engineer, backline
     switch out google map with styled map
 Compensation Reporting
-    allow for using performance id in url
+    *allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
         clear performance id on submit
         make show flier not required if peformance id exists
-    allow add new venue
+    *allow add new venue
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
+    *Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
-    allow edit inquiry
+    *allow edit inquiry
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
@@ -62,7 +60,7 @@ Advanced inquiries
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
 Additional pages
-    Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
+    *Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
 SEO
     remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
@@ -81,6 +79,7 @@ Advanced messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
+    *add profile pic and display name to things that increase search rank
     change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
     locaiton filter
     include media relevance in search algo
@@ -148,7 +147,7 @@ Testing
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
 UX
-    pop up on top right that prompts you to log in with google as soon as you open the site
+    *pop up on top right that prompts you to log in with google as soon as you open the site
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
