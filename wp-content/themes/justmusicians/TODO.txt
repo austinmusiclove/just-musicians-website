@@ -1,10 +1,9 @@
-Deploy
-    listing acf
-    save all existing listing reviews or one for each artist
 Account details
     *Create notification bubble to update display name and photo
     *add profile pic and display name to things that increase search rank
 Reviews
+    listing reviews
+        make it so that when you add a review on the listing page, it updates the hero rating stars and count
     venue reviews
         public venue review instructions
         venue ameneties for musicians

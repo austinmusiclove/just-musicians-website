@@ -2,13 +2,13 @@
 <?php if (!empty($args['disabled']) and $args['disabled']) { ?>
 
     <!-- For previews and any time the button should do nothing -->
-    <span class="sm:absolute sm:right-0 sm:bottom-3 w-full sm:w-fit">
+    <span class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit">
         <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 sm:text-12 inline-block w-full sm:w-fit" >Send Inquiry</button>
     </span>
 
 <?php } else { ?>
 
-    <span id="request-quote-button-<?php echo $args['post_id']; ?>" class="sm:absolute sm:right-0 sm:bottom-3 w-full sm:w-fit"
+    <span id="request-quote-button-<?php echo $args['post_id']; ?>" class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit"
         x-data="{
             showInquiriesMenu: false,
             inquirySearchQuery: '',
