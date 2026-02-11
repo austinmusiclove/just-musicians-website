@@ -4,11 +4,12 @@ function get_default_options($filter) {
     // This is the singluar place to adjust the default filter options
     // Each array does not have to have the same number of options
     $default_options = [
-        'category' =>        ['Band', 'DJ', 'Solo Artist', 'Cover Band'],
-        'genre' =>           ['Folk', 'Hip Hop', 'Latin', 'Soul'],
-        'subgenre' =>        ['Americana', 'Punk Rock', 'Honky Tonk', '90s Covers'],
+        'category'        => ['Band', 'DJ', 'Solo Artist', 'Cover Band'],
+        'genre'           => ['Folk', 'Hip Hop', 'Latin', 'Soul'],
+        'subgenre'        => ['Americana', 'Punk Rock', 'Honky Tonk', '90s Covers'],
         'instrumentation' => ['Guitar', 'Vocals', 'Piano', 'Saxophone'],
-        'setting' =>         ['Wedding', 'Festival', 'Hotel', 'Jazz Club'],
+        'setting'         => ['Wedding', 'Festival', 'Hotel', 'Jazz Club'],
+        'ensemble_size'   => ['Solo', 'Duo', 'Trio', '4-6', '7+'], // coresponds to mu-plugins/listing-api/get-listings.php
     ];
     return $default_options[$filter];
 }

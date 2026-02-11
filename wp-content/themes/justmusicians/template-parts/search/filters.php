@@ -18,7 +18,7 @@
         'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('category'),
         'tags' => isset($args['categories']) ? $args['categories'] : [],
-        'show_modal_var' => 'showCategoryModal'
+        'show_modal_var' => 'showCategoryModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -26,7 +26,7 @@
         'input_name' => 'genres', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('genre'),
         'tags' => isset($args['genres']) ? $args['genres'] : [],
-        'show_modal_var' => 'showGenreModal'
+        'show_modal_var' => 'showGenreModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
@@ -34,7 +34,7 @@
         'input_name' => 'subgenres', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('subgenre'),
         'tags' => isset($args['subgenres']) ? $args['subgenres'] : [],
-        'show_modal_var' => 'showSubGenreModal'
+        'show_modal_var' => 'showSubGenreModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
@@ -42,7 +42,7 @@
         'input_name' => 'instrumentations', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('instrumentation'),
         'tags' => isset($args['instrumentations']) ? $args['instrumentations'] : [],
-        'show_modal_var' => 'showInstrumentationModal'
+        'show_modal_var' => 'showInstrumentationModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
@@ -50,8 +50,17 @@
         'input_name' => 'settings', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('setting'),
         'tags' => isset($args['settings']) ? $args['settings'] : [],
-        'show_modal_var' => 'showSettingModal'
+        'show_modal_var' => 'showSettingModal',
     ));
+    echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'ensemble-size-filters',
+        'title' => 'Ensemble Size',
+        'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
+        'default_tags' => get_default_options('ensemble_size'),
+        'tags' => [],
+        'show_modal_var' => 'showEnsembleSizeModal',
+    ));
+    /*
     echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [
         'min_value'         => 1,
         'max_value'         => 10,
@@ -63,6 +72,7 @@
         'max_input_x_ref'   => 'maxEnsembleSize',
         'on_change_event'   => 'filterupdate',
     ]);
+    */
     //echo get_template_part('template-parts/filters/location', '', array());
 
     ?>

@@ -188,7 +188,7 @@ function get_listings($args) {
         'valid_subgenres'        => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
         'valid_settings'         => $valid_settings,
-        'ensemble_size'          => $ensemble_size,
+        'ensemble_size'          => ensemble_size_values_to_options($ensemble_size),
         'min_ensemble_size'      => $min_ensemble_size,
         'max_ensemble_size'      => $max_ensemble_size,
         'max_num_results'        => $max_num_results,
@@ -212,7 +212,7 @@ function get_ensemble_size_values($args) {
     $ensemble_size_values = [];
 
     // Convert single or multiple values into an array
-    $direct_ensemble_sizes = isset($args['ensemble_size']) ? (array) $args['ensemble_size'] : [];
+    $direct_ensemble_sizes = isset($args['ensemble_size']) ? ensemble_size_options_to_values((array) $args['ensemble_size']) : [];
 
     foreach ($direct_ensemble_sizes as $value) {
         $value = (int) $value;
@@ -245,3 +245,57 @@ function get_ensemble_size_values($args) {
     // Remove duplicates
     return array_values(array_unique($ensemble_size_values));
 }
+
+// coresponds to lib/inc/helper.php get_default_options
+function ensemble_size_options_to_values($options) {
+    $result = [];
+
+    foreach ($options as $option) {
+        switch ($option) {
+            case "Solo":
+                $result[] = "1";
+                break;
+
+            case "Duo":
+                $result[] = "2";
+                break;
+
+            case "Trio":
+                $result[] = "3";
+                break;
+
+            case "4-6":
+                $result = array_merge($result, ["4", "5", "6"]);
+                break;
+
+            case "7+":
+                $result = array_merge($result, ["7", "8", "9", "10+"]);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    return array_values(array_unique($result));
+}
+
+// coresponds to lib/inc/helper.php get_default_options
+function ensemble_size_values_to_options($values) {
+    $result = [];
+
+    $values = array_unique($values);
+
+    $has = function($v) use ($values) {
+        return in_array($v, $values);
+    };
+
+    if ($has("1"))                                          { $result[] = "Solo"; }
+    if ($has("2"))                                          { $result[] = "Duo"; }
+    if ($has("3"))                                          { $result[] = "Trio"; }
+    if ($has("4") || $has("5") || $has("6"))                { $result[] = "4-6"; }
+    if ($has("7") || $has("8") || $has("9") || $has("10+")) { $result[] = "7+"; }
+
+    return array_values(array_unique($result));
+}
+

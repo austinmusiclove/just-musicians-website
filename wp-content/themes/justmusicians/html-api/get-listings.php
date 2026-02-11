@@ -12,6 +12,7 @@ $result = get_listings([
     'instrumentations'  => !empty($_GET['instrumentations']) ? $_GET['instrumentations'] : [],
     'settings'          => !empty($_GET['settings']) ? $_GET['settings'] : [],
     'verified'          => !empty($_GET['verified']) ? $_GET['verified'] : null,
+    'ensemble_size'     => !empty($_GET['ensemble_size']) ? $_GET['ensemble_size'] : [],
     'min_ensemble_size' => !empty($_GET['min_ensemble_size']) ? $_GET['min_ensemble_size'] : null,
     'max_ensemble_size' => !empty($_GET['max_ensemble_size']) ? $_GET['max_ensemble_size'] : null,
     'page'              => $page,
@@ -87,7 +88,7 @@ if ($page == 1) {
         'input_name' => 'categories', // should match the input name used for the tag check boxes
         'default_tags' => get_default_options('category'),
         'tags' => $valid_categories,
-        'show_modal_var' => 'showCategoryModal'
+        'show_modal_var' => 'showCategoryModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -95,7 +96,7 @@ if ($page == 1) {
         'input_name' => 'genres',
         'default_tags' => get_default_options('genre'),
         'tags' => $valid_genres,
-        'show_modal_var' => 'showGenreModal'
+        'show_modal_var' => 'showGenreModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
@@ -103,7 +104,7 @@ if ($page == 1) {
         'input_name' => 'subgenres',
         'default_tags' => get_default_options('subgenre'),
         'tags' => $valid_subgenres,
-        'show_modal_var' => 'showSubGenreModal'
+        'show_modal_var' => 'showSubGenreModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
@@ -111,7 +112,7 @@ if ($page == 1) {
         'input_name' => 'instrumentations',
         'default_tags' => get_default_options('instrumentation'),
         'tags' => $valid_instrumentations,
-        'show_modal_var' => 'showInstrumentationModal'
+        'show_modal_var' => 'showInstrumentationModal',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
@@ -119,8 +120,17 @@ if ($page == 1) {
         'input_name' => 'settings',
         'default_tags' => get_default_options('setting'),
         'tags' => $valid_settings,
-        'show_modal_var' => 'showSettingModal'
+        'show_modal_var' => 'showSettingModal',
     ));
+    echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'ensemble-size-filters',
+        'title' => 'Ensemble Size',
+        'input_name' => 'ensemble_size',
+        'default_tags' => get_default_options('ensemble_size'),
+        'tags' => $ensemble_size,
+        'show_modal_var' => 'showEnsembleSizeModal',
+    ));
+    /*
     echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [
         'min_value'         => $min_ensemble_size ? $min_ensemble_size : 1,
         'max_value'         => $max_ensemble_size ? $max_ensemble_size : 10,
@@ -132,6 +142,7 @@ if ($page == 1) {
         'max_input_x_ref'   => 'maxEnsembleSize',
         'on_change_event'   => 'filterupdate',
     ]);
+    */
 }
 
 // Render total resutls count

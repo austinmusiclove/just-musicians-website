@@ -38,20 +38,22 @@ $next_page       = $result ? $result['next_page']       : null;
             showSubGenreModal: false,
             showInstrumentationModal: false,
             showSettingModal: false,
+            showEnsembleSizeModal: false,
             searchVal: searchInput,
             categoriesCheckboxes:       [<?php if (!empty($args['qcategory']))        { echo "'" . $args['qcategory']        . "'"; } ?>],
             genresCheckboxes:           [<?php if (!empty($args['qgenre']))           { echo "'" . $args['qgenre']           . "'"; } ?>],
             subgenresCheckboxes:        [<?php if (!empty($args['qsubgenre']))        { echo "'" . $args['qsubgenre']        . "'"; } ?>],
             instrumentationsCheckboxes: [<?php if (!empty($args['qinstrumentation'])) { echo "'" . $args['qinstrumentation'] . "'"; } ?>],
             settingsCheckboxes:         [<?php if (!empty($args['qsetting']))         { echo "'" . $args['qsetting']         . "'"; } ?>],
+            ensembleSizeCheckboxes:     [],
             verifiedCheckbox: false,
             minEnsembleSize: 1,
             maxEnsembleSize: 10,
             get selectedFilters() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).length;
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.minEnsembleSize > 1 ? 'Min performers: ' + this.minEnsembleSize : '', this.maxEnsembleSize < 10 ? 'Max performers: ' + this.maxEnsembleSize : '', this.searchVal].filter(Boolean).length;
             },
             tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
             showTagModalOption(option) {
@@ -278,6 +280,15 @@ $next_page       = $result ? $result['next_page']       : null;
                         'x-model' => 'settingsCheckboxes',
                         'x-show' => 'showSettingModal',
                         'has_search_bar' => true,
+                    ]);
+                    $ensemble_size_options = get_default_options('ensemble_size');
+                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                        'title' => 'Ensemble Size',
+                        'labels' => $ensemble_size_options,
+                        'name' => 'ensemble_size',
+                        'x-model' => 'ensembleSizeCheckboxes',
+                        'x-show' => 'showEnsembleSizeModal',
+                        'has_search_bar' => false,
                     ]);
                 ?>
 

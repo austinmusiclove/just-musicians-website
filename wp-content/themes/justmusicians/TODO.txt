@@ -71,7 +71,6 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
     ***add profile pic and display name to things that increase search rank
-    ***change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size; or just change options to solo, duo, trio, 4-6, 7+
     locaiton filter
     include media relevance in search algo
     video order depending on search criteria
