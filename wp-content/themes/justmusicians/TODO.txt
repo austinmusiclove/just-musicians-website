@@ -1,14 +1,6 @@
 Reviews
-    listing reviews
-        *make it so that when you add a review on the listing page, it updates the hero rating stars and count
-    venue reviews
-        *public venue review instructions
-        venue ameneties for musicians
-            backline
-            provide sound engineer
-            overall, communication, sound, safety ratings
+    **make it so that when you add a review on the listing page, it updates the hero rating stars and count
     *add lisitng review pagination on listing page and venue page and buyer page
-    *Don't allow reviewing yourself
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
         don't show review for 2 weeks to give the user time to review the buyer
@@ -39,17 +31,17 @@ Compensation Reporting
         add performance id hidden field
         clear performance id on submit
         make show flier not required if peformance id exists
-    *allow add new venue
+    **allow add new venue
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
-    *Create notification bubble to update display name and photo
+    **Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
-    *allow edit inquiry
+    **allow edit inquiry
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
@@ -60,16 +52,15 @@ Advanced inquiries
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
 Additional pages
-    *Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
+    ***Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
 SEO
-    remove urls that were previously indexed mistakenly if necessary; google my unindex with new sitemap
     indexing
         add listing titles in meta description
         add internal linking for featured pages
         maybe add artist bios
         maybe add some kind of page blurb
     add best x in x listacle blog posts
-Advanced messages
+Messages
     show inquiry detail in right side panel
     profile image(s) in conversation next to title
     show read receipt
@@ -79,8 +70,8 @@ Advanced messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
-    *add profile pic and display name to things that increase search rank
-    change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size
+    ***add profile pic and display name to things that increase search rank
+    ***change ensemble size to taxonomy and change filter UI and allow tagging images with ensemble size; or just change options to solo, duo, trio, 4-6, 7+
     locaiton filter
     include media relevance in search algo
     video order depending on search criteria
@@ -94,33 +85,31 @@ Search algo update
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
 Listing form
-    when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
+    *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
     active search for cities
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
-    allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
+    **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
     scroll preview to section when corresponding input is focused
     disable input until change made or auto save after input
     limit access until you verify email
-    make form invite only
-    accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    accept pdf for stage plots
+    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    **accept pdf for stage plots
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
-    Add venue
 Listing page
     allow play with mouse off iframe for videos
     add seek in video
     see more bio
     see more venues played
-    click to copy email on listing page
+    ***click to copy email on listing page
     artist pages that will get you listed on google as a musician by using schema
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
-    video seeking
+    *video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
 Data
@@ -132,22 +121,15 @@ Data
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
 Testing
-    set up testing with playwright with multiple browsers
-    user mgmt
-        user registration
-        user log in
-        update account info
-    listings
-        create listing
-    inquiries
-        create inquiry
-    collections
-        create collection
+    *set up testing with playwright with multiple browsers
     test apostrophes everywhere
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
 UX
-    *pop up on top right that prompts you to log in with google as soon as you open the site
+    **pop up on top right that prompts you to log in with google as soon as you open the site
+    *show search rank in their area and how to improve it
+    *make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
+    *show skeleton listings while main listing search is in flight
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
@@ -161,7 +143,6 @@ UX
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
-    make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
 Devon
     venue page especially stats
     venues search
@@ -172,9 +153,9 @@ Devon
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
-    make it so that logged out users and logged in users cant see inquiries pages unless they have access to the inquiry (right now you can see the inquiry details but not conversations if you put the url in)
+    *make it so that logged out users and logged in users cant see inquiries pages unless they have access to the inquiry (right now you can see the inquiry details but not conversations if you put the url in)
 Performance
-    prefetch on mouse down
+    ***prefetch on mouse down
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
@@ -188,7 +169,7 @@ Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
 Accessibility
-    Need full audit
+    *Need full audit
 Document
     Dev Principles
         No js for first paint
