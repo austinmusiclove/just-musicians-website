@@ -40,3 +40,11 @@ if (count($reviews) > 0) {
 <div id="average-rating" class="flex gap-x-1 text-yellow w-24" hx-swap-oob="outerHTML">
     <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => $average_rating, ]); ?>
 </div>
+
+<!-- Return average rating stars with count -->
+<div id="rating-with-count" hx-swap-oob="outerHTML">
+    <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+        'rating'       => $average_rating,
+        'review_count' => $review_count,
+    ]); ?>
+</div>

@@ -1,5 +1,6 @@
+Deploy
+    Add contact page to staging and live
 Reviews
-    **make it so that when you add a review on the listing page, it updates the hero rating stars and count
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
@@ -36,12 +37,12 @@ Compensation Reporting
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
-    **Create notification bubble to update display name and photo
+    ***Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
-    **allow edit inquiry
+    ***allow edit inquiry
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
@@ -51,8 +52,6 @@ Advanced inquiries
     record response time
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
-Additional pages
-    ***Add contact page for people to contact web admin about issues (link the page in inquiries and reviews popup error slides)
 SEO
     indexing
         add listing titles in meta description

@@ -21,7 +21,7 @@ get_header();
     </div>
 </header>
 
-<div class="container lg:grid lg:grid-cols-10 gap-24 py-8">
+<div class="container lg:grid lg:grid-cols-10 gap-24 py-8 min-h-[500px]">
     <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
         <?php the_content(); ?>
     </div>

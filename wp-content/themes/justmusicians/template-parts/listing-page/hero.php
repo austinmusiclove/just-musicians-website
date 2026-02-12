@@ -80,10 +80,12 @@ if ($args['instance'] == 'listing-form') {
                 </div>
 
                 <!-- Rating -->
-                <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
-                    'rating'       => $args['rating'],
-                    'review_count' => $args['review_count'],
-                ]); ?>
+                <div id="rating-with-count" hx-swap-oob="outerHTML">
+                    <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+                        'rating'       => $args['rating'],
+                        'review_count' => $args['review_count'],
+                    ]); ?>
+                </div>
 
                 <!-- Description -->
                 <p class="text-18"
