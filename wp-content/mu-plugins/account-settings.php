@@ -19,10 +19,11 @@ function get_user_account_settings($user_id) {
     $profile_image = get_profile_image($user_id);
 
     return [
-        'display_name'  => clean_display_name($user_info->display_name),
-        'profile_image' => $profile_image,
-        'organization'  => get_field('organization', 'user_' . $user_id),
-        'position'      => get_field('position', 'user_' . $user_id),
+        'display_name'         => clean_display_name($user_info->display_name),
+        'display_name_cleaned' => $user_info->display_name != clean_display_name($user_info->display_name),
+        'profile_image'        => $profile_image,
+        'organization'         => get_field('organization', 'user_' . $user_id),
+        'position'             => get_field('position', 'user_' . $user_id),
     ];
 }
 

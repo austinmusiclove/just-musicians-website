@@ -15,7 +15,6 @@ require_once 'messages-api/get-conversation-messages.php';
 require_once 'messages-api/send-message.php';
 require_once 'messages-api/add-read-receipt.php';
 require_once 'messages-api/remove-read-receipt.php';
-require_once 'messages-api/get-unread-conversation-count.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
@@ -27,11 +26,6 @@ add_action('rest_api_init', function () {
     register_rest_route( 'v1', '/messages/(?P<conversation_id>\d+)', [
         'methods' => 'GET',
         'callback' => 'get_conversation_messages',
-        'permission_callback' => 'is_user_logged_in',
-    ]);
-    register_rest_route( 'v1', '/notifications_count/', [
-        'methods' => 'GET',
-        'callback' => 'get_unread_conversation_count',
         'permission_callback' => 'is_user_logged_in',
     ]);
     register_rest_route( 'v1', '/messages/(?P<conversation_id>\d+)', [

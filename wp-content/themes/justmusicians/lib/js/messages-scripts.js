@@ -59,7 +59,7 @@ async function markAsRead(alco, conversationId, messageId) {
                 conversation.latest_message_is_read = true;
                 await updateApplicationState(alco, [conversation], null);
             }
-            alco.notificationCount = await get_notification_count();
+            alco.notifications = await get_notification_count();
         }
     }
 }
@@ -78,7 +78,7 @@ async function markAsUnread(alco, conversationId, messageId) {
                 conversation.latest_message_is_read = false;
                 await updateApplicationState(alco, [conversation], null);
             }
-            alco.notificationCount = await get_notification_count();
+            alco.notifications = await get_notification_count();
         }
     }
 }

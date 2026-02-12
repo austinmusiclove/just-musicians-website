@@ -43,7 +43,7 @@
             width: 0,
             redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
-            notificationCount: 0,
+            notifications: { 'unread_convo_count': 0, 'account_notification_count': 0 },
             shakeElements: new Set(),
             _emphasizeElm(elm, elmId) { emphasizeElm(this, elm, elmId); },
             showPassword: false,
@@ -113,7 +113,7 @@
         x-init="(async () => {
             width = window.innerWidth;
             document.body.addEventListener('htmx:responseError', (event) => { if (event.detail.xhr.status === 404) { $dispatch('error-toast', {'message': 'HTMX Error: 404'}); } });
-            document.addEventListener('DOMContentLoaded', async function() { notificationCount = await get_notification_count(); });
+            document.addEventListener('DOMContentLoaded', async function() { notifications = await get_notification_count(); });
         })"
         x-resize.document="
             width = $width;
@@ -200,14 +200,15 @@
             <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showSignupModal = !showSignupModal">Sign Up</button>
 
             <!-- Logged in Menu -->
-            <span class="relative font-sun-motter text-18 items-center gap-2 relative group hidden lg:flex" x-cloak x-show="loggedIn">
+            <span class="relative font-sun-motter text-18 items-center gap-2 group hidden lg:flex" x-cloak x-show="loggedIn">
               <a href="#">My Account</a>
               <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
-              <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notificationCount" x-show="notificationCount > 0" x-cloak></span>
+              <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['total_notification_count']" x-show="notifications['total_notification_count'] > 0" x-cloak></span>
               <!-- Dropdown menu -->
               <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/account/'); ?>">
+                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/account/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+                  <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['account_notification_count']" x-show="notifications['account_notification_count'] > 0" x-cloak></span>
                   Account
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/listings/'); ?>">
@@ -223,9 +224,9 @@
                   Inquiries
                 </a>
                 <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/messages/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
-                    <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notificationCount" x-show="notificationCount > 0" x-cloak></span>
-                    Messages
+                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
+                  <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['unread_convo_count']" x-show="notifications['unread_convo_count'] > 0" x-cloak></span>
+                  Messages
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo wp_logout_url('/'); ?>">
                   <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />

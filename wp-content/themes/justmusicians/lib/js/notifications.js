@@ -13,7 +13,7 @@ async function get_notification_count() {
     });
 
     const data = await res.json();
-    if (typeof data === 'number') {
+    if (typeof data === 'object') {
         return data;
     }
     return 0;

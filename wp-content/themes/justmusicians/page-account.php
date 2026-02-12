@@ -43,6 +43,17 @@ get_header();
                         <a href="/account"><h1 class="font-bold text-22 sm:text-25">Account Settings</h1></a>
                     </div>
 
+                    <!-- Prompt user to fill out required fields if they have pending notifications -->
+                    <div class="text-16 bg-yellow-60 p-2 pr-8 text-center sticky w-full mb-8"
+                        x-data="{
+                            closed: false,
+                            get show() { return !this.closed && notifications?.account_notification_count > 0; },
+                        }"
+                        x-show="show" x-cloak
+                    >
+                        <span>Complete your profile by including a display name and a profile image.</span>
+                        <img class="close-button opacity-60 hover:opacity-100 absolute top-0.5 right-0.5 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="closed = true"/>
+                    </div>
 
                     <!-- Settings -->
                     <div class="flex flex-col gap-8 md:col-span-6 pb-4">

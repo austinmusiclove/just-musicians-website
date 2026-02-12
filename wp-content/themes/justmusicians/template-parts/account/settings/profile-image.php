@@ -4,7 +4,7 @@
 
     <!-- Profile Image Label -->
     <label class="flex gap-1">
-        <span class="text-18 mb-1 inline-block">Profile Image</span>
+        <span class="text-18 mb-1 inline-block">Profile Image <span class="text-red">*</span></span>
         <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is the image that other users will see when they receive messages from you.' ]); ?>
     </label>
 

@@ -37,12 +37,13 @@ Compensation Reporting
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
-    ***Create notification bubble to update display name and photo
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     ***allow edit inquiry
+    **link to inquiry page from inquiry message for inquiry owner only
+    **add review stars in inquiry suggestion listings
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
