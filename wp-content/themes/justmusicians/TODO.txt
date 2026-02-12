@@ -1,5 +1,3 @@
-Deploy
-    Add contact page to staging and live
 Reviews
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
