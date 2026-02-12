@@ -30,6 +30,8 @@ if (count($listings) > 0) {
             'post_id'                => $listing['post_id'],
             'inquiry_id'             => $inquiry_id,
             'name'                   => $listing['name'],
+            'rating'                 => $listing['rating'],
+            'review_count'           => $listing['review_count'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
             'thumbnail_url'          => $listing['thumbnail_url'],

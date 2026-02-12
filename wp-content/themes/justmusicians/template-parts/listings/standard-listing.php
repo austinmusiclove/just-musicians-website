@@ -169,12 +169,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         </div>
 
         <!-- Rating -->
-        <?php if (true or $is_preview or $args['review_count'] > 0) {
-            echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
-                'rating'       => $args['rating']       ?? 0,
-                'review_count' => $args['review_count'] ?? 0,
-            ]);
-        } ?>
+        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+            'rating'       => $args['rating']       ?? 0,
+            'review_count' => $args['review_count'] ?? 0,
+        ]); ?>
 
         <!-- Links -->
         <?php /*

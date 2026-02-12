@@ -40,8 +40,7 @@ Advanced inquiries
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     ***allow edit inquiry
-    **link to inquiry page from inquiry message for inquiry owner only
-    **add review stars in inquiry suggestion listings
+    ***link to inquiry page from inquiry message for inquiry owner only
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
@@ -148,7 +147,6 @@ Devon
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
-    *make it so that logged out users and logged in users cant see inquiries pages unless they have access to the inquiry (right now you can see the inquiry details but not conversations if you put the url in)
 Performance
     prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
     first page of results without second trip to server

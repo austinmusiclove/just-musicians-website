@@ -126,6 +126,12 @@
             <?php echo $args['description']; ?>
         </p>
 
+        <!-- Rating -->
+        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+            'rating'       => $args['rating']       ?? 0,
+            'review_count' => $args['review_count'] ?? 0,
+        ]); ?>
+
     </div>
 
     <!-- Send inquiry button -->
