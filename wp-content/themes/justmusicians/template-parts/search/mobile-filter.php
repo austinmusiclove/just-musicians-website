@@ -7,9 +7,9 @@
 </button>
 
 <div data-element="mobile-filter" class="mt-28 md:mt-16 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center" x-show="showMobileFilters" x-transition x-cloak>
-    <div class="bg-white relative pt-0 px-8 md:pt-20 relative w-full h-full overflow-scroll pb-56">
+    <div class="bg-white relative pt-0 px-8 md:pt-20 w-full h-full overflow-scroll pb-56">
 
-        <div class="flex items-center justify-between mb-4 sticky top-0 bg-white py-4 w-full">
+        <div class="flex items-center justify-between mb-4 sticky top-0 bg-white py-4 w-full z-10">
             <button type="button" data-trigger="mobile-filter" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="showMobileFilters = ! showMobileFilters" >close</button>
             <h2 class="font-sun-motter text-25">Filter</h2>
             <button type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate')});">clear all</button>
@@ -24,7 +24,7 @@
             'settings'         => $args['settings'],
         ]); ?>
 
-        <div class="bg-white py-4 px-4 fixed bottom-0 left-0 w-screen">
+        <div class="bg-white py-4 px-4 fixed bottom-0 left-0 w-full">
             <button type="button" class="bg-navy w-full shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-5 py-3" x-on:click="showMobileFilters = false" >Update</button>
         </div>
 

@@ -109,7 +109,7 @@
 
             <div class="flex flex-col gap-4">
 
-                <div class="sidebar-module border border-black/20 rounded overflow-hidden bg-white">
+                <div class="sidebar-module border border-black/20 rounded bg-white">
                     <h3 class="bg-yellow-50 font-bold py-2 px-3">Contact Information</h3>
                     <div class="p-4 flex flex-col gap-4">
 

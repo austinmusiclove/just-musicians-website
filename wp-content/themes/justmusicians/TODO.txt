@@ -70,7 +70,6 @@ Messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
-    ***add profile pic and display name to things that increase search rank
     locaiton filter
     include media relevance in search algo
     video order depending on search criteria
@@ -103,7 +102,6 @@ Listing page
     add seek in video
     see more bio
     see more venues played
-    ***click to copy email on listing page
     artist pages that will get you listed on google as a musician by using schema
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
@@ -154,7 +152,7 @@ Security
     use temporary code for email verification instead of account identifier
     *make it so that logged out users and logged in users cant see inquiries pages unless they have access to the inquiry (right now you can see the inquiry details but not conversations if you put the url in)
 Performance
-    ***prefetch on mouse down
+    prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server

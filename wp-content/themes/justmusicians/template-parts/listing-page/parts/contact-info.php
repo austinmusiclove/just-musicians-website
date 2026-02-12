@@ -30,11 +30,12 @@
             <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
             <h4 class="text-16 font-semibold">Email</h4>
         </div>
-        <?php if (is_user_logged_in()) { ?>
-        <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block" <?php if ($args['is_preview']) { ?>x-text="pEmail"<?php } ?>>
-            <?php if (!$args['is_preview']) { echo get_field('email'); } ?>
-        </span>
-        <?php } ?>
+        <?php if (is_user_logged_in()) {
+            echo get_template_part('template-parts/global/copy-to-clipboard', '', [
+                'text'   => !$args['is_preview'] ? get_field('email') : '',
+                'x-text' => $args['is_preview']  ? 'pEmail'           : '',
+            ]);
+        } ?>
         <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
 
     </div>
