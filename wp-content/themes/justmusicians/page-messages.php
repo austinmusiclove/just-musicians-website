@@ -6,6 +6,11 @@ $user_id = get_current_user_id();
 $inquiry_data = null;
 $inquiry_id = null;
 $inquiries_map = null;
+$user_inquiries = get_user_meta($user_id, 'inquiries', true);
+if (!is_array($user_inquiries)) { $user_inquiries = []; }
+$user_inquiries = array_map('strval', $user_inquiries);
+
+error_log(print_r($user_inquiries, true));
 if (!empty($_GET['iid'])) {
     $inquiry_id = $_GET['iid'];
     $inquiry_data = get_user_inquiry(['post_id' => $inquiry_id]);
@@ -32,6 +37,7 @@ get_header();
         conversations: [],
         conversationsMap: {},
         inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
+        userInquiries: <?php echo clean_arr_for_doublequotes($user_inquiries); ?>,
         editInquiryMode: false,
         conversationsView: true,
         messagesView: false,

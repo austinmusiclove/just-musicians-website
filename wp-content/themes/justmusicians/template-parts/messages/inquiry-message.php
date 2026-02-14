@@ -35,14 +35,25 @@
             >
 
                 <!-- Heading  -->
-                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="!message.inquiry.expired" x-cloak >New Inquiry</h3>
-                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="message.inquiry.expired" x-cloak >Expired Inquiry</h3>
+                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="!message.inquiry.expired && !message.inquiry.deleted" x-cloak >New Inquiry</h3>
+                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="message.inquiry.expired && !message.inquiry.deleted" x-cloak >Expired Inquiry</h3>
+                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="message.inquiry.deleted" x-cloak >Deleted Inquiry</h3>
 
-                <div class="p-4 flex flex-col gap-2">
+                <div class="p-4 flex flex-col gap-2" x-show="!message.inquiry.deleted">
 
+                    <!-- Subject -->
+                    <h3 class="text-18 font-bold py-2"
+                        x-html="message.inquiry.subject"
+                        x-show="!userInquiries.includes(message.inquiry.inquiry_id)" x-cloak
+                    ></h3>
+                    <a class="hover:underline cursor-pointer"
+                        x-bind:href="`<?php echo site_url('/messages/'); ?>?iid=${message.inquiry.inquiry_id}`"
+                        x-show="userInquiries.includes(message.inquiry.inquiry_id)" x-cloak
+                    >
+                        <h3 class="text-18 font-bold py-2" x-html="message.inquiry.subject"></h3>
+                    </a>
 
                     <!-- Details paragraph -->
-                    <h3 class="text-18 font-bold py-2" x-html="message.inquiry.subject"></h3>
                     <div class="text-16" x-html="message.inquiry.details"></div>
 
                     <!-- Details with icons -->

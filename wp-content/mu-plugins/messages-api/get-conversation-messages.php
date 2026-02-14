@@ -25,7 +25,7 @@ function formatMessage($message, $user_id) {
 
         // Handle deleted or not found listing
         if (empty($inquiry) or is_wp_error($inquiry)) {
-            $inquiry = [ 'expired' => true, 'subject' => 'Inquiry Expired' ];
+            $inquiry = [ 'expired' => true, 'deleted' => true, 'subject' => 'Inquiry Deleted' ];
             //return null; // Hide deleted inquires creates an issue because hiding the meassage means it never gets set to read
         }
 
