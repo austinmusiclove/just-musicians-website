@@ -40,6 +40,7 @@ function get_inquiry($args) {
         'budget'          => get_field('budget'),
         'percent_of_door' => get_field('percent_of_door'),
         'percent_of_bar'  => get_field('percent_of_bar'),
+        'expired'         => get_field('expired'),
     ];
 
 

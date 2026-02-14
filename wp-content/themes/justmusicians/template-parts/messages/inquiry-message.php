@@ -35,9 +35,10 @@
             >
 
                 <!-- Heading  -->
-                <h3 class="bg-yellow text-20 text-white py-2 px-3">New Inquiry</h3>
+                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="!message.inquiry.expired" x-cloak >New Inquiry</h3>
+                <h3 class="bg-yellow text-20 text-white py-2 px-3" x-show="message.inquiry.expired" x-cloak >Expired Inquiry</h3>
 
-                <div class="p-4 flex flex-col gap-2" x-show="!message.inquiry.expired">
+                <div class="p-4 flex flex-col gap-2">
 
 
                     <!-- Details paragraph -->
