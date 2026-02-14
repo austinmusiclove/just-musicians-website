@@ -148,7 +148,6 @@ async function updateMarkers() {
     // Click on individual marker → show popup
     map.on("click", "unclustered-point", (e) => {
         const f = e.features[0];
-        console.log(f);
         const props = f.properties;
 
         const html = `
@@ -208,7 +207,6 @@ function getVisibleBounds() {
  * Convert WP venue objects → GeoJSON FeatureCollection
  */
 function venuesToGeoJSON(venues) {
-    console.log(venues);
     return {
         type: "FeatureCollection",
         features: venues.map(venue => ({

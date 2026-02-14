@@ -29,7 +29,7 @@ function create_user_inquiry($args) {
         return new WP_Error('creation_failed', 'Failed to create inquiry.');
     }
 
-    // Get user's existing collection IDs
+    // Get user's existing inquiry IDs
     $user_id = get_current_user_id();
     $user_inquiries = get_user_meta($user_id, 'inquiries', true);
     if (!is_array($user_inquiries)) { $user_inquiries = []; }

@@ -16,6 +16,7 @@ require_once 'inquiries-api/get-user-inquiry.php';
 require_once 'inquiries-api/get-inquiry.php';
 require_once 'inquiries-api/get-inquiries.php';
 require_once 'inquiries-api/create-inquiry.php';
+require_once 'inquiries-api/update-user-inquiry.php';
 require_once 'inquiries-api/add-listing-to-inquiry.php';
 require_once 'inquiries-api/notify-listings.php';
 
@@ -37,7 +38,7 @@ add_action('rest_api_init', function () {
 
 
 function create_inquiry_request_handler($request) {
-    $args = get_sanitized_inquiry_args();
+    $args = get_sanitized_inquiry_args(false);
     return create_user_inquiry($args);
 }
 function add_listing_to_inquiry_request_handler($request) {

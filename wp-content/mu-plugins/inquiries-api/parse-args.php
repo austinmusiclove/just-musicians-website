@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // parses args from the request, sanitizes them, and returns args ready for wp_insert_post or wp_update_post
 // if an arg is omitted in $_POST, it will be ommitted in the sanitized_args and therefore not altered in wp_update_post or wp_insert_post
-function get_sanitized_inquiry_args() {
+function get_sanitized_inquiry_args($is_update) {
     $sanitized_args = [
         'post_type'       => 'inquiry',
         'post_status'     => 'publish',
@@ -32,7 +32,7 @@ function get_sanitized_inquiry_args() {
     if (isset($_POST['inquiry_percent_of_door']))             { $sanitized_args['meta_input']['percent_of_door']     = sanitize_text_field($_POST['inquiry_percent_of_door']); }
     if (isset($_POST['inquiry_percent_of_bar']))              { $sanitized_args['meta_input']['percent_of_bar']      = sanitize_text_field($_POST['inquiry_percent_of_bar']); }
     if (isset($_POST['inquiry_max_listing_invites']))         { $sanitized_args['meta_input']['max_listing_invites'] = sanitize_text_field($_POST['inquiry_max_listing_invites']); }
-    if (!isset($_POST['inquiry_max_listing_invites']))        { $sanitized_args['meta_input']['max_listing_invites'] = DEFAULT_QUOTES_REQUESTED; }
+    else if (!$is_update)                                     { $sanitized_args['meta_input']['max_listing_invites'] = DEFAULT_QUOTES_REQUESTED; }
     if (isset($_POST['inquiry_ensemble_size']))               { $sanitized_args['meta_input']['ensemble_size']       = custom_sanitize_array($_POST['inquiry_ensemble_size']); }
     if (isset($_POST['inquiry_details']))                     { $sanitized_args['meta_input']['details']             = sanitize_textarea_field($_POST['inquiry_details']); }
 
@@ -40,7 +40,10 @@ function get_sanitized_inquiry_args() {
     if (isset($_POST['inquiry_genres']))                      { $sanitized_args['tax_input']['genre']                = custom_sanitize_array($_POST['inquiry_genres']); }
 
     // Add listing to the inquiry if provided
-    $sanitized_args['meta_input']['listings_invited'] = [];
+    // Set to [] by default if this is a new inquiry, not update
+    if (!$is_update) {
+        $sanitized_args['meta_input']['listings_invited'] = [];
+    }
     if (isset($_POST['inquiry_listing'])) {
         $listing_id = sanitize_text_field($_POST['inquiry_listing']);
         if ($listing_id && get_post_type($listing_id) === 'listing' && get_post_status($listing_id) === 'publish') {

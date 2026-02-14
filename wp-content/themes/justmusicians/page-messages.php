@@ -32,6 +32,7 @@ get_header();
         conversations: [],
         conversationsMap: {},
         inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
+        editInquiryMode: false,
         conversationsView: true,
         messagesView: false,
         getCvInFlight: false,
@@ -53,9 +54,11 @@ get_header();
         inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
         _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
         _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+        _updateInquiry(postId, inquiry)                      { return updateInquiry(this, postId, inquiry); },
     }"
     x-ref="mainContainer"
     x-init="_getConversations(null); _pollConversations();"
+    x-on:update-inquiry.window="_updateInquiry($event.detail.post_id, $event.detail.inquiry)"
 >
 
     <div class="px-4 lg:pr-0 md:pl-12 lg:pl-0 lg:grid lg:grid-cols-12 gap-12 xl:gap-28">
@@ -65,10 +68,7 @@ get_header();
         <div class="flex-col col-span-12 lg:col-span-4 z-0 border-r border-black/20 lg:pl-[2rem] xl:pl-0 h-[calc(100vh-7rem)] md:h-[calc(100vh-4rem)]"
             :class="conversationsView ? 'flex' : 'hidden lg:flex'"
         >
-            <?php echo get_template_part('template-parts/messages/conversations-menu', '', [
-                'inquiry_id'   => $inquiry_id,
-                'inquiry_data' => $inquiry_data
-            ]); ?>
+            <?php echo get_template_part('template-parts/messages/conversations-menu', '', []); ?>
         </div>
 
         <!-- Message Board -->

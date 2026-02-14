@@ -42,7 +42,7 @@
     <!-- Suggestions -->
     <template x-if="inquiry">
         <div class="border-t-4 border-black/20 py-16 pr-4"
-            hx-get="<?php echo site_url('/wp-html/v1/inquiries/' . $args['inquiry_id'] . '/suggestions/'); ?>"
+            x-bind:hx-get="`<?php echo site_url(); ?>/wp-html/v1/inquiries/${inquiry.inquiry_id}/suggestions/`"
             hx-trigger="load"
             hx-target="#inquiry-suggestion-results"
             hx-indicator="#suggestions-spinner"

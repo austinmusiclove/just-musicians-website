@@ -1,3 +1,5 @@
+Deploy
+    save permalinks
 Reviews
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
@@ -31,16 +33,17 @@ Compensation Reporting
         clear performance id on submit
         make show flier not required if peformance id exists
     **allow add new venue
+    ***Make sure people get prompted to log in when they open the form while logged out
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
+    ***link to inquiry page from inquiry message for inquiry owner only
+    *add more editable fields to edit inquiry
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
-    ***allow edit inquiry
-    ***link to inquiry page from inquiry message for inquiry owner only
     allow delete/expire inquiry
     add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
@@ -80,6 +83,7 @@ Search algo update
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
 Listing form
+    ***really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
     active search for cities
@@ -89,21 +93,21 @@ Listing form
     scroll preview to section when corresponding input is focused
     disable input until change made or auto save after input
     limit access until you verify email
-    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    **accept pdf for stage plots
+    ***accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    ***accept pdf for stage plots
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
     allow play with mouse off iframe for videos
-    add seek in video
+    ***add seek in video
     see more bio
     see more venues played
     artist pages that will get you listed on google as a musician by using schema
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
-    *video seeking
+    ***video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
 Data
@@ -120,10 +124,11 @@ Testing
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
 UX
-    **pop up on top right that prompts you to log in with google as soon as you open the site
+    **link from profile images and display names to account settings to edit your own image and name
+    *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
-    *make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
-    *show skeleton listings while main listing search is in flight
+    ***make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
+    ***show skeleton listings while main listing search is in flight
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry

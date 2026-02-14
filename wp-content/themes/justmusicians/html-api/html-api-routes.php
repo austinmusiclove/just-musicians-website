@@ -35,7 +35,9 @@ function html_api_v1_template_redirects() {
         case 'inquiries':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiries.php'; exit;
-                case 'POST'  : include_once get_template_directory() . '/html-api/create-inquiry.php'; exit;
+                case 'POST'  :
+                    if (get_query_var('inquiry-id')) { include_once get_template_directory() . '/html-api/update-inquiry.php'; exit; }
+                    else                             { include_once get_template_directory() . '/html-api/create-inquiry.php'; exit; }
             }
         case 'inquiry-listing':
             switch ($_SERVER['REQUEST_METHOD']) {

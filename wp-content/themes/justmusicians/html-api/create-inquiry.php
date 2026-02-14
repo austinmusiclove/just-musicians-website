@@ -1,7 +1,7 @@
 <?php
 
 // Create Inquiry
-$args = get_sanitized_inquiry_args();
+$args = get_sanitized_inquiry_args(false);
 
 $result = create_user_inquiry($args);
 if ( is_wp_error($result) ) {
