@@ -10,12 +10,12 @@
     >
 
         <span x-show="!editInquiryMode" x-cloak>
-            <?php echo get_template_part('template-parts/messages/parts/inquiry-message/inquiry-info-display', '', [] ); ?>
+            <?php echo get_template_part('template-parts/messages/parts/inquiry-detail/inquiry-info-display', '', [] ); ?>
         </span>
 
         <!-- Inquiry edit form -->
         <span x-show="editInquiryMode" x-cloak>
-            <?php echo get_template_part('template-parts/messages/parts/inquiry-message/inquiry-edit-form', '', [] ); ?>
+            <?php echo get_template_part('template-parts/messages/parts/inquiry-detail/inquiry-edit-form', '', [] ); ?>
         </span>
 
     </div>

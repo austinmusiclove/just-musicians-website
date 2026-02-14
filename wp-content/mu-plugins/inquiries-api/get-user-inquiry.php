@@ -39,7 +39,7 @@ function get_user_inquiry($args) {
 
     // Formatted time
     $time = get_field('time', false, false);            // raw value (military)
-    $formatted_time = date("g:i A", strtotime($time));  // convert to 12-hour
+    $formatted_time = $time ? date("g:i A", strtotime($time)) : '';  // convert to 12-hour
 
     // Array to store post meta and taxonomy data
     $result = [
