@@ -69,7 +69,7 @@ $next_page       = $result ? $result['next_page']       : null;
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
         hx-target="#results"
-        hx-indicator="#spinner"
+        hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>
             hx-trigger="filterupdate"
         <?php } else { ?>
@@ -122,6 +122,16 @@ $next_page       = $result ? $result['next_page']       : null;
                             'max_num_results' => $max_num_results,
                         ]); ?>
                     </div>
+
+                    <span class="spinner-start htmx-indicator-block">
+                        <?php
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        ?>
+                    </span>
 
                     <span id="results"
                         x-data='{
@@ -197,21 +207,23 @@ $next_page       = $result ? $result['next_page']       : null;
                             if ($is_last_page) {
                                 get_template_part( 'template-parts/content/no-more-results');
                             }
-                        } else {
-                            // Render placeholder listings
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
                         }
                     ?>
                     </span>
 
 
-                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
-                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                    </div>
+                    <span id="spinner-end" class="htmx-indicator-block">
+                        <?php
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                        ?>
+                        <div class="my-8 flex items-center justify-center">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                        </div>
+                    </span>
 
 
                     <div class="xl:hidden">

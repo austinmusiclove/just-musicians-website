@@ -1,5 +1,3 @@
-Deploy
-    save permalinks
 Reviews
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
@@ -125,8 +123,6 @@ UX
     **link from profile images and display names to account settings to edit your own image and name
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
-    ***make filter buttons on home page more responsive by altering the UI before request returns (and still replacing after request returns to make sure it is always consistent with what the results are)
-    ***show skeleton listings while main listing search is in flight
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry

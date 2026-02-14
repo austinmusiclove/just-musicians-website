@@ -147,6 +147,12 @@ form {
   .htmx-request .htmx-indicator {
       opacity: 1;
   }
+  .htmx-indicator-block {
+      display: none;
+  }
+  .htmx-request.htmx-indicator-block {
+      display: block;
+  }
   .htmx-indicator-replace {
       opacity: 1;
   }

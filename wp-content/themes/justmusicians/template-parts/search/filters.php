@@ -19,6 +19,7 @@
         'default_tags' => get_default_options('category'),
         'tags' => isset($args['categories']) ? $args['categories'] : [],
         'show_modal_var' => 'showCategoryModal',
+        'x-model' => 'categoriesCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -27,6 +28,7 @@
         'default_tags' => get_default_options('genre'),
         'tags' => isset($args['genres']) ? $args['genres'] : [],
         'show_modal_var' => 'showGenreModal',
+        'x-model' => 'genresCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
@@ -35,6 +37,7 @@
         'default_tags' => get_default_options('subgenre'),
         'tags' => isset($args['subgenres']) ? $args['subgenres'] : [],
         'show_modal_var' => 'showSubGenreModal',
+        'x-model' => 'subgenresCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
@@ -43,6 +46,7 @@
         'default_tags' => get_default_options('instrumentation'),
         'tags' => isset($args['instrumentations']) ? $args['instrumentations'] : [],
         'show_modal_var' => 'showInstrumentationModal',
+        'x-model' => 'instrumentationsCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
@@ -51,6 +55,7 @@
         'default_tags' => get_default_options('setting'),
         'tags' => isset($args['settings']) ? $args['settings'] : [],
         'show_modal_var' => 'showSettingModal',
+        'x-model' => 'settingsCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'ensemble-size-filters',
@@ -59,6 +64,7 @@
         'default_tags' => get_default_options('ensemble_size'),
         'tags' => [],
         'show_modal_var' => 'showEnsembleSizeModal',
+        'x-model' => 'ensembleSizeCheckboxes',
     ));
     /*
     echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [

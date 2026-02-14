@@ -89,6 +89,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('category'),
         'tags' => $valid_categories,
         'show_modal_var' => 'showCategoryModal',
+        'x-model' => 'categoriesCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'genre-filters',
@@ -97,6 +98,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('genre'),
         'tags' => $valid_genres,
         'show_modal_var' => 'showGenreModal',
+        'x-model' => 'genresCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'subgenre-filters',
@@ -105,6 +107,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('subgenre'),
         'tags' => $valid_subgenres,
         'show_modal_var' => 'showSubGenreModal',
+        'x-model' => 'subgenresCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'instrumentation-filters',
@@ -113,6 +116,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('instrumentation'),
         'tags' => $valid_instrumentations,
         'show_modal_var' => 'showInstrumentationModal',
+        'x-model' => 'instrumentationsCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'setting-filters',
@@ -121,6 +125,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('setting'),
         'tags' => $valid_settings,
         'show_modal_var' => 'showSettingModal',
+        'x-model' => 'settingsCheckboxes',
     ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'ensemble-size-filters',
@@ -129,6 +134,7 @@ if ($page == 1) {
         'default_tags' => get_default_options('ensemble_size'),
         'tags' => $ensemble_size,
         'show_modal_var' => 'showEnsembleSizeModal',
+        'x-model' => 'ensembleSizeCheckboxes',
     ));
     /*
     echo get_template_part('template-parts/filters/elements/ensemble-size-input', '', [

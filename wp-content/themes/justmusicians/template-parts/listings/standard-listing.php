@@ -14,6 +14,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
         hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
+        hx-indicator="#spinner-end"
         hx-swap="beforeend"
         hx-include="#hx-form"
     <?php } ?>

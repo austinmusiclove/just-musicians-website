@@ -6,7 +6,10 @@
         <!-- Add all selected tags -->
         <?php foreach($args['tags'] as $tag) {
             $tag_ref = get_checkbox_ref_string($args['input_name'], $tag); ?>
-            <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light bg-yellow"
+            <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20"
+                :class="<?php echo $args['x-model']; ?>.includes('<?php echo $tag; ?>')
+                    ? 'bg-yellow hover:bg-yellow-light'
+                    : 'hover:bg-yellow-light'"
                 x-on:click="$refs.<?php echo $tag_ref; ?>.click()">
                 <?php echo $tag; ?>
             </button>
@@ -19,7 +22,10 @@
             $default_tags = array_slice(array_diff($args['default_tags'], $args['tags']), 0, $num_default_tags_to_add);
             foreach($default_tags as $tag) {
                 $tag_ref = get_checkbox_ref_string($args['input_name'], $tag); ?>
-                <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light"
+                <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20"
+                    :class="<?php echo $args['x-model']; ?>.includes('<?php echo $tag; ?>')
+                        ? 'bg-yellow hover:bg-yellow-light'
+                        : 'hover:bg-yellow-light'"
                     x-on:click="$refs.<?php echo $tag_ref; ?>.click()">
                     <?php echo $tag; ?>
                 </button>

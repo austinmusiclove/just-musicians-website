@@ -48,5 +48,8 @@
         </div>
     <?php } ?>
 
+    <div class="spinner-start htmx-indicator my-8 flex items-center justify-center">
+        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+    </div>
 
 </div>
