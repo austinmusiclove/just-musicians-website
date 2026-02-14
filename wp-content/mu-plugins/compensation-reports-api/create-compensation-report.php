@@ -2,6 +2,10 @@
 
 function create_compensation_report($args) {
 
+    if (!is_user_logged_in()) {
+        return new WP_Error('not_logged_in', 'You must be logged in to contribute.');
+    }
+
     $author_id = get_current_user_id();
     $args['post_title'] = "{$args['meta_input']['venue_name']} - venueID:{$args['meta_input']['venue']} - {$args['meta_input']['author_email']} - \${$args['meta_input']['total_earnings']}";
 

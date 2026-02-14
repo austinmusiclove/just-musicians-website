@@ -69,4 +69,10 @@ get_header();
 </div>
 
 <?php
+
+// Show login form to users who are not logged in
+if (!is_user_logged_in()) { ?>
+    <span x-init="showLoginModal = true; signupModalMessage = 'Sign up to contribute'; loginModalMessage = 'Sign in to contribute';"></span>
+<?php }
+
 get_footer();
