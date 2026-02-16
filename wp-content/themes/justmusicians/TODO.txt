@@ -1,4 +1,6 @@
 Reviews
+    **add listing name to review title
+    ***prompt to edit name, pos, org, image when submitting review with no name or image
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
@@ -119,7 +121,15 @@ Testing
     test apostrophes everywhere
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api
+    create screen state/action tree
+        each screen has multiple states which are nodes
+        each state has actions which are edges
+        each action has an expected result that can be tested for
+        integration tests test one edge of the tree at a time
+        set up users that allow tests to reach different screen states for testing without having to create a user every time
+        maturity test by following a random path on the tree
 UX
+    **hide search results while first page request is in flight (should see only the spinner which includes skeleton listings)
     **link from profile images and display names to account settings to edit your own image and name
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it

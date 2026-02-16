@@ -128,8 +128,8 @@
 
         <!-- Rating -->
         <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
-            'rating'       => $args['rating']       ?? 0,
-            'review_count' => $args['review_count'] ?? 0,
+            'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
+            'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
         ]); ?>
 
     </div>

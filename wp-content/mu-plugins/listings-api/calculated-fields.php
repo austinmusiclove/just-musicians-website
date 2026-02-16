@@ -101,6 +101,7 @@ function update_search_rank($post_id) {
 
     // Boost rank by number of reviews
     $review_count = get_post_meta( $post_id, 'review_count', true );
+    $review_count = (int) $review_count;
     $rank += $review_count;
 
     // Boost by admin defined amount
