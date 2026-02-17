@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showReviewSlide" x-cloak>
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] overflow-y-auto pr-2" x-show="showReviewSlide" x-cloak>
 
 
     <!-- Heading -->
@@ -35,7 +35,7 @@
 
 
     <!-- Submit Button -->
-    <div class="absolute bottom-10 right-10 flex flex-row gap-1">
+    <div class="mt-4 flex flex-row justify-end gap-1">
 
         <!-- If rating has been selected and body is long enough, show submit button; else show disabled button that waggles the required input -->
         <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
@@ -49,8 +49,8 @@
         <button type="submit" class="review-submit-button flex justify-center items-center bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2 w-[82px] h-[40px] disabled:opacity-50"
             x-show="rating > 0 && reviewBody.length >= 50" x-cloak
         >
-            <span class="absolute htmx-indicator-replace">Submit</span>
-            <span class="absolute flex items-center justify-center htmx-indicator">
+            <span class="htmx-indicator-component-block-replace">Submit</span>
+            <span class="htmx-indicator-component-block">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
             </span>
         </button>
