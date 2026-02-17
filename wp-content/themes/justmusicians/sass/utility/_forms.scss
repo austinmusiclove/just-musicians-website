@@ -159,6 +159,12 @@ form {
   .htmx-request.htmx-indicator-block {
       display: block;
   }
+  .htmx-indicator-block-replace {
+      display: block;
+  }
+  .htmx-request.htmx-indicator-block-replace {
+      display: none;
+  }
   .htmx-indicator-component-block {
       display: none;
   }

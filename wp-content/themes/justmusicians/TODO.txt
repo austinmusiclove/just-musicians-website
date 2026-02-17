@@ -128,7 +128,6 @@ Testing
         set up users that allow tests to reach different screen states for testing without having to create a user every time
         maturity test by following a random path on the tree
 UX
-    **hide search results while first page request is in flight (should see only the spinner which includes skeleton listings)
     **link from profile images and display names to account settings to edit your own image and name
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it

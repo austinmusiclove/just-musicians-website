@@ -133,7 +133,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         ?>
                     </span>
 
-                    <span id="results"
+                    <span id="results" class="spinner-start htmx-indicator-block-replace"
                         x-data='{
                             collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
                             get sortedCollections()                              { return getSortedCollections(this, 0); },
