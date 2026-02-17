@@ -147,15 +147,27 @@ form {
   .htmx-request .htmx-indicator {
       opacity: 1;
   }
+  .htmx-indicator-replace {
+      opacity: 1;
+  }
+  .htmx-request .htmx-indicator-replace {
+      opacity: 0;
+  }
   .htmx-indicator-block {
       display: none;
   }
   .htmx-request.htmx-indicator-block {
       display: block;
   }
-  .htmx-indicator-replace {
-      opacity: 1;
+  .htmx-indicator-component-block {
+      display: none;
   }
-  .htmx-request .htmx-indicator-replace {
-      opacity: 0;
+  .htmx-request .htmx-indicator-component-block {
+      display: block;
+  }
+  .htmx-indicator-component-block-replace {
+      display: block;
+  }
+  .htmx-request .htmx-indicator-component-block-replace {
+      display: none;
   }
