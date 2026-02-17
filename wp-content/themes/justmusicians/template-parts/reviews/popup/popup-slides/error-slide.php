@@ -1,4 +1,4 @@
-<div data-slide="4" class="slide w-[24rem] text-center" x-show="showReviewErrorSlide" x-cloak>
+<div class="slide w-[24rem] text-center" x-show="showReviewErrorSlide" x-cloak>
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">There was an error processing your submission.</h2>

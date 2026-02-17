@@ -1,8 +1,7 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] overflow-y-auto pr-2" x-show="showReviewSlide" x-cloak>
-
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showReviewSlide" x-cloak>
 
     <!-- Heading -->
-    <h2 class="font-bold font-poppins text-20 mb-8 sm:mb-16">Tell us about your experience with <span x-text="revieweeName"></span></h2>
+    <h2 class="font-bold font-poppins text-20 mb-8">Tell us about your experience with <span x-text="revieweeName"></span></h2>
     <input type="hidden" name="reviewee_name" x-model="revieweeName" />
 
 
@@ -35,7 +34,7 @@
 
 
     <!-- Submit Button -->
-    <div class="mt-4 flex flex-row justify-end gap-1">
+    <div class="mt-auto pt-6 flex justify-end gap-1">
 
         <!-- If rating has been selected and body is long enough, show submit button; else show disabled button that waggles the required input -->
         <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"

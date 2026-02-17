@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] overflow-y-auto pr-2" x-show="showReviewUserInfoSlide" x-cloak x-data="{
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showReviewUserInfoSlide" x-cloak x-data="{
     displayNameInput: accountSettings.display_name,
     organizationInput: accountSettings.organization,
     positionInput: accountSettings.position,
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Submit Button -->
-    <div class="account-settings-indicator mt-4 flex flex-row justify-end gap-1">
+    <div class="account-settings-indicator mt-auto pt-6 flex justify-end gap-1">
 
         <button type="button" class="flex justify-center items-center bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2 w-[82px] h-[40px] disabled:opacity-50 account-settings-submit-button"
             hx-post="<?php echo site_url('wp-html/v1/account-settings'); ?>"

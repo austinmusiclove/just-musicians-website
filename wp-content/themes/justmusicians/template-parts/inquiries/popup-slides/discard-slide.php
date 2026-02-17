@@ -1,4 +1,4 @@
-<div data-slide="5" class="slide w-[24rem] text-center" x-show="showDiscardSlide" x-cloak>
+<div class="slide w-[24rem] text-center" x-show="showDiscardSlide" x-cloak>
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">You’re almost done!</h2>
@@ -8,8 +8,7 @@
     <div class="flex flex-row gap-1 justify-center">
         <button type="button" data-popup="quote" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2"
             x-on:click="_exitInquiryModal();"
-            >
-        Discard</button>
+        >Discard</button>
         <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide(currentInquirySlide);">Continue</button>
     </div>
 

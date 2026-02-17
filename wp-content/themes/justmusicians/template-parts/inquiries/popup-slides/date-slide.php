@@ -1,5 +1,4 @@
-
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showDateSlide" x-cloak>
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showDateSlide" x-cloak>
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">When is your event?</h2>
@@ -30,7 +29,7 @@
         <input type="time" name="inquiry_time" class="mb-4">
     </span>
 
-    <div class="absolute bottom-10 right-10 flex flex-row gap-1">
+    <div class="mt-auto pt-6 flex justify-end gap-1">
         <button type="button" class="bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2"
             x-text="inquiryDateType ? 'Next' : 'Skip'"
             x-on:click="_showInquirySlide('location')"

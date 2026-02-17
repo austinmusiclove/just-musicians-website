@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showQuoteSlide" x-cloak>
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showQuoteSlide" x-cloak>
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Would you like us to send this inquiry to similar musicians?</h2>
@@ -17,7 +17,7 @@
         </div>
     </fieldset>
 
-    <div class="absolute bottom-10 right-10 flex flex-row gap-1">
+    <div class="mt-auto pt-6 flex justify-end gap-1">
 
         <!-- Back button -->
         <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2" x-on:click="_showInquirySlide('details')">Back</button>
@@ -26,8 +26,8 @@
         <button type="submit" class="relative bg-navy shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-white font-sun-motter text-16 px-4 py-2 disabled:opacity-50 inquiry-submit-button"
             x-bind:disabled="!quotesRequested"
         >
-            <span class="htmx-indicator-replace">Submit</span>
-            <span class="absolute inset-0 flex items-center justify-center htmx-indicator">
+            <span class="htmx-indicator-component-block-replace">Submit</span>
+            <span class="htmx-indicator-component-block">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
             </span>
         </button>

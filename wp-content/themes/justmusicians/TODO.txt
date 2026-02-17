@@ -37,7 +37,6 @@ Compensation Reporting
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
-    ***fix inquiries modal to have scroll like the reviews modal
     *add more editable fields to edit inquiry
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
