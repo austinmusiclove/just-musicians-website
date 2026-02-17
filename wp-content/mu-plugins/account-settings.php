@@ -19,11 +19,12 @@ function get_user_account_settings($user_id) {
     $profile_image = get_profile_image($user_id);
 
     return [
-        'display_name'         => clean_display_name($user_info->display_name),
-        'display_name_cleaned' => $user_info->display_name != clean_display_name($user_info->display_name),
-        'profile_image'        => $profile_image,
-        'organization'         => get_field('organization', 'user_' . $user_id),
-        'position'             => get_field('position', 'user_' . $user_id),
+        'raw_display_name'        => $user_info->display_name,
+        'display_name'            => clean_display_name($user_info->display_name),
+        'display_name_is_cleaned' => $user_info->display_name != clean_display_name($user_info->display_name),
+        'profile_image'           => $profile_image,
+        'organization'            => get_field('organization', 'user_' . $user_id),
+        'position'                => get_field('position', 'user_' . $user_id),
     ];
 }
 
@@ -103,6 +104,8 @@ function get_post_account_settings_args() {
     if (isset($_POST['organization']))       { $sanitized_args['organization']  = sanitize_text_field($_POST['organization']); }
     if (isset($_POST['position']))           { $sanitized_args['position']      = sanitize_text_field($_POST['position']); }
     if (isset($_POST['profile_image_meta'])) { $sanitized_args['profile_image'] = custom_parse_file($_POST['profile_image_meta'], 'profile_image'); }
+    if (isset($_POST['is_popup']))           { $sanitized_args['is_popup']      = sanitize_text_field($_POST['is_popup']); }
+    else                                     { $sanitized_args['is_popup']      = false; }
 
     return $sanitized_args;
 }

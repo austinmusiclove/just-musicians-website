@@ -96,7 +96,7 @@ function initCropper(alco, displayElement, displaySrc, submitButtons, newFile) {
         }
     };
 
-    displayElement.src = displaySrc;
+    alco.accountSettings.profile_image.url = displaySrc;
 
     // If it's already loaded (cached), fire manually
     if (displayElement.complete && displayElement.naturalWidth !== 0) {

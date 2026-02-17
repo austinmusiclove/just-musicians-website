@@ -40,7 +40,7 @@ function get_reviews($review_post_type, $reviewee_id) {
 
             $reviews[] = [
                 'rating'              => get_post_meta($post->ID, 'rating', true),
-                'review'              => get_post_meta($post->ID, 'review', true),
+                'review'              => nl2br(get_post_meta($post->ID, 'review', true)),
                 'author_name'         => $author_name,
                 'author_organization' => $author_org,
                 'author_position'     => $author_position,

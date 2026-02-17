@@ -43,6 +43,7 @@
             width: 0,
             redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
+            accountSettings: <?php if (is_user_logged_in()) { echo clean_arr_for_doublequotes(get_account_settings()); } else { echo '[]'; } ?>,
             notifications: { 'unread_convo_count': 0, 'account_notification_count': 0 },
             shakeElements: new Set(),
             _emphasizeElm(elm, elmId) { emphasizeElm(this, elm, elmId); },
@@ -57,6 +58,7 @@
             currentReviewSlide: '',
             showReviewModal: false,
             showReviewSlide: true,
+            showReviewUserInfoSlide: false,
             showReviewThankYouSlide: false,
             showReviewErrorSlide: false,
             reviewPostType: '',
@@ -97,6 +99,8 @@
             _handleCreateInquiryError(message)                   { handleCreateInquiryError(this, message); },
             _handleCreateReviewSuccess()                         { handleCreateReviewSuccess(this); },
             _handleCreateReviewError(message)                    { handleCreateReviewError(this, message); },
+            _handleUpdateAccountSettingsSuccess()                { handleUpdateAccountSettingsSuccess(this); },
+            _handleUpdateAccountSettingsError(message)           { handleUpdateAccountSettingsError(this, message); },
             showSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
@@ -121,6 +125,7 @@
             showSearchOptions = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
+        x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
     >
     <!-- Setting a fixed height allows us to position the popups on mobile -->
     <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->

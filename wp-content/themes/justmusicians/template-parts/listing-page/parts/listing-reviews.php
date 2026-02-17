@@ -1,4 +1,3 @@
-
 <div class="w-full"
     x-init="
         reviewPostType = 'listing_review';

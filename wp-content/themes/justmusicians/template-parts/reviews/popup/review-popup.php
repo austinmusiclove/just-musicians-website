@@ -41,6 +41,7 @@
         >
 
             <input type="hidden" name="author" value="<?php echo get_current_user_id(); ?>" />
+            <input type="hidden" name="author_display_name" x-model="accountSettings.raw_display_name" />
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/review-slide',    '', []); ?>
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/user-info-slide', '', []); ?>
             <?php echo get_template_part('template-parts/reviews/popup/popup-slides/thank-you-slide', '', []); ?>

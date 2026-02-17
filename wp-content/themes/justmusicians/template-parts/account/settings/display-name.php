@@ -12,6 +12,6 @@
     </label>
 
     <!-- Input -->
-    <input class="border border-black/20 rounded h-8 p-2" type="text" name="display_name" x-bind:value="accountSettings.display_name_cleaned ? '' : accountSettings.display_name">
+    <input class="border border-black/20 rounded h-8 p-2" type="text" name="display_name" x-bind:value="accountSettings.display_name_is_cleaned ? '' : accountSettings.display_name">
 
 </div>

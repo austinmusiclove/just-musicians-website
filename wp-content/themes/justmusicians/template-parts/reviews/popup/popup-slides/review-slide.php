@@ -3,6 +3,7 @@
 
     <!-- Heading -->
     <h2 class="font-bold font-poppins text-20 mb-8 sm:mb-16">Tell us about your experience with <span x-text="revieweeName"></span></h2>
+    <input type="hidden" name="reviewee_name" x-model="revieweeName" />
 
 
     <!-- Rating Stars Input -->
@@ -45,7 +46,7 @@
             x-show="rating > 0 && reviewBody.length < 50" x-cloak
             x-on:click.prevent="_emphasizeElm($refs.reviewBody, 'reviewBodyInput')"
         >Submit</button>
-        <button type="submit" class="flex justify-center items-center bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2 w-[82px] h-[40px]"
+        <button type="submit" class="review-submit-button flex justify-center items-center bg-navy shadow-black-offset border-2 border-black text-white font-sun-motter text-16 px-4 py-2 w-[82px] h-[40px] disabled:opacity-50"
             x-show="rating > 0 && reviewBody.length >= 50" x-cloak
         >
             <span class="absolute htmx-indicator-replace">Submit</span>

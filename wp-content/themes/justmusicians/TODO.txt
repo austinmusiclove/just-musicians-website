@@ -1,6 +1,4 @@
 Reviews
-    **add listing name to review title
-    ***prompt to edit name, pos, org, image when submitting review with no name or image
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
@@ -52,6 +50,7 @@ Advanced inquiries
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
 SEO
+    register on bing web master
     indexing
         add listing titles in meta description
         add internal linking for featured pages
