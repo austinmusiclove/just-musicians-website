@@ -1,7 +1,7 @@
 <div class="w-full"
     x-init="
         reviewPostType = 'buyer_review';
-        revieweeId     = '<?php echo $args['user_id']; ?>';
+        revieweeId     = '<?php echo $args['buyer_id']; ?>';
         revieweeName   = '<?php echo $args['display_name']; ?>';
     "
 >
@@ -14,7 +14,7 @@
 
     <!-- Reviews -->
     <div
-        hx-get="<?php echo site_url('/wp-html/v1/reviews/buyer_review/' . $args['user_id']); ?>"
+        hx-get="<?php echo site_url('/wp-html/v1/reviews/buyer_review/' . $args['buyer_id']); ?>"
         hx-trigger="load, fetch-reviews from:window"
     ></div>
 

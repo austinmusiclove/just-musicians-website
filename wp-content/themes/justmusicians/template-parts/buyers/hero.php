@@ -20,9 +20,19 @@ if (has_post_thumbnail()) {
             <!-- Thumbnail (Moved to Left and Made Circular) -->
             <div class="flex-shrink-0">
                 <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-black shadow-black-offset">
+
+                    <?php if (get_current_user_id() == $args['buyer_id']): ?>
+                    <a href="<?php echo site_url('/account'); ?>">
+                    <?php endif; ?>
+
                     <img class="h-full w-full object-cover"
                          src="<?php echo $args['profile_image']['url']; ?>"
                          alt="<?php echo $args['display_name']; ?>" />
+
+                    <?php if (get_current_user_id() == $args['buyer_id']): ?>
+                    </a>
+                    <?php endif; ?>
+
                 </div>
             </div>
 

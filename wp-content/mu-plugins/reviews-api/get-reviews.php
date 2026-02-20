@@ -45,6 +45,7 @@ function get_reviews($review_post_type, $reviewee_id) {
                 'author_organization' => $author_org,
                 'author_position'     => $author_position,
                 'author_image_url'    => $author_image_url,
+                'author_id'           => $author_id,
             ];
         }
     }

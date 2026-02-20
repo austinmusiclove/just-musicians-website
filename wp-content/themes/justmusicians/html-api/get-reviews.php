@@ -17,6 +17,7 @@ if (count($reviews) > 0) {
                 'author_organization' => $review['author_organization'],
                 'author_position'     => $review['author_position'],
                 'author_image_url'    => $review['author_image_url'],
+                'author_id'           => $review['author_id'],
             ]);
         }
     }

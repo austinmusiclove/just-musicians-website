@@ -5,20 +5,21 @@
  * @package JustMusicians
  */
 
-$user_id = get_query_var('buyer-id');
-$account_settings = get_user_account_settings($user_id);
+$buyer_id = get_query_var('buyer-id');
+$account_settings = get_user_account_settings($buyer_id);
 
 
 get_header();
 
 echo get_template_part('template-parts/buyers/hero', '', [
+    'buyer_id'       => $buyer_id,
     'display_name'  => $account_settings['display_name'],
     'profile_image' => $account_settings['profile_image'],
     'organization'  => $account_settings['organization'],
     'position'      => $account_settings['position'],
 ]);
 echo get_template_part('template-parts/buyers/content', '', [
-    'user_id'       => $user_id,
+    'buyer_id'       => $buyer_id,
     'display_name'  => $account_settings['display_name'],
 ]);
 

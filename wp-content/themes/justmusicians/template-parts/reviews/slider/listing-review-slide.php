@@ -15,7 +15,17 @@
 
         <!-- Author -->
         <figcaption class="mt-10 flex items-center gap-x-6">
+
+            <?php if (get_current_user_id() == $args['author_id']): ?>
+            <a href="<?php echo site_url('/account'); ?>">
+            <?php endif; ?>
+
             <img src="<?php echo $args['author_image_url']; ?>" alt="" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full" />
+
+            <?php if (get_current_user_id() == $args['author_id']): ?>
+            </a>
+            <?php endif; ?>
+
             <div class="text-16 sm:text-18 leading-6">
                 <div class="font-semibold text-grey"><?php echo $args['author_name']; ?></div>
                 <div class="mt-0.5 text-grey"><?php echo implode(' at ', array_filter([$args['author_position'], $args['author_organization']])); ?></div>

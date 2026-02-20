@@ -5,7 +5,17 @@
 
         <!-- Author -->
         <figcaption class="flex gap-x-6">
+
+            <?php if (get_current_user_id() == $args['author_id']): ?>
+            <a href="<?php echo site_url('/account'); ?>">
+            <?php endif; ?>
+
             <img src="<?php echo $args['author_image_url']; ?>" alt="" class="w-12 h-12 rounded-full" />
+
+            <?php if (get_current_user_id() == $args['author_id']): ?>
+            </a>
+            <?php endif; ?>
+
             <div class="text-16 flex flex-col gap-1 justify-center items-left">
                 <div class="font-semibold text-grey"><?php echo $args['author_name']; ?></div>
                 <div class="text-grey"><?php echo implode(' at ', array_filter([$args['author_position'], $args['author_organization']])); ?></div>

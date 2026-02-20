@@ -8,7 +8,7 @@
 
         <!-- Reviews -->
         <?php echo get_template_part('template-parts/buyers/parts/reviews', '', [
-            'user_id'      => $args['user_id'],
+            'buyer_id'      => $args['buyer_id'],
             'display_name' => $args['display_name'],
         ]); ?>
 
