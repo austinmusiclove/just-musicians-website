@@ -38,6 +38,7 @@ Compensation Reporting
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
+    **Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
@@ -129,6 +130,17 @@ Testing
         set up users that allow tests to reach different screen states for testing without having to create a user every time
         maturity test by following a random path on the tree
 UX
+    *Location filtering
+        search filters
+            top search bar location filter
+            support radius
+            support scaling top x genre in x city seo pages
+        listing form
+            auto fill city and state based on zip
+            auto fill state based on city
+            active search cities in listing form
+        allow for advanced listings to be based in multiple locations
+        get inquiry suggestions with location filtering
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
     corrected new logos
@@ -137,7 +149,6 @@ UX
     Filters
         add length of set
         add something about providing sound equipment
-        add location in main filter and inquiry suggestions
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     bug: sometimes active search options don't come up
     better confirm delete listing dialog

@@ -10,7 +10,6 @@ $user_inquiries = get_user_meta($user_id, 'inquiries', true);
 if (!is_array($user_inquiries)) { $user_inquiries = []; }
 $user_inquiries = array_map('strval', $user_inquiries);
 
-error_log(print_r($user_inquiries, true));
 if (!empty($_GET['iid'])) {
     $inquiry_id = $_GET['iid'];
     $inquiry_data = get_user_inquiry(['post_id' => $inquiry_id]);
