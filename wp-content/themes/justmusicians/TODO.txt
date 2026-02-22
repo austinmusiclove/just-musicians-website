@@ -8,6 +8,7 @@ Reviews
     Emails
         add regular email to invite artists to write earnings contributions
         add regular email to invite artists to solicit reviews from bookers
+    *make venue reviews invite only for performers, no public write button
 Venue Browsing Page
     add venues listings next to map
     Sort venues by musician compensation metrics
@@ -38,6 +39,7 @@ Compensation Reporting
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
+    ***Send inquiries button in standard listing is at the top on safari when logged out because the favorites button is missing
     **Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
     allow inquiry when not logged in

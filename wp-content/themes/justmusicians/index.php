@@ -76,7 +76,7 @@ get_header();
                 }
         ?>
                  <div class="col <?php echo $border; ?>">
-                    <div class="text-16 font-bold mb-3">Nov 11, 2024</div>
+                    <div class="text-16 font-bold mb-3"><?php the_date(); ?></div>
                     <h3 class="font-bold text-25 mb-6">
                         <a href="<?php echo esc_url(get_the_permalink()); ?>">
                             <?php echo esc_html(get_the_title()); ?>
