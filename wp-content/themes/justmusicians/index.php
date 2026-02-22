@@ -37,7 +37,7 @@ get_header();
         </div>
     </div>
     <div class="sm:col-span-4 flex flex-col gap-y-6 justify-center">
-        <div class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block w-fit font-bold"><?php the_date(); ?></div>
+        <div class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block w-fit font-bold"><?php echo get_the_date(); ?></div>
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
         <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold"><?php the_author(); ?></div>
         <a class="font-bold text-36 font-sans text-yellow inline-block hover:text-black" href="<?php the_permalink(); ?>">Read &rarr;</a>
@@ -76,7 +76,7 @@ get_header();
                 }
         ?>
                  <div class="col <?php echo $border; ?>">
-                    <div class="text-16 font-bold mb-3"><?php the_date(); ?></div>
+                    <div class="text-16 font-bold mb-3"><?php echo get_the_date(); ?></div>
                     <h3 class="font-bold text-25 mb-6">
                         <a href="<?php echo esc_url(get_the_permalink()); ?>">
                             <?php echo esc_html(get_the_title()); ?>
