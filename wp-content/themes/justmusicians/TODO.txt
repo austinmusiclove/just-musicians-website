@@ -39,7 +39,6 @@ Compensation Reporting
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
-    ***Send inquiries button in standard listing is at the top on safari when logged out because the favorites button is missing
     **Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
     allow inquiry when not logged in
@@ -167,6 +166,7 @@ Devon
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
+    if user is logged out because session times out, make sure that operations that require auth don't work between the session expiring and refreshing
 Performance
     prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
     first page of results without second trip to server
@@ -174,7 +174,6 @@ Performance
     dedicated server
     image sprites
 Bugs
-    ***Big W's Brass Band in convo title is failing to display apostrophe correctly
     when listing cover image loads slowly on search results standard listing, it shows youtube video with play button
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
     fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)

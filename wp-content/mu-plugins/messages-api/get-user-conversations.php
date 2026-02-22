@@ -26,8 +26,8 @@ function formatConversation($conversation) {
     if (empty($conversation->participants)) { return null; } // Don't show conversations that don't have any other participants anymore; could happen if others leave convo or listings are deleted
     return [
         'conversation_id'           => $conversation->conversation_id,
-        'title'                     => htmlspecialchars_decode(implode(', ', $conversation->participants)),
-        'latest_message_content'    => htmlspecialchars_decode($conversation->content),
+        'title'                     => html_entity_decode(implode(', ', $conversation->participants)),
+        'latest_message_content'    => html_entity_decode($conversation->content),
         'latest_message_created_at' => $conversation->created_at,
         'latest_message_sender_id'  => $conversation->sender_id,
         'latest_message_id'         => $conversation->message_id,
