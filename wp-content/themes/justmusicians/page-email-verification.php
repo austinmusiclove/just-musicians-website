@@ -29,9 +29,9 @@ get_header();
                 $update_success = update_user_meta($account_user[0]->ID, "email_verified", true);
                 if ($update_success == true) {
                     echo "Your email has been verified. You may now close this browser tab.";
-                } else {
-                    echo "Error updating account record. Please contact the admin for assistance on your subscription at john@hiremoremusicians.com";
-                }
+                } else { ?>
+                    <p class="text-18">Error updating account record. Please <a class="underline cursor-pointer" href="<?php echo site_url('/contact'); ?>">contact the website admin</a> for assistance.</p>
+                <?php }
             } else {
                 echo "Invalid verification URL";
             }

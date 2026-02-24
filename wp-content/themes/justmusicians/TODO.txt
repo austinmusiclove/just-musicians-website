@@ -1,5 +1,11 @@
+Users
+    ***add first and last name to signup form with autofill so that users start with a display name
+    **when a user uploads a cover image for a listing, update their profile photo if they don't have one
+    **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
-    *review schema if there is one for seo purposes
+    ***add title to review
+    ***add review schema if there is one for seo purposes
+    ***Don't display name if we don't have one
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
@@ -86,7 +92,6 @@ Listing form
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
-    active search for cities
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
     **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
@@ -151,7 +156,6 @@ UX
         add length of set
         add something about providing sound equipment
     Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
-    bug: sometimes active search options don't come up
     better confirm delete listing dialog
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
     sortable listings in single-collection.php
@@ -174,6 +178,7 @@ Performance
     dedicated server
     image sprites
 Bugs
+    ***bug: sometimes active search options don't come up
     when listing cover image loads slowly on search results standard listing, it shows youtube video with play button
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
     fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)

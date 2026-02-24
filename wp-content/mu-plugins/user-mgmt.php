@@ -42,7 +42,7 @@ function activate_account($account_identifier) {
     if ($update_success == true) {
         return "Your email has been verified. You may now close this browser tab.";
     } else {
-        return "Error updating account record. Please contact the admin for assistance on your subscription at john@hiremoremusicians.com";
+        return "Error updating account record. Please contact the website admin for assistance";
     }
 }
 
