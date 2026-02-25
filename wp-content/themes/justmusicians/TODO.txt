@@ -161,9 +161,9 @@ UX
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
 Devon
+    404 page
     venue page especially stats
     venues search
-    404 page
     request quote pop up
     indicator on infinite scroll and listing form (i like mine but could be something on brand)
     podcast - get violotor-blog svg
