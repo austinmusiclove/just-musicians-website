@@ -210,6 +210,7 @@ function register_post_types() {
 
     // Glossary
     register_post_type('glossary', array(
+		'has_archive' => true,
         'public' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt'),
