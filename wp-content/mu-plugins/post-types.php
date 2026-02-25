@@ -213,7 +213,7 @@ function register_post_types() {
         'rewrite' => array('slug' => 'glossaries'),
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'content'),
+        'supports' => array('title', 'editor', 'excerpt'),
         'labels' => array(
           'name' => 'Glossary',
           'add_new_item' => 'Add New Glossary',
@@ -229,7 +229,7 @@ function register_post_types() {
         'rewrite' => array('slug' => 'glossary-terms'),
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'content'),
+        'supports' => array('title', 'editor', 'excerpt'),
         'labels' => array(
           'name' => 'Glossary Term',
           'add_new_item' => 'Add New Glossary Term',
