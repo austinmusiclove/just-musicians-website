@@ -35,25 +35,27 @@ $alphabet = range('A', 'Z');
 
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden pb-6 md:pb-14">
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10">
-        <div class="sm:col-span-7 pr-8 sm:pr-0">
+        <div class="sm:col-span-7 pr-8 sm:pr-0 flex flex-col gap-8">
 
-            <h1 class="font-bold text-32 md:text-40 mb-6"><?php the_title(); ?></h1>
+            <h1 class="font-bold text-40 sm:text-57"><?php the_title(); ?></h1>
 
             <?php if (has_excerpt()) : ?>
-                <p class="text-lg text-gray-700"><?php the_excerpt(); ?></p>
+                <p class="text-22"><?php echo get_the_excerpt(); ?></p>
             <?php endif; ?>
 
             <!-- A-Z Filter -->
-            <div class="flex flex-wrap gap-2 mb-8">
+            <div class="flex flex-wrap gap-2">
                 <?php foreach ($alphabet as $letter) : ?>
                     <?php if (isset($terms_by_letter[$letter])) : ?>
-                        <a href="#letter-<?php echo $letter; ?>" class="w-8 h-8 flex items-center justify-center rounded text-sm hover:underline">
+                        <a href="#letter-<?php echo $letter; ?>" class="flex items-center justify-center rounded text-sm hover:underline">
                             <?php echo $letter; ?>
                         </a>
+                        <?php if ($letter != "Z") : ?><span class="text-grey">|</span><? endif; ?>
                     <?php else : ?>
-                        <span class="w-8 h-8 flex items-center justify-center rounded text-grey text-sm">
+                        <span class="flex items-center justify-center rounded text-grey text-sm">
                             <?php echo $letter; ?>
                         </span>
+                            <?php if ($letter != "Z") : ?><span class="text-grey">|</span><? endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
@@ -68,15 +70,15 @@ $alphabet = range('A', 'Z');
         <!-- All Terms by Letter -->
         <?php foreach ($terms_by_letter as $letter => $letter_terms) : ?>
             <div id="letter-<?php echo $letter; ?>" class="mb-8">
-                <h2 class="font-bold text-2xl mb-4 border-b border-grey pb-2"><?php echo $letter; ?></h2>
+                <h2 class="font-bold text-32 mb-4 border-b border-grey pb-2"><?php echo $letter; ?></h2>
                 <ul class="space-y-3">
                     <?php foreach ($letter_terms as $term) : ?>
                         <li>
-                            <a href="<?php echo add_query_arg('from_glossary', $glossary_id, get_permalink($term['id'])); ?>" class="block hover:bg-gray-50 p-2 rounded">
-                                <h3 class="font-bold text-lg"><?php echo $term['title']; ?></h3>
-                                <?php if ($term['definition']) : ?>
-                                    <p class="text-gray-600 text-sm mt-1"><?php echo wp_trim_words($term['definition'], 30); ?></p>
-                                <?php endif; ?>
+                            <a href="<?php echo add_query_arg('from_glossary', $glossary_id, get_permalink($term['id'])); ?>" class="block rounded">
+                                <h3 class="text-18 hover:underline"><?php echo $term['title']; ?></h3>
+                                <!-- <?php //if ($term['definition']) : ?>
+                                    <p class="text-grey text-sm mt-1"><?php //echo wp_trim_words($term['definition'], 30); ?></p>
+                                <?php //endif; ?> -->
                             </a>
                         </li>
                     <?php endforeach; ?>
