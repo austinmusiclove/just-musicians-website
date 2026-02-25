@@ -45,17 +45,17 @@ $alphabet = range('A', 'Z');
 
             <!-- A-Z Filter -->
             <div class="flex flex-wrap gap-2">
-                <?php foreach ($alphabet as $letter) : ?>
+                <?php foreach ($alphabet as $index => $letter) : ?>
                     <?php if (isset($terms_by_letter[$letter])) : ?>
                         <a href="#letter-<?php echo $letter; ?>" class="flex items-center justify-center rounded text-sm hover:underline">
                             <?php echo $letter; ?>
                         </a>
-                        <?php if ($letter != "Z") : ?><span class="text-grey">|</span><?php endif; ?>
+                        <?php if ($index < count($alphabet) - 1) : ?><span class="text-grey">|</span><?php endif; ?>
                     <?php else : ?>
                         <span class="flex items-center justify-center rounded text-grey text-sm">
                             <?php echo $letter; ?>
                         </span>
-                            <?php if ($letter != "Z") : ?><span class="text-grey">|</span><?php endif; ?>
+                            <?php if ($index < count($alphabet) - 1) : ?><span class="text-grey">|</span><?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
