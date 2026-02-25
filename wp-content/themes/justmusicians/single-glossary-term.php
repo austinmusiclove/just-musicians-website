@@ -12,6 +12,8 @@ $from_glossary_id = isset($_GET['from_glossary']) ? intval($_GET['from_glossary'
 $from_glossary    = $from_glossary_id ? get_post($from_glossary_id) : null;
 
 $related_terms = get_field('related_terms') ?: [];
+$definition = get_field('definition');
+$example = get_field('example');
 
 ?>
 
@@ -36,10 +38,10 @@ $related_terms = get_field('related_terms') ?: [];
                 <span class="font-bold"><?php the_title(); ?></span>
             </div>
 
-            <h1 class="font-bold text-32 md:text-40 mb-6"><?php the_title(); ?></h1>
-            <div class="flex items-center gap-4 font-bold mb-8">
-                <span class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block"><?php echo get_the_modified_date(); ?></span>
-                <!--<span class="text-20 uppercase text-brown-dark-1 opacity-50"><?php //echo the_author_meta('display_name', get_post_field('post_author')); ?></span>-->
+            <div class="flex flex-col gap-8 mb-8">
+                <h1 class="font-bold text-40 sm:text-57 mb-6"><?php the_title(); ?></h1>
+                <?php if ($definition) : ?><span class="text-16 article-body"><?php echo $definition; ?></span><? endif; ?>
+                <?php if ($example)    : ?><span class="text-16 article-body"><?php echo $example;    ?></span><? endif; ?>
             </div>
         </div>
     </div>
