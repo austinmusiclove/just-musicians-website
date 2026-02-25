@@ -210,7 +210,6 @@ function register_post_types() {
 
     // Glossary
     register_post_type('glossary', array(
-        'rewrite' => array('slug' => 'glossaries'),
         'public' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt'),
@@ -226,7 +225,6 @@ function register_post_types() {
 
     // Glossary Term
     register_post_type('glossary_term', array(
-        'rewrite' => array('slug' => 'glossary-terms'),
         'public' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt'),
