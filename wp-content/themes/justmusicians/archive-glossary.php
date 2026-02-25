@@ -34,9 +34,9 @@ $glossaries = new WP_Query(array(
                     <li>
                         <a href="<?php the_permalink(); ?>" class="block py-2 hover:underline rounded transition">
                             <h2 class="text-22"><?php the_title(); ?></h2>
-                            <?php if (has_excerpt()) : ?>
-                                <p class="text-grey mt-2"><?php the_excerpt(); ?></p>
-                            <?php endif; ?>
+                            <?php //if (has_excerpt()) : ?>
+                                <!--<p class="text-grey mt-2"><?php //the_excerpt(); ?></p>-->
+                            <?php //endif; ?>
                         </a>
                     </li>
                 <?php endwhile; ?>
