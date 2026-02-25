@@ -40,8 +40,8 @@ $example = get_field('example');
 
             <div class="flex flex-col gap-8 mb-8">
                 <h1 class="font-bold text-40 sm:text-57 mb-6"><?php the_title(); ?></h1>
-                <?php if ($definition) : ?><span class="text-16 article-body"><?php echo $definition; ?></span><? endif; ?>
-                <?php if ($example)    : ?><span class="text-16 article-body"><?php echo $example;    ?></span><? endif; ?>
+                <?php if ($definition) : ?><span class="text-16 article-body"><?php echo $definition; ?></span><?php endif; ?>
+                <?php if ($example)    : ?><span class="text-16 article-body"><?php echo $example;    ?></span><?php endif; ?>
             </div>
         </div>
     </div>
