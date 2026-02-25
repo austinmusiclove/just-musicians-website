@@ -208,6 +208,38 @@ function register_post_types() {
         'menu_icon' => 'dashicons-microphone'
     ));
 
+    // Glossary
+    register_post_type('glossary', array(
+        'rewrite' => array('slug' => 'glossaries'),
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'content'),
+        'labels' => array(
+          'name' => 'Glossary',
+          'add_new_item' => 'Add New Glossary',
+          'edit_item' => 'Edit Glossary',
+          'all_items' => 'All Glossaries',
+          'singular_name' => 'Glossary'
+        ),
+        'menu_icon' => 'dashicons-book'
+    ));
+
+    // Glossary Term
+    register_post_type('glossary_term', array(
+        'rewrite' => array('slug' => 'glossary-terms'),
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'content'),
+        'labels' => array(
+          'name' => 'Glossary Term',
+          'add_new_item' => 'Add New Glossary Term',
+          'edit_item' => 'Edit Glossary Term',
+          'all_items' => 'All Glossary Terms',
+          'singular_name' => 'Glossary Term'
+        ),
+        'menu_icon' => 'dashicons-book-alt'
+    ));
+
     // Listing Invitation Code
     register_post_type('tmp_code', array(
         'public' => false,
