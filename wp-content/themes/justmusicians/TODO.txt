@@ -1,3 +1,22 @@
+Compensation Reporting
+    Prompt users to log in to use comp report form
+    Send email after comp report submission to show users where they can see data
+    Make sure authorship of reports is correct
+    Comp report data page
+        display data table
+        Only allow users who have authored reports
+        Prompt users with no access to comp report table to contribute to get access
+    *allow for using performance id in url
+        fill in and disable performance inputs
+        add performance id hidden field
+        clear performance id on submit
+        make show flier not required if peformance id exists
+    **allow add new venue
+    allow connecting listing instead of performer name
+    Auto verify event from compensation report with event database
+    Create a way for people to edit and see their comp report submissions
+Glossary
+    Support terms that start with a number in single-glossary.php
 Users
     ***add first and last name to signup form with autofill so that users start with a display name
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
@@ -32,16 +51,6 @@ Venue pages
     add amenities like bathrooms, dog friendly, food/drink, etc.
     add musician amenities like green room, sound engineer, backline
     switch out google map with styled map
-Compensation Reporting
-    *allow for using performance id in url
-        fill in and disable performance inputs
-        add performance id hidden field
-        clear performance id on submit
-        make show flier not required if peformance id exists
-    **allow add new venue
-    allow connecting listing instead of performer name
-    Auto verify event from compensation report with event database
-    Create a way for people to edit and see their comp report submissions
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
