@@ -1,4 +1,4 @@
-<div class="overflow-x-auto"
+<div class="py-8 pr-16 overflow-x-auto"
     x-data="{
         venues: <?php echo clean_arr_for_doublequotes($args['venues']); ?>,
         sortKey: 'total_reports',

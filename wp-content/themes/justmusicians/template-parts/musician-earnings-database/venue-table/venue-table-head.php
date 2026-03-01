@@ -5,32 +5,48 @@
             <span class="flex items-center gap-1">
                 Total Reports
                 <span class="flex flex-col gap-1">
-                    <span class="opacity-50" :class="{ 'opacity-100': sortKey === 'total_reports' && sortAsc, 'opacity-50': sortKey !== 'total_reports' || !sortAsc}">↑</span>
-                    <span class="-mt-1 opacity-50" :class="{ 'opacity-100': sortKey === 'total_reports' && !sortAsc, 'opacity-50': sortKey !== 'total_reports' || sortAsc}">↓</span>
+                    <span :class="{ 'opacity-100': sortKey === 'total_reports' && sortAsc, 'opacity-20': sortKey !== 'total_reports' || !sortAsc}">↑</span>
+                    <span :class="{ 'opacity-100': sortKey === 'total_reports' && !sortAsc, 'opacity-20': sortKey !== 'total_reports' || sortAsc}">↓</span>
                 </span>
             </span>
         </th>
         <th class="py-3 pr-4 font-bold cursor-pointer select-none" x-on:click="sortBy('median_earnings')">
             <span class="flex items-center gap-1">
-                Median Earnings
+                <span>
+                    Median Earnings
+                    <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Median of earnings per gig' ]); ?>
+                </span>
                 <span class="flex flex-col gap-1">
-                    <span class="opacity-50" :class="{ 'opacity-100': sortKey === 'median_earnings' && sortAsc, 'opacity-50': sortKey !== 'median_earnings' || !sortAsc}">↑</span>
-                    <span class="-mt-1 opacity-50" :class="{ 'opacity-100': sortKey === 'median_earnings' && !sortAsc, 'opacity-50': sortKey !== 'median_earnings' || sortAsc}">↓</span>
+                    <span :class="{ 'opacity-100': sortKey === 'median_earnings' && sortAsc, 'opacity-20': sortKey !== 'median_earnings' || !sortAsc}">↑</span>
+                    <span :class="{ 'opacity-100': sortKey === 'median_earnings' && !sortAsc, 'opacity-20': sortKey !== 'median_earnings' || sortAsc}">↓</span>
                 </span>
             </span>
         </th>
         <th class="py-3 pr-4 font-bold cursor-pointer select-none" x-on:click="sortBy('average_earnings')">
             <span class="flex items-center gap-1">
-                Average Earnings
+                <span>
+                    Average Earnings
+                    <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'The average amount earned per gig' ]); ?>
+                </span>
                 <span class="flex flex-col gap-1">
-                    <span class="opacity-50" :class="{ 'opacity-100': sortKey === 'average_earnings' && sortAsc, 'opacity-50': sortKey !== 'average_earnings' || !sortAsc}">↑</span>
-                    <span class="-mt-1 opacity-50" :class="{ 'opacity-100': sortKey === 'average_earnings' && !sortAsc, 'opacity-50': sortKey !== 'average_earnings' || sortAsc}">↓</span>
+                    <span :class="{ 'opacity-100': sortKey === 'average_earnings' && sortAsc, 'opacity-20': sortKey !== 'average_earnings' || !sortAsc}">↑</span>
+                    <span :class="{ 'opacity-100': sortKey === 'average_earnings' && !sortAsc, 'opacity-20': sortKey !== 'average_earnings' || sortAsc}">↓</span>
                 </span>
             </span>
         </th>
-        <th class="py-3 pr-4 font-bold">Avg Ensemble Size</th>
-        <th class="py-3 pr-4 font-bold">Avg Set Length (min)</th>
-        <th class="py-3 pr-4 font-bold">Payment Method</th>
-        <th class="py-3 font-bold">Payment Speed</th>
+        <th class="py-3 pr-4 font-bold">Average Ensemble Size</th>
+        <th class="py-3 pr-4 font-bold">Average Set Length (minutes)</th>
+        <th class="py-3 pr-4 font-bold">
+            <span>
+                Payment Method
+                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported payment method' ]); ?>
+            </span>
+        </th>
+        <th class="py-3 font-bold">
+            <span>
+                Payment Speed
+                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported payment speed' ]); ?>
+            </span>
+        </th>
     </tr>
 </thead>

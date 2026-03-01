@@ -2,7 +2,6 @@ Deploy
     Create Musician Earnings Database page
 Compensation Reporting
     Comp report data page
-        allow sort for earnings fields and total reports
         add tooltips for headings
         Only allow users who have authored reports
         Prompt users with no access to comp report table to contribute to get access
