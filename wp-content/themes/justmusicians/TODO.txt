@@ -1,7 +1,6 @@
 Deploy
     Create Musician Earnings Database page
 Compensation Reporting
-    **Only show comp report data on venues page if there are at least 3 comp reports for that venue; else show link to contribute
     **Make sure authorship of reports is correct
     *allow for using performance id in url
         fill in and disable performance inputs

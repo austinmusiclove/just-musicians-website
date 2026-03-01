@@ -1,4 +1,4 @@
-<?php if (get_field('_comp_report_count') > 0) { ?>
+<?php if (get_field('_comp_report_count') >= 3) { ?>
 
 <div class="flex flex-col gap-4">
 
@@ -60,4 +60,6 @@
     </div>
 </div>
 
+<?php } else { ?>
+    <?php echo get_template_part('template-parts/venues/parts/no-musician-pay-info', '', []); ?>
 <?php } ?>
