@@ -347,6 +347,7 @@ require get_template_directory() . '/lib/inc/blocks.php';
 require get_template_directory() . '/lib/inc/shortcodes.php';
 require get_template_directory() . '/lib/inc/comments.php';
 require get_template_directory() . '/lib/inc/helper.php';
+require get_template_directory() . '/lib/inc/author-filter.php';
 require get_template_directory() . '/html-api/html-api-rewrite-rules.php';
 require get_template_directory() . '/html-api/html-api-routes.php';
 require get_template_directory() . '/template-routes/template-rewrite-rules.php';

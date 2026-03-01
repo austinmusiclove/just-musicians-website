@@ -1,7 +1,6 @@
 Deploy
     Create Musician Earnings Database page
 Compensation Reporting
-    **Make sure authorship of reports is correct
     *allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
