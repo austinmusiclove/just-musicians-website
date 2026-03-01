@@ -18,9 +18,11 @@ if ($current_user_id) {
     <div class="container flex flex-col gap-16 grid grid-cols-1 sm:grid-cols-7">
         <h1 class="font-bold text-32 md:text-36 lg:text-40 sm:col-span-5"><?php the_title(); ?></h1>
         <p class="text-18 sm:col-span-5">The Musician Earnings Database is a community project where musicians anonymously share how much they are earning from live music gigs. In return, contributors benefit from seeing data about how much venues are paying musicians.</p>
-        <a class="text-18 sm:col-span-5" href="<?php echo site_url('/compensation-report-form'); ?>">
-            <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">Contribute</button>
-        </a>
+        <span class="sm:col-span-5">
+            <a href="<?php echo site_url('/compensation-report-form'); ?>">
+                <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">Contribute</button>
+            </a>
+        </span>
     </div>
 </header>
 

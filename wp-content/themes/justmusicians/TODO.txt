@@ -1,10 +1,6 @@
 Deploy
     Create Musician Earnings Database page
 Compensation Reporting
-    Comp report data page
-        add tooltips for headings
-        Only allow users who have authored reports
-        Prompt users with no access to comp report table to contribute to get access
     Make sure authorship of reports is correct
     Send email after comp report submission to show users where they can see data
     Only show comp report data on venues page if there are at least 3 comp reports for that venue; else show link to contribute
