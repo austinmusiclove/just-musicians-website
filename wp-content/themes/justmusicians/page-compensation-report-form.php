@@ -8,7 +8,7 @@ get_header();
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden pb-6 md:pb-14">
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10"> <!--Look here -->
         <div class="sm:col-span-7 pr-8 sm:pr-0">
-            <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to our Live Musician Earnings Database</h1>
+            <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to the Live Musician Earnings Database</h1>
             <p class="text-18">
                 This is a community project to track how much music venues pay musicians.
                 <br><br>

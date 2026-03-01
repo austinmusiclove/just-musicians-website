@@ -15,6 +15,8 @@ require_once 'compensation-reports-api/parse-args.php';
 require_once 'compensation-reports-api/validate-args.php';
 require_once 'compensation-reports-api/create-compensation-report.php';
 require_once 'compensation-reports-api/sync-to-google-sheets.php';
+require_once 'compensation-reports-api/get-user-comp-reports.php';
+require_once 'compensation-reports-api/get-comp-report-data-by-venue.php';
 
 // Rest APIs
 add_action('rest_api_init', function () {

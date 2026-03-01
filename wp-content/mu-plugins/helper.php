@@ -273,3 +273,24 @@ function sort_and_fill(array $values, array $defaults): array {
 function get_address_string($street_address, $address_locality, $address_region, $postal_code) {
     return $street_address . ', ' . $address_locality . ', ' . $address_region . ' ' . $postal_code;
 }
+
+function calculate_median($arr) {
+    if (empty($arr)) return 0;
+    sort($arr);
+    $count = count($arr);
+    $middle = floor($count / 2);
+    return $count % 2 ? $arr[$middle] : ($arr[$middle - 1] + $arr[$middle]) / 2;
+}
+
+function calculate_average($arr) {
+    if (empty($arr)) return 0;
+    return round(array_sum($arr) / count($arr), 2);
+}
+
+function get_mode($arr) {
+    if (empty($arr)) return '-';
+    $counts = array_count_values($arr);
+    arsort($counts);
+    return key($counts);
+}
+
