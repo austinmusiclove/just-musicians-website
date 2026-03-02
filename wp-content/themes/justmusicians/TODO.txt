@@ -1,5 +1,3 @@
-Deploy
-    Create Musician Earnings Database page
 Compensation Reporting
     *allow for using performance id in url
         fill in and disable performance inputs
