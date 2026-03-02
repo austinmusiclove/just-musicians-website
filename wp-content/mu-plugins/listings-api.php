@@ -46,6 +46,13 @@ add_action('rest_api_init', function () {
         'callback' => 'delete_listing_request_handler',
         'permission_callback' => 'check_delete_listing_auth',
     ]);
+    register_rest_route( 'v1', '/listing-owners/(?P<listing_id>\d+)', [
+        'methods' => 'GET',
+        'callback' => 'get_listing_owners_request_handler',
+        'permission_callback' => function() {
+            return current_user_can('administrator');
+        },
+    ]);
 });
 
 function get_listings_request_handler($request) {
@@ -79,4 +86,9 @@ function post_listing_request_handler($request) {
 
 function delete_listing_request_handler($request) {
     return _delete_listing(['post_id' => $request['post_id']]);
+}
+
+function get_listing_owners_request_handler($request) {
+    $listing_id = $request['listing_id'];
+    return get_listing_owners($listing_id);
 }
