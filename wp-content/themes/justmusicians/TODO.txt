@@ -1,4 +1,5 @@
 Compensation Reporting
+    **Make sure pending comp reports don't get you access
     **Ask to submit written public review after submission
     **Change email to say your report is under review and you'll get another email once it is verified and you have access
     *allow for using performance id in url
