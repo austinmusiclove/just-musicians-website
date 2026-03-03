@@ -1,4 +1,4 @@
-<div data-search-state="desktop-2" class="absolute top-full left-0 w-full px-4 py-4 bg-white flex flex-col shadow-md rounded-sm">
+<div class="absolute top-full left-0 w-full px-4 py-4 bg-white flex flex-col shadow-md rounded-sm">
 
     <!-- Categories -->
     <?php foreach(array_map('stripslashes', (array) $args['categories']) as $term) { ?>

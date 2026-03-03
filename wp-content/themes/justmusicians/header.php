@@ -141,14 +141,14 @@
         <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-6 lg:gap-12 justify-between">
 
           <div class="border bg-white text-14 pr-1 rounded-sm border-black/20 grow w-full flex items-stretch">
-            <div data-search="desktop" class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
+            <div class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
-                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false; $dispatch('updatesearchoptions');"
+                x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false;"
                 x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
                 hx-get="<?php echo site_url('/wp-html/v1/search-options'); ?>"
-                hx-trigger="input changed delay:300ms, updatesearchoptions"
+                hx-trigger="input changed delay:300ms"
                 hx-target="#active-search-results-desktop"
               />
               <div id="active-search-results-desktop" x-show="getShowDefaultSearchOptionsDesktop()" x-cloak>

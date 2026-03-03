@@ -180,7 +180,6 @@ Performance
     dedicated server
     image sprites
 Bugs
-    ***bug: sometimes active search options don't come up
     when listing cover image loads slowly on search results standard listing, it shows youtube video with play button
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
     fails to get messages when window left open for long time (i think; noticing it fails to get messages sometimes; refresh fixes it)

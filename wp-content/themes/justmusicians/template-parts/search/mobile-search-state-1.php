@@ -1,4 +1,4 @@
-<div data-search-state="mobile-1" class="w-full flex flex-col gap-8">
+<div class="w-full flex flex-col gap-8">
 
     <div>
         <div class="font-bold mb-4 opacity-60">Suggestions</div>

@@ -3,7 +3,7 @@
     <!-- Sort -->
     <div class="flex items-center gap-2 ">
         <?php echo get_template_part('template-parts/global/tooltip', '', [
-            'tooltip' => 'Learn more about the default Hire More Musicians search algorithm <a class="text-yellow underline" target="_blank" href="' . site_url('/search-algorithm') . '">here</a>.'
+            'tooltip' => 'Learn more about the default HireMusicians.com search algorithm <a class="text-yellow underline" target="_blank" href="' . site_url('/search-algorithm') . '">here</a>.'
         ]); ?>
         <div class="flex items-center gap-1.5 group relative">
             Sort:

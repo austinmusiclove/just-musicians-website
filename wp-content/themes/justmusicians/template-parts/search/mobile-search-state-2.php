@@ -1,4 +1,4 @@
-<div data-search-state="mobile-2" class="w-full flex flex-col gap-8">
+<div class="w-full flex flex-col gap-8">
 
     <div>
         <!-- Categories -->
