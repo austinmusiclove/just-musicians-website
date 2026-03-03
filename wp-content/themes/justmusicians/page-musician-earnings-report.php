@@ -10,10 +10,10 @@ get_header();
         <div class="sm:col-span-7 pr-8 sm:pr-0">
             <h1 class="font-bold text-32 md:text-40 mb-6">Contribute to the Live Musician Earnings Database</h1>
             <p class="text-18">
-                This is a community project to track how much music venues pay musicians.
+                This is a community project to track how much musicians earn at music venues.
                 <br><br>
                 All entries are completely anonymous. We will never share names, show dates, or other personal details. That information is only used to make sure the entry is real.
-                Each entry helps us publish useful facts about how you can expect to be paid by music venues as a musician.
+                Each entry helps us publish useful facts about how you can expect to be paid as a live musician.
             </p>
         </div>
     </div>
@@ -38,19 +38,19 @@ get_header();
     >
 
         <!-- Venue -->
-        <?php echo get_template_part('template-parts/compensation-report-form/venue-input', '', []); ?>
+        <?php echo get_template_part('template-parts/musician-earnings/form/venue-input', '', []); ?>
 
         <!-- Earnings Input Group -->
-        <?php echo get_template_part('template-parts/compensation-report-form/earnings-inputs', '', []); ?>
+        <?php echo get_template_part('template-parts/musician-earnings/form/earnings-inputs', '', []); ?>
 
         <!-- Performance Input Group -->
-        <?php echo get_template_part('template-parts/compensation-report-form/performance-inputs', '', []); ?>
+        <?php echo get_template_part('template-parts/musician-earnings/form/performance-inputs', '', []); ?>
 
         <!-- Review Input -->
-        <?php //echo get_template_part('template-parts/compensation-report-form/review-input', '', []); ?>
+        <?php //echo get_template_part('template-parts/musician-earnings/form/review-input', '', []); ?>
 
         <!-- Submit button -->
-        <?php echo get_template_part('template-parts/compensation-report-form/submit-button', '', []); ?>
+        <?php echo get_template_part('template-parts/musician-earnings/form/submit-button', '', []); ?>
 
         <div id="result"></div>
 

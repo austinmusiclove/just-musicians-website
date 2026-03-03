@@ -29,7 +29,7 @@ if ($current_user_id) {
 <div class="container gap-24 py-8 min-h-[500px]">
     <div class="col article-body mb-8 lg:mb-0">
         <?php if (!$has_comp_report) :
-            echo get_template_part('template-parts/musician-earnings-database/access-denied', '', []);
+            echo get_template_part('template-parts/musician-earnings/database/access-denied', '', []);
         else :
 
             $comp_reports_by_venue = get_comp_report_data_by_venue();
@@ -41,7 +41,7 @@ if ($current_user_id) {
             <?php if (empty($comp_reports_by_venue)) : ?>
                 <p class="text-18">No earnings data available yet. Be the first to contribute!</p>
             <?php else : ?>
-                <?php echo get_template_part('template-parts/musician-earnings-database/venue-table/venue-table', '', [ 'venues' => $comp_reports_by_venue ] ); ?>
+                <?php echo get_template_part('template-parts/musician-earnings/database/venue-table/venue-table', '', [ 'venues' => $comp_reports_by_venue ] ); ?>
             <?php endif; ?>
 
         <?php endif; ?>

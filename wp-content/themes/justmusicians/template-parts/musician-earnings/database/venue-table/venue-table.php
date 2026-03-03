@@ -24,7 +24,7 @@
     <table class="w-full border-collapse text-left">
 
         <!-- Table head -->
-        <?php echo get_template_part('template-parts/musician-earnings-database/venue-table/venue-table-head', '', []); ?>
+        <?php echo get_template_part('template-parts/musician-earnings/database/venue-table/venue-table-head', '', []); ?>
 
         <!-- Table body -->
         <tbody>
