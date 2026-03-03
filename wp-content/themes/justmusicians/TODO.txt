@@ -1,5 +1,4 @@
 Users
-    ***add first and last name to signup form with autofill so that users start with a display name
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
