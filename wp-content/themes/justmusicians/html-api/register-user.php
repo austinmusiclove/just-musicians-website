@@ -7,6 +7,8 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
     $user_login = isset($_POST["r_user_email"]) ? $_POST['r_user_email'] : '';
     $user_email = isset($_POST["r_user_email"]) ? $_POST['r_user_email'] : '';
     $user_pass  = isset($_POST["r_user_pass"])  ? $_POST['r_user_pass']  : '';
+    $first_name = isset($_POST["r_user_first_name"]) ? $_POST['r_user_first_name'] : '';
+    $last_name  = isset($_POST["r_user_last_name"])  ? $_POST['r_user_last_name']  : '';
     $remember   = isset($_POST['rememberme'])   ? $_POST['rememberme']   : false;
     $artist_invitation_code  = isset($_POST['aic']) ? $_POST["aic"] : false;
     $listing_invitation_code = isset($_POST['lic']) ? $_POST["lic"] : false;
@@ -22,6 +24,12 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
     if($user_login == '') {
         // empty username
         array_push($errors, 'Please enter a username');
+    }
+    if($first_name == '') {
+        array_push($errors, 'Please enter your first name');
+    }
+    if($last_name == '') {
+        array_push($errors, 'Please enter your last name');
     }
     if(!is_email($user_email)) {
         //invalid email
@@ -65,6 +73,8 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
                 'user_login' => $user_login,
                 'user_pass' => $user_pass,
                 'user_email' => $user_email,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
                 'user_registered' => date('Y-m-d H:i:s'),
                 'role' => 'subscriber',
                 'meta_input' => array('email_verified' => false, 'account_identifier' => $account_identifier)

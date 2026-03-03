@@ -6,7 +6,7 @@
         <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
             x-on:click="showLoginModal = false; signupModalMessage = 'Sign up for an account'; loginModalMessage = 'Sign in to your account';" />
 
-        <div class="slide w-[32rem] grow">
+        <div class="slide w-[32rem] overflow-y-auto max-h-[90vh]">
 
             <div  class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
 

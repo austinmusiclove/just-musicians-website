@@ -8,7 +8,7 @@
     <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
         x-on:click="showSignupModal = false; signupModalMessage = 'Sign up for an account'; loginModalMessage = 'Sign in to your account';" />
 
-    <div class="slide w-[32rem] grow">
+    <div class="slide w-[32rem] overflow-y-auto max-h-[90vh]">
 
 
         <div class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
@@ -21,6 +21,20 @@
                     <form class="space-y-2" action="" method="POST"
                         hx-post="<?php echo site_url('/wp-html/v1/register-user'); ?>"
                         hx-target="#sign-up-result">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium leading-6">First Name</label>
+                                <div class="mt-2">
+                                    <input id="first_name" name="r_user_first_name" type="text" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium leading-6">Last Name</label>
+                                <div class="mt-2">
+                                    <input id="last_name" name="r_user_last_name" type="text" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6">Email Address</label>
                             <div class="mt-2">
