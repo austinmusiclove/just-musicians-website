@@ -9,7 +9,7 @@
                 </p>
                 <p class="mb-4">
                     If you are a live musician who has played at this venue, consider contributing to our
-                    <a href="/compensation-report-form/" class="text-yellow underline">Live Musician Earnings Database</a>.
+                    <a href="/musician-earnings-report/" class="text-yellow underline">Live Musician Earnings Database</a>.
                     Contributions are completely anonymous. We will never share your name, performance dates, or any other identifiable details.
                 </p>
                 <p>

@@ -1,21 +1,10 @@
 Compensation Reporting
-    **Change email to say your report is under review and you'll get another email once it is verified and you have access
-    **Make sure pending comp reports don't get you access
-        switch to user
-        check user does not have access
-        create comp report (should be pending)
-        make sure still no access
-        check email
-        publish comp report
-        check email
-        check access granted
-    **Ask to submit written public review after submission
-    *allow for using performance id in url
+    **allow add new venue
+    allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
         clear performance id on submit
         make show flier not required if peformance id exists
-    **allow add new venue
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
@@ -27,6 +16,7 @@ Reviews
     ***add title to review
     ***add review schema if there is one for seo purposes
     ***Don't display name if we don't have one
+    ***Lock venue review so they can only be done by invite or if you were a contributor for that venue
     *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system

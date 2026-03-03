@@ -19,7 +19,7 @@ if ($current_user_id) {
         <h1 class="font-bold text-32 md:text-36 lg:text-40 sm:col-span-5"><?php the_title(); ?></h1>
         <p class="text-18 sm:col-span-5">The Musician Earnings Database is a community project where musicians anonymously share how much they are earning from live music gigs. In return, contributors benefit from seeing data about how much venues are paying musicians.</p>
         <span class="sm:col-span-5">
-            <a href="<?php echo site_url('/compensation-report-form'); ?>">
+            <a href="<?php echo site_url('/musician-earnings-report'); ?>">
                 <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">Contribute</button>
             </a>
         </span>

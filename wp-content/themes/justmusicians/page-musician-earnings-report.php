@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for the compensation report form
+ * The template for the musician earnings report form
  */
 get_header();
 ?>

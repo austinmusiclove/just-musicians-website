@@ -12,7 +12,7 @@
             A contribution is an anonymous report of how much you earned from a live music gig.
         </p>
 
-        <a href="<?php echo site_url('/compensation-report-form'); ?>">
+        <a href="<?php echo site_url('/musician-earnings-report'); ?>">
             <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3">
                 Contribute Earnings Data
             </button>

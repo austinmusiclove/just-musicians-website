@@ -305,8 +305,8 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
-    // Compensation Report Form page
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/compensation-report-form/')) {
+    // Musician Earnings Report Form page
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/musician-earnings-report/')) {
         // Input component scripts
         wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, true);
 
