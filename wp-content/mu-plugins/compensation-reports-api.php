@@ -18,8 +18,17 @@ require_once 'compensation-reports-api/sync-to-google-sheets.php';
 require_once 'compensation-reports-api/get-user-comp-reports.php';
 require_once 'compensation-reports-api/get-comp-report-data-by-venue.php';
 require_once 'compensation-reports-api/notify-on-publish.php';
+require_once 'compensation-reports-api/get-contributor-emails.php';
 
 // Rest APIs
+add_action('rest_api_init', function () {
+    register_rest_route('comp_reports/v1', 'contributors', [
+        'methods' => WP_REST_SERVER::READABLE,
+        'callback' => 'get_contributor_emails_handler',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
+    ]);
+});
+
 add_action('rest_api_init', function () {
     register_rest_route('comp_reports/v1', 'posts_to_sheets', [
         'methods' => WP_REST_SERVER::READABLE,
@@ -27,6 +36,10 @@ add_action('rest_api_init', function () {
         'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
 });
+
+function get_contributor_emails_handler() {
+    return [ 'emails' => get_contributor_emails() ];
+}
 
 add_action('rest_api_init', function () {
     register_rest_route('comp_reports/v1', 'sheets_to_posts', [

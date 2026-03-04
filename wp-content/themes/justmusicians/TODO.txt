@@ -35,6 +35,8 @@ Venue Browsing Page
     show/hide popup on hover
 Venue pages
     *empty comp data state that invites you to contribute
+    *remove decimal places in y axis for payment method and payment speed
+    *change pay per hour to median pay
     Add artists recently played to venue pages
     median pay?
     typical ensemble size hired
@@ -151,6 +153,7 @@ UX
         get inquiry suggestions with location filtering
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
+    *add spinner to active search in header search bar and mobile header search bar
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
