@@ -10,6 +10,10 @@ get_header();
 $terms = get_field('terms') ?: [];
 $glossary_id = get_the_ID();
 
+$parent_glossary = get_post_meta($glossary_id, 'parent_glossary', true)[0];
+$parent_glossary_title = $parent_glossary ? get_the_title($parent_glossary) : '';
+$parent_glossary_link = $parent_glossary ? get_permalink($parent_glossary) : '';
+
 usort($terms, function($a, $b) {
     return strcasecmp(get_the_title($a), get_the_title($b));
 });
@@ -36,6 +40,16 @@ $alphabet = range('A', 'Z');
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden pb-6 md:pb-14">
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10">
         <div class="sm:col-span-8 pl-4 pr-8 sm:pr-0 flex flex-col gap-8">
+
+            <?php if ($parent_glossary) : ?>
+            <div class="inline-flex items-center gap-1 mb-4">
+                <a href="<?php echo $parent_glossary_link; ?>" class="hover:underline">
+                    <span><?php echo esc_html($parent_glossary_title); ?></span>
+                </a>
+                <img class="h-8 rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                <span class="font-bold"><?php the_title(); ?></span>
+            </div>
+            <?php endif ?>
 
             <h1 class="font-bold text-40 sm:text-57"><?php the_title(); ?></h1>
 

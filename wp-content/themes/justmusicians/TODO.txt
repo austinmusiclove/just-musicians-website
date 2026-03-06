@@ -1,3 +1,16 @@
+SEO
+    *Ask gemini what to do to rank
+        ***Add musician and offer schema on listing pages
+        ***Add reviews schema
+        ***Venue schema on venue pages and on listings who have played there
+        ***Get knowledge pannel for HireMusicians.com
+    register on bing web master
+    indexing
+        add listing titles in meta description
+        add internal linking for featured pages
+        maybe add artist bios
+        maybe add some kind of page blurb
+    add best x in x listacle blog posts
 Users
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
@@ -16,6 +29,8 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
+    ***remove decimal for minutes in database and add minutes in each row instead of heading
+    ***Add deal type column
     **allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs
@@ -37,6 +52,7 @@ Venue pages
     *empty comp data state that invites you to contribute
     *remove decimal places in y axis for payment method and payment speed
     *change pay per hour to median pay
+    *add perminently closed state for venues (coral snake)
     Add artists recently played to venue pages
     median pay?
     typical ensemble size hired
@@ -62,14 +78,6 @@ Advanced inquiries
     record response time
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
-SEO
-    register on bing web master
-    indexing
-        add listing titles in meta description
-        add internal linking for featured pages
-        maybe add artist bios
-        maybe add some kind of page blurb
-    add best x in x listacle blog posts
 Messages
     show inquiry detail in right side panel
     profile image(s) in conversation next to title
