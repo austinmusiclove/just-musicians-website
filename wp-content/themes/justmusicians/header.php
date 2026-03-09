@@ -135,6 +135,7 @@
         <div class="w-32 md:w-auto col-span-2 relative">
           <a class="w-full absolute top-0 left-0 z-10" href="<?php echo get_home_url(); ?>">
             <img src="<?php echo get_template_directory_uri() . '/lib/images/logos/hmm-logo.svg'; ?>" />
+            <!--<img src="<?php echo get_template_directory_uri() . '/lib/images/logos/hm-logo-emblem-white-1.svg'; ?>" />-->
           </a>
         </div>
 

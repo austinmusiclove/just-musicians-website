@@ -15,7 +15,8 @@ Users
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
-    **add review schema if there is one for seo purposes
+    ***pin reviews
+    ***add review schema if there is one for seo purposes
     **add title to review
     **Don't display name if we don't have one
     **Lock venue review so they can only be done by invite or if you were a contributor for that venue
