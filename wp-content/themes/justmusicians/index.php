@@ -24,8 +24,7 @@ get_header();
         while ( $featured_query->have_posts() ) : $featured_query->the_post();
     ?>
 
-    <img class="w-32 absolute top-0 right-0 z-10" src="<?php echo get_template_directory_uri() . '/lib/images/other/violator-blog.svg'; ?>" />
-    <!--<img class="w-32 absolute top-0 right-0 z-10" src="<?php echo get_template_directory_uri() . '/lib/images/other/hm-violator-blog.svg'; ?>" />-->
+    <img class="w-32 absolute top-0 right-0 z-10" src="<?php echo get_template_directory_uri() . '/lib/images/other/hm-violator-blog.svg'; ?>" />
     <div class="container grid grid-cols-1 sm:grid-cols-7 gap-x-8 md:gap-x-24 gap-y-10 relative">
 
 

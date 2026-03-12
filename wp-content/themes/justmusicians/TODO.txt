@@ -1,9 +1,12 @@
 SEO
+    *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
-        ***Add musician and offer schema on listing pages
+        ***Add musician schema on listing pages
+        ***Get knowledge pannel for each musician listing
         ***Add reviews schema
         ***Venue schema on venue pages and on listings who have played there
         ***Get knowledge pannel for HireMusicians.com
+        *Add offer schema on listing pages
     register on bing web master
     indexing
         add listing titles in meta description
@@ -11,12 +14,22 @@ SEO
         maybe add artist bios
         maybe add some kind of page blurb
     add best x in x listacle blog posts
+Applications
+    Associate users with a venue
+    Application form for any artist that collects artist info and availability; auto fills if they have a listing
+    Backend for viewing list of applicaitons with sort and filter; including filter by availability; show freshness of reported availability
+    Backend for viewing calendar with artist availability
+    Email to artists who fill it out but don't have an account and listing yet; easy one click listing
+    Draw estimate or compensation minimum in application
+    Customized questions on applications
+    Allow musicians to update availability on the site such that it gets communicated to all applicaitons at once
+    Allow venue users to alter venue page data
 Users
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
-    ***pin reviews
-    ***add review schema if there is one for seo purposes
+    ***Take photo upload out of the user info slide
+    **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
     **add title to review
     **Don't display name if we don't have one
     **Lock venue review so they can only be done by invite or if you were a contributor for that venue
@@ -31,7 +44,7 @@ Reviews
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
     ***remove decimal for minutes in database and add minutes in each row instead of heading
-    ***Add deal type column
+    ***Add deal type column (add this detail to the blog post about MED
     **allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs
@@ -45,7 +58,7 @@ Glossary
     Support terms that start with a number in single-glossary.php
 Venue Browsing Page
     add venues listings next to map
-    Sort venues by musician compensation metrics
+    Sort venues by musician compensation metrics (contributors only feature)
     Filter venues by genres they play
     Filter venues that played certian artists
     show/hide popup on hover
@@ -66,12 +79,14 @@ Venue pages
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
+    Recurring event
     **Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
+    Offer accept edit reject workflow
+        Compare listings side by side in offers tab on inquiry page (show offer, media, link to convo in sidebar; show messages in message body area)
     allow delete/expire inquiry
-    add settings (hotel, bar, restaurant) to quiz
     allow just send direct message for other kind of inquiry that is not for an event
     paginate inquiries instead of getting all at once in php for inquiriesMap
     only get non expired listings for inquiriesMap
@@ -79,6 +94,7 @@ Advanced inquiries
     record response time
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
+    add settings (hotel, bar, restaurant) to quiz
 Messages
     show inquiry detail in right side panel
     profile image(s) in conversation next to title
@@ -102,6 +118,7 @@ Search algo update
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
 Listing form
+    ***Remove media tagging until i at least get it in the search algo
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
