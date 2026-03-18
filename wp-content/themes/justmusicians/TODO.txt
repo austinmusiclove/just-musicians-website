@@ -113,7 +113,7 @@ Search algo update
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
 Listing form
-    ***Remove media tagging until i at least get it in the search algo
+    **Remove media tagging until i at least get it in the search algo
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused

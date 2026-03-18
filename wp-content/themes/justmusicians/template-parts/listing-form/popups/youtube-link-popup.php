@@ -59,8 +59,8 @@
                     </div>
                     <div class="sm:px-4 md:px-10 py-4">
                         <div class="-mx-6 pb-2 sm:pb-0 px-6">
-                            <h5 class="font-bold text-18 mb-4">Link search terms</h5>
-                            <p class="mb-4 text-16">Tag your videos with the appropriate search terms to help us show the most appropriate media to buyers.</p>
+                            <h5 class="font-bold text-18 mb-4">Link search terms for this video</h5>
+                            <p class="mb-4 text-16">Tell us what you see in this video. Labeling your media with the appropriate terms helps us show your listing to the right buyers.</p>
                             <div class="flex flex-wrap gap-x-1 gap-y-2 mb-4">
                                 <div class="overflow-y-scroll max-h-[300px]">
                                     <?php $term_groups = [
