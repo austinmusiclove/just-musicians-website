@@ -42,8 +42,6 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
-    ***remove decimal for minutes in database and add minutes in each row instead of heading
-    ***Add deal type column (add this detail to the blog post about MED
     **allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs

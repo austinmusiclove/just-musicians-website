@@ -35,7 +35,13 @@
             </span>
         </th>
         <th class="py-3 pr-4 font-bold align-top">Average Ensemble Size</th>
-        <th class="py-3 pr-4 font-bold align-top">Average Set Length (minutes)</th>
+        <th class="py-3 pr-4 font-bold align-top">Average Set Length</th>
+        <th class="py-3 pr-4 font-bold align-top">
+            <span>
+                Deal Type
+                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported compensation structure' ]); ?>
+            </span>
+        </th>
         <th class="py-3 pr-4 font-bold align-top">
             <span>
                 Payment Method

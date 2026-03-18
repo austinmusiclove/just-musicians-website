@@ -1,4 +1,4 @@
-<div class="py-8 pr-16 overflow-x-auto"
+<div class="py-16 pr-16 overflow-x-auto"
     x-data="{
         venues: <?php echo clean_arr_for_doublequotes($args['venues']); ?>,
         sortKey: 'total_reports',
@@ -39,7 +39,8 @@
                     <td class="py-3 pr-4" x-text="'$' + venue.median_earnings"></td>
                     <td class="py-3 pr-4" x-text="'$' + venue.average_earnings"></td>
                     <td class="py-3 pr-4" x-text="venue.avg_ensemble_size"></td>
-                    <td class="py-3 pr-4" x-text="venue.avg_set_length"></td>
+                    <td class="py-3 pr-4" x-text="Math.round(venue.avg_set_length) + ' minutes'"></td>
+                    <td class="py-3 pr-4" x-text="venue.deal_type"></td>
                     <td class="py-3 pr-4" x-text="venue.payment_method"></td>
                     <td class="py-3" x-text="venue.payment_speed"></td>
 

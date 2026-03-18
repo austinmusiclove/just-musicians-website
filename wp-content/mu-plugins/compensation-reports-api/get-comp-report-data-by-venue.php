@@ -17,11 +17,12 @@ function get_comp_report_data_by_venue() {
 
             if (!isset($venue_data[$venue_post_id])) {
                 $venue_data[$venue_post_id] = [
-                    'earnings' => [],
-                    'ensemble_sizes' => [],
-                    'set_lengths' => [],
+                    'earnings'        => [],
+                    'ensemble_sizes'  => [],
+                    'set_lengths'     => [],
                     'payment_methods' => [],
-                    'payment_speeds' => [],
+                    'payment_speeds'  => [],
+                    'deal_types'      => [],
                 ];
             }
 
@@ -31,12 +32,16 @@ function get_comp_report_data_by_venue() {
 
             $payment_method = get_field('payment_method');
             $payment_speed = get_field('payment_speed');
+            $deal_type = get_field('comp_structure');
 
             if ($payment_method) {
                 $venue_data[$venue_post_id]['payment_methods'][] = $payment_method;
             }
             if ($payment_speed) {
                 $venue_data[$venue_post_id]['payment_speeds'][] = $payment_speed;
+            }
+            if ($deal_type) {
+                $venue_data[$venue_post_id]['deal_types'][] = $deal_type;
             }
         }
     }
@@ -58,6 +63,7 @@ function get_comp_report_data_by_venue() {
             'avg_set_length' => calculate_average($data['set_lengths']),
             'payment_method' => get_mode($data['payment_methods']),
             'payment_speed' => get_mode($data['payment_speeds']),
+            'deal_type' => get_mode($data['deal_types']),
         ];
     }
 
