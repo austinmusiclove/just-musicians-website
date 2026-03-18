@@ -30,6 +30,7 @@ if ($listing_data) {
     foreach (array_unique(array_merge($verified_venue_ids, $unverified_venue_ids)) as $venue_id) {
         $all_venues_played[] = [
             'ID'               => $venue_id,
+            'permalink'        => get_permalink($venue_id),
             'name'             => get_field('name',             $venue_id),
             'street_address'   => get_field('street_address',   $venue_id),
             'address_locality' => get_field('address_locality', $venue_id),

@@ -1,5 +1,5 @@
 Deploy
-    define( 'REVIEW_PAGE_SIZE', 10);
+    define( 'REVIEW_PAGE_SIZE', 5);
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
@@ -7,7 +7,6 @@ SEO
             add reviews to music group schema
         **Venue schema on venue pages with reviews
         **Get knowledge pannel for HireMusicians.com
-    *link venue pages in venues played on listing pages
     register on bing web master
     indexing
         add listing titles in meta description
@@ -33,7 +32,6 @@ Reviews
     **add title to review
     **Don't display name if we don't have one
     **Lock venue review so they can only be done by invite or if you were a contributor for that venue
-    *add lisitng review pagination on listing page and venue page and buyer page
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
         don't show review for 2 weeks to give the user time to review the buyer

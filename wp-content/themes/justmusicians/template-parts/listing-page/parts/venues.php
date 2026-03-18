@@ -12,7 +12,7 @@
             <template x-for="(venue, index) in allVenuesPlayed" :key="index">
 
                 <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
-                    <span class="font-bold" x-text="venue['name']"></span>
+                    <a x-bind:href="venue['permalink']"><span class="font-bold hover:underline" x-text="venue['name']"></span></a>
                     <span x-text="venue['street_address']"></span>
                     <span x-text="venue['address_locality'] + ', ' + venue['address_region'] + ' ' + venue['postal_code']"></span>
                 </div>
@@ -25,7 +25,7 @@
             foreach($args['venues_combined'] as $venue) { ?>
 
                 <div class="bg-yellow-light p-2 rounded text-16 flex flex-col items-start gap-0.5">
-                    <span class="font-bold"><?php echo $venue['name']; ?></span>
+                    <a href="<?php echo $venue['permalink']; ?>"><span class="font-bold hover:underline"><?php echo $venue['name']; ?></span></a>
                     <span><?php echo $venue['street_address']; ?><br/><?php echo $venue['address_locality'] . ', ' . $venue['address_region'] . ' ' . $venue['postal_code']; ?></span>
                 </div>
 
