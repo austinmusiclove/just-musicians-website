@@ -28,7 +28,6 @@ Users
     **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
-    ***Take photo upload out of the user info slide
     **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
     **add title to review
     **Don't display name if we don't have one

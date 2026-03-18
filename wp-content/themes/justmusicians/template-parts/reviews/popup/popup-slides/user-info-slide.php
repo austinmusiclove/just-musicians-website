@@ -37,15 +37,17 @@
             <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Your position at the organization you represent. I.e. Guitarist, Talent Buyer, General Manger, etc.' ]); ?>
         </label>
         <input class="border border-black/20 rounded h-8 p-2 mb-2,col-span-1 sm:col-span-2" type="text" name="position" placeholder="Job Title" x-model="positionInput">
+        <!--
         <div class="flex flex-col gap-4">
-            <?php echo get_template_part('template-parts/account/settings/profile-image/label', '', []); ?>
-            <?php echo get_template_part('template-parts/account/settings/profile-image/buttons', '', []); ?>
+            <?php //echo get_template_part('template-parts/account/settings/profile-image/label', '', []); ?>
+            <?php //echo get_template_part('template-parts/account/settings/profile-image/buttons', '', []); ?>
         </div>
         <div class="flex flex-col gap-4 ml-2">
-            <?php echo get_template_part('template-parts/account/settings/profile-image/image-display', '', []); ?>
+            <?php //echo get_template_part('template-parts/account/settings/profile-image/image-display', '', []); ?>
         </div>
-        <?php echo get_template_part('template-parts/account/settings/profile-image/hidden-inputs', '', []); ?>
+        <?php //echo get_template_part('template-parts/account/settings/profile-image/hidden-inputs', '', []); ?>
         <input type="hidden" name="is_popup" value="1">
+        -->
     </div>
 
     <!-- Submit Button -->
