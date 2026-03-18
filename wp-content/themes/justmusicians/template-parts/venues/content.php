@@ -17,7 +17,11 @@
         <?php echo get_template_part('template-parts/venues/parts/map', '', []); ?>
 
         <!-- Reviews -->
-        <?php echo get_template_part('template-parts/venues/parts/reviews', '', []); ?>
+        <?php echo get_template_part('template-parts/venues/parts/reviews', '', [
+            'reviews'      => $args['reviews'],
+            'review_count' => $args['review_count'],
+            'rating'       => $args['rating'],
+        ]); ?>
 
     </div>
 

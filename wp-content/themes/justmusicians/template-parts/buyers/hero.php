@@ -54,7 +54,7 @@ if (has_post_thumbnail()) {
 
                 <!-- Rating Stars -->
                 <div id="hero-average-rating" class="flex gap-x-1 text-yellow w-32 mb-4" hx-swap-oob="outerHTML">
-                    <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => 0 ]); ?>
+                    <?php echo get_template_part('template-parts/reviews/rating-stars-display', '', [ 'rating' => $args['rating'] ]); ?>
                 </div>
 
 

@@ -1,14 +1,9 @@
+Deploy
+    define( 'REVIEW_PAGE_SIZE', 10);
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
         **Add reviews schema
-            get reviews on first load for listings
-                add pagination
-                add reviews to music group schema
-                get review count and average rating directly from get_reviews
-            get reviews on first load for venues
-            get reviews on first load for buyers
-            remove htmx for getting reviews
             add reviews to music group schema
         **Venue schema on venue pages with reviews
         **Get knowledge pannel for HireMusicians.com

@@ -8,19 +8,28 @@
 $buyer_id = get_query_var('buyer-id');
 $account_settings = get_user_account_settings($buyer_id);
 
+$gr_result    = get_reviews('buyer_review', $buyer_id);
+$reviews      = $gr_result['reviews'];
+$review_count = $gr_result['review_count'];
+$rating       = $gr_result['rating'];
 
 get_header();
 
 echo get_template_part('template-parts/buyers/hero', '', [
-    'buyer_id'       => $buyer_id,
+    'buyer_id'      => $buyer_id,
     'display_name'  => $account_settings['display_name'],
     'profile_image' => $account_settings['profile_image'],
     'organization'  => $account_settings['organization'],
     'position'      => $account_settings['position'],
+    'review_count'  => $review_count,
+    'rating'        => $rating,
 ]);
 echo get_template_part('template-parts/buyers/content', '', [
-    'buyer_id'       => $buyer_id,
+    'buyer_id'      => $buyer_id,
     'display_name'  => $account_settings['display_name'],
+    'reviews'       => $reviews,
+    'review_count'  => $review_count,
+    'rating'        => $rating,
 ]);
 
 // Show review modal popup on page load when mdl=review in url

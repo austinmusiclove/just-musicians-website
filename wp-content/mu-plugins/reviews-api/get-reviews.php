@@ -1,12 +1,11 @@
-
 <?php
 
-function get_reviews($review_post_type, $reviewee_id, $page = 1, $per_page = 10) {
+function get_reviews($review_post_type, $reviewee_id, $page = null) {
     $args = [
         'post_type'      => $review_post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => $per_page,
-        'paged'          => $page,
+        'posts_per_page' => $page ? REVIEW_PAGE_SIZE : -1,
+        'paged'          => $page ? $page : 1,
         'orderby'        => 'date',
         'order'          => 'DESC',
         'meta_query'     => [
@@ -54,5 +53,13 @@ function get_reviews($review_post_type, $reviewee_id, $page = 1, $per_page = 10)
     }
 
     wp_reset_postdata();
-    return $reviews;
+
+    $review_count = count($reviews);
+    $rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
+
+    return [
+        'reviews'      => $reviews,
+        'review_count' => $review_count,
+        'rating'       => $rating,
+    ];
 }

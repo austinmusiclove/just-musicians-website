@@ -8,8 +8,11 @@
 
         <!-- Reviews -->
         <?php echo get_template_part('template-parts/buyers/parts/reviews', '', [
-            'buyer_id'      => $args['buyer_id'],
+            'buyer_id'     => $args['buyer_id'],
             'display_name' => $args['display_name'],
+            'reviews'      => $args['reviews'],
+            'review_count' => $args['review_count'],
+            'rating'       => $args['rating'],
         ]); ?>
 
 

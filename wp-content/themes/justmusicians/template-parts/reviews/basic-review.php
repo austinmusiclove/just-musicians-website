@@ -1,4 +1,4 @@
-<section class="bg-white pr-6 py-8 lg:pr-8">
+<section class="bg-white pr-6 py-8 lg:pr-8" x-show="numReviewsToShow > <?php echo $args['index']; ?>" x-cloak>
     <figure class="max-w-2xl flex flex-col gap-4">
 
 

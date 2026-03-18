@@ -21,9 +21,10 @@ $inquiries_result = get_user_inquiries([
 ]);
 $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
-$reviews = get_reviews('listing_review', get_the_ID(), 1, 10);
-$review_count = count($reviews);
-$rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
+$gr_result    = get_reviews('listing_review', get_the_ID());
+$reviews      = $gr_result['reviews'];
+$review_count = $gr_result['review_count'];
+$rating       = $gr_result['rating'];
 
 $categories        = wp_list_pluck(get_the_terms(get_the_ID(), 'mcategory')       ?: [], 'name');
 $genres            = wp_list_pluck(get_the_terms(get_the_ID(), 'genre')           ?: [], 'name');
