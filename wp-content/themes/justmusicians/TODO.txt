@@ -54,8 +54,6 @@ Compensation Reporting
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
-Glossary
-    Support terms that start with a number in single-glossary.php
 Venue Browsing Page
     add venues listings next to map
     Sort venues by musician compensation metrics (contributors only feature)

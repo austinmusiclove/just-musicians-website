@@ -19,7 +19,30 @@ usort($terms, function($a, $b) {
 });
 
 $terms_by_letter = [];
+$numeric_terms = [];
+$alphabetical_terms = [];
+
 foreach ($terms as $term_id) {
+    $title = get_the_title($term_id);
+    // Check if the first character is a digit
+    if (is_numeric(substr($title, 0, 1))) {
+        $numeric_terms[] = [
+            'id' => $term_id,
+            'title' => $title,
+            'definition' => get_field('definition', $term_id),
+        ];
+    } else {
+        $alphabetical_terms[] = $term_id;
+    }
+}
+
+// Add numeric terms to terms_by_letter under '#' key
+if (!empty($numeric_terms)) {
+    $terms_by_letter['#'] = $numeric_terms;
+}
+
+// Process remaining alphabetical terms
+foreach ($alphabetical_terms as $term_id) {
     $title = get_the_title($term_id);
     $letter = strtoupper(substr($title, 0, 1));
     if (!isset($terms_by_letter[$letter])) {
@@ -59,17 +82,17 @@ $alphabet = range('A', 'Z');
 
             <!-- A-Z Filter -->
             <div class="flex flex-wrap gap-2">
+                <?php if (isset($terms_by_letter['#'])) : ?>
+                    <a href="#letter-#" class="flex items-center justify-center rounded text-sm hover:underline">#</a>
+                    <?php if (!empty($alphabetical_terms)) : ?><span class="opacity-20">|</span><?php endif; ?>
+                <?php endif; ?>
                 <?php foreach ($alphabet as $index => $letter) : ?>
                     <?php if (isset($terms_by_letter[$letter])) : ?>
-                        <a href="#letter-<?php echo $letter; ?>" class="flex items-center justify-center rounded text-sm hover:underline">
-                            <?php echo $letter; ?>
-                        </a>
+                        <a href="#letter-<?php echo $letter; ?>" class="flex items-center justify-center rounded text-sm hover:underline"><?php echo $letter; ?></a>
                         <?php if ($index < count($alphabet) - 1) : ?><span class="opacity-20">|</span><?php endif; ?>
                     <?php else : ?>
-                        <span class="flex items-center justify-center rounded opacity-20 text-sm">
-                            <?php echo $letter; ?>
-                        </span>
-                            <?php if ($index < count($alphabet) - 1) : ?><span class="opacity-20">|</span><?php endif; ?>
+                        <span class="flex items-center justify-center rounded opacity-20 text-sm"><?php echo $letter; ?></span>
+                        <?php if ($index < count($alphabet) - 1) : ?><span class="opacity-20">|</span><?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
