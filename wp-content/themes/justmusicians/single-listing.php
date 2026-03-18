@@ -67,16 +67,30 @@ echo get_template_part('template-parts/listing-page/content', '', [
    'inquiries_map'      => $inquiries_map,
 ]);
 
-echo get_template_part('template-parts/schema/local-business-schema', '', [
+echo get_template_part('template-parts/schema/music-group-schema', '', [
     'name'        => get_field('name'),
     'description' => get_field('description'),
-    'website'     => get_field('website'),
     'phone'       => get_field('phone'),
-    'genres'      => $genres,
+    'email'       => get_field('email'),
+    'genre'       => array_unique(array_merge($genres, $subgenres)),
     'url'         => get_permalink(),
-    'image'       => get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'),
+    'image'       => get_the_post_thumbnail_url(get_the_ID(), 'full') ?: get_the_post_thumbnail_url(get_the_ID(), 'large'),
     'city'        => get_field('city'),
     'state'       => get_field('state'),
+    'rating'      => get_field('rating'),
+    'review_count'=> get_field('review_count'),
+    'sameAs'      => [
+        get_field('website'),
+        get_field('instagram_url'),
+        get_field('facebook_url'),
+        get_field('x_url'),
+        get_field('tiktok_url'),
+        get_field('youtube_url'),
+        get_field('spotify_artist_url'),
+        get_field('apple_music_artist_url'),
+        get_field('bandcamp_url'),
+        get_field('soundcloud_url'),
+    ]
 ]);
 
 // Show review modal popup on page load when mdl=review in url

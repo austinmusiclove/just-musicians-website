@@ -1,8 +1,6 @@
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
-        ***Add musician schema on listing pages
-        ***Get knowledge pannel for each musician listing
         ***Add reviews schema
         ***Venue schema on venue pages and on listings who have played there
         ***Get knowledge pannel for HireMusicians.com
@@ -134,6 +132,7 @@ Listing page
     see more bio
     see more venues played
     artist pages that will get you listed on google as a musician by using schema
+    allow artists to feature releases of their choice
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
