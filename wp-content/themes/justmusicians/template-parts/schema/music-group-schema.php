@@ -50,12 +50,25 @@ if (!empty($args['rating']) && !empty($args['review_count'])) {
 
 if (!empty($args['reviews'])) {
     foreach ($args['reviews'] as $review) {
+        $author_schema = [
+            '@type' => 'Person',
+            'name'  => $review['author_name'],
+        ];
+
+        if (!empty($review['author_position'])) {
+            $author_schema['jobTitle'] = $review['author_position'];
+        }
+
+        if (!empty($review['author_organization'])) {
+            $author_schema['worksFor'] = [
+                '@type' => 'Organization',
+                'name'  => $review['author_organization'],
+            ];
+        }
+
         $schema['review'][] = [
             '@type'         => 'Review',
-            'author'        => [
-                '@type' => 'Person',
-                'name'  => $review['author_name'],
-            ],
+            'author'        => $author_schema,
             'datePublished' => $review['date'],
             'reviewBody'    => wp_strip_all_tags($review['review']),
             'reviewRating'  => [
