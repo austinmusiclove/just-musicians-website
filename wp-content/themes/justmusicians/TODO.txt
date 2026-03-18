@@ -3,6 +3,9 @@ SEO
     *Ask gemini what to do to rank
         **Add reviews schema
             get reviews on first load for listings
+                add pagination
+                add reviews to music group schema
+                get review count and average rating directly from get_reviews
             get reviews on first load for venues
             get reviews on first load for buyers
             remove htmx for getting reviews

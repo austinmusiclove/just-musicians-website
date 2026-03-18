@@ -1,17 +1,18 @@
 
 <?php
 
-function get_reviews($review_post_type, $reviewee_id) {
+function get_reviews($review_post_type, $reviewee_id, $page = 1, $per_page = 10) {
     $args = [
         'post_type'      => $review_post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => -1,
+        'posts_per_page' => $per_page,
+        'paged'          => $page,
         'orderby'        => 'date',
         'order'          => 'DESC',
         'meta_query'     => [
             [
-                'key'   => 'reviewee',
-                'value' => $reviewee_id,
+                'key'     => 'reviewee',
+                'value'   => $reviewee_id,
                 'compare' => '='
             ]
         ]

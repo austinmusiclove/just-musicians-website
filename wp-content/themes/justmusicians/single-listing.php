@@ -21,7 +21,7 @@ $inquiries_result = get_user_inquiries([
 ]);
 $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
-$reviews = get_reviews('listing_review', get_the_ID());
+$reviews = get_reviews('listing_review', get_the_ID(), 1, 10);
 $review_count = count($reviews);
 $rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
 
