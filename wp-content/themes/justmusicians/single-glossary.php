@@ -64,12 +64,12 @@ $alphabet = range('A', 'Z');
                         <a href="#letter-<?php echo $letter; ?>" class="flex items-center justify-center rounded text-sm hover:underline">
                             <?php echo $letter; ?>
                         </a>
-                        <?php if ($index < count($alphabet) - 1) : ?><span class="text-grey">|</span><?php endif; ?>
+                        <?php if ($index < count($alphabet) - 1) : ?><span class="opacity-20">|</span><?php endif; ?>
                     <?php else : ?>
-                        <span class="flex items-center justify-center rounded text-grey text-sm">
+                        <span class="flex items-center justify-center rounded opacity-20 text-sm">
                             <?php echo $letter; ?>
                         </span>
-                            <?php if ($index < count($alphabet) - 1) : ?><span class="text-grey">|</span><?php endif; ?>
+                            <?php if ($index < count($alphabet) - 1) : ?><span class="opacity-20">|</span><?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
