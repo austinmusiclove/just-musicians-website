@@ -26,7 +26,7 @@ if (has_post_thumbnail()) {
 ?>
 
 <header class="bg-yellow-light pt-12 md:pt-24 relative overflow-hidden <?php echo $header_padding; ?>">
-    <img class="w-32 absolute top-0 right-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/violator-blog.svg'; ?>" />
+    <img class="w-32 absolute top-0 right-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/hm-violator-blog.svg'; ?>" />
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10"> <!--Look here -->
         <div class="sm:col-span-7 pr-8 sm:pr-0">
             <h1 class="font-bold text-32 md:text-40 mb-6"><?php the_title(); ?></h1>
