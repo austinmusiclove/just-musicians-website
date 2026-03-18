@@ -3,8 +3,6 @@ Deploy
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
-        **Add reviews schema
-            add reviews to music group schema
         **Venue schema on venue pages with reviews
         **Get knowledge pannel for HireMusicians.com
     register on bing web master

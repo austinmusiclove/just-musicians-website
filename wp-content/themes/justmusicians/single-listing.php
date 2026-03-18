@@ -88,6 +88,7 @@ echo get_template_part('template-parts/schema/music-group-schema', '', [
     'state'       => get_field('state'),
     'rating'      => get_field('rating'),
     'review_count'=> get_field('review_count'),
+    'reviews'     => $reviews,
     'sameAs'      => [
         get_field('website'),
         get_field('instagram_url'),
