@@ -1,4 +1,3 @@
-
 <section class="bg-white pr-6 py-8 lg:pr-8">
     <figure class="max-w-2xl flex flex-col gap-4">
 

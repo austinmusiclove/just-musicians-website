@@ -1,10 +1,15 @@
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
-        ***Add reviews schema
-        ***Venue schema on venue pages and on listings who have played there
-        ***Get knowledge pannel for HireMusicians.com
-        *Add offer schema on listing pages
+        **Add reviews schema
+            get reviews on first load for listings
+            get reviews on first load for venues
+            get reviews on first load for buyers
+            remove htmx for getting reviews
+            add reviews to music group schema
+        **Venue schema on venue pages with reviews
+        **Get knowledge pannel for HireMusicians.com
+    *link venue pages in venues played on listing pages
     register on bing web master
     indexing
         add listing titles in meta description

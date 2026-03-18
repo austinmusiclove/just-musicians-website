@@ -13,6 +13,7 @@ if (count($reviews) > 0) {
             echo get_template_part('template-parts/reviews/basic-review', '', [
                 'rating'              => $review['rating'],
                 'review'              => $review['review'],
+                'date'                => $review['date'],
                 'author_name'         => $review['author_name'],
                 'author_organization' => $review['author_organization'],
                 'author_position'     => $review['author_position'],

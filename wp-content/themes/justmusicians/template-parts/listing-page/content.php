@@ -92,7 +92,12 @@
 
         <!-- Reviews -->
         <?php if (!$is_preview) {
-            echo get_template_part('template-parts/listing-page/parts/listing-reviews', '', [ 'post_id' => get_the_ID() ]);
+            echo get_template_part('template-parts/listing-page/parts/listing-reviews', '', [
+                'post_id'      => get_the_ID(),
+                'reviews'      => $args['reviews'],
+                'rating'       => $args['rating'],
+                'review_count' => $args['review_count'],
+            ]);
         } ?>
 
     </div>

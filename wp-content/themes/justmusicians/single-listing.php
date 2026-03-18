@@ -21,6 +21,10 @@ $inquiries_result = get_user_inquiries([
 ]);
 $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
 
+$reviews = get_reviews('listing_review', get_the_ID());
+$review_count = count($reviews);
+$rating = $review_count > 0 ? array_sum(array_column($reviews, 'rating')) / $review_count : 0;
+
 $categories        = wp_list_pluck(get_the_terms(get_the_ID(), 'mcategory')       ?: [], 'name');
 $genres            = wp_list_pluck(get_the_terms(get_the_ID(), 'genre')           ?: [], 'name');
 $subgenres         = wp_list_pluck(get_the_terms(get_the_ID(), 'subgenre')        ?: [], 'name');
@@ -49,8 +53,8 @@ echo get_template_part('template-parts/listing-page/hero', '', [
    'instance'        => 'listing-page',
    'genres'          => $genres,
    'collections_map' => $collections_map,
-   'rating'          => get_field('rating') ?? 0,
-   'review_count'    => get_field('review_count') ?? 0,
+   'rating'          => $rating,
+   'review_count'    => $review_count,
 ]);
 
 // Content
@@ -65,6 +69,9 @@ echo get_template_part('template-parts/listing-page/content', '', [
    'venues_combined'    => $venues_combined,
    'youtube_video_data' => $youtube_video_data,
    'inquiries_map'      => $inquiries_map,
+   'reviews'            => $reviews,
+   'rating'             => $rating,
+   'review_count'       => $review_count,
 ]);
 
 echo get_template_part('template-parts/schema/music-group-schema', '', [
