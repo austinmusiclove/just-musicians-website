@@ -23,7 +23,7 @@ Applications
     Allow musicians to update availability on the site such that it gets communicated to all applicaitons at once
     Allow venue users to alter venue page data
 Users
-    **when a user uploads a cover image for a listing, update their profile photo if they don't have one
+    ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
 Reviews
     **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
@@ -39,7 +39,7 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
-    **allow add new venue
+    ***allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
@@ -72,7 +72,7 @@ Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
 Advanced inquiries
     Recurring event
-    **Test inquiries modal on safari on desktop and mobile
+    ****Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
@@ -116,7 +116,7 @@ Listing form
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
-    **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
+    ***allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
     scroll preview to section when corresponding input is focused
     disable input until change made or auto save after input
     limit access until you verify email
@@ -127,7 +127,7 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
 Listing page
     allow play with mouse off iframe for videos
-    **add seek in video
+    ***add seek in video
     see more bio
     see more venues played
     artist pages that will get you listed on google as a musician by using schema
@@ -135,7 +135,7 @@ Listing page
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
-    **video seeking
+    ***video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
 Data

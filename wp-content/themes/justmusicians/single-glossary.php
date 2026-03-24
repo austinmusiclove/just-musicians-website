@@ -113,9 +113,9 @@ $alphabet = range('A', 'Z');
                         <li>
                             <a href="<?php echo add_query_arg('from_glossary', $glossary_id, get_permalink($term['id'])); ?>" class="block rounded">
                                 <h3 class="text-20 hover:underline"><?php echo $term['title']; ?></h3>
-                                <?php //if ($term['definition']) : ?>
-                                    <!--<p class="text-grey text-sm mt-1"><?php //echo wp_trim_words($term['definition'], 12); ?></p>-->
-                                <?php //endif; ?>
+                                <?php if ($term['definition']) : ?>
+                                    <p class="text-grey text-sm mt-1"><?php echo wp_trim_words($term['definition'], 12); ?></p>
+                                <?php endif; ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
