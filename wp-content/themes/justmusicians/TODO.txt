@@ -1,3 +1,5 @@
+Glossaries
+    add other glossaries section at the bottom of single-glossary
 Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
 SEO
@@ -22,6 +24,12 @@ Applications
     Customized questions on applications
     Allow musicians to update availability on the site such that it gets communicated to all applicaitons at once
     Allow venue users to alter venue page data
+Calendar View
+    add event post type
+    event gets created for each inquiry
+    calendar shows events and has an add event button; recurring event can also be created
+    you can send inquiry for existing event, not send existing inquiry to another musician; one event has many inquiries; one inquiry only has one event or zero
+    create recurring event (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
 Users
     ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
@@ -159,17 +167,30 @@ Testing
         set up users that allow tests to reach different screen states for testing without having to create a user every time
         maturity test by following a random path on the tree
 UX
-    *Location filtering
+    *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
         search filters
             top search bar location filter
-            support radius
+                auto complete cities, states, zip codes, and other regions
+            support radius from zip in home search
             support scaling top x genre in x city seo pages
         listing form
             auto fill city and state based on zip
             auto fill state based on city
             active search cities in listing form
-        allow for advanced listings to be based in multiple locations
+        allow for advanced listings to be based in multiple locations or to be based in different locations at different times on a schedule like a tour schedule
+            solution 1: listing search actually searches though a different table of geo_listings that each have a location, type (live, edu, prod) and link to one listing
+                each listing has a geo_listing and multi city listings have multiple
+                limit sql to group results by the listing id that is linked in the geo_listing
+                location data stored in geo_listing not listing
+            solution 2: separate listing for multi location cases
+                for multi-home-base maintain a separate duplicate listing record that is the same but different place
+                for tour-schedule maintain a separate duplicate listing record that changes place on the schedule
+                multi-home-base areas must be at least a certain distance from each other or just tolerate some duplicates in searches
+                duplicates
+                    we want to return the closest one to the search center so maybe this can be done in sql
+                    maybe scan page before returning and remove duplicates; should not mess up pagination as long it is cursor based and order is maintained
         get inquiry suggestions with location filtering
+        get user's location with their permission to set the default location, otherwise ATX
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
     *add spinner to active search in header search bar and mobile header search bar
@@ -184,6 +205,8 @@ UX
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
+Compliance
+    *figure out if i need to request permission for cookies or not
 Devon
     404 page
     venue page especially stats
