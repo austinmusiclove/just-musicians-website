@@ -1,7 +1,12 @@
-Glossaries
-    add other glossaries section at the bottom of single-glossary
 Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
+    define access key and secret
+Event Manager
+    organize to separate files
+    make sure api only gets pending review staged transactions
+    list the transactions in a table that show id, status, transaction type, scrape url, created at
+Glossaries
+    add other glossaries section at the bottom of single-glossary
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
