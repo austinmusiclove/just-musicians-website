@@ -11,7 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once plugin_dir_path( __FILE__ ) . 'aws-helper.php';
-require_once plugin_dir_path( __FILE__ ) . 'controllers/admin-page.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/router.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/dashboard.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/single-transaction.php';
 
 /**
  * Register the admin menu page for Event Manager.
@@ -22,7 +24,7 @@ function event_manager_add_admin_menu() {
         'Event Manager',                  // Menu title
         'manage_options',                 // Capability required
         'event-manager',                  // Menu slug
-        'event_manager_render_admin_page',// Callback function to render the page
+        'event_manager_admin_router',     // Callback function to render the page
         'dashicons-database-view',        // Menu icon
         25                                // Position
     );
