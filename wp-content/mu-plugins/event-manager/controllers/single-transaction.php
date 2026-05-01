@@ -22,13 +22,7 @@ function event_manager_render_single_transaction( $transaction_id ) {
         $body = wp_remote_retrieve_body( $response );
 
         if ( $response_code === 200 ) {
-            $data = json_decode( $body, true );
-            if ( isset( $data['staged_data'] ) ) {
-                $transaction = $data['staged_data'];
-                $transaction['id'] = $transaction_id;
-            } else {
-                $error_msg = 'API response did not contain "staged_data".';
-            }
+            $transaction = json_decode( $body, true );
         } else {
             $error_msg = 'API Request failed. Status Code: ' . $response_code . '. Response: ' . esc_html( $body );
         }
