@@ -13,6 +13,7 @@ function event_manager_render_single_transaction( $transaction_id ) {
     $response = event_manager_aws_sigv4_request( $api_url );
 
     $transaction = null;
+    $staged = array();
     $error_msg = '';
 
     if ( is_wp_error( $response ) ) {
@@ -22,7 +23,9 @@ function event_manager_render_single_transaction( $transaction_id ) {
         $body = wp_remote_retrieve_body( $response );
 
         if ( $response_code === 200 ) {
-            $transaction = json_decode( $body, true );
+            $data = json_decode( $body, true );
+            $transaction = $data;
+            $staged = isset( $data['staged_data'] ) ? $data['staged_data'] : array();
         } else {
             $error_msg = 'API Request failed. Status Code: ' . $response_code . '. Response: ' . esc_html( $body );
         }
