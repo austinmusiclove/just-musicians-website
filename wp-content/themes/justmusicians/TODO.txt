@@ -1,10 +1,12 @@
 Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
-    define access key and secret
+    define access key and secret and base url
 Event Manager
-    organize to separate files
-    make sure api only gets pending review staged transactions
-    list the transactions in a table that show id, status, transaction type, scrape url, created at
+    link each item in the table to a new view
+        show staged data
+        show screenshot
+        show existing data if any
+    add venue name to transactions table
 Glossaries
     add other glossaries section at the bottom of single-glossary
 SEO
