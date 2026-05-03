@@ -74,6 +74,7 @@ function event_manager_aws_sigv4_request( $url, $method = 'GET', $body = '' ) {
         'method'  => $method,
         'headers' => $headers,
         'body'    => $body ? $body : null,
+        'timeout' => 30,
     );
 
     return wp_remote_request( $url, $args );
