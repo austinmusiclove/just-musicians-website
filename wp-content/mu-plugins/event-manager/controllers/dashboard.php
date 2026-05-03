@@ -36,5 +36,5 @@ function event_manager_render_dashboard() {
         }
     }
 
-    include plugin_dir_path( dirname( __FILE__ ) ) . 'views/admin-page.php';
+    include plugin_dir_path( dirname( __FILE__ ) ) . 'views/dashboard.php';
 }
