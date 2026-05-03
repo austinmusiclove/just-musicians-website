@@ -10,9 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             Approve Transaction
         </button>
     </form>
-    <button type="button" class="button button-secondary" id="em-reject-transaction" style="margin-left: 8px;">
-        Reject Transaction
-    </button>
+    <form method="post" action="" style="display: inline; margin-left: 8px;">
+        <?php wp_nonce_field( 'em_approve_' . $transaction['id'] ); ?>
+        <button type="submit" name="em_reject" value="1" class="button button-secondary" id="em-reject-transaction">
+            Reject Transaction
+        </button>
+    </form>
 </div>
 
 <?php if ( ! empty( $approve_result ) ) : ?>
