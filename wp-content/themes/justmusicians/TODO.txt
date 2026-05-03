@@ -2,9 +2,7 @@ Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
     define access key and secret and base url
 Event Manager
-    error due to paused db not gracefully handled
     organize files to lower file size
-    rename admin page to dashboard page
     reject transaction
     approve with edits
     add venue name to transactions table
