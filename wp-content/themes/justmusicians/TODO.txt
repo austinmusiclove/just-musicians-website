@@ -2,11 +2,13 @@ Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
     define access key and secret and base url
 Event Manager
-    link each item in the table to a new view
-        show staged data
-        show screenshot
-        show existing data if any
+    error due to paused db not gracefully handled
+    organize files to lower file size
+    rename admin page to dashboard page
+    reject transaction
+    approve with edits
     add venue name to transactions table
+    add venue name in staged event data in single transaction page
 Glossaries
     add other glossaries section at the bottom of single-glossary
 SEO

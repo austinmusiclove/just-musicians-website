@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <td>
                                     <?php
                                         $event_id = isset( $transaction['id'] ) ? esc_attr( $transaction['id'] ) : '';
-                                        $event_title = isset( $transaction['staged_event_title'] ) ? $transaction['staged_event_title'] : '-';
+                                        $event_title = isset( $transaction['title'] ) ? $transaction['title'] : '-';
                                         if ( ! empty( $event_id ) ) {
                                             $link = add_query_arg( array( 'action' => 'view', 'id' => $event_id ) );
                                             echo '<a href="' . esc_url( $link ) . '"><strong>' . esc_html( $event_title ) . '</strong></a>';
