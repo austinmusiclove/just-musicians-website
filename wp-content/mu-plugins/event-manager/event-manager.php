@@ -14,6 +14,8 @@ require_once plugin_dir_path( __FILE__ ) . 'aws-helper.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/router.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/dashboard.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/single-transaction.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/transaction-approve.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/transaction-reject.php';
 
 /**
  * Register the admin menu page for Event Manager.
