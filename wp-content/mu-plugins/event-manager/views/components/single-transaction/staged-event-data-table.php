@@ -79,6 +79,13 @@ $show_current_column = ! empty( $current ) && is_array( $current );
             <?php endif; ?>
         </tr>
         <tr>
+            <th scope="row"><label>Venue Name</label></th>
+            <td><?php echo esc_html( em_get_field_value( $staged, 'venue_name' ) ); ?></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['venue_name'] ?? '', $current['venue_name'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'venue_name' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
             <th scope="row"><label>Start Date</label></th>
             <td><input type="date" name="staged[start_date]" value="<?php echo esc_attr( em_get_field_value( $staged, 'start_date' ) ); ?>" style="width: 100%"></td>
             <?php if ( $show_current_column ) : ?>
