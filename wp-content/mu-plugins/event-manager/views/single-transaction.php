@@ -24,11 +24,14 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/screenshot.php'; ?>
 
             <div class="em-column-data" style="flex: 1; min-width: 300px;">
-                <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
-                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/staged-event-data-table.php'; ?>
-                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/meta-data-table.php'; ?>
-                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/action-buttons.php'; ?>
-                </div>
+                <form method="post" action="">
+                    <?php wp_nonce_field( 'em_approve_' . $transaction['id'] ); ?>
+                    <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
+                        <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/staged-event-data-table.php'; ?>
+                        <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/meta-data-table.php'; ?>
+                        <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/action-buttons.php'; ?>
+                    </div>
+                </form>
             </div>
         </div>
     <?php else : ?>

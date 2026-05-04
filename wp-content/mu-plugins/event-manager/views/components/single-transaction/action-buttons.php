@@ -4,18 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #c3c4c7;">
-    <form method="post" action="" style="display: inline;">
-        <?php wp_nonce_field( 'em_approve_' . $transaction['id'] ); ?>
-        <button type="submit" name="em_approve" value="1" class="button button-primary" id="em-approve-transaction">
-            Approve Transaction
-        </button>
-    </form>
-    <form method="post" action="" style="display: inline; margin-left: 8px;">
-        <?php wp_nonce_field( 'em_approve_' . $transaction['id'] ); ?>
-        <button type="submit" name="em_reject" value="1" class="button button-secondary" id="em-reject-transaction">
-            Reject Transaction
-        </button>
-    </form>
+    <button type="submit" name="em_approve" value="1" class="button button-primary" id="em-approve-transaction">
+        Approve Transaction
+    </button>
+    <button type="submit" name="em_reject" value="1" class="button button-secondary" id="em-reject-transaction" style="margin-left: 8px;">
+        Reject Transaction
+    </button>
 </div>
 
 <?php if ( ! empty( $approve_result ) ) : ?>

@@ -67,7 +67,8 @@ function event_manager_aws_sigv4_request( $url, $method = 'GET', $body = '' ) {
         'Host'          => $host,
         'X-Amz-Date'    => $timestamp,
         'Authorization' => $authorization_header,
-        'Accept'        => 'application/json'
+        'Accept'        => 'application/json',
+        'Content-Type'  => 'application/json',
     );
 
     $args = array(

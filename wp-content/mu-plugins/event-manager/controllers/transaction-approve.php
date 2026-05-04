@@ -18,8 +18,12 @@ function event_manager_handle_approve( $transaction_id ) {
         wp_die( 'Security check failed.' );
     }
 
+    // Build the request body from submitted form data
+    $staged_data = isset( $_POST['staged'] ) && is_array( $_POST['staged'] ) ? $_POST['staged'] : array();
+    $body = ! empty( $staged_data ) ? wp_json_encode( $staged_data ) : '';
+
     $approve_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/' . urlencode( $transaction_id ) . '/approve';
-    $response = event_manager_aws_sigv4_request( $approve_url, 'POST' );
+    $response = event_manager_aws_sigv4_request( $approve_url, 'POST', $body );
 
     if ( is_wp_error( $response ) ) {
         return array(
