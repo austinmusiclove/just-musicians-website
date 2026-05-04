@@ -40,6 +40,7 @@ function event_manager_render_single_transaction( $transaction_id ) {
             $transaction = $data;
             $transaction['id'] = $transaction_id;
             $staged = isset( $data['staged_data'] ) ? $data['staged_data'] : array();
+            $current = isset( $data['current_data'] ) ? $data['current_data'] : array();
         } else {
             $error_msg = 'API Request failed. Status Code: ' . $response_code . '. Response: ' . esc_html( $body );
         }
