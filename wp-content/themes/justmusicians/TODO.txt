@@ -2,9 +2,11 @@ Deploy
     define( 'REVIEW_PAGE_SIZE', 5);
     define access key and secret and base url
 Event Manager
-    organize files to lower file size
     reject transaction
     approve with edits
+    next button
+        check case where it is the last id and there is no next
+    show current data and highlight differences with current data and staged
     add venue name to transactions table
     add venue name in staged event data in single transaction page
 Glossaries

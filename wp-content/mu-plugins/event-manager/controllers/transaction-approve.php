@@ -20,6 +20,14 @@ function event_manager_handle_approve( $transaction_id ) {
 
     // Build the request body from submitted form data
     $staged_data = isset( $_POST['staged'] ) && is_array( $_POST['staged'] ) ? $_POST['staged'] : array();
+
+    // Convert empty strings and 'null' strings to actual null
+    foreach ( $staged_data as $key => $value ) {
+        if ( $value === '' || $value === 'null' ) {
+            $staged_data[$key] = null;
+        }
+    }
+
     $body = ! empty( $staged_data ) ? wp_json_encode( $staged_data ) : '';
 
     $approve_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/' . urlencode( $transaction_id ) . '/approve';
