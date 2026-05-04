@@ -13,9 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         </button>
     </div>
     <div style="margin-left: auto;">
-        <button type="button" class="button button-secondary" id="em-next-transaction">
-            Next &rarr;
-        </button>
+        <?php if ( ! empty( $transaction['next_transaction_id'] ) ) : ?>
+            <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager&action=view&id=' . urlencode( $transaction['next_transaction_id'] ) ) ); ?>" class="button button-secondary" id="em-next-transaction">
+                Next &rarr;
+            </a>
+        <?php endif; ?>
     </div>
 </div>
 
