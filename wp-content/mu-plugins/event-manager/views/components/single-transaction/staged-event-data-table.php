@@ -14,19 +14,8 @@ function em_get_field_value( $array, $key ) {
  * Compare staged vs current values and return highlight class if different.
  */
 function em_get_highlight_class( $staged_value, $current_value ) {
-    // Normalize values for comparison (handle null, 'null' strings, empty strings)
-    $normalize = function( $val ) {
-        if ( $val === null || $val === 'null' ) {
-            return '';
-        }
-        return trim( (string) $val );
-    };
-
-    $staged_normalized = $normalize( $staged_value );
-    $current_normalized = $normalize( $current_value );
-
     // Return highlight class if different and current is not empty
-    if ( $current_normalized !== '' && $staged_normalized !== $current_normalized ) {
+    if ( $current_value !== '' && $staged_value !== $current_value ) {
         return 'current-data-changed';
     }
     return '';
@@ -39,9 +28,23 @@ $show_current_column = ! empty( $current ) && is_array( $current );
 <style>
     .current-data-changed {
         background-color: #fff3cd;
-        border: 1px solid #ffc107;
         padding: 5px;
         border-radius: 3px;
+    }
+    .url-field-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .url-field-wrapper input {
+        flex: 1;
+    }
+    .url-view-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        white-space: nowrap;
     }
 </style>
 <table class="form-table" style="margin-bottom: 30px; table-layout: fixed; width: 100%;">
@@ -129,16 +132,48 @@ $show_current_column = ! empty( $current ) && is_array( $current );
         </tr>
         <tr>
             <th scope="row"><label>Event Page URL</label></th>
-            <td><input type="url" name="staged[event_page_url]" value="<?php echo esc_attr( em_get_field_value( $staged, 'event_page_url' ) ); ?>" style="width: 100%"></td>
+            <td>
+                <div class="url-field-wrapper">
+                    <input type="url" name="staged[event_page_url]" value="<?php echo esc_attr( em_get_field_value( $staged, 'event_page_url' ) ); ?>" style="width: 100%">
+                    <?php if ( ! empty( $staged['event_page_url'] ) ) : ?>
+                        <a href="<?php echo esc_url( $staged['event_page_url'] ); ?>" target="_blank" class="button url-view-btn" title="View Event Page">View</a>
+                    <?php endif; ?>
+                </div>
+            </td>
             <?php if ( $show_current_column ) : ?>
-                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['event_page_url'] ?? '', $current['event_page_url'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'event_page_url' ) ); ?></td>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['event_page_url'] ?? '', $current['event_page_url'] ?? '' ) ); ?>">
+                    <?php
+                    $event_page_url = em_get_field_value( $current, 'event_page_url' );
+                    if ( ! empty( $event_page_url ) ) :
+                    ?>
+                        <a href="<?php echo esc_url( $event_page_url ); ?>" target="_blank"><?php echo esc_html( $event_page_url ); ?></a>
+                    <?php else : ?>
+                        <?php echo esc_html( $event_page_url ); ?>
+                    <?php endif; ?>
+                </td>
             <?php endif; ?>
         </tr>
         <tr>
             <th scope="row"><label>Ticket URL</label></th>
-            <td><input type="url" name="staged[ticket_url]" value="<?php echo esc_attr( em_get_field_value( $staged, 'ticket_url' ) ); ?>" style="width: 100%"></td>
+            <td>
+                <div class="url-field-wrapper">
+                    <input type="url" name="staged[ticket_url]" value="<?php echo esc_attr( em_get_field_value( $staged, 'ticket_url' ) ); ?>" style="width: 100%">
+                    <?php if ( ! empty( $staged['ticket_url'] ) ) : ?>
+                        <a href="<?php echo esc_url( $staged['ticket_url'] ); ?>" target="_blank" class="button url-view-btn" title="View Tickets">View</a>
+                    <?php endif; ?>
+                </div>
+            </td>
             <?php if ( $show_current_column ) : ?>
-                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['ticket_url'] ?? '', $current['ticket_url'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'ticket_url' ) ); ?></td>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['ticket_url'] ?? '', $current['ticket_url'] ?? '' ) ); ?>">
+                    <?php
+                    $ticket_url = em_get_field_value( $current, 'ticket_url' );
+                    if ( ! empty( $ticket_url ) ) :
+                    ?>
+                        <a href="<?php echo esc_url( $ticket_url ); ?>" target="_blank"><?php echo esc_html( $ticket_url ); ?></a>
+                    <?php else : ?>
+                        <?php echo esc_html( $ticket_url ); ?>
+                    <?php endif; ?>
+                </td>
             <?php endif; ?>
         </tr>
         <tr>
