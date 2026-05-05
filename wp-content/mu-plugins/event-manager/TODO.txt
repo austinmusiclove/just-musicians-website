@@ -1,2 +1,7 @@
-add link button for tickets and event page link input boxes
-make link clickable for current data links
+display existing events
+filter existing events by venue
+paginate dashboard staged transactions
+be able to edit existing events
+be able to approve and change an update to a create
+show current published events for the venue in question (two venues if current and staged have different venues)
+show any events from the same day and same venue that are published below in left column

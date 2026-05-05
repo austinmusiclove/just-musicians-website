@@ -177,12 +177,30 @@ $show_current_column = ! empty( $current ) && is_array( $current );
             <?php endif; ?>
         </tr>
         <tr>
-            <th scope="row"><label>Image</label></th>
+            <th scope="row"><label>Image URL</label></th>
+            <td>
+                <input type="url" name="staged[image_url]" id="staged-image-url-input" value="<?php echo esc_attr( em_get_field_value( $staged, 'image_url' ) ); ?>" style="width: 100%;" oninput="var preview = document.getElementById('staged-image-preview'); if (this.value) { preview.src = this.value; preview.style.display = 'block'; } else { preview.style.display = 'none'; }">
+            </td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['image_url'] ?? '', $current['image_url'] ?? '' ) ); ?>">
+                    <?php
+                    $current_image_url = em_get_field_value( $current, 'image_url' );
+                    if ( ! empty( $current_image_url ) ) :
+                    ?>
+                        <a href="<?php echo esc_url( $current_image_url ); ?>" target="_blank"><?php echo esc_html( $current_image_url ); ?></a>
+                    <?php else : ?>
+                        No image URL.
+                    <?php endif; ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Image Preview</label></th>
             <td>
                 <?php if ( ! empty( $staged['image_url'] ) ) : ?>
-                    <img src="<?php echo esc_url( $staged['image_url'] ); ?>" alt="Staged Image" style="max-width: 100%; height: auto; display: block; border: 1px solid #c3c4c7;" />
+                    <img id="staged-image-preview" src="<?php echo esc_url( $staged['image_url'] ); ?>" alt="Staged Image" style="max-width: 100%; height: auto; display: block; border: 1px solid #c3c4c7;" />
                 <?php else : ?>
-                    No image available.
+                    <img id="staged-image-preview" src="" alt="Staged Image" style="max-width: 100%; height: auto; display: none; border: 1px solid #c3c4c7;" />
                 <?php endif; ?>
             </td>
             <?php if ( $show_current_column ) : ?>
