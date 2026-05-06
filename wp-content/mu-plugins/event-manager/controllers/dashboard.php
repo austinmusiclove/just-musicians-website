@@ -7,11 +7,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Render the Event Manager admin list page.
  */
 function event_manager_render_dashboard() {
+    $current_page = isset( $_GET['paged'] ) ? max( 1, intval( $_GET['paged'] ) ) : 1;
+
     $api_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/events';
+    $api_url = add_query_arg( array( 'page' => $current_page ), $api_url );
+
     $response = event_manager_aws_sigv4_request( $api_url );
 
-    $staged_count = 0;
+    $total_count = 0;
     $staged_transactions = array();
+    $total_pages = 0;
     $error_msg = '';
 
     if ( is_wp_error( $response ) ) {
@@ -22,10 +27,9 @@ function event_manager_render_dashboard() {
 
         if ( $response_code === 200 ) {
             $data = json_decode( $body, true );
-            if ( isset( $data['count'] ) ) {
-                $staged_count = intval( $data['count'] );
-            } else {
-                $error_msg = 'API response did not contain a "count" field.';
+            if ( isset( $data['total'] ) ) {
+                $total_count = intval( $data['total'] );
+                $total_pages = max( 1, intval( $data['total_pages'] ) );
             }
 
             if ( isset( $data['transactions'] ) && is_array( $data['transactions'] ) ) {

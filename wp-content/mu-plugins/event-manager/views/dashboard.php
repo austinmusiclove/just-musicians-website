@@ -15,10 +15,34 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         <?php else : ?>
             <p style="font-size: 1.2em; font-weight: bold; color: #2271b1;">
-                Total: <?php echo esc_html( $staged_count ); ?>
+                Total: <?php echo esc_html( $total_count ); ?>
             </p>
         <?php endif; ?>
     </div>
 
     <?php include plugin_dir_path( __FILE__ ) . 'components/dashboard/staged-transactions-table.php'; ?>
+
+    <?php if ( ! empty( $error_msg ) ) : ?>
+    <?php elseif ( $total_pages > 1 ) : ?>
+        <div class="tablenav bottom" style="margin-top: 20px;">
+            <div class="tablenav-pages">
+                <span class="displaying-num"><?php echo esc_html( number_format_i18n( $total_count ) ); ?> items</span>
+                <span class="pagination-links">
+                    <?php
+                    $base_url = admin_url( 'admin.php?page=event-manager' );
+                    $pagination_args = array(
+                        'base'   => add_query_arg( 'paged', '%#%', $base_url ),
+                        'format' => '',
+                        'current' => $current_page,
+                        'total' => $total_pages,
+                        'prev_text' => '&lsaquo;',
+                        'next_text' => '&rsaquo;',
+                        'type' => 'plain',
+                    );
+                    echo paginate_links( $pagination_args );
+                    ?>
+                </span>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
