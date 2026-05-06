@@ -3,10 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-require_once plugin_dir_path( __FILE__ ) . 'transaction-approve.php';
-require_once plugin_dir_path( __FILE__ ) . 'transaction-reject.php';
-require_once plugin_dir_path( __FILE__ ) . 'transaction-update.php';
-
 /**
  * Render the single transaction detail page.
  *
@@ -22,7 +18,16 @@ function event_manager_render_single_transaction( $transaction_id ) {
     $error_msg = '';
     $approve_result = null;
 
-    // Fetch transaction data first (needed for update handler)
+    // Check for action result error
+    if ( isset( $_GET['em_action'] ) && $_GET['em_action'] === 'error' ) {
+        $error_data = get_transient( 'em_action_error_' . $transaction_id );
+        if ( $error_data ) {
+            $error_msg = $error_data;
+            delete_transient( 'em_action_error_' . $transaction_id );
+        }
+    }
+
+    // Fetch transaction data
     if ( is_wp_error( $response ) ) {
         $error_msg = $response->get_error_message();
     } else {
@@ -38,21 +43,6 @@ function event_manager_render_single_transaction( $transaction_id ) {
         } else {
             $error_msg = 'API Request failed. Status Code: ' . $response_code . '. Response: ' . esc_html( $body );
         }
-    }
-
-    // Handle update action (only if we have transaction data)
-    if ( $error_msg === '' && $transaction !== null ) {
-        $approve_result = event_manager_handle_update( $transaction_id, $transaction );
-    }
-
-    // Handle approve action (only if update wasn't triggered)
-    if ( $approve_result === null && $error_msg === '' ) {
-        $approve_result = event_manager_handle_approve( $transaction_id );
-    }
-
-    // Handle reject action (only if update and approve weren't triggered)
-    if ( $approve_result === null && $error_msg === '' ) {
-        $approve_result = event_manager_handle_reject( $transaction_id );
     }
 
     include plugin_dir_path( dirname( __FILE__ ) ) . 'views/single-transaction.php';

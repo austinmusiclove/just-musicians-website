@@ -1,4 +1,5 @@
 single transaction
+    add start date to staged transactions page staged_start_date
     go to next automatically if successful approve
     show new data in inputs after you hit input (right now it reverts to original not edits)
     show current published events for the venue in question (two venues if current and staged have different venues)
