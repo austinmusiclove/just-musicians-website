@@ -5,9 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function event_manager_render_events() {
     $current_page = isset( $_GET['paged'] ) ? max( 1, intval( $_GET['paged'] ) ) : 1;
+    $venue_id = isset( $_GET['venue_id'] ) && $_GET['venue_id'] !== '' ? sanitize_text_field( $_GET['venue_id'] ) : '';
 
     $api_url = untrailingslashit( AWS_API_BASE_URL ) . '/events/future';
-    $api_url = add_query_arg( array( 'page' => $current_page ), $api_url );
+    $api_args = array( 'page' => $current_page );
+    if ( ! empty( $venue_id ) ) {
+        $api_args['venue_id'] = $venue_id;
+    }
+    $api_url = add_query_arg( $api_args, $api_url );
 
     $response = event_manager_aws_sigv4_request( $api_url );
 

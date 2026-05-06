@@ -33,6 +33,15 @@ if ( ! defined( 'ABSPATH' ) ) {
             <p><strong>Error:</strong> <?php echo esc_html( $error_msg ); ?></p>
         </div>
     <?php else : ?>
+        <form method="get" action="" style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
+            <input type="hidden" name="page" value="event-manager-events">
+            <label for="em-venue-filter" style="font-weight: 600;">Venue ID:</label>
+            <input type="text" name="venue_id" id="em-venue-filter" value="<?php echo esc_attr( $venue_id ); ?>" style="width: 100px;">
+            <button type="submit" class="button">Filter</button>
+            <?php if ( ! empty( $venue_id ) ) : ?>
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager-events' ) ); ?>" class="button">Clear</a>
+            <?php endif; ?>
+        </form>
         <p style="font-size: 1.2em; font-weight: bold; color: #2271b1;">
             Total: <?php echo esc_html( $total_count ); ?>
         </p>
@@ -56,6 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             'prev_text' => '&lsaquo;',
                             'next_text' => '&rsaquo;',
                             'type' => 'plain',
+                            'add_args' => ! empty( $venue_id ) ? array( 'venue_id' => $venue_id ) : array(),
                         );
                         echo paginate_links( $pagination_args );
                         ?>
