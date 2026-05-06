@@ -4,13 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Handle transaction approve action.
+ * Handle transaction update action.
  *
  * @param string $transaction_id
+ * @param array  $transaction The full transaction data array.
  * @return array|null Result array with 'type', 'message', 'body' keys, or null if not triggered.
  */
-function event_manager_handle_approve( $transaction_id ) {
-    if ( ! isset( $_POST['em_approve'] ) ) {
+function event_manager_handle_update( $transaction_id, $transaction ) {
+    if ( ! isset( $_POST['em_update'] ) ) {
         return null;
     }
 
@@ -18,20 +19,13 @@ function event_manager_handle_approve( $transaction_id ) {
         wp_die( 'Security check failed.' );
     }
 
-    // Build the request body from submitted form data
-    $staged_data = isset( $_POST['staged'] ) && is_array( $_POST['staged'] ) ? wp_unslash($_POST['staged']) : array();
+    $body = wp_json_encode( array(
+        'transaction_type' => isset( $transaction['transaction_type'] ) ? $transaction['transaction_type'] : null,
+        'current_data_id'  => isset( $transaction['current_data_id'] ) ? $transaction['current_data_id'] : null,
+    ), 0 );
 
-    // Convert empty strings and 'null' strings to actual null
-    foreach ( $staged_data as $key => $value ) {
-        if ( $value === '' || $value === 'null' ) {
-            $staged_data[$key] = null;
-        }
-    }
-
-    $body = ! empty( $staged_data ) ? wp_json_encode( $staged_data ) : '';
-
-    $approve_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/' . urlencode( $transaction_id ) . '/approve';
-    $response = event_manager_aws_sigv4_request( $approve_url, 'POST', $body );
+    $update_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/' . urlencode( $transaction_id ) . '/update';
+    $response = event_manager_aws_sigv4_request( $update_url, 'POST', $body );
 
     if ( is_wp_error( $response ) ) {
         return array(
@@ -46,7 +40,7 @@ function event_manager_handle_approve( $transaction_id ) {
     if ( $response_code === 200 || $response_code === 201 ) {
         return array(
             'type'    => 'success',
-            'message' => 'Transaction approved successfully!',
+            'message' => 'Transaction updated successfully!',
             'body'    => $body,
         );
     }
