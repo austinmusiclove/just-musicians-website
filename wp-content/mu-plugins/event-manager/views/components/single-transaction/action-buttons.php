@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         <button type="submit" name="em_approve" value="1" class="button button-primary" id="em-approve-transaction">
             Approve Transaction
         </button>
+        <button type="submit" name="em_update" value="1" class="button button-secondary" id="em-update-transaction" style="margin-left: 8px;">
+            Update Transaction
+        </button>
         <button type="submit" name="em_reject" value="1" class="button button-secondary" id="em-reject-transaction" style="margin-left: 8px;">
             Reject Transaction
         </button>

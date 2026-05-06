@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 ?>
-<h2 style="margin-top: 30px;">Meta Data</h2>
+<h2 style="margin-top: 30px;">Staged Transaction Meta Data</h2>
 <table class="form-table">
     <tr>
         <th scope="row"><label>ID</label></th>
