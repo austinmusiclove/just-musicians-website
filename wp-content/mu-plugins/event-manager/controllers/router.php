@@ -11,11 +11,17 @@ function event_manager_admin_router() {
         return;
     }
 
+    $page = isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
     $action = isset( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : '';
     $transaction_id = isset( $_GET['id'] ) ? sanitize_text_field( $_GET['id'] ) : '';
 
     if ( 'view' === $action && ! empty( $transaction_id ) ) {
         event_manager_render_single_transaction( $transaction_id );
+        return;
+    }
+
+    if ( 'event-manager-events' === $page ) {
+        event_manager_render_events();
         return;
     }
 

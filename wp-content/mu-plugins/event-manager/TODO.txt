@@ -1,7 +1,9 @@
-display existing events
-filter existing events by venue
-paginate dashboard staged transactions
-be able to edit existing events
-be able to approve and change an update to a create
-show current published events for the venue in question (two venues if current and staged have different venues)
-show any events from the same day and same venue that are published below in left column
+single transaction
+    show current published events for the venue in question (two venues if current and staged have different venues)
+    be able to approve and change an update to a create and vis versa
+staged transactions
+    paginate dashboard staged transactions
+events
+    get events
+    filter events by venue
+    be able to edit existing events
