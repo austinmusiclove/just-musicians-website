@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+    exit;
 }
 ?>
 <div class="wrap">
@@ -13,7 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="notice notice-error inline" style="margin: 10px 0;">
             <p><strong>Error:</strong> <?php echo esc_html( $error_msg ); ?></p>
         </div>
-    <?php elseif ( ! empty( $transaction ) ) : ?>
+    <?php endif; ?>
+
+    <?php if ( ! empty( $success_msg ) ) : ?>
+        <div class="notice notice-success inline" style="margin: 10px 0;">
+            <p><strong>Success:</strong> <?php echo esc_html( $success_msg ); ?></p>
+        </div>
+    <?php endif; ?>
+
+    <?php if ( ! empty( $transaction ) ) : ?>
         <style>
             .em-transaction-columns .form-table td,
             .em-transaction-columns .form-table th {

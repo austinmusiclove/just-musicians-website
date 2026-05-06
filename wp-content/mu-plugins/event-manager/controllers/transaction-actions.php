@@ -76,12 +76,18 @@ function event_manager_process_actions() {
     }
 
     if ( $result !== null && $result['type'] === 'success' ) {
-        $next_id = ! empty( $transaction['next_transaction_id'] ) ? $transaction['next_transaction_id'] : null;
-        $redirect_url = $next_id
-            ? admin_url( 'admin.php?page=event-manager&action=view&id=' . urlencode( $next_id ) )
-            : admin_url( 'admin.php?page=event-manager' );
-        wp_redirect( $redirect_url );
-        exit;
+        if ( $action === 'update' ) {
+            set_transient( 'em_action_success_' . $transaction_id, $result['message'], 30 );
+            wp_redirect( admin_url( 'admin.php?page=event-manager&action=view&id=' . urlencode( $transaction_id ) . '&em_action=success' ) );
+            exit;
+        } else {
+            $next_id = ! empty( $transaction['next_transaction_id'] ) ? $transaction['next_transaction_id'] : null;
+            $redirect_url = $next_id
+                ? admin_url( 'admin.php?page=event-manager&action=view&id=' . urlencode( $next_id ) )
+                : admin_url( 'admin.php?page=event-manager' );
+            wp_redirect( $redirect_url );
+            exit;
+        }
     }
 
     if ( $result !== null && $result['type'] === 'error' ) {

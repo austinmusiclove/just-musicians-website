@@ -16,14 +16,20 @@ function event_manager_render_single_transaction( $transaction_id ) {
     $staged = array();
     $current = array();
     $error_msg = '';
-    $approve_result = null;
+    $success_msg = '';
 
-    // Check for action result error
+    // Check for action result
     if ( isset( $_GET['em_action'] ) && $_GET['em_action'] === 'error' ) {
         $error_data = get_transient( 'em_action_error_' . $transaction_id );
         if ( $error_data ) {
             $error_msg = $error_data;
             delete_transient( 'em_action_error_' . $transaction_id );
+        }
+    } elseif ( isset( $_GET['em_action'] ) && $_GET['em_action'] === 'success' ) {
+        $success_data = get_transient( 'em_action_success_' . $transaction_id );
+        if ( $success_data ) {
+            $success_msg = $success_data;
+            delete_transient( 'em_action_success_' . $transaction_id );
         }
     }
 
