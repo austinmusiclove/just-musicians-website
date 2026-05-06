@@ -7,6 +7,28 @@ if ( ! defined( 'ABSPATH' ) ) {
     <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
     <p>Welcome to the Event Manager. Use this page to manage event operations.</p>
 
+    <style>
+        .tablenav .pagination-links a,
+        .tablenav .pagination-links span {
+            display: inline-block;
+            padding: 3px 6px;
+            margin: 0 2px;
+            border: 1px solid #c3c4c7;
+            border-radius: 3px;
+            text-decoration: none;
+            min-width: 30px;
+            text-align: center;
+        }
+        .tablenav .pagination-links a:hover {
+            background: #f0f0f1;
+        }
+        .tablenav .pagination-links span.current {
+            background: #2271b1;
+            border-color: #2271b1;
+            color: #fff;
+        }
+    </style>
+
     <div class="card" style="max-width: 100%; margin-top: 20px;">
         <h2>Staged Transactions Overview</h2>
         <?php if ( ! empty( $error_msg ) ) : ?>
