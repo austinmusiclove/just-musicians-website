@@ -9,11 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             <thead>
                 <tr>
                     <th scope="col" style="width: 80px;">ID</th>
-                    <th scope="col" style="width: 120px;">Status</th>
+                    <th scope="col" style="width: 100px;">Status</th>
                     <th scope="col">Event Title</th>
-                    <th scope="col" style="width: 150px;">Transaction Type</th>
+                    <th scope="col" style="width: 130px;">Transaction Type</th>
+                    <th scope="col" style="width: 130px;">Staged Start Date</th>
                     <th scope="col">Scrape URL</th>
-                    <th scope="col" style="width: 180px;">Created At</th>
+                    <th scope="col" style="width: 160px;">Created At</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 ?>
                             </td>
                             <td><?php echo esc_html( isset( $transaction['transaction_type'] ) ? $transaction['transaction_type'] : '-' ); ?></td>
+                            <td><?php echo esc_html( isset( $transaction['staged_start_date'] ) && ! empty( $transaction['staged_start_date'] ) ? $transaction['staged_start_date'] : '-' ); ?></td>
                             <td>
                                 <?php if ( ! empty( $transaction['scrape_url'] ) ) : ?>
                                     <a href="<?php echo esc_url( $transaction['scrape_url'] ); ?>" target="_blank">
@@ -64,7 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="6" style="text-align: center; padding: 20px;">No staged transactions found.</td>
+                        <td colspan="7" style="text-align: center; padding: 20px;">No staged transactions found.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -74,6 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <th scope="col">Status</th>
                     <th scope="col">Event Title</th>
                     <th scope="col">Transaction Type</th>
+                    <th scope="col">Staged Start Date</th>
                     <th scope="col">Scrape URL</th>
                     <th scope="col">Created At</th>
                 </tr>
