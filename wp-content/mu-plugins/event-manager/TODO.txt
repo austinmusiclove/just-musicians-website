@@ -1,4 +1,7 @@
+staged transactions
+    bulk reject
 single transaction
+    highlight even if the current data is empty
     show new data in inputs after you hit input (right now it reverts to original not edits)
     show current published events for the venue in question (two venues if current and staged have different venues)
     be able to approve and change an update to a create and vis versa

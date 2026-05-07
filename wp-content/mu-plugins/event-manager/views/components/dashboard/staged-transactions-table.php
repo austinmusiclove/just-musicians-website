@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <thead>
                 <tr>
                     <th scope="col" style="width: 80px;">ID</th>
-                    <th scope="col" style="width: 100px;">Status</th>
+                    <th scope="col" style="width: 100px;">Venue</th>
                     <th scope="col">Event Title</th>
                     <th scope="col" style="width: 130px;">Transaction Type</th>
                     <th scope="col" style="width: 130px;">Staged Start Date</th>
@@ -22,12 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php foreach ( $staged_transactions as $transaction ) : ?>
                         <tr>
                             <td><?php echo esc_html( isset( $transaction['id'] ) ? $transaction['id'] : '-' ); ?></td>
-                            <td>
-                                <?php
-                                    $status = isset( $transaction['status'] ) ? $transaction['status'] : '-';
-                                    echo esc_html( $status );
-                                ?>
-                            </td>
+                            <td><?php echo esc_html( isset( $transaction['staged_venue_name'] ) ? $transaction['staged_venue_name'] : '-' ); ?></td>
                             <td>
                                 <?php
                                     $event_id = isset( $transaction['id'] ) ? esc_attr( $transaction['id'] ) : '';
@@ -73,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <tfoot>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Venue</th>
                     <th scope="col">Event Title</th>
                     <th scope="col">Transaction Type</th>
                     <th scope="col">Staged Start Date</th>
