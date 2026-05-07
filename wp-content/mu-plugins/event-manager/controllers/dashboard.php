@@ -18,6 +18,19 @@ function event_manager_render_dashboard() {
     $staged_transactions = array();
     $total_pages = 0;
     $error_msg = '';
+    $bulk_result = null;
+
+    // Check for bulk action result
+    if ( isset( $_GET['em_bulk_result'] ) ) {
+        $bulk_result = get_transient( 'em_bulk_result' );
+        delete_transient( 'em_bulk_result' );
+
+        $bulk_error = get_transient( 'em_bulk_error' );
+        if ( $bulk_error ) {
+            $error_msg = $bulk_error;
+            delete_transient( 'em_bulk_error' );
+        }
+    }
 
     if ( is_wp_error( $response ) ) {
         $error_msg = $response->get_error_message();

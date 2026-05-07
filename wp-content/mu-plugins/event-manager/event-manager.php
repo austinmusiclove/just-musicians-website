@@ -15,6 +15,7 @@ require_once plugin_dir_path( __FILE__ ) . 'controllers/router.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/dashboard.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/events.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/transaction-actions.php';
+require_once plugin_dir_path( __FILE__ ) . 'controllers/bulk-actions.php';
 require_once plugin_dir_path( __FILE__ ) . 'controllers/single-transaction.php';
 
 /**
