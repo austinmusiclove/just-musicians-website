@@ -1,5 +1,3 @@
-staged transactions
-    bulk reject
 single transaction
     highlight even if the current data is empty
     show new data in inputs after you hit input (right now it reverts to original not edits)

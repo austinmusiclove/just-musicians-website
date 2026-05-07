@@ -4,11 +4,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php if ( empty( $error_msg ) ) : ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectAll = document.getElementById('cb-select-all');
+            if (selectAll) {
+                selectAll.addEventListener('change', function() {
+                    var checked = this.checked;
+                    document.querySelectorAll('.em-row-cb').forEach(function(cb) {
+                        cb.checked = checked;
+                    });
+                });
+            }
+        });
+    </script>
     <table class="wp-list-table widefat fixed striped table-view-list">
         <thead>
             <tr>
                 <th scope="col" style="width: 30px;">
-                    <input type="checkbox" id="cb-select-all" onclick="document.querySelectorAll('.em-row-cb').forEach(function(cb){cb.checked=this.checked;});">
+                    <input type="checkbox" id="cb-select-all">
                 </th>
                 <th scope="col" style="width: 60px;">ID</th>
                 <th scope="col" style="width: 80px;">Venue</th>
