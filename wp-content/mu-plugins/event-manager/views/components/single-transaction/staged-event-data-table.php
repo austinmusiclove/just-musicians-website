@@ -15,7 +15,7 @@ function em_get_field_value( $array, $key ) {
  */
 function em_get_highlight_class( $staged_value, $current_value ) {
     // Return highlight class if different and current is not empty
-    if ( $current_value !== '' && $staged_value !== $current_value ) {
+    if ( $staged_value !== $current_value ) {
         return 'current-data-changed';
     }
     return '';
@@ -28,8 +28,8 @@ $show_current_column = ! empty( $current ) && is_array( $current );
 <style>
     .current-data-changed {
         background-color: #fff3cd;
-        padding: 5px;
         border-radius: 3px;
+        padding: 5px;
     }
     .url-field-wrapper {
         display: flex;

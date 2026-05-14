@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <th scope="col" style="width: 80px;">Venue</th>
                 <th scope="col">Event Title</th>
                 <th scope="col" style="width: 120px;">Transaction Type</th>
-                <th scope="col" style="width: 120px;">Staged Start Date</th>
+                <th scope="col" style="width: 120px;">Date</th>
                 <th scope="col">Scrape URL</th>
                 <th scope="col" style="width: 140px;">Created At</th>
             </tr>
@@ -40,11 +40,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <input type="checkbox" class="em-row-cb" name="em_transactions[]" value="<?php echo esc_attr( isset( $transaction['id'] ) ? $transaction['id'] : '' ); ?>">
                         </td>
                         <td><?php echo esc_html( isset( $transaction['id'] ) ? $transaction['id'] : '-' ); ?></td>
-                        <td><?php echo esc_html( isset( $transaction['staged_venue_name'] ) ? $transaction['staged_venue_name'] : '-' ); ?></td>
+                        <td>
+                            <?php
+                                $venue = ! empty( $transaction['current_venue_name'] ) ? $transaction['current_venue_name'] : ( isset( $transaction['staged_venue_name'] ) ? $transaction['staged_venue_name'] : '-' );
+                                echo esc_html( $venue );
+                            ?>
+                        </td>
                         <td>
                             <?php
                                 $event_id = isset( $transaction['id'] ) ? esc_attr( $transaction['id'] ) : '';
-                                $event_title = isset( $transaction['staged_event_title'] ) ? $transaction['staged_event_title'] : '-';
+                                $current_title = ! empty( $transaction['current_event_title'] ) ? $transaction['current_event_title'] : '';
+                                $event_title = ! empty( $current_title ) ? $current_title : ( isset( $transaction['staged_event_title'] ) ? $transaction['staged_event_title'] : '-' );
                                 if ( ! empty( $event_id ) ) {
                                     $link = add_query_arg( array( 'action' => 'view', 'id' => $event_id ) );
                                     echo '<a href="' . esc_url( $link ) . '"><strong>' . esc_html( $event_title ) . '</strong></a>';
@@ -54,7 +60,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                             ?>
                         </td>
                         <td><?php echo esc_html( isset( $transaction['transaction_type'] ) ? $transaction['transaction_type'] : '-' ); ?></td>
-                        <td><?php echo esc_html( isset( $transaction['staged_start_date'] ) && ! empty( $transaction['staged_start_date'] ) ? $transaction['staged_start_date'] : '-' ); ?></td>
+                        <td>
+                            <?php
+                                $date = ! empty( $transaction['current_start_date'] ) ? $transaction['current_start_date'] : ( isset( $transaction['staged_start_date'] ) && ! empty( $transaction['staged_start_date'] ) ? $transaction['staged_start_date'] : '-' );
+                                echo esc_html( $date );
+                            ?>
+                        </td>
                         <td>
                             <?php if ( ! empty( $transaction['scrape_url'] ) ) : ?>
                                 <a href="<?php echo esc_url( $transaction['scrape_url'] ); ?>" target="_blank">
@@ -90,7 +101,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <th scope="col">Venue</th>
                 <th scope="col">Event Title</th>
                 <th scope="col">Transaction Type</th>
-                <th scope="col">Staged Start Date</th>
+                <th scope="col">Date</th>
                 <th scope="col">Scrape URL</th>
                 <th scope="col">Created At</th>
             </tr>
