@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     <p>Welcome to the Event Manager. Use this page to manage event operations.</p>
 
     <style>
+        .nav-tab-wrapper {
+            margin-bottom: 20px;
+        }
         .tablenav .pagination-links a,
         .tablenav .pagination-links span {
             display: inline-block;
@@ -34,6 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         }
     </style>
 
+    <h2 class="nav-tab-wrapper">
+        <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager' ) ); ?>" class="nav-tab <?php echo $current_tab === '' ? 'nav-tab-active' : ''; ?>">Pending Review</a>
+        <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager&tab=pending-scrape' ) ); ?>" class="nav-tab <?php echo $current_tab === 'pending-scrape' ? 'nav-tab-active' : ''; ?>">Pending Scrape</a>
+    </h2>
+
     <?php if ( ! empty( $error_msg ) ) : ?>
         <div class="notice notice-error" style="margin: 20px 0;">
             <p><strong>Error:</strong> <?php echo esc_html( $error_msg ); ?></p>
@@ -57,6 +65,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     <?php if ( empty( $error_msg ) ) : ?>
         <form method="post" action="">
             <?php wp_nonce_field( 'em_bulk_reject' ); ?>
+            <?php if ( $current_tab === 'pending-scrape' ) : ?>
+                <input type="hidden" name="tab" value="pending-scrape">
+            <?php endif; ?>
             <div class="tablenav top" style="margin-bottom: 10px;">
                 <div class="alignleft actions bulkactions">
                     <select name="em_bulk_action">
@@ -81,6 +92,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <span class="pagination-links">
                             <?php
                             $base_url = admin_url( 'admin.php?page=event-manager' );
+                            if ( $current_tab === 'pending-scrape' ) {
+                                $base_url = add_query_arg( array( 'tab' => 'pending-scrape' ), $base_url );
+                            }
                             $pagination_args = array(
                                 'base'   => add_query_arg( 'paged', '%#%', $base_url ),
                                 'format' => '',

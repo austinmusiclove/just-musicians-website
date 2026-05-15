@@ -1,7 +1,6 @@
 single transaction
     show both event lsit and event page screenshots if available
     show schema
-    show pending-scrape transactions
     be able to trigger scrape of pending-scrape transaction in case it is stuck in queue
     show current published events for the venue in question (two venues if current and staged have different venues)
     be able to approve and change an update to a create and vis versa

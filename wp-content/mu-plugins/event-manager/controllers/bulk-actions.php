@@ -20,13 +20,18 @@ function event_manager_process_bulk_actions() {
         return;
     }
 
+    $tab_param = '';
+    if ( isset( $_POST['tab'] ) && $_POST['tab'] === 'pending-scrape' ) {
+        $tab_param = '&tab=pending-scrape';
+    }
+
     if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'em_bulk_reject' ) ) {
         wp_die( 'Security check failed.' );
     }
 
     if ( empty( $_POST['em_transactions'] ) || ! is_array( $_POST['em_transactions'] ) ) {
         set_transient( 'em_bulk_error', 'No transactions selected.', 30 );
-        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' ) );
+        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' . $tab_param ) );
         exit;
     }
 
@@ -38,7 +43,7 @@ function event_manager_process_bulk_actions() {
 
     if ( is_wp_error( $response ) ) {
         set_transient( 'em_bulk_error', 'API request failed: ' . $response->get_error_message(), 30 );
-        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' ) );
+        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' . $tab_param ) );
         exit;
     }
 
@@ -47,7 +52,7 @@ function event_manager_process_bulk_actions() {
 
     if ( $response_code !== 200 ) {
         set_transient( 'em_bulk_error', 'API request failed. Status Code: ' . $response_code . '. Response: ' . $resp_body, 30 );
-        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' ) );
+        wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=error' . $tab_param ) );
         exit;
     }
 
@@ -71,7 +76,7 @@ function event_manager_process_bulk_actions() {
         'failed'   => $failed,
     ), 30 );
 
-    wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=' . $result_type ) );
+    wp_redirect( admin_url( 'admin.php?page=event-manager&em_bulk_result=' . $result_type . $tab_param ) );
     exit;
 }
 add_action( 'admin_init', 'event_manager_process_bulk_actions' );

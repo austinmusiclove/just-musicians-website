@@ -8,9 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function event_manager_render_dashboard() {
     $current_page = isset( $_GET['paged'] ) ? max( 1, intval( $_GET['paged'] ) ) : 1;
+    $current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : '';
 
     $api_url = untrailingslashit( AWS_API_BASE_URL ) . '/staged-transactions/events';
     $api_url = add_query_arg( array( 'page' => $current_page ), $api_url );
+
+    if ( $current_tab === 'pending-scrape' ) {
+        $api_url = add_query_arg( array( 'status' => 'pending-scrape' ), $api_url );
+    }
 
     $response = event_manager_aws_sigv4_request( $api_url );
 
