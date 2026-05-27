@@ -42,7 +42,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <td><?php
                             $id = isset( $transaction['id'] ) ? $transaction['id'] : '';
                             if ( ! empty( $id ) ) {
-                                $link = add_query_arg( array( 'action' => 'view', 'id' => $id ) );
+                                $action_type = ( isset( $current_tab ) && $current_tab === 'bulk-review' ) ? 'multi-view' : 'view';
+                                $link = add_query_arg( array( 'action' => $action_type, 'id' => $id ) );
                                 echo '<a href="' . esc_url( $link ) . '">' . esc_html( $id ) . '</a>';
                             } else {
                                 echo '-';
@@ -60,7 +61,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 $current_title = ! empty( $transaction['current_event_title'] ) ? $transaction['current_event_title'] : '';
                                 $event_title = ! empty( $current_title ) ? $current_title : ( isset( $transaction['staged_event_title'] ) ? $transaction['staged_event_title'] : '-' );
                                 if ( ! empty( $event_id ) ) {
-                                    $link = add_query_arg( array( 'action' => 'view', 'id' => $event_id ) );
+                                    $action_type = ( isset( $current_tab ) && $current_tab === 'bulk-review' ) ? 'multi-view' : 'view';
+                                    $link = add_query_arg( array( 'action' => $action_type, 'id' => $event_id ) );
                                     echo '<a href="' . esc_url( $link ) . '"><strong>' . esc_html( $event_title ) . '</strong></a>';
                                 } else {
                                     echo '<strong>' . esc_html( $event_title ) . '</strong>';

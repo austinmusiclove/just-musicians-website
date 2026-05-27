@@ -15,6 +15,11 @@ function event_manager_admin_router() {
     $action = isset( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : '';
     $transaction_id = isset( $_GET['id'] ) ? sanitize_text_field( $_GET['id'] ) : '';
 
+    if ( 'multi-view' === $action && ! empty( $transaction_id ) ) {
+        event_manager_render_multiple_transaction( $transaction_id );
+        return;
+    }
+
     if ( 'view' === $action && ! empty( $transaction_id ) ) {
         event_manager_render_single_transaction( $transaction_id );
         return;
