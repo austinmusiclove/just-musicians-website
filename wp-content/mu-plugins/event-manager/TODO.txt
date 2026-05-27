@@ -1,5 +1,7 @@
 multiple transactions
-    add multiple transaction page for multiple type transaction links
+    show status of staged events
+    add reject
+    add bulk approve
 single transaction
     be able to trigger scrape of pending-scrape transaction in case it is stuck in queue
     be able to approve and change an update to a create and vis versa

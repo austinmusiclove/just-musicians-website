@@ -22,6 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     <?php endif; ?>
 
     <?php if ( ! empty( $transaction ) ) : ?>
+        <style>
+            .current-data-changed {
+                background-color: #fff3cd;
+                border-radius: 3px;
+                padding: 5px;
+            }
+        </style>
         <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
             <div style="flex: 1; min-width: 300px; max-width: 50%;">
                 <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
@@ -39,14 +46,20 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div style="flex: 1; min-width: 300px;">
                 <form method="post" action="">
                     <?php wp_nonce_field( 'em_bulk_approve_' . $transaction['id'] ); ?>
-                    <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
-                        <?php include plugin_dir_path( __FILE__ ) . 'components/multiple-transaction/events-summary-table.php'; ?>
-
-                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #c3c4c7;">
-                            <button type="submit" name="em_bulk_approve_all" value="1" class="button button-primary">
-                                Bulk Approve All Events
-                            </button>
+                    <?php foreach ( $sub_transactions as $index => $sub_txn ) : ?>
+                        <?php $sd = $sub_txn['staged_data'] ?? array(); ?>
+                        <?php $cd = $sub_txn['current_data'] ?? array(); ?>
+                        <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px; margin-bottom: 20px;">
+                            <h2>Transaction <?php echo $index + 1; ?></h2>
+                            <?php include plugin_dir_path( __FILE__ ) . 'components/multiple-transaction/sub-transaction-data-table.php'; ?>
                         </div>
+                    <?php endforeach; ?>
+                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/venue-future-events-table.php'; ?>
+
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #c3c4c7;">
+                        <button type="submit" name="em_bulk_approve_all" value="1" class="button button-primary">
+                            Bulk Approve All Events
+                        </button>
                     </div>
                 </form>
             </div>
