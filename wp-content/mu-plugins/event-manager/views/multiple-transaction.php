@@ -29,8 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                 padding: 5px;
             }
         </style>
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-            <div style="flex: 1; min-width: 300px; max-width: 50%;">
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start;">
+            <div style="flex: 1; min-width: 300px; max-width: 50%; position: sticky; top: 20px; align-self: flex-start;">
                 <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
                     <?php if ( ! empty( $event_list_screenshot ) ) : ?>
                         <h2>Event List Screenshot</h2>
@@ -40,10 +40,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php else : ?>
                         <p>No event list screenshot available.</p>
                     <?php endif; ?>
+                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/venue-future-events-table.php'; ?>
                 </div>
             </div>
 
-            <div style="flex: 1; min-width: 300px;">
+            <div style="flex: 1; min-width: 300px; max-height: calc(100vh - 180px); overflow-y: auto;">
                 <form method="post" action="">
                     <?php wp_nonce_field( 'em_bulk_approve_' . $transaction['id'] ); ?>
                     <?php foreach ( $sub_transactions as $index => $sub_txn ) : ?>
@@ -54,7 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <?php include plugin_dir_path( __FILE__ ) . 'components/multiple-transaction/sub-transaction-data-table.php'; ?>
                         </div>
                     <?php endforeach; ?>
-                    <?php include plugin_dir_path( __FILE__ ) . 'components/single-transaction/venue-future-events-table.php'; ?>
 
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #c3c4c7;">
                         <button type="submit" name="em_bulk_approve_all" value="1" class="button button-primary">
