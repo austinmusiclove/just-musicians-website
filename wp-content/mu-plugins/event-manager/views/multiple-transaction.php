@@ -28,8 +28,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                 border-radius: 3px;
                 padding: 5px;
             }
+            .em-multi-transaction-columns .form-table td,
+            .em-multi-transaction-columns .form-table th {
+                padding: 6px 10px;
+            }
         </style>
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start;">
+        <div class="em-multi-transaction-columns" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start;">
             <div style="flex: 1; min-width: 300px; max-width: 50%; position: sticky; top: 20px; align-self: flex-start;">
                 <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
                     <?php if ( ! empty( $event_list_screenshot ) ) : ?>

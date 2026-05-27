@@ -1,5 +1,4 @@
 multiple transactions
-    show status of staged events
     add reject
     add bulk approve
 single transaction
