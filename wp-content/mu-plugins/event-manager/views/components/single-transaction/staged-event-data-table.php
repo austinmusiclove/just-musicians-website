@@ -213,5 +213,25 @@ $show_current_column = ! empty( $current ) && is_array( $current );
                 </td>
             <?php endif; ?>
         </tr>
+        <?php if ( ! empty( $staged['page_schema'] ) ) : ?>
+        <tr>
+            <th scope="row"><label>Page Schema</label></th>
+            <td colspan="<?php echo $show_current_column ? 2 : 1; ?>">
+                <pre style="max-height: 400px; overflow: auto; background: #f6f7f7; padding: 10px; border: 1px solid #c3c4c7; border-radius: 3px; font-size: 11px; line-height: 1.4; margin: 0; white-space: pre-wrap; word-wrap: break-word;"><?php
+                    $schema = $staged['page_schema'];
+                    if ( is_array( $schema ) || is_object( $schema ) ) {
+                        echo esc_html( json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
+                    } else {
+                        $decoded = json_decode( $schema, true );
+                        if ( json_last_error() === JSON_ERROR_NONE && is_array( $decoded ) ) {
+                            echo esc_html( json_encode( $decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
+                        } else {
+                            echo esc_html( $schema );
+                        }
+                    }
+                ?></pre>
+            </td>
+        </tr>
+        <?php endif; ?>
     </tbody>
 </table>

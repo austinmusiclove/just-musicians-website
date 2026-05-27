@@ -6,16 +6,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Get URLs from staged data (available via $staged variable)
 $ticket_url = $staged['ticket_url'] ?? '';
 $event_page_url = $staged['event_page_url'] ?? '';
+$event_list_screenshot = $staged['event_list_screenshot'] ?? '';
+$event_page_screenshot = $staged['event_page_screenshot'] ?? '';
 ?>
 <div class="em-column-screenshot" style="flex: 1; min-width: 300px; max-width: 50%;">
     <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px;">
-        <h2>Screenshot</h2>
-        <?php if ( ! empty( $transaction['screenshot'] ) ) : ?>
+        <?php if ( ! empty( $event_list_screenshot ) ) : ?>
+            <h2>Event List Screenshot</h2>
             <div class="em-screenshot-container" style="max-height: 100vh; overflow-y: auto; border: 1px solid #c3c4c7; background: #f0f0f1; margin-bottom: 20px;">
-                <img src="<?php echo esc_url( $transaction['screenshot'] ); ?>" alt="Transaction Screenshot" style="display: block; max-width: 100%; height: auto;" />
+                <img src="<?php echo esc_url( $event_list_screenshot ); ?>" alt="Event List Screenshot" style="display: block; max-width: 100%; height: auto;" />
             </div>
-        <?php else : ?>
-            <p>No screenshot available.</p>
+        <?php endif; ?>
+
+        <?php if ( ! empty( $event_page_screenshot ) ) : ?>
+            <h2>Event Page Screenshot</h2>
+            <div class="em-screenshot-container" style="max-height: 100vh; overflow-y: auto; border: 1px solid #c3c4c7; background: #f0f0f1; margin-bottom: 20px;">
+                <img src="<?php echo esc_url( $event_page_screenshot ); ?>" alt="Event Page Screenshot" style="display: block; max-width: 100%; height: auto;" />
+            </div>
+        <?php endif; ?>
+
+        <?php if ( empty( $event_list_screenshot ) && empty( $event_page_screenshot ) ) : ?>
+            <p>No screenshots available.</p>
         <?php endif; ?>
 
         <?php if ( ! empty( $event_page_url ) ) : ?>
