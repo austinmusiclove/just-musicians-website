@@ -15,6 +15,10 @@ function event_manager_render_dashboard() {
 
     if ( $current_tab === 'pending-scrape' ) {
         $api_url = add_query_arg( array( 'status' => 'pending-scrape' ), $api_url );
+    } elseif ( $current_tab === 'bulk-review' ) {
+        $api_url = add_query_arg( array( 'transaction_type' => urlencode( 'multiple' ) ), $api_url );
+    } else {
+        $api_url = add_query_arg( array( 'transaction_type' => urlencode( 'create,update,delete' ) ), $api_url );
     }
 
     $response = event_manager_aws_sigv4_request( $api_url );

@@ -40,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <h2 class="nav-tab-wrapper">
         <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager' ) ); ?>" class="nav-tab <?php echo $current_tab === '' ? 'nav-tab-active' : ''; ?>">Pending Review</a>
         <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager&tab=pending-scrape' ) ); ?>" class="nav-tab <?php echo $current_tab === 'pending-scrape' ? 'nav-tab-active' : ''; ?>">Pending Scrape</a>
+        <a href="<?php echo esc_url( admin_url( 'admin.php?page=event-manager&tab=bulk-review' ) ); ?>" class="nav-tab <?php echo $current_tab === 'bulk-review' ? 'nav-tab-active' : ''; ?>">Bulk Review</a>
     </h2>
 
     <?php if ( ! empty( $error_msg ) ) : ?>
@@ -65,8 +66,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     <?php if ( empty( $error_msg ) ) : ?>
         <form method="post" action="">
             <?php wp_nonce_field( 'em_bulk_reject' ); ?>
-            <?php if ( $current_tab === 'pending-scrape' ) : ?>
-                <input type="hidden" name="tab" value="pending-scrape">
+            <?php if ( $current_tab !== '' ) : ?>
+                <input type="hidden" name="tab" value="<?php echo esc_attr( $current_tab ); ?>">
             <?php endif; ?>
             <div class="tablenav top" style="margin-bottom: 10px;">
                 <div class="alignleft actions bulkactions">
@@ -92,8 +93,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <span class="pagination-links">
                             <?php
                             $base_url = admin_url( 'admin.php?page=event-manager' );
-                            if ( $current_tab === 'pending-scrape' ) {
-                                $base_url = add_query_arg( array( 'tab' => 'pending-scrape' ), $base_url );
+                            if ( $current_tab !== '' ) {
+                                $base_url = add_query_arg( array( 'tab' => $current_tab ), $base_url );
                             }
                             $pagination_args = array(
                                 'base'   => add_query_arg( 'paged', '%#%', $base_url ),

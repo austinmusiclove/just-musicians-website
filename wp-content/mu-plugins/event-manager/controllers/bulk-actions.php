@@ -21,8 +21,8 @@ function event_manager_process_bulk_actions() {
     }
 
     $tab_param = '';
-    if ( isset( $_POST['tab'] ) && $_POST['tab'] === 'pending-scrape' ) {
-        $tab_param = '&tab=pending-scrape';
+    if ( isset( $_POST['tab'] ) && in_array( $_POST['tab'], array( 'pending-scrape', 'bulk-review' ), true ) ) {
+        $tab_param = '&tab=' . sanitize_key( $_POST['tab'] );
     }
 
     if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'em_bulk_reject' ) ) {

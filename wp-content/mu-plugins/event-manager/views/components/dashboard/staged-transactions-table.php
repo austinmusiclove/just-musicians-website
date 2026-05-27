@@ -39,7 +39,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <td>
                             <input type="checkbox" class="em-row-cb" name="em_transactions[]" value="<?php echo esc_attr( isset( $transaction['id'] ) ? $transaction['id'] : '' ); ?>">
                         </td>
-                        <td><?php echo esc_html( isset( $transaction['id'] ) ? $transaction['id'] : '-' ); ?></td>
+                        <td><?php
+                            $id = isset( $transaction['id'] ) ? $transaction['id'] : '';
+                            if ( ! empty( $id ) ) {
+                                $link = add_query_arg( array( 'action' => 'view', 'id' => $id ) );
+                                echo '<a href="' . esc_url( $link ) . '">' . esc_html( $id ) . '</a>';
+                            } else {
+                                echo '-';
+                            }
+                        ?></td>
                         <td>
                             <?php
                                 $venue = ! empty( $transaction['current_venue_name'] ) ? $transaction['current_venue_name'] : ( isset( $transaction['staged_venue_name'] ) ? $transaction['staged_venue_name'] : '-' );
