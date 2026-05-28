@@ -54,20 +54,44 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php foreach ( $sub_transactions as $index => $sub_txn ) : ?>
                         <?php $sd = $sub_txn['staged_data'] ?? array(); ?>
                         <?php $cd = $sub_txn['current_data'] ?? array(); ?>
+                        <?php $txn_status = $sub_txn['status'] ?? ''; ?>
+                        <?php $is_disabled = in_array( $txn_status, array( 'approved', 'rejected' ) ); ?>
                         <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px; margin-bottom: 20px;">
-                            <h2>Transaction <?php echo $index + 1; ?></h2>
+                            <h2 style="margin-top: 0; margin-bottom: 4px">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" class="em-txn-checkbox" name="selected_indices[]" value="<?php echo $index; ?>" <?php echo $is_disabled ? 'disabled' : ''; ?>>
+                                    Transaction <?php echo $index + 1; ?>
+                                </label>
+                            </h2>
+                            <?php if ( $txn_status ) : ?>
+                                <span style="display: block; font-size: 12px; color: #666; margin: 2px 0 10px 32px;">Status: <?php echo esc_html( $txn_status ); ?></span>
+                            <?php endif; ?>
+                            <input type="hidden" name="transactions[<?php echo $index; ?>][staged_transaction_id]" value="<?php echo esc_attr( $sub_txn['staged_transaction_id'] ?? $sub_txn['id'] ?? '' ); ?>">
                             <?php include plugin_dir_path( __FILE__ ) . 'components/multiple-transaction/sub-transaction-data-table.php'; ?>
                         </div>
                     <?php endforeach; ?>
 
-                    <div style="position: sticky; bottom: 0; background: #fff; padding: 16px 20px; border-top: 1px solid #c3c4c7; display: flex; gap: 10px;">
-                        <button type="submit" name="em_bulk_approve_all" value="1" class="button button-primary">
-                            Approve All
+                    <div style="position: sticky; bottom: 0; background: #fff; padding: 16px 20px; border-top: 1px solid #c3c4c7; display: flex; gap: 10px; align-items: center;">
+                        <label style="display: flex; align-items: center; gap: 4px; cursor: pointer; font-size: 13px; margin-right: auto;">
+                            <input type="checkbox" id="em-select-all"> Select All
+                        </label>
+                        <button type="submit" name="em_bulk_approve_selected" value="1" class="button button-primary">
+                            Approve Selected
                         </button>
-                        <button type="button" class="button">
-                            Reject All
+                        <button type="submit" name="em_bulk_reject_selected" value="1" class="button">
+                            Reject Selected
                         </button>
                     </div>
+                    <script>
+                    document.getElementById('em-select-all').addEventListener('change', function() {
+                        var checkboxes = document.querySelectorAll('.em-txn-checkbox');
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            if (!checkboxes[i].disabled) {
+                                checkboxes[i].checked = this.checked;
+                            }
+                        }
+                    });
+                    </script>
                 </form>
             </div>
         </div>
