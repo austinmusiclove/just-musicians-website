@@ -46,6 +46,13 @@ $show_current_column = ! empty( $cd ) && is_array( $cd );
             <?php endif; ?>
         </tr>
         <tr>
+            <th scope="row"><label>Venue ID</label></th>
+            <td><input type="text" name="transactions[<?php echo $index; ?>][staged][venue_id]" value="<?php echo esc_attr( em_get_field_value( $sd, 'venue_id' ) ); ?>" style="width: 100%"></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['venue_id'] ?? '', $cd['venue_id'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'venue_id' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
             <th scope="row"><label>Venue Name</label></th>
             <td><?php echo esc_html( em_get_field_value( $sd, 'venue_name' ) ); ?></td>
             <?php if ( $show_current_column ) : ?>
