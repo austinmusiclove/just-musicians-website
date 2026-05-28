@@ -60,9 +60,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     <?php endforeach; ?>
 
-                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #c3c4c7;">
+                    <div style="position: sticky; bottom: 0; background: #fff; padding: 16px 20px; border-top: 1px solid #c3c4c7; display: flex; gap: 10px;">
                         <button type="submit" name="em_bulk_approve_all" value="1" class="button button-primary">
-                            Bulk Approve All Events
+                            Approve All
+                        </button>
+                        <button type="button" class="button">
+                            Reject All
                         </button>
                     </div>
                 </form>
