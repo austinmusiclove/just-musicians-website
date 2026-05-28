@@ -64,7 +64,6 @@ function event_manager_process_multiple_selected() {
         }
 
         $body     = wp_json_encode( $approve_items );
-        error_log(print_r($body, true));
         $api_url  = $api_base . '/staged-transactions/approve';
         $response = event_manager_aws_sigv4_request( $api_url, 'POST', $body );
 
@@ -198,7 +197,6 @@ function event_manager_render_multiple_transaction( $transaction_id ) {
             $transaction['id'] = $transaction_id;
             $event_list_screenshot = $data['screenshot'] ?? '';
             $sub_transactions = isset( $data['transactions'] ) && is_array( $data['transactions'] ) ? $data['transactions'] : array();
-            error_log(print_r($sub_transactions, true));
         } else {
             $error_msg = 'API Request failed. Status Code: ' . $response_code . '. Response: ' . esc_html( $body );
         }

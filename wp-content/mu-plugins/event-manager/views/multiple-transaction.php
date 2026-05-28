@@ -71,6 +71,58 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     <?php endforeach; ?>
 
+                    <?php $parent_index = count( $sub_transactions ); ?>
+                    <?php $parent_status = $transaction['status'] ?? ''; ?>
+                    <?php $parent_disabled = in_array( $parent_status, array( 'approved', 'rejected' ) ); ?>
+                    <div style="background: #fff; border: 1px solid #c3c4c7; padding: 20px; margin-bottom: 20px;">
+                        <h2 style="margin-top: 0;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" class="em-txn-checkbox" name="selected_indices[]" value="<?php echo $parent_index; ?>" <?php echo $parent_disabled ? 'disabled' : ''; ?>>
+                                Parent Transaction
+                            </label>
+                        </h2>
+                        <?php if ( $parent_status ) : ?>
+                            <span style="display: block; font-size: 12px; color: #666; margin: 2px 0 10px 32px;">Status: <?php echo esc_html( $parent_status ); ?></span>
+                        <?php endif; ?>
+                        <input type="hidden" name="transactions[<?php echo $parent_index; ?>][staged_transaction_id]" value="<?php echo esc_attr( $transaction['staged_transaction_id'] ?? $transaction['id'] ?? '' ); ?>">
+                        <table class="form-table" style="margin-bottom: 0; table-layout: fixed; width: 100%;">
+                            <colgroup>
+                                <col style="width: 100px;">
+                                <col style="width: auto;">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><label>Transaction Type</label></th>
+                                    <td><?php echo esc_html( $transaction['transaction_type'] ?? '-' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label>ID</label></th>
+                                    <td><?php echo esc_html( $transaction['id'] ?? '-' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label>Scrape URL</label></th>
+                                    <td>
+                                        <?php if ( ! empty( $transaction['scrape_url'] ) ) : ?>
+                                            <a href="<?php echo esc_url( $transaction['scrape_url'] ); ?>" target="_blank"><?php echo esc_html( $transaction['scrape_url'] ); ?></a>
+                                        <?php else : ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label>Screenshot</label></th>
+                                    <td>
+                                        <?php if ( ! empty( $event_list_screenshot ) ) : ?>
+                                            <a href="<?php echo esc_url( $event_list_screenshot ); ?>" target="_blank"><?php echo esc_html( $event_list_screenshot ); ?></a>
+                                        <?php else : ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div style="position: sticky; bottom: 0; background: #fff; padding: 16px 20px; border-top: 1px solid #c3c4c7; display: flex; gap: 10px; align-items: center;">
                         <label style="display: flex; align-items: center; gap: 4px; cursor: pointer; font-size: 13px; margin-right: auto;">
                             <input type="checkbox" id="em-select-all"> Select All
