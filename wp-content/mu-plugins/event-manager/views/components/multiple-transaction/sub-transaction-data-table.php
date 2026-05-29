@@ -68,10 +68,45 @@ $show_current_column = ! empty( $cd ) && is_array( $cd );
             <?php endif; ?>
         </tr>
         <tr>
+            <th scope="row"><label>End Date</label></th>
+            <td><input type="date" name="transactions[<?php echo $index; ?>][staged][end_date]" value="<?php echo esc_attr( em_get_field_value( $sd, 'end_date' ) ); ?>" style="width: 100%"></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['end_date'] ?? '', $cd['end_date'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'end_date' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
             <th scope="row"><label>Start Time</label></th>
             <td><input type="time" name="transactions[<?php echo $index; ?>][staged][start_time]" value="<?php echo esc_attr( em_get_field_value( $sd, 'start_time' ) ); ?>" style="width: 100%"></td>
             <?php if ( $show_current_column ) : ?>
                 <td class="<?php echo esc_attr( em_get_highlight_class( $sd['start_time'] ?? '', $cd['start_time'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'start_time' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>End Time</label></th>
+            <td><input type="time" name="transactions[<?php echo $index; ?>][staged][end_time]" value="<?php echo esc_attr( em_get_field_value( $sd, 'end_time' ) ); ?>" style="width: 100%"></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['end_time'] ?? '', $cd['end_time'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'end_time' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Ages</label></th>
+            <td><input type="text" name="transactions[<?php echo $index; ?>][staged][ages]" value="<?php echo esc_attr( em_get_field_value( $sd, 'ages' ) ); ?>" style="width: 100%"></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['ages'] ?? '', $cd['ages'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'ages' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Price Range</label></th>
+            <td><input type="text" name="transactions[<?php echo $index; ?>][staged][price_range]" value="<?php echo esc_attr( em_get_field_value( $sd, 'price_range' ) ); ?>" style="width: 100%"></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['price_range'] ?? '', $cd['price_range'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'price_range' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Description</label></th>
+            <td><textarea name="transactions[<?php echo $index; ?>][staged][description]" style="width: 100%; min-height: 80px;"><?php echo esc_textarea( em_get_field_value( $sd, 'description' ) ); ?></textarea></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['description'] ?? '', $cd['description'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'description' ) ); ?></td>
             <?php endif; ?>
         </tr>
         <tr>
@@ -91,6 +126,27 @@ $show_current_column = ! empty( $cd ) && is_array( $cd );
                         <a href="<?php echo esc_url( $cp ); ?>" target="_blank"><?php echo esc_html( $cp ); ?></a>
                     <?php else : ?>
                         <?php echo esc_html( $cp ); ?>
+                    <?php endif; ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Ticket URL</label></th>
+            <td>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <input type="url" name="transactions[<?php echo $index; ?>][staged][ticket_url]" value="<?php echo esc_attr( em_get_field_value( $sd, 'ticket_url' ) ); ?>" style="flex: 1">
+                    <?php if ( ! empty( $sd['ticket_url'] ) ) : ?>
+                        <a href="<?php echo esc_url( $sd['ticket_url'] ); ?>" target="_blank" class="button" style="white-space: nowrap;">View</a>
+                    <?php endif; ?>
+                </div>
+            </td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $sd['ticket_url'] ?? '', $cd['ticket_url'] ?? '' ) ); ?>">
+                    <?php $ct = em_get_field_value( $cd, 'ticket_url' ); ?>
+                    <?php if ( ! empty( $ct ) ) : ?>
+                        <a href="<?php echo esc_url( $ct ); ?>" target="_blank"><?php echo esc_html( $ct ); ?></a>
+                    <?php else : ?>
+                        <?php echo esc_html( $ct ); ?>
                     <?php endif; ?>
                 </td>
             <?php endif; ?>
