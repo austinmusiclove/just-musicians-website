@@ -58,7 +58,7 @@ function event_manager_process_multiple_selected() {
             }
 
             $approve_items[] = array(
-                'staged_transaction_id' => isset( $txn['staged_transaction_id'] ) ? $txn['staged_transaction_id'] : null,
+                'staged_transaction_id' => isset( $txn['staged_transaction_id'] ) && $txn['staged_transaction_id'] !== '' ? array( $txn['staged_transaction_id'] ) : array(),
                 'override_data'         => $staged,
             );
         }
