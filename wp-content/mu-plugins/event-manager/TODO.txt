@@ -1,5 +1,3 @@
- multi transaction
-    next transaction
 single transaction
     be able to trigger scrape of pending-scrape transaction in case it is stuck in queue
     be able to approve and change an update to a create and vis versa

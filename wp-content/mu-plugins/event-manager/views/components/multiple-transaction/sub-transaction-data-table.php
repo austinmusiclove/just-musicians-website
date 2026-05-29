@@ -1,3 +1,4 @@
+views/components/multiple-transaction/sub-transaction-data-table.php
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -129,5 +130,13 @@ $show_current_column = ! empty( $cd ) && is_array( $cd );
                 </td>
             <?php endif; ?>
         </tr>
+        <?php if ( ! empty( $sd['event_page_url'] ) ) : ?>
+        <tr>
+            <th scope="row"><label>Event Page Preview</label></th>
+            <td colspan="<?php echo $show_current_column ? 2 : 1; ?>">
+                <iframe src="<?php echo esc_url( $sd['event_page_url'] ); ?>" style="width: 100%; height: 500px; border: 1px solid #c3c4c7; background: #f0f0f1;"></iframe>
+            </td>
+        </tr>
+        <?php endif; ?>
     </tbody>
 </table>
