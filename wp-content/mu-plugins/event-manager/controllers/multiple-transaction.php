@@ -115,7 +115,7 @@ function event_manager_process_multiple_selected() {
             }
         }
 
-        $body     = wp_json_encode( $ids );
+        $body     = wp_json_encode( array( 'ids' => $ids ) );
         $api_url  = $api_base . '/staged-transactions/reject';
         $response = event_manager_aws_sigv4_request( $api_url, 'POST', $body );
 
@@ -129,27 +129,18 @@ function event_manager_process_multiple_selected() {
         $response_body = wp_remote_retrieve_body( $response );
         $data          = json_decode( $response_body, true );
 
-        if ( $response_code === 200 && isset( $data['results'] ) ) {
-            $success_count = 0;
-            $fail_count    = 0;
-            $messages      = array();
+        if ( $response_code === 200 && isset( $data['total'] ) ) {
+            $total    = isset( $data['total'] ) ? intval( $data['total'] ) : 0;
+            $rejected = isset( $data['rejected'] ) ? intval( $data['rejected'] ) : 0;
+            $failed   = isset( $data['failed'] ) ? intval( $data['failed'] ) : 0;
 
-            foreach ( $data['results'] as $result ) {
-                if ( ! empty( $result['success'] ) ) {
-                    $success_count++;
-                } else {
-                    $fail_count++;
-                    $messages[] = isset( $result['error'] ) ? $result['error'] : 'Unknown error';
-                }
-            }
-
-            if ( $fail_count === 0 ) {
-                set_transient( 'em_action_success_' . $transaction_id, $success_count . ' event(s) rejected successfully.', 30 );
+            if ( $failed === 0 ) {
+                set_transient( 'em_action_success_' . $transaction_id, $rejected . ' event(s) rejected successfully.', 30 );
                 wp_redirect( admin_url( 'admin.php?page=event-manager&tab=bulk-review' ) );
                 exit;
             }
 
-            $error_msg = $success_count . ' rejected, ' . $fail_count . ' failed: ' . implode( '; ', $messages );
+            $error_msg = $rejected . ' rejected, ' . $failed . ' failed out of ' . $total;
             set_transient( 'em_action_error_' . $transaction_id, $error_msg, 30 );
         } else {
             set_transient( 'em_action_error_' . $transaction_id, 'Reject request failed. Status Code: ' . $response_code . '. Response: ' . $response_body, 30 );
