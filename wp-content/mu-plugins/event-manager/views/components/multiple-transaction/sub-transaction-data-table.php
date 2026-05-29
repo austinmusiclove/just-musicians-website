@@ -1,4 +1,3 @@
-views/components/multiple-transaction/sub-transaction-data-table.php
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
