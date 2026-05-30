@@ -75,6 +75,18 @@ $show_current_column = ! empty( $current ) && is_array( $current );
             <?php endif; ?>
         </tr>
         <tr>
+            <th scope="row"><label>Event Type</label></th>
+            <td>
+                <select name="staged[event_type]" style="width: 100%">
+                    <option value="live_music" <?php selected( em_get_field_value( $staged, 'event_type' ), 'live_music' ); ?>>Live Music</option>
+                    <option value="other" <?php selected( em_get_field_value( $staged, 'event_type' ), 'other' ); ?>>Other</option>
+                </select>
+            </td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['event_type'] ?? '', $current['event_type'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'event_type' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
             <th scope="row"><label>Venue ID</label></th>
             <td><input type="text" name="staged[venue_id]" value="<?php echo esc_attr( em_get_field_value( $staged, 'venue_id' ) ); ?>" style="width: 100%"></td>
             <?php if ( $show_current_column ) : ?>
@@ -128,6 +140,13 @@ $show_current_column = ! empty( $current ) && is_array( $current );
             <td><input type="text" name="staged[price_range]" value="<?php echo esc_attr( em_get_field_value( $staged, 'price_range' ) ); ?>" style="width: 100%"></td>
             <?php if ( $show_current_column ) : ?>
                 <td class="<?php echo esc_attr( em_get_highlight_class( $staged['price_range'] ?? '', $current['price_range'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'price_range' ) ); ?></td>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th scope="row"><label>Description</label></th>
+            <td><textarea name="staged[description]" style="width: 100%; min-height: 80px;"><?php echo esc_textarea( em_get_field_value( $staged, 'description' ) ); ?></textarea></td>
+            <?php if ( $show_current_column ) : ?>
+                <td class="<?php echo esc_attr( em_get_highlight_class( $staged['description'] ?? '', $current['description'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $current, 'description' ) ); ?></td>
             <?php endif; ?>
         </tr>
         <tr>

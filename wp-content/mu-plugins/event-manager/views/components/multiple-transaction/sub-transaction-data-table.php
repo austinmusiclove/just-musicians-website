@@ -47,7 +47,12 @@ $show_current_column = ! empty( $cd ) && is_array( $cd );
         </tr>
         <tr>
             <th scope="row"><label>Event Type</label></th>
-            <td><input type="text" name="transactions[<?php echo $index; ?>][staged][event_type]" value="<?php echo esc_attr( em_get_field_value( $sd, 'event_type' ) ); ?>" style="width: 100%"></td>
+            <td>
+                <select name="transactions[<?php echo $index; ?>][staged][event_type]" style="width: 100%">
+                    <option value="live_music" <?php selected( em_get_field_value( $sd, 'event_type' ), 'live_music' ); ?>>Live Music</option>
+                    <option value="other" <?php selected( em_get_field_value( $sd, 'event_type' ), 'other' ); ?>>Other</option>
+                </select>
+            </td>
             <?php if ( $show_current_column ) : ?>
                 <td class="<?php echo esc_attr( em_get_highlight_class( $sd['event_type'] ?? '', $cd['event_type'] ?? '' ) ); ?>"><?php echo esc_html( em_get_field_value( $cd, 'event_type' ) ); ?></td>
             <?php endif; ?>
