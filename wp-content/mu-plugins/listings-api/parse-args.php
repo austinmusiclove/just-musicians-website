@@ -61,6 +61,7 @@ function get_sanitized_listing_args() {
     if (isset($_POST['venues_played_unverified'])) { $sanitized_args['meta_input']['venues_played_unverified'] = custom_sanitize_array($_POST['venues_played_unverified']); }
 
     // Taxonomies
+    if (isset($_POST['ensemble_size']))            { $sanitized_args['tax_input']['ensemble_size']             = ensemble_size_values_to_options(custom_sanitize_array($_POST['ensemble_size'])); }
     if (isset($_POST['categories']) )              { $sanitized_args['tax_input']['mcategory']                 = custom_sanitize_array($_POST['categories']); }
     if (isset($_POST['genres']))                   { $sanitized_args['tax_input']['genre']                     = custom_sanitize_array($_POST['genres']); }
     if (isset($_POST['subgenres']))                { $sanitized_args['tax_input']['subgenre']                  = custom_sanitize_array($_POST['subgenres']); }

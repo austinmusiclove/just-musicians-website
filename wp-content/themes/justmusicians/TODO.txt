@@ -1,7 +1,5 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Convert ensemble size to taxonomy
-        Push and run it on prod and staging
-        Alter listing form to edit taxonomy as well as ensemble size data from ensemble size filter
         Alter main search to treat ensemble size as taxonomy
             Alter front end to use a taxonomy filter like the others for ensemble size
             Add ensemble size to taxonomy filters in back end

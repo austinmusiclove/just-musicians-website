@@ -80,6 +80,10 @@ function get_listing($args) {
 
     // Add taxonomy data to the array
     foreach ($taxonomies as $taxonomy) {
+        # skip ensemble_size taxonomy because we don't want it to override the ensemble_size post meta
+        if ($taxonomy->name == 'ensemble_size') {
+            continue;
+        }
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
 
         // If terms exist for this taxonomy, add them to the result array
