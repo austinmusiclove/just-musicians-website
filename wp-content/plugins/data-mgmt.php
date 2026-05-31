@@ -29,8 +29,7 @@ add_action('rest_api_init', function () {
     register_rest_route( 'datamgmt/v1', '/assign-ensemble-taxonomy', [
         'methods' => 'POST',
         'callback' => 'assign_ensemble_size_taxonomy',
-        'permission_callback' => '__return_true',
-        #'permission_callback' => function () { return current_user_can('manage_options'); },
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
 });
 
