@@ -26,6 +26,11 @@ add_action('rest_api_init', function () {
         'callback' => 'get_unassigned_listings',
         'permission_callback' => '__return_true',
     ]);
+    register_rest_route( 'datamgmt/v1', '/assign-ensemble-taxonomy', [
+        'methods' => 'POST',
+        'callback' => 'assign_ensemble_size_taxonomy',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
+    ]);
 });
 
 
@@ -163,3 +168,46 @@ function get_unassigned_listings() {
     return $unassigned;
 }
 
+function assign_ensemble_size_taxonomy() {
+    $listing_ids = get_posts([
+        'post_type'      => 'listing',
+        'posts_per_page' => -1,
+        'post_status'    => 'any',
+        'fields'         => 'ids',
+    ]);
+
+    $updated = 0;
+    $skipped = 0;
+    $errors  = [];
+
+    foreach ($listing_ids as $post_id) {
+        $meta = get_post_meta($post_id, 'ensemble_size', true);
+
+        if (empty($meta) || !is_array($meta)) {
+            $skipped++;
+            continue;
+        }
+
+        $term_slugs = ensemble_size_values_to_options($meta);
+
+        if (empty($term_slugs)) {
+            $skipped++;
+            continue;
+        }
+
+        $result = wp_set_object_terms($post_id, $term_slugs, 'ensemble_size', false);
+
+        if (is_wp_error($result)) {
+            $errors[] = [ 'post_id' => $post_id, 'error' => $result->get_error_message() ];
+        } else {
+            $updated++;
+        }
+    }
+
+    return new WP_REST_Response([
+        'processed' => count($listing_ids),
+        'updated'   => $updated,
+        'skipped'   => $skipped,
+        'errors'    => $errors,
+    ], 200);
+}
