@@ -1,3 +1,44 @@
+*Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
+    1. Convert ensemble size to taxonomy
+        Push and populate values in staging and prod
+        Make api that will populate taxonomy based on ensemble size meta and run it
+        Push and run it on prod and staging
+        Alter listing form to edit taxonomy as well as ensemble size data from ensemble size filter
+        Alter main search to treat ensemble size as taxonomy
+            Alter front end to use a taxonomy filter like the others for ensemble size
+            Add ensemble size to taxonomy filters in back end
+    2. Create api that will rebuild listing index to perform searches
+        Fields include
+            post status, name, has_thumbnail, description, zip, lat, long, disabled, listing type, verified, rank
+        Filter out no image, no description, no zip, not name, disabled, etc.
+        Filter by listing type
+        Filter by verified
+        Location - use lat/long; multi location supported by creating another index entry and filtering out duplicates in sql
+        Order by
+            1 - Relevant Media based on search
+            2 - Rank
+                1 - Response Time
+                2 - Inquiries/Views/Clicks
+                3 - Reviews/Rating score
+                4 - Profile Completeness
+            3 - Profile Age (post_id tie breaker)
+        WP_Query layer
+            Taxonomies - maybe use existing taxonomy tables; maybe just use wp query after getting list of ids from index
+            Name search (for active search)
+    3. Maintain listing index when users modify, create, delete their listings
+    4. Implement new search in main listing search
+        Add radius from zip filter (default in austin)
+        Add x listings near city, state text to result count
+    5. Create location api for getting city, state, zip, lat, lons
+    6. Implement new search in top bar active search
+    7. Activate top bar location filter options
+        auto complete cities, states, zip codes, and other regions
+    8. Update listing form features
+        auto fill city and state based on zip
+        auto fill state based on city
+        active search cities in listing form
+    9. Get inquiry suggestions with location filtering
+    10. Scale top x genre in x city seo pages
 Glossaries
     add other glossaries section at the bottom of single-glossary
 SEO
@@ -103,7 +144,6 @@ Messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
-    locaiton filter
     include media relevance in search algo
     video order depending on search criteria
     switch to cursor pagination
@@ -165,30 +205,6 @@ Testing
         set up users that allow tests to reach different screen states for testing without having to create a user every time
         maturity test by following a random path on the tree
 UX
-    *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-        search filters
-            top search bar location filter
-                auto complete cities, states, zip codes, and other regions
-            support radius from zip in home search
-            support scaling top x genre in x city seo pages
-        listing form
-            auto fill city and state based on zip
-            auto fill state based on city
-            active search cities in listing form
-        allow for advanced listings to be based in multiple locations or to be based in different locations at different times on a schedule like a tour schedule
-            solution 1: listing search actually searches though a different table of geo_listings that each have a location, type (live, edu, prod) and link to one listing
-                each listing has a geo_listing and multi city listings have multiple
-                limit sql to group results by the listing id that is linked in the geo_listing
-                location data stored in geo_listing not listing
-            solution 2: separate listing for multi location cases
-                for multi-home-base maintain a separate duplicate listing record that is the same but different place
-                for tour-schedule maintain a separate duplicate listing record that changes place on the schedule
-                multi-home-base areas must be at least a certain distance from each other or just tolerate some duplicates in searches
-                duplicates
-                    we want to return the closest one to the search center so maybe this can be done in sql
-                    maybe scan page before returning and remove duplicates; should not mess up pagination as long it is cursor based and order is maintained
-        get inquiry suggestions with location filtering
-        get user's location with their permission to set the default location, otherwise ATX
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
     *add spinner to active search in header search bar and mobile header search bar
@@ -198,9 +214,8 @@ UX
     Filters
         add length of set
         add something about providing sound equipment
-    Show tooltip explaining that you can only search in Austin, TX right now or that location searching is coming
     better confirm delete listing dialog
-    add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search
+    add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search (solved by keyword taxonomy in post content?)
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
 Compliance

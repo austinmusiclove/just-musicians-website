@@ -336,6 +336,19 @@ function register_taxonomies() {
       'singular_name' => 'Keyword'
     )
   ));
+  register_taxonomy('ensemble_size', array('listing'), array(
+    'public' => true,
+    'hierarchical' => false,
+    'show_in_rest' => true,
+    'capabilities' => [ 'assign_terms' => 'read', ],
+    'labels' => array(
+      'name' => 'Ensemble Size',
+      'add_new_item' => 'Add New Ensemble Size',
+      'edit_item' => 'Edit Ensemble Size',
+      'all_items' => 'All Ensemble Sizes',
+      'singular_name' => 'Ensemble Size'
+    )
+  ));
   register_taxonomy('mediatag', array('listing', 'attachment', 'youtubevideo'), array(
     'public' => true,
     'hierarchical' => false,
