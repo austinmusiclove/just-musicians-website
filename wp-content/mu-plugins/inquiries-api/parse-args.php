@@ -33,11 +33,11 @@ function get_sanitized_inquiry_args($is_update) {
     if (isset($_POST['inquiry_percent_of_bar']))              { $sanitized_args['meta_input']['percent_of_bar']      = sanitize_text_field($_POST['inquiry_percent_of_bar']); }
     if (isset($_POST['inquiry_max_listing_invites']))         { $sanitized_args['meta_input']['max_listing_invites'] = sanitize_text_field($_POST['inquiry_max_listing_invites']); }
     else if (!$is_update)                                     { $sanitized_args['meta_input']['max_listing_invites'] = DEFAULT_QUOTES_REQUESTED; }
-    if (isset($_POST['inquiry_ensemble_size']))               { $sanitized_args['meta_input']['ensemble_size']       = custom_sanitize_array($_POST['inquiry_ensemble_size']); }
     if (isset($_POST['inquiry_details']))                     { $sanitized_args['meta_input']['details']             = sanitize_textarea_field($_POST['inquiry_details']); }
 
     // Taxonomies
     if (isset($_POST['inquiry_genres']))                      { $sanitized_args['tax_input']['genre']                = custom_sanitize_array($_POST['inquiry_genres']); }
+    if (isset($_POST['inquiry_ensemble_size']))               { $sanitized_args['tax_input']['ensemble_size']        = custom_sanitize_array($_POST['inquiry_ensemble_size']); }
 
     // Add listing to the inquiry if provided
     // Set to [] by default if this is a new inquiry, not update

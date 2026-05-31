@@ -8,9 +8,6 @@ function get_listings($args) {
     $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
     $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
     $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
-    $ensemble_size          = get_ensemble_size_values($args);
-    $min_ensemble_size      = (!empty($args['min_ensemble_size'])) ? sanitize_text_field($args['min_ensemble_size'])                  : null;
-    $max_ensemble_size      = (!empty($args['max_ensemble_size'])) ? sanitize_text_field($args['max_ensemble_size'])                  : null;
     $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
     $types                  = (!empty($args['types']))             ? rest_sanitize_array($args['types'])                              : [];
     $valid_categories       = (!empty($args['categories']))        ? validate_tax_input($args['categories'], 'mcategory')             : [];
@@ -18,6 +15,7 @@ function get_listings($args) {
     $valid_subgenres        = (!empty($args['subgenres']))         ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
+    $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
     $valid_types            = validate_listing_types($types);
     $media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
@@ -70,22 +68,6 @@ function get_listings($args) {
             'value' => $verified,
         ];
     }
-    // Ensemble Size
-    if ((($min_ensemble_size or $max_ensemble_size) and ($min_ensemble_size != 1 or $max_ensemble_size != 10)) or !empty($ensemble_size)) {
-        $ensemble_size_values = [];
-        foreach ($ensemble_size as $option) {
-            $ensemble_size_values[] = (string)$option;
-        }
-        $ensemble_size_query = [ 'relation' => 'OR' ];
-        foreach ($ensemble_size_values as $value) {
-            $ensemble_size_query[] = [
-                'key'     => 'ensemble_size',
-                'value'   => '"' . $value . '"',
-                'compare' => 'LIKE',
-            ];
-        }
-        $meta_queries[] = $ensemble_size_query;
-    }
 
     $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
         'relation' => 'AND',
@@ -129,6 +111,14 @@ function get_listings($args) {
             'taxonomy' => 'setting',
             'field' => 'name',
             'terms' => $valid_settings,
+            'compare' => 'IN',
+        ];
+    }
+    if (!empty($valid_ensemble_sizes)) {
+        $tax_queries[] = [
+            'taxonomy' => 'ensemble_size',
+            'field' => 'name',
+            'terms' => $valid_ensemble_sizes,
             'compare' => 'IN',
         ];
     }
@@ -188,9 +178,7 @@ function get_listings($args) {
         'valid_subgenres'        => $valid_subgenres,
         'valid_instrumentations' => $valid_instrumentations,
         'valid_settings'         => $valid_settings,
-        'ensemble_size'          => ensemble_size_values_to_options($ensemble_size),
-        'min_ensemble_size'      => $min_ensemble_size,
-        'max_ensemble_size'      => $max_ensemble_size,
+        'valid_ensemble_sizes'   => $valid_ensemble_sizes,
         'max_num_results'        => $max_num_results,
         'max_num_pages'          => $max_num_pages,
         'next_page'              => $next_page,
@@ -206,96 +194,3 @@ function validate_tax_input($tax_input, $taxonomy) {
     $valid_input = array_map('stripslashes', array_filter($input, fn($item) => in_array(stripslashes($item), $terms, true)));
     return $valid_input;
 }
-
-// Handle min/max ensemble size filters and specific ensemble sizes filter
-function get_ensemble_size_values($args) {
-    $ensemble_size_values = [];
-
-    // Convert single or multiple values into an array
-    $direct_ensemble_sizes = isset($args['ensemble_size']) ? ensemble_size_options_to_values((array) $args['ensemble_size']) : [];
-
-    foreach ($direct_ensemble_sizes as $value) {
-        $value = (int) $value;
-        if ($value >= 10) {
-            $ensemble_size_values[] = '10+';
-        } elseif ($value > 0) {
-            $ensemble_size_values[] = (string) $value;
-        }
-    }
-
-    // Add values from min/max ensemble size range if they are set and not default 1–10
-    $min = isset($args['min_ensemble_size']) ? (int) $args['min_ensemble_size'] : null;
-    $max = isset($args['max_ensemble_size']) ? (int) $args['max_ensemble_size'] : null;
-
-    if (
-        (is_int($min) || is_int($max)) &&
-        !($min === 1 && $max === 10)
-    ) {
-        $min = $min ?? 1;
-        $max = $max ?? 10;
-
-        for ($option = $min; $option <= min($max, 9); $option++) {
-            $ensemble_size_values[] = (string) $option;
-        }
-        if ($max >= 10) {
-            $ensemble_size_values[] = '10+';
-        }
-    }
-
-    // Remove duplicates
-    return array_values(array_unique($ensemble_size_values));
-}
-
-// coresponds to lib/inc/helper.php get_default_options
-function ensemble_size_options_to_values($options) {
-    $result = [];
-
-    foreach ($options as $option) {
-        switch ($option) {
-            case "Solo":
-                $result[] = "1";
-                break;
-
-            case "Duo":
-                $result[] = "2";
-                break;
-
-            case "Trio":
-                $result[] = "3";
-                break;
-
-            case "4-6":
-                $result = array_merge($result, ["4", "5", "6"]);
-                break;
-
-            case "7+":
-                $result = array_merge($result, ["7", "8", "9", "10+"]);
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    return array_values(array_unique($result));
-}
-
-// coresponds to lib/inc/helper.php get_default_options
-function ensemble_size_values_to_options($values) {
-    $result = [];
-
-    $values = array_unique($values);
-
-    $has = function($v) use ($values) {
-        return in_array($v, $values);
-    };
-
-    if ($has("1"))                                          { $result[] = "Solo"; }
-    if ($has("2"))                                          { $result[] = "Duo"; }
-    if ($has("3"))                                          { $result[] = "Trio"; }
-    if ($has("4") || $has("5") || $has("6"))                { $result[] = "4-6"; }
-    if ($has("7") || $has("8") || $has("9") || $has("10+")) { $result[] = "7+"; }
-
-    return array_values(array_unique($result));
-}
-

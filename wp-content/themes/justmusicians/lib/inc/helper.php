@@ -9,9 +9,27 @@ function get_default_options($filter) {
         'subgenre'        => ['Americana', 'Punk Rock', 'Honky Tonk', '90s Covers'],
         'instrumentation' => ['Guitar', 'Vocals', 'Piano', 'Saxophone'],
         'setting'         => ['Wedding', 'Festival', 'Hotel', 'Jazz Club'],
-        'ensemble_size'   => ['Solo', 'Duo', 'Trio', '4-6', '7+'], // coresponds to mu-plugins/listing-api/get-listings.php
+        'ensemble_size'   => ['Solo', 'Duo', 'Trio', '4-6', '7+'],
     ];
     return $default_options[$filter];
+}
+
+function ensemble_size_values_to_options($values) {
+    $result = [];
+
+    $values = array_unique($values);
+
+    $has = function($v) use ($values) {
+        return in_array($v, $values);
+    };
+
+    if ($has("1"))                                          { $result[] = "Solo"; }
+    if ($has("2"))                                          { $result[] = "Duo"; }
+    if ($has("3"))                                          { $result[] = "Trio"; }
+    if ($has("4") || $has("5") || $has("6"))                { $result[] = "4-6"; }
+    if ($has("7") || $has("8") || $has("9") || $has("10+")) { $result[] = "7+"; }
+
+    return array_values(array_unique($result));
 }
 
 function get_checkbox_ref_string($input_name, $label) {

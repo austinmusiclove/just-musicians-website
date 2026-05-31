@@ -7,7 +7,7 @@ function create_user_inquiry($args) {
     if (count($listings_invited) < $max_listing_invites) {
 
         // Get suggestions
-        $ensemble_size  = $args['meta_input']['ensemble_size'];
+        $ensemble_size  = $args['tax_input']['ensemble_size'];
         $inquiry_genres = $args['tax_input']['genre'];
         $result = get_listings([
             'ensemble_size' => $ensemble_size,

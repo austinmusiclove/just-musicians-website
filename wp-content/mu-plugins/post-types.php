@@ -336,7 +336,7 @@ function register_taxonomies() {
       'singular_name' => 'Keyword'
     )
   ));
-  register_taxonomy('ensemble_size', array('listing'), array(
+  register_taxonomy('ensemble_size', array('listing', 'inquiry'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,

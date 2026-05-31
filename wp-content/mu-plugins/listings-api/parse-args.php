@@ -54,8 +54,6 @@ function get_sanitized_listing_args() {
     if (isset($_POST['soundcloud_url']))           { $sanitized_args['meta_input']['soundcloud_url']           = sanitize_url($_POST['soundcloud_url'],         ['https', 'http']); }
     if (isset($_POST['spotify_artist_url']))       { $sanitized_args['meta_input']['spotify_artist_url']       = sanitize_url($_POST['spotify_artist_url'],     ['https', 'http']); }
     if (isset($_POST['spotify_artist_id']))        { $sanitized_args['meta_input']['spotify_artist_id']        = sanitize_text_field($_POST['spotify_artist_id']); }
-    if (isset($_POST['min_ensemble_size']))        { $sanitized_args['meta_input']['min_ensemble_size']        = sanitize_text_field($_POST['min_ensemble_size']); }
-    if (isset($_POST['max_ensemble_size']))        { $sanitized_args['meta_input']['max_ensemble_size']        = sanitize_text_field($_POST['max_ensemble_size']); }
     if (isset($_POST['ensemble_size']))            { $sanitized_args['meta_input']['ensemble_size']            = custom_sanitize_array($_POST['ensemble_size']); }
     if (isset($_POST['venues_played_verified']))   { $sanitized_args['meta_input']['venues_played_verified']   = custom_sanitize_array($_POST['venues_played_verified']); }
     if (isset($_POST['venues_played_unverified'])) { $sanitized_args['meta_input']['venues_played_unverified'] = custom_sanitize_array($_POST['venues_played_unverified']); }

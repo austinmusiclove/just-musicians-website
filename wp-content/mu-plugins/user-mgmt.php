@@ -160,6 +160,7 @@ function create_listing_by_artist_invitation_code($artist_invitation_code) {
             ],
             'tax_input' => [
                 'genre'                  => $artist_post['genres'],
+                'ensemble_size'          => ensemble_size_values_to_options($artist_post['ensemble_size']),
             ],
         ];
         $new_post_id = wp_insert_post($new_listing);

@@ -1,9 +1,5 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-    1. Convert ensemble size to taxonomy
-        Alter main search to treat ensemble size as taxonomy
-            Alter front end to use a taxonomy filter like the others for ensemble size
-            Add ensemble size to taxonomy filters in back end
-    2. Create api that will rebuild listing index to perform searches
+    1. Create api that will rebuild listing index to perform searches
         Fields include
             post status, name, has_thumbnail, description, zip, lat, long, disabled, listing type, verified, rank
         Filter out no image, no description, no zip, not name, disabled, etc.
@@ -21,20 +17,20 @@
         WP_Query layer
             Taxonomies - maybe use existing taxonomy tables; maybe just use wp query after getting list of ids from index
             Name search (for active search)
-    3. Maintain listing index when users modify, create, delete their listings
-    4. Implement new search in main listing search
+    2. Maintain listing index when users modify, create, delete their listings
+    3. Implement new search in main listing search
         Add radius from zip filter (default in austin)
         Add x listings near city, state text to result count
-    5. Create location api for getting city, state, zip, lat, lons
-    6. Implement new search in top bar active search
-    7. Activate top bar location filter options
+    4. Create location api for getting city, state, zip, lat, lons
+    5. Implement new search in top bar active search
+    5. Activate top bar location filter options
         auto complete cities, states, zip codes, and other regions
-    8. Update listing form features
+    7. Update listing form features
         auto fill city and state based on zip
         auto fill state based on city
         active search cities in listing form
-    9. Get inquiry suggestions with location filtering
-    10. Scale top x genre in x city seo pages
+    8. Get inquiry suggestions with location filtering
+    9. Scale top x genre in x city seo pages
 Glossaries
     add other glossaries section at the bottom of single-glossary
 SEO

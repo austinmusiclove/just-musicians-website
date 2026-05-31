@@ -3,7 +3,7 @@
 // Get listings
 $page             = $_GET['page'] ?? 1;
 $inquiry_id       = get_query_var('inquiry-id');
-$ensemble_size    = get_post_meta($inquiry_id, 'ensemble_size', true);
+$ensemble_size    = wp_get_post_terms($inquiry_id, 'ensemble_size', ['fields' => 'names']);
 $inquiry_genres   = wp_get_post_terms($inquiry_id, 'genre', ['fields' => 'names']);
 $listings_invited = get_post_meta($inquiry_id, 'listings_invited', true);
 $listings_invited = is_array($listings_invited) ? $listings_invited : [];

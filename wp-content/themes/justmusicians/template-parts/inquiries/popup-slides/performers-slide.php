@@ -4,35 +4,17 @@
     <h2 class="font-bold font-poppins text-20 mb-8">How many performers do you need?</h2>
     <p class="text-16 mt-4 mb-8">Check any and all ensemble sizes you would consider for your event.</p>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox max-h-[500px] md:max-h-[240px]">
+
+    <div class="h-64">
         <input type="hidden" name="inquiry_ensemble_size[]" >
-
-        <!-- Select all -->
-        <label class="custom-checkbox has-disabled:text-grey">
-        <input type="checkbox" value="any"
-            x-on:change="
-                if ($event.target.checked) {
-                  numPerformers = ['1','2','3','4','5','6','7','8','9','10+']; // select all
-                } else {
-                  numPerformers = []; // deselect all
-                }
-            "
-        />
-        <span class="checkmark"></span>Select All</label>
-
-        <!-- Ensemble size options -->
-        <?php $ensemble_size_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
-        foreach ($ensemble_size_options as $option) {
-            echo get_template_part('template-parts/filters/elements/checkbox', '', [
-                'label'    => $option,
-                'value'    => $option,
-                'name'     => 'inquiry_ensemble_size',
-                'is_array' => true,
-                'x-model'  => 'numPerformers',
-                'x-ref'    => 'inquiryEnsembleSize_' . $option,
-            ]);
-        } ?>
-
+        <?php
+        $ensemble_sizes = get_default_options('ensemble_size');
+        echo get_template_part('template-parts/filters/taxonomy-options', '', [
+            'terms'           => $ensemble_sizes,
+            'input_name'      => 'inquiry_ensemble_size',
+            'input_x_model'   => 'numPerformers',
+            'show_search_bar' => false,
+        ]); ?>
     </div>
 
 
