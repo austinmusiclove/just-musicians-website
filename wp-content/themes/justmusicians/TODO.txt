@@ -1,22 +1,20 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-    1. Create api that will rebuild listing index to perform searches
-        Push and run on staging and prod
-    2. Maintain listing index when users modify, create, delete their listings
-    3. Implement new search in main listing search
+    1. Maintain listing index when users modify, create, delete their listings
+    2. Implement new search in main listing search
         Get list of ids from index and then do taxonomy filter in wp query
         Do same for name/relevance search for active search
         Add radius from zip filter (default in austin)
         Add x listings near city, state text to result count
-    4. Create location api for getting city, state, zip, lat, lons
-    5. Implement new search in top bar active search
+    3. Create location api for getting city, state, zip, lat, lons
+    4. Implement new search in top bar active search
     5. Activate top bar location filter options
         auto complete cities, states, zip codes, and other regions
-    7. Update listing form features
+    6. Update listing form features
         auto fill city and state based on zip
         auto fill state based on city
         active search cities in listing form
-    8. Get inquiry suggestions with location filtering
-    9. Scale top x genre in x city seo pages
+    7. Get inquiry suggestions with location filtering
+    8. Scale top x genre in x city seo pages
 Glossaries
     add other glossaries section at the bottom of single-glossary
 SEO

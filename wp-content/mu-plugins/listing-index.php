@@ -16,8 +16,7 @@ add_action('rest_api_init', function () {
     register_rest_route('listing-index/v1', '/build', [
         'methods'             => 'POST',
         'callback'            => 'jm_build_listing_index',
-        'permission_callback' => '__return_true',
-        #'permission_callback' => function () { return current_user_can('manage_options'); },
+        'permission_callback' => function () { return current_user_can('manage_options'); },
     ]);
 });
 

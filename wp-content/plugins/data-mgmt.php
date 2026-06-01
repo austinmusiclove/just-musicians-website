@@ -33,6 +33,50 @@ add_action('rest_api_init', function () {
     ]);
 });
 
+add_action('admin_menu', 'jm_data_mgmt_admin_menu');
+
+function jm_data_mgmt_admin_menu() {
+    add_menu_page(
+        'Data Management',
+        'Data Management',
+        'manage_options',
+        'data-mgmt',
+        'jm_data_mgmt_admin_page',
+        'dashicons-admin-tools',
+        23
+    );
+}
+
+function jm_data_mgmt_admin_page() {
+    if (!current_user_can('manage_options')) { return; }
+
+    if (isset($_POST['jm_action']) && check_admin_referer('jm_data_mgmt')) {
+        set_time_limit(300);
+        $result = jm_build_listing_index();
+    }
+
+    ?>
+    <div class="wrap">
+        <h1>Data Management</h1>
+
+        <?php if (isset($result)): ?>
+            <div class="notice notice-info is-dismissible">
+                <pre style="white-space: pre-wrap;"><?php echo esc_html(print_r($result->get_data(), true)); ?></pre>
+            </div>
+        <?php endif; ?>
+
+        <form method="post">
+            <?php wp_nonce_field('jm_data_mgmt'); ?>
+            <p>
+                <button type="submit" name="jm_action" value="build_index" class="button button-primary">
+                    Build Listing Index
+                </button>
+            </p>
+        </form>
+    </div>
+    <?php
+}
+
 
 // Updates content so that listings are searchable by all metafields and taxonomies
 // Updates search rank
