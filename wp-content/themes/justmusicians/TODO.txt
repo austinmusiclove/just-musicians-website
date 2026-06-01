@@ -1,17 +1,10 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Create api that will rebuild listing index to perform searches
-        Fields include
-            post status, name, has_thumbnail, description, zip, lat, long, disabled, listing type, verified, rank
-        Filter out no image, no description, no zip, no name, disabled, etc.
-        Filter by listing type
-        Filter by verified
-        Location - use lat/long; multi location supported by creating another index entry and filtering out duplicates in sql
-        Order by rank, post id
-        WP_Query layer
-            Taxonomies - maybe use existing taxonomy tables; maybe just use wp query after getting list of ids from index
-            Name search (for active search)
+        Push and run on staging and prod
     2. Maintain listing index when users modify, create, delete their listings
     3. Implement new search in main listing search
+        Get list of ids from index and then do taxonomy filter in wp query
+        Do same for name/relevance search for active search
         Add radius from zip filter (default in austin)
         Add x listings near city, state text to result count
     4. Create location api for getting city, state, zip, lat, lons

@@ -40,7 +40,7 @@ function jm_build_listing_index() {
             'lng'             => null,
             'listing_type'    => 'live_music',
             'verified'        => !empty($verified) ? 1 : 0,
-            'rank'            => $rank,
+            'search_rank'     => $rank,
         ]);
 
         if ($result === false) {
@@ -62,7 +62,7 @@ function jm_create_listing_index_table() {
     $table = jm_get_listing_index_table();
     $charset_collate = $wpdb->get_charset_collate();
 
-    $sql = "CREATE TABLE {$table} (
+    $sql = "CREATE TABLE IF NOT EXISTS {$table} (
         id              BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         listing_post_id BIGINT(20) UNSIGNED NOT NULL,
         city            VARCHAR(255) DEFAULT '',
@@ -72,13 +72,12 @@ function jm_create_listing_index_table() {
         lng             DECIMAL(11,7) DEFAULT NULL,
         listing_type    VARCHAR(50) NOT NULL DEFAULT 'live_music',
         verified        TINYINT(1) NOT NULL DEFAULT 0,
-        rank            INT NOT NULL DEFAULT 0,
+        search_rank     INT NOT NULL DEFAULT 0,
         created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         INDEX idx_lat_lng (lat, lng),
         INDEX idx_city_state (city, state),
-        INDEX idx_rank_id (rank, listing_post_id)
+        INDEX idx_search_rank_id (search_rank, listing_post_id)
     ) {$charset_collate}";
 
-    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-    dbDelta($sql);
+    $wpdb->query($sql);
 }
