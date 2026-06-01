@@ -14,46 +14,27 @@ function jm_build_listing_index() {
         'fields'         => 'ids',
     ]);
 
-    $inserted = 0;
-    $errors  = [];
+    $inserted   = 0;
+    $incomplete = 0;
+    $errors     = [];
 
     foreach ($listing_ids as $post_id) {
-        $name        = get_post_meta($post_id, 'name', true);
-        $description = get_post_meta($post_id, 'description', true);
-        $city        = get_post_meta($post_id, 'city', true);
-        $state       = get_post_meta($post_id, 'state', true);
-        $zip_code    = get_post_meta($post_id, 'zip_code', true);
-        $verified    = get_post_meta($post_id, 'verified', true);
-        $rank        = (int) get_post_meta($post_id, 'rank', true);
-        $thumbnail   = get_post_thumbnail_id($post_id);
+        $status = jm_index_upsert_listing($post_id);
 
-        if (empty($name) || empty($thumbnail) || empty($city) || empty($state) || empty($zip_code) || empty($description)) {
-            continue;
-        }
-
-        $result = $wpdb->insert($table, [
-            'listing_post_id' => $post_id,
-            'city'            => $city,
-            'state'           => $state,
-            'zip_code'        => $zip_code,
-            'lat'             => null,
-            'lng'             => null,
-            'listing_type'    => 'live_music',
-            'verified'        => !empty($verified) ? 1 : 0,
-            'search_rank'     => $rank,
-        ]);
-
-        if ($result === false) {
-            $errors[] = ['post_id' => $post_id, 'error' => $wpdb->last_error];
-        } else {
+        if ($status === 'inserted') {
             $inserted++;
+        } elseif ($status === 'incomplete') {
+            $incomplete++;
+        } else {
+            $errors[] = ['post_id' => $post_id, 'error' => 'Insert failed'];
         }
     }
 
     return new WP_REST_Response([
-        'processed' => count($listing_ids),
-        'inserted'  => $inserted,
-        'errors'    => $errors,
+        'processed'  => count($listing_ids),
+        'inserted'   => $inserted,
+        'incomplete' => $incomplete,
+        'errors'     => $errors,
     ], 200);
 }
 

@@ -11,6 +11,7 @@ define('JM_LISTING_INDEX_TABLE', 'listing_index');
 
 require_once __DIR__ . '/listings-api/listing-index/build.php';
 require_once __DIR__ . '/listings-api/listing-index/query.php';
+require_once __DIR__ . '/listings-api/listing-index/update.php';
 
 add_action('rest_api_init', function () {
     register_rest_route('listing-index/v1', '/build', [

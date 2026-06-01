@@ -109,6 +109,10 @@ function update_search_rank($post_id) {
     $rank += $boost ? $boost : 0;
 
     $result = update_post_meta( $post_id, 'rank', $rank );
+
+    if (function_exists('jm_index_listing_on_rank_change')) {
+        jm_index_listing_on_rank_change($post_id, $rank);
+    }
 }
 
 
