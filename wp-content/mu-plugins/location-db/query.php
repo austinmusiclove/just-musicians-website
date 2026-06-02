@@ -42,3 +42,16 @@ function jm_location_search_cities($q, $limit = 20) {
         $limit
     ));
 }
+
+function jm_location_get_by_city_state_country($city, $state_code, $country) {
+    global $wpdb;
+    $table = jm_get_location_city_table();
+
+    return $wpdb->get_row($wpdb->prepare(
+        "SELECT city, state_code, state, country, lat, lng
+         FROM {$table}
+         WHERE city = %s AND state_code = %s AND country = %s
+         LIMIT 1",
+        $city, $state_code, $country
+    ));
+}

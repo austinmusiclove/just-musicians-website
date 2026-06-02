@@ -38,6 +38,20 @@ function jm_get_listing_ids_by_bounds($args = []) {
     return array_map('intval', wp_list_pluck($wpdb->get_results($sql), 'listing_post_id'));
 }
 
+function jm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified = null, $listing_type = null) {
+    $lat_delta = $distance_miles / 69;
+    $lng_delta = $distance_miles / (69 * cos(deg2rad($lat)));
+
+    return jm_get_listing_ids_by_bounds([
+        'lat_min'      => $lat - $lat_delta,
+        'lat_max'      => $lat + $lat_delta,
+        'lng_min'      => $lng - $lng_delta,
+        'lng_max'      => $lng + $lng_delta,
+        'verified'     => $verified,
+        'listing_type' => $listing_type,
+    ]);
+}
+
 function jm_get_listing_ids_by_location($args = []) {
     global $wpdb;
     $table = jm_get_listing_index_table();

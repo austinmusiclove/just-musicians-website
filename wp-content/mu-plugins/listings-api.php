@@ -58,7 +58,6 @@ add_action('rest_api_init', function () {
 function get_listings_request_handler($request) {
     return get_listings([
         'search'          => $request['s'],
-        'types'           => $request['types'],
         'categories'      => $request['categories'],
         'genres'          => $request['genres'],
         'subgenres'       => $request['subgenres'],

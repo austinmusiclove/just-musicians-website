@@ -1,6 +1,5 @@
 <?php
 
-// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
@@ -9,70 +8,71 @@ function get_listings($args) {
     $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
     $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
     $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
-    $types                  = (!empty($args['types']))             ? rest_sanitize_array($args['types'])                              : [];
     $valid_categories       = (!empty($args['categories']))        ? validate_tax_input($args['categories'], 'mcategory')             : [];
     $valid_genres           = (!empty($args['genres']))            ? validate_tax_input($args['genres'], 'genre')                     : [];
     $valid_subgenres        = (!empty($args['subgenres']))         ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
-    $valid_types            = validate_listing_types($types);
     $media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
+
+    $city       = (!empty($args['city']))       ? sanitize_text_field($args['city'])       : null;
+    $state_code = (!empty($args['state_code'])) ? sanitize_text_field($args['state_code']) : null;
+    $country    = (!empty($args['country']))    ? sanitize_text_field($args['country'])    : null;
+    $distance   = (!empty($args['distance']))   ? (float) $args['distance']                : 50;
+
+    if (empty($city)) {
+        $city       = 'Austin';
+        $state_code = 'TX';
+        $country    = 'US';
+    }
+
+    $loc = jm_location_get_by_city_state_country($city, $state_code, $country);
+    $listing_ids = $loc ? jm_get_listing_ids_by_distance($loc->lat, $loc->lng, $distance, $verified, 'live_music') : [];
+
+    if (empty($listing_ids)) {
+        return [
+            'listings'               => [],
+            'valid_categories'       => $valid_categories,
+            'valid_genres'           => $valid_genres,
+            'valid_subgenres'        => $valid_subgenres,
+            'valid_instrumentations' => $valid_instrumentations,
+            'valid_settings'         => $valid_settings,
+            'valid_ensemble_sizes'   => $valid_ensemble_sizes,
+            'max_num_results'        => 0,
+            'max_num_pages'          => 0,
+            'next_page'              => 1,
+        ];
+    }
 
     $query_args = [
         'post_type'      => 'listing',
         'post_status'    => 'publish',
         'paged'          => $page,
         'posts_per_page' => 10,
-        'orderby'        => [ 'meta_value_num' => 'DEC', 'ID' => 'ASC' ],
-        'meta_key'       => 'rank',
+        'post__in'       => $listing_ids,
+        'orderby'        => 'post__in',
     ];
+
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
         $query_args['orderby'] = 'relevance';
-    } else {
-        //error_log('user listing search algo');
-        //$query_args['use_listings_search_algo'] = true;
     }
 
-    // Exclude listings
     if (!empty($args['exclude'])) {
         $query_args['post__not_in'] = $args['exclude'];
     }
 
-    $meta_queries = [];
-    $meta_queries[] = [ 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ];
-    $meta_queries[] = [ 'key' => 'name', 'value' => '', 'compare' => '!=' ];
-    $meta_queries[] = [ 'key' => 'description', 'value' => '', 'compare' => '!=' ];
-    $meta_queries[] = [ 'key' => 'city', 'value' => '', 'compare' => '!=' ];
-    $meta_queries[] = [ 'key' => 'state', 'value' => '', 'compare' => '!=' ];
     if (!empty($name_search_term)) {
-        $meta_queries[] = [
+        $query_args['meta_query'] = [
             'key' => 'name',
             'value' => $name_search_term,
             'compare' => 'LIKE',
         ];
     }
-    if (!empty($types)) {
-        $meta_queries[] = [
-            'key' => 'type',
-            'value' => $valid_types,
-            'compare' => 'IN',
-        ];
-    }
-    if (!empty($verified)) {
-        $meta_queries[] = [
-            'key' => 'verified',
-            'value' => $verified,
-        ];
-    }
 
-    $query_args['meta_query'] = count($meta_queries) == 0 ? null : (count($meta_queries) == 1 ? [...$meta_queries] : [
-        'relation' => 'AND',
-        ...$meta_queries,
-    ]);
     $tax_queries = [];
     if (!empty($valid_categories)) {
         $tax_queries[] = [
@@ -127,7 +127,6 @@ function get_listings($args) {
         ...$tax_queries,
     ]);
 
-    // Media Tags
     $query_args['media_tags'] = $media_tags;
 
     $query = new WP_Query($query_args);
@@ -137,7 +136,6 @@ function get_listings($args) {
     while ($query->have_posts()) {
         $query->the_post();
 
-        // Get youtube links
         $youtube_video_post_ids = get_field('youtube_videos');
         $youtube_video_data = get_youtube_video_data($youtube_video_post_ids);
 
@@ -172,7 +170,6 @@ function get_listings($args) {
     wp_reset_postdata();
     return [
         'listings'               => $results,
-        'valid_types'            => $valid_types,
         'valid_categories'       => $valid_categories,
         'valid_genres'           => $valid_genres,
         'valid_subgenres'        => $valid_subgenres,
@@ -183,10 +180,6 @@ function get_listings($args) {
         'max_num_pages'          => $max_num_pages,
         'next_page'              => $next_page,
     ];
-}
-function validate_listing_types($types) {
-    $default_types = ['Artist', 'Musician', 'Producer', 'DJ', 'Sound Engineer', 'Band'];
-    return array_values(array_intersect($types, $default_types));
 }
 function validate_tax_input($tax_input, $taxonomy) {
     $input = rest_sanitize_array($tax_input);
