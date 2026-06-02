@@ -27,7 +27,7 @@ function jm_get_listing_ids_by_bounds($args = []) {
     }
 
     $sql = $wpdb->prepare(
-        "SELECT listing_post_id, MAX(rank) AS max_rank
+        "SELECT listing_post_id, MAX(search_rank) AS max_rank
          FROM {$table}
          WHERE " . implode(' AND ', $where) . "
          GROUP BY listing_post_id
@@ -89,7 +89,7 @@ function jm_get_listing_ids_by_location($args = []) {
     $where_sql = $where ? implode(' AND ', $where) : '1=1';
 
     $sql = $wpdb->prepare(
-        "SELECT listing_post_id, MAX(rank) AS max_rank
+        "SELECT listing_post_id, MAX(search_rank) AS max_rank
          FROM {$table}
          WHERE {$where_sql}
          GROUP BY listing_post_id

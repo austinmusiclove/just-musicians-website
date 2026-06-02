@@ -21,7 +21,7 @@ function get_listings($args) {
     $city       = (!empty($args['city']))       ? sanitize_text_field($args['city'])       : null;
     $state_code = (!empty($args['state_code'])) ? sanitize_text_field($args['state_code']) : null;
     $country    = (!empty($args['country']))    ? sanitize_text_field($args['country'])    : null;
-    $distance   = (!empty($args['distance']))   ? (float) $args['distance']                : 50;
+    $distance   = (!empty($args['distance']))   ? (float) $args['distance']                : 40;
 
     if (empty($city)) {
         $city       = 'Austin';
