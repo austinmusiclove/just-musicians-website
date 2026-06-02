@@ -1,10 +1,18 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-    1. Implement new search in main listing search
+    1. Create location api for getting city, state, zip, lat, lons
+        Add country to get by city state
+        Get actual city center coordinates
+            new data set
+            new table
+            use new cities table to do active search on cities
+            use new cities table to link in the zip table instead of storing city state country in zip table
+        Run build index in staging and prod
+        Add lat lon to listing index based on zip
+    2. Implement new search in main listing search
         Get list of ids from index and then do taxonomy filter in wp query
         Do same for name/relevance search for active search
         Add radius from zip filter (default in austin)
         Add x listings near city, state text to result count
-    2. Create location api for getting city, state, zip, lat, lons
     3. Implement new search in top bar active search
     4. Activate top bar location filter options
         auto complete cities, states, zip codes, and other regions

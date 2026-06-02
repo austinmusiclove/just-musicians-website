@@ -52,7 +52,15 @@ function jm_data_mgmt_admin_page() {
 
     if (isset($_POST['jm_action']) && check_admin_referer('jm_data_mgmt')) {
         set_time_limit(300);
-        $result = jm_build_listing_index();
+
+        switch ($_POST['jm_action']) {
+            case 'build_listing_index':
+                $result = jm_build_listing_index();
+                break;
+            case 'build_location_index':
+                $result = jm_build_location_index();
+                break;
+        }
     }
 
     ?>
@@ -68,8 +76,13 @@ function jm_data_mgmt_admin_page() {
         <form method="post">
             <?php wp_nonce_field('jm_data_mgmt'); ?>
             <p>
-                <button type="submit" name="jm_action" value="build_index" class="button button-primary">
+                <button type="submit" name="jm_action" value="build_listing_index" class="button button-primary">
                     Build Listing Index
+                </button>
+            </p>
+            <p>
+                <button type="submit" name="jm_action" value="build_location_index" class="button button-primary">
+                    Build Location Index
                 </button>
             </p>
         </form>
