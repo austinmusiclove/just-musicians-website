@@ -1,6 +1,12 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Implement new search in main listing search
-        Add radius from zip filter (default in austin)
+        Add radius from city filter (default in austin)
+            make sure if you don't select a option, it clears it do you don't try to write something without picking an option
+        Get active search working
+        Pass in lat lng
+        Use hard coded default lat lng for austin instead of getting using city db and remove function for getting lat lng for city
+        Make sure filter works in mobile and desktop
+        Connect filter city value with header
         Add x listings near city, state text to result count
     2. Implement new search in top bar active search
     3. Activate top bar location filter options
