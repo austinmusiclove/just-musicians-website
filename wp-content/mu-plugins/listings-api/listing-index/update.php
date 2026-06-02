@@ -22,13 +22,15 @@ function jm_index_upsert_listing($post_id) {
         return 'incomplete';
     }
 
+    $loc = jm_location_get_by_pc($zip_code);
+
     $result = $wpdb->insert($table, [
         'listing_post_id' => $post_id,
         'city'            => $city,
         'state'           => $state,
         'zip_code'        => $zip_code,
-        'lat'             => null,
-        'lng'             => null,
+        'lat'             => $loc ? $loc->lat : null,
+        'lng'             => $loc ? $loc->lng : null,
         'listing_type'    => 'live_music',
         'verified'        => !empty($verified) ? 1 : 0,
         'search_rank'     => $rank,
