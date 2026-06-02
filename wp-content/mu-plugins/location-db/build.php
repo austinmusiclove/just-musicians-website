@@ -176,10 +176,7 @@ function jm_create_location_pc_table() {
         lat         DECIMAL(10,7) DEFAULT NULL,
         lng         DECIMAL(11,7) DEFAULT NULL,
         country     VARCHAR(2) NOT NULL DEFAULT '',
-        INDEX idx_postal_code (postal_code),
-        INDEX idx_city (city),
-        INDEX idx_state_code (state_code),
-        INDEX idx_city_state (city, state_code)
+        INDEX idx_postal_code (postal_code)
     ) {$charset_collate}";
 
     $wpdb->query($sql);
@@ -198,7 +195,7 @@ function jm_create_location_city_table() {
         state       VARCHAR(100) NOT NULL DEFAULT '',
         lat         DECIMAL(10,7) DEFAULT NULL,
         lng         DECIMAL(11,7) DEFAULT NULL,
-        INDEX idx_city_state (city, state_code)
+        INDEX idx_city (city)
     ) {$charset_collate}";
 
     $wpdb->query($sql);

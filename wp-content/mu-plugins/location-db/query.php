@@ -1,6 +1,6 @@
 <?php
 
-function jm_location_get_by_zip($zip) {
+function jm_location_get_by_pc($pc) {
     global $wpdb;
     $table = jm_get_location_pc_table();
 
@@ -9,29 +9,16 @@ function jm_location_get_by_zip($zip) {
          FROM {$table}
          WHERE postal_code = %s
          LIMIT 1",
-        $zip
+        $pc
     ));
 }
 
-function jm_location_get_by_city_state($city, $state_code) {
-    global $wpdb;
-    $table = jm_get_location_city_table();
-
-    return $wpdb->get_row($wpdb->prepare(
-        "SELECT city, state_code, state, lat, lng
-         FROM {$table}
-         WHERE city = %s AND state_code = %s
-         LIMIT 1",
-        $city, $state_code
-    ));
-}
-
-function jm_location_search_zips($q, $limit = 20) {
+function jm_location_search_pc($q, $limit = 20) {
     global $wpdb;
     $table = jm_get_location_pc_table();
 
-    return $wpdb->get_col($wpdb->prepare(
-        "SELECT DISTINCT postal_code
+    return $wpdb->get_results($wpdb->prepare(
+        "SELECT DISTINCT postal_code, city, state, country, lat, lng
          FROM {$table}
          WHERE postal_code LIKE %s
          ORDER BY postal_code ASC
@@ -41,26 +28,17 @@ function jm_location_search_zips($q, $limit = 20) {
     ));
 }
 
-function jm_location_search_cities($q, $state_code = null, $limit = 20) {
+function jm_location_search_cities($q, $limit = 20) {
     global $wpdb;
     $table = jm_get_location_city_table();
 
-    $where  = 'city LIKE %s';
-    $params = [$wpdb->esc_like($q) . '%'];
-
-    if ($state_code !== null) {
-        $where   .= ' AND state_code = %s';
-        $params[] = $state_code;
-    }
-
-    $params[] = $limit;
-
     return $wpdb->get_results($wpdb->prepare(
-        "SELECT DISTINCT city, state_code, state
+        "SELECT DISTINCT city, state, country, lat, lng
          FROM {$table}
-         WHERE {$where}
+         WHERE city LIKE %s
          ORDER BY city ASC
          LIMIT %d",
-        $params
+        $wpdb->esc_like($q) . '%',
+        $limit
     ));
 }
