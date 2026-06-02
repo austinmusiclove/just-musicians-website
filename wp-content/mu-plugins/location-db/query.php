@@ -18,7 +18,7 @@ function jm_location_get_by_city_state($city, $state_code) {
     $table = jm_get_location_city_table();
 
     return $wpdb->get_row($wpdb->prepare(
-        "SELECT city, state_code, lat, lng
+        "SELECT city, state_code, state, lat, lng
          FROM {$table}
          WHERE city = %s AND state_code = %s
          LIMIT 1",
@@ -56,7 +56,7 @@ function jm_location_search_cities($q, $state_code = null, $limit = 20) {
     $params[] = $limit;
 
     return $wpdb->get_results($wpdb->prepare(
-        "SELECT DISTINCT city, state_code
+        "SELECT DISTINCT city, state_code, state
          FROM {$table}
          WHERE {$where}
          ORDER BY city ASC
