@@ -2,10 +2,13 @@
     1. Create location api for getting city, state, zip, lat, lons
         Add country to get by city state
         Get actual city center coordinates
-            new data set
             new table
+            add country to city state search for uniqueness
             use new cities table to do active search on cities
             use new cities table to link in the zip table instead of storing city state country in zip table
+            don't need state code index
+            make sure all indexes are needed
+            move data files into data source folder
         Run build index in staging and prod
         Add lat lon to listing index based on zip
     2. Implement new search in main listing search
