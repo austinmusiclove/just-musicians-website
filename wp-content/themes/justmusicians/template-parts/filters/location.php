@@ -26,7 +26,7 @@
         </div>
         <input type="hidden" name="lat" value="30.2672" x-model="searchLat" />
         <input type="hidden" name="lng" value="-97.7431" x-model="searchLng" />
-        <select id="distance" name="distance" x-model="distance" x-on:change="$dispatch('filterupdate');">
+        <select id="distance" name="distance" x-model="distance" x-ref="distanceFilter" x-on:change="$dispatch('filterupdate');">
             <option value="10">10 mile radius</option>
             <option value="20">20 mile radius</option>
             <option value="40">40 mile radius</option>

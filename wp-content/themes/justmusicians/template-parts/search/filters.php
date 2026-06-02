@@ -1,4 +1,4 @@
-<?php
+ <?php
     echo get_template_part('template-parts/filters/location', '', array());
 ?>
 
@@ -16,6 +16,15 @@
     </div>
 
 <?php
+    echo get_template_part('template-parts/filters/elements/tags', '', array(
+        'id' => 'ensemble-size-filters',
+        'title' => 'Ensemble Size',
+        'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
+        'default_tags' => get_default_options('ensemble_size'),
+        'tags' => [],
+        'show_modal_var' => 'showEnsembleSizeModal',
+        'x-model' => 'ensembleSizeCheckboxes',
+    ));
     echo get_template_part('template-parts/filters/elements/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
@@ -60,15 +69,6 @@
         'tags' => isset($args['settings']) ? $args['settings'] : [],
         'show_modal_var' => 'showSettingModal',
         'x-model' => 'settingsCheckboxes',
-    ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
-        'id' => 'ensemble-size-filters',
-        'title' => 'Ensemble Size',
-        'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
-        'default_tags' => get_default_options('ensemble_size'),
-        'tags' => [],
-        'show_modal_var' => 'showEnsembleSizeModal',
-        'x-model' => 'ensembleSizeCheckboxes',
     ));
 
     ?>
