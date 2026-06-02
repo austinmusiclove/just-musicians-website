@@ -1,7 +1,5 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Implement new search in main listing search
-        Get list of ids from index and then do taxonomy filter in wp query
-        Do same for name/relevance search for active search
         Add radius from zip filter (default in austin)
         Add x listings near city, state text to result count
     2. Implement new search in top bar active search

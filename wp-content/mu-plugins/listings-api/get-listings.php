@@ -14,7 +14,7 @@ function get_listings($args) {
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
-    $media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
+    #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
 
@@ -66,11 +66,11 @@ function get_listings($args) {
     }
 
     if (!empty($name_search_term)) {
-        $query_args['meta_query'] = [
+        $query_args['meta_query'] = [[
             'key' => 'name',
             'value' => $name_search_term,
             'compare' => 'LIKE',
-        ];
+        ]];
     }
 
     $tax_queries = [];
@@ -126,8 +126,6 @@ function get_listings($args) {
         'relation' => 'AND',
         ...$tax_queries,
     ]);
-
-    $query_args['media_tags'] = $media_tags;
 
     $query = new WP_Query($query_args);
     global $wpdb;

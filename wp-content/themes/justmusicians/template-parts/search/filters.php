@@ -1,3 +1,7 @@
+<?php
+    echo get_template_part('template-parts/filters/location', '', array());
+?>
+
 <div>
 
     <div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0">
@@ -66,7 +70,6 @@
         'show_modal_var' => 'showEnsembleSizeModal',
         'x-model' => 'ensembleSizeCheckboxes',
     ));
-    //echo get_template_part('template-parts/filters/location', '', array());
 
     ?>
 </div>

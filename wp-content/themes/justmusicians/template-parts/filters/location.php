@@ -6,9 +6,10 @@
         <label for="radius" class="hidden">Radius</label>
         <select id="radius" name="radius">
             <option value="" disabled selected hidden>Radius</option>
-            <option value="10 miles">10 miles</option>
-            <option value="20 miles">20 miles</option>
-            <option value="30 miles">30 miles</option>
+            <option value="10">5 miles</option>
+            <option value="15">15 miles</option>
+            <option value="25" selected>25 miles</option>
+            <option value="40">40 miles</option>
         </select>
     </form>
 </div>
