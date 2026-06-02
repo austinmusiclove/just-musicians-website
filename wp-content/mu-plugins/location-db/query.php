@@ -13,7 +13,7 @@ function jm_location_get_by_pc($pc) {
     ));
 }
 
-function jm_location_search_pc($q, $limit = 20) {
+function jm_location_search_pc($q, $limit = 40) {
     global $wpdb;
     $table = jm_get_location_pc_table();
 
@@ -28,7 +28,7 @@ function jm_location_search_pc($q, $limit = 20) {
     ));
 }
 
-function jm_location_search_cities($q, $limit = 20) {
+function jm_location_search_cities($q, $limit = 40) {
     global $wpdb;
     $table = jm_get_location_city_table();
 
@@ -43,15 +43,36 @@ function jm_location_search_cities($q, $limit = 20) {
     ));
 }
 
-function jm_location_get_by_city_state_country($city, $state_code, $country) {
-    global $wpdb;
-    $table = jm_get_location_city_table();
+function jm_location_search($q, $limit = 40) {
+    $pcs = jm_location_search_pc($q, $limit);
+    $cities = jm_location_search_cities($q, $limit);
 
-    return $wpdb->get_row($wpdb->prepare(
-        "SELECT city, state_code, state, country, lat, lng
-         FROM {$table}
-         WHERE city = %s AND state_code = %s AND country = %s
-         LIMIT 1",
-        $city, $state_code, $country
-    ));
+    $results = [];
+
+    foreach ($pcs as $pc) {
+        $results[] = [
+            'label'       => $pc->city . ', ' . $pc->state . ' ' . $pc->postal_code,
+            'value'       => $pc->postal_code,
+            'type'        => 'postal_code',
+            'city'        => $pc->city,
+            'state'       => $pc->state,
+            'lat'         => $pc->lat,
+            'lng'         => $pc->lng,
+        ];
+    }
+
+    foreach ($cities as $city) {
+        $results[] = [
+            'label'       => $city->city . ', ' . $city->state,
+            'value'       => $city->city . ', ' . $city->state,
+            'type'        => 'city',
+            'city'        => $city->city,
+            'state'       => $city->state,
+            'lat'         => $city->lat,
+            'lng'         => $city->lng,
+        ];
+    }
+
+    return $results;
 }
+

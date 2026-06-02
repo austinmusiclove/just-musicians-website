@@ -4,6 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
     $results = [];
+    $lat                    = (!empty($args['lat']))               ? (float) $args['lat']                                             : 30.2672;  // Default to Austin, TX coordinates
+    $lng                    = (!empty($args['lng']))               ? (float) $args['lng']                                             : -97.7431; // Default to Austin, TX coordinates
+    $distance               = (!empty($args['distance']))          ? (float) $args['distance']                                        : 40;
     $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
     $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
     $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
@@ -14,23 +17,12 @@ function get_listings($args) {
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
+
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
 
-    $city       = (!empty($args['city']))       ? sanitize_text_field($args['city'])       : null;
-    $state_code = (!empty($args['state_code'])) ? sanitize_text_field($args['state_code']) : null;
-    $country    = (!empty($args['country']))    ? sanitize_text_field($args['country'])    : null;
-    $distance   = (!empty($args['distance']))   ? (float) $args['distance']                : 40;
-
-    if (empty($city)) {
-        $city       = 'Austin';
-        $state_code = 'TX';
-        $country    = 'US';
-    }
-
-    $loc = jm_location_get_by_city_state_country($city, $state_code, $country);
-    $listing_ids = $loc ? jm_get_listing_ids_by_distance($loc->lat, $loc->lng, $distance, $verified, 'live_music') : [];
+    $listing_ids = jm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music');
 
     if (empty($listing_ids)) {
         return [

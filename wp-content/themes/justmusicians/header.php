@@ -54,6 +54,9 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
+            searchLocation: 'Austin, Texas',
+            searchLat: 30.2672,
+            searchLng: -97.7431,
             reviewProgress: 0,
             currentReviewSlide: '',
             showReviewModal: false,
@@ -102,6 +105,7 @@
             _handleUpdateAccountSettingsSuccess()                { handleUpdateAccountSettingsSuccess(this); },
             _handleUpdateAccountSettingsError(message)           { handleUpdateAccountSettingsError(this, message); },
             showSearchOptions: false,
+            showLocationSearchOptions: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
             showMobileMenu: false,
@@ -109,6 +113,8 @@
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
+            locationInput: 'Austin, Texas',
+            updateSearchLocation(location) { this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             focusElm(id) {
                 var elm = document.getElementById(id);
                 if (elm) { elm.scrollIntoView({ behavior: 'smooth', block: 'center' }); elm.focus(); }
@@ -123,6 +129,7 @@
             width = $width;
             showMobileMenu = false;
             showSearchOptions = false;
+            showLocationSearchOptions = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
@@ -147,7 +154,7 @@
                 x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
                 x-ref="desktopSearchInput"
                 x-bind:value="searchInput"
-                hx-get="<?php echo site_url('/wp-html/v1/search-options'); ?>"
+                hx-get="<?php echo site_url('/wp-html/v1/search-options/'); ?>"
                 hx-trigger="input changed delay:300ms"
                 hx-target="#active-search-results-desktop"
               />
@@ -159,7 +166,7 @@
             <div class="hidden md:block w-px bg-black/20 my-2"></div>
             <div class="hidden md:block grow relative px-1 py-1 flex items-center">
               <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-              <input class="w-full h-full py-2 pr-3 pl-5" type="text" placeholder="Austin, Texas" disabled />
+              <input class="w-full h-full py-2 pr-3 pl-5" type="text" x-bind:value="locationInput"/>
             </div>
             <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + $refs.desktopSearchInput.value">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />

@@ -6,6 +6,9 @@ $page = $_GET['page'] ?? 1;
 
 $result = get_listings([
     'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
+    'lat'               => !empty($_GET['lat']) ? $_GET['lat'] : null,
+    'lng'               => !empty($_GET['lng']) ? $_GET['lng'] : null,
+    'distance'          => !empty($_GET['distance']) ? $_GET['distance'] : null,
     'categories'        => !empty($_GET['categories']) ? $_GET['categories'] : [],
     'genres'            => !empty($_GET['genres']) ? $_GET['genres'] : [],
     'subgenres'         => !empty($_GET['subgenres']) ? $_GET['subgenres'] : [],

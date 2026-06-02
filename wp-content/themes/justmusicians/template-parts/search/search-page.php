@@ -45,6 +45,7 @@ $next_page       = $result ? $result['next_page']       : null;
             settingsCheckboxes:         [<?php if (!empty($args['qsetting']))         { echo "'" . $args['qsetting']         . "'"; } ?>],
             ensembleSizeCheckboxes:     [],
             verifiedCheckbox: false,
+            distance: 40,
             get selectedFilters() {
                 return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
             },
@@ -81,7 +82,7 @@ $next_page       = $result ? $result['next_page']       : null;
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
                               <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14"
-                                  x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate') });"
+                                  x-on:click="$nextTick(() => { searchInput = ''; $refs.sidebarLocationSearchInput.value = searchLocation; $dispatch('filterupdate') });"
                               >clear all</button>
                           </div>
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
