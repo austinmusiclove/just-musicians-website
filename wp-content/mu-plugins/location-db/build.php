@@ -3,7 +3,7 @@
 function jm_build_location_index() {
     global $wpdb;
 
-    $data_dir = __DIR__;
+    $data_dir = __DIR__ . '/data';
     $inserted_pc   = 0;
     $inserted_city = 0;
     $errors        = [];
