@@ -1,6 +1,5 @@
 <?php
 $device = $args['device'] ?? 'desktop';
-$search_input_ref = $device . 'LocationSearchInput';
 $distance_input_ref = $device . 'DistanceInput';
 $target_id = 'location-active-search-results-' . $device;
 ?>
@@ -18,12 +17,10 @@ $target_id = 'location-active-search-results-' . $device;
                 x-model="locationInput"
                 x-on:focus="showLocationSearchOptions = true; locationInput = '';"
                 x-on:click.away="showLocationSearchOptions = false; $el.value = searchLocation;"
-                x-ref="<?php echo $search_input_ref; ?>"
                 hx-get="<?php echo site_url('/wp-html/v1/location-search-options/'); ?>"
                 hx-trigger="input changed delay:300ms"
                 hx-target="#<?php echo $target_id; ?>"
                 hx-indicator=".location-active-search-spinner"
-                x-init="$watch('searchLocation', value => { $dispatch('filterupdate'); })"
             />
              <div id="<?php echo $target_id; ?>" x-show="showLocationSearchOptions" x-cloak>
                  <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>

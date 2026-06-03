@@ -17,7 +17,17 @@
         </div>
         <div class="w-full relative border border-black/20 rounded-sm">
             <img class="h-4 absolute top-2 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-            <input class="w-full h-full py-2 pr-3 pl-6" type="text" placeholder="Austin, Texas" disabled />
+              <input class="w-full h-full py-2 pr-3 pl-5" type="text" name="location" autocomplete="off"
+                  x-model="locationInput"
+                  x-on:focus="showLocationSearchOptionsHeader = true; locationInput = '';"
+                  x-on:click.away="showLocationSearchOptionsHeader = false; $el.value = searchLocation;"
+                  hx-get="<?php echo site_url('/wp-html/v1/location-search-options/'); ?>"
+                  hx-trigger="input changed delay:300ms"
+                  hx-target="#location-active-search-results-mobile-header"
+              />
+              <div id="location-active-search-results-mobile-header" x-show="showLocationSearchOptionsHeader" x-cloak>
+                  <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
+              </div>
         </div>
     </div>
 

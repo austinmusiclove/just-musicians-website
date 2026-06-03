@@ -106,6 +106,7 @@
             _handleUpdateAccountSettingsError(message)           { handleUpdateAccountSettingsError(this, message); },
             showSearchOptions: false,
             showLocationSearchOptions: false,
+            showLocationSearchOptionsHeader: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
             showMobileMenu: false,
@@ -114,7 +115,7 @@
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
             locationInput: 'Austin, Texas',
-            updateSearchLocation(location) { this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
+            updateSearchLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             focusElm(id) {
                 var elm = document.getElementById(id);
                 if (elm) { elm.scrollIntoView({ behavior: 'smooth', block: 'center' }); elm.focus(); }
@@ -130,6 +131,7 @@
             showMobileMenu = false;
             showSearchOptions = false;
             showLocationSearchOptions = false;
+            showLocationSearchOptionsHeader = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
@@ -165,7 +167,17 @@
             <div class="hidden md:block w-px bg-black/20 my-2"></div>
             <div class="hidden md:block grow relative px-1 py-1 flex items-center">
               <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-              <input class="w-full h-full py-2 pr-3 pl-5" type="text" x-bind:value="locationInput"/>
+              <input class="w-full h-full py-2 pr-3 pl-5" type="text" name="location" autocomplete="off"
+                  x-model="locationInput"
+                  x-on:focus="showLocationSearchOptionsHeader = true; locationInput = '';"
+                  x-on:click.away="showLocationSearchOptionsHeader = false; $el.value = searchLocation;"
+                  hx-get="<?php echo site_url('/wp-html/v1/location-search-options/'); ?>"
+                  hx-trigger="input changed delay:300ms"
+                  hx-target="#location-active-search-results-desktop-header"
+              />
+              <div id="location-active-search-results-desktop-header" x-show="showLocationSearchOptionsHeader" x-cloak>
+                  <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
+              </div>
             </div>
             <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + searchInput">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />

@@ -72,6 +72,7 @@ $next_page       = $result ? $result['next_page']       : null;
         <?php } else { ?>
             hx-trigger="load, filterupdate"
         <?php } ?>
+        x-init="$watch('searchLocation', value => { $dispatch('filterupdate'); })"
     >
         <input type="hidden" name="search" x-model="listingSearchVal" />
         <div id="content" class="grow flex flex-col relative">
@@ -97,8 +98,6 @@ $next_page       = $result ? $result['next_page']       : null;
 
                     </div>
                 </div>
-
-
 
 
                 <div class="col md:col-span-6 py-6 md:py-4">
