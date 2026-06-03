@@ -29,6 +29,7 @@ $target_id = 'location-active-search-results-' . $device;
                  <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
              </div>
         </div>
+        <input type="hidden" name="location_label" x-model="locationInput" />
         <input type="hidden" name="lat" value="30.2672" x-model="searchLat" />
         <input type="hidden" name="lng" value="-97.7431" x-model="searchLng" />
         <select id="distance" name="distance" x-model="distance" x-ref="<?php echo $distance_input_ref; ?>" x-on:change="$dispatch('filterupdate');">

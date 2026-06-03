@@ -2,6 +2,7 @@
 
 // Get listings
 $page = $_GET['page'] ?? 1;
+$location_label = $_GET['location_label'] ?? null;
 
 
 $result = get_listings([
@@ -140,5 +141,7 @@ if ($page == 1) {
 // Render total resutls count
 ?><span id="max_num_results" hx-swap-oob="outerHTML"><?php
     echo $max_num_results;
-    if ($max_num_results == 1) { echo ' result'; } else { echo ' results'; }?>
+    if ($max_num_results == 1) { echo ' result'; } else { echo ' results'; }
+    if ($location_label) { echo " near $location_label"; }
+?>
 </span><?php

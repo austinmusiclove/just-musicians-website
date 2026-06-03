@@ -105,7 +105,7 @@ $next_page       = $result ? $result['next_page']       : null;
 
                     <?php if (isset($args['title'])) { ?><h1 class="py-4 text-28 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
 
-                    <div class="flex items-center justify-between md:justify-start">
+                    <div class="flex items-center justify-start">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', [
                             'categories'       => $categories,
                             'genres'           => $genres,

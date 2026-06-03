@@ -1,4 +1,4 @@
-<div class="text-16 py-2 flex items-center gap-2">
+<div class="text-16 p-2 flex sm:items-center items-start gap-2 sm:flex-row flex-col">
 
     <!-- Sort -->
     <div class="flex items-center gap-2 ">
@@ -9,7 +9,7 @@
             Sort:
             <span class="font-bold flex items-center">
                 Default
-                <img class="ml-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+                <img class="mx-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
             </span>
             <div class="absolute top-full w-40 px-4 py-4 bg-white hidden group-hover:flex flex-col shadow-md rounded-sm z-10 right-0">
                 <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-yellow-light/50 rounded-sm" href="#">
@@ -30,7 +30,7 @@
     <!-- Number of Results -->
     <?php if (!empty($args['show_number']) and $args['show_number']) { ?>
         <div class="flex items-center gap-2">
-            <div class="h-5 w-px bg-black/20"></div>
+            <div class="hidden sm:block h-5 w-px bg-black/20"></div>
 
             <span id="max_num_results" hx-swap-oob="outerHTML"><?php
 
@@ -45,11 +45,12 @@
 
             ?></span>
 
+            <div class="spinner-start htmx-indicator flex items-center justify-center">
+                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+            </div>
+
         </div>
     <?php } ?>
 
-    <div class="spinner-start htmx-indicator my-8 flex items-center justify-center">
-        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
-    </div>
 
 </div>
