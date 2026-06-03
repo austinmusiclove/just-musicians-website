@@ -54,9 +54,9 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            searchLocation: 'Austin, Texas',
-            searchLat: 30.2672,
-            searchLng: -97.7431,
+            searchLat: <?php echo !empty($_GET['lat']) ? (float)$_GET['lat'] : 30.2672; ?>,
+            searchLng: <?php echo !empty($_GET['lng']) ? (float)$_GET['lng'] : -97.7431; ?>,
+            searchLocation: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : 'Austin, Texas'; ?>',
             reviewProgress: 0,
             currentReviewSlide: '',
             showReviewModal: false,
@@ -114,7 +114,7 @@
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
-            locationInput: 'Austin, Texas',
+            locationInput: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : 'Austin, Texas'; ?>',
             updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             focusElm(id) {
                 var elm = document.getElementById(id);
@@ -179,7 +179,7 @@
                   <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
               </div>
             </div>
-            <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + searchInput">
+            <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
             </button>
           </div>
