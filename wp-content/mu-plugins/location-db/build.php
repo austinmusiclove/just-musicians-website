@@ -155,6 +155,50 @@ function jm_build_location_index() {
         }
     }
 
+    // ---- Supplement missing cities from postal codes ----
+    $rows = $wpdb->get_results("
+        SELECT pc.city, pc.state_code, pc.state, pc.country,
+               AVG(pc.lat) AS lat, AVG(pc.lng) AS lng
+        FROM {$pc_table} pc
+        LEFT JOIN {$city_table} c
+            ON pc.city = c.city AND pc.state_code = c.state_code AND pc.country = c.country
+        WHERE c.id IS NULL
+        GROUP BY pc.city, pc.state_code, pc.state, pc.country
+        HAVING AVG(pc.lat) IS NOT NULL AND AVG(pc.lng) IS NOT NULL
+    ");
+
+    if ($rows !== null && !empty($rows)) {
+        $placeholders = [];
+        foreach ($rows as $row) {
+            $country    = $wpdb->prepare('%s', $row->country);
+            $city       = $wpdb->prepare('%s', $row->city);
+            $state_code = $wpdb->prepare('%s', $row->state_code);
+            $state      = $wpdb->prepare('%s', $row->state);
+            $lat        = (float) $row->lat;
+            $lng        = (float) $row->lng;
+
+            $placeholders[] = "({$country}, {$city}, {$state_code}, {$state}, {$lat}, {$lng})";
+
+            if (count($placeholders) >= 500) {
+                $result = $wpdb->query("INSERT INTO {$city_table} (country, city, state_code, state, lat, lng) VALUES " . implode(', ', $placeholders));
+                if ($result === false) {
+                    $errors[] = ['source' => 'pc-supplement', 'error' => $wpdb->last_error];
+                } else {
+                    $inserted_city += $result;
+                }
+                $placeholders = [];
+            }
+        }
+        if (!empty($placeholders)) {
+            $result = $wpdb->query("INSERT INTO {$city_table} (country, city, state_code, state, lat, lng) VALUES " . implode(', ', $placeholders));
+            if ($result === false) {
+                $errors[] = ['source' => 'pc-supplement', 'error' => $wpdb->last_error];
+            } else {
+                $inserted_city += $result;
+            }
+        }
+    }
+
     return new WP_REST_Response([
         'postal_codes_inserted' => $inserted_pc,
         'cities_inserted'       => $inserted_city,
@@ -169,13 +213,13 @@ function jm_create_location_pc_table() {
 
     $sql = "CREATE TABLE {$table} (
         id          BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        postal_code VARCHAR(20) NOT NULL DEFAULT '',
         city        VARCHAR(180) NOT NULL DEFAULT '',
-        state       VARCHAR(100) NOT NULL DEFAULT '',
         state_code  VARCHAR(20) NOT NULL DEFAULT '',
+        state       VARCHAR(100) NOT NULL DEFAULT '',
+        postal_code VARCHAR(20) NOT NULL DEFAULT '',
+        country     VARCHAR(2) NOT NULL DEFAULT '',
         lat         DECIMAL(10,7) DEFAULT NULL,
         lng         DECIMAL(11,7) DEFAULT NULL,
-        country     VARCHAR(2) NOT NULL DEFAULT '',
         INDEX idx_postal_code (postal_code)
     ) {$charset_collate}";
 
@@ -189,10 +233,10 @@ function jm_create_location_city_table() {
 
     $sql = "CREATE TABLE {$table} (
         id          BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        country     VARCHAR(2) NOT NULL DEFAULT '',
         city        VARCHAR(200) NOT NULL DEFAULT '',
         state_code  VARCHAR(20) NOT NULL DEFAULT '',
         state       VARCHAR(100) NOT NULL DEFAULT '',
+        country     VARCHAR(2) NOT NULL DEFAULT '',
         lat         DECIMAL(10,7) DEFAULT NULL,
         lng         DECIMAL(11,7) DEFAULT NULL,
         INDEX idx_city (city)
