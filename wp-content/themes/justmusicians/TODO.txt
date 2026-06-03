@@ -1,19 +1,19 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Implement new search in main listing search
-        Make sure filter works in mobile and desktop filters
-        Connect filter city value with header
-        Connect filter city value with mobile header
         Add x listings near city, state text to result count
     2. Implement new search in top bar active search
-    3. Activate top bar location filter options
-        auto complete cities, states, zip codes, and other regions
-    4. Update listing form features
+        Connect filter city value with header
+        Connect filter city value with mobile header
+    3. Update listing form features
         auto fill city and state based on zip
         auto fill state based on city
         active search cities in listing form
-    5. Get inquiry suggestions with location filtering
+    4. Get inquiry suggestions with location filtering
         change inquiries to city based instead of zip?
-    6. Scale top x genre in x city seo pages
+    5. Fix city list by adding all cities in postal code data set
+        iterate through it after using the city centroid dataset to fill in gaps
+        (missing dripping springs but it is in the postal code data set)
+    5. Scale top x genre in x city seo pages
 Errors
     when not logged in getting profile image url fails in console log
 Glossarier

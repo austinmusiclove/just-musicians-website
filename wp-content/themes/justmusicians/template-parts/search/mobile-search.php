@@ -6,10 +6,10 @@
             <button type="button" data-trigger="mobile-search" class="px-2 h-full absolute top-0 left-0 flex items-center justify-center" x-on:click="showSearchOptions = false" x-on:focus="$focus.focus($refs.mobileSearchInput)">
                 <img class="h-5 absolute" src="<?php echo get_template_directory_uri() . '/lib/images/icons/arrow_left.svg' ?>" />
             </button>
-            <input data-input="search" class="w-full py-2 pr-3 pl-6 inline-block" type="text" name="s" autocomplete="off" placeholder="Search"
+            <input class="w-full py-2 pr-3 pl-6 inline-block" type="text" name="s" autocomplete="off" placeholder="Search"
               x-ref="mobileSearchInput"
-              x-bind:value="searchInput"
-              x-on:keyup.enter="searchInput = $el.value"
+              x-model="searchInput"
+              x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
               hx-get="<?php echo site_url('/wp-html/v1/search-options-mobile/'); ?>"
               hx-trigger="input changed delay:300ms"
               hx-target="#active-search-results-mobile"

@@ -1,5 +1,7 @@
- <?php
-    echo get_template_part('template-parts/filters/location', '', array());
+<?php
+    echo get_template_part('template-parts/filters/location', '', array(
+        'device' => $args['device'] ?? 'desktop',
+    ));
 ?>
 
 <div>

@@ -15,7 +15,6 @@ get_header();
     x-on:add-collection="redirect('<?php echo $_SERVER['REQUEST_URI']; ?>')"
 >
 
-        <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
                 <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">

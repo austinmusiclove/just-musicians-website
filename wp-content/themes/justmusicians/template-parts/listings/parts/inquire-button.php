@@ -33,7 +33,7 @@
         <!-- For logged in users with no existing inquiries; opens inquiry modal -->
         <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 sm:py-2 rounded-sm font-sun-motter text-14 sm:text-12 inline-block w-full sm:w-fit"
             x-show="loggedIn && Object.keys(inquiriesMap).length == 0" x-cloak
-            x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
+            x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo clean_str_for_doublequotes($args['name']); ?>');"
         >Send Inquiry</button>
 
         <!-- Results from inquiries menu -->
@@ -102,7 +102,7 @@
                 <div class="pt-3 border-t flex justify-center">
                     <!--<button type="button" class="w-full border rounded-full py-2 text-center text-sm text-black font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-sm"-->
                     <button type="button" class="text-sm text-black font-medium w-full hover:underline"
-                        x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo $args['name']; ?>');"
+                        x-on:click="_clearInquiryForm(); _openInquiryModal('<?php echo $args['post_id']; ?>', '<?php echo clean_str_for_doublequotes($args['name']); ?>');"
                     >Create new inquiry +</button>
                 </div>
             </div>

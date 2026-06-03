@@ -152,8 +152,7 @@
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
                 x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false;"
                 x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
-                x-ref="desktopSearchInput"
-                x-bind:value="searchInput"
+                x-model="searchInput"
                 hx-get="<?php echo site_url('/wp-html/v1/search-options/'); ?>"
                 hx-trigger="input changed delay:300ms"
                 hx-target="#active-search-results-desktop"
@@ -168,7 +167,7 @@
               <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
               <input class="w-full h-full py-2 pr-3 pl-5" type="text" x-bind:value="locationInput"/>
             </div>
-            <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + $refs.desktopSearchInput.value">
+            <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + searchInput">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
             </button>
           </div>

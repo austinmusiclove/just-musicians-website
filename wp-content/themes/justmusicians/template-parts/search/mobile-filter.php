@@ -12,7 +12,7 @@
         <div class="flex items-center justify-between mb-4 sticky top-0 bg-white py-4 w-full z-10">
             <button type="button" data-trigger="mobile-filter" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="showMobileFilters = ! showMobileFilters" >close</button>
             <h2 class="font-sun-motter text-25">Filter</h2>
-            <button type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate')});">clear all</button>
+            <button type="button" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="_clearListingForm()" >clear all</button>
         </div>
 
         <?php echo get_template_part('template-parts/search/filters', '', [

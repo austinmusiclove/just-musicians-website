@@ -37,7 +37,7 @@ $next_page       = $result ? $result['next_page']       : null;
             showInstrumentationModal: false,
             showSettingModal: false,
             showEnsembleSizeModal: false,
-            searchVal: searchInput,
+            listingSearchVal:           '<?php if (!empty($_GET['qsearch']))          { echo $_GET['qsearch']; } ?>',
             categoriesCheckboxes:       [<?php if (!empty($args['qcategory']))        { echo "'" . $args['qcategory']        . "'"; } ?>],
             genresCheckboxes:           [<?php if (!empty($args['qgenre']))           { echo "'" . $args['qgenre']           . "'"; } ?>],
             subgenresCheckboxes:        [<?php if (!empty($args['qsubgenre']))        { echo "'" . $args['qsubgenre']        . "'"; } ?>],
@@ -47,21 +47,21 @@ $next_page       = $result ? $result['next_page']       : null;
             verifiedCheckbox: false,
             distance: 40,
             get selectedFilters() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).join(' | ');
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.listingSearchVal].filter(Boolean).join(' | ');
             },
             get selectedFiltersCount() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.searchVal].filter(Boolean).length;
+                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.listingSearchVal].filter(Boolean).length;
             },
             tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
-
             inquiriesMap: <?php echo clean_arr_for_doublequotes($args['inquiries_map']); ?>,
             get sortedInquiries()                                { return getSortedInquiries(this); },
             _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
             _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
             _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+            _clearListingForm()                                  { clearListingForm(this); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
@@ -73,7 +73,7 @@ $next_page       = $result ? $result['next_page']       : null;
             hx-trigger="load, filterupdate"
         <?php } ?>
     >
-        <input type="hidden" name="search" value="" x-bind:value="searchInput" x-init="$watch('searchInput', value => { searchVal = value; $dispatch('filterupdate'); })" />
+        <input type="hidden" name="search" x-model="listingSearchVal" />
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
                 <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
@@ -81,14 +81,13 @@ $next_page       = $result ? $result['next_page']       : null;
                       <div class="mb-8 min-h-16">
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
-                              <button id="clear-form" type="reset" class="underline opacity-40 hover:opacity-100 inline-block text-14"
-                                  x-on:click="$nextTick(() => { searchInput = ''; $refs.distanceFilter.value = 40; $refs.sidebarLocationSearchInput.value = searchLocation; $dispatch('filterupdate') });"
-                              >clear all</button>
+                              <button id="clear-form" type="button" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="_clearListingForm()" >clear all</button>
                           </div>
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
 
                       <?php echo get_template_part('template-parts/search/filters', '', [
+                          'device'           => 'desktop',
                           'categories'       => $categories,
                           'genres'           => $genres,
                           'subgenres'        => $subgenres,
