@@ -3,7 +3,7 @@
     <!-- Locations -->
     <?php foreach((array) $args['locations'] as $location) { ?>
         <li class="p-2 hover:bg-yellow-10 cursor-pointer" x-on:click="updateLocation(<?php echo clean_arr_for_doublequotes($location); ?>)">
-            <span><?php echo $location['label']; ?></span>
+            <span><?php echo $location['label'] . ', ' . $location['country']; ?></span>
         </li>
 
     <?php } ?>

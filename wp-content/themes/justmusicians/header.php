@@ -115,7 +115,7 @@
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
             locationInput: 'Austin, Texas',
-            updateSearchLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
+            updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             focusElm(id) {
                 var elm = document.getElementById(id);
                 if (elm) { elm.scrollIntoView({ behavior: 'smooth', block: 'center' }); elm.focus(); }

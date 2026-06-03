@@ -1,8 +1,7 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-    1. Update listing form features
-        auto fill city and state based on zip
-        auto fill state based on city
-        active search cities in listing form
+    1. Get location search working from other pages
+        When you hit location search from header on other pages it needs to go to the home search page with that location
+        Need to have location context in the header active search (right now stuck on ausitn or just defaulting in the back end; need to send lat lng)
     2. Get inquiry suggestions with location filtering
         change inquiries to city based instead of zip?
     3. Fix city list by adding all cities in postal code data set

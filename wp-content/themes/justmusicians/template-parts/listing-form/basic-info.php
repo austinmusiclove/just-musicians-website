@@ -21,73 +21,35 @@
 
     </h2>
 
+    <!-- Location -->
     <fieldgroup>
-        <div class="grid sm:grid-cols-3 gap-2">
-            <!-- City -->
+        <div>
+            <!-- Postal Code -->
             <div class="relative">
-                <label for="city" class="mb-1 inline-block">City<span class="text-red">*</span></label>
-                <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <input class="has-icon" type="text" id="city" name="city" required x-model="pCity"
-                  x-on:input="pCity = pCity.replace(/\b\w/g, char => char.toUpperCase()).toLowerCase().replace(/\b\w/g, char => char.toUpperCase())"
-                >
-            </div>
-            <!-- State -->
-            <div x-data="{
-                states: [
-                    'Texas', 'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-                    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-                    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-                    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-                    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-                    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-                    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-                ],
-                showDropdown: false,
-                select(state) {
-                    this.showDropdown = false;
-                    pState = state;
-                }
-            }">
-                <label id="state" for="state" class="mb-1 inline-block">State<span class="text-red">*</span></label><br>
-                <div class="relative flex items-center justify-between">
-                    <button type="button" class="inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"
-                        x-on:click="showDropdown = true"
-                    >
-                    <span x-text="pState || 'Select one'"></span>
-                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                    </button>
-
-                    <ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-60 overflow-y-auto" style="margin-top: -1px"
-                        x-show="showDropdown" x-cloak
-                        x-on:click.away="showDropdown = false"
-                    >
-                        <template x-for="(state, index) in states" :key="index">
-                            <li
-                                @click="select(state)"
-                                class="px-4 py-2 hover:bg-yellow-10 cursor-pointer"
-                                tabindex="0"
-                                @keydown.enter.prevent="select(state)"
-                            >
-                                <span x-text="state"></span>
-                            </li>
-                        </template>
-                    </ul>
-
-                    <!-- Hidden input to store selected state -->
-                    <input type="hidden" name="state" required x-model="pState">
+                <div class="flex items-center gap-2 mb-3">
+                    <label for="zip_code" class="mb-1 inline-block">Postal Code<span class="text-red">*</span></label>
+                    <span id="zip-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+                    </span>
                 </div>
-            </div>
-            <!-- Zip Code -->
-            <div>
-                <label for="zip_code" class="mb-1 inline-block">Zip<span class="text-red">*</span></label>
-                <input type="text" id="zip_code" name="zip_code" required
-                    pattern="^\d{5}(-\d{4})?$" maxlength="5"
-                    title="Enter a valid ZIP code (e.g., 12345 or 12345-6789)."
-                    x-model="pZipCode"
+                <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
+                <input class="has-icon" type="text" id="pc_search" name="pc_search" autocomplete="off" required
+                    title="Enter a US or Canadian postal code (e.g., 78701, )."
+                    x-model="zipCodeInput"
+                    x-on:focus="showZipSearchOptions = true; zipCodeInput = '';"
+                    x-on:click.away="showZipSearchOptions = false; $el.value = fullLocation;"
+                    hx-get="<?php echo site_url('/wp-html/v1/pc-search-options/'); ?>"
+                    hx-trigger="input changed delay:300ms"
+                    hx-target="#zip-active-search-results"
+                    hx-indicator="#zip-active-search-spinner"
                 >
+                 <div id="zip-active-search-results" x-show="showZipSearchOptions" x-cloak>
+                     <?php echo get_template_part('template-parts/search/pc-search-state-1', '', array()); ?>
+                 </div>
             </div>
+            <input type="hidden" id="city" name="city" x-model="pCity">
+            <input type="hidden" id="state" name="state" x-model="pState">
+            <input type="hidden" id="postal_code" name="zip_code" x-model="pZipCode">
         </div>
     </fieldgroup>
 
