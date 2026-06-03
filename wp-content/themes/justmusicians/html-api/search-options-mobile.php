@@ -1,11 +1,18 @@
 <?php
-$search_term = stripslashes($_GET['s']);
+$search_term = stripslashes($_GET['s'] ?? '');
+$lat = !empty($_GET['lat']) ? stripslashes($_GET['lat']) : null;
+$lng = !empty($_GET['lng']) ? stripslashes($_GET['lng']) : null;
 if (empty($search_term)) {
     get_template_part('template-parts/search/mobile-search-state-1', '', array());
 } else {
-    $result = get_listings([
-        'name_search' => $search_term
-    ]);
+    $get_listings_args = [
+        'name_search' => $search_term,
+    ];
+    if ($lat !== null && $lng !== null) {
+        $get_listings_args['lat'] = $lat;
+        $get_listings_args['lng'] = $lng;
+    }
+    $result = get_listings($get_listings_args);
     $listings = $result['listings'];
     $categories       = get_terms_decoded('mcategory', 'names', $search_term, true);
     $genres           = get_terms_decoded('genre', 'names', $search_term, true);

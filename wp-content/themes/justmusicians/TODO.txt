@@ -1,13 +1,11 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
-    1. Get location search working from other pages
-        Need to have location context in the header active search (right now stuck on ausitn or just defaulting in the back end; need to send lat lng)
-    2. Get inquiry suggestions with location filtering
+    1. Get inquiry suggestions with location filtering
         change inquiries to city based instead of zip?
-    3. Fix city list by adding all cities in postal code data set
+    2. Fix city list by adding all cities in postal code data set
         iterate through it after using the city centroid dataset to fill in gaps
         (missing dripping springs but it is in the postal code data set)
-    4. Add location requesting to get default location
-    5. Scale top x genre in x city seo pages
+    3. Add location requesting to get default location
+    4. Scale top x genre in x city seo pages
 Errors
     when not logged in getting profile image url fails in console log
 Glossarier

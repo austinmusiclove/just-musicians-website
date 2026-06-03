@@ -13,11 +13,12 @@
               hx-get="<?php echo site_url('/wp-html/v1/search-options-mobile/'); ?>"
               hx-trigger="input changed delay:300ms"
               hx-target="#active-search-results-mobile"
+              hx-include="#lat-input-header-mobile, #lng-input-header-mobile"
             />
         </div>
         <div class="w-full relative border border-black/20 rounded-sm">
             <img class="h-4 absolute top-2 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-              <input class="w-full h-full py-2 pr-3 pl-5" type="text" name="location" autocomplete="off"
+              <input id="location-input-header-mobile" class="w-full h-full py-2 pr-3 pl-5" type="text" name="location" autocomplete="off"
                   x-model="locationInput"
                   x-on:focus="showLocationSearchOptionsHeader = true; locationInput = '';"
                   x-on:click.away="showLocationSearchOptionsHeader = false; $el.value = searchLocation;"
@@ -28,6 +29,8 @@
               <div id="location-active-search-results-mobile-header" x-show="showLocationSearchOptionsHeader" x-cloak>
                   <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
               </div>
+              <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="searchLat" />
+              <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="searchLng" />
         </div>
     </div>
 

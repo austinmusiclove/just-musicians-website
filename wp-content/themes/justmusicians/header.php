@@ -158,6 +158,7 @@
                 hx-get="<?php echo site_url('/wp-html/v1/search-options/'); ?>"
                 hx-trigger="input changed delay:300ms"
                 hx-target="#active-search-results-desktop"
+                hx-include="#lat-input-header-desktop, #lng-input-header-desktop"
               />
               <div id="active-search-results-desktop" x-show="getShowDefaultSearchOptionsDesktop()" x-cloak>
                 <?php echo get_template_part('template-parts/search/search-state-1', '', array()); ?>
@@ -178,6 +179,8 @@
               <div id="location-active-search-results-desktop-header" x-show="showLocationSearchOptionsHeader" x-cloak>
                   <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
               </div>
+              <input id="lat-input-header-desktop" type="hidden" name="lat" x-model="searchLat" />
+              <input id="lng-input-header-desktop" type="hidden" name="lng" x-model="searchLng" />
             </div>
             <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
               <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
