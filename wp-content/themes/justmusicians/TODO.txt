@@ -1,8 +1,5 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Get location search working from other pages
-        Connect search icon button
-            send lat, lng, location
-        Connect selecting location option from dropdown when not on home page
         Need to have location context in the header active search (right now stuck on ausitn or just defaulting in the back end; need to send lat lng)
     2. Get inquiry suggestions with location filtering
         change inquiries to city based instead of zip?

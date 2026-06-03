@@ -153,7 +153,7 @@
             <div class="grow relative px-1 py-1" x-on:click.outside="showSearchOptions = false" >
               <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
                 x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false;"
-                x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
+                x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)"
                 x-model="searchInput"
                 hx-get="<?php echo site_url('/wp-html/v1/search-options/'); ?>"
                 hx-trigger="input changed delay:300ms"

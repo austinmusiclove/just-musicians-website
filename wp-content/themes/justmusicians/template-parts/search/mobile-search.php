@@ -9,7 +9,7 @@
             <input class="w-full py-2 pr-3 pl-6 inline-block" type="text" name="s" autocomplete="off" placeholder="Search"
               x-ref="mobileSearchInput"
               x-model="searchInput"
-              x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value)"
+              x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)"
               hx-get="<?php echo site_url('/wp-html/v1/search-options-mobile/'); ?>"
               hx-trigger="input changed delay:300ms"
               hx-target="#active-search-results-mobile"
