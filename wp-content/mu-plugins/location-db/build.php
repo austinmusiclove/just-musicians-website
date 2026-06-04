@@ -1,6 +1,6 @@
 <?php
 
-function jm_build_location_index() {
+function hm_build_location_index() {
     global $wpdb;
 
     $data_dir = __DIR__ . '/data';
@@ -9,9 +9,9 @@ function jm_build_location_index() {
     $errors        = [];
 
     // ---- Postal codes ----
-    $pc_table = jm_get_location_pc_table();
+    $pc_table = hm_get_location_pc_table();
     $wpdb->query("DROP TABLE IF EXISTS {$pc_table}");
-    jm_create_location_pc_table();
+    hm_create_location_pc_table();
 
     $pc_files = ['US.txt', 'CA.txt'];
 
@@ -71,9 +71,9 @@ function jm_build_location_index() {
     }
 
     // ---- City centroids ----
-    $city_table = jm_get_location_city_table();
+    $city_table = hm_get_location_city_table();
     $wpdb->query("DROP TABLE IF EXISTS {$city_table}");
-    jm_create_location_city_table();
+    hm_create_location_city_table();
 
     // Load admin1 lookup (US.CA => California, CA.01 => Alberta, etc.)
     $admin1_map = [];
@@ -206,9 +206,9 @@ function jm_build_location_index() {
     ], 200);
 }
 
-function jm_create_location_pc_table() {
+function hm_create_location_pc_table() {
     global $wpdb;
-    $table = jm_get_location_pc_table();
+    $table = hm_get_location_pc_table();
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE {$table} (
@@ -226,9 +226,9 @@ function jm_create_location_pc_table() {
     $wpdb->query($sql);
 }
 
-function jm_create_location_city_table() {
+function hm_create_location_city_table() {
     global $wpdb;
-    $table = jm_get_location_city_table();
+    $table = hm_get_location_city_table();
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE {$table} (

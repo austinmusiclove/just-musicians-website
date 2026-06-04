@@ -1,11 +1,11 @@
 <?php
 
-function jm_build_listing_index() {
+function hm_build_listing_index() {
     global $wpdb;
-    $table = jm_get_listing_index_table();
+    $table = hm_get_listing_index_table();
 
     $wpdb->query("DROP TABLE IF EXISTS {$table}");
-    jm_create_listing_index_table();
+    hm_create_listing_index_table();
 
     $listing_ids = get_posts([
         'post_type'      => 'listing',
@@ -19,7 +19,7 @@ function jm_build_listing_index() {
     $errors     = [];
 
     foreach ($listing_ids as $post_id) {
-        $status = jm_index_upsert_listing($post_id);
+        $status = hm_index_upsert_listing($post_id);
 
         if ($status === 'inserted') {
             $inserted++;
@@ -38,9 +38,9 @@ function jm_build_listing_index() {
     ], 200);
 }
 
-function jm_create_listing_index_table() {
+function hm_create_listing_index_table() {
     global $wpdb;
-    $table = jm_get_listing_index_table();
+    $table = hm_get_listing_index_table();
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE IF NOT EXISTS {$table} (

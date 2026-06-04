@@ -33,32 +33,32 @@ add_action('rest_api_init', function () {
     ]);
 });
 
-add_action('admin_menu', 'jm_data_mgmt_admin_menu');
+add_action('admin_menu', 'hm_data_mgmt_admin_menu');
 
-function jm_data_mgmt_admin_menu() {
+function hm_data_mgmt_admin_menu() {
     add_menu_page(
         'Data Management',
         'Data Management',
         'manage_options',
         'data-mgmt',
-        'jm_data_mgmt_admin_page',
+        'hm_data_mgmt_admin_page',
         'dashicons-admin-tools',
         23
     );
 }
 
-function jm_data_mgmt_admin_page() {
+function hm_data_mgmt_admin_page() {
     if (!current_user_can('manage_options')) { return; }
 
-    if (isset($_POST['jm_action']) && check_admin_referer('jm_data_mgmt')) {
+    if (isset($_POST['hm_action']) && check_admin_referer('hm_data_mgmt')) {
         set_time_limit(300);
 
-        switch ($_POST['jm_action']) {
+        switch ($_POST['hm_action']) {
             case 'build_listing_index':
-                $result = jm_build_listing_index();
+                $result = hm_build_listing_index();
                 break;
             case 'build_location_index':
-                $result = jm_build_location_index();
+                $result = hm_build_location_index();
                 break;
         }
     }
@@ -74,14 +74,14 @@ function jm_data_mgmt_admin_page() {
         <?php endif; ?>
 
         <form method="post">
-            <?php wp_nonce_field('jm_data_mgmt'); ?>
+            <?php wp_nonce_field('hm_data_mgmt'); ?>
             <p>
-                <button type="submit" name="jm_action" value="build_listing_index" class="button button-primary">
+                <button type="submit" name="hm_action" value="build_listing_index" class="button button-primary">
                     Build Listing Index
                 </button>
             </p>
             <p>
-                <button type="submit" name="jm_action" value="build_location_index" class="button button-primary">
+                <button type="submit" name="hm_action" value="build_location_index" class="button button-primary">
                     Build Location Index
                 </button>
             </p>

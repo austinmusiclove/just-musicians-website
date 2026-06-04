@@ -1,8 +1,8 @@
+Readme for GeoNames Postal Code files :
+
 Sources:
 - https://download.geonames.org/export/zip/
 - https://download.geonames.org/export/dump/cities5000.zip
-
-Readme for GeoNames Postal Code files :
 
 allCountries.zip: all supported countries, for CA,NL and UK only the first part of the codes.
 The full codes for CA are in the CA_full.csv.zip, same for NL and UK.
@@ -51,3 +51,22 @@ admin code3       : 3. order subdivision (community) varchar(20)
 latitude          : estimated latitude (wgs84)
 longitude         : estimated longitude (wgs84)
 accuracy          : accuracy of lat/lng from 1=estimated, 4=geonameid, 6=centroid of addresses or shape
+
+
+MaxMind GeoLite2-City:
+Used for IP-based geolocation fallback (no browser permission needed).
+Two files required in this directory:
+
+1. GeoLite2-City.mmdb
+   Download: https://www.maxmind.com/en/accounts/current/geoip/downloads
+   (requires free account + license key, or via curl):
+   curl -L -o GeoLite2-City.mmdb \
+     "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=YOUR_KEY&suffix=tar.gz"
+   Extract the .mmdb from the tar.gz archive.
+
+2. geoip2.phar
+   curl -L -o geoip2.phar \
+     https://github.com/maxmind/GeoIP2-php/releases/download/v2.13.0/geoip2.phar
+
+License: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+https://www.maxmind.com/en/geolite2-free-geolocation-data

@@ -22,7 +22,7 @@ function get_listings($args) {
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
 
-    $listing_ids = jm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music');
+    $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music');
 
     if (empty($listing_ids)) {
         return [

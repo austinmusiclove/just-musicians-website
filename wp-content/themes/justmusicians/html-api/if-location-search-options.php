@@ -5,7 +5,7 @@ if (empty($search_term)) {
 } else if (strlen($search_term) < 2) {
     get_template_part('template-parts/search/if-location-search-state-1');
 } else {
-    $result = jm_location_search($search_term);
+    $result = hm_location_search($search_term);
     get_template_part('template-parts/search/if-location-search-state-2', '', [
         'locations' => $result,
     ]);

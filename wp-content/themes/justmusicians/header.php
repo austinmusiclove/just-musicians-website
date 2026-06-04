@@ -38,6 +38,14 @@
 
 </head>
 
+<?php
+// Get user location
+$ip_loc = function_exists('hm_get_ip_location') ? hm_get_ip_location() : null;
+$ip_lat   = $ip_loc->lat ?? null;
+$ip_lng   = $ip_loc->lon ?? null;
+$ip_label = $ip_loc ? addslashes("{$ip_loc->city}, {$ip_loc->region}") : '';
+?>
+
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
         x-data="{
             width: 0,
@@ -54,9 +62,9 @@
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            searchLat: <?php echo !empty($_GET['lat']) ? (float)$_GET['lat'] : 30.2672; ?>,
-            searchLng: <?php echo !empty($_GET['lng']) ? (float)$_GET['lng'] : -97.7431; ?>,
-            searchLocation: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : 'Austin, Texas'; ?>',
+            searchLat: <?php echo !empty($_GET['lat']) ? (float)$_GET['lat'] : ($ip_lat ?: 30.2672); ?>,
+            searchLng: <?php echo !empty($_GET['lng']) ? (float)$_GET['lng'] : ($ip_lng ?: -97.7431); ?>,
+            searchLocation: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : ($ip_label ?: 'Austin, Texas'); ?>',
             reviewProgress: 0,
             currentReviewSlide: '',
             showReviewModal: false,
@@ -120,7 +128,7 @@
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
-            locationInput: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : 'Austin, Texas'; ?>',
+            locationInput: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : ($ip_label ?: 'Austin, Texas'); ?>',
             inquiryLocationInput: '',
             updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             _updateInquiryLocation(location) { updateInquiryLocation(this, location); },

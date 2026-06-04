@@ -15,23 +15,21 @@
         <div class="bg-yellow-20 absolute bottom-2 right-2 text-14 text-grey px-1 py-0.5 rounded-sm"><span x-text="pDescription.length">0</span>/40 char</div>
     </fieldgroup>
 
-    <h2 class="flex items-center gap-1">
-        <span class="font-bold text-18">Where are you based?</span>
-        <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is where you consider yourself to be "based out of" not where you are from' ]); ?>
-
-    </h2>
-
     <!-- Location -->
+    <div class="flex items-center gap-2">
+        <h2 class="flex items-center gap-1">
+            <span class="font-bold text-18">Where are you based?</span>
+            <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is where you consider yourself to be "based out of" not where you are from' ]); ?>
+        </h2>
+        <span id="zip-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
+            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+        </span>
+    </div>
+
     <fieldgroup>
         <div>
             <!-- Postal Code -->
             <div class="relative">
-                <div class="flex items-center gap-2 mb-3">
-                    <label for="zip_code" class="mb-1 inline-block">Postal Code<span class="text-red">*</span></label>
-                    <span id="zip-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
-                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
-                    </span>
-                </div>
                 <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
                 <input class="has-icon" type="text" id="pc_search" name="pc_search" autocomplete="off" required
                     title="Enter a US or Canadian postal code (e.g., 78701, )."
