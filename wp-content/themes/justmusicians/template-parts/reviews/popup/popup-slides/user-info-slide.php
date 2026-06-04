@@ -16,7 +16,7 @@
 
     <!-- Author Preview -->
     <figcaption class="flex gap-x-6 mb-8 justify-center">
-        <img x-bind:src="accountSettings.profile_image.url" alt="" class="w-12 h-12 rounded-full" />
+        <img x-bind:src="accountSettings.profile_image?.url || '#'" alt="" class="w-12 h-12 rounded-full" />
         <div class="text-16 flex flex-col gap-1 justify-center items-left">
             <div class="font-semibold text-grey" x-text="displayNameInput || 'Display Name'"></div>
             <div class="text-grey" x-text="[positionInput, organizationInput].filter(Boolean).join(' at ') || 'Job Title at Organization'"> </div>
