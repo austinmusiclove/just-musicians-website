@@ -1,5 +1,63 @@
-Glossarier
-    add other glossaries section at the bottom of single-glossary
+Events and Inquiries refactor
+    Refactor
+        Account Menu
+            Account
+            My Listings
+            My Collections
+            Messages
+            My Gigs (musician calendar and list)
+            Manage Events (buyer calendar and event list)
+        Add event post type
+        You can send inquiry for existing event, not send existing inquiry to another musician; one event has many inquiries; one inquiry only has one event or zero
+        Event gets created for each inquiry
+    Replace inquiries page with Gigs page and Calendar page
+    Add My Gigs page (for musicians)
+        Has list view and calendar view
+        Musician Calendar View
+            Show events that you said you were available for for your listings
+            Musician can update application from a button on the event on their calendar
+            Filter calendar by listing
+            Allow musicians to update availability for all events on the same day at once
+    Add Events page (for buyers)
+        Has list view and calendar view
+        Click on event to open details, see musicians who applied, and go to messages connected to the event
+        Set event status to booked/open/cancelled/etc.
+        Can add events; each event can be one date or multiple dates
+        Edit event details
+        Edit multiple event details at once
+        Create recurring event (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
+        Buyer Calendar View
+            Show events with potential artists who are available for the gig
+            Add event button (support creating event and recurring event)
+            Mark events as booked
+    Musicians have separate My Gigs and Calendar page under the musicians account menu
+        shows gigs that they have in the pipeline
+        shows their upcoming gigs for their listings
+        filter calendar by listing
+Applications (Calendly for music booking)
+    Application set up screen
+        Add venue logo
+        Checkboxes to request draw estimate, compensation minimum, personal message
+        Customized questions on applications
+        Add dates
+            Auto populate current events
+            Allow marking current events as booked
+            Allow adding dates and times
+            Current applicants get notified when dates are added
+    Application form screen
+        Require sign up to fill application
+        Autofill if logged in
+        Fill availability if the venue has specific dates; yes/no for each date/location
+        Price, draw, personal message, and custom question answers
+    Applicant review screen
+        Sort and filter (including availability)
+        Show key info like price, draw, availability, personal message
+        Show freshness of reported availability
+        Filter by answers to custom questions (advanced)
+    Application link
+    Venue relationship
+        Associate users with a venue
+        Allow venue users to alter venue page data
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
@@ -12,22 +70,8 @@ SEO
         maybe add artist bios
         maybe add some kind of page blurb
     add best x in x listacle blog posts
-Applications
-    Associate users with a venue
-    Application form for any artist that collects artist info and availability; auto fills if they have a listing
-    Backend for viewing list of applicaitons with sort and filter; including filter by availability; show freshness of reported availability
-    Backend for viewing calendar with artist availability
-    Email to artists who fill it out but don't have an account and listing yet; easy one click listing
-    Draw estimate or compensation minimum in application
-    Customized questions on applications
-    Allow musicians to update availability on the site such that it gets communicated to all applicaitons at once
-    Allow venue users to alter venue page data
-Calendar View
-    add event post type
-    event gets created for each inquiry
-    calendar shows events and has an add event button; recurring event can also be created
-    you can send inquiry for existing event, not send existing inquiry to another musician; one event has many inquiries; one inquiry only has one event or zero
-    create recurring event (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
+Glossarier
+    add other glossaries section at the bottom of single-glossary
 Users
     ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one

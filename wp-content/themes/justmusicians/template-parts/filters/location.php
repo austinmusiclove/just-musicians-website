@@ -3,7 +3,7 @@ $device = $args['device'] ?? 'desktop';
 $distance_input_ref = $device . 'DistanceInput';
 $target_id = 'location-active-search-results-' . $device;
 ?>
-<div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0">
+<div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0" x-show="showLocationFilter" x-cloak>
     <div class="flex items-center gap-2 mb-3">
         <h3 class="font-bold text-18">Location</h3>
         <span class="inset-0 flex items-center justify-center htmx-indicator location-active-search-spinner">

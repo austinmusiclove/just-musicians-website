@@ -1,4 +1,4 @@
-<div class="text-16 p-2 flex sm:items-center items-start gap-2 sm:flex-row flex-col">
+<div class="text-16 p-2 flex sm:items-center items-end gap-2 sm:flex-row flex-col">
 
     <!-- Sort -->
     <div class="flex items-center gap-2 ">
