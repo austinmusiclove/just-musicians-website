@@ -26,7 +26,11 @@ function get_sanitized_inquiry_args($is_update) {
     if (isset($_POST['inquiry_date_type']))                   { $sanitized_args['meta_input']['date_type']           = sanitize_text_field($_POST['inquiry_date_type']); }
     if (isset($_POST['inquiry_date']))                        { $sanitized_args['meta_input']['date']                = sanitize_text_field($_POST['inquiry_date']); }
     if (isset($_POST['inquiry_time']))                        { $sanitized_args['meta_input']['time']                = sanitize_text_field($_POST['inquiry_time']); }
+    if (isset($_POST['inquiry_city']))                        { $sanitized_args['meta_input']['city']                = sanitize_text_field($_POST['inquiry_city']); }
+    if (isset($_POST['inquiry_state']))                       { $sanitized_args['meta_input']['state']               = sanitize_text_field($_POST['inquiry_state']); }
     if (isset($_POST['inquiry_zip_code']))                    { $sanitized_args['meta_input']['zip_code']            = sanitize_text_field($_POST['inquiry_zip_code']); }
+    if (isset($_POST['inquiry_lat']))                         { $sanitized_args['meta_input']['latitude']            = sanitize_text_field($_POST['inquiry_lat']); }
+    if (isset($_POST['inquiry_lng']))                         { $sanitized_args['meta_input']['longitude']           = sanitize_text_field($_POST['inquiry_lng']); }
     if (isset($_POST['inquiry_budget_type']))                 { $sanitized_args['meta_input']['budget_type']         = sanitize_text_field($_POST['inquiry_budget_type']); }
     if (isset($_POST['inquiry_budget']))                      { $sanitized_args['meta_input']['budget']              = sanitize_text_field($_POST['inquiry_budget']); }
     if (isset($_POST['inquiry_percent_of_door']))             { $sanitized_args['meta_input']['percent_of_door']     = sanitize_text_field($_POST['inquiry_percent_of_door']); }

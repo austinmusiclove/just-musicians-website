@@ -14,10 +14,10 @@
         <span class="text-16 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="_showTime(message.inquiry)"></span>
     </div>
 
-    <!-- Zip code -->
+    <!-- Location -->
     <div class="flex items-center gap-1">
         <img style="height: 1.5rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-        <span class="text-16 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.zip_code"></span>
+        <span class="text-16 whitespace-nowrap overflow-hidden text-ellipsis block" x-text="message.inquiry.location"></span>
     </div>
 
     <!-- Budget -->

@@ -73,6 +73,7 @@ function jm_location_search($q, $get_cities = true, $get_pc = true, $limit = 40)
                 'type'        => 'city',
                 'city'        => $city->city,
                 'state'       => $city->state,
+                'postal_code' => '',
                 'country'     => $city->country,
                 'lat'         => $city->lat,
                 'lng'         => $city->lng,

@@ -23,7 +23,7 @@ function showInquirySlide(alco, slide) {
         alco.showErrorSlide      = false;
         alco.showDiscardSlide    = false;
         if (slide == 'date')       { alco.showDateSlide       = true; alco.currentInquirySlide = 'date';       alco.$nextTick(() => { alco.inquiryProgress = Math.round((1/8) * 100); }); }
-        if (slide == 'location')   { alco.showLocationSlide   = true; alco.currentInquirySlide = 'location';   alco.$nextTick(() => { alco.inquiryProgress = Math.round((2/8) * 100); alco.$refs.inquiryZipCodeInput.focus(); });  }
+        if (slide == 'location')   { alco.showLocationSlide   = true; alco.currentInquirySlide = 'location';   alco.$nextTick(() => { alco.inquiryProgress = Math.round((2/8) * 100); }); }
         if (slide == 'budget')     { alco.showBudgetSlide     = true; alco.currentInquirySlide = 'budget';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((3/8) * 100); }); }
         if (slide == 'genre')      { alco.showGenreSlide      = true; alco.currentInquirySlide = 'genre';      alco.$nextTick(() => { alco.inquiryProgress = Math.round((4/8) * 100); }); }
         if (slide == 'performers') { alco.showPerformersSlide = true; alco.currentInquirySlide = 'performers'; alco.$nextTick(() => { alco.inquiryProgress = Math.round((5/8) * 100); }); }
@@ -66,4 +66,14 @@ function handleCreateInquirySuccess(alco, inquiryId) {
 function handleCreateInquiryError(alco, message) {
     alco.inquiryErrorMsg = message;
     showInquirySlide(alco, 'error');
+}
+
+function updateInquiryLocation(alco, inquiryLocation) {
+    alco.inquiryLocationInput = inquiryLocation.label;
+    alco.inquiryLocation = inquiryLocation.label;
+    alco.inquiryCity = inquiryLocation.city;
+    alco.inquiryState = inquiryLocation.state;
+    alco.inquiryZipCode = inquiryLocation.postal_code;
+    alco.inquiryLat = inquiryLocation.lat;
+    alco.inquiryLng = inquiryLocation.lng;
 }

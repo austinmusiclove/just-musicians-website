@@ -110,7 +110,7 @@ get_header();
             'stage_plots':            <?php if (!empty($listing_data["stage_plots_data"]))    { echo clean_arr_for_doublequotes($listing_data["stage_plots_data"]);                  } else { echo '[]'; } ?>,
         },
         getListingLocation() { return this.pCity && this.pState ? `${this.pCity}, ${this.pState}` : this.pCity || this.pState ? this.pCity || this.pState || '' : 'City, State'; },
-        updateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
+        listingFormUpdateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
 
         cropper:                    null,
         showCropperDisplay:         true,

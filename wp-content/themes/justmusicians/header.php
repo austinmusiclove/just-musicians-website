@@ -84,7 +84,12 @@
             inquiryListing: '',
             inquiryListingName: '',
             inquiryDateType: 'TBD',
+            inquiryCity: '',
+            inquiryState: '',
             inquiryZipCode: '',
+            inquiryLat: '',
+            inquiryLng: '',
+            inquiryLocation: '',
             inquiryGenres: [],
             inquirySubject: '',
             inquiryBudgetType: 'Request Quotes',
@@ -106,6 +111,7 @@
             _handleUpdateAccountSettingsError(message)           { handleUpdateAccountSettingsError(this, message); },
             showSearchOptions: false,
             showLocationSearchOptions: false,
+            showInquiryLocationSearchOptions: false,
             showLocationSearchOptionsHeader: false,
             getShowDefaultSearchOptionsDesktop() { return this.showSearchOptions && this.width >= 768 },
             getShowDefaultSearchOptionsMobile()  { return this.showSearchOptions && this.width <  768 },
@@ -115,7 +121,9 @@
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
             locationInput: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : 'Austin, Texas'; ?>',
+            inquiryLocationInput: '',
             updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
+            _updateInquiryLocation(location) { updateInquiryLocation(this, location); },
             focusElm(id) {
                 var elm = document.getElementById(id);
                 if (elm) { elm.scrollIntoView({ behavior: 'smooth', block: 'center' }); elm.focus(); }
@@ -131,6 +139,7 @@
             showMobileMenu = false;
             showSearchOptions = false;
             showLocationSearchOptions = false;
+            showInquiryLocationSearchOptions = false;
             showLocationSearchOptionsHeader = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
