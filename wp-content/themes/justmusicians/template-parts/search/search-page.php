@@ -11,6 +11,9 @@ $result = null;
 if ($args['send_first_page']) {
     $result = get_listings([
         'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
+        'lat'               => !empty($args['lat']) ? $args['lat'] : null,
+        'lng'               => !empty($args['lng']) ? $args['lng'] : null,
+        'distance'          => 40,
         'categories'        => $categories,
         'genres'            => $genres,
         'subgenres'         => $subgenres,

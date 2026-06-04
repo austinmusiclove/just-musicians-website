@@ -43,7 +43,16 @@
 $ip_loc = function_exists('hm_get_ip_location') ? hm_get_ip_location() : null;
 $ip_lat   = $ip_loc->lat ?? null;
 $ip_lng   = $ip_loc->lon ?? null;
-$ip_label = $ip_loc ? addslashes("{$ip_loc->city}, {$ip_loc->region}") : '';
+$ip_label = $ip_loc ? "{$ip_loc->city}, {$ip_loc->region}" : '';
+
+// Priority: SEO page args > URL query args > IP geolocation > hardcoded defaults
+$header_arg_location_label = $args['header_arg_location_label'] ?? '';
+$header_arg_lat            = $args['header_arg_lat'] ?? null;
+$header_arg_lng            = $args['header_arg_lng'] ?? null;
+
+$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : ($ip_lat ?: 30.2672));
+$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : ($ip_lng ?: -97.7431));
+$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : ($ip_label ?: 'Austin, Texas'));
 ?>
 
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
@@ -62,9 +71,9 @@ $ip_label = $ip_loc ? addslashes("{$ip_loc->city}, {$ip_loc->region}") : '';
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            searchLat: <?php echo !empty($_GET['lat']) ? (float)$_GET['lat'] : ($ip_lat ?: 30.2672); ?>,
-            searchLng: <?php echo !empty($_GET['lng']) ? (float)$_GET['lng'] : ($ip_lng ?: -97.7431); ?>,
-            searchLocation: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : ($ip_label ?: 'Austin, Texas'); ?>',
+            searchLat: <?php echo $lat; ?>,
+            searchLng: <?php echo $lng; ?>,
+            searchLocation: '<?php echo clean_str_for_doublequotes($location_label); ?>',
             reviewProgress: 0,
             currentReviewSlide: '',
             showReviewModal: false,
@@ -128,7 +137,7 @@ $ip_label = $ip_loc ? addslashes("{$ip_loc->city}, {$ip_loc->region}") : '';
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
-            locationInput: '<?php echo !empty($_GET['location_label']) ? addslashes($_GET['location_label']) : ($ip_label ?: 'Austin, Texas'); ?>',
+            locationInput: '<?php echo clean_str_for_doublequotes($location_label); ?>',
             inquiryLocationInput: '',
             updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             _updateInquiryLocation(location) { updateInquiryLocation(this, location); },
