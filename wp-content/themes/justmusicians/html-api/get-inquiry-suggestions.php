@@ -3,12 +3,16 @@
 // Get listings
 $page             = $_GET['page'] ?? 1;
 $inquiry_id       = get_query_var('inquiry-id');
+$inquiry_lat      = get_post_meta($inquiry_id, 'latitude', true);
+$inquiry_lng      = get_post_meta($inquiry_id, 'longitude', true);
 $ensemble_size    = wp_get_post_terms($inquiry_id, 'ensemble_size', ['fields' => 'names']);
 $inquiry_genres   = wp_get_post_terms($inquiry_id, 'genre', ['fields' => 'names']);
 $listings_invited = get_post_meta($inquiry_id, 'listings_invited', true);
 $listings_invited = is_array($listings_invited) ? $listings_invited : [];
 
 $result = get_listings([
+    'lat'           => $inquiry_lat,
+    'lng'           => $inquiry_lng,
     'ensemble_size' => $ensemble_size,
     'genres'        => $inquiry_genres,
     'exclude'       => $listings_invited,

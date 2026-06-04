@@ -1,6 +1,5 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Inquiries
-        Get inquiry suggestions with location filtering
         Manually add lat lng to all existing inquiries
         Deploy staging and prod
             Add lat lng city state to inquiry
