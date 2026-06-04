@@ -1,7 +1,6 @@
 *Location filtering (implement after updating the listing search to custom db table for efficiency and build that with location filtering in mind)
     1. Scale top x genre in x city seo pages
         make it so that austin-tx is processed and used to set the location of the query in the top-in-x teplate
-    2. autocomplete="off" not working
 Errors
     when not logged in getting profile image url fails in console log
 Glossarier

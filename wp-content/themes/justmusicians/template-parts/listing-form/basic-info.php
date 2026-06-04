@@ -19,7 +19,7 @@
     <div class="flex items-center gap-2">
         <h2 class="flex items-center gap-1">
             <span class="font-bold text-18">Where are you based?</span>
-            <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is where you consider yourself to be "based out of" not where you are from' ]); ?>
+            <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Enter a US or Canada postal code. This is where you consider yourself to be "based out of" not where you are from.' ]); ?>
         </h2>
         <span id="zip-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
@@ -31,8 +31,8 @@
             <!-- Postal Code -->
             <div class="relative">
                 <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <input class="has-icon" type="text" id="pc_search" name="pc_search" autocomplete="off" required
-                    title="Enter a US or Canadian postal code (e.g., 78701, )."
+                <input class="has-icon" type="text" id="pc_search" name="pc_search" autocomplete="postal-code-disabled" required placeholder="Postal Code"
+                    title="Enter a US or Canada postal code (ex. 78701, A1A)."
                     x-model="zipCodeInput"
                     x-on:focus="showZipSearchOptions = true; zipCodeInput = '';"
                     x-on:click.away="showZipSearchOptions = false; $el.value = fullLocation;"
