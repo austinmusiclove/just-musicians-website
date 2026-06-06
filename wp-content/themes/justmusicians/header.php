@@ -213,32 +213,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             </button>
           </div>
 
-          <div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0">
-            <span class="flex items-center gap-2 relative group">
-              <a href="#">Live Music</a>
-              <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
-              <!-- Dropdown menu -->
-              <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Band'); ?>">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
-                  Bands
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Solo Artist'); ?>">
-                  <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
-                  Solo Artists
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=DJ'); ?>">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
-                  DJs
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qsetting=Wedding'); ?>">
-                  <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
-                  Wedding Music
-                </a>
-              </div>
-            </span>
-            <a href="/blog/">Blog</a>
-          </div>
+          <?php echo get_template_part('template-parts/menus/desktop-header-nav-bar', '', []); ?>
 
           <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center">
@@ -251,41 +226,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3 ml-4" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
             <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" x-cloak x-show="!loggedIn" x-on:click="showSignupModal = !showSignupModal">Sign Up</button>
 
-            <!-- Logged in Menu -->
-            <span class="relative font-sun-motter text-18 items-center gap-2 group hidden lg:flex" x-cloak x-show="loggedIn">
-              <a href="#">My Account</a>
-              <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
-              <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['total_notification_count']" x-show="notifications['total_notification_count'] > 0" x-cloak></span>
-              <!-- Dropdown menu -->
-              <div class="absolute top-full w-40 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/account/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
-                  <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['account_notification_count']" x-show="notifications['account_notification_count'] > 0" x-cloak></span>
-                  Account
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/listings/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
-                  My Listings
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/collections/'); ?>">
-                  <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
-                  Collections
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/inquiries/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
-                  Inquiries
-                </a>
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/messages/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
-                  <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['unread_convo_count']" x-show="notifications['unread_convo_count'] > 0" x-cloak></span>
-                  Messages
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo wp_logout_url('/'); ?>">
-                  <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
-                  Log Out
-                </a>
-              </div>
-            </span>
+            <?php echo get_template_part('template-parts/menus/desktop-header-nav-dropdown', '', []); ?>
 
           </div>
 
@@ -301,7 +242,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
 
     <?php wp_body_open(); ?>
     <?php
-        echo get_template_part('template-parts/global/mobile-menu', '', []);
+        echo get_template_part('template-parts/menus/mobile-menu', '', []);
         echo get_template_part('template-parts/login/login-modal', '', []);
         echo get_template_part('template-parts/login/signup-modal', '', []);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);

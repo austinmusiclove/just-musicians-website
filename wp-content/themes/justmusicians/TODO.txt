@@ -1,63 +1,163 @@
+Questions
+    Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
+        No
+    Should you be able to have an application for individual events?
+        No, that would be Proposal
+    Should musicians be able to withdraw application?
+        Yes, you should be able to see My Applications and withdraw or update
+    Should you set show dates in application or allow musicians to just provide availability info for all dates?
+        Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
+        Paid version: application has existing events and applicants get notified to fill out availability when new events are added
+    What is an inquiry?
+        Replace it with event and replace inquiry invite with Proposal (requested status)
+    How are inquiries related to events?
+        Replaced
+    Can inquiry post type be eliminated?
+        Yes
+    Should inquiry/event reuqire a date?
+        Yes
+    Should inquiry/event require location?
+        No
+    How should availability data be stored? Per application or with event or neither?
+        Per event/listing
+        Proposal post type that contains event, listing, availability, draw, quote; proposal can be created when requested by venue or when application is filled out
+    Does application need to be connected to a specific location?
+        No but it needs a description of what the application is for
+    What should we do with exisitng send inquiry?
+        Send inquiry to existing event results in creating Proposal with requested status
+        Change drop down to a modal that asks if you want to invite them to an existing event or create a new event
+        Make sure to send people to event page to manage their event after they make a new one
+    Should Proposal request go to messages?
+        No
+    Should Offer be in messages?
+        No
+    Should Proposal response be in messages?
+        No
+    Should availability be an advanced feature or just collecting quotes and draw or all free?
+        Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
+    What happens when Proposal is requested?
+        Event appears in My Gigs calendar and list with notification and musician can click on the event to respond to the proposal
+    When should messages be initiated?
+        Only when buyer initiates; proposal and offer can contain messages and shoudl be enough until buyer wants to open conversation
+    How should Proposals and Offers appear in messages
+        Button above send message box that say Respond to RFP, Edit Proposal, Make Offer, Respond to Offer
+        Could be a problem unless conversation is limited to one event
+    What happens when Offer or Proposal is accepted?
+        Show event as booked in My Gigs page for musicians
+        Need to ask buyer if event should change to booked
+        Need email confirmations on both sides
+        Send out calendar invites for event (somehow allow the buyer to set the description details with info about parking and everything else)
+        Allows musician to send message to buyer
+    Should conversations be per event?
+        No; no offer and proposal special message types
+        Maybe still like applications/events/proposals/offers that are related to the conversation
+    Can buyer send message to any listing?
+        Only applicants, or those with Proposals that have been replied to
+    Should you lose ability to access or send messages if you don't meet conditions?
+        Buyers can always message an applicant listings
+        Listings can always message a buyer who booked them for an upcoming event
+        Listings can only message if they have an open conversation started by the buyer
+        Once conversation is open between a buyer and listing, it is open
+        Buyers can silence conversation to avoid getting too many unwanted messages from listing
+    Should there be conversations grouped by event?
+        Yes and there should be a way to filter conversations by event on main messages page
+    What should happen to inquiry messages
+        Leave them and never use them again; then consider removing all trace of them later
+    When should users be prompted to review?
+        A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
+
+
 Events and Inquiries refactor
-    Refactor
-        Account Menu
-            Account
+    New Account Menu (add all but comment future state)
+        Account
+        Messages
+        Collections
+        For Musicians
             My Listings
-            My Collections
-            Messages
             My Gigs (musician calendar and list)
-            Manage Events (buyer calendar and event list)
-        Add event post type
-        You can send inquiry for existing event, not send existing inquiry to another musician; one event has many inquiries; one inquiry only has one event or zero
-        Event gets created for each inquiry
-    Replace inquiries page with Gigs page and Calendar page
-    Add My Gigs page (for musicians)
-        Has list view and calendar view
-        Musician Calendar View
-            Show events that you said you were available for for your listings
-            Musician can update application from a button on the event on their calendar
-            Filter calendar by listing
-            Allow musicians to update availability for all events on the same day at once
-    Add Events page (for buyers)
-        Has list view and calendar view
-        Click on event to open details, see musicians who applied, and go to messages connected to the event
-        Set event status to booked/open/cancelled/etc.
-        Can add events; each event can be one date or multiple dates
-        Edit event details
-        Edit multiple event details at once
-        Create recurring event (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
-        Buyer Calendar View
-            Show events with potential artists who are available for the gig
-            Add event button (support creating event and recurring event)
-            Mark events as booked
-    Musicians have separate My Gigs and Calendar page under the musicians account menu
-        shows gigs that they have in the pipeline
-        shows their upcoming gigs for their listings
-        filter calendar by listing
+            My Applications (show listings and in future state allow searching up venues to apply to)
+        For Buyers
+            My Events (buyer calendar and event list)
+            My Venues
+            My Applications
+    Remove inquiries page
+        Create event post type to replace inquiries
+            Add status for booked/open/cancelled
+            Add checkbox for if they want a quote, draw
+            Offers, Booked listings, invited listings
+        Create an event for each existing inquiry
+        Alter inquiry modal to create events instead
+        Alter send inquiry drop down to create Proposal instead of invite to inquiry
+            Proposal post type; Event, listing, availability, quote, draw, musician message, status, pay and pay structure, details, offer
+        Inquiry related emails need to be updated
+        Add My Gigs page where you can see the events you were invited to as a list and click through to messages
+        Add Manage Events page where you can see your events in list view, edit them, and click through to messages
+        Add Manage Event page
+        Remove inquiries page menu item
+        Consider removing all traces of inquiries
+Add My Gigs page (for musicians)
+    Show events that you have gotten an event request for Proposal for
+    Filter by listing
+    Filter by status (proposal request, proposal sent, offer, booked)
+    Can update availability status for an event
+    Show events that you have applied for (but filtered out of view by default)
+    Add calendar view
+    Allow musicians to update availability for all events on the same day at once
+Add Manage Events page (for buyers)
+    List view
+    Add event button
+    Event creation form or use modal
+    Edit button
+    Set event status to booked/open/cancelled/etc.
+    Add calendar View
+    Edit multiple event details at once
+    Create multiple events at once (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
+    Create event from a copy of another event
+    Current applicants get notified when event dates are added (use cron on a delay of at least an hour so that multiple emails don't go out if someone makes a ton of events in one session)
+Manage event page
+    Edit all event fields (Notify proposals that are available/unavailable if the date or time changes)
+    Show invited, available, unavailable musicians (Show freshness of reported availability)
+    Show offers
+    Click through to messages for each listing and/or all conversations for the event
 Applications (Calendly for music booking)
+    Application post type
+        Title, description, logo, request draw, comp min, personal message
+        Venue association
+        Excluded events
+    Application Response post type
+        Application and listing relationship
     Application set up screen
+        Application link copy button
         Add venue logo
-        Checkboxes to request draw estimate, compensation minimum, personal message
-        Customized questions on applications
-        Add dates
-            Auto populate current events
-            Allow marking current events as booked
-            Allow adding dates and times
-            Current applicants get notified when dates are added
+        Add description/title of what the application is for
+        Allow associating venue you have access to manage or adding a venue
+        Advanced
+            Show events and allow excluding from application
+            Prompt to add events to get availability (advanced)
+            Invite listings to apply (advanced)
+            Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
+            Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
     Application form screen
+        This application has not yet been set up screen
         Require sign up to fill application
         Autofill if logged in
-        Fill availability if the venue has specific dates; yes/no for each date/location
-        Price, draw, personal message, and custom question answers
+        Show events with option to fill availability and other proposal fields (if advanced application)
+        Min guarantee request, personal message
+        Inform applicant that they can come back to this application to update it any time
+        Have multiple band mates fill out the availability (listing advanced feature)
     Applicant review screen
-        Sort and filter (including availability)
+        Sort and filter
         Show key info like price, draw, availability, personal message
-        Show freshness of reported availability
         Filter by answers to custom questions (advanced)
-    Application link
     Venue relationship
         Associate users with a venue
         Allow venue users to alter venue page data
+Offer post type (future)
+    Status
+    Pay with structure
+    Event relationship
+    Details
+    Proposal relationship
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
