@@ -48,23 +48,32 @@
                     <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['account_notification_count']" x-show="notifications['account_notification_count'] > 0" x-cloak></span>
                     Account
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/listings/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
-                    My Listings
-                </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/collections/'); ?>">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
                     Collections
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/inquiries/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
-                    Inquiries
-                </a>
                 </a>
                 <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
                     <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full" x-text="notifications['unread_convo_count']" x-show="notifications['unread_convo_count'] > 0" x-cloak></span>
                     Messages
                 </a>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/inquiries/'); ?>">
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                    Inquiries
+                </a>
+
+                <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none">For Musicians</span>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="<?php echo site_url('/listings/'); ?>">
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
+                    My Listings
+                </a>
+                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="#">My Gigs</a> -->
+                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="#">My Applications</a> -->
+
+                <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none">For Buyers</span>
+                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="#">My Events</a> -->
+                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="#">My Venues</a> -->
+                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm ml-4" href="#">My Applications</a> -->
             </div>
 
         </div>
