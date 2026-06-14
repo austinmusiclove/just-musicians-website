@@ -44,16 +44,17 @@ function get_user_events($args) {
 
     while ($query->have_posts()) {
         $query->the_post();
-        $event_id = get_the_ID();
 
+        $event_id = get_the_ID();
         $listings = hm_get_listing_ids_by_event_id($event_id);
+        $listings = is_array($listings) ? array_map(fn($post_id) => strval($post_id), $listings) : [];
 
         $events[] = [
-            'post_id'        => get_the_ID(),
+            'post_id'        => $event_id,
             'event_name'     => get_field('event_name'),
             'details'        => get_field('details'),
             'listings'       => $listings,
-            'permalink'      => get_permalink(get_the_ID()),
+            'permalink'      => get_permalink($event_id),
         ];
     }
 

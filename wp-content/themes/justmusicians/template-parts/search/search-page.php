@@ -64,7 +64,6 @@ $next_page       = $result ? $result['next_page']       : null;
             get sortedEvents()                                   { return getSortedEvents(this); },
             _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
             _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
-            _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
             _clearListingForm()                                  { clearListingForm(this); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"

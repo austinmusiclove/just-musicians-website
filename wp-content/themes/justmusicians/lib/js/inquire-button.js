@@ -5,10 +5,6 @@ function showRequestProposalButton(alco, eventId, listingId) {
     return !alco.$data.eventsMap[eventId].listings.includes(listingId);
 }
 
-function showListingInEvent(alco, eventId, listingId) {
-    return alco.$data.eventsMap[eventId].listings.includes(listingId);
-}
-
 function addListingToEvent(alco, eventId, listingId) {
     var eventObj = alco.$data.eventsMap[eventId];
     if (eventObj && !eventObj.listings.includes(listingId)) {

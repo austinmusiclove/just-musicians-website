@@ -55,7 +55,6 @@ $events_map = array_column($events_result['events'], null, 'post_id');
                         get sortedEvents()                                   { return getSortedEvents(this); },
                         _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
                         _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
-                        _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
 
                         players: {},
                         playersMuted: true,

@@ -3,8 +3,10 @@ Critical bugs
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
 
 Deploy
-    Set up Event post type
+    Set up Event acf
     Make Event for each Inquiry
+    Set up proposal acf
+    Set up offer acf
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -79,9 +81,7 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Test
-            Test inquiry on home page
             Test inquriy on home page listing
-            Test send inquiry from suggestion listing
             Test inquiry from collection page
             Test inquiry from single listing page
             Test inquiry from seo page
@@ -91,8 +91,8 @@ Events and Inquiries refactor
             Listing invite notification of event creation
             Send listing invite after create
             make sure single event link in email and inquiry modal after success works
-            make sure events from the past don't go in events map but events on today do go there
             Check the modal in mobile and mobile/desktop safari view
+            Test send inquiry from suggestion listing
             Commit
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages

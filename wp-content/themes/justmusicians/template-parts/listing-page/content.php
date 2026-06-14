@@ -15,7 +15,6 @@
         get sortedEvents()                                   { return getSortedEvents(this); },
         _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
         _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
-        _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
     }"
 >
     <div class="col-span-5 flex flex-col gap-8 items-start">

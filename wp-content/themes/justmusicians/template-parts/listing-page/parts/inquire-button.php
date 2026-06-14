@@ -78,13 +78,19 @@ themes/justmusicians/template-parts/listing-page/parts/inquire-button.php
                                 x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/events/request-proposal/' + event.post_id + '/listings/<?php echo $args['post_id']; ?>'"
                                 hx-target="#inquiry-menu-result-<?php echo $args['post_id']; ?>"
                                 hx-trigger="click"
-                                hx-indicator="#decoy-indicator<?php echo $args['post_id']; ?>"
-                                hx-vals='{"listing_id": "<?php echo $args['post_id']; ?>"}'
-                            >Send</button>
+                                x-bind:hx-indicator="'#request-proposal-button-content-<?php echo $args['post_id']; ?>-' + event.post_id"
+                            >
+                                <span x-bind:id="'request-proposal-button-content-<?php echo $args['post_id']; ?>-' + event.post_id">
+                                    <span class="htmx-indicator-component-block-replace">Send</span>
+                                    <span class="htmx-indicator-component-block mx-2 my-1">
+                                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+                                    </span>
+                                </span>
+                            </button>
 
                             <!-- Already sent state -->
                             <button type="button" class="ml-4 border border-2 border-navy text-white bg-navy text-sm px-3 py-1 rounded-full"
-                                x-show="_showListingInEvent(event.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
+                                x-show="!_showRequestProposalButton(event.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
                             >Sent</button>
 
                         </div>
@@ -100,7 +106,6 @@ themes/justmusicians/template-parts/listing-page/parts/inquire-button.php
                 </div>
             </div>
         </div>
-        <span id="decoy-indicator<?php echo $args['post_id']; ?>"></span>
 
     </span>
 

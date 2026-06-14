@@ -34,6 +34,7 @@ function hm_index_upsert_proposal($post_id) {
 
 function hm_index_proposal_on_save($post_id, $post, $update) {
     if ($post->post_status === 'auto-draft') { return; }
+    if ($post->post_status !== 'publish') { return; }
 
     hm_index_upsert_proposal($post_id);
 }
