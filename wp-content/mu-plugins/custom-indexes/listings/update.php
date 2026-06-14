@@ -1,8 +1,9 @@
 <?php
 
 add_action('save_post_listing', 'hm_index_listing_on_save', 20, 3);
-add_action('wp_trash_post',        'hm_index_listing_on_trash');
+add_action('wp_trash_post',     'hm_index_listing_on_trash');
 add_action('untrash_post',      'hm_index_listing_on_untrash');
+
 function hm_index_upsert_listing($post_id) {
     global $wpdb;
     $table = hm_get_listing_index_table();

@@ -85,15 +85,6 @@ function hm_location_search($q, $get_cities = true, $get_pc = true, $limit = 40)
 }
 
 function hm_get_ip_location() {
-    //$ip = '136.50.121.27'; // San Antonio
-    //$ip = '173.174.46.198'; // Austin
-    //$ip = '159.26.101.17'; // Boston
-    //$ip = '159.26.106.136'; // London
-    //$ip = '88.178.237.84'; // France (no vpn)
-    //$ip = '136.50.121.27'; // San Antonio
-    //$ip = '207.81.221.222'; // Vancouver
-    //$ip = '192.206.151.131'; // Toronto (does not get city or province)
-    //$ip = '172.3.173.227'; // Austell, GA
     $ip = $_SERVER['REMOTE_ADDR'];
     $db_path = __DIR__ . '/data/GeoLite2-City.mmdb';
 
@@ -123,5 +114,3 @@ function hm_get_ip_location() {
         return null;
     }
 }
-
-
