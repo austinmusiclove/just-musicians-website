@@ -86,23 +86,6 @@ function register_post_types() {
         'menu_icon' => 'dashicons-clipboard'
     ));
 
-    // Venue Review Submission
-    /*
-    register_post_type('review_submission', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title'),
-        'labels' => array(
-          'name' => 'Review Submission',
-          'add_new_item' => 'Add New Review Submission',
-          'edit_item' => 'Edit Review Submission',
-          'all_items' => 'All Review Submissions',
-          'singular_name' => 'Review Submission'
-        ),
-        'menu_icon' => 'dashicons-clipboard'
-    ));
-    */
-
     // Listing
     register_post_type('listing', array(
         'public' => true,
@@ -116,6 +99,21 @@ function register_post_types() {
           'singular_name' => 'Listing'
         ),
         'menu_icon' => 'dashicons-id-alt'
+    ));
+
+    // Collections
+    register_post_type('collection', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('title', 'author'),
+        'labels' => array(
+          'name' => 'Collection',
+          'add_new_item' => 'Add New Collection',
+          'edit_item' => 'Edit Collection',
+          'all_items' => 'All Collections',
+          'singular_name' => 'Collection'
+        ),
+        'menu_icon' => 'dashicons-list-view'
     ));
 
     // Inquiry
@@ -133,19 +131,49 @@ function register_post_types() {
         'menu_icon' => 'dashicons-editor-help'
     ));
 
-    // Collections
-    register_post_type('collection', array(
+    // Event
+    register_post_type('event', array(
         'public' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
-          'name' => 'Collection',
-          'add_new_item' => 'Add New Collection',
-          'edit_item' => 'Edit Collection',
-          'all_items' => 'All Collections',
-          'singular_name' => 'Collection'
+          'name' => 'Event',
+          'add_new_item' => 'Add New Event',
+          'edit_item' => 'Edit Event',
+          'all_items' => 'All Events',
+          'singular_name' => 'Event'
         ),
-        'menu_icon' => 'dashicons-list-view'
+        'menu_icon' => 'dashicons-calendar'
+    ));
+
+    // Proposal
+    register_post_type('proposal', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array(),
+        'labels' => array(
+          'name' => 'Proposal',
+          'add_new_item' => 'Add New Proposal',
+          'edit_item' => 'Edit Proposal',
+          'all_items' => 'All Proposals',
+          'singular_name' => 'Proposal'
+        ),
+        'menu_icon' => 'dashicons-text-page'
+    ));
+
+    // Offer
+    register_post_type('offer', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array('author'),
+        'labels' => array(
+          'name' => 'Offer',
+          'add_new_item' => 'Add New Offer',
+          'edit_item' => 'Edit Offer',
+          'all_items' => 'All Offers',
+          'singular_name' => 'Offer'
+        ),
+        'menu_icon' => 'dashicons-text-page'
     ));
 
     // Youtube Videos
@@ -271,7 +299,7 @@ function register_taxonomies() {
       'singular_name' => 'Category'
     )
   ));
-  register_taxonomy('genre', array('listing', 'artist', 'inquiry'), array(
+  register_taxonomy('genre', array('listing', 'artist', 'inquiry', 'event'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
@@ -310,7 +338,7 @@ function register_taxonomies() {
       'singular_name' => 'Instrumentation'
     )
   ));
-  register_taxonomy('setting', array('listing', 'artist'), array(
+  register_taxonomy('setting', array('listing', 'artist', 'event'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
@@ -336,7 +364,7 @@ function register_taxonomies() {
       'singular_name' => 'Keyword'
     )
   ));
-  register_taxonomy('ensemble_size', array('listing', 'inquiry'), array(
+  register_taxonomy('ensemble_size', array('listing', 'inquiry', 'event'), array(
     'public' => true,
     'hierarchical' => false,
     'show_in_rest' => true,

@@ -14,12 +14,12 @@ $collections_result = get_user_collections([
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
-// Get user inquiries
-$inquiries_result = get_user_inquiries([
+// Get user events
+$events_result = get_user_events([
     'nopaging'     => true,
-    'nothumbnails' => true,
+    'start_date'   => date('Y-m-d'),
 ]);
-$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
+$events_map = array_column($events_result['events'], null, 'post_id');
 
 $gr_result    = get_reviews('listing_review', get_the_ID());
 $reviews      = $gr_result['reviews'];
@@ -70,7 +70,7 @@ echo get_template_part('template-parts/listing-page/content', '', [
    'keywords'           => $keywords,
    'venues_combined'    => $venues_combined,
    'youtube_video_data' => $youtube_video_data,
-   'inquiries_map'      => $inquiries_map,
+   'events_map'         => $events_map,
    'reviews'            => $reviews,
    'rating'             => $rating,
    'review_count'       => $review_count,

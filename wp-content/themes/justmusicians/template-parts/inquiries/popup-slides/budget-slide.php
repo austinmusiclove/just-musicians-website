@@ -3,53 +3,36 @@
 
     <h2 class="font-bold font-poppins text-20 mb-8">How do you plan to pay musicians?</h2>
 
-    <fieldset class="radio-buttons custom-radio">
+    <fieldset class="radio-buttons custom-radio" x-on:change="inquiryBudget = ''; inquiryCompensation = '';">
         <div>
-            <input type="radio" id="request_quotes" name="inquiry_budget_type" x-model="inquiryBudgetType" value="Request Quotes" checked>
+            <input type="radio" id="budget_option_quotes" x-model="inquiryBudgetType" value="Request Quotes" checked>
             <span></span>
-            <label class="text-16" for="request_quotes">I'd like to get quotes from musicians</label>
+            <label class="text-16" for="budget_option_quotes">I'd like to get quotes from musicians</label>
         </div>
         <div>
-            <input type="radio" id="budget_guarantee" name="inquiry_budget_type" x-model="inquiryBudgetType" value="Guarantee">
+            <input type="radio" id="budget_option_budget" x-model="inquiryBudgetType" value="Budget">
             <span></span>
-            <label class="text-16" for="budget_guarantee">I have a budget</label>
+            <label class="text-16" for="budget_option_budget">I have a budget</label>
         </div>
         <div>
-            <input type="radio" id="budget_door_deal" name="inquiry_budget_type" x-model="inquiryBudgetType" value="Door Deal">
+            <input type="radio" id="budget_option_other" x-model="inquiryBudgetType" value="Other">
             <span></span>
-            <label class="text-16" for="budget_door_deal">Door Deal</label>
-        </div>
-        <div>
-            <input type="radio" id="budget_bar_deal" name="inquiry_budget_type" x-model="inquiryBudgetType" value="Bar Deal">
-            <span></span>
-            <label class="text-16" for="budget_bar_deal">Bar Deal</label>
-        </div>
-        <div>
-            <input type="radio" id="budget_other" name="inquiry_budget_type" x-model="inquiryBudgetType" value="Other">
-            <span></span>
-            <label class="text-16" for="budget_other">Other</label>
+            <label class="text-16" for="budget_option_other">I have other compensation in mind</label>
         </div>
     </fieldset>
+    <input type="hidden" name="event_request_quote" x-bind:value="inquiryBudgetType == 'Request Quotes'" />
 
-    <span x-show="inquiryBudgetType == 'Guarantee'" x-cloak>
+    <span x-show="inquiryBudgetType == 'Budget'" x-cloak>
         <p>Live Music Budget</p>
         <div class="relative">
             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-grey pointer-events-none">$</span>
-            <input class="!pl-7 w-full px-3 py-2" type="number" name="inquiry_budget">
+            <input class="!pl-7 w-full px-3 py-2" type="number" name="event_budget" x-model="inquiryBudget">
         </div>
     </span>
-    <span x-show="inquiryBudgetType == 'Door Deal'" x-cloak>
-        <p>% of Door/Ticket Sales</p>
+    <span x-show="inquiryBudgetType == 'Other'" x-cloak>
+        <p>Please add details about how musicians will be compensated.</p>
         <div class="relative">
-            <input class="!pl-7 w-full px-3 py-2" type="number" name="inquiry_percent_of_door" x-on:input="$el.value = Math.min(100, Math.max(0, $el.value))">
-            <span class="absolute inset-y-0 right-0 pr-8 flex items-center text-grey pointer-events-none">%</span>
-        </div>
-    </span>
-    <span x-show="inquiryBudgetType == 'Bar Deal'" x-cloak>
-        <p>% of Bar Sales</p>
-        <div class="relative">
-            <input class="!pl-7 w-full px-3 py-2" type="number" name="inquiry_percent_of_bar" min="0" max="100" x-on:input="$el.value = Math.min(100, Math.max(0, $el.value))">
-            <span class="absolute inset-y-0 right-0 pr-8 flex items-center text-grey pointer-events-none">%</span>
+            <textarea class="w-full h-32 mb-6 flex-shrink-0" name="event_compensation" x-model="inquiryCompensation"></textarea>
         </div>
     </span>
 

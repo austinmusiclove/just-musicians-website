@@ -24,12 +24,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
-// Get user inquiries
-$inquiries_result = get_user_inquiries([
+// Get user events
+$events_result = get_user_events([
     'nopaging'     => true,
-    'nothumbnails' => true,
+    'start_date'   => date('Y-m-d'),
 ]);
-$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
+$events_map = array_column($events_result['events'], null, 'post_id');
 
 ?>
 
@@ -51,11 +51,11 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                         _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
 
-                        inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
-                        get sortedInquiries()                                { return getSortedInquiries(this); },
-                        _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
-                        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
-                        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+                        eventsMap: <?php echo clean_arr_for_doublequotes($events_map); ?>,
+                        get sortedEvents()                                   { return getSortedEvents(this); },
+                        _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
+                        _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
+                        _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
 
                         players: {},
                         playersMuted: true,
@@ -68,7 +68,7 @@ $inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
                         _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
-                    x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
+                    x-on:add-event="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"

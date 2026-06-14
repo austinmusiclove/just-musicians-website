@@ -6,7 +6,7 @@ function user_owns_inquiry($request) {
         return new WP_Error('unauthorized', 'You must be logged in to perform this action.', ['status' => 401]);
     }
 
-    $user_id          = get_current_user_id();
+    $user_id        = get_current_user_id();
     $user_inquiries = get_user_meta($user_id, 'inquiries', true);
 
     // Make sure it's an array

@@ -134,9 +134,9 @@
 
     </div>
 
-    <!-- Send inquiry button -->
+    <!-- Request proposal button -->
     <?php get_template_part('template-parts/listings/parts/send-inquiry-button', '', [
-        'post_id'    => $args['post_id'],
-        'inquiry_id' => $args['inquiry_id'],
+        'post_id'  => $args['post_id'],
+        'event_id' => $args['event_id'],
     ]); ?>
 </div>

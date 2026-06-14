@@ -11,7 +11,7 @@
         $genres = get_terms_decoded('genre', 'names');
         echo get_template_part('template-parts/filters/taxonomy-options', '', [
             'terms'           => $genres,
-            'input_name'      => 'inquiry_genres',
+            'input_name'      => 'event_genres',
             'input_x_model'   => 'inquiryGenres',
             'show_search_bar' => false,
         ]); ?>

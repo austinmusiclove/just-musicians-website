@@ -253,7 +253,7 @@ get_header();
                             'settings'           => $settings,
                             'youtube_video_data' => null,
                             'venues_combined'    => null,
-                            'inquiries_map'      => [],
+                            'events_map'         => [],
                         )); ?>
                     </div>
 

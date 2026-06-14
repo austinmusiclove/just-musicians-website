@@ -11,11 +11,11 @@
 
 <section class="<?php echo $theme['container_class']; ?>"
     x-data="{
-        inquiriesMap: <?php echo clean_arr_for_doublequotes($args['inquiries_map']); ?>,
-        get sortedInquiries()                                { return getSortedInquiries(this); },
-        _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
-        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
-        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+        eventsMap: <?php echo clean_arr_for_doublequotes($args['events_map']); ?>,
+        get sortedEvents()                                   { return getSortedEvents(this); },
+        _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
+        _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
+        _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
     }"
 >
     <div class="col-span-5 flex flex-col gap-8 items-start">

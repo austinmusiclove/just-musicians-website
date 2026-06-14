@@ -37,17 +37,17 @@ if ( $term and !is_wp_error( $term ) ) {
 
 
 
-// Get user collections and inquiries
+// Get user collections and events
 $collections_result = get_user_collections([
     'nopaging'     => true,
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
-$inquiries_result = get_user_inquiries([
+$events_result = get_user_events([
     'nopaging'     => true,
-    'nothumbnails' => true,
+    'start_date'   => date('Y-m-d'),
 ]);
-$inquiries_map = array_column($inquiries_result['inquiries'], null, 'post_id');
+$events_map = array_column($events_result['events'], null, 'post_id');
 
 
 // Generate page content
@@ -60,7 +60,7 @@ get_header( null, [
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => true,
     'title'            => $title,
-    'inquiries_map'    => $inquiries_map,
+    'events_map'       => $events_map,
     'collections_map'  => $collections_map,
     'qcategory'        => $category_name,
     'qgenre'           => '',

@@ -243,15 +243,6 @@ function get_state_code($stateName) {
     return isset($states[$stateName]) ? $states[$stateName] : null;
 }
 
-function send_email_safely($email, $subject, $message) {
-    if (EMAIL_TEST_MODE) {
-        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
-    } else {
-        wp_mail($email, $subject, $message);
-        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
-    }
-}
-
 function sort_and_fill(array $values, array $defaults): array {
     // Sort by value DESC, keep keys
     arsort($values);

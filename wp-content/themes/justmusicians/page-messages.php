@@ -57,9 +57,9 @@ get_header();
         _setMessageInputHeight()                    { setMessageInputHeight(this); },
 
         inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
-        _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
-        _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
-        _updateInquiry(postId, inquiry)                      { return updateInquiry(this, postId, inquiry); },
+        _showRequestProposalButton(eventId, listingId) { return showRequestProposalButton(this, eventId, listingId); },
+        _showListingInEvent(eventId, listingId)        { return showListingInEvent(this, eventId, listingId); },
+        _updateInquiry(postId, inquiry)                { return updateInquiry(this, postId, inquiry); },
     }"
     x-ref="mainContainer"
     x-init="_getConversations(null); _pollConversations();"

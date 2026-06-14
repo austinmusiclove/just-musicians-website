@@ -53,6 +53,13 @@ function html_api_rewrite_rules() {
         'top'
     );
 
+    // Events
+    add_rewrite_rule(
+        '^wp-html/v1/events/request-proposal/([0-9]+)/listings/([0-9]+)/?$',
+        'index.php?wp-html-v1=request-proposal&event-id=$matches[1]&listing-id=$matches[2]',
+        'top'
+    );
+
     // Reviews
     add_rewrite_rule(
         '^wp-html/v1/reviews/([^/]+)/([0-9]+)/?$',
@@ -68,6 +75,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'listing-id';
     $vars[] = 'collection-id';
     $vars[] = 'inquiry-id';
+    $vars[] = 'event-id';
     $vars[] = 'conversation-id';
     $vars[] = 'review-post-type';
     $vars[] = 'reviewee-id';

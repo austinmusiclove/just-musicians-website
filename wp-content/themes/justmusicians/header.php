@@ -100,7 +100,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             showErrorSlide: false,
             inquiryListing: '',
             inquiryListingName: '',
-            inquiryDateType: 'TBD',
+            inquiryStartDate: '',
             inquiryCity: '',
             inquiryState: '',
             inquiryZipCode: '',
@@ -108,9 +108,10 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             inquiryLng: '',
             inquiryLocation: '',
             inquiryGenres: [],
-            inquirySubject: '',
+            inquiryEventName: '',
             inquiryBudgetType: 'Request Quotes',
-            quotesRequested: '<?php echo DEFAULT_QUOTES_REQUESTED; ?>',
+            inquiryBudget: '',
+            inquiryCompensation: '',
             inquiryErrorMsg: '',
             newInquiryId: '',
             _clearInquiryForm()                                  { clearInquiryForm(this); },
@@ -194,17 +195,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             <div class="hidden md:block w-px bg-black/20 my-2"></div>
             <div class="hidden md:block grow relative px-1 py-1 flex items-center">
               <img class="h-4 absolute top-3 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-              <input class="w-full h-full py-2 pr-3 pl-5" type="text" name="location" autocomplete="off"
-                  x-model="locationInput"
-                  x-on:focus="showLocationSearchOptionsHeader = true; locationInput = '';"
-                  x-on:click.away="showLocationSearchOptionsHeader = false; $el.value = searchLocation;"
-                  hx-get="<?php echo site_url('/wp-html/v1/location-search-options/'); ?>"
-                  hx-trigger="input changed delay:300ms"
-                  hx-target="#location-active-search-results-desktop-header"
-              />
-              <div id="location-active-search-results-desktop-header" x-show="showLocationSearchOptionsHeader" x-cloak>
-                  <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
-              </div>
+              <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-header', '', ['target_id' => 'location-active-search-results-desktop-header']); ?>
               <input id="lat-input-header-desktop" type="hidden" name="lat" x-model="searchLat" />
               <input id="lng-input-header-desktop" type="hidden" name="lng" x-model="searchLng" />
             </div>

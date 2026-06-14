@@ -31,19 +31,7 @@
             <!-- Postal Code -->
             <div class="relative">
                 <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <input class="has-icon" type="text" id="pc_search" name="pc_search" autocomplete="postal-code-disabled" required placeholder="Postal Code"
-                    title="Enter a US or Canada postal code (ex. 78701, A1A)."
-                    x-model="zipCodeInput"
-                    x-on:focus="showZipSearchOptions = true; zipCodeInput = '';"
-                    x-on:click.away="showZipSearchOptions = false; $el.value = fullLocation;"
-                    hx-get="<?php echo site_url('/wp-html/v1/lf-location-search-options/'); ?>"
-                    hx-trigger="input changed delay:300ms"
-                    hx-target="#zip-active-search-results"
-                    hx-indicator="#zip-active-search-spinner"
-                >
-                 <div id="zip-active-search-results" x-show="showZipSearchOptions" x-cloak>
-                     <?php echo get_template_part('template-parts/search/lf-location-search-state-1', '', array()); ?>
-                 </div>
+                <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-lf', '', []); ?>
             </div>
             <input type="hidden" id="city" name="city" x-model="pCity">
             <input type="hidden" id="state" name="state" x-model="pState">

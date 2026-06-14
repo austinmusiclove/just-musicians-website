@@ -43,14 +43,6 @@ add_action('send_notifications_after_message_send', function($message) {
     $participants = $user_messages_plugin->get_conversation_participants_user_ids($message['conversation_id'], $message['sender_id'], true);
     foreach ($participants as $user_id) {
         $is_read = $user_messages_plugin->is_read($message['message_id'], $user_id);
-        if (!$is_read) { send_new_message_notification($user_id); }
+        if (!$is_read) { send_new_message_email($user_id); }
     }
 });
-
-function send_new_message_notification($user_id) {
-    $user = get_userdata($user_id);
-    $email = $user->user_email;
-    $subject = 'You have a new message!';
-    $message = 'You have a new message in your inbox. Visit ' . site_url('/messages') . ' to check your messages.';
-    send_email_safely($email, $subject, $message);
-}

@@ -1,3 +1,7 @@
+Deploy
+    Set up Event post type
+    Make Event for each Inquiry
+
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
         No
@@ -17,7 +21,7 @@ Questions
     Should inquiry/event reuqire a date?
         Yes
     Should inquiry/event require location?
-        No
+        Location yes but not address
     How should availability data be stored? Per application or with event or neither?
         Per event/listing
         Proposal post type that contains event, listing, availability, draw, quote; proposal can be created when requested by venue or when application is filled out
@@ -32,56 +36,77 @@ Questions
     Should Offer be in messages?
         No
     Should Proposal response be in messages?
-        No
+        Yes a proposal response that is not an offer is a message. When reviewing proposal, a buyer can send offer or message.
     Should availability be an advanced feature or just collecting quotes and draw or all free?
         Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
     What happens when Proposal is requested?
         Event appears in My Gigs calendar and list with notification and musician can click on the event to respond to the proposal
     When should messages be initiated?
-        Only when buyer initiates; proposal and offer can contain messages and shoudl be enough until buyer wants to open conversation
+        Only when buyer initiates; proposal and offer can contain messages and should be enough until buyer wants to open conversation
     How should Proposals and Offers appear in messages
-        Button above send message box that say Respond to RFP, Edit Proposal, Make Offer, Respond to Offer
-        Could be a problem unless conversation is limited to one event
+        Leave them out of messages for now but it could be nice in the future to add them
+    Can the flow work with Proposal but not Offer?
+        Yes that should be enough if buyers can see all messages for an event just like current inquiry convo groups; from there they can see event details and send offers
     What happens when Offer or Proposal is accepted?
         Show event as booked in My Gigs page for musicians
         Need to ask buyer if event should change to booked
         Need email confirmations on both sides
         Send out calendar invites for event (somehow allow the buyer to set the description details with info about parking and everything else)
         Allows musician to send message to buyer
+        After event has passed, both parties get notified to review
     Should conversations be per event?
         No; no offer and proposal special message types
         Maybe still like applications/events/proposals/offers that are related to the conversation
     Can buyer send message to any listing?
         Only applicants, or those with Proposals that have been replied to
     Should you lose ability to access or send messages if you don't meet conditions?
-        Buyers can always message an applicant listings
-        Listings can always message a buyer who booked them for an upcoming event
+        Buyers can always message an applicant listing or proposal listing
+        Listings can always message a buyer who booked them for an upcoming event or responded to their proposal
         Listings can only message if they have an open conversation started by the buyer
         Once conversation is open between a buyer and listing, it is open
         Buyers can silence conversation to avoid getting too many unwanted messages from listing
     Should there be conversations grouped by event?
         Yes and there should be a way to filter conversations by event on main messages page
-    What should happen to inquiry messages
+    What should happen to inquiry messages?
         Leave them and never use them again; then consider removing all trace of them later
     When should users be prompted to review?
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
     Remove inquiries page
-        Create event post type to replace inquiries
-            Add status for booked/open/cancelled
-            Add checkbox for if they want a quote, draw
-            Offers, Booked listings, invited listings
-        Create an event for each existing inquiry
-        Alter inquiry modal to create events instead
         Alter send inquiry drop down to create Proposal instead of invite to inquiry
-            Proposal post type; Event, listing, availability, quote, draw, musician message, status, pay and pay structure, details, offer
-        Inquiry related emails need to be updated
+            Make index for events, proposals, offers to avoid maintaining lists in users and events
+                Get proposal by listing
+                Get listing ids of proposals by event
+                use this in get user events and request proposal mu plugin functions
+        Test
+            Test inquiry on home page
+            Test inquiry on other page
+            Test send inquiry button on home
+            Test send inquiry on collections
+            Find all pages where send inquiry button is used and test
+            Admin notification of event creation
+            Creator notification of event creation
+            Listing invite notification of event creation
+            Send listing invite after create
+            make sure single event link in email and inquiry modal after success works
+            make sure events from the past don't go in events map but events on today do go there
+            Check the modal in mobile and mobile/desktop safari view
+            Commit
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
+            Add Create/update Event form
+            Show proposals
+            Show suggestion listings to request proposal
+        Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
+        Figure out what happens with existing inquiries messages
+            Evaluate if i need userInquiries in x-data of page-messages.php
+            Evaluate if inquiriesMap is needed in page-messages.php
+        Remove inquiries html apis and mu plugin functions
         Remove inquiries page menu item
-        Consider removing all traces of inquiries
+        Remove inquiries page
+        Consider removing inquiry post type and inquiry messages
 Add My Gigs page (for musicians)
     Show events that you have gotten an event request for Proposal for
     Filter by listing
@@ -145,6 +170,7 @@ Offer post type (future)
     Event relationship
     Details
     Proposal relationship
+Rename clear-listing-form to clear-listing-search-form
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
@@ -217,9 +243,8 @@ Advanced inquiries
         Compare listings side by side in offers tab on inquiry page (show offer, media, link to convo in sidebar; show messages in message body area)
     allow delete/expire inquiry
     allow just send direct message for other kind of inquiry that is not for an event
-    paginate inquiries instead of getting all at once in php for inquiriesMap
-    only get non expired listings for inquiriesMap
-    search bar for inquiries
+    only get non expired listings for eventsMap
+    search bar for events page
     record response time
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times

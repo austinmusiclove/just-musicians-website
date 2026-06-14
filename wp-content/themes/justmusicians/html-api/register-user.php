@@ -85,7 +85,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             wp_new_user_notification($new_user_id);
 
             // send email verification email
-            send_account_activation_link($user_email, $account_identifier);
+            send_account_activation_email($user_email, $account_identifier);
 
             // log the new user in
             wp_set_auth_cookie($new_user_id, $remember);

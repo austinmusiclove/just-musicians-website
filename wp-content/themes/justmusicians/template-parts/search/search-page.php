@@ -60,15 +60,15 @@ $next_page       = $result ? $result['next_page']       : null;
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
-            inquiriesMap: <?php echo clean_arr_for_doublequotes($args['inquiries_map']); ?>,
-            get sortedInquiries()                                { return getSortedInquiries(this); },
-            _addInquiry(postId, subject, listings, permalink)    { return addInquiry(this, postId, subject, listings, permalink); },
-            _showAddListingToInquiryButton(inquiryId, listingId) { return showAddListingToInquiryButton(this, inquiryId, listingId); },
-            _showListingInInquiry(inquiryId, listingId)          { return showListingInInquiry(this, inquiryId, listingId); },
+            eventsMap: <?php echo clean_arr_for_doublequotes($args['events_map']); ?>,
+            get sortedEvents()                                   { return getSortedEvents(this); },
+            _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
+            _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
+            _showListingInEvent(eventId, listingId)              { return showListingInEvent(this, eventId, listingId); },
             _clearListingForm()                                  { clearListingForm(this); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
-        x-on:add-inquiry="_addInquiry($event.detail.post_id, $event.detail.subject, $event.detail.listings, $event.detail.permalink)"
+        x-on:add-event="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
         hx-target="#results"
         hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>
