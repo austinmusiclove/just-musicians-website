@@ -45,8 +45,7 @@ function get_user_events($args) {
         $query->the_post();
         $event_id = get_the_ID();
 
-        // TODO get listings that have proposals with this event using index
-        $listings = [];
+        $listings = hm_get_listing_ids_by_event_id($event_id);
 
         $events[] = [
             'post_id'        => get_the_ID(),

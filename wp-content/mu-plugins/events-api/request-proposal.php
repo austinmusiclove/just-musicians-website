@@ -14,8 +14,7 @@ function request_proposal($event_id, $listing_id) {
     }
 
     // Get listings
-    // TODO get listings for this event with index
-    $listings = [];
+    $listings = hm_get_listing_ids_by_event_id($event_id);
 
     // Create proposal if one is not already created
     if (!in_array($listing_id, $listings)) {

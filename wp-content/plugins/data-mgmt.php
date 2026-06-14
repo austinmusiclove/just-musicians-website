@@ -60,6 +60,9 @@ function hm_data_mgmt_admin_page() {
             case 'build_location_index':
                 $result = hm_build_location_index();
                 break;
+            case 'build_proposal_index':
+                $result = hm_build_proposal_index();
+                break;
         }
     }
 
@@ -83,6 +86,11 @@ function hm_data_mgmt_admin_page() {
             <p>
                 <button type="submit" name="hm_action" value="build_location_index" class="button button-primary">
                     Build Location Index
+                </button>
+            </p>
+            <p>
+                <button type="submit" name="hm_action" value="build_proposal_index" class="button button-primary">
+                    Build Proposal Index
                 </button>
             </p>
         </form>

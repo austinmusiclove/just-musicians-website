@@ -1,3 +1,7 @@
+Critical bugs
+    Remove city auto complete from location filter on home page
+    Fix mu plugins depending on each other; move code to includes instead
+
 Deploy
     Set up Event post type
     Make Event for each Inquiry
