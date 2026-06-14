@@ -48,7 +48,7 @@ function create_event($args) {
     return [
         'post_id'    => $event_id,
         'event_name' => $args['meta_input']['event_name'],
-        'listings'   => $listing_invites,
+        'listings'   => $listings_to_invite,
         'permalink'  => $event_link,
     ];
 }

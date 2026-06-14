@@ -1,6 +1,6 @@
 <?php
 
-function notify_listing_proposal_request($event_id, $listing_ids, $event_name) {
+function notify_listing_proposal_request($event_id, $listing_id, $event_name) {
     global $user_messages_plugin;
     if (!$listing_id || !$event_id) { return; }
 

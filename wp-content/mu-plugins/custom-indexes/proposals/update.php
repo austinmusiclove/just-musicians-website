@@ -16,11 +16,14 @@ function hm_index_upsert_proposal($post_id) {
         return 'incomplete';
     }
 
-    $result = $wpdb->replace($table, [
-        'event_id'   => $event_id,
-        'listing_id' => $listing_id,
-        'status'     => $status ?: 'requested',
-    ]);
+    $result = $wpdb->query($wpdb->prepare(
+        "INSERT INTO {$table} (event_id, listing_id, status)
+         VALUES (%d, %d, %s)
+         ON DUPLICATE KEY UPDATE status = VALUES(status)",
+        $event_id,
+        $listing_id,
+        $status ?: 'requested'
+    ));
 
     if ($result === false) {
         return 'error';

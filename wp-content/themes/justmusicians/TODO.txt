@@ -1,6 +1,7 @@
 Critical bugs
     Remove city auto complete from location filter on home page
     Fix mu plugins depending on each other; move code to includes instead
+    importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
 
 Deploy
     Set up Event post type

@@ -20,7 +20,8 @@ function request_proposal($event_id, $listing_id) {
     if (!in_array($listing_id, $listings)) {
         $listings[] = $listing_id;
         create_proposal($event_id, $listing_id, 'requested');
-        notify_listing_proposal_request($event_id, $listing_id, $args['meta_input']['event_name']);
+        $event_name = get_post_meta($event_id, 'event_name', true);
+        notify_listing_proposal_request($event_id, $listing_id, $event_name);
     }
 
     return new WP_REST_Response(['success' => true, 'listings' => $listings], 200);

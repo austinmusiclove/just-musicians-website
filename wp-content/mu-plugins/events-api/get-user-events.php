@@ -12,6 +12,7 @@ function get_user_events($args) {
 
 
     // Get events
+    $events = [];
     $query_args = [
         'post_type'   => 'event',
         'post_status' => 'publish',
@@ -59,7 +60,7 @@ function get_user_events($args) {
     wp_reset_postdata();
 
     return [
-        'events'       => $events,
+        'events'          => $events,
         'max_num_results' => $max_num_results,
         'max_num_pages'   => $max_num_pages,
         'next_page'       => $next_page,
