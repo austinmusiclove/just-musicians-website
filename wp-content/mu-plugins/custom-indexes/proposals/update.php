@@ -30,14 +30,12 @@ function hm_index_upsert_proposal($post_id) {
 }
 
 function hm_index_proposal_on_save($post_id, $post, $update) {
-    error_log('save');
     if ($post->post_status === 'auto-draft') { return; }
 
     hm_index_upsert_proposal($post_id);
 }
 
 function hm_index_proposal_on_trash($post_id) {
-    error_log('trash');
     if (get_post_type($post_id) !== 'proposal') { return; }
 
     global $wpdb;
@@ -55,7 +53,6 @@ function hm_index_proposal_on_trash($post_id) {
 }
 
 function hm_index_proposal_on_untrash($post_id) {
-    error_log('untrash');
     if (get_post_type($post_id) !== 'proposal') { return; }
 
     hm_index_upsert_proposal($post_id);
