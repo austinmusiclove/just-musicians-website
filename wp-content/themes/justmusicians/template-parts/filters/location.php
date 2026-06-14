@@ -14,7 +14,7 @@ $distance_input_ref = $device . 'DistanceInput';
             <img class="h-4 absolute left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
             <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-filter', '', ['device' => $device]); ?>
         </div>
-        <input type="hidden" name="location_label" x-model="locationInput" />
+        <input type="hidden" name="location_label" x-model="searchLocation" />
         <input type="hidden" name="lat" value="30.2672" x-model="searchLat" />
         <input type="hidden" name="lng" value="-97.7431" x-model="searchLng" />
         <select id="distance" name="distance" x-model="distance" x-ref="<?php echo $distance_input_ref; ?>" x-on:change="$dispatch('filterupdate');">

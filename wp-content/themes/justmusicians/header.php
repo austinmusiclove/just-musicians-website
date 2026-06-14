@@ -139,8 +139,9 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
             locationInput: '<?php echo clean_str_for_doublequotes($location_label); ?>',
+            locationInputHeader: '<?php echo clean_str_for_doublequotes($location_label); ?>',
             inquiryLocationInput: '',
-            updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
+            updateLocation(location) { this.locationInput = location.label; this.locationInputHeader = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
             _updateInquiryLocation(location) { updateInquiryLocation(this, location); },
             focusElm(id) {
                 var elm = document.getElementById(id);

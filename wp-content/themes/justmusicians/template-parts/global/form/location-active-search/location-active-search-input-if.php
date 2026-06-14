@@ -1,6 +1,6 @@
 <input id="inquiry-location-input"
     class="w-full py-2 pr-3 pl-5 no-formatting border border-black/20 focus:border-black outline-none"
-    type="text" name="location" autocomplete="off"
+    type="text" name="location" autocomplete="location-disabled"
     placeholder="Start typing your city or postal code.."
     :class="{ 'shake': shakeElements.has('inquiry-location-input') }"
     x-ref="inquiryLocationInputElm"

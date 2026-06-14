@@ -1,5 +1,4 @@
 Critical bugs
-    Remove city auto complete from location filter on home page
     Fix mu plugins depending on each other; move code to includes instead
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
 
@@ -79,17 +78,14 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Alter send inquiry drop down to create Proposal instead of invite to inquiry
-            Make index for events, proposals, offers to avoid maintaining lists in users and events
-                Get proposal by listing
-                Get listing ids of proposals by event
-                use this in get user events and request proposal mu plugin functions
         Test
             Test inquiry on home page
+            Test inquriy on home page listing
+            Test send inquiry from suggestion listing
+            Test inquiry from collection page
+            Test inquiry from single listing page
+            Test inquiry from seo page
             Test inquiry on other page
-            Test send inquiry button on home
-            Test send inquiry on collections
-            Find all pages where send inquiry button is used and test
             Admin notification of event creation
             Creator notification of event creation
             Listing invite notification of event creation

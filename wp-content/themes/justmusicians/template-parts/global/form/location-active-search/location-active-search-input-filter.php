@@ -4,7 +4,7 @@ $target_id = 'location-active-search-results-' . $device;
 ?>
 <input
     class="w-full py-2 pr-3 pl-5 no-formatting border border-black/20 focus:border-black outline-none"
-    type="text" name="location" autocomplete="off"
+    type="text" name="location" autocomplete="location-disabled"
     placeholder="Start typing your city or postal code.."
     x-model="locationInput"
     x-on:focus="showLocationSearchOptions = true; locationInput = '';"
