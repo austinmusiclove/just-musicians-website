@@ -40,11 +40,33 @@ get_header();
 
                     </div>
 
-                <?php } else {
-
-                      echo get_template_part('template-parts/content/no-gigs', '', []);
-
-                } ?>
+                <?php } else { ?>
+                    <div
+                        hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
+                        hx-target="#results"
+                        hx-indicator=".spinner-start"
+                        hx-trigger="load"
+                    >
+                        <span class="spinner-start htmx-indicator-block">
+                            <?php
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            ?>
+                        </span>
+                        <span id="results" class="spinner-start htmx-indicator-block-replace"></span>
+                        <span id="spinner-end" class="htmx-indicator-block">
+                            <?php
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                            ?>
+                            <div class="my-8 flex items-center justify-center">
+                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                            </div>
+                        </span>
+                    </div>
+                <?php } ?>
 
             </div>
         </div>

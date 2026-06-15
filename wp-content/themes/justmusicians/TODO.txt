@@ -8,6 +8,7 @@ Deploy
     Set up proposal acf
     Set up offer acf
     Add My Gigs page
+    Rebuild proposal index
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -83,6 +84,8 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show all proposals for all user listings and all status
+                add start date to proposals index so we can do ordering by the event date
+                template part for displaying
             Allow responding to proposals
             Show notifications for proposal requests
             Allow editing proposal response

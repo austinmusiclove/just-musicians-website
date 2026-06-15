@@ -17,11 +17,12 @@ function hm_index_upsert_proposal($post_id) {
     }
 
     $result = $wpdb->query($wpdb->prepare(
-        "INSERT INTO {$table} (event_id, listing_id, status)
-         VALUES (%d, %d, %s)
-         ON DUPLICATE KEY UPDATE status = VALUES(status)",
+        "INSERT INTO {$table} (event_id, listing_id, proposal_id, status)
+         VALUES (%d, %d, %d, %s)
+         ON DUPLICATE KEY UPDATE status = VALUES(status), proposal_id = VALUES(proposal_id)",
         $event_id,
         $listing_id,
+        $post_id,
         $status ?: 'requested'
     ));
 

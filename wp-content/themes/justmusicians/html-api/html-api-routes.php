@@ -58,6 +58,12 @@ function html_api_v1_template_redirects() {
                 case 'POST'  : include_once get_template_directory() . '/html-api/request-proposal.php'; exit;
             }
 
+        // Proposals
+        case 'my-gigs':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'  : include_once get_template_directory() . '/html-api/get-my-gigs.php'; exit;
+            }
+
         // Reviews
         case 'reviews':
             switch ($_SERVER['REQUEST_METHOD']) {

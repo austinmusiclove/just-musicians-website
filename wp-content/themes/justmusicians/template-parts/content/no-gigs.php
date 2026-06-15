@@ -3,7 +3,7 @@
 
     <div class="pb-32 relative z-10">
         <span class="text-18 sm:text-22 block text-center mb-4">You don't have any gigs yet</span>
-        <p class="text-20 mb-4">Gigs you are invited to apply for will appear here</p>
+        <p class="text-20 mb-4">Gigs that you are invited to apply for will appear here</p>
     </div>
 
     <img class="w-40 absolute bottom-0 left-0 z-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
