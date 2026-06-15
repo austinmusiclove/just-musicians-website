@@ -7,6 +7,7 @@ Deploy
     Make Event for each Inquiry
     Set up proposal acf
     Set up offer acf
+    Add My Gigs page
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -81,6 +82,10 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
+            Show all proposals for all user listings and all status
+            Allow responding to proposals
+            Show notifications for proposal requests
+            Allow editing proposal response
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
             Add Create/update Event form
@@ -94,12 +99,11 @@ Events and Inquiries refactor
         Remove inquiries page menu item
         Remove inquiries page
         Consider removing inquiry post type and inquiry messages
-Add My Gigs page (for musicians)
-    Show events that you have gotten an event request for Proposal for
+My Gigs page (for musicians)
     Filter by listing
     Filter by status (proposal request, proposal sent, offer, booked)
-    Can update availability status for an event
-    Show events that you have applied for (but filtered out of view by default)
+        Show events that you have applied for (but filtered out of view by default)
+        maybe application generated props have status applied; and we can show responded and requested by default and not applied
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
 Add Manage Events page (for buyers)
