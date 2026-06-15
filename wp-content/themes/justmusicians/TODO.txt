@@ -80,10 +80,6 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Test
-            location autofill happens still in modal and if you use that you can move on without setting lat lng potentially
-            Test inquiry on other page
-            Check the modal in mobile and mobile/desktop safari view
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
