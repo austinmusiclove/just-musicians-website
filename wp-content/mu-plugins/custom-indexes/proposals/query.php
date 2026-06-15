@@ -11,5 +11,5 @@ function hm_get_listing_ids_by_event_id($event_id) {
         $event_id
     ));
 
-    return array_map('intval', wp_list_pluck($rows, 'listing_id'));
+    return array_map('strval', wp_list_pluck($rows, 'listing_id'));
 }

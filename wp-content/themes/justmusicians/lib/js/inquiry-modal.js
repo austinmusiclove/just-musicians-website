@@ -27,7 +27,7 @@ function showInquirySlide(alco, slide) {
         if (slide == 'budget')     { alco.showBudgetSlide     = true; alco.currentInquirySlide = 'budget';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((3/8) * 100); }); }
         if (slide == 'genre')      { alco.showGenreSlide      = true; alco.currentInquirySlide = 'genre';      alco.$nextTick(() => { alco.inquiryProgress = Math.round((4/8) * 100); }); }
         if (slide == 'performers') { alco.showPerformersSlide = true; alco.currentInquirySlide = 'performers'; alco.$nextTick(() => { alco.inquiryProgress = Math.round((5/8) * 100); }); }
-        if (slide == 'details')    { alco.showDetailsSlide    = true; alco.currentInquirySlide = 'details';    alco.$nextTick(() => { alco.inquiryProgress = Math.round((6/8) * 100); alco.$refs.inquirySubject.focus(); }); }
+        if (slide == 'details')    { alco.showDetailsSlide    = true; alco.currentInquirySlide = 'details';    alco.$nextTick(() => { alco.inquiryProgress = Math.round((6/8) * 100); alco.$refs.inquiryEventName.focus(); }); }
         if (slide == 'quotes')     { alco.showQuoteSlide      = true; alco.currentInquirySlide = 'quotes';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((7/8) * 100); }); }
         if (slide == 'thankyou')   { alco.showThankYouSlide   = true; alco.currentInquirySlide = 'thankyou';   alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
         if (slide == 'error')      { alco.showErrorSlide      = true; alco.currentInquirySlide = 'error';      alco.$nextTick(() => { alco.inquiryProgress = 100; });                     }
@@ -58,8 +58,8 @@ function exitInquiryModal(alco) {
     clearInquiryForm(alco);
 }
 
-function handleCreateInquirySuccess(alco, inquiryId) {
-    alco.newInquiryId = inquiryId;
+function handleCreateInquirySuccess(alco, eventPermalink) {
+    alco.newEventPermalink = eventPermalink;
     showInquirySlide(alco, 'thankyou');
 }
 

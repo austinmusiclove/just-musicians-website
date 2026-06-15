@@ -40,7 +40,7 @@ $next_page       = $result ? $result['next_page']       : null;
             showInstrumentationModal: false,
             showSettingModal: false,
             showEnsembleSizeModal: false,
-            showLocationFilter:          <?php echo empty($args['title']); ?>,
+            showLocationFilter:          <?php if (empty($args['title']))             { echo 'true'; } else { echo 'false'; }; ?>,
             listingSearchVal:           '<?php if (!empty($_GET['qsearch']))          { echo $_GET['qsearch']; } ?>',
             categoriesCheckboxes:       [<?php if (!empty($args['qcategory']))        { echo "'" . $args['qcategory']        . "'"; } ?>],
             genresCheckboxes:           [<?php if (!empty($args['qgenre']))           { echo "'" . $args['qgenre']           . "'"; } ?>],
@@ -67,7 +67,7 @@ $next_page       = $result ? $result['next_page']       : null;
             _clearListingForm()                                  { clearListingForm(this); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
-        x-on:add-event="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
+        x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
         hx-target="#results"
         hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>

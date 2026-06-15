@@ -67,7 +67,7 @@ $events_map = array_column($events_result['events'], null, 'post_id');
                         _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
-                    x-on:add-event="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
+                    x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"

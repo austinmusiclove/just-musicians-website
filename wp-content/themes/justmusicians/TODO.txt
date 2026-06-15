@@ -81,19 +81,9 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Test
-            Test inquriy on home page listing
-            Test inquiry from collection page
-            Test inquiry from single listing page
-            Test inquiry from seo page
+            location autofill happens still in modal and if you use that you can move on without setting lat lng potentially
             Test inquiry on other page
-            Admin notification of event creation
-            Creator notification of event creation
-            Listing invite notification of event creation
-            Send listing invite after create
-            make sure single event link in email and inquiry modal after success works
             Check the modal in mobile and mobile/desktop safari view
-            Test send inquiry from suggestion listing
-            Commit
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
@@ -132,6 +122,9 @@ Manage event page
     Show invited, available, unavailable musicians (Show freshness of reported availability)
     Show offers
     Click through to messages for each listing and/or all conversations for the event
+    make sure single event link in email and inquiry modal after success works
+    Show suggestions
+    Test send inquiry from suggestion listing
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message

@@ -1,3 +1,4 @@
+
 <?php
     $is_preview        = $args['instance'] == 'listing-form';
     $ph_thumbnail      = get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp';
@@ -16,6 +17,7 @@
         _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
         _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
     }"
+    x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
 >
     <div class="col-span-5 flex flex-col gap-8 items-start">
 

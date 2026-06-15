@@ -113,7 +113,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             inquiryBudget: '',
             inquiryCompensation: '',
             inquiryErrorMsg: '',
-            newInquiryId: '',
+            newEventPermalink: '',
             _clearInquiryForm()                                  { clearInquiryForm(this); },
             _showInquirySlide(slide)                             { showInquirySlide(this, slide); },
             _openInquiryModal(listingId, listingName)            { openInquiryModal(this, listingId, listingName); },

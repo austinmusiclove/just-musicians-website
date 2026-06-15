@@ -1,5 +1,20 @@
 <?php
 function create_proposal($event_id, $listing_id, $status = 'requested') {
+    $existing = new WP_Query([
+        'post_type'      => 'proposal',
+        'post_status'    => 'any',
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            ['key' => 'event',   'value' => $event_id],
+            ['key' => 'listing', 'value' => $listing_id],
+        ],
+    ]);
+
+    if ($existing->have_posts()) {
+        return $existing->posts[0];
+    }
+
     $event_name = get_post_meta($event_id, 'event_name', true);
     $listing_name = get_post_meta($listing_id, 'name', true);
     return wp_insert_post([

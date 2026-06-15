@@ -1,5 +1,3 @@
-themes/justmusicians/template-parts/listing-page/parts/inquire-button.php
-
 <?php if (!empty($args['disabled']) and $args['disabled']) { ?>
 
     <!-- For previews and any time the button should do nothing -->

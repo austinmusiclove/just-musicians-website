@@ -17,12 +17,16 @@ function create_event($args) {
         // Get suggestions
         $ensemble_size  = $args['tax_input']['ensemble_size'];
         $event_genres = $args['tax_input']['genre'];
+        $lat = $args['meta_input']['latitude'];
+        $lng = $args['meta_input']['longitude'];
         $result = get_listings([
             'ensemble_size' => $ensemble_size,
             'genres'        => $event_genres,
             'exclude'       => $listings_to_invite,
+            'lat'           => $lat,
+            'lng'           => $lng,
         ]);
-        $suggestions = array_column($result['listings'], 'post_id');
+        $suggestions = array_map('strval', array_column($result['listings'], 'post_id'));
 
         // update listings_to_invite
         $remaining_slots = $max_listing_invites - count($listings_to_invite);
@@ -37,7 +41,6 @@ function create_event($args) {
     }
 
     // Get event page link
-    // TODO Create single event and make sure it has access control and get permalink here
     $event_link = get_permalink($event_id);
 
     $event_name = $args['meta_input']['event_name'];

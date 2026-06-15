@@ -23,6 +23,10 @@ function get_listings($args) {
     $next_page              = $page + 1;
 
     $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music');
+    if (!empty($args['exclude'])) {
+        $listing_ids = array_diff($listing_ids, $args['exclude']);
+    }
+
 
     if (empty($listing_ids)) {
         return [
@@ -51,10 +55,6 @@ function get_listings($args) {
     if (!empty($search_term)) {
         $query_args['s'] = $args['search'];
         $query_args['orderby'] = 'relevance';
-    }
-
-    if (!empty($args['exclude'])) {
-        $query_args['post__not_in'] = $args['exclude'];
     }
 
     if (!empty($name_search_term)) {
