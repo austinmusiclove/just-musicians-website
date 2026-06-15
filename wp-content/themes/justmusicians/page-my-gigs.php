@@ -44,27 +44,21 @@ get_header();
                     <div
                         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
                         hx-target="#results"
-                        hx-indicator=".spinner-start"
+                        hx-indicator="#spinner"
                         hx-trigger="load"
                     >
-                        <span class="spinner-start htmx-indicator-block">
+                        <span id="results">
                             <?php
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
+                                echo get_template_part('template-parts/search/standard-listing-skeleton');
                             ?>
                         </span>
-                        <span id="results" class="spinner-start htmx-indicator-block-replace"></span>
-                        <span id="spinner-end" class="htmx-indicator-block">
-                            <?php
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                            ?>
-                            <div class="my-8 flex items-center justify-center">
-                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                            </div>
-                        </span>
+
+                        <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                        </div>
+
                     </div>
                 <?php } ?>
 

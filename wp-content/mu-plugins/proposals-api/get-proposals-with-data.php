@@ -13,7 +13,7 @@ function get_proposals_with_data($proposal_ids) {
         $proposals[] = [
             'proposal_id'  => $proposal_id,
             'listing_id'   => $listing_id,
-            'listing_name' => get_post_meta($listing_id, 'name', true);
+            'listing_name' => get_post_meta($listing_id, 'name', true),
             'status'       => get_post_meta($proposal_id, 'status', true) ?: 'requested',
             'event'        => [
                 'event_id'     => $event_id,
