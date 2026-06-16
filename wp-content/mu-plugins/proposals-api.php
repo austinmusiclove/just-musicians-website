@@ -14,3 +14,4 @@ require_once 'proposals-api/create-proposal.php';
 require_once 'proposals-api/get-user-listing-proposals.php';
 require_once 'proposals-api/get-proposals-with-data.php';
 require_once 'proposals-api/request-proposal.php';
+require_once 'proposals-api/update-proposal.php';
