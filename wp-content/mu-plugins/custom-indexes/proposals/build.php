@@ -44,7 +44,7 @@ function hm_create_proposal_index_table() {
         event_id    BIGINT(20) UNSIGNED NOT NULL,
         listing_id  BIGINT(20) UNSIGNED NOT NULL,
         proposal_id BIGINT(20) UNSIGNED NOT NULL,
-        status      VARCHAR(50) NOT NULL DEFAULT 'requested',
+        status      VARCHAR(50) NOT NULL,
         created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         start_date  DATE NOT NULL DEFAULT '0000-00-00',
         INDEX idx_event_id (event_id),

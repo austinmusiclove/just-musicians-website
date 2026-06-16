@@ -19,7 +19,11 @@ function request_proposal($event_id, $listing_id) {
     // Create proposal if one is not already created
     if (!in_array($listing_id, $listings)) {
         $listings[] = $listing_id;
-        create_proposal($event_id, $listing_id, 'requested');
+        create_proposal([
+            'event'   => $event_id,
+            'listing' => $listing_id,
+            'status'  => 'inquiry',
+        ]);
         $event_name = get_post_meta($event_id, 'event_name', true);
         notify_listing_proposal_request($event_id, $listing_id, $event_name);
     }

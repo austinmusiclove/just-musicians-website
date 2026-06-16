@@ -80,7 +80,7 @@ get_header();
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => [
                                         ['value' => 'all', 'label' => 'All Statuses'],
-                                        ['value' => 'requested', 'label' => 'Response Requested'],
+                                        ['value' => 'inquiry', 'label' => 'New Inquiry'],
                                         ['value' => 'applied', 'label'   => 'Applied'],
                                     ],
                                     'input_name'  => 'filter_status',

@@ -27,7 +27,7 @@ function hm_index_upsert_proposal($post_id) {
         $event_id,
         $listing_id,
         $post_id,
-        $status ?: 'requested',
+        $status,
         $start_date
     ));
 

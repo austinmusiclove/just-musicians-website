@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // parses args from the request, sanitizes them, and returns args ready for wp_insert_post or wp_update_post
 // if an arg is omitted in $_POST, it will be ommitted in the sanitized_args and therefore not altered in wp_update_post or wp_insert_post
-function get_sanitized_event_args($is_update) {
+function get_sanitized_event_args() {
     $sanitized_args = [
         'post_type'       => 'event',
         'post_status'     => 'publish',

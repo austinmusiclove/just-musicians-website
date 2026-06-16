@@ -14,7 +14,7 @@ function get_proposals_with_data($proposal_ids) {
             'proposal_id'  => $proposal_id,
             'listing_id'   => $listing_id,
             'listing_name' => get_post_meta($listing_id, 'name', true),
-            'status'       => get_post_meta($proposal_id, 'status', true) ?: 'requested',
+            'status'       => get_post_meta($proposal_id, 'status', true),
             'event'        => [
                 'event_id'     => $event_id,
                 'event_name'   => get_field('event_name', $event_id),

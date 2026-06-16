@@ -1,7 +1,7 @@
 <?php
 
 // Create Event
-$args = get_sanitized_event_args(false);
+$args = get_sanitized_event_args();
 
 $result = create_event($args);
 if ( is_wp_error($result) ) {

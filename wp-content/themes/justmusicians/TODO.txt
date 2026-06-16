@@ -84,9 +84,19 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Allow responding to proposals
+                authorize create proposal by making sure that the creator has owns the event or the listing
+                mu plugin update proposal
+                authorize by making sure that the user owns either the event or the listing
+                html api that calls update proposal
+                open textarea input with form connected to html api with htmx on click respond button
+                add availability input
+                add quote input if quote requested
+                add draw input if draw requested
+                show response, quote, draw
+                change button to edit response if applied
                 open modal or add input under post
-                switch button to edit response
             Allow editing proposal response
+                switch button to edit response for applied proposals
             Show notifications for proposal requests
             Show notifications for proposal response
             make sure new notification goes out on edit response
