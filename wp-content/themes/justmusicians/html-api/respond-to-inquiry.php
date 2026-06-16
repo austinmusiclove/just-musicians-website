@@ -5,7 +5,6 @@ $args = [
     'proposal_id' => $proposal_id,
 ];
 
-if (isset($_POST['status']))       { $args['status']       = sanitize_text_field($_POST['status']); }
 if (isset($_POST['availability'])) { $args['availability'] = sanitize_text_field($_POST['availability']); }
 if (isset($_POST['draw']))         { $args['draw']         = rest_sanitize_boolean($_POST['draw']); }
 if (isset($_POST['quote']))        { $args['quote']        = sanitize_text_field($_POST['quote']); }

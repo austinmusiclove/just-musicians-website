@@ -39,5 +39,6 @@ function respond_to_inquiry_proposal($args) {
         return $authorized;
     }
 
+    $args['status'] = 'applied';
     return update_proposal($args);
 }

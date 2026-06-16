@@ -88,7 +88,7 @@ Events and Inquiries refactor
                     test success
                     test error
                     test request proposal on listing page and on home standard listing
-                    respond to inquiry should set status to applied
+                modify message for no gigs content
                 open textarea input with form connected to html api with htmx on click respond button
                 add availability input
                 add quote input if quote requested
