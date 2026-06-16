@@ -126,6 +126,7 @@ module.exports = {
             'yellow-light-50': '#F6E9D4',
 			// Other
 			'navy': '#0F384C',
+			'navy-light': '#E7ECF6',
 			'red': '#C23D28',
 			'red-60': '#DA8B7E',
             'grey-light': '#e3e3e3',

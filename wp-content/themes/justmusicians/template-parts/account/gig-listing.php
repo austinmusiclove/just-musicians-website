@@ -3,20 +3,25 @@
 $proposal     = $args['proposal'];
 $listing_name = $proposal['listing_name'];
 $status       = $proposal['status'];
+$availability = $proposal['availability'];
+$prop_details = $proposal['details'];
+$quote        = $proposal['quote'];
+$draw         = $proposal['draw'];
 
-$event        = $args['proposal']['event'];
-$event_id     = $event['event_id'];
-$event_name   = $event['event_name'];
-$start_date   = $event['start_date'];
-$end_date     = $event['end_date'];
-$start_time   = $event['start_time'];
-$end_time     = $event['end_time'];
-$city         = $event['city'] ?? '';
-$state        = $event['state'] ?? '';
-$details      = $event['details'];
-$budget       = $event['budget'];
-$compensation = $event['compensation'];
-$permalink    = $event['permalink'];
+$event         = $args['proposal']['event'];
+$event_id      = $event['event_id'];
+$event_name    = $event['event_name'];
+$start_date    = $event['start_date'];
+$end_date      = $event['end_date'];
+$start_time    = $event['start_time'];
+$end_time      = $event['end_time'];
+$city          = $event['city'] ?? '';
+$state         = $event['state'] ?? '';
+$event_details = $event['details'];
+$budget        = $event['budget'];
+$compensation  = $event['compensation'];
+$request_quote = $event['request_quote'];
+$request_draw  = $event['request_draw'];
 
 $start_ts    = $start_date ? strtotime($start_date) : null;
 $end_ts      = $end_date   ? strtotime($end_date)   : null;
@@ -51,7 +56,15 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
         hx-trigger="revealed once"
         hx-swap="beforeend"
         hx-target="#results"
-        <?php } ?>>
+        <?php } ?>
+        x-data="{
+            showForm: false,
+            availability: '<?php echo clean_str_for_doublequotes($availability); ?>',
+            prop_details: '<?php echo clean_str_for_doublequotes($prop_details); ?>',
+            quote:        '<?php echo clean_str_for_doublequotes($quote); ?>',
+            draw:         '<?php echo clean_str_for_doublequotes($draw); ?>',
+        }"
+    >
 
         <!-- Calendar Icon -->
         <div class="w-20 sm:w-24 shrink-0">
@@ -63,9 +76,7 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 
             <!-- Title + Status -->
             <div class="flex flex-row items-start justify-between gap-2">
-                <a href="<?php echo esc_url($permalink); ?>">
-                    <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($event_name); ?></h2>
-                </a>
+                <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($event_name); ?></h2>
                 <span class="text-11 px-2 py-0.5 rounded-full bg-yellow/40 text-12 capitalize font-semibold break-words shrink-0"><?php echo esc_html($status); ?></span>
             </div>
 
@@ -83,10 +94,10 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
             <?php } ?>
 
             <!-- Details -->
-            <?php if ($details) { ?>
+            <?php if ($event_details) { ?>
                 <div class="flex flex-col min-h-[1.5rem]">
                     <span class="text-12 text-black/50 font-semibold">Details</span>
-                    <p class="text-14"><?php echo esc_html($details); ?></p>
+                    <p class="text-14"><?php echo esc_html($event_details); ?></p>
                 </div>
             <?php } ?>
 
@@ -109,21 +120,27 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
             <?php } ?>
 
             <!-- Respond (desktop) -->
-            <div class="hidden sm:flex justify-end">
-                <a href="<?php echo esc_url($permalink); ?>">
-                    <button type="button" class="bg-navy hover:bg-yellow text-white hover:text-black px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap">Respond to Gig</button>
-                </a>
+            <div class="hidden sm:flex justify-start">
+                <?php get_template_part('template-parts/account/gig-listing-form', '', [
+                    'proposal_id'   => $proposal['proposal_id'],
+                    'request_quote' => $request_quote,
+                    'request_draw'  => $request_draw,
+                    'device'        => 'desktop',
+                ]); ?>
+            </div>
+
+            <!-- Respond (mobile) -->
+            <div class="block sm:hidden w-full">
+                <?php get_template_part('template-parts/account/gig-listing-form', '', [
+                    'proposal_id'   => $proposal['proposal_id'],
+                    'request_quote' => $request_quote,
+                    'request_draw'  => $request_draw,
+                    'device'        => 'mobile',
+                ]); ?>
             </div>
 
         </div>
 
-    </div>
-
-    <!-- Respond (mobile) -->
-    <div class="block sm:hidden">
-        <a href="<?php echo esc_url($permalink); ?>">
-            <button type="button" class="bg-navy hover:bg-yellow text-white hover:text-black px-3 py-2 rounded-sm font-sun-motter text-14 inline-block w-full">Respond to Gig</button>
-        </a>
     </div>
 
 </div>

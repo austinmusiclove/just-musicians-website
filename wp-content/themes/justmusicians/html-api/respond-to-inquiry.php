@@ -6,7 +6,7 @@ $args = [
 ];
 
 if (isset($_POST['availability'])) { $args['availability'] = sanitize_text_field($_POST['availability']); }
-if (isset($_POST['draw']))         { $args['draw']         = rest_sanitize_boolean($_POST['draw']); }
+if (isset($_POST['draw']))         { $args['draw']         = sanitize_text_field($_POST['draw']); }
 if (isset($_POST['quote']))        { $args['quote']        = sanitize_text_field($_POST['quote']); }
 if (isset($_POST['details']))      { $args['details']      = sanitize_textarea_field($_POST['details']); }
 

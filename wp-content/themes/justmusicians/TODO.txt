@@ -84,18 +84,11 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Allow responding to proposals
+                show response, quote, draw, availability
                 html api that calls update proposal
-                    test success
-                    test error
-                    test request proposal on listing page and on home standard listing
-                modify message for no gigs content
-                open textarea input with form connected to html api with htmx on click respond button
-                add availability input
-                add quote input if quote requested
-                add draw input if draw requested
-                show response, quote, draw
+                    update info on front end
                 change button to edit response if applied
-                open modal or add input under post
+                modify message for no gigs content
             Allow editing proposal response
                 switch button to edit response for applied proposals
             Show notifications for proposal requests

@@ -101,19 +101,20 @@ get_header();
 
                         </div>
 
-                        <span id="results">
-                            <?php
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                                echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            ?>
-                        </span>
-
-                        <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
-                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                        </div>
-
                     </form>
+
+                    <span id="results">
+                        <?php
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                            echo get_template_part('template-parts/search/standard-listing-skeleton');
+                        ?>
+                    </span>
+
+                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                    </div>
+
                 <?php } ?>
 
             </div>
