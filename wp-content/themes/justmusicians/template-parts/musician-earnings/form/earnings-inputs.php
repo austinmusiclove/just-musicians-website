@@ -48,7 +48,7 @@
     </fieldgroup>
 
     <!-- Comp Structure -->
-    <?php echo get_template_part('template-parts/global/form/dropdown', '', [
+    <?php echo get_template_part('template-parts/global/form/dropdown-with-other', '', [
         'title'        => 'Compensation Structure',
         'input_name'   => 'comp_structure',
         'options'      => [ 'Guarantee', 'Guarantee plus Door Deal', 'Guarantee plus Bar Deal', 'Door Deal', 'Bar Deal', 'Versus Deal', 'Tips Only', 'Benefit Show', 'Unpaid', ],
@@ -58,7 +58,7 @@
     ]); ?>
 
     <!-- Payment Speed -->
-    <?php echo get_template_part('template-parts/global/form/dropdown', '', [
+    <?php echo get_template_part('template-parts/global/form/dropdown-with-other', '', [
         'title'      => 'When were you paid?',
         'input_name' => 'payment_speed',
         'options'    => [ 'Before the gig', 'Same Day', 'Within 7 days', 'Within 30 days', 'Over 30 days later', 'Never got paid', ],
@@ -66,7 +66,7 @@
     ]); ?>
 
     <!-- Payment Method -->
-    <?php echo get_template_part('template-parts/global/form/dropdown', '', [
+    <?php echo get_template_part('template-parts/global/form/dropdown-with-other', '', [
         'title'        => 'How were you paid?',
         'input_name'   => 'payment_method',
         'options'      => [ 'Cash', 'Check', 'ACH', 'Zelle', 'Direct Deposit', 'Venmo', 'Cash App', 'PayPal', 'Bill.com', 'Gift Card', 'None', ],

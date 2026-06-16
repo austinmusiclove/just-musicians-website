@@ -48,7 +48,7 @@ function html_api_v1_template_redirects() {
                 case 'GET'   : include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;
             }
 
-        // Events
+        // Events and Proposals
         case 'events':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/create-event.php'; exit;
@@ -57,8 +57,6 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/request-proposal.php'; exit;
             }
-
-        // Proposals
         case 'my-gigs':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : include_once get_template_directory() . '/html-api/get-my-gigs.php'; exit;

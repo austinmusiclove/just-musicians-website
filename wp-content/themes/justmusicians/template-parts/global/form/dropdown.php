@@ -1,75 +1,34 @@
 <div x-data="{
-        options: (() => {
-            let opts = <?php echo clean_arr_for_doublequotes($args['options']); ?>;
-            <?php if (!empty($args['other_option'])) : ?>
-                opts = [...opts, 'Other'];
-            <?php endif; ?>
-            return opts;
-        })(),
-        selected: '',
+        options: <?php echo clean_arr_for_doublequotes($args['options']); ?>,
+        selected: '<?php echo $args['selected']; ?>',
         showDropdown: false,
-        otherValue: '',
-        otherSelected: false,
         select(option) {
-            if (option === 'Other') {
-                this.otherSelected = true;
-                this.otherValue = '';
-                this.selected = '';
-            } else {
-                this.otherSelected = false;
-                this.otherValue = '';
-                this.selected = option;
-            }
+            this.selected = option;
             this.showDropdown = false;
-        },
-        deselect() {
-            this.selected = '';
-            this.otherValue = '';
-            this.otherSelected = false;
+            $nextTick(() => $dispatch('<?php echo $args['input_name']; ?>-changed', { value: option }));
         }
     }"
-    x-on:clear-form.window="deselect();"
+    x-on:click.away="showDropdown = false"
+    class="relative"
 >
-    <div class="flex flex-row">
-        <label id="<?php echo $args['input_name']; ?>" for="<?php echo $args['input_name']; ?>" class="mb-1 mr-2 inline-block">
-            <?php echo $args['title']; ?>
-            <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
-        </label><br>
-        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
-    </div>
-    <div class="relative flex flex-col items-center justify-between">
-        <button type="button" class="w-full inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"
-            x-on:click="showDropdown = !showDropdown"
-        >
-            <span x-text="otherSelected ? 'Other' : (selected || 'Select one')"></span>
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
+    <button type="button"
+        class="flex items-center gap-1 px-3 py-1.5 border border-black/20 rounded-sm text-14 hover:border-black"
+        x-on:click="showDropdown = !showDropdown">
+        <span x-text="(function() { const o = options.find(o => o.value === selected); return o ? o.label : '<?php echo $args['placeholder']; ?>'; })()"></span>
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
 
-        <ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto" style="margin-top: -1px"
-            x-show="showDropdown" x-cloak
-            x-on:click.away="showDropdown = false"
-        >
-            <template x-for="(option, index) in options" :key="index">
-                <li
-                    @click="select(option)"
-                    class="px-4 py-2 hover:bg-yellow-10 cursor-pointer"
-                    tabindex="0"
-                    @keydown.enter.prevent="select(option)"
-                >
-                    <span x-text="option"></span>
-                </li>
-            </template>
-        </ul>
+    <ul class="absolute z-10 top-full left-0 w-56 bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto mt-1"
+        x-show="showDropdown" x-cloak>
+        <template x-for="(opt, i) in options" :key="i">
+            <li @click="select(opt.value)"
+                class="px-4 py-2 hover:bg-yellow-10 cursor-pointer text-14"
+                :class="selected === opt.value ? 'bg-yellow-10 font-semibold' : ''"
+                x-text="opt.label"></li>
+        </template>
+    </ul>
 
-        <input type="text" class="px-4 py-2 border border-black/40 rounded-md" placeholder="Please specify"
-            x-show="otherSelected" x-cloak
-            x-model="otherValue"
-            x-on:input="selected = otherValue"
-        />
-
-        <!-- Hidden input to store selected option -->
-        <input type="hidden" name="<?php echo $args['input_name']; ?>" x-model="selected" required>
-    </div>
+    <input type="hidden" name="<?php echo $args['input_name']; ?>" x-model="selected" />
 </div>

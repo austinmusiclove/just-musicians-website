@@ -46,8 +46,9 @@ function hm_create_proposal_index_table() {
         proposal_id BIGINT(20) UNSIGNED NOT NULL,
         status      VARCHAR(50) NOT NULL DEFAULT 'requested',
         created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        start_date  DATE NOT NULL DEFAULT '0000-00-00',
         INDEX idx_event_id (event_id),
-        INDEX idx_listing_id (listing_id),
+        INDEX idx_listing_date (listing_id, start_date),
         UNIQUE KEY uq_event_listing (event_id, listing_id)
     ) {$charset_collate}";
 

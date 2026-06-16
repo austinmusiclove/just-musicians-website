@@ -18,6 +18,7 @@ require_once 'listings-api/authorization.php';
 require_once 'listings-api/get-listing.php';
 require_once 'listings-api/get-listings.php';
 require_once 'listings-api/get-listings-by-id.php';
+require_once 'listings-api/get-user-listings.php';
 require_once 'listings-api/create-listing.php';
 require_once 'listings-api/update-listing.php';
 require_once 'listings-api/delete-listing.php';

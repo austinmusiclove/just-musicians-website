@@ -1,9 +1,31 @@
 <?php
 
 $page = $_GET['page'] ?? 1;
-$result = get_user_listing_proposals([
-    'page' => $page
-]);
+
+$listing_filter = !empty($_GET['filter_listing']) && $_GET['filter_listing'] !== 'all'
+    ? [(int) $_GET['filter_listing']]
+    : null;
+
+$args = ['page' => $page];
+
+if ($listing_filter) {
+    $args['listing_ids'] = $listing_filter;
+}
+
+if (!empty($_GET['filter_status']) && $_GET['filter_status'] !== 'all') {
+    $args['status'] = $_GET['filter_status'];
+}
+
+if (!empty($_GET['date_range'])) {
+    $today = gmdate('Y-m-d');
+    if ($_GET['date_range'] === 'upcoming') {
+        $args['start_date_after'] = $today;
+    } elseif ($_GET['date_range'] === 'past') {
+        $args['start_date_before'] = $today;
+    }
+}
+
+$result = get_user_listing_proposals($args);
 
 $proposals       = $result['proposals'];
 $max_num_results = $result['max_num_results'];

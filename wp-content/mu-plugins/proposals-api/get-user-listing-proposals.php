@@ -11,7 +11,9 @@ function get_user_listing_proposals($args = []) {
             'next_page'       => 1,
         ];
     }
-    $listing_ids = get_user_meta($user_id, 'listings', true);
+    $listing_ids = !empty($args['listing_ids'])
+        ? $args['listing_ids']
+        : get_user_meta($user_id, 'listings', true);
 
     if (empty($listing_ids)) {
         return [
@@ -22,7 +24,19 @@ function get_user_listing_proposals($args = []) {
         ];
     }
 
-    $proposal_ids = hm_get_proposals_by_listing_ids($listing_ids);
+    $query_args = [];
+
+    if (!empty($args['status'])) {
+        $query_args['status'] = $args['status'];
+    }
+    if (!empty($args['start_date_after'])) {
+        $query_args['start_date_after'] = $args['start_date_after'];
+    }
+    if (!empty($args['start_date_before'])) {
+        $query_args['start_date_before'] = $args['start_date_before'];
+    }
+
+    $proposal_ids = hm_get_proposals_by_listing_ids($listing_ids, $query_args);
 
     $page            = (!empty($args['page']) && is_numeric($args['page'])) ? (int) $args['page'] : 1;
     $page_size       = (!empty($args['page_size']) && is_numeric($args['page_size'])) ? (int) $args['page_size'] : 10;

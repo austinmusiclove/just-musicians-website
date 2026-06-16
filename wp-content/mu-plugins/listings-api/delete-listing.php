@@ -44,11 +44,19 @@ add_action('clean_listing_references_after_delete', function($post_id) {
     // 1. Clean up user favorites (usermeta 'listings')
     $users = get_users(['fields' => ['ID']]);
     foreach ($users as $user) {
-        $favorites = get_user_meta($user->ID, 'listings', true);
+        $favorites = get_user_meta($user->ID, 'favorites', true);
         if (!is_array($favorites)) continue;
 
         $new_favorites = array_filter($favorites, fn($id) => intval($id) !== intval($post_id));
         if ($new_favorites !== $favorites) {
+            update_user_meta($user->ID, 'favorites', $new_favorites);
+        }
+
+        $user_listings = get_user_meta($user->ID, 'listings', true);
+        if (!is_array($user_listings)) continue;
+
+        $new_favorites = array_filter($user_listings, fn($id) => intval($id) !== intval($post_id));
+        if ($new_favorites !== $user_listings) {
             update_user_meta($user->ID, 'listings', $new_favorites);
         }
     }

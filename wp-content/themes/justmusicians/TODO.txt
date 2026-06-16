@@ -83,16 +83,13 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            Show all proposals for all user listings and all status
-                Add start date to proposals index so we can do ordering by the event date
-                Filters
-                    Listing filter
-                    Filter out past events and make a button for past events
-                    Status filter
             Allow responding to proposals
                 open modal or add input under post
-            Show notifications for proposal requests
+                switch button to edit response
             Allow editing proposal response
+            Show notifications for proposal requests
+            Show notifications for proposal response
+            make sure new notification goes out on edit response
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
             Add Create/update Event form
@@ -107,10 +104,6 @@ Events and Inquiries refactor
         Remove inquiries page
         Consider removing inquiry post type and inquiry messages
 My Gigs page (for musicians)
-    Filter by listing
-    Filter by status (proposal request, proposal sent, offer, booked)
-        Show events that you have applied for (but filtered out of view by default)
-        maybe application generated props have status applied; and we can show responded and requested by default and not applied
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
 Add Manage Events page (for buyers)
@@ -172,6 +165,9 @@ Offer post type (future)
     Details
     Proposal relationship
 Rename clear-listing-form to clear-listing-search-form
+DB Indexes
+    consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
+    consider doing something to make get listing owners faster
 SEO
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank

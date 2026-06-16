@@ -40,13 +40,67 @@ get_header();
 
                     </div>
 
-                <?php } else { ?>
-                    <div
+                <?php } else {
+                    $user_listings = get_user_listings(get_current_user_id());
+                    $listing_options = [['value' => 'all', 'label' => 'All Listings']];
+                    foreach ($user_listings as $id => $name) {
+                        $listing_options[] = ['value' => (string) $id, 'label' => $name];
+                    }
+                ?>
+                    <form
+                        x-data="{
+                            listing: 'all',
+                            status: 'all',
+                            dateRange: 'upcoming',
+                        }"
                         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
                         hx-target="#results"
                         hx-indicator="#spinner"
-                        hx-trigger="load"
+                        hx-trigger="load, filterupdate"
                     >
+                        <input type="hidden" name="filter_listing" x-model="listing" />
+                        <input type="hidden" name="filter_status" x-model="status" />
+                        <input type="hidden" name="date_range" x-model="dateRange" />
+
+                        <!-- Filter bar -->
+                        <div class="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-black/20">
+
+                            <!-- Listing dropdown -->
+                            <div x-on:filter_listing-changed="listing = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+                                <?php get_template_part('template-parts/global/form/dropdown', '', [
+                                    'options'     => $listing_options,
+                                    'input_name'  => 'filter_listing',
+                                    'selected'    => 'all',
+                                    'placeholder' => 'All Listings',
+                                ]); ?>
+                            </div>
+
+                            <!-- Status dropdown -->
+                            <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+                                <?php get_template_part('template-parts/global/form/dropdown', '', [
+                                    'options'     => [
+                                        ['value' => 'all', 'label' => 'All Statuses'],
+                                        ['value' => 'requested', 'label' => 'Response Requested'],
+                                        ['value' => 'applied', 'label'   => 'Applied'],
+                                    ],
+                                    'input_name'  => 'filter_status',
+                                    'selected'    => 'all',
+                                    'placeholder' => 'All Statuses',
+                                ]); ?>
+                            </div>
+
+                            <!-- Date range toggle -->
+                            <div class="flex items-center gap-1 border-l border-black/20 pl-2 ml-1">
+                                <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
+                                    :class="dateRange === 'upcoming' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
+                                    x-on:click="dateRange = 'upcoming'; $nextTick(() => $dispatch('filterupdate'));">Upcoming</button>
+                                <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
+                                    :class="dateRange === 'past' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
+                                    x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
+                            </div>
+
+                        </div>
+
                         <span id="results">
                             <?php
                                 echo get_template_part('template-parts/search/standard-listing-skeleton');
@@ -59,7 +113,7 @@ get_header();
                             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                         </div>
 
-                    </div>
+                    </form>
                 <?php } ?>
 
             </div>
