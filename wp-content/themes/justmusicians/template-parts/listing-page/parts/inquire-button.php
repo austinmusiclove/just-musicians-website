@@ -73,7 +73,7 @@
                             <!-- Request proposal button -->
                             <button type="button" class="ml-4 border border-navy text-navy bg-white text-sm px-3 py-1 rounded-full hover:bg-navy hover:text-white hover:opacity-50"
                                 x-show="_showRequestProposalButton(event.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
-                                x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/events/request-proposal/' + event.post_id + '/listings/<?php echo $args['post_id']; ?>'"
+                                x-bind:hx-post="'<?php echo site_url(); ?>' + '/wp-html/v1/events/' + event.post_id + '/listings/<?php echo $args['post_id']; ?>/request-proposal/'"
                                 hx-target="#inquiry-menu-result-<?php echo $args['post_id']; ?>"
                                 hx-trigger="click"
                                 x-bind:hx-indicator="'#request-proposal-button-content-<?php echo $args['post_id']; ?>-' + event.post_id"

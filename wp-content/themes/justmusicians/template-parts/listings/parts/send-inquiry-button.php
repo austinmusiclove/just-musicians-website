@@ -10,7 +10,7 @@
     <!-- Request proposal button -->
     <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-14 inline-block w-full"
         x-show="_showRequestProposalButton('<?php echo $args['event_id']; ?>', '<?php echo $args['listing_id']; ?>')" x-cloak
-        hx-post="<?php echo site_url('/wp-html/v1/events/request-proposal/' . $args['event_id'] . '/listings/' . $args['listing_id']); ?>"
+        hx-post="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/listings/' . $args['listing_id']); ?>/request-proposal/"
         hx-target="#inquiry-menu-result-<?php echo $args['listing_id']; ?>"
         hx-trigger="click"
         hx-indicator="#request-proposal-button-content-<?php echo $args['listing_id'] . '-' . $args['event_id']; ?>"

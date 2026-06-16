@@ -12,11 +12,6 @@ function update_proposal($args) {
         return new WP_Error('not_found', 'Proposal not found.', ['status' => 404]);
     }
 
-    $authorized = user_can_update_proposal($proposal_id);
-    if (is_wp_error($authorized)) {
-        return $authorized;
-    }
-
     $meta_input = [];
     foreach (['status', 'availability', 'draw', 'quote', 'details'] as $field) {
         if (array_key_exists($field, $args)) {
@@ -34,4 +29,15 @@ function update_proposal($args) {
     ], true);
 
     return is_wp_error($result) ? $result : $result;
+}
+
+function respond_to_inquiry_proposal($args) {
+    $proposal_id = (int) ($args['proposal_id'] ?? 0);
+
+    $authorized = user_can_update_proposal($proposal_id);
+    if (is_wp_error($authorized)) {
+        return $authorized;
+    }
+
+    return update_proposal($args);
 }
