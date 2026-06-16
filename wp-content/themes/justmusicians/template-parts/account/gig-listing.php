@@ -2,6 +2,7 @@
 
 $proposal     = $args['proposal'];
 $listing_name = $proposal['listing_name'];
+$status       = $proposal['status'];
 
 $event        = $args['proposal']['event'];
 $event_id     = $event['event_id'];
@@ -10,6 +11,8 @@ $start_date   = $event['start_date'];
 $end_date     = $event['end_date'];
 $start_time   = $event['start_time'];
 $end_time     = $event['end_time'];
+$city         = $event['city'] ?? '';
+$state        = $event['state'] ?? '';
 $details      = $event['details'];
 $budget       = $event['budget'];
 $compensation = $event['compensation'];
@@ -17,8 +20,8 @@ $permalink    = $event['permalink'];
 
 $start_ts    = $start_date ? strtotime($start_date) : null;
 $end_ts      = $end_date   ? strtotime($end_date)   : null;
-$start_display = $start_ts ? gmdate('F j, Y', $start_ts) : '';
-$end_display   = $end_ts   ? gmdate('F j, Y', $end_ts)   : '';
+$start_display = $start_ts ? gmdate('M j, Y', $start_ts) : '';
+$end_display   = $end_ts   ? gmdate('M j, Y', $end_ts)   : '';
 
 $time_display = '';
 if ($start_time) {
@@ -28,84 +31,98 @@ if ($start_time) {
     }
 }
 
-$location_parts = array_filter([$event['city'], $event['state']]);
+$location_parts = array_filter([$city, $state]);
 $location       = !empty($location_parts) ? implode(', ', $location_parts) : '';
 
-$details_excerpt = '';
-if ($details) {
-    $details_excerpt = mb_strlen($details) > 120 ? mb_substr($details, 0, 120) . '…' : $details;
+$date_display = $start_display;
+if ($end_display && $end_display !== $start_display) {
+    $date_display .= ' – ' . $end_display;
 }
+$meta_parts = array_filter([$date_display, $time_display, $location]);
+$meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
+
 ?>
 
-<div
-    class="bg-white border border-black/20 rounded-sm p-4 flex flex-col gap-3"
-    <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
-        hx-target="#results"
+<div class="flex flex-col mb-4">
+
+    <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20 last:border-none"
+        <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
         hx-swap="beforeend"
-    <?php } ?>>
+        hx-target="#results"
+        <?php } ?>>
 
-    <div class="flex items-start justify-between">
-        <div class="flex items-center gap-3 w-full">
+        <!-- Calendar Icon -->
+        <div class="w-20 sm:w-24 shrink-0">
             <?php echo get_template_part('template-parts/global/calendar-icon', '', ['timestamp' => $start_ts]); ?>
-            <div class="min-w-0 flex-1">
-                <div class="flex items-start justify-between gap-2">
-                    <a href="<?php echo esc_url($permalink); ?>" class="font-bold text-16 hover:underline leading-tight truncate"><?php echo esc_html($event_name); ?></a>
-                    <span class="text-11 px-2 py-0.5 rounded-full bg-yellow/40 text-12 capitalize shrink-0 whitespace-nowrap font-semibold"><?php echo esc_html($proposal['status']); ?></span>
-                </div>
-                <?php if ($listing_name) { ?>
-                    <span class="text-13 text-black/50 block mt-0.5">via <?php echo esc_html($listing_name); ?></span>
-                <?php } ?>
-            </div>
         </div>
-    </div>
 
-    <div class="flex flex-col gap-1.5 text-14 text-black/70">
-        <?php if ($start_display) { ?>
-            <div class="flex items-center gap-2">
-                <img class="w-3.5 h-3.5 shrink-0 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
-                <span><?php echo esc_html($start_display); if ($end_display && $end_display !== $start_display) { echo ' – ' . esc_html($end_display); } ?></span>
-            </div>
-        <?php } ?>
-        <?php if ($time_display) { ?>
-            <div class="flex items-center gap-2">
-                <img class="w-3.5 h-3.5 shrink-0 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clock.svg'; ?>" />
-                <span><?php echo esc_html($time_display); ?></span>
-            </div>
-        <?php } ?>
-        <?php if ($location) { ?>
-            <div class="flex items-center gap-2">
-                <img class="w-3.5 h-3.5 shrink-0 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-                <span><?php echo esc_html($location); ?></span>
-            </div>
-        <?php } ?>
-    </div>
+        <!-- Info -->
+        <div class="py-2 flex flex-col gap-y-2 flex-1 min-w-0 w-full">
 
-    <?php if ($details_excerpt) { ?>
-        <div class="text-14 text-black/60 border-t border-black/10 pt-3 leading-relaxed"><?php echo esc_html($details_excerpt); ?></div>
-    <?php } ?>
+            <!-- Title + Status -->
+            <div class="flex flex-row items-start justify-between gap-2">
+                <a href="<?php echo esc_url($permalink); ?>">
+                    <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($event_name); ?></h2>
+                </a>
+                <span class="text-11 px-2 py-0.5 rounded-full bg-yellow/40 text-12 capitalize font-semibold break-words shrink-0"><?php echo esc_html($status); ?></span>
+            </div>
 
-    <?php if ($budget || $compensation) { ?>
-        <div class="flex flex-wrap gap-3 border-t border-black/10 pt-3">
-            <?php if ($budget) { ?>
-                <div class="flex items-center gap-1.5 text-14 bg-green-50 rounded-sm px-2 py-1">
-                    <img class="w-3.5 h-3.5 shrink-0 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/dollar.svg'; ?>" />
-                    <span class="font-semibold">Budget: $<?php echo esc_html(number_format((float) $budget)); ?></span>
+            <?php if ($listing_name) { ?>
+                <div class="flex items-center gap-1 flex-wrap">
+                    <p class="text-14 text-black/50">Listing: <?php echo esc_html($listing_name); ?></p>
                 </div>
             <?php } ?>
-            <?php if ($compensation) { ?>
-                <div class="text-14 text-black/60 px-2 py-1">
-                    <span class="font-semibold">Compensation:</span> <?php echo esc_html($compensation); ?>
+
+            <!-- Meta line -->
+            <?php if ($meta_line) { ?>
+                <div class="flex items-center gap-1 min-h-[1.5rem]">
+                    <p class="text-14 truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
                 </div>
             <?php } ?>
-        </div>
-    <?php } ?>
 
-    <div class="border-t border-black/10 pt-3">
-        <a href="<?php echo esc_url($permalink); ?>"
-            class="inline-block bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-4 py-2 hover:bg-navy hover:text-white transition-colors">
-            Respond to Gig
+            <!-- Details -->
+            <?php if ($details) { ?>
+                <div class="flex flex-col min-h-[1.5rem]">
+                    <span class="text-12 text-black/50 font-semibold">Details</span>
+                    <p class="text-14"><?php echo esc_html($details); ?></p>
+                </div>
+            <?php } ?>
+
+            <!-- Budget + Compensation -->
+            <?php if ($budget || $compensation) { ?>
+                <div class="flex flex-col min-h-[1.5rem]">
+                    <span class="text-12 text-black/50 font-semibold">Compensation</span>
+                    <div class="flex flex-wrap items-center gap-2 text-14">
+                        <?php if ($budget) { ?>
+                            <span>$<?php echo esc_html(number_format((float) $budget)); ?></span>
+                        <?php } ?>
+                        <?php if ($budget && $compensation) { ?>
+                            <span class="text-black/30">|</span>
+                        <?php } ?>
+                        <?php if ($compensation) { ?>
+                            <span><?php echo esc_html($compensation); ?></span>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <!-- Respond (desktop) -->
+            <div class="hidden sm:flex justify-end">
+                <a href="<?php echo esc_url($permalink); ?>">
+                    <button type="button" class="bg-navy hover:bg-yellow text-white hover:text-black px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap">Respond to Gig</button>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Respond (mobile) -->
+    <div class="block sm:hidden">
+        <a href="<?php echo esc_url($permalink); ?>">
+            <button type="button" class="bg-navy hover:bg-yellow text-white hover:text-black px-3 py-2 rounded-sm font-sun-motter text-14 inline-block w-full">Respond to Gig</button>
         </a>
     </div>
 

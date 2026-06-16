@@ -84,10 +84,13 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show all proposals for all user listings and all status
-                better display design
-                test design with lots of different info
-                add start date to proposals index so we can do ordering by the event date
+                Add start date to proposals index so we can do ordering by the event date
+                Filters
+                    Listing filter
+                    Filter out past events and make a button for past events
+                    Status filter
             Allow responding to proposals
+                open modal or add input under post
             Show notifications for proposal requests
             Allow editing proposal response
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages

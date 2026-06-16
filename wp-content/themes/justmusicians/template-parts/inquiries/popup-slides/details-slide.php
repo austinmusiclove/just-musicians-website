@@ -12,7 +12,7 @@
     />
 
     <p class="text-16 mt-8 mb-4">Enter any other relevant details about your event that a musician would need to give you a quote.</p>
-    <textarea class="w-full h-32 sm:h-48 mb-6 flex-shrink-0" name="event_details" placeholder="Tell us more.."></textarea>
+    <textarea class="w-full h-32 sm:h-48 mb-6 flex-shrink-0" name="event_details" placeholder="Consider including things like performance duration, parking, special reqeusts, etc..."></textarea>
 
     <div class="mt-auto pt-6 flex justify-end gap-1">
 
