@@ -84,7 +84,6 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Allow responding to proposals
-                authorize create proposal by making sure that the creator has owns the event or the listing
                 mu plugin update proposal
                 authorize by making sure that the user owns either the event or the listing
                 html api that calls update proposal

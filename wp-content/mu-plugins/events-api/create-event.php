@@ -36,10 +36,9 @@ function create_event($args) {
 
     // Invite listings to respond
     foreach($listings_to_invite as $listing_id) {
-        create_proposal([
+        create_inquiry_proposal([
             'event'   => $event_id,
             'listing' => $listing_id,
-            'status'  => 'inquiry',
         ]);
         notify_listing_proposal_request($event_id, $listing_id, $args['meta_input']['event_name']);
     }

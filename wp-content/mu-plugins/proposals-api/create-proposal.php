@@ -1,4 +1,5 @@
 <?php
+
 function create_proposal($args) {
     $event_id   = (int) ($args['event'] ?? 0);
     $listing_id = (int) ($args['listing'] ?? 0);
@@ -35,4 +36,16 @@ function create_proposal($args) {
             'details'      => $args['details'] ?? '',
         ],
     ]);
+}
+
+function create_inquiry_proposal($args) {
+    $event_id = (int) ($args['event'] ?? 0);
+
+    $authorized = user_can_create_inquiry_proposal($event_id);
+    if (is_wp_error($authorized)) {
+        return $authorized;
+    }
+
+    $args['status'] = 'inquiry';
+    return create_proposal($args);
 }
