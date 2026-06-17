@@ -3,12 +3,14 @@ $proposal_id   = $args['proposal_id'];
 $request_quote = $args['request_quote'];
 $request_draw  = $args['request_draw'];
 $device        = $args['device'];
+$status        = $args['status'];
 ?>
 
 <button type="button" x-on:click="showForm = true" x-show="!showForm" x-cloak
-:class="'<?php echo $device; ?>' == 'desktop' ? '' : 'w-full'"
-    class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap">
-    Respond to Gig
+    class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap"
+    :class="'<?php echo $device; ?>' == 'desktop' ? '' : 'w-full'"
+    x-text="status == 'applied' ? 'Edit Response' : 'Respond to Inquiry'"
+>
 </button>
 
 <form class="w-full" x-show="showForm" x-cloak
@@ -23,14 +25,14 @@ $device        = $args['device'];
         <div>
             <span class="text-12 text-black/50 font-semibold">Availability</span>
             <div class="flex gap-2 mt-1">
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'yes' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="yes" class="sr-only" x-model="availability">Yes
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Available' ? 'bg-navy text-white' : ''">
+                    <input type="radio" name="availability" value="Available" class="sr-only" x-model="availability">Available
                 </label>
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'no' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="no" class="sr-only" x-model="availability">No
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Unavailable' ? 'bg-navy text-white' : ''">
+                    <input type="radio" name="availability" value="Unavailable" class="sr-only" x-model="availability">Unavailable
                 </label>
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'partial' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="partial" class="sr-only" x-model="availability">Partial
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Partially Available' ? 'bg-navy text-white' : ''">
+                    <input type="radio" name="availability" value="Partially Available" class="sr-only" x-model="availability">Partially Available
                 </label>
             </div>
         </div>

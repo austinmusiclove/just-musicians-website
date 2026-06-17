@@ -83,14 +83,8 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            Allow responding to proposals
-                show response, quote, draw, availability
-                html api that calls update proposal
-                    update info on front end
-                change button to edit response if applied
-                modify message for no gigs content
-            Allow editing proposal response
-                switch button to edit response for applied proposals
+            modify message for no gigs content
+            add tooltip for draw and tooltip
             Show notifications for proposal requests
             Show notifications for proposal response
             make sure new notification goes out on edit response
