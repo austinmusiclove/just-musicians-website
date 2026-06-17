@@ -17,5 +17,10 @@ if (is_wp_error($result)) {
     exit;
 }
 
+$response_details      = $args['details']      ?? get_post_meta($proposal_id, 'details', true);
+$response_availability = $args['availability'] ?? get_post_meta($proposal_id, 'availability', true);
+$response_quote        = $args['quote']        ?? get_post_meta($proposal_id, 'quote', true);
+$response_draw         = $args['draw']         ?? get_post_meta($proposal_id, 'draw', true);
+
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Response Updated Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'update-proposal\', { \'details\': \'' . $args['details'] . '\', \'availability\': \'' . $args['availability'] . '\', \'quote\': \'' . $args['quote'] . '\', \'draw\': \'' . $args['draw'] . '\'})"></span>';
+echo '<span x-init="$dispatch(\'update-proposal\', { \'details\': \'' . $response_details . '\', \'availability\': \'' . $response_availability . '\', \'quote\': \'' . $response_quote . '\', \'draw\': \'' . $response_draw . '\'})"></span>';

@@ -17,6 +17,7 @@ $status        = $args['status'];
     hx-post="<?php echo site_url('/wp-html/v1/proposals/' . $proposal_id . '/respond-to-inquiry/'); ?>"
     hx-target="#result-<?php echo $proposal_id; ?>"
     hx-swap="outerHTML"
+    hx-indicator="#submit-response-button-content-<?php echo $proposal_id; ?>"
 >
 
     <div class="flex flex-col gap-3">
@@ -55,7 +56,12 @@ $status        = $args['status'];
 
         <div class="flex gap-2">
             <button type="submit" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit">
-                Submit Response
+                <span id="submit-response-button-content-<?php echo $proposal_id; ?>">
+                    <span class="htmx-indicator-component-block-replace">Submit Response</span>
+                    <span class="htmx-indicator-component-block mx-2 my-1">
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
+                    </span>
+                </span>
             </button>
             <button type="button" x-on:click="showForm = false" class="bg-white hover:bg-black/10 text-black px-3 py-2 rounded-sm font-sun-motter text-14 w-fit border border-black/20">
                 Cancel

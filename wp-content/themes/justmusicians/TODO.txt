@@ -83,10 +83,14 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            Send email for proposal inquiry response
             Show notifications for inquiry proposals on listings you own
+                add notifications table
+                on inquiry proposal create add notification for users who own the listing
+                on proposal response add notification for user who owns event
+                on application proposal create, add notification for event owner
+                on reveal once it sends htmx to set this to read which removes row for userId, notificationType, subjectId (variable; could be event id or proposal id depending on notificationType)
+                get notifications can quickly get user notifications with user index on notification table
             Show notifications for new proposal responses
-            Make sure new notification email does not go out on edit response
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
             Add Create/update Event form

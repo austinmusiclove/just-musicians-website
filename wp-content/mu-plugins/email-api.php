@@ -9,11 +9,12 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-require_once 'email-api/events.php';
 require_once 'email-api/compensation-reports.php';
 require_once 'email-api/reviews.php';
 require_once 'email-api/users.php';
 require_once 'email-api/messages.php';
+require_once 'email-api/events.php';
+require_once 'email-api/proposals.php';
 
 function send_email_safely($email, $subject, $message) {
     if (EMAIL_TEST_MODE) {

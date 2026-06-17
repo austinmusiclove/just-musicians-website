@@ -28,7 +28,7 @@ function update_proposal($args) {
         'meta_input' => $meta_input,
     ], true);
 
-    return is_wp_error($result) ? $result : $result;
+    return $result;
 }
 
 function respond_to_inquiry_proposal($args) {
@@ -39,6 +39,18 @@ function respond_to_inquiry_proposal($args) {
         return $authorized;
     }
 
+    $initial_status = get_post_meta($proposal_id, 'status', true);
+
     $args['status'] = 'applied';
-    return update_proposal($args);
+
+    $result = update_proposal($args);
+    if (is_wp_error($result)) {
+        return $result;
+    }
+
+    if ($initial_status === 'inquiry') {
+        send_inquiry_proposal_response_email($proposal_id);
+    }
+
+    return $result;
 }
