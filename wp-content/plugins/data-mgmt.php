@@ -63,6 +63,10 @@ function hm_data_mgmt_admin_page() {
             case 'build_proposal_index':
                 $result = hm_build_proposal_index();
                 break;
+            case 'create_notifications_table':
+                hm_create_notifications_table();
+                $result = new WP_REST_Response(['message' => 'Notifications table created successfully.'], 200);
+                break;
         }
     }
 
@@ -91,6 +95,11 @@ function hm_data_mgmt_admin_page() {
             <p>
                 <button type="submit" name="hm_action" value="build_proposal_index" class="button button-primary">
                     Build Proposal Index
+                </button>
+            </p>
+            <p>
+                <button type="submit" name="hm_action" value="create_notifications_table" class="button button-primary">
+                    Create Notifications Table
                 </button>
             </p>
         </form>

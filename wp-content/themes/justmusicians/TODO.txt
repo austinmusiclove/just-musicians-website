@@ -84,7 +84,6 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show notifications for inquiry proposals on listings you own
-                add notifications table
                 on inquiry proposal create add notification for users who own the listing
                 on proposal response add notification for user who owns event
                 on application proposal create, add notification for event owner
