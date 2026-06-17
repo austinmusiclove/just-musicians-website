@@ -83,7 +83,6 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            modify message for no gigs content
             add tooltip for draw and tooltip
             Show notifications for proposal requests
             Show notifications for proposal response
