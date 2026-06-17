@@ -83,10 +83,10 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            add tooltip for draw and tooltip
-            Show notifications for proposal requests
-            Show notifications for proposal response
-            make sure new notification goes out on edit response
+            Send email for proposal inquiry response
+            Show notifications for inquiry proposals on listings you own
+            Show notifications for new proposal responses
+            Make sure new notification email does not go out on edit response
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
             Add Create/update Event form

@@ -39,7 +39,8 @@ $status        = $args['status'];
 
         <?php if ($request_quote) { ?>
         <div>
-            <span class="text-12 text-black/50 font-semibold">Quote ($)</span>
+            <span class="text-12 text-black/50 font-semibold">Quote</span>
+            <?php echo get_template_part('template-parts/global/tooltip', '', ['tooltip' => 'The buyer has requested a quote. Give them your best estimate if you can. This is an optional field']); ?>
             <input type="number" name="quote" min="0" step="0.01" class="border border-black/20 rounded-sm p-2 text-14 w-full mt-1" x-model="quote">
         </div>
         <?php } ?>
@@ -47,6 +48,7 @@ $status        = $args['status'];
         <?php if ($request_draw) { ?>
         <div>
             <span class="text-12 text-black/50 font-semibold">Draw</span>
+            <?php echo get_template_part('template-parts/global/tooltip', '', ['tooltip' => 'The buyer has requested an estimate of how many people you would be able to attract to the show. Give them your best estimate if you can. This is an optional field.']); ?>
             <input type="number" name="draw" min="0" class="border border-black/20 rounded-sm p-2 text-14 w-full mt-1" x-model="draw">
         </div>
         <?php } ?>
