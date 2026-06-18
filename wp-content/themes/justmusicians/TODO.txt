@@ -85,9 +85,6 @@ Events and Inquiries refactor
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show notifications for inquiry proposals on listings you own
 
-                move notify listings file to proposals; rename request prop to send inquiry
-                unindent menu items including listing form smaller menu
-
                 get notifications from table in notification api
                 show notifications for new inquiries
 

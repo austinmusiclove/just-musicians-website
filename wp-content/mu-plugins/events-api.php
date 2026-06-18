@@ -17,4 +17,3 @@ require_once 'events-api/parse-args.php';
 require_once 'events-api/get-user-events.php';
 require_once 'events-api/create-event.php';
 #require_once 'inquiries-api/update-user-inquiry.php';
-require_once 'events-api/notify-listing-proposal-request.php';
