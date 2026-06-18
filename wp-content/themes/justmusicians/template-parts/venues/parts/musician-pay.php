@@ -7,7 +7,7 @@
         <div class="py-4 flex flex-col gap-4">
 
             <!-- Pay per gig -->
-            <?php echo get_template_part('template-parts/stats/stat-card', '', [
+            <?php echo get_template_part('template-parts/global/stats/stat-card', '', [
                 'title'    => 'Average Pay Per Gig',
                 'stat'     => '$' . round((float) get_field('_average_earnings'), 2),
                 'sub_text' => 'Mean average of ' . get_field('_comp_report_count') . ' gigs',
@@ -15,7 +15,7 @@
             ]); ?>
 
             <!-- Pay per performer per hour -->
-            <?php echo get_template_part('template-parts/stats/stat-card', '', [
+            <?php echo get_template_part('template-parts/global/stats/stat-card', '', [
                 'title'    => 'Average Pay Per Hour',
                 'stat'     => '$' . round((float) get_field('_average_earnings_per_hour'), 2) . '/hr',
                 'sub_text' => 'Average ensemble size is ' . round((float) get_field('_average_ensemble_size'), 2) . ' performers',
@@ -27,7 +27,7 @@
             $payment_speeds    = (array)json_decode(get_field('_payment_speed'));
             $top_payment_speed = array_search(max($payment_speeds), $payment_speeds);
             $pay_speed_data    = sort_and_fill($payment_speeds, [ 'Before the gig', 'Same day', 'Within 7 days', 'Within 30 days', 'Over 30 days later', 'Never got paid', ]);
-            echo get_template_part('template-parts/stats/stat-card-bar-chart', '', [
+            echo get_template_part('template-parts/global/stats/stat-card-bar-chart', '', [
                 'title'      => 'Payment Speed',
                 'stat'       => $top_payment_speed,
                 'sub_text'   => '',
@@ -44,7 +44,7 @@
             $payment_methods    = (array)json_decode(get_field('_payment_method'));
             $top_payment_method = array_search(max($payment_methods), $payment_methods);
             $pay_method_data    = sort_and_fill($payment_methods, [ 'Cash', 'Check', 'ACH', 'Zelle', 'Venmo', ]);
-            echo get_template_part('template-parts/stats/stat-card-bar-chart', '', [
+            echo get_template_part('template-parts/global/stats/stat-card-bar-chart', '', [
                 'title'      => 'Payment Method',
                 'stat'       => $top_payment_method,
                 'sub_text'   => '',

@@ -5,7 +5,7 @@
             <div class="font-bold text-12">Emo Night</div>
             <div class="flex gap-4 text-12">
                 <div class="pr-4 border-r border-white/20">
-                Emo’s Austin<br />2015 E Riverside Dr<br />Austin, TX 78741
+                Emo's Austin<br />2015 E Riverside Dr<br />Austin, TX 78741
                 </div>
                 <div>
                 April 20, 2025<br />6-9pm

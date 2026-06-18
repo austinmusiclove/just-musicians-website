@@ -76,7 +76,7 @@ echo get_template_part('template-parts/listing-page/content', '', [
    'review_count'       => $review_count,
 ]);
 
-echo get_template_part('template-parts/schema/music-group-schema', '', [
+echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'name'        => get_field('name'),
     'description' => get_field('description'),
     'phone'       => get_field('phone'),

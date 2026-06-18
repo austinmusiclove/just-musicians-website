@@ -112,7 +112,7 @@ get_header();
                                     $thumbnail_url  = get_the_post_thumbnail_url(get_the_ID(), 'standard-listing');
                                     $listing_genres = get_the_terms(get_the_ID(), 'genre');
                                     $genres = $listing_genres ? array_map(function($term) { return $term->name; }, $listing_genres) : [];
-                                    echo get_template_part('template-parts/account/listing', '', [
+                                    echo get_template_part('template-parts/cards/account-listing-card', '', [
                                         'post_id' => get_the_ID(),
                                         'name' => $listing_title,
                                         'genres' => $genres,
@@ -126,11 +126,11 @@ get_header();
 
 
                             <?php } else {
-                              echo get_template_part('template-parts/content/no-user-listings', '', []);
+                              echo get_template_part('template-parts/global/no-results-content/no-user-listings', '', []);
                             }
 
                         } else {
-                          echo get_template_part('template-parts/content/no-user-listings', '', []);
+                          echo get_template_part('template-parts/global/no-results-content/no-user-listings', '', []);
                         }
                     } ?>
 

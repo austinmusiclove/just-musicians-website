@@ -73,7 +73,7 @@ if ($args['instance'] == 'listing-form') {
                     </div>
 
                     <!-- Collections button -->
-                    <?php if (!$is_preview) { get_template_part('template-parts/listings/parts/favorites-button', '', [
+                    <?php if (!$is_preview) { get_template_part('template-parts/cards/card-components/favorites-button', '', [
                         'post_id' => get_the_ID(),
                     ]);} ?>
 

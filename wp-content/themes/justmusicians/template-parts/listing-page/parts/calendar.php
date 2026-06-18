@@ -25,14 +25,14 @@
             <button class="hidden sm:block px-2.5 py-2 border border-black/20 rounded font-bold text-14">Today</button>
         </div>
         <div class="flex flex-row p-8 gap-8">
-            <?php echo get_template_part('template-parts/global/calendar', '', array(
+            <?php echo get_template_part('template-parts/global/calendar/calendar', '', array(
                 'month' => 'April',
                 'year' => '2025',
                 'order' => 1,
                 'responsive' => '',
                 'event_day' => 20,
             )); ?>
-            <?php echo get_template_part('template-parts/global/calendar', '', array(
+            <?php echo get_template_part('template-parts/global/calendar/calendar', '', array(
                 'month' => 'May',
                 'year' => '2025',
                 'order' => 2,

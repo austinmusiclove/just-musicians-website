@@ -39,7 +39,7 @@ if (count($listings) > 0) {
         if (!empty($listing['genre'])) {
             $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
         }
-        get_template_part('template-parts/listings/standard-listing', '', [
+        get_template_part('template-parts/cards/standard-listing-card', '', [
             'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
             'rating'                 => $listing['rating'],
@@ -72,10 +72,10 @@ if (count($listings) > 0) {
     }
 
 } else if ($page == 1) {
-    get_template_part( 'template-parts/content/no-search-results');
+    get_template_part( 'template-parts/global/no-results-content/no-search-results');
 }
 if ($is_last_page) {
-    get_template_part( 'template-parts/content/no-more-results');
+    get_template_part( 'template-parts/global/no-results-content/no-more-results');
 }
 
 

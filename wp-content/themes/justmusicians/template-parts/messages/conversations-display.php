@@ -71,11 +71,11 @@
             <!-- Suggestion Listings -->
             <div id="inquiry-suggestion-results">
                 <?php
-                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                 ?>
             </div>
 

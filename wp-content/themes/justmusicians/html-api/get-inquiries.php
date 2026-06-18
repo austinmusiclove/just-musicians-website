@@ -15,7 +15,7 @@ $inquiries       = $result['inquiries'];
 if (count($inquiries) > 0) {
 
     foreach ($inquiries as $index => $inquiry) {
-        echo get_template_part('template-parts/account/inquiry-listing', '', [
+        echo get_template_part('template-parts/cards/inquiry-card', '', [
             'post_id'        => $inquiry['post_id'],
             'subject'        => $inquiry['subject'],
             'details'        => $inquiry['details'],
@@ -30,5 +30,5 @@ if (count($inquiries) > 0) {
     }
 
 } else {
-    echo get_template_part('template-parts/content/no-user-inquiries', '', []);
+    echo get_template_part('template-parts/global/no-results-content/no-user-inquiries', '', []);
 }

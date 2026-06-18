@@ -4,7 +4,7 @@
             <?php echo $args['title']; ?>
             <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
         </label><br>
-        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
+        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
     </div>
     <div class="relative">
         <img class="h-5 absolute bottom-2.5 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/' . $args['icon_filename']; ?>" />

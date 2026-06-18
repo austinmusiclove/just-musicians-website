@@ -7,7 +7,7 @@
         <span class="text-18 mb-1 inline-block">Display Name <span class="text-red">*</span></span>
 
         <!-- Tooltip -->
-        <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'This is the name other users will see when they interact with you. This is not your band or organization name.' ]); ?>
+        <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'This is the name other users will see when they interact with you. This is not your band or organization name.' ]); ?>
 
     </label>
 

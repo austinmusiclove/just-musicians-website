@@ -82,19 +82,17 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Add My Gigs page where you can see the events you were invited to as a list and click through to messages
-            Show notifications for inquiry proposals on listings you own
-                test with different user
-                    add listing that admin also has
-                    make an event with inquiry to non shared listing (check notifications for sent prop)
-                    send inquiry to shared listing (check notifications for sent prop)
-                    login with admin and check notifications
-                    log back in and check notifications are still there
-                    log in as admin and respond with listing that only they own, not other user
-                    log in as other user and see response notification and clear it
-                    make sure they have their own notifications
         Organize template parts
+            active search dir in search
+            something with filters
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
+            List view of events
+                Date image
+                Event name, time dates
+                Edit button
+            Add event button
+            Clear notifications for inquiry responses
+        Event creation and update page
         Add Manage Event page
             Add Create/update Event form
             Show proposals
@@ -108,14 +106,10 @@ Events and Inquiries refactor
         Remove inquiries page
         Consider removing inquiry post type and inquiry messages
 My Gigs page (for musicians)
+    Be able to click through to conversation if one exists between you and event owner
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
 Add Manage Events page (for buyers)
-    Show notifications for inquiry responses
-    List view
-    Add event button
-    Event creation form or use modal
-    Edit button
     Set event status to booked/open/cancelled/etc.
     Add calendar View
     Edit multiple event details at once

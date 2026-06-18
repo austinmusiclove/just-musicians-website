@@ -106,7 +106,7 @@
         <div class="flex flex-row justify-between items-center w-full">
 
             <!-- Name and verification badge -->
-            <?php get_template_part('template-parts/listings/parts/listing-name', '', [
+            <?php get_template_part('template-parts/cards/card-components/listing-name', '', [
                 'is_preview' => false,
                 'name'       => $args['name'],
                 'permalink'  => $args['permalink'],
@@ -135,7 +135,7 @@
     </div>
 
     <!-- Request proposal button -->
-    <?php get_template_part('template-parts/listings/parts/send-inquiry-button', '', [
+    <?php get_template_part('template-parts/cards/card-components/send-inquiry-button', '', [
         'listing_id' => $args['post_id'],
         'event_id'   => $args['event_id'],
     ]); ?>

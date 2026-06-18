@@ -35,7 +35,7 @@
             <?php echo $args['title']; ?>
             <?php if ($args['required']) { ?><span class="text-red">*</span><?php } ?>
         </label><br>
-        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
+        <?php if (!empty($args['tooltip'])) { echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => $args['tooltip'], ]); } ?>
     </div>
     <div class="relative flex flex-col items-center justify-between">
         <button type="button" class="w-full inline-flex justify-between items-center grow px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-black/40 rounded-md focus:outline-none"

@@ -7,7 +7,7 @@
         <span class="text-18 mb-1 inline-block">Organization</span>
 
         <!-- Tooltip -->
-        <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'The organization you represent. This could be your band name, agency name, venue, etc.' ]); ?>
+        <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'The organization you represent. This could be your band name, agency name, venue, etc.' ]); ?>
 
     </label>
 

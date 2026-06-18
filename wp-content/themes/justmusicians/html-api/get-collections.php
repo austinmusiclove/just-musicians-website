@@ -13,7 +13,7 @@ $next_page       = $result['next_page'];
 $collections     = $result['collections'];
 
 foreach ($collections as $index => $collection) {
-    echo get_template_part('template-parts/account/collection-listing', '', [
+    echo get_template_part('template-parts/cards/collection-card', '', [
         'post_id'        => $collection['post_id'],
         'name'           => $collection['name'],
         'thumbnail_urls' => $collection['thumbnail_urls'],

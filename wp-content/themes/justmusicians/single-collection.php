@@ -125,11 +125,11 @@ $events_map = array_column($events_result['events'], null, 'post_id');
 
                             <span id="results">
                                 <?php
-                                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
-                                    echo get_template_part('template-parts/listings/standard-listing-skeleton');
+                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                                 ?>
                             </span>
 

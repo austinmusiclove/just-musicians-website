@@ -18,7 +18,7 @@
     </div>
 
 
-    <?php echo get_template_part('template-parts/stats/bar-chart', '', [
+    <?php echo get_template_part('template-parts/global/stats/bar-chart', '', [
         'index_axis' => $args['index_axis'],
         'title'      => $args['title'],
         'chart_id'   => $args['chart_id'],
@@ -28,4 +28,3 @@
     ]); ?>
 
 </div>
-

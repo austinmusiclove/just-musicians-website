@@ -6,54 +6,56 @@
         <h2 class="text-20 sm:text-25 font-bold">Search Terms</h2>
     </div>
 
-    <div class="tabs-container relative z-0" x-data="{
-        showTab1: true,
-        showTab2: false,
-        showTab3: false,
-        showTab4: false,
-        showTab5: false,
-        hideTabs() {
-            this.showTab1 = false;
-            this.showTab2 = false;
-            this.showTab3 = false;
-            this.showTab4 = false;
-            this.showTab5 = false;
-        },
-    }">
+    <div class="tabs-container relative z-0"
+        x-data="{
+            showTab1: true,
+            showTab2: false,
+            showTab3: false,
+            showTab4: false,
+            showTab5: false,
+            hideTabs() {
+                this.showTab1 = false;
+                this.showTab2 = false;
+                this.showTab3 = false;
+                this.showTab4 = false;
+                this.showTab5 = false;
+            },
+        }"
+    >
         <div class="flex flex-wrap items-stretch gap-x-1 z-10 relative">
             <?php
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'     => "Categories",
                     'required'  => false,
-                    'show_exp'  => "showTab1",
+                    'show_var'  => "showTab1",
                     'hide_exp'  => "hideTabs()",
                     'count_exp' => "categoriesCheckboxes.length > 0 ? categoriesCheckboxes.length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'     => 'Genres',
                     'required'  => false,
-                    'show_exp'  => "showTab2",
+                    'show_var'  => "showTab2",
                     'hide_exp'  => "hideTabs()",
                     'count_exp' => "genresCheckboxes.length > 0 ? genresCheckboxes.length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'     => 'Subgenres',
                     'required'  => false,
-                    'show_exp'  => "showTab3",
+                    'show_var'  => "showTab3",
                     'hide_exp'  => "hideTabs()",
                     'count_exp' => "subgenresCheckboxes.length > 0 ? subgenresCheckboxes.length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'     => 'Instruments',
                     'required'  => false,
-                    'show_exp'  => "showTab4",
+                    'show_var'  => "showTab4",
                     'hide_exp'  => "hideTabs()",
                     'count_exp' => "instCheckboxes.length > 0 ? instCheckboxes.length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'     => 'Settings',
                     'required'  => false,
-                    'show_exp'  => "showTab5",
+                    'show_var'  => "showTab5",
                     'hide_exp'  => "hideTabs()",
                     'count_exp' => "settingsCheckboxes.length > 0 ? settingsCheckboxes.length : ''",
                 ]);

@@ -131,7 +131,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         <div class="flex flex-row justify-between items-center w-full">
 
             <!-- Name and verification badge -->
-            <?php get_template_part('template-parts/listings/parts/listing-name', '', [
+            <?php get_template_part('template-parts/cards/card-components/listing-name', '', [
                 'is_preview' => $is_preview,
                 'name'       => $is_preview ? '' : $args['name'],
                 'permalink'  => $is_preview ? '' : $args['permalink'],
@@ -139,7 +139,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             ]); ?>
 
             <!-- Collections button -->
-            <?php if (!$is_preview) { get_template_part('template-parts/listings/parts/favorites-button', '', [
+            <?php if (!$is_preview) { get_template_part('template-parts/cards/card-components/favorites-button', '', [
                 'post_id'       => $args['post_id'],
             ]);} ?>
 
@@ -177,7 +177,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Links -->
         <?php /*
-        get_template_part('template-parts/listings/parts/link-icons', '', [
+        get_template_part('template-parts/cards/card-components/link-icons', '', [
             'is_preview'             => $is_preview,
             'website'                => $is_preview ? '' : $args['website'],
             'instagram_url'          => $is_preview ? '' : $args['instagram_url'],
@@ -194,7 +194,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     </div>
 
     <!-- Inquire button -->
-    <?php get_template_part('template-parts/listings/parts/inquire-button', '', [
+    <?php get_template_part('template-parts/cards/card-components/inquire-button', '', [
         'post_id'  => !$is_preview ? $args['post_id'] : '',
         'name'     => !$is_preview ? $args['name'] : '',
         'disabled' => $is_preview,
@@ -204,7 +204,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 <?php
 // Local Business Schema
 if (!$is_preview) {
-    echo get_template_part('template-parts/schema/local-business-schema', '', [
+    echo get_template_part('template-parts/global/schema/local-business-schema', '', [
         'name'        => $args['name'],
         'description' => $args['description'],
         'website'     => $args['website'],

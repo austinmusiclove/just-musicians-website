@@ -14,7 +14,7 @@
             <span class="flex items-start gap-1">
                 <span>
                     Median Earnings
-                    <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Median of earnings per gig' ]); ?>
+                    <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Median of earnings per gig' ]); ?>
                 </span>
                 <span class="flex flex-col gap-1">
                     <span :class="{ 'opacity-100': sortKey === 'median_earnings' && sortAsc, 'opacity-20': sortKey !== 'median_earnings' || !sortAsc}">↑</span>
@@ -26,7 +26,7 @@
             <span class="flex items-start gap-1">
                 <span>
                     Average Earnings
-                    <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'The average amount earned per gig' ]); ?>
+                    <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'The average amount earned per gig' ]); ?>
                 </span>
                 <span class="flex flex-col gap-1">
                     <span :class="{ 'opacity-100': sortKey === 'average_earnings' && sortAsc, 'opacity-20': sortKey !== 'average_earnings' || !sortAsc}">↑</span>
@@ -39,19 +39,19 @@
         <th class="py-3 pr-4 font-bold align-top">
             <span>
                 Deal Type
-                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported compensation structure' ]); ?>
+                <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Most commonly reported compensation structure' ]); ?>
             </span>
         </th>
         <th class="py-3 pr-4 font-bold align-top">
             <span>
                 Payment Method
-                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported payment method' ]); ?>
+                <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Most commonly reported payment method' ]); ?>
             </span>
         </th>
         <th class="py-3 font-bold align-top">
             <span>
                 Payment Speed
-                <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Most commonly reported payment speed' ]); ?>
+                <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Most commonly reported payment speed' ]); ?>
             </span>
         </th>
     </tr>

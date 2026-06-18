@@ -277,7 +277,7 @@ get_header();
                         x-on:mute-youtube-players="_toggleMute()"
                         x-init="_setupVisibilityListener()">
 
-                        <?php echo get_template_part('template-parts/listings/standard-listing', '', [
+                        <?php echo get_template_part('template-parts/cards/standard-listing-card', '', [
                             'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
                             'verified'                      => $listing_data ? $listing_data['verified']               : false,
                             'lazyload_thumbnail'            => false,
@@ -289,8 +289,8 @@ get_header();
 
                         <div class="opacity-50">
                             <?php
-                                echo get_template_part('template-parts/listings/standard-listing-skeleton', '', []);
-                                echo get_template_part('template-parts/listings/standard-listing-skeleton', '', []);
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton', '', []);
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton', '', []);
                             ?>
                         </div>
 

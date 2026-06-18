@@ -22,31 +22,31 @@
         <div class="flex max-sm:flex-wrap items-stretch gap-x-1 z-10 relative">
 
             <?php
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'  => 'Cover Image',
                     'required' => true,
-                    'show_exp' => "showTab1",
+                    'show_var' => "showTab1",
                     'hide_exp' => "hideTabs()",
                     'count_exp' => "''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'  => 'Listing Images',
                     'required' => false,
-                    'show_exp' => "showTab2",
+                    'show_var' => "showTab2",
                     'hide_exp' => "hideTabs()",
                     'count_exp' => "orderedImageData['listing_images'].length > 0 ? orderedImageData['listing_images'].length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'  => 'YouTube Videos',
                     'required' => false,
-                    'show_exp' => "showTab3",
+                    'show_var' => "showTab3",
                     'hide_exp' => "hideTabs()",
                     'count_exp' => "youtubeVideoData.length > 0 ? youtubeVideoData.length : ''",
                 ]);
-                get_template_part( 'template-parts/components/tab', null, [
+                get_template_part( 'template-parts/global/tab', null, [
                     'title'  => 'Stage Plot Images',
                     'required' => false,
-                    'show_exp' => "showTab4",
+                    'show_var' => "showTab4",
                     'hide_exp' => "hideTabs()",
                     'count_exp' => "orderedImageData['stage_plots'].length > 0 ? orderedImageData['stage_plots'].length : ''",
                 ]);

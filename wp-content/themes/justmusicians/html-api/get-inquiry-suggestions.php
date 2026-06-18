@@ -30,7 +30,7 @@ $results_label   = $max_num_results == 1 ? ' Listing' : ' Listings';
 // Render listings
 if (count($listings) > 0) {
     foreach($listings as $index => $listing) {
-        get_template_part('template-parts/listings/suggestion-listing', '', [
+        get_template_part('template-parts/cards/suggestion-listing-card', '', [
             'post_id'                => $listing['post_id'],
             'inquiry_id'             => $inquiry_id,
             'name'                   => $listing['name'],
@@ -50,5 +50,5 @@ if (count($listings) > 0) {
     }
 
 } else if ($page == 1) {
-    get_template_part( 'template-parts/content/no-suggestion-listings');
+    get_template_part( 'template-parts/global/no-results-content/no-suggestion-listings');
 }

@@ -7,7 +7,7 @@
         <span class="text-18 mb-1 inline-block">Job Title</span>
 
         <!-- Tooltip -->
-        <?php echo get_template_part('template-parts/global/tooltip', '', [ 'tooltip' => 'Your position at the organization you represent. I.e. Guitarist, Talent Buyer, General Manger, etc.' ]); ?>
+        <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Your position at the organization you represent. I.e. Guitarist, Talent Buyer, General Manger, etc.' ]); ?>
 
     </label>
 
