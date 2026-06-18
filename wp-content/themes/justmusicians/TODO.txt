@@ -84,12 +84,9 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show notifications for inquiry proposals on listings you own
-
-                get notifications from table in notification api
-                show notifications for new inquiries
-
                 on reveal once it sends htmx to set this to read which removes row for userId, notificationType, subjectId (variable; could be event id or proposal id depending on notificationType)
-
+                    add query func that will remove a notification for a user, type, subject
+                    on proposal inquiry type
                 test with different user
                     add listing that admin also has
                     make an event with inquiry to non shared listing (check notifications for sent prop)
@@ -99,8 +96,6 @@ Events and Inquiries refactor
                     log in as admin and respond with listing that only they own, not other user
                     log in as other user and see response notification and clear it
                     make sure they have their own notifications
-
-            Show notifications for new proposal responses
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
             Add Create/update Event form

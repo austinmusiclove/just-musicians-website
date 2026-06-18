@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 // Include
 require_once 'messages-api/get-unread-conversation-count.php';
 require_once 'notifications-api/get-account-notifications.php';
+require_once 'notifications-api/get-notifications-from-db.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
@@ -25,10 +26,23 @@ add_action('rest_api_init', function () {
 function get_notification_count($request) {
     $unread_convo_count         = get_unread_conversation_count();
     $account_notification_count = get_account_notification_count();
-    $total_notifications        = $account_notification_count + $unread_convo_count;
+    $db_notifications           = get_notifications_from_db();
+    $gig_notification_count     = isset($db_notifications['new-inquiry'])     ? (int) $db_notifications['new-inquiry']     : 0;
+    $event_notification_count   = isset($db_notifications['inquiry-response']) ? (int) $db_notifications['inquiry-response'] : 0;
+
+
+    $total_notifications = array_sum([
+        $account_notification_count,
+        $unread_convo_count,
+        $gig_notification_count,
+        $event_notification_count,
+    ]);
+
     return [
         'unread_convo_count'         => $unread_convo_count,
         'account_notification_count' => $account_notification_count,
+        'gig_notification_count'     => $gig_notification_count,
+        'event_notification_count'   => $event_notification_count,
         'total_notification_count'   => $total_notifications,
     ];
 }

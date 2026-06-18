@@ -61,7 +61,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },
             loggedIn: <?php if (is_user_logged_in()) { echo 'true'; } else { echo 'false'; } ?>,
             accountSettings: <?php if (is_user_logged_in()) { echo clean_arr_for_doublequotes(get_account_settings()); } else { echo '[]'; } ?>,
-            notifications: { 'unread_convo_count': 0, 'account_notification_count': 0 },
+            notifications: { 'unread_convo_count': 0, 'account_notification_count': 0, 'gig_notification_count': 0, 'event_notification_count': 0 },
             shakeElements: new Set(),
             _emphasizeElm(elm, elmId) { emphasizeElm(this, elm, elmId); },
             showPassword: false,
