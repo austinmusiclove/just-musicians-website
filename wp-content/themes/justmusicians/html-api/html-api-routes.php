@@ -116,6 +116,12 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/post-compensation-report.php'; exit;
             }
+
+        // Notifications
+        case 'clear-notification':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : include_once get_template_directory() . '/html-api/clear-notification.php'; exit;
+            }
     }
 }
 add_action('template_redirect', 'html_api_v1_template_redirects');

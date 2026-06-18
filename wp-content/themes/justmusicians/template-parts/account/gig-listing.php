@@ -48,9 +48,14 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 
 ?>
 
-<div class="flex flex-col mb-4">
+<div class="flex flex-col mb-4"
+    hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes(<?php echo (int) $proposal['proposal_id']; ?>)) ? 'never-trigger' : 'revealed once'"
+    hx-vals='{"notification_type":"new-inquiry","subject_id":<?php echo (int) $proposal['proposal_id']; ?>}'
+    hx-swap="beforeend"
+>
 
-    <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20 last:border-none"
+    <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20"
         <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"

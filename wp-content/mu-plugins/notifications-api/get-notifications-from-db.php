@@ -3,7 +3,10 @@ if (!defined('ABSPATH')) { exit; }
 
 function get_notifications_from_db() {
     if (!is_user_logged_in()) {
-        return [];
+        return [
+            'counts'      => [],
+            'subject_ids' => [],
+        ];
     }
 
     global $wpdb;
@@ -11,14 +14,28 @@ function get_notifications_from_db() {
     $user_id = get_current_user_id();
 
     $rows = $wpdb->get_results($wpdb->prepare(
-        "SELECT notification_type, COUNT(*) as count FROM {$table} WHERE user_id = %d GROUP BY notification_type",
+        "SELECT notification_type, subject_id FROM {$table} WHERE user_id = %d",
         $user_id
     ));
 
-    $notifications = [];
+    $counts      = [];
+    $subject_ids = [];
+
     foreach ($rows as $row) {
-        $notifications[$row->notification_type] = (int) $row->count;
+        $type = $row->notification_type;
+        $sid  = (int) $row->subject_id;
+
+        if (!isset($counts[$type])) {
+            $counts[$type]      = 0;
+            $subject_ids[$type] = [];
+        }
+
+        $counts[$type]++;
+        $subject_ids[$type][] = $sid;
     }
 
-    return $notifications;
+    return [
+        'counts'      => $counts,
+        'subject_ids' => $subject_ids,
+    ];
 }
