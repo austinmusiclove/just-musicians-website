@@ -84,11 +84,25 @@ Events and Inquiries refactor
     Remove inquiries page
         Add My Gigs page where you can see the events you were invited to as a list and click through to messages
             Show notifications for inquiry proposals on listings you own
-                on inquiry proposal create add notification for users who own the listing
-                on proposal response add notification for user who owns event
-                on application proposal create, add notification for event owner
+
+                move notify listings file to proposals; rename request prop to send inquiry
+                unindent menu items including listing form smaller menu
+
+                get notifications from table in notification api
+                show notifications for new inquiries
+
                 on reveal once it sends htmx to set this to read which removes row for userId, notificationType, subjectId (variable; could be event id or proposal id depending on notificationType)
-                get notifications can quickly get user notifications with user index on notification table
+
+                test with different user
+                    add listing that admin also has
+                    make an event with inquiry to non shared listing (check notifications for sent prop)
+                    send inquiry to shared listing (check notifications for sent prop)
+                    login with admin and check notifications
+                    log back in and check notifications are still there
+                    log in as admin and respond with listing that only they own, not other user
+                    log in as other user and see response notification and clear it
+                    make sure they have their own notifications
+
             Show notifications for new proposal responses
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
         Add Manage Event page
@@ -107,6 +121,7 @@ My Gigs page (for musicians)
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
 Add Manage Events page (for buyers)
+    Show notifications for inquiry responses
     List view
     Add event button
     Event creation form or use modal
@@ -344,6 +359,7 @@ Security
     use temporary code for email verification instead of account identifier
     if user is logged out because session times out, make sure that operations that require auth don't work between the session expiring and refreshing
 Performance
+    send emails in cron instead of waiting on them; they take some time
     prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction

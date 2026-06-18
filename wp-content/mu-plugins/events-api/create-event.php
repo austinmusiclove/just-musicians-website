@@ -36,11 +36,18 @@ function create_event($args) {
 
     // Invite listings to respond
     foreach($listings_to_invite as $listing_id) {
-        create_inquiry_proposal([
+        $result = create_inquiry_proposal([
             'event'   => $event_id,
             'listing' => $listing_id,
         ]);
-        notify_listing_proposal_request($event_id, $listing_id, $args['meta_input']['event_name']);
+
+        if (is_wp_error($result)) {
+            error_log('create-event: failed to create inquiry proposal for listing ' . $listing_id . ' — ' . $result->get_error_message());
+            continue;
+        }
+
+        $proposal_id = $result;
+        notify_listing_proposal_request($proposal_id, $event_id, $listing_id, $args['meta_input']['event_name']);
     }
 
     // Get event page link

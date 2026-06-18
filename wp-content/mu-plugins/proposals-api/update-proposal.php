@@ -49,7 +49,11 @@ function respond_to_inquiry_proposal($args) {
     }
 
     if ($initial_status === 'inquiry') {
-        send_inquiry_proposal_response_email($proposal_id);
+        $event_id    = (int) get_post_meta($proposal_id, 'event', true);
+        $event       = get_post($event_id);
+        $author_id   = $event->post_author;
+        send_inquiry_proposal_response_email($author_id, $proposal_id, $event_id);
+        add_inquiry_response_notification($author_id, $proposal_id);
     }
 
     return $result;

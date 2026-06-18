@@ -25,6 +25,7 @@ require_once __DIR__ . '/custom-indexes/proposals/query.php';
 require_once __DIR__ . '/custom-indexes/proposals/update.php';
 
 require_once __DIR__ . '/custom-indexes/notifications/build.php';
+require_once __DIR__ . '/custom-indexes/notifications/query.php';
 
 function hm_get_listing_index_table() {
     global $wpdb;
