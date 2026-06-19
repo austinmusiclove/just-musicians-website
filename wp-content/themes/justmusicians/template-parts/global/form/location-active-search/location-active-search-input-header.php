@@ -11,5 +11,5 @@
     hx-target="#<?php echo $target_id; ?>"
 />
 <div id="<?php echo $target_id; ?>" x-show="showLocationSearchOptionsHeader" x-cloak>
-    <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
+    <?php echo get_template_part('template-parts/search/active-search/location-search-state-1', '', array()); ?>
 </div>

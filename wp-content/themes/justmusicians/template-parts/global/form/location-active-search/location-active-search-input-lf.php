@@ -12,5 +12,5 @@
     hx-indicator="#zip-active-search-spinner"
 />
 <div id="zip-active-search-results" x-show="showZipSearchOptions" x-cloak>
-    <?php echo get_template_part('template-parts/search/lf-location-search-state-1', '', array()); ?>
+    <?php echo get_template_part('template-parts/search/active-search/lf-location-search-state-1', '', array()); ?>
 </div>

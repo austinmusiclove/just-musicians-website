@@ -82,7 +82,7 @@ if ($is_last_page) {
 // Render Filters
 // TODO only swap out the filter section that was altered
 if ($page == 1) {
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
         'input_name' => 'categories', // should match the input name used for the tag check boxes
@@ -91,7 +91,7 @@ if ($page == 1) {
         'show_modal_var' => 'showCategoryModal',
         'x-model' => 'categoriesCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'genre-filters',
         'title' => 'Genre',
         'input_name' => 'genres',
@@ -100,7 +100,7 @@ if ($page == 1) {
         'show_modal_var' => 'showGenreModal',
         'x-model' => 'genresCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'subgenre-filters',
         'title' => 'Sub Genre',
         'input_name' => 'subgenres',
@@ -109,7 +109,7 @@ if ($page == 1) {
         'show_modal_var' => 'showSubGenreModal',
         'x-model' => 'subgenresCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'instrumentation-filters',
         'title' => 'Instrumentation',
         'input_name' => 'instrumentations',
@@ -118,7 +118,7 @@ if ($page == 1) {
         'show_modal_var' => 'showInstrumentationModal',
         'x-model' => 'instrumentationsCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'setting-filters',
         'title' => 'Settings',
         'input_name' => 'settings',
@@ -127,7 +127,7 @@ if ($page == 1) {
         'show_modal_var' => 'showSettingModal',
         'x-model' => 'settingsCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'ensemble-size-filters',
         'title' => 'Ensemble Size',
         'input_name' => 'ensemble_size',

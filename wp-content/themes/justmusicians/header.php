@@ -189,7 +189,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
                 hx-include="#lat-input-header-desktop, #lng-input-header-desktop"
               />
               <div id="active-search-results-desktop" x-show="getShowDefaultSearchOptionsDesktop()" x-cloak>
-                <?php echo get_template_part('template-parts/search/search-state-1', '', array()); ?>
+                <?php echo get_template_part('template-parts/search/active-search/search-state-1', '', array()); ?>
               </div>
               <?php echo get_template_part('template-parts/search/mobile-search', '', array()); ?>
             </div>

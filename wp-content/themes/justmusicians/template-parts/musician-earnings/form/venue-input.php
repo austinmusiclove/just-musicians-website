@@ -43,7 +43,7 @@
                     />
                 </div>
                 <div id="venue-active-search-results" class="z-10" x-show="showOptions" x-cloak>
-                    <?php echo get_template_part('template-parts/search/venues-search-state-1', '', []); ?>
+                    <?php echo get_template_part('template-parts/search/active-search/venues-search-state-1', '', []); ?>
                 </div>
             </div>
 

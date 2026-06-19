@@ -11,7 +11,7 @@
         <?php
             if (!empty($args['terms']) && !is_wp_error($args['terms'])) {
                 foreach ($args['terms'] as $term) {
-                    echo get_template_part('template-parts/filters/elements/checkbox', '', [
+                    echo get_template_part('template-parts/global/form/checkbox', '', [
                         'label'      => $term,
                         'value'      => $term,
                         'name'       => $args['input_name'],

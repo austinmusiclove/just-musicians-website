@@ -25,7 +25,7 @@
     </div>
 
     <div id="active-search-results-mobile" class="p-8" x-show="getShowDefaultSearchOptionsMobile()" x-cloak>
-        <?php echo get_template_part('template-parts/search/mobile-search-state-1', '', array()); ?>
+        <?php echo get_template_part('template-parts/search/active-search/mobile-search-state-1', '', array()); ?>
     </div>
 
 

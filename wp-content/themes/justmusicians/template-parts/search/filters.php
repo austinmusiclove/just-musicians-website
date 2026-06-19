@@ -8,7 +8,7 @@
 
     <div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0">
         <h3 class="font-bold text-18 mb-3">Verification</h3>
-        <?php echo get_template_part('template-parts/filters/elements/checkbox', '', array(
+        <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
             'label' => 'Verified only',
             'name' => 'verified',
             'value' => 'Verified',
@@ -18,7 +18,7 @@
     </div>
 
 <?php
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'ensemble-size-filters',
         'title' => 'Ensemble Size',
         'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
@@ -27,7 +27,7 @@
         'show_modal_var' => 'showEnsembleSizeModal',
         'x-model' => 'ensembleSizeCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
         'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
@@ -36,7 +36,7 @@
         'show_modal_var' => 'showCategoryModal',
         'x-model' => 'categoriesCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'genre-filters',
         'title' => 'Genre',
         'input_name' => 'genres', // should match the input name used for the tag modal checkboxes
@@ -45,7 +45,7 @@
         'show_modal_var' => 'showGenreModal',
         'x-model' => 'genresCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'subgenre-filters',
         'title' => 'Sub Genre',
         'input_name' => 'subgenres', // should match the input name used for the tag modal checkboxes
@@ -54,7 +54,7 @@
         'show_modal_var' => 'showSubGenreModal',
         'x-model' => 'subgenresCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'instrumentation-filters',
         'title' => 'Instrumentation',
         'input_name' => 'instrumentations', // should match the input name used for the tag modal checkboxes
@@ -63,7 +63,7 @@
         'show_modal_var' => 'showInstrumentationModal',
         'x-model' => 'instrumentationsCheckboxes',
     ));
-    echo get_template_part('template-parts/filters/elements/tags', '', array(
+    echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'setting-filters',
         'title' => 'Settings',
         'input_name' => 'settings', // should match the input name used for the tag modal checkboxes

@@ -3,7 +3,7 @@ $search_term = stripslashes($_GET['s'] ?? '');
 $lat = !empty($_GET['lat']) ? stripslashes($_GET['lat']) : null;
 $lng = !empty($_GET['lng']) ? stripslashes($_GET['lng']) : null;
 if (empty($search_term)) {
-    get_template_part('template-parts/search/mobile-search-state-1', '', array());
+    get_template_part('template-parts/search/active-search/mobile-search-state-1', '', array());
 } else {
     $get_listings_args = [
         'name_search' => $search_term,
@@ -19,7 +19,7 @@ if (empty($search_term)) {
     $subgenres        = get_terms_decoded('subgenre', 'names', $search_term, true);
     $instrumentations = get_terms_decoded('instrumentation', 'names', $search_term, true);
     $settings         = get_terms_decoded('setting', 'names', $search_term, true);
-    get_template_part('template-parts/search/mobile-search-state-2', '', array(
+    get_template_part('template-parts/search/active-search/mobile-search-state-2', '', array(
         'listings' => $listings,
         'categories' => $categories,
         'genres' => $genres,

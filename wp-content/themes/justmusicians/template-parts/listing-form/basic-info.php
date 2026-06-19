@@ -46,7 +46,7 @@
         <div class="hidden">
             <input type="hidden" name="ensemble_size[]" >
             <?php foreach (["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"] as $option) {
-                echo get_template_part('template-parts/filters/elements/checkbox', '', [
+                echo get_template_part('template-parts/global/form/checkbox', '', [
                     'label' => $option,
                     'value' => $option,
                     'name' => 'ensemble_size',

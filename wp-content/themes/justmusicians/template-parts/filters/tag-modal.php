@@ -1,3 +1,4 @@
+template-parts/filters/tag-modal.php
 <div data-popup="filter" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="<?php echo $args['x-show']; ?>" x-transition x-cloak>
     <div data-trigger="filter" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
         x-on:click="<?php echo $args['x-show']; ?> = ! <?php echo $args['x-show']; ?>; tagModalSearchQuery = '';"
@@ -16,7 +17,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
         <?php
             foreach((array) $args['labels'] as $label) {
-                echo get_template_part('template-parts/filters/elements/checkbox', '', [
+                echo get_template_part('template-parts/global/form/checkbox', '', [
                     'label' => $label,
                     'value' => $label,
                     'name' => $args['name'],

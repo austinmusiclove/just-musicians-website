@@ -15,5 +15,5 @@ $target_id = 'location-active-search-results-' . $device;
     hx-indicator=".location-active-search-spinner"
 />
 <div id="<?php echo $target_id; ?>" x-show="showLocationSearchOptions" x-cloak>
-    <?php echo get_template_part('template-parts/search/location-search-state-1', '', array()); ?>
+    <?php echo get_template_part('template-parts/search/active-search/location-search-state-1', '', array()); ?>
 </div>

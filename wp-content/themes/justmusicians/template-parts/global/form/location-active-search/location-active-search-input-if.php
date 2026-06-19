@@ -14,5 +14,5 @@
     x-on:keydown.enter.prevent
 />
 <div id="inquiry-location-active-search-results" x-show="showInquiryLocationSearchOptions" x-cloak>
-    <?php echo get_template_part('template-parts/search/if-location-search-state-1', '', array()); ?>
+    <?php echo get_template_part('template-parts/search/active-search/if-location-search-state-1', '', array()); ?>
 </div>
