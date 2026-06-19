@@ -61,6 +61,8 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
         hx-trigger="revealed once"
         hx-swap="beforeend"
         hx-target="#results"
+        hx-indicator="#spinner"
+        hx-include="#my-gigs-form"
         <?php } ?>
         x-data="{
             showForm: false,

@@ -38,7 +38,7 @@ function hm_get_proposals_by_listing_ids($listing_ids, $args = []) {
         $params[] = $args['start_date_after'];
     }
     if (!empty($args['start_date_before'])) {
-        $where_clauses[] = 'start_date <= %s';
+        $where_clauses[] = 'start_date < %s';
         $params[] = $args['start_date_before'];
         $order = 'DESC';
     }

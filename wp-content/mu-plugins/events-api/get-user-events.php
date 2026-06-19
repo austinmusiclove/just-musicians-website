@@ -17,25 +17,40 @@ function get_user_events($args) {
         'post_type'   => 'event',
         'post_status' => 'publish',
         'author'      => get_current_user_id(),
-        'orderby'     => 'start_date',
-        'order'       => 'DESC',
     ];
     if ($nopaging) {
         $query_args['nopaging'] = true;
     } else {
         $query_args['paged']          = $page;
-        $query_args['posts_per_page'] = 6;
+        $query_args['posts_per_page'] = 10;
     }
 
-    if (!empty($args['start_date'])) {
-        $query_args['meta_query'] = [
-            [
-                'key'     => 'start_date',
-                'value'   => sanitize_text_field($args['start_date']),
-                'compare' => '>=',
-                'type'    => 'DATE',
-            ],
+    $meta_conditions = [];
+
+    if (!empty($args['start_date_after'])) {
+        $meta_conditions[] = [
+            'key'     => 'start_date',
+            'value'   => sanitize_text_field($args['start_date_after']),
+            'compare' => '>=',
+            'type'    => 'DATE',
         ];
+        $query_args['orderby'] = 'meta_value';
+        $query_args['order'] = 'ASC';
+    }
+
+    if (!empty($args['start_date_before'])) {
+        $meta_conditions[] = [
+            'key'     => 'start_date',
+            'value'   => sanitize_text_field($args['start_date_before']),
+            'compare' => '<',
+            'type'    => 'DATE',
+        ];
+        $query_args['orderby'] = 'meta_value';
+        $query_args['order'] = 'DESC';
+    }
+
+    if (!empty($meta_conditions)) {
+        $query_args['meta_query'] = $meta_conditions;
     }
 
     $query = new WP_Query($query_args);

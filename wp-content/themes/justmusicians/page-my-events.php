@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for the my gigs page
+ * The template for the my events page
  *
  * @package JustMusicians
  */
@@ -21,17 +21,20 @@ get_header();
             <div class="col md:col-span-6 py-6 md:py-12">
 
                 <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                    <a href="<?php echo site_url('/my-gigs/'); ?>"><h1 class="font-bold text-25">My Gigs</h1></a>
+                    <a href="<?php echo site_url('/my-events/'); ?>"><h1 class="font-bold text-25">My Events</h1></a>
+                    <?php if (is_user_logged_in()) { ?>
+                        <a href="<?php echo site_url('/event-form/'); ?>" class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add +</a>
+                    <?php } ?>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
 
-                    <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to see your gigs';"></span>
+                    <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to see your events';"></span>
 
                     <div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
 
                         <div class="pb-32 relative z-10">
-                            <span class="text-18 sm:text-22 block text-center mb-4">Log in to see your gigs</span>
+                            <span class="text-18 sm:text-22 block text-center mb-4">Log in to see your events</span>
                             <button x-on:click="showLoginModal = true;" type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Log In</button>
                         </div>
 
@@ -40,57 +43,21 @@ get_header();
 
                     </div>
 
-                <?php } else {
-                    $user_listings = get_user_listings(get_current_user_id());
-                    $listing_options = [['value' => 'all', 'label' => 'All Listings']];
-                    foreach ($user_listings as $id => $name) {
-                        $listing_options[] = ['value' => (string) $id, 'label' => $name];
-                    }
-                ?>
-                    <form id="my-gigs-form"
+                <?php } else { ?>
+
+                    <form id="my-events-form"
                         x-data="{
-                            listing: 'all',
-                            status: 'all',
                             dateRange: 'upcoming',
                         }"
-                        hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
+                        hx-get="<?php echo site_url('/wp-html/v1/my-events/'); ?>"
                         hx-target="#results"
                         hx-indicator="#spinner"
                         hx-trigger="load, filterupdate"
                     >
-                        <input type="hidden" name="filter_listing" x-model="listing" />
-                        <input type="hidden" name="filter_status" x-model="status" />
                         <input type="hidden" name="date_range" x-model="dateRange" />
 
-                        <!-- Filter bar -->
                         <div class="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-black/20">
-
-                            <!-- Listing dropdown -->
-                            <div x-on:filter_listing-changed="listing = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
-                                <?php get_template_part('template-parts/global/form/dropdown', '', [
-                                    'options'     => $listing_options,
-                                    'input_name'  => 'filter_listing',
-                                    'selected'    => 'all',
-                                    'placeholder' => 'All Listings',
-                                ]); ?>
-                            </div>
-
-                            <!-- Status dropdown -->
-                            <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
-                                <?php get_template_part('template-parts/global/form/dropdown', '', [
-                                    'options'     => [
-                                        ['value' => 'all', 'label' => 'All Statuses'],
-                                        ['value' => 'inquiry', 'label' => 'New Inquiry'],
-                                        ['value' => 'applied', 'label'   => 'Applied'],
-                                    ],
-                                    'input_name'  => 'filter_status',
-                                    'selected'    => 'all',
-                                    'placeholder' => 'All Statuses',
-                                ]); ?>
-                            </div>
-
-                            <!-- Date range toggle -->
-                            <div class="flex items-center gap-1 border-l border-black/20 pl-2 ml-1">
+                            <div class="flex items-center gap-1">
                                 <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
                                     :class="dateRange === 'upcoming' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
                                     x-on:click="dateRange = 'upcoming'; $nextTick(() => $dispatch('filterupdate'));">Upcoming</button>
@@ -98,7 +65,6 @@ get_header();
                                     :class="dateRange === 'past' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
                                     x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
                             </div>
-
                         </div>
 
                     </form>

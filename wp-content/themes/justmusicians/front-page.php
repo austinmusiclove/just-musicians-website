@@ -20,8 +20,8 @@ $collections_result = get_user_collections([
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 // Get user events
 $events_result = get_user_events([
-    'nopaging'     => true,
-    'start_date'   => date('Y-m-d'),
+    'nopaging'         => true,
+    'start_date_after' => date('Y-m-d'),
 ]);
 $events_map = array_column($events_result['events'], null, 'post_id');
 

@@ -9,6 +9,9 @@ Deploy
     Set up offer acf
     Add My Gigs page
     Rebuild proposal index
+    Add My Events page
+    Save permalinks
+    Add Event Form page
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -83,11 +86,8 @@ Questions
 Events and Inquiries refactor
     Remove inquiries page
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
-            List view of events
-                Date image
-                Event name, time dates
+            Event cards
                 Edit button
-            Add event button
             Clear notifications for inquiry responses
         Event creation and update page
         Add Manage Event page
