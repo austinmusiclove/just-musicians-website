@@ -14,6 +14,16 @@ function hm_get_listing_ids_by_event_id($event_id) {
     return array_map('strval', wp_list_pluck($rows, 'listing_id'));
 }
 
+function hm_get_proposal_ids_by_event_id($event_id) {
+    global $wpdb;
+    $table = hm_get_proposal_index_table();
+
+    return $wpdb->get_col($wpdb->prepare(
+        "SELECT proposal_id FROM {$table} WHERE event_id = %d",
+        $event_id
+    ));
+}
+
 function hm_get_proposals_by_listing_ids($listing_ids, $args = []) {
     if (empty($listing_ids)) return [];
 

@@ -50,8 +50,8 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 
 <div class="flex flex-col mb-4"
     hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes(<?php echo (int) $proposal['proposal_id']; ?>)) ? 'never-trigger' : 'revealed once'"
-    hx-vals='{"notification_type":"new-inquiry","subject_id":<?php echo (int) $proposal['proposal_id']; ?>}'
+    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $proposal['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
+    hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $proposal['proposal_id']; ?>" }'
     hx-swap="beforeend"
 >
 

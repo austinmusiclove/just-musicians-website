@@ -23,7 +23,7 @@ function get_notifications_from_db() {
 
     foreach ($rows as $row) {
         $type = $row->notification_type;
-        $sid  = (int) $row->subject_id;
+        $sid  = $row->subject_id;
 
         if (!isset($counts[$type])) {
             $counts[$type]      = 0;

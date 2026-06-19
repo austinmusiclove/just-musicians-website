@@ -1,4 +1,4 @@
-<?php
+themes/justmusicians/template-parts/cards/event-card.php<?php
 $event_id     = $args['event_id'];
 $event_name   = $args['event_name'];
 $permalink    = $args['permalink'];
@@ -10,10 +10,10 @@ $state        = $args['state'] ?? '';
 $details      = $args['details'] ?? '';
 $budget       = $args['budget'] ?? '';
 $compensation = $args['compensation'] ?? '';
+$proposals    = $args['proposals'] ?? [];
 
 $start_ts     = $start_date ? strtotime($start_date) : null;
 $start_display = $start_ts ? gmdate('M j, Y', $start_ts) : '';
-$sticky_class = $start_ts && $start_ts <= strtotime('+7 days') ? 'bg-yellow-light' : '';
 
 $time_display = '';
 if ($start_time) {
@@ -42,7 +42,7 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
     <?php } ?>
 >
 
-    <div class="w-20 sm:w-24 shrink-0 <?php echo $sticky_class; ?> rounded overflow-hidden">
+    <div class="w-20 sm:w-24 shrink-0">
         <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['timestamp' => $start_ts]); ?>
     </div>
 
@@ -80,6 +80,23 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
                 </div>
             </div>
         <?php } ?>
+
+        <!-- Manage Event -->
+        <div class="flex items-center justify-between gap-2 pt-2"
+            x-data="{ proposals: <?php echo clean_arr_for_doublequotes($proposals); ?>, }"
+        >
+            <div class="flex items-center gap-1">
+                <span class="text-12 text-black/50 font-semibold">Applicants</span>
+                <span class="text-14"><?php echo count($proposals); ?></span>
+            </div>
+            <a href="<?php echo esc_url($permalink); ?>" class="relative bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
+                Manage Event
+                <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                    x-show="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposals.includes(id)).length > 0" x-cloak
+                    x-text="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposals.includes(id)).length"
+                ></span>
+            </a>
+        </div>
     </div>
 
 </div>
