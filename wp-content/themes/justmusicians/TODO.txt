@@ -86,12 +86,17 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Add Manage Event page
-            Add Create/update Event form
-                Sucesss takes you to single event which has a tab for event details and editing
-            Show proposals
-            Show suggestion listings to request proposal
-            Clear notifications for inquiry responses
+        Add Single Event page
+            Event details
+                Show event details
+                Edit button
+                Event form to edit all details
+                Update event functionality
+            Applicants
+                Show proposals in applicants tab
+                Show suggestion listings after last applicant and on empty state
+                Clear notifications for inquiry responses
+                Show notifications bubble in applicants tab heading
         Event creation form
         Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
         Figure out what happens with existing inquiries messages
@@ -101,13 +106,6 @@ Events and Inquiries refactor
         Remove inquiries page menu item
         Remove inquiries page
         Consider removing inquiry post type and inquiry messages
-Add My Events page (for buyers)
-    Set event status to booked/open/cancelled/etc.
-    Add calendar View
-    Edit multiple event details at once
-    Create multiple events at once (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
-    Create event from a copy of another event
-    Current applicants get notified when event dates are added (use cron on a delay of at least an hour so that multiple emails don't go out if someone makes a ton of events in one session)
 Single Event page
     Edit all event fields (Notify proposals that are available/unavailable if the date or time changes)
     Show invited, available, unavailable musicians (Show freshness of reported availability)
@@ -118,6 +116,7 @@ Single Event page
     Test send inquiry from suggestion listing
 Event Form page
     Allow venue location
+    Sucesss takes you to single event which has a tab for event details and editing
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message
@@ -151,6 +150,13 @@ Applications (Calendly for music booking)
     Venue relationship
         Associate users with a venue
         Allow venue users to alter venue page data
+Add My Events page (for buyers)
+    Set event status to booked/open/cancelled/etc.
+    Add calendar View
+    Edit multiple event details at once
+    Create multiple events at once (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
+    Create event from a copy of another event
+    Current applicants get notified when event dates are added (use cron on a delay of at least an hour so that multiple emails don't go out if someone makes a ton of events in one session)
 My Gigs page (for musicians)
     Be able to click through to conversation if one exists between you and event owner
     Add calendar view
