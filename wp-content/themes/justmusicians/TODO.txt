@@ -82,8 +82,6 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Organize template parts
-            something with filters
         Add Manage Events page where you can see your events in list view, edit them, and click through to messages
             List view of events
                 Date image

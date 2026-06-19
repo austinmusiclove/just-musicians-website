@@ -63,7 +63,7 @@
         </div>
         <fieldgroup class="has-border px-4 py-8 relative h-[17rem] relative z-0 rounded-tl-none overflow-scroll" style="margin-top: -1px">
             <div class="overflow-hidden" x-show="showTab1" x-cloak>
-                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                <?php echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
                     'terms'           => $args['categories'],
                     'input_name'      => 'categories',
                     'input_x_model'   => 'categoriesCheckboxes',
@@ -71,7 +71,7 @@
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab2" x-cloak>
-                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                <?php echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
                     'terms'           => $args['genres'],
                     'input_name'      => 'genres',
                     'input_x_model'   => 'genresCheckboxes',
@@ -80,7 +80,7 @@
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab3" x-cloak>
-                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                <?php echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
                     'terms'           => $args['subgenres'],
                     'input_name'      => 'subgenres',
                     'input_x_model'   => 'subgenresCheckboxes',
@@ -88,7 +88,7 @@
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab4" x-cloak>
-                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                <?php echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
                     'terms'           => $args['instrumentations'],
                     'input_name'      => 'instrumentations',
                     'input_x_model'   => 'instCheckboxes',
@@ -96,7 +96,7 @@
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab5" x-cloak>
-                <?php echo get_template_part('template-parts/filters/taxonomy-options', '', [
+                <?php echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
                     'terms'           => $args['settings'],
                     'input_name'      => 'settings',
                     'input_x_model'   => 'settingsCheckboxes',

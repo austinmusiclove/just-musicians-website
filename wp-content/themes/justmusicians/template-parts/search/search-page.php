@@ -247,7 +247,7 @@ $next_page       = $result ? $result['next_page']       : null;
                 <!-- Modals -->
                 <?php
                     $categories = get_terms_decoded('mcategory', 'names', false, true);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Category',
                         'labels' => $categories,
                         'name' => 'categories',
@@ -256,7 +256,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'has_search_bar' => true,
                     ]);
                     $genres = get_terms_decoded('genre', 'names', false, true);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Genre',
                         'labels' => $genres,
                         'name' => 'genres',
@@ -265,7 +265,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'has_search_bar' => true,
                     ]);
                     $subgenres = get_terms_decoded('subgenre', 'names', false, true);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Sub Genre',
                         'labels' => $subgenres,
                         'name' => 'subgenres',
@@ -274,7 +274,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'has_search_bar' => true,
                     ]);
                     $instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Instrumentation',
                         'labels' => $instrumentation,
                         'name' => 'instrumentations',
@@ -283,7 +283,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'has_search_bar' => true,
                     ]);
                     $settings = get_terms_decoded('setting', 'names', false, true);
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Setting',
                         'labels' => $settings,
                         'name' => 'settings',
@@ -292,7 +292,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'has_search_bar' => true,
                     ]);
                     $ensemble_size_options = get_default_options('ensemble_size');
-                    echo get_template_part('template-parts/filters/tag-modal', '', [
+                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Ensemble Size',
                         'labels' => $ensemble_size_options,
                         'name' => 'ensemble_size',

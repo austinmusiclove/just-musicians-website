@@ -1,4 +1,4 @@
-template-parts/filters/tag-modal.php
+template-parts/search/filter-components/tag-modal.php
 <div data-popup="filter" class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center" x-show="<?php echo $args['x-show']; ?>" x-transition x-cloak>
     <div data-trigger="filter" class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
         x-on:click="<?php echo $args['x-show']; ?> = ! <?php echo $args['x-show']; ?>; tagModalSearchQuery = '';"

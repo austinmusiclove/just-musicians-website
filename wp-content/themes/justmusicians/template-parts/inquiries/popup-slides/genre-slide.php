@@ -9,7 +9,7 @@
     <div class="h-64">
         <?php
         $genres = get_terms_decoded('genre', 'names');
-        echo get_template_part('template-parts/filters/taxonomy-options', '', [
+        echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
             'terms'           => $genres,
             'input_name'      => 'event_genres',
             'input_x_model'   => 'inquiryGenres',

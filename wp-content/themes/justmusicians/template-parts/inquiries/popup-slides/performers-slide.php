@@ -9,7 +9,7 @@
         <input type="hidden" name="inquiry_ensemble_size[]" >
         <?php
         $ensemble_sizes = get_default_options('ensemble_size');
-        echo get_template_part('template-parts/filters/taxonomy-options', '', [
+        echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
             'terms'           => $ensemble_sizes,
             'input_name'      => 'event_ensemble_size',
             'input_x_model'   => 'numPerformers',
