@@ -16,14 +16,14 @@ require_once 'notifications-api/get-notifications-from-db.php';
 
 // Register REST API Routes
 add_action('rest_api_init', function () {
-    register_rest_route( 'v1', '/notifications_count/', [
+    register_rest_route( 'v1', '/user-notifications/', [
         'methods' => 'GET',
-        'callback' => 'get_notification_count',
+        'callback' => 'get_user_notifications',
         'permission_callback' => 'is_user_logged_in',
     ]);
 });
 
-function get_notification_count() {
+function get_user_notifications() {
     $unread_convo_count         = get_unread_conversation_count();
     $account_notification_count = get_account_notification_count();
     $db_notifications           = get_notifications_from_db();

@@ -151,7 +151,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         x-init="(async () => {
             width = window.innerWidth;
             document.body.addEventListener('htmx:responseError', (event) => { if (event.detail.xhr.status === 404) { $dispatch('error-toast', {'message': 'HTMX Error: 404'}); } });
-            document.addEventListener('DOMContentLoaded', async function() { notifications = await get_notification_count(); });
+            document.addEventListener('DOMContentLoaded', async function() { notifications = await get_user_notifications(); });
         })"
         x-resize.document="
             width = $width;

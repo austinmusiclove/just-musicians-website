@@ -1,57 +1,8 @@
-<?php
-
-$proposal     = $args['proposal'];
-$listing_name = $proposal['listing_name'];
-$status       = $proposal['status'];
-$availability = $proposal['availability'];
-$prop_details = $proposal['details'];
-$quote        = $proposal['quote'];
-$draw         = $proposal['draw'];
-
-$event         = $args['proposal']['event'];
-$event_id      = $event['event_id'];
-$event_name    = $event['event_name'];
-$start_date    = $event['start_date'];
-$end_date      = $event['end_date'];
-$start_time    = $event['start_time'];
-$end_time      = $event['end_time'];
-$city          = $event['city'] ?? '';
-$state         = $event['state'] ?? '';
-$event_details = $event['details'];
-$budget        = $event['budget'];
-$compensation  = $event['compensation'];
-$request_quote = $event['request_quote'];
-$request_draw  = $event['request_draw'];
-
-$start_ts    = $start_date ? strtotime($start_date) : null;
-$end_ts      = $end_date   ? strtotime($end_date)   : null;
-$start_display = $start_ts ? gmdate('M j, Y', $start_ts) : '';
-$end_display   = $end_ts   ? gmdate('M j, Y', $end_ts)   : '';
-
-$time_display = '';
-if ($start_time) {
-    $time_display = gmdate('g:i A', strtotime($start_time));
-    if ($end_time) {
-        $time_display .= ' – ' . gmdate('g:i A', strtotime($end_time));
-    }
-}
-
-$location_parts = array_filter([$city, $state]);
-$location       = !empty($location_parts) ? implode(', ', $location_parts) : '';
-
-$date_display = $start_display;
-if ($end_display && $end_display !== $start_display) {
-    $date_display .= ' – ' . $end_display;
-}
-$meta_parts = array_filter([$date_display, $time_display, $location]);
-$meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
-
-?>
 
 <div class="flex flex-col mb-4"
     hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $proposal['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
-    hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $proposal['proposal_id']; ?>" }'
+    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
+    hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
     hx-swap="beforeend"
 >
 
@@ -66,11 +17,11 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
         <?php } ?>
         x-data="{
             showForm: false,
-            prop_details: '<?php echo clean_str_for_doublequotes($prop_details); ?>',
-            availability: '<?php echo clean_str_for_doublequotes($availability); ?>',
-            quote:        '<?php echo clean_str_for_doublequotes($quote); ?>',
-            draw:         '<?php echo clean_str_for_doublequotes($draw); ?>',
-            status:       '<?php echo clean_str_for_doublequotes($status); ?>',
+            prop_details: '<?php echo clean_str_for_doublequotes($args['proposal']['details']); ?>',
+            availability: '<?php echo clean_str_for_doublequotes($args['proposal']['availability']); ?>',
+            quote:        '<?php echo clean_str_for_doublequotes($args['proposal']['quote']); ?>',
+            draw:         '<?php echo clean_str_for_doublequotes($args['proposal']['draw']); ?>',
+            status:       '<?php echo clean_str_for_doublequotes($args['proposal']['status']); ?>',
             _updateProposal(details, availability, quote, draw) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = 'applied'},
         }"
         x-on:update-proposal="_updateProposal($event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw);"
@@ -78,7 +29,7 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 
         <!-- Calendar Icon -->
         <div class="w-20 sm:w-24 shrink-0">
-            <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['timestamp' => $start_ts]); ?>
+            <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['timestamp' => $args['proposal']['event']['start_date'] ? strtotime($args['proposal']['event']['start_date']) : null ]); ?>
         </div>
 
         <!-- Info -->
@@ -86,44 +37,46 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 
             <!-- Title + Status -->
             <div class="flex flex-row items-start justify-between gap-2">
-                <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($event_name); ?></h2>
+                <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($args['proposal']['event']['event_name']); ?></h2>
                 <span class="text-11 px-2 py-0.5 rounded-full text-12 capitalize font-semibold break-words shrink-0" :class="status == 'inquiry' ? 'bg-red/40' : 'bg-yellow/40'" x-text="status"></span>
             </div>
 
-            <?php if ($listing_name) { ?>
+            <?php if ($args['proposal']['listing_name']) { ?>
                 <div class="flex items-center gap-1 flex-wrap">
-                    <p class="text-14 text-black/50">Listing: <?php echo esc_html($listing_name); ?></p>
+                    <p class="text-14 text-black/50">Listing: <?php echo esc_html($args['proposal']['listing_name']); ?></p>
                 </div>
             <?php } ?>
 
-            <!-- Meta line -->
-            <?php if ($meta_line) { ?>
-                <div class="flex items-center gap-1 min-h-[1.5rem]">
-                    <p class="text-14 truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
-                </div>
-            <?php } ?>
+            <?php echo get_template_part('template-parts/cards/card-components/event-meta-line', '', [
+                'start_date' => $args['proposal']['event']['start_date'],
+                'end_date'   => $args['proposal']['event']['end_date'],
+                'start_time' => $args['proposal']['event']['start_time'],
+                'end_time'   => $args['proposal']['event']['end_time'],
+                'city'       => $args['proposal']['event']['city'],
+                'state'      => $args['proposal']['event']['state'],
+            ]); ?>
 
             <!-- Details -->
-            <?php if ($event_details) { ?>
+            <?php if ($args['proposal']['event']['details']) { ?>
                 <div class="flex flex-col min-h-[1.5rem]">
                     <span class="text-12 text-black/50 font-semibold">Details</span>
-                    <p class="text-14"><?php echo esc_html($event_details); ?></p>
+                    <p class="text-14"><?php echo esc_html($args['proposal']['event']['details']); ?></p>
                 </div>
             <?php } ?>
 
             <!-- Budget + Compensation -->
-            <?php if ($budget || $compensation) { ?>
+            <?php if ($args['proposal']['event']['budget'] || $args['proposal']['event']['compensation']) { ?>
                 <div class="flex flex-col min-h-[1.5rem]">
                     <span class="text-12 text-black/50 font-semibold">Compensation</span>
                     <div class="flex flex-wrap items-center gap-2 text-14">
-                        <?php if ($budget) { ?>
-                            <span>$<?php echo esc_html(number_format((float) $budget)); ?></span>
+                        <?php if ($args['proposal']['event']['budget']) { ?>
+                            <span>$<?php echo esc_html(number_format((float) $args['proposal']['event']['budget'])); ?></span>
                         <?php } ?>
-                        <?php if ($budget && $compensation) { ?>
+                        <?php if ($args['proposal']['event']['budget'] && $args['proposal']['event']['compensation']) { ?>
                             <span class="text-black/30">|</span>
                         <?php } ?>
-                        <?php if ($compensation) { ?>
-                            <span><?php echo esc_html($compensation); ?></span>
+                        <?php if ($args['proposal']['event']['compensation']) { ?>
+                            <span><?php echo esc_html($args['proposal']['event']['compensation']); ?></span>
                         <?php } ?>
                     </div>
                 </div>
@@ -143,9 +96,9 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
             <!-- Respond (desktop) -->
             <div class="hidden sm:flex justify-start">
                 <?php get_template_part('template-parts/cards/card-components/gig-card-form', '', [
-                    'proposal_id'   => $proposal['proposal_id'],
-                    'request_quote' => $request_quote,
-                    'request_draw'  => $request_draw,
+                    'proposal_id'   => $args['proposal']['proposal_id'],
+                    'request_quote' => $args['proposal']['event']['request_quote'],
+                    'request_draw'  => $args['proposal']['event']['request_draw'],
                     'device'        => 'desktop',
                     'status'        => $status,
                 ]); ?>
@@ -154,9 +107,9 @@ $meta_line  = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
             <!-- Respond (mobile) -->
             <div class="block sm:hidden w-full">
                 <?php get_template_part('template-parts/cards/card-components/gig-card-form', '', [
-                    'proposal_id'   => $proposal['proposal_id'],
-                    'request_quote' => $request_quote,
-                    'request_draw'  => $request_draw,
+                    'proposal_id'   => $args['proposal']['proposal_id'],
+                    'request_quote' => $args['proposal']['event']['request_quote'],
+                    'request_draw'  => $args['proposal']['event']['request_draw'],
                     'device'        => 'mobile',
                     'status'        => $status,
                 ]); ?>

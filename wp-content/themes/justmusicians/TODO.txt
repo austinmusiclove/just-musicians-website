@@ -86,10 +86,6 @@ Questions
 
 Events and Inquiries refactor
     Remove inquiries page
-        Add Manage Events page where you can see your events in list view, edit them, and click through to messages
-            Call notification count api to udpate with js after posts instead of calling before response
-            Rename get notification count to something more fitting
-            Why does gig have end date considered but not my events
         Add Manage Event page
             Add Create/update Event form
                 Sucesss takes you to single event which has a tab for event details and editing
@@ -105,18 +101,14 @@ Events and Inquiries refactor
         Remove inquiries page menu item
         Remove inquiries page
         Consider removing inquiry post type and inquiry messages
-My Gigs page (for musicians)
-    Be able to click through to conversation if one exists between you and event owner
-    Add calendar view
-    Allow musicians to update availability for all events on the same day at once
-Add Manage Events page (for buyers)
+Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View
     Edit multiple event details at once
     Create multiple events at once (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
     Create event from a copy of another event
     Current applicants get notified when event dates are added (use cron on a delay of at least an hour so that multiple emails don't go out if someone makes a ton of events in one session)
-Manage event page
+Single Event page
     Edit all event fields (Notify proposals that are available/unavailable if the date or time changes)
     Show invited, available, unavailable musicians (Show freshness of reported availability)
     Show offers
@@ -124,6 +116,8 @@ Manage event page
     make sure single event link in email and inquiry modal after success works
     Show suggestions
     Test send inquiry from suggestion listing
+Event Form page
+    Allow venue location
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message
@@ -157,6 +151,10 @@ Applications (Calendly for music booking)
     Venue relationship
         Associate users with a venue
         Allow venue users to alter venue page data
+My Gigs page (for musicians)
+    Be able to click through to conversation if one exists between you and event owner
+    Add calendar view
+    Allow musicians to update availability for all events on the same day at once
 Offer post type (future)
     Status
     Pay with structure

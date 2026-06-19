@@ -29,6 +29,7 @@ if (count($events) > 0) {
             'event_name'   => $event['event_name'],
             'permalink'    => $event['permalink'],
             'start_date'   => get_field('start_date', $event_id),
+            'end_date'     => get_field('end_date', $event_id),
             'start_time'   => get_field('start_time', $event_id),
             'end_time'     => get_field('end_time', $event_id),
             'city'         => get_field('city', $event_id),

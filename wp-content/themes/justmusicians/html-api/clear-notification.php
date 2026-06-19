@@ -1,3 +1,4 @@
+themes/justmusicians/html-api/clear-notification.php
 <?php
 
 if (!is_user_logged_in()) {
@@ -15,6 +16,4 @@ $user_id = get_current_user_id();
 
 clear_notification($user_id, $notification_type, $subject_id);
 
-$notifications = get_notification_count();
-$notifications_json = clean_arr_for_doublequotes($notifications);
-echo '<span x-init="notifications = ' . $notifications_json . '"></span>';
+echo '<span x-init="notifications = await get_user_notifications();"></span>';

@@ -18,7 +18,7 @@ if ( is_wp_error($result) ) {
     if (isset($result['profile_image_attachment_id'])) {
         echo '<span x-init="$dispatch(\'updateimageid\', ' . clean_arr_for_doublequotes($result['profile_image_attachment_id']) . ')"></span>';
     }
-    echo '<span x-init="notifications = await get_notification_count();"></span>';
+    echo '<span x-init="notifications = await get_user_notifications();"></span>';
     echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Account settings updated successfully\'})"></span>';
 
     // For updating account settings from review popup
