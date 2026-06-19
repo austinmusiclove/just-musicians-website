@@ -40,7 +40,22 @@ get_header();
                         </div>
                     </div>
 
-                    <?php echo get_template_part('template-parts/events/event-details'); ?>
+                    <?php echo get_template_part('template-parts/events/event-details', '', [
+                        'start_date'     => get_field('start_date'),
+                        'end_date'       => get_field('end_date'),
+                        'start_time'     => get_field('start_time'),
+                        'end_time'       => get_field('end_time'),
+                        'address_line_1' => get_field('address_line_1'),
+                        'address_line_2' => get_field('address_line_2'),
+                        'city'           => get_field('city'),
+                        'state'          => get_field('state'),
+                        'zip_code'       => get_field('zip_code'),
+                        'details'        => get_field('details'),
+                        'budget'         => get_field('budget'),
+                        'compensation'   => get_field('compensation'),
+                        'request_quote'  => get_field('request_quote'),
+                        'request_draw'   => get_field('request_draw'),
+                    ]); ?>
                     <?php echo get_template_part('template-parts/events/event-applicants'); ?>
                 </div>
 

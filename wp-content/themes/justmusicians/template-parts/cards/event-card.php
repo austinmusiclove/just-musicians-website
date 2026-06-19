@@ -42,9 +42,6 @@
                     <?php if ($args['budget']) { ?>
                         <span>$<?php echo esc_html(number_format((float) $args['budget'])); ?></span>
                     <?php } ?>
-                    <?php if ($args['budget'] && $args['compensation']) { ?>
-                        <span class="text-black/30">|</span>
-                    <?php } ?>
                     <?php if ($args['compensation']) { ?>
                         <span><?php echo esc_html($args['compensation']); ?></span>
                     <?php } ?>

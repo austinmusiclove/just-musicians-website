@@ -85,35 +85,35 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
+    Add Single Event page
+        Event details
+            Add css calendar
+            Add icons for calendar, location pin, dollar sign, clock
+            Add genres and ensemble size
+            Edit button
+            Event form to edit all details
+            Update event functionality
+        Applicants
+            Show proposals in applicants tab
+            Show suggestion listings after last applicant and on empty state
+            Clear notifications for inquiry responses
+            Show notifications bubble in applicants tab heading
+            Test send inquiry from suggestion listing
+            Show invited, available, unavailable musicians (Show freshness of reported availability)
+            Click through to messages for each listing and/or all conversations for the event
+        Make sure single event link in email and inquiry modal after success works
+    Event creation form
+    Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
+    Figure out what happens with existing inquiries messages
+        Evaluate if i need userInquiries in x-data of page-messages.php
+        Evaluate if inquiriesMap is needed in page-messages.php
+    Remove inquiries html apis and mu plugin functions
+    Remove inquiries page menu item
     Remove inquiries page
-        Add Single Event page
-            Event details
-                Show event details
-                Edit button
-                Event form to edit all details
-                Update event functionality
-            Applicants
-                Show proposals in applicants tab
-                Show suggestion listings after last applicant and on empty state
-                Clear notifications for inquiry responses
-                Show notifications bubble in applicants tab heading
-        Event creation form
-        Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
-        Figure out what happens with existing inquiries messages
-            Evaluate if i need userInquiries in x-data of page-messages.php
-            Evaluate if inquiriesMap is needed in page-messages.php
-        Remove inquiries html apis and mu plugin functions
-        Remove inquiries page menu item
-        Remove inquiries page
-        Consider removing inquiry post type and inquiry messages
-Single Event page
-    Edit all event fields (Notify proposals that are available/unavailable if the date or time changes)
-    Show invited, available, unavailable musicians (Show freshness of reported availability)
-    Show offers
-    Click through to messages for each listing and/or all conversations for the event
-    make sure single event link in email and inquiry modal after success works
-    Show suggestions
-    Test send inquiry from suggestion listing
+    Grep inquir, inquiries, inquiry to remove all references that are not needed
+    Mark inquiry post type as deprecated
+    Note inquiry deprecation in user messages plugin
+    Remove inquiries account page
 Event Form page
     Allow venue location
     Sucesss takes you to single event which has a tab for event details and editing
@@ -150,6 +150,10 @@ Applications (Calendly for music booking)
     Venue relationship
         Associate users with a venue
         Allow venue users to alter venue page data
+Single Event page
+    Show offers
+    Notify proposals that are available/unavailable if the date or time changes
+    Support venue location
 Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View
