@@ -13,6 +13,7 @@ Deploy
     Save permalinks
     Add Event Form page
     Update package version
+    Add ensemble size term description as ints for sorting
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -87,12 +88,22 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Event details
-            Add css calendar
-            Add icons for calendar, location pin, dollar sign, clock
-            Add genres and ensemble size
-            Edit button
             Event form to edit all details
+                show/hide form on edit button
+                include udpate event button in form
+                include all fields
+                    date, start/end time
+                    all address fields with no active search and no venue
+                    genre checkboxes
+                    ensemble size checkboxes
+                    details text area
+                    budget input
+                    comp text area
+                    application requirements checkboxes
             Update event functionality
+                update event mu plugin
+                update event html api
+                update event htmx with indicator
         Applicants
             Show proposals in applicants tab
             Show suggestion listings after last applicant and on empty state

@@ -4,30 +4,42 @@ $end_date   = $args['end_date'] ?? '';
 $start_time = $args['start_time'] ?? '';
 $end_time   = $args['end_time'] ?? '';
 
-$has_date = (bool) $start_date;
+// Date line
 $date_line = '';
-if ($start_date) {
-    $start_ts = strtotime($start_date);
-    $date_line = gmdate('M j, Y', $start_ts);
-    if ($end_date) {
-        $end_ts = strtotime($end_date);
-        $end_display = gmdate('M j, Y', $end_ts);
-        if ($start_time) $date_line .= ' ' . gmdate('g:i A', strtotime($start_time));
-        if ($end_time) $end_display .= ' ' . gmdate('g:i A', strtotime($end_time));
-        $date_line .= ' – ' . $end_display;
-    } else {
-        if ($start_time) {
-            $date_line .= ' • ' . gmdate('g:i A', strtotime($start_time));
-            if ($end_time) $date_line .= ' – ' . gmdate('g:i A', strtotime($end_time));
-        }
-    }
+if ($start_date && $end_date) {
+    $date_line = gmdate('M j, Y', strtotime($start_date)) . ' – ' . gmdate('M j, Y', strtotime($end_date));
+} elseif ($start_date) {
+    $date_line = gmdate('M j, Y', strtotime($start_date));
+} elseif ($end_date) {
+    $date_line = '? – ' . gmdate('M j, Y', strtotime($end_date));
+}
+
+// Time line
+$time_line = '';
+if ($start_time && $end_time) {
+    $time_line = gmdate('g:i A', strtotime($start_time)) . ' – ' . gmdate('g:i A', strtotime($end_time));
+} elseif ($start_time) {
+    $time_line = gmdate('g:i A', strtotime($start_time));
+} elseif ($end_time) {
+    $time_line = '? – ' . gmdate('g:i A', strtotime($end_time));
 }
 ?>
-<div>
-    <span class="text-12 text-black/50 font-semibold">Date & Time</span>
-    <?php if ($has_date) { ?>
-        <p class="text-14"><?php echo esc_html($date_line); ?></p>
-    <?php } else { ?>
-        <p class="text-14 text-black/50">Not specified</p>
-    <?php } ?>
+<div class="flex flex-col gap-2">
+    <div class="flex items-center gap-1">
+        <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/calendar.svg" />
+        <?php if ($date_line) { ?>
+            <span class="text-16"><?php echo esc_html($date_line); ?></span>
+        <?php } else { ?>
+            <span class="text-16 text-black/50">Date not specified</span>
+        <?php } ?>
+    </div>
+
+    <div class="flex items-center gap-1">
+        <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/clock.svg" />
+        <?php if ($time_line) { ?>
+            <span class="text-16"><?php echo esc_html($time_line); ?></span>
+        <?php } else { ?>
+            <span class="text-16 text-black/50">Time not specified</span>
+        <?php } ?>
+    </div>
 </div>

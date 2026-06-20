@@ -20,7 +20,10 @@ get_header();
             </div>
             <div class="col md:col-span-6 py-6 md:py-12">
 
-                <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
+                <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
+                    <div class="w-20 shrink-0">
+                        <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['timestamp' => strtotime(get_field('start_date'))]); ?>
+                    </div>
                     <h1 class="font-bold text-25"><?php the_title(); ?></h1>
                 </div>
 
@@ -55,6 +58,8 @@ get_header();
                         'compensation'   => get_field('compensation'),
                         'request_quote'  => get_field('request_quote'),
                         'request_draw'   => get_field('request_draw'),
+                        'genres'         => wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),
+                        'ensemble_size'  => sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),
                     ]); ?>
                     <?php echo get_template_part('template-parts/events/event-applicants'); ?>
                 </div>

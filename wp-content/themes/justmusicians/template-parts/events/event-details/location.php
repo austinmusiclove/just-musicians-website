@@ -5,21 +5,28 @@ $city           = $args['city'] ?? '';
 $state          = $args['state'] ?? '';
 $zip_code       = $args['zip_code'] ?? '';
 
-$has_location  = $address_line_1 || $address_line_2 || $city || $state || $zip_code;
-$address_lines = array_filter([$address_line_1, $address_line_2]);
-$city_line     = array_filter([$city, $state, $zip_code]);
+$has_location = $address_line_1 || $address_line_2 || $city || $state || $zip_code;
 ?>
 
-<div>
-    <span class="text-12 text-black/50 font-semibold">Location</span>
+<div class="flex items-center gap-1">
+    <img style="height: 1rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
     <?php if ($has_location) { ?>
-        <?php foreach ($address_lines as $address_line) { ?>
-            <p class="text-14"><?php echo esc_html($address_line); ?></p>
-        <?php } ?>
-        <?php if ($city_line) { ?>
-            <p class="text-14"><?php echo esc_html(implode(', ', $city_line)); ?></p>
-        <?php } ?>
+        <span class="text-16">
+            <?php
+            $parts = [];
+
+            $address = trim($address_line_1 . ' ' . $address_line_2);
+            if ($address) $parts[] = $address;
+
+            $city_part = $city;
+            if ($state) $city_part .= ($city_part ? ', ' : '') . $state;
+            if ($zip_code) $city_part .= ' ' . $zip_code;
+            if ($city_part) $parts[] = $city_part;
+
+            echo esc_html(implode(', ', $parts));
+            ?>
+        </span>
     <?php } else { ?>
-        <p class="text-14 text-black/50">Not specified</p>
+        <span class="text-16 text-black/50">Location not specified</span>
     <?php } ?>
 </div>

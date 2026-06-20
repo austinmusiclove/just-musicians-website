@@ -32,6 +32,38 @@ function ensemble_size_values_to_options($values) {
     return array_values(array_unique($result));
 }
 
+function sort_ensemble_size_options($options) {
+    if (empty($options) || !is_array($options)) {
+        return [];
+    }
+
+    if (count($options) === 1) {
+        return $options;
+    }
+
+    $terms = get_terms([
+        'taxonomy'   => 'ensemble_size',
+        'hide_empty' => false,
+    ]);
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return $options;
+    }
+
+    $sort_map = [];
+    foreach ($terms as $term) {
+        $sort_map[$term->name] = (int) $term->description;
+    }
+
+    usort($options, function ($a, $b) use ($sort_map) {
+        $order_a = $sort_map[$a] ?? 999;
+        $order_b = $sort_map[$b] ?? 999;
+        return $order_a - $order_b;
+    });
+
+    return $options;
+}
+
 function get_checkbox_ref_string($input_name, $label) {
     $clean_label = html_entity_decode($label, ENT_QUOTES | ENT_HTML5, 'UTF-8'); // Handles html encoded characters like &amp; for &
     $cleaned =  preg_replace('/[^A-Za-z0-9]/', '', $clean_label); // remove special characters
