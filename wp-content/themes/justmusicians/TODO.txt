@@ -89,14 +89,14 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Include all fields in form
-                disallow start time after end time
                 all address fields with no active search and no venue
-                genre checkboxes
+                genre checkboxes (at least one)
                 ensemble size checkboxes
                 budget input
                 comp text area
                 application requirements checkboxes
                 make sure all fields can be udpated and get updated in front and back end
+                update css calendar on date update
         Applicants
             Show proposals in applicants tab
             Show suggestion listings after last applicant and on empty state

@@ -3,7 +3,7 @@
     <?php echo get_template_part('template-parts/events/event-details/date-time'); ?>
     <?php echo get_template_part('template-parts/events/event-details/location'); ?>
     <?php echo get_template_part('template-parts/events/event-details/genre'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/ensemble_size'); ?>
+    <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
     <?php echo get_template_part('template-parts/events/event-details/details'); ?>
     <?php echo get_template_part('template-parts/events/event-details/compensation'); ?>
     <?php echo get_template_part('template-parts/events/event-details/requirements'); ?>
@@ -19,6 +19,6 @@
 
 <!-- Edit Event Form -->
 <div x-show="showEditForm">
-    <?php echo get_template_part('template-parts/events/event-details/edit-event-form', '', []); ?>
+    <?php echo get_template_part('template-parts/events/edit-event-form', '', []); ?>
 </div>
 

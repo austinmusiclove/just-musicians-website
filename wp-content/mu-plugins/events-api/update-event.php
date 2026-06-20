@@ -25,11 +25,11 @@ function update_event($args) {
         return new WP_Error('update_failed', 'Failed to update event');
     }
 
-    // Returns all meta key value pairs
-    $meta = array_map(fn($val) => $val[0], get_post_meta($event_id, '', false));
+    $post_meta = array_map(fn($val) => $val[0], get_post_meta($event_id, '', false)); // Returns all meta key value pairs
 
-    return [
-        'post_id'   => $event_id,
-        'post_meta' => $meta,
-    ];
+    return array_merge([
+        'post_id'       => $event_id,
+        'genres'        => wp_get_post_terms($event_id, 'genre', ['fields' => 'names']),
+        'ensemble_size' => wp_get_post_terms($event_id, 'ensemble_size', ['fields' => 'names']),
+    ], $post_meta);
 }

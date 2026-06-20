@@ -12,5 +12,5 @@
 
 <div class="flex items-center gap-1" x-show="genres.length == 0" x-cloak>
     <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/music.svg" />
-    <p class="text-16 text-black/50">No genres specified</p>
+    <p class="text-16 text-black/50">Any genre</p>
 </div>

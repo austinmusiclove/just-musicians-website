@@ -13,4 +13,4 @@ if ( is_wp_error($result) ) {
 
 // Success Response
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Event Updated Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'update-event\', { \'event\': ' . clean_arr_for_doublequotes($result['post_meta']) . ' })"></span>';
+echo '<span x-init="$dispatch(\'update-event\', { \'event\': ' . clean_arr_for_doublequotes($result) . ' })"></span>';
