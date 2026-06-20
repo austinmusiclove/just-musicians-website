@@ -1,6 +1,7 @@
 <?php
 
 // Handles creating a formatted string for event dates, times, and location
+// Expects dates in Y-m-d (2027-01-07) and times in H:i (15:00) format
 
 $start_date = $args['start_date'] ?? '';
 $end_date   = $args['end_date'] ?? '';

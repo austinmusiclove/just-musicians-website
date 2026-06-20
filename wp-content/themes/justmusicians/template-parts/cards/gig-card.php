@@ -100,7 +100,6 @@
                     'request_quote' => $args['proposal']['event']['request_quote'],
                     'request_draw'  => $args['proposal']['event']['request_draw'],
                     'device'        => 'desktop',
-                    'status'        => $status,
                 ]); ?>
             </div>
 
@@ -111,7 +110,6 @@
                     'request_quote' => $args['proposal']['event']['request_quote'],
                     'request_draw'  => $args['proposal']['event']['request_draw'],
                     'device'        => 'mobile',
-                    'status'        => $status,
                 ]); ?>
             </div>
 

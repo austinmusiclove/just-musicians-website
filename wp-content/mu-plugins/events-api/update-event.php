@@ -25,8 +25,11 @@ function update_event($args) {
         return new WP_Error('update_failed', 'Failed to update event');
     }
 
+    // Returns all meta key value pairs
+    $meta = array_map(fn($val) => $val[0], get_post_meta($event_id, '', false));
+
     return [
         'post_id'   => $event_id,
-        'details'   => get_post_meta($event_id, 'details', true),
+        'post_meta' => $meta,
     ];
 }

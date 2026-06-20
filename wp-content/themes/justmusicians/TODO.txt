@@ -89,13 +89,15 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Include all fields in form
-                date, start/end time
+                refactor from php args to alpine args for all fields
+                disallow start time after end time
                 all address fields with no active search and no venue
                 genre checkboxes
                 ensemble size checkboxes
                 budget input
                 comp text area
                 application requirements checkboxes
+                make sure all fields can be udpated and get updated in front and back end
         Applicants
             Show proposals in applicants tab
             Show suggestion listings after last applicant and on empty state
@@ -105,6 +107,8 @@ Events and Inquiries refactor
             Show invited, available, unavailable musicians (Show freshness of reported availability)
             Click through to messages for each listing and/or all conversations for the event
         Make sure single event link in email and inquiry modal after success works
+        Notification to proposal owners when event date or time is altered
+        Listing: listing name change to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
     Event creation form
     Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
     Figure out what happens with existing inquiries messages
@@ -240,6 +244,7 @@ Venue pages
     switch out google map with styled map
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
+    Consider notification when musician updates a proposal
 Advanced inquiries
     Recurring event
     ****Test inquiries modal on safari on desktop and mobile

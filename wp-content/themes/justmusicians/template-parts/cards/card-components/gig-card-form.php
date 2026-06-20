@@ -3,7 +3,6 @@ $proposal_id   = $args['proposal_id'];
 $request_quote = $args['request_quote'];
 $request_draw  = $args['request_draw'];
 $device        = $args['device'];
-$status        = $args['status'];
 ?>
 
 <button type="button" x-on:click="showForm = true" x-show="!showForm" x-cloak

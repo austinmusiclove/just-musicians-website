@@ -1,11 +1,6 @@
 <div class="flex flex-col gap-4" x-show="!showEditForm">
 
-    <?php echo get_template_part('template-parts/events/event-details/date-time', '', [
-        'start_date' => $args['start_date'] ?? '',
-        'end_date'   => $args['end_date'] ?? '',
-        'start_time' => $args['start_time'] ?? '',
-        'end_time'   => $args['end_time'] ?? '',
-    ]); ?>
+    <?php echo get_template_part('template-parts/events/event-details/date-time'); ?>
 
     <?php echo get_template_part('template-parts/events/event-details/location', '', [
         'address_line_1' => $args['address_line_1'] ?? '',
@@ -47,8 +42,6 @@
 
 <!-- Edit Event Form -->
 <div x-show="showEditForm">
-    <?php echo get_template_part('template-parts/events/event-details/edit-event-form', '', [
-        'post_id' => $args['post_id'],
-    ]); ?>
+    <?php echo get_template_part('template-parts/events/event-details/edit-event-form', '', []); ?>
 </div>
 

@@ -21,10 +21,26 @@ get_header();
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
                     showEditForm: false,
-                    details: '<?php echo clean_str_for_doublequotes(get_field('details')); ?>',
+                    event_id:       '<?php echo get_the_ID(); ?>',
+                    details:        '<?php echo clean_str_for_doublequotes(get_field('details')); ?>',
+                    startDate:      '<?php echo clean_str_for_doublequotes(get_field('start_date')); ?>',
+                    endDate:        '<?php echo clean_str_for_doublequotes(get_field('end_date')); ?>',
+                    startTime:      '<?php echo clean_str_for_doublequotes(get_field('start_time')); ?>',
+                    endTime:        '<?php echo clean_str_for_doublequotes(get_field('end_time')); ?>',
+                    address_line_1: '<?php echo clean_str_for_doublequotes(get_field('address_line_1')); ?>',
+                    address_line_2: '<?php echo clean_str_for_doublequotes(get_field('address_line_2')); ?>',
+                    city:           '<?php echo clean_str_for_doublequotes(get_field('city')); ?>',
+                    state:          '<?php echo clean_str_for_doublequotes(get_field('state')); ?>',
+                    zip_code:       '<?php echo clean_str_for_doublequotes(get_field('zip_code')); ?>',
+                    budget:         '<?php echo clean_str_for_doublequotes(get_field('budget')); ?>',
+                    compensation:   '<?php echo clean_str_for_doublequotes(get_field('compensation')); ?>',
+                    request_quote:  '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',
+                    request_draw:   '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
+                    genres:          <?php echo clean_arr_for_doublequotes( wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),); ?>,
+                    ensemble_size:   <?php echo clean_arr_for_doublequotes( sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),); ?>,
                     _updateEvent(event) { updateEvent(this, event); },
                 }"
-                x-on:update-event="_updateEvent($event.detail); showEditForm = false;"
+                x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
             >
 
                 <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
@@ -52,10 +68,6 @@ get_header();
 
                     <div class="pt-4" x-show="showEventDetails" x-cloak>
                         <?php echo get_template_part('template-parts/events/event-details', '', [
-                            'start_date'     => get_field('start_date'),
-                            'end_date'       => get_field('end_date'),
-                            'start_time'     => get_field('start_time'),
-                            'end_time'       => get_field('end_time'),
                             'address_line_1' => get_field('address_line_1'),
                             'address_line_2' => get_field('address_line_2'),
                             'city'           => get_field('city'),
@@ -67,7 +79,6 @@ get_header();
                             'request_draw'   => get_field('request_draw'),
                             'genres'         => wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),
                             'ensemble_size'  => sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),
-                            'post_id'        => get_the_ID(),
                         ]); ?>
                     </div>
 
