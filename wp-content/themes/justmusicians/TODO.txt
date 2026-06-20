@@ -88,20 +88,14 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Event details
-            Event form to edit all details
-                include all fields in form
-                    date, start/end time
-                    all address fields with no active search and no venue
-                    genre checkboxes
-                    ensemble size checkboxes
-                    details text area
-                    budget input
-                    comp text area
-                    application requirements checkboxes
-            Update event functionality
-                update event mu plugin
-                update event html api
-                update event htmx with indicator
+            Include all fields in form
+                date, start/end time
+                all address fields with no active search and no venue
+                genre checkboxes
+                ensemble size checkboxes
+                budget input
+                comp text area
+                application requirements checkboxes
         Applicants
             Show proposals in applicants tab
             Show suggestion listings after last applicant and on empty state

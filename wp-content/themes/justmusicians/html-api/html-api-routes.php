@@ -53,6 +53,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/create-event.php'; exit;
             }
+        case 'update-event':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : include_once get_template_directory() . '/html-api/update-event.php'; exit;
+            }
         case 'request-proposal':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : include_once get_template_directory() . '/html-api/request-proposal.php'; exit;

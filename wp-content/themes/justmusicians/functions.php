@@ -234,6 +234,12 @@ function hmm_scripts() {
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
     }
 
+    // Single Event Pages
+    if (preg_match('#^/event/[^/]+/?$#', $path)) {
+        // Events
+        wp_enqueue_script('events-js', get_template_directory_uri() . '/lib/js/events.js', [], $pkg->version, true);
+    }
+
     // Messages pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/messages/')) {
 

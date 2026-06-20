@@ -18,7 +18,14 @@ get_header();
                   <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 py-6 md:py-12">
+            <div class="col md:col-span-6 py-6 md:py-12"
+                x-data="{
+                    showEditForm: false,
+                    details: '<?php echo clean_str_for_doublequotes(get_field('details')); ?>',
+                    _updateEvent(event) { updateEvent(this, event); },
+                }"
+                x-on:update-event="_updateEvent($event.detail); showEditForm = false;"
+            >
 
                 <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
                     <div class="w-20 shrink-0">
@@ -34,7 +41,6 @@ get_header();
                         this.showEventDetails = false;
                         this.showApplicants = false;
                     },
-                    showEditForm: false,
                 }">
                     <!-- Tabs -->
                     <div class="flex items-start justify-between border-b border-black/20">
@@ -55,13 +61,13 @@ get_header();
                             'city'           => get_field('city'),
                             'state'          => get_field('state'),
                             'zip_code'       => get_field('zip_code'),
-                            'details'        => get_field('details'),
                             'budget'         => get_field('budget'),
                             'compensation'   => get_field('compensation'),
                             'request_quote'  => get_field('request_quote'),
                             'request_draw'   => get_field('request_draw'),
                             'genres'         => wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),
                             'ensemble_size'  => sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),
+                            'post_id'        => get_the_ID(),
                         ]); ?>
                     </div>
 

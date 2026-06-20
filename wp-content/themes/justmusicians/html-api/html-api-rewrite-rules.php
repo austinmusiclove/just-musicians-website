@@ -55,6 +55,11 @@ function html_api_rewrite_rules() {
 
     // Events and Proposals
     add_rewrite_rule(
+        '^wp-html/v1/events/([0-9]+)/?$',
+        'index.php?wp-html-v1=update-event&event-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/events/([0-9]+)/listings/([0-9]+)/request-proposal/?$',
         'index.php?wp-html-v1=request-proposal&event-id=$matches[1]&listing-id=$matches[2]',
         'top'

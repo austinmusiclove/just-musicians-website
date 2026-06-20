@@ -23,9 +23,7 @@
         'ensemble_size'  => $args['ensemble_size'] ?? [],
     ]); ?>
 
-    <?php echo get_template_part('template-parts/events/event-details/details', '', [
-        'details'        => $args['details'] ?? '',
-    ]); ?>
+    <?php echo get_template_part('template-parts/events/event-details/details', '', []); ?>
 
     <?php echo get_template_part('template-parts/events/event-details/compensation', '', [
         'budget'         => $args['budget'] ?? '',
@@ -49,6 +47,8 @@
 
 <!-- Edit Event Form -->
 <div x-show="showEditForm">
-    <?php echo get_template_part('template-parts/events/event-details/edit-event-form', '', []); ?>
+    <?php echo get_template_part('template-parts/events/event-details/edit-event-form', '', [
+        'post_id' => $args['post_id'],
+    ]); ?>
 </div>
 

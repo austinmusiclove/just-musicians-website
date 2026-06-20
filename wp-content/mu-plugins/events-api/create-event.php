@@ -2,7 +2,7 @@
 function create_event($args) {
 
     // Create post
-    $event_id = wp_insert_post($args);
+    $event_id = wp_insert_post($args, true);
     if (is_wp_error($event_id) || !$event_id) {
         return new WP_Error('creation_failed', 'Failed to create event.');
     }
