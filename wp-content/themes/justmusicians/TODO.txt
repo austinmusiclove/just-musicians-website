@@ -89,9 +89,7 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Event form to edit all details
-                show/hide form on edit button
-                include udpate event button in form
-                include all fields
+                include all fields in form
                     date, start/end time
                     all address fields with no active search and no venue
                     genre checkboxes
@@ -125,9 +123,6 @@ Events and Inquiries refactor
     Mark inquiry post type as deprecated
     Note inquiry deprecation in user messages plugin
     Remove inquiries account page
-Event Form page
-    Allow venue location
-    Sucesss takes you to single event which has a tab for event details and editing
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message
@@ -176,6 +171,9 @@ My Gigs page (for musicians)
     Be able to click through to conversation if one exists between you and event owner
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
+Event Form page
+    Allow venue location
+    Sucesss takes you to single event which has a tab for event details and editing
 Offer post type (future)
     Status
     Pay with structure
