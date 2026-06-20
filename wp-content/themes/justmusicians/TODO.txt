@@ -89,7 +89,6 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Include all fields in form
-                refactor from php args to alpine args for all fields
                 disallow start time after end time
                 all address fields with no active search and no venue
                 genre checkboxes
