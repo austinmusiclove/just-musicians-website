@@ -89,15 +89,14 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Include all fields in form
-            location
-                test all location search inputs
-                add error in postal code options that reminds them they need to enter posal code if what they entered gets 0 results
-                insepct html of location search inptus to make sure they have the right properties
-                add active search indicator for search bar and mobile search bar
-                make desktop header search bar template part and maybe mobile one too (or rename mobile-search which is probably the mobile search bar)
-            try to reuse currency input
             genre checkboxes (at least one)
             ensemble size checkboxes
+            location
+                test all location search inputs
+                insepct html of location search inptus to make sure they have the right properties
+                add error in postal code options that reminds them they need to enter posal code if what they entered gets 0 results
+                add active search indicator for search bar and mobile search bar
+                make desktop header search bar template part and maybe mobile one too (or rename mobile-search which is probably the mobile search bar)
             make sure all fields can be udpated and get updated in front and back end
             update css calendar on date update
         Applicants

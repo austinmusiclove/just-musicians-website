@@ -27,6 +27,12 @@ function update_event($args) {
 
     $post_meta = array_map(fn($val) => $val[0], get_post_meta($event_id, '', false)); // Returns all meta key value pairs
 
+    // Get times and dates with get_field to assure they come back in the format specified in ACF
+    $post_meta['start_date'] = get_field('start_date', $event_id);
+    $post_meta['end_date']   = get_field('end_date', $event_id);
+    $post_meta['start_time'] = get_field('start_time', $event_id);
+    $post_meta['end_time']   = get_field('end_time', $event_id);
+
     return array_merge([
         'post_id'       => $event_id,
         'genres'        => wp_get_post_terms($event_id, 'genre', ['fields' => 'names']),
