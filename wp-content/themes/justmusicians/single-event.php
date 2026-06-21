@@ -32,6 +32,8 @@ get_header();
                     city:           '<?php echo clean_str_for_doublequotes(get_field('city')); ?>',
                     state:          '<?php echo clean_str_for_doublequotes(get_field('state')); ?>',
                     zip_code:       '<?php echo clean_str_for_doublequotes(get_field('zip_code')); ?>',
+                    lat:            '<?php echo clean_str_for_doublequotes(get_field('latitude')); ?>',
+                    lng:            '<?php echo clean_str_for_doublequotes(get_field('longitude')); ?>',
                     budget:         '<?php echo clean_str_for_doublequotes(get_field('budget')); ?>',
                     compensation:   '<?php echo clean_str_for_doublequotes(get_field('compensation')); ?>',
                     request_quote:  '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',

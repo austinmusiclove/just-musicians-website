@@ -89,19 +89,32 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Include all fields in form
-                all address fields with active search and lat/lng
+                location
+                    move location active search filters to search/active/search instead of global
+                    create postal code options api that is general
+                    use that one in listing form and anywhere else postal only search is needed
+                    consolodate the other location filters with general city/zip options api
+                try to reuse currency input
                 genre checkboxes (at least one)
                 ensemble size checkboxes
                 make sure all fields can be udpated and get updated in front and back end
                 update css calendar on date update
         Applicants
             Show proposals in applicants tab
+                get proposals by event id
+                proposal cards
+                    all details
+                    Click through to messages for each listing and/or all conversations for the event
+                    show new inquiry or updated bubble for notifications; this one is not cleared until refresh unlick number bubbles
+                empty state
+                Show invited, available, unavailable musicians (Show freshness of reported availability)
+                rename no-results to empty-states
             Show suggestion listings after last applicant and on empty state
+                use existing inqiury suggestions api and suggestion cards
+                new suggestion cards if needed
             Clear notifications for inquiry responses
             Show notifications bubble in applicants tab heading
             Test send inquiry from suggestion listing
-            Show invited, available, unavailable musicians (Show freshness of reported availability)
-            Click through to messages for each listing and/or all conversations for the event
         Make sure single event link in email and inquiry modal after success works
         Notification to proposal owners when event date or time is altered
         Listing: listing name change to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
