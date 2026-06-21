@@ -16,12 +16,31 @@
               hx-include="#lat-input-header-mobile, #lng-input-header-mobile"
             />
         </div>
-        <div class="w-full relative border border-black/20 rounded-sm">
-            <img class="h-4 absolute top-2 left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-            <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-header', '', ['target_id' => 'location-active-search-results-mobile-header']); ?>
-            <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="searchLat" />
-            <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="searchLng" />
+        <div class="bg-white text-14 pr-1 rounded-sm border border-black/20 grow w-full flex items-stretch">
+            <?php echo get_template_part('template-parts/search/active-search/location-search-input', '', [
+                'container_class' => 'w-full relative rounded-sm',
+                'image_class'     => 'h-4 absolute top-2 left-2',
+                'image_file'      => 'location.svg',
+                'id'              => 'mobile-header-location-filter',
+                'input_class'     => 'w-full h-full py-2 pr-3 pl-5',
+                'input_name'      => 'location',
+                'placeholder'     => 'Start typing your city or postal code..',
+                'autocomplete'    => 'location-disabled',
+                'required'        => false,
+                'input_var'       => 'locationInputHeader',
+                'selected_var'    => 'searchLocation',
+                'show_var'        => 'showLocationSearchOptionsHeader',
+                'htmx_path'       => '/wp-html/v1/location-search-options/',
+                'spinner_id'      => 'mobile-header-location-active-search-spinner',
+                'update_func'     => 'updateLocation',
+                'state_1_msg'     => 'Start typing a city or postal code..',
+            ]); ?>
+            <span id="mobile-header-location-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
+                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+            </span>
         </div>
+        <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="searchLat" />
+        <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="searchLng" />
     </div>
 
     <div id="active-search-results-mobile" class="p-8" x-show="getShowDefaultSearchOptionsMobile()" x-cloak>

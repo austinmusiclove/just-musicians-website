@@ -1,6 +1,7 @@
 Critical bugs
     Fix mu plugins depending on each other; move code to includes instead
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
+    Figure out why update listing takes forever; probably something with unneeded image processing
 
 Deploy
     Set up Event acf
@@ -87,18 +88,18 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Event details
-            Include all fields in form
-                location
-                    move location active search filters to search/active/search instead of global
-                    create postal code options api that is general
-                    use that one in listing form and anywhere else postal only search is needed
-                    consolodate the other location filters with general city/zip options api
-                try to reuse currency input
-                genre checkboxes (at least one)
-                ensemble size checkboxes
-                make sure all fields can be udpated and get updated in front and back end
-                update css calendar on date update
+        Include all fields in form
+            location
+                test all location search inputs
+                add error in postal code options that reminds them they need to enter posal code if what they entered gets 0 results
+                insepct html of location search inptus to make sure they have the right properties
+                add active search indicator for search bar and mobile search bar
+                make desktop header search bar template part and maybe mobile one too (or rename mobile-search which is probably the mobile search bar)
+            try to reuse currency input
+            genre checkboxes (at least one)
+            ensemble size checkboxes
+            make sure all fields can be udpated and get updated in front and back end
+            update css calendar on date update
         Applicants
             Show proposals in applicants tab
                 get proposals by event id

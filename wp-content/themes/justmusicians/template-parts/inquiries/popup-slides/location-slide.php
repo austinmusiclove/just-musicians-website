@@ -4,16 +4,31 @@
 
     <div class="flex items-start gap-2 mb-3">
         <h2 class="font-bold font-poppins text-20 mb-8">Where is your event?</h2>
-        <span class="inset-0 flex items-center justify-center htmx-indicator inquiry-location-active-search-spinner">
+        <span id="inquiry-location-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
         </span>
     </div>
 
     <p><span class="text-red">* </span>Location</p>
-    <div class="relative flex items-center">
-        <img class="h-4 absolute left-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-        <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-if', '', []); ?>
-    </div>
+    <?php echo get_template_part('template-parts/search/active-search/location-search-input', '', [
+        'container_class' => 'relative flex items-center',
+        'image_class'     => 'absolute h-4 left-2',
+        'image_file'      => 'location.svg',
+        'id'              => 'inquiry-location-input',
+        'input_class'     => 'h-full w-full py-2 pr-3 pl-5 no-formatting border border-black/20 focus:border-black outline-none',
+        'input_name'      => 'location',
+        'placeholder'     => 'Start typing your city or postal code..',
+        'autocomplete'    => 'off',
+        'required'        => true,
+        'input_var'       => 'inquiryLocationInput',
+        'selected_var'    => 'inquiryLocation',
+        'show_var'        => 'showInquiryLocationSearchOptions',
+        'x_class'         => "{ 'shake': shakeElements.has('inquiry-location-input') }",
+        'htmx_path'       => '/wp-html/v1/location-search-options/',
+        'spinner_id'      => 'inquiry-location-active-search-spinner',
+        'update_func'     => '_updateInquiryLocation',
+        'state_1_msg'     => 'Start typing a city or postal code..',
+    ]); ?>
     <input type="hidden" name="event_city" x-model="inquiryCity" />
     <input type="hidden" name="event_state" x-model="inquiryState" />
     <input type="hidden" name="event_zip_code" x-model="inquiryZipCode" />

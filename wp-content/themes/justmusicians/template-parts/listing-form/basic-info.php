@@ -29,10 +29,24 @@
     <fieldgroup>
         <div>
             <!-- Postal Code -->
-            <div class="relative">
-                <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <?php echo get_template_part('template-parts/global/form/location-active-search/location-active-search-input-lf', '', []); ?>
-            </div>
+            <?php echo get_template_part('template-parts/search/active-search/location-search-input', '', [
+                'container_class' => 'relative flex items-center',
+                'image_class'     => 'h-4 absolute bottom-3 left-3 opacity-60',
+                'image_file'      => 'location-2.svg',
+                'id'              => 'listing-form-zip',
+                'input_class'     => 'has-icon',
+                'input_name'      => 'pc_search',
+                'placeholder'     => 'Postal Code',
+                'autocomplete'    => 'postal-code-disabled',
+                'required'        => true,
+                'input_var'       => 'zipCodeInput',
+                'selected_var'    => 'fullLocation',
+                'show_var'        => 'showZipSearchOptions',
+                'htmx_path'       => '/wp-html/v1/location-search-options-pc/',
+                'spinner_id'      => 'zip-active-search-spinner',
+                'update_func'     => 'listingFormUpdateLocation',
+                'state_1_msg'     => 'Enter a US or Canada postal code (ex. 78701, A1A)',
+            ]); ?>
             <input type="hidden" id="city" name="city" x-model="pCity">
             <input type="hidden" id="state" name="state" x-model="pState">
             <input type="hidden" id="postal_code" name="zip_code" x-model="pZipCode">

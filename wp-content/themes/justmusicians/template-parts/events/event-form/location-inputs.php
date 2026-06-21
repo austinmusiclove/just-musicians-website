@@ -18,17 +18,27 @@
         <div class="flex flex-col justify-end">
             <div class="flex flex-row">
                 <label class="text-14 font-bold">Postal Code<span class="text-red"> *</span></label>
-                <span id="zip-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
+                <span id="zip-active-search-spinner" class="px-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
             </div>
-            <?php echo get_template_part('template-parts/search/active-search-inputs/pc-active-search-input', '', [
-                'id'           => 'edit-event-zip',
-                'input_var'    => 'zipCodeInput',
-                'selected_var' => 'zipCodeSelected',
-                'show_var'     => 'showZipSearchOptions',
-                'spinner_id'   => 'zip-active-search-spinner',
-                'update_func'  => 'updateEventFormLocation',
+            <?php echo get_template_part('template-parts/search/active-search/location-search-input', '', [
+                'container_class' => 'relative flex items-center',
+                'image_class'     => 'h-4 absolute bottom-3 left-3 opacity-60',
+                'image_file'      => 'location-2.svg',
+                'id'              => 'edit-event-zip',
+                'input_class'     => 'has-icon',
+                'input_name'      => 'pc_search',
+                'placeholder'     => 'Postal Code',
+                'autocomplete'    => 'postal-code-disabled',
+                'required'        => true,
+                'input_var'       => 'zipCodeInput',
+                'selected_var'    => 'zipCodeSelected',
+                'show_var'        => 'showZipSearchOptions',
+                'htmx_path'       => '/wp-html/v1/location-search-options-pc/',
+                'spinner_id'      => 'zip-active-search-spinner',
+                'update_func'     => 'updateEventFormLocation',
+                'state_1_msg'     => 'Enter a US or Canada postal code (ex. 78701, A1A)',
             ]); ?>
             <input type="hidden" name="event_zip_code" x-model="zipCodeSelected" />
         </div>
