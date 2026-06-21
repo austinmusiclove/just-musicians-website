@@ -89,8 +89,8 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Include all fields in form
-            genre checkboxes (at least one)
-            ensemble size checkboxes
+            make genre require at least one
+            fix height for taxonomy options
             location
                 test all location search inputs
                 insepct html of location search inptus to make sure they have the right properties

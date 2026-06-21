@@ -5,6 +5,7 @@
 >
     <?php echo get_template_part('template-parts/events/event-form/date-time-inputs'); ?>
     <?php echo get_template_part('template-parts/events/event-form/location-inputs'); ?>
+    <?php echo get_template_part('template-parts/events/event-form/taxonomy-inputs'); ?>
     <?php echo get_template_part('template-parts/events/event-form/details-input'); ?>
     <?php echo get_template_part('template-parts/events/event-form/compensation-inputs'); ?>
 
