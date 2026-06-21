@@ -98,6 +98,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : include_once get_template_directory() . '/html-api/location-search-options.php'; exit;
             }
+        case 'location-search-options-pc':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'   : include_once get_template_directory() . '/html-api/location-search-options-pc.php'; exit;
+            }
         case 'lf-location-search-options':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : include_once get_template_directory() . '/html-api/lf-location-search-options.php'; exit;

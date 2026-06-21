@@ -4,7 +4,7 @@
     zipCodeInput: zip_code,
     zipCodeSelected: zip_code,
     showZipSearchOptions: false,
-    listingFormUpdateLocation(location) { this.zipCodeSelected = location.postal_code; this.zipCodeInput = location.postal_code; this.cityInput = location.city; this.stateInput = location.state; lat = location.lat; lng = location.lng; },
+    updateEventFormLocation(location) { this.zipCodeSelected = location.postal_code; this.zipCodeInput = location.postal_code; this.cityInput = location.city; this.stateInput = location.state; lat = location.lat; lng = location.lng; },
 }">
     <div>
         <label class="text-14 font-bold">Address Line 1</label>
@@ -22,25 +22,14 @@
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
             </div>
-            <div class="relative">
-                <img class="h-4 absolute bottom-3 left-3 opacity-60" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
-                <input class="has-icon"
-                    type="text" id="pc_search" name="pc_search"
-                    autocomplete="postal-code-disabled" required
-                    placeholder="Postal Code"
-                    title="Enter a US or Canada postal code (ex. 78701, A1A)."
-                    x-model="zipCodeInput"
-                    x-on:focus="showZipSearchOptions = true; zipCodeInput = '';"
-                    x-on:click.away="showZipSearchOptions = false; zipCodeInput = zipCodeSelected;"
-                    hx-get="<?php echo site_url('/wp-html/v1/lf-location-search-options/'); ?>"
-                    hx-trigger="input changed delay:300ms"
-                    hx-target="#zip-active-search-results"
-                    hx-indicator="#zip-active-search-spinner"
-                />
-                <div id="zip-active-search-results" x-show="showZipSearchOptions" x-cloak>
-                    <?php echo get_template_part('template-parts/search/active-search/lf-location-search-state-1', '', array()); ?>
-                </div>
-            </div>
+            <?php echo get_template_part('template-parts/search/active-search-inputs/pc-active-search-input', '', [
+                'id'           => 'edit-event-zip',
+                'input_var'    => 'zipCodeInput',
+                'selected_var' => 'zipCodeSelected',
+                'show_var'     => 'showZipSearchOptions',
+                'spinner_id'   => 'zip-active-search-spinner',
+                'update_func'  => 'updateEventFormLocation',
+            ]); ?>
             <input type="hidden" name="event_zip_code" x-model="zipCodeSelected" />
         </div>
         <div>
