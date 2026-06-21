@@ -89,12 +89,9 @@ Events and Inquiries refactor
     Add Single Event page
         Event details
             Include all fields in form
-                all address fields with no active search and no venue
+                all address fields with active search and lat/lng
                 genre checkboxes (at least one)
                 ensemble size checkboxes
-                budget input
-                comp text area
-                application requirements checkboxes
                 make sure all fields can be udpated and get updated in front and back end
                 update css calendar on date update
         Applicants

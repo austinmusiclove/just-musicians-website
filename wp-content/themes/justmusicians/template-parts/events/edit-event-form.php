@@ -4,11 +4,10 @@
     hx-indicator="#submit-button-content"
 >
     <?php echo get_template_part('template-parts/events/event-form/date-time-inputs'); ?>
+    <?php echo get_template_part('template-parts/events/event-form/details-input'); ?>
+    <?php echo get_template_part('template-parts/events/event-form/compensation-inputs'); ?>
 
-    <label class="text-14 font-bold">Details</label>
-    <textarea class="w-full h-24 sm:h-40" name="event_details" placeholder="Event details" x-bind:value="details"></textarea>
-
-    <div class="flex gap-2 mt-4">
+    <div class="flex gap-2 mt-8">
         <button type="submit" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit">
             <span id="submit-button-content">
                 <span class="htmx-indicator-component-block-replace">Update Event</span>
