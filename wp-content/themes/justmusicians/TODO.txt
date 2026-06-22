@@ -88,8 +88,6 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Event edit form
-            make sure all fields can be udpated and get updated in front and back end
         Applicants
             Show proposals in applicants tab
                 get proposals by event id

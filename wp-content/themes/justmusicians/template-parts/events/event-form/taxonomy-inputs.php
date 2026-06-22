@@ -18,7 +18,7 @@
         echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
             'terms'           => $ensemble_sizes,
             'input_name'      => 'event_ensemble_size',
-            'input_x_model'   => 'ensemble_size',
+            'input_x_model'   => 'ensembleSize',
             'show_search_bar' => false,
         ]); ?>
     </div>

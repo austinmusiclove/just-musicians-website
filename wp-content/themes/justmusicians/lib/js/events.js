@@ -46,20 +46,21 @@ function formatTimeLine(startTime, endTime) {
 }
 
 function updateEvent(alco, event) {
+    alco.eventName      = event.event_name || '';
     alco.startDate      = event.start_date || '';
     alco.endDate        = event.end_date || '';
     alco.startTime      = event.start_time || '';
     alco.endTime        = event.end_time || '';
-    alco.details        = event.details || '';
-    alco.address_line_1 = event.address_line_1 || '';
-    alco.address_line_2 = event.address_line_2 || '';
+    alco.addressLine1   = event.address_line_1 || '';
+    alco.addressLine2   = event.address_line_2 || '';
     alco.city           = event.city || '';
     alco.state          = event.state || '';
-    alco.zip_code       = event.zip_code || '';
+    alco.zipCode        = event.zip_code || '';
+    alco.details        = event.details || '';
     alco.budget         = event.budget || '';
     alco.compensation   = event.compensation || '';
-    alco.request_quote  = event.request_quote ? true : false;
-    alco.request_draw   = event.request_draw ? true : false;
+    alco.requestQuote   = event.request_quote ? true : false;
+    alco.requestDraw    = event.request_draw ? true : false;
     alco.genres         = event.genres || [];
-    alco.ensemble_size  = event.ensemble_size || [];
+    alco.ensembleSize   = event.ensemble_size || [];
 }

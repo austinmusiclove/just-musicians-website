@@ -21,25 +21,26 @@ get_header();
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
                     showEditForm: false,
-                    event_id:       '<?php echo get_the_ID(); ?>',
-                    details:        '<?php echo clean_str_for_doublequotes(get_field('details')); ?>',
+                    eventId:        '<?php echo get_the_ID(); ?>',
+                    eventName:      '<?php echo clean_str_for_doublequotes(get_field('event_name')); ?>',
                     startDate:      '<?php echo clean_str_for_doublequotes(get_field('start_date')); ?>',
                     endDate:        '<?php echo clean_str_for_doublequotes(get_field('end_date')); ?>',
                     startTime:      '<?php echo clean_str_for_doublequotes(get_field('start_time')); ?>',
                     endTime:        '<?php echo clean_str_for_doublequotes(get_field('end_time')); ?>',
-                    address_line_1: '<?php echo clean_str_for_doublequotes(get_field('address_line_1')); ?>',
-                    address_line_2: '<?php echo clean_str_for_doublequotes(get_field('address_line_2')); ?>',
+                    addressLine1:   '<?php echo clean_str_for_doublequotes(get_field('address_line_1')); ?>',
+                    addressLine2:   '<?php echo clean_str_for_doublequotes(get_field('address_line_2')); ?>',
                     city:           '<?php echo clean_str_for_doublequotes(get_field('city')); ?>',
                     state:          '<?php echo clean_str_for_doublequotes(get_field('state')); ?>',
-                    zip_code:       '<?php echo clean_str_for_doublequotes(get_field('zip_code')); ?>',
+                    zipCode:        '<?php echo clean_str_for_doublequotes(get_field('zip_code')); ?>',
                     lat:            '<?php echo clean_str_for_doublequotes(get_field('latitude')); ?>',
                     lng:            '<?php echo clean_str_for_doublequotes(get_field('longitude')); ?>',
+                    details:        '<?php echo clean_str_for_doublequotes(get_field('details')); ?>',
                     budget:         '<?php echo clean_str_for_doublequotes(get_field('budget')); ?>',
                     compensation:   '<?php echo clean_str_for_doublequotes(get_field('compensation')); ?>',
-                    request_quote:  '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',
-                    request_draw:   '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
+                    requestQuote:   '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',
+                    requestDraw:    '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
                     genres:          <?php echo clean_arr_for_doublequotes( wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),); ?>,
-                    ensemble_size:   <?php echo clean_arr_for_doublequotes( sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),); ?>,
+                    ensembleSize:    <?php echo clean_arr_for_doublequotes( sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),); ?>,
                     _updateEvent(event) { updateEvent(this, event); },
                 }"
                 x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
@@ -49,7 +50,7 @@ get_header();
                     <div class="w-20 shrink-0">
                         <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
                     </div>
-                    <h1 class="font-bold text-25"><?php the_title(); ?></h1>
+                    <h1 class="font-bold text-25" x-text="eventName"></h1>
                 </div>
 
                 <div x-data="{

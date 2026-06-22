@@ -1,8 +1,9 @@
 <form
-    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/events/'); ?>' + event_id"
+    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/events/'); ?>' + eventId"
     hx-target="#event-update-result"
     hx-indicator="#submit-button-content"
 >
+    <?php echo get_template_part('template-parts/events/event-form/event-name-input'); ?>
     <?php echo get_template_part('template-parts/events/event-form/date-time-inputs'); ?>
     <?php echo get_template_part('template-parts/events/event-form/location-inputs'); ?>
     <?php echo get_template_part('template-parts/events/event-form/taxonomy-inputs'); ?>

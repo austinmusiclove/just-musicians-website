@@ -1,18 +1,18 @@
 <div class="flex flex-col gap-2 mb-4" x-data="{
     cityInput: city,
     stateInput: state,
-    zipCodeInput: zip_code,
-    zipCodeSelected: zip_code,
+    zipCodeInput: zipCode,
+    zipCodeSelected: zipCode,
     showZipSearchOptions: false,
     updateEventFormLocation(location) { this.zipCodeSelected = location.postal_code; this.zipCodeInput = location.postal_code; this.cityInput = location.city; this.stateInput = location.state; lat = location.lat; lng = location.lng; },
 }">
     <div>
         <label class="text-14 font-bold">Address Line 1</label>
-        <input type="text" name="event_address_line_1" x-bind:value="address_line_1" class="w-full" placeholder="Street address" />
+        <input type="text" name="event_address_line_1" x-bind:value="addressLine1" class="w-full" placeholder="Street address" />
     </div>
     <div>
         <label class="text-14 font-bold">Address Line 2</label>
-        <input type="text" name="event_address_line_2" x-bind:value="address_line_2" class="w-full" placeholder="Apt, suite, etc." />
+        <input type="text" name="event_address_line_2" x-bind:value="addressLine2" class="w-full" placeholder="Apt, suite, etc." />
     </div>
     <div class="flex flex-col sm:flex-row gap-2">
         <div class="flex flex-col justify-end">
