@@ -91,33 +91,42 @@ Events and Inquiries refactor
         Applicants
             Show proposals in applicants tab
                 proposal cards
-                    change applied status should cange to availble/unavailalbe instead of applied
-                        show different status display based on status and who is viewing and notifications with a template part or function to output the appropriate string for status bubble template part
+                    figure out status for proposals
+                        change applied status should cange to availble/unavailalbe instead of applied
+                            alter respond to proposal to udpate status update-proposal.php mu plugin, gig card, gig card form
+                            alter ACF options for status
+                            fix status filter options on my gigs
+                            remove partial available
+                            show different status display based on status and who is viewing and notifications with a template part or function to output the appropriate string for status bubble template part
+                        Make sure availability is required for inquiry response and make default "Availability Unknown"
+                        unavailable in red
                     Click through to messages for each listing and/or all conversations for the event
-                    show new inquiry or updated bubble for notifications; this one is not cleared until refresh unlick number bubbles
-                    image slider
+                    show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
+                    image slider or add more images into slider
                 applicants section
                     filters (copy my-gigs page)
-                        add status filter for inquiry, applied, new (maybe sort new ones to the top)
-                        Show invited, available, unavailable musicians (Show freshness of reported availability)
+                        add status filter for inquiry (No Response), available, unavailable, unread (maybe sort new ones to the top)
                     sort
+                        default sort by most recently udpated
                         by quote
                         by draw
                         by rating
-                work on no results message personality especially events
-                rename no-results to empty-states
-                create folders for html api files
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed
-            Clear notifications for inquiry responses
-            Show notifications bubble in applicants tab heading
-            Test send inquiry from suggestion listing
+                Test send inquiry from suggestion listing
+            Notifications
+                Clear notifications for inquiry responses
+                Show notification bubble on new response and do not clear that until refresh
+                Show notifications bubble in applicants tab heading
         Make sure single event link in email and inquiry modal after success works
         Notification to proposal owners when event date or time is altered
         Need to clear notifications if proposal is deleted or event
         On gig card: change "Listing: listing name" to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
     Event creation form
+    Work on no results message personality especially events
+    Rename no-results to empty-states
+    Create folders for html api files
     Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
     Figure out what happens with existing inquiries messages
         Evaluate if i need userInquiries in x-data of page-messages.php
@@ -129,6 +138,7 @@ Events and Inquiries refactor
     Mark inquiry post type as deprecated
     Note inquiry deprecation in user messages plugin
     Remove inquiries account page
+    Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message

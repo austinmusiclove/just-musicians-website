@@ -4,6 +4,7 @@
         proposal_quote:   '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
         proposal_draw:    '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
         proposal_details: '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
+        proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability']); ?>',
     }"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
         hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
@@ -164,12 +165,20 @@
         </div>
 
         <!-- Details -->
-        <div class="flex flex-col" x-show="proposal_details" x-cloak>
+        <div class="flex flex-col" x-show="proposal_details" x-cloak
+            x-data="{ expanded: false, tooLong: <?php echo mb_strlen($args['proposal_details']) > 150 ? 'true' : 'false'; ?> }">
             <span class="text-12 text-black/50 font-semibold">Response</span>
-            <p class="text-14 whitespace-pre-wrap" x-text="proposal_details"></p>
+            <p class="text-14 whitespace-pre-wrap" x-text="expanded ? proposal_details : proposal_details.slice(0, 200) + (tooLong ? '...' : '')"></p>
+            <button x-show="tooLong" x-on:click="expanded = !expanded" class="text-12 underline cursor-pointer w-fit mt-1" x-text="expanded ? 'Show less' : 'Show more'"></button>
         </div>
 
-        <div class="flex justify-between">
+        <!-- Availability -->
+        <div class="flex items-center gap-2" x-show="proposal_availability" x-cloak>
+            <span class="text-12 px-2 py-0.5 rounded-full bg-navy text-white capitalize font-semibold" x-text="proposal_availability"></span>
+            <span class="text-12 text-black/50 whitespace-nowrap">last updated <?php echo esc_html($args['proposal_updated']); ?></span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between gap-2">
             <!-- Quote / Draw -->
             <div class="flex flex-wrap items-center gap-2">
                 <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
@@ -177,7 +186,7 @@
             </div>
 
             <!-- Send Message -->
-            <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit" x-on:click="alert('Messaging coming soon')">
+            <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap">
                 Send Message
             </button>
         </div>
