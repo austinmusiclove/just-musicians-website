@@ -90,8 +90,6 @@ Events and Inquiries refactor
     Add Single Event page
         Event edit form
             location
-                add active search indicator for search bar and mobile search bar
-                make desktop header search bar template part and maybe mobile one too (or rename mobile-search which is probably the mobile search bar)
                 test all location search inputs
                 insepct html of location search inptus to make sure they have the right properties
             make sure all fields can be udpated and get updated in front and back end
