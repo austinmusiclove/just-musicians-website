@@ -27,7 +27,7 @@
         'input_class'     => 'w-full h-full py-2 pr-3 pl-5',
         'input_name'      => 'location',
         'placeholder'     => 'Start typing your city or postal code..',
-        'autocomplete'    => 'location-disabled',
+        'autocomplete'    => 'off',
         'required'        => false,
         'input_var'       => 'locationInputHeader',
         'selected_var'    => 'searchLocation',

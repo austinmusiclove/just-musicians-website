@@ -89,9 +89,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Event edit form
-            location
-                test all location search inputs
-                insepct html of location search inptus to make sure they have the right properties
             make sure all fields can be udpated and get updated in front and back end
         Applicants
             Show proposals in applicants tab
@@ -158,6 +155,9 @@ Applications (Calendly for music booking)
     Venue relationship
         Associate users with a venue
         Allow venue users to alter venue page data
+    My Applications for musicians
+        Show applications that have been filled out and allow withdraw (alter availability in gigs page or both)
+        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
 Single Event page
     Show offers
     Notify proposals that are available/unavailable if the date or time changes
