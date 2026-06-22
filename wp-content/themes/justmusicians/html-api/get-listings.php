@@ -34,11 +34,6 @@ $next_page              = $result['next_page'];
 // Render listings
 if (count($listings) > 0) {
     foreach($listings as $index => $listing) {
-        $genres = [];
-        $listing['genre'] ??= [];
-        if (!empty($listing['genre'])) {
-            $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
-        }
         get_template_part('template-parts/cards/standard-listing-card', '', [
             'post_id'                => $listing['post_id'],
             'name'                   => $listing['name'],
@@ -48,7 +43,7 @@ if (count($listings) > 0) {
             'state'                  => $listing['state'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
-            'genres'                 => $genres,
+            'genres'                 => (!empty($listing['genre'])) ? array_map(fn($genre) => $genre->name, $listing['genre']) : [], //$genres,
             'thumbnail_url'          => $listing['thumbnail_url'],
             'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
             'website'                => $listing['website'],

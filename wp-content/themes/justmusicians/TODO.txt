@@ -90,21 +90,23 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Show proposals in applicants tab
-                applicants section
-                    restructure like my-gigs
-                    support the media slider
-                    add status filter for inquiry, applied, new (maybe sort new ones to the top)
                 proposal cards
-                    start with standard listing
-                        support paging
-                        support the media slider with js and x-data required in wrapper
-                    add proposal details
+                    change applied status should cange to availble/unavailalbe instead of applied
+                        show different status display based on status and who is viewing and notifications with a template part or function to output the appropriate string for status bubble template part
                     Click through to messages for each listing and/or all conversations for the event
                     show new inquiry or updated bubble for notifications; this one is not cleared until refresh unlick number bubbles
-                Show invited, available, unavailable musicians (Show freshness of reported availability)
+                    image slider
+                applicants section
+                    filters (copy my-gigs page)
+                        add status filter for inquiry, applied, new (maybe sort new ones to the top)
+                        Show invited, available, unavailable musicians (Show freshness of reported availability)
+                    sort
+                        by quote
+                        by draw
+                        by rating
+                work on no results message personality especially events
                 rename no-results to empty-states
                 create folders for html api files
-                work on no results message personality especially events
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed

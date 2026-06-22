@@ -5,6 +5,20 @@
  * @package JustMusicians
  */
 
+
+// Get user collections
+$collections_result = get_user_collections([
+    'nopaging'     => true,
+    'nothumbnails' => true,
+]);
+$collections_map = array_column($collections_result['collections'], null, 'post_id');
+// Get user events
+$events_result = get_user_events([
+    'nopaging'         => true,
+    'start_date_after' => date('Y-m-d'),
+]);
+$events_map = array_column($events_result['events'], null, 'post_id');
+
 get_header();
 
 ?>
@@ -20,6 +34,10 @@ get_header();
             </div>
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
+                    eventsMap:       <?php echo clean_arr_for_doublequotes($events_map); ?>,
+                    get sortedEvents()                                   { return getSortedEvents(this); },
+                    _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
+                    collectionsMap:  <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     showEditForm: false,
                     eventId:        '<?php echo get_the_ID(); ?>',
                     eventName:      '<?php echo clean_str_for_doublequotes(get_field('event_name')); ?>',
