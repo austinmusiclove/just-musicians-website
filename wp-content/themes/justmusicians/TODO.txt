@@ -90,14 +90,21 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Show proposals in applicants tab
-                get proposals by event id
+                applicants section
+                    restructure like my-gigs
+                    support the media slider
+                    add status filter for inquiry, applied, new (maybe sort new ones to the top)
                 proposal cards
-                    all details
+                    start with standard listing
+                        support paging
+                        support the media slider with js and x-data required in wrapper
+                    add proposal details
                     Click through to messages for each listing and/or all conversations for the event
                     show new inquiry or updated bubble for notifications; this one is not cleared until refresh unlick number bubbles
-                empty state
                 Show invited, available, unavailable musicians (Show freshness of reported availability)
                 rename no-results to empty-states
+                create folders for html api files
+                work on no results message personality especially events
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed

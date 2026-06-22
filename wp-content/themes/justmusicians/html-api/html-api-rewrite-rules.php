@@ -60,6 +60,11 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
+        '^wp-html/v1/events/([0-9]+)/applicants/?$',
+        'index.php?wp-html-v1=event-applicants&event-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/events/([0-9]+)/listings/([0-9]+)/request-proposal/?$',
         'index.php?wp-html-v1=request-proposal&event-id=$matches[1]&listing-id=$matches[2]',
         'top'
