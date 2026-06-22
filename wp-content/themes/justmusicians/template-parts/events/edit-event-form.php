@@ -10,7 +10,7 @@
     <?php echo get_template_part('template-parts/events/event-form/compensation-inputs'); ?>
 
     <div class="flex gap-2 mt-8">
-        <button type="submit" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit">
+        <button type="submit" x-bind:disabled="genres.length < 1" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit disabled:opacity-50 disabled:cursor-not-allowed">
             <span id="submit-button-content">
                 <span class="htmx-indicator-component-block-replace">Update Event</span>
                 <span class="htmx-indicator-component-block mx-2 my-1">
