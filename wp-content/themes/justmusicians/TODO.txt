@@ -88,9 +88,8 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Include all fields in form
+        Event edit form
             make genre require at least one
-            fix height for taxonomy options
             location
                 test all location search inputs
                 insepct html of location search inptus to make sure they have the right properties
@@ -99,6 +98,7 @@ Events and Inquiries refactor
                 make desktop header search bar template part and maybe mobile one too (or rename mobile-search which is probably the mobile search bar)
             make sure all fields can be udpated and get updated in front and back end
             update css calendar on date update
+            need to clear notifications if proposal is deleted or event
         Applicants
             Show proposals in applicants tab
                 get proposals by event id

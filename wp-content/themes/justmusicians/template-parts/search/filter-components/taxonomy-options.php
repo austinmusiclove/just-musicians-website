@@ -1,11 +1,17 @@
+<?php $input_wrapper_class = !empty($args['input_wrapper_class']) ? $args['input_wrapper_class'] : 'h-full'; ?>
+
 <div x-data='{
     searchQuery: "",
     showOption(option) { return this.searchQuery === "" || option.toLowerCase().includes(this.searchQuery.toLowerCase()); },
 }'>
-    <?php if (!empty($args['title'])) { ?><h2 class="font-bold text-22"><?php echo $args['title']; ?></h2><?php } ?>
-    <?php if (!empty($args['show_search_bar']) and $args['show_search_bar']) {?><input type='text' class="my-6" placeholder="search..." x-model="searchQuery"></input><?php } ?>
+    <?php if (!empty($args['title'])) { ?>
+        <h2 class="font-bold text-22"><?php echo $args['title']; ?></h2>
+    <?php } ?>
+    <?php if (!empty($args['show_search_bar']) and $args['show_search_bar']) {?>
+        <input type='text' class="my-6" placeholder="search..." x-model="searchQuery"></input>
+    <?php } ?>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox overflow-scroll h-[10rem] content-start">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-y-2 gap-x-10 custom-checkbox content-start <?php echo $input_wrapper_class; ?>">
         <!-- This hidden input insures that this input data gets sent as [""] if no checkboxes are set instead of omitting it from the post body -->
         <input type="hidden" name="<?php echo $args['input_name']; ?>[]" >
         <?php

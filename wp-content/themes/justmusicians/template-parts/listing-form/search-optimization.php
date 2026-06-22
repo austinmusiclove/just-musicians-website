@@ -68,6 +68,7 @@
                     'input_name'      => 'categories',
                     'input_x_model'   => 'categoriesCheckboxes',
                     'show_search_bar' => true,
+                    'input_wrapper_class' => 'overflow-scroll h-[10rem]',
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab2" x-cloak>
@@ -77,6 +78,7 @@
                     'input_x_model'   => 'genresCheckboxes',
                     'show_search_bar' => true,
                     'max_options'     => 6,
+                    'input_wrapper_class' => 'overflow-scroll h-[10rem]',
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab3" x-cloak>
@@ -85,6 +87,7 @@
                     'input_name'      => 'subgenres',
                     'input_x_model'   => 'subgenresCheckboxes',
                     'show_search_bar' => true,
+                    'input_wrapper_class' => 'overflow-scroll h-[10rem]',
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab4" x-cloak>
@@ -93,6 +96,7 @@
                     'input_name'      => 'instrumentations',
                     'input_x_model'   => 'instCheckboxes',
                     'show_search_bar' => true,
+                    'input_wrapper_class' => 'overflow-scroll h-[10rem]',
                 ]); ?>
             </div>
             <div class="overflow-hidden" x-show="showTab5" x-cloak>
@@ -101,6 +105,7 @@
                     'input_name'      => 'settings',
                     'input_x_model'   => 'settingsCheckboxes',
                     'show_search_bar' => true,
+                    'input_wrapper_class' => 'overflow-scroll h-[10rem]',
                 ]); ?>
             </div>
         </fieldgroup>
