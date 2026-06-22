@@ -47,7 +47,7 @@ get_header();
 
                 <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
                     <div class="w-20 shrink-0">
-                        <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['timestamp' => strtotime(get_field('start_date'))]); ?>
+                        <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
                     </div>
                     <h1 class="font-bold text-25"><?php the_title(); ?></h1>
                 </div>
