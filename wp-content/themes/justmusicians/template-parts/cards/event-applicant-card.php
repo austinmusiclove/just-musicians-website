@@ -134,7 +134,7 @@
             </div>
 
             <!-- Status -->
-            <span class="text-11 px-2 py-0.5 rounded-full text-12 capitalize font-semibold w-fit" :class="proposal_status == 'inquiry' ? 'bg-red/40' : 'bg-yellow/40'" x-text="proposal_status" x-show="proposal_status" x-cloak></span>
+            <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['var' => 'proposal_status']); ?>
 
         </div>
 
@@ -166,7 +166,7 @@
 
         <!-- Details -->
         <div class="flex flex-col" x-show="proposal_details" x-cloak
-            x-data="{ expanded: false, tooLong: <?php echo mb_strlen($args['proposal_details']) > 150 ? 'true' : 'false'; ?> }">
+            x-data="{ expanded: false, tooLong: <?php echo mb_strlen($args['proposal_details']) > 200 ? 'true' : 'false'; ?> }">
             <span class="text-12 text-black/50 font-semibold">Response</span>
             <p class="text-14 whitespace-pre-wrap" x-text="expanded ? proposal_details : proposal_details.slice(0, 200) + (tooLong ? '...' : '')"></p>
             <button x-show="tooLong" x-on:click="expanded = !expanded" class="text-12 underline cursor-pointer w-fit mt-1" x-text="expanded ? 'Show less' : 'Show more'"></button>
@@ -174,8 +174,7 @@
 
         <!-- Availability -->
         <div class="flex items-center gap-2" x-show="proposal_availability" x-cloak>
-            <span class="text-12 px-2 py-0.5 rounded-full bg-navy text-white capitalize font-semibold" x-text="proposal_availability"></span>
-            <span class="text-12 text-black/50 whitespace-nowrap">last updated <?php echo esc_html($args['proposal_updated']); ?></span>
+            <span class="text-12 text-black/50 whitespace-nowrap">Availability last updated <?php echo esc_html($args['proposal_updated']); ?></span>
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between gap-2">

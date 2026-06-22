@@ -10,6 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 require_once 'proposals-api/authorization.php';
+require_once 'proposals-api/parse-args.php';
 require_once 'proposals-api/create-proposal.php';
 require_once 'proposals-api/get-user-listing-proposals.php';
 require_once 'proposals-api/get-proposals-with-data.php';

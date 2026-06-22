@@ -91,26 +91,16 @@ Events and Inquiries refactor
         Applicants
             Show proposals in applicants tab
                 proposal cards
-                    figure out status for proposals
-                        change applied status should cange to availble/unavailalbe instead of applied
-                            alter respond to proposal to udpate status update-proposal.php mu plugin, gig card, gig card form
-                            alter ACF options for status
-                            fix status filter options on my gigs
-                            remove partial available
-                            show different status display based on status and who is viewing and notifications with a template part or function to output the appropriate string for status bubble template part
-                        Make sure availability is required for inquiry response and make default "Availability Unknown"
-                        unavailable in red
                     Click through to messages for each listing and/or all conversations for the event
                     show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
                     image slider or add more images into slider
-                applicants section
-                    filters (copy my-gigs page)
-                        add status filter for inquiry (No Response), available, unavailable, unread (maybe sort new ones to the top)
-                    sort
-                        default sort by most recently udpated
-                        by quote
-                        by draw
-                        by rating
+                filters (copy my-gigs page)
+                    add status filter for inquiry (No Response), available, unavailable, unread (maybe sort new ones to the top)
+                sort
+                    default sort by most recently udpated
+                    by quote
+                    by draw
+                    by rating
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed

@@ -22,9 +22,9 @@
             quote:        '<?php echo clean_str_for_doublequotes($args['proposal']['quote']); ?>',
             draw:         '<?php echo clean_str_for_doublequotes($args['proposal']['draw']); ?>',
             status:       '<?php echo clean_str_for_doublequotes($args['proposal']['status']); ?>',
-            _updateProposal(details, availability, quote, draw) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = 'applied'},
+            _updateProposal(status, details, availability, quote, draw) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = status},
         }"
-        x-on:update-proposal="_updateProposal($event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw);"
+        x-on:update-proposal="_updateProposal($event.detail.status, $event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw);"
     >
 
         <!-- Calendar Icon -->
@@ -38,7 +38,7 @@
             <!-- Title + Status -->
             <div class="flex flex-row items-start justify-between gap-2">
                 <h2 class="text-18 sm:text-20 font-semibold cursor-pointer"><?php echo esc_html($args['proposal']['event']['event_name']); ?></h2>
-                <span class="text-11 px-2 py-0.5 rounded-full text-12 capitalize font-semibold break-words shrink-0" :class="status == 'inquiry' ? 'bg-red/40' : 'bg-yellow/40'" x-text="status"></span>
+                <?php get_template_part('template-parts/cards/card-components/gig-status-badge', '', ['var' => 'status']); ?>
             </div>
 
             <?php if ($args['proposal']['listing_name']) { ?>
@@ -72,9 +72,6 @@
                         <?php if ($args['proposal']['event']['budget']) { ?>
                             <span>$<?php echo esc_html(number_format((float) $args['proposal']['event']['budget'])); ?></span>
                         <?php } ?>
-                        <?php if ($args['proposal']['event']['budget'] && $args['proposal']['event']['compensation']) { ?>
-                            <span class="text-black/30">|</span>
-                        <?php } ?>
                         <?php if ($args['proposal']['event']['compensation']) { ?>
                             <span><?php echo esc_html($args['proposal']['event']['compensation']); ?></span>
                         <?php } ?>
@@ -83,11 +80,10 @@
             <?php } ?>
 
             <!-- Response -->
-            <div class="flex flex-col mb-4" x-show="!showForm && status == 'applied'" x-cloak>
+            <div class="flex flex-col mb-4" x-show="!showForm && status != 'inquiry'" x-cloak>
                 <span class="text-12 text-black/50 font-semibold">Your Response</span>
                 <div class="flex flex-wrap items-center gap-2">
-                    <p class="w-full text-14 mb-1" x-text="prop_details" x-show="prop_details" x-cloak></p>
-                    <span class="text-12 px-2 py-0.5 rounded-full bg-navy text-white capitalize font-semibold" x-text="availability" x-show="availability" x-cloak></span>
+                    <p class="w-full text-14 mb-1 whitespace-pre-wrap" x-text="prop_details" x-show="prop_details" x-cloak></p>
                     <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${quote}`" x-show="quote" x-cloak></span>
                     <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw: ${draw}`" x-show="draw" x-cloak></span>
                 </div>

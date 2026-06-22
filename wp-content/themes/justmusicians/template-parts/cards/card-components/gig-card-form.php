@@ -8,7 +8,7 @@ $device        = $args['device'];
 <button type="button" x-on:click="showForm = true" x-show="!showForm" x-cloak
     class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap"
     :class="'<?php echo $device; ?>' == 'desktop' ? '' : 'w-full'"
-    x-text="status == 'applied' ? 'Edit Response' : 'Respond to Inquiry'"
+    x-text="status == 'inquiry' ? 'Respond to Inquiry' : 'Edit Response'"
 >
 </button>
 
@@ -25,14 +25,11 @@ $device        = $args['device'];
         <div>
             <span class="text-12 text-black/50 font-semibold">Availability</span>
             <div class="flex gap-2 mt-1">
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Available' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="Available" class="sr-only" x-model="availability">Available
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'available' ? 'bg-navy text-white' : ''">
+                    <input type="radio" name="availability" value="available" class="sr-only" x-model="availability">Available
                 </label>
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Unavailable' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="Unavailable" class="sr-only" x-model="availability">Unavailable
-                </label>
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'Partially Available' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="Partially Available" class="sr-only" x-model="availability">Partially Available
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'unavailable' ? 'bg-navy text-white' : ''">
+                    <input type="radio" name="availability" value="unavailable" class="sr-only" x-model="availability">Unavailable
                 </label>
             </div>
         </div>
