@@ -90,7 +90,9 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Sort
-                add more listings and respond and to further test sort
+                change "no response" in drop down to "invited" and don't show no reponse in all
+                change all applicants to provide all responded, not no response
+                when empty, show "no one has responded yet" and show suggestions
             Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
@@ -103,11 +105,7 @@ Events and Inquiries refactor
                 Show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
                 Notification to proposal owners when event date or time is altered
                 Need to clear notifications if proposal is deleted or event
-            Lowest quote shows no responses
-                change all applicants to provide all responded, not no response
-                when empty, show "no one has responded yet" and showsuggestions
         Make sure single event link in email and inquiry modal after success works
-        Authenticate single event page to only allow event author and admin
     Event creation form
     Need error message about times not being compatible in event edit
     Work on no results message personality especially events
@@ -354,6 +352,7 @@ UX
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search (solved by keyword taxonomy in post content?)
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
+    when adding to collection toast should be more specific "added to [collection name]"
 Compliance
     *figure out if i need to request permission for cookies or not
 Devon

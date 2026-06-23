@@ -28,27 +28,26 @@ function hm_get_proposal_ids_by_event_id($event_id, $args = []) {
 
     $where = implode(' AND ', $where_clauses);
 
-    $joins = '';
+    $joins = "LEFT JOIN {$wpdb->posts} proposal_post ON idx.proposal_id = proposal_post.ID";
     $order_by = 'proposal_post.post_modified DESC, idx.proposal_id DESC';
 
-    if ($args['sort'] === 'high-quote') {
-        $joins = "LEFT JOIN {$wpdb->postmeta} quote_meta ON idx.proposal_id = quote_meta.post_id AND quote_meta.meta_key = 'quote'";
-        $order_by = 'CAST(COALESCE(quote_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
-    } elseif ($args['sort'] === 'low-quote') {
-        $joins = "LEFT JOIN {$wpdb->postmeta} quote_meta ON idx.proposal_id = quote_meta.post_id AND quote_meta.meta_key = 'quote'";
-        $order_by = 'CAST(COALESCE(quote_meta.meta_value, 0) AS UNSIGNED) ASC, idx.proposal_id DESC';
-    } elseif ($args['sort'] === 'high-draw') {
-        $joins = "LEFT JOIN {$wpdb->postmeta} draw_meta ON idx.proposal_id = draw_meta.post_id AND draw_meta.meta_key = 'draw'";
-        $order_by = 'CAST(COALESCE(draw_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
-    } elseif ($args['sort'] === 'low-draw') {
-        $joins = "LEFT JOIN {$wpdb->postmeta} draw_meta ON idx.proposal_id = draw_meta.post_id AND draw_meta.meta_key = 'draw'";
-        $order_by = 'CAST(COALESCE(draw_meta.meta_value, 0) AS UNSIGNED) ASC, idx.proposal_id DESC';
-    } elseif ($args['sort'] === 'high-rating') {
-        $joins = "LEFT JOIN {$wpdb->postmeta} rating_meta ON idx.listing_id = rating_meta.post_id AND rating_meta.meta_key = 'rating'";
-        $order_by = 'CAST(COALESCE(rating_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
-    } else {
-        $joins = "LEFT JOIN {$wpdb->posts} proposal_post ON idx.proposal_id = proposal_post.ID";
-        $order_by = 'proposal_post.post_modified DESC, idx.proposal_id DESC';
+    if (!empty($args['sort'])) {
+        if ($args['sort'] === 'high-quote') {
+            $joins = "LEFT JOIN {$wpdb->postmeta} quote_meta ON idx.proposal_id = quote_meta.post_id AND quote_meta.meta_key = 'quote'";
+            $order_by = 'CAST(COALESCE(quote_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
+        } elseif ($args['sort'] === 'low-quote') {
+            $joins = "LEFT JOIN {$wpdb->postmeta} quote_meta ON idx.proposal_id = quote_meta.post_id AND quote_meta.meta_key = 'quote'";
+            $order_by = "CAST(COALESCE(NULLIF(quote_meta.meta_value, ''), 999999999) AS UNSIGNED) ASC, idx.proposal_id DESC";
+        } elseif ($args['sort'] === 'high-draw') {
+            $joins = "LEFT JOIN {$wpdb->postmeta} draw_meta ON idx.proposal_id = draw_meta.post_id AND draw_meta.meta_key = 'draw'";
+            $order_by = 'CAST(COALESCE(draw_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
+        } elseif ($args['sort'] === 'low-draw') {
+            $joins = "LEFT JOIN {$wpdb->postmeta} draw_meta ON idx.proposal_id = draw_meta.post_id AND draw_meta.meta_key = 'draw'";
+            $order_by = "CAST(COALESCE(NULLIF(draw_meta.meta_value, ''), 999999999) AS UNSIGNED) ASC, idx.proposal_id DESC";
+        } elseif ($args['sort'] === 'high-rating') {
+            $joins = "LEFT JOIN {$wpdb->postmeta} rating_meta ON idx.listing_id = rating_meta.post_id AND rating_meta.meta_key = 'rating'";
+            $order_by = 'CAST(COALESCE(rating_meta.meta_value, 0) AS UNSIGNED) DESC, idx.proposal_id DESC';
+        }
     }
 
     return $wpdb->get_col($wpdb->prepare(
