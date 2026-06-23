@@ -25,6 +25,10 @@ function user_can_update_proposal($proposal_id) {
         return new WP_Error('unauthorized', 'You must be logged in.', ['status' => 401]);
     }
 
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
     if (!$proposal_id || !is_numeric($proposal_id)) {
         return new WP_Error('invalid_proposal_id', 'Proposal ID is required.', ['status' => 400]);
     }
