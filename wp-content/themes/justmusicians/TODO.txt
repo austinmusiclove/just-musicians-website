@@ -96,11 +96,10 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
+            Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 remove no-result html when suggestions come up and replace it with a heading for the suggestions
                 if no results from suggestions, no results html should suggest broadening search
-                sidebar that asks if you need more musicians to respond and does the same
-            Click through to messages for each listing and/or all conversations for the event
             Notifications
                 Clear notifications for inquiry responses
                 Show notification bubble on new response and do not clear that until refresh
