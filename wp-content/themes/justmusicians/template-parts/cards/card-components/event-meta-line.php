@@ -7,16 +7,24 @@ $start_date = $args['start_date'] ?? '';
 $end_date   = $args['end_date'] ?? '';
 $start_time = $args['start_time'] ?? '';
 $end_time   = $args['end_time'] ?? '';
-$city       = $args['city'] ?? '';
-$state      = $args['state'] ?? '';
+$city           = $args['city'] ?? '';
+$state          = $args['state'] ?? '';
+$address_line_1 = $args['address_line_1'] ?? '';
+$address_line_2 = $args['address_line_2'] ?? '';
+$zip_code       = $args['zip_code'] ?? '';
 
 $start_ts      = $start_date ? strtotime($start_date) : null;
 $end_ts        = $end_date   ? strtotime($end_date)   : null;
 $start_display = $start_ts   ? gmdate('M j, Y', $start_ts) : '';
 $end_display   = $end_ts     ? gmdate('M j, Y', $end_ts)   : '';
 
-$location_parts = array_filter([$city, $state]);
-$location       = !empty($location_parts) ? implode(', ', $location_parts) : '';
+$address_parts = [];
+if ($address_line_1) $address_parts[] = $address_line_1;
+if ($address_line_2) $address_parts[] = $address_line_2;
+$city_state = trim(implode(', ', array_filter([$city, $state])));
+$city_state_zip = trim($city_state . ' ' . $zip_code);
+if ($city_state_zip) $address_parts[] = $city_state_zip;
+$location = implode(', ', $address_parts);
 
 if ($start_display && $end_display) {
     $start_seg = $start_display;

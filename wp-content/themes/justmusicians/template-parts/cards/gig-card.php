@@ -42,6 +42,7 @@
                 <?php get_template_part('template-parts/cards/card-components/gig-status-badge', '', ['var' => 'status']); ?>
             </div>
 
+            <!-- Listing and update time -->
             <?php if ($args['proposal']['listing_name']) { ?>
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 rounded-full overflow-hidden bg-yellow-light shrink-0">
@@ -59,13 +60,17 @@
                 </div>
             <?php } ?>
 
+            <!-- Date time location -->
             <?php echo get_template_part('template-parts/cards/card-components/event-meta-line', '', [
-                'start_date' => $args['proposal']['event']['start_date'],
-                'end_date'   => $args['proposal']['event']['end_date'],
-                'start_time' => $args['proposal']['event']['start_time'],
-                'end_time'   => $args['proposal']['event']['end_time'],
-                'city'       => $args['proposal']['event']['city'],
-                'state'      => $args['proposal']['event']['state'],
+                'start_date'     => $args['proposal']['event']['start_date'],
+                'end_date'       => $args['proposal']['event']['end_date'],
+                'start_time'     => $args['proposal']['event']['start_time'],
+                'end_time'       => $args['proposal']['event']['end_time'],
+                'address_line_1' => $args['proposal']['event']['address_line_1'] ?? '',
+                'address_line_2' => $args['proposal']['event']['address_line_2'] ?? '',
+                'city'           => $args['proposal']['event']['city'],
+                'state'          => $args['proposal']['event']['state'],
+                'zip_code'       => $args['proposal']['event']['zip_code'] ?? '',
             ]); ?>
 
             <!-- Details -->

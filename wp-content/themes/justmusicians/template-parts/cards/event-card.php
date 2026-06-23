@@ -20,12 +20,15 @@
         </div>
 
         <?php echo get_template_part('template-parts/cards/card-components/event-meta-line', '', [
-            'start_date' => $args['start_date'],
-            'end_date'   => $args['end_date'],
-            'start_time' => $args['start_time'],
-            'end_time'   => $args['end_time'],
-            'city'       => $args['city'],
-            'state'      => $args['state'],
+            'start_date'     => $args['start_date'],
+            'end_date'       => $args['end_date'],
+            'start_time'     => $args['start_time'],
+            'end_time'       => $args['end_time'],
+            'address_line_1' => $args['address_line_1'],
+            'address_line_2' => $args['address_line_2'],
+            'city'           => $args['city'],
+            'state'          => $args['state'],
+            'zip_code'       => $args['zip_code'],
         ]); ?>
 
         <?php if ($args['details']) { ?>
