@@ -188,7 +188,15 @@
             </div>
 
             <!-- Send Message -->
-            <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap">
+            <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
+                x-on:click="
+                    sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name']); ?>';
+                    sendMessageListingId = <?php echo $args['listing_id']; ?>;
+                    sendMessageProposalId = <?php echo $args['proposal_id']; ?>;
+                    sendMessageText = '';
+                    showSendMessageModal = true;
+                "
+            >
                 Send Message
             </button>
         </div>

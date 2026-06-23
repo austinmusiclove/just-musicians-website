@@ -1,10 +1,4 @@
-Critical bugs
-    Home search bugs
-        Selecting all ens size options in home search causes htmx error (also just 4-6 and 7+
-            need to also test out saving event with all ens sizes
-            happens when 4-6 and 7+ are both selected no matter what order or other vars involved; not sure why;
-            renaming one of them could fix it potentially
-            temporary fix is set 404 to false on every custom html api route before exit
+themes/justmusicians/TODO.txtCritical bugs
     Fix mu plugins depending on each other; move code to includes instead
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
     Figure out why update listing takes forever; probably something with unneeded image processing
@@ -100,6 +94,7 @@ Events and Inquiries refactor
             Show suggestion listings after last applicant and on empty state
                 remove no-result html when suggestions come up and replace it with a heading for the suggestions
                 if no results from suggestions, no results html should suggest broadening search
+                maybe change to "invite to respond" and "invited"
             Notifications
                 Clear notifications for inquiry responses
                 Show notification bubble on new response and do not clear that until refresh
@@ -169,6 +164,7 @@ Single Event page
     Support venue location
     Support filtering applicants for unread; just go to the notifications table instad of the proposal index
     Add image slider to applicant card or add more images into slider
+    Send message button should send a message that has the proposal/event attached to it so that it can be displayed in the convo nicely
 Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View
@@ -387,6 +383,7 @@ Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
     the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
+    in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
 Accessibility
     *Need full audit
 Document

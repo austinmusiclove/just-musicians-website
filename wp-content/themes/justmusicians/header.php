@@ -85,6 +85,10 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             reviewErrorMsg: '',
             inquiryProgress: 0,
             showInquiryModal: false,
+            showSendMessageModal: false,
+            sendMessageListingName: '',
+            sendMessageListingId: 0,
+            sendMessageProposalId: 0,
             currentInquirySlide: '',
             showDateSlide: true,
             showLocationSlide: false,
@@ -181,4 +185,5 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
         echo get_template_part('template-parts/reviews/popup/review-popup', '', []);
+        echo get_template_part('template-parts/messages/send-message-modal', '', []);
     ?>
