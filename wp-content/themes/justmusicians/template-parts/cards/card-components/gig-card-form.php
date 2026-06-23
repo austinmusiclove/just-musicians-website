@@ -26,10 +26,10 @@ $device        = $args['device'];
             <span class="text-12 text-black/50 font-semibold">Availability</span>
             <div class="flex gap-2 mt-1">
                 <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'available' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="available" class="sr-only" x-model="availability">Available
+                    <input type="radio" name="availability" value="available" class="sr-only" x-model="availability" required>Available
                 </label>
                 <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 hover:bg-navy-light" :class="availability == 'unavailable' ? 'bg-navy text-white' : ''">
-                    <input type="radio" name="availability" value="unavailable" class="sr-only" x-model="availability">Unavailable
+                    <input type="radio" name="availability" value="unavailable" class="sr-only" x-model="availability" required>Unavailable
                 </label>
             </div>
         </div>
