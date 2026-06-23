@@ -3,10 +3,12 @@
 $event_id      = get_query_var('event-id');
 $filter_status = $_GET['filter_status'] ?? 'all';
 $page          = $_GET['page'] ?? 1;
+$sort          = $_GET['sort'] ?? 'recent';
 $per_page      = 10;
 
 $proposal_ids = hm_get_proposal_ids_by_event_id($event_id, [
     'status' => $filter_status,
+    'sort'   => $sort,
 ]);
 
 $total_ids     = count($proposal_ids);
@@ -41,6 +43,7 @@ if (!empty($page_ids)) {
             'verified'               => $listing['verified'],
             'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,
+            'sort'                   => $sort,
             'last'                   => $index === array_key_last($page_ids),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,

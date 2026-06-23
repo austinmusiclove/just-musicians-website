@@ -89,14 +89,7 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
-            Show proposals in applicants tab
-                sort
-                    do sorting after index or add to index
-                    default sort by most recently udpated
-                    by quote
-                    by draw
-                    by rating
-                Click through to messages for each listing and/or all conversations for the event
+            Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed

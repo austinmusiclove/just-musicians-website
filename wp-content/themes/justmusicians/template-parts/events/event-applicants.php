@@ -54,7 +54,9 @@
                 'options'     => [
                     ['value' => 'recent', 'label' => 'Most Recent'],
                     ['value' => 'high-quote',   'label' => 'Highest Quote'],
+                    ['value' => 'low-quote',    'label' => 'Lowest Quote'],
                     ['value' => 'high-draw',   'label' => 'Highest Draw'],
+                    ['value' => 'low-draw',    'label' => 'Lowest Draw'],
                     ['value' => 'high-rating',   'label' => 'Highest Rating'],
                 ],
                 'input_name'  => 'sort',
