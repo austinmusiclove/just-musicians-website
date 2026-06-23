@@ -15,7 +15,7 @@ $device        = $args['device'];
 <form class="w-full" x-show="showForm" x-cloak
     hx-post="<?php echo site_url('/wp-html/v1/proposals/' . $proposal_id . '/respond-to-inquiry/'); ?>"
     hx-target="#result-<?php echo $proposal_id; ?>"
-    hx-swap="outerHTML"
+    hx-swap="innerHTML"
     hx-indicator="#submit-response-button-content-<?php echo $proposal_id; ?>"
 >
 

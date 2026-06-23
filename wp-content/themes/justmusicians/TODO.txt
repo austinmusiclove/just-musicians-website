@@ -109,7 +109,6 @@ Events and Inquiries refactor
         Need to clear notifications if proposal is deleted or event
         Authenticate single event page to only allow event author and admin
         Gig card
-            change "Listing: listing name" to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
             Make availability required in gig card form
     Event creation form
     Work on no results message personality especially events

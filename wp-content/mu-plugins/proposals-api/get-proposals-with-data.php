@@ -11,14 +11,16 @@ function get_proposals_with_data($proposal_ids) {
         if (!$listing_id) continue;
 
         $proposals[] = [
-            'proposal_id'  => $proposal_id,
-            'listing_id'   => $listing_id,
-            'listing_name' => get_post_meta($listing_id, 'name', true),
-            'status'       => get_post_meta($proposal_id, 'status', true),
-            'availability' => get_post_meta($proposal_id, 'availability', true),
-            'details'      => get_post_meta($proposal_id, 'details', true),
-            'quote'        => get_post_meta($proposal_id, 'quote', true),
-            'draw'         => get_post_meta($proposal_id, 'draw', true),
+            'proposal_id'           => $proposal_id,
+            'listing_id'            => $listing_id,
+            'listing_name'          => get_post_meta($listing_id, 'name', true),
+            'listing_thumbnail_url' => get_the_post_thumbnail_url($listing_id, 'thumbnail') ?: '',
+            'proposal_updated'      => get_the_modified_time('M j, Y', $proposal_id),
+            'status'                => get_post_meta($proposal_id, 'status', true),
+            'availability'          => get_post_meta($proposal_id, 'availability', true),
+            'details'               => get_post_meta($proposal_id, 'details', true),
+            'quote'                 => get_post_meta($proposal_id, 'quote', true),
+            'draw'                  => get_post_meta($proposal_id, 'draw', true),
             'event'        => [
                 'event_id'      => $event_id,
                 'event_name'    => get_field('event_name', $event_id),

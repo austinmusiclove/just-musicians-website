@@ -22,9 +22,10 @@
             quote:        '<?php echo clean_str_for_doublequotes($args['proposal']['quote']); ?>',
             draw:         '<?php echo clean_str_for_doublequotes($args['proposal']['draw']); ?>',
             status:       '<?php echo clean_str_for_doublequotes($args['proposal']['status']); ?>',
-            _updateProposal(status, details, availability, quote, draw) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = status},
+            proposal_updated: '<?php echo clean_str_for_doublequotes($args['proposal']['proposal_updated']); ?>',
+            _updateProposal(status, details, availability, quote, draw, proposal_updated) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = status; this.proposal_updated = proposal_updated},
         }"
-        x-on:update-proposal="_updateProposal($event.detail.status, $event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw);"
+        x-on:update-proposal="_updateProposal($event.detail.status, $event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw, $event.detail.proposal_updated);"
     >
 
         <!-- Calendar Icon -->
@@ -42,8 +43,19 @@
             </div>
 
             <?php if ($args['proposal']['listing_name']) { ?>
-                <div class="flex items-center gap-1 flex-wrap">
-                    <p class="text-14 text-black/50">Listing: <?php echo esc_html($args['proposal']['listing_name']); ?></p>
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full overflow-hidden bg-yellow-light shrink-0">
+                        <?php if ($args['proposal']['listing_thumbnail_url']) { ?>
+                            <img src="<?php echo esc_url($args['proposal']['listing_thumbnail_url']); ?>" alt="<?php echo esc_attr($args['proposal']['listing_name']); ?>" class="w-full h-full object-cover" />
+                        <?php } else { ?>
+                            <div class="w-full h-full flex items-center justify-center text-12 font-bold text-black/40"><?php echo strtoupper(mb_substr($args['proposal']['listing_name'], 0, 1)); ?></div>
+                        <?php } ?>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-14 font-semibold"><?php echo esc_html($args['proposal']['listing_name']); ?></span>
+                        <p class="text-12 text-black/50" x-show="status == 'inquiry'" x-cloak>was invited to respond on <span x-text="proposal_updated"></p>
+                        <p class="text-12 text-black/50" x-show="status != 'inquiry'" x-cloak>responded on <span x-text="proposal_updated"></span></p>
+                    </div>
                 </div>
             <?php } ?>
 
