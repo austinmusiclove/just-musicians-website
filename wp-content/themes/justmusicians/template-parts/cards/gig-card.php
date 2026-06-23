@@ -12,7 +12,7 @@
         hx-trigger="revealed once"
         hx-swap="beforeend"
         hx-target="#results"
-        hx-indicator="#spinner"
+        hx-indicator="#gig-spinner-bottom"
         hx-include="#my-gigs-form"
         <?php } ?>
         x-data="{

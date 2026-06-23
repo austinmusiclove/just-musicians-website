@@ -51,12 +51,13 @@ get_header();
                         }"
                         hx-get="<?php echo site_url('/wp-html/v1/my-events/'); ?>"
                         hx-target="#results"
-                        hx-indicator="#spinner"
+                        hx-indicator="#events-spinner-top"
                         hx-trigger="load, filterupdate"
                     >
                         <input type="hidden" name="date_range" x-model="dateRange" />
 
                         <div class="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-black/20">
+
                             <div class="flex items-center gap-1">
                                 <button type="button" class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
                                     :class="dateRange === 'upcoming' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
@@ -65,19 +66,18 @@ get_header();
                                     :class="dateRange === 'past' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
                                     x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
                             </div>
+
+                            <div id="events-spinner-top" class="flex items-center justify-center htmx-indicator">
+                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                            </div>
+
                         </div>
 
                     </form>
 
-                    <span id="results">
-                        <?php
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                            echo get_template_part('template-parts/search/standard-listing-skeleton');
-                        ?>
-                    </span>
+                    <span id="results"></span>
 
-                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                    <div id="events-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                     </div>
 

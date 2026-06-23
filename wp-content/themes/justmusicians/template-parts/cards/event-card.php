@@ -5,7 +5,7 @@
     hx-trigger="revealed once"
     hx-swap="beforeend"
     hx-target="#results"
-    hx-indicator="#spinner"
+    hx-indicator="#events-spinner-bottom"
     hx-include="#my-events-form"
     <?php } ?>
 >

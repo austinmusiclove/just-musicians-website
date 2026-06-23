@@ -1,9 +1,12 @@
-<div
-    x-bind:hx-get="'<?php echo site_url('/wp-html/v1/events/'); ?>' + eventId + '/applicants'"
-    hx-trigger="load"
+<form id="event-applicants-form"
+    x-bind:hx-get="'<?php echo site_url('/wp-html/v1/events/'); ?>' + eventId + '/applicants/'"
     hx-target="#applicant-results"
-    hx-indicator="#applicants-spinner"
+    hx-indicator="#applicants-spinner-top"
+    hx-trigger="load, filterupdate"
     x-data='{
+        status: "all",
+        sort: "recent",
+
         get sortedCollections()                              { return getSortedCollections(this, 0); },
         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
@@ -27,8 +30,49 @@
     x-on:mute-youtube-players="_toggleMute()"
     x-init="_setupVisibilityListener()"
 >
+    <input type="hidden" name="filter_status" x-model="status" />
+    <input type="hidden" name="sort" x-model="sort" />
+
+    <div class="flex flex-wrap items-center gap-2 mb-4 pb-4">
+        <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+            <?php get_template_part('template-parts/global/form/dropdown', '', [
+                'options'     => [
+                    ['value' => 'all',         'label' => 'All Applicants'],
+                    ['value' => 'available',   'label' => 'Available'],
+                    ['value' => 'unavailable', 'label' => 'Unavailable'],
+                    ['value' => 'inquiry',     'label' => 'No Response'],
+                    //['value' => 'unread',      'label' => 'Unread'],
+                ],
+                'input_name'  => 'filter_status',
+                'selected'    => 'all',
+                'placeholder' => 'All Statuses',
+            ]); ?>
+        </div>
+
+        <div x-on:sort-changed="sort = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+            <?php get_template_part('template-parts/global/form/dropdown', '', [
+                'options'     => [
+                    ['value' => 'recent', 'label' => 'Most Recent'],
+                    ['value' => 'high-quote',   'label' => 'Highest Quote'],
+                    ['value' => 'high-draw',   'label' => 'Highest Draw'],
+                    ['value' => 'high-rating',   'label' => 'Highest Rating'],
+                ],
+                'input_name'  => 'sort',
+                'selected'    => 'recent',
+                'placeholder' => 'Sort by',
+            ]); ?>
+        </div>
+
+        <div id="applicants-spinner-top" class="flex items-center justify-center htmx-indicator">
+            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+        </div>
+
+    </div>
+
     <div id="applicant-results"></div>
-    <div id="applicants-spinner" class="my-8 flex items-center justify-center htmx-indicator">
+
+    <div id="applicants-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
     </div>
-</div>
+
+</form>

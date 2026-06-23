@@ -3,8 +3,7 @@
       :class="{
           'bg-navy text-white': <?php echo $args['var']; ?> === 'available',
           'bg-red text-white':  <?php echo $args['var']; ?> === 'unavailable',
-          'bg-yellow/40':       <?php echo $args['var']; ?> === 'inquiry',
-          'bg-yellow/40':       !['inquiry', 'available', 'unavailable'].includes(<?php echo $args['var']; ?>),
+          'bg-yellow/40':       !['available', 'unavailable'].includes(<?php echo $args['var']; ?>),
       }"
       x-text="({
           available:   'Available',

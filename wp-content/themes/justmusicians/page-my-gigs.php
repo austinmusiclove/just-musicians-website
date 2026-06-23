@@ -55,7 +55,7 @@ get_header();
                         }"
                         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
                         hx-target="#results"
-                        hx-indicator="#spinner"
+                        hx-indicator="#gig-spinner-top"
                         hx-trigger="load, filterupdate"
                     >
                         <input type="hidden" name="filter_listing" x-model="listing" />
@@ -100,13 +100,17 @@ get_header();
                                     x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
                             </div>
 
+                            <div id="gig-spinner-top" class="flex items-center justify-center htmx-indicator">
+                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                            </div>
+
                         </div>
 
                     </form>
 
                     <span id="results"></span>
 
-                    <div id="spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                    <div id="gig-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
                         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                     </div>
 

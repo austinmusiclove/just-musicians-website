@@ -14,13 +14,23 @@ function hm_get_listing_ids_by_event_id($event_id) {
     return array_map('strval', wp_list_pluck($rows, 'listing_id'));
 }
 
-function hm_get_proposal_ids_by_event_id($event_id) {
+function hm_get_proposal_ids_by_event_id($event_id, $args = []) {
     global $wpdb;
     $table = hm_get_proposal_index_table();
 
+    $where_clauses = ["event_id = %d"];
+    $params = [$event_id];
+
+    if (!empty($args['status']) && $args['status'] !== 'all') {
+        $where_clauses[] = 'status = %s';
+        $params[] = $args['status'];
+    }
+
+    $where = implode(' AND ', $where_clauses);
+
     return $wpdb->get_col($wpdb->prepare(
-        "SELECT proposal_id FROM {$table} WHERE event_id = %d",
-        $event_id
+        "SELECT proposal_id FROM {$table} WHERE {$where}",
+        $params
     ));
 }
 

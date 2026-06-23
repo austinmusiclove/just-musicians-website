@@ -1,10 +1,13 @@
 <?php
 
-$event_id = get_query_var('event-id');
-$page     = $_GET['page'] ?? 1;
-$per_page = 10;
+$event_id      = get_query_var('event-id');
+$filter_status = $_GET['filter_status'] ?? 'all';
+$page          = $_GET['page'] ?? 1;
+$per_page      = 10;
 
-$proposal_ids = hm_get_proposal_ids_by_event_id($event_id);
+$proposal_ids = hm_get_proposal_ids_by_event_id($event_id, [
+    'status' => $filter_status,
+]);
 
 $total_ids     = count($proposal_ids);
 $max_num_pages = max(1, ceil($total_ids / $per_page));

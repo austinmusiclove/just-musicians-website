@@ -90,17 +90,13 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Show proposals in applicants tab
-                proposal cards
-                    Click through to messages for each listing and/or all conversations for the event
-                    show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
-                    image slider or add more images into slider
-                filters (copy my-gigs page)
-                    add status filter for inquiry (No Response), available, unavailable, unread (maybe sort new ones to the top)
                 sort
+                    do sorting after index or add to index
                     default sort by most recently udpated
                     by quote
                     by draw
                     by rating
+                Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
                 new suggestion cards if needed
@@ -109,10 +105,14 @@ Events and Inquiries refactor
                 Clear notifications for inquiry responses
                 Show notification bubble on new response and do not clear that until refresh
                 Show notifications bubble in applicants tab heading
+                Show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
         Make sure single event link in email and inquiry modal after success works
         Notification to proposal owners when event date or time is altered
         Need to clear notifications if proposal is deleted or event
-        On gig card: change "Listing: listing name" to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
+        Authenticate single event page to only allow event author and admin
+        Gig card
+            change "Listing: listing name" to include profile cover image and name and maybe a message depending on status like Tom Breton was invited to respond
+            Make availability required in gig card form
     Event creation form
     Work on no results message personality especially events
     Rename no-results to empty-states
@@ -169,6 +169,8 @@ Single Event page
     Show offers
     Notify proposals that are available/unavailable if the date or time changes
     Support venue location
+    Support filtering applicants for unread; just go to the notifications table instad of the proposal index
+    Add image slider to applicant card or add more images into slider
 Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View

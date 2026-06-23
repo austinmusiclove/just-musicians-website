@@ -9,8 +9,10 @@
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
         hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
-        hx-indicator="#applicants-spinner"
         hx-swap="beforeend"
+        hx-target="#applicant-results"
+        hx-indicator="#applicants-spinner-bottom"
+        hx-include="#event-applicants-form"
     <?php } ?>
 >
 
@@ -169,7 +171,7 @@
             x-data="{ expanded: false, tooLong: <?php echo mb_strlen($args['proposal_details']) > 200 ? 'true' : 'false'; ?> }">
             <span class="text-12 text-black/50 font-semibold">Response</span>
             <p class="text-14 whitespace-pre-wrap" x-text="expanded ? proposal_details : proposal_details.slice(0, 200) + (tooLong ? '...' : '')"></p>
-            <button x-show="tooLong" x-on:click="expanded = !expanded" class="text-12 underline cursor-pointer w-fit mt-1" x-text="expanded ? 'Show less' : 'Show more'"></button>
+            <button type="button" x-show="tooLong" x-on:click="expanded = !expanded" class="text-12 underline cursor-pointer w-fit mt-1" x-text="expanded ? 'Show less' : 'Show more'"></button>
         </div>
 
         <!-- Availability -->
