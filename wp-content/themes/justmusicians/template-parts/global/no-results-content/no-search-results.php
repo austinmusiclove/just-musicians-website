@@ -4,8 +4,8 @@
         <span class="text-22 block text-center mb-2">Looks like this ol' trail's <span class="text-yellow">run dry!</span></span>
         <p class="text-20 mb-4">No results, but try again and you might strike gold!</p>
 
-        <button type="reset" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
-            x-on:click="$nextTick(() => { searchInput = ''; $dispatch('filterupdate') });">
+        <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
+            x-on:click="_clearListingForm()">
             Clear Search
         </button>
     </div>

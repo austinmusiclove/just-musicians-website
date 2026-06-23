@@ -44,10 +44,6 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/add-listing-to-inquiry.php'; exit;
             }
-        case 'inquiry-suggestions':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;
-            }
 
         // Events and Proposals
         case 'events':
@@ -77,6 +73,10 @@ function html_api_v1_template_redirects() {
         case 'my-gigs':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/get-my-gigs.php'; exit;
+            }
+        case 'inquiry-suggestions':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/get-inquiry-suggestions.php'; exit;
             }
 
         // Reviews

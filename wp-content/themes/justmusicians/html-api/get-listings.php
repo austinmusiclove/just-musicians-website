@@ -43,7 +43,7 @@ if (count($listings) > 0) {
             'state'                  => $listing['state'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
-            'genres'                 => (!empty($listing['genre'])) ? array_map(fn($genre) => $genre->name, $listing['genre']) : [], //$genres,
+            'genres'                 => (!empty($listing['genre'])) ? array_map(fn($genre) => $genre->name, $listing['genre']) : [],
             'thumbnail_url'          => $listing['thumbnail_url'],
             'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
             'website'                => $listing['website'],

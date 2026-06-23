@@ -2,12 +2,12 @@
 
 // Get listings
 $page             = $_GET['page'] ?? 1;
-$inquiry_id       = get_query_var('inquiry-id');
-$inquiry_lat      = get_post_meta($inquiry_id, 'latitude', true);
-$inquiry_lng      = get_post_meta($inquiry_id, 'longitude', true);
-$ensemble_size    = wp_get_post_terms($inquiry_id, 'ensemble_size', ['fields' => 'names']);
-$inquiry_genres   = wp_get_post_terms($inquiry_id, 'genre', ['fields' => 'names']);
-$listings_invited = get_post_meta($inquiry_id, 'listings_invited', true);
+$event_id         = get_query_var('event-id');
+$inquiry_lat      = get_post_meta($event_id, 'latitude', true);
+$inquiry_lng      = get_post_meta($event_id, 'longitude', true);
+$ensemble_size    = wp_get_post_terms($event_id, 'ensemble_size', ['fields' => 'names']);
+$inquiry_genres   = wp_get_post_terms($event_id, 'genre', ['fields' => 'names']);
+$listings_invited = hm_get_listing_ids_by_event_id($event_id);
 $listings_invited = is_array($listings_invited) ? $listings_invited : [];
 
 $result = get_listings([
@@ -24,7 +24,6 @@ $max_num_results = $result['max_num_results'];
 $max_num_pages   = $result['max_num_pages'];
 $is_last_page    = $page == $max_num_pages;
 $next_page       = $result['next_page'];
-$results_label   = $max_num_results == 1 ? ' Listing' : ' Listings';
 
 
 // Render listings
@@ -32,12 +31,13 @@ if (count($listings) > 0) {
     foreach($listings as $index => $listing) {
         get_template_part('template-parts/cards/suggestion-listing-card', '', [
             'post_id'                => $listing['post_id'],
-            'inquiry_id'             => $inquiry_id,
+            'event_id'               => $event_id,
             'name'                   => $listing['name'],
             'rating'                 => $listing['rating'],
             'review_count'           => $listing['review_count'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
+            'genres'                 => (!empty($listing['genre'])) ? array_map(fn($genre) => $genre->name, $listing['genre']) : [], //$genres,
             'thumbnail_url'          => $listing['thumbnail_url'],
             'youtube_video_data'     => $listing['youtube_video_data'],
             'verified'               => $listing['verified'],

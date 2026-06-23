@@ -1,5 +1,5 @@
 
-<span id="request-quote-button-<?php echo $args['listing_id']; ?>" class="w-full"
+<span id="request-quote-button-<?php echo $args['listing_id']; ?>" class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit sm:min-w-32"
     x-data="{
         _addListingToEvent(eventId, listingId) { return addListingToEvent(this, eventId, listingId); },
     }"
@@ -15,10 +15,10 @@
         hx-trigger="click"
         hx-indicator="#request-proposal-button-content-<?php echo $args['listing_id'] . '-' . $args['event_id']; ?>"
     >
-        <span id="request-proposal-button-content-<?php echo $args['listing_id'] . '-' . $args['event_id']; ?>">
+        <span id="request-proposal-button-content-<?php echo $args['listing_id'] . '-' . $args['event_id']; ?>" class="flex justify-center">
             <span class="htmx-indicator-component-block-replace">Send Inquiry</span>
-            <span class="htmx-indicator-component-block mx-2 my-1">
-                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+            <span class="htmx-indicator-component-block">
+                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
             </span>
         </span>
     </button>

@@ -1,7 +1,14 @@
 Critical bugs
+    Home search bugs
+        Selecting all ens size options in home search causes htmx error (also just 4-6 and 7+
+            need to also test out saving event with all ens sizes
+            happens when 4-6 and 7+ are both selected no matter what order or other vars involved; not sure why;
+            renaming one of them could fix it potentially
+            temporary fix is set 404 to false on every custom html api route before exit
     Fix mu plugins depending on each other; move code to includes instead
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
     Figure out why update listing takes forever; probably something with unneeded image processing
+    Consider setting status header in html apis on errors
 
 Deploy
     Set up Event acf
@@ -89,11 +96,11 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
-            Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
-                use existing inqiury suggestions api and suggestion cards
-                new suggestion cards if needed
-                Test send inquiry from suggestion listing
+                remove no-result html when suggestions come up and replace it with a heading for the suggestions
+                if no results from suggestions, no results html should suggest broadening search
+                sidebar that asks if you need more musicians to respond and does the same
+            Click through to messages for each listing and/or all conversations for the event
             Notifications
                 Clear notifications for inquiry responses
                 Show notification bubble on new response and do not clear that until refresh
@@ -103,6 +110,8 @@ Events and Inquiries refactor
                 Need to clear notifications if proposal is deleted or event
         Make sure single event link in email and inquiry modal after success works
     Event creation form
+        link from no event results page
+        link from add button
     Need error message about times not being compatible in event edit
     Work on no results message personality especially events
     Rename no-results to empty-states (also why do they have z-10, maybe get rid of that for all)
@@ -378,6 +387,7 @@ Bugs
 Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
+    the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
 Accessibility
     *Need full audit
 Document

@@ -2,8 +2,8 @@
 
     <div class="pb-32 relative">
 
-        <span class="text-22 block text-center mb-2">Looks like a <span class="text-yellow">ghost town</span> in here.</span>
-        <p class="text-20 mb-4">Need to rustle up some talent?</p>
+        <span class="text-22 block text-center mb-2">Looks like you've reached the <span class="text-yellow">end of the tail.</span></span>
+        <p class="text-20 mb-4">Still looking for your hired gun?</p>
 
         <button type="button"
             class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"

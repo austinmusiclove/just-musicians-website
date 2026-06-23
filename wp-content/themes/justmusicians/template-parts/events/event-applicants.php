@@ -80,6 +80,7 @@
     </div>
 
     <div id="applicant-results"></div>
+    <div id="applicant-suggestion-results"></div>
 
     <div id="applicants-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>

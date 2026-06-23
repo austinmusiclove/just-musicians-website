@@ -12,10 +12,10 @@ $proposal_ids = hm_get_proposal_ids_by_event_id($event_id, [
 ]);
 
 $total_ids     = count($proposal_ids);
-$max_num_pages = max(1, ceil($total_ids / $per_page));
+$max_num_pages = ceil($total_ids / $per_page);
 $offset        = ($page - 1) * $per_page;
 $page_ids      = array_slice($proposal_ids, $offset, $per_page);
-$is_last_page  = $page >= $max_num_pages;
+$is_last_page  = $page == $max_num_pages;
 $next_page     = $is_last_page ? null : (int) $page + 1;
 
 if (!empty($page_ids)) {
@@ -50,5 +50,8 @@ if (!empty($page_ids)) {
         ]);
     }
 } else if ($page == 1) {
-    get_template_part('template-parts/global/no-results-content/no-event-applicants', '', []);
+    get_template_part('template-parts/global/no-results-content/no-event-applicants', '', [ 'event_id' => $event_id, ]);
+}
+if ($is_last_page) {
+    get_template_part('template-parts/global/no-results-content/no-more-event-applicants', '', [ 'event_id' => $event_id, ]);
 }

@@ -1,8 +1,6 @@
+<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative">
 
-<div class="py-4 relative flex flex-col items-start gap-3 relative">
-
-
-    <div class="bg-yellow-light w-full shrink-0 relative max-w-3xl overflow-hidden"
+    <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
             previousIndex: 0,
             currentIndex: 0,
@@ -57,30 +55,30 @@
         <!-- Play -->
         <div class="absolute transform left-2 bottom-2"
             @click="_updateIndex(1)"
-            x-show="currentIndex == 0 && totalSlides > 1">
+            x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
         </div>
         <!-- Pause -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            x-show="currentIndex > 0 && _isPaused()">
+            x-show="currentIndex > 0 && _isPaused()" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
         </div>
         <!-- Mute -->
         <div class="absolute transform left-2 bottom-2"
             @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && playersMuted">
+            x-show="currentIndex > 0 && playersMuted" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
         </div>
         <!-- Unmute -->
         <div class="absolute transform left-2 bottom-2"
             @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && !playersMuted">
+            x-show="currentIndex > 0 && !playersMuted" x-cloak>
             <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
         </div>
         <!-- Left Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
             @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-            x-show="currentIndex > 0 && showArrows"
+            x-show="currentIndex > 0 && showArrows" x-cloak
             x-transition:enter-start="-translate-x-full opacity-0"
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
@@ -90,7 +88,7 @@
         <!-- Right Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
             @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-            x-show="currentIndex < totalSlides - 1 && showArrows"
+            x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
             x-transition:enter-start="translate-x-full opacity-0"
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
@@ -113,7 +111,18 @@
                 'verified'   => $args['verified'],
             ]); ?>
 
+            <!-- Collections button -->
+            <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [
+                'post_id'       => $args['post_id'],
+            ]); ?>
+
         </div>
+
+        <!-- Rating -->
+        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+            'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
+            'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
+        ]); ?>
 
         <!-- Location -->
         <span class="text-14 flex items-center">
@@ -126,11 +135,14 @@
             <?php echo $args['description']; ?>
         </p>
 
-        <!-- Rating -->
-        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
-            'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
-            'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
-        ]); ?>
+        <!-- Genres -->
+        <div class="flex items-center gap-1 flex-wrap">
+            <?php foreach ($args['genres'] as $term) { ?>
+                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+                    <?php echo $term; ?>
+                </span>
+            <?php } ?>
+        </div>
 
     </div>
 
@@ -139,4 +151,5 @@
         'listing_id' => $args['post_id'],
         'event_id'   => $args['event_id'],
     ]); ?>
+
 </div>
