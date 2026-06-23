@@ -89,10 +89,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
-            Sort
-                change "no response" in drop down to "invited" and don't show no reponse in all
-                change all applicants to provide all responded, not no response
-                when empty, show "no one has responded yet" and show suggestions
             Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
@@ -109,7 +105,7 @@ Events and Inquiries refactor
     Event creation form
     Need error message about times not being compatible in event edit
     Work on no results message personality especially events
-    Rename no-results to empty-states
+    Rename no-results to empty-states (also why do they have z-10, maybe get rid of that for all)
     Create folders for html api files
     Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
     Figure out what happens with existing inquiries messages

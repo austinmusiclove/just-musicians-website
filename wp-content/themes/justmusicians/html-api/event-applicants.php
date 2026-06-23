@@ -1,7 +1,7 @@
 <?php
 
 $event_id      = get_query_var('event-id');
-$filter_status = $_GET['filter_status'] ?? 'all';
+$filter_status = $_GET['filter_status'] ?? 'response';
 $page          = $_GET['page'] ?? 1;
 $sort          = $_GET['sort'] ?? 'recent';
 $per_page      = 10;

@@ -22,8 +22,13 @@ function hm_get_proposal_ids_by_event_id($event_id, $args = []) {
     $params = [$event_id];
 
     if (!empty($args['status']) && $args['status'] !== 'all') {
-        $where_clauses[] = 'status = %s';
-        $params[] = $args['status'];
+        if ($args['status'] === 'response') {
+            $where_clauses[] = 'status != %s';
+            $params[] = 'inquiry';
+        } else {
+            $where_clauses[] = 'status = %s';
+            $params[] = $args['status'];
+        }
     }
 
     $where = implode(' AND ', $where_clauses);
@@ -70,8 +75,13 @@ function hm_get_proposals_by_listing_ids($listing_ids, $args = []) {
     $params = array_merge($params, $listing_ids);
 
     if (!empty($args['status']) && $args['status'] !== 'all') {
-        $where_clauses[] = 'status = %s';
-        $params[] = $args['status'];
+        if ($args['status'] === 'response') {
+            $where_clauses[] = 'status != %s';
+            $params[] = 'inquiry';
+        } else {
+            $where_clauses[] = 'status = %s';
+            $params[] = $args['status'];
+        }
     }
 
     $order = 'ASC';

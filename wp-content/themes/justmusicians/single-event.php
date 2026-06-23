@@ -91,7 +91,7 @@ get_header();
                     <div class="flex items-start justify-between border-b border-black/20">
                         <div class="flex gap-6 items-start">
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showEventDetails}" x-on:click="hideTabs(); showEventDetails = true;">Event Details</div>
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">Applicants</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">Musicians</div>
                         </div>
                     </div>
 

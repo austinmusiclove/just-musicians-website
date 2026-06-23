@@ -37,14 +37,14 @@
         <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
                 'options'     => [
-                    ['value' => 'all',         'label' => 'All Applicants'],
+                    ['value' => 'response',    'label' => 'All Responses'],
                     ['value' => 'available',   'label' => 'Available'],
                     ['value' => 'unavailable', 'label' => 'Unavailable'],
-                    ['value' => 'inquiry',     'label' => 'No Response'],
+                    ['value' => 'inquiry',     'label' => 'Invited'],
+                    //['value' => 'all',         'label' => 'All'],
                 ],
                 'input_name'  => 'filter_status',
-                'selected'    => 'all',
-                'placeholder' => 'All Statuses',
+                'selected'    => 'response',
             ]); ?>
         </div>
 
@@ -70,7 +70,6 @@
                 'options'     => $sort_options,
                 'input_name'  => 'sort',
                 'selected'    => 'recent',
-                'placeholder' => 'Sort by',
             ]); ?>
         </div>
 

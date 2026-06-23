@@ -1,7 +1,7 @@
 
 <div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
 
-    <div class="pb-32 relative z-10">
+    <div class="pb-32 relative">
         <span class="text-22 block text-center mb-2">Well ain't this a <span class="text-yellow">quiet saloon!</span></span>
         <p class="text-20 mb-4">No applicants have moseyed on in just yet!</p>
     </div>
