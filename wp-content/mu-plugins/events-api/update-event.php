@@ -3,7 +3,7 @@ function update_user_event($args) {
 
     // Authenticate
     if (!current_user_can('manage_options')) {
-        if (!user_owns_event(['event_id' => $args['ID']])) {
+        if (!user_owns_event($args['ID'])) {
             return new WP_Error('access_denied', 'You must be the author of the event to update it');
         }
     }

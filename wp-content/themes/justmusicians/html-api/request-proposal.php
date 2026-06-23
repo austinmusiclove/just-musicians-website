@@ -2,11 +2,9 @@
 
 $event_id = get_query_var('event-id');
 $listing_id = get_query_var('listing-id');
-$args = ['event_id' => $event_id];
-
 
 // Check if user is authorized
-$is_authorized = user_owns_event($args);
+$is_authorized = user_owns_event($event_id);
 if ( is_wp_error($is_authorized)) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';

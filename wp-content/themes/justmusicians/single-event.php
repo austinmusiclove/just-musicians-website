@@ -5,6 +5,14 @@
  * @package JustMusicians
  */
 
+// Authorize
+if (!current_user_can('manage_options')) {
+    $auth = user_owns_event(get_the_ID());
+    if (is_wp_error($auth) || !$auth) {
+        wp_safe_redirect(site_url('/my-events/'));
+        exit;
+    }
+}
 
 // Get user collections
 $collections_result = get_user_collections([
