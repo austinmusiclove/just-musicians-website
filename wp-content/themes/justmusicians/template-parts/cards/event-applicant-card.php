@@ -129,14 +129,15 @@
                     'verified'   => $args['verified'],
                 ]); ?>
 
-                <!-- Collections button -->
-                <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [
-                    'post_id'       => $args['listing_id'],
-                ]); ?>
             </div>
 
             <!-- Status -->
             <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['var' => 'proposal_status']); ?>
+
+            <!-- Collections button -->
+            <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [
+                'post_id'       => $args['listing_id'],
+            ]); ?>
 
         </div>
 
