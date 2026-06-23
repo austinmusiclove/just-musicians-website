@@ -41,7 +41,6 @@
                     ['value' => 'available',   'label' => 'Available'],
                     ['value' => 'unavailable', 'label' => 'Unavailable'],
                     ['value' => 'inquiry',     'label' => 'No Response'],
-                    //['value' => 'unread',      'label' => 'Unread'],
                 ],
                 'input_name'  => 'filter_status',
                 'selected'    => 'all',
@@ -49,16 +48,26 @@
             ]); ?>
         </div>
 
+        <?php
+        $sort_options = [
+            ['value' => 'recent',      'label' => 'Most Recent'],
+            ['value' => 'high-rating', 'label' => 'Highest Rating'],
+        ];
+
+        if (get_field('request_quote')) {
+            $sort_options[] = ['value' => 'high-quote', 'label' => 'Highest Quote'];
+            $sort_options[] = ['value' => 'low-quote',  'label' => 'Lowest Quote'];
+        }
+
+        if (get_field('request_draw')) {
+            $sort_options[] = ['value' => 'high-draw',  'label' => 'Highest Draw'];
+            $sort_options[] = ['value' => 'low-draw',   'label' => 'Lowest Draw'];
+        }
+        ?>
+
         <div x-on:sort-changed="sort = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
-                'options'     => [
-                    ['value' => 'recent', 'label' => 'Most Recent'],
-                    ['value' => 'high-quote',   'label' => 'Highest Quote'],
-                    ['value' => 'low-quote',    'label' => 'Lowest Quote'],
-                    ['value' => 'high-draw',   'label' => 'Highest Draw'],
-                    ['value' => 'low-draw',    'label' => 'Lowest Draw'],
-                    ['value' => 'high-rating',   'label' => 'Highest Rating'],
-                ],
+                'options'     => $sort_options,
                 'input_name'  => 'sort',
                 'selected'    => 'recent',
                 'placeholder' => 'Sort by',

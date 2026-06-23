@@ -40,13 +40,8 @@ get_header();
 
                     </div>
 
-                <?php } else {
-                    $user_listings = get_user_listings(get_current_user_id());
-                    $listing_options = [['value' => 'all', 'label' => 'All Listings']];
-                    foreach ($user_listings as $id => $name) {
-                        $listing_options[] = ['value' => (string) $id, 'label' => $name];
-                    }
-                ?>
+                <?php } else { ?>
+
                     <form id="my-gigs-form"
                         x-data="{
                             listing: 'all',
@@ -66,6 +61,13 @@ get_header();
                         <div class="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-black/20">
 
                             <!-- Listing dropdown -->
+                            <?php
+                                $user_listings = get_user_listings(get_current_user_id());
+                                $listing_options = [['value' => 'all', 'label' => 'All Listings', 'show' => 'true']];
+                                foreach ($user_listings as $id => $name) {
+                                    $listing_options[] = ['value' => (string) $id, 'label' => $name, 'show' => 'true'];
+                                }
+                            ?>
                             <div x-on:filter_listing-changed="listing = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => $listing_options,
@@ -79,10 +81,10 @@ get_header();
                             <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => [
-                                        ['value' => 'all',         'label' => 'All Statuses'],
-                                        ['value' => 'inquiry',     'label' => 'New Inquiry'],
-                                        ['value' => 'available',   'label' => 'Available'],
-                                        ['value' => 'unavailable', 'label' => 'Unavailable'],
+                                        ['value' => 'all',         'label' => 'All Statuses', 'show' => 'true'],
+                                        ['value' => 'inquiry',     'label' => 'New Inquiry',  'show' => 'true'],
+                                        ['value' => 'available',   'label' => 'Available',    'show' => 'true'],
+                                        ['value' => 'unavailable', 'label' => 'Unavailable',  'show' => 'true'],
                                     ],
                                     'input_name'  => 'filter_status',
                                     'selected'    => 'all',

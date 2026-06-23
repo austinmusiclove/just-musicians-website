@@ -89,6 +89,8 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
+            Sort
+                add more listings and respond and to further test sort
             Click through to messages for each listing and/or all conversations for the event
             Show suggestion listings after last applicant and on empty state
                 use existing inqiury suggestions api and suggestion cards
@@ -99,6 +101,9 @@ Events and Inquiries refactor
                 Show notification bubble on new response and do not clear that until refresh
                 Show notifications bubble in applicants tab heading
                 Show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
+            Lowest quote shows no responses
+                change all applicants to provide all responded, not no response
+                when empty, show "no one has responded yet" and showsuggestions
         Make sure single event link in email and inquiry modal after success works
         Notification to proposal owners when event date or time is altered
         Need to clear notifications if proposal is deleted or event

@@ -9,6 +9,7 @@
         }
     }"
     x-on:click.away="showDropdown = false"
+
     class="relative"
 >
     <button type="button"
@@ -23,7 +24,7 @@
     <ul class="absolute z-10 top-full left-0 w-56 bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto mt-1"
         x-show="showDropdown" x-cloak>
         <template x-for="(opt, i) in options" :key="i">
-            <li @click="select(opt.value)"
+            <li x-on:click="select(opt.value)"
                 class="px-4 py-2 hover:bg-yellow-10 cursor-pointer text-14"
                 :class="selected === opt.value ? 'bg-yellow-10 font-semibold' : ''"
                 x-text="opt.label"></li>
