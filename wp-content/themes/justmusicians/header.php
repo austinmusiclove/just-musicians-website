@@ -86,6 +86,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             inquiryProgress: 0,
             showInquiryModal: false,
             showSendMessageModal: false,
+            showSendMessageSuccess: false,
             sendMessageListingName: '',
             sendMessageListingId: 0,
             sendMessageText: '',

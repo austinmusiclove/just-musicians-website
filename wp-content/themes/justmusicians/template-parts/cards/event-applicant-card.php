@@ -193,9 +193,8 @@
                     sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name']); ?>';
                     sendMessageListingId = <?php echo $args['listing_id']; ?>;
                     sendMessageText = '';
-                    $nextTick(() => {
-                        showSendMessageModal = true;
-                    });
+                    showSendMessageSuccess = false;
+                    showSendMessageModal = true;
                 "
             >
                 Send Message

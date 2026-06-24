@@ -90,10 +90,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
-            Click through to messages for each listing and/or all conversations for the event
-                Return more feedback for user including link to convo
-                Click to convo if one exists
-                Button to see all convos for this event
             Show suggestion listings after last applicant and on empty state
                 remove no-result html when suggestions come up and replace it with a heading for the suggestions
                 if no results from suggestions, no results html should suggest broadening search
@@ -171,6 +167,8 @@ Single Event page
     Support filtering applicants for unread; just go to the notifications table instad of the proposal index
     Add image slider to applicant card or add more images into slider
     Send message button should send a message that has the proposal/event attached to it so that it can be displayed in the convo nicely
+    Conversation group for events; link from send message success on event applicant card
+    Add a way to click to convo in send message modal for a particular listing if one exists
 Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View

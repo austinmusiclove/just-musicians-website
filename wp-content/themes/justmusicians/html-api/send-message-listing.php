@@ -35,4 +35,4 @@ if (is_wp_error($result)) {
     exit;
 }
 
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Message sent successfully!\'}); showSendMessageModal = false;"></span>';
+echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Message sent successfully!\'}); showSendMessageSuccess = true;"></span>';
