@@ -28,6 +28,9 @@ $next_page       = $result['next_page'];
 
 // Render listings
 if (count($listings) > 0) {
+
+    get_template_part('template-parts/events/suggestions-heading', '', []);
+
     foreach($listings as $index => $listing) {
         get_template_part('template-parts/cards/suggestion-listing-card', '', [
             'post_id'                => $listing['post_id'],
@@ -52,3 +55,5 @@ if (count($listings) > 0) {
 } else if ($page == 1) {
     get_template_part( 'template-parts/global/no-results-content/no-suggestion-listings');
 }
+
+echo '<span x-init="showSuggestions = true;"></span>';

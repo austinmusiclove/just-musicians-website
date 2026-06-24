@@ -32,7 +32,7 @@
                     hx-indicator="#send-message-button-content"
                     hx-include="#send-message-form"
                 >
-                    <span id="send-message-button-content">
+                    <span id="send-message-button-content" class="flex justify-center">
                         <span class="htmx-indicator-component-block-replace">Send</span>
                         <span class="htmx-indicator-component-block">
                             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>

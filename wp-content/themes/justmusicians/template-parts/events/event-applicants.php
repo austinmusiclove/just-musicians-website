@@ -6,6 +6,7 @@
     x-data='{
         status: "all",
         sort: "recent",
+        showSuggestions: false,
 
         get sortedCollections()                              { return getSortedCollections(this, 0); },
         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
@@ -40,7 +41,7 @@
                     ['value' => 'response',    'label' => 'All Responses'],
                     ['value' => 'available',   'label' => 'Available'],
                     ['value' => 'unavailable', 'label' => 'Unavailable'],
-                    ['value' => 'inquiry',     'label' => 'Invited'],
+                    ['value' => 'inquiry',     'label' => 'Invited to Respond'],
                     //['value' => 'all',         'label' => 'All'],
                 ],
                 'input_name'  => 'filter_status',
@@ -80,7 +81,6 @@
     </div>
 
     <div id="applicant-results"></div>
-    <div id="applicant-suggestion-results"></div>
 
     <div id="applicants-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>

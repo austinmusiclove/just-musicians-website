@@ -91,9 +91,7 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Show suggestion listings after last applicant and on empty state
-                remove no-result html when suggestions come up and replace it with a heading for the suggestions
                 if no results from suggestions, no results html should suggest broadening search
-                maybe change to "invite to respond" and "invited"
             Notifications
                 Show notification bubble on new response and do not clear that until refresh (red pill next to status "Unread")
                 Clear notifications for inquiry responses

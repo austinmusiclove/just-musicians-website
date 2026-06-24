@@ -55,3 +55,5 @@ if (!empty($page_ids)) {
 if ($is_last_page) {
     get_template_part('template-parts/global/no-results-content/no-more-event-applicants', '', [ 'event_id' => $event_id, ]);
 }
+
+echo '<span x-init="showSuggestions = false;"></span>';

@@ -250,6 +250,10 @@ function hmm_scripts() {
         wp_enqueue_script('alpinejs-intersect', get_template_directory_uri() . '/lib/js/alpine.intersect.min.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'alpinejs-intersect';
 
+        // Alpine Collapse
+        wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-collapse';
+
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, true);
         $alpine_dependencies[] = 'collections-scripts-js';
