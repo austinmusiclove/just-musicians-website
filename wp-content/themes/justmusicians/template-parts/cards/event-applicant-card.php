@@ -16,6 +16,11 @@
     <?php } ?>
 >
 
+    <!-- Notification Badge -->
+    <div class="absolute top-2 -left-2 z-10">
+        <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>
+    </div>
+
 
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
@@ -118,7 +123,7 @@
 
     <div class="py-2 flex flex-col gap-y-2 w-full">
 
-        <div class="flex flex-row justify-between items-center w-full">
+        <div class="flex flex-row justify-between items-start w-full">
 
             <div class="flex flex-row justify-start items-center w-full">
                 <!-- Name and verification badge -->
