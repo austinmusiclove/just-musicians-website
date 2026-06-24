@@ -1,20 +1,21 @@
 
 <div class="flex flex-col mb-4"
-    hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-    x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
-    hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
-    hx-swap="beforeend"
->
-
-    <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20"
-        <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
+    <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
         hx-swap="beforeend"
         hx-target="#results"
         hx-indicator="#gig-spinner-bottom"
         hx-include="#my-gigs-form"
-        <?php } ?>
+    <?php } ?>
+>
+
+    <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20"
+        hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+        x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
+        hx-swap="beforeend"
+        hx-indicator="decoy-indicator"
+        hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
         x-data="{
             showForm: false,
             prop_details: '<?php echo clean_str_for_doublequotes($args['proposal']['details']); ?>',
@@ -27,6 +28,7 @@
         }"
         x-on:update-proposal="_updateProposal($event.detail.status, $event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw, $event.detail.proposal_updated);"
     >
+        <span id="decoy-indicator"></span>
 
         <!-- Calendar Icon -->
         <div class="w-20 sm:w-24 shrink-0">

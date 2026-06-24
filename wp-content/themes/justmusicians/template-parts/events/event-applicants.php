@@ -2,9 +2,9 @@
     x-bind:hx-get="'<?php echo site_url('/wp-html/v1/events/'); ?>' + eventId + '/applicants/'"
     hx-target="#applicant-results"
     hx-indicator="#applicants-spinner-top"
-    hx-trigger="load, filterupdate"
+    hx-trigger="intersect once, filterupdate"
     x-data='{
-        status: "all",
+        status: "response",
         sort: "recent",
         showSuggestions: false,
 
@@ -31,7 +31,6 @@
     x-on:mute-youtube-players="_toggleMute()"
     x-init="_setupVisibilityListener()"
 >
-    <input type="hidden" name="filter_status" x-model="status" />
     <input type="hidden" name="sort" x-model="sort" />
 
     <div class="flex flex-wrap items-center gap-2 mb-4 pb-4">

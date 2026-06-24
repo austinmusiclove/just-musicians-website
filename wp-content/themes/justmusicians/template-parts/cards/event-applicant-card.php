@@ -1,26 +1,32 @@
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
     x-data="{
-        proposal_status:  '<?php echo clean_str_for_doublequotes($args['proposal_status']); ?>',
-        proposal_quote:   '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
-        proposal_draw:    '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
-        proposal_details: '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
+        proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']); ?>',
+        proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
+        proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
+        proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
         proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability']); ?>',
     }"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
         hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
-        hx-swap="beforeend"
         hx-target="#applicant-results"
+        hx-swap="beforeend"
         hx-indicator="#applicants-spinner-bottom"
         hx-include="#event-applicants-form"
     <?php } ?>
 >
 
     <!-- Notification Badge -->
-    <div class="absolute top-2 -left-2 z-10">
+    <div class="absolute top-2 -left-2 z-10"
+        hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+        x-bind:hx-trigger="(!notifications?.inquiry_response_proposal_ids?.includes('<?php echo $args['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
+        hx-swap="beforeend"
+        hx-indicator="decoy-indicator"
+        hx-vals='{"notification_type":"inquiry-response","subject_id": "<?php echo $args['proposal_id']; ?>" }'
+    >
+        <span id="decoy-indicator"></span>
         <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>
     </div>
-
 
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
@@ -57,7 +63,6 @@
                 src="<?php echo $args['thumbnail_url']; ?>"
                 x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
             />
-
             <!-- Youtube video iframes -->
             <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
                 <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
@@ -125,15 +130,14 @@
 
         <div class="flex flex-row justify-between items-start w-full">
 
+            <!-- Name and verification badge -->
             <div class="flex flex-row justify-start items-center w-full">
-                <!-- Name and verification badge -->
                 <?php get_template_part('template-parts/cards/card-components/listing-name', '', [
                     'is_preview' => false,
                     'name'       => $args['name'],
                     'permalink'  => $args['permalink'],
                     'verified'   => $args['verified'],
                 ]); ?>
-
             </div>
 
             <!-- Status -->
