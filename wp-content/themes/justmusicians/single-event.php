@@ -95,8 +95,8 @@ get_header();
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
                                 Musicians
                                 <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-                                    x-show="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length > 0"
-                                    x-text="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length">
+                                    x-show="((notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length + (notifications?.inquiry_response_update_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length) > 0"
+                                    x-text="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length + (notifications?.inquiry_response_update_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length">
                                 </span>
                             </div>
                         </div>

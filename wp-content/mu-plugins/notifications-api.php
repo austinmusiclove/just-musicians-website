@@ -31,11 +31,13 @@ function get_user_notifications() {
     $db_counts      = $db_notifications['counts'];
     $db_subject_ids = $db_notifications['subject_ids'];
 
-    $gig_notification_count   = isset($db_counts['new-inquiry'])      ? (int) $db_counts['new-inquiry']      : 0;
-    $event_notification_count = isset($db_counts['inquiry-response']) ? (int) $db_counts['inquiry-response'] : 0;
+    $gig_notification_count   = isset($db_counts['new-inquiry'])              ? (int) $db_counts['new-inquiry']              : 0;
+    $event_notification_count = isset($db_counts['inquiry-response'])         ? (int) $db_counts['inquiry-response']         : 0;
+    $event_notification_count += isset($db_counts['inquiry-response-update']) ? (int) $db_counts['inquiry-response-update']  : 0;
 
-    $new_inquiry_proposal_ids      = isset($db_subject_ids['new-inquiry'])      ? $db_subject_ids['new-inquiry']      : [];
-    $inquiry_response_proposal_ids = isset($db_subject_ids['inquiry-response']) ? $db_subject_ids['inquiry-response'] : [];
+    $new_inquiry_proposal_ids             = isset($db_subject_ids['new-inquiry'])              ? $db_subject_ids['new-inquiry']              : [];
+    $inquiry_response_proposal_ids        = isset($db_subject_ids['inquiry-response'])         ? $db_subject_ids['inquiry-response']         : [];
+    $inquiry_response_update_proposal_ids = isset($db_subject_ids['inquiry-response-update']) ? $db_subject_ids['inquiry-response-update']  : [];
 
     $total_notifications = array_sum([
         $account_notification_count,
@@ -45,12 +47,13 @@ function get_user_notifications() {
     ]);
 
     return [
-        'unread_convo_count'              => $unread_convo_count,
-        'account_notification_count'      => $account_notification_count,
-        'gig_notification_count'          => $gig_notification_count,
-        'event_notification_count'        => $event_notification_count,
-        'total_notification_count'        => $total_notifications,
-        'new_inquiry_proposal_ids'        => $new_inquiry_proposal_ids,
-        'inquiry_response_proposal_ids'   => $inquiry_response_proposal_ids,
+        'unread_convo_count'                   => $unread_convo_count,
+        'account_notification_count'           => $account_notification_count,
+        'gig_notification_count'               => $gig_notification_count,
+        'event_notification_count'             => $event_notification_count,
+        'total_notification_count'             => $total_notifications,
+        'new_inquiry_proposal_ids'             => $new_inquiry_proposal_ids,
+        'inquiry_response_proposal_ids'        => $inquiry_response_proposal_ids,
+        'inquiry_response_update_proposal_ids' => $inquiry_response_update_proposal_ids,
     ];
 }

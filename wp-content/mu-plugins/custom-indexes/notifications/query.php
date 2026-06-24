@@ -23,6 +23,17 @@ function add_inquiry_response_notification($user_id, $proposal_id) {
     ]);
 }
 
+function add_inquiry_response_update_notification($user_id, $proposal_id) {
+    global $wpdb;
+    $table = hm_get_notifications_table();
+
+    $wpdb->insert($table, [
+        'user_id'           => (int) $user_id,
+        'notification_type' => 'inquiry-response-update',
+        'subject_id'        => (int) $proposal_id,
+    ]);
+}
+
 function clear_notification($user_id, $notification_type, $subject_id) {
     global $wpdb;
     $table = hm_get_notifications_table();

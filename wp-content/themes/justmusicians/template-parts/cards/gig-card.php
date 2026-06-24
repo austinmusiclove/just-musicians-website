@@ -14,7 +14,7 @@
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
         x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
         hx-swap="beforeend"
-        hx-indicator="decoy-indicator"
+        hx-indicator="#decoy-indicator"
         hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
         x-data="{
             showForm: false,
