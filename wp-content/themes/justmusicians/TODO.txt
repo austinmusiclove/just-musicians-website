@@ -90,8 +90,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Applicants
-            Show suggestion listings after last applicant and on empty state
-                if no results from suggestions, no results html should suggest broadening search
             Notifications
                 Show notification bubble on new response and do not clear that until refresh (red pill next to status "Unread")
                 Clear notifications for inquiry responses

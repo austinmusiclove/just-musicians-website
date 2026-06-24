@@ -2,11 +2,11 @@
 
     <div class="pb-32 relative z-10">
         <span class="text-18 sm:text-22 block text-center mb-4">Looks like we couldn't find any suggestions.</span>
-        <p class="text-20 mb-4">Start a search to find musicians to invite to respond to this inquiry.</p>
+        <p class="text-20 mb-4">Try selecting more genres or ensemble sizes in your event details to get more matches.</p>
 
         <button type="reset" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
-            x-on:click="window.location = '/'">
-            Start a Search
+            x-on:click="hideTabs(); showEventDetails = true; showEditForm = true; $nextTick(() => { focusElm('event-form-taxonomy'); });">
+            Edit Event
         </button>
     </div>
 
