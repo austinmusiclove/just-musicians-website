@@ -4,7 +4,7 @@
           if ((notifications?.inquiry_response_proposal_ids ?? []).includes('<?php echo $args['proposal_id']; ?>')) {
               badgeText = 'New Response';
           } else if ((notifications?.inquiry_response_update_proposal_ids ?? []).includes('<?php echo $args['proposal_id']; ?>')) {
-              badgeText = 'Unread Update';
+              badgeText = 'Response Updated';
           }
       }"
       x-show="badgeText"
