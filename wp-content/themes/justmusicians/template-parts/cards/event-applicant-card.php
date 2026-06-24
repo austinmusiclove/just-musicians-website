@@ -192,9 +192,10 @@
                 x-on:click="
                     sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name']); ?>';
                     sendMessageListingId = <?php echo $args['listing_id']; ?>;
-                    sendMessageProposalId = <?php echo $args['proposal_id']; ?>;
                     sendMessageText = '';
-                    showSendMessageModal = true;
+                    $nextTick(() => {
+                        showSendMessageModal = true;
+                    });
                 "
             >
                 Send Message

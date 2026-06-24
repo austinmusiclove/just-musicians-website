@@ -108,6 +108,12 @@ function html_api_v1_template_redirects() {
                 case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/location-search-options-pc.php'; exit;
             }
 
+        // Messages
+        case 'send-message-listing':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/send-message-listing.php'; exit;
+            }
+
         // Register User
         case 'register-user':
             switch ($_SERVER['REQUEST_METHOD']) {

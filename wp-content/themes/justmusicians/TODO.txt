@@ -91,15 +91,16 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Click through to messages for each listing and/or all conversations for the event
+                Click to convo if one exists
+                Button to see all convos for this event
             Show suggestion listings after last applicant and on empty state
                 remove no-result html when suggestions come up and replace it with a heading for the suggestions
                 if no results from suggestions, no results html should suggest broadening search
                 maybe change to "invite to respond" and "invited"
             Notifications
+                Show notification bubble on new response and do not clear that until refresh (red pill next to status "Unread")
                 Clear notifications for inquiry responses
-                Show notification bubble on new response and do not clear that until refresh
-                Show notifications bubble in applicants tab heading
-                Show new response red status pill for notifications; this one is not cleared until refresh unlick number bubbles
+                Show notifications bubble in Musicians tab heading
                 Notification to proposal owners when event date or time is altered
                 Need to clear notifications if proposal is deleted or event
         Make sure single event link in email and inquiry modal after success works
@@ -122,6 +123,7 @@ Events and Inquiries refactor
     Note inquiry deprecation in user messages plugin
     Remove inquiries account page
     Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
+    Handle delete event (maybe set status to cancelled and show that in left over proposals on my gigs; don't show in my events anymore)
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message

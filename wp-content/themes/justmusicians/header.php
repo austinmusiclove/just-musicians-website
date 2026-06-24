@@ -88,7 +88,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             showSendMessageModal: false,
             sendMessageListingName: '',
             sendMessageListingId: 0,
-            sendMessageProposalId: 0,
+            sendMessageText: '',
             currentInquirySlide: '',
             showDateSlide: true,
             showLocationSlide: false,

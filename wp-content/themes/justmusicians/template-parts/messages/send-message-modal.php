@@ -17,8 +17,7 @@
             <h2 class="text-22 font-sun-motter mb-2">Send a message to <span x-text="sendMessageListingName"></span></h2>
 
             <textarea class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 min-h-[200px] focus:border-yellow outline-none" name="message" placeholder="Write your message..."></textarea>
-            <input type="hidden" name="listing_id" x-bind:value="sendMessageListingId" />
-            <input type="hidden" name="proposal_id" x-bind:value="sendMessageProposalId" />
+            <input type="hidden" name="listing_id" x-model="sendMessageListingId" />
 
             <div class="flex justify-end gap-2 mt-4">
                 <button type="button"
@@ -27,7 +26,7 @@
                 >Cancel</button>
                 <button type="button"
                     class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-5 py-2 hover:bg-navy hover:text-white"
-                    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/proposals/'); ?>' +  sendMessageProposalId + '/send-message/'"
+                    hx-post="<?php echo site_url('/wp-html/v1/send-message-listing/'); ?>"
                     hx-target="#send-message-result"
                     hx-include="#send-message-form"
                 >Send</button>
