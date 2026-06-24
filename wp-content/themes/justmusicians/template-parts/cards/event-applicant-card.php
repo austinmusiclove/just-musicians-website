@@ -17,7 +17,7 @@
 >
 
     <!-- Notification Badge -->
-    <div class="absolute top-2 -left-2 z-10"
+    <div class="absolute top-2 -left-2 z-[1]"
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
         x-bind:hx-trigger="(!notifications?.inquiry_response_proposal_ids?.includes('<?php echo $args['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
         hx-swap="beforeend"

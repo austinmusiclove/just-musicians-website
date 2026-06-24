@@ -91,7 +91,6 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Notifications
-                Cant see dropdown over notification badge
                 Add notification for response update
                     make sure it cant be added twice
                     modify notifications api to add new type of notification
