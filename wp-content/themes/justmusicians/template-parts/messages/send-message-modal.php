@@ -29,8 +29,16 @@
                     class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-5 py-2 hover:bg-navy hover:text-white"
                     hx-post="<?php echo site_url('/wp-html/v1/send-message-listing/'); ?>"
                     hx-target="#send-message-result"
+                    hx-indicator="#send-message-button-content"
                     hx-include="#send-message-form"
-                >Send</button>
+                >
+                    <span id="send-message-button-content">
+                        <span class="htmx-indicator-component-block-replace">Send</span>
+                        <span class="htmx-indicator-component-block">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
+                        </span>
+                    </span>
+                </button>
             </div>
 
             <span id="send-message-result"></span>
