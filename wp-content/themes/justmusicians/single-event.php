@@ -67,6 +67,7 @@ get_header();
                     requestDraw:    '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
                     genres:          <?php echo clean_arr_for_doublequotes( wp_list_pluck(get_the_terms(get_the_ID(), 'genre') ?: [], 'name'),); ?>,
                     ensembleSize:    <?php echo clean_arr_for_doublequotes( sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),); ?>,
+                    proposal_ids:    <?php echo clean_arr_for_doublequotes(hm_get_proposal_ids_by_event_id(get_the_ID())); ?>,
                     _updateEvent(event) { updateEvent(this, event); },
                 }"
                 x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
@@ -91,7 +92,13 @@ get_header();
                     <div class="flex items-start justify-between border-b border-black/20">
                         <div class="flex gap-6 items-start">
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showEventDetails}" x-on:click="hideTabs(); showEventDetails = true;">Event Details</div>
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">Musicians</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
+                                Musicians
+                                <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                                    x-show="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length > 0"
+                                    x-text="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposal_ids.includes(id)).length">
+                                </span>
+                            </div>
                         </div>
                     </div>
 

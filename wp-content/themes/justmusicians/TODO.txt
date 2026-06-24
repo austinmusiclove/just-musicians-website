@@ -93,9 +93,11 @@ Events and Inquiries refactor
             Notifications
                 Show notification bubble on new response and do not clear that until refresh (red pill next to status "Unread")
                 Clear notifications for inquiry responses
-                Show notifications bubble in Musicians tab heading
+                Add notification for response update
                 Notification to proposal owners when event date or time is altered
-                Need to clear notifications if proposal is deleted or event
+                    Gigs maybe also need a similar update status
+                    Show "new inquiry" only if unread; otherwise inquiry
+                Need to clear notifications if proposal is deleted or event; also update proposals status to event cancelled if event deleted
         Make sure single event link in email and inquiry modal after success works
     Event creation form
         link from no event results page
