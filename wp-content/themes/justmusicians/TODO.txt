@@ -6,6 +6,7 @@ Critical bugs
     Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
 
 Deploy
+    make sure EMAIL_TEST_MODE is on in staging
     Set up Event acf
     Make Event for each Inquiry
     Set up proposal acf
@@ -88,10 +89,7 @@ Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
             User updates date or time
-                Find all available and unavailable proposals for the event
-                Change status of proposals to stale
-                Send event-dt-change notification
-                Send them an email
+                refactor notifications query file; helper for updating db and constants for notification types
             Musician hits "Update Availability" button on gig card
                 event-dt-change notification is cleared on successful update of a stale proposal
                 proposal status changes to available or unavailable
@@ -114,7 +112,11 @@ Events and Inquiries refactor
                     proposal state changed
                     Index gets rebuilt on status update to stale for proposals
                     Make sure email gets sent to the listing owners
+                    Make sure link in email works
                     Make sure notification goes to the listing owners
+                On "Update Availability"
+                    availability is not filled in and required
+                    proposal status on card changes to available or unavailable
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
     Handle Event Delete

@@ -11,3 +11,14 @@ function send_inquiry_proposal_response_email($user_id, $proposal_id, $event_id)
     send_email_safely($email, $subject, $message);
 }
 
+function send_proposal_date_time_change_email($user_id, $listing_id, $event_id) {
+    $listing_name = get_post_meta($listing_id, 'name', true);
+    $event_name   = get_the_title($event_id);
+    $permalink    = site_url('/my-gigs/');
+    $user         = get_userdata($user_id);
+    $email        = $user->user_email;
+    $subject      = 'Date or time changed for ' . $event_name . '. Update availability for ' . $listing_name;
+    $message      = 'The date or time for ' . $event_name . ' has changed. Visit ' . $permalink . ' to update availability for ' . $listing_name . '.';
+    send_email_safely($email, $subject, $message);
+}
+

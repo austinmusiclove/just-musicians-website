@@ -63,6 +63,21 @@ function add_inquiry_response_update_notification($user_id, $proposal_id) {
     ]);
 }
 
+function add_event_dt_change_notification($user_id, $proposal_id) {
+    if (notification_exists($user_id, 'event_dt_change', $proposal_id)) {
+        return;
+    }
+
+    global $wpdb;
+    $table = hm_get_notifications_table();
+
+    $wpdb->insert($table, [
+        'user_id'           => (int) $user_id,
+        'notification_type' => 'event_dt_change',
+        'subject_id'        => (int) $proposal_id,
+    ]);
+}
+
 function clear_notification($user_id, $notification_type, $subject_id) {
     global $wpdb;
     $table = hm_get_notifications_table();
