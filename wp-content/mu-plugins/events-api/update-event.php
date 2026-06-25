@@ -46,7 +46,7 @@ function update_event($args) {
         ( $post_meta['start_time'] != $old_start_time and !empty($post_meta['start_time']) )                             or
         ( $post_meta['end_time']   != $old_end_time   and !empty($post_meta['end_time'])   ))
     {
-        handle_event_date_time_change();
+        handle_event_date_time_change($event_id);
     }
 
     return array_merge([

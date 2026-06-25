@@ -89,9 +89,9 @@ Events and Inquiries refactor
         Notification to proposal owners when event date or time is altered
             User updates date or time
                 Find all available and unavailable proposals for the event
-                Send them an email
-                Send event-dt-change notification
                 Change status of proposals to stale
+                Send event-dt-change notification
+                Send them an email
             Musician hits "Update Availability" button on gig card
                 event-dt-change notification is cleared on successful update of a stale proposal
                 proposal status changes to available or unavailable
@@ -109,8 +109,12 @@ Events and Inquiries refactor
             Single Event
                 Change no response to awaiting response which includes inquiry and event-dt-change status
             Test
-                Make sure email gets sent to the right people
-                Make sure notification goes to the same people
+                On update of date
+                    correct proposals are selected
+                    proposal state changed
+                    Index gets rebuilt on status update to stale for proposals
+                    Make sure email gets sent to the listing owners
+                    Make sure notification goes to the listing owners
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
     Handle Event Delete
