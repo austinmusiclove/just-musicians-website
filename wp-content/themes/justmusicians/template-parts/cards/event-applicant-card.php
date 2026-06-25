@@ -1,11 +1,4 @@
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
-    x-data="{
-        proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']); ?>',
-        proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
-        proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
-        proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
-        proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability']); ?>',
-    }"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
         hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
         hx-trigger="revealed once"
@@ -14,9 +7,16 @@
         hx-indicator="#applicants-spinner-bottom"
         hx-include="#event-applicants-form"
     <?php } ?>
+    x-data="{
+        proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']); ?>',
+        proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
+        proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
+        proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
+        proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability']); ?>',
+    }"
 >
 
-    <!-- Notification Badge -->
+    <!-- Notifications -->
     <div class="absolute top-2 -left-2 z-[1]"
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
         x-bind:hx-trigger="(!has_notifications(notifications, ['inquiry_response', 'inquiry_response_update'], '<?php echo $args['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
@@ -141,7 +141,7 @@
             </div>
 
             <!-- Status -->
-            <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['var' => 'proposal_status']); ?>
+            <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['status_var' => 'proposal_status']); ?>
 
             <!-- Collections button -->
             <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [

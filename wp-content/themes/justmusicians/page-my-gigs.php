@@ -53,8 +53,6 @@ get_header();
                         hx-indicator="#gig-spinner-top"
                         hx-trigger="load, filterupdate"
                     >
-                        <input type="hidden" name="filter_listing" x-model="listing" />
-                        <input type="hidden" name="filter_status" x-model="status" />
                         <input type="hidden" name="date_range" x-model="dateRange" />
 
                         <!-- Filter bar -->
@@ -80,8 +78,8 @@ get_header();
                             <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => [
-                                        ['value' => 'all',         'label' => 'All Statuses'],
-                                        ['value' => 'inquiry',     'label' => 'New Inquiry'],
+                                        ['value' => 'all',         'label' => 'All Gigs'],
+                                        ['value' => 'inquiry',     'label' => 'Inquiry'],
                                         ['value' => 'available',   'label' => 'Available'],
                                         ['value' => 'unavailable', 'label' => 'Unavailable'],
                                     ],

@@ -89,12 +89,12 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Applicants
-            Notifications
-                Gigs notifications
-                    Add badge for new inquiry vs read inquiry and change status badge test to inquiry (maybe status should say responded and put availability pill back in content)
-                    Notification to proposal owners when event date or time is altered
-                    Add notification badge for date time change
+        Gigs notifications
+            Show new inquiry instead of inquiry when has new_inquiry notification
+            availability pill back in content
+            Notification to proposal owners when event date or time is altered
+                Add notification badge for date time change
+                only clear when proposal is updated
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
         Handle Event Delete
@@ -105,9 +105,11 @@ Events and Inquiries refactor
     Event creation form
         link from no event results page
         link from add button
-    Need error message about times not being compatible in event edit
-    Work on no results message personality especially events
-    Rename no-results to empty-states (also why do they have z-10, maybe get rid of that for all)
+    Need front end feedback error message about times not being compatible in event edit
+    No Results content
+        Work on no results message personality especially events
+        Rename no-results to empty-states
+        why do they have z-10, maybe get rid of that for all; gets in the way of dropdowns on gigs and applicants pages
     Create folders for html api files
     Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
     Figure out what happens with existing inquiries messages

@@ -1,15 +1,18 @@
 <span class="text-12 px-2 py-0.5 rounded-full capitalize font-semibold w-fit inline-block whitespace-nowrap"
-      x-show="<?php echo $args['var']; ?>"
+      x-data="{ hasNotification: false }"
+      x-effect="if (!hasNotification) {
+          if (has_notification(notifications, 'new_inquiry', '<?php echo $args['proposal_id']; ?>')) {
+              hasNotification = true;
+          }
+      }"
+      x-show="<?php echo $args['status_var']; ?> && !hasNotification" x-cloak
       :class="{
-          'bg-navy text-white': <?php echo $args['var']; ?> === 'available',
-          'bg-red text-white':  <?php echo $args['var']; ?> === 'inquiry',
-          'bg-red/40':          <?php echo $args['var']; ?> === 'unavailable',
-          'bg-yellow/40':       !['inquiry', 'available', 'unavailable'].includes(<?php echo $args['var']; ?>),
+          'bg-red/40':    <?php echo $args['status_var']; ?> === 'inquiry',
+          'bg-yellow/40': !['inquiry'].includes(<?php echo $args['status_var']; ?>),
       }"
       x-text="({
-          available:   'Available',
-          unavailable: 'Unavailable',
-          inquiry:     'New Inquiry',
-      }[<?php echo $args['var']; ?>] || <?php echo $args['var']; ?>)"
-      x-cloak
+          available:   'Responded',
+          unavailable: 'Responded',
+          inquiry:     'Inquiry',
+      }[<?php echo $args['status_var']; ?>] || <?php echo $args['status_var']; ?>)"
 ></span>

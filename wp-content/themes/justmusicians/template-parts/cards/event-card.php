@@ -1,12 +1,11 @@
-
 <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20"
     <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
-    hx-get="<?php echo site_url('/wp-html/v1/my-events/?page=' . $args['next_page']); ?>"
-    hx-trigger="revealed once"
-    hx-swap="beforeend"
-    hx-target="#results"
-    hx-indicator="#events-spinner-bottom"
-    hx-include="#my-events-form"
+        hx-get="<?php echo site_url('/wp-html/v1/my-events/?page=' . $args['next_page']); ?>"
+        hx-trigger="revealed once"
+        hx-swap="beforeend"
+        hx-target="#results"
+        hx-indicator="#events-spinner-bottom"
+        hx-include="#my-events-form"
     <?php } ?>
 >
 

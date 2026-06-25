@@ -7,7 +7,7 @@
               badgeText = 'Response Updated';
           }
       }"
-      x-show="badgeText"
+      x-show="badgeText" x-cloak
       x-text="badgeText"
-      x-cloak>
+>
 </span>
