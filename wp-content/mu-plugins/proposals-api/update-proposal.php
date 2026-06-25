@@ -54,7 +54,7 @@ function respond_to_inquiry_proposal($args) {
         send_inquiry_proposal_response_email($author_id, $proposal_id, $event_id);
         add_inquiry_response_notification($author_id, $proposal_id);
     } else if ($initial_status === 'stale') {
-        clear_notification(get_current_user_id(), 'event_dt_change', $proposal_id);
+        clear_event_dt_change_notifications($proposal_id);
         add_inquiry_response_notification($author_id, $proposal_id);
     } else {
         add_inquiry_response_update_notification($author_id, $proposal_id);

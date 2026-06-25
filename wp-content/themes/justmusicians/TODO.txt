@@ -88,7 +88,20 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
+            notification needs to be cleared for all listing owners
             Test
+                Set up new event
+                Make sure single event link in email and inquiry modal after success works
+                Inivte a listing owned by 3 users
+                Inivte a listing owned by admin
+                Respond from different account
+                Change date
+                Observe
+                Respond to date change
+                Observe from all accounts
+                Date change again
+                Invite another listing
+                Date change again
                 On update of date
                     correct proposals are selected
                     proposal state changed
@@ -112,7 +125,6 @@ Events and Inquiries refactor
                     event-dt-change notification is cleared
                     proposal status changes to available or unavailable
                     status should visibly change from date time changed in red to responded in yellow
-        Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
     Handle Event Delete
         change post status to cancelled and exclude it in get user events resutls
