@@ -78,6 +78,10 @@ function hm_get_proposals_by_listing_ids($listing_ids, $args = []) {
         if ($args['status'] === 'response') {
             $where_clauses[] = 'status != %s';
             $params[] = 'inquiry';
+        } else if ($args['status'] === 'request') {
+            $where_clauses[] = 'status IN (%s, %s)';
+            $params[] = 'inquiry';
+            $params[] = 'stale';
         } else {
             $where_clauses[] = 'status = %s';
             $params[] = $args['status'];
