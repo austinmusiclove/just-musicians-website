@@ -73,6 +73,11 @@ get_header();
                 x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
             >
 
+                <a href="<?php echo site_url('/my-events/'); ?>" class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16">
+                    <span>←</span>
+                    <span>Back to My Events</span>
+                </a>
+
                 <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
                     <div class="w-20 shrink-0">
                         <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
