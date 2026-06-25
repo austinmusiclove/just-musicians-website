@@ -88,10 +88,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
-            Musician hits "Update Availability" button on gig card
-                event-dt-change notification is cleared on successful update of a stale proposal
-                proposal status changes to available or unavailable
-                status should visibly change from date time changed in red to responded in yellow
             Gig card
                 display Date/Time Changed for status in red
                 update button will read "Update Availability" when status is stale
@@ -115,6 +111,9 @@ Events and Inquiries refactor
                 On "Update Availability"
                     availability is not filled in and required
                     proposal status on card changes to available or unavailable
+                    event-dt-change notification is cleared
+                    proposal status changes to available or unavailable
+                    status should visibly change from date time changed in red to responded in yellow
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
     Handle Event Delete
