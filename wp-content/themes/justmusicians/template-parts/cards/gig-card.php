@@ -9,12 +9,12 @@
     <?php } ?>
     x-data="{
         showForm: false,
-        prop_details: '<?php echo clean_str_for_doublequotes($args['proposal']['details']); ?>',
-        availability: '<?php echo clean_str_for_doublequotes($args['proposal']['availability']); ?>',
-        quote:        '<?php echo clean_str_for_doublequotes($args['proposal']['quote']); ?>',
-        draw:         '<?php echo clean_str_for_doublequotes($args['proposal']['draw']); ?>',
-        status:       '<?php echo clean_str_for_doublequotes($args['proposal']['status']); ?>',
-        proposal_updated: '<?php echo clean_str_for_doublequotes($args['proposal']['proposal_updated']); ?>',
+        prop_details:     '<?php echo clean_str_for_doublequotes($args['proposal']['details']          ?? ''); ?>',
+        availability:     '<?php echo clean_str_for_doublequotes($args['proposal']['availability']     ?? ''); ?>',
+        quote:            '<?php echo clean_str_for_doublequotes($args['proposal']['quote']            ?? ''); ?>',
+        draw:             '<?php echo clean_str_for_doublequotes($args['proposal']['draw']             ?? ''); ?>',
+        status:           '<?php echo clean_str_for_doublequotes($args['proposal']['status']           ?? ''); ?>',
+        proposal_updated: '<?php echo clean_str_for_doublequotes($args['proposal']['proposal_updated'] ?? ''); ?>',
         _updateProposal(status, details, availability, quote, draw, proposal_updated) { this.showForm = false; this.prop_details = details; this.availability = availability; this.quote = quote; this.draw = draw; this.status = status; this.proposal_updated = proposal_updated},
     }"
     x-on:update-proposal="_updateProposal($event.detail.status, $event.detail.details, $event.detail.availability, $event.detail.quote, $event.detail.draw, $event.detail.proposal_updated);"

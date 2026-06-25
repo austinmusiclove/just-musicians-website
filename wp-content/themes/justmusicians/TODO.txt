@@ -88,11 +88,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
-            Gig card
-                display Date/Time Changed for status in red
-                update button will read "Update Availability" when status is stale
-                when status is stale don't fill in availability in the gig form, though the data is there, to force entering availability
-                show availability with some kind of indicator that it needs to be udpated
             Event Applicant Card
                 status will read "Awaiting Update" in yellow for stale status
                 show old availability in response with text that says when availability was updated and waiting for update since date time of event changed
@@ -108,6 +103,11 @@ Events and Inquiries refactor
                     Make sure email gets sent to the listing owners
                     Make sure link in email works
                     Make sure notification goes to the listing owners
+                    Gigs page
+                        Date/Time Changed for status in red
+                        update button will read "Update Availability" when status is stale
+                        availability appears only if status not stale
+                        gig form has availability filled out only when status not stale
                 On "Update Availability"
                     availability is not filled in and required
                     proposal status on card changes to available or unavailable

@@ -8,7 +8,7 @@ $device        = $args['device'];
 <button type="button" x-on:click="showForm = true" x-show="!showForm" x-cloak
     class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap"
     :class="'<?php echo $device; ?>' == 'desktop' ? '' : 'w-full'"
-    x-text="status == 'inquiry' ? 'Respond to Inquiry' : 'Edit Response'"
+    x-text="status == 'inquiry' ? 'Respond to Inquiry' : status == 'stale' ? 'Update Availability' : 'Edit Response'"
 >
 </button>
 

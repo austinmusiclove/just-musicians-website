@@ -7,12 +7,14 @@
       }"
       x-show="<?php echo $args['status_var']; ?> && !hasNotification" x-cloak
       :class="{
-          'bg-red/40':    <?php echo $args['status_var']; ?> === 'inquiry',
-          'bg-yellow/40': !['inquiry'].includes(<?php echo $args['status_var']; ?>),
+          'bg-red/40':         <?php echo $args['status_var']; ?> === 'inquiry',
+          'bg-red text-white': <?php echo $args['status_var']; ?> === 'stale',
+          'bg-yellow/40':      !['inquiry'].includes(<?php echo $args['status_var']; ?>),
       }"
       x-text="({
           available:   'Responded',
           unavailable: 'Responded',
           inquiry:     'Inquiry',
+          stale:       'Availability Requested',
       }[<?php echo $args['status_var']; ?>] || <?php echo $args['status_var']; ?>)"
 ></span>

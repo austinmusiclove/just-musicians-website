@@ -35,6 +35,9 @@ $next_page       = $result['next_page'];
 
 if (count($proposals) > 0) {
     foreach ($proposals as $index => $proposal) {
+        if (($proposal['status'] ?? null) === 'stale') {
+            $proposal['availability'] = '';
+        }
         get_template_part('template-parts/cards/gig-card', '', [
             'proposal'     => $proposal,
             'last'         => $index == array_key_last($proposals),

@@ -3,7 +3,7 @@
       x-effect="if (!badgeText) {
           if (has_notification(notifications, 'inquiry_response', '<?php echo $args['proposal_id']; ?>')) {
               badgeText = 'New Response';
-          } else if (has_notification(notifications, 'inquiry_response_update', '<?php echo (int) $args['proposal_id']; ?>')) {
+          } else if (has_notification(notifications, 'inquiry_response_update', '<?php echo $args['proposal_id']; ?>')) {
               badgeText = 'Response Updated';
           }
       }"
