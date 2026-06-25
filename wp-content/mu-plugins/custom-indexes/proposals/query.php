@@ -25,6 +25,10 @@ function hm_get_proposal_ids_by_event_id($event_id, $args = []) {
         if ($args['status'] === 'response') {
             $where_clauses[] = 'status != %s';
             $params[] = 'inquiry';
+        } else if ($args['status'] === 'request') {
+            $where_clauses[] = 'status IN (%s, %s)';
+            $params[] = 'inquiry';
+            $params[] = 'stale';
         } else {
             $where_clauses[] = 'status = %s';
             $params[] = $args['status'];

@@ -6,9 +6,10 @@
           'bg-yellow/40':       !['available', 'unavailable'].includes(<?php echo $args['status_var']; ?>),
       }"
       x-text="({
-          available:        'Available',
-          unavailable:      'Unavailable',
-          inquiry:          'No Response',
+          available:   'Available',
+          unavailable: 'Unavailable',
+          inquiry:     'No Response',
+          stale:       'Awaiting Update',
       }[<?php echo $args['status_var']; ?>] || <?php echo $args['status_var']; ?>)"
       x-cloak
 ></span>

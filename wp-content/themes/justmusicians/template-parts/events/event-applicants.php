@@ -38,10 +38,10 @@
             <?php get_template_part('template-parts/global/form/dropdown', '', [
                 'options'     => [
                     ['value' => 'all',         'label' => 'All Musicians'],
-                    ['value' => 'response',    'label' => 'All Responses'],
+                    ['value' => 'response',    'label' => 'All Responses'], // available and unavailable
                     ['value' => 'available',   'label' => 'Available'],
                     ['value' => 'unavailable', 'label' => 'Unavailable'],
-                    ['value' => 'inquiry',     'label' => 'No Response'],
+                    ['value' => 'request',     'label' => 'Awaiting Response'], // inquiry and stale
                 ],
                 'input_name'  => 'filter_status',
                 'selected'    => 'all',

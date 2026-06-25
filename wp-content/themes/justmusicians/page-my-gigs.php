@@ -79,7 +79,7 @@ get_header();
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => [
                                         ['value' => 'all',         'label' => 'All Gigs'],
-                                        ['value' => 'request',     'label' => 'Action Required'],
+                                        ['value' => 'request',     'label' => 'Action Required'], // inquiry and stale
                                         ['value' => 'available',   'label' => 'Available'],
                                         ['value' => 'unavailable', 'label' => 'Unavailable'],
                                     ],

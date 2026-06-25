@@ -88,11 +88,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
-            Event Applicant Card
-                status will read "Awaiting Update" in yellow for stale status
-                show old availability in response with text that says when availability was updated and waiting for update since date time of event changed
-            Single Event
-                Change no response to awaiting response which includes inquiry and event-dt-change status
             Test
                 On update of date
                     correct proposals are selected
@@ -107,6 +102,10 @@ Events and Inquiries refactor
                         availability appears only if status not stale
                         gig form has availability filled out only when status not stale
                         Dropdown action required gets stale and inquiry proposals
+                    Single Event page
+                        status will read "Awaiting Update" in yellow for stale status
+                        show old availability in response with text that says when availability was updated and waiting for update since date time of event changed
+                        Awaiting response gets inquiry and stale proposals
                 On "Update Availability"
                     availability is not filled in and required
                     proposal status on card changes to available or unavailable

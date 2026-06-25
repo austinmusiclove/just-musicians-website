@@ -185,8 +185,10 @@
         </div>
 
         <!-- Availability -->
-        <div class="flex items-center gap-2" x-show="proposal_availability" x-cloak>
-            <span class="text-12 text-black/50 whitespace-nowrap">Availability last updated <?php echo esc_html($args['proposal_updated']); ?></span>
+        <div class="flex flex-col items-start" x-show="proposal_availability" x-cloak>
+            <span class="text-12 text-black/50" x-show="proposal_status != 'stale'" x-cloak >Availability last updated <?php echo esc_html($args['proposal_updated']); ?></span>
+            <span class="text-12 text-black/50" x-show="proposal_status == 'stale'" x-cloak ><span class="capitalize" x-text="proposal_status"></span> as of <?php echo esc_html($args['proposal_updated']); ?></span>
+            <span class="text-12 text-red"      x-show="proposal_status == 'stale'" x-cloak >Availability not updated since event date/time changed</span>
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between gap-2">
