@@ -20,5 +20,5 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Proposal Requested Successfully' . '\'})"></span>';
+echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Invite Sent Successfully' . '\'})"></span>';
 echo '<span x-init="$dispatch(\'add-listing-to-event\', {\'event_id\': \'' . $event_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';

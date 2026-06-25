@@ -87,45 +87,10 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Notification to proposal owners when event date or time is altered
-            notification needs to be cleared for all listing owners
-            Test
-                Set up new event
-                Make sure single event link in email and inquiry modal after success works
-                Inivte a listing owned by 3 users
-                Inivte a listing owned by admin
-                Respond from different account
-                Change date
-                Observe
-                Respond to date change
-                Observe from all accounts
-                Date change again
-                Invite another listing
-                Date change again
-                On update of date
-                    correct proposals are selected
-                    proposal state changed
-                    Index gets rebuilt on status update to stale for proposals
-                    Make sure email gets sent to the listing owners
-                    Make sure link in email works
-                    Make sure notification goes to the listing owners
-                    Gigs page
-                        Date/Time Changed for status in red
-                        update button will read "Update Availability" when status is stale
-                        availability appears only if status not stale
-                        gig form has availability filled out only when status not stale
-                        Dropdown action required gets stale and inquiry proposals
-                    Single Event page
-                        status will read "Awaiting Update" in yellow for stale status
-                        show old availability in response with text that says when availability was updated and waiting for update since date time of event changed
-                        Awaiting response gets inquiry and stale proposals
-                On "Update Availability"
-                    availability is not filled in and required
-                    proposal status on card changes to available or unavailable
-                    event-dt-change notification is cleared
-                    proposal status changes to available or unavailable
-                    status should visibly change from date time changed in red to responded in yellow
         Highlight My Events when on single event page
+    New inquiry not sending to all listing owners
+    Add listing name in new inquriy email
+    Need to only allow postal code in inquiry modal (check all 6 locaiton filters to make sure they are doing the right thing)
     Handle Event Delete
         change post status to cancelled and exclude it in get user events resutls
         change status of all associated proposals to cancelled and handle the way that looks on front end

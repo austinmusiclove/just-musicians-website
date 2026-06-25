@@ -48,6 +48,9 @@ function add_inquiry_response_update_notification($user_id, $proposal_id) {
 }
 
 function add_event_dt_change_notification($user_id, $proposal_id) {
+    if (notification_exists($user_id, HM_NOTIFICATION_TYPE_NEW_INQUIRY, $proposal_id)) {
+        clear_notification($user_id, HM_NOTIFICATION_TYPE_NEW_INQUIRY, $proposal_id);
+    }
     if (notification_exists($user_id, HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id)) return;
     add_notification($user_id, HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id);
 }
@@ -58,6 +61,16 @@ function clear_notification($user_id, $notification_type, $subject_id) {
 
     $wpdb->delete($table, [
         'user_id'           => (int) $user_id,
+        'notification_type' => $notification_type,
+        'subject_id'        => (int) $subject_id,
+    ]);
+}
+
+function clear_notifications($notification_type, $subject_id) {
+    global $wpdb;
+    $table = hm_get_notifications_table();
+
+    $wpdb->delete($table, [
         'notification_type' => $notification_type,
         'subject_id'        => (int) $subject_id,
     ]);

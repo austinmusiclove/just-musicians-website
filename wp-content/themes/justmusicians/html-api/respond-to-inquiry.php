@@ -27,3 +27,4 @@ echo "    'quote':            '" . clean_str_for_doublequotes($quote) .         
 echo "    'draw':             '" . clean_str_for_doublequotes($draw) .             "',";
 echo "    'proposal_updated': '" . clean_str_for_doublequotes($proposal_updated) . "'";
 echo '})"></span>';
+echo '<span x-init="notifications = await get_user_notifications();"></span>';

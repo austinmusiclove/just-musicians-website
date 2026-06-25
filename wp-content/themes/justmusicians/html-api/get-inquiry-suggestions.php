@@ -26,7 +26,6 @@ $is_last_page    = $page == $max_num_pages;
 $next_page       = $result['next_page'];
 
 
-$listings = [];
 // Render listings
 if (count($listings) > 0) {
 

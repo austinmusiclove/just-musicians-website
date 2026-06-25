@@ -55,5 +55,6 @@ function get_event_count_for_proposals(notifications, proposal_ids) {
 }
 
 function get_gig_notification_count(notifications) {
-    return get_notification_count(notifications, 'new_inquiry');
+    return get_notification_count(notifications, 'new_inquiry')
+         + get_notification_count(notifications, 'event_dt_change');
 }

@@ -9,7 +9,7 @@
           available:   'Available',
           unavailable: 'Unavailable',
           inquiry:     'No Response',
-          stale:       'Awaiting Update',
+          stale:       'Awaiting Availability',
       }[<?php echo $args['status_var']; ?>] || <?php echo $args['status_var']; ?>)"
       x-cloak
 ></span>
