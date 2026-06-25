@@ -1,8 +1,8 @@
-themes/justmusicians/TODO.txtCritical bugs
+Critical bugs
     Fix mu plugins depending on each other; move code to includes instead
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
     Figure out why update listing takes forever; probably something with unneeded image processing
-    Consider setting status header in html apis on errors
+    Consider setting status header in html apis files on errors
 
 Deploy
     Set up Event acf
@@ -19,7 +19,12 @@ Deploy
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
-        No
+        Not on free version.
+        Create them as recurring events with a name, location, description and dates. You can edit them on the my events page in recurring events tab
+        Editing a recurring event will update all existing at once
+        You can also see individual events for the recurring event in my events and can edit them as normal and those edits will only apply to one date.
+        A recurring event cannot have two instances on the same day
+        You can add dates to recurring event and it will automatically create individual events for each date
     Should you be able to have an application for individual events?
         No, that would be Proposal
     Should musicians be able to withdraw application?
@@ -27,23 +32,15 @@ Questions
     Should you set show dates in application or allow musicians to just provide availability info for all dates?
         Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
         Paid version: application has existing events and applicants get notified to fill out availability when new events are added
-    What is an inquiry?
-        Replace it with event and replace inquiry invite with Proposal (requested status)
-    How are inquiries related to events?
-        Replaced
     Can inquiry post type be eliminated?
         Yes
-    Should inquiry/event reuqire a date?
-        Yes
-    Should inquiry/event require location?
-        Location yes but not address
     How should availability data be stored? Per application or with event or neither?
         Per event/listing
         Proposal post type that contains event, listing, availability, draw, quote; proposal can be created when requested by venue or when application is filled out
     Does application need to be connected to a specific location?
         No but it needs a description of what the application is for
     What should we do with exisitng send inquiry?
-        Send inquiry to existing event results in creating Proposal with requested status
+        Send inquiry to existing event results in creating Proposal with inquiry status
         Change drop down to a modal that asks if you want to invite them to an existing event or create a new event
         Make sure to send people to event page to manage their event after they make a new one
     Should Proposal request go to messages?
@@ -51,11 +48,9 @@ Questions
     Should Offer be in messages?
         No
     Should Proposal response be in messages?
-        Yes a proposal response that is not an offer is a message. When reviewing proposal, a buyer can send offer or message.
+        No
     Should availability be an advanced feature or just collecting quotes and draw or all free?
         Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
-    What happens when Proposal is requested?
-        Event appears in My Gigs calendar and list with notification and musician can click on the event to respond to the proposal
     When should messages be initiated?
         Only when buyer initiates; proposal and offer can contain messages and should be enough until buyer wants to open conversation
     How should Proposals and Offers appear in messages
@@ -71,17 +66,18 @@ Questions
         After event has passed, both parties get notified to review
     Should conversations be per event?
         No; no offer and proposal special message types
-        Maybe still like applications/events/proposals/offers that are related to the conversation
+        Group conversations by event using query var, but there is only one unique convo for a unique group of convo participants
+    Should there be conversations grouped by event?
+        Yes and there should be a way to filter conversations by event on main messages page
     Can buyer send message to any listing?
         Only applicants, or those with Proposals that have been replied to
+        Maybe as paid feature
     Should you lose ability to access or send messages if you don't meet conditions?
         Buyers can always message an applicant listing or proposal listing
         Listings can always message a buyer who booked them for an upcoming event or responded to their proposal
         Listings can only message if they have an open conversation started by the buyer
         Once conversation is open between a buyer and listing, it is open
         Buyers can silence conversation to avoid getting too many unwanted messages from listing
-    Should there be conversations grouped by event?
-        Yes and there should be a way to filter conversations by event on main messages page
     What should happen to inquiry messages?
         Leave them and never use them again; then consider removing all trace of them later
     When should users be prompted to review?
@@ -89,19 +85,39 @@ Questions
 
 Events and Inquiries refactor
     Add Single Event page
-        Gigs notifications
-            Show new inquiry instead of inquiry when has new_inquiry notification
-            availability pill back in content
-            Notification to proposal owners when event date or time is altered
-                Add notification badge for date time change
-                only clear when proposal is updated
+        Notification to proposal owners when event date or time is altered
+            User updates date or time
+                Make sure start date is required in event update form
+                If change in date or time is detected, call new function notify_proposals_date_time_change()
+                Find all available and unavailable proposals for the event
+                Send them an email
+                Send event-dt-change notification
+                Change status of proposals to stale
+            Musician hits "Update Availability" button on gig card
+                event-dt-change notification is cleared on successful update of a stale proposal
+                proposal status changes to available or unavailable
+                status should visibly change from date time changed in red to responded in yellow
+            Gig card
+                display Date/Time Changed for status in red
+                update button will read "Update Availability" when status is stale
+                when status is stale don't fill in availability in the gig form, though the data is there, to force entering availability
+                show availability with some kind of indicator that it needs to be udpated
+            Event Applicant Card
+                status will read "Awaiting Update" in yellow for stale status
+                show old availability in response with text that says when availability was updated and waiting for update since date time of event changed
+            My gigs
+                Change inquiry dropdown option to Response Requested for status inquiry and stale
+            Single Event
+                Change no response to awaiting response which includes inquiry and event-dt-change status
+            Test
+                Make sure it is not triggered if a time is added from empty or made empty
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
-        Handle Event Delete
-            change post status to cancelled and exclude it in get user events resutls
-            change status of all associated proposals to cancelled and handle the way that looks on front end
-            clear notifications of all proposals associated
-            add cancelled event notification
+    Handle Event Delete
+        change post status to cancelled and exclude it in get user events resutls
+        change status of all associated proposals to cancelled and handle the way that looks on front end
+        clear notifications of all proposals associated
+        add cancelled event notification
     Event creation form
         link from no event results page
         link from add button
