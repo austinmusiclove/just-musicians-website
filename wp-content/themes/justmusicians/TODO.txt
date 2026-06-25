@@ -88,8 +88,6 @@ Questions
 Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
-            User updates date or time
-                refactor notifications query file; helper for updating db and constants for notification types
             Musician hits "Update Availability" button on gig card
                 event-dt-change notification is cleared on successful update of a stale proposal
                 proposal status changes to available or unavailable
