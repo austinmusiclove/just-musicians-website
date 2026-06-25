@@ -4,7 +4,7 @@
     hx-indicator="#applicants-spinner-top"
     hx-trigger="intersect once, filterupdate"
     x-data='{
-        status: "response",
+        status: "all",
         sort: "recent",
         showSuggestions: false,
 
@@ -37,14 +37,14 @@
         <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
                 'options'     => [
+                    ['value' => 'all',         'label' => 'All Musicians'],
                     ['value' => 'response',    'label' => 'All Responses'],
                     ['value' => 'available',   'label' => 'Available'],
                     ['value' => 'unavailable', 'label' => 'Unavailable'],
-                    ['value' => 'inquiry',     'label' => 'Invited to Respond'],
-                    //['value' => 'all',         'label' => 'All'],
+                    ['value' => 'inquiry',     'label' => 'No Response'],
                 ],
                 'input_name'  => 'filter_status',
-                'selected'    => 'response',
+                'selected'    => 'all',
             ]); ?>
         </div>
 

@@ -63,8 +63,8 @@
             <a href="<?php echo esc_url($args['permalink']); ?>" class="relative bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
                 Manage Event
                 <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-                    x-show="((notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposals.includes(id)).length + (notifications?.inquiry_response_update_proposal_ids ?? []).filter(id => proposals.includes(id)).length) > 0" x-cloak
-                    x-text="(notifications?.inquiry_response_proposal_ids ?? []).filter(id => proposals.includes(id)).length + (notifications?.inquiry_response_update_proposal_ids ?? []).filter(id => proposals.includes(id)).length"
+                    x-show="get_event_count_for_proposals(notifications, proposals) > 0" x-cloak
+                    x-text="get_event_count_for_proposals(notifications, proposals)"
                 ></span>
             </a>
         </div>

@@ -12,10 +12,10 @@
 
     <div class="py-4 relative flex flex-row items-start gap-3 md:gap-6 relative border-b border-black/20"
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-        x-bind:hx-trigger="(!notifications?.new_inquiry_proposal_ids?.includes('<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
+        x-bind:hx-trigger="(!has_notification(notifications, 'new_inquiry', '<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
         hx-swap="beforeend"
         hx-indicator="#decoy-indicator"
-        hx-vals='{"notification_type":"new-inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
+        hx-vals='{"notification_type":"new_inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'
         x-data="{
             showForm: false,
             prop_details: '<?php echo clean_str_for_doublequotes($args['proposal']['details']); ?>',

@@ -91,18 +91,17 @@ Events and Inquiries refactor
     Add Single Event page
         Applicants
             Notifications
-                Add notification for response update
-                    maybe restrucutre notifications api to send back notifications for each event and proposal in maps so it is easy on the front end
-                        add events notificaiton counts by event id
-                    put complex js for parsing notifications into notifications js file
                 Gigs notifications
-                    Add badge for new inquiry vs read inquiry
-                    Gigs maybe also need a similar update status
-                    Show "new inquiry" only if unread; otherwise inquiry
+                    Add badge for new inquiry vs read inquiry and change status badge test to inquiry (maybe status should say responded and put availability pill back in content)
                     Notification to proposal owners when event date or time is altered
-                Need to clear notifications if proposal is deleted or event; also update proposals status to event cancelled if event deleted
+                    Add notification badge for date time change
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
+        Handle Event Delete
+            change post status to cancelled and exclude it in get user events resutls
+            change status of all associated proposals to cancelled and handle the way that looks on front end
+            clear notifications of all proposals associated
+            add cancelled event notification
     Event creation form
         link from no event results page
         link from add button

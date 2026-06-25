@@ -19,10 +19,10 @@
     <!-- Notification Badge -->
     <div class="absolute top-2 -left-2 z-[1]"
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-        x-bind:hx-trigger="((!notifications?.inquiry_response_proposal_ids?.includes('<?php echo $args['proposal_id']; ?>') && !notifications?.inquiry_response_update_proposal_ids?.includes('<?php echo $args['proposal_id']; ?>'))) ? 'never-trigger' : 'intersect once'"
+        x-bind:hx-trigger="(!has_notifications(notifications, ['inquiry_response', 'inquiry_response_update'], '<?php echo $args['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
         hx-swap="beforeend"
         hx-indicator="#decoy-indicator"
-        hx-vals='{"notification_type":"inquiry-response,inquiry-response-update","subject_id": "<?php echo $args['proposal_id']; ?>" }'
+        hx-vals='{"notification_type":"inquiry_response,inquiry_response_update","subject_id": "<?php echo $args['proposal_id']; ?>" }'
     >
         <span id="decoy-indicator"></span>
         <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>

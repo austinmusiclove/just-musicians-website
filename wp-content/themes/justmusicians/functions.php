@@ -353,17 +353,17 @@ function hmm_scripts() {
     //wp_enqueue_script('hmm-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
     // Utilities
+    wp_enqueue_script('notifications-js', get_template_directory_uri() . '/lib/js/notifications.js', [], $pkg->version, true);
+    wp_localize_script('notifications-js', 'notificationsSiteData', [
+        'userLoggedIn' => is_user_logged_in(),
+        'nonce'        => wp_create_nonce('wp_rest'),
+    ]);
     wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, true);
     wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, true);
-    wp_enqueue_script('notifications-js', get_template_directory_uri() . '/lib/js/notifications.js', [], $pkg->version, true);
-    wp_localize_script('notifications-js', 'notificationsSiteData', [
-        'userLoggedIn' => is_user_logged_in(),
-        'nonce'        => wp_create_nonce('wp_rest'),
-    ]);
 
 
 

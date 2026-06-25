@@ -45,7 +45,7 @@ get_header();
                     <div class="text-16 bg-yellow-60 p-2 pr-8 text-center sticky w-full mb-8"
                         x-data="{
                             closed: false,
-                            get show() { return !this.closed && notifications?.account_notification_count > 0; },
+                            get show() { return !this.closed && get_notification_count(notifications, 'account') > 0; },
                         }"
                         x-show="show" x-cloak
                     >

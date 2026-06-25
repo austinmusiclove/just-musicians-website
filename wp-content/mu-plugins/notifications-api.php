@@ -24,36 +24,17 @@ add_action('rest_api_init', function () {
 });
 
 function get_user_notifications() {
-    $unread_convo_count         = get_unread_conversation_count();
-    $account_notification_count = get_account_notification_count();
-    $db_notifications           = get_notifications_from_db();
+    $notifications = get_notifications_from_db();
 
-    $db_counts      = $db_notifications['counts'];
-    $db_subject_ids = $db_notifications['subject_ids'];
-
-    $gig_notification_count   = isset($db_counts['new-inquiry'])              ? (int) $db_counts['new-inquiry']              : 0;
-    $event_notification_count = isset($db_counts['inquiry-response'])         ? (int) $db_counts['inquiry-response']         : 0;
-    $event_notification_count += isset($db_counts['inquiry-response-update']) ? (int) $db_counts['inquiry-response-update']  : 0;
-
-    $new_inquiry_proposal_ids             = isset($db_subject_ids['new-inquiry'])              ? $db_subject_ids['new-inquiry']              : [];
-    $inquiry_response_proposal_ids        = isset($db_subject_ids['inquiry-response'])         ? $db_subject_ids['inquiry-response']         : [];
-    $inquiry_response_update_proposal_ids = isset($db_subject_ids['inquiry-response-update']) ? $db_subject_ids['inquiry-response-update']  : [];
-
-    $total_notifications = array_sum([
-        $account_notification_count,
-        $unread_convo_count,
-        $gig_notification_count,
-        $event_notification_count,
-    ]);
-
-    return [
-        'unread_convo_count'                   => $unread_convo_count,
-        'account_notification_count'           => $account_notification_count,
-        'gig_notification_count'               => $gig_notification_count,
-        'event_notification_count'             => $event_notification_count,
-        'total_notification_count'             => $total_notifications,
-        'new_inquiry_proposal_ids'             => $new_inquiry_proposal_ids,
-        'inquiry_response_proposal_ids'        => $inquiry_response_proposal_ids,
-        'inquiry_response_update_proposal_ids' => $inquiry_response_update_proposal_ids,
+    $notifications['unread_convo'] = [
+        'count'       => (int) get_unread_conversation_count(),
+        'subject_ids' => [],
     ];
+
+    $notifications['account'] = [
+        'count'       => (int) get_account_notification_count(),
+        'subject_ids' => [],
+    ];
+
+    return $notifications;
 }
