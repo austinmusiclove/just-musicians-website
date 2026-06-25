@@ -17,3 +17,4 @@ require_once 'events-api/parse-args.php';
 require_once 'events-api/get-user-events.php';
 require_once 'events-api/create-event.php';
 require_once 'events-api/update-event.php';
+require_once 'events-api/handle-event-date-time-change.php';
