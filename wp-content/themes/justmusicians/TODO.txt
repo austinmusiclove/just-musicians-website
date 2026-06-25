@@ -3,6 +3,7 @@ Critical bugs
     importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
     Figure out why update listing takes forever; probably something with unneeded image processing
     Consider setting status header in html apis files on errors
+    Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
 
 Deploy
     Set up Event acf
@@ -87,8 +88,6 @@ Events and Inquiries refactor
     Add Single Event page
         Notification to proposal owners when event date or time is altered
             User updates date or time
-                Make sure start date is required in event update form
-                If change in date or time is detected, call new function notify_proposals_date_time_change()
                 Find all available and unavailable proposals for the event
                 Send them an email
                 Send event-dt-change notification
@@ -110,7 +109,8 @@ Events and Inquiries refactor
             Single Event
                 Change no response to awaiting response which includes inquiry and event-dt-change status
             Test
-                Make sure it is not triggered if a time is added from empty or made empty
+                Make sure email gets sent to the right people
+                Make sure notification goes to the same people
         Make sure single event link in email and inquiry modal after success works
         Highlight My Events when on single event page
     Handle Event Delete

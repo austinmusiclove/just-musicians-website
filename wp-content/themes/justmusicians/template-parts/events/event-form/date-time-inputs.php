@@ -2,7 +2,7 @@
 
     <div>
         <label class="text-14 font-bold">Date</label>
-        <input type="date" name="event_start_date" x-bind:value="startDate" class="w-full" />
+        <input type="date" name="event_start_date" x-bind:value="startDate" class="w-full" required/>
     </div>
 
     <div class="flex gap-2" x-data="{ startTimeInput: startTime, endTimeInput: endTime }">
