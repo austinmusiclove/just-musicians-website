@@ -86,11 +86,6 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
-    Need to only allow postal code in inquiry modal (check all 6 locaiton filters to make sure they are doing the right thing)
-        Need to add active search for cities in edit event form
-        Postal code should not be required but city should be
-        City auto fills state and clears zip if a city is selected without zip code
     Handle Event Delete
         Handle delete event (maybe set status to cancelled and show that in left over proposals on my gigs; don't show in my events anymore)
         Add delete/cancel button on single event page
@@ -374,6 +369,8 @@ Performance
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
     image sprites
+Emails
+    all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 Bugs
     when listing cover image loads slowly on search results standard listing, it shows youtube video with play button
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
