@@ -86,9 +86,6 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    No Results content
-        Rename no-results to empty-states
-    Create folders for html api files
     Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
     Figure out what happens with existing inquiries messages
         Evaluate if i need userInquiries in x-data of page-messages.php
