@@ -12,9 +12,10 @@
           'bg-yellow/40':      !['inquiry', 'stale'].includes(<?php echo $args['status_var']; ?>),
       }"
       x-text="({
-          available:   'Responded',
-          unavailable: 'Responded',
-          inquiry:     'Inquiry',
-          stale:       'Availability Requested',
+          available:    'Response Sent',
+          unavailable:  'Response Sent',
+          inquiry:      'Inquiry',
+          stale:        'Availability Requested',
+          eventremoved: 'Event Cancelled',
       }[<?php echo $args['status_var']; ?>] || <?php echo $args['status_var']; ?>)"
 ></span>

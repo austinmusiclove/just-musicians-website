@@ -48,11 +48,10 @@ function html_api_v1_template_redirects() {
         // Events and Proposals
         case 'events':
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/create-event.php'; exit;
-            }
-        case 'update-event':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/update-event.php'; exit;
+                case 'POST'  :
+                    if (get_query_var('event-id')) { status_header(200); include_once get_template_directory() . '/html-api/update-event.php'; exit; }
+                    else                           { status_header(200); include_once get_template_directory() . '/html-api/create-event.php'; exit; }
+                case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/delete-event.php'; exit;
             }
         case 'event-applicants':
             switch ($_SERVER['REQUEST_METHOD']) {

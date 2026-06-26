@@ -27,6 +27,11 @@ get_header();
                     <?php } ?>
                 </div>
 
+                <!------------ Page Load Toasts ----------------->
+                <div>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'delete') { ?><span x-init="$dispatch('success-toast', {'message': 'Event Deleted Successfully'});"></span><?php } ?>
+                </div>
+
                 <?php if (!is_user_logged_in()) { ?>
 
                     <span x-init="showLoginModal = true; showSignupModal = false; loginModalMessage = 'Sign in to see your events';"></span>

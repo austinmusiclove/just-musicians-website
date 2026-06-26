@@ -107,7 +107,7 @@
         <?php } ?>
 
         <!-- Response -->
-        <div class="flex flex-col mb-4" x-show="!showForm && status != 'inquiry'" x-cloak>
+        <div class="flex flex-col mb-4" x-show="!showForm && status != 'inquiry' && status != 'eventremoved'" x-cloak>
             <span class="text-12 text-black/50 font-semibold">Your Response</span>
             <div class="flex flex-wrap items-center gap-2">
                 <p class="w-full text-14 mb-1 whitespace-pre-wrap" x-text="prop_details" x-show="prop_details" x-cloak></p>

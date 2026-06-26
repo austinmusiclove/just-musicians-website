@@ -86,13 +86,6 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    Handle Event Delete
-        Handle delete event (maybe set status to cancelled and show that in left over proposals on my gigs; don't show in my events anymore)
-        Add delete/cancel button on single event page
-        change post status to removed and exclude it in get user events resutls
-        change status of all associated proposals to event-removed and handle the way that looks on front end
-        disable respond button for event-removed proposals
-        clear notifications of all proposals associated
     Change applicants count on event card to responses
     Add copy to explain Draw in event form
     Event creation form
