@@ -2,7 +2,7 @@
 
 <?php
 $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$is_my_events = $current_path === '/my-events/' || preg_match('#^/event/#', $current_path);
+$is_my_events = $current_path === '/my-events/' || $current_path === '/event-form/' || preg_match('#^/event/#', $current_path);
 ?>
 
     <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/account/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/account/'); ?>">

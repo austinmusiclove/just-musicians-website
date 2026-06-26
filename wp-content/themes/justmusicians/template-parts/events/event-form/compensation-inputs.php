@@ -9,7 +9,7 @@
     </div>
     <div>
         <label class="text-14 font-bold">Compensation Details</label>
-        <textarea name="event_compensation" x-bind:value="compensation" class="w-full h-24 sm:h-40" placeholder="Describe compensation"></textarea>
+        <textarea name="event_compensation" x-bind:value="compensation" class="w-full h-24 sm:h-40" placeholder="Describe compensation for musicians"></textarea>
     </div>
 </div>
 

@@ -9,7 +9,7 @@ function create_event($args) {
 
     // Auto invite listings
     $auto_rfp            = $args['meta_input']['auto_rfp'] ?? false;
-    $inquiry_listing     = $args['inquiry_listing'];
+    $inquiry_listing     = $args['inquiry_listing'] ?? null;
     $listings_to_invite   = $inquiry_listing ? [$inquiry_listing] : [];
     $max_listing_invites = DEFAULT_QUOTES_REQUESTED;
     if ($auto_rfp) {

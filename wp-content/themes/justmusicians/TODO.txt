@@ -86,10 +86,6 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    Event creation form
-        link from no event results page
-        link from add button
-    Need front end feedback error message about times not being compatible in event edit
     No Results content
         Work on no results message personality especially events
         Rename no-results to empty-states

@@ -85,6 +85,11 @@ get_header();
                     <h1 class="font-bold text-25" x-text="eventName"></h1>
                 </div>
 
+                <!------------ Page Load Toasts ----------------->
+                <div>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span x-init="$dispatch('success-toast', {'message': 'Event Created Successfully'});"></span><?php } ?>
+                </div>
+
                 <div x-data="{
                     showEventDetails: true,
                     showApplicants: false,

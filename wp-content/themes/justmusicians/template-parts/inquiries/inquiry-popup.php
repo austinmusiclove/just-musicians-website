@@ -31,6 +31,7 @@
             "
         >
             <input type="hidden" name="inquiry_listing" x-model="inquiryListing" x-ref="inquiryListingInput" />
+            <input type="hidden" name="is_inquiry" value="true" />
             <?php echo get_template_part('template-parts/inquiries/popup-slides/date-slide',            '', []); ?>
             <?php echo get_template_part('template-parts/inquiries/popup-slides/location-slide',        '', []); ?>
             <?php echo get_template_part('template-parts/inquiries/popup-slides/budget-slide',          '', []); ?>
