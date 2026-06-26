@@ -25,10 +25,6 @@ $is_my_events = $current_path === '/my-events/' || $current_path === '/event-for
         ></span>
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Messages</span>
     </a>
-    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/inquiries/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/inquiries/'); ?>">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
-        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Inquiries</span>
-    </a>
 
     <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none" x-text="showSidebar ? 'For Musicians' : 'M'"></span>
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/listings/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/listings/'); ?>">

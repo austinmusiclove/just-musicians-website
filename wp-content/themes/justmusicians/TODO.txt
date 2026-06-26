@@ -86,17 +86,10 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    Make sure to replace all functionality from mu-plubins/inquiries-api/ files and all html-api files for inquiries
-    Figure out what happens with existing inquiries messages
-        Evaluate if i need userInquiries in x-data of page-messages.php
-        Evaluate if inquiriesMap is needed in page-messages.php
     Remove inquiries html apis and mu plugin functions
-    Remove inquiries page menu item
-    Remove inquiries page
     Grep inquir, inquiries, inquiry to remove all references that are not needed
     Mark inquiry post type as deprecated
     Note inquiry deprecation in user messages plugin
-    Remove inquiries account page
     Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
 Applications (Calendly for music booking)
     Application post type
