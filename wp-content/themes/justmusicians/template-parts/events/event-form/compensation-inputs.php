@@ -18,10 +18,12 @@
         <input type="hidden" name="event_request_quote" value="0" />
         <input type="checkbox" name="event_request_quote" value="1" x-bind:checked="requestQuote" class="w-4 h-4" />
         <span class="text-16">Request quote from musicians</span>
+        <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Select this if you want musicians to give you a price for their service' ]); ?>
     </label>
     <label class="flex items-center gap-2 cursor-pointer">
         <input type="hidden" name="event_request_draw" value="0" />
         <input type="checkbox" name="event_request_draw" value="1" x-bind:checked="requestDraw" class="w-4 h-4" />
         <span class="text-16">Request draw estimate from musicians</span>
+        <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Select this if you want musicians to let you know how many guests they believe they will attract to the show' ]); ?>
     </label>
 </div>
