@@ -30,8 +30,7 @@ function request_proposal($event_id, $listing_id) {
         }
 
         $proposal_id = $result;
-        $event_name  = get_post_meta($event_id, 'event_name', true);
-        notify_listing_proposal_request($proposal_id, $event_id, $listing_id, $event_name);
+        notify_listing_proposal_request($proposal_id, $listing_id, $event_id);
     }
 
     return new WP_REST_Response(['success' => true, 'listings' => $listings], 200);

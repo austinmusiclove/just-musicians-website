@@ -7,6 +7,11 @@
 
 get_header();
 
+$valid_statuses = ['all', 'request', 'available', 'unavailable'];
+$initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_statuses, true)
+    ? $_GET['status']
+    : 'all';
+
 ?>
 
 <div id="page" class="flex flex-col grow">
@@ -45,7 +50,7 @@ get_header();
                     <form id="my-gigs-form"
                         x-data="{
                             listing: 'all',
-                            status: 'all',
+                            status: '<?php echo $initial_status; ?>',
                             dateRange: 'upcoming',
                         }"
                         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
@@ -84,7 +89,7 @@ get_header();
                                         ['value' => 'unavailable', 'label' => 'Unavailable'],
                                     ],
                                     'input_name'  => 'filter_status',
-                                    'selected'    => 'all',
+                                    'selected'    => $initial_status,
                                 ]); ?>
                             </div>
 

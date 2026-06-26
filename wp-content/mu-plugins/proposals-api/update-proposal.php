@@ -55,7 +55,7 @@ function respond_to_inquiry_proposal($args) {
         add_inquiry_response_notification($author_id, $proposal_id);
     } else if ($initial_status === 'stale') {
         clear_notifications(HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id);
-        add_inquiry_response_notification($author_id, $proposal_id);
+        add_inquiry_response_update_notification($author_id, $proposal_id);
     } else {
         add_inquiry_response_update_notification($author_id, $proposal_id);
     }

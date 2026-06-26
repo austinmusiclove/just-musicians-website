@@ -47,7 +47,7 @@ function create_event($args) {
         }
 
         $proposal_id = $result;
-        notify_listing_proposal_request($proposal_id, $event_id, $listing_id, $args['meta_input']['event_name']);
+        notify_listing_proposal_request($proposal_id, $listing_id, $event_id);
     }
 
     // Get event page link
