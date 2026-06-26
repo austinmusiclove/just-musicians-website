@@ -1,3 +1,4 @@
+// Deprecated
 function updateInquiry(alco, post_id, inquiry) {
     alco.$data.eventsMap[post_id]['subject'] = inquiry.subject;
     alco.$data.eventsMap[post_id]['details'] = inquiry.details;

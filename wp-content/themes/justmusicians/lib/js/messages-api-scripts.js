@@ -13,7 +13,7 @@ function getConversationsUrl(cursor, isUpdate, inquiryId) {
     let params = [];
     if (cursor) { params.push(`cursor=${encodeURIComponent(cursor)}`); }
     if (isUpdate) { params.push(`update=true`); }
-    if (inquiryId) { params.push(`inquiry_id=${inquiryId}`); }
+    if (inquiryId) { params.push(`inquiry_id=${inquiryId}`); } // Deprecated
     let query = params.length > 0 ? `?${params.join('&')}` : '';
     return `${messagesSiteData.siteUrl}/wp-json/v1/conversations/${query}`;
 }

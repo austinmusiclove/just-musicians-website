@@ -1,4 +1,4 @@
-
+<!-- Deprecated -->
 <template x-if="inquiry">
 
     <div class="flex-1 overflow-y-auto my-8 pr-8"

@@ -17,7 +17,7 @@ function send_message(WP_REST_Request $request) {
     // Handle success
     } else if ($message) {
         $message = [
-            'inquiry'                  => null,
+            'inquiry'                  => null, // Deprecated; This stays in tact to serve existing inquiry messages
             'content'                  => nl2br($message['content']),
             'is_outgoing'              => true,
             'sender_id'                => $message['sender_id'],

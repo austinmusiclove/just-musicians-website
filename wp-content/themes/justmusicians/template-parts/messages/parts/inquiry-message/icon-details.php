@@ -1,3 +1,4 @@
+<!-- Deprecated -->
 <div class="grid gap-x-12 gap-y-4 w-full">
 
     <!-- Date -->

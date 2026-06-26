@@ -3,6 +3,7 @@
 <header class="pt-4 md:pt-20 mb-4 mt-8 gap-2 flex flex-col">
 
     <!-- Back button -->
+    <!-- Deprecated; inquiry always null -->
     <span class="opacity-50 cursor-pointer" x-show="inquiry != null" x-cloak>
         <a class="flex items-center hover:underline" href="<?php echo site_url('/inquiries/'); ?>">
             <svg width="16" height="16" class="icon_svg"><path d="M12.75 7.25H5.038l1.747-1.78a.75.75 0 0 0-1.07-1.05l-3 3.055a.75.75 0 0 0 0 1.05l3 3.055a.75.75 0 0 0 1.07-1.05L5.038 8.75h7.712a.75.75 0 1 0 0-1.5Z"></path></svg>
@@ -11,6 +12,7 @@
     </span>
 
     <!-- Title -->
+    <!-- Deprecated; inquiry always null -->
     <h1 class="font-bold text-25" x-show="inquiry == null" x-cloak>All Conversations</h1>
     <span class="flex flex-col gap-1 my-4" x-show="inquiry != null" x-cloak>
         <h2 class="font-bold text-25" x-text="inquiry ? inquiry.subject : ''"></h2>
@@ -28,6 +30,7 @@
 }">
 
     <!-- Tabs -->
+    <!-- Deprecated; inquiry always null -->
     <div class="flex items-start justify-between border-b border-black/20" x-show="inquiry != null" x-cloak>
         <div class="flex gap-6 items-start">
             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showConversations}" x-on:click="hideTabs(); showConversations = true;">Responses</div>
@@ -51,6 +54,7 @@
     </div>
 
     <!-- Inquiry Details -->
+    <!-- Deprecated; inquiry always null -->
     <div class="flex-1 flex overflow-hidden" x-show="showInquiryDetails" x-cloak >
 
         <!-- Inquiry details -->

@@ -116,7 +116,7 @@ function register_post_types() {
         'menu_icon' => 'dashicons-list-view'
     ));
 
-    // Inquiry
+    // Inquiry (Deprecated; replaced by event)
     register_post_type('inquiry', array(
         'public' => true,
         'show_in_rest' => true,

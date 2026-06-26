@@ -32,19 +32,6 @@ function html_api_v1_template_redirects() {
                 case 'GET'   : status_header(200); include_once get_template_directory() . '/single-collection.php'; exit;
             }
 
-        // Inquiries (deprecated)
-        case 'inquiries':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/inquiries/get-inquiries.php'; exit;
-                case 'POST'  :
-                    if (get_query_var('inquiry-id')) { status_header(200); include_once get_template_directory() . '/html-api/inquiries/update-inquiry.php'; exit; }
-                    else                             { status_header(200); include_once get_template_directory() . '/html-api/inquiries/create-inquiry.php'; exit; }
-            }
-        case 'inquiry-listing':
-            switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/inquiries/add-listing-to-inquiry.php'; exit;
-            }
-
         // Events and Proposals
         case 'events':
             switch ($_SERVER['REQUEST_METHOD']) {

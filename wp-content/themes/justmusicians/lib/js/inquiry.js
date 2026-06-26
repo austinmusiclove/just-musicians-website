@@ -1,4 +1,5 @@
 
+// Deprecated
 function showDate(inquiry) {
     if (inquiry.date != '' && inquiry.date_type == 'Single Date') {
         return inquiry.date;
@@ -9,6 +10,7 @@ function showDate(inquiry) {
     }
 }
 
+// Deprecated
 function showTime(inquiry) {
     if (inquiry.time != '' && inquiry.date_type == 'Single Date') {
         return inquiry.time;
@@ -17,6 +19,7 @@ function showTime(inquiry) {
     }
 }
 
+// Deprecated
 function showBudget(inquiry) {
     if (inquiry.budget_type == 'Request Quotes') {
         return 'I need a quote';

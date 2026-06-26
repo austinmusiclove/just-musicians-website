@@ -1,3 +1,4 @@
+<!-- Deprecated -->
 <!-- Heading and edit button -->
 <div class="flex flex-row justify-between items-start">
     <h2 class="mb-8 font-bold text-20" x-text="inquiry.subject"></h2>

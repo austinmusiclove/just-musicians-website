@@ -3,6 +3,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+// Deprecated
 function get_user_inquiry($args) {
     $post_id = $args['post_id'];
 

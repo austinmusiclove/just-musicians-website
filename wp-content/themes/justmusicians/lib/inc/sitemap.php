@@ -10,7 +10,10 @@ add_filter( 'wp_sitemaps_add_provider', function( $provider, $name ) {
 function remove_custom_post_types_from_sitemap( $post_types ) {
     // Post types to remove from sitemap
     unset( $post_types['collection'] );
-    unset( $post_types['inquiry'] );
+    unset( $post_types['inquiry'] ); // Deprecated
+    unset( $post_types['event'] );
+    unset( $post_types['proposal'] );
+    unset( $post_types['offer'] );
     unset( $post_types['youtubevideo'] );
     unset( $post_types['artist'] );
     unset( $post_types['performance'] );
@@ -19,6 +22,7 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['venue_review'] );
     unset( $post_types['comp_report'] );
     unset( $post_types['review_submission'] ); // Keep this old post type unless all review submission posts are deleted
+    unset( $post_types['tmp_code'] );
 
     return $post_types;
 }
@@ -33,6 +37,7 @@ function remove_taxonomies_from_sitemap( $taxonomies ) {
     unset( $taxonomies['instrumentation'] );
     unset( $taxonomies['setting'] );
     unset( $taxonomies['keyword'] );
+    unset( $taxonomies['ensemble_size'] );
     unset( $taxonomies['mediatag'] );
 
     return $taxonomies;
@@ -48,8 +53,11 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
             'listings',
             'listing-form',
             'collections',
-            'inquiries',
+            'inquiries', // Deprecated
             'messages',
+            'my-events',
+            'my-gigs',
+            'event-form',
         ];
         $page_ids = [];
 

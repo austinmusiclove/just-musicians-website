@@ -1,7 +1,11 @@
-<form
-    x-bind:hx-post="`<?php echo site_url(); ?>/wp-html/v1/inquiries/${inquiry.inquiry_id}`"
+<!-- Deprecated -->
+<!--
+    Update inquiry url Deprecated
+    x-bind:hx-post="`<?php //echo site_url(); ?>/wp-html/v1/inquiries/${inquiry.inquiry_id}`"
     hx-target="#inquiry-result"
     hx-ext="disable-element" hx-disable-element=".inquiry-submit-button"
+-->
+<form
     x-data="{
         subjectInput: inquiry.subject,
     }"

@@ -18,6 +18,7 @@ Deploy
     Add Event Form page
     Update package version
     Add ensemble size term description as ints for sorting
+    Remove inquiries page
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -86,18 +87,16 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    Remove inquiries html apis and mu plugin functions
-    Grep inquir, inquiries, inquiry to remove all references that are not needed
-    Mark inquiry post type as deprecated
-    Note inquiry deprecation in user messages plugin
     Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message
         Venue association
         Excluded events
+        Add to robots and sitemap php files
     Application Response post type
         Application and listing relationship
+        Add to robots and sitemap php files
     Application set up screen
         Application link copy button
         Add venue logo

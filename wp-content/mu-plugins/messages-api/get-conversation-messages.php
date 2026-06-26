@@ -19,8 +19,11 @@ function get_conversation_messages($request) {
 
 function formatMessage($message, $user_id) {
     $display_name = clean_display_name($message->sender_name);
+
+    // Deprecated
     $inquiry = null;
     if ($message->inquiry_id) {
+        /*
         $inquiry = get_inquiry(['post_id' => $message->inquiry_id]);
 
         // Handle deleted or not found listing
@@ -28,6 +31,8 @@ function formatMessage($message, $user_id) {
             $inquiry = [ 'expired' => true, 'deleted' => true, 'subject' => 'Inquiry Deleted' ];
             //return null; // Hide deleted inquires creates an issue because hiding the meassage means it never gets set to read
         }
+         */
+        $inquiry = [ 'expired' => true, 'deleted' => true, 'subject' => 'Inquiry Deleted' ];
 
     }
     return [

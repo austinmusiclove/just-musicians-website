@@ -36,18 +36,6 @@ function html_api_rewrite_rules() {
         'top'
     );
 
-    // Inquiries
-    add_rewrite_rule(
-        '^wp-html/v1/inquiries/([0-9]+)/?$',
-        'index.php?wp-html-v1=inquiries&inquiry-id=$matches[1]',
-        'bottom'
-    );
-    add_rewrite_rule(
-        '^wp-html/v1/inquiries/([0-9]+)/listings/([0-9]+)/?$',
-        'index.php?wp-html-v1=inquiry-listing&inquiry-id=$matches[1]&listing-id=$matches[2]',
-        'top'
-    );
-
     // Events and Proposals
     add_rewrite_rule(
         '^wp-html/v1/events/([0-9]+)/?$',
@@ -89,7 +77,6 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'wp-html-v1';
     $vars[] = 'listing-id';
     $vars[] = 'collection-id';
-    $vars[] = 'inquiry-id';
     $vars[] = 'event-id';
     $vars[] = 'proposal-id';
     $vars[] = 'conversation-id';

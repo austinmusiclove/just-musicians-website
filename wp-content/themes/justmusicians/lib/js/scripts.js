@@ -1,6 +1,5 @@
 // replaced with alpinejs and htmx
 // TODO remove data triggers and data element attributes from html or leave it in to use this as a fall back in case i move away from alpine and htmx
-// TODO finish flow for the inquiry modal
 
 
 (function($) {

@@ -14,11 +14,13 @@
 >
 
     <!-- No conversations -->
+    <!-- Deprecated; inquiry always null -->
     <template x-if="!getCvInFlight && conversations.length == 0 && inquiry == null">
         <div class="my-4">No Conversations</div>
     </template>
 
     <!-- No inquiry responses-->
+    <!-- Deprecated; inquiry always null -->
     <template x-if="!getCvInFlight && conversations.length == 0 && inquiry != null">
         <div class="my-4 py-16 pr-2 text-16">No conversations yet. This inquiry has not been sent to any musicians yet.</div>
     </template>
@@ -40,12 +42,16 @@
     </template>
 
     <!-- Suggestions -->
+    <!-- Deprecated; inquiry always null -->
     <template x-if="inquiry">
-        <div class="border-t-4 border-black/20 py-16 pr-4"
-            x-bind:hx-get="`<?php echo site_url(); ?>/wp-html/v1/inquiries/${inquiry.inquiry_id}/suggestions/`"
+        <!--
+        Get Inquiries suggestions url deprecated
+            x-bind:hx-get="`<?php //echo site_url(); ?>/wp-html/v1/inquiries/${inquiry.inquiry_id}/suggestions/`"
             hx-trigger="load"
             hx-target="#inquiry-suggestion-results"
             hx-indicator="#suggestions-spinner"
+        -->
+        <div class="border-t-4 border-black/20 py-16 pr-4"
             x-data="{
                 players: {},
                 playersMuted: true,

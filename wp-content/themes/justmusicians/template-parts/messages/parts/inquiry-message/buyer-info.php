@@ -1,3 +1,4 @@
+<!-- Deprecated -->
 <h3 class="text-20 font-bold mb-4">About The Sender</h3>
 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4">
 

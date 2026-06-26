@@ -1,5 +1,5 @@
 
-async function getConversations(alco, cursor, inquiryId) {
+async function getConversations(alco, cursor, inquiryId) { // inquiryId deprecated; always null
     var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, false, inquiryId), 'conversations', 'getCvInFlight');
     if (conversations instanceof Error) {
         alco.$dispatch('error-toast', { message: conversations.message });
@@ -92,7 +92,7 @@ async function shortPollConversations(alco) {
         await new Promise(requestAnimationFrame);                // Pause while browser tab is inactive
         var cursor = alco.conversations.length > 0 ? alco.conversations[0].latest_message_id : null;
         var isUpdate = alco.conversations.length > 0;
-        var inquiryId = alco.inquiry ? alco.inquiry.inquiry_id : null;
+        var inquiryId = alco.inquiry ? alco.inquiry.inquiry_id : null; // Deprecated; inquiry is always null
         var conversations = await fetchResource(alco, 'GET', getConversationsUrl(cursor, isUpdate, inquiryId), 'conversations', null);
         if (conversations instanceof Error && conversations.cause == 403) {
             break;

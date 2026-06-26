@@ -1,3 +1,4 @@
+<!-- Deprecated -->
 <div class="flex gap-x-1 text-yellow w-24"
     x-data="{
         indicies: [ 0, 1, 2, 3, 4 ],
