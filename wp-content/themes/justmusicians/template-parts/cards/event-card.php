@@ -56,8 +56,8 @@
             x-data="{ proposals: <?php echo clean_arr_for_doublequotes($args['proposals']); ?>, }"
         >
             <div class="flex items-center gap-1">
-                <span class="text-12 text-black/50 font-semibold">Applicants</span>
-                <span class="text-14"><?php echo count($args['proposals']); ?></span>
+                <span class="text-12 text-black/50 font-semibold">Responses</span>
+                <span class="text-14"><?php echo count($args['responses']); ?></span>
             </div>
             <a href="<?php echo esc_url($args['permalink']); ?>" class="relative bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
                 Manage Event

@@ -86,7 +86,6 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Events and Inquiries refactor
-    Change applicants count on event card to responses
     Add copy to explain Draw in event form
     Event creation form
         link from no event results page

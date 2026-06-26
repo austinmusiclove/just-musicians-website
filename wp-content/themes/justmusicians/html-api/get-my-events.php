@@ -41,6 +41,7 @@ if (count($events) > 0) {
             'budget'         => get_field('budget', $event_id),
             'compensation'   => get_field('compensation', $event_id),
             'proposals'      => hm_get_proposal_ids_by_event_id($event_id),
+            'responses'      => hm_get_proposal_ids_by_event_id($event_id, ['status' => 'response']),
             'last'           => $index == array_key_last($events),
             'is_last_page'   => $is_last_page,
             'next_page'      => $next_page,
