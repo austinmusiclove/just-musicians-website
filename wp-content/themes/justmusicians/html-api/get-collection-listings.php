@@ -60,5 +60,5 @@ if (count($listings) > 0) {
     }
 
 } else if ($page == 1) {
-    get_template_part( 'template-parts/global/no-results-content/no-collection-listings');
+    get_template_part( 'template-parts/global/empty-states/no-collection-listings');
 }

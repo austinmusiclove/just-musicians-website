@@ -30,5 +30,5 @@ if (count($inquiries) > 0) {
     }
 
 } else {
-    echo get_template_part('template-parts/global/no-results-content/no-user-inquiries', '', []);
+    echo get_template_part('template-parts/global/empty-states/no-user-inquiries', '', []);
 }

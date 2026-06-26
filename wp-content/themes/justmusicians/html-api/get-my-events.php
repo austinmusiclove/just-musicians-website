@@ -48,5 +48,5 @@ if (count($events) > 0) {
         ]);
     }
 } else if ($page == 1) {
-    get_template_part('template-parts/global/no-results-content/no-events', '', []);
+    get_template_part('template-parts/global/empty-states/no-events', '', []);
 }

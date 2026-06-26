@@ -126,11 +126,11 @@ get_header();
 
 
                             <?php } else {
-                              echo get_template_part('template-parts/global/no-results-content/no-user-listings', '', []);
+                              echo get_template_part('template-parts/global/empty-states/no-user-listings', '', []);
                             }
 
                         } else {
-                          echo get_template_part('template-parts/global/no-results-content/no-user-listings', '', []);
+                          echo get_template_part('template-parts/global/empty-states/no-user-listings', '', []);
                         }
                     } ?>
 

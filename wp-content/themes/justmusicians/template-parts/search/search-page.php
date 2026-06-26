@@ -200,10 +200,10 @@ $next_page       = $result ? $result['next_page']       : null;
                                 }
 
                             } else {
-                                get_template_part( 'template-parts/global/no-results-content/no-search-results');
+                                get_template_part( 'template-parts/global/empty-states/no-search-results');
                             }
                             if ($is_last_page) {
-                                get_template_part( 'template-parts/global/no-results-content/no-more-results');
+                                get_template_part( 'template-parts/global/empty-states/no-more-results');
                             }
                         }
                     ?>

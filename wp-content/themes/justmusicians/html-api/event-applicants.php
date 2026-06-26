@@ -50,10 +50,10 @@ if (!empty($page_ids)) {
         ]);
     }
 } else if ($page == 1) {
-    get_template_part('template-parts/global/no-results-content/no-event-applicants', '', [ 'event_id' => $event_id, ]);
+    get_template_part('template-parts/global/empty-states/no-event-applicants', '', [ 'event_id' => $event_id, ]);
 }
 if ($is_last_page) {
-    get_template_part('template-parts/global/no-results-content/no-more-event-applicants', '', [ 'event_id' => $event_id, ]);
+    get_template_part('template-parts/global/empty-states/no-more-event-applicants', '', [ 'event_id' => $event_id, ]);
 }
 
 echo '<span x-init="showSuggestions = false;"></span>';

@@ -46,5 +46,5 @@ if (count($proposals) > 0) {
         ]);
     }
 } else if ($page == 1) {
-    get_template_part('template-parts/global/no-results-content/no-gigs', '', []);
+    get_template_part('template-parts/global/empty-states/no-gigs', '', []);
 }
