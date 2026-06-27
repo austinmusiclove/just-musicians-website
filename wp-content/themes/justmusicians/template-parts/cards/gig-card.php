@@ -22,7 +22,7 @@
     <!-- Notifications -->
     <div class="absolute -top-1 -left-3 z-[1]"
         hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
-        x-bind:hx-trigger="(!has_notification(notifications, 'new_inquiry', '<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'revealed once'"
+        x-bind:hx-trigger="(!has_notification(notifications, 'new_inquiry', '<?php echo $args['proposal']['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
         hx-swap="beforeend"
         hx-indicator="#decoy-indicator"
         hx-vals='{"notification_type":"new_inquiry","subject_id": "<?php echo $args['proposal']['proposal_id']; ?>" }'

@@ -72,10 +72,7 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 Fixes
     add calendar
-    new inquiry notification slow to clear; or not clearing until i refresh the resutls with status filter
-    don't send new response update notification if the prop was updated but not changed
-    on many account pages, the whole html goes to half width of screen when it gets really small
-    add default location setting in account settings
+    new inquiry notification slow to clear; or not clearing until i refresh the resutls with status filter (test with one gig in list)
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message
@@ -134,6 +131,7 @@ My Gigs page (for musicians)
     Be able to click through to conversation if one exists between you and event owner
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
+    Don't send new response update notification if the prop was updated but not changed
 Event Form page
     Allow venue location
     Sucesss takes you to single event which has a tab for event details and editing
@@ -143,7 +141,6 @@ Offer post type (future)
     Event relationship
     Details
     Proposal relationship
-Rename clear-listing-form to clear-listing-search-form
 DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
@@ -159,11 +156,12 @@ SEO
         maybe add artist bios
         maybe add some kind of page blurb
     add best x in x listacle blog posts
-Glossarier
+Glossaries
     add other glossaries section at the bottom of single-glossary
 Users
     ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one
+    add default location setting in account settings
 Reviews
     **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
     **add title to review
@@ -263,6 +261,7 @@ Listing form
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
+    Rename clear-listing-form to clear-listing-search-form
 Listing page
     allow play with mouse off iframe for videos
     ***add seek in video
@@ -344,6 +343,7 @@ Quirks
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
     the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
     in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
+    on many account pages, the whole html goes to half width of screen when it gets really small
 Accessibility
     *Need full audit
 Document
