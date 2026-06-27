@@ -31,6 +31,6 @@ if ( is_wp_error($result) ) {
 
 // Success Response
 echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', [
-    'success_toast' => 'Invite Sent Successfully',
+    'success_toast' => 'Inquiry Sent Successfully',
     'btn_text'      => 'Sent',
 ]);
