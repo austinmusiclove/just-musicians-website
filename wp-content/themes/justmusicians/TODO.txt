@@ -6,19 +6,22 @@ Critical bugs
     Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
 
 Deploy
-    make sure EMAIL_TEST_MODE is on in staging
-    Set up Event acf
-    Make Event for each Inquiry
-    Set up proposal acf
-    Set up offer acf
-    Add My Gigs page
-    Rebuild proposal index
-    Add My Events page
-    Save permalinks
-    Add Event Form page
-    Update package version
-    Add ensemble size term description as ints for sorting
-    Remove inquiries page
+    After push
+        Set up Event acf
+        Set up proposal acf
+        Rebuild all indexes
+        Save permalinks
+        Remove inquiries page
+        Make Event for each Inquiry
+    Test on staging
+        Create event
+        Invite listings
+        View back end
+        Respond to inquiries
+        Change date
+        Respond again
+        Check notifications db
+    Prod deploy
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
