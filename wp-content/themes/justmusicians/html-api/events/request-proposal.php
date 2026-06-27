@@ -11,6 +11,7 @@ if ( is_wp_error($is_authorized)) {
         'event_id'    => $event_id,
         'listing_id'  => $listing_id,
         'error_toast' => $message,
+        'btn_text'    => 'Send',
     ]);
     exit;
 }
@@ -23,9 +24,13 @@ if ( is_wp_error($result) ) {
         'event_id'    => $event_id,
         'listing_id'  => $listing_id,
         'error_toast' => $message,
+        'btn_text'    => 'Send',
     ]);
     exit;
 }
 
 // Success Response
-echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', [ 'success_toast' => 'Invite Sent Successfully' ]);
+echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', [
+    'success_toast' => 'Invite Sent Successfully',
+    'btn_text'      => 'Sent',
+]);

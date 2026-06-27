@@ -36,10 +36,13 @@
             <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
                 'event_id'       => $args['event_id'],
                 'listing_id_var' => 'inquiryListing',
+                'btn_text'       => 'Send',
             ]); ?>
         </div>
         <div class="w-fit sm:min-w-22" x-show="proposalSent()" x-cloak>
-            <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', []); ?>
+            <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', [
+                'btn_text' => 'Sent',
+            ]); ?>
         </div>
 
     </div>

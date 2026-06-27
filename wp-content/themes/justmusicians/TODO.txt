@@ -86,9 +86,6 @@ Questions
     When should users be prompted to review?
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
-Events and Inquiries refactor
-    Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
-        allow customize button text for rfp buttons
 Applications (Calendly for music booking)
     Application post type
         Title, description, logo, request draw, comp min, personal message

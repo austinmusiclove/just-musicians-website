@@ -1,8 +1,9 @@
 <!-- Request proposal button -->
 <?php
+$btn_text      = $args['btn_text']      ?? 'Send';
+$listing_var   = $args['listing_id_var'] ?? null;
 $success_toast = $args['success_toast']  ?? null;
 $error_toast   = $args['error_toast']    ?? null;
-$listing_var   = $args['listing_id_var'] ?? null;
 ?>
 
 <button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-14 inline-block w-full"
@@ -33,7 +34,7 @@ $listing_var   = $args['listing_id_var'] ?? null;
             id="request-proposal-btn-indicator-<?php echo $args['event_id'] . '-' . $args['listing_id']; ?>"
         <?php } ?>
     >
-        <span class="htmx-indicator-component-block-replace">Send</span>
+        <span class="htmx-indicator-component-block-replace"><?php echo $btn_text; ?></span>
         <span class="htmx-indicator-component-block">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
         </span>

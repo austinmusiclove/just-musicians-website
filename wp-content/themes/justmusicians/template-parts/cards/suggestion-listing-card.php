@@ -157,10 +157,13 @@
         <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
             'event_id'   => $args['event_id'],
             'listing_id' => $args['post_id'],
+            'btn_text'   => 'Send',
         ]); ?>
     </span>
     <span class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit sm:min-w-32" x-show="proposalSent()" x-cloak>
-        <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', []); ?>
+        <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '',
+            'btn_text' => 'Sent',
+        ]); ?>
     </span>
 
 </div>

@@ -1,5 +1,6 @@
 <!-- Request proposal button (already sent state) -->
 <?php
+$btn_text      = $args['btn_text']      ?? 'Sent';
 $success_toast = $args['success_toast'] ?? null;
 $error_toast   = $args['error_toast']   ?? null;
 ?>
@@ -13,4 +14,4 @@ $error_toast   = $args['error_toast']   ?? null;
         x-init="$dispatch('error-toast',   { 'message': '<?php echo $error_toast; ?>' })"
     <?php } ?>
 
->Sent</button>
+><?php echo $btn_text; ?></button>
