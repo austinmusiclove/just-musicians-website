@@ -1,5 +1,5 @@
 <div class="mt-28 md:mt-16 w-screen h-screen fixed top-0 left-0 z-30 flex items-center justify-center" x-show="showMobileMenu" x-transition x-cloak>
-    <div class="bg-white relative p-8 md:pt-20 relative w-full h-full">
+    <div class="bg-white relative p-8 md:pt-20 relative w-full h-full overflow-y-auto" style="-webkit-overflow-scrolling: touch">
 
     <?php $class = 'border-b border-black/20 last:border-none pb-3 mb-3'; ?>
 
