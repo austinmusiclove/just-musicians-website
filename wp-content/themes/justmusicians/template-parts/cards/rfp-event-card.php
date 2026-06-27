@@ -1,4 +1,11 @@
 <div class="flex items-center gap-3 py-3 border-b border-black/20 overflow-hidden"
+    <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
+        hx-get="<?php echo site_url('/wp-html/v1/rfp-events/?page=' . $args['next_page']); ?>"
+        hx-trigger="revealed once"
+        hx-swap="beforeend"
+        hx-target="#request-slide-results"
+        hx-indicator="#rfp-paging-spinner"
+    <?php } ?>
     x-data="{
         listingId:          inquiryListing,
         proposalListingIds: <?php echo clean_arr_for_doublequotes($args['proposal_listing_ids']); ?>,

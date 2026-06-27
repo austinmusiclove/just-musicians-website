@@ -88,7 +88,6 @@ Questions
 
 Events and Inquiries refactor
     Modify send inquiry button to go to modal instead of pop up to send existing event inquiry
-        infinite scroll paging for rfp event cards
         allow customize button text for rfp buttons
 Applications (Calendly for music booking)
     Application post type

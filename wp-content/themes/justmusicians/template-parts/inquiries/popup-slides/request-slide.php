@@ -14,6 +14,9 @@
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
         </span>
         <span id="request-slide-results" class="request-slide-indicator htmx-indicator-block-replace"></span>
+        <span id="rfp-paging-spinner" class="htmx-indicator-flex justify-center">
+            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+        </span>
     </div>
 
     <div class="mt-auto pt-6 flex flex-col items-center gap-1">
