@@ -43,7 +43,10 @@
             ></span>
             My Gigs
         </a>
-        <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="#">My Applications</a> -->
+        <a class="px-2 py-1.5 flex items-start gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/submitted-applications/'); ?>">
+            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pen.svg'; ?>" />
+            Submitted Applications
+        </a>
 
         <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none">For Buyers</span>
         <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/my-events/'); ?>">
@@ -55,7 +58,10 @@
             My Events
         </a>
         <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="#">My Venues</a> -->
-        <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="#">My Applications</a> -->
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo site_url('/applications/'); ?>">
+            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pen.svg'; ?>" />
+            Applications
+        </a>
 
         <hr class="my-2 border-black/10" />
         <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo wp_logout_url('/'); ?>">
