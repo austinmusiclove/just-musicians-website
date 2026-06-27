@@ -70,7 +70,7 @@ get_header();
                 </a>
 
                 <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
-                    <div class="w-20 shrink-0">
+                    <div class="w-20 sm:w-24 shrink-0">
                         <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
                     </div>
                     <h1 class="font-bold text-25" x-text="eventName"></h1>
