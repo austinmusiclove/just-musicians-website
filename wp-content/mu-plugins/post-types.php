@@ -176,6 +176,36 @@ function register_post_types() {
         'menu_icon' => 'dashicons-text-page'
     ));
 
+    // Application
+    register_post_type('application', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array(),
+        'labels' => array(
+          'name' => 'Application',
+          'add_new_item' => 'Add New Application',
+          'edit_item' => 'Edit Application',
+          'all_items' => 'All Applications',
+          'singular_name' => 'Application'
+        ),
+        'menu_icon' => 'dashicons-text-page'
+    ));
+
+    // Application Submission
+    register_post_type('app_submission', array(
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => array(),
+        'labels' => array(
+          'name' => 'Application Submission',
+          'add_new_item' => 'Add New Application Submission',
+          'edit_item' => 'Edit Application Submission',
+          'all_items' => 'All Application Submissions',
+          'singular_name' => 'Application Submission'
+        ),
+        'menu_icon' => 'dashicons-text-page'
+    ));
+
     // Youtube Videos
     register_post_type('youtubevideo', array(
         'public' => true,

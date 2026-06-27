@@ -13,6 +13,8 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['inquiry'] ); // Deprecated
     unset( $post_types['event'] );
     unset( $post_types['proposal'] );
+    unset( $post_types['application'] );
+    unset( $post_types['app_submission'] );
     unset( $post_types['offer'] );
     unset( $post_types['youtubevideo'] );
     unset( $post_types['artist'] );
@@ -58,6 +60,8 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
             'my-events',
             'my-gigs',
             'event-form',
+            'applications',
+            'submitted-applications',
         ];
         $page_ids = [];
 

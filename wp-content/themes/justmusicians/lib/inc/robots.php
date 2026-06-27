@@ -7,6 +7,8 @@ function noindex_specific_post_type($robots) {
         is_singular('event') or
         is_singular('proposal') or
         is_singular('offer') or
+        is_singular('application') or
+        is_singular('app_submission') or
         is_singular('youtubevideo') or
         is_singular('artist') or
         is_singular('performance') or
@@ -24,6 +26,8 @@ function noindex_specific_post_type($robots) {
         is_page('my-gigs') or
         is_page('my-events') or
         is_page('event-form') or
+        is_page('applications') or
+        is_page('submitted-applications') or
         is_page('messages')
     ) {
         $robots['index'] = 'noindex';
