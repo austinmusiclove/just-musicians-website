@@ -205,7 +205,7 @@
                     sendMessageListingId = <?php echo $args['listing_id']; ?>;
                     sendMessageText = '';
                     showSendMessageSuccess = false;
-                    showSendMessageModal = true;
+                    $nextTick(() => { showSendMessageModal = true; });
                 "
             >
                 Send Message

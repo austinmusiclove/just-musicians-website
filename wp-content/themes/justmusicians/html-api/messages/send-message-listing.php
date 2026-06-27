@@ -6,7 +6,7 @@ if (!$user_id) {
     exit;
 }
 
-$message_content = isset($_POST['message'])     ? sanitize_textarea_field($_POST['message']) : '';
+$message_content = isset($_POST['message'])     ? wp_kses_post(wp_unslash(sanitize_textarea_field($_POST['message']))) : '';
 $listing_id      = isset($_POST['listing_id'])  ? sanitize_text_field($_POST['listing_id']) : '';
 
 if (!$listing_id) {
