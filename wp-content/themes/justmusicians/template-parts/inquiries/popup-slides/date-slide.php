@@ -25,6 +25,10 @@
     </span>
 
     <div class="mt-auto pt-6 flex justify-end gap-1">
+        <button type="button" class="bg-white shadow-black-offset border-2 border-black hover:bg-yellow hover:text-black text-black font-sun-motter text-16 px-4 py-2"
+            x-show="inquiryListing && accountSettings.has_events" x-cloak
+            x-on:click="_showInquirySlide('request')"
+        >Back</button>
         <button type="button" class="shadow-black-offset border-2 border-black font-sun-motter text-16 px-4 py-2 bg-grey text-white cursor-not-allowed"
             x-show="!inquiryStartDate" x-cloak
             x-on:click="_emphasizeElm($refs.inquiryStartDateInputElm, 'inquiry-start-date-input')"

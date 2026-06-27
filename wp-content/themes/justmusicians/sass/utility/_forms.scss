@@ -153,6 +153,18 @@ form {
   .htmx-request .htmx-indicator-replace {
       opacity: 0;
   }
+  .htmx-indicator-flex {
+      display: none;
+  }
+  .htmx-request.htmx-indicator-flex {
+      display: flex;
+  }
+  .htmx-indicator-flex-replace {
+      display: flex;
+  }
+  .htmx-request.htmx-indicator-flex-replace {
+      display: none;
+  }
   .htmx-indicator-block {
       display: none;
   }
@@ -166,6 +178,18 @@ form {
       display: none;
   }
   .htmx-indicator-component-block {
+      display: none;
+  }
+  .htmx-request .htmx-indicator-component-flex {
+      display: flex;
+  }
+  .htmx-indicator-component-flex-replace {
+      display: flex;
+  }
+  .htmx-request .htmx-indicator-component-flex-replace {
+      display: none;
+  }
+  .htmx-indicator-component-flex {
       display: none;
   }
   .htmx-request .htmx-indicator-component-block {

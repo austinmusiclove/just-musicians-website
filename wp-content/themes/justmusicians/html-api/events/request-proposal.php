@@ -7,7 +7,11 @@ $listing_id = get_query_var('listing-id');
 $is_authorized = user_owns_event($event_id);
 if ( is_wp_error($is_authorized)) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
-    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
+        'event_id'    => $event_id,
+        'listing_id'  => $listing_id,
+        'error_toast' => $message,
+    ]);
     exit;
 }
 
@@ -15,10 +19,13 @@ if ( is_wp_error($is_authorized)) {
 $result = request_proposal($event_id, $listing_id);
 if ( is_wp_error($result) ) {
     $message = 'Error: ' . $result->get_error_message();
-    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
+        'event_id'    => $event_id,
+        'listing_id'  => $listing_id,
+        'error_toast' => $message,
+    ]);
     exit;
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Invite Sent Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'add-listing-to-event\', {\'event_id\': \'' . $event_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';
+echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', [ 'success_toast' => 'Invite Sent Successfully' ]);

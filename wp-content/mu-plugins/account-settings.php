@@ -25,6 +25,7 @@ function get_user_account_settings($user_id) {
         'profile_image'           => $profile_image,
         'organization'            => get_field('organization', 'user_' . $user_id),
         'position'                => get_field('position', 'user_' . $user_id),
+        'has_events'              => user_has_events($user_id),
     ];
 }
 

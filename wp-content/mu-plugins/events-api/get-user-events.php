@@ -66,6 +66,15 @@ function get_user_events($args) {
         $events[] = [
             'post_id'        => $event_id,
             'event_name'     => get_field('event_name'),
+            'start_date'     => get_field('start_date'),
+            'end_date'       => get_field('end_date', $event_id),
+            'start_time'     => get_field('start_time', $event_id),
+            'end_time'       => get_field('end_time', $event_id),
+            'address_line_1' => get_field('address_line_1', $event_id),
+            'address_line_2' => get_field('address_line_2', $event_id),
+            'city'           => get_field('city', $event_id),
+            'state'          => get_field('state', $event_id),
+            'zip_code'       => get_field('zip_code', $event_id),
             'listings'       => $listings,
             'permalink'      => get_permalink($event_id),
         ];

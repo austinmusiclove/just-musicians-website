@@ -60,14 +60,9 @@ $next_page       = $result ? $result['next_page']       : null;
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
-            eventsMap: <?php echo clean_arr_for_doublequotes($args['events_map']); ?>,
-            get sortedEvents()                                   { return getSortedEvents(this); },
-            _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
-            _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
             _clearListingForm()                                  { clearListingForm(this); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
-        x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
         hx-target="#results"
         hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>

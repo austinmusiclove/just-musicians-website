@@ -18,12 +18,6 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
-// Get user events
-$events_result = get_user_events([
-    'nopaging'         => true,
-    'start_date_after' => date('Y-m-d'),
-]);
-$events_map = array_column($events_result['events'], null, 'post_id');
 
 
 
@@ -31,7 +25,6 @@ get_header();
 
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
-    'events_map'       => $events_map,
     'collections_map'  => $collections_map,
     'qcategory'        => isset($_GET['qcategory'])        ? $_GET['qcategory']        : '',
     'qgenre'           => isset($_GET['qgenre'])           ? $_GET['qgenre']           : '',

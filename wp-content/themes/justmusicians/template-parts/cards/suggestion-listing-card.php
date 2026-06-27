@@ -1,4 +1,10 @@
-<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative">
+<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
+    x-data="{
+        listingId:          '<?php echo clean_str_for_doublequotes($args['post_id']); ?>',
+        proposalListingIds:  <?php echo clean_arr_for_doublequotes($args['listings_invited']); ?>,
+        proposalSent() { return this.proposalListingIds.includes(this.listingId); },
+    }"
+>
 
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
@@ -147,9 +153,14 @@
     </div>
 
     <!-- Request proposal button -->
-    <?php get_template_part('template-parts/cards/card-components/send-inquiry-button', '', [
-        'listing_id' => $args['post_id'],
-        'event_id'   => $args['event_id'],
-    ]); ?>
+    <span class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit sm:min-w-32" x-show="!proposalSent()" x-cloak>
+        <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
+            'event_id'   => $args['event_id'],
+            'listing_id' => $args['post_id'],
+        ]); ?>
+    </span>
+    <span class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit sm:min-w-32" x-show="proposalSent()" x-cloak>
+        <?php echo get_template_part('template-parts/cards/card-components/request-proposal-btn-sent', '', []); ?>
+    </span>
 
 </div>

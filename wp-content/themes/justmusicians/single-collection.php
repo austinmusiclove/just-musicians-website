@@ -24,12 +24,6 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
-// Get user events
-$events_result = get_user_events([
-    'nopaging'         => true,
-    'start_date_after' => date('Y-m-d'),
-]);
-$events_map = array_column($events_result['events'], null, 'post_id');
 
 ?>
 
@@ -51,11 +45,6 @@ $events_map = array_column($events_result['events'], null, 'post_id');
                         _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
                         _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
 
-                        eventsMap: <?php echo clean_arr_for_doublequotes($events_map); ?>,
-                        get sortedEvents()                                   { return getSortedEvents(this); },
-                        _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
-                        _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
-
                         players: {},
                         playersMuted: true,
                         playersPaused: false,
@@ -67,7 +56,6 @@ $events_map = array_column($events_result['events'], null, 'post_id');
                         _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
                     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
-                    x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
                     x-on:pause-all-youtube-players="_pauseAllPlayers()"
                     x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
                     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"

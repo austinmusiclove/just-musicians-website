@@ -10,15 +10,8 @@
         [ 'container_class' => 'container flex flex-col-reverse lg:grid grid-cols-8 gap-8 xl:gap-24 mb-20', ];
 ?>
 
-<section class="<?php echo $theme['container_class']; ?>"
-    x-data="{
-        eventsMap: <?php echo clean_arr_for_doublequotes($args['events_map']); ?>,
-        get sortedEvents()                                   { return getSortedEvents(this); },
-        _addEvent(postId, eventName, listings, permalink)    { return addEvent(this, postId, eventName, listings, permalink); },
-        _showRequestProposalButton(eventId, listingId)       { return showRequestProposalButton(this, eventId, listingId); },
-    }"
-    x-on:add-event.window="_addEvent($event.detail.post_id, $event.detail.event_name, $event.detail.listings, $event.detail.permalink)"
->
+<section class="<?php echo $theme['container_class']; ?>">
+
     <div class="col-span-5 flex flex-col gap-8 items-start">
 
 
@@ -107,10 +100,12 @@
         <div class="sticky top-20 flex flex-col gap-8">
 
             <!-- Inquire button -->
-            <?php get_template_part('template-parts/listing-page/parts/inquire-button', '', [
-                'post_id'  => !$is_preview ? get_the_ID() : '',
-                'name'     => !$is_preview ? get_field('name') : '',
-                'disabled' => $is_preview,
+            <?php get_template_part('template-parts/inquiries/inquire-button', '', [
+                'post_id'     => !$is_preview ? get_the_ID() : '',
+                'name'        => !$is_preview ? get_field('name') : '',
+                'disabled'    => $is_preview,
+                'btn_classes' => 'hover:bg-yellow-light bg-yellow font-sun-motter w-full shadow-black-offset border-2 border-black px-2 py-2',
+                'btn_text'    => 'Send Inquiry',
             ]); ?>
 
             <div class="flex flex-col gap-4">

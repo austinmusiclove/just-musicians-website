@@ -1,9 +1,9 @@
 
-// Get notification count
+// Get notifications
 async function get_user_notifications() {
 
-    // Return 0 if user not logged in
-    if (!notificationsSiteData.userLoggedIn) { return 0; }
+    // Return {} if user not logged in
+    if (!notificationsSiteData.userLoggedIn) { return {}; }
 
     const res = await fetch('/wp-json/v1/user-notifications', {
         headers: {
@@ -16,7 +16,7 @@ async function get_user_notifications() {
     if (typeof data === 'object') {
         return data;
     }
-    return 0;
+    return {};
 }
 
 function get_notification_count(notifications, type) {

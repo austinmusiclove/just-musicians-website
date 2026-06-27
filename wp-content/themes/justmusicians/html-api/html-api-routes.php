@@ -56,6 +56,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/events/get-my-events.php'; exit;
             }
+        case 'rfp-events':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/events/get-rfp-events.php'; exit;
+            }
         case 'my-gigs':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/events/get-my-gigs.php'; exit;

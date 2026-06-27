@@ -35,6 +35,7 @@ if (count($listings) > 0) {
         get_template_part('template-parts/cards/suggestion-listing-card', '', [
             'post_id'                => $listing['post_id'],
             'event_id'               => $event_id,
+            'listings_invited'       => $listings_invited,
             'name'                   => $listing['name'],
             'rating'                 => $listing['rating'],
             'review_count'           => $listing['review_count'],

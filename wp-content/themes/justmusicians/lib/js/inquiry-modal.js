@@ -12,6 +12,7 @@ function clearInquiryForm(alco) {
 function showInquirySlide(alco, slide) {
     if (slide) {
         alco.showInquiryModal    = true;
+        alco.showRequestSlide    = false;
         alco.showDateSlide       = false;
         alco.showLocationSlide   = false;
         alco.showBudgetSlide     = false;
@@ -22,6 +23,7 @@ function showInquirySlide(alco, slide) {
         alco.showThankYouSlide   = false;
         alco.showErrorSlide      = false;
         alco.showDiscardSlide    = false;
+        if (slide == 'request')    { alco.showRequestSlide    = true; alco.currentInquirySlide = 'request';    alco.$nextTick(() => { alco.inquiryProgress = Math.round((0/8) * 100); alco.$dispatch('requestslide'); }); }
         if (slide == 'date')       { alco.showDateSlide       = true; alco.currentInquirySlide = 'date';       alco.$nextTick(() => { alco.inquiryProgress = Math.round((1/8) * 100); }); }
         if (slide == 'location')   { alco.showLocationSlide   = true; alco.currentInquirySlide = 'location';   alco.$nextTick(() => { alco.inquiryProgress = Math.round((2/8) * 100); }); }
         if (slide == 'budget')     { alco.showBudgetSlide     = true; alco.currentInquirySlide = 'budget';     alco.$nextTick(() => { alco.inquiryProgress = Math.round((3/8) * 100); }); }
@@ -41,11 +43,15 @@ function openInquiryModal(alco, listingId, listingName) {
     alco.$refs.inquiryListingInput.value = listingId;
     alco.inquiryListing = listingId;
     alco.inquiryListingName = listingName;
-    showInquirySlide(alco, 'date');
+    if (listingId && alco.accountSettings.has_events) {
+        showInquirySlide(alco, 'request');
+    } else {
+        showInquirySlide(alco, 'date');
+    }
 }
 
 function tryExitInquiryModal(alco) {
-    if (alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error') {
+    if (alco.currentInquirySlide == 'request' || alco.currentInquirySlide == 'thankyou' || alco.currentInquirySlide == 'error') {
         exitInquiryModal(alco);
     } else if (alco.showDiscardSlide == true) {
         showInquirySlide(alco, alco.currentInquirySlide);

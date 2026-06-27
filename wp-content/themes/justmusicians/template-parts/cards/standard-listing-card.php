@@ -194,11 +194,15 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     </div>
 
     <!-- Inquire button -->
-    <?php get_template_part('template-parts/cards/card-components/inquire-button', '', [
-        'post_id'  => !$is_preview ? $args['post_id'] : '',
-        'name'     => !$is_preview ? $args['name'] : '',
-        'disabled' => $is_preview,
-    ]); ?>
+    <span class="sm:absolute sm:right-0 sm:bottom-4 w-full sm:w-fit">
+        <?php get_template_part('template-parts/inquiries/inquire-button', '', [
+            'post_id'     => !$is_preview ? $args['post_id'] : '',
+            'name'        => !$is_preview ? $args['name'] : '',
+            'disabled'    => $is_preview,
+            'btn_classes' => 'hover:bg-yellow-light bg-yellow font-sun-motter w-full px-3 py-3 sm:py-2 rounded-sm text-14 sm:text-12 inline-block sm:w-fit',
+            'btn_text'    => 'Send Inquiry',
+        ]); ?>
+    </span>
 </div>
 
 <?php
