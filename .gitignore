@@ -5,10 +5,24 @@ node_modules
 ai1wm-backups
 wp-config.php
 wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
-wp-content/uploads
 wp-content/cache
 wp-content/debug.log
 wp-content/mu-plugins/google-sheets/website-349104-9c7063841440.json
+
+# Ignore WordPress Core
+/wp-admin/
+/wp-includes/
+/*.php
+!/wp-config-sample.php
+
+# Ignore User Uploads (Never commit images/media)
+/wp-content/uploads/
+/wp-content/blogs.dir/
+/wp-content/upgrade/
+/wp-content/backup-db/
+
+
+
 #wp-content/plugins/*
 #!wp-content/plugins/user-messages/
 #!wp-content/plugins/user-mgmt.php
