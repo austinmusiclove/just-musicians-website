@@ -15,3 +15,4 @@ require_once 'applications-api/parse-args.php';
 require_once 'applications-api/create-application.php';
 require_once 'applications-api/get-user-applications.php';
 require_once 'applications-api/get-musician-application-url.php';
+require_once 'applications-api/get-user-application-submissions.php';

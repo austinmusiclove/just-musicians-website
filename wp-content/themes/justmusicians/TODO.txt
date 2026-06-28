@@ -85,12 +85,12 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Have AI create submitted applications page based on my gigs page
-    Have AI create single application page based on single events page
     Application Submissions for musicians
-        Show applications that have been filled out and allow withdraw (alter availability in gigs page or both)
+        Show more for message
+        Allow edit and withdraw/reactivate
         Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
     Single Application
+        Have AI create single application page based on single events page
         Application set up tab
             Application link copy button
             Add venue logo
@@ -101,10 +101,12 @@ Applications (Calendly for music booking)
             Sort and filter
             Show personal message
     Application form screen
-        Use rewrite rule to direct application urls to this template
+        Handle situation where logged in user opens form and has a listing with existing submission that is withdrawn
         Require sign up to fill application
         If logged in and have a listing, select one of your listings to submit application
         Min guarantee request, personal message
+        Listing dropdown for logged in users should show all listings; the ones that already have the app submitted should be in grey and disabled options; or just return err that they already have a submission and link to edit
+        Listing form for not logged in users or users with no listings
     Applications Page
         Improve application card UI
     Create application form

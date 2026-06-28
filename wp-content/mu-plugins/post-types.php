@@ -195,7 +195,7 @@ function register_post_types() {
     register_post_type('app_submission', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array(),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Application Submission',
           'add_new_item' => 'Add New Application Submission',
