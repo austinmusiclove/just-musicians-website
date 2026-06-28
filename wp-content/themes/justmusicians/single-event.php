@@ -64,7 +64,7 @@ get_header();
                 x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
             >
 
-                <a href="<?php echo site_url('/my-events/'); ?>" class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16">
+                <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16" href="<?php echo site_url('/my-events/'); ?>" >
                     <span>←</span>
                     <span>Back to My Events</span>
                 </a>

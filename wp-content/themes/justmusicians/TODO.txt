@@ -85,7 +85,6 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Set up single application page
     Set up application create form page
     Menu highlight for applications single app and form
     Figure out routing for actual application links
@@ -258,6 +257,7 @@ Messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
+    Need fuzzy search for locations in location active search
     include media relevance in search algo
     video order depending on search criteria
     switch to cursor pagination
