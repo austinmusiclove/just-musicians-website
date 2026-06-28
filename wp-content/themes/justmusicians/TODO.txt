@@ -85,16 +85,11 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Have AI create applications page based on my events page
     Have AI create application form based on event create form
     Have AI create single application page based on single events page
     Have AI create submitted applications page based on my gigs page
     Add authentication to applications, single application, application form, submitted applications
     Applications Page
-        Shows user applications; click on them to edit on single applications page
-        Start with empty state with add button
-        Add button is always there and if you have one app then it has a message that the limit is one
-        Link to create application form when click on add
         Show url for each application with copy to clipboard button
     Create application form
         creates an application
@@ -120,6 +115,8 @@ Applications (Calendly for music booking)
         If logged in and have a listing, select one of your listings to submit application
         Min guarantee request, personal message
 Applications Advanced
+    Applications page
+        Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
     Application form screen Advanced
         Show events with option to fill availability and other proposal fields (if advanced application)
         Inform applicant that they can come back to this application to update it any time

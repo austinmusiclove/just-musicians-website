@@ -31,6 +31,21 @@ get_header();
 
                     <?php echo get_template_part('template-parts/global/empty-states/sign-in-to-access', '', [ 'message' => 'see your applications' ]); ?>
 
+                <?php } else { ?>
+
+                    <form id="applications-form"
+                        hx-get="<?php echo site_url('/wp-html/v1/applications/'); ?>"
+                        hx-target="#results"
+                        hx-indicator="#applications-spinner"
+                        hx-trigger="load"
+                    ></form>
+
+                    <span id="results"></span>
+
+                    <div id="applications-spinner" class="my-8 flex items-center justify-center htmx-indicator">
+                        <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                    </div>
+
                 <?php } ?>
 
             </div>
