@@ -85,7 +85,6 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Set up application create form page
     Menu highlight for applications single app and form
     Figure out routing for actual application links
     Have AI create applications page based on my events page

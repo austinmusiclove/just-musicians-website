@@ -22,6 +22,9 @@ get_header();
 
                 <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                     <a href="<?php echo site_url('/applications/'); ?>"><h1 class="font-bold text-25">Applications</h1></a>
+                    <?php if (is_user_logged_in()) { ?>
+                        <a href="<?php echo site_url('/application-form/'); ?>" class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add +</a>
+                    <?php } ?>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
