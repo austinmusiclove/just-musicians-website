@@ -10,6 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
+require_once 'applications-api/authorization.php';
 require_once 'applications-api/parse-args.php';
 require_once 'applications-api/create-application.php';
 require_once 'applications-api/get-user-applications.php';

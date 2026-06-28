@@ -3,7 +3,7 @@
     x-data="{
         copied: false,
         copyText() {
-            const text = this.$refs.email.innerText.trim();
+            const text = this.$refs.copycontent.innerText.trim();
             navigator.clipboard.writeText(text).then(() => {
                 this.copied = true;
                 setTimeout(() => this.copied = false, 2000);
@@ -12,9 +12,9 @@
     }"
 >
     <span
-        x-ref="email"
+        x-ref="copycontent"
         class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
-        <?php if ($args['x-text']) { echo 'x-text="' . $args['x-text'] . '"'; } ?>
+        <?php if (isset($args['x-text'])) { echo 'x-text="' . $args['x-text'] . '"'; } ?>
     >
         <?php if ($args['text']) { echo $args['text']; } ?>
     </span>

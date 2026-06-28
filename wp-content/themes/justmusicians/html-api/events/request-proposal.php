@@ -4,8 +4,8 @@ $event_id = get_query_var('event-id');
 $listing_id = get_query_var('listing-id');
 
 // Check if user is authorized
-$is_authorized = user_owns_event($event_id);
-if ( is_wp_error($is_authorized)) {
+$auth = user_can_request_proposal($event_id);
+if ( is_wp_error($auth)) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
     echo get_template_part('template-parts/cards/card-components/request-proposal-btn', '', [
         'event_id'    => $event_id,

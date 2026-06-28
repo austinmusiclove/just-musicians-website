@@ -6,13 +6,10 @@
  */
 
 // Authorize
-if (!is_user_logged_in()) { wp_safe_redirect(site_url()); exit; }
-if (!current_user_can('manage_options')) {
-    $auth = user_owns_event(get_the_ID());
-    if (is_wp_error($auth) || !$auth) {
-        wp_safe_redirect(site_url('/my-events/'));
-        exit;
-    }
+$auth = user_can_view_single_event(get_the_ID());
+if (is_wp_error($auth) || !$auth) {
+    wp_safe_redirect(site_url());
+    exit;
 }
 
 // Get user collections

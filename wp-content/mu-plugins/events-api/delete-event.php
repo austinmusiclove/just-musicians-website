@@ -12,10 +12,9 @@ function trash_event( $post_id ) {
         return new WP_Error( 'invalid_event', 'Invalid event.', array( 'status' => 400 ) );
     }
 
-    if ( ! current_user_can( 'manage_options' ) ) {
-        if ( ! user_owns_event( $post_id ) ) {
-            return new WP_Error( 'access_denied', 'You must be the author of the event to delete it' );
-        }
+    $auth = user_can_delete_event(get_the_ID());
+    if (is_wp_error($auth)) {
+        return $auth;
     }
 
     $result = wp_trash_post( $post_id );

@@ -87,11 +87,9 @@ Questions
 Applications (Calendly for music booking)
     Have AI create submitted applications page based on my gigs page
     Have AI create single application page based on single events page
-    Add authentication to single application, application form, submitted applications
-    Create application form
-        Limit users to one application unless admin
-        Allow associating venue
-        Put add venue functionality in comp form
+    Application Submissions for musicians
+        Show applications that have been filled out and allow withdraw (alter availability in gigs page or both)
+        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
     Single Application
         Application set up tab
             Application link copy button
@@ -102,9 +100,6 @@ Applications (Calendly for music booking)
         Applicant review tab
             Sort and filter
             Show personal message
-    Application Submissions for musicians
-        Show applications that have been filled out and allow withdraw (alter availability in gigs page or both)
-        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
     Application form screen
         Use rewrite rule to direct application urls to this template
         Require sign up to fill application
@@ -112,6 +107,9 @@ Applications (Calendly for music booking)
         Min guarantee request, personal message
     Applications Page
         Improve application card UI
+    Create application form
+        Allow associating venue
+        Put add venue functionality in comp form
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
