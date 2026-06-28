@@ -62,6 +62,7 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
             'event-form',
             'applications',
             'submitted-applications',
+            'application-form',
         ];
         $page_ids = [];
 

@@ -28,6 +28,7 @@ function noindex_specific_post_type($robots) {
         is_page('event-form') or
         is_page('applications') or
         is_page('submitted-applications') or
+        is_page('application-form') or
         is_page('messages')
     ) {
         $robots['index'] = 'noindex';
