@@ -3,6 +3,7 @@
 <?php
 $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $is_my_events = $current_path === '/my-events/' || $current_path === '/event-form/' || preg_match('#^/event/#', $current_path);
+$is_applications = $current_path === '/applications/' || $current_path === '/application-form/' || preg_match('#^/application/#', $current_path);
 ?>
 
     <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/account/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/account/'); ?>">
@@ -56,7 +57,7 @@ $is_my_events = $current_path === '/my-events/' || $current_path === '/event-for
     <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="#"> -->
     <!--     <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>My Venues</span> -->
     <!-- </a> -->
-    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/applications/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/applications/'); ?>">
+    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $is_applications ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/applications/'); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pen.svg'; ?>" />
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Applications</span>
     </a>
