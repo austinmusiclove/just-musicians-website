@@ -6,6 +6,7 @@
  */
 
 // Authorize
+if (!is_user_logged_in()) { wp_safe_redirect(site_url()); exit; }
 if (!current_user_can('manage_options')) {
     $auth = user_owns_event(get_the_ID());
     if (is_wp_error($auth) || !$auth) {
