@@ -180,7 +180,7 @@ function register_post_types() {
     register_post_type('application', array(
         'public' => true,
         'show_in_rest' => true,
-        'supports' => array(),
+        'supports' => array('title', 'author'),
         'labels' => array(
           'name' => 'Application',
           'add_new_item' => 'Add New Application',

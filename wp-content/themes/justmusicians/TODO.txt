@@ -85,7 +85,6 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Figure out routing for actual application links
     Have AI create applications page based on my events page
     Have AI create application form based on event create form
     Have AI create single application page based on single events page
@@ -100,24 +99,18 @@ Applications (Calendly for music booking)
     Create application form
         creates an application
         on success takes you to single application
+        Allow associating venue
+        Put add venue functionality in comp form
     Single Application
         Application set up tab
             Application link copy button
             Add venue logo
             Add description/title of what the application is for
-            Allow associating venue you have access to manage or adding a venue
-            Advanced
-                Show events and allow excluding from application
-                Prompt to add events to get availability (advanced)
-                Invite listings to apply (advanced)
-                Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
-                Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
-                Excluded events
-                Request draw, comp min, personal message
+            Allow associating venue
+            Allow adding a venue
         Applicant review tab
             Sort and filter
-            Show key info like price, draw, availability, personal message
-            Filter by answers to custom questions (advanced)
+            Show personal message
     Application Submissions for musicians
         Show applications that have been filled out and allow withdraw (alter availability in gigs page or both)
         Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
@@ -126,13 +119,22 @@ Applications (Calendly for music booking)
         Require sign up to fill application
         If logged in and have a listing, select one of your listings to submit application
         Min guarantee request, personal message
-        Advanced
-            Show events with option to fill availability and other proposal fields (if advanced application)
-            Inform applicant that they can come back to this application to update it any time
-            Have multiple band mates fill out the availability (listing advanced feature)
-    Venue relationship
-        Associate users with a venue
-        Allow venue users to alter venue page data
+Applications Advanced
+    Application form screen Advanced
+        Show events with option to fill availability and other proposal fields (if advanced application)
+        Inform applicant that they can come back to this application to update it any time
+        Have multiple band mates fill out the availability (listing advanced feature)
+    Single Application Application set up tab Advanced
+        Show events and allow excluding from application
+        Prompt to add events to get availability (advanced)
+        Invite listings to apply (advanced)
+        Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
+        Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
+        Excluded events
+        Request draw, comp min, personal message
+    Single Application Applicant review tab Advanced
+        Show dates available for your events
+        Filter by answers to custom questions (advanced)
 Single Event page
     Show offers
     Support venue location

@@ -9,11 +9,19 @@ function template_route_rewrite_rules() {
         'top'
     );
 
+    // Applications
+    add_rewrite_rule(
+        '^musician-application/([0-9]+)/?',
+        'index.php?custom-template=musician-application&application-id=$matches[1]',
+        'top'
+    );
+
 }
 add_action('init', 'template_route_rewrite_rules');
 
 function register_template_route_query_vars($vars) {
     $vars[] = 'custom-template';
+    $vars[] = 'application-id';
     $vars[] = 'buyer-id';
     return $vars;
 }

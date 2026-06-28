@@ -11,6 +11,13 @@ add_filter('template_include', function($template) {
                 return $new_template;
             }
 
+        // Applications
+        case 'musician-application':
+            $new_template = locate_template(['musician-application.php']);
+            if (!empty($new_template)) {
+                return $new_template;
+            }
+
         default:
             return $template;
 
