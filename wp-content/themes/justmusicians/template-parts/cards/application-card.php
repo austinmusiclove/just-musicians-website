@@ -17,6 +17,10 @@
         <?php if ($args['description']) { ?>
             <p class="text-14 text-black/60"><?php echo esc_html($args['description']); ?></p>
         <?php } ?>
+
+        <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
+            'text' => get_musician_application_url($args['post_id']),
+        ]); ?>
     </div>
 
 </div>

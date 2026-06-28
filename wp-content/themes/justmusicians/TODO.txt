@@ -88,9 +88,7 @@ Applications (Calendly for music booking)
     Have AI create application form based on event create form
     Have AI create single application page based on single events page
     Have AI create submitted applications page based on my gigs page
-    Add authentication to applications, single application, application form, submitted applications
-    Applications Page
-        Show url for each application with copy to clipboard button
+    Add authentication to single application, application form, submitted applications
     Create application form
         creates an application
         on success takes you to single application
@@ -114,6 +112,8 @@ Applications (Calendly for music booking)
         Require sign up to fill application
         If logged in and have a listing, select one of your listings to submit application
         Min guarantee request, personal message
+    Applications Page
+        Improve application card UI
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium

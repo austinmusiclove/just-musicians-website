@@ -11,3 +11,4 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // Include
 require_once 'applications-api/get-user-applications.php';
+require_once 'applications-api/get-musician-application-url.php';
