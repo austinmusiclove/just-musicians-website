@@ -60,7 +60,7 @@ function create_event($args) {
 
     return [
         'post_id'    => $event_id,
-        'event_name' => $args['meta_input']['event_name'],
+        'event_name' => $event_name,
         'listings'   => $listings_to_invite,
         'permalink'  => $event_link,
     ];

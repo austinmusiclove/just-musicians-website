@@ -51,7 +51,7 @@ get_header();
 
                         <div class="mb-4">
                             <label for="description" class="block font-bold text-16 mb-2">Description</label>
-                            <textarea id="description" name="description" x-model="description" placeholder="Describe your application" rows="6"></textarea>
+                            <textarea id="description" class="w-full" name="description" x-model="description" placeholder="Describe your application" rows="6"></textarea>
                         </div>
 
                         <div class="flex gap-2 mt-8">

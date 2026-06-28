@@ -85,13 +85,11 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Have AI create application form based on event create form
-    Have AI create single application page based on single events page
     Have AI create submitted applications page based on my gigs page
+    Have AI create single application page based on single events page
     Add authentication to single application, application form, submitted applications
     Create application form
-        creates an application
-        on success takes you to single application
+        Limit users to one application unless admin
         Allow associating venue
         Put add venue functionality in comp form
     Single Application
@@ -132,6 +130,8 @@ Applications Advanced
     Single Application Applicant review tab Advanced
         Show dates available for your events
         Filter by answers to custom questions (advanced)
+    Create Application Form
+        Limit users to one application unless admin or premium subscription
 Single Event page
     Show offers
     Support venue location

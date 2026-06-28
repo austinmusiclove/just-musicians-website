@@ -1,16 +1,18 @@
 <?php
 
-// Create Event
-$args = get_sanitized_event_args();
+$args       = get_sanitized_event_args();
+$is_inquiry = isset( $_POST['is_inquiry'] ) ? rest_sanitize_boolean( $_POST['is_inquiry'] ) : false;
 
+// Create Event
 $result = create_event($args);
 if ( is_wp_error($result) ) {
     $message = 'Error: ' . $result->get_error_message();
-    echo '<span x-init="_handleCreateInquiryError(\'' . $message . '\')"></span>';
-    exit;
+    if ($is_inquiry) {
+        echo '<span x-init="_handleCreateInquiryError(\'' . $message . '\')"></span>'; exit;
+    } else {
+        echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>'; exit;
+    }
 }
-
-$is_inquiry = isset( $_POST['is_inquiry'] ) ? rest_sanitize_boolean( $_POST['is_inquiry'] ) : false;
 
 // Success Response
 if ($is_inquiry) {

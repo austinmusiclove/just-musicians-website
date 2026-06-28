@@ -48,7 +48,7 @@ get_header();
                 </a>
 
                 <div class="mb-6 md:mb-14 flex justify-start items-center flex-row">
-                    <h1 class="font-bold text-25">Application</h1>
+                    <h1 class="font-bold text-25"><?php echo esc_html(get_post_meta(get_the_ID(), 'title', true) ?: 'Application'); ?></h1>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
