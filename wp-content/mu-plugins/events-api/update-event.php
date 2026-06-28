@@ -2,7 +2,7 @@
 function update_user_event($args) {
 
     // Authenticate
-    $auth = user_can_update_event(get_the_ID());
+    $auth = user_can_update_event($args['ID']);
     if (is_wp_error($auth)) {
         return $auth;
     }

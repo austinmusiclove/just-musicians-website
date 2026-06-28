@@ -12,7 +12,7 @@ function trash_event( $post_id ) {
         return new WP_Error( 'invalid_event', 'Invalid event.', array( 'status' => 400 ) );
     }
 
-    $auth = user_can_delete_event(get_the_ID());
+    $auth = user_can_delete_event($post_id);
     if (is_wp_error($auth)) {
         return $auth;
     }

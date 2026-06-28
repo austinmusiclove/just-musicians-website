@@ -349,6 +349,8 @@ Performance
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
     image sprites
+Code consistency
+    auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
 Emails
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 Bugs

@@ -1,6 +1,6 @@
 <?php
 
-function user_owns_application($application_id) {
+function user_is_application_author($application_id) {
 
     if (!isset($application_id) || !is_numeric($application_id)) {
         return new WP_Error('invalid_application_id', 'Application ID is required and must be an integer.', ['status' => 400]);
@@ -16,7 +16,7 @@ function user_owns_application($application_id) {
     return true;
 }
 
-function require_application_authorization($application_id) {
+function require_application_authorship($application_id) {
 
     if (!is_user_logged_in()) {
         return new WP_Error('unauthorized', 'You must sign in to perform this function.');
@@ -26,11 +26,11 @@ function require_application_authorization($application_id) {
         return true;
     }
 
-    return user_owns_application($application_id);
+    return user_is_application_author($application_id);
 }
 
-function user_can_view_single_application($application_id)   { return require_application_authorization($application_id); }
-function user_can_view_update_application($application_id)   { return require_application_authorization($application_id); }
+function user_can_view_single_application($application_id) { return require_application_authorship($application_id); }
+function user_can_update_application($application_id)      { return require_application_authorship($application_id); }
 
 function user_can_create_application() {
     global $wpdb;

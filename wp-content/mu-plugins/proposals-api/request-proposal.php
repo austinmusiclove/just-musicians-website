@@ -7,6 +7,11 @@ function request_proposal($event_id, $listing_id) {
         return new WP_Error(400, 'Invalid event or listing ID :: ' . $event_id . ' :: ' . $listing_id);
     }
 
+    $auth = user_can_request_proposal($event_id);
+    if ( is_wp_error($auth)) {
+        return $auth;
+    }
+
     // Get Event
     $event = get_post($event_id);
     if (!$event || $event->post_type !== 'event') {
