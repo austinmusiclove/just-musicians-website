@@ -1,11 +1,9 @@
-<form id="event-applicants-form"
-    x-bind:hx-get="'<?php echo site_url('/wp-html/v1/events/'); ?>' + eventId + '/applicants/'"
+<form id="applicants-form"
+    x-bind:hx-get="'<?php echo site_url('/wp-html/v1/applications/'); ?>' + applicationId + '/applicants/'"
     hx-target="#applicant-results"
     hx-indicator="#applicants-spinner-top"
     hx-trigger="intersect once, filterupdate"
     x-data='{
-        showSuggestions: false,
-
         get sortedCollections()                              { return getSortedCollections(this, 0); },
         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
@@ -31,40 +29,24 @@
 >
 
     <div class="flex flex-wrap items-center gap-2 mb-4 pb-4">
+
         <div x-on:filter_status-changed="$dispatch('filterupdate');">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
                 'options'     => [
-                    ['value' => 'all',         'label' => 'All Musicians'],
-                    ['value' => 'response',    'label' => 'All Responses'], // available and unavailable
-                    ['value' => 'available',   'label' => 'Available'],
-                    ['value' => 'unavailable', 'label' => 'Unavailable'],
-                    ['value' => 'request',     'label' => 'Awaiting Response'], // inquiry and stale
+                    ['value' => 'all',       'label' => 'All'],
+                    ['value' => 'active',    'label' => 'Active'],
+                    ['value' => 'withdrawn', 'label' => 'Withdrawn'],
                 ],
                 'input_name'  => 'filter_status',
-                'selected'    => 'all',
+                'selected'    => 'active',
             ]); ?>
         </div>
 
-        <?php
-        $sort_options = [
-            ['value' => 'recent',      'label' => 'Most Recent'],
-            ['value' => 'high-rating', 'label' => 'Highest Rating'],
-        ];
-
-        if (get_field('request_quote')) {
-            $sort_options[] = ['value' => 'high-quote', 'label' => 'Highest Quote'];
-            $sort_options[] = ['value' => 'low-quote',  'label' => 'Lowest Quote'];
-        }
-
-        if (get_field('request_draw')) {
-            $sort_options[] = ['value' => 'high-draw',  'label' => 'Highest Draw'];
-            $sort_options[] = ['value' => 'low-draw',   'label' => 'Lowest Draw'];
-        }
-        ?>
-
         <div x-on:sort-changed="$dispatch('filterupdate');">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
-                'options'     => $sort_options,
+                'options'     => [
+                    ['value' => 'recent', 'label' => 'Most Recent'],
+                ],
                 'input_name'  => 'sort',
                 'selected'    => 'recent',
             ]); ?>

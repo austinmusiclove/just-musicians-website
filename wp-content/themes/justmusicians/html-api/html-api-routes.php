@@ -82,6 +82,10 @@ function html_api_v1_template_redirects() {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-my-applications.php'; exit;
                 case 'POST' : status_header(200); include_once get_template_directory() . '/html-api/applications/create-application.php'; exit;
             }
+        case 'applicants':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-applicants.php'; exit;
+            }
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-application-submissions.php'; exit;

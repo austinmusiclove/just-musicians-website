@@ -37,8 +37,6 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
 
                     <form id="my-gigs-form"
                         x-data="{
-                            listing: 'all',
-                            status: '<?php echo $initial_status; ?>',
                             dateRange: 'upcoming',
                         }"
                         hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
@@ -59,7 +57,7 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                                     $listing_options[] = ['value' => (string) $id, 'label' => $name, 'show' => 'true'];
                                 }
                             ?>
-                            <div x-on:filter_listing-changed="listing = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+                            <div x-on:filter_listing-changed="$dispatch('filterupdate');">
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => $listing_options,
                                     'input_name'  => 'filter_listing',
@@ -68,7 +66,7 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                             </div>
 
                             <!-- Status dropdown -->
-                            <div x-on:filter_status-changed="status = $event.detail.value; $nextTick(() => $dispatch('filterupdate'));">
+                            <div x-on:filter_status-changed="$dispatch('filterupdate');">
                                 <?php get_template_part('template-parts/global/form/dropdown', '', [
                                     'options'     => [
                                         ['value' => 'all',         'label' => 'All Gigs'],

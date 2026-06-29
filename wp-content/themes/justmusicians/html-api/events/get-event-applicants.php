@@ -22,6 +22,7 @@ if (!empty($page_ids)) {
     foreach ($page_ids as $index => $proposal_id) {
         $listing_id = (int) get_post_meta($proposal_id, 'listing', true);
         $listing = get_listing(['post_id' => $listing_id]);
+
         get_template_part('template-parts/cards/event-applicant-card', '', [
             'event_id'               => $event_id,
             'listing_id'             => $listing_id,
@@ -43,7 +44,6 @@ if (!empty($page_ids)) {
             'verified'               => $listing['verified'],
             'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,
-            'sort'                   => $sort,
             'last'                   => $index === array_key_last($page_ids),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,

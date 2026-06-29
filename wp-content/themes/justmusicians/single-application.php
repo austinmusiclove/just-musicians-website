@@ -35,6 +35,9 @@ get_header();
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
                     collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                    applicationId:  '<?php echo get_the_ID(); ?>',
+                    title:          '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
+                    description:    '<?php echo clean_str_for_doublequotes(get_field('description') ?? ''); ?>',
                 }"
             >
 
@@ -69,9 +72,24 @@ get_header();
                     </div>
 
                     <div class="pt-4" x-show="showApplicationDetails" x-cloak>
+
+                        <div class="flex flex-col gap-y-2">
+                            <h3 class="font-bold text-16">Title</h3>
+                            <p class="text-16 whitespace-pre-wrap" :class="title ? '' : 'text-black/50'" x-text="title ? title : 'No title provided'"></p>
+                            <h3 class="font-bold text-16">Details</h3>
+                            <p class="text-16 whitespace-pre-wrap" :class="description ? '' : 'text-black/50'" x-text="description ? description : 'No description provided'"></p>
+                            <div class="flex items-center gap-1">
+                                <h3 class="font-bold text-16">Application Link: </h3>
+                                <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
+                                    'text' => get_musician_application_url(get_the_ID()),
+                                ]); ?>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="pt-4" x-show="showApplicants" x-cloak>
+                        <?php echo get_template_part('template-parts/applications/applicants', '', []); ?>
                     </div>
 
                 </div>

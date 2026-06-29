@@ -87,16 +87,12 @@ Questions
 
 Applications (Calendly for music booking)
     Single Application
-        Have AI create single application page based on single events page
+        Status should be withdrawn or applied?
         Application set up tab
-            Application link copy button
+            Edit application title and description
             Add venue logo
-            Add description/title of what the application is for
             Allow associating venue
             Allow adding a venue
-        Applicant review tab
-            Sort and filter
-            Show personal message
     Application form screen
         Handle situation where logged in user opens form and has a listing with existing submission that is withdrawn
         Require sign up to fill application
