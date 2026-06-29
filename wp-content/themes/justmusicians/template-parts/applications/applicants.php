@@ -30,18 +30,6 @@
 
     <div class="flex flex-wrap items-center gap-2 mb-4 pb-4">
 
-        <div x-on:filter_status-changed="$dispatch('filterupdate');">
-            <?php get_template_part('template-parts/global/form/dropdown', '', [
-                'options'     => [
-                    ['value' => 'all',       'label' => 'All'],
-                    ['value' => 'active',    'label' => 'Active'],
-                    ['value' => 'withdrawn', 'label' => 'Withdrawn'],
-                ],
-                'input_name'  => 'filter_status',
-                'selected'    => 'active',
-            ]); ?>
-        </div>
-
         <div x-on:sort-changed="$dispatch('filterupdate');">
             <?php get_template_part('template-parts/global/form/dropdown', '', [
                 'options'     => [

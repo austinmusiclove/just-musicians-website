@@ -87,12 +87,11 @@ Questions
 
 Applications (Calendly for music booking)
     Single Application
-        Status should be withdrawn or applied?
-        Application set up tab
-            Edit application title and description
-            Add venue logo
-            Allow associating venue
-            Allow adding a venue
+        Edit application title and description
+        Improve UI for application details
+        Add venue logo
+        Allow associating venue
+        Allow adding a venue
     Application form screen
         Handle situation where logged in user opens form and has a listing with existing submission that is withdrawn
         Require sign up to fill application
@@ -124,6 +123,7 @@ Applications Advanced
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
         Excluded events
         Request draw, comp min, personal message
+        Sort by highest rating (need index)
     Single Application Applicant review tab
         Show dates available for your events
         Filter by answers to custom questions (advanced)

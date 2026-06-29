@@ -8,7 +8,6 @@
         hx-include="#applicants-form"
     <?php } ?>
     x-data="{
-        submission_status:  '<?php echo clean_str_for_doublequotes($args['submission_status']); ?>',
         submission_message: '<?php echo clean_str_for_doublequotes($args['submission_message']); ?>',
         submission_updated: '<?php echo clean_str_for_doublequotes($args['submission_updated']); ?>',
     }"
@@ -123,12 +122,6 @@
                     'verified'   => $args['verified'],
                 ]); ?>
             </div>
-
-            <!-- Status -->
-            <span class="text-12 px-2 py-0.5 rounded-full font-semibold capitalize whitespace-nowrap shrink-0"
-                :class="submission_status === 'active' ? 'bg-navy text-white' : 'bg-yellow/40'"
-                x-text="submission_status"
-            ></span>
 
             <!-- Collections button -->
             <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [

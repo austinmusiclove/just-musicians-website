@@ -26,7 +26,6 @@ if (!empty($submission_ids)) {
             'application_id'      => $application_id,
             'listing_id'          => $listing_id,
             'submission_id'       => $submission_id,
-            'submission_status'   => get_post_meta($submission_id, 'status', true),
             'submission_message'  => get_post_meta($submission_id, 'message', true),
             'submission_updated'  => get_the_modified_time('F j, Y', $submission_id),
             'name'                => $listing['name'] ?? '',
