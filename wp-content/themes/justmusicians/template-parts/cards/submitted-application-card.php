@@ -44,8 +44,11 @@
             </div>
         </div>
 
-        <div x-show="!showForm" x-cloak>
-            <p class="text-14 text-black/60" x-show="message" x-text="message"></p>
+        <div x-show="!showForm && message" x-cloak>
+            <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+                'text_var'      => 'message',
+                'limit'         => 200,
+            ]); ?>
         </div>
 
         <!-- Respond Button and form -->

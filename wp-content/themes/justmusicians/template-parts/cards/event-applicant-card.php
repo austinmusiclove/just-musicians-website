@@ -177,11 +177,12 @@
         </div>
 
         <!-- Details -->
-        <div class="flex flex-col" x-show="proposal_details" x-cloak
-            x-data="{ expanded: false, tooLong: <?php echo mb_strlen($args['proposal_details']) > 200 ? 'true' : 'false'; ?> }">
+        <div class="flex flex-col" x-show="proposal_details" x-cloak>
             <span class="text-12 text-black/50 font-semibold">Response</span>
-            <p class="text-14 whitespace-pre-wrap" x-text="expanded ? proposal_details : proposal_details.slice(0, 200) + (tooLong ? '...' : '')"></p>
-            <button type="button" x-show="tooLong" x-on:click="expanded = !expanded" class="text-12 underline cursor-pointer w-fit mt-1" x-text="expanded ? 'Show less' : 'Show more'"></button>
+            <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+                'text_var' => 'proposal_details',
+                'limit'    => 200,
+            ]); ?>
         </div>
 
         <!-- Availability -->
