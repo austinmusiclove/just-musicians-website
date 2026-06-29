@@ -11,6 +11,7 @@ Deploy
     Add Application Form Page
     Add Applications ACF
     Add Application Submission ACF
+    Save permalinks
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -87,8 +88,6 @@ Questions
 Applications (Calendly for music booking)
     Application Submissions for musicians
         Show more for message
-        Allow edit and withdraw/reactivate
-        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
     Single Application
         Have AI create single application page based on single events page
         Application set up tab
@@ -111,15 +110,19 @@ Applications (Calendly for music booking)
         Improve application card UI
     Create application form
         Allow associating venue
+        Allow including a location if venue not included
         Put add venue functionality in comp form
+    Notifications
+        New applicant email
+        New applicant notification
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
-    Application form screen Advanced
+    Application form screen
         Show events with option to fill availability and other proposal fields (if advanced application)
         Inform applicant that they can come back to this application to update it any time
         Have multiple band mates fill out the availability (listing advanced feature)
-    Single Application Application set up tab Advanced
+    Single Application Application set up tab
         Show events and allow excluding from application
         Prompt to add events to get availability (advanced)
         Invite listings to apply (advanced)
@@ -127,11 +130,20 @@ Applications Advanced
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
         Excluded events
         Request draw, comp min, personal message
-    Single Application Applicant review tab Advanced
+    Single Application Applicant review tab
         Show dates available for your events
         Filter by answers to custom questions (advanced)
     Create Application Form
         Limit users to one application unless admin or premium subscription
+    Submitted Applications Page
+        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
+    Money
+        Features page where you can see what you get with the plan
+        Annual and monthly pricing
+        90 day free trial
+        Checkout process from Stripe
+        Upsell locations in the current workflow
+        Testing
 Single Event page
     Show offers
     Support venue location

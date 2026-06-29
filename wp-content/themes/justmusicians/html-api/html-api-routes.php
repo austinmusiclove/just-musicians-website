@@ -85,6 +85,9 @@ function html_api_v1_template_redirects() {
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-application-submissions.php'; exit;
+                case 'POST' :
+                    if (get_query_var('app-submission')) { status_header(200); include_once get_template_directory() . '/html-api/applications/update-application-submission.php'; exit; }
+                    else                                 { status_header(404); exit; }
             }
 
         // Active Search

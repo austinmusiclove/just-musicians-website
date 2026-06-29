@@ -15,3 +15,16 @@ function get_sanitized_application_args() {
 
     return $sanitized_args;
 }
+
+function get_sanitized_application_submission_args() {
+    $sanitized_args = [
+        'post_type'   => 'app_submission',
+        'post_status' => 'publish',
+        'meta_input' => [],
+    ];
+
+    if (isset($_POST['message'])) { $sanitized_args['meta_input']['message'] = sanitize_textarea_field($_POST['message']); }
+    if (isset($_POST['status']))  { $sanitized_args['meta_input']['status']  = sanitize_text_field($_POST['status']); }
+
+    return $sanitized_args;
+}

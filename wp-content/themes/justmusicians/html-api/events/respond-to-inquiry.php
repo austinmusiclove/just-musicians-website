@@ -11,11 +11,11 @@ if (is_wp_error($result)) {
     exit;
 }
 
-$status           = $args['status']           ?? get_post_meta($proposal_id, 'status', true);
-$details          = $args['details']          ?? get_post_meta($proposal_id, 'details', true);
-$availability     = $args['availability']     ?? get_post_meta($proposal_id, 'availability', true);
-$quote            = $args['quote']            ?? get_post_meta($proposal_id, 'quote', true);
-$draw             = $args['draw']             ?? get_post_meta($proposal_id, 'draw', true);
+$status           = get_post_meta($proposal_id, 'status', true);
+$details          = get_post_meta($proposal_id, 'details', true);
+$availability     = get_post_meta($proposal_id, 'availability', true);
+$quote            = get_post_meta($proposal_id, 'quote', true);
+$draw             = get_post_meta($proposal_id, 'draw', true);
 $proposal_updated = get_the_modified_time('M j, Y', $proposal_id);
 
 echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Response Updated Successfully' . '\'})"></span>';

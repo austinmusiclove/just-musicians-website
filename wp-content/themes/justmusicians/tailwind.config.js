@@ -34,6 +34,9 @@ const applyMultiplier = (values, multiplier) => {
   const fontSizeWithMultiplier = applyMultiplier(baseSpacing, .8);
 
 module.exports = {
+    future: {
+        hoverOnlyWhenSupported: true,
+    },
 	input: './tailwind/input.css',
 	output: './dist/tailwind.css',
 	content: [

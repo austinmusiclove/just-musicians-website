@@ -117,25 +117,12 @@
             </div>
         </div>
 
-        <!-- Respond (desktop) -->
-        <div class="hidden sm:flex justify-start">
-            <?php get_template_part('template-parts/cards/card-components/gig-card-form', '', [
-                'proposal_id'   => $args['proposal']['proposal_id'],
-                'request_quote' => $args['proposal']['event']['request_quote'],
-                'request_draw'  => $args['proposal']['event']['request_draw'],
-                'device'        => 'desktop',
-            ]); ?>
-        </div>
-
-        <!-- Respond (mobile) -->
-        <div class="block sm:hidden w-full">
-            <?php get_template_part('template-parts/cards/card-components/gig-card-form', '', [
-                'proposal_id'   => $args['proposal']['proposal_id'],
-                'request_quote' => $args['proposal']['event']['request_quote'],
-                'request_draw'  => $args['proposal']['event']['request_draw'],
-                'device'        => 'mobile',
-            ]); ?>
-        </div>
+        <!-- Respond Button and Form -->
+        <?php get_template_part('template-parts/cards/card-components/gig-card-form', '', [
+            'proposal_id'   => $args['proposal']['proposal_id'],
+            'request_quote' => $args['proposal']['event']['request_quote'],
+            'request_draw'  => $args['proposal']['event']['request_draw'],
+        ]); ?>
 
     </div>
 

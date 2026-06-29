@@ -7,18 +7,27 @@
         hx-indicator="#submissions-spinner-bottom"
         hx-include="#submitted-applications-form"
     <?php } ?>
+    x-data="{
+        showForm: false,
+        message:     '<?php echo clean_str_for_doublequotes($args['submission']['message']); ?>',
+        status:      '<?php echo $args['submission']['status']; ?>',
+        statusInput: '<?php echo $args['submission']['status']; ?>',
+        updated:     '<?php echo $args['submission']['updated']; ?>',
+        _updateSubmission(message, status, updated) { this.showForm = false; this.message = message; this.status = status; this.updated = updated },
+    }"
+    x-on:update-submission="_updateSubmission($event.detail.message, $event.detail.status, $event.detail.updated);"
 >
+
     <div class="py-2 flex flex-col gap-y-2 flex-1 min-w-0 w-full">
 
-        <!-- Application Title + Status -->
         <div class="flex flex-row items-start justify-between gap-2">
             <h2 class="text-18 sm:text-20 font-semibold"><?php echo esc_html($args['submission']['application_title']); ?></h2>
             <span class="text-12 px-2 py-0.5 rounded-full font-semibold capitalize whitespace-nowrap"
-                :class="'<?php echo $args['submission']['status']; ?>' === 'active' ? 'bg-navy text-white' : 'bg-yellow/40'"
-            ><?php echo esc_html($args['submission']['status']); ?></span>
+                :class="status === 'active' ? 'bg-navy text-white' : 'bg-yellow/40'"
+                x-text="status"
+            ></span>
         </div>
 
-        <!-- Byline -->
         <div class="flex items-center gap-2">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 rounded-full overflow-hidden bg-yellow-light shrink-0">
@@ -30,20 +39,20 @@
                 </div>
                 <div class="flex flex-col">
                     <span class="text-14 font-semibold"><?php echo esc_html($args['submission']['listing_name']); ?></span>
-                    <p class="text-12 text-black/50">Last updated <?php echo $args['submission']['updated']; ?></p>
+                    <p class="text-12 text-black/50">Last updated <span x-text="updated"></span></p>
                 </div>
             </div>
         </div>
 
-        <!-- Message -->
-        <?php if ($args['submission']['message']) { ?>
-            <p class="text-14 text-black/60"><?php echo esc_html($args['submission']['message']); ?></p>
-        <?php } ?>
-
-        <!-- Button -->
-        <div class="flex justify-start pt-2">
-            <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Update Application</button>
+        <div x-show="!showForm" x-cloak>
+            <p class="text-14 text-black/60" x-show="message" x-text="message"></p>
         </div>
+
+        <!-- Respond Button and form -->
+        <?php get_template_part('template-parts/cards/card-components/submitted-application-card-form', '', [
+            'app_submission_id' => $args['submission']['post_id'],
+        ]); ?>
+
 
     </div>
 

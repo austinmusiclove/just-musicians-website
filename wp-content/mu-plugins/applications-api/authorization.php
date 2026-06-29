@@ -57,3 +57,28 @@ function user_can_create_application() {
 
     return true;;
 }
+
+function user_can_update_application_submission($submission_id) {
+
+    if (!is_user_logged_in()) {
+        return new WP_Error('unauthorized', 'You must sign in to perform this function.');
+    }
+
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
+    if (!isset($submission_id) || !is_numeric($submission_id)) {
+        return new WP_Error('invalid_submission_id', 'Submission ID is required and must be an integer.', ['status' => 400]);
+    }
+
+    $user_id   = get_current_user_id();
+    $author_id = (int) get_post_field('post_author', $submission_id);
+
+    if ($user_id !== $author_id) {
+        return new WP_Error('unauthorized_user', 'Your account is not authorized for this resource.', ['status' => 400]);
+    }
+
+    return true;
+}
+

@@ -63,6 +63,13 @@ function html_api_rewrite_rules() {
         'top'
     );
 
+    // Applications
+    add_rewrite_rule(
+        '^wp-html/v1/application-submissions/([0-9]+)/?$',
+        'index.php?wp-html-v1=application-submissions&app-submission=$matches[1]',
+        'top'
+    );
+
     // Reviews
     add_rewrite_rule(
         '^wp-html/v1/reviews/([^/]+)/([0-9]+)/?$',
@@ -79,6 +86,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'collection-id';
     $vars[] = 'event-id';
     $vars[] = 'proposal-id';
+    $vars[] = 'app-submission';
     $vars[] = 'conversation-id';
     $vars[] = 'review-post-type';
     $vars[] = 'reviewee-id';
