@@ -31,6 +31,7 @@ function require_application_authorship($application_id) {
 
 function user_can_view_single_application($application_id) { return require_application_authorship($application_id); }
 function user_can_update_application($application_id)      { return require_application_authorship($application_id); }
+function user_can_delete_application($application_id)      { return require_application_authorship($application_id); }
 
 function user_can_create_application() {
     global $wpdb;

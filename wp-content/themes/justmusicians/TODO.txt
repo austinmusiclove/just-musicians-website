@@ -69,7 +69,6 @@ Questions
 
 Applications (Calendly for music booking)
     Single Application
-        delete application
         Add venue logo
         Allow associating venue
         Allow adding a venue

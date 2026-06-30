@@ -79,7 +79,8 @@ function html_api_v1_template_redirects() {
         // Applications
         case 'applications':
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-my-applications.php'; exit;
+                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/applications/get-my-applications.php'; exit;
+                case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/applications/delete-application.php'; exit;
                 case 'POST' :
                     if (get_query_var('application-id')) { status_header(200); include_once get_template_directory() . '/html-api/applications/update-application.php'; exit; }
                     else                                 { status_header(200); include_once get_template_directory() . '/html-api/applications/create-application.php'; exit; }
