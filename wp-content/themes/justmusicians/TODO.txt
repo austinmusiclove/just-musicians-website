@@ -68,17 +68,15 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Single Application
-        Add venue logo
-        Allow associating venue
-        Allow adding a venue
     Application form screen
-        Handle situation where logged in user opens form and has a listing with existing submission that is withdrawn
-        Require sign up to fill application
-        If logged in and have a listing, select one of your listings to submit application
-        Min guarantee request, personal message
-        Listing dropdown for logged in users should show all listings; the ones that already have the app submitted should be in grey and disabled options; or just return err that they already have a submission and link to edit
-        Listing form for not logged in users or users with no listings
+        Listing form
+            Fill in fields
+            required fields only required if listing form is showing
+        Submit application function
+            require listing required fields (no listing_id only)
+            create listing (no listing_id only)
+            create application submission
+            return introduction message explaining that their listing is linked to their application
     Applications Page
         Improve application card UI
         Show number of applicants in applicant card
@@ -86,6 +84,10 @@ Applications (Calendly for music booking)
         Allow associating venue
         Allow including a location if venue not included
         Put add venue functionality in comp form
+    Single Application
+        Add venue logo
+        Allow associating venue
+        Allow adding a venue
     Notifications
         New applicant email
         New applicant notification

@@ -55,6 +55,8 @@ module.exports = {
 		'./template-parts/account/*.{php,js}',
 		'./template-parts/account/**/*.{php,js}',
 		'./template-parts/account/**/**/*.{php,js}',
+		'./template-parts/applications/*.{php,js}',
+		'./template-parts/applications/**/*.{php,js}',
 		'./template-parts/buyers/*.{php,js}',
 		'./template-parts/buyers/**/*.{php,js}',
 		'./template-parts/cards/*.{php,js}',
