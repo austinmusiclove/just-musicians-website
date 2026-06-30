@@ -15,13 +15,18 @@
 
     <!-- Application Link -->
     <div>
-        <h3 class="font-bold text-16 mb-2">Application Link</h3>
-        <div class="flex flex-row gap-1">
+        <div class="flex items-center gap-4">
+            <h3 class="font-bold text-16">Application Link</h3>
             <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
-                'text' => get_musician_application_url(get_the_ID()),
+                'text'          => get_musician_application_url(get_the_ID()),
                 'external_link' => esc_url(get_musician_application_url(get_the_ID())),
+                'show_text'     => false,
+                'icon_size_classes' => 'h-6 sm:h-4',
             ]); ?>
         </div>
+        <span class="text-14">
+            <?php echo esc_url(get_musician_application_url(get_the_ID())); ?>
+        </span>
     </div>
 
     <!-- Actions -->

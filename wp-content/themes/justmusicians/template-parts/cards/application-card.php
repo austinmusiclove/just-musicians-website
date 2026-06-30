@@ -21,6 +21,8 @@
         <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
             'text' => get_musician_application_url($args['post_id']),
             'external_link' => esc_url(get_musician_application_url($args['post_id'])),
+            'show_text' => true,
+            'icon_size_classes' => 'h-6 sm:h-4',
         ]); ?>
     </div>
 

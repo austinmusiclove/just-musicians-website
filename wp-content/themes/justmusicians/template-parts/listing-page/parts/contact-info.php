@@ -32,8 +32,9 @@
         </div>
         <?php if (is_user_logged_in()) {
             echo get_template_part('template-parts/global/copy-to-clipboard', '', [
-                'text'   => !$args['is_preview'] ? get_field('email') : '',
-                'x-text' => $args['is_preview']  ? 'pEmail'           : '',
+                'text'      => !$args['is_preview'] ? get_field('email') : '',
+                'text_var'  => $args['is_preview']  ? 'pEmail'           : '',
+                'show_text' => true,
             ]);
         } ?>
         <?php if (!is_user_logged_in()) { ?><span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis">Log in to reveal</span><?php } ?>
