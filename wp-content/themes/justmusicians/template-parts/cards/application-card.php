@@ -9,7 +9,7 @@
     <?php } ?>
 >
 
-    <div class="py-2 flex flex-col gap-y-2 flex-1 min-w-0 w-full">
+    <div class="py-2 flex flex-col items-start gap-y-2 flex-1 min-w-0 w-full">
         <div class="flex flex-row items-start justify-between gap-2">
             <a href="<?php echo esc_url($args['permalink']); ?>"><h2 class="text-18 sm:text-20 font-semibold"><?php echo esc_html($args['title']); ?></h2></a>
         </div>
@@ -20,6 +20,7 @@
 
         <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
             'text' => get_musician_application_url($args['post_id']),
+            'external_link' => esc_url(get_musician_application_url($args['post_id'])),
         ]); ?>
     </div>
 

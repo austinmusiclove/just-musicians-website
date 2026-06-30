@@ -19,9 +19,16 @@
         <?php if ($args['text']) { echo $args['text']; } ?>
     </span>
 
+    <!-- External Link -->
+    <?php if (isset($args['external_link'])) { ?>
+    <a href="<?php echo $args['external_link']; ?>" target="_blank">
+        <img class="h-6 opacity-40 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/up-right-from-square.svg';?>" />
+    </a>
+    <?php } ?>
+
     <div class="relative flex items-center">
         <button type="button" @click="copyText()" class="group">
-            <div class="relative inline-flex group">
+            <div class="relative flex group">
 
                 <!-- Copy icon -->
                 <img

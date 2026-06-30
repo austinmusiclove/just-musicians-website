@@ -68,10 +68,9 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
+    click to copy not show feedback on mobile
     Single Application
-        view application link (open in new tab)
         delete application
-        Improve UI for application details
         Add venue logo
         Allow associating venue
         Allow adding a venue
@@ -84,6 +83,7 @@ Applications (Calendly for music booking)
         Listing form for not logged in users or users with no listings
     Applications Page
         Improve application card UI
+        Show number of applicants in applicant card
     Create application form
         Allow associating venue
         Allow including a location if venue not included
