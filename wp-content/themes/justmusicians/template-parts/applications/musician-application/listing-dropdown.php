@@ -28,10 +28,10 @@ $listings_options[] = [
     }"
     x-on:click.away="showDropdown = false"
 >
-    <label class="block font-bold text-16 mb-2">Listing</label>
+    <h2 class="text-20 sm:text-25 font-bold mb-4">Musician</h2>
 
     <!-- Dropdown button -->
-    <button type="button" class="flex items-center gap-2 w-full px-3 py-2 border border-black/20 rounded-sm text-14"
+    <button type="button" class="flex items-center gap-2 w-full px-3 py-2 border border-black/20 rounded-sm text-16"
         x-on:click="showDropdown = !showDropdown">
         <img class="w-12 h-12 object-cover shrink-0"
             x-show="selected && selected.thumbnail_url"
@@ -45,7 +45,7 @@ $listings_options[] = [
     <ul class="absolute z-10 w-[calc(100%-2rem)] bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto mt-1" x-show="showDropdown" x-cloak>
         <template x-for="(opt, index) in options" :key="index">
             <li x-on:click="select(opt)"
-                class="flex items-center gap-2 px-4 py-2 hover:bg-yellow-10 cursor-pointer text-14"
+                class="flex items-center gap-2 px-4 py-2 hover:bg-yellow-10 cursor-pointer text-16"
                 :class="selected && selected.value === opt.value ? 'bg-yellow-10 font-semibold' : ''">
                 <img x-show="opt.thumbnail_url" :src="opt.thumbnail_url" class="w-12 h-12 object-cover shrink-0" />
                 <span x-text="opt.label"></span>

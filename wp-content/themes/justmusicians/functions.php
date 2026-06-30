@@ -168,6 +168,39 @@ function hmm_scripts() {
         wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, true);
     }
 
+    // Musician Application form
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/musician-application')) {
+
+        // Input component scripts
+        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, true);
+        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, true);
+
+        // HTMX Extensions
+        wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
+
+        // Alpine Mask
+        wp_enqueue_script('alpinejs-mask', get_template_directory_uri() . '/lib/js/alpine.mask.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-mask';
+
+        // Alpine Sort
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-sort';
+
+        // Alpine Collapse
+        wp_enqueue_script('alpinejs-collapse', get_template_directory_uri() . '/lib/js/alpine.collapse.min.js', [], $pkg->version, true);
+        $alpine_dependencies[] = 'alpinejs-collapse';
+
+        // Cropper.js
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, true);
+        wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
+        wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, true);
+        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        $alpine_dependencies[] = 'cropper-1.6-js';
+
+        // Listing Form Image Upload handling
+        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, true);
+    }
+
     // Collection pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/collection/')) {
         // Media Slider

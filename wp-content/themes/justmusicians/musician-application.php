@@ -39,8 +39,75 @@ get_header();
                 <?php } else { ?>
 
                 <form class="flex flex-col gap-4" x-data="{
-                    hasListings: '<?php echo count($user_listings) > 0 ? 'false' : 'true'; ?>',
-                    createNewListing: 'false',
+                    hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
+                    createNewListing: false,
+                    showImageEditPopup:     false,
+                    showStagePlotPopup:     false,
+                    showYoutubeLinkPopup:   false,
+                    showZipSearchOptions:   false,
+                    pName:                  '',
+                    pDescription:           '',
+                    pCity:                  '',
+                    pState:                 '',
+                    pZipCode:               '',
+                    zipCodeInput:           '',
+                    fullLocation:           '',
+                    pBio:                   '',
+                    pEmail:                 '',
+                    pPhone:                 '',
+                    pInstagramHandle:       '',
+                    pInstagramUrl:          '',
+                    pTiktokHandle:          '',
+                    pTiktokUrl:             '',
+                    pXHandle:               '',
+                    pXUrl:                  '',
+                    pWebsite:               '',
+                    pFacebookUrl:           '',
+                    pYoutubeUrl:            '',
+                    pBandcampUrl:           '',
+                    pSpotifyArtistUrl:      '',
+                    pSpotifyArtistId:       '',
+                    pAppleMusicArtistUrl:   '',
+                    pSoundcloudUrl:         '',
+                    pThumbnailSrc:          '',
+                    ensembleSizeCheckboxes: [],
+                    youtubeVideoData:       [],
+                    orderedImageData: {
+                        'cover_image': [
+                            {
+                                'image_id':      'cover_image',
+                                'attachment_id': '',
+                                'url':           '',
+                                'filename':      '',
+                                'mediatags':     [],
+                                'loading':       false,
+                                'worker':        null,
+                            },
+                        ],
+                        'listing_images':        [],
+                        'stage_plots':           [],
+                    },
+                    listingFormUpdateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
+
+                    cropper:                    null,
+                    showCropperDisplay:         true,
+                    popupImageSpinner: false,
+                    _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this._getImageData(imageType, imageId).url, false); },
+                    _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId); },
+
+                    currentImageId: 'cover_image',
+                    currentYtIndex:  -1,
+                    _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
+                    _toggleImageTerm(imageType, imageId, term)                    { toggleImageTerm(this, imageType, imageId, term); },
+                    _toggleYoutubeLinkTerm(index, term)                           { toggleYoutubeLinkTerm(this, index, term); },
+                    _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
+                    _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
+                    _updateFileInputs(imageType)                                  { updateFileInputs(this, imageType); },
+                    _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
+                    _getAllMediatags()                                            { return getAllMediatags(this); },
+
+                    _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
+                    _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
                 }">
 
                     <!-- Listing Dropdown -->
@@ -56,9 +123,11 @@ get_header();
                     </div>
 
                     <!-- Message Input -->
-                    <div>
-                        <label for="submission-message" class="block font-bold text-16 mb-2">Personalized Message</label>
-                        <textarea id="submission-message" name="message" rows="4" class="w-full px-3 py-2 border border-black/20 rounded-sm text-14" placeholder="Here's your chance to send the application reviewer a personalized message"></textarea>
+                    <div class="has-border p-0">
+                        <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
+                            <span class="font-bold">Personalized Message</span>
+                        </label>
+                        <textarea id="message" name="message" placeholder="Here's your chance to send the application reviewer a personalized message" class="w-full h-32 !border-0"></textarea>
                     </div>
 
                     <!-- Submit -->
@@ -66,6 +135,25 @@ get_header();
                         x-bind:disabled="!loggedIn"
                     >Submit Application</button>
 
+
+                    <!-- Image edit popup -->
+                    <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', [
+                        'categories'       => $categories,
+                        'instrumentations' => $instrumentations,
+                        'settings'         => $settings,
+                    ]); ?>
+
+                    <!-- Stage Plot popup -->
+                    <?php echo get_template_part('template-parts/listing-form/popups/stage-plot-popup', '', []); ?>
+
+                    <!-- Youtube link popup -->
+                    <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', [
+                        'categories'       => $categories,
+                        'instrumentations' => $instrumentations,
+                        'settings'         => $settings,
+                        'genres'           => $genres,
+                        'subgenres'        => $subgenres,
+                    ]); ?>
                 </form>
 
             <?php } ?>

@@ -69,9 +69,11 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
+        Listing dropdown options too wide
+        Get rid of media tags on front end
         Listing form
-            Fill in fields
-            required fields only required if listing form is showing
+            Genres
+            required fields only required if listing form is showing (name, description, thumbnail, zip)
         Submit application function
             require listing required fields (no listing_id only)
             create listing (no listing_id only)
