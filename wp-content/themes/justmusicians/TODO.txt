@@ -69,7 +69,6 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        Listing dropdown options too wide
         Get rid of media tags on front end
         Listing form
             Genres

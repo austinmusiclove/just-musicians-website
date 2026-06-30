@@ -15,7 +15,7 @@ $listings_options[] = [
 ];
 ?>
 
-<div
+<div class="relative"
     x-data="{
         options: <?php echo clean_arr_for_doublequotes($listings_options); ?>,
         selected: {},
@@ -42,7 +42,7 @@ $listings_options[] = [
     </button>
 
     <!-- Dropdown options -->
-    <ul class="absolute z-10 w-[calc(100%-2rem)] bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto mt-1" x-show="showDropdown" x-cloak>
+    <ul class="absolute z-10 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-56 overflow-y-auto" x-show="showDropdown" x-cloak>
         <template x-for="(opt, index) in options" :key="index">
             <li x-on:click="select(opt)"
                 class="flex items-center gap-2 px-4 py-2 hover:bg-yellow-10 cursor-pointer text-16"
