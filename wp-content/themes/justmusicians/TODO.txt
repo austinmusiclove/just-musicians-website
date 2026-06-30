@@ -68,7 +68,6 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    click to copy not show feedback on mobile
     Single Application
         delete application
         Add venue logo

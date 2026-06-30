@@ -10,6 +10,7 @@ $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
     class="flex flex-row items-center gap-2"
     x-data="{
         copied: false,
+        hover: false,
         copyText() {
             const text = '<?php echo clean_str_for_doublequotes($text); ?>';
             navigator.clipboard.writeText(text).then(() => {
@@ -37,8 +38,13 @@ $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
     <?php } ?>
 
     <div class="relative flex items-center">
-        <button type="button" x-on:click="copyText()" class="group">
-            <div class="relative flex group">
+        <button type="button"
+            x-on:click="copyText()"
+            x-on:mouseenter="hover = true"
+            x-on:mouseleave="hover = false; copied = false;"
+            x-on:click.outside="copied = false"
+        >
+            <div class="relative flex">
 
                 <!-- Copy icon -->
                 <img
@@ -47,7 +53,7 @@ $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
                 />
 
                 <!-- Copy tooltip -->
-                <div class="z-50 absolute bottom-full left-1/2 -translate-x-1/2 hidden group-hover:block hover:block">
+                <div class="z-50 absolute bottom-full left-1/2 -translate-x-1/2" x-show="hover || copied" x-cloak>
                     <div class="mb-2 w-56 text-white bg-black px-4 py-3 text-14 rounded" x-text="copied ? 'Copied!' : 'Click to copy'"></div>
                 </div>
 
