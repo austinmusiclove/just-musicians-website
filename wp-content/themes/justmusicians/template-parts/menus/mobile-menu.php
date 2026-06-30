@@ -81,7 +81,7 @@
                     My Gigs
                 </a>
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/submitted-applications/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pen.svg'; ?>" />
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
                     Submitted Applications
                 </a>
 
@@ -96,7 +96,7 @@
                 </a>
                 <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">My Venues</a> -->
                 <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/applications/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pen.svg'; ?>" />
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clipboard.svg'; ?>" />
                     Applications
                 </a>
             </div>

@@ -65,6 +65,11 @@ function html_api_rewrite_rules() {
 
     // Applications
     add_rewrite_rule(
+        '^wp-html/v1/applications/([0-9]+)/?$',
+        'index.php?wp-html-v1=applications&application-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/applications/([0-9]+)/applicants/?$',
         'index.php?wp-html-v1=applicants&application-id=$matches[1]',
         'top'

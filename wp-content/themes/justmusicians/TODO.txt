@@ -21,30 +21,17 @@ Questions
         You can also see individual events for the recurring event in my events and can edit them as normal and those edits will only apply to one date.
         A recurring event cannot have two instances on the same day
         You can add dates to recurring event and it will automatically create individual events for each date
-    Should you be able to have an application for individual events?
-        No, that would be Proposal
-    Should musicians be able to withdraw application?
-        Yes, you should be able to see My Applications and withdraw or update
     Should you set show dates in application or allow musicians to just provide availability info for all dates?
         Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
         Paid version: application has existing events and applicants get notified to fill out availability when new events are added
     Can inquiry post type be eliminated?
-        Yes
-    How should availability data be stored? Per application or with event or neither?
-        Per event/listing
-        Proposal post type that contains event, listing, availability, draw, quote; proposal can be created when requested by venue or when application is filled out
+        Maybe in the future. no need
     Does application need to be connected to a specific location?
         No but it needs a description of what the application is for
     What should we do with exisitng send inquiry?
         Send inquiry to existing event results in creating Proposal with inquiry status
         Change drop down to a modal that asks if you want to invite them to an existing event or create a new event
         Make sure to send people to event page to manage their event after they make a new one
-    Should Proposal request go to messages?
-        No
-    Should Offer be in messages?
-        No
-    Should Proposal response be in messages?
-        No
     Should availability be an advanced feature or just collecting quotes and draw or all free?
         Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
     When should messages be initiated?
@@ -74,20 +61,16 @@ Questions
         Listings can only message if they have an open conversation started by the buyer
         Once conversation is open between a buyer and listing, it is open
         Buyers can silence conversation to avoid getting too many unwanted messages from listing
-    What should happen to inquiry messages?
-        Leave them and never use them again; then consider removing all trace of them later
     When should users be prompted to review?
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
-    When you open applications page do you see your one only application or do you start by creating your first then see a list?
-        See empty state then create your first
-        Limit free users to one application
     Should single application be the page to configure the application and review applicants or the application form?
         Single application is for configuring and reviewing applicants like single event
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
     Single Application
-        Edit application title and description
+        view application link (open in new tab)
+        delete application
         Improve UI for application details
         Add venue logo
         Allow associating venue
