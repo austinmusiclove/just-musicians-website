@@ -13,17 +13,6 @@ function getIndexOfId(arr, id, idName) {
     return arr.findIndex(item => item[idName] === id);
 }
 
-function toggleImageTerm(alco, imageType, imageId, term) {
-    var tagIndex = getImageData(alco, imageType, imageId)['mediatags'].indexOf(term);
-    var imageIndex = getIndexOfId(alco.orderedImageData[imageType], imageId, 'image_id');
-
-    if (tagIndex == -1) {
-        alco.orderedImageData[imageType][imageIndex]['mediatags'].push(term);
-    } else {
-        alco.orderedImageData[imageType][imageIndex]['mediatags'].splice(tagIndex, 1);
-    }
-}
-
 function addImage(alco, imageType, imageId, imageData) {
     alco.currentImageId = imageId;
     if (imageType == 'cover_image') {
@@ -47,23 +36,6 @@ function removeImage(alco, imageType, imageId) {
     var list = [...alco.orderedImageData[imageType]];  // copy list
     list.splice(imageIndex, 1);                        // remove item
     alco.orderedImageData[imageType] = list            // update data;
-}
-
-function getAllMediatags(alco) {
-    var tagsSet = new Set();
-    for (var imageType of Object.keys(alco.orderedImageData)) {
-        for (var image of alco.orderedImageData[imageType]) {
-            if (Array.isArray(image.mediatags)) {
-                image.mediatags.forEach(tag => tagsSet.add(tag));
-            }
-        }
-    }
-    for (var videoData of alco.youtubeVideoData) {
-        if (Array.isArray(videoData.mediatags)) {
-            videoData.mediatags.forEach(tag => tagsSet.add(tag));
-        }
-    }
-    return Array.from(tagsSet);
 }
 
 async function updateImage(alco, imageType, imageId, url, file) {

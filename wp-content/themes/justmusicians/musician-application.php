@@ -98,13 +98,10 @@ get_header();
                     currentImageId: 'cover_image',
                     currentYtIndex:  -1,
                     _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
-                    _toggleImageTerm(imageType, imageId, term)                    { toggleImageTerm(this, imageType, imageId, term); },
-                    _toggleYoutubeLinkTerm(index, term)                           { toggleYoutubeLinkTerm(this, index, term); },
                     _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
                     _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
                     _updateFileInputs(imageType)                                  { updateFileInputs(this, imageType); },
                     _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
-                    _getAllMediatags()                                            { return getAllMediatags(this); },
 
                     _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
                     _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },

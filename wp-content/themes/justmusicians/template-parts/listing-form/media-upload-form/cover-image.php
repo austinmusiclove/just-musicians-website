@@ -50,13 +50,6 @@
                         x-on:click="_removeImage('cover_image', 'cover_image')"
                     >Delete</button>
                 </div>
-                <div class="tags flex flex-wrap gap-1 min-w-0 max-h-24 overflow-scroll" x-show="!_getImageData('cover_image', 'cover_image')?.loading" x-cloak>
-                    <template x-for="tag in _getImageData('cover_image', 'cover_image')?.mediatags" :key="tag">
-                        <div class="w-fit flex items-center text-14 whitespace-nowrap bg-yellow-20 px-3 h-6 rounded-full" x-text="tag"></div>
-                    </template>
-                </div>
-                <!--
-                -->
             </div>
         </div>
     </div>

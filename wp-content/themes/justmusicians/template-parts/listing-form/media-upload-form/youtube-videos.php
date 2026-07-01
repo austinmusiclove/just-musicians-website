@@ -41,11 +41,6 @@
                     </div>
                     <div class="overflow-hidden">
                         <div class="text-14 text-grey truncate overflow-hidden whitespace-nowrap grow-0 shrink min-w-0" x-text="videoData.url"></div>
-                        <div class="tags flex flex-wrap gap-1 min-w-0">
-                            <template x-for="tag in youtubeVideoData[index].mediatags" :key="tag">
-                                <div class="w-fit flex items-center text-14 whitespace-nowrap bg-yellow-20 px-3 h-6 rounded-full" x-text="tag"></div>
-                            </template>
-                        </div>
                     </div>
                 </div>
                 <div class="flex gap-2">

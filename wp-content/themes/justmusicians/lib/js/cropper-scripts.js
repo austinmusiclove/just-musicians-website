@@ -103,12 +103,14 @@ function initCropper(alco, displayElement, imageType, imageId, displaySrc, newFi
     };
 
     alco.showCropperDisplay = true;
-    displayElement.src = displaySrc;
+    requestAnimationFrame(() => {
+        displayElement.src = displaySrc;
 
-    // If it's already loaded (cached), fire manually
-    if (displayElement.complete && displayElement.naturalWidth !== 0) {
-        displayElement.onload();
-    }
+        // If it's already loaded (cached), fire manually
+        if (displayElement.complete && displayElement.naturalWidth !== 0) {
+            displayElement.onload();
+        }
+    });
 
 }
 function initCropperFromFile(alco, event, displayElement, imageType, imageId) {

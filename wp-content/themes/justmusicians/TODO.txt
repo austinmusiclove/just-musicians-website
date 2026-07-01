@@ -69,7 +69,6 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        Get rid of media tags on front end
         Listing form
             Genres
             required fields only required if listing form is showing (name, description, thumbnail, zip)

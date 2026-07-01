@@ -100,12 +100,3 @@ function getYoutubeVideoIdFromUrl(url) {
 
     return videoId;
 }
-
-function toggleYoutubeLinkTerm(alco, index, term) {
-    var termIndex = alco.youtubeVideoData[index].mediatags.indexOf(term);
-    if (termIndex == -1) {
-        alco.youtubeVideoData[index].mediatags.push(term);
-    } else {
-        alco.youtubeVideoData[index].mediatags.splice(termIndex, 1);
-    }
-}
