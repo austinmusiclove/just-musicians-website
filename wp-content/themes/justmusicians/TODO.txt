@@ -68,8 +68,6 @@ Questions
         Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Application form screen
-        add ids to post title for submissions for back end search purposes
     Applications Page
         Improve application card UI
         Show number of applicants in applicant card

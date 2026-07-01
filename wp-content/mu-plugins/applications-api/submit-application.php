@@ -18,7 +18,7 @@ function submit_application($args) {
     // Set post title
     $application_title = get_post_meta($application_id, 'title', true);
     $listing_name      = get_post_meta($listing_id, 'name', true);
-    $args['post_title'] = $application_title . '-' . $listing_name;
+    $args['post_title'] = "$application_id-$listing_id :: $application_title-$listing_name";
 
     // If a submission exists, update it
     $submission_id = get_application_submission($application_id, $listing_id);
