@@ -21,94 +21,92 @@ get_header();
         <div class="container pt-20 md:pt-32 pb-6 md:pb-12">
 
             <?php if (!$application_id || !$title) { ?>
-
                 <p class="text-16 text-black/60">Application not found.</p>
-
             <?php } ?>
 
-                <h1 class="font-bold text-25 mb-4"><?php echo esc_html($title); ?></h1>
+            <h1 class="font-bold text-25 mb-4"><?php echo esc_html($title); ?></h1>
 
-                <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80"><?php echo wpautop(esc_html($description)); ?></div>
-                <?php } ?>
+            <?php if ($description) { ?>
+                <div class="mb-8 text-16 text-black/80"><?php echo wpautop(esc_html($description)); ?></div>
+            <?php } ?>
 
-                <?php if (!is_user_logged_in()) { ?>
+            <?php if (!is_user_logged_in()) { ?>
 
-                    <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'submit an application' ]); ?>
+                <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'submit an application' ]); ?>
 
-                <?php } else { ?>
+            <?php } else { ?>
 
-            <form class="flex flex-col gap-4"
-                x-data="{
-                    hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
-                    createNewListing: false,
-                    showImageEditPopup:     false,
-                    showStagePlotPopup:     false,
-                    showYoutubeLinkPopup:   false,
-                    showZipSearchOptions:   false,
-                    pName:                  '',
-                    pDescription:           '',
-                    pCity:                  '',
-                    pState:                 '',
-                    pZipCode:               '',
-                    zipCodeInput:           '',
-                    fullLocation:           '',
-                    pBio:                   '',
-                    pEmail:                 '',
-                    pPhone:                 '',
-                    pInstagramHandle:       '',
-                    pInstagramUrl:          '',
-                    pTiktokHandle:          '',
-                    pTiktokUrl:             '',
-                    pXHandle:               '',
-                    pXUrl:                  '',
-                    pWebsite:               '',
-                    pFacebookUrl:           '',
-                    pYoutubeUrl:            '',
-                    pBandcampUrl:           '',
-                    pSpotifyArtistUrl:      '',
-                    pSpotifyArtistId:       '',
-                    pAppleMusicArtistUrl:   '',
-                    pSoundcloudUrl:         '',
-                    pThumbnailSrc:          '',
-                    ensembleSizeCheckboxes: [],
-                    genresCheckboxes:       [],
-                    youtubeVideoData:       [],
-                    orderedImageData: {
-                        'cover_image': [
-                            {
-                                'image_id':      'cover_image',
-                                'attachment_id': '',
-                                'url':           '',
-                                'filename':      '',
-                                'mediatags':     [],
-                                'loading':       false,
-                                'worker':        null,
-                            },
-                        ],
-                        'listing_images':        [],
-                        'stage_plots':           [],
-                    },
-                    listingFormUpdateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
+                <form class="flex flex-col gap-4"
+                    x-data="{
+                        hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
+                        createNewListing: false,
+                        showImageEditPopup:     false,
+                        showStagePlotPopup:     false,
+                        showYoutubeLinkPopup:   false,
+                        showZipSearchOptions:   false,
+                        pName:                  '',
+                        pDescription:           '',
+                        pCity:                  '',
+                        pState:                 '',
+                        pZipCode:               '',
+                        zipCodeInput:           '',
+                        fullLocation:           '',
+                        pBio:                   '',
+                        pEmail:                 '',
+                        pPhone:                 '',
+                        pInstagramHandle:       '',
+                        pInstagramUrl:          '',
+                        pTiktokHandle:          '',
+                        pTiktokUrl:             '',
+                        pXHandle:               '',
+                        pXUrl:                  '',
+                        pWebsite:               '',
+                        pFacebookUrl:           '',
+                        pYoutubeUrl:            '',
+                        pBandcampUrl:           '',
+                        pSpotifyArtistUrl:      '',
+                        pSpotifyArtistId:       '',
+                        pAppleMusicArtistUrl:   '',
+                        pSoundcloudUrl:         '',
+                        pThumbnailSrc:          '',
+                        ensembleSizeCheckboxes: [],
+                        genresCheckboxes:       [],
+                        youtubeVideoData:       [],
+                        orderedImageData: {
+                            'cover_image': [
+                                {
+                                    'image_id':      'cover_image',
+                                    'attachment_id': '',
+                                    'url':           '',
+                                    'filename':      '',
+                                    'mediatags':     [],
+                                    'loading':       false,
+                                    'worker':        null,
+                                },
+                            ],
+                            'listing_images':        [],
+                            'stage_plots':           [],
+                        },
+                        listingFormUpdateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
 
-                    cropper:                    null,
-                    showCropperDisplay:         true,
-                    popupImageSpinner: false,
-                    _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this._getImageData(imageType, imageId).url, false); },
-                    _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId); },
+                        cropper:                    null,
+                        showCropperDisplay:         true,
+                        popupImageSpinner: false,
+                        _initCropper(displayElement, imageType, imageId)                { initCropper(this, displayElement, imageType, imageId, this._getImageData(imageType, imageId).url, false); },
+                        _initCropperFromFile(event, displayElement, imageType, imageId) { initCropperFromFile(this, event, displayElement, imageType, imageId); },
 
-                    currentImageId: 'cover_image',
-                    currentYtIndex:  -1,
-                    _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
-                    _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
-                    _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
-                    _updateFileInputs(imageType)                                  { updateFileInputs(this, imageType); },
-                    _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
+                        currentImageId: 'cover_image',
+                        currentYtIndex:  -1,
+                        _getImageData(imageType, imageId)                             { return getImageData(this, imageType, imageId); },
+                        _removeImage(imageType, imageId)                              { removeImage(this, imageType, imageId); },
+                        _reorderImage(imageType, imageId, newPosition)                { reorderImage(this, imageType, imageId, newPosition); },
+                        _updateFileInputs(imageType)                                  { updateFileInputs(this, imageType); },
+                        _updateAttachmentIds(attachmentIds)                           { updateAttachmentIds(this, attachmentIds); },
 
-                    _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
-                    _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
-                }"
-            >
+                        _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
+                        _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
+                    }"
+                >
 
                     <!-- Listing Dropdown -->
                     <?php if ($current_user_id and count($user_listings) > 0) { ?>
