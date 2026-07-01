@@ -69,11 +69,9 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        cover image on form not displaying properly
         genres required for creating
-        clear message when listing dropdown option is selected
+        clear message input when listing dropdown option is selected
         err message if you hit submit right off the bat
-        ignore not being cleared when switching from lsiting to create new listing
         Success message
             application has been submitted
             you can edit the application here (link to application)
