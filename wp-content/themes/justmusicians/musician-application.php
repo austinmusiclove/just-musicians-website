@@ -26,6 +26,7 @@ get_header();
         <div class="container pt-20 md:pt-32 pb-6 md:pb-12"
             x-data="{
                 listingId: '',
+                message: '',
                 hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
                 createNewListing: false,
             }"

@@ -7,7 +7,8 @@
     x-data="{
         onListingSelect(option) {
             listingId = option.value;
-            if (option.label == 'Create New Musician Listing') {
+            message = '';
+            if (!option.value) {
                 createNewListing = true;
                 this.pName        = '';
                 this.pDescription = '';
@@ -107,7 +108,10 @@
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Personalized Message</span>
         </label>
-        <textarea id="message" name="message" placeholder="Here's your chance to send the application reviewer a personalized message" class="w-full h-32 !border-0"></textarea>
+        <textarea name="message" class="w-full h-32 !border-0"
+            placeholder="Here's your chance to send the application reviewer a personalized message"
+            x-model="message"
+        ></textarea>
     </div>
     <input type="hidden" name="application_id" value="<?php echo $application_id; ?>" />
     <input type="hidden" name="status" value="active" />

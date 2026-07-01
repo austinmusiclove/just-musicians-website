@@ -69,9 +69,6 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        genres required for creating
-        clear message input when listing dropdown option is selected
-        err message if you hit submit right off the bat
         Success message
             application has been submitted
             you can edit the application here (link to application)
