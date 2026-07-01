@@ -21,15 +21,13 @@ function update_application_submission($args) {
     return $result;
 }
 
-function update_user_submission_message($args) {
+function update_user_application_submission($args) {
     $submission_id = (int) ($args['ID'] ?? 0);
 
     $authorized = user_can_update_application_submission($submission_id);
     if (is_wp_error($authorized)) {
         return $authorized;
     }
-
-    if (!isset($args['meta_input'])) { $args['meta_input'] = []; }
 
     $result = update_application_submission($args);
     if (is_wp_error($result)) {

@@ -23,6 +23,7 @@ $listings_options[] = [
         select(option) {
             this.selected = option;
             this.showDropdown = false;
+            listingId = option.value;
             if (option.label == 'Create New Musician Listing') {
                 createNewListing = true;
                 pName        = '';

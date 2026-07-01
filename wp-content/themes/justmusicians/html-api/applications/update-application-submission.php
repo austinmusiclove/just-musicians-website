@@ -1,11 +1,10 @@
 <?php
 
-$submission_id = (int) get_query_var('app-submission');
 
 $args = get_sanitized_application_submission_args();
-$args['ID'] = $submission_id;
+$args['ID'] = (int) get_query_var('app-submission');
 
-$result = update_user_submission_message($args);
+$result = update_user_application_submission($args);
 if (is_wp_error($result)) {
     $message = 'Error: ' . $result->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';

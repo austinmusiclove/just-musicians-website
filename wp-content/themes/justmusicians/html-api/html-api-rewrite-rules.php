@@ -75,6 +75,16 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
+        '^wp-html/v1/applications/([0-9]+)/listings/([0-9]+)/submit/?$',
+        'index.php?wp-html-v1=submit-application&application-id=$matches[1]&listing-id=$matches[2]',
+        'top'
+    );
+    add_rewrite_rule(
+        '^wp-html/v1/applications/([0-9]+)/submit/?$',
+        'index.php?wp-html-v1=submit-new-listing-application&application-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/application-submissions/([0-9]+)/?$',
         'index.php?wp-html-v1=application-submissions&app-submission=$matches[1]',
         'top'

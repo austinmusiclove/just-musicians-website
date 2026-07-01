@@ -5,6 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function _create_listing($args) {
 
+    if (empty($args['meta_input']['name'])) {
+        return new WP_Error( 'missing_required_field', 'Name is missing');
+    }
+    if (empty($args['meta_input']['description'])) {
+        return new WP_Error( 'missing_required_field', 'Description is missing');
+    }
+    if (empty($args['meta_input']['zip_code'])) {
+        return new WP_Error( 'missing_required_field', 'Postal code is missing');
+    }
+
     // Insert post; this returns post_id on success and WP_Error on failure
     $post_id = wp_insert_post($args, true);
     if( is_wp_error( $post_id ) ) {
@@ -62,8 +72,8 @@ function _create_listing($args) {
         }
     }
     // youtube videos
-    if (!empty($args['youtube_video_data']) and is_array($args['youtube_video_data'])) {
-        foreach ($args['youtube_video_data'] as $video_data) {
+    if (!empty($args['youtube_videos']) and is_array($args['youtube_videos'])) {
+        foreach ($args['youtube_videos'] as $video_data) {
             if (empty($video_data['post_id'])) {
                 $video_post_id = insert_youtube_video($video_data , true);
                 if ( is_wp_error( $video_post_id ) ) {

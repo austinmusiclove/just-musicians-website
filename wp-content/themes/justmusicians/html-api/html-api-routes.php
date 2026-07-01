@@ -100,6 +100,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST' : status_header(200); include_once get_template_directory() . '/html-api/applications/submit-application.php'; exit;
             }
+        case 'submit-new-listing-application':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST' : status_header(200); include_once get_template_directory() . '/html-api/applications/submit-new-listing-application.php'; exit;
+            }
 
         // Active Search
         case 'search-options':

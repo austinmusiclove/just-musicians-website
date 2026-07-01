@@ -9,6 +9,11 @@ $application_id = get_query_var('application-id');
 $title = get_post_meta($application_id, 'title', true);
 $description = get_post_meta($application_id, 'description', true);
 
+if (!$application_id || !$title) {
+    wp_safe_redirect(site_url());
+    exit;
+}
+
 $current_user_id = get_current_user_id();
 $user_listings   = $current_user_id ? get_user_listings($current_user_id) : [];
 
@@ -18,11 +23,13 @@ get_header();
 <div id="page" class="flex flex-col grow">
 
     <div id="content" class="grow flex flex-col relative">
-        <div class="container pt-20 md:pt-32 pb-6 md:pb-12">
-
-            <?php if (!$application_id || !$title) { ?>
-                <p class="text-16 text-black/60">Application not found.</p>
-            <?php } ?>
+        <div class="container pt-20 md:pt-32 pb-6 md:pb-12"
+            x-data="{
+                listingId: '',
+                hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
+                createNewListing: false,
+            }"
+        >
 
             <h1 class="font-bold text-25 mb-4"><?php echo esc_html($title); ?></h1>
 
@@ -36,10 +43,13 @@ get_header();
 
             <?php } else { ?>
 
-                <form class="flex flex-col gap-4"
+                <form class="flex flex-col gap-4" enctype="multipart/form-data"
+                    x-ref="listingForm"
+                    x-init="$watch('listingId', () => htmx.process($el))"
+                    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $application_id); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+                    hx-target="#submit-application-result"
+                    hx-indicator="#submit-button-content"
                     x-data="{
-                        hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
-                        createNewListing: false,
                         showImageEditPopup:     false,
                         showStagePlotPopup:     false,
                         showYoutubeLinkPopup:   false,
@@ -120,18 +130,28 @@ get_header();
                         <?php get_template_part('template-parts/applications/musician-application/listing-form', '', []); ?>
                     </div>
 
-                    <!-- Message Input -->
+                    <!-- Application Submission Inputs -->
                     <div class="has-border p-0">
                         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
                             <span class="font-bold">Personalized Message</span>
                         </label>
                         <textarea id="message" name="message" placeholder="Here's your chance to send the application reviewer a personalized message" class="w-full h-32 !border-0"></textarea>
                     </div>
+                    <input type="hidden" name="application_id" value="<?php echo $application_id; ?>" />
+                    <input type="hidden" name="status" value="active" />
 
                     <!-- Submit -->
-                    <button type="submit" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
-                        x-bind:disabled="!loggedIn"
-                    >Submit Application</button>
+                    <button type="submit" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
+                        x-bind:disabled="!loggedIn || (!listingId && !createNewListing)"
+                    >
+                        <span id="submit-button-content">
+                            <span class="htmx-indicator-component-block-replace">Submit Application</span>
+                            <span class="htmx-indicator-component-block mx-2 my-1">
+                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'white']); ?>
+                            </span>
+                        </span>
+                    </button>
+                    <span id="submit-application-result"></span>
 
 
                     <!-- Media modals -->

@@ -10,17 +10,12 @@ function validate_listing_args() {
 
     // Cover image
     if (!isset($_POST['cover_image_meta'])) {
-        return new WP_Error('missing_cover_image', 'Cover image required');
+        return new WP_Error('missing_cover_image', 'Missing cover image');
     } else {
         $cover_image_data = custom_parse_file($_POST['cover_image_meta'], 'cover_image');
         if (empty($cover_image_data['attachment_id']) and empty($cover_image_data['file'])) {
             return new WP_Error('missing_cover_image', 'Cover image required');
         }
-    }
-
-    // State
-    if (isset($_POST['state']) and empty($_POST['state'])) {
-        return new WP_Error('missing_state', 'State required');
     }
 
     // Email

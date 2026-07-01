@@ -69,20 +69,12 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        Listing form
-            required fields only required if listing form is showing (name, description, thumbnail, zip)
-                err message if you hit submit right off the bat
-                success when select listing then submit
-                front end and back end validation for submitting create new without
-                    name
-                    description
-                    zip
-                    cover image
-        Submit application function
-            require listing required fields (no listing_id only)
-            create listing (no listing_id only)
-            create application submission
-            return introduction message explaining that their listing is linked to their application
+        move js in listing dropdown that should be in parent file to a func in parent file and pass that in and execute it in the listing dropdown file
+        cover image on form not displaying properly
+        genres required for creating
+        clear message when listing dropdown option is selected
+        err message if you hit submit right off the bat
+        ignore not being cleared when switching from lsiting to create new listing
         Success message
             application has been submitted
             you can edit the application here (link to application)
