@@ -71,6 +71,7 @@ get_header();
                     pSoundcloudUrl:         '',
                     pThumbnailSrc:          '',
                     ensembleSizeCheckboxes: [],
+                    genresCheckboxes:       [],
                     youtubeVideoData:       [],
                     orderedImageData: {
                         'cover_image': [
@@ -133,24 +134,11 @@ get_header();
                     >Submit Application</button>
 
 
-                    <!-- Image edit popup -->
-                    <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', [
-                        'categories'       => $categories,
-                        'instrumentations' => $instrumentations,
-                        'settings'         => $settings,
-                    ]); ?>
-
-                    <!-- Stage Plot popup -->
+                    <!-- Media modals -->
+                    <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', []); ?>
                     <?php echo get_template_part('template-parts/listing-form/popups/stage-plot-popup', '', []); ?>
+                    <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', []); ?>
 
-                    <!-- Youtube link popup -->
-                    <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', [
-                        'categories'       => $categories,
-                        'instrumentations' => $instrumentations,
-                        'settings'         => $settings,
-                        'genres'           => $genres,
-                        'subgenres'        => $subgenres,
-                    ]); ?>
                 </form>
 
             <?php } ?>

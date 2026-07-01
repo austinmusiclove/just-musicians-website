@@ -294,24 +294,10 @@ get_header();
             </div>
         </div>
 
-        <!-- Image edit popup -->
-        <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', [
-            'categories'       => $categories,
-            'instrumentations' => $instrumentations,
-            'settings'         => $settings,
-        ]); ?>
-
-        <!-- Stage Plot popup -->
+        <!-- Media modals -->
+        <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', []); ?>
         <?php echo get_template_part('template-parts/listing-form/popups/stage-plot-popup', '', []); ?>
-
-        <!-- Youtube link popup -->
-        <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', [
-            'categories'       => $categories,
-            'instrumentations' => $instrumentations,
-            'settings'         => $settings,
-            'genres'           => $genres,
-            'subgenres'        => $subgenres,
-        ]); ?>
+        <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', []); ?>
 
     </form>
 

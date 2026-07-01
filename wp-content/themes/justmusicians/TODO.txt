@@ -70,13 +70,16 @@ Questions
 Applications (Calendly for music booking)
     Application form screen
         Listing form
-            Genres
             required fields only required if listing form is showing (name, description, thumbnail, zip)
         Submit application function
             require listing required fields (no listing_id only)
             create listing (no listing_id only)
             create application submission
             return introduction message explaining that their listing is linked to their application
+        Success message
+            application has been submitted
+            you can edit the application here (link to application)
+            if created listing, explain the application is linked to lsiting (link to edit listing)
     Applications Page
         Improve application card UI
         Show number of applicants in applicant card

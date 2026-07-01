@@ -53,75 +53,14 @@
         </div>
     </fieldgroup>
 
-
-
-    <fieldgroup class="has-border p-0">
-        <!-- Ensemble Size -->
-        <div class="hidden">
-            <input type="hidden" name="ensemble_size[]" >
-            <?php foreach (["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"] as $option) {
-                echo get_template_part('template-parts/global/form/checkbox', '', [
-                    'label' => $option,
-                    'value' => $option,
-                    'name' => 'ensemble_size',
-                    'x-model' => 'ensembleSizeCheckboxes',
-                    'is_array' => true,
-                ]);
-            } ?>
-        </div>
-        <label id="ensemble-size-input" class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
-            <span class="font-bold">Ensemble size <span class="text-14 font-normal">(select all that apply)</span></span>
-            <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'How many performers in your group? If you perform with different ensemble sizes, include all that apply.' ]); ?>
-        </label>
-        <div class="p-2 flex gap-1 items-start flex-wrap h-20" x-data="{
-            sizeOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'],
-            showDropdown: false,
-            addSize(size) {
-                if (!ensembleSizeCheckboxes.includes(size)) { ensembleSizeCheckboxes.push(size); }
-                this.showDropdown = false;
-            },
-            removeSize(size) {
-                ensembleSizeCheckboxes = ensembleSizeCheckboxes.filter(item => item !== size);
-            },
-        }">
-             <!-- Selected sizes -->
-            <template x-for="size in ensembleSizeCheckboxes" :key="size">
-                <div class="w-fit">
-                    <div class="flex items-center border border-black/20 pl-3 pr-1 py-0.5 h-8 rounded-full">
-                        <span class="text-14 w-fit" x-text="size"></span>
-                        <button type="button" class="opacity-50 hover:opacity-100 ml-auto" x-on:click="removeSize(size)">
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
-                        </button>
-                    </div>
-                </div>
-            </template>
-             <!-- Add size button -->
-            <div class="relative">
-                <button id="addEnsembleSize" type="button" class="w-fit" x-on:click="showDropdown = true">
-                    <div class="flex items-center border border-black/20 pl-3 pr-2 py-0.5 h-8 rounded-full">
-                        <span class="text-14 w-fit">Add an option</span>
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </div>
-                </button>
-                <ul id="ensembleSizeDropdown" style="width: calc(100% - 1rem); left: .5rem" class="absolute z-10 top-full bg-white border border-black/40 rounded-md shadow-sm max-h-60 overflow-y-auto" style="margin-top: -1px"
-                    x-show="showDropdown" x-cloak
-                    x-on:click.away="showDropdown = false"
-                >
-                    <template x-for="size in sizeOptions" :key="size">
-                        <li
-                            @click="addSize(size)"
-                            class="px-4 py-2 hover:bg-yellow-10 cursor-pointer"
-                            tabindex="0"
-                            @keydown.enter.prevent="addSize(size)"
-                        >
-                            <span x-text="size"></span>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-        </div>
-    </fieldgroup>
-
+    <?php echo get_template_part('template-parts/global/form/tag-select-input', '', [
+        'id'         => 'ensemble-size-input',
+        'label'      => 'Ensemble Size',
+        'input_name' => 'ensemble_size',
+        'options'    => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"],
+        'x-model'    => 'ensembleSizeCheckboxes',
+        'tooltip'    => "How many performers in your group? If you perform with different ensemble sizes, include all that apply.",
+    ]); ?>
 
     <!-- Bio -->
     <fieldgroup class="has-border p-0">
