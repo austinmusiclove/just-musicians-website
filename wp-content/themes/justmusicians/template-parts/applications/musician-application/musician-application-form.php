@@ -1,27 +1,11 @@
 <form class="flex flex-col gap-4" enctype="multipart/form-data"
+    x-show="showApplication" x-cloak
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
-    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $application_id); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
     hx-target="#submit-application-result"
     hx-indicator="#submit-button-content"
     x-data="{
-        onListingSelect(option) {
-            listingId = option.value;
-            message = '';
-            if (!option.value) {
-                createNewListing = true;
-                this.pName        = '';
-                this.pDescription = '';
-                this.zipCodeInput = '';
-                this.fullLocation = '';
-            } else {
-                createNewListing = false;
-                this.pName        = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.pDescription = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.zipCodeInput = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.fullLocation = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-            }
-        },
         showImageEditPopup:     false,
         showStagePlotPopup:     false,
         showYoutubeLinkPopup:   false,
@@ -70,6 +54,23 @@
             'stage_plots':           [],
         },
         listingFormUpdateLocation(location) { this.fullLocation = location.label; this.zipCodeInput = location.label; this.pZipCode = location.postal_code; this.pCity = location.city; this.pState = location.state; },
+        onListingSelect(option) {
+            listingId = option.value;
+            message = '';
+            if (!option.value) {
+                this.pName        = '';
+                this.pDescription = '';
+                this.zipCodeInput = '';
+                this.fullLocation = '';
+                $nextTick(() => { createNewListing = true; } );
+            } else {
+                this.pName        = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                this.pDescription = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                this.zipCodeInput = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                this.fullLocation = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                $nextTick(() => { createNewListing = false; } );
+            }
+        },
 
         cropper:                    null,
         showCropperDisplay:         true,
@@ -113,7 +114,7 @@
             x-model="message"
         ></textarea>
     </div>
-    <input type="hidden" name="application_id" value="<?php echo $application_id; ?>" />
+    <input type="hidden" name="application_id" value="<?php echo $args['application_id']; ?>" />
     <input type="hidden" name="status" value="active" />
 
     <!-- Submit -->
@@ -127,8 +128,6 @@
             </span>
         </span>
     </button>
-    <span id="submit-application-result"></span>
-
 
     <!-- Media modals -->
     <?php echo get_template_part('template-parts/listing-form/popups/image-edit-popup', '', []); ?>
@@ -136,3 +135,5 @@
     <?php echo get_template_part('template-parts/listing-form/popups/youtube-link-popup', '', []); ?>
 
 </form>
+
+<span id="submit-application-result"></span>

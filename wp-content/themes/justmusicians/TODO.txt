@@ -69,24 +69,22 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        Success message
-            application has been submitted
-            you can edit the application here (link to application)
-            if created listing, explain the application is linked to lsiting (link to edit listing)
+        add ids to post title for submissions for back end search purposes
     Applications Page
         Improve application card UI
         Show number of applicants in applicant card
-    Create application form
-        Allow associating venue
-        Allow including a location if venue not included
-        Put add venue functionality in comp form
-    Single Application
-        Add venue logo
-        Allow associating venue
-        Allow adding a venue
     Notifications
         New applicant email
         New applicant notification
+        Application created email
+    Create application form
+        Allow including a location if venue not included
+        Allow associating venue
+        Allow adding a venue
+        Put add venue functionality in comp form
+    Single Application
+        Allow associating venue
+        Allow adding a venue
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
@@ -117,6 +115,8 @@ Applications Advanced
         Checkout process from Stripe
         Upsell locations in the current workflow
         Testing
+Single Application
+    Add venue logo
 Single Event page
     Show offers
     Support venue location

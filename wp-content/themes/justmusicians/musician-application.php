@@ -29,13 +29,15 @@ get_header();
                 message: '',
                 hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
                 createNewListing: false,
+                showApplication: true,
             }"
+            x-on:hideform="showApplication = false;"
         >
 
-            <h1 class="font-bold text-25 mb-4"><?php echo esc_html($title); ?></h1>
+            <h1 class="font-bold text-25 text-center mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
 
             <?php if ($description) { ?>
-                <div class="mb-8 text-16 text-black/80"><?php echo wpautop(esc_html($description)); ?></div>
+                <div class="mb-8 text-16 text-center text-black/80" x-show="showApplication" x-cloak><?php echo wpautop(esc_html($description)); ?></div>
             <?php } ?>
 
             <?php if (!is_user_logged_in()) { ?>
@@ -45,6 +47,7 @@ get_header();
             <?php } else { ?>
 
                 <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
+                    'application_id'  => $application_id,
                     'current_user_id' => $current_user_id,
                     'user_listings'   => $user_listings,
                 ]); ?>

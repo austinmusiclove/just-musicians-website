@@ -17,5 +17,9 @@ if (is_wp_error($result)) {
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
 }
+?>
 
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'Application Submitted Successfully\'})"></span>';
+<span x-init="$dispatch('success-toast', { 'message': 'Application Submitted Successfully'})"></span>
+<span x-init="$dispatch('hideform');"></span>
+<?php get_template_part('template-parts/applications/musician-application/successful-submission'); ?>
+
