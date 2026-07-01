@@ -69,7 +69,6 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        put form in template part
         cover image on form not displaying properly
         genres required for creating
         clear message when listing dropdown option is selected
