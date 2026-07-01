@@ -50,6 +50,22 @@ get_header();
                     hx-target="#submit-application-result"
                     hx-indicator="#submit-button-content"
                     x-data="{
+                        onListingSelect(option) {
+                            listingId = option.value;
+                            if (option.label == 'Create New Musician Listing') {
+                                createNewListing = true;
+                                this.pName        = '';
+                                this.pDescription = '';
+                                this.zipCodeInput = '';
+                                this.fullLocation = '';
+                            } else {
+                                createNewListing = false;
+                                this.pName        = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                                this.pDescription = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                                this.zipCodeInput = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                                this.fullLocation = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                            }
+                        },
                         showImageEditPopup:     false,
                         showStagePlotPopup:     false,
                         showYoutubeLinkPopup:   false,
@@ -121,7 +137,8 @@ get_header();
                     <!-- Listing Dropdown -->
                     <?php if ($current_user_id and count($user_listings) > 0) { ?>
                     <?php get_template_part('template-parts/applications/musician-application/listing-dropdown', '', [
-                        'listings' => $user_listings,
+                        'listings'           => $user_listings,
+                        'parent_select_func' => 'onListingSelect',
                     ]); ?>
                     <?php } ?>
 

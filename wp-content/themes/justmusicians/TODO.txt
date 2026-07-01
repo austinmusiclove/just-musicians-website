@@ -69,7 +69,7 @@ Questions
 
 Applications (Calendly for music booking)
     Application form screen
-        move js in listing dropdown that should be in parent file to a func in parent file and pass that in and execute it in the listing dropdown file
+        put form in template part
         cover image on form not displaying properly
         genres required for creating
         clear message when listing dropdown option is selected
