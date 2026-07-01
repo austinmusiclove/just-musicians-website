@@ -38,7 +38,8 @@ get_header();
 
                 <?php } else { ?>
 
-                <form class="flex flex-col gap-4" x-data="{
+            <form class="flex flex-col gap-4"
+                x-data="{
                     hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
                     createNewListing: false,
                     showImageEditPopup:     false,
@@ -106,7 +107,8 @@ get_header();
 
                     _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
                     _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
-                }">
+                }"
+            >
 
                     <!-- Listing Dropdown -->
                     <?php if ($current_user_id and count($user_listings) > 0) { ?>

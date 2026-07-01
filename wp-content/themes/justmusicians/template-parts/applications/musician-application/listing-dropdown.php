@@ -23,7 +23,19 @@ $listings_options[] = [
         select(option) {
             this.selected = option;
             this.showDropdown = false;
-            createNewListing = option.label == 'Create New Musician Listing';
+            if (option.label == 'Create New Musician Listing') {
+                createNewListing = true;
+                pName        = '';
+                pDescription = '';
+                zipCodeInput = '';
+                fullLocation = '';
+            } else {
+                createNewListing = false;
+                pName        = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                pDescription = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                zipCodeInput = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+                fullLocation = 'ignore'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
+            }
         }
     }"
     x-on:click.away="showDropdown = false"

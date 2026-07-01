@@ -20,3 +20,4 @@ require_once 'applications-api/delete-application.php';
 require_once 'applications-api/get-musician-application-url.php';
 require_once 'applications-api/get-user-application-submissions.php';
 require_once 'applications-api/update-application-submission.php';
+require_once 'applications-api/submit-application.php';
