@@ -3,6 +3,7 @@
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
     x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+    hx-trigger="submitapplication"
     hx-target="#submit-application-result"
     hx-indicator="#submit-button-content"
     x-data="{
@@ -118,8 +119,9 @@
     <input type="hidden" name="status" value="active" />
 
     <!-- Submit -->
-    <button type="submit" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
+    <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
         x-bind:disabled="!loggedIn || (!listingId && !createNewListing)"
+        x-on:click="$dispatch('submitapplication')"
     >
         <span id="submit-button-content">
             <span class="htmx-indicator-component-block-replace">Submit Application</span>
