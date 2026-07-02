@@ -6,9 +6,6 @@ Critical bugs
     Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
 
 Deploy
-    Add Applications Page
-    Add Submitted Applications Page
-    Add Application Form Page
     Add Applications ACF
     Add Application Submission ACF
     Save permalinks
