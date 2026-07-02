@@ -37,10 +37,20 @@
         <?php } ?>
 
         <!-- Buttons -->
-        <div class="flex flex-wrap items-center gap-3">
-            <a class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
+        <div class="flex flex-wrap items-center gap-3"
+            x-data="{
+                submission_ids: <?php echo clean_arr_for_doublequotes($args['app_submission_ids']); ?>,
+            }"
+        >
+            <a class="relative bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
                 href="<?php echo esc_url(add_query_arg('tab', 'applicants', $args['permalink'])); ?>"
-            >Review Applicants (<?php echo $args['applicant_count'] ?? '0'; ?>)</a>
+            >
+                Review Applicants (<?php echo count($args['app_submission_ids']) ?? '0'; ?>)
+                <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                    x-show="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids) > 0" x-cloak
+                    x-text="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids)"
+                ></span>
+            </a>
             <a class="border border-black/20 hover:border-black px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
                 href="<?php echo esc_url($args['permalink']); ?>"
             >Edit Application</a>

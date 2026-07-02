@@ -5,8 +5,10 @@
  * @package JustMusicians
  */
 
+$application_id = get_the_ID();
+
 // Authorize
-$auth = user_can_view_single_application(get_the_ID());
+$auth = user_can_view_single_application($application_id);
 if (is_wp_error($auth) || !$auth) {
     wp_safe_redirect(site_url());
     exit;
@@ -18,6 +20,12 @@ $collections_result = get_user_collections([
     'nothumbnails' => true,
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
+
+$app_submissions = get_applicants($application_id, [
+    'status' => 'active',
+    'nopaging' => true,
+]);
+$app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
 get_header();
 
@@ -35,9 +43,10 @@ get_header();
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
                     collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
-                    applicationId:  '<?php echo get_the_ID(); ?>',
+                    applicationId:  '<?php echo $application_id; ?>',
                     title:          '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
                     description:    '<?php echo clean_str_for_doublequotes(get_field('description') ?? ''); ?>',
+                    submission_ids:  <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,
                     showEditForm:   false,
                     _updateApplication(app) {
                         this.title       = app.title       || '';
@@ -54,7 +63,7 @@ get_header();
                 </a>
 
                 <div class="mb-6 md:mb-14 flex justify-start items-center flex-row">
-                    <h1 class="font-bold text-25"><?php echo esc_html(get_post_meta(get_the_ID(), 'title', true) ?: 'Application'); ?></h1>
+                    <h1 class="font-bold text-25"><?php echo esc_html(get_post_meta($application_id, 'title', true) ?: 'Application'); ?></h1>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
@@ -75,7 +84,13 @@ get_header();
                     <div class="flex items-start justify-between border-b border-black/20">
                         <div class="flex gap-6 items-start">
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicationDetails}" x-on:click="hideTabs(); showApplicationDetails = true;">Application Details</div>
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">Applicants</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
+                                Applicants
+                                <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                                    x-show="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids) > 0" x-cloak
+                                    x-text="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids)">
+                                </span>
+                            </div>
                         </div>
                     </div>
 

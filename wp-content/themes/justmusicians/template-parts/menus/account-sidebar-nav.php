@@ -57,8 +57,12 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
     <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="#"> -->
     <!--     <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>My Venues</span> -->
     <!-- </a> -->
-    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $is_applications ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/applications/'); ?>">
+    <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $is_applications ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/applications/'); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clipboard.svg'; ?>" />
+        <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+            x-show="get_notification_count(notifications, 'new_applicant') > 0" x-cloak
+            x-text="get_notification_count(notifications, 'new_applicant') ?? 0"
+        ></span>
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Applications</span>
     </a>
 

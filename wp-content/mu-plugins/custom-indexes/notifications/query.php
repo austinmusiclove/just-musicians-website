@@ -31,9 +31,9 @@ function add_event_dt_change_notification($user_id, $proposal_id) {
     add_notification($user_id, HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id);
 }
 
-function add_new_applicant_notification($user_id, $application_id) {
-    if (notification_exists($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $application_id)) return;
-    add_notification($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $application_id);
+function add_new_applicant_notification($user_id, $app_submission_id) {
+    if (notification_exists($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $app_submission_id)) return;
+    add_notification($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $app_submission_id);
 }
 
 function notification_exists($user_id, $notification_type, $subject_id) {

@@ -13,6 +13,18 @@
     }"
 >
 
+    <!-- Notifications -->
+    <div class="absolute top-2 -left-2 z-[1]"
+        hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+        x-bind:hx-trigger="(!has_notification(notifications, 'new_applicant', '<?php echo $args['submission_id']; ?>')) ? 'never-trigger' : 'intersect once'"
+        hx-swap="beforeend"
+        hx-indicator="#decoy-indicator"
+        hx-vals='{"notification_type":"new_applicant","subject_id": "<?php echo $args['submission_id']; ?>" }'
+    >
+        <span id="decoy-indicator"></span>
+        <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['submission_id' => $args['submission_id'] ]); ?>
+    </div>
+
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
             previousIndex: 0,
@@ -166,7 +178,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2">
-            <span class="text-12 text-black/50">Last updated <span x-text="submission_updated"></span></span>
+            <span class="text-12 text-black/50">Application submission last updated <span x-text="submission_updated"></span></span>
 
             <?php get_template_part('template-parts/inquiries/inquire-button', '', [
                 'post_id'     => $args['listing_id'],

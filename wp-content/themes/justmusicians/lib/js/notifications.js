@@ -49,6 +49,10 @@ function has_notifications(notifications, types, subject_id) {
     return types.some(type => has_notification(notifications, type, subject_id));
 }
 
+function get_notification_count_for_subject_ids(notifications, type, subject_ids) {
+    return get_subject_ids(notifications, type).filter(id => subject_ids.includes(id)).length;
+}
+
 function get_event_count_for_proposals(notifications, proposal_ids) {
     return get_subject_ids(notifications, 'inquiry_response').filter(id => proposal_ids.includes(id)).length
          + get_subject_ids(notifications, 'inquiry_response_update').filter(id => proposal_ids.includes(id)).length;

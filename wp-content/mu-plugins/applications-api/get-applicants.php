@@ -10,6 +10,8 @@ function get_applicants($application_id, $args = []) {
         ];
     }
 
+    $no_paging = !empty($args['nopaging']);
+
     $page = !empty($args['page']) ? max(1, (int) $args['page']) : 1;
 
     $meta_query = [
@@ -29,19 +31,18 @@ function get_applicants($application_id, $args = []) {
     $query = new WP_Query([
         'post_type'      => 'app_submission',
         'post_status'    => 'publish',
-        'posts_per_page' => 10,
-        'paged'          => $page,
+        'fields'         => 'ids',
+        'posts_per_page' => $no_paging ? -1 : 10,
+        'paged'          => $no_paging ? 1 : $page,
         'meta_query'     => $meta_query,
         'orderby'        => 'modified',
         'order'          => 'DESC',
     ]);
 
-    $submission_ids = wp_list_pluck($query->posts, 'ID');
-
     return [
-        'submission_ids'  => $submission_ids,
-        'max_num_pages'   => $query->max_num_pages,
+        'submission_ids'  => $query->posts,
+        'max_num_pages'   => $no_paging ? 1 : $query->max_num_pages,
         'max_num_results' => $query->found_posts,
-        'page'            => $page,
+        'page'            => $no_paging ? 1 : $page,
     ];
 }

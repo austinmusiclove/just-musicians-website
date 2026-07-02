@@ -25,7 +25,7 @@
         hx-vals='{"notification_type":"inquiry_response,inquiry_response_update","subject_id": "<?php echo $args['proposal_id']; ?>" }'
     >
         <span id="decoy-indicator"></span>
-        <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>
+        <?php get_template_part('template-parts/cards/card-components/event-applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>
     </div>
 
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
