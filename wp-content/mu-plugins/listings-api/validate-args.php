@@ -9,12 +9,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 function validate_listing_args() {
 
     // Cover image
-    if (!isset($_POST['cover_image_meta'])) {
+    if (empty($_POST['cover_image_meta'])) {
         return new WP_Error('missing_cover_image', 'Missing cover image');
     } else {
         $cover_image_data = custom_parse_file($_POST['cover_image_meta'], 'cover_image');
+        if (empty($cover_image_data['filename'])) {
+            return new WP_Error('missing_cover_image', 'Missing cover image');
+        }
         if (empty($cover_image_data['attachment_id']) and empty($cover_image_data['file'])) {
-            return new WP_Error('missing_cover_image', 'Cover image required');
+            return new WP_Error('missing_cover_image', 'Cover image file missing');
         }
     }
 

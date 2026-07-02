@@ -37,7 +37,7 @@ function _create_listing($args) {
     // cover image
     if (!empty($args['cover_image']) and is_array($args['cover_image'])) {
         if (!empty($args['cover_image']['file']) and empty($args['cover_image']['attachment_id'])) {
-            $attachment_id = upload_attachment($args['cover_image']['file'], $args['cover_image']['filename'], $post_id, '', $args['cover_image']['mediatags']);
+            $attachment_id = upload_attachment($args['cover_image']['file'], $args['cover_image']['filename'], $post_id, '', $args['cover_image']['mediatags'] ?? []);
             if ( is_wp_error( $attachment_id ) ) {
                 return $attachment_id;
             }
@@ -49,7 +49,7 @@ function _create_listing($args) {
     if (!empty($args['listing_images']) and is_array($args['listing_images'])) {
         foreach ($args['listing_images'] as $image_data) {
             if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
-                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, '', $image_data['mediatags']);
+                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, '', $image_data['mediatags'] ?? []);
                 if ( is_wp_error( $attachment_id ) ) {
                     return $attachment_id;
                 }
@@ -62,7 +62,7 @@ function _create_listing($args) {
     if (!empty($args['stage_plots']) and is_array($args['stage_plots'])) {
         foreach ($args['stage_plots'] as $image_data) {
             if (isset($image_data['file']) and empty($image_data['attachment_id'])) {
-                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, $image_data['caption'], $image_data['mediatags']);
+                $attachment_id = upload_attachment($image_data['file'], $image_data['filename'], $post_id, $image_data['caption'], $image_data['mediatags'] ?? []);
                 if ( is_wp_error( $attachment_id ) ) {
                     return $attachment_id;
                 }
