@@ -5,6 +5,7 @@ define('HM_NOTIFICATION_TYPE_NEW_INQUIRY',             'new_inquiry');
 define('HM_NOTIFICATION_TYPE_INQUIRY_RESPONSE',        'inquiry_response');
 define('HM_NOTIFICATION_TYPE_INQUIRY_RESPONSE_UPDATE', 'inquiry_response_update');
 define('HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE',         'event_dt_change');
+define('HM_NOTIFICATION_TYPE_NEW_APPLICANT',           'new_applicant');
 
 function add_new_inquiry_notification($user_id, $proposal_id) {
     if (notification_exists($user_id, HM_NOTIFICATION_TYPE_NEW_INQUIRY, $proposal_id)) return;
@@ -28,6 +29,11 @@ function add_event_dt_change_notification($user_id, $proposal_id) {
     }
     if (notification_exists($user_id, HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id)) return;
     add_notification($user_id, HM_NOTIFICATION_TYPE_EVENT_DT_CHANGE, $proposal_id);
+}
+
+function add_new_applicant_notification($user_id, $application_id) {
+    if (notification_exists($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $application_id)) return;
+    add_notification($user_id, HM_NOTIFICATION_TYPE_NEW_APPLICANT, $application_id);
 }
 
 function notification_exists($user_id, $notification_type, $subject_id) {

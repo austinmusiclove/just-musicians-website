@@ -57,10 +57,8 @@ Questions
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
 Applications (Calendly for music booking)
-    Notifications
-        New applicant email
-        New applicant notification
-        Application created email
+    Display new applicant notifications
+    Clear new applicant notification
     Deploy
 Applications Advanced
     Applications page
@@ -85,6 +83,8 @@ Applications Advanced
         Filter by answers to custom questions (advanced)
     Create Application Form
         Limit users to one application unless admin or premium subscription
+    Notifications
+        Notify all applicants when there is a new event to udpate availability for on application
     Money
         Features page where you can see what you get with the plan
         Annual and monthly pricing

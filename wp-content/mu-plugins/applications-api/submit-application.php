@@ -32,6 +32,11 @@ function submit_application($args) {
         return $post_id;
     }
 
+    // Send notifications and emails
+    $application_author = get_post_field('post_author', $application_id);
+    send_creator_new_applicant_email($application_author, $application_id);
+    add_new_applicant_notification($application_author, $application_id);
+
     return $post_id;
 }
 

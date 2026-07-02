@@ -12,6 +12,8 @@ function create_application($args) {
         return new WP_Error('creation_failed', 'Failed to create application.');
     }
 
+    send_creator_new_application_email(get_current_user_id(), $application_id);
+
     return [
         'post_id'   => $application_id,
         'permalink' => get_permalink($application_id),

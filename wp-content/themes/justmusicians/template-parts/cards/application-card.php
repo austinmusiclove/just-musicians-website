@@ -17,7 +17,7 @@
         </div>
 
         <!-- Application Link -->
-        <div class="text-yellow/50">
+        <div class="text-black/50">
             <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
                 'text' => get_musician_application_url($args['post_id']),
                 'external_link' => esc_url(get_musician_application_url($args['post_id'])),
@@ -38,10 +38,10 @@
 
         <!-- Buttons -->
         <div class="flex flex-wrap items-center gap-3">
-            <a class="border border-black/20 hover:border-black px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
+            <a class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
                 href="<?php echo esc_url(add_query_arg('tab', 'applicants', $args['permalink'])); ?>"
             >Review Applicants (<?php echo $args['applicant_count'] ?? '0'; ?>)</a>
-            <a class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
+            <a class="border border-black/20 hover:border-black px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
                 href="<?php echo esc_url($args['permalink']); ?>"
             >Edit Application</a>
         </div>

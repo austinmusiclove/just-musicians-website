@@ -1,12 +1,6 @@
 <!-- Details -->
 <div class="flex flex-col gap-4" x-show="!showEditForm" x-cloak>
 
-    <!-- Title -->
-    <div>
-        <h3 class="font-bold text-16 mb-2">Application Title</h3>
-        <p class="text-16 whitespace-pre-wrap" :class="title ? '' : 'text-black/50'" x-text="title ? title : 'No title provided'"></p>
-    </div>
-
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>

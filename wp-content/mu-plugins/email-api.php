@@ -15,6 +15,7 @@ require_once 'email-api/users.php';
 require_once 'email-api/messages.php';
 require_once 'email-api/events.php';
 require_once 'email-api/proposals.php';
+require_once 'email-api/applications.php';
 
 function send_email_safely($email, $subject, $message) {
     if (EMAIL_TEST_MODE) {
