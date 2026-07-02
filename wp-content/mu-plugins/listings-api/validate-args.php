@@ -13,7 +13,7 @@ function validate_listing_args() {
         return new WP_Error('missing_cover_image', 'Missing cover image');
     } else {
         $cover_image_data = custom_parse_file($_POST['cover_image_meta'], 'cover_image');
-        if (empty($cover_image_data['filename'])) {
+        if (empty($cover_image_data['filename'])) { // Handles case where you add an image then delete it; the file input still has data but the meta data is cleared including filename
             return new WP_Error('missing_cover_image', 'Missing cover image');
         }
         if (empty($cover_image_data['attachment_id']) and empty($cover_image_data['file'])) {
