@@ -24,14 +24,6 @@ Questions
     Should you set show dates in application or allow musicians to just provide availability info for all dates?
         Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
         Paid version: application has existing events and applicants get notified to fill out availability when new events are added
-    Can inquiry post type be eliminated?
-        Maybe in the future. no need
-    Does application need to be connected to a specific location?
-        No but it needs a description of what the application is for
-    What should we do with exisitng send inquiry?
-        Send inquiry to existing event results in creating Proposal with inquiry status
-        Change drop down to a modal that asks if you want to invite them to an existing event or create a new event
-        Make sure to send people to event page to manage their event after they make a new one
     Should availability be an advanced feature or just collecting quotes and draw or all free?
         Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
     When should messages be initiated?
@@ -63,26 +55,13 @@ Questions
         Buyers can silence conversation to avoid getting too many unwanted messages from listing
     When should users be prompted to review?
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
-    Should single application be the page to configure the application and review applicants or the application form?
-        Single application is for configuring and reviewing applicants like single event
-        Create a rewrite rule to map custom urls or just app-form/application-id to an application form page template
 
 Applications (Calendly for music booking)
-    Applications Page
-        Improve application card UI
-        Show number of applicants in applicant card
     Notifications
         New applicant email
         New applicant notification
         Application created email
-    Create application form
-        Allow including a location if venue not included
-        Allow associating venue
-        Allow adding a venue
-        Put add venue functionality in comp form
-    Single Application
-        Allow associating venue
-        Allow adding a venue
+    Deploy
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
@@ -93,19 +72,19 @@ Applications Advanced
     Single Application Application set up tab
         Show events and allow excluding from application
         Prompt to add events to get availability (advanced)
+        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
+        Show add dates option in set up form but show an upsell message when you try to use it
         Invite listings to apply (advanced)
         Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
-        Excluded events
         Request draw, comp min, personal message
         Sort by highest rating (need index)
+        Excluded events
     Single Application Applicant review tab
         Show dates available for your events
         Filter by answers to custom questions (advanced)
     Create Application Form
         Limit users to one application unless admin or premium subscription
-    Submitted Applications Page
-        Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
     Money
         Features page where you can see what you get with the plan
         Annual and monthly pricing
@@ -113,8 +92,20 @@ Applications Advanced
         Checkout process from Stripe
         Upsell locations in the current workflow
         Testing
+Create application form
+    Allow including a location if venue not included
+    Allow associating venue
+    Allow adding a venue
+    Put add venue functionality in comp form
 Single Application
     Add venue logo
+    Allow associating venue
+    Allow adding a venue
+Submitted Applciations
+    When active state add withdraw application button in white next to udpate button
+    When withdrawn state only show resubmit application button
+    No status input in update application form
+    Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
 Single Event page
     Show offers
     Support venue location

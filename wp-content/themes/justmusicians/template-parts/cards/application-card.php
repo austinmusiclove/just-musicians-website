@@ -9,21 +9,42 @@
     <?php } ?>
 >
 
-    <div class="py-2 flex flex-col items-start gap-y-2 flex-1 min-w-0 w-full">
+    <div class="py-2 flex flex-col items-start gap-4 flex-1 min-w-0 w-full">
+
+        <!-- Application Title -->
         <div class="flex flex-row items-start justify-between gap-2">
             <a href="<?php echo esc_url($args['permalink']); ?>"><h2 class="text-18 sm:text-20 font-semibold"><?php echo esc_html($args['title']); ?></h2></a>
         </div>
 
+        <!-- Application Link -->
+        <div class="text-yellow">
+            <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
+                'text' => get_musician_application_url($args['post_id']),
+                'external_link' => esc_url(get_musician_application_url($args['post_id'])),
+                'show_text' => true,
+                'icon_size_classes' => 'h-6 sm:h-4',
+            ]); ?>
+        </div>
+
+        <!-- Application Description -->
         <?php if ($args['description']) { ?>
-            <p class="text-14 text-black/60"><?php echo esc_html($args['description']); ?></p>
+            <div x-data="{ description: '<?php echo clean_str_for_doublequotes($args['description']); ?>' }">
+                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+                    'text_var' => 'description',
+                    'limit'    => 200,
+                ]); ?>
+            </div>
         <?php } ?>
 
-        <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
-            'text' => get_musician_application_url($args['post_id']),
-            'external_link' => esc_url(get_musician_application_url($args['post_id'])),
-            'show_text' => true,
-            'icon_size_classes' => 'h-6 sm:h-4',
-        ]); ?>
+        <!-- Buttons -->
+        <div class="flex flex-wrap items-center gap-3">
+            <a class="border border-black/20 hover:border-black px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
+                href="<?php echo esc_url(add_query_arg('tab', 'applicants', $args['permalink'])); ?>"
+            >Review Applicants (<?php echo $args['applicant_count'] ?? '0'; ?>)</a>
+            <a class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
+                href="<?php echo esc_url($args['permalink']); ?>"
+            >Edit Application</a>
+        </div>
     </div>
 
 </div>

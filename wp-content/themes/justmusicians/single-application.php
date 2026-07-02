@@ -62,9 +62,10 @@ get_header();
                     <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span x-init="$dispatch('success-toast', {'message': 'Application Created Successfully'});"></span><?php } ?>
                 </div>
 
+                <?php $default_tab = $_GET['tab'] ?? 'details'; ?>
                 <div x-data="{
-                    showApplicationDetails: true,
-                    showApplicants: false,
+                    showApplicationDetails: <?php echo $default_tab === 'applicants' ? 'false' : 'true'; ?>,
+                    showApplicants:         <?php echo $default_tab === 'applicants' ? 'true'  : 'false'; ?>,
                     hideTabs() {
                         this.showApplicationDetails = false;
                         this.showApplicants = false;

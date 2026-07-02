@@ -14,13 +14,14 @@ $next_page     = $result['next_page'];
 if (count($applications) > 0) {
     foreach ($applications as $index => $application) {
         get_template_part('template-parts/cards/application-card', '', [
-            'post_id'      => $application['post_id'],
-            'title'        => $application['title'],
-            'description'  => $application['description'],
-            'permalink'    => $application['permalink'],
-            'last'         => $index == array_key_last($applications),
-            'is_last_page' => $is_last_page,
-            'next_page'    => $next_page,
+            'post_id'         => $application['post_id'],
+            'title'           => $application['title'],
+            'description'     => $application['description'],
+            'permalink'       => $application['permalink'],
+            'applicant_count' => $application['applicant_count'],
+            'last'            => $index == array_key_last($applications),
+            'is_last_page'    => $is_last_page,
+            'next_page'       => $next_page,
         ]);
     }
 } else if ($page == 1) {

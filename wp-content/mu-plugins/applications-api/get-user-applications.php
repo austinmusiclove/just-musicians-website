@@ -22,11 +22,26 @@ function get_user_applications($args) {
     while ($query->have_posts()) {
         $query->the_post();
 
+        $application_id = get_the_ID();
+
+        $count_query = new WP_Query([
+            'post_type'      => 'app_submission',
+            'post_status'    => 'publish',
+            'fields'         => 'ids',
+            'posts_per_page' => -1,
+            'no_found_rows'  => true,
+            'meta_query'     => [
+                ['key' => 'application', 'value' => $application_id],
+                ['key' => 'status',      'value' => 'active'],
+            ],
+        ]);
+
         $applications[] = [
-            'post_id'     => get_the_ID(),
-            'title'       => get_post_meta(get_the_ID(), 'title', true),
-            'description' => get_post_meta(get_the_ID(), 'description', true),
-            'permalink'   => get_permalink(),
+            'post_id'         => $application_id,
+            'title'           => get_post_meta($application_id, 'title', true),
+            'description'     => get_post_meta($application_id, 'description', true),
+            'permalink'       => get_permalink(),
+            'applicant_count' => (int) $count_query->post_count,
         ];
     }
 
