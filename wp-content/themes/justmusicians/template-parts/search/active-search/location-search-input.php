@@ -20,6 +20,7 @@
 
         x-model="<?php echo $args['input_var']; ?>"
         x-on:focus="<?php echo $args['show_var']; ?> = true; <?php echo $args['input_var']; ?> = '';"
+        x-on:input="<?php echo $args['show_var']; ?> = true;"
         x-on:click.away="<?php echo $args['show_var']; ?> = false; <?php echo $args['input_var']; ?> = <?php echo $args['selected_var']; ?>;"
         <?php if (isset($args['x_class'])) { echo ':class="' . $args['x_class'] . '"'; } ?>
     />

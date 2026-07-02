@@ -1,14 +1,7 @@
 Critical bugs
-    Fix mu plugins depending on each other; move code to includes instead
-    importing upload-attachment in listings api plugin is wrong. if this is not used elsewhere mybe it be be put in listings plugin or just somewhere it makes more sense
     Figure out why update listing takes forever; probably something with unneeded image processing
-    Consider setting status header in html apis files on errors
+    Fix mu plugins depending on each other; move code to includes instead
     Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
-
-Deploy
-    Add Applications ACF
-    Add Application Submission ACF
-    Save permalinks
 
 Questions
     Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
@@ -53,8 +46,6 @@ Questions
     When should users be prompted to review?
         A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
 
-Applications (Calendly for music booking)
-    Deploy
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
@@ -87,6 +78,8 @@ Applications Advanced
         Checkout process from Stripe
         Upsell locations in the current workflow
         Testing
+Applications page
+    Explain what applications are a bit on empty state
 Create application form
     Allow including a location if venue not included
     Allow associating venue
@@ -322,6 +315,8 @@ Performance
     image sprites
 Code consistency
     auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
+    i use echo throughout php templates and i think it is unnecessary
+    i use echo and escaped strings to output html in html apis and it is not necessary
 Emails
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 Bugs

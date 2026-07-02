@@ -160,10 +160,6 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         x-resize.document="
             width = $width;
             showMobileMenu = false;
-            showSearchOptions = false;
-            showLocationSearchOptions = false;
-            showInquiryLocationSearchOptions = false;
-            showLocationSearchOptionsHeader = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
