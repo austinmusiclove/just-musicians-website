@@ -14,7 +14,10 @@
         <div class="flex flex-col justify-center lg:px-8 min-h-full py-12 sm:px-6">
             <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
                 <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
-                <h2 x-text="signupModalMessage" class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight">Sign up for an account</h2>
+                <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight"
+                    data-testid="signup-modal-heading"
+                    x-text="signupModalMessage"
+                >Sign up for an account</h2>
             </div>
             <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div class="bg-white px-6 pb-4 sm:px-12">
@@ -60,7 +63,9 @@
                         <?php if (isset($_GET['lic'])) { ?><input type="hidden" name="lic" value="<?php echo $_GET['lic']; ?>"><?php } ?>
                         <input type="hidden" name="r_csrf" value="<?php echo wp_create_nonce('r-csrf'); ?>">
                         <div>
-                            <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign up</button>
+                            <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4"
+                                data-testid="signup-submit-btn"
+                            >Sign up</button>
                         </div>
                         <div id="sign-up-result" class="flex items-center text-14 justify-between"></div>
 

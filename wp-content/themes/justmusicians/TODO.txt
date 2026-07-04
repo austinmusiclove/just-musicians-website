@@ -2,6 +2,19 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
 
 Testing for Applications product rollout
+    First test
+        Add more browsers/devices
+        How do i check for activation email
+    Register user tests
+        Can we test register/sign in with google
+    Min tests
+        Create listing
+        Update listing (need existing data state)
+        Create Application
+        Update Application
+        Delete Appication
+        Submit Appication
+        Update Appication Submission
     Regression Testing
         Use Playwright for regression test suite
         Run locally or staging, not prod (except maybe a subset that is safe to run on prod without disruption or emails to users)
@@ -10,6 +23,7 @@ Testing for Applications product rollout
         After running full test suite reset db and uploads to that state (should not be needed if Playwright clean up works properly)
         Try to make tests as atomic as possible
         Playwright has multi devices built in
+        Tests should all be able to run in parallel
     Start testing with user registration, listings, and applications (large media upload)
     Pen Testing
     Code clean up
