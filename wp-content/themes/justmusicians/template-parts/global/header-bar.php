@@ -18,7 +18,7 @@
                     <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                 </div>
             </div>
-            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3 ml-4" x-cloak x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal">Log In</button>
+            <button class="border-2 font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3 ml-4" data-testid="header-login-btn" x-show="!loggedIn" x-on:click="showLoginModal = !showLoginModal" x-cloak>Log In</button>
             <button class="bg-navy border-2 border-black text-white shadow-black-offset hover:bg-yellow hover:text-black font-sun-motter text-16 px-3 md:px-5 py-2 md:py-3" data-testid="header-signup-btn"
                 x-show="!loggedIn" x-cloak
                 x-on:click="showSignupModal = !showSignupModal"

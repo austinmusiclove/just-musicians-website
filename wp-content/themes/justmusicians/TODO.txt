@@ -1,14 +1,12 @@
 Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
-
 Testing for Applications product rollout
-    First test
-        Add more browsers/devices
-        How do i check for activation email
     Register user tests
         Can we test register/sign in with google
     Min tests
+        Log in
         Create listing
+        Listing large media upload
         Update listing (need existing data state)
         Create Application
         Update Application
@@ -24,7 +22,6 @@ Testing for Applications product rollout
         Try to make tests as atomic as possible
         Playwright has multi devices built in
         Tests should all be able to run in parallel
-    Start testing with user registration, listings, and applications (large media upload)
     Pen Testing
     Code clean up
         Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
@@ -258,17 +255,9 @@ Data
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
 Testing
-    *set up testing with playwright with multiple browsers
     test apostrophes everywhere
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api (does this work or does htmx reject response and not swap and not show the toast)
-    create screen state/action tree
-        each screen has multiple states which are nodes
-        each state has actions which are edges
-        each action has an expected result that can be tested for
-        integration tests test one edge of the tree at a time
-        set up users that allow tests to reach different screen states for testing without having to create a user every time
-        maturity test by following a random path on the tree
 UX
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it

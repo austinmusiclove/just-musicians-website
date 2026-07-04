@@ -22,7 +22,7 @@ test.describe('User Registration', () => {
         }
     });
 
-    test('registers a new user successfully', async ({ page }) => {
+    test('register user from header sign up button', async ({ page }) => {
         testEmail = `e2e-success-${ts}@test.justmusicians.com`;
 
         await page.goto('/');
@@ -39,7 +39,13 @@ test.describe('User Registration', () => {
             page.getByTestId('signup-submit-btn').click(),
         ]);
 
+        await page.waitForLoadState('load');
         await expect(page.getByTestId('header-signup-btn')).not.toBeVisible({ timeout: 5000 });
+        await expect(page.getByTestId('header-login-btn')).not.toBeVisible({ timeout: 5000 });
     });
+
+    test.skip('new user is redirected to the same url that they were at when they registered successfully with query params', async ({ page }) => {});
+    test.skip('account activation email is sent to new user after registration', async ({ page }) => {}); // Maybe best for a PHP test
+    test.skip('sign up with google', async ({ page }) => {}); // Mock the google part
 
 });

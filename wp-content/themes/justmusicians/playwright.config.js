@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
     testDir: './tests/e2e',
@@ -9,12 +9,28 @@ export default defineConfig({
     reporter: [['html', { outputFolder: 'playwright-report' }]],
     use: {
         baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost',
-        trace: 'on-first-retry',
+        trace: 'retain-on-failure',
     },
     projects: [
         {
             name: 'chromium',
             use: { browserName: 'chromium' },
+        },
+        {
+            name: 'firefox',
+            use: { browserName: 'firefox' },
+        },
+        {
+            name: 'webkit',
+            use: { browserName: 'webkit' },
+        },
+        {
+            name: 'Mobile Chrome',
+            use: { ...devices['Pixel 7'] },
+        },
+        {
+            name: 'Mobile Safari',
+            use: { ...devices['iPhone 14'] },
         },
     ],
 });
