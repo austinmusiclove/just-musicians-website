@@ -41,7 +41,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                 </div>
                 <div class="col md:col-span-6 py-8 md:py-12"
                     x-data="{
-                        collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                        collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map ?? []); ?>,
                         get sortedCollections()                              { return getSortedCollections(this, <?php echo $collection_id; ?>); },
                         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
                         _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },

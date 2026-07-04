@@ -8,11 +8,11 @@
         hx-include="#event-applicants-form"
     <?php } ?>
     x-data="{
-        proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']); ?>',
-        proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']); ?>',
-        proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']); ?>',
-        proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']); ?>',
-        proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability']); ?>',
+        proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']       ?? ''); ?>',
+        proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']        ?? ''); ?>',
+        proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']         ?? ''); ?>',
+        proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']      ?? ''); ?>',
+        proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability'] ?? ''); ?>',
     }"
 >
 
@@ -34,7 +34,7 @@
             currentIndex: 0,
             showArrows: isTouchDevice,
             totalSlides: <?php echo (count($args['youtube_video_data']) + 1); ?>,
-            videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data']); ?>,
+            videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data'] ?? []); ?>,
             playerIds: {},
             _updateIndex(newIndex)  { updateIndex(this, newIndex); },
             _pausePreviousSlide()   { pausePreviousSlide(this); },
@@ -202,7 +202,7 @@
             <!-- Send Message -->
             <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
                 x-on:click="
-                    sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name']); ?>';
+                    sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name'] ?? ''); ?>';
                     sendMessageListingId = <?php echo $args['listing_id']; ?>;
                     sendMessageText = '';
                     showSendMessageSuccess = false;

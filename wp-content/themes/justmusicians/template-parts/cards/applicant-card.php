@@ -8,8 +8,8 @@
         hx-include="#applicants-form"
     <?php } ?>
     x-data="{
-        submission_message: '<?php echo clean_str_for_doublequotes($args['submission_message']); ?>',
-        submission_updated: '<?php echo clean_str_for_doublequotes($args['submission_updated']); ?>',
+        submission_message: '<?php echo clean_str_for_doublequotes($args['submission_message'] ?? ''); ?>',
+        submission_updated: '<?php echo clean_str_for_doublequotes($args['submission_updated'] ?? ''); ?>',
     }"
 >
 
@@ -31,7 +31,7 @@
             currentIndex: 0,
             showArrows: isTouchDevice,
             totalSlides: <?php echo (count($args['youtube_video_data']) + 1); ?>,
-            videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data']); ?>,
+            videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data'] ?? []); ?>,
             playerIds: {},
             _updateIndex(newIndex)  { updateIndex(this, newIndex); },
             _pausePreviousSlide()   { pausePreviousSlide(this); },

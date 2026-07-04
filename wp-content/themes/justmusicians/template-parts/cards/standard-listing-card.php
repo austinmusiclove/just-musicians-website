@@ -126,7 +126,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     </div>
 
 
-    <div class="py-2 flex flex-col gap-y-2 w-full">
+    <div class="flex flex-col gap-y-2 w-full">
 
         <div class="flex flex-row justify-between items-center w-full">
 
@@ -144,6 +144,12 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             ]);} ?>
 
         </div>
+
+        <!-- Rating -->
+        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+            'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
+            'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
+        ]); ?>
 
         <!-- Location -->
         <span class="text-14 flex items-center">
@@ -168,12 +174,6 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                 </span>
             <?php } ?>
         </div>
-
-        <!-- Rating -->
-        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
-            'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
-            'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
-        ]); ?>
 
         <!-- Links -->
         <?php /*

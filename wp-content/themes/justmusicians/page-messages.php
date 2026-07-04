@@ -38,8 +38,8 @@ get_header();
         conversationId: -1,
         conversations: [],
         conversationsMap: {},
-        inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data); } else { echo 'null'; } ?>,
-        userInquiries: <?php echo clean_arr_for_doublequotes($user_inquiries); ?>,
+        inquiry: <?php if ($inquiry_data != null) { echo clean_arr_for_doublequotes($inquiry_data ?? []); } else { echo 'null'; } ?>,
+        userInquiries: <?php echo clean_arr_for_doublequotes($user_inquiries ?? []); ?>,
         editInquiryMode: false,
         conversationsView: true,
         messagesView: false,
@@ -59,7 +59,7 @@ get_header();
         _getMessageElmId(conversationId, messageId) { return getMessageElmId(conversationId, messageId); },
         _setMessageInputHeight()                    { setMessageInputHeight(this); },
 
-        inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map); ?>,
+        inquiriesMap: <?php echo clean_arr_for_doublequotes($inquiries_map ?? []); ?>,
         _updateInquiry(postId, inquiry)                { return updateInquiry(this, postId, inquiry); },
     }"
     x-ref="mainContainer"

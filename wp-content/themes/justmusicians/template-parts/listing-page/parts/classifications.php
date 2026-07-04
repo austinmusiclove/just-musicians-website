@@ -13,7 +13,7 @@
             <h4 class="text-16 mb-3">Categories</h4>
             <div class="flex flex-wrap items-center gap-1">
                 <?php foreach ($args['categories'] as $term) { ?>
-                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="categoriesCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
+                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="categoriesCheckboxes.includes('<?php echo clean_str_for_doublequotes($term ?? ''); ?>')" x-cloak <?php } ?> >
                         <?php echo $term; ?>
                     </span>
                 <?php } ?>
@@ -25,7 +25,7 @@
             <h4 class="text-16 mb-3">Genres</h4>
             <div class="flex flex-wrap items-center gap-1">
                 <?php foreach ($args['genres'] as $term) { ?>
-                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
+                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="genresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term ?? ''); ?>')" x-cloak <?php } ?> >
                         <?php echo $term; ?>
                     </span>
                 <?php } ?>
@@ -37,7 +37,7 @@
             <h4 class="text-16 mb-3">Subgenres</h4>
             <div class="flex flex-wrap items-center gap-1">
                 <?php foreach ($args['subgenres'] as $term) { ?>
-                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="subgenresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
+                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="subgenresCheckboxes.includes('<?php echo clean_str_for_doublequotes($term ?? ''); ?>')" x-cloak <?php } ?> >
                         <?php echo $term; ?>
                     </span>
                 <?php } ?>
@@ -49,7 +49,7 @@
             <h4 class="text-16 mb-3">Instrumentation</h4>
             <div class="flex flex-wrap items-center gap-1">
                 <?php foreach ($args['instrumentations'] as $term) { ?>
-                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="instCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
+                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="instCheckboxes.includes('<?php echo clean_str_for_doublequotes($term ?? ''); ?>')" x-cloak <?php } ?> >
                         <?php echo $term; ?>
                     </span>
                 <?php } ?>
@@ -61,7 +61,7 @@
             <h4 class="text-16 mb-3">Settings</h4>
             <div class="flex flex-wrap items-center gap-1">
                 <?php foreach ($args['settings'] as $term) { ?>
-                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="settingsCheckboxes.includes('<?php echo clean_str_for_doublequotes($term); ?>')" x-cloak <?php } ?> >
+                    <span class="bg-yellow-light px-2 py-0.5 rounded-full text-12" <?php if ($args['is_preview']) { ?> x-show="settingsCheckboxes.includes('<?php echo clean_str_for_doublequotes($term ?? ''); ?>')" x-cloak <?php } ?> >
                         <?php echo $term; ?>
                     </span>
                 <?php } ?>

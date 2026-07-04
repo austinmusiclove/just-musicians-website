@@ -1,51 +1,27 @@
 Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
-    Fix mu plugins depending on each other; move code to includes instead
-    Find all instances of clean_str_for_doublequotes and make sure not to send null (fixed in single-event.php)
 
-Questions
-    Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
-        Not on free version.
-        Create them as recurring events with a name, location, description and dates. You can edit them on the my events page in recurring events tab
-        Editing a recurring event will update all existing at once
-        You can also see individual events for the recurring event in my events and can edit them as normal and those edits will only apply to one date.
-        A recurring event cannot have two instances on the same day
-        You can add dates to recurring event and it will automatically create individual events for each date
-    Should you set show dates in application or allow musicians to just provide availability info for all dates?
-        Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
-        Paid version: application has existing events and applicants get notified to fill out availability when new events are added
-    Should availability be an advanced feature or just collecting quotes and draw or all free?
-        Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
-    When should messages be initiated?
-        Only when buyer initiates; proposal and offer can contain messages and should be enough until buyer wants to open conversation
-    How should Proposals and Offers appear in messages
-        Leave them out of messages for now but it could be nice in the future to add them
-    Can the flow work with Proposal but not Offer?
-        Yes that should be enough if buyers can see all messages for an event just like current inquiry convo groups; from there they can see event details and send offers
-    What happens when Offer or Proposal is accepted?
-        Show event as booked in My Gigs page for musicians
-        Need to ask buyer if event should change to booked
-        Need email confirmations on both sides
-        Send out calendar invites for event (somehow allow the buyer to set the description details with info about parking and everything else)
-        Allows musician to send message to buyer
-        After event has passed, both parties get notified to review
-    Should conversations be per event?
-        No; no offer and proposal special message types
-        Group conversations by event using query var, but there is only one unique convo for a unique group of convo participants
-    Should there be conversations grouped by event?
-        Yes and there should be a way to filter conversations by event on main messages page
-    Can buyer send message to any listing?
-        Only applicants, or those with Proposals that have been replied to
-        Maybe as paid feature
-    Should you lose ability to access or send messages if you don't meet conditions?
-        Buyers can always message an applicant listing or proposal listing
-        Listings can always message a buyer who booked them for an upcoming event or responded to their proposal
-        Listings can only message if they have an open conversation started by the buyer
-        Once conversation is open between a buyer and listing, it is open
-        Buyers can silence conversation to avoid getting too many unwanted messages from listing
-    When should users be prompted to review?
-        A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
-
+Testing for Applications product rollout
+    Regression Testing
+        Use Playwright for regression test suite
+        Run locally or staging, not prod (except maybe a subset that is safe to run on prod without disruption or emails to users)
+        Create starting data state for DB and uploads folder
+        Clean up data with Playwright after each test or group of tests
+        After running full test suite reset db and uploads to that state (should not be needed if Playwright clean up works properly)
+        Try to make tests as atomic as possible
+        Playwright has multi devices built in
+    Start testing with user registration, listings, and applications (large media upload)
+    Pen Testing
+    Code clean up
+        Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
+        Go through html apis and stop echoing out html
+    Major refactors
+        Fix mu plugins depending on each other; move code to includes instead
+Applications UX
+    UX audit
+    Get devon to fix design
+    Applications page
+        Explain what applications are a bit on empty state
 Applications Advanced
     Applications page
         Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
@@ -78,8 +54,6 @@ Applications Advanced
         Checkout process from Stripe
         Upsell locations in the current workflow
         Testing
-Applications page
-    Explain what applications are a bit on empty state
 Create application form
     Allow including a location if venue not included
     Allow associating venue
@@ -114,6 +88,7 @@ My Gigs page (for musicians)
     Add calendar view
     Allow musicians to update availability for all events on the same day at once
     Don't send new response update notification if the prop was updated but not changed
+    Allow recommending another band when you decline a gig
 Event Form page
     Allow venue location
     Sucesss takes you to single event which has a tab for event details and editing
@@ -241,6 +216,7 @@ Listing form
     limit access until you verify email
     **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
     **accept pdf for stage plots
+    allow attaching stage plot to a gig
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
@@ -252,6 +228,7 @@ Listing page
     see more venues played
     artist pages that will get you listed on google as a musician by using schema
     allow artists to feature releases of their choice
+    add set lists with set length and repertoire
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
@@ -270,7 +247,7 @@ Testing
     *set up testing with playwright with multiple browsers
     test apostrophes everywhere
     test when nonce expires and api does not return data
-    need to add proper status codes on html api errors like i have in compensation reports html api
+    need to add proper status codes on html api errors like i have in compensation reports html api (does this work or does htmx reject response and not swap and not show the toast)
     create screen state/action tree
         each screen has multiple states which are nodes
         each state has actions which are edges
@@ -349,3 +326,46 @@ Document
         need to do settings -> permalinks save to get apis to work
         wp config constants
     you can't have a post with a field named the same as a post type; it causes 404
+
+UX Questions
+    Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
+        Not on free version.
+        Create them as recurring events with a name, location, description and dates. You can edit them on the my events page in recurring events tab
+        Editing a recurring event will update all existing at once
+        You can also see individual events for the recurring event in my events and can edit them as normal and those edits will only apply to one date.
+        A recurring event cannot have two instances on the same day
+        You can add dates to recurring event and it will automatically create individual events for each date
+    Should you set show dates in application or allow musicians to just provide availability info for all dates?
+        Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
+        Paid version: application has existing events and applicants get notified to fill out availability when new events are added
+    Should availability be an advanced feature or just collecting quotes and draw or all free?
+        Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
+    When should messages be initiated?
+        Only when buyer initiates; proposal and offer can contain messages and should be enough until buyer wants to open conversation
+    How should Proposals and Offers appear in messages
+        Leave them out of messages for now but it could be nice in the future to add them
+    Can the flow work with Proposal but not Offer?
+        Yes that should be enough if buyers can see all messages for an event just like current inquiry convo groups; from there they can see event details and send offers
+    What happens when Offer or Proposal is accepted?
+        Show event as booked in My Gigs page for musicians
+        Need to ask buyer if event should change to booked
+        Need email confirmations on both sides
+        Send out calendar invites for event (somehow allow the buyer to set the description details with info about parking and everything else)
+        Allows musician to send message to buyer
+        After event has passed, both parties get notified to review
+    Should conversations be per event?
+        No; no offer and proposal special message types
+        Group conversations by event using query var, but there is only one unique convo for a unique group of convo participants
+    Should there be conversations grouped by event?
+        Yes and there should be a way to filter conversations by event on main messages page
+    Can buyer send message to any listing?
+        Only applicants, or those with Proposals that have been replied to
+        Maybe as paid feature
+    Should you lose ability to access or send messages if you don't meet conditions?
+        Buyers can always message an applicant listing or proposal listing
+        Listings can always message a buyer who booked them for an upcoming event or responded to their proposal
+        Listings can only message if they have an open conversation started by the buyer
+        Once conversation is open between a buyer and listing, it is open
+        Buyers can silence conversation to avoid getting too many unwanted messages from listing
+    When should users be prompted to review?
+        A day after an event ends it should send an email to invite to review and in event list/calendar it should have a button to review past events if they had an accepted offer
