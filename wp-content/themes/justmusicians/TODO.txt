@@ -1,33 +1,74 @@
 Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
-    Register user tests
-        Can we test register/sign in with google
+    Set up clean test data set
+        jot down login creds for admin and non admin user for prod and local
+            local admin admin
+            local admin@austinmusiclove.com pass
+            hmtest admin admin
+            prod contactlesshost@gmail.com u52j3Uuq#R
+            prod themeadowcrest@gmail.com wf5DHL8nVf
+        set up on clean env
+            update origin master to include tests
+            spin up new test env with theme
+            log in and make sure it works
+            wp db update and import uploads and update wp-config
+            check that it works
+            log in with admin and other users
+            run test suite on it
+        set up on local env
+            back up db file and uploads and wp-config
+            wp db update and import uploads and update wp-config
+            log in as admin and other users
+            check the site works
+            run test suite
+            try to flip it back and fourth again
+        figure out how to have isolation when doing updates on the same user or post; maybe just use a different post for each test
+            use the same asset only within the same file; different files work in parallel
+        document
+            reset data procedure
+                import uploads files
+                wp db import old-site-db.sql
+                wp search-replace 'https://olddomain.com' 'https://newdomain.com' --all-tables
+                wp rewrite flush
+                wp cache flush
+                make sure to update custom wp-config file define vars
+            update reset data procedure
+                wp db export hm-prod-db-2026-07-09.sql
+                scp master_nyxccywghm@137.184.230.228:applications/jacbbjzuzx/public_html/hm-prod-db-2026-07-09.sql .
+                rm hm-prod-db-2026-07-09.sql
+    Test code patterns
+        create logged in page fixture (examine fixture scope; maybe use worker scope)
+        abstract away locators in to page classes as fixtures
+        test fixture to make sure no unwanted console logs get through
+        text fixture to find all broken images on a page
+        make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
+        skip loading images or google urls to make tests run faster
+        set up test env in docker
+        Use "accessibility" locators over test id when possible
+    Config
+        maybe use global action timeouts instead of on each action; find out if those overwrite the config
+        maybe set specific viewport size for different "projects" in the config if possible
+        maybe set location for projects; might need to use proxy
+        ask ai why it used spread operator for mobile projects and not all
+            look at the default args for all devices that exist in playwright devices
+        Maybe include a no js project; maybe only to test a UI component that tells the user that js is required and to turn it on
     Min tests
-        Log in
+        register user with existing account (registered with gmail) not giving any feedback and not working
+        *requires existing data
+        *lid tmp code user registration with listing and other scenario (aid?)
+        *Log in
         Create listing
-        Listing large media upload
-        Update listing (need existing data state)
+        Listing large media upload (skip)
+        *Update listing
         Create Application
-        Update Application
-        Delete Appication
-        Submit Appication
-        Update Appication Submission
-    Regression Testing
-        Use Playwright for regression test suite
-        Run locally or staging, not prod (except maybe a subset that is safe to run on prod without disruption or emails to users)
-        Create starting data state for DB and uploads folder
-        Clean up data with Playwright after each test or group of tests
-        After running full test suite reset db and uploads to that state (should not be needed if Playwright clean up works properly)
-        Try to make tests as atomic as possible
-        Playwright has multi devices built in
-        Tests should all be able to run in parallel
-    Pen Testing
-    Code clean up
-        Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
-        Go through html apis and stop echoing out html
-    Major refactors
-        Fix mu plugins depending on each other; move code to includes instead
+        *Update Application
+        *Delete Appication
+        *Submit Appication
+        *Update Appication Submission
+        *Applications access
+            you can only see your own applications
+            you can only see your own applicaiton submissions
 Applications UX
     UX audit
     Get devon to fix design
@@ -254,14 +295,23 @@ Data
     content moderation for images
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
+    start using s3 for media storage
 Testing
     test apostrophes everywhere
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api (does this work or does htmx reject response and not swap and not show the toast)
+    Pen Testing
+Code consistency and cleanliness
+    auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
+    i use echo throughout php templates and i think it is unnecessary
+    i use echo and escaped strings to output html in html apis and it is not necessary
+    use linter
+    Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
+    Go through html apis and stop echoing out html
+    Fix mu plugins depending on each other; move code to includes instead
 UX
     *pop up on top right that prompts you to log in with google as soon as you open the site
     *show search rank in their area and how to improve it
-    *add spinner to active search in header search bar and mobile header search bar
     corrected new logos
     add animation when add to collection/fav
     add animation when add to inquiry
@@ -293,10 +343,6 @@ Performance
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
     image sprites
-Code consistency
-    auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
-    i use echo throughout php templates and i think it is unnecessary
-    i use echo and escaped strings to output html in html apis and it is not necessary
 Emails
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 Bugs
