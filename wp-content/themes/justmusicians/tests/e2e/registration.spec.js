@@ -1,6 +1,5 @@
-import { test } from '@playwright/test';
 import { execSync } from 'child_process';
-import { ThemePage } from '../pages/ThemePage.js';
+import { test } from '../fixtures/fixtures.js';
 
 let testEmail;
 
@@ -15,8 +14,7 @@ test.describe('User Registration', () => {
         }
     });
 
-    test('register user from header sign up button on home page', async ({ page }) => {
-        const themePage = new ThemePage(page);
+    test('register user from header sign up button on home page', async ({ themePage }) => {
         await themePage.navigate('/');
         const user = await themePage.registerUser();
         testEmail = user.email;

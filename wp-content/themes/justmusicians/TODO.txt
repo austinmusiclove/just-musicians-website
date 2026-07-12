@@ -5,9 +5,8 @@ Critical bugs
 Testing for Applications product rollout
     Test code patterns
         use POM
-            clean up users after all tests
             use locator vars for form ids
-            make POM into fixture
+            clean up users after all tests
         make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
             need to close pages if you open a new tab
         create logged in page fixture (examine fixture scope; maybe use worker scope)
