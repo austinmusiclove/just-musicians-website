@@ -6,9 +6,9 @@ let testEmail;
 
 async function openSignupModal(page) {
     const btn = page.getByTestId('header-signup-btn');
-    await expect(btn).toBeVisible({ timeout: 5000 });
+    await expect(btn).toBeVisible();
     await btn.click();
-    await expect(page.getByTestId('signup-modal-heading')).toBeVisible({ timeout: 5000 });
+    await expect(page.getByTestId('signup-modal-heading')).toBeVisible();
 }
 
 test.describe('User Registration', () => {
@@ -35,13 +35,13 @@ test.describe('User Registration', () => {
         await page.locator('#r_rememberme').check();
 
         await Promise.all([
-            page.waitForURL('**/*', { timeout: 15000 }),
+            page.waitForURL('**/*'),
             page.getByTestId('signup-submit-btn').click(),
         ]);
 
         await page.waitForLoadState('load');
-        await expect(page.getByTestId('header-signup-btn')).not.toBeVisible({ timeout: 5000 });
-        await expect(page.getByTestId('header-login-btn')).not.toBeVisible({ timeout: 5000 });
+        await expect(page.getByTestId('header-signup-btn')).not.toBeVisible();
+        await expect(page.getByTestId('header-login-btn')).not.toBeVisible();
     });
 
     test.skip('new user is redirected to the same url that they were at when they registered successfully with query params', async ({ page }) => {});

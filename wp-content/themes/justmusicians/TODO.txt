@@ -1,60 +1,27 @@
 Critical bugs
+    Register user on a user that is registered with google does not give any feedback on prod; should say user already registered
+    Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
-    Set up clean test data set
-        jot down login creds for admin and non admin user for prod and local
-            local admin admin
-            local admin@austinmusiclove.com pass
-            hmtest admin admin
-            prod contactlesshost@gmail.com u52j3Uuq#R
-            prod themeadowcrest@gmail.com wf5DHL8nVf
-        set up on clean env
-            update origin master to include tests
-            spin up new test env with theme
-            log in and make sure it works
-            wp db update and import uploads and update wp-config
-            check that it works
-            log in with admin and other users
-            run test suite on it
-        set up on local env
-            back up db file and uploads and wp-config
-            wp db update and import uploads and update wp-config
-            log in as admin and other users
-            check the site works
-            run test suite
-            try to flip it back and fourth again
-        figure out how to have isolation when doing updates on the same user or post; maybe just use a different post for each test
-            use the same asset only within the same file; different files work in parallel
-        document
-            reset data procedure
-                import uploads files
-                wp db import old-site-db.sql
-                wp search-replace 'https://olddomain.com' 'https://newdomain.com' --all-tables
-                wp rewrite flush
-                wp cache flush
-                make sure to update custom wp-config file define vars
-            update reset data procedure
-                wp db export hm-prod-db-2026-07-09.sql
-                scp master_nyxccywghm@137.184.230.228:applications/jacbbjzuzx/public_html/hm-prod-db-2026-07-09.sql .
-                rm hm-prod-db-2026-07-09.sql
     Test code patterns
-        create logged in page fixture (examine fixture scope; maybe use worker scope)
-        abstract away locators in to page classes as fixtures
-        test fixture to make sure no unwanted console logs get through
-        text fixture to find all broken images on a page
+        use POM
+            figure out where to put POM
+                tests/pages
+                make them into fixtures
+            figure out where to put helper functions to create data
+                in tests/data
+            figure out where to put helper functions to register a user or log in or create a listing
+                they go in POM and use data factory if not passed in
+            put all locators in POM
+            Use "accessibility" locators over test id when possible
         make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
-        skip loading images or google urls to make tests run faster
-        set up test env in docker
-        Use "accessibility" locators over test id when possible
-    Config
-        maybe use global action timeouts instead of on each action; find out if those overwrite the config
-        maybe set specific viewport size for different "projects" in the config if possible
-        maybe set location for projects; might need to use proxy
-        ask ai why it used spread operator for mobile projects and not all
-            look at the default args for all devices that exist in playwright devices
-        Maybe include a no js project; maybe only to test a UI component that tells the user that js is required and to turn it on
+            need to close pages if you open a new tab
+        create logged in page fixture (examine fixture scope; maybe use worker scope)
+        save session state to not have to log in for every test (chapter 16)
+        set up assets required for testing in before all and tear down after all including users; need helper functions to do the heavy lifting by using faker js to make data and using front end to make assets
     Min tests
         register user with existing account (registered with gmail) not giving any feedback and not working
+        forgot password workflow
         *requires existing data
         *lid tmp code user registration with listing and other scenario (aid?)
         *Log in
@@ -69,23 +36,38 @@ Testing for Applications product rollout
         *Applications access
             you can only see your own applications
             you can only see your own applicaiton submissions
-Applications UX
-    UX audit
-    Get devon to fix design
-    Applications page
-        Explain what applications are a bit on empty state
+Applications Release
+    Availability for events on applications
+        Notification to applicants when dates added
+        Allow adding/removing events to application
+        Recurring events
+            Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
+    Applications UX
+        UX audit
+        Get devon to fix design
+        Applications page
+            Explain what applications are a bit on empty state
+    Paywall
+        Features page where you can see what you get with the plan
+            Annual and monthly pricing
+            30 day free trial
+            replace link to blog in header with venues link to this page
+            add premium link under buyers in menus
+        Checkout process from Stripe
+            Checkout testing
+            User feature flags int in user data; return val in account settings or return individual flag values (need to still check auth for feature flags in back end since js can be manipulated on front end)
+            Set feature flags when buy
+            Unset feature flags when subscription ends
+        Upsell locations in the current workflow
+            Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
+            Limit users to one application unless admin or premium subscription
+            Show add dates option in set up form but show an upsell message when you try to use it
 Applications Advanced
-    Applications page
-        Add button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
     Application form screen
         Show events with option to fill availability and other proposal fields (if advanced application)
         Inform applicant that they can come back to this application to update it any time
         Have multiple band mates fill out the availability (listing advanced feature)
     Single Application Application set up tab
-        Show events and allow excluding from application
-        Prompt to add events to get availability (advanced)
-        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
-        Show add dates option in set up form but show an upsell message when you try to use it
         Invite listings to apply (advanced)
         Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
@@ -95,17 +77,6 @@ Applications Advanced
     Single Application Applicant review tab
         Show dates available for your events
         Filter by answers to custom questions (advanced)
-    Create Application Form
-        Limit users to one application unless admin or premium subscription
-    Notifications
-        Notify all applicants when there is a new event to udpate availability for on application
-    Money
-        Features page where you can see what you get with the plan
-        Annual and monthly pricing
-        90 day free trial
-        Checkout process from Stripe
-        Upsell locations in the current workflow
-        Testing
 Create application form
     Allow including a location if venue not included
     Allow associating venue
@@ -301,6 +272,12 @@ Testing
     test when nonce expires and api does not return data
     need to add proper status codes on html api errors like i have in compensation reports html api (does this work or does htmx reject response and not swap and not show the toast)
     Pen Testing
+    test concurrency; test registering multiple users at the same time and other operations
+    text fixture to find all broken images on a page (Automated Testing with Playwright 99)
+    test fixture to make sure no unwanted console logs get through (Automated Testing with Playwright 103)
+    include a no js playwright project; maybe only to test a UI component that tells the user that js is required and to turn it on
+    set location for a project that is only for location based tests; might need to use proxy
+    set specific viewport size for different "projects" in the config to make sure i am testing all the sizes necessary; for now defaults are ok
 Code consistency and cleanliness
     auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
     i use echo throughout php templates and i think it is unnecessary
