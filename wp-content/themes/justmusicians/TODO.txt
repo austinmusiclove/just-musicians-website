@@ -5,15 +5,9 @@ Critical bugs
 Testing for Applications product rollout
     Test code patterns
         use POM
-            figure out where to put POM
-                tests/pages
-                make them into fixtures
-            figure out where to put helper functions to create data
-                in tests/data
-            figure out where to put helper functions to register a user or log in or create a listing
-                they go in POM and use data factory if not passed in
-            put all locators in POM
-            Use "accessibility" locators over test id when possible
+            clean up users after all tests
+            use locator vars for form ids
+            make POM into fixture
         make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
             need to close pages if you open a new tab
         create logged in page fixture (examine fixture scope; maybe use worker scope)

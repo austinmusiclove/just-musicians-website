@@ -1,15 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { execSync } from 'child_process';
-import { createUser } from '../data/user_factory.js';
+import { ThemePage } from '../pages/ThemePage.js';
 
 let testEmail;
-
-async function openSignupModal(page) {
-    const btn = page.getByTestId('header-signup-btn');
-    await expect(btn).toBeVisible();
-    await btn.click();
-    await expect(page.getByTestId('signup-modal-heading')).toBeVisible();
-}
 
 test.describe('User Registration', () => {
 
@@ -22,27 +15,12 @@ test.describe('User Registration', () => {
         }
     });
 
-    test('register user from header sign up button', async ({ page }) => {
-        const user = createUser();
+    test('register user from header sign up button on home page', async ({ page }) => {
+        const themePage = new ThemePage(page);
+        await themePage.navigate('/');
+        const user = await themePage.registerUser();
         testEmail = user.email;
-
-        await page.goto('/');
-        await openSignupModal(page);
-
-        await page.fill('#first_name', user.firstName);
-        await page.fill('#last_name', user.lastName);
-        await page.fill('#email', user.email);
-        await page.fill('#password', user.password);
-        await page.locator('#r_rememberme').check();
-
-        await Promise.all([
-            page.waitForURL('**/*'),
-            page.getByTestId('signup-submit-btn').click(),
-        ]);
-
-        await page.waitForLoadState('load');
-        await expect(page.getByTestId('header-signup-btn')).not.toBeVisible();
-        await expect(page.getByTestId('header-login-btn')).not.toBeVisible();
+        await themePage.expectLoggedInPage();
     });
 
     test.skip('new user is redirected to the same url that they were at when they registered successfully with query params', async ({ page }) => {});
