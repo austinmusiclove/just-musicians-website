@@ -4,9 +4,7 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
     Test code patterns
-        use POM
-            use locator vars for form ids
-            clean up users after all tests
+        clean up users after all tests
         make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
             need to close pages if you open a new tab
         create logged in page fixture (examine fixture scope; maybe use worker scope)

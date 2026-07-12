@@ -8,6 +8,11 @@ export class ThemePage {
         this.loginBtn           = page.getByTestId('header-login-btn');
         this.signupModalHeading = page.getByTestId('signup-modal-heading');
         this.signupSubmitBtn    = page.getByTestId('signup-submit-btn');
+        this.signupFirstName    = page.getByTestId('signup-first-name');
+        this.signupLastName     = page.getByTestId('signup-last-name');
+        this.signupEmail        = page.getByTestId('signup-email');
+        this.signupPassword     = page.getByTestId('signup-password');
+        this.signupRememberMe   = page.getByTestId('signup-remember-me');
     }
 
     async navigate(url = '/') {
@@ -21,11 +26,11 @@ export class ThemePage {
     }
 
     async fillSignupForm(user) {
-        await this.page.fill('#first_name', user.firstName);
-        await this.page.fill('#last_name', user.lastName);
-        await this.page.fill('#email', user.email);
-        await this.page.fill('#password', user.password);
-        await this.page.locator('#r_rememberme').check();
+        await this.signupFirstName.fill(user.firstName);
+        await this.signupLastName.fill(user.lastName);
+        await this.signupEmail.fill(user.email);
+        await this.signupPassword.fill(user.password);
+        await this.signupRememberMe.check();
     }
 
     async submitSignup() {

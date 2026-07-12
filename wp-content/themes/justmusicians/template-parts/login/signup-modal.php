@@ -28,26 +28,38 @@
                             <div>
                                 <label for="first_name" class="block text-sm font-medium leading-6">First Name</label>
                                 <div class="mt-2">
-                                    <input id="first_name" name="r_user_first_name" type="text" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                    <input id="first_name" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                                        name="r_user_first_name" type="text" required
+                                        data-testid="signup-first-name"
+                                    >
                                 </div>
                             </div>
                             <div>
                                 <label for="last_name" class="block text-sm font-medium leading-6">Last Name</label>
                                 <div class="mt-2">
-                                    <input id="last_name" name="r_user_last_name" type="text" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                    <input id="last_name" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                                        name="r_user_last_name" type="text" required
+                                        data-testid="signup-last-name"
+                                    >
                                 </div>
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6">Email Address</label>
                             <div class="mt-2">
-                                <input id="email" name="r_user_email" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                <input id="email" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                                    name="r_user_email" type="email" autocomplete="email" required
+                                    data-testid="signup-email"
+                                >
                             </div>
                         </div>
                         <div>
                             <label for="password" class="block text-sm font-medium leading-6">Password</label>
                             <div class="mt-2">
-                                <input id="password" name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+                                <input id="password" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                                    name="r_user_pass" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required
+                                    data-testid="signup-password"
+                                >
                                 <span class="float-right right-[12px] mt-[-29px] relative">
                                     <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
                                     <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
@@ -56,7 +68,7 @@
                         </div>
                         <div class="flex items-center justify-between pb-6">
                             <div class="flex items-center">
-                                <input id="r_rememberme" name="r_rememberme" type="checkbox" class="h-4 w-4 rounded">
+                                <input id="r_rememberme" name="r_rememberme" type="checkbox" data-testid="signup-remember-me" class="h-4 w-4 rounded">
                                 <label for="r_rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                             </div>
                         </div>
