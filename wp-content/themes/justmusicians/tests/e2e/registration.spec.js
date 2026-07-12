@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { execSync } from 'child_process';
+import { createUser } from '../data/user_factory.js';
 
-const ts = Date.now();
 let testEmail;
 
 async function openSignupModal(page) {
@@ -23,15 +23,16 @@ test.describe('User Registration', () => {
     });
 
     test('register user from header sign up button', async ({ page }) => {
-        testEmail = `e2e-success-${ts}@test.justmusicians.com`;
+        const user = createUser();
+        testEmail = user.email;
 
         await page.goto('/');
         await openSignupModal(page);
 
-        await page.fill('#first_name', 'E2ETest');
-        await page.fill('#last_name', 'User');
-        await page.fill('#email', testEmail);
-        await page.fill('#password', 'TestPassword123!');
+        await page.fill('#first_name', user.firstName);
+        await page.fill('#last_name', user.lastName);
+        await page.fill('#email', user.email);
+        await page.fill('#password', user.password);
         await page.locator('#r_rememberme').check();
 
         await Promise.all([
