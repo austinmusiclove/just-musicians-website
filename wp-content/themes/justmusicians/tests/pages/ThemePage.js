@@ -41,7 +41,7 @@ export class ThemePage {
         await this.page.waitForLoadState('load');
     }
 
-    async registerUser(user) {
+    async registerUserSignupModal(user) {
         const userData = user || createUser();
         const originalUrl = this.page.url();
         await this.openSignupModal();

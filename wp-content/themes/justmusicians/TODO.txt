@@ -3,30 +3,22 @@ Critical bugs
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
-    Test code patterns
-        clean up users after all tests
-        make sure to close pages and contexts when necessary; i think if you use the standard fixtures you don't have to but need to check
-            need to close pages if you open a new tab
-        create logged in page fixture (examine fixture scope; maybe use worker scope)
-        save session state to not have to log in for every test (chapter 16)
-        set up assets required for testing in before all and tear down after all including users; need helper functions to do the heavy lifting by using faker js to make data and using front end to make assets
     Min tests
-        register user with existing account (registered with gmail) not giving any feedback and not working
-        forgot password workflow
-        *requires existing data
-        *lid tmp code user registration with listing and other scenario (aid?)
-        *Log in
+        Log in
         Create listing
         Listing large media upload (skip)
-        *Update listing
+        Update listing
         Create Application
-        *Update Application
-        *Delete Appication
-        *Submit Appication
-        *Update Appication Submission
-        *Applications access
+        Update Application
+        Delete Appication
+        Submit Appication
+        Update Appication Submission
+        Applications access
             you can only see your own applications
             you can only see your own applicaiton submissions
+        register user with existing account (registered with gmail) not giving any feedback and not working
+        forgot password workflow
+        lid tmp code user registration with listing and other scenario (aid?)
 Applications Release
     Availability for events on applications
         Notification to applicants when dates added
@@ -269,6 +261,8 @@ Testing
     include a no js playwright project; maybe only to test a UI component that tells the user that js is required and to turn it on
     set location for a project that is only for location based tests; might need to use proxy
     set specific viewport size for different "projects" in the config to make sure i am testing all the sizes necessary; for now defaults are ok
+    figure out logged in page fixture so that we don't have to reg user and log in every time(examine fixture scope; maybe use worker scope)
+        save session state to not have to log in for every test (Automated Testing with Playwright chapter 16)
 Code consistency and cleanliness
     auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
     i use echo throughout php templates and i think it is unnecessary
