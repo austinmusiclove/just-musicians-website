@@ -29,7 +29,7 @@ export class ThemePage {
         await this.page.goto(url);
     }
 
-    async waitOnRedirectAfterClick(button) {
+    async clickAndWaitForRedirect(button) {
         await Promise.all([
             this.page.waitForURL('**/*'),
             button.click(),
@@ -68,7 +68,7 @@ export class ThemePage {
         const originalUrl = this.page.url();
         await this.openSignupModal();
         await this.fillSignupForm(userData);
-        await this.waitOnRedirectAfterClick(this.signupSubmitBtn);
+        await this.clickAndWaitForRedirect(this.signupSubmitBtn);
         await expect(this.page).toHaveURL(originalUrl);
         return userData;
     }
@@ -76,17 +76,17 @@ export class ThemePage {
     async login(username, password) {
         await this.openLoginModal();
         await this.fillLoginForm(username, password);
-        await this.waitOnRedirectAfterClick(this.loginSubmitBtn);
+        await this.clickAndWaitForRedirect(this.loginSubmitBtn);
     }
 
     async logout() {
         if (this.isMobile) {
             await this.hamburgerBtn.click();
             await expect(this.logoutLinkMobile).toBeVisible();
-            await this.waitOnRedirectAfterClick(this.logoutLinkMobile);
+            await this.clickAndWaitForRedirect(this.logoutLinkMobile);
         } else {
             await this.accountMenu.hover();
-            await this.waitOnRedirectAfterClick(this.logoutLinkDesktop);
+            await this.clickAndWaitForRedirect(this.logoutLinkDesktop);
         }
     }
 

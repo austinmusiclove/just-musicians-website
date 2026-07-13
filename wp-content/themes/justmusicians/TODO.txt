@@ -3,21 +3,34 @@ Critical bugs
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
-    Min tests
+    Applications tests
+        Applications page
+            Setup
+                create application for user
+                create user with no applications
+            User's Application displays on the applications page
+            Test edit button
+            Test review button
+        Single Application page
+            Update Application
+            Delete Appication
+        Create Application page
+            Create Application
+        Submit Appication page
+            Submit Appication
+        Submitted Appications page
+            Update Appication Submission
+        Applications access
+            you can only see your own applications
+            you can only see your own applicaiton submissions
+    Listings tests
         Create most basic listing
         Create complete listing
         Update basic listing (add the rest of the fields)
         Update complete listing
         Create Listing large media upload (skip)
         Update Listing large media upload (skip)
-        Create Application
-        Update Application
-        Delete Appication
-        Submit Appication
-        Update Appication Submission
-        Applications access
-            you can only see your own applications
-            you can only see your own applicaiton submissions
+    Users tests
         register user with existing account (registered with gmail) not giving any feedback and not working
         forgot password workflow
         lid tmp code user registration with listing and other scenario (aid?)
