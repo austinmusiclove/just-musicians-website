@@ -5,9 +5,6 @@ Critical bugs
 Testing for Applications product rollout
     Applications tests
         Applications page
-            Setup
-                create application for user
-                create user with no applications
             User's Application displays on the applications page
             Test edit button
             Test review button

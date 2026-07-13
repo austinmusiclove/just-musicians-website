@@ -1,18 +1,9 @@
-import { execSync } from 'child_process';
 import { test } from '../fixtures/fixtures.js';
+import { wpCliDeleteUsers } from '../data/wp_cli.js';
 
 test.describe('User Registration', () => {
 
     const userEmailsToDelete = [];
-
-    test.afterAll(async () => {
-        if (userEmailsToDelete.length) {
-            execSync(
-                `wp user delete ${userEmailsToDelete.join(' ')} --yes --path=/Users/johnfilippone/Local\\ Sites/just-musicians/app/public`,
-                { stdio: 'ignore' }
-            );
-        }
-    });
 
     test('register user from header sign up button on home page', async ({ themePage }) => {
         await themePage.navigate('/');
@@ -31,5 +22,9 @@ test.describe('User Registration', () => {
     test.skip('new user is redirected to the same url that they were at when they registered successfully with query params', async ({ page }) => {});
     test.skip('account activation email is sent to new user after registration', async ({ page }) => {}); // Maybe best for a PHP test
     test.skip('sign up with google', async ({ page }) => {}); // Mock the google part
+
+    test.afterAll(async () => {
+        wpCliDeleteUsers(userEmailsToDelete);
+    });
 
 });

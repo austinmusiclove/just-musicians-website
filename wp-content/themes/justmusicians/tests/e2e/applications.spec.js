@@ -1,29 +1,15 @@
-import { execSync } from 'child_process';
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/fixtures.js';
 import { createUser } from '../data/user_factory.js';
+import { createApplication } from '../data/application_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliCreatePost, wpCliDeletePost } from '../data/wp_cli.js';
 
 
 test.describe('Applications', () => {
 
     let noApplicationsUser;
-
-    test.beforeAll(async () => {
-        noApplicationsUser = createUser();
-        execSync(
-            `wp user create "${noApplicationsUser.email}" "${noApplicationsUser.email}" --role=subscriber --user_pass="${noApplicationsUser.password}" --first_name="${noApplicationsUser.firstName}" --last_name="${noApplicationsUser.lastName}" --path=/Users/johnfilippone/Local\\ Sites/just-musicians/app/public`,
-            { stdio: 'ignore' }
-        );
-    });
-
-    test.afterAll(async () => {
-        if (noApplicationsUser) {
-            execSync(
-                `wp user delete ${noApplicationsUser.email} --yes --path=/Users/johnfilippone/Local\\ Sites/just-musicians/app/public`,
-                { stdio: 'ignore' }
-            );
-        }
-    });
+    let applicationAuthorUser;
+    let applicationId;
 
     test('logged out user sees the login modal', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/applications/');
@@ -51,6 +37,38 @@ test.describe('Applications', () => {
         await applicationsPage.navigate('/applications/');
         await applicationsPage.addBtn.click();
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
+    });
+
+    test.beforeAll(async () => {
+        noApplicationsUser = createUser();
+        wpCliCreateUser(noApplicationsUser);
+
+        applicationAuthorUser = createUser();
+        wpCliCreateUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
+
+        const application = createApplication();
+        applicationId = wpCliCreatePost({
+            postType: 'application',
+            title: application.title,
+            authorId: applicationAuthorUserId,
+            meta: {
+                title: application.title,
+                description: application.description,
+            },
+        });
+    });
+
+    test.afterAll(async () => {
+        if (applicationId) {
+            wpCliDeletePost(applicationId);
+        }
+        if (applicationAuthorUser) {
+            wpCliDeleteUser(applicationAuthorUser.email);
+        }
+        if (noApplicationsUser) {
+            wpCliDeleteUser(noApplicationsUser.email);
+        }
     });
 
 });
