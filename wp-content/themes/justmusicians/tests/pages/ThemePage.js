@@ -13,6 +13,11 @@ export class ThemePage {
         this.signupEmail        = page.getByTestId('signup-email');
         this.signupPassword     = page.getByTestId('signup-password');
         this.signupRememberMe   = page.getByTestId('signup-remember-me');
+        this.loginModalHeading  = page.getByTestId('login-modal-heading');
+        this.loginEmail         = page.getByTestId('login-email');
+        this.loginPassword      = page.getByTestId('login-password');
+        this.loginRememberMe    = page.getByTestId('login-remember-me');
+        this.loginSubmitBtn     = page.getByTestId('login-submit-btn');
     }
 
     async navigate(url = '/') {
@@ -49,6 +54,26 @@ export class ThemePage {
         await this.submitSignup();
         await expect(this.page).toHaveURL(originalUrl);
         return userData;
+    }
+
+    async openLoginModal() {
+        await expect(this.loginBtn).toBeVisible();
+        await this.loginBtn.click();
+        await expect(this.loginModalHeading).toBeVisible();
+    }
+
+    async fillLoginForm(email, password) {
+        await this.loginEmail.fill(email);
+        await this.loginPassword.fill(password);
+        await this.loginRememberMe.check();
+    }
+
+    async submitLogin() {
+        await Promise.all([
+            this.page.waitForURL('**/*'),
+            this.loginSubmitBtn.click(),
+        ]);
+        await this.page.waitForLoadState('load');
     }
 
     async expectLoggedInPage() {

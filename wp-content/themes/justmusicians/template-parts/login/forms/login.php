@@ -2,7 +2,7 @@
 
     <div class="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md text-center">
         <!--<img class="mx-auto h-20 w-20 mb-4" src="<?php echo get_site_icon_url(); ?>" alt="Site Icon">-->
-        <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight" x-text="loginModalMessage">Sign in to your account</h2>
+        <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 leading-tight" data-testid="login-modal-heading" x-text="loginModalMessage">Sign in to your account</h2>
     </div>
     <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div class="bg-white px-6 pb-4 sm:px-12">
@@ -13,13 +13,19 @@
                 <div>
                     <label for="log" class="block text-sm font-medium leading-6">Email Address</label>
                     <div class="mt-2">
-                        <input id="user_login" name="log" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                        <input id="user_login" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                            name="log" type="email" autocomplete="email" required
+                            data-testid="login-email"
+                        >
                     </div>
                 </div>
                 <div>
                     <label for="pwd" class="block text-sm font-medium leading-6">Password</label>
                     <div class="mt-2">
-                        <input id="user_pass" name="pwd" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6">
+                        <input id="user_pass" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                            name="pwd" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required
+                            data-testid="login-password"
+                        >
                         <span class="float-right right-[12px] mt-[-29px] relative">
                             <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
                             <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
@@ -28,15 +34,17 @@
                 </div>
                 <div class="flex items-center justify-between pb-6">
                     <div class="flex items-center">
-                        <input id="rememberme" name="rememberme" type="checkbox" class="h-4 w-4 rounded">
+                        <input id="rememberme" name="rememberme" type="checkbox" data-testid="login-remember-me" class="h-4 w-4 rounded">
                         <label for="rememberme" class="ml-2 block text-sm leading-6">Remember Me</label>
                     </div>
                     <div class="text-sm leading-6"><button type="button" x-on:click="showPasswordResetModal = true; showLoginModal = false; loginModalMessage = 'Sign in to your account'" class="underline opacity-50 hover:opacity-100">Forgot password?</button></div>
                 </div>
                 <div>
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4">Sign in</button>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4"
+                        data-testid="login-submit-btn"
+                    >Sign in</button>
                 </div>
-                <div id="login-result" class="flex items-center text-14 justify-between"></div>
+                <div id="login-result" class="flex items-center text-14 justify-between" data-testid="login-result"></div>
             </form>
             <div>
                 <div class="relative mt-4">
