@@ -24,20 +24,12 @@ test.describe('User Login', () => {
         }
     });
 
-    test('log in with valid credentials from header on home page', async ({ themePage }) => {
-        await themePage.navigate('/');
-        await themePage.openLoginModal();
-        await themePage.fillLoginForm(testUser.email, testUser.password);
-        await themePage.submitLogin();
-        await themePage.expectLoggedInPage();
-    });
-
     test('log in with valid credentials from header on home page and log out', async ({ themePage }) => {
         await themePage.navigate('/');
-        await themePage.openLoginModal();
-        await themePage.fillLoginForm(testUser.email, testUser.password);
-        await themePage.submitLogin();
+        await themePage.login(testUser.email, testUser.password);
         await themePage.expectLoggedInPage();
+        await themePage.logout();
+        await themePage.expectLoggedOutPage();
     });
 
 });

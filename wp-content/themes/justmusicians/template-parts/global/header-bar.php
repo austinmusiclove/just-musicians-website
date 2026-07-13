@@ -12,7 +12,11 @@
 
         <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center">
-                <div class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative" x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;" x-bind:class="{ 'active': showMobileMenu }" >
+                <div class="hamburger block lg:hidden h-8 w-8 cursor-pointer relative"
+                    x-bind:class="{ 'active': showMobileMenu }"
+                    x-on:click="showMobileMenu = ! showMobileMenu; showMobileFilters = false;"
+                    data-testid="header-hamburger-btn"
+                >
                     <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 -translate-y-2.5 transform transition duration-500 ease-in-out"></div>
                     <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 transform transition duration-500 ease-in-out"></div>
                     <div aria-hidden="true" class="w-8 h-1 bg-black block absolute top-1/2 translate-y-2.5 transform transition duration-500 ease-in-out"></div>

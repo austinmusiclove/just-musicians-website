@@ -68,7 +68,7 @@
         </a>
 
         <hr class="my-2 border-black/10" />
-        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo wp_logout_url('/'); ?>">
+        <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50" href="<?php echo wp_logout_url('/'); ?>" data-testid="desktop-logout-link">
             <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
             Log Out
         </a>

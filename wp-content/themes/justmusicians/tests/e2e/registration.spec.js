@@ -21,7 +21,7 @@ test.describe('User Registration', () => {
         await themePage.expectLoggedInPage();
     });
 
-    test('register user from header sign up button on blog page with query args', async ({ themePage }) => {
+    test('register user from non home page url with query args and expect it to redirect to the same url after success', async ({ themePage }) => {
         await themePage.navigate('/blog/?arg=abc');
         const user = await themePage.registerUserSignupModal();
         userEmailsToDelete.push(user.email);

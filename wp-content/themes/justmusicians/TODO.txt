@@ -4,10 +4,12 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
     Min tests
-        Log in
-        Create listing
-        Listing large media upload (skip)
-        Update listing
+        Create most basic listing
+        Create complete listing
+        Update basic listing (add the rest of the fields)
+        Update complete listing
+        Create Listing large media upload (skip)
+        Update Listing large media upload (skip)
         Create Application
         Update Application
         Delete Appication

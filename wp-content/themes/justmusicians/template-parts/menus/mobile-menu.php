@@ -116,7 +116,7 @@
 
     <!-- Log out -->
     <div class="<?php echo $class; ?> mt-8" x-cloak x-show="loggedIn">
-        <a class="font-sun-motter" href="<?php echo wp_logout_url('/'); ?>">Log Out</a>
+        <a class="font-sun-motter" href="<?php echo wp_logout_url('/'); ?>" data-testid="mobile-logout-link">Log Out</a>
     </div>
 
 

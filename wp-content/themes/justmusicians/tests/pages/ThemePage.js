@@ -2,8 +2,9 @@ import { expect } from '@playwright/test';
 import { createUser } from '../data/user_factory.js';
 
 export class ThemePage {
-    constructor(page) {
+    constructor(page, isMobile = false) {
         this.page = page;
+        this.isMobile = isMobile;
         this.signupBtn          = page.getByTestId('header-signup-btn');
         this.loginBtn           = page.getByTestId('header-login-btn');
         this.signupModalHeading = page.getByTestId('signup-modal-heading');
@@ -18,42 +19,28 @@ export class ThemePage {
         this.loginPassword      = page.getByTestId('login-password');
         this.loginRememberMe    = page.getByTestId('login-remember-me');
         this.loginSubmitBtn     = page.getByTestId('login-submit-btn');
+        this.logoutLinkDesktop  = page.getByTestId('desktop-logout-link');
+        this.logoutLinkMobile   = page.getByTestId('mobile-logout-link');
+        this.hamburgerBtn       = page.getByTestId('header-hamburger-btn');
+        this.accountMenu        = page.getByTestId('header-account-menu');
     }
 
     async navigate(url = '/') {
         await this.page.goto(url);
     }
 
-    async openSignupModal() {
-        await expect(this.signupBtn).toBeVisible();
-        await this.signupBtn.click();
-        await expect(this.signupModalHeading).toBeVisible();
-    }
-
-    async fillSignupForm(user) {
-        await this.signupFirstName.fill(user.firstName);
-        await this.signupLastName.fill(user.lastName);
-        await this.signupEmail.fill(user.email);
-        await this.signupPassword.fill(user.password);
-        await this.signupRememberMe.check();
-    }
-
-    async submitSignup() {
+    async waitOnRedirectAfterClick(button) {
         await Promise.all([
             this.page.waitForURL('**/*'),
-            this.signupSubmitBtn.click(),
+            button.click(),
         ]);
         await this.page.waitForLoadState('load');
     }
 
-    async registerUserSignupModal(user) {
-        const userData = user || createUser();
-        const originalUrl = this.page.url();
-        await this.openSignupModal();
-        await this.fillSignupForm(userData);
-        await this.submitSignup();
-        await expect(this.page).toHaveURL(originalUrl);
-        return userData;
+    async openSignupModal() {
+        await expect(this.signupBtn).toBeVisible();
+        await this.signupBtn.click();
+        await expect(this.signupModalHeading).toBeVisible();
     }
 
     async openLoginModal() {
@@ -68,16 +55,47 @@ export class ThemePage {
         await this.loginRememberMe.check();
     }
 
-    async submitLogin() {
-        await Promise.all([
-            this.page.waitForURL('**/*'),
-            this.loginSubmitBtn.click(),
-        ]);
-        await this.page.waitForLoadState('load');
+    async fillSignupForm(user) {
+        await this.signupFirstName.fill(user.firstName);
+        await this.signupLastName.fill(user.lastName);
+        await this.signupEmail.fill(user.email);
+        await this.signupPassword.fill(user.password);
+        await this.signupRememberMe.check();
+    }
+
+    async registerUserSignupModal(user) {
+        const userData = user || createUser();
+        const originalUrl = this.page.url();
+        await this.openSignupModal();
+        await this.fillSignupForm(userData);
+        await this.waitOnRedirectAfterClick(this.signupSubmitBtn);
+        await expect(this.page).toHaveURL(originalUrl);
+        return userData;
+    }
+
+    async login(username, password) {
+        await this.openLoginModal();
+        await this.fillLoginForm(username, password);
+        await this.waitOnRedirectAfterClick(this.loginSubmitBtn);
+    }
+
+    async logout() {
+        if (this.isMobile) {
+            await this.hamburgerBtn.click();
+            await expect(this.logoutLinkMobile).toBeVisible();
+            await this.waitOnRedirectAfterClick(this.logoutLinkMobile);
+        } else {
+            await this.accountMenu.hover();
+            await this.waitOnRedirectAfterClick(this.logoutLinkDesktop);
+        }
     }
 
     async expectLoggedInPage() {
         await expect(this.signupBtn).not.toBeVisible();
         await expect(this.loginBtn).not.toBeVisible();
+    }
+    async expectLoggedOutPage() {
+        await expect(this.signupBtn).toBeVisible();
+        await expect(this.loginBtn).toBeVisible();
     }
 }
