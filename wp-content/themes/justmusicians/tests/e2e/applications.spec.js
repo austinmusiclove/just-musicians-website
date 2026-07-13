@@ -25,23 +25,31 @@ test.describe('Applications', () => {
         }
     });
 
-    test.skip('not logged in user sees the login modal', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
-        await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
+    test('logged out user sees the login modal', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/applications/');
+        await expect(applicationsPage.loginModalHeading).toBeVisible();
     });
 
-    test.skip('user with no applications sees the empty state', async ({ applicationsPage }) => {
+    test('user with no applications sees the empty state', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
         await applicationsPage.navigate('/applications/');
+        await expect(applicationsPage.emptyStateCreateBtn).toBeVisible();
+    });
+
+    test('click empty state create application button navigates to application form', async ({ applicationsPage }) => {
+        await applicationsPage.navigate('/');
+        await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
+        await applicationsPage.navigate('/applications/');
+        await applicationsPage.emptyStateCreateBtn.click();
+        await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });
 
     test('click add button navigates to application form', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
         await applicationsPage.navigate('/applications/');
-        await applicationsPage.clickAndWaitForRedirect(applicationsPage.addBtn);
+        await applicationsPage.addBtn.click();
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });
 

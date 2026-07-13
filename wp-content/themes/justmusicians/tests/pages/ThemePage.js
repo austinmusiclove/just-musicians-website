@@ -26,15 +26,7 @@ export class ThemePage {
     }
 
     async navigate(url = '/') {
-        await this.page.goto(url);
-    }
-
-    async clickAndWaitForRedirect(button) {
-        await Promise.all([
-            this.page.waitForURL('**/*'),
-            button.click(),
-        ]);
-        await this.page.waitForLoadState('load');
+        await this.page.goto(url, { waitUntil: 'domcontentloaded' });
     }
 
     async openSignupModal() {
@@ -68,7 +60,7 @@ export class ThemePage {
         const originalUrl = this.page.url();
         await this.openSignupModal();
         await this.fillSignupForm(userData);
-        await this.clickAndWaitForRedirect(this.signupSubmitBtn);
+        await this.signupSubmitBtn.click();
         await expect(this.page).toHaveURL(originalUrl);
         return userData;
     }
@@ -76,17 +68,17 @@ export class ThemePage {
     async login(username, password) {
         await this.openLoginModal();
         await this.fillLoginForm(username, password);
-        await this.clickAndWaitForRedirect(this.loginSubmitBtn);
+        await this.loginSubmitBtn.click();
     }
 
     async logout() {
         if (this.isMobile) {
             await this.hamburgerBtn.click();
             await expect(this.logoutLinkMobile).toBeVisible();
-            await this.clickAndWaitForRedirect(this.logoutLinkMobile);
+            await this.logoutLinkMobile.click();
         } else {
             await this.accountMenu.hover();
-            await this.clickAndWaitForRedirect(this.logoutLinkDesktop);
+            await this.logoutLinkDesktop.click();
         }
     }
 

@@ -158,8 +158,10 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             document.addEventListener('DOMContentLoaded', async function() { if (loggedIn) { notifications = await get_user_notifications(); } });
         })"
         x-resize.document="
+            if ($width !== width) {
+                showMobileMenu = false;
+            }
             width = $width;
-            showMobileMenu = false;
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"

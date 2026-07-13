@@ -3,7 +3,8 @@ import { ThemePage } from './ThemePage.js';
 export class ApplicationsPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.addBtn = page.getByRole('link', { name: 'Add +' });
+        this.addBtn              = page.getByRole('link', { name: 'Add +' });
+        this.emptyStateCreateBtn = page.getByRole('button', { name: 'Create an Application' });
     }
 
     async navigate(url = '/applications/') {

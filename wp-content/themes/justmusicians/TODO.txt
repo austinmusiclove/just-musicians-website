@@ -17,7 +17,8 @@ Testing for Applications product rollout
         Create Application page
             Create Application
         Submit Appication page
-            Submit Appication
+            Submit Appication new listing
+            Submit Appication existing listing
         Submitted Appications page
             Update Appication Submission
         Applications access
