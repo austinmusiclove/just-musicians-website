@@ -20,10 +20,8 @@ export class ApplicationsPage extends ThemePage {
         return card.getByRole('link', { name: 'Edit Application' });
     }
 
-    async waitForCards() {
-        await this.page.waitForResponse(resp =>
-            resp.url().includes('/wp-html/v1/applications/') && resp.status() === 200
-        );
+    async waitForResults() {
+        await this.page.locator('#results > *').first().waitFor();
     }
 
     async navigate(url = '/applications/') {

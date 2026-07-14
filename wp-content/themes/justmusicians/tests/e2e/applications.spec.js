@@ -21,6 +21,7 @@ test.describe('Applications', () => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
         await applicationsPage.navigate('/applications/');
+        await applicationsPage.waitForResults();
         await expect(applicationsPage.emptyStateCreateBtn).toBeVisible();
     });
 
@@ -44,7 +45,7 @@ test.describe('Applications', () => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
-        await applicationsPage.waitForCards();
+        await applicationsPage.waitForResults();
         const cards = await applicationsPage.applicationCards.all();
         expect(cards).toHaveLength(1);
         await expect(applicationsPage.getCardTitle(applicationsPage.applicationCards.first())).toHaveText(applicationTitle);
@@ -54,7 +55,7 @@ test.describe('Applications', () => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
-        await applicationsPage.waitForCards();
+        await applicationsPage.waitForResults();
         await expect(applicationsPage.applicationCards.first()).toBeVisible();
         await applicationsPage.getReviewApplicantsBtn(applicationsPage.applicationCards.first()).click();
         await expect(applicationsPage.page).toHaveURL(/\/application\/[^/]+\/?\?tab=applicants/);
@@ -64,7 +65,7 @@ test.describe('Applications', () => {
         await applicationsPage.navigate('/');
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
-        await applicationsPage.waitForCards();
+        await applicationsPage.waitForResults();
         await expect(applicationsPage.applicationCards.first()).toBeVisible();
         await applicationsPage.getEditApplicationBtn(applicationsPage.applicationCards.first()).click();
         await expect(applicationsPage.page).toHaveURL(/\/application\/[^/]+\/?$/);
