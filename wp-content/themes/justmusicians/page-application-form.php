@@ -25,8 +25,9 @@ get_header();
                     <span>Back to Applications</span>
                 </a>
 
-                <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                    <h1 class="font-bold text-25">Create Application</h1>
+                <div class="mb-6 md:mb-14 flex flex-col gap-4">
+                    <h1 class="font-bold text-25">Create an Application</h1>
+                    <p class="text-16 mb-4">Applications allow musicians to show interest in your gigs without having to deal with a mess of emails. Once they apply, you can review them in one convenient place.</p>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
@@ -46,12 +47,12 @@ get_header();
                     >
                         <div class="mb-4">
                             <label for="title" class="block font-bold text-16 mb-2">Title</label>
-                            <input type="text" id="title" name="title" x-model="title" placeholder="Application title" />
+                            <input type="text" id="title" name="title" x-model="title" placeholder="Live Band Application for Saturday Nights at Buck's" />
                         </div>
 
                         <div class="mb-4">
                             <label for="description" class="block font-bold text-16 mb-2">Description</label>
-                            <textarea id="description" class="w-full" name="description" x-model="description" placeholder="Describe your application" rows="6"></textarea>
+                            <textarea id="description" class="w-full" name="description" x-model="description" placeholder="Tell the musicians a little bit more about the type of gigs they are applying for" rows="6"></textarea>
                         </div>
 
                         <div class="flex gap-2 mt-8">

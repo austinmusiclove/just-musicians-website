@@ -3,6 +3,7 @@
 
     <div class="pb-32 relative">
         <span class="text-22 block text-center mb-2">No applications yet!</span>
+        <p class="text-16 mb-4">Applications allow musicians to show interest in your gigs minus the messy inbox. Once they apply, you can review your applicants in one convenient place.</p>
         <a href="/application-form/"><button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create an Application</button></a>
     </div>
 

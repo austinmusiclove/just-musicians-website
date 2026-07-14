@@ -30,15 +30,23 @@ Testing for Applications product rollout
         lid tmp code user registration with listing and other scenario (aid?)
 Applications Release
     Availability for events on applications
-        Notification to applicants when dates added
+        Show events on musician application
+        Show events with availability filled out if there are existing proposals
+        Create proposals for all events that the user submitted availability for
+        Update proposals for any events that already had a proposal
         Allow adding/removing events to application
+        Notification to applicants when dates added
         Recurring events
             Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
-    Applications UX
-        UX audit
-        Get devon to fix design
-        Applications page
-            Explain what applications are a bit on empty state
+    Get devon to fix design
+        Applications empty state
+        Applications card
+        Single application page
+        Applicant card
+        Submitted applications page
+        Submitted application card
+        Musician Application
+        Create Application page
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing
