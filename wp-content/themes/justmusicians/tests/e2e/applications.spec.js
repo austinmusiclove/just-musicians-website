@@ -10,6 +10,7 @@ test.describe('Applications', () => {
     let noApplicationsUser;
     let applicationAuthorUser;
     let applicationId;
+    let applicationTitle;
 
     test('logged out user sees the login modal', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/applications/');
@@ -39,6 +40,36 @@ test.describe('Applications', () => {
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });
 
+    test('logged in user\'s application is displayed', async ({ applicationsPage }) => {
+        await applicationsPage.navigate('/');
+        await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
+        await applicationsPage.navigate('/applications/');
+        await applicationsPage.waitForCards();
+        const cards = await applicationsPage.applicationCards.all();
+        expect(cards).toHaveLength(1);
+        await expect(applicationsPage.getCardTitle(applicationsPage.applicationCards.first())).toHaveText(applicationTitle);
+    });
+
+    test('application review applicants button navigates to single application page on the applicants tab', async ({ applicationsPage }) => {
+        await applicationsPage.navigate('/');
+        await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
+        await applicationsPage.navigate('/applications/');
+        await applicationsPage.waitForCards();
+        await expect(applicationsPage.applicationCards.first()).toBeVisible();
+        await applicationsPage.getReviewApplicantsBtn(applicationsPage.applicationCards.first()).click();
+        await expect(applicationsPage.page).toHaveURL(/\/application\/[^/]+\/?\?tab=applicants/);
+    });
+
+    test('edit application button navigates to single application page on the details tab', async ({ applicationsPage }) => {
+        await applicationsPage.navigate('/');
+        await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
+        await applicationsPage.navigate('/applications/');
+        await applicationsPage.waitForCards();
+        await expect(applicationsPage.applicationCards.first()).toBeVisible();
+        await applicationsPage.getEditApplicationBtn(applicationsPage.applicationCards.first()).click();
+        await expect(applicationsPage.page).toHaveURL(/\/application\/[^/]+\/?$/);
+    });
+
     test.beforeAll(async () => {
         noApplicationsUser = createUser();
         wpCliCreateUser(noApplicationsUser);
@@ -48,6 +79,7 @@ test.describe('Applications', () => {
         const applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
 
         const application = createApplication();
+        applicationTitle = application.title;
         applicationId = wpCliCreatePost({
             postType: 'application',
             title: application.title,

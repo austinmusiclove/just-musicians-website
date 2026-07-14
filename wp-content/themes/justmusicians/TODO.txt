@@ -4,10 +4,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
 Testing for Applications product rollout
     Applications tests
-        Applications page
-            User's Application displays on the applications page
-            Test edit button
-            Test review button
         Single Application page
             Update Application
             Delete Appication
