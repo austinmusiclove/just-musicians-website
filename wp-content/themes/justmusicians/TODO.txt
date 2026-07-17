@@ -2,6 +2,7 @@ Critical bugs
     Register user on a user that is registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
+    Make sure i am compliant with laws on accessibility and cookies
 Testing for Applications product rollout
     Applications tests
         Single Application page
@@ -280,6 +281,10 @@ Testing
     set specific viewport size for different "projects" in the config to make sure i am testing all the sizes necessary; for now defaults are ok
     figure out logged in page fixture so that we don't have to reg user and log in every time(examine fixture scope; maybe use worker scope)
         save session state to not have to log in for every test (Automated Testing with Playwright chapter 16)
+    test emulating a slow internet environment
+    test emulating device orientation switch
+    maybe use tap() instead of click() for mobile and tablet envs
+    use get by label for form field inputs
 Code consistency and cleanliness
     auth for mu plugin apis should be in authorization.php in the plugin folder and those functions should be used from within the plugin directory or template files for viewing auth but not html api templates; copy events auth pattern
     i use echo throughout php templates and i think it is unnecessary

@@ -34,7 +34,7 @@ get_header();
 
                 <?php if (!is_user_logged_in()) { ?>
 
-                    <?php echo get_template_part('template-parts/global/empty-states/sign-in-to-access', '', [ 'message' => 'see your applications' ]); ?>
+                    <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'create an application' ]); ?>
 
                 <?php } else { ?>
 

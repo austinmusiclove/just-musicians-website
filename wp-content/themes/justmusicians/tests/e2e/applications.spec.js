@@ -14,7 +14,7 @@ test.describe('Applications', () => {
 
     test('logged out user sees the login modal', async ({ applicationsPage }) => {
         await applicationsPage.navigate('/applications/');
-        await expect(applicationsPage.loginModalHeading).toBeVisible();
+        await expect(applicationsPage.signupModalHeading).toBeVisible();
     });
 
     test('user with no applications sees the empty state', async ({ applicationsPage }) => {
