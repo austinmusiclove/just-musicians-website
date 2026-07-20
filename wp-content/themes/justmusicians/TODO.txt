@@ -4,7 +4,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
 Applications updates for sales
-    WYSIWYG editor for application description
     Make a way to generate example screenshots with playwright
     Make it so you don't have to log in right away to see the form. But the result is that an account is created
     Other features that would be needed for parity with venue forms out there

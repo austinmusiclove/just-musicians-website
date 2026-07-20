@@ -25,7 +25,7 @@ function update_application($args) {
     }
 
     $application_id = wp_update_post($args, true);
-    if (is_wp_error($event_id) || !$application_id) {
+    if (!$application_id) {
         return new WP_Error('update_failed', 'Failed to update application');
     }
 

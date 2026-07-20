@@ -37,7 +37,7 @@ get_header();
             <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
 
             <?php if ($description) { ?>
-                <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak><?php echo wpautop(esc_html($description)); ?></div>
+                <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak><?php echo wpautop(wp_kses_post($description)); ?></div>
             <?php } ?>
 
             <?php if (!is_user_logged_in()) { ?>

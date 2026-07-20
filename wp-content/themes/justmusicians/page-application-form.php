@@ -39,7 +39,6 @@ get_header();
                     <form
                         x-data="{
                             title: '',
-                            description: '',
                         }"
                         hx-post="<?php echo site_url('/wp-html/v1/applications/'); ?>"
                         hx-target="#create-application-result"
@@ -52,7 +51,17 @@ get_header();
 
                         <div class="mb-4">
                             <label for="description" class="block font-bold text-16 mb-2">Description</label>
-                            <textarea id="description" class="w-full" name="description" x-model="description" placeholder="Tell the musicians a little bit more about the type of gigs they are applying for" rows="6"></textarea>
+                            <?php
+                            wp_editor('', 'description', [
+                                'textarea_name' => 'description',
+                                'textarea_rows' => 8,
+                                'media_buttons' => false,
+                                'teeny'         => true,
+                                'quicktags'     => false,
+                                'toolbar1'      => 'bold,italic,underline,bullist,numlist,link,unlink',
+                                'toolbar2'      => '',
+                            ]);
+                            ?>
                         </div>
 
                         <div class="flex gap-2 mt-8">

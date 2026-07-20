@@ -28,7 +28,7 @@
 
         <!-- Application Description -->
         <?php if ($args['description']) { ?>
-            <div x-data="{ description: '<?php echo clean_str_for_doublequotes($args['description']); ?>' }">
+            <div x-data="{ description: '<?php echo clean_str_for_doublequotes(wp_strip_all_tags($args['description'])); ?>' }">
                 <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                     'text_var' => 'description',
                     'limit'    => 200,

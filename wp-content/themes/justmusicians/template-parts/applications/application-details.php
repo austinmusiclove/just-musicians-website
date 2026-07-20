@@ -4,7 +4,7 @@
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>
-        <p class="text-16 whitespace-pre-wrap" :class="description ? '' : 'text-black/50'" x-text="description ? description : 'No description provided'"></p>
+        <div class="text-16" :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'"></div>
     </div>
 
     <!-- Application Link -->
@@ -42,5 +42,5 @@
 
 <!-- Edit form -->
 <div x-show="showEditForm">
-    <?php echo get_template_part('template-parts/applications/edit-application-form', '', []); ?>
+    <?php echo get_template_part('template-parts/applications/edit-application-form', '', [ 'description' => $args['description'] ]); ?>
 </div>

@@ -312,6 +312,16 @@ function hmm_scripts() {
 
         // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+
+        // WYSIWYG Editor
+        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, true);
+    }
+
+    // Create Application Form
+    if (preg_match('#^/application-form/[^/]+/?$#', $path)) {
+
+        // WYSIWYG Editor
+        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, true);
     }
 
     // Messages pages

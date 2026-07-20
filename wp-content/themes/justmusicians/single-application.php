@@ -27,6 +27,8 @@ $app_submissions = get_applicants($application_id, [
 ]);
 $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
+$app_description = get_field('description'); //get_post_meta(get_the_ID(), 'description', true);
+
 get_header();
 
 ?>
@@ -45,7 +47,7 @@ get_header();
                     collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     applicationId:  '<?php echo $application_id; ?>',
                     title:          '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
-                    description:    '<?php echo clean_str_for_doublequotes(get_field('description') ?? ''); ?>',
+                    description:    '<?php echo clean_str_for_doublequotes($app_description); ?>',
                     submission_ids:  <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,
                     showEditForm:   false,
                     _updateApplication(app) {
@@ -95,7 +97,7 @@ get_header();
                     </div>
 
                     <div class="pt-4" x-show="showApplicationDetails" x-cloak>
-                        <?php echo get_template_part('template-parts/applications/application-details', '', []); ?>
+                        <?php echo get_template_part('template-parts/applications/application-details', '', [ 'description' => $app_description ]); ?>
                     </div>
 
                     <div class="pt-4" x-show="showApplicants" x-cloak>

@@ -12,7 +12,7 @@ function get_sanitized_application_args() {
     if (isset($_POST['post_id']))     { $sanitized_args['ID']                        = sanitize_text_field($_POST['post_id']); }
     if (isset($_POST['title']))       { $sanitized_args['post_title']                = sanitize_text_field($_POST['title']); }
     if (isset($_POST['title']))       { $sanitized_args['meta_input']['title']       = sanitize_text_field($_POST['title']); }
-    if (isset($_POST['description'])) { $sanitized_args['meta_input']['description'] = sanitize_textarea_field($_POST['description']); }
+    if (isset($_POST['description'])) { $sanitized_args['meta_input']['description'] = wp_kses_post($_POST['description']); }
 
     return $sanitized_args;
 }

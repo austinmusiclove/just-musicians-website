@@ -12,9 +12,17 @@
 
     <!-- Description -->
     <h3 class="font-bold text-16 mb-1 mt-6">Description</h3>
-    <textarea name="description" class="w-full px-3 py-2 border border-black/20 rounded-sm" rows="6"
-        x-bind:value="description"
-    ></textarea>
+    <?php
+    wp_editor($args['description'], 'application_description', [
+        'textarea_name' => 'description',
+        'textarea_rows' => 8,
+        'media_buttons' => false,
+        'teeny'         => true,
+        'quicktags'     => false,
+        'toolbar1'      => 'bold,italic,underline,bullist,numlist,link,unlink',
+        'toolbar2'      => '',
+    ]);
+    ?>
 
     <!-- Buttons -->
     <div class="flex items-center gap-2 mt-8">
