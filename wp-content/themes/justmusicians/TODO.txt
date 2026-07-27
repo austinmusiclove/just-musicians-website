@@ -3,9 +3,32 @@ Critical bugs
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
+    SEO
+        Hide 0 reviews on listings
+        Add paragraph under heading like https://www.thebash.com/search/cover-band-austin-tx
+        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
+        larger listing with more data like bio and more images
+        keep filter code out of index by lazy loading it
+        schema - add organization schema for HM and local business schema or musician schema for listings and regional landing page schema that shows service and area served on city specific pages and itemlist for directory list schema
+        change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
+        add llms.txt
 Applications updates for sales
-    Make a way to generate example screenshots with playwright
     Make it so you don't have to log in right away to see the form. But the result is that an account is created
+        create pending listing and pending application submission
+        on success screen require sign up to complete application; when user signs up the listing and submitted application become published
+        if pending application submission is created and user is not registered in 24 hours, send email with link to sign up to complete submission
+    Add draw and price options for application and add them to applicant card
+    Add venue and location
+    Collect availability for existing events in the musician application
+    Tests single application
+        update application title
+        update application description
+    Tests create application
+        create application
+    Tests submit application
+        create submitted application
+        make sure new listing ends up in authors listings user meta list
+        make sure disabled submit at the right time and make sure you can't submit without required fields
     Other features that would be needed for parity with venue forms out there
         draw number (Kick Butt Coffee)
         dates requested (Flamingo, Kick Butt Coffee)
@@ -136,6 +159,8 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
+    Remove performances posts from indexing
+    Look into registering HM for live music hiring voice search
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
         **Venue schema on venue pages with reviews
@@ -256,6 +281,7 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
 Listing page
+    add data from chartmetric and/or musicstax
     allow play with mouse off iframe for videos
     ***add seek in video
     see more bio

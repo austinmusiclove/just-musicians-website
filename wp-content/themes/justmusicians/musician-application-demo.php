@@ -28,7 +28,7 @@ get_header();
                 listingId: '',
                 message: '',
                 hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
-                createNewListing: false,
+                createNewListing: <?php echo $current_user_id ? 'false' : 'true'; ?>,
                 showApplication: true,
             }"
             x-on:hideform="showApplication = false;"
@@ -40,20 +40,12 @@ get_header();
                 <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak><?php echo wpautop(wp_kses_post($description)); ?></div>
             <?php } ?>
 
-            <?php if (!is_user_logged_in()) { ?>
-
-                <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'submit an application' ]); ?>
-
-            <?php } else { ?>
-
-                <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
-                    'application_id'  => $application_id,
-                    'current_user_id' => $current_user_id,
-                    'user_listings'   => $user_listings,
-                    'demo'            => false,
-                ]); ?>
-
-            <?php } ?>
+            <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
+                'application_id'  => $application_id,
+                'current_user_id' => $current_user_id,
+                'user_listings'   => $user_listings,
+                'demo'            => true,
+            ]); ?>
 
         </div>
     </div>

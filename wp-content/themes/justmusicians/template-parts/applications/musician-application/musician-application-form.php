@@ -1,8 +1,12 @@
-<form class="flex flex-col gap-4" enctype="multipart/form-data"
+<form class="flex flex-col gap-4" enctype="multipart/form-data" novalidate
     x-show="showApplication" x-cloak
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
-    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+    <?php if ($args['demo']) { ?>
+        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/demo/` : '/submit/demo/')"
+    <?php } else { ?>
+        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+    <?php } ?>
     hx-trigger="submitapplication"
     hx-target="#submit-application-result"
     hx-indicator="#submit-button-content"
@@ -59,17 +63,9 @@
             listingId = option.value;
             message = '';
             if (!option.value) {
-                this.pName        = '';
-                this.pDescription = '';
-                this.zipCodeInput = '';
-                this.fullLocation = '';
-                $nextTick(() => { createNewListing = true; } );
+                createNewListing = true;
             } else {
-                this.pName        = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.pDescription = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.zipCodeInput = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                this.fullLocation = '-'; // Set to bypass front end input require for this field; value is ignored in the back end when listing id is set
-                $nextTick(() => { createNewListing = false; } );
+                createNewListing = false;
             }
         },
 
@@ -120,8 +116,14 @@
 
     <!-- Submit -->
     <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
-        x-bind:disabled="!loggedIn || (!listingId && !createNewListing)"
-        x-on:click="$dispatch('submitapplication')"
+        x-bind:disabled="hasListings && !listingId && !createNewListing"
+        x-on:click=" <?php // Skip front end validation when user is not creating a listing ?>
+            if (!createNewListing) {
+                $dispatch('submitapplication');
+            } else if ($refs.listingForm.reportValidity()) {
+                $dispatch('submitapplication');
+            }
+        "
     >
         <span id="submit-button-content">
             <span class="htmx-indicator-component-block-replace">Submit Application</span>

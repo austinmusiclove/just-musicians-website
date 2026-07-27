@@ -17,6 +17,11 @@ add_filter('template_include', function($template) {
             if (!empty($new_template)) {
                 return $new_template;
             }
+        case 'musician-application-demo':
+            $new_template = locate_template(['musician-application-demo.php']);
+            if (!empty($new_template)) {
+                return $new_template;
+            }
 
         default:
             return $template;

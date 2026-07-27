@@ -15,6 +15,11 @@ function template_route_rewrite_rules() {
         'index.php?custom-template=musician-application&application-id=$matches[1]',
         'top'
     );
+    add_rewrite_rule(
+        '^musician-application-demo/([0-9]+)/?',
+        'index.php?custom-template=musician-application-demo&application-id=$matches[1]',
+        'top'
+    );
 
 }
 add_action('init', 'template_route_rewrite_rules');
