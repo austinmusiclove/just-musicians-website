@@ -1,0 +1,37 @@
+# Hire More Musicians
+
+> A marketplace platform connecting people who need to hire live music with musicians, bands, and DJs. Currently focused on Austin, Texas.
+
+## Key Sections
+
+- Home: Search and discover musicians with advanced filtering
+- Listings: Browse musician profiles by category, genre, instrumentation
+- Events: Create and manage gig requests
+- Applications: Job postings for musicians to apply to
+- Glossary: Music industry terminology
+
+## For Musicians
+
+- Create profiles showcasing music, videos, social links, and venue history
+- Apply to gig opportunities posted by buyers
+- View compensation data at venues (earnings database)
+- Contribute anonymously to earnings database
+
+## For Buyers
+
+- Search musicians with filters for category, genre, setting, ensemble size
+- Create events with date, location, budget, and genre requirements
+- Request quotes from musicians
+- Create an application to handle musician booking inquiries
+- Save favorite musician listings via collections
+
+## Geographic Focus
+
+- Default location: Austin, Texas
+- Location-aware search using IP geolocation
+
+## Credits
+
+- Theme by Devon Bussell
+- Custom development by John Filippone
+- Built on WordPress
