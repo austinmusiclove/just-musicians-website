@@ -52,7 +52,7 @@ get_header();
                         <div class="mb-4">
                             <label for="description" class="block font-bold text-16 mb-2">Description</label>
                             <?php
-                            wp_editor('', 'description', [
+                            wp_editor('', 'application_description', [
                                 'textarea_name' => 'description',
                                 'textarea_rows' => 8,
                                 'media_buttons' => false,

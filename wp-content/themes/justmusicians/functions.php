@@ -318,7 +318,7 @@ function hmm_scripts() {
     }
 
     // Create Application Form
-    if (preg_match('#^/application-form/[^/]+/?$#', $path)) {
+    if (str_starts_with($_SERVER['REQUEST_URI'], '/application-form/')) {
 
         // WYSIWYG Editor
         wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, true);

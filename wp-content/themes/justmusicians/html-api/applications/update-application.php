@@ -4,7 +4,6 @@ $args = get_sanitized_application_args();
 $args['ID'] = get_query_var('application-id');
 
 $result = update_user_application($args);
-
 if (is_wp_error($result)) {
     $message = 'Error: ' . $result->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
