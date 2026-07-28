@@ -1,4 +1,4 @@
-<form class="flex flex-col gap-4" enctype="multipart/form-data" novalidate
+<form class="flex flex-col gap-8" enctype="multipart/form-data" novalidate
     x-show="showApplication" x-cloak
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
@@ -62,10 +62,14 @@
         onListingSelect(option) {
             listingId = option.value;
             message = '';
-            if (!option.value) {
+            if (!listingId) {
                 createNewListing = true;
+                eventAvailability = {};
             } else {
                 createNewListing = false;
+                eventAvailability = {};
+                const lp = savedProposals[listingId] || {};
+                Object.keys(lp).forEach(eid => { eventAvailability[eid] = lp[eid].availability; });
             }
         },
 
@@ -113,6 +117,9 @@
     </div>
     <input type="hidden" name="application_id" value="<?php echo $args['application_id']; ?>" />
     <input type="hidden" name="status" value="active" />
+
+    <!-- Availability -->
+    <?php get_template_part('template-parts/applications/musician-application/availability-inputs', '', [ 'events' => $args['events'] ]); ?>
 
     <!-- Submit -->
     <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"

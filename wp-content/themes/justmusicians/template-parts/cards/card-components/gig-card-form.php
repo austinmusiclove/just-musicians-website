@@ -24,13 +24,13 @@ $request_draw  = $args['request_draw'];
         <div>
             <span class="text-12 text-black/50 font-semibold">Availability</span>
             <div class="flex gap-2 mt-1">
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white hover:bg-navy-light hover:text-black"
-                    :class="availability == 'available' ? 'bg-navy text-white' : 'bg-transparent text-black'"
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white"
+                    :class="availability == 'available' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
                 >
                     <input type="radio" name="availability" value="available" class="sr-only" x-model="availability" required>Available
                 </label>
-                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white hover:bg-navy-light hover:text-black"
-                    :class="availability == 'unavailable' ? 'bg-navy text-white' : 'bg-transparent text-black'"
+                <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white"
+                    :class="availability == 'unavailable' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
                 >
                     <input type="radio" name="availability" value="unavailable" class="sr-only" x-model="availability" required>Unavailable
                 </label>

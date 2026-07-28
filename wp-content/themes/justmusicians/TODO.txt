@@ -16,9 +16,7 @@ Critical bugs
         add llms.txt
 Applications updates for sales
     Collect availability for existing events in the musician application
-        Create inputs for events in musician applicaiton including availability, quote and draw if applicable (no message)
         When user submits musician application it creates/updates proposals for any events that have input
-        When user opens musiciain application it populates existing proposals options
     showing &nbsp; in listing card description when new line; didn't replicate on staging
     fix application card so that link does not blend in with description
     update package version
