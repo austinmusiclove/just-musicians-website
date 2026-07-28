@@ -29,6 +29,8 @@ $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
 $app_description = get_field('description'); //get_post_meta(get_the_ID(), 'description', true);
 
+$app_events = get_application_events($application_id);
+
 get_header();
 
 ?>
@@ -97,7 +99,10 @@ get_header();
                     </div>
 
                     <div class="pt-4" x-show="showApplicationDetails" x-cloak>
-                        <?php echo get_template_part('template-parts/applications/application-details', '', [ 'description' => $app_description ]); ?>
+                        <?php echo get_template_part('template-parts/applications/application-details', '', [
+                            'description' => $app_description,
+                            'events' => $app_events
+                        ]); ?>
                     </div>
 
                     <div class="pt-4" x-show="showApplicants" x-cloak>
