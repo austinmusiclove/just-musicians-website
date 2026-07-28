@@ -15,6 +15,29 @@ function submit_application($args) {
         return new WP_Error('missing_required_field', 'Listing id missing');
     }
 
+    // Create/update proposals for each event's availability
+    if (!empty($args['meta_input']['event_availability']) && $listing_id) {
+        foreach ($args['meta_input']['event_availability'] as $event_id => $availability) {
+            $proposal_id = hm_proposal_exists($listing_id, $event_id);
+            if ($proposal_id) {
+                update_proposal([
+                    'ID'         => $proposal_id,
+                    'meta_input' => [
+                        'availability' => $availability,
+                        'status'       => $availability,
+                    ],
+                ]);
+            } else {
+                create_proposal([
+                    'event'        => $event_id,
+                    'listing'      => $listing_id,
+                    'availability' => $availability,
+                    'status'       => $availability,
+                ]);
+            }
+        }
+    }
+
     // Set post title
     $application_title = get_post_meta($application_id, 'title', true);
     $listing_name      = get_post_meta($listing_id, 'name', true);

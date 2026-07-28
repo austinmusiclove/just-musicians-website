@@ -15,9 +15,8 @@ Critical bugs
         change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
         add llms.txt
 Applications updates for sales
-    Collect availability for existing events in the musician application
-        When user submits musician application it creates/updates proposals for any events that have input
     showing &nbsp; in listing card description when new line; didn't replicate on staging
+    change edit submitted application to either resubmit or withdraw
     fix application card so that link does not blend in with description
     update package version
     Add draw and price options for application and add them to applicant card

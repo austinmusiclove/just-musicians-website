@@ -114,3 +114,14 @@ function hm_get_proposals_by_listing_ids($listing_ids, $args = []) {
 
     return $wpdb->get_col($sql);
 }
+
+function hm_proposal_exists($listing_id, $event_id) {
+    global $wpdb;
+    $table = hm_get_proposal_index_table();
+    $proposal_id = $wpdb->get_var($wpdb->prepare(
+        "SELECT proposal_id FROM {$table} WHERE listing_id = %d AND event_id = %d LIMIT 1",
+        $listing_id,
+        $event_id
+    ));
+    return $proposal_id ? (int) $proposal_id : false;
+}

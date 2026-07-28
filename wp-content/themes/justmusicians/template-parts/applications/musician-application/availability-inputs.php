@@ -16,14 +16,14 @@
 
                 <div class="flex gap-2 shrink-0">
                     <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white"
-                        :class="eventAvailability['<?php echo $event['event_id']; ?>'] == 'available' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
+                        :class="eventAvailability[<?php echo $event['event_id']; ?>] == 'available' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
                     >
-                        <input type="radio" name="event_availability['<?php echo $event['event_id']; ?>']" value="available" class="sr-only" x-model="eventAvailability['<?php echo $event['event_id']; ?>']" required>Available
+                        <input type="radio" name="event_availability[<?php echo $event['event_id']; ?>]" value="available" class="sr-only" x-model="eventAvailability[<?php echo $event['event_id']; ?>]" required>Available
                     </label>
                     <label class="cursor-pointer px-3 py-1 rounded-full border border-black/20 text-14 active:bg-navy active:text-white"
-                        :class="eventAvailability['<?php echo $event['event_id']; ?>'] == 'unavailable' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
+                        :class="eventAvailability[<?php echo $event['event_id']; ?>] == 'unavailable' ? 'bg-navy text-white' : 'bg-transparent text-black hover:bg-navy-light hover:text-black'"
                     >
-                        <input type="radio" name="event_availability['<?php echo $event['event_id']; ?>']" value="unavailable" class="sr-only" x-model="eventAvailability['<?php echo $event['event_id']; ?>']" required>Unavailable
+                        <input type="radio" name="event_availability[<?php echo $event['event_id']; ?>]" value="unavailable" class="sr-only" x-model="eventAvailability[<?php echo $event['event_id']; ?>]" required>Unavailable
                     </label>
                 </div>
 

@@ -4,19 +4,9 @@ function create_proposal($args) {
     $event_id   = (int) ($args['event'] ?? 0);
     $listing_id = (int) ($args['listing'] ?? 0);
 
-    $existing = new WP_Query([
-        'post_type'      => 'proposal',
-        'post_status'    => 'any',
-        'posts_per_page' => 1,
-        'fields'         => 'ids',
-        'meta_query'     => [
-            ['key' => 'event',   'value' => $event_id],
-            ['key' => 'listing', 'value' => $listing_id],
-        ],
-    ]);
-
-    if ($existing->have_posts()) {
-        return $existing->posts[0];
+    $existing = hm_proposal_exists($listing_id, $event_id);
+    if ($existing) {
+        return $existing;
     }
 
     $event_name   = get_post_meta($event_id, 'event_name', true);

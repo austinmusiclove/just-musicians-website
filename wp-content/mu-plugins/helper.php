@@ -25,6 +25,18 @@ function custom_sanitize_int_array($arr) {
     return array_values(array_filter(array_map('absint', rest_sanitize_array($arr))));
 }
 
+function sanitize_event_availability($arr) {
+    if (!is_array($arr)) return [];
+    $sanitized = [];
+    foreach ($arr as $event_id => $avail) {
+        $eid = absint($event_id);
+        if ($eid && in_array($avail, ['available', 'unavailable'], true)) {
+            $sanitized[$eid] = $avail;
+        }
+    }
+    return $sanitized;
+}
+
 function get_thumbnails_from_listings($listing_post_ids) {
     $thumbnails = [];
     if (count($listing_post_ids) >= 4) {
