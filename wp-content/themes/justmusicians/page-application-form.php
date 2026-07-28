@@ -27,7 +27,7 @@ get_header();
 
                 <div class="mb-6 md:mb-14 flex flex-col gap-4">
                     <h1 class="font-bold text-25">Create an Application</h1>
-                    <p class="text-16 mb-4">Applications allow musicians to show interest in your gigs without having to deal with a mess of emails. Once they apply, you can review them in one convenient place.</p>
+                    <p class="text-16 mb-4">Once you create your application, you will be provided with a public URL for your application.</p>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
