@@ -26,20 +26,17 @@
     <!-- Events -->
     <div>
         <h3 class="font-bold text-16 mb-2">Events</h3>
-        <?php if (!empty($args['events'])) { ?>
         <div class="flex flex-col gap-2">
-            <?php foreach ($args['events'] as $event) { ?>
-            <div class="p-2 border border-black/20 rounded-sm">
-                <div class="flex flex-col">
-                    <span class="text-14 font-semibold"><?php echo esc_html($event['event_name']); ?></span>
-                    <span class="text-12 text-black/60"><?php echo $event['start_date'] ? gmdate('M j, Y', strtotime($event['start_date'])) : ''; ?></span>
+            <template x-for="event in appEvents" :key="event.event_id">
+                <div class="p-2 border border-black/20 rounded-sm">
+                    <div class="flex flex-col">
+                        <span class="text-14 font-semibold" x-text="event.event_name"></span>
+                        <span class="text-12 text-black/60" x-text="event.start_date ? new Date(event.start_date + 'T00:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' }) : ''"></span>
+                    </div>
                 </div>
-            </div>
-            <?php } ?>
+            </template>
         </div>
-        <?php } else { ?>
-        <div class="text-16 text-black/50">No events associated with this application</div>
-        <?php } ?>
+        <div class="text-16 text-black/50" x-show="appEvents.length === 0" x-cloak>No events associated with this application</div>
     </div>
 
     <!-- Actions -->
@@ -61,5 +58,8 @@
 
 <!-- Edit form -->
 <div x-show="showEditForm">
-    <?php echo get_template_part('template-parts/applications/edit-application-form', '', [ 'description' => $args['description'] ]); ?>
+    <?php echo get_template_part('template-parts/applications/edit-application-form', '', [
+        'description'        => $args['description'],
+        'upcoming_events'    => $args['upcoming_events'],
+    ]); ?>
 </div>
