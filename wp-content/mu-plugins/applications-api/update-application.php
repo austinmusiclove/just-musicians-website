@@ -33,5 +33,6 @@ function update_application($args) {
         'post_id'     => $post_id,
         'title'       => get_post_meta($post_id, 'title', true),
         'description' => get_post_meta($post_id, 'description', true),
+        'events'      => get_application_events($post_id),
     ];
 }

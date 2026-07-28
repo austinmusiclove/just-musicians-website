@@ -29,6 +29,14 @@ $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
 $app_description = get_field('description'); //get_post_meta(get_the_ID(), 'description', true);
 
+// Events
+$user_events_result = get_user_events([
+    'start_date_after' => date('Y-m-d'),
+    'nopaging'         => true,
+]);
+$upcoming_events = $user_events_result['events'];
+$app_events = get_application_events($application_id);
+
 get_header();
 
 ?>
@@ -44,15 +52,18 @@ get_header();
             </div>
             <div class="col md:col-span-6 py-6 md:py-12"
                 x-data="{
-                    collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
-                    applicationId:  '<?php echo $application_id; ?>',
-                    title:          '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
-                    description:    '<?php echo clean_str_for_doublequotes($app_description); ?>',
-                    submission_ids:  <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,
+                    collectionsMap:   <?php echo clean_arr_for_doublequotes($collections_map); ?>,
+                    applicationId:   '<?php echo $application_id; ?>',
+                    title:           '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
+                    description:     '<?php echo clean_str_for_doublequotes($app_description); ?>',
+                    appEvents:        <?php echo clean_arr_for_doublequotes($app_events); ?>,
+                    selectedEventIds: <?php echo clean_arr_for_doublequotes(array_column($app_events, 'event_id')); ?>,
+                    submission_ids:   <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,
                     showEditForm:   false,
                     _updateApplication(app) {
-                        this.title       = app.title       || '';
-                        this.description = app.description || '';
+                        this.title        = app.title       || '';
+                        this.description  = app.description || '';
+                        this.appEvents    = app.events      || [];
                         this.showEditForm = false;
                     },
                 }"
@@ -97,7 +108,11 @@ get_header();
                     </div>
 
                     <div class="pt-4" x-show="showApplicationDetails" x-cloak>
-                        <?php echo get_template_part('template-parts/applications/application-details', '', [ 'description' => $app_description ]); ?>
+                        <?php echo get_template_part('template-parts/applications/application-details', '', [
+                            'description'     => $app_description,
+                            'upcoming_events' => $upcoming_events,
+                            'app_events'      => $app_events,
+                        ]); ?>
                     </div>
 
                     <div class="pt-4" x-show="showApplicants" x-cloak>

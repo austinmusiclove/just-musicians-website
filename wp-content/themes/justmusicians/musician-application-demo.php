@@ -8,6 +8,7 @@
 $application_id = get_query_var('application-id');
 $title = get_post_meta($application_id, 'title', true);
 $description = get_post_meta($application_id, 'description', true);
+$events = get_application_events($application_id);
 
 if (!$application_id || !$title) {
     wp_safe_redirect(site_url());
@@ -16,6 +17,7 @@ if (!$application_id || !$title) {
 
 $current_user_id = get_current_user_id();
 $user_listings   = $current_user_id ? get_user_listings($current_user_id) : [];
+$proposals_map   = get_proposals_by_events_listings(array_column($events, 'event_id'), array_keys($user_listings));
 
 get_header();
 ?>
@@ -30,6 +32,8 @@ get_header();
                 hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
                 createNewListing: <?php echo $current_user_id ? 'false' : 'true'; ?>,
                 showApplication: true,
+                eventAvailability: {},
+                savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
             }"
             x-on:hideform="showApplication = false;"
         >
@@ -44,6 +48,7 @@ get_header();
                 'application_id'  => $application_id,
                 'current_user_id' => $current_user_id,
                 'user_listings'   => $user_listings,
+                'events'          => $events,
                 'demo'            => true,
             ]); ?>
 
