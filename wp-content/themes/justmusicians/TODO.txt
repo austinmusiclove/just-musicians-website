@@ -1,3 +1,5 @@
+Deploy
+    add events to applications acf
 Critical bugs
     Register user on a user that is registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
@@ -13,13 +15,18 @@ Critical bugs
         change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
         add llms.txt
 Applications updates for sales
-    Make it so you don't have to log in right away to see the form. But the result is that an account is created
-        create pending listing and pending application submission
-        on success screen require sign up to complete application; when user signs up the listing and submitted application become published
-        if pending application submission is created and user is not registered in 24 hours, send email with link to sign up to complete submission
+    Collect availability for existing events in the musician application
+        Display events in single application details
+        In single application edit form add ability to add/remove existing events
+        Create inputs for events in musician applicaiton including availability, quote and draw if applicable (no message)
+        On musician application form go through all events in the application and add inputs for them
+        When user submits musician application it creates proposals for any events that have input and don't already exist, updates the ones that exist
+        When user opens musiciain application it populates existing proposals options
+    showing &nbsp; in listing card description when new line; didn't replicate on staging
+    fix application card so that link does not blend in with description
+    update package version
     Add draw and price options for application and add them to applicant card
     Add venue and location
-    Collect availability for existing events in the musician application
     Tests single application
         update application title
         update application description
@@ -29,8 +36,16 @@ Applications updates for sales
         create submitted application
         make sure new listing ends up in authors listings user meta list
         make sure disabled submit at the right time and make sure you can't submit without required fields
+    Make it so you don't have to log in right away to see the form. But the result is that an account is created
+        create pending listing and pending application submission
+        on success screen require sign up to complete application; when user signs up the listing and submitted application become published
+        if pending application submission is created and user is not registered in 24 hours, send email with link to sign up to complete submission
+    Sorting and organizing
+        Earmark or favorite certain applicants
+        Filter by draw and price
+        Filter by favorites
+        Filter genres, ensemble size and other taxonomies
     Other features that would be needed for parity with venue forms out there
-        draw number (Kick Butt Coffee)
         dates requested (Flamingo, Kick Butt Coffee)
         last time you played here (Flamingo)
         Full bill; maybe bands you can play with or have played with (Flamingo)

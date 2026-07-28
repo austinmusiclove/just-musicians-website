@@ -20,6 +20,11 @@ function custom_sanitize_array($arr) {
     return array_values(array_filter(array_map('sanitize_text_field', rest_sanitize_array($arr))));
 }
 
+// Same as custom_sanitize_array but expects ints; good for post ids
+function custom_sanitize_int_array($arr) {
+    return array_values(array_filter(array_map('absint', rest_sanitize_array($arr))));
+}
+
 function get_thumbnails_from_listings($listing_post_ids) {
     $thumbnails = [];
     if (count($listing_post_ids) >= 4) {
