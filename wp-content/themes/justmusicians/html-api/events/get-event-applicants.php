@@ -21,7 +21,10 @@ $next_page     = $is_last_page ? null : (int) $page + 1;
 if (!empty($page_ids)) {
     foreach ($page_ids as $index => $proposal_id) {
         $listing_id = (int) get_post_meta($proposal_id, 'listing', true);
-        $listing = get_listing(['post_id' => $listing_id]);
+        $listing = $listing_id ? get_listing(['post_id' => $listing_id]) : [];
+        if (is_wp_error($listing)) {
+            continue;
+        }
 
         get_template_part('template-parts/cards/event-applicant-card', '', [
             'event_id'               => $event_id,

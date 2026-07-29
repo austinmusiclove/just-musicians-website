@@ -1,5 +1,3 @@
-Deploy
-    add events to applications acf
 Critical bugs
     Register user on a user that is registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
@@ -15,6 +13,7 @@ Critical bugs
         change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
         add llms.txt
 Applications updates for sales
+    if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
     change edit submitted application to either resubmit or withdraw
     fix application card so that link does not blend in with description

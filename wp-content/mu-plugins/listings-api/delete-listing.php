@@ -30,16 +30,9 @@ function _delete_listing($args) {
 }
 
 // After listing deletion, delete all references of the listing in collections and user favorites
-add_action('delete_post', 'delete_post_hook');
-function delete_post_hook($post_id) {
+add_action('delete_post', 'delete_listing_post_hook');
+function delete_listing_post_hook($post_id) {
     if (get_post_type($post_id) !== 'listing') { return; }
-
-    // Schedle cron if there isn't one already scheduled for this post
-    if (!wp_next_scheduled('clean_listing_references_after_delete', [$post_id])) {
-        wp_schedule_single_event(time() + CALC_DELAY, 'clean_listing_references_after_delete', [$post_id]);
-    }
-}
-add_action('clean_listing_references_after_delete', function($post_id) {
 
     // 1. Clean up user favorites (usermeta 'listings')
     $users = get_users(['fields' => ['ID']]);
@@ -78,4 +71,69 @@ add_action('clean_listing_references_after_delete', function($post_id) {
             update_post_meta($collection_id, 'listings', $new_listings);
         }
     }
-});
+
+    // 3. Delete all application submissions for this listing
+    $submissions = get_posts([
+        'post_type'      => 'app_submission',
+        'post_status'    => ['publish', 'draft', 'pending', 'future', 'private', 'trash'],
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            [
+                'key'   => 'listing',
+                'value' => intval($post_id),
+            ],
+        ],
+    ]);
+
+    foreach ($submissions as $submission_id) {
+        wp_delete_post($submission_id, true);
+    }
+
+    // 4. Delete all proposals for this listing
+    $proposals = get_posts([
+        'post_type'      => 'proposal',
+        'post_status'    => ['publish', 'draft', 'pending', 'future', 'private', 'trash'],
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            [
+                'key'   => 'listing',
+                'value' => intval($post_id),
+            ],
+        ],
+    ]);
+
+    foreach ($proposals as $proposal_id) {
+        wp_delete_post($proposal_id, true);
+    }
+}
+
+add_action('wp_trash_post', 'trash_listing_post_hook');
+function trash_listing_post_hook($post_id) {
+    if (get_post_type($post_id) !== 'listing') { return; }
+
+    // 1. Trash all application submissions for this listing
+    $submissions = get_posts([
+        'post_type'      => 'app_submission',
+        'post_status'    => 'any',
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            [
+                'key'   => 'listing',
+                'value' => intval($post_id),
+            ],
+        ],
+    ]);
+
+    foreach ($submissions as $submission_id) {
+        wp_trash_post($submission_id);
+    }
+
+    // 2. Trash all proposals for this listing
+    $proposal_ids = hm_get_proposals_by_listing_ids([$post_id]);
+    foreach ($proposal_ids as $proposal_id) {
+        wp_trash_post($proposal_id);
+    }
+}

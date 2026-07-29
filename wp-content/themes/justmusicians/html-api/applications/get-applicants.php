@@ -21,6 +21,9 @@ if (!empty($submission_ids)) {
     foreach ($submission_ids as $index => $submission_id) {
         $listing_id = (int) get_post_meta($submission_id, 'listing', true);
         $listing    = $listing_id ? get_listing(['post_id' => $listing_id]) : [];
+        if (is_wp_error($listing)) {
+            continue;
+        }
 
         get_template_part('template-parts/cards/applicant-card', '', [
             'application_id'      => $application_id,
