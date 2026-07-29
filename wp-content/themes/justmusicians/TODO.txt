@@ -4,7 +4,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
     SEO
-        Hide 0 reviews on listings
         Add paragraph under heading like https://www.thebash.com/search/cover-band-austin-tx
         internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
         larger listing with more data like bio and more images
