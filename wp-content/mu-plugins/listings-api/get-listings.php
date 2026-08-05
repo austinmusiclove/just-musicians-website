@@ -17,6 +17,7 @@ function get_listings($args) {
     $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
     $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
     $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
+    $with_reviews           = (!empty($args['get_reviews']))       ? rest_sanitize_boolean($args['get_reviews'])                      : false;
 
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
@@ -137,6 +138,7 @@ function get_listings($args) {
             'review_count'           => get_field('review_count'),
             'city'                   => get_field('city'),
             'state'                  => get_field('state'),
+            'zip_code'               => get_field('zip_code'),
             'description'            => get_field('description'),
             'genre'                  => get_the_terms(get_the_ID(), 'genre'),
             'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
@@ -154,6 +156,7 @@ function get_listings($args) {
             'verified'               => get_field('verified'),
             'youtube_video_data'     => $youtube_video_data,
             'permalink'              => get_permalink(),
+            'reviews'                => $with_reviews ? get_reviews('listing_review', get_the_ID(), 1)['reviews'] : [],
         ];
     }
 

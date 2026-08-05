@@ -45,6 +45,7 @@ function get_listings_by_id($args) {
                 'review_count'           => get_field('review_count'),
                 'city'                   => get_field('city'),
                 'state'                  => get_field('state'),
+                'zip_code'               => get_field('zip_code'),
                 'description'            => get_field('description'),
                 'genre'                  => get_the_terms(get_the_ID(), 'genre'),
                 'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),

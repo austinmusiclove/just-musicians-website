@@ -155,6 +155,20 @@ function generate_calendar_grid($month, $year, $event_day, $instance) {
     return $calendarHTML;
 }
 
+function clean_schema_array($schema) {
+    foreach ($schema as $key => $value) {
+        if (is_array($value)) {
+            $value = clean_schema_array($value);
+        }
+        if ($value === null || $value === '' || (is_array($value) && empty($value))) {
+            unset($schema[$key]);
+        } else {
+            $schema[$key] = $value;
+        }
+    }
+    return $schema;
+}
+
 function get_instagram_url_from_handle($handle) {
     $instagram_url_prefix = 'https://instagram.com/';
     return !empty($handle) ? $instagram_url_prefix . $handle : '';

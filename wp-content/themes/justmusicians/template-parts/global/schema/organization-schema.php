@@ -9,6 +9,7 @@ $schema = [
     'email'       => 'john@hiremusicians.com',
     'description' => 'HireMusicians.com is an online live musician directory based in Austin, Texas.',
     'logo'        => get_template_directory_uri() . '/lib/images/logos/hm-logo-emblem-white-1.svg',
+    'image'       => get_template_directory_uri() . '/lib/images/logos/hm-logo-emblem-white-1.svg',
     'sameAs'   => [
         'https://www.instagram.com/hiremoremusicians',
     ],

@@ -78,10 +78,11 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'image'       => get_the_post_thumbnail_url(get_the_ID(), 'full') ?: get_the_post_thumbnail_url(get_the_ID(), 'large'),
     'city'        => get_field('city'),
     'state'       => get_field('state'),
+    'zip_code'    => get_field('zip_code'),
     'rating'      => get_field('rating'),
     'review_count'=> get_field('review_count'),
     'reviews'     => $reviews,
-    'sameAs'      => [
+    'sameAs'      => array_filter([
         get_field('website'),
         get_field('instagram_url'),
         get_field('facebook_url'),
@@ -92,7 +93,7 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         get_field('apple_music_artist_url'),
         get_field('bandcamp_url'),
         get_field('soundcloud_url'),
-    ]
+    ])
 ]);
 
 // Show review modal popup on page load when mdl=review in url

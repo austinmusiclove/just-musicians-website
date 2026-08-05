@@ -32,6 +32,7 @@ if (count($listings) > 0) {
             'review_count'           => $listing['review_count'],
             'city'                   => $listing['city'],
             'state'                  => $listing['state'],
+            'zip_code'               => $listing['zip_code'],
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
             'genres'                 => $genres,

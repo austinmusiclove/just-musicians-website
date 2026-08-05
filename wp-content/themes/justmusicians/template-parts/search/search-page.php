@@ -20,6 +20,7 @@ if ($args['send_first_page']) {
         'instrumentations'  => $instrumentations,
         'settings'          => $settings,
         'verified'          => false,
+        'get_reviews'       => true,
         'page'              => 1,
     ]);
 }
@@ -167,8 +168,10 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'name'                   => $listing['name'],
                                         'rating'                 => $listing['rating'],
                                         'review_count'           => $listing['review_count'],
+                                        'reviews'                => $listing['reviews'],
                                         'city'                   => $listing['city'],
                                         'state'                  => $listing['state'],
+                                        'zip_code'               => $listing['zip_code'],
                                         'location'               => $listing['city'] . ', ' . $listing['state'],
                                         'description'            => $listing['description'],
                                         'genres'                 => $genres,

@@ -175,22 +175,6 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             <?php } ?>
         </div>
 
-        <!-- Links -->
-        <?php /*
-        get_template_part('template-parts/cards/card-components/link-icons', '', [
-            'is_preview'             => $is_preview,
-            'website'                => $is_preview ? '' : $args['website'],
-            'instagram_url'          => $is_preview ? '' : $args['instagram_url'],
-            'x_url'                  => $is_preview ? '' : $args['x_url'],
-            'tiktok_url'             => $is_preview ? '' : $args['tiktok_url'],
-            'facebook_url'           => $is_preview ? '' : $args['facebook_url'],
-            'youtube_url'            => $is_preview ? '' : $args['youtube_url'],
-            'bandcamp_url'           => $is_preview ? '' : $args['bandcamp_url'],
-            'spotify_artist_url'     => $is_preview ? '' : $args['spotify_artist_url'],
-            'apple_music_artist_url' => $is_preview ? '' : $args['apple_music_artist_url'],
-            'soundcloud_url'         => $is_preview ? '' : $args['soundcloud_url'],
-        ]);
-        */ ?>
     </div>
 
     <!-- Inquire button -->
@@ -206,18 +190,33 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 </div>
 
 <?php
-// Local Business Schema
+// MusicGroup Schema
 if (!$is_preview) {
-    echo get_template_part('template-parts/global/schema/local-business-schema', '', [
+    echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         'name'        => $args['name'],
         'description' => $args['description'],
-        'website'     => $args['website'],
+        'genre'       => $args['genres'],
         'phone'       => $args['phone'],
-        'genres'      => $args['genres'],
         'url'         => $args['permalink'],
         'image'       => $args['thumbnail_url'],
         'city'        => $args['city'],
         'state'       => $args['state'],
+        'zip_code'    => $args['zip_code'] ?? '',
+        'rating'      => $args['rating'],
+        'review_count'=> $args['review_count'],
+        'reviews'     => $args['reviews'] ?? [],
+        'sameAs'      => array_filter([
+            $args['website'] ?? '',
+            $args['facebook_url'] ?? '',
+            $args['instagram_url'] ?? '',
+            $args['x_url'] ?? '',
+            $args['youtube_url'] ?? '',
+            $args['tiktok_url'] ?? '',
+            $args['bandcamp_url'] ?? '',
+            $args['spotify_artist_url'] ?? '',
+            $args['apple_music_artist_url'] ?? '',
+            $args['soundcloud_url'] ?? '',
+        ]),
     ]);
 }
 ?>

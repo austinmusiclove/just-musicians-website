@@ -5,7 +5,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
     SEO
         schema
-            musician schema for listings
             regional landing page schema that shows service and area served on city specific pages
             itemlist for directory list schema
         Add paragraph under heading like https://www.thebash.com/search/cover-band-austin-tx
@@ -292,6 +291,9 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
 Listing page
+    *add productized services. allow artists to include prices for things like 3 hr full band set
+    add gear list
+    add faq
     add data from chartmetric and/or musicstax
     allow play with mouse off iframe for videos
     ***add seek in video
