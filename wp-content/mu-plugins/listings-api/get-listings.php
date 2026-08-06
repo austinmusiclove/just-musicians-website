@@ -141,6 +141,7 @@ function get_listings($args) {
             'zip_code'               => get_field('zip_code'),
             'description'            => get_field('description'),
             'bio'                    => get_field('bio'),
+            'listing_image_urls'     => get_listing_image_urls(get_the_ID()),
             'genre'                  => get_the_terms(get_the_ID(), 'genre'),
             'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
             'tiny_thumbnail_url'     => get_the_post_thumbnail_url(get_the_ID(), 'tiny'),
@@ -174,6 +175,24 @@ function get_listings($args) {
         'max_num_pages'          => $max_num_pages,
         'next_page'              => $next_page,
     ];
+}
+
+function get_listing_image_urls($post_id) {
+    $image_ids = get_post_meta($post_id, 'listing_images', true);
+    if (!is_array($image_ids)) {
+        return [];
+    }
+
+    $urls = [];
+    foreach (array_slice($image_ids, 0, 2) as $image_id) {
+        if (!$image_id) { continue; }
+        $url = wp_get_attachment_image_url($image_id, 'standard-listing');
+        if ($url) {
+            $urls[] = $url;
+        }
+    }
+
+    return $urls;
 }
 function validate_tax_input($tax_input, $taxonomy) {
     $input = rest_sanitize_array($tax_input);

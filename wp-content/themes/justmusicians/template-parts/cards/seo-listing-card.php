@@ -20,7 +20,9 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 >
 
 
-    <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
+    <div class="flex flex-col gap-3 w-full sm:w-56 shrink-0 max-w-3xl">
+
+    <div class="bg-yellow-light w-full shrink-0 relative overflow-hidden"
         x-data="{
             previousIndex: 0,
             currentIndex: 0,
@@ -118,6 +120,26 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
     </div>
 
+    <?php
+    $listing_image_urls = $args['listing_image_urls'] ?? [];
+    $listing_image_count = count($listing_image_urls);
+    ?>
+    <?php if ($listing_image_count >= 1) {
+        $media_items = ($listing_image_count == 1)
+            ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]])
+            : array_slice($listing_image_urls, 0, 2);
+        ?>
+        <div class="flex gap-3 w-full">
+            <?php foreach ($media_items as $img_url) { ?>
+                <img class="w-[calc(50%-6px)] aspect-4/3 object-cover bg-yellow-light"
+                    <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
+                    src="<?php echo esc_url($img_url); ?>" />
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+    </div>
+
 
     <div class="flex flex-col gap-y-2 w-full">
 
@@ -166,10 +188,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Bio -->
         <?php if (!empty($args['bio'])) { ?>
-            <div x-data="{ bio: '<?php echo clean_str_for_doublequotes(wp_strip_all_tags($args['bio'])); ?>' }">
+            <div class="mb-4" x-data="{ bio: '<?php echo clean_str_for_doublequotes(wp_strip_all_tags($args['bio'])); ?>' }">
                 <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                     'text_var' => 'bio',
-                    'limit'    => 300,
+                    'limit'    => 450,
                 ]); ?>
             </div>
         <?php } ?>
