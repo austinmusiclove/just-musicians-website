@@ -452,6 +452,7 @@ require get_template_directory() . '/seo/seo-rewrite-rules.php';
 require get_template_directory() . '/seo/seo-routes.php';
 require get_template_directory() . '/seo/title-tags.php';
 require get_template_directory() . '/seo/meta-descriptions.php';
+require get_template_directory() . '/seo/locations.php';
 
 
 

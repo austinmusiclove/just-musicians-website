@@ -4,16 +4,16 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
     SEO
-        schema
-            regional landing page schema that shows service and area served on city specific pages
-            itemlist for directory list schema
-        Add paragraph under heading like https://www.thebash.com/search/cover-band-austin-tx
-        keep filter code out of index by lazy loading it
-        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
         larger listing with more data like bio and more images
         change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
+        schema
+            add video objects
+            regional landing page schema that shows service and area served on city specific pages
+            itemlist for directory list schema
+        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
         FAQ Page
         Update about and include schema for founder in org after there is schema for the founder person
+        keep filter code out of index by lazy loading it
 Applications updates for sales
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
@@ -292,6 +292,7 @@ Listing form
     Rename clear-listing-form to clear-listing-search-form
 Listing page
     *add productized services. allow artists to include prices for things like 3 hr full band set
+    *add ticket sales numbers self reported by artists
     add gear list
     add faq
     add data from chartmetric and/or musicstax

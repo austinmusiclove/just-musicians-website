@@ -3,19 +3,15 @@
 $category = get_query_var('seo-category') ?? 0;
 $location = get_query_var('seo-location') ?? 0;
 
-$location_map = [
-    'austin-tx' => ['city' => 'Austin', 'state' => 'Texas', 'lat' => 30.2672, 'lng' => -97.7431],
-];
-
+// Parse location
 $location_label = '';
 $city_lat = null;
 $city_lng = null;
-
-if (!empty($location) && isset($location_map[$location])) {
-    $loc = $location_map[$location];
-    $location_label = $loc['city'] . ', ' . $loc['state'];
-    $city_lat = $loc['lat'];
-    $city_lng = $loc['lng'];
+$location_data = !empty($location) ? get_seo_location($location) : null;
+if (!empty($location_data)) {
+    $location_label = $location_data['city'] . ', ' . $location_data['state'];
+    $city_lat = $location_data['lat'];
+    $city_lng = $location_data['lng'];
 } else {
     wp_redirect(site_url());
     exit;
@@ -27,9 +23,8 @@ $category_name = '';
 $term = get_term_by('slug', $category, 'mcategory');
 if ( $term and !is_wp_error( $term ) ) {
     $category_name = $term->name;
-    $title = $category_name . 's in ' . $location_label;
-
-// If the term doesn't exist or there was an error, just redirect to home page
+    $title       = get_seo_page_title( $category_name, $location_label );
+    $description = get_seo_meta_description($category_name, $location_label);
 } else {
     wp_redirect(site_url());
     exit;
@@ -55,6 +50,7 @@ get_header( null, [
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => true,
     'title'            => $title,
+    'description'      => $description,
     'collections_map'  => $collections_map,
     'qcategory'        => $category_name,
     'qgenre'           => '',
