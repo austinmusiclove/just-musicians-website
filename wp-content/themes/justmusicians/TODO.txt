@@ -4,10 +4,8 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
     SEO
-        larger listing with more data like bio and more images
-        change from /top in url to something that makes more sense like live-music so in the future i can have music-ed and music-production seo pages as well
         schema
-            add video objects
+            add video objects maybe more images in schema
             regional landing page schema that shows service and area served on city specific pages
             itemlist for directory list schema
         internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx

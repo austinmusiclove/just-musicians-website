@@ -80,7 +80,7 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
 }
 add_filter( 'wp_sitemaps_posts_query_args', 'exclude_pages_by_slug_from_sitemap', 10, 2 );
 
-// Top [category] in [location] pages
+// Live Music [category] in [location] pages
 add_action( 'init', function() {
     wp_register_sitemap_provider( 'featuredlistings', new Featured_Listing_Sitemap_Provider() );
 } );
@@ -102,7 +102,7 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
 
         foreach ( $categories as $category ) {
             foreach ( $locations as $location ) {
-                $url = home_url( "/top/{$category}/{$location}/" );
+                $url = home_url( "/live-music/{$category}/{$location}/" );
                 $urls[] = [
                     'loc' => $url,
                     'lastmod' => current_time( 'Y-m-d\TH:i:sP' ),
