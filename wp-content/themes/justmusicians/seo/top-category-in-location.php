@@ -31,7 +31,6 @@ if ( $term and !is_wp_error( $term ) ) {
 }
 
 
-
 // Get user collections and events
 $collections_result = get_user_collections([
     'nopaging'     => true,

@@ -164,7 +164,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                     if (!empty($listing['genre'])) {
                                         $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
                                     }
-                                    get_template_part('template-parts/cards/standard-listing-card', '', [
+                                    get_template_part('template-parts/cards/seo-listing-card', '', [
                                         'post_id'                => $listing['post_id'],
                                         'name'                   => $listing['name'],
                                         'rating'                 => $listing['rating'],
@@ -175,6 +175,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'zip_code'               => $listing['zip_code'],
                                         'location'               => $listing['city'] . ', ' . $listing['state'],
                                         'description'            => $listing['description'],
+                                        'bio'                    => $listing['bio'],
                                         'genres'                 => $genres,
                                         'thumbnail_url'          => $listing['thumbnail_url'],
                                         'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
