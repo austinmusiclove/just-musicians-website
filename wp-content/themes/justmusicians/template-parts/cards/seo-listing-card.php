@@ -218,6 +218,7 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'phone'       => $args['phone'],
     'url'         => $args['permalink'],
     'thumbnail'   => $args['thumbnail_url'],
+    'area_served' => $args['area_served'] ?? null,
     'city'        => $args['city'],
     'state'       => $args['state'],
     'zip_code'    => $args['zip_code'] ?? '',

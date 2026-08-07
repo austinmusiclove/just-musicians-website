@@ -58,6 +58,12 @@ echo get_template_part('template-parts/search/search-page', '', [
     'qsetting'         => '',
     'lat'              => $city_lat,
     'lng'              => $city_lng,
+    'area_served'      => [
+        'city'  => $location_data['city'],
+        'state' => $location_data['state'],
+        'lat'   => $city_lat,
+        'lng'   => $city_lng,
+    ],
 ]);
 
 get_footer();

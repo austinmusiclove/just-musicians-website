@@ -193,6 +193,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'youtube_video_data'     => $listing['youtube_video_data'],
                                         'verified'               => $listing['verified'],
                                         'permalink'              => $listing['permalink'],
+                                        'area_served'            => $args['area_served'] ?? null,
                                         'lazyload_thumbnail'     => $index >= 3,
                                         'last'                   => $index == array_key_last($listings),
                                         'is_last_page'           => $is_last_page,

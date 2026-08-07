@@ -1,3 +1,4 @@
+
 <?php
 
 $location_data  = (!empty($args['zip_code']) && function_exists('hm_location_get_by_pc')) ? hm_location_get_by_pc($args['zip_code']) : null;
@@ -72,6 +73,25 @@ if (!empty($args['videos'])) {
     }
 }
 
+$area_served = null;
+if (!empty($args['area_served']) && is_array($args['area_served'])) {
+    $area_served = [
+        '@type' => 'Place',
+        'name'  => trim(($args['area_served']['city'] ?? '') . ', ' . ($args['area_served']['state'] ?? ''), ', '),
+    ];
+    if (!empty($args['area_served']['lat']) && !empty($args['area_served']['lng'])) {
+        $area_served['geo'] = [
+            '@type'       => 'GeoCircle',
+            'geoMidpoint' => [
+                '@type'     => 'GeoCoordinates',
+                'latitude'  => $args['area_served']['lat'],
+                'longitude' => $args['area_served']['lng'],
+            ],
+            'geoRadius'   => 40,
+        ];
+    }
+}
+
 $schema = [
     '@context'        => 'https://schema.org',
     '@type'           => 'MusicGroup',
@@ -94,6 +114,7 @@ $schema = [
             'addressCountry'  => $addressCountry,
         ],
     ] : null,
+    'areaServed'      => $area_served,
     'aggregateRating' => (!empty($args['rating']) && !empty($args['review_count'])) ? [
         '@type'       => 'AggregateRating',
         'ratingValue' => $args['rating'],
