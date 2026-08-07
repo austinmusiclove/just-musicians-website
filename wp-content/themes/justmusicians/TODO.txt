@@ -8,9 +8,9 @@ Applications updates for sales
     showing &nbsp; in listing card description when new line; didn't replicate on staging
     change edit submitted application to either resubmit or withdraw
     fix application card so that link does not blend in with description
-    update package version
     Add draw and price options for application and add them to applicant card
     Add venue and location
+    Add two listing images on applicant cards
     Tests single application
         update application title
         update application description
@@ -158,18 +158,16 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
+    FAQ Page
+    Update about and include schema for founder in org after there is schema for the founder person
     rock bands in austin type pages
-        schema
-            add more data to the image object schema and video object schema; description for videos
-            maybe add venues played and venue schema as well for those
-        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
         keep filter code out of index by lazy loading it
+        add more data to the image object schema and video object schema; description for videos
+        maybe add venues played and venue schema as well for those
     single listing pages
         add description to videos to qualify for rich result for single li
         stand alone video objects to qualify for rich result
         figure out what i need to do to get a rich google result with the listing pages
-    FAQ Page
-    Update about and include schema for founder in org after there is schema for the founder person
     Remove performances posts from indexing
     Look into registering HM for live music hiring voice search
     *Make artist and other pages not visible when you type the url in the search bar directly

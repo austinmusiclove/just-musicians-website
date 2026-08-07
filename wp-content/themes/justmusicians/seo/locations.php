@@ -11,3 +11,7 @@ function get_seo_location($slug) {
     return isset($locations[$slug]) ? $locations[$slug] : null;
 }
 
+function get_seo_location_slugs() {
+    return array_keys(get_seo_locations());
+}
+

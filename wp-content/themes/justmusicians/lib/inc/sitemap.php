@@ -93,15 +93,8 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
     public function get_url_list( $page_num, $post_type = '' ) {
         $urls = [];
 
-        $categories = [
-            'country-band', 'cover-band', 'dj', 'funk-band', 'jam-band', 'jazz-trio', 'metal-band',
-            'party-band', 'punk-band', 'rapper', 'rock-band', 'singer-songwriter', 'solo-artist',
-            'tribute-band', 'wedding-band',
-        ];
-        $locations  = [ 'austin-tx' ];
-
-        foreach ( $categories as $category ) {
-            foreach ( $locations as $location ) {
+        foreach ( get_seo_location_slugs() as $location ) {
+            foreach ( get_seo_categories_for_location( $location ) as $category ) {
                 $url = home_url( "/live-music/{$category}/{$location}/" );
                 $urls[] = [
                     'loc' => $url,

@@ -42,6 +42,7 @@ module.exports = {
 	content: [
 		// Root
 		'./*.php',
+		'./seo/*.php',
 		// Lib
 		'./lib/blocks/*.{php,js}',
 		'./lib/inc/*.{php,js}',

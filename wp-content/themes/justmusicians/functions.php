@@ -453,6 +453,7 @@ require get_template_directory() . '/seo/seo-routes.php';
 require get_template_directory() . '/seo/title-tags.php';
 require get_template_directory() . '/seo/meta-descriptions.php';
 require get_template_directory() . '/seo/locations.php';
+require get_template_directory() . '/seo/categories.php';
 
 
 

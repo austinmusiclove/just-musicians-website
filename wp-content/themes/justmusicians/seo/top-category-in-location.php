@@ -19,12 +19,13 @@ if (!empty($location_data)) {
 
 // Set page title and category filter
 $title = '';
+$description = '';
 $category_name = '';
 $term = get_term_by('slug', $category, 'mcategory');
 if ( $term and !is_wp_error( $term ) ) {
     $category_name = $term->name;
-    $title       = get_seo_page_title( $category_name, $location_label );
-    $description = get_seo_meta_description($category_name, $location_label);
+    $title       = get_seo_page_title( $category, $location_label );
+    $description = get_seo_meta_description($category, $location_label);
 } else {
     wp_redirect(site_url());
     exit;
@@ -66,4 +67,28 @@ echo get_template_part('template-parts/search/search-page', '', [
     ],
 ]);
 
+// You may also be interested in
+$supported_categories = get_seo_categories_for_location($location);
+$other_categories = array_filter($supported_categories, fn($supported_category) => $supported_category !== $category);
+
+if (count($other_categories) > 0) { ?>
+
+<div class="container flex justify-center py-32">
+    <div class="flex flex-col items-center sm:max-w-[600px]">
+        <h2 class="font-sun-motter text-center text-25 mb-4">Explore other categories in <?php echo esc_html($location_label); ?></h2>
+        <div class="flex items-center justify-center gap-2 flex-wrap">
+            <?php foreach ($other_categories as $other_category) {
+                $other_name = get_seo_category_plural_name($other_category); ?>
+                <a class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light inline-block"
+                    href="<?php echo esc_url(site_url('/live-music/' . $other_category . '/' . $location . '/')); ?>">
+                    <?php echo esc_html($other_name); ?>
+                </a>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<?php } ?>
+
+<?php
 get_footer();

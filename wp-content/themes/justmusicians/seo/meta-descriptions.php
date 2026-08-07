@@ -1,6 +1,6 @@
 <?php
 
-function get_seo_meta_description( $category_name, $location_label ) {
+function get_seo_meta_description( $category_slug, $location_label ) {
     $descriptions = [
         'country-band'       => 'Looking to add music to your event in the ' . $location_label . ' area? Hire a country band here on HireMusicians.com for down-home, boot-stomping energy. From hoedowns to weddings, a country band fills the room with hits everyone can sing along to.',
         'cover-band'         => 'Looking to add music to your event in the ' . $location_label . ' area? Hire a cover band here on HireMusicians.com for a setlist packed with crowd-pleasing hits. With songs everyone knows, a cover band keeps every guest on the dance floor.',
@@ -19,13 +19,11 @@ function get_seo_meta_description( $category_name, $location_label ) {
         'wedding-band'       => 'Looking to add music to your event in the ' . $location_label . ' area? Hire a wedding band here on HireMusicians.com for the soundtrack to your big day. From the first dance to the last song, a wedding band keeps you and your guests dancing all night.',
     ];
 
-    $key = sanitize_title( $category_name );
-
-    if ( ! isset( $descriptions[ $key ] ) ) {
-        return 'Discover ' . $category_name . 's in ' . $location_label . '. Find local artists to hire for your next live music event.';
+    if ( ! isset( $descriptions[ $category_slug ] ) ) {
+        return 'Discover ' . get_seo_category_plural_name( $category_slug ) . ' in ' . $location_label . '. Find local artists to hire for your next live music event.';
     }
 
-    return $descriptions[ $key ];
+    return $descriptions[ $category_slug ];
 }
 
 function custom_meta_descriptions() {
@@ -34,13 +32,10 @@ function custom_meta_descriptions() {
     $location = get_query_var('seo-location') ?? 0;
     if ( $category && $location ) {
 
-        $term = get_term_by('slug', $category, 'mcategory');
-        if ( $term and !is_wp_error( $term ) ) {
-            $location_data = get_seo_location($location);
-            if ( $location_data ) {
-                $description = get_seo_meta_description( $term->name, $location_data['city'] . ', ' . $location_data['state'] );
-                echo '<meta name="description" content="' . esc_attr( $description ) . '" />' . "\n";
-            }
+        $location_data = get_seo_location($location);
+        if ( $location_data ) {
+            $description = get_seo_meta_description( $category, $location_data['city'] . ', ' . $location_data['state'] );
+            echo '<meta name="description" content="' . esc_attr( $description ) . '" />' . "\n";
         }
 
     }
