@@ -101,7 +101,7 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         get_field('apple_music_artist_url'),
         get_field('bandcamp_url'),
         get_field('soundcloud_url'),
-    ])
+    ]),
     'representative_of_page' => true,
 ]);
 
