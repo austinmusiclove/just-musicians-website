@@ -47,7 +47,7 @@ function hmm_scripts() {
 
 
     // Home
-    if (is_front_page() or str_starts_with($_SERVER['REQUEST_URI'], '/top')) {
+    if (is_front_page() or str_starts_with($_SERVER['REQUEST_URI'], '/live-music')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
