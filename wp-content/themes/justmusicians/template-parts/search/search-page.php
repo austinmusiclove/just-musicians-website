@@ -200,6 +200,10 @@ $next_page       = $result ? $result['next_page']       : null;
                                     ]);
                                 }
 
+                                get_template_part('template-parts/global/schema/item-list-schema', '', [
+                                    'listings' => $listings,
+                                ]);
+
                             } else {
                                 get_template_part( 'template-parts/global/empty-states/no-search-results');
                             }
