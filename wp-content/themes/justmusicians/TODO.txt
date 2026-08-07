@@ -7,7 +7,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
     SEO
         schema
-            pass in area served on city specific pages
             add more data to the image object schema and video object schema; description for videos
             maybe add venues played and venue schema as well for those
         internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
