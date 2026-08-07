@@ -123,7 +123,7 @@ $schema = [
         'worstRating' => '1',
     ] : null,
     'review'          => $reviews_schema,
-    'video'           => $videos_schema,
+    'subjectOf'       => $videos_schema,
 ];
 
 // Remove any null, empty string, or empty array values recursively

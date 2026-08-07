@@ -1,5 +1,3 @@
-Deploy
-    save permalinks
 Critical bugs
     Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
@@ -160,11 +158,18 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
-    internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
-    keep filter code out of index by lazy loading it
+    rock bands in austin type pages
+        schema
+            add more data to the image object schema and video object schema; description for videos
+            maybe add venues played and venue schema as well for those
+        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
+        keep filter code out of index by lazy loading it
+    single listing pages
+        add description to videos to qualify for rich result for single li
+        stand alone video objects to qualify for rich result
+        figure out what i need to do to get a rich google result with the listing pages
     FAQ Page
     Update about and include schema for founder in org after there is schema for the founder person
-    add listing titles in meta description for rock bands in austin type seo pages
     Remove performances posts from indexing
     Look into registering HM for live music hiring voice search
     *Make artist and other pages not visible when you type the url in the search bar directly
@@ -172,9 +177,6 @@ SEO
         **Venue schema on venue pages with reviews
         **Get knowledge pannel for HireMusicians.com
     register on bing web master
-    schema
-        add more data to the image object schema and video object schema; description for videos
-        maybe add venues played and venue schema as well for those
     add best x in x listacle blog posts
 Glossaries
     add other glossaries section at the bottom of single-glossary
