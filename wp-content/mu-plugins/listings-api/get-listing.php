@@ -172,6 +172,7 @@ function get_youtube_video_data($post_ids) {
             'video_id'   => get_post_meta($video_post_id, 'video_id', true),
             'start_time' => get_post_meta($video_post_id, 'start_time', true),
             'mediatags'  => get_mediatags($video_post_id),
+            'post_date'  => get_the_date('c', $video_post_id),
         ];
     }
 

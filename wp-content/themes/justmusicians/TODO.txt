@@ -1,3 +1,5 @@
+Deploy
+    save permalinks
 Critical bugs
     Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
@@ -5,13 +7,14 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
     SEO
         schema
-            add video objects maybe more images in schema
             regional landing page schema that shows service and area served on city specific pages
             itemlist for directory list schema
+            maybe add venues played and venue schema as well for those
+            add more data to the image object schema and video object schema
         internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
+        keep filter code out of index by lazy loading it
         FAQ Page
         Update about and include schema for founder in org after there is schema for the founder person
-        keep filter code out of index by lazy loading it
 Applications updates for sales
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging

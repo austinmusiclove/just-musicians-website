@@ -29,6 +29,12 @@ $keywords          = wp_list_pluck(get_the_terms(get_the_ID(), 'keyword')       
 $youtube_video_post_ids = get_field('youtube_videos');
 $youtube_video_data     = get_youtube_video_data($youtube_video_post_ids);
 
+$listing_image_urls = [];
+foreach ((array) get_post_meta(get_the_ID(), 'listing_images', true) as $image_id) {
+    $url = wp_get_attachment_image_url($image_id, 'standard-listing');
+    if ($url) { $listing_image_urls[] = $url; }
+}
+
 $venues_combined      = [];
 $verified_venue_ids   = get_field('venues_played_verified', false, false) ?: [];
 $unverified_venue_ids = get_field('venues_played_unverified', false, false) ?: [];
@@ -75,13 +81,15 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'email'       => get_field('email'),
     'genre'       => array_unique(array_merge($genres, $subgenres)),
     'url'         => get_permalink(),
-    'image'       => get_the_post_thumbnail_url(get_the_ID(), 'full') ?: get_the_post_thumbnail_url(get_the_ID(), 'large'),
+    'thumbnail'   => get_the_post_thumbnail_url(get_the_ID(), 'full') ?: get_the_post_thumbnail_url(get_the_ID(), 'large'),
     'city'        => get_field('city'),
     'state'       => get_field('state'),
     'zip_code'    => get_field('zip_code'),
     'rating'      => get_field('rating'),
     'review_count'=> get_field('review_count'),
     'reviews'     => $reviews,
+    'videos'      => $youtube_video_data,
+    'images'      => $listing_image_urls,
     'sameAs'      => array_filter([
         get_field('website'),
         get_field('instagram_url'),
@@ -94,6 +102,7 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         get_field('bandcamp_url'),
         get_field('soundcloud_url'),
     ])
+    'representative_of_page' => true,
 ]);
 
 // Show review modal popup on page load when mdl=review in url

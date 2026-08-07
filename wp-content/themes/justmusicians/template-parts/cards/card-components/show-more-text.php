@@ -1,5 +1,5 @@
 <?php
-$limit      = (int) $args['limit'] ?? 200;
+$limit      = (int) ($args['limit'] ?? 200);
 $text_var   = $args['text_var'];
 $text_color = $args['text_color_class'] ?? 'text-black/50';
 $text_size  = $args['text_size_class']  ?? 'text-14';

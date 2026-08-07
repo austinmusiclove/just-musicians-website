@@ -58,6 +58,7 @@ if (count($listings) > 0) {
             'apple_music_artist_url' => $listing['apple_music_artist_url'],
             'soundcloud_url'         => $listing['soundcloud_url'],
             'youtube_video_data'     => $listing['youtube_video_data'],
+            'listing_image_urls'     => $listing['listing_image_urls'],
             'verified'               => $listing['verified'],
             'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,

@@ -188,10 +188,9 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Bio -->
         <?php if (!empty($args['bio'])) { ?>
-            <div class="mb-4" x-data="{ bio: '<?php echo clean_str_for_doublequotes(wp_strip_all_tags($args['bio'])); ?>' }">
-                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
-                    'text_var' => 'bio',
-                    'limit'    => 450,
+            <div class="mb-4">
+                <?php get_template_part('template-parts/cards/card-components/show-more-text-seo', '', [
+                    'text'  => wp_strip_all_tags($args['bio']),
                 ]); ?>
             </div>
         <?php } ?>
@@ -218,13 +217,15 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'genre'       => $args['genres'],
     'phone'       => $args['phone'],
     'url'         => $args['permalink'],
-    'image'       => $args['thumbnail_url'],
+    'thumbnail'   => $args['thumbnail_url'],
     'city'        => $args['city'],
     'state'       => $args['state'],
     'zip_code'    => $args['zip_code'] ?? '',
     'rating'      => $args['rating'],
     'review_count'=> $args['review_count'],
     'reviews'     => $args['reviews'] ?? [],
+    'videos'      => $args['youtube_video_data'],
+    'images'      => $args['listing_image_urls'] ?? [],
     'sameAs'      => array_filter([
         $args['website'] ?? '',
         $args['facebook_url'] ?? '',
