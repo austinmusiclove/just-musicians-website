@@ -5,14 +5,6 @@ Critical bugs
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
-    SEO
-        schema
-            add more data to the image object schema and video object schema; description for videos
-            maybe add venues played and venue schema as well for those
-        internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
-        keep filter code out of index by lazy loading it
-        FAQ Page
-        Update about and include schema for founder in org after there is schema for the founder person
 Applications updates for sales
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
@@ -168,6 +160,11 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
+    internal links by including links in footer to near by cities same category and same city other categories like The Bash https://www.thebash.com/search/cover-band-austin-tx
+    keep filter code out of index by lazy loading it
+    FAQ Page
+    Update about and include schema for founder in org after there is schema for the founder person
+    add listing titles in meta description for rock bands in austin type seo pages
     Remove performances posts from indexing
     Look into registering HM for live music hiring voice search
     *Make artist and other pages not visible when you type the url in the search bar directly
@@ -175,11 +172,9 @@ SEO
         **Venue schema on venue pages with reviews
         **Get knowledge pannel for HireMusicians.com
     register on bing web master
-    indexing
-        add listing titles in meta description
-        add internal linking for featured pages
-        maybe add artist bios
-        maybe add some kind of page blurb
+    schema
+        add more data to the image object schema and video object schema; description for videos
+        maybe add venues played and venue schema as well for those
     add best x in x listacle blog posts
 Glossaries
     add other glossaries section at the bottom of single-glossary
