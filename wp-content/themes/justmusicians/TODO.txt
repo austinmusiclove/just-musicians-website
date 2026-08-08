@@ -158,7 +158,6 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
-    FAQ Page
     Update about and include schema for founder in org after there is schema for the founder person
     rock bands in austin type pages
         keep filter code out of index by lazy loading it
