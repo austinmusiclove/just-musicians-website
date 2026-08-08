@@ -448,6 +448,7 @@ require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
 require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/lib/inc/robots.php';
+require get_template_directory() . '/lib/inc/404-redirects.php';
 require get_template_directory() . '/seo/seo-rewrite-rules.php';
 require get_template_directory() . '/seo/seo-routes.php';
 require get_template_directory() . '/seo/title-tags.php';

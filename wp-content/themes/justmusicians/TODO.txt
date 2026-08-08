@@ -168,7 +168,6 @@ SEO
         add description to videos to qualify for rich result for single li
         stand alone video objects to qualify for rich result
         figure out what i need to do to get a rich google result with the listing pages
-    Remove performances posts from indexing
     Look into registering HM for live music hiring voice search
     *Make artist and other pages not visible when you type the url in the search bar directly
     *Ask gemini what to do to rank
