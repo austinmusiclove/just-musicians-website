@@ -24,15 +24,15 @@ $faq_categories = [
                 'answer'   => 'HireMusicians.com is a free online marketplace for live musicians.',
             ],
             [
-                'question' => 'Is HireMusicians really 100% free to use?',
-                'answer'   => 'Yes. HireMusicians is completely free for both buyers and musicians. There are no subscription fees, service charges, or lead fees charged to musicians.',
+                'question' => 'Is HireMusicians.com really 100% free to use?',
+                'answer'   => 'Yes. HireMusicians.com is completely free for both buyers and musicians. There are no subscription fees, service charges, or lead fees charged to musicians.',
             ],
             [
                 'question' => 'Why is the platform free? What\'s the catch?',
-                'answer'   => 'No catch. HireMusicians was built to connect live talent directly with organizers without taking a percentage of musicians\' hard-earned gig pay or charging hosts extra service fees. In the future, the platform intends to offer optional escrow services for people who prefer to pay the platform instead of musicians directly. However, escrow and the fees the come with it will be noncompulsary.',
+                'answer'   => 'No catch. HireMusicians.com was built to connect live talent directly with organizers without taking a percentage of musicians\' hard-earned gig pay or charging hosts extra service fees. In the future, the platform intends to offer optional escrow services for people who prefer to pay the platform instead of musicians directly. However, escrow and the fees the come with it will be noncompulsary.',
             ],
             [
-                'question' => 'How does HireMusicians work?',
+                'question' => 'How does HireMusicians.com work?',
                 'answer'   => 'Musicians set up a listing to appear on the platform. Event hosts browse or search for musicians by location, genre, ensemble size and more. They can then contact musicians directly outside the platform or send them an inquiry in the platform. When a musician gets an inquiry, they will get an email notification to respond to the inquiry on the platform. The buyer can then evaluate their responses and initiate a chat with musicians on the platform to discuss the job further. Musicians do not gain access to buyer contact information unless it is directly shared with them by the buyer. When a musician is booked on HireMusicians.com, payment must be handled outside the platform.',
             ],
         ],
