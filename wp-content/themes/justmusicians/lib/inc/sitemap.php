@@ -95,7 +95,7 @@ class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
 
         foreach ( get_seo_location_slugs() as $location ) {
             foreach ( get_seo_categories_for_location( $location ) as $category ) {
-                $url = home_url( "/live-music/{$category}/{$location}/" );
+                $url = home_url( "/live-music/{$location}/{$category}/" );
                 $urls[] = [
                     'loc' => $url,
                     'lastmod' => current_time( 'Y-m-d\TH:i:sP' ),

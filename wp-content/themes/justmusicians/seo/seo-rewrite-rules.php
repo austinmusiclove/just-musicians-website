@@ -3,7 +3,7 @@
 function seo_pages_rewrite_rules() {
     add_rewrite_rule(
         '^live-music/([^/]+)/([^/]+)/?$',
-        'index.php?seo-category=$matches[1]&seo-location=$matches[2]',
+        'index.php?seo-location=$matches[1]&seo-category=$matches[2]',
         'bottom'
     );
 }
