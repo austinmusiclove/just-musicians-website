@@ -52,6 +52,14 @@ $faq_categories = [
                 'question' => 'What should I include in my initial booking message to a musician?',
                 'answer'   => 'To get a fast, accurate quote, include the date and time of your event, the venue and its address, expected performance length, your budget, and any special requests. If possible, include information on parking and proximity to the stage. Specify who will be providing the equipment and sound set up for the show whether it is the musicians or a third party.',
             ],
+            [
+                'question' => 'Can I create favorites lists of musicians?',
+                'answer'   => 'Yes. You can save musicians to a favorites list or create your own custom lists to keep track of the acts you\'re interested in.',
+            ],
+            [
+                'question' => 'Can I make a job posting to collect applicants?',
+                'answer'   => 'Yes. Create an application and share the link on your website or social media. Musicians who want to play at your venue, festival, or event can apply directly. You can review every applicant right on HireMusicians.com. You can even collect quotes, draw, and availability from your applicants for your events.',
+            ],
         ],
     ],
     [
@@ -63,7 +71,7 @@ $faq_categories = [
             ],
             [
                 'question' => 'Who can join HireMusicians.com?',
-                'answer'   => 'Any musician, full band, DJ, or other musical act offering live music services can create a listing.',
+                'answer'   => 'Any musician, full band, DJ, or other musical act in the United States or Canada offering live music services can create a listing.',
             ],
             [
                 'question' => 'How do I make my musician profile stand out in search results?',
