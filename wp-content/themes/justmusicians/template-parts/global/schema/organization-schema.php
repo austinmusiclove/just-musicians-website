@@ -22,6 +22,15 @@ $schema = [
             'availableLanguage' => 'English',
         ],
     ],
+    'founder'  => [
+        '@type'       => 'Person',
+        '@id'         => home_url('/about/') . '#founder',
+        'name'        => 'John Filippone',
+        'jobTitle'    => 'Founder',
+        'image'       => 'https://hiremusicians.com/wp-content/uploads/2026/08/headshot-large.jpg',
+        'sameAs'      => 'https://www.instagram.com/hiremoremusicians',
+        'description' => 'John Filippone is a musician and software engineer from Austin, Texas, and the founder of HireMusicians.com.',
+    ],
 ];
 
 ?>
