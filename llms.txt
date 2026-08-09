@@ -30,6 +30,14 @@
 - Default location: Austin, Texas
 - Location-aware search using IP geolocation
 
+## API
+
+- Find live music listings programmatically via the public API
+- OpenAPI spec: https://hiremusicians.com/openapi.json
+- Endpoint: GET https://hiremusicians.com/api/v1/musicians/live-music
+- Search by postal code (required `zip` param) and filter by `genres` and `ensemble_size`
+- Returns only essential musician fields (name, genres, city, state, description, bio, thumbnail_url, permalink)
+
 ## Credits
 
 - Theme by Devon Bussell

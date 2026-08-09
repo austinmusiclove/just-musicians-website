@@ -1,0 +1,239 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hire Musicians Public Listings API",
+    "description": "Public API for discovering live music listings (musicians) on Hire Musicians. Returns only essential fields to keep responses small.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Hire Musicians",
+      "url": "https://hiremusicians.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://hiremusicians.com"
+    }
+  ],
+  "paths": {
+    "/api/v1/musicians/live-music": {
+      "get": {
+        "summary": "Find live music listings near a postal code",
+        "description": "Searches verified live music listings within a radius of the provided US or Canada postal code. Results are paginated 10 per page and sorted by search rank.",
+        "operationId": "findLiveMusic",
+        "parameters": [
+          {
+            "name": "zip",
+            "in": "query",
+            "required": true,
+            "description": "US or Canada postal code to search around, e.g. 78701.",
+            "schema": {
+              "type": "string",
+              "example": "78701"
+            }
+          },
+          {
+            "name": "genres",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated list of genres to filter by. Multiple genres are combined with AND (listings must match all).",
+            "schema": {
+              "type": "string",
+              "example": "Rock,Country",
+              "enum": [
+                "Avant-Garde",
+                "Blues",
+                "Christian",
+                "Classical",
+                "Country",
+                "Electronic",
+                "Folk",
+                "Funk",
+                "Hip Hop",
+                "Jazz",
+                "Latin",
+                "Metal",
+                "Pop",
+                "R&B",
+                "Reggae",
+                "Rock",
+                "Soul"
+              ]
+            }
+          },
+          {
+            "name": "ensemble_size",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated list of ensemble sizes to filter by. Multiple sizes are combined with AND (listings must match all).",
+            "schema": {
+              "type": "string",
+              "example": "Solo,Duo",
+              "enum": [
+                "Solo",
+                "Duo",
+                "Trio",
+                "4-6",
+                "7+"
+              ]
+            }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "required": false,
+            "description": "Search radius in miles from the postal code. Defaults to 40.",
+            "schema": {
+              "type": "number",
+              "default": 40,
+              "example": 40
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Page number for pagination. Results are returned 10 per page. Defaults to 1.",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with matching musicians.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MusiciansResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid zip parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Musician": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Performer or band name."
+          },
+          "genres": {
+            "type": "array",
+            "description": "Genres this musician plays.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "city": {
+            "type": "string",
+            "description": "City the musician is based in."
+          },
+          "state": {
+            "type": "string",
+            "description": "State the musician is based in."
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of the musician."
+          },
+          "bio": {
+            "type": "string",
+            "description": "Longer biography of the musician."
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the musician's thumbnail image."
+          },
+          "permalink": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the musician's profile on Hire Musicians."
+          }
+        }
+      },
+      "MusiciansResponse": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "object",
+            "description": "The resolved location of the search.",
+            "properties": {
+              "zip": { "type": "string" },
+              "city": { "type": "string" },
+              "state": { "type": "string" },
+              "lat": { "type": "number" },
+              "lng": { "type": "number" }
+            }
+          },
+          "query": {
+            "type": "object",
+            "description": "Echo of the applied filters.",
+            "properties": {
+              "distance": { "type": "number" },
+              "genres": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "ensemble_size": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "verified": { "type": "boolean" },
+              "page": { "type": "integer" }
+            }
+          },
+          "max_num_results": {
+            "type": "integer",
+            "description": "Total number of matching musicians across all pages."
+          },
+          "next_page": {
+            "type": "integer",
+            "description": "The next page number, or a value past max_num_results when there are no more results."
+          },
+          "musicians": {
+            "type": "array",
+            "description": "Matching musicians for this page.",
+            "items": {
+              "$ref": "#/components/schemas/Musician"
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Short error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          },
+          "zip": {
+            "type": "string",
+            "description": "The invalid zip value, when provided."
+          }
+        }
+      }
+    }
+  }
+}

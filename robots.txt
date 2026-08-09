@@ -1,0 +1,15 @@
+User-agent: GPTBot
+Allow: /
+Allow: /musicians/
+Allow: /api/v1/
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://hiremusicians.com/wp-sitemap.php
