@@ -7,8 +7,8 @@ $schema = [
     '@type'       => 'AboutPage',
     '@id'         => $about_url . '#webpage',
     'url'         => $about_url,
-    'name'        => 'About HireMusicians.com',
-    'description' => 'Learn about HireMusicians.com, our philosophy, and founder John Filippone.',
+    'name'        => 'About Hire Musicians',
+    'description' => 'Learn about Hire Musicians, our philosophy, and founder John Filippone.',
     'isPartOf'    => ['@id' => home_url()],
     'about'       => ['@id' => home_url()],
     'mainEntity'  => [
@@ -18,7 +18,7 @@ $schema = [
         'jobTitle'    => 'Founder',
         'image'       => 'https://hiremusicians.com/wp-content/uploads/2026/08/headshot-large.jpg',
         'worksFor'    => ['@id' => home_url()],
-        'description' => 'John Filippone is a musician and software engineer from Austin, Texas, and the founder of HireMusicians.com.',
+        'description' => 'John Filippone is a musician and software engineer from Austin, Texas, and the founder of Hire Musicians.',
     ],
 ];
 

@@ -1,6 +1,6 @@
-# Hire More Musicians
+# Hire Musicians
 
-> A marketplace platform connecting people who need to hire live music with musicians, bands, and DJs. Currently focused on Austin, Texas.
+> A free online marketplace platform for live musicians. Currently focused on Austin, Texas.
 
 ## Key Sections
 

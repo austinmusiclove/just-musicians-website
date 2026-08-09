@@ -10,7 +10,7 @@ get_header();
 <header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
     <div class="container relative">
         <h1 class="font-bold text-32 md:text-36 lg:text-40">Frequently Asked Questions</h1>
-        <p class="text-20 text-brown-dark-1 mt-4 max-w-2xl">Everything you need to know about hiring live music and getting hired on HireMusicians.com.</p>
+        <p class="text-20 text-brown-dark-1 mt-4 max-w-2xl">Everything you need to know about hiring live music and getting hired on Hire Musicians.</p>
     </div>
 </header>
 
@@ -20,20 +20,20 @@ $faq_categories = [
         'heading' => 'General & How It Works',
         'items' => [
             [
-                'question' => 'What is HireMusicians.com?',
-                'answer'   => 'HireMusicians.com is a free online marketplace for live musicians.',
+                'question' => 'What is Hire Musicians?',
+                'answer'   => 'Hire Musicians is a free online marketplace for live musicians.',
             ],
             [
-                'question' => 'Is HireMusicians.com really 100% free to use?',
-                'answer'   => 'Yes. HireMusicians.com is completely free for both buyers and musicians. There are no subscription fees, service charges, or lead fees charged to musicians.',
+                'question' => 'Is Hire Musicians really 100% free to use?',
+                'answer'   => 'Yes. Hire Musicians is completely free for both buyers and musicians. There are no subscription fees, service charges, or lead fees charged to musicians.',
             ],
             [
                 'question' => 'Why is the platform free? What\'s the catch?',
-                'answer'   => 'No catch. HireMusicians.com was built to connect live talent directly with organizers without taking a percentage of musicians\' hard-earned gig pay or charging hosts extra service fees. In the future, the platform intends to offer optional escrow services for people who prefer to pay the platform instead of musicians directly. However, escrow and the fees the come with it will be noncompulsary.',
+                'answer'   => 'No catch. Hire Musicians was built to connect live talent directly with organizers without taking a percentage of musicians\' hard-earned gig pay or charging hosts extra service fees. In the future, the platform intends to offer optional escrow services for people who prefer to pay the platform instead of musicians directly. However, escrow and the fees the come with it will be noncompulsary.',
             ],
             [
-                'question' => 'How does HireMusicians.com work?',
-                'answer'   => 'Musicians set up a listing to appear on the platform. Event hosts browse or search for musicians by location, genre, ensemble size and more. They can then contact musicians directly outside the platform or send them an inquiry in the platform. When a musician gets an inquiry, they will get an email notification to respond to the inquiry on the platform. The buyer can then evaluate their responses and initiate a chat with musicians on the platform to discuss the job further. Musicians do not gain access to buyer contact information unless it is directly shared with them by the buyer. When a musician is booked on HireMusicians.com, payment must be handled outside the platform.',
+                'question' => 'How does Hire Musicians work?',
+                'answer'   => 'Musicians set up a listing to appear on the platform. Event hosts browse or search for musicians by location, genre, ensemble size and more. They can then contact musicians directly outside the platform or send them an inquiry in the platform. When a musician gets an inquiry, they will get an email notification to respond to the inquiry on the platform. The buyer can then evaluate their responses and initiate a chat with musicians on the platform to discuss the job further. Musicians do not gain access to buyer contact information unless it is directly shared with them by the buyer. When a musician is booked on Hire Musicians, payment must be handled outside the platform.',
             ],
         ],
     ],
@@ -46,7 +46,7 @@ $faq_categories = [
             ],
             [
                 'question' => 'How do payments work? Do I pay through the website?',
-                'answer'   => 'Payment terms and methods are arranged directly between you and the performer. Currently, HireMusicians.com does not handle payments and does not take any discovery fee for using the platform.',
+                'answer'   => 'Payment terms and methods are arranged directly between you and the performer. Currently, Hire Musicians does not handle payments and does not take any discovery fee for using the platform.',
             ],
             [
                 'question' => 'What should I include in my initial booking message to a musician?',
@@ -58,7 +58,7 @@ $faq_categories = [
             ],
             [
                 'question' => 'Can I make a job posting to collect applicants?',
-                'answer'   => 'Yes. Create an application and share the link on your website or social media. Musicians who want to play at your venue, festival, or event can apply directly. You can review every applicant right on HireMusicians.com. You can even collect quotes, draw, and availability from your applicants for your events.',
+                'answer'   => 'Yes. Create an application and share the link on your website or social media. Musicians who want to play at your venue, festival, or event can apply directly. You can review every applicant right on Hire Musicians. You can even collect quotes, draw, and availability from your applicants for your events.',
             ],
         ],
     ],
@@ -66,11 +66,11 @@ $faq_categories = [
         'heading' => 'For Musicians & Performers',
         'items' => [
             [
-                'question' => 'Does HireMusicians.com take any commission from the gigs I land?',
+                'question' => 'Does Hire Musicians take any commission from the gigs I land?',
                 'answer'   => 'No. You keep 100% of every dollar you earn from gigs booked through the platform.',
             ],
             [
-                'question' => 'Who can join HireMusicians.com?',
+                'question' => 'Who can join Hire Musicians?',
                 'answer'   => 'Any musician, full band, DJ, or other musical act in the United States or Canada offering live music services can create a listing.',
             ],
             [

@@ -158,9 +158,15 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
-    register on bing web master
-    Look into registering HM for live music hiring voice search
-    **Get knowledge pannel for HireMusicians.com
+    LLM Friendly api for finding musicians
+        Create open api for LLMs
+        expose api spec
+    get partner backlinks (vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis)
+    get press (voyage austin, blogs, new stations, news papers)
+    single listing pages
+        figure out what i need to do to get a rich google result with the listing pages
+        add description to videos to qualify for rich result for single listing
+        stand alone video objects to qualify for rich result
     rock bands in austin type pages
         maybe add venues played and venue schema as well for those
         keep filter code out of index by lazy loading it
@@ -168,13 +174,10 @@ SEO
         add other location same category internal links
         add location pages
         add breadcrumb
-    single listing pages
-        figure out what i need to do to get a rich google result with the listing pages
-        add description to videos to qualify for rich result for single listing
-        stand alone video objects to qualify for rich result
     *Ask gemini what to do to rank
         **Venue schema on venue pages with reviews
     add best x in x listacle blog posts
+    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
 Glossaries
     add other glossaries section at the bottom of single-glossary
 Users

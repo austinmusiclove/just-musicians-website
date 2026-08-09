@@ -5,7 +5,7 @@ function send_creator_new_application_email($user_id, $application_id) {
     $user_data = get_userdata($user_id);
     $email = $user_data->user_email;
     $subject = 'Your application has been created!';
-    $message = 'Thank you for creating an application on HireMusicians.com. You can edit your application and review your applicants here: ' . $permalink;
+    $message = 'Thank you for creating an application on Hire Musicians. You can edit your application and review your applicants here: ' . $permalink;
     send_email_safely($email, $subject, $message);
 }
 
