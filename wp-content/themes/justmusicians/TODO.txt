@@ -4,13 +4,29 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
 Applications updates for sales
+    Make it so you don't have to log in right away to see the form. But the result is that an account is created
+        alter submit application for not logged in users
+            require email
+            create pending listing and pending application submission
+            create tmp code
+            send email to finish application
+            on success screen redirect to page where they can sign up
+        page to sign up to complete application
+            tmp code create listing flow needs to set zip code
+            add function to complete application by tmp code
+                copy add listing by invite code function
+                publish listings in the tmp code
+                publish all application submissions with the listing ids
+                invalidate tmp code after success
+                send success email
+                redirect to listings page to edit listing
+    fix application card so that link does not blend in with description
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
-    change edit submitted application to either resubmit or withdraw
-    fix application card so that link does not blend in with description
     Add draw and price options for application and add them to applicant card
     Add venue and location
     Add two listing images on applicant cards
+    change edit submitted application to either resubmit or withdraw
     Tests single application
         update application title
         update application description
@@ -20,10 +36,6 @@ Applications updates for sales
         create submitted application
         make sure new listing ends up in authors listings user meta list
         make sure disabled submit at the right time and make sure you can't submit without required fields
-    Make it so you don't have to log in right away to see the form. But the result is that an account is created
-        create pending listing and pending application submission
-        on success screen require sign up to complete application; when user signs up the listing and submitted application become published
-        if pending application submission is created and user is not registered in 24 hours, send email with link to sign up to complete submission
     Sorting and organizing
         Earmark or favorite certain applicants
         Filter by draw and price
@@ -72,6 +84,7 @@ Applications Release
         Recurring events
             Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Get devon to fix design
+        Send inquiry modal for existing events
         Applications empty state
         Applications card
         Single application page
@@ -158,7 +171,15 @@ DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
 SEO
-    get partner backlinks (vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis)
+    backlinks
+        get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
+        free verification for artist backlink
+        artist spotlight article in exchange for backlink to article and HM profile link
+        get venue backlinks by doing x type venues in x city blog posts and asking them to link it on their site because it will get better seo traffic if the article has backlinks from the actual venues
+        get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+        get press backlinks
+        steal competitor backlinks by using seo tool to findout who links to them
+    system for keeping data accurate by scraping artist websites and comparing information
     get press (voyage austin, blogs, new stations, news papers)
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
