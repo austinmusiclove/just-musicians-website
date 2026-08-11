@@ -15,7 +15,7 @@ $listings_options[] = [
 ];
 ?>
 
-<div class="relative"
+<div class="relative" data-testid="listing-dropdown"
     x-data="{
         options: <?php echo clean_arr_for_doublequotes($listings_options); ?>,
         selected: {},
