@@ -4,22 +4,17 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
 Applications updates for sales
-    Make it so you don't have to log in right away to see the form. But the result is that an account is created
-        alter submit application for not logged in users
-            require email
-            create pending listing and pending application submission
-            create tmp code
-            send email to finish application
-            on success screen redirect to page where they can sign up
-        page to sign up to complete application
-            tmp code create listing flow needs to set zip code
-            add function to complete application by tmp code
-                copy add listing by invite code function
-                publish listings in the tmp code
-                publish all application submissions with the listing ids
-                invalidate tmp code after success
-                send success email
-                redirect to listings page to edit listing
+    Test submit application
+        lpc parsing
+            logged in no lpc - display form
+            logged out no lpc - display form
+            logged in invalid lpc - err
+            logged out invalid lpc - err
+            logged in valid lpc - process and display result
+            logged out valid lpc - successful saved submission and call to sign up
+        logged in existing listing with availability in application
+        logged in new listing with availability in application
+        not logged in (new listing) with availability in application
     fix application card so that link does not blend in with description
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
@@ -179,6 +174,7 @@ SEO
         get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
         get press backlinks
         steal competitor backlinks by using seo tool to findout who links to them
+    price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     get press (voyage austin, blogs, new stations, news papers)
     single listing pages

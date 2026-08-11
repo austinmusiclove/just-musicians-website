@@ -13,7 +13,7 @@
             <div class="grow relative">
                 <label for="listing_email" class="mb-1 inline-block">Email (not public)</label>
                 <img class="h-5 absolute bottom-2.5 left-3" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" />
-                <input class="has-icon" type="text" id="listing_email" name="listing_email" autocomplete="email" placeholder="example@example.com" title="example@example.com" x-model="pEmail" >
+                <input class="has-icon" type="text" id="listing_email" name="listing_email" autocomplete="email" placeholder="example@example.com" title="example@example.com" required x-model="pEmail" >
             </div>
             <!-- Phone -->
             <div class="grow relative">

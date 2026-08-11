@@ -2,6 +2,7 @@
 
 $args = get_sanitized_application_submission_args();
 $args['meta_input']['application'] = (int) get_query_var('application-id');
+$args['meta_input']['listing']     = (int) get_query_var('listing-id');
 
 $result = submit_application($args);
 if (is_wp_error($result)) {

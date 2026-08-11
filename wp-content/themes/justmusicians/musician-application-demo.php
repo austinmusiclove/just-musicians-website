@@ -10,6 +10,7 @@ $title = get_post_meta($application_id, 'title', true);
 $description = get_post_meta($application_id, 'description', true);
 $events = get_application_events($application_id);
 
+
 if (!$application_id || !$title) {
     wp_safe_redirect(site_url());
     exit;
@@ -46,7 +47,6 @@ get_header();
 
             <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
                 'application_id'  => $application_id,
-                'current_user_id' => $current_user_id,
                 'user_listings'   => $user_listings,
                 'events'          => $events,
                 'demo'            => true,

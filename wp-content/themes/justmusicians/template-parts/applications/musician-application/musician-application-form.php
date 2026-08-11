@@ -93,7 +93,7 @@
 >
 
     <!-- Listing Dropdown -->
-    <?php if ($args['current_user_id'] and count($args['user_listings']) > 0) { ?>
+    <?php if (count($args['user_listings']) > 0) { ?>
     <?php get_template_part('template-parts/applications/musician-application/listing-dropdown', '', [
         'listings'           => $args['user_listings'],
         'parent_select_func' => 'onListingSelect',
