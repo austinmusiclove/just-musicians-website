@@ -24,6 +24,13 @@ export function wpCliDeleteUser(userEmail) {
     );
 }
 
+export function wpCliSetUserMeta(userEmail, key, value) {
+    execSync(
+        `wp user meta update "${userEmail}" "${key}" '${JSON.stringify(value)}' --format=json --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+}
+
 export function wpCliDeleteUsers(userEmails) {
     if (userEmails.length) {
         execSync(

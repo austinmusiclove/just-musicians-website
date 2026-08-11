@@ -6,8 +6,6 @@ Critical bugs
 Applications updates for sales
     Test submit application
         lpc parsing
-            logged in no lpc - display form
-            logged out no lpc - display form
             logged in invalid lpc - err
             logged out invalid lpc - err
             logged in valid lpc - process and display result

@@ -106,7 +106,7 @@
     </div>
 
     <!-- Application Submission Inputs -->
-    <div class="has-border p-0">
+    <div class="has-border p-0" data-testid="application-submission-inputs">
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Personalized Message</span>
         </label>
