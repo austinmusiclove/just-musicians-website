@@ -6,9 +6,6 @@ Critical bugs
     Make sure prompting to add org and job title after sign up works
 Applications updates for sales
     Test submit application
-        lpc parsing
-            logged in valid lpc - process and display result
-            logged out valid lpc - successful saved submission and call to sign up
         logged in existing listing with availability in application
         logged in new listing with availability in application
         not logged in (new listing) with availability in application

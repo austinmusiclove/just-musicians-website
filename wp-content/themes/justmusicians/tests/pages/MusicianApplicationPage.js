@@ -9,6 +9,8 @@ export class MusicianApplicationPage extends ThemePage {
         this.invalidLpc      = page.getByTestId('invalid-lpc');
         this.applicationTitle = page.getByTestId('musician-application-title');
         this.applicationDescription = page.getByTestId('musician-application-description');
+        this.successfulSubmissionAnon = page.getByTestId('successful-submission-anon');
+        this.successfulSubmissionNewListing = page.getByTestId('successful-submission-new-listing');
     }
 
     async navigateByApplicationId(applicationId, lpc = '') {

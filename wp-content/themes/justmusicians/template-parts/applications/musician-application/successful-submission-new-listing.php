@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center gap-4 my-16 text-center">
+<div class="flex flex-col items-center gap-4 my-16 text-center" data-testid="successful-submission-new-listing">
     <h2 class="font-bold text-25">Your application has been submitted!</h2>
     <p class="text-16 text-black/80">Your new musician listing has been created. It is now searchable on Hire Musicians. You can also edit your listing and changes will be automatically reflected in your application submission.</p>
     <div class="flex gap-4 mt-2">

@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
-import { test } from '../fixtures/fixtures.js';
-import { createUser } from '../data/user_factory.js';
-import { createApplicationPost } from '../data/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../data/wp_cli.js';
+import { test } from '../../fixtures/fixtures.js';
+import { createUser } from '../../data/user_factory.js';
+import { createApplicationPost } from '../../data/application_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
 
 
 test.describe('Musician Application logged in', () => {

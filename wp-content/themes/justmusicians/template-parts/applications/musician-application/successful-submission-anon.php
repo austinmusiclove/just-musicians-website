@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center gap-4 mt-16 text-center">
+<div class="flex flex-col items-center gap-4 mt-16 text-center" data-testid="successful-submission-anon">
     <h2 class="font-bold text-25">Your application submission has been saved!</h2>
     <p class="text-16 text-black/80">We have saved your application submission for "<?php echo $args['title']; ?>".</p>
     <p class="text-16 text-black/80">We need to verify you are a real person before sending it to the reviewer. Please create an account to complete your submission.</p>

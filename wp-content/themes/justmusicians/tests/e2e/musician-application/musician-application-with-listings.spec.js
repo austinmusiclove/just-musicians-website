@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
-import { test } from '../fixtures/fixtures.js';
-import { createUser } from '../data/user_factory.js';
-import { createApplicationPost } from '../data/application_factory.js';
-import { createListingPost } from '../data/listing_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliSetUserMeta, wpCliDeletePost } from '../data/wp_cli.js';
+import { test } from '../../fixtures/fixtures.js';
+import { createUser } from '../../data/user_factory.js';
+import { createApplicationPost } from '../../data/application_factory.js';
+import { createListingPost } from '../../data/listing_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliSetUserMeta, wpCliDeletePost } from '../../data/wp_cli.js';
 
 
 test.describe('Musician Application with listings', () => {
@@ -12,6 +12,7 @@ test.describe('Musician Application with listings', () => {
     let applicationAuthorUserId;
     let applicationId;
     let testUser;
+    let testUserId;
     let listingId;
 
     test.beforeAll(async () => {
