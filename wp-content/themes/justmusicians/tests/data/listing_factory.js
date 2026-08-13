@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { wpCliCreatePost } from './wp_cli.js';
 
 const DEFAULT_THUMBNAIL_URL = 'https://picsum.photos/seed/listing/200';
 
@@ -15,4 +16,23 @@ export function createListing(overrides = {}) {
         verified: faker.datatype.boolean(),
         ...overrides,
     };
+}
+
+export function createListingPost({ authorId, status = 'publish', overrides = {} } = {}) {
+    const listing = createListing(overrides);
+    return wpCliCreatePost({
+        postType: 'listing',
+        title: listing.name,
+        status,
+        authorId,
+        meta: {
+            name: listing.name,
+            description: listing.description,
+            city: listing.city,
+            state: listing.state,
+            zip_code: listing.zip,
+            bio: listing.bio,
+            verified: listing.verified,
+        },
+    });
 }

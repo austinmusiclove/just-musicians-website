@@ -3,23 +3,24 @@ Critical bugs
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
+    Make sure prompting to add org and job title after sign up works
 Applications updates for sales
     Test submit application
         lpc parsing
-            logged in invalid lpc - err
-            logged out invalid lpc - err
             logged in valid lpc - process and display result
             logged out valid lpc - successful saved submission and call to sign up
         logged in existing listing with availability in application
         logged in new listing with availability in application
         not logged in (new listing) with availability in application
     fix application card so that link does not blend in with description
+    application description does not handle bullets
     if event is deleted remove it from applications or just do not show events that are not published
     showing &nbsp; in listing card description when new line; didn't replicate on staging
     Add draw and price options for application and add them to applicant card
-    Add venue and location
     Add two listing images on applicant cards
     change edit submitted application to either resubmit or withdraw
+    show availability dates on the applicant card
+    add ensemble size to applicant view
     Tests single application
         update application title
         update application description
@@ -138,6 +139,7 @@ Single Event page
     Send message button should send a message that has the proposal/event attached to it so that it can be displayed in the convo nicely
     Conversation group for events; link from send message success on event applicant card
     Add a way to click to convo in send message modal for a particular listing if one exists
+    **add start a search at the bottom of suggestions results in empty and not empty suggestions state
 Add My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View
@@ -177,7 +179,7 @@ SEO
     get press (voyage austin, blogs, new stations, news papers)
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
-        add description to videos to qualify for rich result for single listing
+        **add description to videos to qualify for rich result for single listing (this is also coming up as an error in search console so generic description is fine)
         stand alone video objects to qualify for rich result
     rock bands in austin type pages
         maybe add venues played and venue schema as well for those
@@ -193,7 +195,8 @@ Glossaries
     add other glossaries section at the bottom of single-glossary
 Users
     ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
-    **retroactively set user's profile image to their first listing's cover photo if they don't have one
+    **retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
+    *Automatically populate profile image with gmail image if they have one
     add default location setting in account settings
 Reviews
     **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)

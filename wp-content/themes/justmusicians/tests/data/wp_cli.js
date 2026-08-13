@@ -41,7 +41,7 @@ export function wpCliDeleteUsers(userEmails) {
 }
 
 export function wpCliCreatePost({ postType, title, status = 'publish', authorId, meta = {} }) {
-    const metaJson = JSON.stringify(meta);
+    const metaJson = JSON.stringify(meta).replace(/'/g, `'\\''`);
     const output = execSync(
         `wp post create --post_type=${postType} --post_title="${title}" --post_status=${status} --post_author=${authorId} --meta_input='${metaJson}' --path=${WP_PATH} --porcelain`,
         { encoding: 'utf-8' }

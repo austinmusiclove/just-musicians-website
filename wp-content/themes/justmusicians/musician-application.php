@@ -41,10 +41,10 @@ get_header();
 
             <?php if (empty($lpc)) { ?>
 
-                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
+                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
 
                 <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak><?php echo wpautop(wp_kses_post($description)); ?></div>
+                    <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak data-testid="musician-application-description"><?php echo wpautop(wp_kses_post($description)); ?></div>
                 <?php } ?>
 
                 <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
