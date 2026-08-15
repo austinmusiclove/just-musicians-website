@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center gap-4 my-16 text-center" data-testid="invalid-lpc">
+<div class="flex flex-col items-center gap-4 my-16 text-center" data-testid="invalid-lic">
     <h2 class="font-bold text-25">Invalid Link!</h2>
     <p class="text-16 text-black/80">This link has expired or is invalid. Try resubmitting the application.</p>
     <div class="flex gap-4 mt-2">
