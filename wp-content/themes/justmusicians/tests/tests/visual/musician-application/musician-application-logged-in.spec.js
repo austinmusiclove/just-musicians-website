@@ -1,11 +1,11 @@
 import { expect } from '@playwright/test';
-import { test } from '../../fixtures/fixtures.js';
-import { createUser } from '../../data/user_factory.js';
-import { createApplicationPost } from '../../data/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
+import { test } from '../../../fixtures/fixtures.js';
+import { createUser } from '../../../data/user_factory.js';
+import { createApplicationPost } from '../../../data/application_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
-test.describe('Musician Application logged in', () => {
+test.describe('Visual - Musician Application - Logged in - No listings', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
@@ -28,7 +28,7 @@ test.describe('Musician Application logged in', () => {
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('user with no listings sees the listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
+    test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
         await musicianApplicationPage.navigateByApplicationId(applicationId);
@@ -39,7 +39,7 @@ test.describe('Musician Application logged in', () => {
         await expect(musicianApplicationPage.applicationSubmissionInputs).toBeVisible();
     });
 
-    test('sees the invalid link message instead of the form', async ({ musicianApplicationPage }) => {
+    test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
         await musicianApplicationPage.navigateByApplicationId(applicationId, 'test');

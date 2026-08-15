@@ -1,11 +1,11 @@
 import { expect } from '@playwright/test';
-import { test } from '../../fixtures/fixtures.js';
-import { createUser } from '../../data/user_factory.js';
-import { createApplicationPost } from '../../data/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
+import { test } from '../../../fixtures/fixtures.js';
+import { createUser } from '../../../data/user_factory.js';
+import { createApplicationPost } from '../../../data/application_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
-test.describe('Musician Application', () => {
+test.describe('Visual - Musician Application - Logged out', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
@@ -24,7 +24,7 @@ test.describe('Musician Application', () => {
         if (applicationAuthorUser) { wpCliDeleteUser(applicationAuthorUser.email); }
     });
 
-    test('not logged in user sees the listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
+    test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateByApplicationId(applicationId);
         await expect(musicianApplicationPage.applicationTitle).toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).toBeVisible();
@@ -33,7 +33,7 @@ test.describe('Musician Application', () => {
         await expect(musicianApplicationPage.applicationSubmissionInputs).toBeVisible();
     });
 
-    test('not logged in user with an invalid lic code sees the invalid link message', async ({ musicianApplicationPage }) => {
+    test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateByApplicationId(applicationId, 'test');
         await expect(musicianApplicationPage.invalidLic).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();

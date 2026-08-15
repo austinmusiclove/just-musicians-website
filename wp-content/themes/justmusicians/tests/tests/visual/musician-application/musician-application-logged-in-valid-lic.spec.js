@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
-import { test } from '../../fixtures/fixtures.js';
-import { createUser } from '../../data/user_factory.js';
-import { createApplicationPost } from '../../data/application_factory.js';
-import { createListingPost } from '../../data/listing_factory.js';
-import { createTmpCodePost } from '../../data/tmp_code_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
+import { test } from '../../../fixtures/fixtures.js';
+import { createUser } from '../../../data/user_factory.js';
+import { createApplicationPost } from '../../../data/application_factory.js';
+import { createListingPost } from '../../../data/listing_factory.js';
+import { createTmpCodePost } from '../../../data/tmp_code_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
-test.describe('Musician Application logged in valid lic', () => {
+test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
@@ -46,7 +46,7 @@ test.describe('Musician Application logged in valid lic', () => {
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('sees the successful submission content instead of the form', async ({ musicianApplicationPage }) => {
+    test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
         await musicianApplicationPage.navigateByApplicationId(applicationId, lic);

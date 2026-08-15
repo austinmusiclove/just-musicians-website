@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
-import { test } from '../../fixtures/fixtures.js';
-import { createUser } from '../../data/user_factory.js';
-import { createApplicationPost } from '../../data/application_factory.js';
-import { createListingPost } from '../../data/listing_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliSetUserMeta, wpCliDeletePost } from '../../data/wp_cli.js';
+import { test } from '../../../fixtures/fixtures.js';
+import { createUser } from '../../../data/user_factory.js';
+import { createApplicationPost } from '../../../data/application_factory.js';
+import { createListingPost } from '../../../data/listing_factory.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliSetUserMeta, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
-test.describe('Musician Application with listings', () => {
+test.describe('Visual - Musician Application - Logged in - One listings', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
@@ -36,7 +36,7 @@ test.describe('Musician Application with listings', () => {
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('sees the listing dropdown and no listing form', async ({ musicianApplicationPage }) => {
+    test('Displays the listing dropdown and no listing form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
         await musicianApplicationPage.navigateByApplicationId(applicationId);
