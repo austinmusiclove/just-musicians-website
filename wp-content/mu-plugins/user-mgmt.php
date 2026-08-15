@@ -215,7 +215,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     return true; // Success
 }
 
-// TODO: publish the listing(s) associated with this tmp code along with associated proposals and application submissions
+// publish the listing(s) associated with this tmp code
 function publish_listing_by_tmp_code($listing_publish_code) {
     // Validate listing invitation code
     $code_post = validate_temporary_code($listing_publish_code);
@@ -245,35 +245,6 @@ function publish_listing_by_tmp_code($listing_publish_code) {
     // Publish listings
     foreach ($valid_listings as $listing_id) {
         wp_update_post(['ID' => $listing_id, 'post_status' => 'publish']);
-
-        // Publish associated application submissions
-        $submission_ids = get_posts([
-            'post_type'      => 'app_submission',
-            'post_status'    => 'any',
-            'posts_per_page' => -1,
-            'fields'         => 'ids',
-            'meta_query'     => [['key' => 'listing', 'value' => $listing_id]],
-        ]);
-        foreach ($submission_ids as $submission_id) {
-            wp_update_post(['ID' => $submission_id, 'post_status' => 'publish']);
-            $application_id = get_post_meta($submission_id, 'application', true);
-            send_application_submitted_successfully_email(get_current_user_id(), $application_id);
-            $application_author = get_post_field('post_author', $application_id);
-            send_creator_new_applicant_email($application_author, $application_id);
-            add_new_applicant_notification($application_author, $submission_id);
-        }
-
-        // Publish associated proposals
-        $proposal_ids = get_posts([
-            'post_type'      => 'proposal',
-            'post_status'    => 'any',
-            'posts_per_page' => -1,
-            'fields'         => 'ids',
-            'meta_query'     => [['key' => 'listing', 'value' => $listing_id]],
-        ]);
-        foreach ($proposal_ids as $proposal_id) {
-            wp_update_post(['ID' => $proposal_id, 'post_status' => 'publish']);
-        }
     }
 
     // Add the listings to the current user's meta field

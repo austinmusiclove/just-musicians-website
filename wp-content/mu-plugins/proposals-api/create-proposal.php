@@ -1,6 +1,6 @@
 <?php
 
-function create_proposal($args, $status = 'publish') {
+function create_proposal($args) {
     $event_id   = (int) ($args['event'] ?? 0);
     $listing_id = (int) ($args['listing'] ?? 0);
 
@@ -14,7 +14,7 @@ function create_proposal($args, $status = 'publish') {
 
     return wp_insert_post([
         'post_type'   => 'proposal',
-        'post_status' => $status,
+        'post_status' => 'publish',
         'post_title'  => $event_name . ' :: ' . $listing_name,
         'meta_input'  => [
             'event'        => $event_id,
