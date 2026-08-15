@@ -21,7 +21,7 @@
     <?php } ?>
 
     <!-- Email -->
-    <?php if (!empty(get_field('email')) or $args['is_preview']) { ?>
+    <?php if ((!empty(get_field('email')) and get_post_status() == 'publish') or $args['is_preview']) { ?>
     <div
         <?php if ($args['is_preview']) { ?> x-show="pEmail" x-cloak <?php } ?>
         <?php if ($args['is_preview']) { ?> x-on:click="focusElm('listing_email')" <?php } ?>
