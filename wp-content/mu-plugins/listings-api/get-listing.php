@@ -106,7 +106,7 @@ function get_listings_by_auuid($auuid) {
     $listings = [];
     $query = new WP_Query(array(
         'post_type'   => 'listing',
-        'post_status' => ['publish', 'draft'],
+        'post_status' => ['publish', 'draft', 'pending'],
         'meta_query'  => [
             [
                 'key' => 'artist_uuid',

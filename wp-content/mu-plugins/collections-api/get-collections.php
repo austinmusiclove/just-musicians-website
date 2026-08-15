@@ -23,7 +23,7 @@ function get_user_collections($args) {
         // Get favorites thumbnail(s)
         $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listing_ids);
 
-        // Filter out listings are not published
+        // Filter out listings are not published or pending
         $the_post = $GLOBALS['post'];
         $listings_by_id_result = get_listings_by_id([
             'listing_ids' => $listing_ids,
@@ -73,7 +73,7 @@ function get_user_collections($args) {
             $listing_ids = is_array($listing_ids) ? array_map(fn($post_id) => strval($post_id), $listing_ids) : [];
             $thumbnails = $nothumbnails ? [] : get_thumbnails_from_listings($listing_ids);
 
-            // Filter out listings are not published
+            // Filter out listings are not published or pending
             $the_post = $GLOBALS['post'];
             $listings_by_id_result = get_listings_by_id([
                 'listing_ids' => $listing_ids,

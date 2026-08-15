@@ -17,7 +17,7 @@ function get_listings_by_id($args) {
 
         $query_args = [
             'post_type'      => 'listing',
-            'post_status'    => 'publish',
+            'post_status'    => ['publish', 'pending'],
             'post__in'       => $listing_ids,
             'orderby'        => 'post__in',
         ];
