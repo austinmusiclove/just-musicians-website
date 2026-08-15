@@ -25,3 +25,7 @@ function send_email_safely($email, $subject, $message) {
         wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
     }
 }
+
+function send_email_to_hm_admin($subject, $message) {
+    wp_mail( ADMIN_NOTIFICATION_EMAIL, $subject, $message);
+}

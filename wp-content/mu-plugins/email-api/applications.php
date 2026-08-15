@@ -30,12 +30,23 @@ function send_application_submitted_successfully_email($user_id, $application_id
 
 function send_sign_up_to_complete_application_email($email, $application_id, $sign_up_link) {
     $application_title = get_post_meta($application_id, 'title', true);
-    $subject = 'Your application submission has been saved. Sign up to complete your submission.';
-    $message = "We have saved your application submission for " . $application_title
-        . "We need to verify you are a real person before sending it to the reviewer. Please create an account to complete your submission."
+    $subject = 'Your application submission has been submitted.';
+    $message = "We have received your application submission for " . $application_title
+        . "We need to verify you are a real person for the reviewer. Please create an account to complete your submission."
         . "Create your free account here:\n\n"
         . $sign_up_link . "\n\n"
-        . "When you sign up through this link, we'll automatically connect your application and musician listing to your new account.\n\n"
+        . "When you sign up through this link, we'll automatically connect your application submission and new musician listing to your new account. Please reply to this email for support if you run into any issues.\n\n"
         . "See you on the stage,\nThe Hire Musicians Team";
     send_email_safely($email, $subject, $message);
+}
+
+function send_failed_to_generate_lpc_email($submitter_email, $application_id, $err) {
+    $application_title = get_post_meta($application_id, 'title', true);
+    $subject = 'Failed to generate listing publish code';
+    $message = 'There was an error generating the listing publish code for application ' . $application_id . ".\n\n"
+        . 'Submitter email: ' . $submitter_email . "\n"
+        . 'Application ID: ' . $application_id . "\n"
+        . 'Application title: ' . $application_title . "\n"
+        . 'Error: ' . $err->get_error_message();
+    send_email_to_hm_admin($subject, $message);
 }
