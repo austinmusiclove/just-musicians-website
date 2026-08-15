@@ -57,8 +57,7 @@ function submit_application($args) {
     add_new_applicant_notification($application_author, $post_id);
 
     // If the submittor is logged in, send them success email
-    $submittor_user_id = get_current_user_id();
-    if ($submittor_user_id) {
+    if (is_user_logged_in()) {
         send_application_submitted_successfully_email(get_current_user_id(), $application_id);
 
     // If user is not logged in, send them link to sign up
@@ -69,13 +68,13 @@ function submit_application($args) {
         $tmp_code = create_temporary_code($expiration, [ 'listings' => [$listing_id] ]);
         if (is_wp_error($tmp_code)) {
             // Return success but notify admin of error
-            send_failed_to_generate_lpc_email($submitter_email, $application_id, $tmp_code);
+            send_failed_to_generate_tmp_code_email( 'Submitter email: ' . $submitter_email . "\n" . 'Application ID: ' . $application_id . "\n" . 'Application title: ' . $application_title . "\n", $tmp_code);
             return [ 'post_id' => $post_id, ];
         }
 
         // Send email to non logged in user to direct them to sign up to complete their application
-        $sign_up_link = site_url('/musician-application/' . $application_id) . '?lpc=' . $tmp_code;
-        send_sign_up_to_complete_application_email($submitter_email, $application_id, $tmp_code);
+        $sign_up_link = site_url('/musician-application/' . $application_id) . '?lic=' . $tmp_code;
+        send_sign_up_to_complete_application_email($submitter_email, $application_id, $sign_up_link);
         return [
             'post_id'      => $post_id,
             'sign_up_link' => $sign_up_link ,
@@ -90,7 +89,7 @@ function submit_new_listing_application($submission_args, $listing_args) {
     $user_id = get_current_user_id();
     if (!$user_id) {
         // Set status of new listing to pending
-        $listing_args['status'] = 'pending';
+        $listing_args['post_status'] = 'pending';
         $submission_args['submitter_email'] = $listing_args['meta_input']['email'];
     }
 

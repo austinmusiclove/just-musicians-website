@@ -36,6 +36,7 @@ if (!empty($page_ids)) {
             'proposal_details'       => get_post_meta($proposal_id, 'details', true),
             'proposal_availability'  => get_post_meta($proposal_id, 'availability', true),
             'proposal_updated'       => get_the_modified_time('M j, Y', $proposal_id),
+            'listing_post_status'    => $listing['post_status'],
             'name'                   => $listing['name'],
             'rating'                 => $listing['rating'],
             'review_count'           => $listing['review_count'],

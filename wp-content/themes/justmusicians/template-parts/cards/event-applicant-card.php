@@ -199,18 +199,21 @@
                 <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
             </div>
 
-            <!-- Send Message -->
-            <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
-                x-on:click="
-                    sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name'] ?? ''); ?>';
-                    sendMessageListingId = <?php echo $args['listing_id']; ?>;
-                    sendMessageText = '';
-                    showSendMessageSuccess = false;
-                    $nextTick(() => { showSendMessageModal = true; });
-                "
-            >
-                Send Message
-            </button>
+            <!-- Send Message (only for published listings to avoid sending message to listing with no owner/author) -->
+            <?php if ($args['listing_post_status'] == 'publish') { ?>
+                <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
+                    x-on:click="
+                        sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name'] ?? ''); ?>';
+                        sendMessageListingId = <?php echo $args['listing_id']; ?>;
+                        sendMessageText = '';
+                        showSendMessageSuccess = false;
+                        $nextTick(() => { showSendMessageModal = true; });
+                    "
+                >
+                    Send Message
+                </button>
+            <?php } ?>
+
         </div>
 
     </div>

@@ -31,6 +31,9 @@ function send_buyer_review_invites($listing_id, $author_id) {
     foreach ($listing_owners as $recipient_user_id) {
         send_listing_owner_review_invite_email($recipient_user_id, $author_name, $listing_name, $buyer_review_url);
     }
+    if (empty($listing_owners)) {
+        send_sign_up_to_see_review_email($listing_id, $author_name);
+    }
 }
 
 function create_buyer_review_invite_url($buyer_id) {

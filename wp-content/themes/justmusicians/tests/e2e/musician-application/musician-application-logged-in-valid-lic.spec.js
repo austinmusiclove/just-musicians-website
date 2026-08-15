@@ -7,7 +7,7 @@ import { createTmpCodePost } from '../../data/tmp_code_factory.js';
 import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
 
 
-test.describe('Musician Application logged in valid lpc', () => {
+test.describe('Musician Application logged in valid lic', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
@@ -16,7 +16,7 @@ test.describe('Musician Application logged in valid lpc', () => {
     let testUserId;
     let listingId;
     let tmpCodeId;
-    let lpc;
+    let lic;
 
     test.beforeAll(async () => {
         applicationAuthorUser = createUser();
@@ -35,7 +35,7 @@ test.describe('Musician Application logged in valid lpc', () => {
             overrides: { listings: [listingId] },
         });
         tmpCodeId = tmpCode.id;
-        lpc = tmpCode.code;
+        lic = tmpCode.code;
     });
 
     test.afterAll(async () => {
@@ -49,7 +49,7 @@ test.describe('Musician Application logged in valid lpc', () => {
     test('sees the successful submission content instead of the form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
-        await musicianApplicationPage.navigateByApplicationId(applicationId, lpc);
+        await musicianApplicationPage.navigateByApplicationId(applicationId, lic);
         await expect(musicianApplicationPage.successfulSubmissionNewListing).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();

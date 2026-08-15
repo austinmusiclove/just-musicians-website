@@ -73,6 +73,7 @@
                             </div>
                         </div>
                         <?php if (isset($_GET['lic'])) { ?><input type="hidden" name="lic" value="<?php echo $_GET['lic']; ?>"><?php } ?>
+                        <input type="hidden" name="r_redirect" value="<?php echo esc_url(home_url($_SERVER['REQUEST_URI'] ?? '/')); ?>">
                         <input type="hidden" name="r_csrf" value="<?php echo wp_create_nonce('r-csrf'); ?>">
                         <div>
                             <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4"

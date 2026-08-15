@@ -33,3 +33,19 @@ function send_proposal_request_email($user_id, $listing_id, $event_id) {
     send_email_safely($email, $subject, $message);
 }
 
+function send_sign_up_to_see_inquiry_email($listing_id, $event_id) {
+    $listing_email = get_post_meta($listing_id, 'email', true);
+    $listing_name = get_post_meta($listing_id, 'name', true);
+    $event_name = get_post_meta($event_id, 'event_name', true);
+    $expiration = time() + 31536000; // one year
+    $tmp_code = create_temporary_code($expiration, [ 'listings' => [$listing_id] ]);
+    if (is_wp_error($tmp_code)) {
+        send_failed_to_generate_tmp_code_email( 'Listing email: ' . $listing_email . "\n" . 'Listing Name: ' . $listing_name . "\n" . 'Event ID: ' . $event_id . "\n" . 'Event name: ' . $event_name . "\n", $tmp_code);
+        return;
+    }
+    $sign_up_link = site_url('/my-gigs/') . '?lic=' . $tmp_code;
+    $subject = 'New inquiry for ' . $listing_name . ' - ' . $event_name;
+    $message = 'Congrats! Someone is interested in hiring you on HireMusicians.com. You have a new inquiry for ' . $listing_name . '. You\'ll need to create a free account to see it. Sign up here: ' . $sign_up_link;
+    send_email_safely($listing_email, $subject, $message);
+}
+

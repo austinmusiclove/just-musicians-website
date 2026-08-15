@@ -6,15 +6,15 @@ export class MusicianApplicationPage extends ThemePage {
         this.listingForm     = page.getByTestId('listing-form');
         this.listingDropdown = page.getByTestId('listing-dropdown');
         this.applicationSubmissionInputs = page.getByTestId('application-submission-inputs');
-        this.invalidLpc      = page.getByTestId('invalid-lpc');
+        this.invalidLic      = page.getByTestId('invalid-lic');
         this.applicationTitle = page.getByTestId('musician-application-title');
         this.applicationDescription = page.getByTestId('musician-application-description');
         this.successfulSubmissionAnon = page.getByTestId('successful-submission-anon');
         this.successfulSubmissionNewListing = page.getByTestId('successful-submission-new-listing');
     }
 
-    async navigateByApplicationId(applicationId, lpc = '') {
-        const query = lpc ? `?lpc=${lpc}` : '';
+    async navigateByApplicationId(applicationId, lic = '') {
+        const query = lic ? `?lic=${lic}` : '';
         await super.navigate(`/musician-application/${applicationId}${query}`);
     }
 

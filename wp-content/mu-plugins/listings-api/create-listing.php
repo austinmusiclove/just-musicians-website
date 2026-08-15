@@ -21,6 +21,16 @@ function _create_listing($args) {
         return $post_id;
     }
 
+    // wp_insert_post skips tax_input when the current user lacks the assign_terms
+    // capability (e.g. logged-out musician application submissions), so apply taxonomies explicitly.
+    if (!is_user_logged_in() && !empty($args['tax_input']) && is_array($args['tax_input'])) {
+        foreach ($args['tax_input'] as $taxonomy => $terms) {
+            if (taxonomy_exists($taxonomy)) {
+                wp_set_post_terms($post_id, (array) $terms, $taxonomy);
+            }
+        }
+    }
+
     // Add post to user listings
     add_listing_to_current_user($post_id);
 

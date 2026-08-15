@@ -4,11 +4,41 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
     Make sure prompting to add org and job title after sign up works
+    Paging issue when i use piano filter; extra page after scroll to top button and duplicate listings
+    In AWS change sender name to Hire Musicians
 Applications updates for sales
+    Show send message button disabled with tooltip that tells you why it is disabled instead of it being missing
+    when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
+    Manual logged out application test
+        (done) submit applicationw while logged out
+            (done) pending listing created
+            (done) published app submission created
+            (done) published proposals created
+            (done) tmp code created
+            (done) redirect to same page with tmp code
+            (done) email sent with tmp code link
+            (done) applicant visible
+                (done) can view listing page
+                (done) can add to favorites and collection
+                (done) send inquiry works and email goes out to the listing email with sign up tmp code link
+                (done) can see event applicant after sending inquiry
+            (done) listing not visible in search
+        (done) sign up
+            (done) listing published
+            (done) applicant still visible in application and event
+            (done) listing visible in search
+            (done) send message visible on event applicant card
+        (done) send inquiry before they sign up and sign up directly after submission - listings page, notification on gigs
+        (done) send inquiry before they sign up and sign up from submission email - listings page, notification on gigs
+        (done) send inquiry before they sign up and sign up through inquiry email - gigs page, see new inquiry badge on gig
     Test submit application
         logged in existing listing with availability in application
         logged in new listing with availability in application
         not logged in (new listing) with availability in application
+    Test new review email to listing owners
+    Test new inquiry email to listing owners
+    Test pending listing gets new review email and listing code
+    Test pending listing gets inquiry; email and listing code
     fix application card so that link does not blend in with description
     application description does not handle bullets
     if event is deleted remove it from applications or just do not show events that are not published
@@ -18,6 +48,12 @@ Applications updates for sales
     change edit submitted application to either resubmit or withdraw
     show availability dates on the applicant card
     add ensemble size to applicant view
+    update listing owners logic
+        create access index for posts
+        owner function and other auth functions will give access to author and anyone specified in the index
+        build index from listing list in user data
+        get rid of listings list in user data once it is deprecated
+    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
     Tests single application
         update application title
         update application description
@@ -65,6 +101,9 @@ Testing for Applications product rollout
         forgot password workflow
         lid tmp code user registration with listing and other scenario (aid?)
 Applications Release
+    Share applicationa access with other users
+    Export applicants with emails to spreadsheet csv or google sheet
+        Flag pending listing applicatns as email not verified on the spreadsheet export
     Availability for events on applications
         Show events on musician application
         Show events with availability filled out if there are existing proposals
@@ -245,6 +284,7 @@ Advanced inquiries
     Recurring event
     ****Test inquiries modal on safari on desktop and mobile
     *add more editable fields to edit inquiry
+    add something about sound equipment for events; musicians need to know if they need to bring PA to quote
     allow inquiry when not logged in
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     Offer accept edit reject workflow
@@ -324,7 +364,10 @@ Data
     content moderation for images
     garbage collector for images that are no longer linked to profiles
     program to move unofficial tags to official if added
-    start using s3 for media storage
+    start using s3 for image media storage
+    write reviews as AML
+    add to people's profile so they will rank higher and come up in search properly
+    email drip campaign staring when a user's first listing is published that teaches them how to use the platform, how to rank high, etc
 Testing
     test apostrophes everywhere
     test when nonce expires and api does not return data

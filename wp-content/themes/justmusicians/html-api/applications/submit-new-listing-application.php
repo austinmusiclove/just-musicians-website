@@ -15,9 +15,9 @@ if (is_wp_error($result)) {
     $message = 'Error: ' . $result->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
-} else if (isset($result['sign_up_link'])) {
-    wp_safe_redirect($result['sign_up_link']);
-    exit;
+} else if (isset($result['sign_up_link'])) { ?>
+    <span x-init="redirect('<?php echo $result['sign_up_link']; ?>');"></span>
+    <?php exit;
 }
 ?>
 

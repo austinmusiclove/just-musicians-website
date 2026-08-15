@@ -92,12 +92,13 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             wp_set_current_user($new_user_id, $user_login);
 
             // Redirect
+            $r_redirect = !empty($_POST['r_redirect']) ? esc_url_raw($_POST['r_redirect']) : site_url('/listings/');
             if ($listing_invitation_code and $artist_invitation_code) {
-                echo '<span x-init="redirect(\'/listings/?aic=' . $artist_invitation_code . '&lic=' . $listing_invitation_code . '\');"></span>';
+                echo '<span x-init="redirect(\'' . esc_url(add_query_arg(['aic' => $artist_invitation_code, 'lic' => $listing_invitation_code], $r_redirect)) . '\');"></span>';
             } else if ($artist_invitation_code) {
-                echo '<span x-init="redirect(\'/listings/?aic=' . $artist_invitation_code . '\');"></span>';
+                echo '<span x-init="redirect(\'' . esc_url(add_query_arg('aic', $artist_invitation_code, $r_redirect)) . '\');"></span>';
             } else if ($listing_invitation_code) {
-                echo '<span x-init="redirect(\'/listings/?lic=' . $listing_invitation_code . '\');"></span>';
+                echo '<span x-init="redirect(\'' . esc_url(add_query_arg('lic', $listing_invitation_code, $r_redirect)) . '\');"></span>';
             } else {
                 echo '<span x-init="redirect();"></span>';
             }

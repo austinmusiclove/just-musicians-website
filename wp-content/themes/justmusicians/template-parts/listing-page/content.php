@@ -111,7 +111,12 @@
             <div class="flex flex-col gap-4">
 
                 <div class="sidebar-module border border-black/20 rounded bg-white">
-                    <h3 class="bg-yellow-50 font-bold py-2 px-3">Contact Information</h3>
+                    <h3 class="bg-yellow-50 font-bold py-2 px-3">
+                        Contact Information
+                        <?php if (!$is_preview and get_post_status() == 'pending') { ?>
+                            <span class="font-normal text-14"> (email not verified)</span>
+                        <?php } ?>
+                    </h3>
                     <div class="p-4 flex flex-col gap-4">
 
 

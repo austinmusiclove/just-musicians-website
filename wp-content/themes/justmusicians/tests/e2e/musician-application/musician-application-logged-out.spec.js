@@ -33,9 +33,9 @@ test.describe('Musician Application', () => {
         await expect(musicianApplicationPage.applicationSubmissionInputs).toBeVisible();
     });
 
-    test('not logged in user with an invalid lpc code sees the invalid link message', async ({ musicianApplicationPage }) => {
+    test('not logged in user with an invalid lic code sees the invalid link message', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateByApplicationId(applicationId, 'test');
-        await expect(musicianApplicationPage.invalidLpc).toBeVisible();
+        await expect(musicianApplicationPage.invalidlic).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
         await expect(musicianApplicationPage.listingForm).not.toBeVisible();

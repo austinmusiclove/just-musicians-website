@@ -6,13 +6,13 @@ import { createTmpCodePost } from '../../data/tmp_code_factory.js';
 import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../data/wp_cli.js';
 
 
-test.describe('Musician Application valid lpc logged out', () => {
+test.describe('Musician Application valid lic logged out', () => {
 
     let applicationAuthorUser;
     let applicationAuthorUserId;
     let applicationId;
     let tmpCodeId;
-    let lpc;
+    let lic;
 
     test.beforeAll(async () => {
         applicationAuthorUser = createUser();
@@ -22,7 +22,7 @@ test.describe('Musician Application valid lpc logged out', () => {
 
         const tmpCode = createTmpCodePost({ authorId: applicationAuthorUserId });
         tmpCodeId = tmpCode.id;
-        lpc = tmpCode.code;
+        lic = tmpCode.code;
     });
 
     test.afterAll(async () => {
@@ -32,7 +32,7 @@ test.describe('Musician Application valid lpc logged out', () => {
     });
 
     test('sees the successful submission content and sign up modal', async ({ musicianApplicationPage }) => {
-        await musicianApplicationPage.navigateByApplicationId(applicationId, lpc);
+        await musicianApplicationPage.navigateByApplicationId(applicationId, lic);
         await expect(musicianApplicationPage.successfulSubmissionAnon).toBeVisible();
         await expect(musicianApplicationPage.signupModalHeading).toHaveText('Sign up to complete your submission');
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();

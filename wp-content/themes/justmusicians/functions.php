@@ -234,7 +234,7 @@ function hmm_scripts() {
     }
 
     // Listing pages
-    if (str_starts_with($_SERVER['REQUEST_URI'], '/listing/')) {
+    if (is_singular('listing')) {
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, true);
@@ -272,7 +272,7 @@ function hmm_scripts() {
     }
 
     // Single Event Pages
-    if (preg_match('#^/event/[^/]+/?$#', $path)) {
+    if (is_singular('event')) {
         // Events
         wp_enqueue_script('events-js', get_template_directory_uri() . '/lib/js/events.js', [], $pkg->version, true);
 
@@ -300,7 +300,7 @@ function hmm_scripts() {
     }
 
     // Single Application Pages
-    if (preg_match('#^/application/[^/]+/?$#', $path)) {
+    if (is_singular('application')) {
 
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);

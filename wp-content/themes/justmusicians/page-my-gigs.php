@@ -29,11 +29,26 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                     <a href="<?php echo site_url('/my-gigs/'); ?>"><h1 class="font-bold text-25">My Gigs</h1></a>
                 </div>
 
-                <?php if (!is_user_logged_in()) { ?>
+                <?php if (!is_user_logged_in() and isset($_GET['lic'])) { ?>
+
+                    <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'see your gigs' ]); ?>
+
+                <?php } else if (!is_user_logged_in()) { ?>
 
                     <?php echo get_template_part('template-parts/global/empty-states/sign-in-to-access', '', [ 'message' => 'see your gigs' ]); ?>
 
-                <?php } else { ?>
+                <?php } else {
+
+                    if (isset($_GET['lic'])) {
+                        // send listing invitation validation with redirect without the param in url to avoid infinite loop
+                        $success = add_listing_by_invitation_code($_GET['lic']);
+                        // if success, redirect back to the same page but remove query params to avoid an infinite loop
+                        if ($success and !is_wp_error($success)) { ?>
+                            <span x-init="$dispatch('success-toast', {'message': 'Listing published successfully'})"></span>
+                        <?php } else { ?>
+                            <span x-init="$dispatch('error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
+                        <?php }
+                    } ?>
 
                     <form id="my-gigs-form"
                         x-data="{

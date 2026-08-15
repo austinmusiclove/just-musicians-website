@@ -194,7 +194,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
     $listing_ids = get_post_meta($code_post->ID, 'listings', true);
     $valid_listings = (empty($listing_ids) or !is_array($listing_ids)) ? [] : array_filter($listing_ids, function ($listing) {
         $post = get_post($listing);
-        return $post and $post->post_status === 'publish';
+        return $post and in_array($post->post_status, ['publish', 'pending'], true);
     });
 
     // Check if listings are found in the tmp_code post
@@ -202,6 +202,14 @@ function add_listing_by_invitation_code($listing_invitation_code) {
         return new WP_Error('no_listings', 'No listings associated with this code.');
     }
 
+    // Publish listings if pending
+    foreach ($valid_listings as $listing_id) {
+        $listing_status = get_post_status($listing_id);
+        if ($listing_status == 'pending') {
+            wp_update_post(['ID' => $listing_id, 'post_status' => 'publish']);
+        }
+    }
+
     // Add the listings to the current user's meta field
     $current_user = wp_get_current_user();
     $current_listings = get_user_meta($current_user->ID, 'listings', true);
@@ -211,53 +219,14 @@ function add_listing_by_invitation_code($listing_invitation_code) {
 
     // Save the updated listings to the user meta
     update_user_meta($current_user->ID, 'listings', $current_listings);
+
+    // Add notifications if there are any proposals
+    $proposal_ids = hm_get_proposals_by_listing_ids($valid_listings, ['status' => 'request']);
+    foreach ($proposal_ids as $proposal_id) {
+        add_new_inquiry_notification($current_user->ID, $proposal_id);
+    }
 
     return true; // Success
-}
-
-// publish the listing(s) associated with this tmp code
-function publish_listing_by_tmp_code($listing_publish_code) {
-    // Validate listing invitation code
-    $code_post = validate_temporary_code($listing_publish_code);
-    if (is_wp_error($code_post)) {
-        if ($code_post->get_error_code() == 'invalid_code') { return new WP_Error('invalid_link', 'Invalid listing invitation link'); }
-        if ($code_post->get_error_code() == 'expired_code') { return new WP_Error('expired_link', 'Expired listing invitation link'); }
-        return $code_post;
-    }
-
-    // Check if the user is logged in
-    if (!is_user_logged_in()) {
-        return new WP_Error('user_not_logged_in', 'You must be logged in to use this code.');
-    }
-
-    // Get the listings (array of post IDs) from the tmp_code post
-    $listing_ids = get_post_meta($code_post->ID, 'listings', true);
-    $valid_listings = (empty($listing_ids) or !is_array($listing_ids)) ? [] : array_filter($listing_ids, function ($listing) {
-        $post = get_post($listing);
-        return $post and $post->post_status === 'pending';
-    });
-
-    // Check if listings are found in the tmp_code post
-    if (empty($valid_listings) or !is_array($valid_listings)) {
-        return new WP_Error('no_listings', 'No pending listings associated with this code.');
-    }
-
-    // Publish listings
-    foreach ($valid_listings as $listing_id) {
-        wp_update_post(['ID' => $listing_id, 'post_status' => 'publish']);
-    }
-
-    // Add the listings to the current user's meta field
-    $current_user = wp_get_current_user();
-    $current_listings = get_user_meta($current_user->ID, 'listings', true);
-    if (empty($current_listings)) { $current_listings = []; }
-    $current_listings = array_merge($current_listings, $valid_listings);
-    $current_listings = array_unique($current_listings);
-
-    // Save the updated listings to the user meta
-    update_user_meta($current_user->ID, 'listings', $current_listings);
-
-    return true;
 }
 
 function validate_temporary_code($temporary_code) {
