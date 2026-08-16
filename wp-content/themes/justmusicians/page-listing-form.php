@@ -51,7 +51,7 @@ get_header();
 </div>
 
 
-<div class="lg:container min-h-[500px]"
+<div class="lg:container min-h-[500px]" data-testid="listing-form-alpine"
     x-data="{
         showImageEditPopup:     false,
         showStagePlotPopup:     false,

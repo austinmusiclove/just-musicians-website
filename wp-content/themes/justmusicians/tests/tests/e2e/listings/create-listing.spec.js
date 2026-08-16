@@ -158,4 +158,5 @@ test.describe('E2E - Create Listing', () => {
     });
 
     test.skip('Create listing with every single field filled out', async ({ listingFormPage }) => { });
+    test.skip('Create listing with large image upload', async ({ listingFormPage }) => { });
 });

@@ -14,8 +14,10 @@ export class ListingFormPage extends ThemePage {
         this.publishBtnTop     = page.getByRole('button', { name: 'Publish listing' }).first();
         this.draftBtnBottom    = page.getByRole('button', { name: 'Save draft' }).last();
         this.draftBtnTop       = page.getByRole('button', { name: 'Save draft' }).first();
-        this.updateBtn         = page.getByRole('button', { name: 'Update Listing' }).last();
+        this.updateBtnBottom   = page.getByRole('button', { name: 'Update Listing' }).last();
+        this.updateBtnTop      = page.getByRole('button', { name: 'Update Listing' }).first();
         this.applyCropBtn      = page.getByRole('button', { name: 'Apply' });
+        this.alpineRoot        = page.getByTestId('listing-form-alpine');
     }
 
     async navigate(url = '/listing-form/') {
@@ -51,6 +53,16 @@ export class ListingFormPage extends ThemePage {
 
     async uploadCoverImage(imagePath) {
         await this.coverImageInput.setInputFiles(imagePath);
+        // wait for image to be processed before closing modal so that auto submit is not triggered when it finishes processing
+        const alpineEl = await this.alpineRoot.elementHandle();
+        await this.page.waitForFunction(
+            (el) => {
+                const data = Alpine.$data(el);
+                const coverImages = data.orderedImageData['cover_image'];
+                return coverImages.length > 0 && !coverImages[0].loading;
+            },
+            alpineEl
+        );
         await expect(this.applyCropBtn).toBeVisible();
         await this.applyCropBtn.click();
     }
@@ -71,11 +83,20 @@ export class ListingFormPage extends ThemePage {
         await this.draftBtnTop.click();
     }
 
-    async updateListing() {
+    // Waits for response and publish buttons do not because publish waits for redirect to new url; update does not
+    async updateListingBottom() {
         const responsePromise = this.page.waitForResponse(
             resp => resp.url().includes('wp-html/v1/listings') && resp.status() === 200
         );
-        await this.updateBtn.click();
+        await this.updateBtnBottom.click();
+        await responsePromise;
+    }
+
+    async updateListingTop() {
+        const responsePromise = this.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/listings') && resp.status() === 200
+        );
+        await this.updateBtnTop.click();
         await responsePromise;
     }
 

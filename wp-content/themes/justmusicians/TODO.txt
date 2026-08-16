@@ -67,12 +67,6 @@ Testing for Applications product rollout
         Applications access
             you can only see your own applications
             you can only see your own applicaiton submissions
-    Listings tests
-        Create complete listing
-        Update basic listing (add the rest of the fields)
-        Update complete listing
-        Create Listing large media upload (skip)
-        Update Listing large media upload (skip)
     Users tests
         register user with existing account (registered with gmail) not giving any feedback and not working
         forgot password workflow

@@ -34,10 +34,30 @@ test.describe('E2E - Update Listing', () => {
 
         const newName = 'Updated Name';
         await listingFormPage.performerName.fill(newName);
-        await listingFormPage.updateListing();
+        await listingFormPage.updateListingBottom();
 
         expect(wpCliGetPostField(listingId, 'post_title')).toBe(newName);
         expect(wpCliGetPostMeta(listingId, 'name')).toBe(newName);
         expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
     });
+
+    test('Update listing name using top update button', async ({ listingFormPage }) => {
+        await listingFormPage.navigate('/');
+        await listingFormPage.login(testUser.email, testUser.password);
+        await listingFormPage.navigateToListing(listingId);
+
+        await expect(listingFormPage.performerName).toHaveValue('Original Name');
+
+        const newName = 'Updated Name Top';
+        await listingFormPage.performerName.fill(newName);
+        await listingFormPage.updateListingTop();
+
+        expect(wpCliGetPostField(listingId, 'post_title')).toBe(newName);
+        expect(wpCliGetPostMeta(listingId, 'name')).toBe(newName);
+        expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
+    });
+
+    test.skip('Update all listing fields', async ({ listingFormPage }) => {} );
+    test.skip('Update listing with large image upload', async ({ listingFormPage }) => {} );
+
 });

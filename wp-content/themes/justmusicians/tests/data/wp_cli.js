@@ -63,7 +63,7 @@ export function wpCliGetLatestPostId(authorId, postType = 'listing', postStatus 
         { encoding: 'utf-8' }
     );
     const lines = output.trim().split('\n');
-    return lines[1].trim();
+    return lines.length > 1 ? lines[1].trim() : null;
 }
 
 export function wpCliGetPostField(postId, field) {

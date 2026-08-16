@@ -28,6 +28,7 @@ export function createListingPost({ authorId, status = 'publish', overrides = {}
         meta: {
             name: listing.name,
             description: listing.description,
+            email: faker.internet.email(),
             city: listing.city,
             state: listing.state,
             zip_code: listing.zip,
