@@ -49,6 +49,47 @@ export function wpCliCreatePost({ postType, title, status = 'publish', authorId,
     return output.trim();
 }
 
+export function wpCliGetUserMeta(userId, key) {
+    const output = execSync(
+        `wp user meta get ${userId} ${key} --format=json --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    return JSON.parse(output.trim());
+}
+
+export function wpCliGetLatestPostId(authorId, postType = 'listing') {
+    const output = execSync(
+        `wp post list --author=${authorId} --post_type=${postType} --post_status=publish --fields=ID --format=csv --orderby=date --order=desc --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    const lines = output.trim().split('\n');
+    return lines[1].trim();
+}
+
+export function wpCliGetPostField(postId, field) {
+    const output = execSync(
+        `wp post get ${postId} --field=${field} --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    return output.trim();
+}
+
+export function wpCliGetPostMeta(postId, key) {
+    try {
+        const output = execSync(
+            `wp post meta get ${postId} ${key} --path=${WP_PATH}`,
+            { encoding: 'utf-8' }
+        );
+        return output.trim();
+    } catch (e) {
+        return null;
+    }
+}
+
+export function wpCliGetPostThumbnailId(postId) {
+    return wpCliGetPostMeta(postId, '_thumbnail_id');
+}
+
 export function wpCliDeletePost(postId) {
     execSync(
         `wp post delete ${postId} --force --path=${WP_PATH}`,

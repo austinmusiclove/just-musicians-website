@@ -23,6 +23,7 @@ function _create_listing($args) {
 
     // wp_insert_post skips tax_input when the current user lacks the assign_terms
     // capability (e.g. logged-out musician application submissions), so apply taxonomies explicitly.
+    // this happens in musician application when a listing is created by a user that is not logged in
     if (!is_user_logged_in() && !empty($args['tax_input']) && is_array($args['tax_input'])) {
         foreach ($args['tax_input'] as $taxonomy => $terms) {
             if (taxonomy_exists($taxonomy)) {
