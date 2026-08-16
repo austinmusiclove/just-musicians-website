@@ -14,11 +14,16 @@ export class ListingFormPage extends ThemePage {
         this.publishBtnTop     = page.getByRole('button', { name: 'Publish listing' }).first();
         this.draftBtnBottom    = page.getByRole('button', { name: 'Save draft' }).last();
         this.draftBtnTop       = page.getByRole('button', { name: 'Save draft' }).first();
+        this.updateBtn         = page.getByRole('button', { name: 'Update Listing' }).last();
         this.applyCropBtn      = page.getByRole('button', { name: 'Apply' });
     }
 
     async navigate(url = '/listing-form/') {
         await super.navigate(url);
+    }
+
+    async navigateToListing(lid) {
+        await super.navigate(`/listing-form/?lid=${lid}`);
     }
 
     async login(username, password) {
@@ -64,6 +69,14 @@ export class ListingFormPage extends ThemePage {
 
     async saveDraftTop() {
         await this.draftBtnTop.click();
+    }
+
+    async updateListing() {
+        const responsePromise = this.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/listings') && resp.status() === 200
+        );
+        await this.updateBtn.click();
+        await responsePromise;
     }
 
     async waitForPublishRedirect() {

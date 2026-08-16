@@ -13,7 +13,7 @@ export class MusicianApplicationPage extends ThemePage {
         this.successfulSubmissionNewListing = page.getByTestId('successful-submission-new-listing');
     }
 
-    async navigateByApplicationId(applicationId, lic = '') {
+    async navigateToApplication(applicationId, lic = '') {
         const query = lic ? `?lic=${lic}` : '';
         await super.navigate(`/musician-application/${applicationId}${query}`);
     }

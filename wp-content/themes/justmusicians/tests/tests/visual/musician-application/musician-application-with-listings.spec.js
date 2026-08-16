@@ -39,7 +39,7 @@ test.describe('Visual - Musician Application - Logged in - One listings', () => 
     test('Displays the listing dropdown and no listing form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
-        await musicianApplicationPage.navigateByApplicationId(applicationId);
+        await musicianApplicationPage.navigateToApplication(applicationId);
         await expect(musicianApplicationPage.applicationTitle).toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingDropdown).toBeVisible();

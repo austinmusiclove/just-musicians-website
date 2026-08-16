@@ -96,3 +96,16 @@ export function wpCliDeletePost(postId) {
         { stdio: 'ignore' }
     );
 }
+
+export function wpCliSetPostThumbnail(postId, imagePath) {
+    const output = execSync(
+        `wp media import ${imagePath} --post_id=${postId} --title="cover" --porcelain --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    const attachmentId = output.trim();
+    execSync(
+        `wp post meta update ${postId} _thumbnail_id ${attachmentId} --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+    return attachmentId;
+}

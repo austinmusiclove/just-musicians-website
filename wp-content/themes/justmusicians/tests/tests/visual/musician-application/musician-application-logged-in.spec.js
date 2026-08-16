@@ -31,7 +31,7 @@ test.describe('Visual - Musician Application - Logged in - No listings', () => {
     test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
-        await musicianApplicationPage.navigateByApplicationId(applicationId);
+        await musicianApplicationPage.navigateToApplication(applicationId);
         await expect(musicianApplicationPage.applicationTitle).toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingForm).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Visual - Musician Application - Logged in - No listings', () => {
     test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigate('/');
         await musicianApplicationPage.login(testUser.email, testUser.password);
-        await musicianApplicationPage.navigateByApplicationId(applicationId, 'test');
+        await musicianApplicationPage.navigateToApplication(applicationId, 'test');
         await expect(musicianApplicationPage.invalidLic).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
