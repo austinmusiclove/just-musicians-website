@@ -12,6 +12,8 @@ export class ListingFormPage extends ThemePage {
         this.coverImageInput   = page.locator('input[name="cover_image_input"]');
         this.publishBtnBottom  = page.getByRole('button', { name: 'Publish listing' }).last();
         this.publishBtnTop     = page.getByRole('button', { name: 'Publish listing' }).first();
+        this.draftBtnBottom    = page.getByRole('button', { name: 'Save draft' }).last();
+        this.draftBtnTop       = page.getByRole('button', { name: 'Save draft' }).first();
         this.applyCropBtn      = page.getByRole('button', { name: 'Apply' });
     }
 
@@ -54,6 +56,14 @@ export class ListingFormPage extends ThemePage {
 
     async publishTop() {
         await this.publishBtnTop.click();
+    }
+
+    async saveDraftBottom() {
+        await this.draftBtnBottom.click();
+    }
+
+    async saveDraftTop() {
+        await this.draftBtnTop.click();
     }
 
     async waitForPublishRedirect() {

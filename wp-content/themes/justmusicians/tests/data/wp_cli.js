@@ -57,9 +57,9 @@ export function wpCliGetUserMeta(userId, key) {
     return JSON.parse(output.trim());
 }
 
-export function wpCliGetLatestPostId(authorId, postType = 'listing') {
+export function wpCliGetLatestPostId(authorId, postType = 'listing', postStatus = 'publish') {
     const output = execSync(
-        `wp post list --author=${authorId} --post_type=${postType} --post_status=publish --fields=ID --format=csv --orderby=date --order=desc --path=${WP_PATH}`,
+        `wp post list --author=${authorId} --post_type=${postType} --post_status=${postStatus} --fields=ID --format=csv --orderby=date --order=desc --path=${WP_PATH}`,
         { encoding: 'utf-8' }
     );
     const lines = output.trim().split('\n');

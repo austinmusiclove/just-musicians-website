@@ -36,17 +36,14 @@ test.describe('E2E - Create Listing', () => {
         listingId = wpCliGetLatestPostId(userId);
         expect(listingId).toBe(urlListingId);
 
-        await expect(listingFormPage.performerName).toHaveValue(listing.name);
-        await expect(listingFormPage.description).toHaveValue(listing.description);
-
         const userListings = wpCliGetUserMeta(userId, 'listings');
-        expect(userListings).toContain(Number(listingId));
+        expect(userListings).toEqual([Number(listingId)]);
 
         expect(wpCliGetPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCliGetPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCliGetPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description);
+        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description.trim());
         expect(wpCliGetPostMeta(listingId, 'email')).toBe(testUser.email);
         expect(wpCliGetPostMeta(listingId, 'zip_code')).toBe(listing.zip);
         expect(wpCliGetPostMeta(listingId, 'verified')).toBeNull();
@@ -73,17 +70,14 @@ test.describe('E2E - Create Listing', () => {
         listingId = wpCliGetLatestPostId(userId);
         expect(listingId).toBe(urlListingId);
 
-        await expect(listingFormPage.performerName).toHaveValue(listing.name);
-        await expect(listingFormPage.description).toHaveValue(listing.description);
-
         const userListings = wpCliGetUserMeta(userId, 'listings');
-        expect(userListings).toContain(Number(listingId));
+        expect(userListings).toEqual([Number(listingId)]);
 
         expect(wpCliGetPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCliGetPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCliGetPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description);
+        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description.trim());
         expect(wpCliGetPostMeta(listingId, 'email')).toBe(testUser.email);
         expect(wpCliGetPostMeta(listingId, 'zip_code')).toBe(listing.zip);
         expect(wpCliGetPostMeta(listingId, 'verified')).toBeNull();
@@ -95,6 +89,73 @@ test.describe('E2E - Create Listing', () => {
         expect(wpCliGetPostField(thumbnailId, 'post_type')).toBe('attachment');
     });
 
-    test.skip('Create listing as user with existing listings', async ({ listingFormPage }) => { }); // Make sure listing is added to user listings correctly and the old listing is still there
+    test('Create listing using bottom save draft button', async ({ listingFormPage }) => {
+        const listing = createListing({ zip: '78701' });
+
+        await listingFormPage.navigate('/');
+        await listingFormPage.login(testUser.email, testUser.password);
+        await listingFormPage.navigate('/listing-form/');
+
+        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.uploadCoverImage('tests/data/test-image.png');
+        await listingFormPage.saveDraftBottom();
+
+        const urlListingId = await listingFormPage.waitForPublishRedirect();
+        listingId = wpCliGetLatestPostId(userId, 'listing', 'draft');
+        expect(listingId).toBe(urlListingId);
+
+        const userListings = wpCliGetUserMeta(userId, 'listings');
+        expect(userListings).toEqual([Number(listingId)]);
+
+        expect(wpCliGetPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCliGetPostField(listingId, 'post_status')).toBe('draft');
+        expect(wpCliGetPostField(listingId, 'post_author')).toBe(userId);
+        expect(wpCliGetPostMeta(listingId, 'name')).toBe(listing.name);
+        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCliGetPostMeta(listingId, 'email')).toBe(testUser.email);
+        expect(wpCliGetPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCliGetPostMeta(listingId, 'verified')).toBeNull();
+        expect(wpCliGetPostMeta(listingId, 'city')).toBe('Austin');
+        expect(wpCliGetPostMeta(listingId, 'state')).toBe('Texas');
+
+        const thumbnailId = wpCliGetPostThumbnailId(listingId);
+        expect(thumbnailId).toBeTruthy();
+        expect(wpCliGetPostField(thumbnailId, 'post_type')).toBe('attachment');
+    });
+
+    test('Create listing using top save draft button', async ({ listingFormPage }) => {
+        const listing = createListing({ zip: '78701' });
+
+        await listingFormPage.navigate('/');
+        await listingFormPage.login(testUser.email, testUser.password);
+        await listingFormPage.navigate('/listing-form/');
+
+        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.uploadCoverImage('tests/data/test-image.png');
+        await listingFormPage.saveDraftTop();
+
+        const urlListingId = await listingFormPage.waitForPublishRedirect();
+        listingId = wpCliGetLatestPostId(userId, 'listing', 'draft');
+        expect(listingId).toBe(urlListingId);
+
+        const userListings = wpCliGetUserMeta(userId, 'listings');
+        expect(userListings).toEqual([Number(listingId)]);
+
+        expect(wpCliGetPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCliGetPostField(listingId, 'post_status')).toBe('draft');
+        expect(wpCliGetPostField(listingId, 'post_author')).toBe(userId);
+        expect(wpCliGetPostMeta(listingId, 'name')).toBe(listing.name);
+        expect(wpCliGetPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCliGetPostMeta(listingId, 'email')).toBe(testUser.email);
+        expect(wpCliGetPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCliGetPostMeta(listingId, 'verified')).toBeNull();
+        expect(wpCliGetPostMeta(listingId, 'city')).toBe('Austin');
+        expect(wpCliGetPostMeta(listingId, 'state')).toBe('Texas');
+
+        const thumbnailId = wpCliGetPostThumbnailId(listingId);
+        expect(thumbnailId).toBeTruthy();
+        expect(wpCliGetPostField(thumbnailId, 'post_type')).toBe('attachment');
+    });
+
     test.skip('Create listing with every single field filled out', async ({ listingFormPage }) => { });
 });

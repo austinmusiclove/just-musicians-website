@@ -9,28 +9,6 @@ Critical bugs
 Applications updates for sales
     Show send message button disabled with tooltip that tells you why it is disabled instead of it being missing
     when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
-    Manual logged out application test
-        (done) submit applicationw while logged out
-            (done) pending listing created
-            (done) published app submission created
-            (done) published proposals created
-            (done) tmp code created
-            (done) redirect to same page with tmp code
-            (done) email sent with tmp code link
-            (done) applicant visible
-                (done) can view listing page
-                (done) can add to favorites and collection
-                (done) send inquiry works and email goes out to the listing email with sign up tmp code link
-                (done) can see event applicant after sending inquiry
-            (done) listing not visible in search
-        (done) sign up
-            (done) listing published
-            (done) applicant still visible in application and event
-            (done) listing visible in search
-            (done) send message visible on event applicant card
-        (done) send inquiry before they sign up and sign up directly after submission - listings page, notification on gigs
-        (done) send inquiry before they sign up and sign up from submission email - listings page, notification on gigs
-        (done) send inquiry before they sign up and sign up through inquiry email - gigs page, see new inquiry badge on gig
     Test submit application
         logged in existing listing with availability in application
         logged in new listing with availability in application
@@ -90,7 +68,6 @@ Testing for Applications product rollout
             you can only see your own applications
             you can only see your own applicaiton submissions
     Listings tests
-        Create most basic listing
         Create complete listing
         Update basic listing (add the rest of the fields)
         Update complete listing
