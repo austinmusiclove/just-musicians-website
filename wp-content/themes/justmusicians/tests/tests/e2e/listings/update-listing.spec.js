@@ -10,7 +10,7 @@ test.describe('E2E - Update Listing', () => {
     let userId;
     let listingId;
 
-    test.beforeEach(async () => {
+    test.beforeEach(async ({ listingFormPage }) => {
         testUser = createUser();
         wpCliCreateUser(testUser);
         userId = wpCliGetUserId(testUser.email);
@@ -18,6 +18,8 @@ test.describe('E2E - Update Listing', () => {
         listingId = createListingPost({ authorId: userId, overrides: { name: 'Original Name' } });
         wpCliSetPostThumbnail(listingId, 'tests/data/test-image.png');
         wpCliSetUserMeta(testUser.email, 'listings', [Number(listingId)]);
+
+        await listingFormPage.login(testUser.email, testUser.password);
     });
 
     test.afterEach(async () => {
@@ -26,8 +28,6 @@ test.describe('E2E - Update Listing', () => {
     });
 
     test('Update listing name from published listing', async ({ listingFormPage }) => {
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
         await listingFormPage.navigateToListing(listingId);
 
         await expect(listingFormPage.performerName).toHaveValue('Original Name');
@@ -42,8 +42,6 @@ test.describe('E2E - Update Listing', () => {
     });
 
     test('Update listing name using top update button', async ({ listingFormPage }) => {
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
         await listingFormPage.navigateToListing(listingId);
 
         await expect(listingFormPage.performerName).toHaveValue('Original Name');

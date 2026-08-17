@@ -20,18 +20,17 @@ test.describe('Navigation - Applications - Empty State', () => {
         }
     });
 
-    test('click empty state create application button navigates to application form', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
+    test.beforeEach(async ({ applicationsPage }) => {
         await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
         await applicationsPage.navigate('/applications/');
+    });
+
+    test('click empty state create application button navigates to application form', async ({ applicationsPage }) => {
         await applicationsPage.emptyStateCreateBtn.click();
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });
 
     test('click add button navigates to application form', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
-        await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
-        await applicationsPage.navigate('/applications/');
         await applicationsPage.addBtn.click();
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });

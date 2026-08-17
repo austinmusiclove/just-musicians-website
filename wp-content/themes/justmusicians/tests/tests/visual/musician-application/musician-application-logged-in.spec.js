@@ -28,9 +28,11 @@ test.describe('Visual - Musician Application - Logged in - No listings', () => {
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
-        await musicianApplicationPage.navigate('/');
+    test.beforeEach(async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.login(testUser.email, testUser.password);
+    });
+
+    test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
         await expect(musicianApplicationPage.applicationTitle).toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).toBeVisible();
@@ -40,8 +42,6 @@ test.describe('Visual - Musician Application - Logged in - No listings', () => {
     });
 
     test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
-        await musicianApplicationPage.navigate('/');
-        await musicianApplicationPage.login(testUser.email, testUser.password);
         await musicianApplicationPage.navigateToApplication(applicationId, 'test');
         await expect(musicianApplicationPage.invalidLic).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();

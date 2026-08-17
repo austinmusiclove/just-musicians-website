@@ -46,9 +46,11 @@ test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {
-        await musicianApplicationPage.navigate('/');
+    test.beforeEach(async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.login(testUser.email, testUser.password);
+    });
+
+    test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId, lic);
         await expect(musicianApplicationPage.successfulSubmissionNewListing).toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();

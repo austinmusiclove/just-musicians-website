@@ -10,10 +10,13 @@ test.describe('E2E - Create Listing', () => {
     let userId;
     let listingId;
 
-    test.beforeEach(async () => {
+    test.beforeEach(async ({ listingFormPage }) => {
         testUser = createUser();
         wpCliCreateUser(testUser);
         userId = wpCliGetUserId(testUser.email);
+
+        await listingFormPage.login(testUser.email, testUser.password);
+        await listingFormPage.navigate('/listing-form/');
     });
 
     test.afterEach(async () => {
@@ -23,10 +26,6 @@ test.describe('E2E - Create Listing', () => {
 
     test('Create listing using bottom publish button', async ({ listingFormPage }) => {
         const listing = createListing({ zip: '78701' });
-
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
-        await listingFormPage.navigate('/listing-form/');
 
         await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/test-image.png');
@@ -58,10 +57,6 @@ test.describe('E2E - Create Listing', () => {
     test('Create listing using top publish button', async ({ listingFormPage }) => {
         const listing = createListing({ zip: '78701' });
 
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
-        await listingFormPage.navigate('/listing-form/');
-
         await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/test-image.png');
         await listingFormPage.publishTop();
@@ -92,10 +87,6 @@ test.describe('E2E - Create Listing', () => {
     test('Create listing using bottom save draft button', async ({ listingFormPage }) => {
         const listing = createListing({ zip: '78701' });
 
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
-        await listingFormPage.navigate('/listing-form/');
-
         await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/test-image.png');
         await listingFormPage.saveDraftBottom();
@@ -125,10 +116,6 @@ test.describe('E2E - Create Listing', () => {
 
     test('Create listing using top save draft button', async ({ listingFormPage }) => {
         const listing = createListing({ zip: '78701' });
-
-        await listingFormPage.navigate('/');
-        await listingFormPage.login(testUser.email, testUser.password);
-        await listingFormPage.navigate('/listing-form/');
 
         await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/test-image.png');

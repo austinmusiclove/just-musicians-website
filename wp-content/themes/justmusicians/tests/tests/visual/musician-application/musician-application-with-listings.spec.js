@@ -36,9 +36,11 @@ test.describe('Visual - Musician Application - Logged in - One listings', () => 
         if (testUser)              { wpCliDeleteUser(testUser.email); }
     });
 
-    test('Displays the listing dropdown and no listing form', async ({ musicianApplicationPage }) => {
-        await musicianApplicationPage.navigate('/');
+    test.beforeEach(async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.login(testUser.email, testUser.password);
+    });
+
+    test('Displays the listing dropdown and no listing form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
         await expect(musicianApplicationPage.applicationTitle).toBeVisible();
         await expect(musicianApplicationPage.applicationDescription).toBeVisible();

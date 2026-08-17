@@ -10,10 +10,13 @@ test.describe('E2E - Create Application', () => {
     let userId;
     let applicationId;
 
-    test.beforeEach(async () => {
+    test.beforeEach(async ({ applicationFormPage }) => {
         testUser = createUser();
         wpCliCreateUser(testUser);
         userId = wpCliGetUserId(testUser.email);
+
+        await applicationFormPage.login(testUser.email, testUser.password);
+        await applicationFormPage.navigate('/application-form/');
     });
 
     test.afterEach(async () => {
@@ -23,10 +26,6 @@ test.describe('E2E - Create Application', () => {
 
     test('Create application', async ({ applicationFormPage }) => {
         const application = createApplication();
-
-        await applicationFormPage.navigate('/');
-        await applicationFormPage.login(testUser.email, testUser.password);
-        await applicationFormPage.navigate('/application-form/');
 
         await applicationFormPage.fillMinimumFields(application.title, application.description);
         await applicationFormPage.submitApplication();
@@ -43,5 +42,5 @@ test.describe('E2E - Create Application', () => {
         expect(wpCliGetPostMeta(applicationId, 'description')).toBe(application.description);
     });
 
-    test('Create application with multi line description', async ({ applicationFormPage }) => {} );
+    test.skip('Create application with multi line description', async ({ applicationFormPage }) => {} );
 });

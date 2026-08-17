@@ -1,6 +1,3 @@
-Test improvements
-    use locators that are not on id?
-    handle navigate to home in login function or log in from the page or both
 Critical bugs
     Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod

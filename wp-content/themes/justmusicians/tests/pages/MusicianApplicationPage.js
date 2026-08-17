@@ -19,6 +19,7 @@ export class MusicianApplicationPage extends ThemePage {
     }
 
     async login(username, password) {
+        await this.navigate('/');
         await super.login(username, password);
         await super.expectLoggedInPage();
     }

@@ -20,10 +20,12 @@ test.describe('Visual - Applications - One applicaiton', () => {
         }
     });
 
-    test('User\'s application is displayed', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
+    test.beforeEach(async ({ applicationsPage }) => {
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
+    });
+
+    test('User\'s application is displayed', async ({ applicationsPage }) => {
         await applicationsPage.waitForResults();
         const cards = await applicationsPage.applicationCards.all();
         expect(cards).toHaveLength(1);

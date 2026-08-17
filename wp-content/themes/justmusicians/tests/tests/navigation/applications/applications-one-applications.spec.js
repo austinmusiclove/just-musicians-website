@@ -38,18 +38,17 @@ test.describe('Navigation - Applications - One Application', () => {
         }
     });
 
-    test('click add button navigates to application form', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
+    test.beforeEach(async ({ applicationsPage }) => {
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
+    });
+
+    test('click add button navigates to application form', async ({ applicationsPage }) => {
         await applicationsPage.addBtn.click();
         await expect(applicationsPage.page).toHaveURL(/\/application-form\/$/);
     });
 
     test('application review applicants button navigates to single application page on the applicants tab', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
-        await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
-        await applicationsPage.navigate('/applications/');
         await applicationsPage.waitForResults();
         await expect(applicationsPage.applicationCards.first()).toBeVisible();
         await applicationsPage.getReviewApplicantsBtn(applicationsPage.applicationCards.first()).click();
@@ -57,9 +56,6 @@ test.describe('Navigation - Applications - One Application', () => {
     });
 
     test('edit application button navigates to single application page on the details tab', async ({ applicationsPage }) => {
-        await applicationsPage.navigate('/');
-        await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
-        await applicationsPage.navigate('/applications/');
         await applicationsPage.waitForResults();
         await expect(applicationsPage.applicationCards.first()).toBeVisible();
         await applicationsPage.getEditApplicationBtn(applicationsPage.applicationCards.first()).click();
