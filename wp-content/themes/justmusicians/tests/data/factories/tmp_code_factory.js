@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { wpCliCreatePost } from './wp_cli.js';
+import { wpCliCreatePost } from './../wp_cli.js';
 
 export function createTmpCode(overrides = {}) {
     return {

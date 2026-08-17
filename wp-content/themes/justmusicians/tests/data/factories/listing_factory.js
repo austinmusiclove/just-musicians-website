@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { wpCliCreatePost } from './wp_cli.js';
+import { wpCliCreatePost } from './../wp_cli.js';
 
 const DEFAULT_THUMBNAIL_URL = 'https://picsum.photos/seed/listing/200';
 

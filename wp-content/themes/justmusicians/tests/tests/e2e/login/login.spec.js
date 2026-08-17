@@ -1,5 +1,5 @@
 import { test } from '../../../fixtures/fixtures.js';
-import { createUser } from '../../../data/user_factory.js';
+import { createUser } from '../../../data/factories/user_factory.js';
 import { wpCliCreateUser, wpCliDeleteUser } from '../../../data/wp_cli.js';
 
 

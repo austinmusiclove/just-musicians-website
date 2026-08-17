@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { createUser } from '../data/user_factory.js';
+import { createUser } from '../data/factories/user_factory.js';
 
 export class ThemePage {
     constructor(page, isMobile = false) {

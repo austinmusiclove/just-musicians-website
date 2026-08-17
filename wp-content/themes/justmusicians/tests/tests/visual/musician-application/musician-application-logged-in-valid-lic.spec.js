@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
-import { createUser } from '../../../data/user_factory.js';
-import { createApplicationPost } from '../../../data/application_factory.js';
-import { createListingPost } from '../../../data/listing_factory.js';
-import { createTmpCodePost } from '../../../data/tmp_code_factory.js';
+import { createUser } from '../../../data/factories/user_factory.js';
+import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createListingPost } from '../../../data/factories/listing_factory.js';
+import { createTmpCodePost } from '../../../data/factories/tmp_code_factory.js';
 import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
