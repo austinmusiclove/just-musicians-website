@@ -1,33 +1,26 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliSetUserMeta, wpCliSetPostThumbnail, wpCliGetPostField, wpCliGetPostMeta, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 import { createListingPost } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Update Listing', () => {
 
-    let testUser;
-    let userId;
     let listingId;
 
-    test.beforeEach(async ({ listingFormPage }) => {
-        testUser = createUser();
-        wpCliCreateUser(testUser);
-        userId = wpCliGetUserId(testUser.email);
+    test.beforeEach(async ({ listingFormPage, wpCli }) => {
+        const testUser = createUser();
+        wpCli.createUser(testUser);
+        const userId = wpCli.getUserId(testUser.email);
 
         listingId = createListingPost({ authorId: userId, overrides: { name: 'Original Name' } });
-        wpCliSetPostThumbnail(listingId, 'tests/data/files/test-image.png');
-        wpCliSetUserMeta(testUser.email, 'listings', [Number(listingId)]);
+        wpCli.trackPost(listingId);
+        wpCli.setPostThumbnail(listingId, 'tests/data/files/test-image.png');
+        wpCli.setUserMeta(testUser.email, 'listings', [Number(listingId)]);
 
         await listingFormPage.login(testUser.email, testUser.password);
     });
 
-    test.afterEach(async () => {
-        if (listingId) { wpCliDeletePost(listingId); }
-        if (testUser)  { wpCliDeleteUser(testUser.email); }
-    });
-
-    test('Update listing name from published listing', async ({ listingFormPage }) => {
+    test('Update listing name from published listing', async ({ listingFormPage, wpCli }) => {
         await listingFormPage.navigateToListing(listingId);
 
         await expect(listingFormPage.performerName).toHaveValue('Original Name');
@@ -36,12 +29,12 @@ test.describe('E2E - Update Listing', () => {
         await listingFormPage.performerName.fill(newName);
         await listingFormPage.updateListingBottom();
 
-        expect(wpCliGetPostField(listingId, 'post_title')).toBe(newName);
-        expect(wpCliGetPostMeta(listingId, 'name')).toBe(newName);
-        expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(newName);
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(newName);
+        expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
     });
 
-    test('Update listing name using top update button', async ({ listingFormPage }) => {
+    test('Update listing name using top update button', async ({ listingFormPage, wpCli }) => {
         await listingFormPage.navigateToListing(listingId);
 
         await expect(listingFormPage.performerName).toHaveValue('Original Name');
@@ -50,9 +43,9 @@ test.describe('E2E - Update Listing', () => {
         await listingFormPage.performerName.fill(newName);
         await listingFormPage.updateListingTop();
 
-        expect(wpCliGetPostField(listingId, 'post_title')).toBe(newName);
-        expect(wpCliGetPostMeta(listingId, 'name')).toBe(newName);
-        expect(wpCliGetPostField(listingId, 'post_status')).toBe('publish');
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(newName);
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(newName);
+        expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
     });
 
     test.skip('Update all listing fields', async ({ listingFormPage }) => {} );

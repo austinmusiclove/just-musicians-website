@@ -2,33 +2,22 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
 test.describe('Visual - Musician Application - Logged in - No listings', () => {
 
-    let applicationAuthorUser;
-    let applicationAuthorUserId;
     let applicationId;
-    let testUser;
 
-    test.beforeAll(async () => {
-        applicationAuthorUser = createUser();
-        wpCliCreateUser(applicationAuthorUser);
-        applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
+    test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
+        const applicationAuthorUser = createUser();
+        wpCli.createUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
+        wpCli.trackPost(applicationId);
 
-        testUser = createUser();
-        wpCliCreateUser(testUser);
-    });
+        const testUser = createUser();
+        wpCli.createUser(testUser);
 
-    test.afterAll(async () => {
-        if (applicationId)         { wpCliDeletePost(applicationId); }
-        if (applicationAuthorUser) { wpCliDeleteUser(applicationAuthorUser.email); }
-        if (testUser)              { wpCliDeleteUser(testUser.email); }
-    });
-
-    test.beforeEach(async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.login(testUser.email, testUser.password);
     });
 

@@ -1,25 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { wpCliCreateUser, wpCliDeleteUser } from '../../../data/wp_cli.js';
 
 
 test.describe('Navigation - Applications - Empty State', () => {
 
-    let noApplicationsUser;
-
-    test.beforeAll(async () => {
-        noApplicationsUser = createUser();
-        wpCliCreateUser(noApplicationsUser);
-    });
-
-    test.afterAll(async () => {
-        if (noApplicationsUser) {
-            wpCliDeleteUser(noApplicationsUser.email);
-        }
-    });
-
-    test.beforeEach(async ({ applicationsPage }) => {
+    test.beforeEach(async ({ wpCli, applicationsPage }) => {
+        const noApplicationsUser = createUser();
+        wpCli.createUser(noApplicationsUser);
         await applicationsPage.login(noApplicationsUser.email, noApplicationsUser.password);
         await applicationsPage.navigate('/applications/');
     });

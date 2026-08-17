@@ -1,3 +1,6 @@
+Tests
+    make factories into fixtures
+    test email for register user
 Critical bugs
     Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod

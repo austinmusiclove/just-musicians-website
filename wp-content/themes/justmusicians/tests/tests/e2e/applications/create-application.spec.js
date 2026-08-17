@@ -2,44 +2,38 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplication } from '../../../data/factories/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliGetLatestPostId, wpCliGetPostIdBySlug, wpCliGetPostField, wpCliGetPostMeta, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 test.describe('E2E - Create Application', () => {
 
     let testUser;
     let userId;
-    let applicationId;
 
-    test.beforeEach(async ({ applicationFormPage }) => {
+    test.beforeEach(async ({ applicationFormPage, wpCli }) => {
         testUser = createUser();
-        wpCliCreateUser(testUser);
-        userId = wpCliGetUserId(testUser.email);
+        wpCli.createUser(testUser);
+        userId = wpCli.getUserId(testUser.email);
 
         await applicationFormPage.login(testUser.email, testUser.password);
         await applicationFormPage.navigate('/application-form/');
     });
 
-    test.afterEach(async () => {
-        if (applicationId) { wpCliDeletePost(applicationId); }
-        if (testUser)      { wpCliDeleteUser(testUser.email); }
-    });
-
-    test('Create application', async ({ applicationFormPage, mailpit }) => {
+    test('Create application', async ({ applicationFormPage, mailpit, wpCli }) => {
         const application = createApplication();
 
         await applicationFormPage.fillMinimumFields(application.title, application.description);
         await applicationFormPage.submitApplication();
 
         const urlSlug = await applicationFormPage.waitForSubmitRedirect();
-        const idFromSlug = wpCliGetPostIdBySlug(urlSlug);
-        applicationId = wpCliGetLatestPostId(userId, 'application');
+        const idFromSlug = wpCli.getPostIdBySlug(urlSlug);
+        const applicationId = wpCli.getLatestPostId(userId, 'application');
+        wpCli.trackPost(applicationId);
         expect(idFromSlug).toBe(applicationId);
 
-        expect(wpCliGetPostField(applicationId, 'post_title')).toBe(application.title);
-        expect(wpCliGetPostField(applicationId, 'post_status')).toBe('publish');
-        expect(wpCliGetPostField(applicationId, 'post_author')).toBe(userId);
-        expect(wpCliGetPostMeta(applicationId, 'title')).toBe(application.title);
-        expect(wpCliGetPostMeta(applicationId, 'description')).toBe(application.description);
+        expect(wpCli.getPostField(applicationId, 'post_title')).toBe(application.title);
+        expect(wpCli.getPostField(applicationId, 'post_status')).toBe('publish');
+        expect(wpCli.getPostField(applicationId, 'post_author')).toBe(userId);
+        expect(wpCli.getPostMeta(applicationId, 'title')).toBe(application.title);
+        expect(wpCli.getPostMeta(applicationId, 'description')).toBe(application.description);
 
         const expectedSubject = `(${mailpit.siteUrl} ${testUser.email}) Your application has been created!`;
         const email = await mailpit.findEmailBySubject(expectedSubject);

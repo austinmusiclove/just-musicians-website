@@ -1,44 +1,18 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplication } from '../../../data/factories/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliCreatePost, wpCliDeletePost } from '../../../data/wp_cli.js';
+import { createApplicationPost } from '../../../data/factories/application_factory.js';
 
 
 test.describe('Navigation - Applications - One Application', () => {
 
-    let applicationAuthorUser;
-    let applicationId;
-    let applicationTitle;
+    test.beforeEach(async ({ wpCli, applicationsPage }) => {
+        const applicationAuthorUser = createUser();
+        wpCli.createUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
+        wpCli.trackPost(applicationId);
 
-    test.beforeAll(async () => {
-        applicationAuthorUser = createUser();
-        wpCliCreateUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
-
-        const application = createApplication();
-        applicationTitle = application.title;
-        applicationId = wpCliCreatePost({
-            postType: 'application',
-            title: application.title,
-            authorId: applicationAuthorUserId,
-            meta: {
-                title: application.title,
-                description: application.description,
-            },
-        });
-    });
-
-    test.afterAll(async () => {
-        if (applicationId) {
-            wpCliDeletePost(applicationId);
-        }
-        if (applicationAuthorUser) {
-            wpCliDeleteUser(applicationAuthorUser.email);
-        }
-    });
-
-    test.beforeEach(async ({ applicationsPage }) => {
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
     });

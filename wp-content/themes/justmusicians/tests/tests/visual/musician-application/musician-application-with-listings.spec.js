@@ -3,40 +3,27 @@ import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
 import { createListingPost } from '../../../data/factories/listing_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliSetUserMeta, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
 test.describe('Visual - Musician Application - Logged in - One listings', () => {
 
-    let applicationAuthorUser;
-    let applicationAuthorUserId;
     let applicationId;
-    let testUser;
-    let testUserId;
-    let listingId;
 
-    test.beforeAll(async () => {
-        applicationAuthorUser = createUser();
-        wpCliCreateUser(applicationAuthorUser);
-        applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
+    test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
+        const applicationAuthorUser = createUser();
+        wpCli.createUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
+        wpCli.trackPost(applicationId);
 
-        testUser = createUser();
-        wpCliCreateUser(testUser);
-        testUserId = wpCliGetUserId(testUser.email);
+        const testUser = createUser();
+        wpCli.createUser(testUser);
+        const testUserId = wpCli.getUserId(testUser.email);
 
-        listingId = createListingPost({ authorId: testUserId });
-        wpCliSetUserMeta(testUser.email, 'listings', [listingId]);
-    });
+        const listingId = createListingPost({ authorId: testUserId });
+        wpCli.trackPost(listingId);
+        wpCli.setUserMeta(testUser.email, 'listings', [listingId]);
 
-    test.afterAll(async () => {
-        if (listingId)             { wpCliDeletePost(listingId); }
-        if (applicationId)         { wpCliDeletePost(applicationId); }
-        if (applicationAuthorUser) { wpCliDeleteUser(applicationAuthorUser.email); }
-        if (testUser)              { wpCliDeleteUser(testUser.email); }
-    });
-
-    test.beforeEach(async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.login(testUser.email, testUser.password);
     });
 

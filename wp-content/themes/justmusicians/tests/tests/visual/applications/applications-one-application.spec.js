@@ -1,26 +1,22 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplication } from '../../../data/factories/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliCreatePost, wpCliDeletePost } from '../../../data/wp_cli.js';
+import { createApplication, createApplicationPost } from '../../../data/factories/application_factory.js';
 
 
 test.describe('Visual - Applications - One applicaiton', () => {
 
-    let applicationAuthorUser;
-    let applicationId;
     let applicationTitle;
 
-    test.afterAll(async () => {
-        if (applicationId) {
-            wpCliDeletePost(applicationId);
-        }
-        if (applicationAuthorUser) {
-            wpCliDeleteUser(applicationAuthorUser.email);
-        }
-    });
+    test.beforeEach(async ({ wpCli, applicationsPage }) => {
+        const applicationAuthorUser = createUser();
+        wpCli.createUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const application = createApplication();
+        applicationTitle = application.title;
+        const applicationId = createApplicationPost({ authorId: applicationAuthorUserId, overrides: application });
+        wpCli.trackPost(applicationId);
 
-    test.beforeEach(async ({ applicationsPage }) => {
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
     });
@@ -30,24 +26,6 @@ test.describe('Visual - Applications - One applicaiton', () => {
         const cards = await applicationsPage.applicationCards.all();
         expect(cards).toHaveLength(1);
         await expect(applicationsPage.getCardTitle(applicationsPage.applicationCards.first())).toHaveText(applicationTitle);
-    });
-
-    test.beforeAll(async () => {
-        applicationAuthorUser = createUser();
-        wpCliCreateUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
-
-        const application = createApplication();
-        applicationTitle = application.title;
-        applicationId = wpCliCreatePost({
-            postType: 'application',
-            title: application.title,
-            authorId: applicationAuthorUserId,
-            meta: {
-                title: application.title,
-                description: application.description,
-            },
-        });
     });
 
 });

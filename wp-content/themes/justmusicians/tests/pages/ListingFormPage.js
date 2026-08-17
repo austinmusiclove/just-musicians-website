@@ -26,6 +26,14 @@ export class ListingFormPage extends ThemePage {
 
     async navigateToListing(lid) {
         await super.navigate(`/listing-form/?lid=${lid}`);
+        const alpineEl = await this.alpineRoot.elementHandle();
+        await this.page.waitForFunction(
+            (el) => {
+                const data = Alpine.$data(el);
+                return data.pName && data.pName.length > 0;
+            },
+            alpineEl
+        );
     }
 
     async login(username, password) {

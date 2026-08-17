@@ -3,32 +3,26 @@ import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
 import { createTmpCodePost } from '../../../data/factories/tmp_code_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 
 test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
 
     let applicationAuthorUser;
-    let applicationAuthorUserId;
     let applicationId;
     let tmpCodeId;
     let lic;
 
-    test.beforeAll(async () => {
+    test.beforeEach(async ({ wpCli }) => {
         applicationAuthorUser = createUser();
-        wpCliCreateUser(applicationAuthorUser);
-        applicationAuthorUserId = wpCliGetUserId(applicationAuthorUser.email);
+        wpCli.createUser(applicationAuthorUser);
+        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
+        wpCli.trackPost(applicationId);
 
         const tmpCode = createTmpCodePost({ authorId: applicationAuthorUserId });
         tmpCodeId = tmpCode.id;
         lic = tmpCode.code;
-    });
-
-    test.afterAll(async () => {
-        if (tmpCodeId)             { wpCliDeletePost(tmpCodeId); }
-        if (applicationId)         { wpCliDeletePost(applicationId); }
-        if (applicationAuthorUser) { wpCliDeleteUser(applicationAuthorUser.email); }
+        wpCli.trackPost(tmpCodeId);
     });
 
     test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {

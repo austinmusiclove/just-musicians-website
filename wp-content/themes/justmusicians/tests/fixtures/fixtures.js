@@ -5,6 +5,13 @@ import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
 import { findEmailBySubject as findEmail } from '../data/mailpit.js';
+import {
+    wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
+    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
+    wpCliGetLatestPostId, wpCliGetPostField, wpCliGetPostMeta,
+    wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
+    wpCliSetPostThumbnail, wpCliDeletePost,
+} from '../data/wp_cli.js';
 
 export const test = base.extend({
     mailpit: async ({ baseURL }, use) => {
@@ -14,6 +21,30 @@ export const test = base.extend({
             siteUrl: baseURL,
             findEmailBySubject: (subject) => findEmail(subject, mailpitApiUrl),
         });
+    },
+    wpCli: async ({}, use) => {
+        const createdUsers = [];
+        const createdPosts = [];
+        await use({
+            createUser: (user) => { wpCliCreateUser(user); createdUsers.push(user); },
+            getUserId: wpCliGetUserId,
+            deleteUser: wpCliDeleteUser,
+            deleteUsers: wpCliDeleteUsers,
+            createPost: (args) => { const id = wpCliCreatePost(args); createdPosts.push(id); return id; },
+            getUserMeta: wpCliGetUserMeta,
+            setUserMeta: wpCliSetUserMeta,
+            getLatestPostId: wpCliGetLatestPostId,
+            getPostField: wpCliGetPostField,
+            getPostMeta: wpCliGetPostMeta,
+            getPostIdBySlug: wpCliGetPostIdBySlug,
+            getPostThumbnailId: wpCliGetPostThumbnailId,
+            setPostThumbnail: wpCliSetPostThumbnail,
+            deletePost: wpCliDeletePost,
+            trackUser: (user) => { if (user) createdUsers.push(user); },
+            trackPost: (postId) => { if (postId) createdPosts.push(postId); },
+        });
+        for (const id of createdPosts) wpCliDeletePost(id);
+        for (const u of createdUsers) wpCliDeleteUser(u.email);
     },
     themePage: async ({ page, isMobile }, use) => {
         const themePage = new ThemePage(page, isMobile);
