@@ -4,6 +4,7 @@ import { ApplicationsPage } from '../pages/ApplicationsPage.js';
 import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
+import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { findEmailBySubject as findEmail } from '../data/mailpit.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
@@ -65,5 +66,9 @@ export const test = base.extend({
     listingFormPage: async ({ page, isMobile }, use) => {
         const listingFormPage = new ListingFormPage(page, isMobile);
         await use(listingFormPage);
+    },
+    singleApplicationPage: async ({ page, isMobile }, use) => {
+        const singleApplicationPage = new SingleApplicationPage(page, isMobile);
+        await use(singleApplicationPage);
     },
 });

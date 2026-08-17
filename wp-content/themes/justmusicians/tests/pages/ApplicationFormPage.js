@@ -26,6 +26,7 @@ export class ApplicationFormPage extends ThemePage {
         await this.page.waitForFunction(() => typeof tinymce !== 'undefined' && tinymce.get('description') !== null);
         await this.page.evaluate((text) => {
             tinymce.get('description').setContent(text);
+            tinymce.get('description').save();
         }, description);
     }
 
