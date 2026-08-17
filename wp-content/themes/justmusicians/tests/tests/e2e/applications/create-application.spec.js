@@ -24,7 +24,7 @@ test.describe('E2E - Create Application', () => {
         if (testUser)      { wpCliDeleteUser(testUser.email); }
     });
 
-    test('Create application', async ({ applicationFormPage }) => {
+    test('Create application', async ({ applicationFormPage, mailpit }) => {
         const application = createApplication();
 
         await applicationFormPage.fillMinimumFields(application.title, application.description);
@@ -40,6 +40,10 @@ test.describe('E2E - Create Application', () => {
         expect(wpCliGetPostField(applicationId, 'post_author')).toBe(userId);
         expect(wpCliGetPostMeta(applicationId, 'title')).toBe(application.title);
         expect(wpCliGetPostMeta(applicationId, 'description')).toBe(application.description);
+
+        const expectedSubject = `(${mailpit.siteUrl} ${testUser.email}) Your application has been created!`;
+        const email = await mailpit.findEmailBySubject(expectedSubject);
+        expect(email).toBeTruthy();
     });
 
     test.skip('Create application with multi line description', async ({ applicationFormPage }) => {} );

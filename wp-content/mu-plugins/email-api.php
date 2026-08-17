@@ -20,10 +20,10 @@ require_once 'email-api/alerts.php';
 
 function send_email_safely($email, $subject, $message) {
     if (EMAIL_TEST_MODE) {
-        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . home_url() . ' ' . $email . ') ' . $subject, $message);
     } else {
         wp_mail($email, $subject, $message);
-        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . $email . ') ' . $subject, $message);
+        wp_mail( ADMIN_NOTIFICATION_EMAIL, '(' . home_url() . ' ' . $email . ') ' . $subject, $message);
     }
 }
 
