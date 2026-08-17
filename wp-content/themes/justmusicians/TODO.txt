@@ -1,3 +1,6 @@
+Test improvements
+    use locators that are not on id?
+    handle navigate to home in login function or log in from the page or both
 Critical bugs
     Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
     Need to add unique auth keys to wp config in staging and prod
@@ -20,7 +23,6 @@ Applications updates for sales
     fix application card so that link does not blend in with description
     application description does not handle bullets
     if event is deleted remove it from applications or just do not show events that are not published
-    showing &nbsp; in listing card description when new line; didn't replicate on staging
     Add draw and price options for application and add them to applicant card
     Add two listing images on applicant cards
     change edit submitted application to either resubmit or withdraw
@@ -35,8 +37,6 @@ Applications updates for sales
     Tests single application
         update application title
         update application description
-    Tests create application
-        create application
     Tests submit application
         create submitted application
         make sure new listing ends up in authors listings user meta list
@@ -57,8 +57,6 @@ Testing for Applications product rollout
         Single Application page
             Update Application
             Delete Appication
-        Create Application page
-            Create Application
         Submit Appication page
             Submit Appication new listing
             Submit Appication existing listing
@@ -84,16 +82,6 @@ Applications Release
         Notification to applicants when dates added
         Recurring events
             Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
-    Get devon to fix design
-        Send inquiry modal for existing events
-        Applications empty state
-        Applications card
-        Single application page
-        Applicant card
-        Submitted applications page
-        Submitted application card
-        Musician Application
-        Create Application page
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing

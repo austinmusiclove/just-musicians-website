@@ -27,7 +27,7 @@ $app_submissions = get_applicants($application_id, [
 ]);
 $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
-$app_description = get_field('description'); //get_post_meta(get_the_ID(), 'description', true);
+$app_description = get_post_meta(get_the_ID(), 'description', true);
 
 // Events
 $user_events_result = get_user_events([

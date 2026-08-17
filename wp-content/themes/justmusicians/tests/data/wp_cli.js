@@ -74,6 +74,14 @@ export function wpCliGetPostField(postId, field) {
     return output.trim();
 }
 
+export function wpCliGetPostIdBySlug(slug, postType = 'application') {
+    const output = execSync(
+        `wp post list --name=${slug} --post_type=${postType} --field=ID --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    return output.trim() || null;
+}
+
 export function wpCliGetPostMeta(postId, key) {
     try {
         const output = execSync(

@@ -4,7 +4,7 @@ import { wpCliCreatePost } from './wp_cli.js';
 export function createApplication(overrides = {}) {
     return {
         title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(2),
+        description: faker.lorem.sentence({ min: 10, max: 20 }),
         ...overrides,
     };
 }

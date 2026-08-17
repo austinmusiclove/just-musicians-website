@@ -189,7 +189,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         <!-- Bio -->
         <?php if (!empty($args['bio'])) { ?>
             <div class="mb-4">
-                <?php get_template_part('template-parts/cards/card-components/show-more-text-seo', '', [
+                <?php get_template_part('template-parts/cards/card-components/show-more-text-lines', '', [
                     'text'  => wp_strip_all_tags($args['bio']),
                 ]); ?>
             </div>

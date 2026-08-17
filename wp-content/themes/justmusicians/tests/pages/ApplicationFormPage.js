@@ -3,9 +3,8 @@ import { ThemePage } from './ThemePage.js';
 export class ApplicationFormPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.titleInput       = page.locator('#title');
-        this.descriptionInput = page.locator('#description');
-        this.submitBtn        = page.getByRole('button', { name: 'Create Application' });
+        this.titleInput           = page.locator('#title');
+        this.submitBtn            = page.getByRole('button', { name: 'Create Application' });
     }
 
     async navigate(url = '/application-form/') {
@@ -19,7 +18,14 @@ export class ApplicationFormPage extends ThemePage {
 
     async fillMinimumFields(title, description) {
         await this.titleInput.fill(title);
-        await this.descriptionInput.fill(description);
+        await this.fillDescription(description);
+    }
+
+    async fillDescription(description) {
+        await this.page.waitForFunction(() => typeof tinymce !== 'undefined' && tinymce.get('description') !== null);
+        await this.page.evaluate((text) => {
+            tinymce.get('description').setContent(text);
+        }, description);
     }
 
     async submitApplication() {
@@ -33,7 +39,7 @@ export class ApplicationFormPage extends ThemePage {
     async waitForSubmitRedirect() {
         await this.page.waitForURL(/\/application\/.*toast=create/, { timeout: 30000 });
         const url = new URL(this.page.url());
-        const pathParts = url.pathname.split('/');
-        return pathParts.find(part => /^\d+$/.test(part));
+        const pathParts = url.pathname.replace(/\/$/, '').split('/');
+        return pathParts[pathParts.length - 1];
     }
 }

@@ -20,7 +20,7 @@
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>
-        <div class="text-16" :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'"></div>
+        <div class="whitespace-pre-wrap text-16" :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'"></div>
     </div>
 
     <!-- Events -->

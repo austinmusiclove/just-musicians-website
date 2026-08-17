@@ -35,6 +35,7 @@ get_header();
                 showApplication: true,
                 eventAvailability: {},
                 savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
+                description:   '<?php echo clean_str_for_doublequotes($description); ?>',
             }"
             x-on:hideform="showApplication = false;"
         >
@@ -44,7 +45,7 @@ get_header();
                 <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
 
                 <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80" x-show="showApplication" x-cloak data-testid="musician-application-description"><?php echo wpautop(wp_kses_post($description)); ?></div>
+                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
                 <?php } ?>
 
                 <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [

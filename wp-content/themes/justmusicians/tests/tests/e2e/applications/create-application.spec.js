@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/user_factory.js';
 import { createApplication } from '../../../data/application_factory.js';
-import { wpCliCreateUser, wpCliGetUserId, wpCliGetLatestPostId, wpCliGetPostField, wpCliGetPostMeta, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
+import { wpCliCreateUser, wpCliGetUserId, wpCliGetLatestPostId, wpCliGetPostIdBySlug, wpCliGetPostField, wpCliGetPostMeta, wpCliDeleteUser, wpCliDeletePost } from '../../../data/wp_cli.js';
 
 test.describe('E2E - Create Application', () => {
 
@@ -31,9 +31,10 @@ test.describe('E2E - Create Application', () => {
         await applicationFormPage.fillMinimumFields(application.title, application.description);
         await applicationFormPage.submitApplication();
 
-        const urlApplicationId = await applicationFormPage.waitForSubmitRedirect();
+        const urlSlug = await applicationFormPage.waitForSubmitRedirect();
+        const idFromSlug = wpCliGetPostIdBySlug(urlSlug);
         applicationId = wpCliGetLatestPostId(userId, 'application');
-        expect(applicationId).toBe(urlApplicationId);
+        expect(idFromSlug).toBe(applicationId);
 
         expect(wpCliGetPostField(applicationId, 'post_title')).toBe(application.title);
         expect(wpCliGetPostField(applicationId, 'post_status')).toBe('publish');
@@ -41,4 +42,6 @@ test.describe('E2E - Create Application', () => {
         expect(wpCliGetPostMeta(applicationId, 'title')).toBe(application.title);
         expect(wpCliGetPostMeta(applicationId, 'description')).toBe(application.description);
     });
+
+    test('Create application with multi line description', async ({ applicationFormPage }) => {} );
 });
