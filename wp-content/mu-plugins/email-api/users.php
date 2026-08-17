@@ -2,7 +2,7 @@
 
 function send_account_activation_email($email, $account_identifier) {
     $link = site_url() . "/email-verification/?aci=" . $account_identifier;
-    $subject = 'Verify your email to activate your Hire More Musicians account';
-    $message = 'Thank you for creating an account with Hire More Musicians. Please click this link to verify your email and activate you account: ' . $link;
+    $subject = 'Verify your email to activate your Hire Musicians account';
+    $message = 'Thank you for creating an account with Hire Musicians. Please click this link to verify your email and activate you account: ' . $link;
     send_email_safely($email, $subject, $message);
 }
