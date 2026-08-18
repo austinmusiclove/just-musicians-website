@@ -12,7 +12,7 @@ import {
     wpCliGetLatestPostId, wpCliGetPostField, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
-    wpCliAddListingToUser,
+    wpCliAddListingToUser, wpCliNotificationExists,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
@@ -43,6 +43,7 @@ export const test = base.extend({
             setPostThumbnail: wpCliSetPostThumbnail,
             deletePost: wpCliDeletePost,
             addListingToUser: wpCliAddListingToUser,
+            notificationExists: wpCliNotificationExists,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });

@@ -138,3 +138,15 @@ export function wpCliAddListingToUser(userId, listingId) {
         { stdio: 'ignore' }
     );
 }
+
+export function wpCliNotificationExists(userId, notificationType, subjectId) {
+    try {
+        const output = execSync(
+            `wp db query "SELECT COUNT(*) FROM wp_notifications WHERE user_id = ${userId} AND notification_type = '${notificationType}' AND subject_id = ${subjectId}" --skip-column-names --path=${WP_PATH}`,
+            { encoding: 'utf-8' }
+        );
+        return parseInt(output.trim(), 10) > 0;
+    } catch {
+        return false;
+    }
+}

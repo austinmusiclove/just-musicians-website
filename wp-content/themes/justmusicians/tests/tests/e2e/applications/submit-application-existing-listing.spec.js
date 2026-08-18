@@ -44,11 +44,7 @@ test.describe('E2E - Musician Application - Submit with exisitng listing', () =>
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
 
-        await expect(musicianApplicationPage.successfulSubmission).toBeVisible();
-        await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
-        await expect(musicianApplicationPage.listingDropdown).not.toBeVisible();
-        await expect(musicianApplicationPage.messageTextarea).not.toBeVisible();
-        await expect(musicianApplicationPage.submitButton).not.toBeVisible();
+        await musicianApplicationPage.expectSuccessScreen();
 
         const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
         expect(submissionId).toBeTruthy();
@@ -63,6 +59,9 @@ test.describe('E2E - Musician Application - Submit with exisitng listing', () =>
         const expectedAuthorSubject = `(${mailpit.siteUrl} ${applicationAuthor.email}) You have a new applicant!`;
         const authorEmail = await mailpit.findEmailBySubject(expectedAuthorSubject);
         expect(authorEmail).toBeTruthy();
+
+        const notificationExists = wpCli.notificationExists(applicationAuthorId, 'new_applicant', submissionId);
+        expect(notificationExists).toBe(true);
     });
 
     test.skip('Submit application with existing listing including event availability', async ({}) => {} );
