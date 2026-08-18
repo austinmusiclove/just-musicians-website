@@ -64,4 +64,6 @@ test.describe('E2E - Musician Application - Submit with exisitng listing', () =>
         const authorEmail = await mailpit.findEmailBySubject(expectedAuthorSubject);
         expect(authorEmail).toBeTruthy();
     });
+
+    test.skip('Submit application with existing listing including event availability', async ({}) => {} );
 });
