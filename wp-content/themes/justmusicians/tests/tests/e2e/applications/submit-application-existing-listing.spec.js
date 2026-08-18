@@ -48,6 +48,7 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
 
         const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
         expect(submissionId).toBeTruthy();
+        wpCli.trackPost(submissionId);
         expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingId));
         expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);

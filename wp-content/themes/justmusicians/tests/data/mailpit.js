@@ -11,3 +11,14 @@ export async function findEmailBySubject(subject, mailpitApiUrl, { timeout = 100
     }
     return null;
 }
+
+export async function getEmailBody(messageId, mailpitApiUrl) {
+    const res = await fetch(`${mailpitApiUrl}/message/${messageId}`);
+    const data = await res.json();
+    return data.Text || '';
+}
+
+export function extractLinkFromEmail(text) {
+    const match = text.match(/https?:\/\/[^\s]+/);
+    return match ? match[0] : null;
+}

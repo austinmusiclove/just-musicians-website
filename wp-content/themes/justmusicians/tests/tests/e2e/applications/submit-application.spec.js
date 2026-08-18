@@ -45,6 +45,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
 
         const listingPostId = wpCli.getLatestPostId(submitterId, 'listing');
         expect(listingPostId).toBeTruthy();
+        wpCli.trackPost(listingPostId);
         expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('publish');
         expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
 
@@ -53,6 +54,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
 
         const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
         expect(submissionId).toBeTruthy();
+        wpCli.trackPost(submissionId);
         expect(wpCli.getPostField(submissionId, 'post_status')).toBe('publish');
         expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingPostId));

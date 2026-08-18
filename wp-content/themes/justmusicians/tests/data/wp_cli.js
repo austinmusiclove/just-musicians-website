@@ -18,10 +18,12 @@ export function wpCliGetUserId(userEmail) {
 }
 
 export function wpCliDeleteUser(userEmail) {
-    execSync(
-        `wp user delete "${userEmail}" --yes --path=${WP_PATH}`,
-        { stdio: 'ignore' }
-    );
+    try {
+        execSync(
+            `wp user delete "${userEmail}" --yes --path=${WP_PATH}`,
+            { stdio: 'ignore' }
+        );
+    } catch (e) {}
 }
 
 export function wpCliSetUserMeta(userEmail, key, value) {
@@ -66,6 +68,17 @@ export function wpCliGetLatestPostId(authorId, postType = 'listing', postStatus 
     return lines.length > 1 ? lines[1].trim() : null;
 }
 
+export function wpCliGetLatestPostIdByType(postType = 'listing', postStatus = 'publish', { metaKey, metaValue } = {}) {
+    let cmd = `wp post list --post_type=${postType} --post_status=${postStatus}`;
+    if (metaKey && metaValue) {
+        cmd += ` --meta_key=${metaKey} --meta_value="${metaValue}"`;
+    }
+    cmd += ` --fields=ID --format=csv --orderby=date --order=desc --path=${WP_PATH}`;
+    const output = execSync(cmd, { encoding: 'utf-8' });
+    const lines = output.trim().split('\n');
+    return lines.length > 1 ? lines[1].trim() : null;
+}
+
 export function wpCliGetPostField(postId, field) {
     const output = execSync(
         `wp post get ${postId} --field=${field} --path=${WP_PATH}`,
@@ -99,10 +112,12 @@ export function wpCliGetPostThumbnailId(postId) {
 }
 
 export function wpCliDeletePost(postId) {
-    execSync(
-        `wp post delete ${postId} --force --path=${WP_PATH}`,
-        { stdio: 'ignore' }
-    );
+    try {
+        execSync(
+            `wp post delete ${postId} --force --path=${WP_PATH}`,
+            { stdio: 'ignore' }
+        );
+    } catch (e) {}
 }
 
 export function wpCliSetPostThumbnail(postId, imagePath) {

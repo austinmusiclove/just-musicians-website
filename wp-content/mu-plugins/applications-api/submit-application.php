@@ -73,7 +73,7 @@ function submit_application($args) {
         }
 
         // Send email to non logged in user to direct them to sign up to complete their application
-        $sign_up_link = site_url('/musician-application/' . $application_id) . '?lic=' . $tmp_code;
+        $sign_up_link = site_url('/musician-application/' . $application_id) . '/?lic=' . $tmp_code;
         send_sign_up_to_complete_application_email($submitter_email, $application_id, $sign_up_link);
         return [
             'post_id'      => $post_id,

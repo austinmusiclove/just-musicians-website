@@ -21,7 +21,7 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         wpCli.trackPost(applicationId);
 
-        listingData = createListing();
+        listingData = createListing({ zip: '78701' });
         message = faker.lorem.sentence();
     });
 
@@ -38,13 +38,13 @@ test.describe('E2E - Submit Application - Logged Out', () => {
             { timeout: 10000 }
         );
 
-        // Need to make sure to get a spcific listing with specific title; otherwise parallelism problem
-        const listingPostId = wpCli.getLatestPostIdByType('listing', 'pending');
+        const listingPostId = wpCli.getLatestPostIdByType('listing', 'pending', { metaKey: 'name', metaValue: listingData.name });
         expect(listingPostId).toBeTruthy();
+        wpCli.trackPost(listingPostId);
         expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('pending');
         expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
 
-        const submissionId = wpCli.getLatestPostIdByType('app_submission', 'publish');
+        const submissionId = wpCli.getLatestPostIdByType('app_submission', 'publish', { metaKey: 'application', metaValue: String(applicationId) });
         expect(submissionId).toBeTruthy();
         expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingPostId));
@@ -53,7 +53,14 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.email}) Your application submission has been submitted.`;
         const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);
         expect(submitterEmail).toBeTruthy();
-        // Check that the link is the same as the redirect url
+        const emailBody = await mailpit.getEmailBody(submitterEmail.ID);
+        const signUpLink = mailpit.extractLinkFromEmail(emailBody);
+        expect(signUpLink).toBeTruthy();
+
+        const code = new URL(signUpLink).searchParams.get('lic');
+        const tmpCodePostId = wpCli.getLatestPostIdByType('tmp_code', 'publish', { metaKey: 'code', metaValue: code });
+        expect(tmpCodePostId).toBeTruthy();
+        wpCli.trackPost(tmpCodePostId);
 
         const expectedAuthorSubject = `(${mailpit.siteUrl} ${applicationAuthor.email}) You have a new applicant!`;
         const authorEmail = await mailpit.findEmailBySubject(expectedAuthorSubject);
@@ -62,6 +69,10 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         const notificationExists = wpCli.notificationExists(applicationAuthorId, 'new_applicant', submissionId);
         expect(notificationExists).toBe(true);
 
+        await musicianApplicationPage.page.waitForURL(
+            url => url.href.startsWith(signUpLink),
+            { timeout: 20000 }
+        );
         // Check for success anon
         // Click sign up
         // Sign up
@@ -71,4 +82,5 @@ test.describe('E2E - Submit Application - Logged Out', () => {
     test.skip('Submit application while logged out and sign up from email link', async ({}) => {} );
     test.skip('Submit application while logged out and sign up with complete listing', async ({}) => {} );
     test.skip('Submit application while logged out and sign up with event availability', async ({}) => {} );
+    test.skip('Submit application while logged out and sign up after getting an inquiry', async ({}) => {} );
 });

@@ -30,7 +30,7 @@ export class MusicianApplicationPage extends ThemePage {
 
     async navigateToApplication(applicationId, lic = '') {
         const query = lic ? `?lic=${lic}` : '';
-        await super.navigate(`/musician-application/${applicationId}${query}`);
+        await super.navigate(`/musician-application/${applicationId}/${query}`);
     }
 
     async selectListing(listingName) {

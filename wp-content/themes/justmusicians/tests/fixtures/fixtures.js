@@ -5,11 +5,11 @@ import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
 import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
-import { findEmailBySubject as findEmail } from '../data/mailpit.js';
+import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink } from '../data/mailpit.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
-    wpCliGetLatestPostId, wpCliGetPostField, wpCliGetPostMeta,
+    wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
     wpCliAddListingToUser, wpCliNotificationExists,
@@ -22,6 +22,8 @@ export const test = base.extend({
             apiUrl: mailpitApiUrl,
             siteUrl: baseURL,
             findEmailBySubject: (subject) => findEmail(subject, mailpitApiUrl),
+            getEmailBody: (messageId) => getEmail(messageId, mailpitApiUrl),
+            extractLinkFromEmail: extractLink,
         });
     },
     wpCli: async ({}, use) => {
@@ -36,6 +38,7 @@ export const test = base.extend({
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
             getLatestPostId: wpCliGetLatestPostId,
+            getLatestPostIdByType: wpCliGetLatestPostIdByType,
             getPostField: wpCliGetPostField,
             getPostMeta: wpCliGetPostMeta,
             getPostIdBySlug: wpCliGetPostIdBySlug,
