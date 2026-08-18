@@ -10,11 +10,11 @@ export class SingleApplicationPage extends ThemePage {
     }
 
     async navigateToApplication(slug) {
-        await super.navigate(`/application/${slug}`);
+        await super.navigate(`/application/${slug}/`);
     }
 
     async login(username, password) {
-        await this.navigate('/');
+        await super.navigate('/');
         await super.login(username, password);
         await super.expectLoggedInPage();
     }
@@ -34,6 +34,10 @@ export class SingleApplicationPage extends ThemePage {
             tinymce.get('application_description').setContent(text);
             tinymce.get('application_description').save();
         }, description);
+        await this.page.waitForFunction(
+            (text) => document.querySelector('textarea[name="description"]').value === text,
+            description
+        );
     }
 
     async updateApplication() {

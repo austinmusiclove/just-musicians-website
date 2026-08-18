@@ -27,6 +27,7 @@ export class ThemePage {
 
     async navigate(url = '/') {
         await this.page.goto(url, { waitUntil: 'domcontentloaded' });
+        await this.page.waitForFunction(() => window.Alpine, { timeout: 10000 });
     }
 
     async openSignupModal() {
@@ -68,7 +69,9 @@ export class ThemePage {
     async login(username, password) {
         await this.openLoginModal();
         await this.fillLoginForm(username, password);
+        const responsePromise = this.page.waitForResponse(resp => resp.url().includes('wp-login.php'));
         await this.loginSubmitBtn.click();
+        await responsePromise;
     }
 
     async logout() {

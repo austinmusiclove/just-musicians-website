@@ -28,6 +28,10 @@ export class ApplicationFormPage extends ThemePage {
             tinymce.get('description').setContent(text);
             tinymce.get('description').save();
         }, description);
+        await this.page.waitForFunction(
+            (text) => document.querySelector('textarea[name="description"]').value === text,
+            description
+        );
     }
 
     async submitApplication() {

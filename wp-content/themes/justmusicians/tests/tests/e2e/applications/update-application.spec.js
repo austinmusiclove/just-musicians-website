@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplication, createApplicationPost } from '../../../data/factories/application_factory.js';
 
 test.describe('E2E - Update Application', () => {
 
@@ -14,7 +14,7 @@ test.describe('E2E - Update Application', () => {
 
         applicationId = createApplicationPost({
             authorId: userId,
-            overrides: { title: 'Original Title', description: 'Original description' },
+            overrides: createApplication(),
         });
         wpCli.trackPost(applicationId);
 
