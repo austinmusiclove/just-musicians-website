@@ -27,7 +27,7 @@ test.describe('E2E - Submit Application with New Listing', () => {
         wpCli.createUser(submitter);
         submitterId = wpCli.getUserId(submitter.email);
 
-        listingData = createListing({ email: submitter.email });
+        listingData = createListing({ email: submitter.email, zip: '78701' });
         message = faker.lorem.sentence();
 
         await musicianApplicationPage.login(submitter.email, submitter.password);
@@ -36,7 +36,6 @@ test.describe('E2E - Submit Application with New Listing', () => {
     test('Submit application with new listing', async ({ musicianApplicationPage, wpCli, mailpit }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
 
-        await musicianApplicationPage.selectCreateNewListing();
         await musicianApplicationPage.fillMinimumListingFields(
             listingData.name, listingData.description,
             listingData.zip, listingData.email
@@ -53,7 +52,7 @@ test.describe('E2E - Submit Application with New Listing', () => {
         expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
 
         const userListings = wpCli.getUserMeta(submitterId, 'listings');
-        expect(userListings).toContain(listingPostId);
+        expect(userListings).toContain(Number(listingPostId));
 
         const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
         expect(submissionId).toBeTruthy();
