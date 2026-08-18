@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center gap-4 my-16 text-center">
+<div class="flex flex-col items-center gap-4 my-16 text-center" data-testid="successful-submission">
     <h2 class="font-bold text-25">Your application has been submitted!</h2>
     <p class="text-16 text-black/80">When you make updates to your musician listing, the changes are automatically reflected in your application submission.</p>
     <div class="flex gap-4 mt-2">

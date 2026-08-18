@@ -117,3 +117,24 @@ export function wpCliSetPostThumbnail(postId, imagePath) {
     );
     return attachmentId;
 }
+
+export function wpCliAddListingToUser(userId, listingId) {
+    let listings = [];
+    try {
+        const current = execSync(
+            `wp user meta get ${userId} listings --format=json --path=${WP_PATH}`,
+            { encoding: 'utf-8' }
+        ).trim();
+        listings = JSON.parse(current);
+    } catch {
+        // User has no listings meta yet
+    }
+    if (!Array.isArray(listings)) listings = [];
+    if (!listings.includes(String(listingId))) {
+        listings.push(String(listingId));
+    }
+    execSync(
+        `wp user meta update ${userId} listings '${JSON.stringify(listings)}' --format=json --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+}

@@ -110,7 +110,7 @@
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Personalized Message</span>
         </label>
-        <textarea name="message" class="w-full h-32 !border-0"
+        <textarea name="applicant_message" class="w-full h-32 !border-0"
             placeholder="Here's your chance to send the application reviewer a personalized message"
             x-model="message"
         ></textarea>

@@ -12,6 +12,7 @@ import {
     wpCliGetLatestPostId, wpCliGetPostField, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
+    wpCliAddListingToUser,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
@@ -41,6 +42,7 @@ export const test = base.extend({
             getPostThumbnailId: wpCliGetPostThumbnailId,
             setPostThumbnail: wpCliSetPostThumbnail,
             deletePost: wpCliDeletePost,
+            addListingToUser: wpCliAddListingToUser,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });
