@@ -4,7 +4,7 @@ import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
 import { createListingPost } from '../../../data/factories/listing_factory.js';
 
-test.describe('E2E - Musician Application - Submit with exisitng listing', () => {
+test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
 
     let applicationAuthor;
     let applicationAuthorId;

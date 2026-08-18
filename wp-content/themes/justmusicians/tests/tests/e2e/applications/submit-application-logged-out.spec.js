@@ -5,17 +5,15 @@ import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
 import { createListing } from '../../../data/factories/listing_factory.js';
 
-test.describe('E2E - Submit Application - Logged in - No Listings', () => {
+test.describe('E2E - Submit Application - Logged Out', () => {
 
     let applicationAuthor;
     let applicationAuthorId;
     let applicationId;
-    let submitter;
-    let submitterId;
     let listingData;
     let message;
 
-    test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
+    test.beforeEach(async ({ wpCli }) => {
         applicationAuthor = createUser();
         wpCli.createUser(applicationAuthor);
         applicationAuthorId = wpCli.getUserId(applicationAuthor.email);
@@ -23,17 +21,11 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         wpCli.trackPost(applicationId);
 
-        submitter = createUser();
-        wpCli.createUser(submitter);
-        submitterId = wpCli.getUserId(submitter.email);
-
-        listingData = createListing({ email: submitter.email, zip: '78701' });
+        listingData = createListing();
         message = faker.lorem.sentence();
-
-        await musicianApplicationPage.login(submitter.email, submitter.password);
     });
 
-    test('Submit application with new listing', async ({ musicianApplicationPage, wpCli, mailpit }) => {
+    test('Submit application while logged out and sign up', async ({ musicianApplicationPage, wpCli, mailpit }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
 
         await musicianApplicationPage.fillMinimumListingFields( listingData.name, listingData.description, listingData.zip, listingData.email);
@@ -41,26 +33,27 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
 
-        await musicianApplicationPage.expectSuccessScreen(true);
+        await musicianApplicationPage.page.waitForURL(
+            url => url.pathname.includes(`/musician-application/${applicationId}`) && url.searchParams.has('lic'),
+            { timeout: 10000 }
+        );
 
-        const listingPostId = wpCli.getLatestPostId(submitterId, 'listing');
+        // Need to make sure to get a spcific listing with specific title; otherwise parallelism problem
+        const listingPostId = wpCli.getLatestPostIdByType('listing', 'pending');
         expect(listingPostId).toBeTruthy();
-        expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('publish');
+        expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('pending');
         expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
 
-        const userListings = wpCli.getUserMeta(submitterId, 'listings');
-        expect(userListings).toContain(Number(listingPostId));
-
-        const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
+        const submissionId = wpCli.getLatestPostIdByType('app_submission', 'publish');
         expect(submissionId).toBeTruthy();
-        expect(wpCli.getPostField(submissionId, 'post_status')).toBe('publish');
         expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingPostId));
         expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);
 
-        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${submitter.email}) Your application submission was successful!`;
+        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.email}) Your application submission has been submitted.`;
         const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);
         expect(submitterEmail).toBeTruthy();
+        // Check that the link is the same as the redirect url
 
         const expectedAuthorSubject = `(${mailpit.siteUrl} ${applicationAuthor.email}) You have a new applicant!`;
         const authorEmail = await mailpit.findEmailBySubject(expectedAuthorSubject);
@@ -68,8 +61,14 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
 
         const notificationExists = wpCli.notificationExists(applicationAuthorId, 'new_applicant', submissionId);
         expect(notificationExists).toBe(true);
-    });
 
-    test.skip('Submit application with new listing including event availability', async ({}) => {} );
-    test.skip('Submit application with new complete listing', async ({}) => {} );
+        // Check for success anon
+        // Click sign up
+        // Sign up
+        // Redirect
+        // Check for listing published, authored by user, and in listings user meta
+    });
+    test.skip('Submit application while logged out and sign up from email link', async ({}) => {} );
+    test.skip('Submit application while logged out and sign up with complete listing', async ({}) => {} );
+    test.skip('Submit application while logged out and sign up with event availability', async ({}) => {} );
 });

@@ -14,6 +14,7 @@ export function createListing(overrides = {}) {
         zip: faker.location.zipCode('#####'),
         bio: faker.lorem.paragraphs(2),
         verified: faker.datatype.boolean(),
+        email: faker.internet.email(),
         ...overrides,
     };
 }
@@ -28,7 +29,7 @@ export function createListingPost({ authorId, status = 'publish', overrides = {}
         meta: {
             name: listing.name,
             description: listing.description,
-            email: faker.internet.email(),
+            email: listing.email,
             city: listing.city,
             state: listing.state,
             zip_code: listing.zip,
