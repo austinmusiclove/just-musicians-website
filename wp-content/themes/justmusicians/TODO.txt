@@ -1,5 +1,6 @@
 Critical bugs
-    Register user on a user that is already registered with google does not give any feedback on prod; should say user already registered
+    Santa Clara California is default location; only on prod not staging or local
+    Register user is not giving feedback like when you try to register existing email
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
@@ -14,7 +15,6 @@ Applications fixes
     if event is deleted remove it from applications or just do not show events that are not published
 Testing for Applications product rollout
     Users tests
-        register user with existing account (registered with gmail) not giving any feedback and not working
         forgot password workflow
         lid tmp code user registration with listing and other scenario (aid?)
 Applications Features to add
