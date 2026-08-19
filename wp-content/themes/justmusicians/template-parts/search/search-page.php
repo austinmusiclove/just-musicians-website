@@ -71,7 +71,7 @@ $next_page       = $result ? $result['next_page']       : null;
         <?php } else { ?>
             hx-trigger="load, filterupdate"
         <?php } ?>
-        x-init="$watch('searchLocation', value => { $dispatch('filterupdate'); })"
+        x-init="$watch('searchLocation', value => { if (!locationDetectedFromServer) { $dispatch('filterupdate'); } locationDetectedFromServer = false; })"
     >
         <input type="hidden" name="search" x-model="listingSearchVal" />
         <div id="content" class="grow flex flex-col relative">

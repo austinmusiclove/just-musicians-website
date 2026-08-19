@@ -37,20 +37,11 @@
 </head>
 
 <?php
-// Get user location
-//$ip_loc = function_exists('hm_get_ip_location') ? hm_get_ip_location() : null;
-//$ip_lat   = $ip_loc->lat ?? null;
-//$ip_lng   = $ip_loc->lon ?? null;
-//$ip_label = $ip_loc ? "{$ip_loc->city}, {$ip_loc->region}" : '';
 
 // Priority: SEO page args > URL query args > IP geolocation > hardcoded defaults
 $header_arg_location_label = $args['header_arg_location_label'] ?? '';
 $header_arg_lat            = $args['header_arg_lat'] ?? null;
 $header_arg_lng            = $args['header_arg_lng'] ?? null;
-
-//$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : ($ip_lat ?: 30.2672));
-//$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : ($ip_lng ?: -97.7431));
-//$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : ($ip_label ?: 'Austin, Texas'));
 
 $lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : null);
 $lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
@@ -73,6 +64,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
+            locationDetectedFromServer: false,
             searchLat: <?php echo $lat !== null ? $lat : 'null'; ?>,
             searchLng: <?php echo $lng !== null ? $lng : 'null'; ?>,
             searchLocation: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
@@ -169,7 +161,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
-        x-on:location-detected.window="updateLocation($event.detail);"
+        x-on:location-detected.window="locationDetectedFromServer = true; updateLocation($event.detail);"
     >
     <!-- Setting a fixed height allows us to position the popups on mobile -->
     <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->
