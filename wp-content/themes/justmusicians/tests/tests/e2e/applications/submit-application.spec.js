@@ -41,7 +41,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
 
-        await musicianApplicationPage.expectSuccessScreen(true);
+        await musicianApplicationPage.expectSuccessScreenNewListing();
 
         const listingPostId = wpCli.getLatestPostId(submitterId, 'listing');
         expect(listingPostId).toBeTruthy();

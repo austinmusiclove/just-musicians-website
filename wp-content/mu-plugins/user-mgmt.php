@@ -202,16 +202,16 @@ function add_listing_by_invitation_code($listing_invitation_code) {
         return new WP_Error('no_listings', 'No listings associated with this code.');
     }
 
-    // Publish listings if pending
+    // Publish listings and assign author if pending
+    $current_user = wp_get_current_user();
     foreach ($valid_listings as $listing_id) {
         $listing_status = get_post_status($listing_id);
         if ($listing_status == 'pending') {
-            wp_update_post(['ID' => $listing_id, 'post_status' => 'publish']);
+            wp_update_post(['ID' => $listing_id, 'post_status' => 'publish', 'post_author' => $current_user->ID]);
         }
     }
 
     // Add the listings to the current user's meta field
-    $current_user = wp_get_current_user();
     $current_listings = get_user_meta($current_user->ID, 'listings', true);
     if (empty($current_listings)) { $current_listings = []; }
     $current_listings = array_merge($current_listings, $valid_listings);

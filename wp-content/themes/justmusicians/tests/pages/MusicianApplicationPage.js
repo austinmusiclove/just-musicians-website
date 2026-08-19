@@ -4,28 +4,29 @@ import { ThemePage } from './ThemePage.js';
 export class MusicianApplicationPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.listingForm     = page.getByTestId('listing-form');
-        this.listingDropdown = page.getByTestId('listing-dropdown');
-        this.applicationSubmissionInputs = page.getByTestId('application-submission-inputs');
-        this.invalidLic      = page.getByTestId('invalid-lic');
-        this.applicationTitle = page.getByTestId('musician-application-title');
-        this.applicationDescription = page.getByTestId('musician-application-description');
-        this.successfulSubmission = page.getByTestId('successful-submission');
-        this.successfulSubmissionAnon = page.getByTestId('successful-submission-anon');
-        this.successfulSubmissionNewListing = page.getByTestId('successful-submission-new-listing');
-        this.submitButton = page.locator('#submit-button-content').locator('.htmx-indicator-component-block-replace');
-        this.messageTextarea = page.locator('textarea[name="applicant_message"]');
-        this.listingDropdownButton = this.listingDropdown.locator('button');
-        this.listingDropdownButtonLabel = this.listingDropdownButton.locator('span');
-        this.alpineForm = page.locator('form[x-ref="listingForm"]');
-        this.coverImageInput = page.locator('input[name="cover_image_input"]');
-        this.applyCropBtn = page.getByRole('button', { name: 'Apply' });
-        this.performerName = page.locator('#performer-name-input');
-        this.description = page.locator('#description-input');
-        this.postalCodeInput = page.locator('#listing-form-zip');
-        this.postalCodeTarget = page.locator('#listing-form-zip-target');
-        this.email = page.locator('#listing_email');
-        this.createNewListingOption = page.locator('[data-testid="listing-dropdown"] li').filter({ hasText: 'Create New Musician Listing' });
+        this.applicationTitle                     = page.getByTestId('musician-application-title');
+        this.applicationDescription               = page.getByTestId('musician-application-description');
+        this.musicianApplicationForm              = page.getByTestId('musician-application-form');
+        this.listingForm                          = page.getByTestId('listing-form');
+        this.listingDropdown                      = page.getByTestId('listing-dropdown');
+        this.listingDropdownButton                = this.listingDropdown.locator('button');
+        this.listingDropdownButtonLabel           = this.listingDropdownButton.locator('span');
+        this.createNewListingOption               = page.locator('[data-testid="listing-dropdown"] li').filter({ hasText: 'Create New Musician Listing' });
+        this.performerName                        = page.locator('#performer-name-input');
+        this.description                          = page.locator('#description-input');
+        this.postalCodeInput                      = page.locator('#listing-form-zip');
+        this.postalCodeTarget                     = page.locator('#listing-form-zip-target');
+        this.email                                = page.locator('#listing_email');
+        this.coverImageInput                      = page.locator('input[name="cover_image_input"]');
+        this.applyCropBtn                         = page.getByRole('button', { name: 'Apply' });
+        this.applicationSubmissionInputs          = page.getByTestId('application-submission-inputs');
+        this.messageTextarea                      = page.locator('textarea[name="applicant_message"]');
+        this.submitButton                         = page.locator('#submit-button-content').locator('.htmx-indicator-component-block-replace');
+        this.invalidLic                           = page.getByTestId('invalid-lic');
+        this.successfulSubmission                 = page.getByTestId('successful-submission');
+        this.successfulSubmissionAnon             = page.getByTestId('successful-submission-anon');
+        this.successfulSubmissionAnonSignUpBtn    = page.getByTestId('successful-submission-anon-sign-up-btn');
+        this.successfulSubmissionNewListing       = page.getByTestId('successful-submission-new-listing');
     }
 
     async navigateToApplication(applicationId, lic = '') {
@@ -65,7 +66,7 @@ export class MusicianApplicationPage extends ThemePage {
     async uploadCoverImage(imagePath) {
         await this.coverImageInput.setInputFiles(imagePath);
         // wait for image to be processed before closing modal so that auto submit is not triggered when it finishes processing
-        const alpineEl = await this.alpineForm.elementHandle();
+        const alpineEl = await this.musicianApplicationForm.elementHandle();
         await this.page.waitForFunction(
             (el) => {
                 const data = Alpine.$data(el);
@@ -90,16 +91,23 @@ export class MusicianApplicationPage extends ThemePage {
         return responsePromise;
     }
 
-    async expectSuccessScreen(isNewListing = false) {
-        if (isNewListing) {
-            await expect(this.successfulSubmissionNewListing).toBeVisible();
-        } else {
-            await expect(this.successfulSubmission).toBeVisible();
-        }
+    async expectSuccessScreen() {
+        await expect(this.successfulSubmission).toBeVisible();
         await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.listingDropdown).not.toBeVisible();
-        await expect(this.messageTextarea).not.toBeVisible();
-        await expect(this.submitButton).not.toBeVisible();
+        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.musicianApplicationForm).not.toBeVisible();
+    }
+    async expectSuccessScreenNewListing() {
+        await expect(this.successfulSubmissionNewListing).toBeVisible();
+        await expect(this.applicationTitle).not.toBeVisible();
+        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.musicianApplicationForm).not.toBeVisible();
+    }
+    async expectSuccessScreenAnon() {
+        await expect(this.successfulSubmissionAnon).toBeVisible();
+        await expect(this.applicationTitle).not.toBeVisible();
+        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.musicianApplicationForm).not.toBeVisible();
     }
 
     async login(username, password) {

@@ -73,11 +73,26 @@ test.describe('E2E - Submit Application - Logged Out', () => {
             url => url.href.startsWith(signUpLink),
             { timeout: 20000 }
         );
-        // Check for success anon
-        // Click sign up
-        // Sign up
-        // Redirect
-        // Check for listing published, authored by user, and in listings user meta
+        await musicianApplicationPage.expectSuccessScreenAnon();
+
+        const newUser = createUser();
+        await musicianApplicationPage.successfulSubmissionAnonSignUpBtn.click();
+        await expect(musicianApplicationPage.signupModalHeading).toBeVisible();
+        await musicianApplicationPage.fillSignupForm(newUser);
+        await musicianApplicationPage.signupSubmitBtn.click();
+        await musicianApplicationPage.page.waitForURL(
+            url => url.pathname.includes(`/musician-application/${applicationId}`) && url.searchParams.get('lic') === code,
+            { timeout: 20000 }
+        );
+        wpCli.trackUser(newUser);
+
+        await musicianApplicationPage.expectLoggedInPage();
+        expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('publish');
+
+        const newUserId = wpCli.getUserId(newUser.email);
+        const newUserListings = wpCli.getUserMeta(newUserId, 'listings');
+        expect(newUserListings).toContain(Number(listingPostId));
+        expect(wpCli.getPostField(listingPostId, 'post_author')).toBe(newUserId);
     });
     test.skip('Submit application while logged out and sign up from email link', async ({}) => {} );
     test.skip('Submit application while logged out and sign up with complete listing', async ({}) => {} );

@@ -1,4 +1,4 @@
-<form class="flex flex-col gap-8" enctype="multipart/form-data" novalidate
+<form class="flex flex-col gap-8" enctype="multipart/form-data" novalidate data-testid="musician-application-form"
     x-show="showApplication" x-cloak
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
