@@ -52,9 +52,9 @@ $header_arg_lng            = $args['header_arg_lng'] ?? null;
 //$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : ($ip_lng ?: -97.7431));
 //$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : ($ip_label ?: 'Austin, Texas'));
 
-$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : 30.2672);
-$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : -97.7431);
-$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : 'Austin, Texas');
+$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : null);
+$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
+$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : '');
 ?>
 
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
@@ -73,8 +73,8 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            searchLat: <?php echo $lat; ?>,
-            searchLng: <?php echo $lng; ?>,
+            searchLat: <?php echo $lat !== null ? $lat : 'null'; ?>,
+            searchLng: <?php echo $lng !== null ? $lng : 'null'; ?>,
             searchLocation: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             reviewProgress: 0,
             currentReviewSlide: '',
@@ -169,6 +169,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
+        x-on:location-detected.window="updateLocation($event.detail);"
     >
     <!-- Setting a fixed height allows us to position the popups on mobile -->
     <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->

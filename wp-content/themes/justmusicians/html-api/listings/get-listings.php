@@ -2,13 +2,29 @@
 
 // Get listings
 $page = $_GET['page'] ?? 1;
+$lat = !empty($_GET['lat']) ? $_GET['lat'] : null;
+$lng = !empty($_GET['lng']) ? $_GET['lng'] : null;
 $location_label = $_GET['location_label'] ?? null;
 
+$detected_location = null;
+if (empty($lat) || empty($lng)) {
+    $detected_location = function_exists('hm_get_ip_location') ? hm_get_ip_location() : null;
+    if ($detected_location) {
+        $lat = $detected_location->lat;
+        $lng = $detected_location->lon;
+        $location_label = "{$detected_location->city}, {$detected_location->region}";
+    } else {
+        $detected_location = true;
+        $lat = 30.2672;
+        $lng = -97.7431;
+        $location_label = 'Austin, Texas';
+    }
+}
 
 $result = get_listings([
     'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
-    'lat'               => !empty($_GET['lat']) ? $_GET['lat'] : null,
-    'lng'               => !empty($_GET['lng']) ? $_GET['lng'] : null,
+    'lat'               => $lat,
+    'lng'               => $lng,
     'distance'          => !empty($_GET['distance']) ? $_GET['distance'] : null,
     'categories'        => !empty($_GET['categories']) ? $_GET['categories'] : [],
     'genres'            => !empty($_GET['genres']) ? $_GET['genres'] : [],
@@ -142,3 +158,9 @@ if ($page == 1) {
     if ($location_label) { echo " near $location_label"; }
 ?>
 </span><?php
+
+// Dispatch location-detected event to populate Alpine state on first load
+if ($detected_location) {
+    $escaped_label = addslashes($location_label); ?>
+    <span x-init="$dispatch('location-detected', {'lat': '<?php echo $lat; ?>', 'lng': '<?php echo $lng; ?>', 'label': '<?php echo $escaped_label; ?>' })"></span>
+<?php }
