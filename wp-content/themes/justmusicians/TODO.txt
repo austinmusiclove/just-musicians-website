@@ -110,6 +110,11 @@ Offer post type (future)
     Event relationship
     Details
     Proposal relationship
+Location detection
+    Currently goes to austin always to avoid issues with caching; the cache bakes the ip detected location of the proxy varnish server into the hidden lat/lng inputs used by listings api
+    Solution could be to set them to null in header and then when listings api fires it will send nulls for the lat/lng and the html api will do ip detection if they are null
+    and return lat/lng with the listings to populate the hidden lat/lng inputs so that the next reqeust just uses those
+    seo pages that have a certain location will just work the same with headers and bake in the location for that page along with the listings
 DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster

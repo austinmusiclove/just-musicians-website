@@ -508,7 +508,10 @@ add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 // Req debug
 function log_incoming_request_url() {
     $request_uri = $_SERVER['REQUEST_URI'];
-    error_log( 'Incoming Request URL: ' . $request_uri );
+    $forwarded_for = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'N/A';
+    $real_ip       = $_SERVER['HTTP_X_REAL_IP'] ?? 'N/A';
+    $remote_addr   = $_SERVER['REMOTE_ADDR'] ?? 'N/A';
+    error_log( 'Request: ' . $request_uri . ' | REMOTE_ADDR: ' . $remote_addr . ' | X-Forwarded-For: ' . $forwarded_for . ' | X-Real-IP: ' . $real_ip );
 }
 add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
 
