@@ -6,38 +6,42 @@ Critical bugs
     Make sure prompting to add org and job title after sign up works
     Paging issue when i use piano filter; extra page after scroll to top button and duplicate listings
     In AWS change sender name to Hire Musicians
-Applications updates for sales
-    Show send message button disabled with tooltip that tells you why it is disabled instead of it being missing
-    when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
-    Test submit application
-        logged in existing listing with availability in application
-        logged in new listing with availability in application
-        not logged in (new listing) with availability in application
-    Test new review email to listing owners
-    Test new inquiry email to listing owners
-    Test pending listing gets new review email and listing code
-    Test pending listing gets inquiry; email and listing code
+Applications fixes
     fix application card so that link does not blend in with description
+    Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
+    when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
     application description does not handle bullets
     if event is deleted remove it from applications or just do not show events that are not published
-    Add draw and price options for application and add them to applicant card
-    Add two listing images on applicant cards
-    change edit submitted application to either resubmit or withdraw
+Testing for Applications product rollout
+    Applications tests
+        you can only see your own applications
+        you can only see your own applicaiton submissions
+    Users tests
+        register user with existing account (registered with gmail) not giving any feedback and not working
+        forgot password workflow
+        lid tmp code user registration with listing and other scenario (aid?)
+Applications Features to add
+    After design update
+        Add two listing images on applicant cards
+        Add draw and price options for application and add them to applicant card
+        change edit submitted application to either resubmit or withdraw
+    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
+    Share application access with other users
+        Create index for access
+        Add share button where you can add email
+        If the email has an account, add access immediately; else send email with special link that adds access on sign up
+        Use the same access mechanism for listings adn update listing owners logic
+            create access index for posts
+            owner function and other auth functions will give access to author and anyone specified in the index
+            build index from listing list in user data
+            get rid of listings list in user data once it is deprecated
+    Export applicants with emails to spreadsheet csv or google sheet
+        Flag pending listing applicatns as email not verified on the spreadsheet export
+    Notification to applicants when dates added to application
+    Recurring events
+        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     show availability dates on the applicant card
     add ensemble size to applicant view
-    update listing owners logic
-        create access index for posts
-        owner function and other auth functions will give access to author and anyone specified in the index
-        build index from listing list in user data
-        get rid of listings list in user data once it is deprecated
-    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
-    Tests single application
-        update application title
-        update application description
-    Tests submit application
-        create submitted application
-        make sure new listing ends up in authors listings user meta list
-        make sure disabled submit at the right time and make sure you can't submit without required fields
     Sorting and organizing
         Earmark or favorite certain applicants
         Filter by draw and price
@@ -49,36 +53,6 @@ Applications updates for sales
         Full bill; maybe bands you can play with or have played with (Flamingo)
         Record label (Radio)
         I'd like to open for.. (Radio)
-Testing for Applications product rollout
-    Applications tests
-        Single Application page
-            Update Application
-            Delete Appication
-        Submit Appication page
-            Submit Appication new listing
-            Submit Appication existing listing
-        Submitted Appications page
-            Update Appication Submission
-        Applications access
-            you can only see your own applications
-            you can only see your own applicaiton submissions
-    Users tests
-        register user with existing account (registered with gmail) not giving any feedback and not working
-        forgot password workflow
-        lid tmp code user registration with listing and other scenario (aid?)
-Applications Release
-    Share applicationa access with other users
-    Export applicants with emails to spreadsheet csv or google sheet
-        Flag pending listing applicatns as email not verified on the spreadsheet export
-    Availability for events on applications
-        Show events on musician application
-        Show events with availability filled out if there are existing proposals
-        Create proposals for all events that the user submitted availability for
-        Update proposals for any events that already had a proposal
-        Allow adding/removing events to application
-        Notification to applicants when dates added
-        Recurring events
-            Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing
@@ -96,28 +70,15 @@ Applications Release
             Show add dates option in set up form but show an upsell message when you try to use it
 Applications Advanced
     Application form screen
-        Show events with option to fill availability and other proposal fields (if advanced application)
         Inform applicant that they can come back to this application to update it any time
         Have multiple band mates fill out the availability (listing advanced feature)
     Single Application Application set up tab
         Invite listings to apply (advanced)
-        Checkboxes to request draw estimate, compensation minimum, personal message (advanced)
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
-        Request draw, comp min, personal message
         Sort by highest rating (need index)
-        Excluded events
     Single Application Applicant review tab
         Show dates available for your events
         Filter by answers to custom questions (advanced)
-Create application form
-    Allow including a location if venue not included
-    Allow associating venue
-    Allow adding a venue
-    Put add venue functionality in comp form
-Single Application
-    Add venue logo
-    Allow associating venue
-    Allow adding a venue
 Submitted Applciations
     When active state add withdraw application button in white next to udpate button
     When withdrawn state only show resubmit application button

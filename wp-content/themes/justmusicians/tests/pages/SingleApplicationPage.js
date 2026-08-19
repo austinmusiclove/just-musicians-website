@@ -7,6 +7,7 @@ export class SingleApplicationPage extends ThemePage {
         this.editBtn             = page.getByRole('button', { name: 'Edit Application' });
         this.titleInput          = page.locator('input[name="title"]');
         this.updateBtn           = page.getByRole('button', { name: 'Update Application' });
+        this.deleteBtn           = page.getByRole('button', { name: 'Delete Application' });
     }
 
     async navigateToApplication(slug) {
