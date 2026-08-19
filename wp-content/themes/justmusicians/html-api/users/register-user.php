@@ -12,7 +12,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
     $remember   = isset($_POST['rememberme'])   ? $_POST['rememberme']   : false;
     $artist_invitation_code  = isset($_POST['aic']) ? $_POST["aic"] : false;
     $listing_invitation_code = isset($_POST['lic']) ? $_POST["lic"] : false;
-    error_log('Attempt to register ' . $user_login . ' ' . $user_pass)
+    error_log('Attempt to register ' . $user_login . ' ' . $user_pass);
 
     //if(username_exists($user_login)) {
         // Username already registered
