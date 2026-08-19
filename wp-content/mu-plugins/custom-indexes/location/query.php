@@ -86,13 +86,6 @@ function hm_location_search($q, $get_cities = true, $get_pc = true, $limit = 40)
 
 function hm_get_ip_location() {
     $ip = $_SERVER['REMOTE_ADDR'];
-    error_log( 'Request From: ' . $ip );
-    if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-        error_log( 'connecting ip: ' . $_SERVER['HTTP_CF_CONNECTING_IP'] );
-    }
-    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        error_log( 'x forwarded for: ' . $_SERVER['HTTP_X_FORWARDED_FOR'] );
-    }
     $db_path = __DIR__ . '/data/GeoLite2-City.mmdb';
 
     if (!file_exists($db_path)) return null;
@@ -100,7 +93,6 @@ function hm_get_ip_location() {
     require_once __DIR__ . '/data/geoip2.phar';
 
     try {
-        error_log( 'Try' );
         $reader = new GeoIp2\Database\Reader($db_path);
         $record = $reader->city($ip);
         $country = $record->country->isoCode;
@@ -111,7 +103,6 @@ function hm_get_ip_location() {
         if (!in_array($country, ['US', 'CA'], true)) return null;
         if (empty($lat) || empty($lng) || empty($city)) return null;
 
-        error_log( 'Request From: ' . $city );
         return (object) [
             'lat'     => $lat,
             'lon'     => $lng,
@@ -120,7 +111,6 @@ function hm_get_ip_location() {
             'country' => $country,
         ];
     } catch (\Exception $e) {
-        error_log( 'Request location not found in db: ' );
         return null;
     }
 }

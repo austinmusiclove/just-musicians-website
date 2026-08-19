@@ -12,7 +12,6 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
     $remember   = isset($_POST['rememberme'])   ? $_POST['rememberme']   : false;
     $artist_invitation_code  = isset($_POST['aic']) ? $_POST["aic"] : false;
     $listing_invitation_code = isset($_POST['lic']) ? $_POST["lic"] : false;
-    error_log('Attempt to register ' . $user_login . ' ' . $user_pass);
 
     //if(username_exists($user_login)) {
         // Username already registered
@@ -69,7 +68,6 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
 
     // if no errors then cretate user
     if(empty($errors)) {
-        error_log('no errors');
         $account_identifier = md5(rand()); // secret used to verifiy email
         $new_user_id = wp_insert_user(array(
                 'user_login' => $user_login,
@@ -106,9 +104,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             }
         }
     } else {
-        error_log('has errors');
         foreach($errors as $error) {
-            error_log('error: ' . $error);
             echo '<div class="signup-error">'. $error . '</div>';
         }
     }
