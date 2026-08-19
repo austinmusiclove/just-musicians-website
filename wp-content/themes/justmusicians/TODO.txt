@@ -1,4 +1,5 @@
 Critical bugs
+    Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
