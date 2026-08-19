@@ -72,6 +72,7 @@ $next_page       = $result ? $result['next_page']       : null;
             hx-trigger="load, filterupdate"
         <?php } ?>
         x-init="$watch('searchLocation', value => { if (!locationDetectedFromServer) { $dispatch('filterupdate'); } locationDetectedFromServer = false; })"
+        x-on:filterupdate="window.scrollTo({ top: 0, behavior: 'instant' });"
     >
         <input type="hidden" name="search" x-model="listingSearchVal" />
         <div id="content" class="grow flex flex-col relative">
