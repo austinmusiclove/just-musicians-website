@@ -80,7 +80,7 @@ if (count($other_categories) > 0) { ?>
             <?php foreach ($other_categories as $other_category) {
                 $other_name = get_seo_category_plural_name($other_category); ?>
                 <a class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light inline-block"
-                    href="<?php echo esc_url(site_url('/live-music/' . $other_category . '/' . $location . '/')); ?>">
+                    href="<?php echo esc_url(site_url('/live-music/' . $location . '/' . $other_category . '/')); ?>">
                     <?php echo esc_html($other_name); ?>
                 </a>
             <?php } ?>
