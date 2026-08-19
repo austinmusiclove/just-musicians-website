@@ -13,8 +13,9 @@ Applications fixes
     if event is deleted remove it from applications or just do not show events that are not published
 Testing for Applications product rollout
     Users tests
+        lic tmp code user registration
+        aic tmp code user registration
         forgot password workflow
-        lid tmp code user registration with listing and other scenario (aid?)
 Applications Features to add
     After design update
         Add two listing images on applicant cards
