@@ -13,9 +13,6 @@ Applications fixes
     application description does not handle bullets
     if event is deleted remove it from applications or just do not show events that are not published
 Testing for Applications product rollout
-    Applications tests
-        you can only see your own applications
-        you can only see your own applicaiton submissions
     Users tests
         register user with existing account (registered with gmail) not giving any feedback and not working
         forgot password workflow
