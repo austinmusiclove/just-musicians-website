@@ -45,7 +45,7 @@ get_header();
                 <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
 
                 <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
+                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
                 <?php } ?>
 
                 <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [

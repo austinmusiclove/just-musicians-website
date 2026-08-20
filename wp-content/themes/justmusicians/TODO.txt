@@ -1,28 +1,18 @@
 Critical bugs
+    Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
+    Mobile location search needs to have serch button to click after location option is selected; it does search but it needs to close the search bar when it is selected or have a btn to do so
     Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
     Make sure prompting to add org and job title after sign up works
-    Paging issue when i use piano filter; extra page after scroll to top button and duplicate listings
     In AWS change sender name to Hire Musicians
-Applications fixes
-    fix application card so that link does not blend in with description
-    Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
-    when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
-    application description does not handle bullets
-    if event is deleted remove it from applications or just do not show events that are not published
 Testing for Applications product rollout
     Users tests
         lic tmp code user registration
         aic tmp code user registration
         forgot password workflow
 Applications Features to add
-    After design update
-        Add two listing images on applicant cards
-        Add draw and price options for application and add them to applicant card
-        change edit submitted application to either resubmit or withdraw
-    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
     Share application access with other users
         Create index for access
         Add share button where you can add email
@@ -34,22 +24,8 @@ Applications Features to add
             get rid of listings list in user data once it is deprecated
     Export applicants with emails to spreadsheet csv or google sheet
         Flag pending listing applicatns as email not verified on the spreadsheet export
-    Notification to applicants when dates added to application
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
-    show availability dates on the applicant card
-    add ensemble size to applicant view
-    Sorting and organizing
-        Earmark or favorite certain applicants
-        Filter by draw and price
-        Filter by favorites
-        Filter genres, ensemble size and other taxonomies
-    Other features that would be needed for parity with venue forms out there
-        dates requested (Flamingo, Kick Butt Coffee)
-        last time you played here (Flamingo)
-        Full bill; maybe bands you can play with or have played with (Flamingo)
-        Record label (Radio)
-        I'd like to open for.. (Radio)
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing
@@ -65,6 +41,28 @@ Applications Features to add
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
             Show add dates option in set up form but show an upsell message when you try to use it
+    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
+    Notification to applicants when dates added to application
+    Sorting and organizing
+        Earmark or favorite certain applicants
+        Filter by draw and price
+        Filter by favorites
+        Filter genres, ensemble size and other taxonomies
+    After design update
+        Add two listing images on applicant cards
+        Add draw and price options for application and add them to applicant card
+        change edit submitted application to either resubmit or withdraw
+        fix application card so that link does not blend in with description
+        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
+        when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
+        show availability dates on the applicant card
+        add ensemble size to applicant view
+    Other features that would be needed for parity with venue forms out there
+        dates requested (Flamingo, Kick Butt Coffee)
+        last time you played here (Flamingo)
+        Full bill; maybe bands you can play with or have played with (Flamingo)
+        Record label (Radio)
+        I'd like to open for.. (Radio)
 Applications Advanced
     Application form screen
         Inform applicant that they can come back to this application to update it any time
@@ -90,7 +88,7 @@ Single Event page
     Conversation group for events; link from send message success on event applicant card
     Add a way to click to convo in send message modal for a particular listing if one exists
     **add start a search at the bottom of suggestions results in empty and not empty suggestions state
-Add My Events page (for buyers)
+My Events page (for buyers)
     Set event status to booked/open/cancelled/etc.
     Add calendar View
     Edit multiple event details at once
@@ -105,7 +103,6 @@ My Gigs page (for musicians)
     Allow recommending another band when you decline a gig
 Event Form page
     Allow venue location
-    Sucesss takes you to single event which has a tab for event details and editing
 Offer post type (future)
     Status
     Pay with structure
@@ -126,7 +123,7 @@ SEO
         steal competitor backlinks by using seo tool to findout who links to them
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
-    get press (voyage austin, blogs, new stations, news papers)
+    get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
         **add description to videos to qualify for rich result for single listing (this is also coming up as an error in search console so generic description is fine)
@@ -194,25 +191,24 @@ Venue pages
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
     Consider notification when musician updates a proposal
+    Email for new listing published/draft
 Advanced inquiries
     Recurring event
     ****Test inquiries modal on safari on desktop and mobile
-    *add more editable fields to edit inquiry
     add something about sound equipment for events; musicians need to know if they need to bring PA to quote
-    allow inquiry when not logged in
+    allow inquiry when not logged in; require email; log in to see responses
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     Offer accept edit reject workflow
         Compare listings side by side in offers tab on inquiry page (show offer, media, link to convo in sidebar; show messages in message body area)
-    allow delete/expire inquiry
+    allow delete/expire event
     allow just send direct message for other kind of inquiry that is not for an event
     only get non expired listings for eventsMap
     search bar for events page
-    record response time
+    record response time; send out emails to all listings to collect an initial response or take it from email verification email
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
     add settings (hotel, bar, restaurant) to quiz
 Messages
-    show inquiry detail in right side panel
     profile image(s) in conversation next to title
     show read receipt
         in get_conversation_messages() in user-messages.php
@@ -226,18 +222,17 @@ Search algo update
     video order depending on search criteria
     switch to cursor pagination
     Final Form Search Algorithm
-        1 - Relevant Media based on search
-        2 - Rank
+        1 - Rank
             1 - Response Time
             2 - Inquiries/Views/Clicks
-            3 - Reviews/Rating score
+            3 - Verified Reviews/Rating score
             4 - Profile Completeness
-        3 - Profile Age (post_id tie breaker)
+        2 - Profile Age (post_id tie breaker)
+        Show Relevant Media as thumbnail based on search
 Listing form
-    **Remove media tagging until i at least get it in the search algo
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
-    when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused
+    when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
     ***allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
@@ -252,18 +247,19 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
 Listing page
-    *add productized services. allow artists to include prices for things like 3 hr full band set
+    *add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
     *add ticket sales numbers self reported by artists
     add gear list
     add faq
     add data from chartmetric and/or musicstax
-    allow play with mouse off iframe for videos
+    allow play with mouse off iframe for videos; pause when another video plays
     ***add seek in video
     see more bio
     see more venues played
     artist pages that will get you listed on google as a musician by using schema
     allow artists to feature releases of their choice
     add set lists with set length and repertoire
+    instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
@@ -305,12 +301,15 @@ Code consistency and cleanliness
     i use echo and escaped strings to output html in html apis and it is not necessary
     use linter
     Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
-    Go through html apis and stop echoing out html
     Fix mu plugins depending on each other; move code to includes instead
-UX
-    *pop up on top right that prompts you to log in with google as soon as you open the site
+    all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
+My Listing page
+    back end page about your listing
     *show search rank in their area and how to improve it
-    corrected new logos
+    view/edit/delete buttons
+    view/manage reviews
+UX
+    *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry
     Filters
@@ -321,8 +320,6 @@ UX
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
     when adding to collection toast should be more specific "added to [collection name]"
-Compliance
-    *figure out if i need to request permission for cookies or not
 Devon
     404 page
     venue page especially stats
@@ -336,13 +333,11 @@ Security
     if user is logged out because session times out, make sure that operations that require auth don't work between the session expiring and refreshing
 Performance
     send emails in cron instead of waiting on them; they take some time
-    prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
+    *prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
     dedicated server
     image sprites
-Emails
-    all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 Bugs
     when listing cover image loads slowly on search results standard listing, it shows youtube video with play button
     listing form: on safari observed by Jac Carson while he was with me in person. Exiting the form after saving draft, browser issues warning that there is unsaved data in the form; could be because things are being updated after htmx returns image data to the form and form fields get programatically updated by alpine. was not able to replicate; he might have older safari. Also experienced save draft hanging. and cropper was really small. and question mark showing in image box on user listings page when listing is draft with no cover image
@@ -353,7 +348,7 @@ Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
     the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
-    in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
+    **in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
     on many account pages, the whole html goes to half width of screen when it gets really small
 Accessibility
     *Need full audit
@@ -373,24 +368,7 @@ Document
         need to do settings -> permalinks save to get apis to work
         wp config constants
     you can't have a post with a field named the same as a post type; it causes 404
-
 UX Questions
-    Should creating application allow you to create events in the process of selecting dates? If so how do we avoid duplicates?
-        Not on free version.
-        Create them as recurring events with a name, location, description and dates. You can edit them on the my events page in recurring events tab
-        Editing a recurring event will update all existing at once
-        You can also see individual events for the recurring event in my events and can edit them as normal and those edits will only apply to one date.
-        A recurring event cannot have two instances on the same day
-        You can add dates to recurring event and it will automatically create individual events for each date
-    Should you set show dates in application or allow musicians to just provide availability info for all dates?
-        Free version: neither; you can invite an applicant to give you availability info on one event at a time (request for proposal)
-        Paid version: application has existing events and applicants get notified to fill out availability when new events are added
-    Should availability be an advanced feature or just collecting quotes and draw or all free?
-        Getting availability/proposals for many people at once should be advanced but requesting one at a time is possible
-    When should messages be initiated?
-        Only when buyer initiates; proposal and offer can contain messages and should be enough until buyer wants to open conversation
-    How should Proposals and Offers appear in messages
-        Leave them out of messages for now but it could be nice in the future to add them
     Can the flow work with Proposal but not Offer?
         Yes that should be enough if buyers can see all messages for an event just like current inquiry convo groups; from there they can see event details and send offers
     What happens when Offer or Proposal is accepted?
