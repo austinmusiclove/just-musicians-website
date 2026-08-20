@@ -125,6 +125,7 @@ function create_listing_by_artist_invitation_code($artist_invitation_code) {
             'post_title'  => $artist_post['name'],
             'post_status' => 'draft',
             'post_type'   => 'listing',
+            'post_author' => get_current_user_id(),
             'meta_input'  => [
                 'name'                   => $artist_post['name'],
                 'artist_uuid'            => $artist_post['artist_uuid'],

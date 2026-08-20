@@ -16,6 +16,12 @@ export class ListingsPage extends ThemePage {
         await super.navigate(url);
     }
 
+    async navigateWithAic(aic, signup) {
+        let url = `/listings/?aic=${aic}`;
+        if (signup) { url += '&mdl=signup'; }
+        await super.navigate(url);
+    }
+
     getCardTitle(card) {
         return card.getByRole('heading', { level: 2 });
     }

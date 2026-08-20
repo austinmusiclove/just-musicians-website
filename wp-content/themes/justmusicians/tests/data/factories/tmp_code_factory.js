@@ -13,9 +13,8 @@ export function createTmpCode(overrides = {}) {
 export function createTmpCodePost({ authorId, status = 'publish', overrides = {} } = {}) {
     const tmpCode = createTmpCode(overrides);
     const meta = { code: tmpCode.code };
-    if (tmpCode.listings) {
-        meta.listings = tmpCode.listings;
-    }
+    if (tmpCode.listings) { meta.listings = tmpCode.listings; }
+    if (tmpCode.artists)  { meta.artists  = tmpCode.artists; }
     const id = wpCliCreatePost({
         postType: 'tmp_code',
         title: tmpCode.code,
@@ -29,9 +28,8 @@ export function createTmpCodePost({ authorId, status = 'publish', overrides = {}
 export function createTmpCodePostData({ authorId, status = 'publish', overrides = {} } = {}) {
     const tmpCode = createTmpCode(overrides);
     const meta = { code: tmpCode.code };
-    if (tmpCode.listings) {
-        meta.listings = tmpCode.listings;
-    }
+    if (tmpCode.listings) { meta.listings = tmpCode.listings; }
+    if (tmpCode.artists)  { meta.artists  = tmpCode.artists; }
      return {
         postType: 'tmp_code',
         title: tmpCode.code,

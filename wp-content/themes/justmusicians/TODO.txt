@@ -9,9 +9,9 @@ Critical bugs
     In AWS change sender name to Hire Musicians
 Testing for Applications product rollout
     Users tests
-        lic tmp code user registration
-        aic tmp code user registration
         forgot password workflow
+        replace createListing flow to not require trackpost
+        replace createTmpCode flow to not require trackpost
 Applications Features to add
     Export applicants with emails to spreadsheet csv or google sheet
         Flag pending listing applicatns as email not verified on the spreadsheet export

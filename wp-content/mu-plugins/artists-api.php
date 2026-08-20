@@ -148,7 +148,7 @@ function get_artist($post_id) {
             'macro_genres' => array_filter([get_field('macro_genre_1'), get_field('macro_genre_2'), get_field('macro_genre_3')]),
             'genres' => $genres,
             'female_led' => get_field('female_led'),
-            'ensemble_size' => get_field('ensemble_size'),
+            'ensemble_size' => get_field('ensemble_size') ?? [],
             'instagram_handle' => get_field('instagram_handle'),
             'tiktok_handle' => get_field('tiktok_handle'),
             'x_handle' => get_field('x_handle'),
