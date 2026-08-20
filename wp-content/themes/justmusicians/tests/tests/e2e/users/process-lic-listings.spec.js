@@ -1,7 +1,21 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
+import { createListingPost } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Process LIC', () => {
+
+    let listingId;
+    let listingData;
+
+    test.beforeEach(async ({ wpCli }) => {
+        const authorUser = createUser();
+        const authorUserId = wpCli.createUser(authorUser);
+
+        listingData = createListing();
+        listingId = createListingPost({ authorId: authorUserId, overrides: { name: listingName } });
+        wpCli.trackPost(listingId);
+        wpCli.addListingToUser(submitterId, listingId);
+    });
 
     test.skip('Process LIC on listings page with one listing', async ( {} ) => {
         // Go to listings page with lic logged out

@@ -8,8 +8,7 @@ test.describe('Navigation - Applications - One Application', () => {
 
     test.beforeEach(async ({ wpCli, applicationsPage }) => {
         const applicationAuthorUser = createUser();
-        wpCli.createUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
         const applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
         wpCli.trackPost(applicationId);
 

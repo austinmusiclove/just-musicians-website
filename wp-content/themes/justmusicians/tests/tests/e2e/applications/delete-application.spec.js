@@ -9,8 +9,7 @@ test.describe('E2E - Delete Application', () => {
 
     test.beforeEach(async ({ wpCli, singleApplicationPage }) => {
         const applicationAuthor = createUser();
-        wpCli.createUser(applicationAuthor);
-        const applicationAuthorId = wpCli.getUserId(applicationAuthor.email);
+        const applicationAuthorId = wpCli.createUser(applicationAuthor);
 
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         const slug = wpCli.getPostField(applicationId, 'post_name');

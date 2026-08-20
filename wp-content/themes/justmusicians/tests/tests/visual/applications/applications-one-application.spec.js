@@ -10,8 +10,7 @@ test.describe('Visual - Applications - One applicaiton', () => {
 
     test.beforeEach(async ({ wpCli, applicationsPage }) => {
         const applicationAuthorUser = createUser();
-        wpCli.createUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
         const application = createApplication();
         applicationTitle = application.title;
         const applicationId = createApplicationPost({ authorId: applicationAuthorUserId, overrides: application });

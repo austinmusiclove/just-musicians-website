@@ -10,8 +10,7 @@ test.describe('E2E - Create Listing', () => {
 
     test.beforeEach(async ({ listingFormPage, wpCli }) => {
         testUser = createUser();
-        wpCli.createUser(testUser);
-        userId = wpCli.getUserId(testUser.email);
+        userId = wpCli.createUser(testUser);
 
         await listingFormPage.login(testUser.email, testUser.password);
         await listingFormPage.navigate('/listing-form/');

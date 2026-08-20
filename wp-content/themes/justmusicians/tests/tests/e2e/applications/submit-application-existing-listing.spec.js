@@ -17,15 +17,13 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
 
     test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
         applicationAuthor = createUser();
-        wpCli.createUser(applicationAuthor);
-        applicationAuthorId = wpCli.getUserId(applicationAuthor.email);
+        applicationAuthorId = wpCli.createUser(applicationAuthor);
 
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         wpCli.trackPost(applicationId);
 
         submitter = createUser();
-        wpCli.createUser(submitter);
-        submitterId = wpCli.getUserId(submitter.email);
+        submitterId = wpCli.createUser(submitter);
 
         listingName = `Test Listing ${Date.now()}`;
         listingId = createListingPost({ authorId: submitterId, overrides: { name: listingName } });

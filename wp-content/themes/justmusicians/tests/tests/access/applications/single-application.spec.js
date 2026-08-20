@@ -10,8 +10,7 @@ test.describe('Access - Single Application Page', () => {
 
     test.beforeEach(async ({ wpCli, singleApplicationPage }) => {
         applicationAuthor = createUser();
-        wpCli.createUser(applicationAuthor);
-        const applicationAuthorId = wpCli.getUserId(applicationAuthor.email);
+        const applicationAuthorId = wpCli.createUser(applicationAuthor);
 
         noApplicationUser = createUser();
         wpCli.createUser(noApplicationUser);

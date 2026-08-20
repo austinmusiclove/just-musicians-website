@@ -10,8 +10,7 @@ test.describe('Visual - Musician Application - Logged out', () => {
 
     test.beforeEach(async ({ wpCli }) => {
         const applicationAuthorUser = createUser();
-        wpCli.createUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
         wpCli.trackPost(applicationId);
     });

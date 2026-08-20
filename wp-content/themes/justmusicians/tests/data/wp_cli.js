@@ -3,10 +3,11 @@ import { execSync } from 'child_process';
 const WP_PATH = '/Users/johnfilippone/Local\\ Sites/just-musicians/app/public';
 
 export function wpCliCreateUser(userData) {
-    execSync(
-        `wp user create "${userData.email}" "${userData.email}" --role=subscriber --user_pass="${userData.password}" --first_name="${userData.firstName}" --last_name="${userData.lastName}" --path=${WP_PATH}`,
-        { stdio: 'ignore' }
+    const output = execSync(
+        `wp user create "${userData.email}" "${userData.email}" --role=subscriber --user_pass="${userData.password}" --first_name="${userData.firstName}" --last_name="${userData.lastName}" --path=${WP_PATH} --porcelain`,
+        { encoding: 'utf-8' }
     );
+    return output.trim();
 }
 
 export function wpCliGetUserId(userEmail) {

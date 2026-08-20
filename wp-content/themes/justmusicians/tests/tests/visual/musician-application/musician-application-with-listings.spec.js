@@ -11,14 +11,12 @@ test.describe('Visual - Musician Application - Logged in - One listings', () => 
 
     test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
         const applicationAuthorUser = createUser();
-        wpCli.createUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
         wpCli.trackPost(applicationId);
 
         const testUser = createUser();
-        wpCli.createUser(testUser);
-        const testUserId = wpCli.getUserId(testUser.email);
+        const testUserId = wpCli.createUser(testUser);
 
         const listingId = createListingPost({ authorId: testUserId });
         wpCli.trackPost(listingId);

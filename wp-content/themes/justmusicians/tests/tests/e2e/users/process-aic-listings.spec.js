@@ -3,17 +3,6 @@ import { test } from '../../../fixtures/fixtures.js';
 
 test.describe('E2E - Process AIC', () => {
 
-    let applicationAuthor;
-    let applicationAuthorId;
-    let applicationId;
-    let listingData;
-    let message;
-
-    test.beforeEach(async ({ wpCli }) => {
-        // Create listing
-        listingData = createListing();
-    });
-
     test.skip('Process AIC on listings page with one listing', async ( {} ) => {
         // Go to listings page with aic logged out
         // Sign up

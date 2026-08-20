@@ -10,8 +10,7 @@ test.describe('E2E - Create Application', () => {
 
     test.beforeEach(async ({ applicationFormPage, wpCli }) => {
         testUser = createUser();
-        wpCli.createUser(testUser);
-        userId = wpCli.getUserId(testUser.email);
+        userId = wpCli.createUser(testUser);
 
         await applicationFormPage.login(testUser.email, testUser.password);
         await applicationFormPage.navigate('/application-form/');

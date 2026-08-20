@@ -10,8 +10,7 @@ test.describe('Visual - Musician Application - Logged in - No listings', () => {
 
     test.beforeEach(async ({ wpCli, musicianApplicationPage }) => {
         const applicationAuthorUser = createUser();
-        wpCli.createUser(applicationAuthorUser);
-        const applicationAuthorUserId = wpCli.getUserId(applicationAuthorUser.email);
+        const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
         wpCli.trackPost(applicationId);
 

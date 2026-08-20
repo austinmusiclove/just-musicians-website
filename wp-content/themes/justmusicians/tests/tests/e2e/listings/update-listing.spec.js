@@ -9,8 +9,7 @@ test.describe('E2E - Update Listing', () => {
 
     test.beforeEach(async ({ listingFormPage, wpCli }) => {
         const testUser = createUser();
-        wpCli.createUser(testUser);
-        const userId = wpCli.getUserId(testUser.email);
+        const userId = wpCli.createUser(testUser);
 
         listingId = createListingPost({ authorId: userId, overrides: { name: 'Original Name' } });
         wpCli.trackPost(listingId);

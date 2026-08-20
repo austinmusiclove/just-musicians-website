@@ -15,8 +15,7 @@ test.describe('E2E - Submit Application - Logged Out', () => {
 
     test.beforeEach(async ({ wpCli }) => {
         applicationAuthor = createUser();
-        wpCli.createUser(applicationAuthor);
-        applicationAuthorId = wpCli.getUserId(applicationAuthor.email);
+        applicationAuthorId = wpCli.createUser(applicationAuthor);
 
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         wpCli.trackPost(applicationId);

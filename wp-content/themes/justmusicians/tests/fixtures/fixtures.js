@@ -30,7 +30,7 @@ export const test = base.extend({
         const createdUsers = [];
         const createdPosts = [];
         await use({
-            createUser: (user) => { wpCliCreateUser(user); createdUsers.push(user); },
+            createUser: (user) => { const id = wpCliCreateUser(user); createdUsers.push(user); return id; },
             getUserId: wpCliGetUserId,
             deleteUser: wpCliDeleteUser,
             deleteUsers: wpCliDeleteUsers,

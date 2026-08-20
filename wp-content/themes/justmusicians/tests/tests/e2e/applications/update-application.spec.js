@@ -9,8 +9,7 @@ test.describe('E2E - Update Application', () => {
 
     test.beforeEach(async ({ singleApplicationPage, wpCli }) => {
         const testUser = createUser();
-        wpCli.createUser(testUser);
-        const userId = wpCli.getUserId(testUser.email);
+        const userId = wpCli.createUser(testUser);
 
         applicationId = createApplicationPost({
             authorId: userId,
