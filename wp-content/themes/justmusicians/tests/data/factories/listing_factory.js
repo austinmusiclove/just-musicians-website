@@ -19,6 +19,7 @@ export function createListing(overrides = {}) {
     };
 }
 
+// Deprecate in favor of createListingPostData
 export function createListingPost({ authorId, status = 'publish', overrides = {} } = {}) {
     const listing = createListing(overrides);
     return wpCliCreatePost({
@@ -37,4 +38,24 @@ export function createListingPost({ authorId, status = 'publish', overrides = {}
             verified: listing.verified,
         },
     });
+}
+
+export function createListingPostData({ authorId, status = 'publish', overrides = {} } = {}) {
+    const listing = createListing(overrides);
+    return {
+        postType: 'listing',
+        title: listing.name,
+        status,
+        authorId,
+        meta: {
+            name: listing.name,
+            description: listing.description,
+            email: listing.email,
+            city: listing.city,
+            state: listing.state,
+            zip_code: listing.zip,
+            bio: listing.bio,
+            verified: listing.verified,
+        },
+    };
 }

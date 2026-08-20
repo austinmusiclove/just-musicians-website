@@ -3,6 +3,7 @@ import { ThemePage } from '../pages/ThemePage.js';
 import { ApplicationsPage } from '../pages/ApplicationsPage.js';
 import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
+import { ListingsPage } from '../pages/ListingsPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
 import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink } from '../data/mailpit.js';
@@ -68,6 +69,10 @@ export const test = base.extend({
     musicianApplicationPage: async ({ page, isMobile }, use) => {
         const musicianApplicationPage = new MusicianApplicationPage(page, isMobile);
         await use(musicianApplicationPage);
+    },
+    listingsPage: async ({ page, isMobile }, use) => {
+        const listingsPage = new ListingsPage(page, isMobile);
+        await use(listingsPage);
     },
     listingFormPage: async ({ page, isMobile }, use) => {
         const listingFormPage = new ListingFormPage(page, isMobile);

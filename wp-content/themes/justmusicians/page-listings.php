@@ -92,6 +92,7 @@ get_header();
                                 <!-- Display user's listings -->
                                 <!-- <div class="flex items-center justify-between md:justify-start"> <?php //echo get_template_part('template-parts/search/sort', '', [ 'show_number' => false ]); ?> </div> -->
 
+                                <div id="account-listing-cards">
                                 <?php while ($query->have_posts()) {
                                     $query->the_post();
                                     $post_status    = get_post_status();
@@ -107,6 +108,7 @@ get_header();
                                         'thumbnail_url' => $thumbnail_url ? $thumbnail_url : get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
                                     ]);
                                 } ?>
+                                </div>
 
                                 <div class="py-12 text-center">
                                     <a href="/listing-form"><button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create New Listing</button></a>

@@ -22,7 +22,7 @@ test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
 
         const tmpCode = createTmpCodePost({
             authorId: applicationAuthorUserId,
-            overrides: { listings: [listingId] },
+            overrides: { listings: [Number(listingId)] },
         });
         const tmpCodeId = tmpCode.id;
         const lic = tmpCode.code;
