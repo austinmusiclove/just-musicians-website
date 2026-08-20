@@ -30,7 +30,7 @@
                     'count_exp' => "''",
                 ]);
                 get_template_part( 'template-parts/global/tab', null, [
-                    'title'  => 'Listing Images',
+                    'title'  => 'More Images',
                     'required' => false,
                     'show_var' => "showTab2",
                     'hide_exp' => "hideTabs()",

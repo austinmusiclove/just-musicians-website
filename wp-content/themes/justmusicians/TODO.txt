@@ -13,6 +13,8 @@ Testing for Applications product rollout
         aic tmp code user registration
         forgot password workflow
 Applications Features to add
+    Export applicants with emails to spreadsheet csv or google sheet
+        Flag pending listing applicatns as email not verified on the spreadsheet export
     Share application access with other users
         Create index for access
         Add share button where you can add email
@@ -22,10 +24,6 @@ Applications Features to add
             owner function and other auth functions will give access to author and anyone specified in the index
             build index from listing list in user data
             get rid of listings list in user data once it is deprecated
-    Export applicants with emails to spreadsheet csv or google sheet
-        Flag pending listing applicatns as email not verified on the spreadsheet export
-    Recurring events
-        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing
@@ -41,6 +39,8 @@ Applications Features to add
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
             Show add dates option in set up form but show an upsell message when you try to use it
+    Recurring events
+        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
     Notification to applicants when dates added to application
     Sorting and organizing
@@ -175,7 +175,6 @@ Venue Browsing Page
     Filter venues that played certian artists
     show/hide popup on hover
 Venue pages
-    *empty comp data state that invites you to contribute
     *remove decimal places in y axis for payment method and payment speed
     *change pay per hour to median pay
     *add perminently closed state for venues (coral snake)
@@ -260,6 +259,7 @@ Listing page
     allow artists to feature releases of their choice
     add set lists with set length and repertoire
     instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
+    allow collecting deposits
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady

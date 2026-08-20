@@ -10,7 +10,7 @@
     </div>
 
     <div class="relative -mx-2 sm:mx-0 pt-1">
-        <h3 class="font-bold text-18">Listing Images</h3>
+        <h3 class="font-bold text-18">More Images</h3>
         <!-- Buttons - screen 2 -->
         <div class="flex gap-2 items-center absolute right-0 top-0" x-show="orderedImageData['listing_images'].length > 0" x-cloak>
             <!--<button type="button" class="w-fit rounded text-14 border border-black/40 group flex items-center font-bold py-1 px-2 hover:border-black disabled:bg-grey disabled:text-white">Bulk delete</button>-->
