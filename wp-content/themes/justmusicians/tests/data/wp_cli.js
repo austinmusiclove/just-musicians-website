@@ -88,6 +88,14 @@ export function wpCliGetPostField(postId, field) {
     return output.trim();
 }
 
+export function wpCliGetPostUrl(postId) {
+    const output = execSync(
+        `wp post url ${postId} --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    return output.trim();
+}
+
 export function wpCliGetPostIdBySlug(slug, postType = 'application') {
     const output = execSync(
         `wp post list --name=${slug} --post_type=${postType} --field=ID --path=${WP_PATH}`,
@@ -132,6 +140,22 @@ export function wpCliSetPostThumbnail(postId, imagePath) {
         { stdio: 'ignore' }
     );
     return attachmentId;
+}
+
+export function wpCliSetPostTerms(postId, taxonomy, terms) {
+    const encodedTerms = Buffer.from(JSON.stringify(terms)).toString('base64');
+    execSync(
+        `wp eval "wp_set_object_terms(${postId}, json_decode(base64_decode('${encodedTerms}')), '${taxonomy}', false);" --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+}
+
+// The listing location index is built on save_post before thumbnails/terms can be attached via cli; re-run it manually
+export function wpCliIndexListing(postId) {
+    execSync(
+        `wp eval "hm_index_upsert_listing(${postId});" --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
 }
 
 export function wpCliAddListingToUser(userId, listingId) {

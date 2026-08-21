@@ -5,16 +5,19 @@ import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
 import { ListingsPage } from '../pages/ListingsPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
+import { SingleListingPage } from '../pages/SingleListingPage.js';
 import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { PasswordResetPage } from '../pages/PasswordResetPage.js';
+import { InquiryModalPage } from '../pages/InquiryModalPage.js';
 import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink } from '../data/mailpit.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
-    wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostMeta,
+    wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
     wpCliAddListingToUser, wpCliNotificationExists,
+    wpCliSetPostTerms, wpCliIndexListing,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
@@ -42,6 +45,7 @@ export const test = base.extend({
             getLatestPostId: wpCliGetLatestPostId,
             getLatestPostIdByType: wpCliGetLatestPostIdByType,
             getPostField: wpCliGetPostField,
+            getPostUrl: wpCliGetPostUrl,
             getPostMeta: wpCliGetPostMeta,
             getPostIdBySlug: wpCliGetPostIdBySlug,
             getPostThumbnailId: wpCliGetPostThumbnailId,
@@ -49,6 +53,8 @@ export const test = base.extend({
             deletePost: wpCliDeletePost,
             addListingToUser: wpCliAddListingToUser,
             notificationExists: wpCliNotificationExists,
+            setPostTerms: wpCliSetPostTerms,
+            indexListing: wpCliIndexListing,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });
@@ -79,6 +85,10 @@ export const test = base.extend({
         const listingFormPage = new ListingFormPage(page, isMobile);
         await use(listingFormPage);
     },
+    singleListingPage: async ({ page, isMobile }, use) => {
+        const singleListingPage = new SingleListingPage(page, isMobile);
+        await use(singleListingPage);
+    },
     singleApplicationPage: async ({ page, isMobile }, use) => {
         const singleApplicationPage = new SingleApplicationPage(page, isMobile);
         await use(singleApplicationPage);
@@ -86,5 +96,9 @@ export const test = base.extend({
     passwordResetPage: async ({ page, isMobile }, use) => {
         const passwordResetPage = new PasswordResetPage(page, isMobile);
         await use(passwordResetPage);
+    },
+    inquiryModalPage: async ({ page, isMobile }, use) => {
+        const inquiryModalPage = new InquiryModalPage(page, isMobile);
+        await use(inquiryModalPage);
     },
 });

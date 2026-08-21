@@ -28,14 +28,16 @@ function send_message(WP_REST_Request $request) {
             'created_at'               => $message['created_at'],
         ];
 
-        // Create cron task to send notifications
-        if (!wp_next_scheduled('send_notifications_after_message_send', [$message])) {
-            wp_schedule_single_event(time() + NEW_MESSAGE_NOTIFICATION_DELAY, 'send_notifications_after_message_send', [$message]);
-        }
-
         return $message;
     }
 }
+
+// Schedule notification emails whenever a message is sent via any code path
+add_action('user_message_sent', function($message) {
+    if (!wp_next_scheduled('send_notifications_after_message_send', [$message])) {
+        wp_schedule_single_event(time() + NEW_MESSAGE_NOTIFICATION_DELAY, 'send_notifications_after_message_send', [$message]);
+    }
+});
 
 // check if message has been read by each user participant user and if not, notify them via email
 add_action('send_notifications_after_message_send', function($message) {

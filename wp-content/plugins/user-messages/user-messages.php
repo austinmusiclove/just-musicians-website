@@ -254,6 +254,9 @@ class UserMessagesPlugin {
 
         // All DB operations succeeded
         $wpdb->query('COMMIT');
+
+        do_action('user_message_sent', $message);
+
         return $message;
     }
 
