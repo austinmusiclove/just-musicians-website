@@ -21,8 +21,12 @@ export class ThemePage {
         this.loginSubmitBtn     = page.getByTestId('login-submit-btn');
         this.logoutLinkDesktop  = page.getByTestId('desktop-logout-link');
         this.logoutLinkMobile   = page.getByTestId('mobile-logout-link');
-        this.hamburgerBtn       = page.getByTestId('header-hamburger-btn');
-        this.accountMenu        = page.getByTestId('header-account-menu');
+        this.hamburgerBtn           = page.getByTestId('header-hamburger-btn');
+        this.accountMenu            = page.getByTestId('header-account-menu');
+        this.forgotPasswordBtn      = page.getByRole('button', { name: 'Forgot password?' });
+        this.passwordResetEmail     = page.locator('input[name="email"]');
+        this.passwordResetSubmitBtn = page.getByRole('button', { name: 'Request Password Reset' });
+        this.passwordResetMessage   = page.locator('.request-password-reset-message');
     }
 
     async navigate(url = '/') {
@@ -89,6 +93,20 @@ export class ThemePage {
         await expect(this.signupBtn).not.toBeVisible();
         await expect(this.loginBtn).not.toBeVisible();
     }
+    async openPasswordResetModal() {
+        await this.openLoginModal();
+        await this.forgotPasswordBtn.click();
+        await expect(this.passwordResetSubmitBtn).toBeVisible();
+    }
+
+    async requestPasswordReset(email) {
+        await this.passwordResetEmail.fill(email);
+        await Promise.all([
+            this.page.waitForNavigation({ timeout: 10000 }),
+            this.passwordResetSubmitBtn.click(),
+        ]);
+    }
+
     async expectLoggedOutPage() {
         await expect(this.signupBtn).toBeVisible();
         await expect(this.loginBtn).toBeVisible();

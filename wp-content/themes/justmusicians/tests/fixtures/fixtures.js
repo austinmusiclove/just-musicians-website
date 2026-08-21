@@ -6,6 +6,7 @@ import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
 import { ListingsPage } from '../pages/ListingsPage.js';
 import { ListingFormPage } from '../pages/ListingFormPage.js';
 import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
+import { PasswordResetPage } from '../pages/PasswordResetPage.js';
 import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink } from '../data/mailpit.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
@@ -81,5 +82,9 @@ export const test = base.extend({
     singleApplicationPage: async ({ page, isMobile }, use) => {
         const singleApplicationPage = new SingleApplicationPage(page, isMobile);
         await use(singleApplicationPage);
+    },
+    passwordResetPage: async ({ page, isMobile }, use) => {
+        const passwordResetPage = new PasswordResetPage(page, isMobile);
+        await use(passwordResetPage);
     },
 });
