@@ -31,7 +31,7 @@ test.describe('E2E - Create Listing', () => {
         const userListings = wpCli.getUserMeta(userId, 'listings');
         expect(userListings).toEqual([Number(listingId)]);
 
-        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.title);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
@@ -62,7 +62,7 @@ test.describe('E2E - Create Listing', () => {
         const userListings = wpCli.getUserMeta(userId, 'listings');
         expect(userListings).toEqual([Number(listingId)]);
 
-        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.title);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
@@ -93,7 +93,7 @@ test.describe('E2E - Create Listing', () => {
         const userListings = wpCli.getUserMeta(userId, 'listings');
         expect(userListings).toEqual([Number(listingId)]);
 
-        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.title);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('draft');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
@@ -124,7 +124,7 @@ test.describe('E2E - Create Listing', () => {
         const userListings = wpCli.getUserMeta(userId, 'listings');
         expect(userListings).toEqual([Number(listingId)]);
 
-        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
+        expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.title);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('draft');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
