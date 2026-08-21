@@ -31,7 +31,7 @@ function noindex_specific_post_type($robots) {
         is_page('application-form') or
         is_page('messages')
     ) {
-        $robots['index'] = 'noindex';
+        $robots['noindex'] = true;
     }
     return $robots;
 }
