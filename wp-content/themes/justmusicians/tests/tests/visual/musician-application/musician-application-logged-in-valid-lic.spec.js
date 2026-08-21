@@ -3,7 +3,7 @@ import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
 import { createListingPostData } from '../../../data/factories/listing_factory.js';
-import { createTmpCodePost } from '../../../data/factories/tmp_code_factory.js';
+import { createTmpCodePostData } from '../../../data/factories/tmp_code_factory.js';
 
 
 test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
@@ -20,12 +20,12 @@ test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
         const listingData = createListingPostData({ authorId: testUserId, status: 'pending' });
         const listingId = wpCli.createListing(listingData);
 
-        const tmpCode = createTmpCodePost({
+        const tmpCodeData = createTmpCodePostData({
             authorId: applicationAuthorUserId,
             overrides: { listings: [Number(listingId)] },
         });
-        const tmpCodeId = tmpCode.id;
-        const lic = tmpCode.code;
+        const tmpCodeId = wpCli.createPost(tmpCodeData);
+        const lic = tmpCodeData.meta.code;
         wpCli.trackPost(tmpCodeId);
 
         await musicianApplicationPage.login(testUser.email, testUser.password);

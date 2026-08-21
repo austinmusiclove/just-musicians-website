@@ -10,13 +10,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure prompting to add org and job title after sign up works
     Make sure i am compliant with laws on accessibility and cookies
-Testing for Applications product rollout
-    Inquiry test
-        allow create post to support taxonomy
-        index all listings that are created; wp cli dedicated create listing method
-    Users tests
-        replace createListing flow to not require trackpost
-        replace createTmpCode flow to not require trackpost
 Applications Features to add
     Export applicants with emails to spreadsheet csv or google sheet
         Flag pending listing applicatns as email not verified on the spreadsheet export

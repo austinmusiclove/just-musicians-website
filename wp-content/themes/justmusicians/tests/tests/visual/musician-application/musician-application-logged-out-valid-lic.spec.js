@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { createTmpCodePost } from '../../../data/factories/tmp_code_factory.js';
+import { createTmpCodePostData } from '../../../data/factories/tmp_code_factory.js';
 
 
 test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
@@ -18,9 +18,9 @@ test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
         applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
         wpCli.trackPost(applicationId);
 
-        const tmpCode = createTmpCodePost({ authorId: applicationAuthorUserId });
-        tmpCodeId = tmpCode.id;
-        lic = tmpCode.code;
+        const tmpCodeData = createTmpCodePostData({ authorId: applicationAuthorUserId });
+        tmpCodeId = wpCli.createPost(tmpCodeData);
+        lic = tmpCodeData.meta.code;
         wpCli.trackPost(tmpCodeId);
     });
 
