@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { createListing } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Submit Application - Logged Out', () => {
 
@@ -20,14 +20,14 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         applicationId = createApplicationPost({ authorId: applicationAuthorId });
         wpCli.trackPost(applicationId);
 
-        listingData = createListing({ zip: '78701' });
+        listingData = createListingPostData({ overrides: { zip: '78701' } });
         message = faker.lorem.sentence();
     });
 
     test('Submit application while logged out and sign up', async ({ musicianApplicationPage, wpCli, mailpit }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
 
-        await musicianApplicationPage.fillMinimumListingFields( listingData.name, listingData.description, listingData.zip, listingData.email);
+        await musicianApplicationPage.fillMinimumListingFields( listingData.meta.name, listingData.meta.description, listingData.meta.zip_code, listingData.meta.email);
         await musicianApplicationPage.uploadCoverImage('tests/data/files/test-image.png');
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
@@ -37,11 +37,11 @@ test.describe('E2E - Submit Application - Logged Out', () => {
             { timeout: 10000 }
         );
 
-        const listingPostId = wpCli.getLatestPostIdByType('listing', 'pending', { metaKey: 'name', metaValue: listingData.name });
+        const listingPostId = wpCli.getLatestPostIdByType('listing', 'pending', { metaKey: 'name', metaValue: listingData.meta.name });
         expect(listingPostId).toBeTruthy();
         wpCli.trackPost(listingPostId);
         expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('pending');
-        expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
+        expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.meta.name);
 
         const submissionId = wpCli.getLatestPostIdByType('app_submission', 'publish', { metaKey: 'application', metaValue: String(applicationId) });
         expect(submissionId).toBeTruthy();
@@ -49,7 +49,7 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingPostId));
         expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);
 
-        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.email}) Your application submission has been submitted.`;
+        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.meta.email}) Your application submission has been submitted.`;
         const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);
         expect(submitterEmail).toBeTruthy();
         const emailBody = await mailpit.getEmailBody(submitterEmail.ID);

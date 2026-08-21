@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { createListingPost } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
 
@@ -11,7 +11,7 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
     let applicationId;
     let submitter;
     let submitterId;
-    let listingName;
+    let listingData;
     let listingId;
     let message;
 
@@ -25,10 +25,8 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
         submitter = createUser();
         submitterId = wpCli.createUser(submitter);
 
-        listingName = `Test Listing ${Date.now()}`;
-        listingId = createListingPost({ authorId: submitterId, overrides: { name: listingName } });
-        wpCli.trackPost(listingId);
-        wpCli.addListingToUser(submitterId, listingId);
+        listingData = createListingPostData({ authorId: submitterId, overrides: { name: `Test Listing ${Date.now()}` } });
+        listingId = wpCli.createListing(listingData);
 
         message = `I would love to play this event! ${Date.now()}`;
 
@@ -38,7 +36,7 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
     test('Submit application with existing listing', async ({ musicianApplicationPage, wpCli, mailpit }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
 
-        await musicianApplicationPage.selectListing(listingName);
+        await musicianApplicationPage.selectListing(listingData.meta.name);
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
 

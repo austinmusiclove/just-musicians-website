@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { createListingPost } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 
 test.describe('Visual - Musician Application - Logged in - One listings', () => {
@@ -18,9 +18,8 @@ test.describe('Visual - Musician Application - Logged in - One listings', () => 
         const testUser = createUser();
         const testUserId = wpCli.createUser(testUser);
 
-        const listingId = createListingPost({ authorId: testUserId });
-        wpCli.trackPost(listingId);
-        wpCli.setUserMeta(testUser.email, 'listings', [listingId]);
+        const listingData = createListingPostData({ authorId: testUserId });
+        const listingId = wpCli.createListing(listingData);
 
         await musicianApplicationPage.login(testUser.email, testUser.password);
     });

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createListing } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Create Listing', () => {
 
@@ -17,9 +17,9 @@ test.describe('E2E - Create Listing', () => {
     });
 
     test('Create listing using bottom publish button', async ({ listingFormPage, wpCli }) => {
-        const listing = createListing({ zip: '78701' });
+        const listing = createListingPostData({ overrides: { zip: '78701' } });
 
-        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.fillMinimumFields(listing.title, listing.meta.description, listing.meta.zip_code, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/files/test-image.png');
         await listingFormPage.publishBottom();
 
@@ -34,10 +34,10 @@ test.describe('E2E - Create Listing', () => {
         expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
-        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
+        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.meta.description.trim());
         expect(wpCli.getPostMeta(listingId, 'email')).toBe(testUser.email);
-        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.meta.zip_code);
         expect(wpCli.getPostMeta(listingId, 'verified')).toBeNull();
         expect(wpCli.getPostMeta(listingId, 'city')).toBe('Austin');
         expect(wpCli.getPostMeta(listingId, 'state')).toBe('Texas');
@@ -48,9 +48,9 @@ test.describe('E2E - Create Listing', () => {
     });
 
     test('Create listing using top publish button', async ({ listingFormPage, wpCli }) => {
-        const listing = createListing({ zip: '78701' });
+        const listing = createListingPostData({ overrides: { zip: '78701' } });
 
-        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.fillMinimumFields(listing.title, listing.meta.description, listing.meta.zip_code, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/files/test-image.png');
         await listingFormPage.publishTop();
 
@@ -65,10 +65,10 @@ test.describe('E2E - Create Listing', () => {
         expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
-        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
+        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.meta.description.trim());
         expect(wpCli.getPostMeta(listingId, 'email')).toBe(testUser.email);
-        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.meta.zip_code);
         expect(wpCli.getPostMeta(listingId, 'verified')).toBeNull();
         expect(wpCli.getPostMeta(listingId, 'city')).toBe('Austin');
         expect(wpCli.getPostMeta(listingId, 'state')).toBe('Texas');
@@ -79,9 +79,9 @@ test.describe('E2E - Create Listing', () => {
     });
 
     test('Create listing using bottom save draft button', async ({ listingFormPage, wpCli }) => {
-        const listing = createListing({ zip: '78701' });
+        const listing = createListingPostData({ overrides: { zip: '78701' } });
 
-        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.fillMinimumFields(listing.title, listing.meta.description, listing.meta.zip_code, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/files/test-image.png');
         await listingFormPage.saveDraftBottom();
 
@@ -96,10 +96,10 @@ test.describe('E2E - Create Listing', () => {
         expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('draft');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
-        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
+        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.meta.description.trim());
         expect(wpCli.getPostMeta(listingId, 'email')).toBe(testUser.email);
-        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.meta.zip_code);
         expect(wpCli.getPostMeta(listingId, 'verified')).toBeNull();
         expect(wpCli.getPostMeta(listingId, 'city')).toBe('Austin');
         expect(wpCli.getPostMeta(listingId, 'state')).toBe('Texas');
@@ -110,9 +110,9 @@ test.describe('E2E - Create Listing', () => {
     });
 
     test('Create listing using top save draft button', async ({ listingFormPage, wpCli }) => {
-        const listing = createListing({ zip: '78701' });
+        const listing = createListingPostData({ overrides: { zip: '78701' } });
 
-        await listingFormPage.fillMinimumFields(listing.name, listing.description, listing.zip, testUser.email);
+        await listingFormPage.fillMinimumFields(listing.title, listing.meta.description, listing.meta.zip_code, testUser.email);
         await listingFormPage.uploadCoverImage('tests/data/files/test-image.png');
         await listingFormPage.saveDraftTop();
 
@@ -127,10 +127,10 @@ test.describe('E2E - Create Listing', () => {
         expect(wpCli.getPostField(listingId, 'post_title')).toBe(listing.name);
         expect(wpCli.getPostField(listingId, 'post_status')).toBe('draft');
         expect(wpCli.getPostField(listingId, 'post_author')).toBe(userId);
-        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.name);
-        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.description.trim());
+        expect(wpCli.getPostMeta(listingId, 'name')).toBe(listing.meta.name);
+        expect(wpCli.getPostMeta(listingId, 'description')).toBe(listing.meta.description.trim());
         expect(wpCli.getPostMeta(listingId, 'email')).toBe(testUser.email);
-        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.zip);
+        expect(wpCli.getPostMeta(listingId, 'zip_code')).toBe(listing.meta.zip_code);
         expect(wpCli.getPostMeta(listingId, 'verified')).toBeNull();
         expect(wpCli.getPostMeta(listingId, 'city')).toBe('Austin');
         expect(wpCli.getPostMeta(listingId, 'state')).toBe('Texas');

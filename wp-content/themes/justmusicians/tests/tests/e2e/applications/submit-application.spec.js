@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPost } from '../../../data/factories/application_factory.js';
-import { createListing } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Submit Application - Logged in - No Listings', () => {
 
@@ -25,7 +25,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         submitter = createUser();
         submitterId = wpCli.createUser(submitter);
 
-        listingData = createListing({ email: submitter.email, zip: '78701' });
+        listingData = createListingPostData({ overrides: { email: submitter.email, zip: '78701' } });
         message = faker.lorem.sentence();
 
         await musicianApplicationPage.login(submitter.email, submitter.password);
@@ -34,7 +34,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
     test('Submit application with new listing', async ({ musicianApplicationPage, wpCli, mailpit }) => {
         await musicianApplicationPage.navigateToApplication(applicationId);
 
-        await musicianApplicationPage.fillMinimumListingFields( listingData.name, listingData.description, listingData.zip, listingData.email);
+        await musicianApplicationPage.fillMinimumListingFields( listingData.meta.name, listingData.meta.description, listingData.meta.zip_code, listingData.meta.email);
         await musicianApplicationPage.uploadCoverImage('tests/data/files/test-image.png');
         await musicianApplicationPage.fillMessage(message);
         await musicianApplicationPage.submitApplication();
@@ -45,7 +45,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         expect(listingPostId).toBeTruthy();
         wpCli.trackPost(listingPostId);
         expect(wpCli.getPostField(listingPostId, 'post_status')).toBe('publish');
-        expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.name);
+        expect(wpCli.getPostMeta(listingPostId, 'name')).toBe(listingData.meta.name);
 
         const userListings = wpCli.getUserMeta(submitterId, 'listings');
         expect(userListings).toContain(Number(listingPostId));

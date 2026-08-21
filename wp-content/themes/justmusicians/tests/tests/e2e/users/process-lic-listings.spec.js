@@ -14,8 +14,8 @@ test.describe('E2E - Process LIC', () => {
         const testUser = createUser();
         const testUserId = wpCli.createUser(testUser);
 
-        listingData = createListingPostData({author: testUserId});
-        listingId = wpCli.createPost(listingData);
+        listingData = createListingPostData({ authorId: testUserId });
+        listingId = wpCli.createListing(listingData);
 
         tmpCodeData = createTmpCodePostData({ authorId: testUserId, status: 'publish', overrides: { listings: [Number(listingId)] } });
         wpCli.createPost(tmpCodeData);

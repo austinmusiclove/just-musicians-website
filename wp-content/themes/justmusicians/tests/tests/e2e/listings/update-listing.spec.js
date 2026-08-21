@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createListingPost } from '../../../data/factories/listing_factory.js';
+import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Update Listing', () => {
 
@@ -11,10 +11,8 @@ test.describe('E2E - Update Listing', () => {
         const testUser = createUser();
         const userId = wpCli.createUser(testUser);
 
-        listingId = createListingPost({ authorId: userId, overrides: { name: 'Original Name' } });
-        wpCli.trackPost(listingId);
-        wpCli.setPostThumbnail(listingId, 'tests/data/files/test-image.png');
-        wpCli.setUserMeta(testUser.email, 'listings', [Number(listingId)]);
+        const listingData = createListingPostData({ authorId: userId, overrides: { name: 'Original Name' } });
+        listingId = wpCli.createListing(listingData);
 
         await listingFormPage.login(testUser.email, testUser.password);
     });
