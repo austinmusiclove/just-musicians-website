@@ -1,6 +1,7 @@
 import { execSync } from 'child_process';
 
 const WP_PATH = '/Users/johnfilippone/Local\\ Sites/just-musicians/app/public';
+const LISTING_THUMBNAIL_PATH = 'tests/data/files/test-image.png';
 
 export function wpCliCreateUser(userData) {
     const output = execSync(
@@ -177,6 +178,27 @@ export function wpCliAddListingToUser(userId, listingId) {
         `wp user meta update ${userId} listings '${JSON.stringify(listings)}' --format=json --path=${WP_PATH}`,
         { stdio: 'ignore' }
     );
+}
+
+// Creates a fully usable listing post from createListingPostData output: post, thumbnail,
+// taxonomies, author's listings user meta, and the location/search index entry
+export function wpCliCreateListing(listingData) {
+    const listingId = wpCliCreatePost(listingData);
+    wpCliSetPostThumbnail(listingId, LISTING_THUMBNAIL_PATH);
+    const taxonomies = [
+        ['genre', listingData.genres],
+        ['ensemble_size', listingData.ensembleSizes],
+    ];
+    for (const [taxonomy, terms] of taxonomies) {
+        if (Array.isArray(terms) && terms.length > 0) {
+            wpCliSetPostTerms(listingId, taxonomy, terms);
+        }
+    }
+    if (listingData.authorId) {
+        wpCliAddListingToUser(listingData.authorId, listingId);
+    }
+    wpCliIndexListing(listingId);
+    return listingId;
 }
 
 export function wpCliNotificationExists(userId, notificationType, subjectId) {

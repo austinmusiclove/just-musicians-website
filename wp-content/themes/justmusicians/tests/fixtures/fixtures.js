@@ -17,7 +17,7 @@ import {
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
     wpCliAddListingToUser, wpCliNotificationExists,
-    wpCliSetPostTerms, wpCliIndexListing,
+    wpCliSetPostTerms, wpCliIndexListing, wpCliCreateListing,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
@@ -40,6 +40,7 @@ export const test = base.extend({
             deleteUser: wpCliDeleteUser,
             deleteUsers: wpCliDeleteUsers,
             createPost: (args) => { const id = wpCliCreatePost(args); createdPosts.push(id); return id; },
+            createListing: (listingData) => { const id = wpCliCreateListing(listingData); createdPosts.push(id); return id; },
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
             getLatestPostId: wpCliGetLatestPostId,

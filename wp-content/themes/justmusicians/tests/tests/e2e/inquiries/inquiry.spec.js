@@ -12,13 +12,11 @@ test.describe('E2E - Inquiry', () => {
         // Create a musician with a listing that matches the inquiry we are about to send
         const musician = createUser();
         const musicianId = wpCli.createUser(musician);
-        const listingData = createListingPostData({ authorId: musicianId, overrides: { city: 'Austin', state: 'Texas', zip: '78701', }, });
-        const listingId = wpCli.createPost(listingData);
-        wpCli.setPostThumbnail(listingId, 'tests/data/files/test-image.png');
-        wpCli.setPostTerms(listingId, 'genre', ['Rock']);
-        wpCli.setPostTerms(listingId, 'ensemble_size', ['Solo']);
-        wpCli.addListingToUser(musicianId, listingId);
-        wpCli.indexListing(listingId);
+        const listingData = createListingPostData({
+            authorId: musicianId,
+            overrides: { city: 'Austin', state: 'Texas', zip: '78701', genres: ['Rock'], ensembleSizes: ['Solo'] },
+        });
+        const listingId = wpCli.createListing(listingData);
 
         const eventDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
         const eventDateStr = `${eventDate.getFullYear()}-${String(eventDate.getMonth() + 1).padStart(2, '0')}-${String(eventDate.getDate()).padStart(2, '0')}`;
