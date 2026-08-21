@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showQuoteSlide" x-cloak>
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showQuoteSlide" x-cloak data-testid="inquiry-slide-competing-quotes">
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Would you like us to send this inquiry to similar musicians?</h2>

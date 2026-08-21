@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-data="{ inquiryEquipment: '', inquiryEquipmentDetails: '' }" x-show="showEquipmentSlide" x-cloak>
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-data="{ inquiryEquipment: '', inquiryEquipmentDetails: '' }" x-show="showEquipmentSlide" x-cloak data-testid="inquiry-slide-equipment">
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Do you need musicians to provide their own sound equipment?</h2>

@@ -1,4 +1,4 @@
-<div class="slide grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col items-center overflow-y-auto pr-2" x-show="showRequestSlide" x-cloak>
+<div class="slide grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col items-center overflow-y-auto pr-2" x-show="showRequestSlide" x-cloak data-testid="inquiry-slide-request">
 
 
     <h2 class="font-bold font-sun-motter text-20 mb-8">Send and existing event inquiry to <span class="text-yellow" x-text="inquiryListingName"></span>?</h2>

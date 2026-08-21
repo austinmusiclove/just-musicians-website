@@ -1,4 +1,4 @@
-<div class="slide w-[24rem] text-center" x-show="showThankYouSlide" x-cloak>
+<div class="slide w-[24rem] text-center" x-show="showThankYouSlide" x-cloak data-testid="inquiry-slide-thankyou">
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">Thanks for submitting your request!</h2>

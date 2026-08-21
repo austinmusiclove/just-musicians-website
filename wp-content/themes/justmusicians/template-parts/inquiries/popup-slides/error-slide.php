@@ -1,4 +1,4 @@
-<div class="slide w-[24rem] text-center" x-show="showErrorSlide" x-cloak>
+<div class="slide w-[24rem] text-center" x-show="showErrorSlide" x-cloak data-testid="inquiry-slide-error">
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">There was an error processing your inquriy submission.</h2>

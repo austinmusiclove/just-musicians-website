@@ -1,4 +1,4 @@
-<div class="slide w-[24rem] text-center" x-show="showDiscardSlide" x-cloak>
+<div class="slide w-[24rem] text-center" x-show="showDiscardSlide" x-cloak data-testid="inquiry-slide-discard">
 
 
     <h2 class="font-bold font-poppins text-20 mb-4">You’re almost done!</h2>

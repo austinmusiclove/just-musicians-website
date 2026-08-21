@@ -1,4 +1,4 @@
-<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showDetailsSlide" x-cloak >
+<div class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem] max-h-[60vh] flex flex-col overflow-y-auto pr-2" x-show="showDetailsSlide" x-cloak data-testid="inquiry-slide-details">
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Final details about your event</h2>

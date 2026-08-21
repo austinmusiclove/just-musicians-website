@@ -1,4 +1,4 @@
-<div data-slide="2" class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showEmailSlide" x-cloak>
+<div data-slide="2" class="slide pb-8 grow w-[18rem] sm:w-[32rem] md:min-h-[30rem]" x-show="showEmailSlide" x-cloak data-testid="inquiry-slide-email">
 
 
     <h2 class="font-bold font-poppins text-20 mb-8">Where can we send the responses from musicians in your area?</h2>

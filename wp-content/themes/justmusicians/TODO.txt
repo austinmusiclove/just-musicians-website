@@ -10,6 +10,23 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure prompting to add org and job title after sign up works
     Make sure i am compliant with laws on accessibility and cookies
+Message Test
+    Go to event page from inquiry success
+    Logout and log in as musician
+    Click to the link from inquiry notification email
+    Gig is in my gigs
+    Respond to gig
+    Check email and notification for buyer
+    Logout and log in as buyer
+    Follow link in inquiry response email
+    See the event response is there
+    Send message to the musician
+    Check to make sure the musican gets email notification and notification
+    Logout and in as musician
+    Follow link to messages from email
+    Read message and make sure the notification for message is cleared
+    Send message
+    make sure email goes to buyer for new message and message notification
 Applications Features to add
     Export applicants with emails to spreadsheet csv or google sheet
         Flag pending listing applicatns as email not verified on the spreadsheet export
