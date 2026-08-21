@@ -9,7 +9,10 @@ import { SingleListingPage } from '../pages/SingleListingPage.js';
 import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { PasswordResetPage } from '../pages/PasswordResetPage.js';
 import { InquiryModalPage } from '../pages/InquiryModalPage.js';
-import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink } from '../data/mailpit.js';
+import { MyGigsPage } from '../pages/MyGigsPage.js';
+import { SingleEventPage } from '../pages/SingleEventPage.js';
+import { MessagesPage } from '../pages/MessagesPage.js';
+import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
@@ -18,15 +21,17 @@ import {
     wpCliSetPostThumbnail, wpCliDeletePost,
     wpCliAddListingToUser, wpCliNotificationExists,
     wpCliSetPostTerms, wpCliIndexListing, wpCliCreateListing,
+    wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
-    mailpit: async ({ baseURL }, use) => {
+    mailpit: async ({ baseURL, request }, use) => {
         const mailpitApiUrl = process.env.MAILPIT_API_URL || 'http://localhost:10000/api/v1';
         await use({
             apiUrl: mailpitApiUrl,
             siteUrl: baseURL,
-            findEmailBySubject: (subject) => findEmail(subject, mailpitApiUrl),
+            findEmailBySubject: (subject, opts) => findEmail(subject, mailpitApiUrl, opts),
+            waitForMessageEmail: (subject, opts) => waitForMessage(subject, mailpitApiUrl, request, opts),
             getEmailBody: (messageId) => getEmail(messageId, mailpitApiUrl),
             extractLinkFromEmail: extractLink,
         });
@@ -56,6 +61,10 @@ export const test = base.extend({
             notificationExists: wpCliNotificationExists,
             setPostTerms: wpCliSetPostTerms,
             indexListing: wpCliIndexListing,
+            getConversationId: wpCliGetConversationId,
+            getLastMessage: wpCliGetLastMessage,
+            messageIsRead: wpCliMessageIsRead,
+            getUnreadConversationCount: wpCliGetUnreadConversationCount,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });
@@ -101,5 +110,17 @@ export const test = base.extend({
     inquiryModalPage: async ({ page, isMobile }, use) => {
         const inquiryModalPage = new InquiryModalPage(page, isMobile);
         await use(inquiryModalPage);
+    },
+    myGigsPage: async ({ page, isMobile }, use) => {
+        const myGigsPage = new MyGigsPage(page, isMobile);
+        await use(myGigsPage);
+    },
+    singleEventPage: async ({ page, isMobile }, use) => {
+        const singleEventPage = new SingleEventPage(page, isMobile);
+        await use(singleEventPage);
+    },
+    messagesPage: async ({ page, isMobile }, use) => {
+        const messagesPage = new MessagesPage(page, isMobile);
+        await use(messagesPage);
     },
 });

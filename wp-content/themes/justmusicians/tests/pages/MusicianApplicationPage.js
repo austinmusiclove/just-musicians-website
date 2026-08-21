@@ -11,7 +11,7 @@ export class MusicianApplicationPage extends ThemePage {
         this.listingDropdown                      = page.getByTestId('listing-dropdown');
         this.listingDropdownButton                = this.listingDropdown.locator('button');
         this.listingDropdownButtonLabel           = this.listingDropdownButton.locator('span');
-        this.createNewListingOption               = page.locator('[data-testid="listing-dropdown"] li').filter({ hasText: 'Create New Musician Listing' });
+        this.createNewListingOption               = page.getByTestId('listing-dropdown').filter({ hasText: 'Create New Musician Listing' });
         this.performerName                        = page.locator('#performer-name-input');
         this.description                          = page.locator('#description-input');
         this.postalCodeInput                      = page.locator('#listing-form-zip');

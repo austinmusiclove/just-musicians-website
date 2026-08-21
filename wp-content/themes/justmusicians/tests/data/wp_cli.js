@@ -3,6 +3,22 @@ import { execSync } from 'child_process';
 const WP_PATH = '/Users/johnfilippone/Local\\ Sites/just-musicians/app/public';
 const LISTING_THUMBNAIL_PATH = 'tests/data/files/test-image.png';
 
+// Runs a wp-cli command, retrying on non-zero exit (transient MySQL contention when tests run in parallel)
+function wpCliWithRetry(command, { attempts = 3, delayMs = 2000 } = {}) {
+    let lastError;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+        try {
+            return execSync(command, { encoding: 'utf-8' });
+        } catch (err) {
+            lastError = err;
+            if (attempt < attempts) {
+                Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delayMs);
+            }
+        }
+    }
+    throw lastError;
+}
+
 export function wpCliCreateUser(userData) {
     const output = execSync(
         `wp user create "${userData.email}" "${userData.email}" --role=subscriber --user_pass="${userData.password}" --first_name="${userData.firstName}" --last_name="${userData.lastName}" --path=${WP_PATH} --porcelain`,
@@ -90,9 +106,10 @@ export function wpCliGetPostField(postId, field) {
 }
 
 export function wpCliGetPostUrl(postId) {
-    const output = execSync(
+    // get_permalink() can transiently return empty under concurrent load, so reject blank output and retry
+    const output = wpCliWithRetry(
         `wp post url ${postId} --path=${WP_PATH}`,
-        { encoding: 'utf-8' }
+        (out) => out.trim().length > 0
     );
     return output.trim();
 }
@@ -203,12 +220,41 @@ export function wpCliCreateListing(listingData) {
 
 export function wpCliNotificationExists(userId, notificationType, subjectId) {
     try {
-        const output = execSync(
-            `wp db query "SELECT COUNT(*) FROM wp_notifications WHERE user_id = ${userId} AND notification_type = '${notificationType}' AND subject_id = ${subjectId}" --skip-column-names --path=${WP_PATH}`,
-            { encoding: 'utf-8' }
+        const output = wpCliWithRetry(
+            `wp db query "SELECT COUNT(*) FROM wp_notifications WHERE user_id = ${userId} AND notification_type = '${notificationType}' AND subject_id = ${subjectId}" --skip-column-names --path=${WP_PATH}`
         );
         return parseInt(output.trim(), 10) > 0;
     } catch {
         return false;
     }
+}
+
+// The buyer participates in the conversation by user id; the musician by their listing id
+export function wpCliGetConversationId(userId, listingId) {
+    const output = wpCliWithRetry(
+        `wp eval "global \\$wpdb; \\$v = \\$wpdb->get_var(\\$wpdb->prepare(\\"SELECT c.id FROM wp_um_conversations c JOIN wp_um_conversation_participants a ON a.conversation_id = c.id AND a.user_id = %d JOIN wp_um_conversation_participants b ON b.conversation_id = c.id AND b.listing_id = %d LIMIT 1\\", ${userId}, ${listingId})); if (\\$v === false) { exit(1); } echo json_encode(\\$v);" --path=${WP_PATH}`
+    );
+    return JSON.parse(output.trim());
+}
+
+export function wpCliGetLastMessage(conversationId) {
+    const output = wpCliWithRetry(
+        `wp eval "global \\$wpdb; \\$row = \\$wpdb->get_row(\\$wpdb->prepare(\\"SELECT id, sender_id, content FROM wp_um_messages WHERE conversation_id = %d ORDER BY created_at DESC, id DESC LIMIT 1\\", ${conversationId}), ARRAY_A); if (\\$row === false) { exit(1); } echo json_encode(\\$row);" --path=${WP_PATH}`
+    );
+    return JSON.parse(output.trim());
+}
+
+export function wpCliMessageIsRead(messageId, userId) {
+    const output = wpCliWithRetry(
+        `wp eval "global \\$wpdb; \\$v = \\$wpdb->get_var(\\$wpdb->prepare(\\"SELECT 1 FROM wp_um_read_receipts WHERE message_id = %d AND user_id = %d LIMIT 1\\", ${messageId}, ${userId})); if (\\$v === false) { exit(1); } echo (int) (bool) \\$v;" --path=${WP_PATH}`
+    );
+    return output.trim() === '1';
+}
+
+export function wpCliGetUnreadConversationCount(userId) {
+    // the $user_messages_plugin global is not populated under wp-cli, so instantiate the class directly
+    const output = wpCliWithRetry(
+        `wp eval "wp_set_current_user(${userId}); \\$count = (new UserMessagesPlugin())->get_unread_conversation_count(${userId}); if (is_wp_error(\\$count)) { exit(1); } echo \\$count;" --path=${WP_PATH}`
+    );
+    return parseInt(output.trim(), 10);
 }

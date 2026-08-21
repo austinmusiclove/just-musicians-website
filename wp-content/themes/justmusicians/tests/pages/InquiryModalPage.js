@@ -17,7 +17,7 @@ export class InquiryModalPage extends ThemePage {
 
     // Get a slide by its full data-testid (e.g., 'inquiry-slide-date')
     getSlide(testId) {
-        return this.page.locator(`[data-testid="${testId}"]`);
+        return this.page.getByTestId(testId);
     }
 
     // Get the navy "Next" button for a specific slide
@@ -98,5 +98,11 @@ export class InquiryModalPage extends ThemePage {
 
     async getEventPermalink() {
         return this.thankYouLink.getAttribute('href');
+    }
+
+    async clickThankYouLink() {
+        await expect(this.thankYouLink).toBeVisible();
+        await this.thankYouLink.click();
+        await this.page.waitForLoadState('domcontentloaded');
     }
 }

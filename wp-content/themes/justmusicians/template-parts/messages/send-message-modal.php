@@ -7,7 +7,7 @@
     <div class="bg-white relative w-full h-full md:w-auto md:h-auto flex items-center justify-center p-4 sm:p-8" style="max-width: 780px;">
 
         <!-- X button -->
-        <img class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer"
+        <img class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" data-testid="send-message-mdl-close"
             src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
             x-on:click="showSendMessageModal = false; showSendMessageSuccess = false;"
         />
