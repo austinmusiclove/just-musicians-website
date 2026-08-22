@@ -23,7 +23,8 @@
                 <div class="bg-white px-6 pb-4 sm:px-12">
                     <form class="space-y-2" action="" method="POST"
                         hx-post="<?php echo site_url('/wp-html/v1/register-user'); ?>"
-                        hx-target="#sign-up-result">
+                        hx-target="#sign-up-result"
+                    >
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="first_name" class="block text-sm font-medium leading-6">First Name</label>
@@ -78,7 +79,12 @@
                         <div>
                             <button type="submit" class="flex w-full justify-center rounded-md bg-yellow px-3 py-1.5 text-sm font-semibold leading-6 text-navy shadow-sm hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow mt-4"
                                 data-testid="signup-submit-btn"
-                            >Sign up</button>
+                            >
+                                <span class="htmx-indicator-component-block-replace">Sign up</span>
+                                <span class="htmx-indicator-component-block">
+                                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'white']); ?>
+                                </span>
+                            </button>
                         </div>
                         <div id="sign-up-result" class="flex items-center text-14 justify-between"></div>
 

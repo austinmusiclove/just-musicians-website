@@ -1,6 +1,4 @@
 Critical bugs
-    Mobile location search needs to have serch button to click after location option is selected; it does search but it needs to close the search bar when it is selected or have a btn to do so
-    Need indicator for sign up and log in buttons
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
     Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
