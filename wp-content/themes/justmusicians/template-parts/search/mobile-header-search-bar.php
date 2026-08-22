@@ -3,7 +3,7 @@
     <div class="bg-white relative relative w-full h-full overflow-scroll">
 
         <div class="bg-yellow/20 p-2" x-trap.noreturn="getShowDefaultSearchOptionsMobile()">
-            <div class="w-full relative border border-black/20 rounded-sm mb-1 flex bg-white">
+            <div class="w-full bg-white border border-black/20 rounded-sm flex mb-1 pr-1 relative">
                 <button type="button" class="px-2 h-full absolute top-0 left-0 flex items-center justify-center" x-on:click="showSearchOptions = false" x-on:focus="$focus.focus($refs.mobileSearchInput)">
                     <img class="h-5 absolute" src="<?php echo get_template_directory_uri() . '/lib/images/icons/arrow_left.svg' ?>" />
                 </button>
@@ -20,8 +20,11 @@
                 <span id="mobile-header-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
+                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                </button>
             </div>
-            <div class="bg-white text-14 pr-1 rounded-sm border border-black/20 grow w-full flex items-stretch">
+            <div class="w-full bg-white border border-black/20 rounded-sm flex text-14 pr-1 grow items-stretch">
                 <?php echo get_template_part('template-parts/search/active-search/location-search-input', '', [
                     'container_class' => 'w-full relative rounded-sm',
                     'image_class'     => 'h-4 absolute top-2 left-2',
@@ -43,6 +46,9 @@
                 <span id="mobile-header-location-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
+                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                </button>
             </div>
             <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="searchLat" />
             <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="searchLng" />
