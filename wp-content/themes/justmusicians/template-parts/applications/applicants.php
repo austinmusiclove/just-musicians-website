@@ -40,6 +40,14 @@
             ]); ?>
         </div>
 
+        <div>
+        <?php get_template_part('template-parts/global/export', '', [
+            'options'     => [
+                ['value' => 'csv', 'label' => '.CSV'],
+            ],
+        ]); ?>
+        </div>
+
         <div id="applicants-spinner-top" class="flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
         </div>
