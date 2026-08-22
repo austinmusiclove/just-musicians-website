@@ -322,6 +322,9 @@ function hmm_scripts() {
 
         // WYSIWYG Editor
         wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, true);
+
+        // Export to download
+        wp_enqueue_script('export-download-js', get_template_directory_uri() . '/lib/js/export-download.js', [], $pkg->version, true);
     }
 
     // Create Application Form

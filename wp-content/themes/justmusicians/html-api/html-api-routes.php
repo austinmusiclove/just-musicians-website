@@ -87,7 +87,9 @@ function html_api_v1_template_redirects() {
             }
         case 'applicants':
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-applicants.php'; exit;
+                case 'GET'  :
+                    if (get_query_var('export-type')) { status_header(200); include_once get_template_directory() . '/html-api/applications/export-applicants.php'; exit; }
+                    else                              { status_header(200); include_once get_template_directory() . '/html-api/applications/get-applicants.php'; exit; }
             }
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {

@@ -75,6 +75,11 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
+        '^wp-html/v1/applications/([0-9]+)/applicants-export/([^/]+)/?$',
+        'index.php?wp-html-v1=applicants&application-id=$matches[1]&export-type=$matches[2]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/applications/([0-9]+)/listings/([0-9]+)/submit/?$',
         'index.php?wp-html-v1=submit-application&application-id=$matches[1]&listing-id=$matches[2]',
         'top'
@@ -121,6 +126,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'conversation-id';
     $vars[] = 'review-post-type';
     $vars[] = 'reviewee-id';
+    $vars[] = 'export-type';
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');

@@ -42,7 +42,9 @@
 
         <div>
         <?php get_template_part('template-parts/global/export', '', [
-            'options'     => [
+            'endpoint'     => site_url('/wp-html/v1/applications/' . get_the_ID() . '/applicants-export/'),
+            'button_id'    => 'applicants-export-button',
+            'options'      => [
                 ['value' => 'csv', 'label' => '.CSV'],
             ],
         ]); ?>
