@@ -31,7 +31,7 @@ export class ThemePage {
 
     async navigate(url = '/') {
         await this.page.goto(url, { waitUntil: 'domcontentloaded' });
-        await this.page.waitForFunction(() => window.Alpine, { timeout: 10000 });
+        await this.page.waitForFunction(() => window.Alpine && window.Alpine.version, { timeout: 10000 });
     }
 
     async openSignupModal() {
@@ -82,9 +82,12 @@ export class ThemePage {
         if (this.isMobile) {
             await this.hamburgerBtn.click();
             await expect(this.logoutLinkMobile).toBeVisible();
+            await expect(this.logoutLinkMobile).toHaveAttribute('href', /_wpnonce=/);
             await this.logoutLinkMobile.click();
         } else {
             await this.accountMenu.hover();
+            await expect(this.logoutLinkDesktop).toBeVisible();
+            await expect(this.logoutLinkDesktop).toHaveAttribute('href', /_wpnonce=/);
             await this.logoutLinkDesktop.click();
         }
     }

@@ -41,7 +41,34 @@ export function wpCliDeleteUser(userEmail) {
             `wp user delete "${userEmail}" --yes --path=${WP_PATH}`,
             { stdio: 'ignore' }
         );
-    } catch (e) {}
+    } catch (e) {
+        console.warn(`Failed to delete test user ${userEmail} (exit ${e.status ?? 'unknown'})`);
+    }
+}
+
+// um_messages/um_read_receipts carry FK constraints into wp_users, so a user's messaging footprint must be cleared before the user can be deleted
+export function wpCliDeleteUserData(users) {
+    const uniqueUsers = [];
+    const seen = new Set();
+    for (const u of users) {
+        if (u?.email && !seen.has(u.email)) {
+            seen.add(u.email);
+            uniqueUsers.push(u);
+        }
+    }
+    const userIds = [];
+    for (const u of uniqueUsers) {
+        if (u.id) {
+            userIds.push(u.id);
+            continue;
+        }
+        try { userIds.push(wpCliGetUserId(u.email)); } catch {}
+    }
+    const idList = userIds.map(id => parseInt(id, 10)).filter(Number.isFinite).join(',');
+    if (!idList) return;
+    wpCliWithRetry(
+        `wp eval "global \\$wpdb; \\$wpdb->query(\\"DELETE FROM wp_um_read_receipts WHERE user_id IN (${idList})\\"); \\$wpdb->query(\\"DELETE FROM wp_um_messages WHERE sender_id IN (${idList})\\"); \\$wpdb->query(\\"DELETE FROM wp_um_conversation_participants WHERE user_id IN (${idList})\\"); \\$wpdb->query(\\"DELETE cp FROM wp_um_conversation_participants cp LEFT JOIN wp_posts p ON p.ID = cp.listing_id WHERE cp.listing_id IS NOT NULL AND p.ID IS NULL\\"); \\$wpdb->query(\\"DELETE c FROM wp_um_conversations c LEFT JOIN wp_um_conversation_participants cp ON cp.conversation_id = c.id WHERE cp.id IS NULL\\"); \\$wpdb->query(\\"DELETE FROM wp_notifications WHERE user_id IN (${idList})\\");" --path=${WP_PATH}`
+    );
 }
 
 export function wpCliSetUserMeta(userEmail, key, value) {

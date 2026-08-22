@@ -14,7 +14,7 @@ import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
 import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import {
-    wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers,
+    wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
@@ -40,7 +40,7 @@ export const test = base.extend({
         const createdUsers = [];
         const createdPosts = [];
         await use({
-            createUser: (user) => { const id = wpCliCreateUser(user); createdUsers.push(user); return id; },
+            createUser: (user) => { const id = wpCliCreateUser(user); createdUsers.push({ ...user, id }); return id; },
             getUserId: wpCliGetUserId,
             deleteUser: wpCliDeleteUser,
             deleteUsers: wpCliDeleteUsers,
@@ -69,6 +69,7 @@ export const test = base.extend({
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });
         for (const id of createdPosts) wpCliDeletePost(id);
+        if (createdUsers.length) wpCliDeleteUserData(createdUsers);
         for (const u of createdUsers) wpCliDeleteUser(u.email);
     },
     themePage: async ({ page, isMobile }, use) => {

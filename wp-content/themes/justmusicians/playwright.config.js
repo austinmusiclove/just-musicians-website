@@ -9,6 +9,13 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
+    /* Include these options in ~/Library/Application Support/Local/lightning-services/php-8.3.23+0/conf/php-fpm.d/www.conf.hbs to increase local server resources
+        pm = dynamic
+        pm.max_children = 10
+        pm.start_servers = 4
+        pm.min_spare_servers = 2
+        pm.max_spare_servers = 6
+     */
     reporter: [['html', { outputFolder: 'playwright-report' }]],
     use: {
         baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost',
