@@ -3,7 +3,6 @@ Critical bugs
     Need indicator for sign up and log in buttons
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
     Pages are indexed that should not be and vis versa
-        change 404 to 410 for post types that should not be indexed and use removal tool on search console
     Need to add unique auth keys to wp config in staging and prod
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure prompting to add org and job title after sign up works
