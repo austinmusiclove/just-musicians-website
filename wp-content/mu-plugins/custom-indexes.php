@@ -12,6 +12,7 @@ define('HM_LOCATION_DB_CITY_TABLE', 'location_index_city');
 define('HM_LISTING_INDEX_TABLE', 'listing_index');
 define('HM_PROPOSAL_INDEX_TABLE', 'proposal_index');
 define('HM_NOTIFICATIONS_TABLE', 'notifications');
+define('HM_ACCESS_INDEX_TABLE', 'access_index');
 
 require_once __DIR__ . '/custom-indexes/location/build.php';
 require_once __DIR__ . '/custom-indexes/location/query.php';
@@ -26,6 +27,10 @@ require_once __DIR__ . '/custom-indexes/proposals/update.php';
 
 require_once __DIR__ . '/custom-indexes/notifications/build.php';
 require_once __DIR__ . '/custom-indexes/notifications/query.php';
+
+require_once __DIR__ . '/custom-indexes/access/build.php';
+require_once __DIR__ . '/custom-indexes/access/query.php';
+require_once __DIR__ . '/custom-indexes/access/update.php';
 
 function hm_get_listing_index_table() {
     global $wpdb;
@@ -50,4 +55,9 @@ function hm_get_proposal_index_table() {
 function hm_get_notifications_table() {
     global $wpdb;
     return $wpdb->prefix . HM_NOTIFICATIONS_TABLE;
+}
+
+function hm_get_access_table() {
+    global $wpdb;
+    return $wpdb->prefix . HM_ACCESS_INDEX_TABLE;
 }

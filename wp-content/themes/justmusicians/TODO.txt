@@ -7,13 +7,12 @@ Critical bugs
 Applications Features to add
     Share application access with other users
         Create index for access
+        In data_mgmt plugin add buttons to construct access from authors of applications retroactively
         Add share button where you can add email
-        If the email has an account, add access immediately; else send email with special link that adds access on sign up
-        Use the same access mechanism for listings adn update listing owners logic
-            create access index for posts
-            owner function and other auth functions will give access to author and anyone specified in the index
-            build index from listing list in user data
-            get rid of listings list in user data once it is deprecated
+        Add modal where you can select read or write access and enter email
+        When you hit share button; If the email has an account, add access immediately; else err
+        Allow non users to get access by sending them email with special link that adds access on sign up
+        Find way that makes it also easy to do this for collections as well
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing
@@ -102,6 +101,12 @@ Offer post type (future)
 DB Indexes
     consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
     consider doing something to make get listing owners faster
+    Use the access mechanism for listings adn update listing owners logic
+        In data_mgmt plugin add buttons to construct access from authors of listings and users with listings in their user meta retroactively
+        find everywhere that listing owners and access needs to be maintained and used
+        owner function and other auth functions will give access to author and anyone specified in the index
+        build index from listing list in user data
+        get rid of listings list in user data once it is deprecated
 SEO
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog

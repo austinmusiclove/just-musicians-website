@@ -67,6 +67,10 @@ function hm_data_mgmt_admin_page() {
                 hm_create_notifications_table();
                 $result = new WP_REST_Response(['message' => 'Notifications table created successfully.'], 200);
                 break;
+            case 'create_access_index_table':
+                hm_create_access_index_table();
+                $result = new WP_REST_Response(['message' => 'Access index table created successfully.'], 200);
+                break;
         }
     }
 
@@ -100,6 +104,11 @@ function hm_data_mgmt_admin_page() {
             <p>
                 <button type="submit" name="hm_action" value="create_notifications_table" class="button button-primary">
                     Create Notifications Table
+                </button>
+            </p>
+            <p>
+                <button type="submit" name="hm_action" value="create_access_index_table" class="button button-primary">
+                    Create Access Index Table
                 </button>
             </p>
         </form>
