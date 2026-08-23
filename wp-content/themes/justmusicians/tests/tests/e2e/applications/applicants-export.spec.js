@@ -55,7 +55,7 @@ test.describe('E2E - Export Applicants', () => {
         const contents = await downloads.downloadText(download);
         const rows = downloads.parseCsv(contents);
 
-        expect(rows[0]).toEqual(['Name', 'Email', 'Phone', 'City', 'State', 'Genres', 'Description', 'Ensemble Size', 'Website', 'Spotify', 'Apple Music', 'Instagram', 'Facebook', 'Youtube', 'Bandcamp', 'Soundcloud', 'Hire Musicians', 'Applied Date', 'Message']);
+        expect(rows[0]).toEqual(['Name', 'Email', 'Phone', 'City', 'State', 'Genres', 'Description', 'Ensemble Size', 'Hire Musicians', 'Website', 'Spotify', 'Apple Music', 'Instagram', 'Facebook', 'Youtube', 'Bandcamp', 'Soundcloud', 'Applied Date', 'Message']);
         expect(rows).toHaveLength(5); // header + 3 applicants
 
         // Check applicant 1 has
