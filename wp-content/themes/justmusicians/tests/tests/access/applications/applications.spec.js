@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 test.describe('Access - Applications Page', () => {
 
@@ -16,7 +16,7 @@ test.describe('Access - Applications Page', () => {
         noApplicationUser = createUser();
         wpCli.createUser(noApplicationUser);
 
-        applicationId = createApplicationPost({ authorId: applicationAuthorId });
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
     });
 
     test('Application author sees their application on applications page', async ({ wpCli, applicationsPage }) => {

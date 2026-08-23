@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 test.describe('Access - Single Application Page', () => {
 
@@ -15,7 +15,7 @@ test.describe('Access - Single Application Page', () => {
         noApplicationUser = createUser();
         wpCli.createUser(noApplicationUser);
 
-        const applicationId = createApplicationPost({ authorId: applicationAuthorId });
+        const applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
         applicationSlug = wpCli.getPostField(applicationId, 'post_name');
     });
 

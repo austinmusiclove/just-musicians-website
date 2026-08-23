@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 test.describe('E2E - Delete Application', () => {
 
@@ -11,7 +11,7 @@ test.describe('E2E - Delete Application', () => {
         const applicationAuthor = createUser();
         const applicationAuthorId = wpCli.createUser(applicationAuthor);
 
-        applicationId = createApplicationPost({ authorId: applicationAuthorId });
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
         const slug = wpCli.getPostField(applicationId, 'post_name');
 
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);

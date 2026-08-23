@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 import { createTmpCodePostData } from '../../../data/factories/tmp_code_factory.js';
 
 
@@ -15,8 +15,7 @@ test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
     test.beforeEach(async ({ wpCli }) => {
         applicationAuthorUser = createUser();
         const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
-        applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
-        wpCli.trackPost(applicationId);
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorUserId }));
 
         const tmpCodeData = createTmpCodePostData({ authorId: applicationAuthorUserId });
         tmpCodeId = wpCli.createPost(tmpCodeData);

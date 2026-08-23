@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 
 test.describe('Navigation - Applications - One Application', () => {
@@ -9,8 +9,7 @@ test.describe('Navigation - Applications - One Application', () => {
     test.beforeEach(async ({ wpCli, applicationsPage }) => {
         const applicationAuthorUser = createUser();
         const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
-        const applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
-        wpCli.trackPost(applicationId);
+        const applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorUserId }));
 
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');

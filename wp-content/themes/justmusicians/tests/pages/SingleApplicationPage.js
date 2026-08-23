@@ -8,10 +8,12 @@ export class SingleApplicationPage extends ThemePage {
         this.titleInput          = page.locator('input[name="title"]');
         this.updateBtn           = page.getByRole('button', { name: 'Update Application' });
         this.deleteBtn           = page.getByRole('button', { name: 'Delete Application' });
+        this.exportButton        = page.locator('#applicants-export-button');
+        this.exportCsvOption     = page.locator('li[hx-get*="applicants-export/csv"]');
     }
 
-    async navigateToApplication(slug) {
-        await super.navigate(`/application/${slug}/`);
+    async navigateToApplication(slug, tab = '') {
+        await super.navigate(`/application/${slug}/${tab ? `?tab=${tab}` : ''}`);
     }
 
     async login(username, password) {
@@ -47,5 +49,12 @@ export class SingleApplicationPage extends ThemePage {
         );
         await this.updateBtn.click();
         await responsePromise;
+    }
+
+    async exportApplicantsToCsv() {
+        const downloadPromise = this.page.waitForEvent('download');
+        await this.exportButton.click();
+        await this.exportCsvOption.click();
+        return downloadPromise;
     }
 }

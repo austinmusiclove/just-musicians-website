@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 
 test.describe('Visual - Musician Application - Logged out', () => {
@@ -11,8 +11,7 @@ test.describe('Visual - Musician Application - Logged out', () => {
     test.beforeEach(async ({ wpCli }) => {
         const applicationAuthorUser = createUser();
         const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
-        applicationId = createApplicationPost({ authorId: applicationAuthorUserId });
-        wpCli.trackPost(applicationId);
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorUserId }));
     });
 
     test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {

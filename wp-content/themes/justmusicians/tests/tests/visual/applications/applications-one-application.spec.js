@@ -1,20 +1,18 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplication, createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 
 test.describe('Visual - Applications - One applicaiton', () => {
 
-    let applicationTitle;
+    let applicationData;
 
     test.beforeEach(async ({ wpCli, applicationsPage }) => {
         const applicationAuthorUser = createUser();
         const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
-        const application = createApplication();
-        applicationTitle = application.title;
-        const applicationId = createApplicationPost({ authorId: applicationAuthorUserId, overrides: application });
-        wpCli.trackPost(applicationId);
+        applicationData = createApplicationPostData({ authorId: applicationAuthorUserId });
+        wpCli.createPost(applicationData);
 
         await applicationsPage.login(applicationAuthorUser.email, applicationAuthorUser.password);
         await applicationsPage.navigate('/applications/');
@@ -24,7 +22,7 @@ test.describe('Visual - Applications - One applicaiton', () => {
         await applicationsPage.waitForResults();
         const cards = await applicationsPage.applicationCards.all();
         expect(cards).toHaveLength(1);
-        await expect(applicationsPage.getCardTitle(applicationsPage.applicationCards.first())).toHaveText(applicationTitle);
+        await expect(applicationsPage.getCardTitle(applicationsPage.applicationCards.first())).toHaveText(applicationData.title);
     });
 
 });

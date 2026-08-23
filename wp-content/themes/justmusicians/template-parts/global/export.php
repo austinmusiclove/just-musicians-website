@@ -21,7 +21,7 @@
 
         <?php foreach ($args['options'] as $option) { ?>
             <li class="flex items-center justify-between gap-8 px-4 py-2 hover:bg-yellow-10 cursor-pointer text-14"
-                hx-get="<?php echo esc_url("{$args['endpoint']}{rawurlencode($option['value'])}/"); ?>"
+                hx-get="<?php echo esc_url($option['endpoint']); ?>"
                 hx-trigger="click"
                 hx-target="#export-toasts"
                 hx-swap="innerHTML"

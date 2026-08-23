@@ -20,7 +20,10 @@ header('Content-Disposition: attachment; filename="' . $filename . '"');
 
 echo "\xEF\xBB\xBF";
 $out = fopen('php://output', 'w');
-fputcsv($out, ['Name', 'Email', 'Email Verified', 'City', 'State', 'Genres', 'Applied Date', 'Message']);
+fputcsv($out, [
+    'Name', 'Email', 'Phone', 'City', 'State', 'Genres', 'Description',
+    'Ensemble Size', 'Website', 'Spotify', 'Apple Music', 'Instagram', 'Facebook',
+    'Youtube', 'Bandcamp', 'Soundcloud', 'Hire Musicians', 'Applied Date', 'Message']);
 
 foreach ($submission_ids as $submission_id) {
     $listing_id = (int) get_post_meta($submission_id, 'listing', true);
@@ -28,16 +31,35 @@ foreach ($submission_ids as $submission_id) {
     $listing = get_listing(['post_id' => $listing_id]);
     if (is_wp_error($listing)) { continue; }
 
-    // Pending listing means the applicant signed up without verifying their email
-    $email_verified = get_post_status($listing_id) === 'pending' ? 'No' : 'Yes';
+    // Email: listing email first, then first listing owner's user email, else blank
+    $email = $listing['email'] ?? '';
+    if (empty($email)) {
+        $listing_owners = get_listing_owners($listing_id);
+        if (!empty($listing_owners)) {
+            $owner = get_userdata($listing_owners[0]);
+            $email = $owner ? $owner->user_email : '';
+        }
+    }
 
     $row = [
         'Name'           => $listing['name'] ?? '',
-        'Email'          => $listing['email'] ?? '',
-        'Email Verified' => $email_verified,
+        'Email'          => $email,
+        'Phone'          => $listing['phone'] ?? '',
         'City'           => trim($listing['city'] ?? ''),
         'State'          => trim($listing['state'] ?? ''),
         'Genres'         => implode(', ', $listing['genre'] ?? []),
+        'Description'    => $listing['description'] ?? '',
+        'Ensemble Size'  => $listing['ensemble_size'] ?? '',
+        //'Bio'            => $listing['bio'] ?? '',
+        'Website'        => $listing['website'] ?? '',
+        'Spotify'        => $listing['spotify_artist_url'] ?? '',
+        'Apple Music'    => $listing['apple_music_artist_url'] ?? '',
+        'Instagram'      => $listing['instagram_url'] ?? '',
+        'Facebook'       => $listing['facebook_url'] ?? '',
+        'Youtube'        => $listing['youtube_url'] ?? '',
+        'Bandcamp'       => $listing['bandcamp_url'] ?? '',
+        'Soundcloud'     => $listing['soundcloud_url'] ?? '',
+        'Hire Musicians' => $listing['permalink'] ?? '',
         'Applied Date'   => get_the_modified_time('Y-m-d', $submission_id),
         'Message'        => get_post_meta($submission_id, 'message', true),
     ];

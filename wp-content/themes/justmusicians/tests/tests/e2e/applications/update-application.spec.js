@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplication, createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 test.describe('E2E - Update Application', () => {
 
@@ -11,11 +11,7 @@ test.describe('E2E - Update Application', () => {
         const testUser = createUser();
         const userId = wpCli.createUser(testUser);
 
-        applicationId = createApplicationPost({
-            authorId: userId,
-            overrides: createApplication(),
-        });
-        wpCli.trackPost(applicationId);
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: userId }));
 
         await singleApplicationPage.login(testUser.email, testUser.password);
     });

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplication } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
 test.describe('E2E - Create Application', () => {
 
@@ -17,9 +17,9 @@ test.describe('E2E - Create Application', () => {
     });
 
     test('Create application', async ({ applicationFormPage, mailpit, wpCli }) => {
-        const application = createApplication();
+        const application = createApplicationPostData({ authorId: userId });
 
-        await applicationFormPage.fillMinimumFields(application.title, application.description);
+        await applicationFormPage.fillMinimumFields(application.title, application.meta.description);
         await applicationFormPage.submitApplication();
 
         const urlSlug = await applicationFormPage.waitForSubmitRedirect();
@@ -32,7 +32,7 @@ test.describe('E2E - Create Application', () => {
         expect(wpCli.getPostField(applicationId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(applicationId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(applicationId, 'title')).toBe(application.title);
-        expect(wpCli.getPostMeta(applicationId, 'description')).toBe(application.description);
+        expect(wpCli.getPostMeta(applicationId, 'description')).toBe(application.meta.description);
 
         const expectedSubject = `(${mailpit.siteUrl} ${testUser.email}) Your application has been created!`;
         const email = await mailpit.findEmailBySubject(expectedSubject);

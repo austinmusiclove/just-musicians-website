@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
-import { createApplicationPost } from '../../../data/factories/application_factory.js';
+import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 import { createListingPostData } from '../../../data/factories/listing_factory.js';
 
 test.describe('E2E - Submit Application - Logged in - No Listings', () => {
@@ -19,8 +19,7 @@ test.describe('E2E - Submit Application - Logged in - No Listings', () => {
         applicationAuthor = createUser();
         applicationAuthorId = wpCli.createUser(applicationAuthor);
 
-        applicationId = createApplicationPost({ authorId: applicationAuthorId });
-        wpCli.trackPost(applicationId);
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
 
         submitter = createUser();
         submitterId = wpCli.createUser(submitter);

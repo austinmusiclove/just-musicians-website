@@ -13,6 +13,7 @@ import { MyGigsPage } from '../pages/MyGigsPage.js';
 import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
 import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
+import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
@@ -34,6 +35,12 @@ export const test = base.extend({
             waitForMessageEmail: (subject, opts) => waitForMessage(subject, mailpitApiUrl, request, opts),
             getEmailBody: (messageId) => getEmail(messageId, mailpitApiUrl),
             extractLinkFromEmail: extractLink,
+        });
+    },
+    downloads: async ({}, use) => {
+        await use({
+            downloadText: csvDownloadText,
+            parseCsv: csvParse,
         });
     },
     wpCli: async ({}, use) => {

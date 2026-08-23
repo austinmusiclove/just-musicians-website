@@ -6,8 +6,7 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Export applicants with emails to spreadsheet csv or google sheet
-        Flag pending listing applicants as email not verified on the spreadsheet export
-        Make sure to get email from account if not in listing
+        add permalink as link on listing name in csv
     Share application access with other users
         Create index for access
         Add share button where you can add email
