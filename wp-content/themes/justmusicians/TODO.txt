@@ -5,8 +5,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Export applicants with emails to spreadsheet csv or google sheet
-        add permalink as link on listing name in csv
     Share application access with other users
         Create index for access
         Add share button where you can add email

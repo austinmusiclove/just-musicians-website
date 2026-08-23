@@ -22,8 +22,8 @@ echo "\xEF\xBB\xBF";
 $out = fopen('php://output', 'w');
 fputcsv($out, [
     'Name', 'Email', 'Phone', 'City', 'State', 'Genres', 'Description',
-    'Ensemble Size', 'Website', 'Spotify', 'Apple Music', 'Instagram', 'Facebook',
-    'Youtube', 'Bandcamp', 'Soundcloud', 'Hire Musicians', 'Applied Date', 'Message']);
+    'Ensemble Size', 'Hire Musicians', 'Website', 'Spotify', 'Apple Music',
+    'Instagram', 'Facebook', 'Youtube', 'Bandcamp', 'Soundcloud', 'Applied Date', 'Message']);
 
 foreach ($submission_ids as $submission_id) {
     $listing_id = (int) get_post_meta($submission_id, 'listing', true);
@@ -49,8 +49,8 @@ foreach ($submission_ids as $submission_id) {
         'State'          => trim($listing['state'] ?? ''),
         'Genres'         => implode(', ', $listing['genre'] ?? []),
         'Description'    => $listing['description'] ?? '',
-        'Ensemble Size'  => $listing['ensemble_size'] ?? '',
-        //'Bio'            => $listing['bio'] ?? '',
+        'Ensemble Size'  => implode(', ', $listing['ensemble_size'] ?? []),
+        'Hire Musicians' => $listing['permalink'] ?? '',
         'Website'        => $listing['website'] ?? '',
         'Spotify'        => $listing['spotify_artist_url'] ?? '',
         'Apple Music'    => $listing['apple_music_artist_url'] ?? '',
@@ -59,7 +59,6 @@ foreach ($submission_ids as $submission_id) {
         'Youtube'        => $listing['youtube_url'] ?? '',
         'Bandcamp'       => $listing['bandcamp_url'] ?? '',
         'Soundcloud'     => $listing['soundcloud_url'] ?? '',
-        'Hire Musicians' => $listing['permalink'] ?? '',
         'Applied Date'   => get_the_modified_time('Y-m-d', $submission_id),
         'Message'        => get_post_meta($submission_id, 'message', true),
     ];
