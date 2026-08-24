@@ -53,6 +53,8 @@ module.exports = {
 		// Template parts
 		'./template-parts/*.{php,js}',
 		'./template-parts/**/*.{php,js}',
+		'./template-parts/access/*.{php,js}',
+		'./template-parts/access/**/*.{php,js}',
 		'./template-parts/account/*.{php,js}',
 		'./template-parts/account/**/*.{php,js}',
 		'./template-parts/account/**/**/*.{php,js}',
