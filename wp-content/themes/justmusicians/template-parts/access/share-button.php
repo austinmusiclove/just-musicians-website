@@ -7,8 +7,9 @@
     </button>
 
     <?php echo get_template_part('template-parts/access/share-modal', '', [
-        'heading'    => $args['heading'],
-        'subject_id' => $args['subject_id'],
+        'heading'      => $args['heading'],
+        'subject_id'   => $args['subject_id'],
+        'subject_type' => $args['subject_type'],
     ]); ?>
 
 </div>

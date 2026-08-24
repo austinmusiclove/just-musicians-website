@@ -4,7 +4,7 @@ $subject_id  = sanitize_text_field(wp_unslash($_GET['subject_id'] ?? ''));
 $access_type = sanitize_key(wp_unslash($_GET['access_type'] ?? ''));
 
 // Authorize
-$auth = require_subject_access_management($subject_id);
+$auth = require_subject_owner($subject_id);
 if (!$auth) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'You are not authorized to view access for this subject' })"></span>
     <?php exit;

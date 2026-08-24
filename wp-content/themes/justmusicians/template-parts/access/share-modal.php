@@ -36,6 +36,7 @@
             </select>
 
             <input type="hidden" name="subject_id" value="<?php echo esc_attr($args['subject_id']); ?>" />
+            <input type="hidden" name="subject_type" value="<?php echo esc_attr($args['subject_type']); ?>" />
 
             <div class="flex justify-end gap-2 mt-6">
                 <button type="button"

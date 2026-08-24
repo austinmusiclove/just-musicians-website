@@ -2,7 +2,7 @@
 
 define('HM_VIEW_TYPE_MGMT', 'view');
 define('HM_EDIT_TYPE_MGMT', 'edit');
-define('HM_ACCESS_TYPE_MGMT', 'access_mgmt');
+define('HM_ACCESS_TYPE_OWNER', 'owner');
 
 function hm_user_has_access($user_id, $subject_id, $access_type) {
     global $wpdb;
@@ -18,15 +18,19 @@ function hm_user_has_access($user_id, $subject_id, $access_type) {
     return (bool) $found;
 }
 
-function hm_get_subject_ids_for_user($user_id, $access_type) {
+function hm_get_subject_ids_for_user($user_id, $access_type, $subject_type = null) {
     global $wpdb;
     $table = hm_get_access_table();
 
-    $rows = $wpdb->get_col($wpdb->prepare(
-        "SELECT subject_id FROM {$table} WHERE user_id = %d AND access_type = %s",
-        $user_id,
-        $access_type
-    ));
+    $sql = "SELECT subject_id FROM {$table} WHERE user_id = %d AND access_type = %s";
+    $params = [$user_id, $access_type];
+
+    if ($subject_type !== null) {
+        $sql .= " AND subject_type = %s";
+        $params[] = $subject_type;
+    }
+
+    $rows = $wpdb->get_col($wpdb->prepare($sql, $params));
 
     return $rows ?: [];
 }

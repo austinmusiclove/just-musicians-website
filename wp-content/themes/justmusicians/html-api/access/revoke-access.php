@@ -3,7 +3,7 @@
 $access_id = absint(get_query_var('access-id'));
 
 // Authorize against the entry's subject
-$auth = require_subject_access_management($entry->subject_id);
+$auth = require_subject_owner($entry->subject_id);
 if (!$auth) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'You are not authorized to manage access for this subject' })"></span>
     <?php exit;

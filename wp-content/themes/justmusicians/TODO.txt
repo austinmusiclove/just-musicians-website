@@ -6,14 +6,14 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        Add subject type to access db
-        Change mng access to owner
-        copy link button in share modal
+        Only show the highest access level if there are multiple entries in hm_get_access_entries
         Add subject id to share-access-list id to make sure no collisions on out of band swap
-        When you hit share button; If the email has an account, add access immediately; else err
         Make revoke access a drop down with ability to change access levels
+            when you revoke access you need to revoke all access greater than it
+            when you add access you have to remove access lesser than it which are redundant
+            when you find access you ask for access on a certain accesss type with multiple access levels and then make sure to remove duplicates
+        copy link button in share modal
         Allow non users to get access by sending them email with special link that adds access on sign up
-        Find way that makes it also easy to do this for collections as well
         in applications page get based on access and alter edit button to view if no edit access
         in single application limit actions based on access
     Paywall

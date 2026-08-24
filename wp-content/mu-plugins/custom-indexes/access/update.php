@@ -7,28 +7,29 @@ function hm_access_post_types() {
     return ['application', 'collection', 'listing', 'event', 'venue'];
 }
 
-function hm_upsert_access($user_id, $subject_id, $access_type) {
+function hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) {
     global $wpdb;
     $table = hm_get_access_table();
 
-    if (empty($user_id) || $subject_id === '' || $subject_id === null || empty($access_type)) {
+    if (empty($user_id) || $subject_id === '' || $subject_id === null || empty($access_type) || empty($subject_type)) {
         return 'incomplete';
     }
 
     $result = $wpdb->query($wpdb->prepare(
-        "INSERT INTO {$table} (user_id, subject_id, access_type)
-         VALUES (%d, %s, %s)
+        "INSERT INTO {$table} (user_id, subject_id, subject_type, access_type)
+         VALUES (%d, %s, %s, %s)
          ON DUPLICATE KEY UPDATE created_at = CURRENT_TIMESTAMP",
         $user_id,
         (string) $subject_id,
+        (string) $subject_type,
         $access_type
     ));
 
     return $result === false ? 'error' : 'inserted';
 }
 
-function hm_grant_access($user_id, $subject_id, $access_type) {
-    return hm_upsert_access($user_id, $subject_id, $access_type) !== 'error';
+function hm_grant_access($user_id, $subject_id, $access_type, $subject_type) {
+    return hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) !== 'error';
 }
 
 function hm_revoke_access($user_id, $subject_id, $access_type) {
@@ -77,12 +78,10 @@ function hm_access_grant_author_access($post_id) {
     $inserted = 0;
     $failed   = false;
 
-    foreach ([HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_MGMT] as $access_type) {
-        if (hm_upsert_access($author_id, $post->ID, $access_type) === 'inserted') {
-            $inserted++;
-        } else {
-            $failed = true;
-        }
+    if (hm_upsert_access($author_id, $post->ID, HM_ACCESS_TYPE_OWNER, $post->post_type) === 'inserted') {
+        $inserted++;
+    } else {
+        $failed = true;
     }
 
     return $failed ? new WP_Error('insert_failed', 'Failed to grant author access') : $inserted;
