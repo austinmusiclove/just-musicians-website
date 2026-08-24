@@ -42,6 +42,7 @@ if (!$result) { ?>
 
 <?php
 get_template_part('template-parts/access/access-list', '', [
-    'entries' => hm_get_access_entries($subject_id),
+    'entries'    => hm_get_access_entries($subject_id),
+    'subject_id' => $subject_id,
 ]);
 exit;

@@ -1,4 +1,5 @@
-<div id="share-access-list">
+<?php $container_id = 'share-access-list-' . esc_attr($args['subject_id']); ?>
+<div id="<?php echo $container_id; ?>">
     <?php if (empty($args['entries'])) : ?>
         <p class="text-14 text-black/60 mt-4">No one has access yet.</p>
     <?php else : ?>
@@ -17,7 +18,7 @@
                         <button type="button"
                             class="text-red hover:underline font-sun-motter"
                             hx-delete="<?php echo esc_url(site_url('/wp-html/v1/access/' . $entry->id)); ?>"
-                            hx-target="#share-access-list"
+                            hx-target="#<?php echo $container_id; ?>"
                             hx-swap="outerHTML"
                             hx-confirm="Revoke access for <?php echo esc_attr($entry->user_email); ?>?"
                         >Remove</button>

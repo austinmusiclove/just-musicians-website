@@ -17,6 +17,7 @@ if ($access_type !== '' && !in_array($access_type, [HM_VIEW_TYPE_MGMT, HM_EDIT_T
 
 status_header(200);
 get_template_part('template-parts/access/access-list', '', [
-    'entries' => hm_get_access_entries($subject_id, $access_type !== '' ? $access_type : null),
+    'entries'    => hm_get_access_entries($subject_id, $access_type !== '' ? $access_type : null),
+    'subject_id' => $subject_id,
 ]);
 exit;

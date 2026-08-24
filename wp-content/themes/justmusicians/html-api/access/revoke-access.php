@@ -21,9 +21,10 @@ if (!$result) { ?>
     <?php exit;
 } ?>
 <span x-init="$dispatch('success-toast', { 'message': 'Access revoked' })"></span>
-
 <?php
+
 get_template_part('template-parts/access/access-list', '', [
-    'entries' => hm_get_access_entries($entry->subject_id),
+    'entries'    => hm_get_access_entries($entry->subject_id),
+    'subject_id' => $entry->subject_id,
 ]);
 exit;

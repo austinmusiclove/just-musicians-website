@@ -19,11 +19,11 @@
             <p class="text-14 text-black/60 mb-4">Give another user access to this <?php echo esc_html(strtolower($args['heading'])); ?>.</p>
 
             <!-- Users with access -->
-            <div id="share-access-list"
+            <div id="share-access-list-<?php echo esc_attr($args['subject_id']); ?>"
                 hx-get="<?php echo site_url('/wp-html/v1/access/'); ?>"
                 hx-trigger="load-share-access from:body"
                 hx-vals='{"subject_id": "<?php echo esc_attr($args['subject_id']); ?>"}'
-                hx-target="#share-access-list"
+                hx-target="#share-access-list-<?php echo esc_attr($args['subject_id']); ?>"
                 hx-swap="outerHTML">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
             </div>
@@ -46,7 +46,7 @@
                 <button type="button"
                     class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-5 py-2 hover:bg-navy hover:text-white"
                     hx-post="<?php echo site_url('/wp-html/v1/access/'); ?>"
-                    hx-target="#share-access-list"
+                    hx-target="#share-access-list-<?php echo esc_attr($args['subject_id']); ?>"
                     hx-swap="outerHTML"
                     hx-indicator="#share-access-button-content"
                     hx-include="#share-access-form"
