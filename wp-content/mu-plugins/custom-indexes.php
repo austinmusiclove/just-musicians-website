@@ -31,6 +31,7 @@ require_once __DIR__ . '/custom-indexes/notifications/query.php';
 require_once __DIR__ . '/custom-indexes/access/build.php';
 require_once __DIR__ . '/custom-indexes/access/query.php';
 require_once __DIR__ . '/custom-indexes/access/update.php';
+require_once __DIR__ . '/custom-indexes/access/authorization.php';
 
 function hm_get_listing_index_table() {
     global $wpdb;

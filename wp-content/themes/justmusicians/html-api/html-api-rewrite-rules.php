@@ -85,6 +85,16 @@ function html_api_rewrite_rules() {
         'top'
     );
     add_rewrite_rule(
+        '^wp-html/v1/access/?$',
+        'index.php?wp-html-v1=access',
+        'top'
+    );
+    add_rewrite_rule(
+        '^wp-html/v1/access/([^/]+)/?$',
+        'index.php?wp-html-v1=access&access-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
         '^wp-html/v1/applications/([0-9]+)/submit/?$',
         'index.php?wp-html-v1=submit-new-listing-application&application-id=$matches[1]',
         'top'
@@ -127,6 +137,7 @@ function register_html_api_query_vars($vars) {
     $vars[] = 'review-post-type';
     $vars[] = 'reviewee-id';
     $vars[] = 'export-type';
+    $vars[] = 'access-id';
     return $vars;
 }
 add_filter('query_vars', 'register_html_api_query_vars');

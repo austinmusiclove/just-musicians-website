@@ -40,10 +40,15 @@
     </div>
 
     <!-- Actions -->
-    <div class="pt-4 flex gap-2">
+    <div class="pt-4 flex gap-2 flex-wrap">
         <button type="button" x-on:click="showEditForm = true" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
             Edit Application
         </button>
+        <?php echo get_template_part('template-parts/access/share-button', '', [
+            'label'      => 'Share',
+            'heading'    => 'Share Application',
+            'subject_id' => get_the_ID(),
+        ]); ?>
         <button type="button" class="bg-white hover:bg-red hover:text-white border border-black/20 hover:border-red px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block"
             hx-delete="<?php echo site_url('/wp-html/v1/applications/' . get_the_ID()); ?>"
             hx-confirm="Are you sure you want to delete this application?"

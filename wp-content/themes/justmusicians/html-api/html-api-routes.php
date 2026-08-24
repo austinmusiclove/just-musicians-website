@@ -91,6 +91,12 @@ function html_api_v1_template_redirects() {
                     if (get_query_var('export-type')) { status_header(200); include_once get_template_directory() . '/html-api/applications/export-applicants.php'; exit; }
                     else                              { status_header(200); include_once get_template_directory() . '/html-api/applications/get-applicants.php'; exit; }
             }
+        case 'access':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/access/add-access.php'; exit;
+                case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/access/revoke-access.php'; exit;
+                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/access/get-access.php'; exit;
+            }
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-application-submissions.php'; exit;
