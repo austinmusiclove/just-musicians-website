@@ -51,7 +51,7 @@ function hm_create_access_index_table() {
         subject_type VARCHAR(50) NOT NULL,
         access_type  VARCHAR(50) NOT NULL,
         created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE KEY uq_user_subject_type (user_id, subject_id, access_type),
+        UNIQUE KEY uq_user_subject (user_id, subject_type, subject_id),
         INDEX idx_subject_type (subject_id, access_type),
         INDEX idx_user_id_subject_type (user_id, subject_type)
     ) {$charset_collate}";
