@@ -44,7 +44,7 @@
                             hidden></div>
 
                         <select class="border border-black/20 rounded-sm bg-white text-14 py-1 px-2 max-w-[80px]"
-                            x-on:change="$dispatch('access-' + $el.value + '-<?php echo (string) $entry->id; ?>')"
+                            onchange="htmx.trigger(document.body, 'access-' + this.value + '-<?php echo (string) $entry->id; ?>')"
                         >
                             <option value="<?php echo esc_attr($entry->access_type); ?>" selected><?php echo esc_html(ucfirst($entry->access_type)); ?></option>
                             <option value="<?php echo esc_attr($other_type); ?>"><?php echo esc_html(ucfirst($other_type)); ?></option>
@@ -59,3 +59,4 @@
 
     <?php } ?>
 </div>
+<div id="access-list-results-<?php echo esc_attr($args['subject_id']); ?>"></div>

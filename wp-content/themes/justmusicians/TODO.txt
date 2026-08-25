@@ -5,14 +5,6 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Share application access with other users
-        tests that use the share btn and check the access with wpcli
-            give view with email
-            give edit with email
-            revoke view
-            revoke edit
-            change view to edit
-            change edit to view
     Share application access features
         copy link button in share modal
         scroll emails with access

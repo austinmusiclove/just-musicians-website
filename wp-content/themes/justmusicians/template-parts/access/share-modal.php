@@ -19,15 +19,11 @@
             <p class="text-14 text-black/60 mb-4">Give another user access to this <?php echo esc_html(strtolower($args['subject_type'])); ?>.</p>
 
             <!-- Users with access -->
-            <div id="share-access-list-<?php echo esc_attr($args['subject_id']); ?>"
-                hx-get="<?php echo site_url('/wp-html/v1/access/'); ?>"
-                hx-trigger="load-share-access from:body"
-                hx-vals='{"subject_id": "<?php echo esc_attr($args['subject_id']); ?>", "subject_type": "<?php echo esc_attr($args['subject_type']); ?>"}'
-                hx-target="#share-access-list-<?php echo esc_attr($args['subject_id']); ?>"
-                hx-swap="outerHTML">
-                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
-            </div>
-            <div id="access-list-results-<?php echo esc_attr($args['subject_id']); ?>"></div>
+            <?php get_template_part('template-parts/access/access-list', '', [
+                'entries'      => hm_get_access_entries($args['subject_id']),
+                'subject_id'   => $args['subject_id'],
+                'subject_type' => $args['subject_type'],
+            ]); ?>
 
             <input type="email" name="email" placeholder="Email address" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 focus:border-yellow outline-none" x-model="shareEmail" />
 
