@@ -6,12 +6,18 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        fix messy htmx ajax calls in access list
-        passing description in access api query arg
-        copy link button in share modal
-        Allow non users to get access by sending them email with special link that adds access on sign up
+        Not showing new line in musican application
+        does not work after one err
         in applications page get based on access and alter edit button to view if no edit access
         in single application limit actions based on access
+        add tests
+    Share application access features
+        copy link button in share modal
+        scroll emails with access
+        send email when access given
+        copy all emails with access (copy google ux)
+        allow giving access to many emails at once
+        Allow non users to get access by sending them email with special link that adds access on sign up
     Paywall
         Features page where you can see what you get with the plan
             Annual and monthly pricing

@@ -1,4 +1,4 @@
-<form
+<form id="application-edit-form"
     x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/'); ?>' + applicationId"
     hx-target="#application-update-result"
     hx-indicator="#update-btn-content"

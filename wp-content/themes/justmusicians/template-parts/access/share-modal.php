@@ -16,7 +16,7 @@
         <form id="share-access-form" class="p-8 w-full" style="width: 500px;">
 
             <h2 class="text-22 font-sun-motter mb-2"><?php echo esc_html($args['heading']); ?></h2>
-            <p class="text-14 text-black/60 mb-4">Give another user access to this <?php echo esc_html(strtolower($args['heading'])); ?>.</p>
+            <p class="text-14 text-black/60 mb-4">Give another user access to this <?php echo esc_html(strtolower($args['subject_type'])); ?>.</p>
 
             <!-- Users with access -->
             <div id="share-access-list-<?php echo esc_attr($args['subject_id']); ?>"

@@ -2,16 +2,16 @@
 
 $access_id = absint(get_query_var('access-id'));
 
+$entry = $access_id ? hm_get_access_by_id($access_id) : null;
+if (!$entry) { ?>
+    <span x-init="$dispatch('error-toast', { 'message': 'Access entry not found' })"></span>
+    <?php exit;
+}
+
 // Authorize against the entry's subject
 $auth = require_subject_owner($entry->subject_id);
 if (!$auth) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'You are not authorized to manage access for this subject' })"></span>
-    <?php exit;
-}
-
-$entry = $access_id ? hm_get_access_by_id($access_id) : null;
-if (!$entry) { ?>
-    <span x-init="$dispatch('error-toast', { 'message': 'Access entry not found' })"></span>
     <?php exit;
 }
 

@@ -53,7 +53,7 @@ function hm_get_access_by_id($access_id) {
     $table = hm_get_access_table();
 
     return $wpdb->get_row($wpdb->prepare(
-        "SELECT id, user_id, subject_id, access_type FROM {$table} WHERE id = %d",
+        "SELECT id, user_id, subject_id, subject_type, access_type FROM {$table} WHERE id = %d",
         $access_id
     ));
 }
@@ -62,7 +62,7 @@ function hm_get_access_entries($subject_id, $access_type = null) {
     global $wpdb;
     $table = hm_get_access_table();
 
-    $sql = "SELECT a.id, a.user_id, a.access_type, u.display_name, u.user_email
+    $sql = "SELECT a.id, a.user_id, a.access_type, a.subject_type, a.subject_id, u.display_name, u.user_email
             FROM {$table} a
             LEFT JOIN {$wpdb->users} u ON u.ID = a.user_id
             WHERE a.subject_id = %s";
