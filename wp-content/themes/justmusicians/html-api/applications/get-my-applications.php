@@ -2,7 +2,8 @@
 
 $page = $_GET['page'] ?? 1;
 
-$args = ['page' => $page];
+$user_app_ids = hm_get_subject_ids_for_user( get_current_user_id(), [HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_OWNER], 'application');
+$args = ['page' => $page, 'post_ids' => $user_app_ids];
 
 $result = get_user_applications($args);
 

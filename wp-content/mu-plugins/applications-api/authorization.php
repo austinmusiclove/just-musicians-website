@@ -29,9 +29,34 @@ function require_application_authorship($application_id) {
     return user_is_application_author($application_id);
 }
 
-function user_can_view_single_application($application_id) { return require_application_authorship($application_id); }
-function user_can_update_application($application_id)      { return require_application_authorship($application_id); }
-function user_can_delete_application($application_id)      { return require_application_authorship($application_id); }
+function require_application_access($application_id, $allowed_access_types) {
+
+    if (!isset($application_id) || !is_numeric($application_id)) {
+        return new WP_Error('invalid_application_id', 'Application ID is required and must be an integer.', ['status' => 400]);
+    }
+
+    if (!is_user_logged_in()) {
+        return new WP_Error('unauthorized', 'You must sign in to perform this function.');
+    }
+
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
+    $user_id = get_current_user_id();
+
+    foreach ($allowed_access_types as $access_type) {
+        if (hm_user_has_access($user_id, $application_id, $access_type)) {
+            return true;
+        }
+    }
+
+    return new WP_Error('unauthorized_user', 'Your account is not authorized for this resource', ['status' => 400]);
+}
+
+function user_can_view_single_application($application_id)  { return require_application_access($application_id, [HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_OWNER]); }
+function user_can_update_application($application_id)       { return require_application_access($application_id, [HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_OWNER]); }
+function user_can_delete_application($application_id)       { return require_application_authorship($application_id); }
 
 function user_can_create_application() {
     global $wpdb;

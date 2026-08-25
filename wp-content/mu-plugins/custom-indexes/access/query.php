@@ -22,8 +22,17 @@ function hm_get_subject_ids_for_user($user_id, $access_type, $subject_type = nul
     global $wpdb;
     $table = hm_get_access_table();
 
-    $sql = "SELECT subject_id FROM {$table} WHERE user_id = %d AND access_type = %s";
-    $params = [$user_id, $access_type];
+    $sql = "SELECT subject_id FROM {$table} WHERE user_id = %d";
+    $params = [$user_id];
+
+    if (is_array($access_type)) {
+        $placeholders = implode(', ', array_fill(0, count($access_type), '%s'));
+        $sql .= " AND access_type IN ({$placeholders})";
+        $params = array_merge($params, $access_type);
+    } else {
+        $sql .= " AND access_type = %s";
+        $params[] = $access_type;
+    }
 
     if ($subject_type !== null) {
         $sql .= " AND subject_type = %s";

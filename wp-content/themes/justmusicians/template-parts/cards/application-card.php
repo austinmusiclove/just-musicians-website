@@ -50,7 +50,7 @@
             </a>
             <a class="border border-black/20 hover:border-black px-3 py-2 rounded-sm font-sun-motter text-14 transition-colors"
                 href="<?php echo esc_url($args['permalink']); ?>"
-            >Edit Application</a>
+            >Manage Application</a>
         </div>
     </div>
 

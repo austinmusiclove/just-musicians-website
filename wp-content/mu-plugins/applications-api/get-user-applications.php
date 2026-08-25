@@ -11,10 +11,16 @@ function get_user_applications($args) {
     $query_args = [
         'post_type'      => 'application',
         'post_status'    => 'publish',
-        'author'         => get_current_user_id(),
         'paged'          => $page,
         'posts_per_page' => 10,
     ];
+
+    if (!empty($args['post_ids'])) {
+        $query_args['post__in'] = $args['post_ids'];
+        $query_args['orderby']  = 'post__in';
+    } else {
+        $query_args['author'] = get_current_user_id();
+    }
 
     $query = new WP_Query($query_args);
     $max_num_pages = $query->max_num_pages;
