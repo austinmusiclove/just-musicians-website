@@ -21,6 +21,7 @@
         'quicktags'     => false,
         'toolbar1'      => 'bold,italic,underline,bullist,numlist,link,unlink',
         'toolbar2'      => '',
+        'tinymce'       => ['paste_as_text' => true],
     ]);
     ?>
 

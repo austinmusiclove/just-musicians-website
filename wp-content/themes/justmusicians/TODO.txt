@@ -6,7 +6,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        Not showing new line in musican application
         does not work after one err
         in applications page get based on access and alter edit button to view if no edit access
         in single application limit actions based on access
