@@ -11,6 +11,11 @@ export class SingleApplicationPage extends ThemePage {
         this.deleteBtn           = page.getByRole('button', { name: 'Delete Application' });
         this.exportButton        = page.locator('#applicants-export-button');
         this.exportCsvOption     = page.locator('li[hx-get*="applicants-export/csv"]');
+        this.shareModal          = page.locator('.popup-wrapper').filter({ hasText: 'Share Application' });
+        this.shareEmailInput     = this.shareModal.locator('input[type="email"]');
+        this.shareAccessType     = this.shareModal.locator('select[name="access_type"]');
+        this.shareSubmitBtn      = this.shareModal.getByRole('button', { name: 'Share' });
+        this.shareAccessList     = this.shareModal.locator('[id^="share-access-list-"]');
     }
 
     async navigateToApplication(slug, tab = '') {
@@ -57,5 +62,17 @@ export class SingleApplicationPage extends ThemePage {
         await this.exportButton.click();
         await this.exportCsvOption.click();
         return downloadPromise;
+    }
+
+    async shareAccess(email, accessType = 'view') {
+        await this.shareBtn.click();
+        await expect(this.shareModal).toBeVisible();
+        await this.shareEmailInput.fill(email);
+        await this.shareAccessType.selectOption(accessType);
+        const responsePromise = this.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/access') && resp.request().method() === 'POST'
+        );
+        await this.shareSubmitBtn.click();
+        await responsePromise;
     }
 }

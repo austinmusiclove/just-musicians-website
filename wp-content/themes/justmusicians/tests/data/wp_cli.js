@@ -299,3 +299,12 @@ export function wpCliRevokeAccess(userId, subjectId) {
     );
     return output.trim() === '1';
 }
+
+export function wpCliQueryAccess(userId, subjectType, subjectId) {
+    const output = wpCliWithRetry(
+        `wp eval "global \\$wpdb; \\$table = hm_get_access_table(); \\$row = \\$wpdb->get_row(\\$wpdb->prepare('SELECT * FROM ' . \\$table . ' WHERE user_id = %d AND subject_id = %s AND subject_type = %s', ${userId}, '${subjectId}', '${subjectType}')); echo \\$row ? json_encode(\\$row) : 'none';" --path=${WP_PATH}`
+    );
+    const trimmed = output.trim();
+    if (trimmed === 'none') return null;
+    return JSON.parse(trimmed);
+}
