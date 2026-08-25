@@ -20,10 +20,9 @@ if (!$result) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Error revoking access' })"></span>
     <?php exit;
 } ?>
-<span x-init="$dispatch('success-toast', { 'message': 'Access revoked' })"></span>
-<?php
 
-get_template_part('template-parts/access/access-list', '', [
+<span x-init="$dispatch('success-toast', { 'message': 'Access revoked' })"></span>
+<?php get_template_part('template-parts/access/access-list', '', [
     'entries'      => hm_get_access_entries($entry->subject_id),
     'subject_id'   => $entry->subject_id,
     'subject_type' => $entry->subject_type,

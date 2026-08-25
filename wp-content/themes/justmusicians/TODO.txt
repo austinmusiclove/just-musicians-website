@@ -6,10 +6,15 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        does not work after one err
         in applications page get based on access and alter edit button to view if no edit access
         in single application limit actions based on access
         add tests
+            applciations page
+                see application you were given access to that you are not author of
+                edit application button does not say edit if you have only view access and says edit if you have edit or owner access
+            single application
+                edit application you were given edit access to but not be able to edit if only view access
+                no edit capability if you only have view access
     Share application access features
         copy link button in share modal
         scroll emails with access

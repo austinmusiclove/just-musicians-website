@@ -27,6 +27,7 @@
                 hx-swap="outerHTML">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
             </div>
+            <div id="access-list-results-<?php echo esc_attr($args['subject_id']); ?>"></div>
 
             <input type="email" name="email" placeholder="Email address" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 focus:border-yellow outline-none" x-model="shareEmail" />
 
@@ -47,7 +48,7 @@
                     class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-5 py-2 hover:bg-navy hover:text-white"
                     hx-post="<?php echo site_url('/wp-html/v1/access/'); ?>"
                     hx-target="#share-mdl-results-<?php echo esc_attr($args['subject_id']); ?>"
-                    hx-swap="outerHTML"
+                    hx-swap="innerHTML"
                     hx-indicator="#share-access-button-content"
                     hx-include="#share-access-form"
                 >

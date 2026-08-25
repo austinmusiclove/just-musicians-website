@@ -24,21 +24,21 @@
                         ]; ?>
                         <div hx-post="<?php echo esc_url(site_url('/wp-html/v1/access/')); ?>"
                             hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_VIEW_TYPE_MGMT]))); ?>'
-                            hx-target="#<?php echo $container_id; ?>"
-                            hx-swap="outerHTML"
+                            hx-target="#access-list-results-<?php echo esc_attr($args['subject_id']); ?>"
+                            hx-swap="innerHTML"
                             hx-trigger="access-view-<?php echo (string) $entry->id; ?> from:body"
                             hx-indicator="#<?php echo $container_id; ?>"
                             hidden></div>
                         <div hx-post="<?php echo esc_url(site_url('/wp-html/v1/access/')); ?>"
                             hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_EDIT_TYPE_MGMT]))); ?>'
-                            hx-target="#<?php echo $container_id; ?>"
-                            hx-swap="outerHTML"
+                            hx-target="#access-list-results-<?php echo esc_attr($args['subject_id']); ?>"
+                            hx-swap="innerHTML"
                             hx-trigger="access-edit-<?php echo (string) $entry->id; ?> from:body"
                             hx-indicator="#<?php echo $container_id; ?>"
                             hidden></div>
                         <div hx-delete="<?php echo esc_url(site_url('/wp-html/v1/access/' . $entry->id)); ?>"
-                            hx-target="#<?php echo $container_id; ?>"
-                            hx-swap="outerHTML"
+                            hx-target="#access-list-results-<?php echo esc_attr($args['subject_id']); ?>"
+                            hx-swap="innerHTML"
                             hx-trigger="access-revoke-<?php echo (string) $entry->id; ?> from:body"
                             hx-indicator="#<?php echo $container_id; ?>"
                             hidden></div>
