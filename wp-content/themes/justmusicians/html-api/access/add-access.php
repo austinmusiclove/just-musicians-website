@@ -27,7 +27,7 @@ if (!$user) { ?>
     <?php exit;
 }
 
-if (!in_array($access_type, [HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT], true)) { ?>
+if (!in_array($access_type, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT], true)) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Invalid access type' })"></span>
     <?php exit;
 }

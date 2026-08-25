@@ -23,6 +23,7 @@ import {
     wpCliAddListingToUser, wpCliNotificationExists,
     wpCliSetPostTerms, wpCliIndexListing, wpCliCreateListing,
     wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
+    wpCliGrantAccess, wpCliRevokeAccess,
 } from '../data/wp_cli.js';
 
 export const test = base.extend({
@@ -72,6 +73,8 @@ export const test = base.extend({
             getLastMessage: wpCliGetLastMessage,
             messageIsRead: wpCliMessageIsRead,
             getUnreadConversationCount: wpCliGetUnreadConversationCount,
+            grantAccess: wpCliGrantAccess,
+            revokeAccess: wpCliRevokeAccess,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
         });

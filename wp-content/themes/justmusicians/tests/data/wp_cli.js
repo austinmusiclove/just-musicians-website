@@ -285,3 +285,17 @@ export function wpCliGetUnreadConversationCount(userId) {
     );
     return parseInt(output.trim(), 10);
 }
+
+export function wpCliGrantAccess(userId, subjectId, accessType, subjectType) {
+    const output = wpCliWithRetry(
+        `wp eval "echo hm_grant_access(${userId}, '${subjectId}', '${accessType}', '${subjectType}') ? '1' : '0';" --path=${WP_PATH}`
+    );
+    return output.trim() === '1';
+}
+
+export function wpCliRevokeAccess(userId, subjectId) {
+    const output = wpCliWithRetry(
+        `wp eval "echo hm_revoke_access(${userId}, '${subjectId}') ? '1' : '0';" --path=${WP_PATH}`
+    );
+    return output.trim() === '1';
+}

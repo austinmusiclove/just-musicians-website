@@ -19,9 +19,9 @@ $user_id = get_current_user_id();
 $app_access = null;
 if (current_user_can('manage_options') || hm_user_has_access($user_id, $application_id, HM_ACCESS_TYPE_OWNER, 'application')) {
     $app_access = 'owner';
-} elseif (hm_user_has_access($user_id, $application_id, HM_EDIT_TYPE_MGMT, 'application')) {
+} elseif (hm_user_has_access($user_id, $application_id, HM_ACCESS_TYPE_EDIT, 'application')) {
     $app_access = 'edit';
-} elseif (hm_user_has_access($user_id, $application_id, HM_VIEW_TYPE_MGMT, 'application')) {
+} elseif (hm_user_has_access($user_id, $application_id, HM_ACCESS_TYPE_VIEW, 'application')) {
     $app_access = 'view';
 }
 

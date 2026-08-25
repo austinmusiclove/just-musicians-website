@@ -54,8 +54,8 @@ function require_application_access($application_id, $allowed_access_types) {
     return new WP_Error('unauthorized_user', 'Your account is not authorized for this resource', ['status' => 400]);
 }
 
-function user_can_view_single_application($application_id)  { return require_application_access($application_id, [HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_OWNER]); }
-function user_can_update_application($application_id)       { return require_application_access($application_id, [HM_EDIT_TYPE_MGMT, HM_ACCESS_TYPE_OWNER]); }
+function user_can_view_single_application($application_id)  { return require_application_access($application_id, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT, HM_ACCESS_TYPE_OWNER]); }
+function user_can_update_application($application_id)       { return require_application_access($application_id, [HM_ACCESS_TYPE_EDIT, HM_ACCESS_TYPE_OWNER]); }
 function user_can_delete_application($application_id)       { return require_application_access($application_id, HM_ACCESS_TYPE_OWNER); }
 
 function user_can_create_application() {

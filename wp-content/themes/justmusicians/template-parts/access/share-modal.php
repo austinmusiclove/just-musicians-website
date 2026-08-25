@@ -32,8 +32,8 @@
             <input type="email" name="email" placeholder="Email address" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 focus:border-yellow outline-none" x-model="shareEmail" />
 
             <select name="access_type" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 bg-white focus:border-yellow outline-none" x-model="shareAccessType">
-                <option value="<?php echo esc_attr(HM_VIEW_TYPE_MGMT); ?>">View</option>
-                <option value="<?php echo esc_attr(HM_EDIT_TYPE_MGMT); ?>">Edit</option>
+                <option value="<?php echo esc_attr(HM_ACCESS_TYPE_VIEW); ?>">View</option>
+                <option value="<?php echo esc_attr(HM_ACCESS_TYPE_EDIT); ?>">Edit</option>
             </select>
 
             <input type="hidden" name="subject_id" value="<?php echo esc_attr($args['subject_id']); ?>" />

@@ -5,6 +5,7 @@ export class SingleApplicationPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
         this.editBtn             = page.getByRole('button', { name: 'Edit Application' });
+        this.shareBtn            = page.getByRole('button', { name: 'Share' });
         this.titleInput          = page.locator('input[name="title"]');
         this.updateBtn           = page.getByRole('button', { name: 'Update Application' });
         this.deleteBtn           = page.getByRole('button', { name: 'Delete Application' });

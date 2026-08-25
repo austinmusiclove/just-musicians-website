@@ -6,17 +6,14 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        add tests
-            share applications
-                give view access to user
-                give edit access to user
-                revoke access to user
-            applciations page
-                see application you were given access to that you are not author of
-            single application
-                show edit for edit access
-                show share only for owner
-                show delete only for owner
+        revoke access needs to take subject type
+        tests that use the share btn and check the access with wpcli
+            give view with email
+            give edit with email
+            revoke view
+            revoke edit
+            change view to edit
+            change edit to view
     Share application access features
         copy link button in share modal
         scroll emails with access

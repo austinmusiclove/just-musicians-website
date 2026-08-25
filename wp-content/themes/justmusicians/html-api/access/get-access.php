@@ -16,7 +16,7 @@ if (!$subject_type) { ?>
     <?php exit;
 }
 
-if ($access_type !== '' && !in_array($access_type, [HM_VIEW_TYPE_MGMT, HM_EDIT_TYPE_MGMT], true)) { ?>
+if ($access_type !== '' && !in_array($access_type, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT], true)) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Invalid access type' })"></span>
     <?php exit;
 }

@@ -16,21 +16,21 @@
                     <?php if ($entry->access_type === HM_ACCESS_TYPE_OWNER) { ?>
                         <span class="text-black/50 uppercase shrink-0 p-3">Owner</span>
                     <?php } else {
-                        $other_type = $entry->access_type === HM_VIEW_TYPE_MGMT ? HM_EDIT_TYPE_MGMT : HM_VIEW_TYPE_MGMT;
+                        $other_type = $entry->access_type === HM_ACCESS_TYPE_VIEW ? HM_ACCESS_TYPE_EDIT : HM_ACCESS_TYPE_VIEW;
                         $hx_vals    = [
                             'email'        => $entry->user_email,
                             'subject_id'   => (string) $args['subject_id'],
                             'subject_type' => (string) $args['subject_type'],
                         ]; ?>
                         <div hx-post="<?php echo esc_url(site_url('/wp-html/v1/access/')); ?>"
-                            hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_VIEW_TYPE_MGMT]))); ?>'
+                            hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_ACCESS_TYPE_VIEW]))); ?>'
                             hx-target="#access-list-results-<?php echo esc_attr($args['subject_id']); ?>"
                             hx-swap="innerHTML"
                             hx-trigger="access-view-<?php echo (string) $entry->id; ?> from:body"
                             hx-indicator="#<?php echo $container_id; ?>"
                             hidden></div>
                         <div hx-post="<?php echo esc_url(site_url('/wp-html/v1/access/')); ?>"
-                            hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_EDIT_TYPE_MGMT]))); ?>'
+                            hx-vals='<?php echo esc_attr(wp_json_encode(array_merge($hx_vals, ['access_type' => HM_ACCESS_TYPE_EDIT]))); ?>'
                             hx-target="#access-list-results-<?php echo esc_attr($args['subject_id']); ?>"
                             hx-swap="innerHTML"
                             hx-trigger="access-edit-<?php echo (string) $entry->id; ?> from:body"

@@ -1,7 +1,7 @@
 <?php
 
-define('HM_VIEW_TYPE_MGMT', 'view');
-define('HM_EDIT_TYPE_MGMT', 'edit');
+define('HM_ACCESS_TYPE_VIEW', 'view');
+define('HM_ACCESS_TYPE_EDIT', 'edit');
 define('HM_ACCESS_TYPE_OWNER', 'owner');
 
 function hm_user_has_access($user_id, $subject_id, $access_type, $subject_type) {
