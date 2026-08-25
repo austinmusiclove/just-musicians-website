@@ -3,7 +3,7 @@
 $application_id = get_query_var('application-id');
 
 // Authorize
-$auth = require_application_authorship($application_id);
+$auth = user_can_view_single_application($application_id);
 if (is_wp_error($auth) || !$auth) {
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'You are not authorized to export these applicants\' })"></span>';
     exit;

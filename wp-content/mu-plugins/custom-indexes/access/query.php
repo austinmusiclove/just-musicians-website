@@ -4,15 +4,16 @@ define('HM_VIEW_TYPE_MGMT', 'view');
 define('HM_EDIT_TYPE_MGMT', 'edit');
 define('HM_ACCESS_TYPE_OWNER', 'owner');
 
-function hm_user_has_access($user_id, $subject_id, $access_type) {
+function hm_user_has_access($user_id, $subject_id, $access_type, $subject_type) {
     global $wpdb;
     $table = hm_get_access_table();
 
     $found = $wpdb->get_var($wpdb->prepare(
-        "SELECT 1 FROM {$table} WHERE user_id = %d AND subject_id = %s AND access_type = %s LIMIT 1",
+        "SELECT 1 FROM {$table} WHERE user_id = %d AND subject_id = %s AND access_type = %s AND subject_type = %s LIMIT 1",
         $user_id,
         (string) $subject_id,
-        $access_type
+        $access_type,
+        $subject_type
     ));
 
     return (bool) $found;

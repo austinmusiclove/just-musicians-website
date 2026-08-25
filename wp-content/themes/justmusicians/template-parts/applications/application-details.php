@@ -41,9 +41,12 @@
 
     <!-- Actions -->
     <div class="pt-4 flex gap-2 flex-wrap">
+        <?php if ($args['app_access'] === 'edit' || $args['app_access'] === 'owner') { ?>
         <button type="button" x-on:click="showEditForm = true" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
             Edit Application
         </button>
+        <?php } ?>
+        <?php if ($args['app_access'] === 'owner') { ?>
         <?php echo get_template_part('template-parts/access/share-button', '', [
             'label'        => 'Share',
             'heading'      => 'Share Application',
@@ -58,6 +61,7 @@
             Delete Application
             <span id="delete-result"></span>
         </button>
+        <?php } ?>
     </div>
 
 </div>

@@ -9,7 +9,7 @@ if (!$entry) { ?>
 }
 
 // Authorize against the entry's subject
-$auth = require_subject_owner($entry->subject_id);
+$auth = require_subject_owner($entry->subject_id, $entry->subject_type);
 if (!$auth) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'You are not authorized to manage access for this subject' })"></span>
     <?php exit;

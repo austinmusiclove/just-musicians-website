@@ -14,6 +14,17 @@ if (is_wp_error($auth) || !$auth) {
     exit;
 }
 
+// Determine access level
+$user_id = get_current_user_id();
+$app_access = null;
+if (current_user_can('manage_options') || hm_user_has_access($user_id, $application_id, HM_ACCESS_TYPE_OWNER, 'application')) {
+    $app_access = 'owner';
+} elseif (hm_user_has_access($user_id, $application_id, HM_EDIT_TYPE_MGMT, 'application')) {
+    $app_access = 'edit';
+} elseif (hm_user_has_access($user_id, $application_id, HM_VIEW_TYPE_MGMT, 'application')) {
+    $app_access = 'view';
+}
+
 // Get user collections
 $collections_result = get_user_collections([
     'nopaging'     => true,
@@ -112,6 +123,7 @@ get_header();
                             'description'     => $app_description,
                             'upcoming_events' => $upcoming_events,
                             'app_events'      => $app_events,
+                            'app_access'      => $app_access,
                         ]); ?>
                     </div>
 
