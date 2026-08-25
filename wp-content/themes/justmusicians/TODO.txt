@@ -6,7 +6,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Share application access with other users
-        revoke access needs to take subject type
         tests that use the share btn and check the access with wpcli
             give view with email
             give edit with email

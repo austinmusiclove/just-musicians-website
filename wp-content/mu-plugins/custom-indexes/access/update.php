@@ -32,7 +32,7 @@ function hm_grant_access($user_id, $subject_id, $access_type, $subject_type) {
     return hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) !== 'error';
 }
 
-function hm_revoke_access($user_id, $subject_id) {
+function hm_revoke_access($user_id, $subject_id, $subject_type) {
     global $wpdb;
     $table = hm_get_access_table();
 

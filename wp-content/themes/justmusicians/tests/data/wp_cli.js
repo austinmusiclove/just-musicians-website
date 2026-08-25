@@ -295,7 +295,7 @@ export function wpCliGrantAccess(userId, subjectId, accessType, subjectType) {
 
 export function wpCliRevokeAccess(userId, subjectId) {
     const output = wpCliWithRetry(
-        `wp eval "echo hm_revoke_access(${userId}, '${subjectId}') ? '1' : '0';" --path=${WP_PATH}`
+        `wp eval "echo hm_revoke_access(${userId}, '${subjectId}', '${subject_type}) ? '1' : '0';" --path=${WP_PATH}`
     );
     return output.trim() === '1';
 }
