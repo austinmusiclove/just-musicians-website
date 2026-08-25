@@ -153,4 +153,59 @@ test.describe('Access - Share Application via Share Button', () => {
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeNull();
     });
+
+    test('Full access lifecycle: none → view → edit → revoke → edit', async ({ wpCli, singleApplicationPage }) => {
+        const accessEntry = () => singleApplicationPage.shareAccessList.locator('li', { hasText: otherUser.email });
+
+        await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
+        await singleApplicationPage.navigateToApplication(applicationSlug);
+
+        // 1. No access — other user not in access list
+        await singleApplicationPage.shareBtn.click();
+        await expect(singleApplicationPage.shareModal).toBeVisible();
+        await expect(accessEntry()).not.toBeVisible();
+        expect(await wpCli.queryAccess(otherUserId, 'application', applicationId)).toBeNull();
+
+        // 2. Add view access (modal is already open)
+        await singleApplicationPage.shareEmailInput.fill(otherUser.email);
+        await singleApplicationPage.shareAccessType.selectOption('view');
+        let responsePromise = singleApplicationPage.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/access') && resp.request().method() === 'POST'
+        );
+        await singleApplicationPage.shareModal.getByRole('button', { name: 'Share' }).click();
+        await responsePromise;
+        await expect(accessEntry()).toBeVisible();
+        await expect(accessEntry().locator('select')).toHaveValue('view');
+        expect((await wpCli.queryAccess(otherUserId, 'application', applicationId)).access_type).toBe('view');
+
+        // 3. Change to edit via dropdown
+        responsePromise = singleApplicationPage.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/access') && resp.request().method() === 'POST'
+        );
+        await accessEntry().locator('select').selectOption('edit');
+        await responsePromise;
+        await expect(accessEntry().locator('select')).toHaveValue('edit');
+        expect((await wpCli.queryAccess(otherUserId, 'application', applicationId)).access_type).toBe('edit');
+
+        // 4. Revoke via dropdown
+        responsePromise = singleApplicationPage.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/access') && resp.request().method() === 'DELETE'
+        );
+        await accessEntry().locator('select').selectOption('revoke');
+        await responsePromise;
+        await expect(accessEntry()).not.toBeVisible();
+        expect(await wpCli.queryAccess(otherUserId, 'application', applicationId)).toBeNull();
+
+        // 5. Add back as edit access via share button (modal is still open)
+        await singleApplicationPage.shareEmailInput.fill(otherUser.email);
+        await singleApplicationPage.shareAccessType.selectOption('edit');
+        responsePromise = singleApplicationPage.page.waitForResponse(
+            resp => resp.url().includes('wp-html/v1/access') && resp.request().method() === 'POST'
+        );
+        await singleApplicationPage.shareModal.getByRole('button', { name: 'Share' }).click();
+        await responsePromise;
+        await expect(accessEntry()).toBeVisible();
+        await expect(accessEntry().locator('select')).toHaveValue('edit');
+        expect((await wpCli.queryAccess(otherUserId, 'application', applicationId)).access_type).toBe('edit');
+    });
 });
