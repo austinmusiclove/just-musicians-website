@@ -121,7 +121,6 @@ SEO
     get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
-        **add description to videos to qualify for rich result for single listing (this is also coming up as an error in search console so generic description is fine)
         stand alone video objects to qualify for rich result
     rock bands in austin type pages
         maybe add venues played and venue schema as well for those
