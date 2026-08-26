@@ -1,4 +1,8 @@
+Deploy
+    stripe vars in wp-config
+    save permalinks
 Critical bugs
+    When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
     Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
@@ -8,21 +12,28 @@ Critical bugs
 Applications Features to add
     Paywall
         Features page where you can see what you get with the plan
-            links
-                figure out UX flow to get someone signed up and pay for plan
-            link to sign up from free tier
+            don't use alpine to redirect to session url
+            add a custom page for password reset
+            send set up password email in webhook
+            make sure email verification happens either after set up or just set it
+            split off into helper functions for each event type from checkout plugin
             add tooltips explaining features
-            replace link to blog in header with venues link to this page "Pricing"
-            add premium link under buyers in menus
-        Checkout process from Stripe
-            Checkout testing
-            User feature flags int in user data; return val in account settings or return individual flag values (need to still check auth for feature flags in back end since js can be manipulated on front end)
-            Set feature flags when buy
-            Unset feature flags when subscription ends
+            add ability to add and remove custom capabilities in user page in wp admin with lib file in functions.php
+        Limit free accounts with feature flags
+            limit to 4 events per month
+            limit to 1 application
+        Cancel subscription
+            handle subscription not paid; card didn't work etc. take away subscription
+            Account page show subscription level
+            Show option to cancel subscription if monthly
+        Testing buy monthly
+        Testing buy one time payment
         Upsell locations in the current workflow
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
             Show add dates option in set up form but show an upsell message when you try to use it
+            replace link to blog in header with venues link to this page "Pricing"
+            add premium link under buyers in menus
     Share application access features
         copy link button in share modal
         scroll emails with access
