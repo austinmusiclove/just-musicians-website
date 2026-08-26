@@ -17,7 +17,7 @@ export class ApplicationsPage extends ThemePage {
     }
 
     getEditApplicationBtn(card) {
-        return card.getByRole('link', { name: 'Edit Application' });
+        return card.getByRole('link', { name: 'Manage Application' });
     }
 
     async waitForResults() {
