@@ -6,18 +6,13 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Share application access features
-        copy link button in share modal
-        scroll emails with access
-        send email when access given
-        copy all emails with access (copy google ux)
-        allow giving access to many emails at once
-        Allow non users to get access by sending them email with special link that adds access on sign up
     Paywall
         Features page where you can see what you get with the plan
-            Annual and monthly pricing
-            30 day free trial
-            replace link to blog in header with venues link to this page
+            links
+                figure out UX flow to get someone signed up and pay for plan
+            link to sign up from free tier
+            add tooltips explaining features
+            replace link to blog in header with venues link to this page "Pricing"
             add premium link under buyers in menus
         Checkout process from Stripe
             Checkout testing
@@ -28,6 +23,14 @@ Applications Features to add
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
             Show add dates option in set up form but show an upsell message when you try to use it
+    Share application access features
+        copy link button in share modal
+        scroll emails with access
+        send email when access given
+        copy all emails with access (copy google ux)
+        Allow non users to get access by sending them email with special link that adds access on sign up
+        allow giving access to many emails at once
+        share collections with other users
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
