@@ -59,10 +59,11 @@ if (!empty($args['videos'])) {
         if (empty($video_id) && empty($video_url)) { continue; }
 
         $video_schema = [
-            '@type'       => 'VideoObject',
-            'name'        => ($args['name'] ?? '') . ' — Video',
-            'contentUrl'  => $video_url,
-            'uploadDate'  => $video['post_date'] ?? '',
+            '@type'        => 'VideoObject',
+            'name'         => ($args['name'] ?? '') . ' — Video',
+            'description'  => 'Video featuring ' . ($args['name'] ?? ''),
+            'contentUrl'   => $video_url,
+            'uploadDate'   => $video['post_date'] ?? '',
         ];
         if ($video_id) {
             $video_schema['embedUrl']     = 'https://www.youtube.com/embed/' . $video_id;
