@@ -70,7 +70,6 @@ function handle_stripe_checkout_session_completed($session) {
             'meta_input'      => [
                 'stripe_customer_id' => $session->customer ?? '',
                 'stripe_session_id'  => $session->id ?? '',
-                'membership_tier'    => $product,
                 'email_verified'     => false,
                 'account_identifier' => $account_identifier,
             ],
@@ -98,7 +97,32 @@ function handle_stripe_checkout_session_completed($session) {
         }
         update_user_meta($user->ID, 'stripe_customer_id', $session->customer ?? '');
         update_user_meta($user->ID, 'stripe_session_id', $session->id ?? '');
-        update_user_meta($user->ID, 'membership_tier', $product);
+    }
+
+    // If the user is buying lifetime, cancel their active monthly subscription
+    if ($product === 'buyer-pro-lifetime') {
+        $customer_id = $session->customer ?? get_user_meta($user->ID, 'stripe_customer_id', true);
+
+        if ($customer_id && defined('STRIPE_PRO_PRICE_ID')) {
+            try {
+                $subscriptions = \Stripe\Subscription::all([
+                    'customer' => $customer_id,
+                    'status'   => 'active',
+                ]);
+
+                foreach ($subscriptions->data as $subscription) {
+                    foreach ($subscription->items->data as $item) {
+                        if ($item->price->id === STRIPE_PRO_PRICE_ID) {
+                            error_log('Cancelling monthly subscription ' . $subscription->id . ' for lifetime upgrade');
+                            $subscription->cancel();
+                            break;
+                        }
+                    }
+                }
+            } catch (\Exception $e) {
+                error_log('Failed to cancel monthly subscription on lifetime upgrade: ' . $e->getMessage());
+            }
+        }
     }
 
     send_subscription_confirmation_email($email, $product_name);

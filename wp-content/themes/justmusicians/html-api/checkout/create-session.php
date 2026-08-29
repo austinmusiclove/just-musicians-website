@@ -40,10 +40,16 @@ try {
         ],
     ];
 
-    // Collect customer email if user is logged in
+    // If logged in and the user already has a Stripe customer, link them to it
     if (is_user_logged_in()) {
-        $user = wp_get_current_user();
-        $params['customer_email'] = $user->user_email;
+        $user        = wp_get_current_user();
+        $customer_id = get_user_meta($user->ID, 'stripe_customer_id', true);
+
+        if ($customer_id) {
+            $params['customer'] = $customer_id;
+        } else {
+            $params['customer_email'] = $user->user_email;
+        }
     } else {
         // New user - collect first and last name via custom fields
         $params['custom_fields'] = [
