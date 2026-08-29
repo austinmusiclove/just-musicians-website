@@ -8,7 +8,7 @@
 $tiers = [
     [
         'name'        => 'Free Tier',
-        'slug'        => 'free',
+        'product'     => 'free-tier',
         'price'       => '$0',
         'price_desc'  => '/month',
         'description' => 'Everything you need to hire musicians.',
@@ -33,8 +33,8 @@ $tiers = [
         ],
     ],
     [
-        'name'        => 'Pro Talent Buyer',
-        'slug'        => 'buyer-pro-monthly',
+        'name'        => 'Talent Buyer Pro',
+        'product'     => 'buyer-pro-monthly',
         'price'       => '$39',
         'price_desc'  => '/month',
         'description' => 'Everything in Free Tier plus unlimited usage and multi user.',
@@ -56,12 +56,12 @@ $tiers = [
     ],
     [
         'name'        => 'Lifetime Pro Membership',
-        'slug'        => 'buyer-pro-lifetime',
+        'product'     => 'buyer-pro-lifetime',
         'price'       => '$349',
         'price_desc'  => 'one time',
         'description' => 'Everything in Pro for a one time payment.',
         'features'    => [
-            'Everything in Pro Talent Buyer',
+            'Everything in Talent Buyer Pro',
             'Lifetime access — no recurring fees',
         ],
     ],
@@ -72,7 +72,7 @@ get_header();
 
 <header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
     <div class="container relative">
-        <h1 class="font-bold text-32 md:text-36 lg:text-40">Pro Talent Buyer Pricing</h1>
+        <h1 class="font-bold text-32 md:text-36 lg:text-40">Talent Buyer Pro Pricing</h1>
         <p class="text-20 mt-4 max-w-2xl">Take talent buying on Hire Musicians to the next level with a Pro membership.</p>
     </div>
 </header>
@@ -90,7 +90,24 @@ get_header();
 
                 <p class="mt-3 text-14"><?php echo $tier['description']; ?></p>
 
-                <?php if ($tier['slug'] === 'free') { ?>
+                <?php
+                $owns_product = false;
+                if (is_user_logged_in()) {
+                    $user_caps = wp_get_current_user()->allcaps;
+                    if ($tier['product'] === 'buyer-pro-monthly') {
+                        $owns_product = !empty($user_caps['hm_buyer_pro']) || !empty($user_caps['hm_buyer_pro_lifetime']);
+                    } elseif ($tier['product'] === 'buyer-pro-lifetime') {
+                        $owns_product = !empty($user_caps['hm_buyer_pro_lifetime']);
+                    } elseif ($tier['product'] === 'free-tier') {
+                        $owns_product = is_user_logged_in();
+                    }
+                }
+                ?>
+
+                <!-- CTA -->
+                <?php if ($owns_product) { ?>
+                    <a href="<?php echo site_url('/subscriptions/'); ?>" class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">Manage My Subscriptions</a>
+                <?php } elseif ($tier['product'] === 'free-tier') { ?>
                     <button type="button"
                         x-on:click="showSignupModal = true"
                         class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold"
@@ -101,7 +118,7 @@ get_header();
                         hx-post="<?php echo site_url('/wp-html/v1/checkout'); ?>"
                         hx-target="#get-started-results"
                     >
-                        <input type="hidden" name="tier" value="<?php echo esc_attr($tier['slug']); ?>">
+                        <input type="hidden" name="product" value="<?php echo esc_attr($tier['product']); ?>">
                         <button type="submit" class="w-full flex justify-center rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">
                             <span class="htmx-indicator-component-block-replace">Get Started</span>
                             <span class="htmx-indicator-component-block">

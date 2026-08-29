@@ -167,39 +167,57 @@ add_filter( 'the_author', function( $display_name ) {
 });
 
 
-// Add Pro Talent Buyer capability toggle to user profile
-add_action('show_user_profile', 'add_hm_pro_buyer_field');
-add_action('edit_user_profile', 'add_hm_pro_buyer_field');
+// Add Pro Talent Buyer capability toggles to user profile
+add_action('show_user_profile', 'add_hm_buyer_pro_field');
+add_action('edit_user_profile', 'add_hm_buyer_pro_field');
 
-function add_hm_pro_buyer_field($user) {
+function add_hm_buyer_pro_field($user) {
     if (!current_user_can('manage_options')) return;
     ?>
     <table class="form-table" role="presentation">
         <tr>
-            <th><label for="hm_pro_buyer">Pro Talent Buyer</label></th>
+            <th><label>Pro Talent Buyer</label></th>
             <td>
-                <?php wp_nonce_field('hm_pro_buyer_nonce', 'hm_pro_buyer_nonce'); ?>
-                <input type="checkbox" name="hm_pro_buyer" id="hm_pro_buyer" value="1"
-                    <?php checked($user->has_cap('hm_pro_buyer')); ?>>
-                <label for="hm_pro_buyer">Grant Pro Talent Buyer access</label>
+                <?php wp_nonce_field('hm_buyer_pro_nonce', 'hm_buyer_pro_nonce'); ?>
+                <fieldset>
+                    <label for="hm_buyer_pro">
+                        <input type="checkbox" name="hm_buyer_pro" id="hm_buyer_pro" value="1"
+                            <?php checked($user->has_cap('hm_buyer_pro')); ?>>
+                        Pro Talent Buyer
+                    </label>
+                    <br>
+                    <label for="hm_buyer_pro_lifetime">
+                        <input type="checkbox" name="hm_buyer_pro_lifetime" id="hm_buyer_pro_lifetime" value="1"
+                            <?php checked($user->has_cap('hm_buyer_pro_lifetime')); ?>>
+                        Pro Talent Buyer (Lifetime)
+                    </label>
+                </fieldset>
             </td>
         </tr>
     </table>
     <?php
 }
 
-// Save Pro Talent Buyer capability
-add_action('personal_options_update', 'save_hm_pro_buyer_field');
-add_action('edit_user_profile_update', 'save_hm_pro_buyer_field');
+// Save Pro Talent Buyer capabilities
+add_action('personal_options_update', 'save_hm_buyer_pro_field');
+add_action('edit_user_profile_update', 'save_hm_buyer_pro_field');
 
-function save_hm_pro_buyer_field($user_id) {
+function save_hm_buyer_pro_field($user_id) {
     if (!current_user_can('manage_options')) return;
-    if (!isset($_POST['hm_pro_buyer_nonce']) || !wp_verify_nonce($_POST['hm_pro_buyer_nonce'], 'hm_pro_buyer_nonce')) return;
+    if (!isset($_POST['hm_buyer_pro_nonce']) || !wp_verify_nonce($_POST['hm_buyer_pro_nonce'], 'hm_buyer_pro_nonce')) return;
 
     $user = get_userdata($user_id);
-    if ($user && isset($_POST['hm_pro_buyer'])) {
-        $user->add_cap('hm_pro_buyer');
+    if (!$user) return;
+
+    if (isset($_POST['hm_buyer_pro'])) {
+        $user->add_cap('hm_buyer_pro');
     } else {
-        $user->remove_cap('hm_pro_buyer');
+        $user->remove_cap('hm_buyer_pro');
+    }
+
+    if (isset($_POST['hm_buyer_pro_lifetime'])) {
+        $user->add_cap('hm_buyer_pro_lifetime');
+    } else {
+        $user->remove_cap('hm_buyer_pro_lifetime');
     }
 }

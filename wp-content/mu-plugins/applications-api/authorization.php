@@ -74,7 +74,7 @@ function user_can_create_application() {
         return true;
     }
 
-    if (current_user_can('hm_pro_buyer')) {
+    if (current_user_can('hm_buyer_pro') or current_user_can('hm_buyer_pro_lifetime')) {
         return true;
     }
 

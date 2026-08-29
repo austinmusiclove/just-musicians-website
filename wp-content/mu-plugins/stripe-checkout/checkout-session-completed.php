@@ -8,8 +8,9 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function handle_stripe_checkout_session_completed($session) {
+    error_log('Handle Stripe event: checkout.session.completed');
     $email = $session->customer_email ?? $session->customer_details->email ?? '';
-    $tier  = $session->metadata->tier ?? '';
+    $product = $session->metadata->product ?? '';
 
     $display_name = '';
     $first_name   = '';
@@ -25,20 +26,25 @@ function handle_stripe_checkout_session_completed($session) {
         $display_name = trim($session->customer_details->name ?? '');
     }
 
-    if (empty($email) || empty($tier)) {
-        return new WP_Error('missing_data', 'Missing email or tier in session', ['status' => 400]);
+    if (empty($email) || empty($product)) {
+        return new WP_Error('missing_data', 'Missing email or product in session', ['status' => 400]);
     }
 
-    $valid_tiers = ['buyer-pro-monthly', 'buyer-pro-life'];
-    if (!in_array($tier, $valid_tiers, true)) {
-        return new WP_Error('invalid_tier', 'Invalid tier: ' . $tier, ['status' => 400]);
+    $valid_products = ['buyer-pro-monthly', 'buyer-pro-lifetime'];
+    if (!in_array($product, $valid_products, true)) {
+        return new WP_Error('invalid_product', 'Invalid product: ' . $product, ['status' => 400]);
     }
+    $product_names = [
+        'buyer-pro-monthly'  => 'Talent Buyer Pro',
+        'buyer-pro-lifetime' => 'Talent Buyer Pro Lifetime Membership',
+    ];
+    $product_name = $product_names[$product];
 
     $cap_map = [
-        'buyer-pro-monthly' => 'hm_pro_buyer',
-        'buyer-pro-life'    => 'hm_pro_buyer',
+        'buyer-pro-monthly'  => ['hm_buyer_pro'],
+        'buyer-pro-lifetime' => ['hm_buyer_pro', 'hm_buyer_pro_lifetime'],
     ];
-    $capability = $cap_map[$tier];
+    $capabilities = $cap_map[$product];
     $user = get_user_by('email', $email);
 
     if (!$user) {
@@ -64,7 +70,7 @@ function handle_stripe_checkout_session_completed($session) {
             'meta_input'      => [
                 'stripe_customer_id' => $session->customer ?? '',
                 'stripe_session_id'  => $session->id ?? '',
-                'membership_tier'    => $tier,
+                'membership_tier'    => $product,
                 'email_verified'     => false,
                 'account_identifier' => $account_identifier,
             ],
@@ -75,7 +81,9 @@ function handle_stripe_checkout_session_completed($session) {
         }
 
         $user = get_userdata($user_id);
-        $user->add_cap($capability);
+        foreach ($capabilities as $cap) {
+            $user->add_cap($cap);
+        }
 
         // send an email to the admin
         wp_new_user_notification($user_id);
@@ -83,21 +91,17 @@ function handle_stripe_checkout_session_completed($session) {
         send_account_activation_email($email, $account_identifier);
         // send password reset email
         retrieve_password($user->user_login);
-        // log the new user in
-        wp_set_auth_cookie($user_id, false);
-        wp_set_current_user($user_id, $user->user_login);
+
     } else {
-        $user->add_cap($capability);
-        wp_update_user([
-            'ID'           => $user->ID,
-            'first_name'   => $first_name,
-            'last_name'    => $last_name,
-            'display_name' => $display_name,
-        ]);
+        foreach ($capabilities as $cap) {
+            $user->add_cap($cap);
+        }
         update_user_meta($user->ID, 'stripe_customer_id', $session->customer ?? '');
         update_user_meta($user->ID, 'stripe_session_id', $session->id ?? '');
-        update_user_meta($user->ID, 'membership_tier', $tier);
+        update_user_meta($user->ID, 'membership_tier', $product);
     }
+
+    send_subscription_confirmation_email($email, $product_name);
 
     return new WP_REST_Response(['status' => 'success', 'user_id' => $user->ID], 200);
 }
