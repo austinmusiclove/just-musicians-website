@@ -4,6 +4,26 @@
 // Disable admin bar for all users
 show_admin_bar(false);
 
+// Restrict non-admin, non-editor users from wp-admin
+add_action('admin_init', function () {
+    if (!is_user_logged_in()) {
+        return;
+    }
+
+    // Always allow AJAX requests used by the front-end
+    if (wp_doing_ajax()) {
+        return;
+    }
+
+    // Allow admins and editors
+    if (current_user_can('manage_options') || current_user_can('edit_others_posts')) {
+        return;
+    }
+
+    wp_safe_redirect(home_url());
+    exit;
+});
+
 
 
 // Add listing admin panel columns
@@ -146,3 +166,40 @@ add_filter( 'the_author', function( $display_name ) {
     return "{$user_id} :: {$display_name}";
 });
 
+
+// Add Pro Talent Buyer capability toggle to user profile
+add_action('show_user_profile', 'add_hm_pro_buyer_field');
+add_action('edit_user_profile', 'add_hm_pro_buyer_field');
+
+function add_hm_pro_buyer_field($user) {
+    if (!current_user_can('manage_options')) return;
+    ?>
+    <table class="form-table" role="presentation">
+        <tr>
+            <th><label for="hm_pro_buyer">Pro Talent Buyer</label></th>
+            <td>
+                <?php wp_nonce_field('hm_pro_buyer_nonce', 'hm_pro_buyer_nonce'); ?>
+                <input type="checkbox" name="hm_pro_buyer" id="hm_pro_buyer" value="1"
+                    <?php checked($user->has_cap('hm_pro_buyer')); ?>>
+                <label for="hm_pro_buyer">Grant Pro Talent Buyer access</label>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+// Save Pro Talent Buyer capability
+add_action('personal_options_update', 'save_hm_pro_buyer_field');
+add_action('edit_user_profile_update', 'save_hm_pro_buyer_field');
+
+function save_hm_pro_buyer_field($user_id) {
+    if (!current_user_can('manage_options')) return;
+    if (!isset($_POST['hm_pro_buyer_nonce']) || !wp_verify_nonce($_POST['hm_pro_buyer_nonce'], 'hm_pro_buyer_nonce')) return;
+
+    $user = get_userdata($user_id);
+    if ($user && isset($_POST['hm_pro_buyer'])) {
+        $user->add_cap('hm_pro_buyer');
+    } else {
+        $user->remove_cap('hm_pro_buyer');
+    }
+}
