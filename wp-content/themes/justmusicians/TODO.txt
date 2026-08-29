@@ -12,28 +12,35 @@ Critical bugs
 Applications Features to add
     Paywall
         Features page where you can see what you get with the plan
-            don't use alpine to redirect to session url
-            add a custom page for password reset
-            send set up password email in webhook
+            DONE - add a custom page for password reset
+            DONE - make sure only send password reset to new user; not existing user buying a plan
+            DONE - split off into helper functions for each event type from checkout plugin
+            DONE - add tooltips explaining features
+            DONE - add ability to add and remove custom capabilities in user page in wp admin with lib file in functions.php
+            DONE - remove ability for subscriber users to see wp admin
             make sure email verification happens either after set up or just set it
-            split off into helper functions for each event type from checkout plugin
-            add tooltips explaining features
-            add ability to add and remove custom capabilities in user page in wp admin with lib file in functions.php
+            schema for pricing page
         Limit free accounts with feature flags
             limit to 4 events per month
-            limit to 1 application
+            DONE - limit to 1 application
         Cancel subscription
-            handle subscription not paid; card didn't work etc. take away subscription
             Account page show subscription level
             Show option to cancel subscription if monthly
-        Testing buy monthly
-        Testing buy one time payment
+            handle subscription not paid; card didn't work etc. take away subscription
+            check to see which other events i might want to handle including error states
         Upsell locations in the current workflow
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
             Show add dates option in set up form but show an upsell message when you try to use it
             replace link to blog in header with venues link to this page "Pricing"
             add premium link under buyers in menus
+        Tests
+            Testing buy monthly - new user
+            Testing buy monthly - existing user
+            Testing buy one time payment - new user
+            Testing buy one time payment - existing user
+            Ability to add 5th event for month
+            Ability to add 2nd application
     Share application access features
         copy link button in share modal
         scroll emails with access
@@ -42,14 +49,15 @@ Applications Features to add
         Allow non users to get access by sending them email with special link that adds access on sign up
         allow giving access to many emails at once
         share collections with other users
+        reorder collections
+    Embed form on 3rd party website
+        Remove branding for members
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
     Notification to applicants when dates added to application
     Sorting and organizing
-        Earmark or favorite certain applicants
         Filter by draw and price
-        Filter by favorites
         Filter genres, ensemble size and other taxonomies
     After design update
         Add two listing images on applicant cards
@@ -75,7 +83,6 @@ Applications Advanced
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
         Sort by highest rating (need index)
     Single Application Applicant review tab
-        Show dates available for your events
         Filter by answers to custom questions (advanced)
 Submitted Applciations
     When active state add withdraw application button in white next to udpate button
@@ -106,6 +113,11 @@ My Gigs page (for musicians)
     Allow recommending another band when you decline a gig
 Event Form page
     Allow venue location
+Claimable listings
+    Claim button shows where to book a call to claim listing
+    Rank higher if you get an account, no one with an account can rank lower than a listing without an account (maybe list as a feature in free; higher rank for having a free account)
+    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
+    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
 Offer post type (future)
     Status
     Pay with structure
@@ -122,6 +134,18 @@ DB Indexes
         build index from listing list in user data
         get rid of listings list in user data once it is deprecated
 SEO
+    single listing pages
+        figure out what i need to do to get a rich google result with the listing pages
+        stand alone video objects to qualify for rich result
+        make sure data can be indexed even though it is hidden behind x-show and x-cloak
+    rock bands in austin type pages
+        maybe add venues played and venue schema as well for those
+        keep filter code out of index by lazy loading it
+        add more data to the image object schema and video object schema; description for videos
+        add other location same category internal links
+        add location pages
+        add breadcrumb
+    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
         free verification for artist backlink
@@ -133,19 +157,8 @@ SEO
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
-    single listing pages
-        figure out what i need to do to get a rich google result with the listing pages
-        stand alone video objects to qualify for rich result
-    rock bands in austin type pages
-        maybe add venues played and venue schema as well for those
-        keep filter code out of index by lazy loading it
-        add more data to the image object schema and video object schema; description for videos
-        add other location same category internal links
-        add location pages
-        add breadcrumb
     **Venue schema on venue pages with reviews
     add best x in x listacle blog posts
-    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
 Glossaries
     add other glossaries section at the bottom of single-glossary
 Users
@@ -207,6 +220,7 @@ Advanced inquiries
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     Offer accept edit reject workflow
         Compare listings side by side in offers tab on inquiry page (show offer, media, link to convo in sidebar; show messages in message body area)
+        need to make it clear buyers should specify performance duration, equipment needed, and ensemble size if possible
     allow delete/expire event
     allow just send direct message for other kind of inquiry that is not for an event
     only get non expired listings for eventsMap
@@ -268,6 +282,7 @@ Listing page
     add set lists with set length and repertoire
     instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
     allow collecting deposits
+    create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady

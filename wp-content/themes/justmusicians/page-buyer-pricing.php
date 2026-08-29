@@ -13,10 +13,23 @@ $tiers = [
         'price_desc'  => '/month',
         'description' => 'Everything you need to hire musicians.',
         'features'    => [
-            'Unlimited inquiries to musicians',
-            'Up to 4 events/month',
-            'Up to 1 Musician Application',
-            'Create Collections of musicians',
+            [
+                'text'    => 'Unlimited Inquiries',
+                'tooltip' => 'Send unlimited inquiries to musicians for your events',
+            ],
+            [
+                'text'    => 'Unlimited Collections',
+                'tooltip' => 'Create unlimited collections. A collection is like a custom favorites list where you can save musician listings.',
+            ],
+            [
+                'text'    => 'Up to 4 Events/month',
+                'tooltip' => 'Create up to 4 events per calendar month. Creating an event allows you to send an inquiry to many musicians with the same details with one click.',
+            ],
+            [
+                'text'    => 'Up to 1 Musician Application',
+                'tooltip' => 'Musician Applications allow you to collect applicants for your event or venue. Share your application link where musicians can find it and manage your applicants from your dashboard.',
+            ],
+            'Export applicants with email addresses',
         ],
     ],
     [
@@ -27,9 +40,18 @@ $tiers = [
         'description' => 'Everything in Free Tier plus unlimited usage and multi user.',
         'features'    => [
             'Everything in Free Tier',
-            'Unlimited Events',
-            'Unlimited Musician Applications',
-            'Share Musician Applications with other users',
+            [
+                'text'    => 'Unlimited Events',
+                'tooltip' => 'Create and manage as many events as you need without any monthly limits.',
+            ],
+            [
+                'text'    => 'Unlimited Musician Applications',
+                'tooltip' => 'Musician Applications allow you to collect applicants for your event or venue. Share your application link where musicians can find it and manage your applicants from your dashboard.',
+            ],
+            [
+                'text'    => 'Share Musician Applications with other users',
+                'tooltip' => 'Collaborate with your team by sharing applications with view or edit access.',
+            ],
         ],
     ],
     [
@@ -40,6 +62,7 @@ $tiers = [
         'description' => 'Everything in Pro for a one time payment.',
         'features'    => [
             'Everything in Pro Talent Buyer',
+            'Lifetime access — no recurring fees',
         ],
     ],
 ];
@@ -91,12 +114,16 @@ get_header();
                 <?php } ?>
 
                 <ul class="mt-8 space-y-3 flex-1">
-                    <?php foreach ($tier['features'] as $feature) { ?>
+                    <?php foreach ($tier['features'] as $feature) {
+                        $text    = is_array($feature) ? $feature['text'] : $feature;
+                        $tooltip = is_array($feature) ? ($feature['tooltip'] ?? '') : '';
+                    ?>
                         <li class="flex items-start gap-x-3 text-14">
-                            <svg class="h-5 w-5 shrink-0 text-yellow mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-                            </svg>
-                            <?php echo $feature; ?>
+                            <img class="h-5 w-5 shrink-0 text-yellow mt-0.5" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/yellow-check.svg" />
+                            <span><?php echo $text; ?></span>
+                            <?php if ($tooltip) { ?>
+                                <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', ['tooltip' => $tooltip]); ?>
+                            <?php } ?>
                         </li>
                     <?php } ?>
                 </ul>
