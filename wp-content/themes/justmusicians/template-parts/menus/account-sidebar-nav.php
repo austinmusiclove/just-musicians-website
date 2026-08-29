@@ -14,6 +14,10 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
         ></span>
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Account</span>
     </a>
+    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/subscriptions/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/subscriptions/'); ?>">
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" />
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Subscriptions</span>
+    </a>
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/collections/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/collections/'); ?>">
         <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Collections</span>
