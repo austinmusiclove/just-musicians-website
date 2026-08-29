@@ -7,12 +7,14 @@ function custom_password_reset_email($message, $key, $user_login, $user_data) {
         'key' => $key
     ), site_url('password-reset'));
 
+    $display_name = !empty($user_data->display_name) ? $user_data->display_name : $user_login;
+
     // Customize your email message
-    $message = "Hello, $user_login\n\n";
-    $message .= "We received a request to reset your password. Please click the link below to reset your password:\n\n";
+    $message = "Hello, $display_name\n\n";
+    $message .= "Please click the link below to set your password and log in:\n\n";
     $message .= $reset_url . "\n\n";
     $message .= "If you didn't request this, you can safely ignore this email.\n\n";
-    $message .= "Thanks,\nHire Musicians";
+    $message .= "Thanks,\nHire Musicians Team";
 
     return $message;
 }

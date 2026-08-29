@@ -12,14 +12,17 @@ Critical bugs
 Applications Features to add
     Paywall
         Features page where you can see what you get with the plan
-            DONE - add a custom page for password reset
             DONE - make sure only send password reset to new user; not existing user buying a plan
-            DONE - split off into helper functions for each event type from checkout plugin
-            DONE - add tooltips explaining features
-            DONE - add ability to add and remove custom capabilities in user page in wp admin with lib file in functions.php
-            DONE - remove ability for subscriber users to see wp admin
-            make sure email verification happens either after set up or just set it
+            DONE - set the first name and last name right in email to reset password
+            DONE - make user logged in after buy and register
+            DONE - pass reset, account activation, and admin notification email for restiered user and not logged in user buy
+            need a confirmation email for subscribing
+            need to create checkout success page; http://localhost/checkout/success?session_id=cs_test_a1Lj6vqyMoDNycnx2oWrOal8FhBQXoB9tEtvjhQ8luRc12t00dGLZyfWbD
             schema for pricing page
+            if user is already subscribed, disable their get started button and change to a my subscription button; but still allow lifetime subscription
+            lifetime needs to be a separate capability; and in mu-plugins/applications-api/authorization.php it should allow if it has either one
+            log more info for ingored stripe event
+            figure out what happens when a non logged in user buys a plan with an email that is registered; figure out if we have to tack on a number to the end of the user login if the email exists
         Limit free accounts with feature flags
             limit to 4 events per month
             DONE - limit to 1 application
