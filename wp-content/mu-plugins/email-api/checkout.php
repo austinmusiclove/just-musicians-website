@@ -26,3 +26,21 @@ function notify_duplicate_stripe_customer($email, $old_customer_id, $new_custome
     send_email_to_hm_admin($subject, $message);
     error_log('Duplicate Stripe customer detected: email=' . $email . ', old=' . $old_customer_id . ', new=' . $new_customer_id . ', session=' . $session_id);
 }
+
+function send_subscription_cancelled_email_to_admin($user_id, $customer_id, $subscription_id) {
+    $user          = get_userdata($user_id);
+    $email         = $user ? $user->user_email : 'N/A';
+    $display_name  = $user ? $user->display_name : 'N/A';
+    $customer_link = 'https://dashboard.stripe.com/customers/' . $customer_id;
+
+    $subject = 'Subscription cancelled — ' . home_url();
+    $message = "A Talent Buyer Pro subscription has been cancelled.\n\n";
+    $message .= "User: {$display_name}\n";
+    $message .= "Email: {$email}\n";
+    $message .= "User ID: {$user_id}\n";
+    $message .= "Subscription ID: {$subscription_id}\n";
+    $message .= "Stripe customer: {$customer_id}\n{$customer_link}\n\n";
+    $message .= "The user's Pro access has been removed.";
+
+    send_email_to_hm_admin($subject, $message);
+}

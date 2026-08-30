@@ -15,18 +15,9 @@ Critical bugs
 Applications Features to add
     Paywall
         Cancel subscription
-            checkout
-                handle cancel subscription
-                handle subscription not paid; card didn't work etc. take away subscription
-                handle customer.subscription.deleted for deleting subscription from stripe
-                check to see which other events i might want to handle including error states
+            handle customer.subscription.deleted for deleting subscription from stripe
         Upsell locations in the current workflow
-            Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
-            Limit users to one application unless admin or premium subscription
-            Show add dates option in set up form but show an upsell message when you try to use it
-            replace link to blog in header with venues link to this page "Pricing"
             add premium link under buyers in menus
-            when creating an inquiry for new event, don't allow dates in month where limit reached
         Tests
             Testing buy monthly - new user
             Testing buy monthly - existing user
@@ -112,9 +103,15 @@ My Gigs page (for musicians)
     Allow recommending another band when you decline a gig
 Event Form page
     Allow venue location
+Subscriptions
+    Delay cancelling of capabilities until end of current pay period
+    Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
+    Link in fail to create event/application in fail toast
+    when creating an inquiry for new event, don't allow dates in month where limit reached
 Claimable listings
     Claim button shows where to book a call to claim listing
     Rank higher if you get an account, no one with an account can rank lower than a listing without an account (maybe list as a feature in free; higher rank for having a free account)
+    Mark listings as unclaimed in back end
     Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
     Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
 Offer post type (future)

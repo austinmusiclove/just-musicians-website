@@ -23,7 +23,8 @@ function handle_stripe_webhook(WP_REST_Request $request) {
     }
 
     $handlers = [
-        'checkout.session.completed' => 'handle_stripe_checkout_session_completed',
+        'checkout.session.completed'    => 'handle_stripe_checkout_session_completed',
+        'customer.subscription.deleted' => 'handle_stripe_customer_subscription_deleted',
     ];
 
     if (isset($handlers[$event->type])) {
