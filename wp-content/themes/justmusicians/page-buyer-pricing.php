@@ -5,13 +5,15 @@
  * @package JustMusicians
  */
 
-$tiers = [
+$products = [
     [
         'name'        => 'Free Tier',
-        'product'     => 'free-tier',
+        'schema_name' => 'Talent Buyer Pro Free Tier',
+        'slug'        => 'free-tier',
         'price'       => '$0',
         'price_desc'  => '/month',
         'description' => 'Everything you need to hire musicians.',
+        'schema_description' => 'Talent Buyer Pro Free Tier includes everything you need to hire musicians. Send unlimited inquiries to musicians, create unlimited collections of musicians, create up to 4 events per calendar month, create up to 1 musician application and export applicants to csv with email addresses.',
         'features'    => [
             [
                 'text'    => 'Unlimited Inquiries',
@@ -34,7 +36,8 @@ $tiers = [
     ],
     [
         'name'        => 'Talent Buyer Pro',
-        'product'     => 'buyer-pro-monthly',
+        'schema_name' => 'Talent Buyer Pro',
+        'slug'        => 'buyer-pro-monthly',
         'price'       => '$39',
         'price_desc'  => '/month',
         'description' => 'Everything in Free Tier plus unlimited usage and multi user.',
@@ -56,7 +59,8 @@ $tiers = [
     ],
     [
         'name'        => 'Lifetime Pro Membership',
-        'product'     => 'buyer-pro-lifetime',
+        'schema_name' => 'Talent Buyer Pro Lifetime Membership',
+        'slug'        => 'buyer-pro-lifetime',
         'price'       => '$349',
         'price_desc'  => 'one time',
         'description' => 'Everything in Pro for a one time payment.',
@@ -79,26 +83,26 @@ get_header();
 
 <div class="container py-8 md:py-12">
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
-        <?php foreach ($tiers as $tier) { ?>
+        <?php foreach ($products as $product) { ?>
             <div class="border border-black/20 rounded p-8 flex flex-col">
-                <h2 class="font-sun-motter text-25"><?php echo $tier['name']; ?></h2>
+                <h2 class="font-sun-motter text-25"><?php echo $product['name']; ?></h2>
 
                 <p class="mt-6 flex items-baseline gap-x-1">
-                    <span class="text-40 font-bold"><?php echo $tier['price']; ?></span>
-                    <span class="text-14 font-semibold"><?php echo $tier['price_desc']; ?></span>
+                    <span class="text-40 font-bold"><?php echo $product['price']; ?></span>
+                    <span class="text-14 font-semibold"><?php echo $product['price_desc']; ?></span>
                 </p>
 
-                <p class="mt-3 text-14"><?php echo $tier['description']; ?></p>
+                <p class="mt-3 text-14"><?php echo $product['description']; ?></p>
 
                 <?php
                 $owns_product = false;
                 if (is_user_logged_in()) {
                     $user_caps = wp_get_current_user()->allcaps;
-                    if ($tier['product'] === 'buyer-pro-monthly') {
+                    if ($product['slug'] === 'buyer-pro-monthly') {
                         $owns_product = !empty($user_caps['hm_buyer_pro']) || !empty($user_caps['hm_buyer_pro_lifetime']);
-                    } elseif ($tier['product'] === 'buyer-pro-lifetime') {
+                    } elseif ($product['slug'] === 'buyer-pro-lifetime') {
                         $owns_product = !empty($user_caps['hm_buyer_pro_lifetime']);
-                    } elseif ($tier['product'] === 'free-tier') {
+                    } elseif ($product['slug'] === 'free-tier') {
                         $owns_product = is_user_logged_in();
                     }
                 }
@@ -107,7 +111,7 @@ get_header();
                 <!-- CTA -->
                 <?php if ($owns_product) { ?>
                     <a href="<?php echo site_url('/subscriptions/'); ?>" class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">Manage My Subscriptions</a>
-                <?php } elseif ($tier['product'] === 'free-tier') { ?>
+                <?php } elseif ($product['slug'] === 'free-tier') { ?>
                     <button type="button"
                         x-on:click="showSignupModal = true"
                         class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold"
@@ -118,7 +122,7 @@ get_header();
                         hx-post="<?php echo site_url('/wp-html/v1/checkout'); ?>"
                         hx-target="#get-started-results"
                     >
-                        <input type="hidden" name="product" value="<?php echo esc_attr($tier['product']); ?>">
+                        <input type="hidden" name="product" value="<?php echo esc_attr($product['slug']); ?>">
                         <button type="submit" class="w-full flex justify-center rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">
                             <span class="htmx-indicator-component-block-replace">Get Started</span>
                             <span class="htmx-indicator-component-block">
@@ -131,7 +135,7 @@ get_header();
                 <?php } ?>
 
                 <ul class="mt-8 space-y-3 flex-1">
-                    <?php foreach ($tier['features'] as $feature) {
+                    <?php foreach ($product['features'] as $feature) {
                         $text    = is_array($feature) ? $feature['text'] : $feature;
                         $tooltip = is_array($feature) ? ($feature['tooltip'] ?? '') : '';
                     ?>
@@ -148,5 +152,7 @@ get_header();
         <?php } ?>
     </div>
 </div>
+
+<?php get_template_part('template-parts/global/schema/offer-schema', '', ['offers' => $products]); ?>
 
 <?php get_footer(); ?>
