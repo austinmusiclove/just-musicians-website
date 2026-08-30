@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 require_once get_template_directory() . '/lib/php/stripe-php/init.php';
 require_once __DIR__ . '/stripe-checkout/checkout-session-completed.php';
+require_once __DIR__ . '/stripe-checkout/webhook.php';
 
 add_action('rest_api_init', function () {
     register_rest_route('stripe-checkout/v1', 'webhook', [
@@ -19,37 +20,17 @@ add_action('rest_api_init', function () {
     ]);
 });
 
-function handle_stripe_webhook(WP_REST_Request $request) {
-    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
-
-    $payload    = $request->get_body();
-    $sig_header = $request->get_header('stripe-signature');
-
-    if (empty($sig_header)) {
-        return new WP_Error('missing_signature', 'Missing Stripe signature header', ['status' => 400]);
-    }
-
-    try {
-        $event = \Stripe\Webhook::constructEvent(
-            $payload,
-            $sig_header,
-            defined('STRIPE_WEBHOOK_SECRET') ? STRIPE_WEBHOOK_SECRET : ''
-        );
-    } catch (\UnexpectedValueException $e) {
-        return new WP_Error('invalid_payload', 'Invalid payload', ['status' => 400]);
-    } catch (\Stripe\Exception\SignatureVerificationException $e) {
-        return new WP_Error('invalid_signature', 'Invalid signature', ['status' => 400]);
-    }
-
-    $handlers = [
-        'checkout.session.completed' => 'handle_stripe_checkout_session_completed',
+function hm_stripe_valid_products() {
+    return [
+        'buyer-pro-monthly'  => [
+            'name'         => 'Talent Buyer Pro',
+            'capabilities' => ['hm_buyer_pro'],
+            'price_id'     => defined('STRIPE_PRO_PRICE_ID') ? STRIPE_PRO_PRICE_ID : '',
+        ],
+        'buyer-pro-lifetime' => [
+            'name'         => 'Talent Buyer Pro Lifetime Membership',
+            'capabilities' => ['hm_buyer_pro', 'hm_buyer_pro_lifetime'],
+            'price_id'     => defined('STRIPE_LIFETIME_PRICE_ID') ? STRIPE_LIFETIME_PRICE_ID : '',
+        ],
     ];
-
-    if (isset($handlers[$event->type])) {
-        return $handlers[$event->type]($event->data->object);
-    }
-
-    error_log('Unhandled Stripe event: ' . $event->type);
-    error_log('Unhanlded Stripe event payload: ' . wp_json_encode($event, JSON_PRETTY_PRINT));
-    return new WP_REST_Response(['status' => 'ignored', 'type' => $event->type], 200);
 }

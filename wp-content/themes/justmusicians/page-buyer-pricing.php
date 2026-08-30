@@ -5,7 +5,7 @@
  * @package JustMusicians
  */
 
-$products = [
+$offers = [
     [
         'name'        => 'Free Tier',
         'schema_name' => 'Talent Buyer Pro Free Tier',
@@ -83,17 +83,18 @@ get_header();
 
 <div class="container py-8 md:py-12">
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
-        <?php foreach ($products as $product) { ?>
+        <?php foreach ($offers as $product) { ?>
             <div class="border border-black/20 rounded p-8 flex flex-col">
                 <h2 class="font-sun-motter text-25"><?php echo $product['name']; ?></h2>
 
+                <!-- Product details -->
                 <p class="mt-6 flex items-baseline gap-x-1">
                     <span class="text-40 font-bold"><?php echo $product['price']; ?></span>
                     <span class="text-14 font-semibold"><?php echo $product['price_desc']; ?></span>
                 </p>
-
                 <p class="mt-3 text-14"><?php echo $product['description']; ?></p>
 
+                <!-- CTA -->
                 <?php
                 $owns_product = false;
                 if (is_user_logged_in()) {
@@ -106,10 +107,7 @@ get_header();
                         $owns_product = is_user_logged_in();
                     }
                 }
-                ?>
-
-                <!-- CTA -->
-                <?php if ($owns_product) { ?>
+                if ($owns_product) { ?>
                     <a href="<?php echo site_url('/subscriptions/'); ?>" class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">Manage My Subscriptions</a>
                 <?php } elseif ($product['slug'] === 'free-tier') { ?>
                     <button type="button"
@@ -134,6 +132,7 @@ get_header();
 
                 <?php } ?>
 
+                <!-- Features -->
                 <ul class="mt-8 space-y-3 flex-1">
                     <?php foreach ($product['features'] as $feature) {
                         $text    = is_array($feature) ? $feature['text'] : $feature;
@@ -148,11 +147,12 @@ get_header();
                         </li>
                     <?php } ?>
                 </ul>
+
             </div>
         <?php } ?>
     </div>
 </div>
 
-<?php get_template_part('template-parts/global/schema/offer-schema', '', ['offers' => $products]); ?>
+<?php get_template_part('template-parts/global/schema/offer-schema', '', ['offers' => $offers]); ?>
 
 <?php get_footer(); ?>

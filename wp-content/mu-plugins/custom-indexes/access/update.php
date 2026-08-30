@@ -1,5 +1,6 @@
 <?php
 
+add_action('wp_trash_post', 'hm_access_on_delete_post', 20);
 add_action('delete_post', 'hm_access_on_delete_post', 20);
 add_action('transition_post_status', 'hm_access_on_new_post', 20, 3);
 

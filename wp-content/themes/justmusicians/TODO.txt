@@ -13,20 +13,12 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Paywall
-        Features page where you can see what you get with the plan
-            DONE - only require first and last name if no account
-            DONE - lifetime needs to be a separate capability; and in mu-plugins/applications-api/authorization.php it should allow if it has either one
-            FIXED - lifetime subscribe not working
-            if you buy lifetime, cancel the monthly if active
-            if user is already subscribed, disable their get started button and change to a my subscription button; but still allow lifetime subscription
-            figure out what happens when a non logged in user buys a plan with an email that is registered; figure out if we have to tack on a number to the end of the user login if the email exists
-            schema for pricing page
-            log more info for ingored stripe event
         Limit free accounts with feature flags
             limit to 4 events per month
-            DONE - limit to 1 application
         Cancel subscription
             Show option to cancel subscription if monthly
+            Show subscriptions based on capabilities not user meta tier
+            fix copy on subscription description for talent buyer pro level
             empty state for subscriptions page
             link pricing page for buyers
             handle subscription not paid; card didn't work etc. take away subscription
@@ -38,6 +30,7 @@ Applications Features to add
             Show add dates option in set up form but show an upsell message when you try to use it
             replace link to blog in header with venues link to this page "Pricing"
             add premium link under buyers in menus
+            when creating an inquiry for new event, don't allow dates in month where limit reached
         Tests
             Testing buy monthly - new user
             Testing buy monthly - existing user
@@ -46,7 +39,11 @@ Applications Features to add
             Ability to add 5th event for month
             Ability to add 2nd application
             Test buy monthly then lifetime; monthly gets cancelled
+            Test buy monthly then lifetime; monthly gets cancelled (with same email but different case; should still work)
             Test buyer pricing page button states when logged in (free) and have existing subscriptions
+            Test try to buy a plan logged out with an email that is registered and has that plan
+            Test try to buy a plan logged out with an email that is registered and does not have a plan
+            Test cancel subscription
     Share application access features
         copy link button in share modal
         scroll emails with access

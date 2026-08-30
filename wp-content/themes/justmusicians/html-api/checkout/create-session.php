@@ -9,17 +9,13 @@ require_once get_template_directory() . '/lib/php/stripe-php/init.php';
 
 $product = sanitize_text_field(wp_unslash($_POST['product'] ?? ''));
 
-$price_map = [
-    'buyer-pro-monthly'  => defined('STRIPE_PRO_PRICE_ID') ? STRIPE_PRO_PRICE_ID : '',
-    'buyer-pro-lifetime' => defined('STRIPE_LIFETIME_PRICE_ID') ? STRIPE_LIFETIME_PRICE_ID : '',
-];
-
-if (empty($product) || empty($price_map[$product])) { ?>
+$valid_products = hm_stripe_valid_products();
+if (empty($product) || !isset($valid_products[$product]) || empty($valid_products[$product]['price_id'])) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Invalid product selected' })"></span>
     <?php exit;
 }
 
-$price_id = $price_map[$product];
+$price_id = $valid_products[$product]['price_id'];
 $is_lifetime = ($product === 'buyer-pro-lifetime');
 
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);

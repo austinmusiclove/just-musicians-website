@@ -78,7 +78,7 @@ function user_can_create_application() {
         return true;
     }
 
-    return new WP_Error('unauthorized', 'You are limited to one application. Upgrade to Pro for unlimited applications.');
+    return new WP_Error('unauthorized', 'You are limited to one application with your account. Upgrade to Talent Buyer Pro for unlimited applications.');
 }
 
 function user_can_update_application_submission($submission_id) {
