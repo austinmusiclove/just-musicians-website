@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once get_template_directory() . '/lib/php/stripe-php/init.php';
 require_once __DIR__ . '/stripe-checkout/checkout-session-completed.php';
 require_once __DIR__ . '/stripe-checkout/webhook.php';
+require_once __DIR__ . '/stripe-checkout/cancel-subscription.php';
 
 add_action('rest_api_init', function () {
     register_rest_route('stripe-checkout/v1', 'webhook', [

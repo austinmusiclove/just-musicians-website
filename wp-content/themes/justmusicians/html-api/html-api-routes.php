@@ -103,6 +103,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/checkout/create-session.php'; exit;
             }
+        case 'cancel-subscription':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/checkout/cancel-subscription.php'; exit;
+            }
 
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {

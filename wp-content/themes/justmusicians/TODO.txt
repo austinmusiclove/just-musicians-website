@@ -15,14 +15,11 @@ Critical bugs
 Applications Features to add
     Paywall
         Cancel subscription
-            Show option to cancel subscription if monthly
-            Show subscriptions based on capabilities not user meta tier
-            fix copy on subscription description for talent buyer pro level
-            empty state for subscriptions page
-            link pricing page for buyers
-            handle subscription not paid; card didn't work etc. take away subscription
-            check to see which other events i might want to handle including error states
-            handle customer.subscription.deleted for deleting subscription from stripe
+            checkout
+                handle cancel subscription
+                handle subscription not paid; card didn't work etc. take away subscription
+                handle customer.subscription.deleted for deleting subscription from stripe
+                check to see which other events i might want to handle including error states
         Upsell locations in the current workflow
             Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
             Limit users to one application unless admin or premium subscription
