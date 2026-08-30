@@ -4,6 +4,7 @@ Deploy
     Checkout Success page
     Subscriptions page
 Critical bugs
+    the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
     Pages are indexed that should not be and vis versa
@@ -13,8 +14,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Paywall
-        Limit free accounts with feature flags
-            limit to 4 events per month
         Cancel subscription
             Show option to cancel subscription if monthly
             Show subscriptions based on capabilities not user meta tier
@@ -141,6 +140,7 @@ SEO
         figure out what i need to do to get a rich google result with the listing pages
         stand alone video objects to qualify for rich result
         make sure data can be indexed even though it is hidden behind x-show and x-cloak
+        get knowledge pannel like it shows up for "texas violinist" from their gig salad page
     rock bands in austin type pages
         maybe add venues played and venue schema as well for those
         keep filter code out of index by lazy loading it
@@ -233,6 +233,7 @@ Advanced inquiries
     calendly like tool for allowing artists to give you their availability for a group of dates/times
     add settings (hotel, bar, restaurant) to quiz
 Messages
+    send message directly to musicain without event for Talent Buyer Pro
     profile image(s) in conversation next to title
     show read receipt
         in get_conversation_messages() in user-messages.php
@@ -254,6 +255,7 @@ Search algo update
         2 - Profile Age (post_id tie breaker)
         Show Relevant Media as thumbnail based on search
 Listing form
+    back to listings button
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
@@ -271,6 +273,7 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
 Listing page
+    add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
     *add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
     *add ticket sales numbers self reported by artists
     add gear list
@@ -292,6 +295,7 @@ Media slider
     ***video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
+    open video in modal (maybe only in listing page)
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
