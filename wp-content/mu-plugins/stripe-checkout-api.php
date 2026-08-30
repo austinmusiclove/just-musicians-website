@@ -50,5 +50,6 @@ function handle_stripe_webhook(WP_REST_Request $request) {
     }
 
     error_log('Unhandled Stripe event: ' . $event->type);
+    error_log('Unhanlded Stripe event payload: ' . wp_json_encode($event, JSON_PRETTY_PRINT));
     return new WP_REST_Response(['status' => 'ignored', 'type' => $event->type], 200);
 }
