@@ -107,6 +107,13 @@
                     ></span>
                     Applications
                 </a>
+
+                <?php if (!current_user_can('hm_buyer_pro') && !current_user_can('hm_buyer_pro_lifetime')) { ?>
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/buyer-pricing/'); ?>">
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/bolt.svg'; ?>" />
+                    Upgrade
+                </a>
+                <?php } ?>
             </div>
 
         </div>

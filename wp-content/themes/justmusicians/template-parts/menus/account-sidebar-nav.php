@@ -70,6 +70,13 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Applications</span>
     </a>
 
+    <?php if (!current_user_can('hm_buyer_pro') && !current_user_can('hm_buyer_pro_lifetime')) { ?>
+    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo site_url('/buyer-pricing/'); ?>">
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/bolt.svg'; ?>" />
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Upgrade</span>
+    </a>
+    <?php } ?>
+
     <hr class="my-2 border-black/10" />
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo wp_logout_url('/'); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />

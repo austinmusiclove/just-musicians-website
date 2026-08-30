@@ -14,23 +14,18 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Paywall
-        Cancel subscription
-            handle customer.subscription.deleted for deleting subscription from stripe
-        Upsell locations in the current workflow
-            add premium link under buyers in menus
-        Tests
-            Testing buy monthly - new user
-            Testing buy monthly - existing user
-            Testing buy one time payment - new user
-            Testing buy one time payment - existing user
-            Ability to add 5th event for month
-            Ability to add 2nd application
-            Test buy monthly then lifetime; monthly gets cancelled
-            Test buy monthly then lifetime; monthly gets cancelled (with same email but different case; should still work)
-            Test buyer pricing page button states when logged in (free) and have existing subscriptions
-            Test try to buy a plan logged out with an email that is registered and has that plan
-            Test try to buy a plan logged out with an email that is registered and does not have a plan
-            Test cancel subscription
+        Testing buy monthly - new user
+        Testing buy monthly - existing user
+        Testing buy one time payment - new user
+        Testing buy one time payment - existing user
+        Test ability to add 5th event for month
+        Test ability to add 2nd application
+        Test buy monthly then lifetime; monthly gets cancelled
+        Test buy monthly then lifetime; monthly gets cancelled (with same email but different case; should still work)
+        Test buyer pricing page button states when logged in (free) and have existing subscriptions
+        Test try to buy a plan logged out with an email that is registered and has that plan
+        Test try to buy a plan logged out with an email that is registered and does not have a plan
+        Test cancel subscription
     Share application access features
         copy link button in share modal
         scroll emails with access
