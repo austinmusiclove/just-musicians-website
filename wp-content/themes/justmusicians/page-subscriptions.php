@@ -1,16 +1,15 @@
 <?php
 
-if (!is_user_logged_in()) { wp_redirect(site_url()); } // Don't allow non logged in users to see this page
-
 $user = wp_get_current_user();
-$is_pro_buyer = $user->has_cap('hm_buyer_pro');
-$tier = get_user_meta($user->ID, 'membership_tier', true);
+$is_logged_in = is_user_logged_in();
+$is_pro_buyer = $is_logged_in && $user->has_cap('hm_buyer_pro');
+$tier = $is_logged_in ? get_user_meta($user->ID, 'membership_tier', true) : '';
 
 $tier_names = [
     'buyer-pro-monthly'  => 'Pro Talent Buyer (Monthly)',
     'buyer-pro-lifetime' => 'Pro Talent Buyer (Lifetime)',
 ];
-$tier_name = $tier_names[$tier] ?? ($is_pro_buyer ? 'Pro Talent Buyer' : 'Free Tier');
+$tier_name = $tier ? $tier_names[$tier] : ($is_pro_buyer ? 'Pro Talent Buyer' : 'Free Tier');
 
 get_header();
 
@@ -24,12 +23,18 @@ get_header();
                   <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col sm:col-span-4 md:col-span-3 py-6 md:py-12">
+            <div class="col md:col-span-6 py-6 md:py-12">
 
                 <!-- Heading -->
                 <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
-                    <a href="/subscriptions"><h1 class="font-bold text-22 sm:text-25">My Subscription</h1></a>
+                    <a href="/subscriptions"><h1 class="font-bold text-22 sm:text-25">My Subscriptions</h1></a>
                 </div>
+
+                <?php if (!$is_logged_in) { ?>
+
+                    <?php echo get_template_part('template-parts/global/empty-states/sign-in-to-access', '', [ 'message' => 'see your subscriptions' ]); ?>
+
+                <?php } else { ?>
 
                 <div class="flex flex-col gap-6 md:col-span-6 pb-4">
 
@@ -45,7 +50,7 @@ get_header();
                             </p>
                             <a class="mt-6 inline-block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold"
                                href="<?php echo site_url('/buyer-pricing/'); ?>"
-                            >Manage Subscription</a>
+                            >Manage Subscriptions</a>
                         </div>
 
                     <?php } else { ?>
@@ -63,6 +68,8 @@ get_header();
                     <?php } ?>
 
                 </div>
+
+                <?php } ?>
 
             </div>
         </div>
