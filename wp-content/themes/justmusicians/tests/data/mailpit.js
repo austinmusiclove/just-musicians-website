@@ -18,6 +18,18 @@ export async function findEmailBySubject(subject, mailpitApiUrl, { timeout = 100
     return null;
 }
 
+export async function findEmailTo(recipient, subject, mailpitApiUrl, { timeout = 10000, interval = 500 } = {}) {
+    const deadline = Date.now() + timeout;
+    while (Date.now() < deadline) {
+        const res = await fetch(`${mailpitApiUrl}/search?query=${encodeURIComponent('subject:' + subject)}`);
+        const data = await res.json();
+        const match = data.messages?.find(m => m.To?.some(t => t.Address === recipient));
+        if (match) return match;
+        await new Promise(r => setTimeout(r, interval));
+    }
+    return null;
+}
+
 export async function getEmailBody(messageId, mailpitApiUrl) {
     const res = await fetch(`${mailpitApiUrl}/message/${messageId}`);
     const data = await res.json();

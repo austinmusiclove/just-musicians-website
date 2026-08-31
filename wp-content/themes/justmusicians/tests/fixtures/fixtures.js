@@ -14,7 +14,7 @@ import { InquiryModalPage } from '../pages/InquiryModalPage.js';
 import { MyGigsPage } from '../pages/MyGigsPage.js';
 import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
-import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
+import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
@@ -36,6 +36,7 @@ export const test = base.extend({
             apiUrl: mailpitApiUrl,
             siteUrl: baseURL,
             findEmailBySubject: (subject, opts) => findEmail(subject, mailpitApiUrl, opts),
+            findEmailTo: (recipient, subject, opts) => findEmailToRecipient(recipient, subject, mailpitApiUrl, opts),
             waitForMessageEmail: (subject, opts) => waitForMessage(subject, mailpitApiUrl, request, opts),
             getEmailBody: (messageId) => getEmail(messageId, mailpitApiUrl),
             extractLinkFromEmail: extractLink,

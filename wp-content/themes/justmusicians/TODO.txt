@@ -15,7 +15,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Paywall
-        Testing buy monthly - new user
         Testing buy one time payment - new user
         Testing buy one time payment - existing user
         Test ability to add 5th event for month
