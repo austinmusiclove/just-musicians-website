@@ -6,7 +6,7 @@ test.describe('Visual - Subscriptions - Buyer', () => {
 
     test('logged out shows the sign-in prompt and no subscription cards', async ({ subscriptionsPage }) => {
         await subscriptionsPage.navigate('/subscriptions/');
-        await expect(subscriptionsPage.page.getByText('Sign in to see your subscriptions', { exact: true })).toBeVisible();
+        await expect(subscriptionsPage.loginModalHeading).toHaveText('Sign in to see your subscriptions');
         await expect(subscriptionsPage.buyerFreeCard).toHaveCount(0);
         await expect(subscriptionsPage.buyerProCard).toHaveCount(0);
         await expect(subscriptionsPage.buyerProLifetimeCard).toHaveCount(0);
