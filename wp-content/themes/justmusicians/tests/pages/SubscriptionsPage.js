@@ -4,6 +4,7 @@ export class SubscriptionsPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
         this.buyerProCard = page.getByTestId('subscription-card-buyer-pro');
+        this.buyerProLifetimeCard = page.getByTestId('subscription-card-buyer-pro-lifetime');
     }
 
     async navigate(url = '/subscriptions/') {
@@ -14,7 +15,7 @@ export class SubscriptionsPage extends ThemePage {
         return card.getByRole('heading');
     }
 
-    cardButton(card, name) {
-        return card.getByRole('button', { name });
+    cardButton(card) {
+        return card.getByRole('button');
     }
 }

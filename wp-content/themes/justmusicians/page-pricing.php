@@ -108,7 +108,7 @@ get_header();
                     }
                 }
                 if ($owns_product) { ?>
-                    <a href="<?php echo site_url('/subscriptions/'); ?>" class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">Manage My Subscriptions</a>
+                    <a href="<?php echo site_url('/subscriptions/'); ?>"><button class="mt-8 block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold">Manage My Subscriptions</button></a>
                 <?php } elseif ($product['slug'] === 'free-tier') { ?>
                     <button type="button"
                         x-on:click="showSignupModal = true"

@@ -39,7 +39,7 @@ get_header();
 
                     <?php if ($has_lifetime) { ?>
 
-                        <div class="border border-black/20 rounded p-6">
+                        <div class="border border-black/20 rounded p-6" data-testid="subscription-card-buyer-pro-lifetime">
                             <div class="flex items-center justify-between">
                                 <h2 class="font-bold text-18">Talent Buyer Pro Lifetime Membership</h2>
                                 <span class="text-14 font-semibold bg-navy text-white px-2 py-0.5 rounded-full capitalize">Active</span>
