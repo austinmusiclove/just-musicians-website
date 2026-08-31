@@ -51,7 +51,7 @@ get_header();
 
                     <?php } elseif ($has_pro) { ?>
 
-                        <div class="border border-black/20 rounded p-6">
+                        <div class="border border-black/20 rounded p-6" data-testid="subscription-card-buyer-pro">
                             <div class="flex items-center justify-between">
                                 <h2 class="font-bold text-18">Talent Buyer Pro</h2>
                                 <span class="text-14 font-semibold bg-navy text-white px-2 py-0.5 rounded-full capitalize">Active</span>
@@ -81,7 +81,7 @@ get_header();
                                 You're currently on the free tier. Upgrade to Talent Buyer Pro for advanced features for talent buyers including unlimited applications, events, and multi-user.
                             </p>
                             <a class="mt-6 inline-block rounded bg-yellow hover:bg-navy hover:text-white px-3 py-2 text-center text-14 font-bold"
-                               href="<?php echo site_url('/buyer-pricing/'); ?>"
+                               href="<?php echo site_url('/pricing/'); ?>"
                             >Pricing</a>
                         </div>
 

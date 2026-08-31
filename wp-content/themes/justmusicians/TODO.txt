@@ -3,6 +3,7 @@ Deploy
     save permalinks
     Checkout Success page
     Subscriptions page
+    Pricing Page (remove buyer pricing)
 Critical bugs
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
@@ -15,7 +16,6 @@ Critical bugs
 Applications Features to add
     Paywall
         Testing buy monthly - new user
-        Testing buy monthly - existing user
         Testing buy one time payment - new user
         Testing buy one time payment - existing user
         Test ability to add 5th event for month

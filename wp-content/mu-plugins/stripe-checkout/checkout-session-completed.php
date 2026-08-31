@@ -71,6 +71,9 @@ function handle_stripe_checkout_session_completed($session) {
         // send email verification email
         send_account_activation_email($email, $account_identifier);
     } else {
+        if (!empty($new_customer_id)) {
+            update_user_meta($user->ID, 'stripe_customer_id', $new_customer_id);
+        }
         // if there is a failure to match up the customer id, notify admin
         $old_customer_id = get_user_meta($user->ID, 'stripe_customer_id', true);
         if (!empty($new_customer_id) && !empty($old_customer_id) && $new_customer_id != $old_customer_id) {

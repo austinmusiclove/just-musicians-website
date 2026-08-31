@@ -1,5 +1,7 @@
 import { test as base } from '@playwright/test';
 import { ThemePage } from '../pages/ThemePage.js';
+import { PricingPage } from '../pages/PricingPage.js';
+import { SubscriptionsPage } from '../pages/SubscriptionsPage.js';
 import { ApplicationsPage } from '../pages/ApplicationsPage.js';
 import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
@@ -16,7 +18,7 @@ import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkF
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
-    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
+    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliGetWpConfig,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
@@ -25,6 +27,7 @@ import {
     wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
     wpCliGrantAccess, wpCliRevokeAccess, wpCliQueryAccess,
 } from '../data/wp_cli.js';
+import { buildCheckoutCompletedEvent, postSignedWebhook, generateStripeSignature } from '../data/stripe.js';
 
 export const test = base.extend({
     mailpit: async ({ baseURL, request }, use) => {
@@ -56,6 +59,8 @@ export const test = base.extend({
             createListing: (listingData) => { const id = wpCliCreateListing(listingData); createdPosts.push(id); return id; },
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
+            userHasCap: wpCliUserHasCap,
+            getWpConfig: wpCliGetWpConfig,
             getLatestPostId: wpCliGetLatestPostId,
             getLatestPostIdByType: wpCliGetLatestPostIdByType,
             getPostField: wpCliGetPostField,
@@ -83,9 +88,25 @@ export const test = base.extend({
         if (createdUsers.length) wpCliDeleteUserData(createdUsers);
         for (const u of createdUsers) wpCliDeleteUser(u.email);
     },
+    stripe: async ({ baseURL, request, wpCli }, use) => {
+        const secret = await wpCli.getWpConfig('STRIPE_WEBHOOK_SECRET');
+        await use({
+            buildEvent: buildCheckoutCompletedEvent,
+            sign: (payload) => generateStripeSignature(payload, secret),
+            postWebhook: (event) => postSignedWebhook({ request, baseURL, event, secret }),
+        });
+    },
     themePage: async ({ page, isMobile }, use) => {
         const themePage = new ThemePage(page, isMobile);
         await use(themePage);
+    },
+    pricingPage: async ({ page, isMobile }, use) => {
+        const pricingPage = new PricingPage(page, isMobile);
+        await use(pricingPage);
+    },
+    subscriptionsPage: async ({ page, isMobile }, use) => {
+        const subscriptionsPage = new SubscriptionsPage(page, isMobile);
+        await use(subscriptionsPage);
     },
     applicationsPage: async ({ page, isMobile }, use) => {
         const applicationsPage = new ApplicationsPage(page, isMobile);
