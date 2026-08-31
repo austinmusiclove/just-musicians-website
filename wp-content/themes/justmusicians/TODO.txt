@@ -17,7 +17,6 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
     Paywall
-        Test cancel subscription
         Visual tests for pricing page logged out, logged in, pro, lifetime
         Visual tests for subscriptions page logged out, logged in, pro, lifetime
         Access test ability to add 5th event for month

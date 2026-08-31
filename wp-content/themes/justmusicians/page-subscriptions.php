@@ -75,7 +75,7 @@ get_header();
 
                     <?php } else { ?>
 
-                        <div class="border border-black/20 rounded p-6">
+                        <div class="border border-black/20 rounded p-6" data-testid="subscription-card-buyer-free">
                             <h2 class="font-bold text-18">Talent Buyer Free Tier</h2>
                             <p class="mt-3 text-14 text-black/70">
                                 You're currently on the free tier. Upgrade to Talent Buyer Pro for advanced features for talent buyers including unlimited applications, events, and multi-user.

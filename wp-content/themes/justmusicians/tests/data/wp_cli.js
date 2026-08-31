@@ -189,6 +189,13 @@ export function wpCliUserHasCap(userId, cap) {
     return output.trim() === '1';
 }
 
+export function wpCliAddUserCap(userId, cap) {
+    execSync(
+        `wp user add-cap ${userId} ${cap} --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+}
+
 export function wpCliSetPostThumbnail(postId, imagePath) {
     const output = execSync(
         `wp media import ${imagePath} --post_id=${postId} --title="cover" --porcelain --path=${WP_PATH}`,

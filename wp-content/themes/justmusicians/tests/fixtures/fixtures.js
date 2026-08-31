@@ -18,7 +18,7 @@ import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, g
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
-    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliGetWpConfig,
+    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliAddUserCap, wpCliGetWpConfig,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
@@ -27,7 +27,7 @@ import {
     wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
     wpCliGrantAccess, wpCliRevokeAccess, wpCliQueryAccess,
 } from '../data/wp_cli.js';
-import { buildCheckoutCompletedEvent, postSignedWebhook, generateStripeSignature } from '../data/stripe.js';
+import { buildCheckoutCompletedEvent, buildSubscriptionDeletedEvent, postSignedWebhook, generateStripeSignature } from '../data/stripe.js';
 
 export const test = base.extend({
     mailpit: async ({ baseURL, request }, use) => {
@@ -61,6 +61,7 @@ export const test = base.extend({
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
             userHasCap: wpCliUserHasCap,
+            addCap: wpCliAddUserCap,
             getWpConfig: wpCliGetWpConfig,
             getLatestPostId: wpCliGetLatestPostId,
             getLatestPostIdByType: wpCliGetLatestPostIdByType,
@@ -93,6 +94,7 @@ export const test = base.extend({
         const secret = await wpCli.getWpConfig('STRIPE_WEBHOOK_SECRET');
         await use({
             buildEvent: buildCheckoutCompletedEvent,
+            buildSubscriptionDeletedEvent,
             sign: (payload) => generateStripeSignature(payload, secret),
             postWebhook: (event) => postSignedWebhook({ request, baseURL, event, secret }),
         });
