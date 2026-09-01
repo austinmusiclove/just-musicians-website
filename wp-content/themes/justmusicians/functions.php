@@ -456,6 +456,8 @@ require get_template_directory() . '/template-routes/template-rewrite-rules.php'
 require get_template_directory() . '/template-routes/template-routes.php';
 require get_template_directory() . '/lib/inc/user-mgmt.php';
 require get_template_directory() . '/lib/inc/admin-panel.php';
+require get_template_directory() . '/lib/inc/admin-panel-users.php';
+require get_template_directory() . '/lib/inc/admin-panel-listings.php';
 require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/lib/inc/robots.php';
 require get_template_directory() . '/lib/inc/404-redirects.php';

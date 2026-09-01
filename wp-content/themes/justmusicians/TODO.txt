@@ -1,11 +1,3 @@
-Deploy
-    stripe vars in wp-config
-    save permalinks
-    Checkout Success page
-    Subscriptions page
-    Pricing Page (remove buyer pricing)
-    update pricing
-    set up stripe products in the real stripe env
 Critical bugs
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
@@ -16,8 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Paywall
-        Access test ability to add 5th event for month
     Share application access features
         copy link button in share modal
         scroll emails with access
