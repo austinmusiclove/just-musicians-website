@@ -18,14 +18,13 @@ Critical bugs
 Applications Features to add
     Paywall
         Access test ability to add 5th event for month
-        Access test ability to add 2nd application
     Share application access features
         copy link button in share modal
         scroll emails with access
         send email when access given
         copy all emails with access (copy google ux)
-        Allow non users to get access by sending them email with special link that adds access on sign up
-        allow giving access to many emails at once
+        Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
+    Collections
         share collections with other users
         reorder collections
     Embed form on 3rd party website
@@ -52,6 +51,13 @@ Applications Features to add
         Full bill; maybe bands you can play with or have played with (Flamingo)
         Record label (Radio)
         I'd like to open for.. (Radio)
+Claimable listings
+    Claim button shows where to book a call to claim listing
+    Rank higher if you get an account, no one with an account can rank lower than a listing without an account (maybe list as a feature in free; higher rank for having a free account)
+    Mark listings as unclaimed in back end
+    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
+    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
+    make sure the unclaimed listings can get inquries and they can sign up and answer those inquiries when they get them
 Applications Advanced
     Application form screen
         Inform applicant that they can come back to this application to update it any time
@@ -60,6 +66,7 @@ Applications Advanced
         Invite listings to apply (advanced)
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
         Sort by highest rating (need index)
+        allow giving access to many emails at once
     Single Application Applicant review tab
         Filter by answers to custom questions (advanced)
 Submitted Applciations
@@ -96,12 +103,6 @@ Subscriptions
     Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
     Link in fail to create event/application in fail toast
     when creating an inquiry for new event, don't allow dates in month where limit reached
-Claimable listings
-    Claim button shows where to book a call to claim listing
-    Rank higher if you get an account, no one with an account can rank lower than a listing without an account (maybe list as a feature in free; higher rank for having a free account)
-    Mark listings as unclaimed in back end
-    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
-    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
 Offer post type (future)
     Status
     Pay with structure
@@ -130,6 +131,7 @@ SEO
         add other location same category internal links
         add location pages
         add breadcrumb
+        make filters lock in the category and location part; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
     **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog

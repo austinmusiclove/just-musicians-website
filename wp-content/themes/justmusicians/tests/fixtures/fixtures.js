@@ -12,6 +12,8 @@ import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { PasswordResetPage } from '../pages/PasswordResetPage.js';
 import { InquiryModalPage } from '../pages/InquiryModalPage.js';
 import { MyGigsPage } from '../pages/MyGigsPage.js';
+import { MyEventsPage } from '../pages/MyEventsPage.js';
+import { EventFormPage } from '../pages/EventFormPage.js';
 import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
 import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
@@ -150,6 +152,14 @@ export const test = base.extend({
     myGigsPage: async ({ page, isMobile }, use) => {
         const myGigsPage = new MyGigsPage(page, isMobile);
         await use(myGigsPage);
+    },
+    myEventsPage: async ({ page, isMobile }, use) => {
+        const myEventsPage = new MyEventsPage(page, isMobile);
+        await use(myEventsPage);
+    },
+    eventFormPage: async ({ page, isMobile }, use) => {
+        const eventFormPage = new EventFormPage(page, isMobile);
+        await use(eventFormPage);
     },
     singleEventPage: async ({ page, isMobile }, use) => {
         const singleEventPage = new SingleEventPage(page, isMobile);
