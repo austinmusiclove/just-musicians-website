@@ -10,6 +10,10 @@ function html_api_v1_template_redirects() {
                 case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/listings/post-listing.php'; exit;
                 case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/listings/delete-listing.php'; exit;
             }
+        case 'claim-listing':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/listings/claim-listing.php'; exit;
+            }
 
         // Collections
         case 'collections':

@@ -108,6 +108,11 @@
                 'btn_text'    => 'Send Inquiry',
             ]); ?>
 
+            <!-- Claim listing button (unclaimed listings only) -->
+            <?php if (!$is_preview and get_post_meta(get_the_ID(), 'unclaimed', true)) { ?>
+                <?php get_template_part('template-parts/listing-page/parts/claim-button', '', [ 'post_id' => get_the_ID(), ]); ?>
+            <?php } ?>
+
             <div class="flex flex-col gap-4">
 
                 <div class="sidebar-module border border-black/20 rounded bg-white">
