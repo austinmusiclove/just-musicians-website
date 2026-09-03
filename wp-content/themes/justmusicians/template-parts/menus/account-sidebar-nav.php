@@ -45,7 +45,7 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>My Gigs</span>
     </a>
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/submitted-applications/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/submitted-applications/'); ?>">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clipboard.svg'; ?>" />
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Submitted Applications</span>
     </a>
 
