@@ -8,9 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
 Claimable listings
-    Claim button shows where to book a call or email to claim listing
-        Add claim button that says sign in to claim
-        when signed in it send an email to admin with the user specified in it
     Send sign up to see inquiry email to listing email address if unclaimed is set to true
 Refactor listing access
     data mgmt

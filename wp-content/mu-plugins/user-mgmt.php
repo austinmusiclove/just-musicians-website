@@ -210,6 +210,7 @@ function add_listing_by_invitation_code($listing_invitation_code) {
         if ($listing_status == 'pending') {
             wp_update_post(['ID' => $listing_id, 'post_status' => 'publish', 'post_author' => $current_user->ID]);
         }
+        update_post_meta($listing_id, 'unclaimed', false);
     }
 
     // Add the listings to the current user's meta field
