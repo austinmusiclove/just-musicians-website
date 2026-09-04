@@ -7,8 +7,40 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
-Claimable listings
-    Send sign up to see inquiry email to listing email address if unclaimed is set to true
+Applications Features to add
+    Share application access features
+        copy link button in share modal
+        scroll emails with access
+        send email when access given
+        copy all emails with access (copy google ux)
+        Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
+    Embed form on 3rd party website
+        Remove branding for members
+    Collections
+        share collections with other users
+        reorder collections
+    Recurring events
+        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
+    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
+    Notification to applicants when dates added to application
+    Sorting and organizing
+        Filter by draw and price
+        Filter genres, ensemble size and other taxonomies
+    After design update
+        Add two listing images on applicant cards
+        Add draw and price options for application and add them to applicant card
+        change edit submitted application to either resubmit or withdraw
+        fix application card so that link does not blend in with description
+        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
+        when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
+        show availability dates on the applicant card
+        add ensemble size to applicant view
+    Other features that would be needed for parity with venue forms out there
+        dates requested (Flamingo, Kick Butt Coffee)
+        last time you played here (Flamingo)
+        Full bill; maybe bands you can play with or have played with (Flamingo)
+        Record label (Radio)
+        I'd like to open for.. (Radio)
 Refactor listing access
     data mgmt
         use access table to give owner access to all that currently have listing in their listings
@@ -41,45 +73,10 @@ Refactor listing access
 Listing lifecycle
     Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
     Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
-    change LIC after pending listing is created from submitted application to claim code
     Drip campaign to reach out to pending and draft listings
 Community partner program
     submit link to your website where you have linked us and you get advanced features automatically
     automatically check ever quarter if the link is still there
-Applications Features to add
-    Share application access features
-        copy link button in share modal
-        scroll emails with access
-        send email when access given
-        copy all emails with access (copy google ux)
-        Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
-    Collections
-        share collections with other users
-        reorder collections
-    Embed form on 3rd party website
-        Remove branding for members
-    Recurring events
-        Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
-    Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
-    Notification to applicants when dates added to application
-    Sorting and organizing
-        Filter by draw and price
-        Filter genres, ensemble size and other taxonomies
-    After design update
-        Add two listing images on applicant cards
-        Add draw and price options for application and add them to applicant card
-        change edit submitted application to either resubmit or withdraw
-        fix application card so that link does not blend in with description
-        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
-        when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
-        show availability dates on the applicant card
-        add ensemble size to applicant view
-    Other features that would be needed for parity with venue forms out there
-        dates requested (Flamingo, Kick Butt Coffee)
-        last time you played here (Flamingo)
-        Full bill; maybe bands you can play with or have played with (Flamingo)
-        Record label (Radio)
-        I'd like to open for.. (Radio)
 Applications Advanced
     Application form screen
         Inform applicant that they can come back to this application to update it any time
