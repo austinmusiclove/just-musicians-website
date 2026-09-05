@@ -32,6 +32,7 @@ $offers = [
                 'tooltip' => 'Musician Applications allow you to collect applicants for your event or venue. Share your application link where musicians can find it and manage your applicants from your dashboard.',
             ],
             'Export applicants with email addresses',
+            'Embed application on your own website',
         ],
     ],
     [

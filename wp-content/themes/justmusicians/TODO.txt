@@ -11,8 +11,6 @@ Applications Features to add
     Share application access features
         send email when access given
         Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
-    Embed form on 3rd party website
-        Add embed application to free features list or paid list
     Collections
         share collections with other users
         reorder collections
