@@ -52,6 +52,7 @@
             'heading'      => 'Share Application',
             'subject_id'   => get_the_ID(),
             'subject_type' => 'application',
+            'permalink'    => get_the_permalink(),
         ]); ?>
         <button type="button" class="bg-white hover:bg-red hover:text-white border border-black/20 hover:border-red px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block"
             hx-delete="<?php echo site_url('/wp-html/v1/applications/' . get_the_ID()); ?>"
