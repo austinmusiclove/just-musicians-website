@@ -24,9 +24,9 @@ export class MusicianApplicationPage extends ThemePage {
         this.submitButton                         = page.locator('#submit-button-content').locator('.htmx-indicator-component-block-replace');
         this.invalidLic                           = page.getByTestId('invalid-lic');
         this.successfulSubmission                 = page.getByTestId('successful-submission');
-        this.successfulSubmissionAnon             = page.getByTestId('successful-submission-anon');
-        this.successfulSubmissionAnonSignUpBtn    = page.getByTestId('successful-submission-anon-sign-up-btn');
-        this.successfulSubmissionNewListing       = page.getByTestId('successful-submission-new-listing');
+        this.successfulSubmissionLoggedOut        = page.getByTestId('successful-submission-logged-out');
+        this.successfulSubmissionSignUp           = page.getByTestId('successful-submission-sign-up');
+        this.successfulSubmissionSignUpBtn        = page.getByTestId('successful-submission-sign-up-btn');
     }
 
     async navigateToApplication(applicationId, lic = '') {
@@ -97,14 +97,14 @@ export class MusicianApplicationPage extends ThemePage {
         await expect(this.applicationDescription).not.toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
-    async expectSuccessScreenNewListing() {
-        await expect(this.successfulSubmissionNewListing).toBeVisible();
+    async expectSuccessScreenLoggedOut() {
+        await expect(this.successfulSubmissionLoggedOut).toBeVisible();
         await expect(this.applicationTitle).not.toBeVisible();
         await expect(this.applicationDescription).not.toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
-    async expectSuccessScreenAnon() {
-        await expect(this.successfulSubmissionAnon).toBeVisible();
+    async expectSuccessfulSubmissionSignUpPage() {
+        await expect(this.successfulSubmissionSignUp).toBeVisible();
         await expect(this.applicationTitle).not.toBeVisible();
         await expect(this.applicationDescription).not.toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();

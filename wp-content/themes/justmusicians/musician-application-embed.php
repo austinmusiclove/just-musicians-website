@@ -9,7 +9,6 @@ $application_id = get_query_var('application-id');
 $title = get_post_meta($application_id, 'title', true);
 $description = get_post_meta($application_id, 'description', true);
 $events = get_application_events($application_id);
-$lic = isset($_GET['lic']) ? sanitize_text_field(wp_unslash($_GET['lic'])) : '';
 
 if (!$application_id or !$title) {
     wp_safe_redirect(site_url());
@@ -41,55 +40,41 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
     ?>
 
         <div class="max-w-2xl mx-auto px-4 py-8"
-            x-data="{
-                listingId: '',
-                message: '',
-                hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
-                createNewListing: <?php echo is_user_logged_in() ? 'false' : 'true'; ?>,
-                showApplication: true,
-                eventAvailability: {},
-                savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
-                description:   '<?php echo clean_str_for_doublequotes($description); ?>',
-            }"
-            x-on:hideform="showApplication = false;"
-        >
+        x-data="{
+            listingId: '',
+            message: '',
+            hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
+            createNewListing: <?php echo is_user_logged_in() ? 'false' : 'true'; ?>,
+            showApplication: true,
+            eventAvailability: {},
+            savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
+            description:   '<?php echo clean_str_for_doublequotes($description); ?>',
+        }"
+        x-on:hideform="showApplication = false;"
+    >
 
-            <?php if (empty($lic)) { ?>
+        <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
 
-                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
+        <?php if ($description) { ?>
+            <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description"></div>
+        <?php } ?>
 
-                <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description"></div>
-                <?php } ?>
-
-                <?php get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
-                    'application_id'  => $application_id,
-                    'user_listings'   => $user_listings,
-                    'events'          => $events,
-                    'demo'            => false,
-                    'embed'           => true,
-                ]); ?>
-
-            <?php } else if (!empty($lic)) {
-                $valid_lic = validate_temporary_code($lic);
-                if (is_wp_error($valid_lic)) {
-                    get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
-                } else if (!is_user_logged_in()) { ?>
-                    <div class="text-center py-16">
-                        <h2 class="font-bold text-25 mb-4">Your application has been received!</h2>
-                        <p class="text-16 text-black/80">Please check your email to complete your account creation.</p>
-                    </div>
-                <?php } else {
-                    $lic_result = add_listing_by_invitation_code($lic);
-                    if (is_wp_error($lic_result)) {
-                        get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
-                    } else {
-                        get_template_part('template-parts/applications/musician-application/successful-submission-new-listing', '', []);
-                    }
-                }
-            } ?>
-
+        <?php if (!is_user_logged_in()) { ?>
+        <div class="mb-8 text-12 text-black/50" x-show="showApplication" x-cloak>
+            This application form is powered by Hire Musicians. If you already have a Hire Musicians account, you can fast-track the application process by signing in and submitting this application
+            <a class="underline font-semibold" href="<?php echo esc_url(get_musician_application_url($application_id)); ?>" target="_blank" rel="noopener">here</a>.
         </div>
+        <?php } ?>
+
+        <?php get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
+            'application_id'  => $application_id,
+            'user_listings'   => $user_listings,
+            'events'          => $events,
+            'demo'            => false,
+            'embed'           => true,
+        ]); ?>
+
+    </div>
 
 <?php wp_footer(); ?>
 </body>

@@ -12,16 +12,7 @@ Applications Features to add
         send email when access given
         Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
     Embed form on 3rd party website
-        Powered by HM link
-        Embed application UX update for applciation details
-        manage possibilities embed and not
-            logged in existing listing
-            logged in new listing
-            logged out new listing
-            only redirect to sign up link if not embed (validate it should be this way)
-        is it possible to be logged in while on another website
         Add embed application to free features list or paid list
-        Add embed application tests somehow
     Collections
         share collections with other users
         reorder collections
@@ -38,7 +29,6 @@ Applications Features to add
         change edit submitted application to either resubmit or withdraw
         fix application card so that link does not blend in with description
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
-        when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
         show availability dates on the applicant card
         add ensemble size to applicant view
     Other features that would be needed for parity with venue forms out there

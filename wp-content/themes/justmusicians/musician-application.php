@@ -39,9 +39,7 @@ get_header();
             }"
             x-on:hideform="showApplication = false;"
         >
-
             <?php if (empty($lic)) { ?>
-
                 <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
 
                 <?php if ($description) { ?>
@@ -64,13 +62,13 @@ get_header();
                 if (is_wp_error($valid_lic)) {
                     get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
                 } else if (!is_user_logged_in()) {
-                    get_template_part('template-parts/applications/musician-application/successful-submission-anon', '', [ 'title' => $title ]);
+                    get_template_part('template-parts/applications/musician-application/successful-submission-sign-up', '', [ 'title' => $title ]);
                 } else {
                     $lic_result = add_listing_by_invitation_code($lic);
                     if (is_wp_error($lic_result)) {
                         get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
                     } else {
-                        get_template_part('template-parts/applications/musician-application/successful-submission-new-listing', '', []);
+                        get_template_part('template-parts/applications/musician-application/successful-submission', '', []);
                     }
                 }
             } ?>
