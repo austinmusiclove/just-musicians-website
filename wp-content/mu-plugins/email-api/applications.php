@@ -31,11 +31,11 @@ function send_application_submitted_successfully_email($user_id, $application_id
 function send_sign_up_to_complete_application_email($email, $application_id, $sign_up_link) {
     $application_title = get_post_meta($application_id, 'title', true);
     $subject = 'Your application submission has been submitted.';
-    $message = "We have received your application submission for " . $application_title
-        . "We need to verify you are a real person for the reviewer. Please create an account to complete your submission.\n\n"
+    $message = "We have received your application submission for " . $application_title . "\n\n"
+        . "Your submission is complete and has been delivered to the reviewer. If you'd like to edit or withdraw your submission at any time, please create your free Hire Musicians account.\n\n"
         . "Create your free account here:\n\n"
         . $sign_up_link . "\n\n"
-        . "When you sign up through this link, we'll automatically connect your application submission and new musician listing to your new account. Please reply to this email for support if you run into any issues.\n\n"
+        . "When you sign up through this link, your application submission and new musician listing will be connected to your new account. Please reply to this email for support if you run into any issues.\n\n"
         . "See you on the stage,\nThe Hire Musicians Team";
     send_email_safely($email, $subject, $message);
 }

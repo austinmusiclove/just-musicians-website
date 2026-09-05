@@ -11,12 +11,17 @@ function template_route_rewrite_rules() {
 
     // Applications
     add_rewrite_rule(
-        '^musician-application/([0-9]+)/?',
+        '^musician-application/([0-9]+)/?$',
         'index.php?custom-template=musician-application&application-id=$matches[1]',
         'top'
     );
     add_rewrite_rule(
-        '^musician-application-demo/([0-9]+)/?',
+        '^musician-application/([0-9]+)/embed/?$',
+        'index.php?custom-template=musician-application-embed&application-id=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
+        '^musician-application/([0-9]+)/demo/?$',
         'index.php?custom-template=musician-application-demo&application-id=$matches[1]',
         'top'
     );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for musician application form
+ * Embed template for musician application form (bare, no site chrome)
  *
  * @package JustMusicians
  */
@@ -19,14 +19,28 @@ if (!$application_id or !$title) {
 $current_user_id = get_current_user_id();
 $user_listings = $current_user_id ? get_user_listings($current_user_id) : [];
 $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_id'), array_keys($user_listings));
-
-get_header();
 ?>
+<!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo esc_html($title); ?></title>
+    <style>#wpadminbar{display:none!important}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class('min-h-screen bg-white'); ?>>
+    <?php wp_body_open(); ?>
 
-<div id="page" class="flex flex-col grow">
+    <?php
+    get_template_part('template-parts/global/toasts/success-toast', '', []);
+    get_template_part('template-parts/global/toasts/error-toast',   '', []);
+    ?>
 
-    <div id="content" class="grow flex flex-col relative">
-        <div class="container pt-20 md:pt-32 pb-6 md:pb-12"
+        <div class="max-w-2xl mx-auto px-4 py-8"
             x-data="{
                 listingId: '',
                 message: '',
@@ -42,10 +56,10 @@ get_header();
 
             <?php if (empty($lic)) { ?>
 
-                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
+                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
 
                 <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
+                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description"></div>
                 <?php } ?>
 
                 <?php get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
@@ -53,19 +67,19 @@ get_header();
                     'user_listings'   => $user_listings,
                     'events'          => $events,
                     'demo'            => false,
+                    'embed'           => true,
                 ]); ?>
 
-
             <?php } else if (!empty($lic)) {
-                // If there is a listing publish code then check if it is valid
-                // if valid and user is logged out, ask user to sign up to complete application
-                // if valid and user is logged in, process and show success or failure
                 $valid_lic = validate_temporary_code($lic);
                 if (is_wp_error($valid_lic)) {
                     get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
-                } else if (!is_user_logged_in()) {
-                    get_template_part('template-parts/applications/musician-application/successful-submission-anon', '', [ 'title' => $title ]);
-                } else {
+                } else if (!is_user_logged_in()) { ?>
+                    <div class="text-center py-16">
+                        <h2 class="font-bold text-25 mb-4">Your application has been received!</h2>
+                        <p class="text-16 text-black/80">Please check your email to complete your account creation.</p>
+                    </div>
+                <?php } else {
                     $lic_result = add_listing_by_invitation_code($lic);
                     if (is_wp_error($lic_result)) {
                         get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
@@ -76,7 +90,7 @@ get_header();
             } ?>
 
         </div>
-    </div>
-</div>
-<?php
-get_footer();
+
+<?php wp_footer(); ?>
+</body>
+</html>
