@@ -8,19 +8,23 @@ function hm_access_post_types() {
     return ['application', 'collection', 'listing', 'event', 'venue'];
 }
 
-function hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) {
+function hm_upsert_access($email, $subject_id, $subject_type, $access_type) {
     global $wpdb;
     $table = hm_get_access_table();
 
-    if (empty($user_id) || $subject_id === '' || $subject_id === null || empty($access_type) || empty($subject_type)) {
+    if (!$email || $subject_id === '' || $subject_id === null || empty($access_type) || empty($subject_type)) {
         return 'incomplete';
     }
 
+    $user    = get_user_by('email', $email);
+    $user_id = $user ? $user->ID : null;
+    $user_sql = $user_id ? (int) $user_id : 'NULL';
+
     $result = $wpdb->query($wpdb->prepare(
-        "INSERT INTO {$table} (user_id, subject_id, subject_type, access_type)
-         VALUES (%d, %s, %s, %s)
-         ON DUPLICATE KEY UPDATE access_type = VALUES(access_type), created_at = CURRENT_TIMESTAMP",
-        $user_id,
+        "INSERT INTO {$table} (user_id, email, subject_id, subject_type, access_type)
+         VALUES ({$user_sql}, %s, %s, %s, %s)
+         ON DUPLICATE KEY UPDATE access_type = VALUES(access_type), email = VALUES(email), created_at = CURRENT_TIMESTAMP",
+        $email,
         (string) $subject_id,
         (string) $subject_type,
         $access_type
@@ -29,8 +33,23 @@ function hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) {
     return $result === false ? 'error' : 'inserted';
 }
 
-function hm_grant_access($user_id, $subject_id, $access_type, $subject_type) {
-    return hm_upsert_access($user_id, $subject_id, $access_type, $subject_type) !== 'error';
+function hm_grant_access_by_email($email, $subject_id, $subject_type, $access_type) {
+    if (!$email) {
+        return ['type' => null, 'user' => null, 'is_new' => false, 'result' => false];
+    }
+
+    $user   = get_user_by('email', $email);
+    $is_new = $user
+        ? !hm_get_user_access_type($user->ID, $subject_id, $subject_type)
+        : !hm_get_access_invite_type($email, $subject_id, $subject_type);
+    $result = hm_upsert_access($email, $subject_id, $subject_type, $access_type) !== 'error';
+
+    return [
+        'type'   => $user ? 'user' : 'invite',
+        'user'   => $user,
+        'is_new' => $is_new,
+        'result' => $result,
+    ];
 }
 
 function hm_revoke_access($user_id, $subject_id, $subject_type) {
@@ -75,10 +94,15 @@ function hm_access_grant_author_access($post_id) {
         return 0;
     }
 
+    $author_email = get_the_author_meta('user_email', $author_id);
+    if (!$author_email) {
+        return 0;
+    }
+
     $inserted = 0;
     $failed   = false;
 
-    if (hm_upsert_access($author_id, $post->ID, HM_ACCESS_TYPE_OWNER, $post->post_type) === 'inserted') {
+    if (hm_upsert_access($author_email, $post->ID, $post->post_type, HM_ACCESS_TYPE_OWNER) === 'inserted') {
         $inserted++;
     } else {
         $failed = true;
@@ -94,3 +118,28 @@ function hm_access_on_new_post($new_status, $old_status, $post) {
 
     hm_access_grant_author_access($post->ID);
 }
+
+function hm_apply_access_invites_on_register($user_id) {
+    $user = get_userdata($user_id);
+    if (!$user) {
+        return 0;
+    }
+
+    global $wpdb;
+    $table   = hm_get_access_table();
+    $invites = hm_get_access_invites_by_email($user->user_email);
+    if (empty($invites)) {
+        return 0;
+    }
+
+    $applied = 0;
+
+    foreach ($invites as $invite) {
+        if ($wpdb->update($table, ['user_id' => $user_id], ['id' => (int) $invite->id], ['%d'], ['%d']) !== false) {
+            $applied++;
+        }
+    }
+
+    return $applied;
+}
+add_action('user_register', 'hm_apply_access_invites_on_register', 10, 1);

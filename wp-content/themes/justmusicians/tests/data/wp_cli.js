@@ -310,7 +310,7 @@ export function wpCliGetUnreadConversationCount(userId) {
 
 export function wpCliGrantAccess(userId, subjectId, accessType, subjectType) {
     const output = wpCliWithRetry(
-        `wp eval "echo hm_grant_access(${userId}, '${subjectId}', '${accessType}', '${subjectType}') ? '1' : '0';" --path=${WP_PATH}`
+        `wp eval "\\$u = get_userdata(${userId}); echo \\$u && hm_upsert_access(\\$u->user_email, '${subjectId}', '${subjectType}', '${accessType}') !== 'error' ? '1' : '0';" --path=${WP_PATH}`
     );
     return output.trim() === '1';
 }

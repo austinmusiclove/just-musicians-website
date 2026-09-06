@@ -21,24 +21,29 @@ if (!$email || !is_email($email)) { ?>
     <?php exit;
 }
 
-$user = get_user_by('email', $email);
-if (!$user) { ?>
-    <span x-init="$dispatch('error-toast', { 'message': 'No user found with that email address' })"></span>
-    <?php exit;
-}
-
 if (!in_array($access_type, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT], true)) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Invalid access type' })"></span>
     <?php exit;
 }
 
-// Grant access
-$result = hm_grant_access($user->ID, $subject_id, $access_type, $subject_type);
-if (!$result) { ?>
+$grant = hm_grant_access_by_email($email, $subject_id, $subject_type, $access_type);
+if (!$grant['result']) { ?>
     <span x-init="$dispatch('error-toast', { 'message': 'Error granting access' })"></span>
     <?php exit;
+}
+
+if ($grant['type'] === 'user') {
+    if ($grant['is_new']) {
+        send_access_granted_email($grant['user']->user_email, $subject_id, $subject_type, $access_type);
+    }
+    $success_message = 'Access granted to ' . $grant['user']->user_email;
+} else {
+    if ($grant['is_new']) {
+        send_access_invite_email($email, $subject_id, $subject_type, $access_type);
+    }
+    $success_message = 'Access invite sent to ' . $email;
 } ?>
-<span x-init="$dispatch('success-toast', { 'message': 'Access granted to <?php echo clean_str_for_doublequotes($user->user_email); ?>' })"></span>
+<span x-init="$dispatch('success-toast', { 'message': '<?php echo clean_str_for_doublequotes($success_message); ?>' })"></span>
 
 <?php
 get_template_part('template-parts/access/access-list', '', [

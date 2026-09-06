@@ -1,3 +1,6 @@
+Deploy
+    create access index table
+    remove the drop table for access index
 Critical bugs
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
@@ -8,9 +11,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Share application access features
-        send email when access given
-        Allow non users to get access by sending them email with special link that adds access on sign up; or give access in separate table based on email for non users and when user registered check that table
     Collections
         share collections with other users
         reorder collections
@@ -35,6 +35,10 @@ Applications Features to add
         Full bill; maybe bands you can play with or have played with (Flamingo)
         Record label (Radio)
         I'd like to open for.. (Radio)
+Escrow
+    explore legal issues
+    figure out what I can offer for live music escrow
+    figure out how to provide escrow with stripe
 Refactor listing access
     data mgmt
         use access table to give owner access to all that currently have listing in their listings
