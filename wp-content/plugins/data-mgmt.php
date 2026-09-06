@@ -251,6 +251,7 @@ function get_unassigned_listings() {
                 'title' => $listing->post_title,
                 'status' => $listing->post_status,
                 'artist_auuid' => $auuid,
+                'unclaimed' => (bool) get_post_meta($listing->ID, 'unclaimed', true),
             ];
         }
     }
