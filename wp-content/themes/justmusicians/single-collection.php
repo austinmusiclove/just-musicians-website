@@ -10,16 +10,8 @@ if (!is_user_logged_in()) { wp_safe_redirect(site_url()); exit; }
 
 get_header();
 
-$is_favorites = get_query_var('wp-html-v1') == 'favorites';
-$listings = [];
-$collection_id = 0;
-
-if ($is_favorites) {
-    $listings = get_user_meta(get_current_user_id(), 'favorites', true);
-} else {
-    $listings = get_field('listings') ?? [];
-    $collection_id = get_the_ID();
-}
+$is_favorites  = get_query_var('wp-html-v1') == 'favorites';
+$collection_id = $is_favorites ? 0 : get_the_ID();
 
 // Get user collections
 $collections_result = get_user_collections([
@@ -81,10 +73,12 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             <div class="h-5 w-px bg-black/20"></div>
                             <span x-text="collectionsMap['<?php echo $collection_id; ?>'].listings.length + ' ' + (collectionsMap['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
                         </div>
+                        <?php if (!is_wp_error(user_can_edit_collection($collection_id))) { ?>
                         <button type="button" data-reorder-toggle x-on:click="reorderMode = !reorderMode"
-                            class="ml-auto text-12 font-bold px-1.5 py-1.5 rounded border border-black/20 hover:drop-shadow cursor-pointer"
+                            class="hidden sm:block ml-auto text-12 font-bold px-1.5 py-1.5 rounded border border-black/20 hover:drop-shadow cursor-pointer"
                             :class="reorderMode ? 'bg-navy text-white' : 'bg-white text-black'"
                             x-text="reorderMode ? 'Done Reordering' : 'Reorder'"></button>
+                        <?php } ?>
                     </div>
 
 
@@ -104,8 +98,6 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             hx-target="#results"
                             hx-indicator="#spinner"
                         >
-
-                            <input type="hidden" name="listing_ids" value="<?php echo implode(',', $listings); ?>" />
 
                             <span id="results"
                                 x-sort="$dispatch('reorder-collection');"

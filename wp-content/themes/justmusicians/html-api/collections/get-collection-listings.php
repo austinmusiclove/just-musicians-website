@@ -3,8 +3,17 @@
 // Get listings
 $page          = $_GET['page']                  ?? 1;
 $collection_id = get_query_var('collection-id') ?? 0;
+
+// Resolve the collection's listing ids server-side
+if ($collection_id == 0) {
+    $listing_ids = get_user_meta(get_current_user_id(), 'favorites', true);
+} else {
+    $listing_ids = get_post_meta($collection_id, 'listings', true);
+}
+$listing_ids = is_array($listing_ids) ? array_values(array_filter($listing_ids, 'is_numeric')) : [];
+
 $result = get_listings_by_id([
-    'listing_ids' => !empty($_GET['listing_ids']) ? $_GET['listing_ids'] : [],
+    'listing_ids' => $listing_ids,
     'page'        => $page,
 ]);
 
