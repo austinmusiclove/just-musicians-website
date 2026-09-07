@@ -37,6 +37,11 @@ export class SingleCollectionPage extends ThemePage {
         await expect(this.reorderHandles.first()).toBeVisible();
     }
 
+    async disableReorderMode() {
+        await this.reorderToggle.click();
+        await expect(this.reorderHandles.first()).toBeHidden();
+    }
+
     async dragHandle(listingId, { afterListingId, waitForUrl }) {
         const handle = this.reorderHandle(listingId);
         const box1 = await handle.boundingBox();

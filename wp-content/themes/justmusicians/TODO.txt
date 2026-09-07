@@ -10,11 +10,6 @@ Critical bugs
     Make sure not varnish caching the suggestions api and other similar things like that
 Applications Features to add
     Collections
-        test reorder
-            reorder button shows and hides handles
-            reorder first page
-            reorder accross pages
-            make sure no reorder is allowed on mobile
         share collections with other users
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
