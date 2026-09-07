@@ -54,6 +54,8 @@ if (count($listings) > 0) {
             'lazyload_thumbnail'     => $index >= 3,
             'hx-request_path'        => 'collections/' . $collection_id . '/listings',
             'collection_id'          => $collection_id,
+            'reorderable'            => true,
+            'index'                  => $index,
             'last'                   => $index == array_key_last($listings),
             'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,

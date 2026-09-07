@@ -31,6 +31,10 @@ function html_api_v1_template_redirects() {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/collections/get-collection-listings.php'; exit;
             }
+        case 'collection-reorder':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/collections/reorder-listings.php'; exit;
+            }
         case 'favorites':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'   : status_header(200); include_once get_template_directory() . '/single-collection.php'; exit;

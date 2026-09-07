@@ -14,8 +14,15 @@ Critical bugs
     Make sure not varnish caching the suggestions api and other similar things like that
 Applications Features to add
     Collections
-        share collections with other users
         reorder collections
+            add reorder button and finish reorder button
+            only show reorder button if user has edit access
+            only allow reorder on desktop
+        test reorder
+            reorder first page
+            reorder accross pages
+            make sure no reorder is allowed on mobile
+        share collections with other users
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
@@ -39,7 +46,14 @@ Applications Features to add
         I'd like to open for.. (Radio)
 Escrow
     explore legal issues
-    figure out what I can offer for live music escrow
+        create generic and customizable performance contract
+    offer
+        payment collected in advance (guaranteed payment)
+        collect deposits
+        enforce cancellation policy
+        tax/income tracking
+    fine print
+        musicians need to document that they fulfilled the job
     figure out how to provide escrow with stripe
 Refactor listing access
     data mgmt

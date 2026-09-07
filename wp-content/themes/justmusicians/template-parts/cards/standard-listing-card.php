@@ -7,6 +7,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 ?>
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
+    <?php if (isset($args['reorderable']) && $args['reorderable']) { ?>
+        data-listing-id="<?php echo $args['post_id']; ?>"
+        x-sort:item="<?php echo $args['index']; ?>"
+    <?php } ?>
     <?php if (!is_null($collection_id)) { ?>
         x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
     <?php } ?>
@@ -20,6 +24,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         hx-sync="closest #hx-form:abort"
     <?php } ?>
 >
+    <?php if (isset($args['reorderable']) && $args['reorderable']) { ?>
+        <input type="hidden" name="reorder_ids[]" value="<?php echo $args['post_id']; ?>" />
+        <button type="button" class="cursor-grab text-20 leading-none px-1 text-black/40 hover:text-black select-none self-center shrink-0" data-reorder-handle x-sort:handle x-show="reorderMode" x-cloak title="Reorder listing">☰</button>
+    <?php } ?>
 
 
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"

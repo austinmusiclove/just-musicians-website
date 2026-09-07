@@ -41,6 +41,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                 </div>
                 <div class="col md:col-span-6 py-8 md:py-12"
                     x-data="{
+                        reorderMode: false,
                         collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map ?? []); ?>,
                         get sortedCollections()                              { return getSortedCollections(this, <?php echo $collection_id; ?>); },
                         _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
@@ -80,6 +81,10 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             <div class="h-5 w-px bg-black/20"></div>
                             <span x-text="collectionsMap['<?php echo $collection_id; ?>'].listings.length + ' ' + (collectionsMap['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
                         </div>
+                        <button type="button" data-reorder-toggle x-on:click="reorderMode = !reorderMode"
+                            class="ml-auto text-12 font-bold px-1.5 py-1.5 rounded border border-black/20 hover:drop-shadow cursor-pointer"
+                            :class="reorderMode ? 'bg-navy text-white' : 'bg-white text-black'"
+                            x-text="reorderMode ? 'Done Reordering' : 'Reorder'"></button>
                     </div>
 
 
@@ -102,7 +107,14 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 
                             <input type="hidden" name="listing_ids" value="<?php echo implode(',', $listings); ?>" />
 
-                            <span id="results">
+                            <span id="results"
+                                x-sort="$dispatch('reorder-collection');"
+                                x-sort:config="{'handle': '[data-reorder-handle]'}"
+                                hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/reorder/"
+                                hx-trigger="reorder-collection"
+                                hx-target="#results"
+                                hx-swap="afterend"
+                            >
                                 <?php
                                     echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                                     echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');

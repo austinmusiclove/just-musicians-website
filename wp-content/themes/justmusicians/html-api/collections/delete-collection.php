@@ -1,11 +1,10 @@
 <?php
 
 $collection_id = get_query_var('collection-id');
-$args = ['collection_id' => $collection_id];
 
 
 // Check if user is authorized
-$is_authorized = user_owns_collection($args);
+$is_authorized = user_owns_collection($collection_id);
 if ( is_wp_error($is_authorized) ) {
     $message = 'Unauthorized: ' . $is_authorized->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
