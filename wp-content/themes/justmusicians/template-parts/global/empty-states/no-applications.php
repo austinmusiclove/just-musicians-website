@@ -1,13 +1,17 @@
-
 <div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
 
-    <div class="pb-32 relative">
-        <span class="text-22 block text-center mb-2">No applications yet!</span>
-        <p class="text-16 mb-4">Applications allow musicians to show interest in your gigs without having to deal with a mess of emails. Once they apply, you can review them in one convenient place.</p>
-        <a href="/application-form/"><button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-12 px-2 py-2">Create an Application</button></a>
+    <div class="pb-32 relative max-w-xl">
+        <span class="text-22 md:text-25 block text-center mb-4">No applications yet!</span>
+        <p class="text-16 mb-6">Applications allow musicians to show interest in your gigs without having to deal with a
+            mess of emails. Once they apply, you can review them in one convenient place.</p>
+        <a href="/application-form/"><button type="button"
+                class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-2 py-2">Create an
+                Application</button></a>
     </div>
 
-    <img class="w-40 absolute bottom-0 left-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
-    <img class="w-40 absolute bottom-0 right-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/tumbleweed.svg'; ?>" />
+    <img class="w-40 absolute bottom-0 left-0"
+        src="<?php echo get_template_directory_uri() . '/lib/images/other/cactus.svg'; ?>" />
+    <img class="w-40 absolute bottom-0 right-0"
+        src="<?php echo get_template_directory_uri() . '/lib/images/other/tumbleweed.svg'; ?>" />
 
 </div>

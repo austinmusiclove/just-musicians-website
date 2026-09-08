@@ -23,11 +23,7 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
 get_header();
 ?>
 
-<div id="page" class="flex flex-col grow">
-
-    <div id="content" class="grow flex flex-col relative">
-        <div class="container pt-20 md:pt-32 pb-6 md:pb-12"
-            x-data="{
+<div id="page" class="flex flex-col grow" x-data="{
                 listingId: '',
                 message: '',
                 hasListings: <?php echo count($user_listings) > 0 ? 'true' : 'false'; ?>,
@@ -36,43 +32,55 @@ get_header();
                 eventAvailability: {},
                 savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
                 description:   '<?php echo clean_str_for_doublequotes($description); ?>',
-            }"
-            x-on:hideform="showApplication = false;"
-        >
+            }" x-on:hideform="showApplication = false;">
 
-            <?php if (empty($lic)) { ?>
-
-                <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
-
+    <div class="bg-yellow-10 py-8 md:py-16 border-y border-t-yellow/40 border-b-yellow/60">
+        <div class="container">
+            <div class="max-w-4xl mx-auto md:px-12">
+                <div class="text-16 md:text-20 font-sun-motter mb-4 text-yellow/80">Musician Application</div>
+                <h1 class="font-bold text-25 md:text-28 mb-4" x-show="showApplication" x-cloak
+                    data-testid="musician-application-title">
+                    <?php echo esc_html($title); ?></h1>
                 <?php if ($description) { ?>
-                    <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
+                <div class="text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak
+                    x-html="description" data-testid="musician-application-description"></div>
                 <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <div id="content" class="grow flex flex-col relative">
+        <div class="container pt-8 pb-6 md:pb-12">
+            <div class="max-w-4xl mx-auto">
+
+                <?php if (empty($lic)) { ?>
 
                 <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
-                    'application_id'  => $application_id,
-                    'user_listings'   => $user_listings,
-                    'events'          => $events,
-                    'demo'            => false,
-                ]); ?>
+                        'application_id'  => $application_id,
+                        'user_listings'   => $user_listings,
+                        'events'          => $events,
+                        'demo'            => false,
+                    ]); ?>
 
-            <?php } else if (!empty($lic)) {
-                // If there is a listing publish code then check if it is valid
-                // if valid and user is logged out, ask user to sign up to complete application
-                // if valid and user is logged in, process and show success or failure
-                $valid_lic = validate_temporary_code($lic);
-                if (is_wp_error($valid_lic)) {
-                    get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
-                } else if (!is_user_logged_in()) {
-                    get_template_part('template-parts/applications/musician-application/successful-submission-anon', '', [ 'title' => $title ]);
-                } else {
-                    $lic_result = add_listing_by_invitation_code($lic);
-                    if (is_wp_error($lic_result)) {
-                        get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
+                <?php } else if (!empty($lic)) {
+                    // If there is a listing publish code then check if it is valid
+                    // if valid and user is logged out, ask user to sign up to complete application
+                    // if valid and user is logged in, process and show success or failure
+                    $valid_lic = validate_temporary_code($lic);
+                    if (is_wp_error($valid_lic)) {
+                        get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
+                    } else if (!is_user_logged_in()) {
+                        get_template_part('template-parts/applications/musician-application/successful-submission-anon', '', [ 'title' => $title ]);
                     } else {
-                        get_template_part('template-parts/applications/musician-application/successful-submission-new-listing', '', []);
+                        $lic_result = add_listing_by_invitation_code($lic);
+                        if (is_wp_error($lic_result)) {
+                            get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
+                        } else {
+                            get_template_part('template-parts/applications/musician-application/successful-submission-new-listing', '', []);
+                        }
                     }
-                }
-            } ?>
+                } ?>
+            </div>
 
         </div>
     </div>

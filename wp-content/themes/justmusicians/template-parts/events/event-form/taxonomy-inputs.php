@@ -1,7 +1,7 @@
-<div id="event-form-taxonomy" class="flex flex-col gap-4 mb-4">
+<div id="event-form-taxonomy" class="flex flex-col gap-4 mb-4 border border-black/20 rounded p-4 bg-yellow-10/50">
     <div>
-        <label class="text-14 font-bold">Desired Genres</label>
-        <p class="text-red text-12 mt-1" x-show="genres.length < 1" x-cloak>Please select at least one genre</p>
+        <label class="text-20 font-bold">Desired Genres</label>
+        <p class="text-red text-12 mb-3" x-show="genres.length < 1" x-cloak>Please select at least one genre</p>
         <?php
         $genres = get_terms_decoded('genre', 'names');
         echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [
@@ -12,7 +12,7 @@
         ]); ?>
     </div>
     <div>
-        <label class="text-14 font-bold">Desired Ensemble Size</label>
+        <label class="text-20 font-bold mb-3 block">Desired Ensemble Size</label>
         <?php
         $ensemble_sizes = get_default_options('ensemble_size');
         echo get_template_part('template-parts/search/filter-components/taxonomy-options', '', [

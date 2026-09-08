@@ -2,190 +2,144 @@ const plugin = require('tailwindcss/plugin');
 
 // Function to multiply spacing values
 const applyMultiplier = (values, multiplier) => {
-	const newValues = {};
-	Object.keys(values).forEach(key => {
-	  const value = values[key];
-	  // Apply the multiplier to each value and convert it to rem
-	  newValues[key] = `${(parseFloat(value) * multiplier).toFixed(3)}rem`;
-	});
-	return newValues;
-  };
+  const newValues = {};
+  Object.keys(values).forEach((key) => {
+    const value = values[key];
+    // Apply the multiplier to each value and convert it to rem
+    newValues[key] = `${(parseFloat(value) * multiplier).toFixed(3)}rem`;
+  });
+  return newValues;
+};
 
-  // https://www.modularscale.com/?14&px&1.125
-	const baseSpacing = {
-		0: '0rem',
-		9: '.6rem',
-		12: '.89rem',
-		14: '1rem',
-		16: '1.13rem',
-		18: '1.27rem',
-		20: '1.4rem',
-		22: '1.6rem',
-		25: '1.8rem',
-		28: '2rem',
-		32: '2.3rem',
-		36: '2.57rem',
-		40: '2.89rem',
-		45: '3.25rem',
-		51: '3.65rem',
-		57: '4.1rem'
-	};
+// https://www.modularscale.com/?14&px&1.125
+const baseSpacing = {
+  0: '0rem',
+  9: '.6rem',
+  12: '.89rem',
+  14: '1rem',
+  16: '1.13rem',
+  18: '1.27rem',
+  20: '1.4rem',
+  22: '1.6rem',
+  25: '1.8rem',
+  28: '2rem',
+  32: '2.3rem',
+  36: '2.57rem',
+  40: '2.89rem',
+  45: '3.25rem',
+  51: '3.65rem',
+  57: '4.1rem',
+};
 
-  const fontSizeWithMultiplier = applyMultiplier(baseSpacing, .8);
+const fontSizeWithMultiplier = applyMultiplier(baseSpacing, 0.8);
 
 module.exports = {
-    future: {
-        hoverOnlyWhenSupported: true,
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
+  input: './tailwind/input.css',
+  output: './dist/tailwind.css',
+  content: [
+    './**/*.{html,php,js}',
+    '!./node_modules/**',
+    '!./dist/**',
+    '!./html-api/**',
+    '!./sass/**',
+    '!./tailwind/**',
+    '!./tests/**',
+  ],
+  safelist: ['flex-row-reverse'],
+  theme: {
+    fontSize: fontSizeWithMultiplier,
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+      },
     },
-	input: './tailwind/input.css',
-	output: './dist/tailwind.css',
-	content: [
-		// Root
-		'./*.php',
-		'./seo/*.php',
-		// Lib
-		'./lib/blocks/*.{php,js}',
-		'./lib/inc/*.{php,js}',
-		'./lib/js/*.{php,js}',
-		'./lib/js/**/*.{php,js}',
-		'./lib/plugins/*.{php,js}',
-		'./lib/plugins/**/*.{php,js}',
-		// Template parts
-		'./template-parts/*.{php,js}',
-		'./template-parts/**/*.{php,js}',
-		'./template-parts/access/*.{php,js}',
-		'./template-parts/access/**/*.{php,js}',
-		'./template-parts/account/*.{php,js}',
-		'./template-parts/account/**/*.{php,js}',
-		'./template-parts/account/**/**/*.{php,js}',
-		'./template-parts/applications/*.{php,js}',
-		'./template-parts/applications/**/*.{php,js}',
-		'./template-parts/buyers/*.{php,js}',
-		'./template-parts/buyers/**/*.{php,js}',
-		'./template-parts/cards/*.{php,js}',
-		'./template-parts/cards/**/*.{php,js}',
-		'./template-parts/events/*.{php,js}',
-		'./template-parts/events/**/*.{php,js}',
-		'./template-parts/global/*.{php,js}',
-		'./template-parts/global/**/*.{php,js}',
-		'./template-parts/global/**/**/*.{php,js}',
-		'./template-parts/inquiries/*.{php,js}',
-		'./template-parts/inquiries/**/*.{php,js}',
-		'./template-parts/listing-form/*.{php,js}',
-		'./template-parts/listing-form/**/*.{php,js}',
-		'./template-parts/listing-page/*.{php,js}',
-		'./template-parts/listing-page/**/*.{php,js}',
-		'./template-parts/login/*.{php,js}',
-		'./template-parts/login/**/*.{php,js}',
-		'./template-parts/menus/*.{php,js}',
-		'./template-parts/messages/*.{php,js}',
-		'./template-parts/messages/**/*.{php,js}',
-		'./template-parts/messages/**/**/*.{php,js}',
-		'./template-parts/musician-earnings/**/*.{php,js}',
-		'./template-parts/musician-earnings/**/*.{php,js}',
-		'./template-parts/musician-earnings/**/**/*.{php,js}',
-		'./template-parts/reviews/*.{php,js}',
-		'./template-parts/reviews/**/*.{php,js}',
-		'./template-parts/reviews/**/**/*.{php,js}',
-		'./template-parts/search/*.{php,js}',
-		'./template-parts/search/**/*.{php,js}',
-		'./template-parts/venues/*.{php,js}',
-		'./template-parts/venues/**/*.{php,js}',
-		// Other
-		'./templates/**/*.{php,js}',
-		'./tailwind/missing.php',
-	],
-    safelist: [
-        'flex-row-reverse',
-    ],
-	theme: {
-		fontSize: fontSizeWithMultiplier,
-		container: {
-			center: true,
-			padding: {
-				DEFAULT: '1rem',
-			},
-		},
-		colors: {
-			// Standard
-			white: '#FFFFFF',
-			black: '#000000',
-            grey: '#808080',
-            red: '#FF0000',
-			// Browns
-			'brown-dark-1': '#312922',
-			'brown-dark-2': '#5B4A38',
-			'brown-dark-3': '#846B4E',
-			'brown-light-1': '#DDD7BC',
-			'brown-light-3': '#F8F3DD',
-			// Yellow
-			'yellow': '#D29429',
-			'yellow-60': '#E4BF7F',
-			'yellow-50': '#F6E9D4',
-			'yellow-40': '#EDD4A9',
-			'yellow-20': '#F6EAD4',
-			'yellow-10': '#FAF4EA',
-			'yellow-light': '#EDD4A9',
-            'yellow-light-50': '#F6E9D4',
-			// Other
-			'navy': '#0F384C',
-			'navy-light': '#E7ECF6',
-			'red': '#C23D28',
-			'red-60': '#DA8B7E',
-            'grey-light': '#e3e3e3',
-            'grey-light-50': '#f0f0f0',
-		},
-		fontFamily: {
-			sans: ['Poppins', 'sans-serif'],
-			'sun-motter': ['Sun Motter', 'sans-serif'],
-		},
-		extend: {
-			boxShadow: {
-				'black-offset': '2px 2px 0px 0px black',
-			  },
-			borderRadius: {
-			},
-			aspectRatio: {
-				'4/3': '4 / 3',
-				'9/16': '9 / 16',
-			},
-            minHeight: (theme) => ({
-                ...theme('spacing'),
-            }),
-            minWidth: (theme) => ({
-                ...theme('spacing'),
-            }),
-		},
-	},
-	plugins: [
-		plugin(function({ addVariant }) {
-		  addVariant('hocus', ['&:hover', '&:focus']),
-		  addVariant("group-hocus", [".group:hover &", ".group:focus &"]),
-		  addVariant("has-disabled", `&:has(input:is(:disabled),button:is(:disabled))`);
-		}),
-		function ({ addComponents }) {
-			addComponents({
-			  '.container': {
-				maxWidth: '100%',
-				marginLeft: 'auto',
-				marginRight: 'auto',
-				paddingLeft: '1rem',
-				paddingRight: '1rem',
-				'@screen sm': {
-				  maxWidth: '100%',
-				},
-				'@screen md': {
-				  maxWidth: '100%',
-				},
-				'@screen lg': {
-				  maxWidth: '1020px',
-				},
-				'@screen xl': {
-				  maxWidth: '1200px',
-				},
-			  }
-			})
-		  },
-        require('@tailwindcss/line-clamp'),
-	  ],
-}
+    colors: {
+      // Standard
+      white: '#FFFFFF',
+      black: '#000000',
+      grey: '#808080',
+      red: '#FF0000',
+      // Browns
+      'brown-dark-1': '#312922',
+      'brown-dark-2': '#5B4A38',
+      'brown-dark-3': '#846B4E',
+      'brown-light-1': '#DDD7BC',
+      'brown-light-3': '#F8F3DD',
+      // Yellow
+      yellow: '#D29429',
+      'yellow-60': '#E4BF7F',
+      'yellow-50': '#F6E9D4',
+      'yellow-40': '#EDD4A9',
+      'yellow-20': '#F6EAD4',
+      'yellow-10': '#FAF4EA',
+      'yellow-light': '#EDD4A9',
+      'yellow-light-50': '#F6E9D4',
+      // Other
+      navy: '#0F384C',
+      'navy-light': '#E7ECF6',
+      red: '#C23D28',
+      'red-60': '#DA8B7E',
+      'grey-light': '#e3e3e3',
+      'grey-light-50': '#f0f0f0',
+      'grey-light-2': '#f6f7f7',
+    },
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+      'sun-motter': ['Sun Motter', 'sans-serif'],
+    },
+    extend: {
+      boxShadow: {
+        'black-offset': '2px 2px 0px 0px black',
+      },
+      borderRadius: {},
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '9/16': '9 / 16',
+      },
+      minHeight: (theme) => ({
+        ...theme('spacing'),
+      }),
+      minWidth: (theme) => ({
+        ...theme('spacing'),
+      }),
+    },
+  },
+  plugins: [
+    plugin(function ({ addVariant }) {
+      (addVariant('hocus', ['&:hover', '&:focus']),
+        addVariant('group-hocus', ['.group:hover &', '.group:focus &']),
+        addVariant(
+          'has-disabled',
+          `&:has(input:is(:disabled),button:is(:disabled))`,
+        ));
+    }),
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: '1rem',
+          paddingRight: '1rem',
+          '@screen sm': {
+            maxWidth: '100%',
+          },
+          '@screen md': {
+            maxWidth: '100%',
+          },
+          '@screen lg': {
+            maxWidth: '1020px',
+          },
+          '@screen xl': {
+            maxWidth: '1200px',
+          },
+        },
+      });
+    },
+    require('@tailwindcss/line-clamp'),
+  ],
+};
