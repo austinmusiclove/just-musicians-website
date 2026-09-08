@@ -29,7 +29,7 @@ test.describe('Collections - Create collection', () => {
         expect(wpCli.getPostField(collectionId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(collectionId, 'post_author')).toBe(String(userId));
         expect(wpCli.getPostMeta(collectionId, 'name')).toBe(collectionName);
-        expect(wpCli.getUserMeta(userId, 'collections').map(String)).toContain(String(collectionId));
+        expect(wpCli.queryAccess(userId, 'collection', String(collectionId))?.access_type).toBe('owner');
     });
 
     test('create a collection from a single listing page using the create new collection option', async ({ singleListingPage, wpCli }) => {
@@ -52,6 +52,6 @@ test.describe('Collections - Create collection', () => {
         expect(wpCli.getPostField(collectionId, 'post_author')).toBe(String(userId));
         expect(wpCli.getPostMeta(collectionId, 'name')).toBe(collectionName);
         expect(wpCli.getPostMetaJson(collectionId, 'listings')).toEqual([String(listingId)]);
-        expect(wpCli.getUserMeta(userId, 'collections').map(String)).toContain(String(collectionId));
+        expect(wpCli.queryAccess(userId, 'collection', String(collectionId))?.access_type).toBe('owner');
     });
 });

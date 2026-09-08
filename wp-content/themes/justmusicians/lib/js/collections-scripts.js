@@ -31,12 +31,13 @@ function removeFromCollection(alpineComponent, collectionId, listingId) {
     }
 }
 
-function addCollection(alpineComponent, post_id, name, listings, permalink) {
-    alpineComponent.$data.collectionsMap[post_id] = {
-        'post_id':   post_id,
-        'name':      name,
-        'listings':  listings,
-        'permalink': permalink,
+function addCollection(alpineComponent, collection) {
+    alpineComponent.$data.collectionsMap[collection.post_id] = {
+        'post_id':      collection.post_id,
+        'name':         collection.name,
+        'access_level': collection.access_level,
+        'listings':     collection.listings,
+        'permalink':    collection.permalink,
     };
 }
 

@@ -18,11 +18,8 @@ function create_user_collection($collection_name, $listing_id = null) {
         return new WP_Error('invalid_character', 'Collection name cannot contain back slash.');
     }
 
-    // Get user's existing collection IDs
-    $user_collections = get_user_meta($user_id, 'collections', true);
-    if (!is_array($user_collections)) {
-        $user_collections = [];
-    }
+// Get user's existing collection IDs (via the access index)
+    $user_collections = hm_get_subject_ids_for_user($user_id, HM_ACCESS_TYPE_OWNER, 'collection');
 
     // Check if user already has a collection with the same name
     foreach ($user_collections as $collection_id) {
@@ -50,11 +47,6 @@ function create_user_collection($collection_name, $listing_id = null) {
     if (is_wp_error($collection_id) || !$collection_id) {
         return new WP_Error('creation_failed', 'Failed to create collection.');
     }
-
-    // Add new collection ID to user's collections meta
-    $user_collections[] = $collection_id;
-    update_user_meta($user_id, 'collections', $user_collections);
-
 
     // Get permalink
     $permalink = get_permalink($collection_id);

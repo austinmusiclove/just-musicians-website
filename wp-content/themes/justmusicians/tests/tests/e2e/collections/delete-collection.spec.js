@@ -25,7 +25,7 @@ test.describe('Collections - Delete collection', () => {
         await expect(collectionsPage.getCollectionCard(collectionName)).not.toBeVisible();
 
         expect(wpCli.getPostField(collectionId, 'post_status')).toBe('trash');
-        expect(wpCli.getUserMeta(userId, 'collections').map(String)).not.toContain(String(collectionId));
+        expect(wpCli.queryAccess(userId, 'collection', String(collectionId))).toBeNull();
     });
 
     test('cancels a delete collection attempt from the collections page', async ({ collectionsPage, wpCli }) => {

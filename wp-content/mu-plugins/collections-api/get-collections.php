@@ -37,6 +37,7 @@ function get_user_collections($args) {
         $collections[] = [
             'post_id'        => 0,
             'name'           => 'Favorites',
+            'access_level'   => HM_ACCESS_TYPE_OWNER,
             'listings'       => $listing_ids,
             'thumbnail_urls' => $thumbnails,
             'permalink'      => '/collection/favorites',
@@ -44,7 +45,9 @@ function get_user_collections($args) {
     }
 
     // Get Collections
-    $user_collections = get_user_meta($current_user_id, 'collections', true);
+    // Collections the user has access to (via the access index)
+    $user_collections = hm_get_subject_ids_for_user($current_user_id, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT, HM_ACCESS_TYPE_OWNER], 'collection');
+
     if ( $user_collections and count($user_collections) > 0 ) {
 
         $query_args = [
@@ -88,6 +91,7 @@ function get_user_collections($args) {
             $collections[] = [
                 'post_id'        => get_the_ID(),
                 'name'           => get_field('name'),
+                'access_level'   => hm_get_user_access_type($current_user_id, (string) get_the_ID(), 'collection'),
                 'listings'       => $listing_ids,
                 'thumbnail_urls' => $thumbnails,
                 'permalink'      => get_the_permalink(),

@@ -25,17 +25,5 @@ function delete_collection($collection_id) {
         return new WP_Error('delete_failed', 'Failed to delete collection.', ['status' => 500]);
     }
 
-    // Remove from current user's collections
-    $user_id = get_current_user_id();
-    $collections = get_user_meta($user_id, 'collections', true);
-
-    if (is_array($collections)) {
-        $updated = array_filter($collections, function ($id) use ($post_id) {
-            return intval($id) !== $post_id;
-        });
-
-        update_user_meta($user_id, 'collections', array_values($updated));
-    }
-
     return true;
 }

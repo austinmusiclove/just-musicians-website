@@ -13,6 +13,12 @@ get_header();
 $is_favorites  = get_query_var('wp-html-v1') == 'favorites';
 $collection_id = $is_favorites ? 0 : get_the_ID();
 
+// Only users with at least view access can open a collection
+if (!$is_favorites && is_wp_error(user_can_view_collection($collection_id))) {
+    wp_safe_redirect(site_url());
+    exit;
+}
+
 // Get user collections
 $collections_result = get_user_collections([
     'nopaging'     => true,
@@ -73,9 +79,21 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             <div class="h-5 w-px bg-black/20"></div>
                             <span x-text="collectionsMap['<?php echo $collection_id; ?>'].listings.length + ' ' + (collectionsMap['<?php echo $collection_id; ?>'].listings.length == 1 ? 'Listing' : 'Listings')"></span>
                         </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <?php if (!$is_favorites && !is_wp_error(user_owns_collection($collection_id))) { ?>
+                            <?php echo get_template_part('template-parts/access/share-button', '', [
+                                'label'        => 'Share',
+                                'heading'      => 'Share Collection',
+                                'subject_id'   => $collection_id,
+                                'subject_type' => 'collection',
+                                'permalink'    => get_the_permalink(),
+                            ]); ?>
+                        <?php } ?>
                         <?php if (!is_wp_error(user_can_edit_collection($collection_id))) { ?>
                         <button type="button" data-reorder-toggle x-on:click="reorderMode = !reorderMode"
-                            class="hidden sm:block ml-auto text-12 font-bold px-1.5 py-1.5 rounded border border-black/20 hover:drop-shadow cursor-pointer"
+                            class="hidden sm:inline-block hover:bg-yellow border border-black/20 px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap"
                             :class="reorderMode ? 'bg-navy text-white' : 'bg-white text-black'"
                             x-text="reorderMode ? 'Done Reordering' : 'Reorder'"></button>
                         <?php } ?>

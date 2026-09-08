@@ -189,3 +189,58 @@ function save_hm_buyer_pro_field($user_id) {
         $user->remove_cap('hm_buyer_pro_lifetime');
     }
 }
+
+// Show the user's access table on the profile page
+add_action('show_user_profile', 'add_user_access_table');
+add_action('edit_user_profile', 'add_user_access_table');
+
+function add_user_access_table($user) {
+    if (!current_user_can('manage_options')) return;
+
+    global $wpdb;
+    $table = hm_get_access_table();
+    $access_rows = $wpdb->get_results($wpdb->prepare(
+        "SELECT subject_type, subject_id, access_type FROM {$table} WHERE user_id = %d ORDER BY subject_id ASC",
+        $user->ID
+    ));
+    foreach ($access_rows as $row) {
+        $post = get_post($row->subject_id);
+        $row->subject_title = $post ? $post->post_title : '';
+    }
+    ?>
+    <table class="form-table" role="presentation">
+        <tr>
+            <th><label>Access</label></th>
+            <td>
+                <table class="widefat striped">
+                    <thead>
+                        <tr>
+                            <th>Subject Type</th>
+                            <th>Subject ID</th>
+                            <th style="width: 40%">Subject</th>
+                            <th>Access Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($access_rows) { ?>
+                            <?php foreach ($access_rows as $row) { ?>
+                                <tr>
+                                    <td><?php echo esc_html($row->subject_type); ?></td>
+                                    <td><?php echo esc_html($row->subject_id); ?></td>
+                                    <td><?php echo esc_html($row->subject_title); ?></td>
+                                    <td><?php echo esc_html($row->access_type); ?></td>
+                                </tr>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <tr>
+                                <td colspan="4">No access granted.</td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <p class="description">Access levels granted to this user.</p>
+            </td>
+        </tr>
+    </table>
+    <?php
+}

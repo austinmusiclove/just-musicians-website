@@ -8,6 +8,20 @@ export class SingleCollectionPage extends ThemePage {
         this.reorderHandles   = page.locator('#results [data-reorder-handle]');
         this.reorderToggle    = page.locator('[data-reorder-toggle]');
         this.results          = page.locator('#results');
+        this.shareBtn         = page.getByRole('button', { name: 'Share' });
+        this.shareModal       = page.locator('.popup-wrapper').filter({ hasText: 'Share Collection' });
+        this.shareEmailInput  = this.shareModal.locator('input[type="email"]');
+        this.shareAccessType  = this.shareModal.locator('select[name="access_type"]');
+        this.shareSubmitBtn   = this.shareModal.getByRole('button', { name: 'Share' });
+        this.shareAccessList  = this.shareModal.locator('[id^="share-access-list-"]');
+    }
+
+    async shareAccess(email, accessType = 'view') {
+        await this.shareBtn.click();
+        await expect(this.shareModal).toBeVisible();
+        await this.shareEmailInput.fill(email);
+        await this.shareAccessType.selectOption(accessType);
+        await this.shareSubmitBtn.click();
     }
 
     async open(slug) {

@@ -41,11 +41,6 @@
         </div>
     </div>
 
-    <a href="<?php echo $args['permalink']; ?>">
-        <button class="absolute p-2 top-2 right-2 opacity-50 hover:opacity-100">
-            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/pencil-solid.svg'; ?>" />
-        </button>
-    </a>
     <?php if ($args['allow_delete']) { ?>
         <button class="absolute p-2 top-10 right-2 opacity-50 hover:opacity-100"
             hx-delete="<?php echo site_url('/wp-html/v1/collections/' . $args['post_id']); ?>"

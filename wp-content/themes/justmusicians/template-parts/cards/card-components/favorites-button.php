@@ -5,12 +5,12 @@
         showCollectionsPopup: false,
         showCreateCollectionInput: false,
         collectionSearchQuery: '',
-        _addCollection(postId, name, listings, permalink) { return addCollection(this, postId, name, listings, permalink); },
+        _addCollection(collection)                        { return addCollection(this, collection); },
         _addToCollection(collectionId, listingId)         { return addToCollection(this, collectionId, listingId); },
         _removeFromCollection(collectionId, listingId)    { return removeFromCollection(this, collectionId, listingId); },
         _resetCollectionsPopup()                          { return resetCollectionsPopup(this, '<?php echo $args['post_id']; ?>'); },
     }"
-    x-on:add-collection="_addCollection($event.detail.post_id, $event.detail.name, $event.detail.listings, $event.detail.permalink)"
+    x-on:add-collection="_addCollection($event.detail)"
     x-on:add-listing-to-collection="_addToCollection($event.detail.collection_id, $event.detail.listing_id)"
     x-on:remove-listing-from-collection="_removeFromCollection($event.detail.collection_id, $event.detail.listing_id)"
 >
@@ -79,7 +79,7 @@
             <div x-ref="collectionsList<?php echo $args['post_id']; ?>" class="max-h-40 overflow-y-auto space-y-2">
                 <template x-for="collection in sortedCollections" :key="collection.post_id">
                     <div class="flex items-center justify-between px-2 py-1 rounded cursor-pointer"
-                        x-show="collection.name.toLowerCase().includes(collectionSearchQuery)" x-cloak
+                        x-show="(collection.access_level === 'edit' || collection.access_level === 'owner') && collection.name.toLowerCase().includes(collectionSearchQuery)" x-cloak
                         x-init="$nextTick(() => htmx.process($el))";
                     >
                         <a class="w-full" x-bind:href="collection.permalink"><span x-text="collection.name"></span></a>

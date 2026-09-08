@@ -3,7 +3,9 @@
 // Ensure the user is logged in
 if (!is_user_logged_in()) {
     $message = 'Unauthorized: Must be logged in to create a collection';
-    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    ?>
+    <span x-init="$dispatch('error-toast', { 'message': '<?php echo $message; ?>'})"></span>
+    <?php
     exit;
 }
 
@@ -17,11 +19,20 @@ $success_event   = !empty($_POST['success_event']) ? $_POST['success_event'] : '
 $result = create_user_collection($collection_name, $listing_id);
 if ( is_wp_error($result) ) {
     $message = 'Error: ' . $result->get_error_message();
-    echo '<span x-init="$dispatch(\'' . $error_event . '\', { \'message\': \'' . $message . '\'})"></span>';
+    ?>
+    <span x-init="$dispatch('<?php echo $error_event; ?>', { 'message': '<?php echo $message; ?>'})"></span>
+    <?php
     exit;
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'' . $success_event . '\', { \'message\': \'' . 'Collection Created Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'add-collection\', {\'post_id\': \'' . $result['post_id'] . '\', \'name\': \'' . $result['name'] . '\', \'listings\': ' . clean_arr_for_doublequotes($result['listings']) . ', \'permalink\': \'' . $result['permalink'] . '\' })"></span>';
-echo '<span x-init="$refs.newCollectionInput' . $listing_id . '.value = \'\';"></span>';
+?>
+<span x-init="$dispatch('<?php echo $success_event; ?>', { 'message': 'Collection Created Successfully' })"></span>
+<span x-init="$dispatch('add-collection', {
+    'post_id': '<?php echo $result['post_id']; ?>',
+    'name': '<?php echo $result['name']; ?>',
+    'access_level': 'owner',
+    'listings': <?php echo clean_arr_for_doublequotes($result['listings']); ?>,
+    'permalink': '<?php echo $result['permalink']; ?>'
+})"></span>
+<span x-init="$refs.newCollectionInput<?php echo $listing_id; ?>.value = '';"></span>

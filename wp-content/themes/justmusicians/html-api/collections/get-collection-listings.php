@@ -4,6 +4,14 @@
 $page          = $_GET['page']                  ?? 1;
 $collection_id = get_query_var('collection-id') ?? 0;
 
+// Check if user is authorized
+$is_authorized = user_can_view_collection($collection_id);
+if ( is_wp_error($is_authorized) ) {
+    $message = 'Unauthorized: ' . $is_authorized->get_error_message();
+    echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
+    exit;
+}
+
 // Resolve the collection's listing ids server-side
 if ($collection_id == 0) {
     $listing_ids = get_user_meta(get_current_user_id(), 'favorites', true);

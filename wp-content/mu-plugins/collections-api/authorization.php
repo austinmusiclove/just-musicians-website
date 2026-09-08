@@ -30,5 +30,6 @@ function require_collection_access($collection_id, $allowed_access_types) {
     return new WP_Error('unauthorized_user', 'Your account is not authorized for this resource', ['status' => 400]);
 }
 
+function user_can_view_collection($collection_id) { return require_collection_access($collection_id, [HM_ACCESS_TYPE_VIEW, HM_ACCESS_TYPE_EDIT, HM_ACCESS_TYPE_OWNER]); }
 function user_owns_collection($collection_id)     { return require_collection_access($collection_id, [HM_ACCESS_TYPE_OWNER]); }
 function user_can_edit_collection($collection_id) { return require_collection_access($collection_id, [HM_ACCESS_TYPE_EDIT, HM_ACCESS_TYPE_OWNER]); }
