@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) { exit; }
 function hm_build_access_index() {
     global $wpdb;
     $table = hm_get_access_table();
-
     $wpdb->query("DROP TABLE IF EXISTS {$table}");
+
     hm_create_access_index_table();
 
     $processed = 0;
@@ -46,14 +46,17 @@ function hm_create_access_index_table() {
 
     $sql = "CREATE TABLE IF NOT EXISTS {$table} (
         id           BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        user_id      BIGINT(20) UNSIGNED NOT NULL,
+        user_id      BIGINT(20) UNSIGNED NULL,
+        email        VARCHAR(191) NULL,
         subject_id   VARCHAR(191) NOT NULL,
         subject_type VARCHAR(50) NOT NULL,
         access_type  VARCHAR(50) NOT NULL,
         created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         UNIQUE KEY uq_user_subject (user_id, subject_type, subject_id),
+        UNIQUE KEY uq_email_subject (email, subject_type, subject_id),
         INDEX idx_subject_type (subject_id, access_type),
-        INDEX idx_user_id_subject_type (user_id, subject_type)
+        INDEX idx_user_id_subject_type (user_id, subject_type),
+        INDEX idx_email (email)
     ) {$charset_collate}";
 
     $wpdb->query($sql);

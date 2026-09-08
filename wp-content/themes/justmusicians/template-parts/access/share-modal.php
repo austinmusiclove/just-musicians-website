@@ -1,3 +1,5 @@
+<?php $entries = hm_get_access_entries($args['subject_id']); ?>
+
 <div class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4 sm:p-8" x-show="showShareModal" x-cloak>
 
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
@@ -16,11 +18,19 @@
         <form id="share-access-form" class="p-8 w-full" style="width: 500px;">
 
             <h2 class="text-22 font-sun-motter mb-2"><?php echo esc_html($args['heading']); ?></h2>
-            <p class="text-14 text-black/60 mb-4">Give another user access to this <?php echo esc_html(strtolower($args['subject_type'])); ?>.</p>
+            <div class="text-14 text-black/60 mb-4 flex items-center justify-between gap-2">
+                <span>People with access</span>
+                <?php
+                $other_users = array_filter($entries, function($entry) { return (int) $entry->user_id !== get_current_user_id() and !empty($entry->user_email); });
+                $copy_emails_arr = array_column($other_users, 'user_email');
+                if (!empty($copy_emails_arr)) {
+                    echo get_template_part('template-parts/global/copy-to-clipboard', '', [ 'text' => implode(', ', $copy_emails_arr), 'click_text' => 'Copy emails', ]);
+                } ?>
+            </div>
 
             <!-- Users with access -->
             <?php get_template_part('template-parts/access/access-list', '', [
-                'entries'      => hm_get_access_entries($args['subject_id']),
+                'entries'      => $entries,
                 'subject_id'   => $args['subject_id'],
                 'subject_type' => $args['subject_type'],
             ]); ?>
@@ -35,7 +45,16 @@
             <input type="hidden" name="subject_id" value="<?php echo esc_attr($args['subject_id']); ?>" />
             <input type="hidden" name="subject_type" value="<?php echo esc_attr($args['subject_type']); ?>" />
 
-            <div class="flex justify-end gap-2 mt-6">
+            <div class="flex items-center justify-end gap-2 mt-6">
+
+                <?php if (!empty($args['permalink'])) { ?>
+                <button type="button" class="mr-auto border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
+                    x-data="{ copied: false, copyLink() { const url = '<?php echo esc_url($args['permalink']); ?>'; navigator.clipboard.writeText(url).then(() => { this.copied = true; setTimeout(() => this.copied = false, 2000); }); } }"
+                    x-on:click="copyLink()"
+                    x-text="copied ? 'Copied Link!' : 'Copy Link'"
+                >Copy Link</button>
+                <?php } ?>
+
                 <button type="button"
                     class="border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
                     x-on:click="showShareModal = false;"

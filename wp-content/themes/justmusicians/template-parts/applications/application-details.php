@@ -17,6 +17,24 @@
         </span>
     </div>
 
+    <!-- Embed code -->
+    <?php if ($args['app_access'] === 'owner') { ?>
+    <div>
+        <div class="flex items-center gap-4">
+            <h3 class="font-bold text-16">Embed Application</h3>
+            <?php echo get_template_part('template-parts/global/copy-to-clipboard', '', [
+                'text'              => get_musician_application_embed_code(get_the_ID()),
+                'show_text'         => false,
+                'icon_size_classes' => 'h-6 sm:h-4',
+                'click_text'        => 'Copy embed code',
+            ]); ?>
+        </div>
+        <span class="text-14">
+            Copy/paste this html code to embed the application form on your own website.
+        </span>
+    </div>
+    <?php } ?>
+
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>
@@ -52,6 +70,7 @@
             'heading'      => 'Share Application',
             'subject_id'   => get_the_ID(),
             'subject_type' => 'application',
+            'permalink'    => get_the_permalink(),
         ]); ?>
         <button type="button" class="bg-white hover:bg-red hover:text-white border border-black/20 hover:border-red px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block"
             hx-delete="<?php echo site_url('/wp-html/v1/applications/' . get_the_ID()); ?>"

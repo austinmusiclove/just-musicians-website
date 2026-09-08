@@ -55,36 +55,35 @@ get_header();
 
                 <?php if (empty($lic)) { ?>
 
-                <?php echo get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
-                        'application_id'  => $application_id,
-                        'user_listings'   => $user_listings,
-                        'events'          => $events,
-                        'demo'            => false,
-                    ]); ?>
+                <?php get_template_part('template-parts/applications/musician-application/musician-application-form', '', [
+                    'application_id'  => $application_id,
+                    'user_listings'   => $user_listings,
+                    'events'          => $events,
+                    'demo'            => false,
+                ]); ?>
+
 
                 <?php } else if (!empty($lic)) {
-                    // If there is a listing publish code then check if it is valid
-                    // if valid and user is logged out, ask user to sign up to complete application
-                    // if valid and user is logged in, process and show success or failure
-                    $valid_lic = validate_temporary_code($lic);
-                    if (is_wp_error($valid_lic)) {
-                        get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
-                    } else if (!is_user_logged_in()) {
-                        get_template_part('template-parts/applications/musician-application/successful-submission-anon', '', [ 'title' => $title ]);
+                // If there is a listing publish code then check if it is valid
+                // if valid and user is logged out, ask user to sign up to complete application
+                // if valid and user is logged in, process and show success or failure
+                $valid_lic = validate_temporary_code($lic);
+                if (is_wp_error($valid_lic)) {
+                    get_template_part('template-parts/applications/musician-application/invalid-lic', '', [ 'application_id' => $application_id ]);
+                } else if (!is_user_logged_in()) {
+                    get_template_part('template-parts/applications/musician-application/successful-submission-sign-up', '', [ 'title' => $title ]);
+                } else {
+                    $lic_result = add_listing_by_invitation_code($lic);
+                    if (is_wp_error($lic_result)) {
+                        get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
                     } else {
-                        $lic_result = add_listing_by_invitation_code($lic);
-                        if (is_wp_error($lic_result)) {
-                            get_template_part('template-parts/applications/musician-application/failed-lic', '', [ 'application_id' => $application_id, 'error' => $lic_result, ]);
-                        } else {
-                            get_template_part('template-parts/applications/musician-application/successful-submission-new-listing', '', []);
-                        }
+                        get_template_part('template-parts/applications/musician-application/successful-submission', '', []);
                     }
-                } ?>
+                } } ?>
             </div>
 
         </div>
     </div>
 </div>
-
 <?php
 get_footer();

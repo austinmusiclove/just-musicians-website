@@ -15,7 +15,8 @@ if (is_wp_error($result)) {
     $message = 'Error: ' . $result->get_error_message();
     echo '<span x-init="$dispatch(\'error-toast\', { \'message\': \'' . $message . '\'})"></span>';
     exit;
-} else if (isset($result['sign_up_link'])) { ?>
+// if user is logged out and this is not an embedded form, try to get them to sign up by redirecting them to the sign up link
+} else if (isset($result['sign_up_link']) && empty($_POST['embed'])) { ?>
     <span x-init="redirect('<?php echo $result['sign_up_link']; ?>');"></span>
     <?php exit;
 }
@@ -23,4 +24,4 @@ if (is_wp_error($result)) {
 
 <span x-init="$dispatch('success-toast', { 'message': 'Application Submitted Successfully'})"></span>
 <span x-init="$dispatch('hideform');"></span>
-<?php get_template_part('template-parts/applications/musician-application/successful-submission-new-listing'); ?>
+<?php get_template_part('template-parts/applications/musician-application/successful-submission'); ?>

@@ -3,11 +3,13 @@ import { test } from '../../../fixtures/fixtures.js';
 import { createUser } from '../../../data/factories/user_factory.js';
 import { createApplicationPostData } from '../../../data/factories/application_factory.js';
 
+const grantedAccessSubject = (siteUrl, recipient, title) => `(${siteUrl} ${recipient}) You have been granted access: ${title}`;
+
 test.describe('Access - Share Application via Share Button', () => {
 
     let applicationAuthor, otherUser;
     let applicationAuthorId, otherUserId;
-    let applicationId, applicationSlug;
+    let applicationId, applicationSlug, applicationTitle;
 
     test.beforeEach(async ({ wpCli }) => {
         applicationAuthor = createUser();
@@ -16,11 +18,13 @@ test.describe('Access - Share Application via Share Button', () => {
         otherUser = createUser();
         otherUserId = wpCli.createUser(otherUser);
 
-        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
+        const applicationData = createApplicationPostData({ authorId: applicationAuthorId });
+        applicationId = wpCli.createPost(applicationData);
         applicationSlug = wpCli.getPostField(applicationId, 'post_name');
+        applicationTitle = applicationData.title;
     });
 
-    test('Share view access via share button', async ({ wpCli, singleApplicationPage }) => {
+    test('Share view access via share button', async ({ wpCli, mailpit, singleApplicationPage }) => {
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
         await singleApplicationPage.navigateToApplication(applicationSlug);
         await singleApplicationPage.shareAccess(otherUser.email, 'view');
@@ -34,9 +38,15 @@ test.describe('Access - Share Application via Share Button', () => {
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeTruthy();
         expect(dbAccess.access_type).toBe('view');
+
+        // A new grant emails the existing user with the granted access type
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        const accessEmail = await mailpit.findEmailBySubject(subject);
+        expect(accessEmail).toBeTruthy();
+        expect(await mailpit.getEmailBody(accessEmail.ID)).toContain('view access');
     });
 
-    test('Share edit access via share button', async ({ wpCli, singleApplicationPage }) => {
+    test('Share edit access via share button', async ({ wpCli, mailpit, singleApplicationPage }) => {
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
         await singleApplicationPage.navigateToApplication(applicationSlug);
         await singleApplicationPage.shareAccess(otherUser.email, 'edit');
@@ -50,9 +60,15 @@ test.describe('Access - Share Application via Share Button', () => {
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeTruthy();
         expect(dbAccess.access_type).toBe('edit');
+
+        // A new grant emails the existing user with the granted access type
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        const accessEmail = await mailpit.findEmailBySubject(subject);
+        expect(accessEmail).toBeTruthy();
+        expect(await mailpit.getEmailBody(accessEmail.ID)).toContain('edit access');
     });
 
-    test('Change view access to edit via share modal dropdown', async ({ wpCli, singleApplicationPage }) => {
+    test('Change view access to edit via share modal dropdown', async ({ wpCli, mailpit, singleApplicationPage }) => {
         wpCli.grantAccess(otherUserId, applicationId, 'view', 'application');
 
         // Open share modal — the access list should load with other user's entry
@@ -76,9 +92,13 @@ test.describe('Access - Share Application via Share Button', () => {
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeTruthy();
         expect(dbAccess.access_type).toBe('edit');
+
+        // Changing an existing grant's type is not a new grant — no email should go out
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        expect(await mailpit.findEmailBySubject(subject)).toBeNull();
     });
 
-    test('Change edit access to view via share modal dropdown', async ({ wpCli, singleApplicationPage }) => {
+    test('Change edit access to view via share modal dropdown', async ({ wpCli, mailpit, singleApplicationPage }) => {
         wpCli.grantAccess(otherUserId, applicationId, 'edit', 'application');
 
         // Open share modal — the access list should load with other user's entry
@@ -102,9 +122,13 @@ test.describe('Access - Share Application via Share Button', () => {
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeTruthy();
         expect(dbAccess.access_type).toBe('view');
+
+        // Changing an existing grant's type is not a new grant — no email should go out
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        expect(await mailpit.findEmailBySubject(subject)).toBeNull();
     });
 
-    test('Revoke view access via share modal dropdown', async ({ wpCli, singleApplicationPage }) => {
+    test('Revoke view access via share modal dropdown', async ({ wpCli, mailpit, singleApplicationPage }) => {
         wpCli.grantAccess(otherUserId, applicationId, 'view', 'application');
 
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
@@ -127,9 +151,13 @@ test.describe('Access - Share Application via Share Button', () => {
         await expect(accessEntry).not.toBeVisible();
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeNull();
+
+        // Revoking is not a grant — no email should go out
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        expect(await mailpit.findEmailBySubject(subject)).toBeNull();
     });
 
-    test('Revoke edit access via share modal dropdown', async ({ wpCli, singleApplicationPage }) => {
+    test('Revoke edit access via share modal dropdown', async ({ wpCli, mailpit, singleApplicationPage }) => {
         wpCli.grantAccess(otherUserId, applicationId, 'edit', 'application');
 
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
@@ -152,10 +180,15 @@ test.describe('Access - Share Application via Share Button', () => {
         await expect(accessEntry).not.toBeVisible();
         const dbAccess = wpCli.queryAccess(otherUserId, 'application', applicationId);
         expect(dbAccess).toBeNull();
+
+        // Revoking is not a grant — no email should go out
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
+        expect(await mailpit.findEmailBySubject(subject)).toBeNull();
     });
 
-    test('Full access lifecycle: none → view → edit → revoke → edit', async ({ wpCli, singleApplicationPage }) => {
+    test('Full access lifecycle: none → view → edit → revoke → edit', async ({ wpCli, mailpit, singleApplicationPage }) => {
         const accessEntry = () => singleApplicationPage.shareAccessList.locator('li', { hasText: otherUser.email });
+        const subject = grantedAccessSubject(mailpit.siteUrl, otherUser.email, applicationTitle);
 
         await singleApplicationPage.login(applicationAuthor.email, applicationAuthor.password);
         await singleApplicationPage.navigateToApplication(applicationSlug);
@@ -177,6 +210,11 @@ test.describe('Access - Share Application via Share Button', () => {
         await expect(accessEntry()).toBeVisible();
         await expect(accessEntry().locator('select')).toHaveValue('view');
         expect((await wpCli.queryAccess(otherUserId, 'application', applicationId)).access_type).toBe('view');
+
+        // New grant → existing user receives a view-access email
+        let accessEmail = await mailpit.findEmailBySubject(subject);
+        expect(accessEmail).toBeTruthy();
+        expect(await mailpit.getEmailBody(accessEmail.ID)).toContain('view access');
 
         // 3. Change to edit via dropdown
         responsePromise = singleApplicationPage.page.waitForResponse(
@@ -207,5 +245,10 @@ test.describe('Access - Share Application via Share Button', () => {
         await expect(accessEntry()).toBeVisible();
         await expect(accessEntry().locator('select')).toHaveValue('edit');
         expect((await wpCli.queryAccess(otherUserId, 'application', applicationId)).access_type).toBe('edit');
+
+        // Re-granting after a revoke is a new grant → the newest email carries the edit access
+        accessEmail = await mailpit.findEmailBySubject(subject);
+        expect(accessEmail).toBeTruthy();
+        expect(await mailpit.getEmailBody(accessEmail.ID)).toContain('edit access');
     });
 });

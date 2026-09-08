@@ -59,8 +59,6 @@ function user_can_update_application($application_id)       { return require_app
 function user_can_delete_application($application_id)       { return require_application_access($application_id, [HM_ACCESS_TYPE_OWNER]); }
 
 function user_can_create_application() {
-    global $wpdb;
-
     if (!is_user_logged_in()) {
         return new WP_Error('unauthorized', 'You must sign in to create an application.');
     }
@@ -69,19 +67,18 @@ function user_can_create_application() {
         return true;
     }
 
-    // Check if user has an application already
-    $query = $wpdb->prepare(
-        "SELECT 1 FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'application' AND post_status = 'publish' LIMIT 1",
-        get_current_user_id()
-    );
-    $has_application = (bool) $wpdb->get_var( $query );
+    $user_id = get_current_user_id();
+    $owned_app_ids = hm_get_subject_ids_for_user($user_id, HM_ACCESS_TYPE_OWNER, 'application');
 
-    // Regular user is limited to 1 application; they can create an application if they don't have any yet
-    if ($has_application) {
-        return new WP_Error('unauthorized', 'You are limited to one application on your account.');
+    if (empty($owned_app_ids)) {
+        return true;
     }
 
-    return true;;
+    if (current_user_can('hm_buyer_pro') or current_user_can('hm_buyer_pro_lifetime')) {
+        return true;
+    }
+
+    return new WP_Error('unauthorized', 'You are limited to one application with your account. Upgrade to Talent Buyer Pro for unlimited applications.');
 }
 
 function user_can_update_application_submission($submission_id) {

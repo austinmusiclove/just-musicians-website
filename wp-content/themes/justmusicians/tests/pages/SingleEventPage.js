@@ -10,6 +10,13 @@ export class SingleEventPage extends ThemePage {
         this.sendMessageMdlMessage = this.sendMessageForm.locator('textarea[name="message"]');
         this.sendMessageMdlSubmit = this.sendMessageForm.getByRole('button', { name: 'Send', exact: true });
         this.sendMessageMdlClose = this.page.getByTestId('send-message-mdl-close');
+        this.deleteBtn           = page.getByRole('button', { name: 'Delete Event' });
+    }
+
+    async deleteEvent() {
+        this.page.once('dialog', dialog => dialog.accept());
+        await this.deleteBtn.click();
+        await this.page.waitForURL(url => url.pathname.startsWith('/my-events') && url.searchParams.get('toast') === 'delete', { timeout: 15000 });
     }
 
     applicantCard(listingName) {

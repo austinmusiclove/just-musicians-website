@@ -174,6 +174,28 @@ export function wpCliDeletePost(postId) {
     } catch (e) {}
 }
 
+export function wpCliGetWpConfig(option) {
+    const output = execSync(
+        `wp config get ${option} --path=${WP_PATH}`,
+        { encoding: 'utf-8' }
+    );
+    return output.trim();
+}
+
+export function wpCliUserHasCap(userId, cap) {
+    const output = wpCliWithRetry(
+        `wp eval "echo user_can(${userId}, '${cap}') ? '1' : '0';" --path=${WP_PATH}`
+    );
+    return output.trim() === '1';
+}
+
+export function wpCliAddUserCap(userId, cap) {
+    execSync(
+        `wp user add-cap ${userId} ${cap} --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+}
+
 export function wpCliSetPostThumbnail(postId, imagePath) {
     const output = execSync(
         `wp media import ${imagePath} --post_id=${postId} --title="cover" --porcelain --path=${WP_PATH}`,
@@ -288,7 +310,7 @@ export function wpCliGetUnreadConversationCount(userId) {
 
 export function wpCliGrantAccess(userId, subjectId, accessType, subjectType) {
     const output = wpCliWithRetry(
-        `wp eval "echo hm_grant_access(${userId}, '${subjectId}', '${accessType}', '${subjectType}') ? '1' : '0';" --path=${WP_PATH}`
+        `wp eval "\\$u = get_userdata(${userId}); echo \\$u && hm_upsert_access(\\$u->user_email, '${subjectId}', '${subjectType}', '${accessType}') !== 'error' ? '1' : '0';" --path=${WP_PATH}`
     );
     return output.trim() === '1';
 }

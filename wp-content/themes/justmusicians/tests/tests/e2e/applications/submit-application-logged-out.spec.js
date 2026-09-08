@@ -71,10 +71,10 @@ test.describe('E2E - Submit Application - Logged Out', () => {
             url => url.href.startsWith(signUpLink),
             { timeout: 20000 }
         );
-        await musicianApplicationPage.expectSuccessScreenAnon();
+        await musicianApplicationPage.expectSuccessfulSubmissionSignUpPage();
 
         const newUser = createUser();
-        await musicianApplicationPage.successfulSubmissionAnonSignUpBtn.click();
+        await musicianApplicationPage.successfulSubmissionSignUpBtn.click();
         await expect(musicianApplicationPage.signupModalHeading).toBeVisible();
         await musicianApplicationPage.fillSignupForm(newUser);
         await musicianApplicationPage.signupSubmitBtn.click();

@@ -68,6 +68,12 @@ add_action('listing_calc_rating_event', function($listing_post_id) {
 function update_search_rank($post_id) {
     $rank = 0;
 
+    // Boost rank by 100 if listing is claimed (not unclaimed)
+    $unclaimed = get_post_meta( $post_id, 'unclaimed', true );
+    if ( !$unclaimed ) {
+        $rank += 100;
+    }
+
     // Boost rank for every field they have filled out in the listing
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',

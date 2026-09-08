@@ -1,6 +1,12 @@
 <?php
 function create_event($args) {
 
+    $start_date = $args['meta_input']['start_date'] ?? '';
+    $auth = user_can_create_event($start_date);
+    if (is_wp_error($auth)) {
+        return $auth;
+    }
+
     // Create post
     $event_id = wp_insert_post($args, true);
     if (is_wp_error($event_id) || !$event_id) {

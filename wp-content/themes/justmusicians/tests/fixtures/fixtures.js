@@ -1,5 +1,7 @@
 import { test as base } from '@playwright/test';
 import { ThemePage } from '../pages/ThemePage.js';
+import { PricingPage } from '../pages/PricingPage.js';
+import { SubscriptionsPage } from '../pages/SubscriptionsPage.js';
 import { ApplicationsPage } from '../pages/ApplicationsPage.js';
 import { ApplicationFormPage } from '../pages/ApplicationFormPage.js';
 import { MusicianApplicationPage } from '../pages/MusicianApplicationPage.js';
@@ -10,13 +12,15 @@ import { SingleApplicationPage } from '../pages/SingleApplicationPage.js';
 import { PasswordResetPage } from '../pages/PasswordResetPage.js';
 import { InquiryModalPage } from '../pages/InquiryModalPage.js';
 import { MyGigsPage } from '../pages/MyGigsPage.js';
+import { MyEventsPage } from '../pages/MyEventsPage.js';
+import { EventFormPage } from '../pages/EventFormPage.js';
 import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
-import { findEmailBySubject as findEmail, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
+import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
-    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta,
+    wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliAddUserCap, wpCliGetWpConfig,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
@@ -25,6 +29,7 @@ import {
     wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
     wpCliGrantAccess, wpCliRevokeAccess, wpCliQueryAccess,
 } from '../data/wp_cli.js';
+import { buildCheckoutCompletedEvent, buildSubscriptionDeletedEvent, postSignedWebhook, generateStripeSignature } from '../data/stripe.js';
 
 export const test = base.extend({
     mailpit: async ({ baseURL, request }, use) => {
@@ -33,6 +38,7 @@ export const test = base.extend({
             apiUrl: mailpitApiUrl,
             siteUrl: baseURL,
             findEmailBySubject: (subject, opts) => findEmail(subject, mailpitApiUrl, opts),
+            findEmailTo: (recipient, subject, opts) => findEmailToRecipient(recipient, subject, mailpitApiUrl, opts),
             waitForMessageEmail: (subject, opts) => waitForMessage(subject, mailpitApiUrl, request, opts),
             getEmailBody: (messageId) => getEmail(messageId, mailpitApiUrl),
             extractLinkFromEmail: extractLink,
@@ -56,6 +62,9 @@ export const test = base.extend({
             createListing: (listingData) => { const id = wpCliCreateListing(listingData); createdPosts.push(id); return id; },
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
+            userHasCap: wpCliUserHasCap,
+            addCap: wpCliAddUserCap,
+            getWpConfig: wpCliGetWpConfig,
             getLatestPostId: wpCliGetLatestPostId,
             getLatestPostIdByType: wpCliGetLatestPostIdByType,
             getPostField: wpCliGetPostField,
@@ -83,9 +92,26 @@ export const test = base.extend({
         if (createdUsers.length) wpCliDeleteUserData(createdUsers);
         for (const u of createdUsers) wpCliDeleteUser(u.email);
     },
+    stripe: async ({ baseURL, request, wpCli }, use) => {
+        const secret = await wpCli.getWpConfig('STRIPE_WEBHOOK_SECRET');
+        await use({
+            buildEvent: buildCheckoutCompletedEvent,
+            buildSubscriptionDeletedEvent,
+            sign: (payload) => generateStripeSignature(payload, secret),
+            postWebhook: (event) => postSignedWebhook({ request, baseURL, event, secret }),
+        });
+    },
     themePage: async ({ page, isMobile }, use) => {
         const themePage = new ThemePage(page, isMobile);
         await use(themePage);
+    },
+    pricingPage: async ({ page, isMobile }, use) => {
+        const pricingPage = new PricingPage(page, isMobile);
+        await use(pricingPage);
+    },
+    subscriptionsPage: async ({ page, isMobile }, use) => {
+        const subscriptionsPage = new SubscriptionsPage(page, isMobile);
+        await use(subscriptionsPage);
     },
     applicationsPage: async ({ page, isMobile }, use) => {
         const applicationsPage = new ApplicationsPage(page, isMobile);
@@ -126,6 +152,14 @@ export const test = base.extend({
     myGigsPage: async ({ page, isMobile }, use) => {
         const myGigsPage = new MyGigsPage(page, isMobile);
         await use(myGigsPage);
+    },
+    myEventsPage: async ({ page, isMobile }, use) => {
+        const myEventsPage = new MyEventsPage(page, isMobile);
+        await use(myEventsPage);
+    },
+    eventFormPage: async ({ page, isMobile }, use) => {
+        const eventFormPage = new EventFormPage(page, isMobile);
+        await use(eventFormPage);
     },
     singleEventPage: async ({ page, isMobile }, use) => {
         const singleEventPage = new SingleEventPage(page, isMobile);

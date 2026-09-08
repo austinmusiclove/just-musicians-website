@@ -25,7 +25,7 @@ test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
 
     test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId, lic);
-        await expect(musicianApplicationPage.successfulSubmissionAnon).toBeVisible();
+        await expect(musicianApplicationPage.successfulSubmissionSignUp).toBeVisible();
         await expect(musicianApplicationPage.signupModalHeading).toHaveText('Sign up to complete your submission');
         await expect(musicianApplicationPage.signupModalHeading).not.toBeVisible();
         await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();

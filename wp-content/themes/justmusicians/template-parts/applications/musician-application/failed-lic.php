@@ -1,5 +1,4 @@
 <?php
-
     $heading = 'Failed to Complete Application Submission!';
     $message = 'Something went wrong with your submission. Try resubmitting the application.';
     if ($args['error']->get_error_code() == 'no_listings') {

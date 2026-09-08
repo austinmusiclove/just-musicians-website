@@ -33,3 +33,45 @@ function user_can_view_single_event($event_id)   { return require_event_authorsh
 function user_can_delete_event($event_id)        { return require_event_authorship($event_id); }
 function user_can_update_event($event_id)        { return require_event_authorship($event_id); }
 function user_can_request_proposal($event_id)    { return require_event_authorship($event_id); }
+
+function user_can_create_event($start_date) {
+    if (!is_user_logged_in()) {
+        return new WP_Error('unauthorized', 'You must sign in to create an event.');
+    }
+
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
+    // Pro Talent Buyer users are unlimited
+    if (current_user_can('hm_buyer_pro') || current_user_can('hm_buyer_pro_lifetime')) {
+        return true;
+    }
+
+    if (empty($start_date)) {
+        return true;
+    }
+
+    // Count the user's published events whose start_date falls in the same month as the new event
+    $month = date('Y-m', strtotime($start_date));
+    $event_count = count(get_posts([
+        'post_type'   => 'event',
+        'post_status' => 'publish',
+        'author'      => get_current_user_id(),
+        'numberposts' => -1,
+        'fields'      => 'ids',
+        'meta_query'  => [
+            [
+                'key'     => 'start_date',
+                'value'   => $month . '-',
+                'compare' => 'LIKE',
+            ],
+        ],
+    ]));
+
+    if ($event_count >= 4) {
+        return new WP_Error('unauthorized', 'You are limited to 4 events per month with your account. Upgrade to Talent Buyer Pro for unlimited events.');
+    }
+
+    return true;
+}

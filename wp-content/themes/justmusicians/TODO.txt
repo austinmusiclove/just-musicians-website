@@ -1,4 +1,9 @@
+Deploy
+    create access index table
+    remove the drop table for access index
 Critical bugs
+    the locaiton bar does not populate with default location when not on home page
+    When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
     Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
@@ -6,36 +11,15 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
 Applications Features to add
-    Share application access features
-        copy link button in share modal
-        scroll emails with access
-        send email when access given
-        copy all emails with access (copy google ux)
-        allow giving access to many emails at once
-        Allow non users to get access by sending them email with special link that adds access on sign up
-    Paywall
-        Features page where you can see what you get with the plan
-            Annual and monthly pricing
-            30 day free trial
-            replace link to blog in header with venues link to this page
-            add premium link under buyers in menus
-        Checkout process from Stripe
-            Checkout testing
-            User feature flags int in user data; return val in account settings or return individual flag values (need to still check auth for feature flags in back end since js can be manipulated on front end)
-            Set feature flags when buy
-            Unset feature flags when subscription ends
-        Upsell locations in the current workflow
-            Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
-            Limit users to one application unless admin or premium subscription
-            Show add dates option in set up form but show an upsell message when you try to use it
+    Collections
+        share collections with other users
+        reorder collections
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them
     Create way to apply for single gig; similar to musician application but it is gig-application and it has the gig details, listing form, response, availability, and maybe this one forces sign up
     Notification to applicants when dates added to application
     Sorting and organizing
-        Earmark or favorite certain applicants
         Filter by draw and price
-        Filter by favorites
         Filter genres, ensemble size and other taxonomies
     After design update
         Add two listing images on applicant cards
@@ -43,7 +27,6 @@ Applications Features to add
         change edit submitted application to either resubmit or withdraw
         fix application card so that link does not blend in with description
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
-        when tmp code fails after logged out application submission, the success message says the listing is searchable and that is wrong
         show availability dates on the applicant card
         add ensemble size to applicant view
     Other features that would be needed for parity with venue forms out there
@@ -52,6 +35,46 @@ Applications Features to add
         Full bill; maybe bands you can play with or have played with (Flamingo)
         Record label (Radio)
         I'd like to open for.. (Radio)
+Escrow
+    explore legal issues
+    figure out what I can offer for live music escrow
+    figure out how to provide escrow with stripe
+Refactor listing access
+    data mgmt
+        use access table to give owner access to all that currently have listing in their listings
+        In data_mgmt plugin add buttons to construct access from authors of listings and users with listings in their user meta retroactively
+        when listing deleted or trashed remove all access
+        make sure listings are not removed from collections when deleted but instead they are ignored because the collection should be getting ids from the list and using wp query to get those listings if they exist
+    listings page
+        show listings you have view, edit or owner access to
+        when deleting a listing check for owner access
+        only show edit button if at least edit access
+        only show delete button if owner access
+    listing form
+        only allow edit for owner or edit access
+        when listing created give author owner access
+    modify get listing owners logic
+        find everywhere that listing owners and access needs to be maintained and used
+        owner function and other auth functions will give access to author and anyone specified in the index
+    inquiries
+        when you get edit/owner access to listing you can respond to gigs
+        when you get edit/owner access to listing you can see gigs
+    applications
+        when you get edit/owner access to listing you can see submitted applications
+        when you get edit/owner access to listing you can submit applications as that listing
+    messages
+        when you get access to a listing you get added to conversations with that listing
+        when you get access to a listing you start getting the messages sent to that listing
+        update the way user messages plugin determines if you own a listing; right now it users get user meta to get listings list
+    find everywhere user listings field is referenced using grep
+    phase 2: get rid of listings list in user data once it is deprecated; replace it with displaying a listing access table and a way to add/edit/remove access from wp admin user page
+Listing lifecycle
+    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
+    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
+    Drip campaign to reach out to pending and draft listings
+Community partner program
+    submit link to your website where you have linked us and you get advanced features automatically
+    automatically check ever quarter if the link is still there
 Applications Advanced
     Application form screen
         Inform applicant that they can come back to this application to update it any time
@@ -60,8 +83,8 @@ Applications Advanced
         Invite listings to apply (advanced)
         Customized questions on applications (create custom-application-question post type and custom-application-question-response post type or custome db table)
         Sort by highest rating (need index)
+        allow giving access to many emails at once
     Single Application Applicant review tab
-        Show dates available for your events
         Filter by answers to custom questions (advanced)
 Submitted Applciations
     When active state add withdraw application button in white next to udpate button
@@ -92,22 +115,32 @@ My Gigs page (for musicians)
     Allow recommending another band when you decline a gig
 Event Form page
     Allow venue location
+Subscriptions
+    Delay cancelling of capabilities until end of current pay period
+    Add application button is always there and if you have one app then it has a message that the limit is one or it is an upsell for premium
+    Link in fail to create event/application in fail toast
+    when creating an inquiry for new event, don't allow dates in month where limit reached
 Offer post type (future)
     Status
     Pay with structure
     Event relationship
     Details
     Proposal relationship
-DB Indexes
-    consider doing something to make removing listing from all user listing lists and favorites and collections faster than iterating all users and collections
-    consider doing something to make get listing owners faster
-    Use the access mechanism for listings adn update listing owners logic
-        In data_mgmt plugin add buttons to construct access from authors of listings and users with listings in their user meta retroactively
-        find everywhere that listing owners and access needs to be maintained and used
-        owner function and other auth functions will give access to author and anyone specified in the index
-        build index from listing list in user data
-        get rid of listings list in user data once it is deprecated
 SEO
+    single listing pages
+        figure out what i need to do to get a rich google result with the listing pages
+        stand alone video objects to qualify for rich result
+        make sure data can be indexed even though it is hidden behind x-show and x-cloak
+        get knowledge pannel like it shows up for "texas violinist" from their gig salad page
+    rock bands in austin type pages
+        maybe add venues played and venue schema as well for those
+        keep filter code out of index by lazy loading it
+        add more data to the image object schema and video object schema; description for videos
+        add other location same category internal links
+        add location pages
+        add breadcrumb
+        make filters lock in the category and location part; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
+    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
         free verification for artist backlink
@@ -119,19 +152,8 @@ SEO
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
-    single listing pages
-        figure out what i need to do to get a rich google result with the listing pages
-        stand alone video objects to qualify for rich result
-    rock bands in austin type pages
-        maybe add venues played and venue schema as well for those
-        keep filter code out of index by lazy loading it
-        add more data to the image object schema and video object schema; description for videos
-        add other location same category internal links
-        add location pages
-        add breadcrumb
     **Venue schema on venue pages with reviews
     add best x in x listacle blog posts
-    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
 Glossaries
     add other glossaries section at the bottom of single-glossary
 Users
@@ -193,6 +215,7 @@ Advanced inquiries
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
     Offer accept edit reject workflow
         Compare listings side by side in offers tab on inquiry page (show offer, media, link to convo in sidebar; show messages in message body area)
+        need to make it clear buyers should specify performance duration, equipment needed, and ensemble size if possible
     allow delete/expire event
     allow just send direct message for other kind of inquiry that is not for an event
     only get non expired listings for eventsMap
@@ -202,6 +225,7 @@ Advanced inquiries
     calendly like tool for allowing artists to give you their availability for a group of dates/times
     add settings (hotel, bar, restaurant) to quiz
 Messages
+    send message directly to musicain without event for Talent Buyer Pro
     profile image(s) in conversation next to title
     show read receipt
         in get_conversation_messages() in user-messages.php
@@ -211,18 +235,23 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
     Need fuzzy search for locations in location active search
-    include media relevance in search algo
-    video order depending on search criteria
+    show relevant thumbnail image and video media based on search but media does not play a part in rank
     switch to cursor pagination
+    on relevance search with search term, the oldest should go first; right now it is opposite
     Final Form Search Algorithm
-        1 - Rank
+        1 - Listing status
+            1 - Community Partner
+            2 - Verified
+            3 - Claimed
+        2 - Rank
             1 - Response Time
             2 - Inquiries/Views/Clicks
-            3 - Verified Reviews/Rating score
+            3 - Reviews/Rating score
             4 - Profile Completeness
-        2 - Profile Age (post_id tie breaker)
+        3 - Profile Age (post_id tie breaker)
         Show Relevant Media as thumbnail based on search
 Listing form
+    back to listings button
     **really slow even for small update; maybe it is doing images stuff when it shouldn't
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
@@ -240,6 +269,7 @@ Listing form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
 Listing page
+    add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
     *add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
     *add ticket sales numbers self reported by artists
     add gear list
@@ -254,12 +284,14 @@ Listing page
     add set lists with set length and repertoire
     instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
     allow collecting deposits
+    create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
     ***video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
+    open video in modal (maybe only in listing page)
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases

@@ -10,6 +10,10 @@ function html_api_v1_template_redirects() {
                 case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/listings/post-listing.php'; exit;
                 case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/listings/delete-listing.php'; exit;
             }
+        case 'claim-listing':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/listings/claim-listing.php'; exit;
+            }
 
         // Collections
         case 'collections':
@@ -97,6 +101,17 @@ function html_api_v1_template_redirects() {
                 case 'DELETE': status_header(200); include_once get_template_directory() . '/html-api/access/revoke-access.php'; exit;
                 case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/access/get-access.php'; exit;
             }
+
+        // Checkout
+        case 'checkout':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/checkout/create-session.php'; exit;
+            }
+        case 'cancel-subscription':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST'  : status_header(200); include_once get_template_directory() . '/html-api/checkout/cancel-subscription.php'; exit;
+            }
+
         case 'application-submissions':
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET'  : status_header(200); include_once get_template_directory() . '/html-api/applications/get-application-submissions.php'; exit;

@@ -70,6 +70,9 @@ function hm_data_mgmt_admin_page() {
             case 'build_access_index':
                 $result = hm_build_access_index();
                 break;
+            case 'recalculate_search_ranks':
+                $result = update_listings_meta_data();
+                break;
         }
     }
 
@@ -108,6 +111,11 @@ function hm_data_mgmt_admin_page() {
             <p>
                 <button type="submit" name="hm_action" value="build_access_index" class="button button-primary">
                     Build Access Index
+                </button>
+            </p>
+            <p>
+                <button type="submit" name="hm_action" value="recalculate_search_ranks" class="button button-primary">
+                    Recalculate Search Rank for All Listings
                 </button>
             </p>
         </form>
@@ -243,6 +251,7 @@ function get_unassigned_listings() {
                 'title' => $listing->post_title,
                 'status' => $listing->post_status,
                 'artist_auuid' => $auuid,
+                'unclaimed' => (bool) get_post_meta($listing->ID, 'unclaimed', true),
             ];
         }
     }

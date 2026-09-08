@@ -4,6 +4,7 @@ $text_var          = $args['text_var'] ?? null;
 $show_text         = $args['show_text'] ?? false;
 $external_link     = $args['external_link'] ?? null;
 $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
+$click_text        = $args['click_text'] ?? 'Click to copy';
 ?>
 
 <div class="flex flex-row items-center gap-2 min-w-0" x-data="{
@@ -46,7 +47,7 @@ $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
                 <!-- Copy tooltip -->
                 <div class="z-50 absolute bottom-full left-1/2 -translate-x-1/2" x-show="hover || copied" x-cloak>
                     <div class="mb-2 w-56 text-white bg-black px-4 py-3 text-14 rounded"
-                        x-text="copied ? 'Copied!' : 'Click to copy'"></div>
+                        x-text="copied ? 'Copied!' : '<?php echo $click_text; ?>'"></div>
                 </div>
 
             </div>

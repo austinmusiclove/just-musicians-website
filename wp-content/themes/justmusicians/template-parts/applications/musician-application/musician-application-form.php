@@ -138,6 +138,9 @@
     </div>
     <input type="hidden" name="application_id" value="<?php echo $args['application_id']; ?>" />
     <input type="hidden" name="status" value="active" />
+    <?php if (!empty($args['embed'])) { ?>
+        <input type="hidden" name="embed" value="1" />
+    <?php } ?>
 
 
     <!-- Availability -->

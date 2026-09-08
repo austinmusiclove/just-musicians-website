@@ -10,6 +10,7 @@
         'heading'      => $args['heading'],
         'subject_id'   => $args['subject_id'],
         'subject_type' => $args['subject_type'],
+        'permalink'    => isset($args['permalink']) ? $args['permalink'] : '',
     ]); ?>
 
 </div>

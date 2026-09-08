@@ -22,5 +22,5 @@
             </a>
         </div>
     </span>
-    <a href="/blog/">Blog</a>
+    <a href="/pricing/">Pricing</a>
 </div>

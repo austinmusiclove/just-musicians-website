@@ -13,6 +13,11 @@ function html_api_rewrite_rules() {
         'index.php?wp-html-v1=listings&listing-id=$matches[1]',
         'top'
     );
+    add_rewrite_rule(
+        '^wp-html/v1/listings/([0-9]+)/claim/?$',
+        'index.php?wp-html-v1=claim-listing&listing-id=$matches[1]',
+        'top'
+    );
 
     // Collections
     add_rewrite_rule(
