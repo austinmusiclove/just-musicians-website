@@ -1,22 +1,16 @@
-<div class="flex items-center gap-3 py-3 border-b border-black/20 overflow-hidden"
+<div class="flex items-center gap-3 py-4 border-b border-black/20 overflow-hidden last:border-none"
     <?php if (!empty($args['last']) && empty($args['is_last_page'])) { ?>
-        hx-get="<?php echo site_url('/wp-html/v1/rfp-events/?page=' . $args['next_page']); ?>"
-        hx-trigger="revealed once"
-        hx-swap="beforeend"
-        hx-target="#request-slide-results"
-        hx-indicator="#rfp-paging-spinner"
-    <?php } ?>
-    x-data="{
+    hx-get="<?php echo site_url('/wp-html/v1/rfp-events/?page=' . $args['next_page']); ?>" hx-trigger="revealed once"
+    hx-swap="beforeend" hx-target="#request-slide-results" hx-indicator="#rfp-paging-spinner" <?php } ?> x-data="{
         listingId:          inquiryListing,
         proposalListingIds: <?php echo clean_arr_for_doublequotes($args['proposal_listing_ids']); ?>,
         proposalSent() { return this.proposalListingIds.includes(this.listingId); },
-    }"
->
+    }">
 
-    <div class="flex gap-1 justify-between w-full">
+    <div class="flex gap-4 justify-between w-full items-center">
 
-        <div class="flex flex-col gap-1 min-w-0">
-            <h2 class="font-bold text-18 sm:text-22 break-words">
+        <div class="flex flex-col min-w-0">
+            <h2 class="font-bold text-16 sm:text-18 break-words">
                 <?php echo esc_html($args['event_name']); ?>
             </h2>
             <?php echo get_template_part('template-parts/cards/card-components/event-meta-line', '', [

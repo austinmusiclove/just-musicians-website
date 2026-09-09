@@ -1470,6 +1470,14 @@ video {
   width: 100vw;
 }
 
+.w-\[28rem\] {
+  width: 28rem;
+}
+
+.w-\[20rem\] {
+  width: 20rem;
+}
+
 .min-w-0 {
   min-width: 0px;
 }
@@ -3620,6 +3628,11 @@ video {
   .sm\:py-20 {
     padding-top: 5rem;
     padding-bottom: 5rem;
+  }
+
+  .sm\:py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .sm\:pb-4 {
