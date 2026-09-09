@@ -1,6 +1,7 @@
 Deploy
     create access index table
     remove the drop table for access index
+    save permalinks
 Critical bugs
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
@@ -10,6 +11,7 @@ Critical bugs
     Figure out why update listing takes forever; probably something with unneeded image processing
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
+    Make sure not varnish caching the suggestions api and other similar things like that
 Applications Features to add
     Collections
         share collections with other users
