@@ -8,6 +8,23 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     Make sure i am compliant with laws on accessibility and cookies
     Make sure not varnish caching the suggestions api and other similar things like that
+Musician Pricing Page
+    Tab on pricing page
+    Verification call option (one per account)
+        Set up calendly
+        free for community partners
+        make sure verification does not increase rank
+        For one time set up fee
+            Set up auto renew verification emails
+    Community Partner (one per listing)
+        add community partner meta in listings
+        increase rank for community partners
+        button to request community partnership that sends email to admin (sign in to access)
+        list advanced features for community partners vs features for regular listings
+        auto verify community partnership on back end single listing page
+            allow enter link to verify
+            provide logos and embed codes for creating links
+            auto verify it is the same domain as their website and HM link is there
 Applications Features to add
     Recurring events
         Allow adding event series with title and list of dates; automatically creates the events and event series posts for them

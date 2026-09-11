@@ -1,4 +1,6 @@
 import { execSync } from 'child_process';
+import { copyFileSync, unlinkSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 const WP_PATH = '/Users/johnfilippone/Local\\ Sites/just-musicians/app/public';
 const LISTING_THUMBNAIL_PATH = 'tests/data/files/test-image.png';
@@ -229,16 +231,25 @@ export function wpCliAddUserCap(userId, cap) {
 }
 
 export function wpCliSetPostThumbnail(postId, imagePath) {
-    const output = execSync(
-        `wp media import ${imagePath} --post_id=${postId} --title="cover" --porcelain --path=${WP_PATH}`,
-        { encoding: 'utf-8' }
-    );
-    const attachmentId = output.trim();
-    execSync(
-        `wp post meta update ${postId} _thumbnail_id ${attachmentId} --path=${WP_PATH}`,
-        { stdio: 'ignore' }
-    );
-    return attachmentId;
+    // WP-CLI sideloads the source into a temp file named after its basename, so concurrent imports of the
+    // same path race on that shared temp file; import from a unique copy in the OS temp dir instead.
+    const ext = imagePath.lastIndexOf('.') > -1 ? imagePath.slice(imagePath.lastIndexOf('.')) : '';
+    const uniqueImagePath = `${tmpdir()}/test-image-${process.pid}-${Date.now()}-${Math.random().toString(36).slice(2)}${ext}`;
+    copyFileSync(imagePath, uniqueImagePath);
+    try {
+        const output = execSync(
+            `wp media import ${uniqueImagePath} --post_id=${postId} --title="cover" --porcelain --path=${WP_PATH}`,
+            { encoding: 'utf-8' }
+        );
+        const attachmentId = output.trim();
+        execSync(
+            `wp post meta update ${postId} _thumbnail_id ${attachmentId} --path=${WP_PATH}`,
+            { stdio: 'ignore' }
+        );
+        return attachmentId;
+    } finally {
+        unlinkSync(uniqueImagePath);
+    }
 }
 
 export function wpCliSetPostTerms(postId, taxonomy, terms) {
