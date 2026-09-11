@@ -34,6 +34,9 @@ Applications Features to add
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
     After design update
+        My events spinner display non when not in use
+        Create event form toast
+        Populate requestQuote and requestDraw in Applications page
         Add two listing images on applicant cards
         Add draw and price options for application and add them to applicant card
         change edit submitted application to either resubmit or withdraw
