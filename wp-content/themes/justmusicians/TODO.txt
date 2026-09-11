@@ -1,4 +1,5 @@
 Critical bugs
+    details for gigs not showing new lines
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
@@ -44,6 +45,11 @@ Applications Features to add
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
         show availability dates on the applicant card
         add ensemble size to applicant view
+        Figure out issue with cover image
+        Figure out get suggestions issue
+        use publicly queriable false in post type registration
+        merge application embed
+        make sure request quote and request draw are connected right
     Other features that would be needed for parity with venue forms out there
         dates requested (Flamingo, Kick Butt Coffee)
         last time you played here (Flamingo)
@@ -149,6 +155,7 @@ Offer post type (future)
     Details
     Proposal relationship
 SEO
+    remove glossary pages and maybe venue pages because they are not on topic for the site
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
         stand alone video objects to qualify for rich result

@@ -56,7 +56,8 @@ test.describe('Collections - Reorder collection items', () => {
         await expect(singleCollectionPage.reorderHandles).toHaveCount(2);
     });
 
-    test('reorders the 11th listing to the 10th position in a collection of 12 listings', async ({ wpCli, themePage, singleCollectionPage }) => {
+    test('reorders the 11th listing to the 10th position in a collection of 12 listings', async ({ wpCli, themePage, singleCollectionPage, waitForScrollToSettle }) => {
+        test.slow();
         test.skip(themePage.isMobile, 'This test is for Desktop only.');
 
         const listingIds = [];
@@ -90,14 +91,14 @@ test.describe('Collections - Reorder collection items', () => {
 
         // Bring the 11th card's handle on screen so its drag target coordinates are in view
         await singleCollectionPage.reorderHandle(listingIds[10]).scrollIntoViewIfNeeded();
+        await waitForScrollToSettle();
 
         // Drag the 11th card's handle onto the 10th card's handle
         const eleventh = listingIds[10];
         const tenth = listingIds[9];
         await singleCollectionPage.dragHandle(eleventh, {
             afterListingId: tenth,
-            waitForUrl: resp => resp.url().includes(`wp-html/v1/collections/${largeCollectionId}/reorder`)
-                && resp.request().method() === 'POST',
+            waitForUrl: resp => resp.url().includes(`wp-html/v1/collections/${largeCollectionId}/reorder`) && resp.request().method() === 'POST',
         });
 
         const expectedOrder = [...listingIds.slice(0, 9), eleventh, tenth, listingIds[11]];

@@ -61,9 +61,7 @@ export class SingleCollectionPage extends ThemePage {
         const box1 = await handle.boundingBox();
         const target = await this.reorderHandle(afterListingId).boundingBox();
 
-        const posted = waitForUrl
-            ? this.page.waitForResponse(waitForUrl)
-            : null;
+        const posted = waitForUrl ? this.page.waitForResponse(waitForUrl) : null;
         await this.page.mouse.move(box1.x + box1.width / 2, box1.y + box1.height / 2);
         await this.page.mouse.down();
         await this.page.mouse.move(target.x + target.width / 2, target.y + target.height / 2, { steps: 15 });

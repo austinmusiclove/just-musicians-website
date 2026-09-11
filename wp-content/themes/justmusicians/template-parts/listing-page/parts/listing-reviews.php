@@ -2,7 +2,7 @@
     x-init="
         reviewPostType = 'listing_review';
         revieweeId     = '<?php echo get_the_ID(); ?>';
-        revieweeName   = '<?php echo get_field('name'); ?>';
+        revieweeName   = '<?php echo clean_str_for_doublequotes(get_field('name')); ?>';
     "
 >
 

@@ -138,6 +138,11 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
 
+                            <span id="spinner-end" class="htmx-indicator-block">
+                                <div class="my-8 flex items-center justify-center">
+                                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                                </div>
+                            </span>
                         </form>
 
                     <?php } ?>

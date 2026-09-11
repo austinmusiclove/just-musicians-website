@@ -54,7 +54,7 @@
             x-show="showCollectionsPopup" x-cloak
             x-transition
             x-on:mouseenter="showCollectionsPopup = true"
-            x-on:mouseleave="_resetCollectionsPopup()"
+            x-on:mouseleave.debounce="_resetCollectionsPopup()"
             x-on:click.away="_resetCollectionsPopup()"
             x-intersect:leave="_resetCollectionsPopup()"
         >

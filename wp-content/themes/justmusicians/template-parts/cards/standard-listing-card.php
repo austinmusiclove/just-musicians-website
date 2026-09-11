@@ -21,6 +21,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         hx-indicator="#spinner-end"
         hx-swap="beforeend"
         hx-include="#hx-form"
+        hx-params="not reorder_ids[]"
         hx-sync="closest #hx-form:abort"
     <?php } ?>
 >

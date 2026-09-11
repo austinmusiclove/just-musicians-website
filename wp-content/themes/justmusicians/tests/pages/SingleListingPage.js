@@ -26,8 +26,7 @@ export class SingleListingPage extends ThemePage {
     async addToFavorites(listingId) {
         const favoritesButton = this.getFavoritesButton(listingId);
         const added = this.page.waitForResponse(
-            resp => resp.request().method() === 'POST'
-                && resp.url().includes(`/wp-html/v1/collections/0/listings/${listingId}/`)
+            resp => resp.request().method() === 'POST' && resp.url().includes(`/wp-html/v1/collections/0/listings/${listingId}/`)
         );
         await favoritesButton.locator('> button:visible').first().click();
         await added;
@@ -45,8 +44,7 @@ export class SingleListingPage extends ThemePage {
         await input.fill(name);
 
         const posted = this.page.waitForResponse(
-            resp => resp.request().method() === 'POST'
-                && resp.url().includes('/wp-html/v1/collections/')
+            resp => resp.request().method() === 'POST' && resp.url().includes('/wp-html/v1/collections/')
         );
         await input.press('Enter');
         await posted;
@@ -66,8 +64,7 @@ export class SingleListingPage extends ThemePage {
         await expect(row).toBeVisible();
 
         const added = this.page.waitForResponse(
-            resp => resp.request().method() === 'POST'
-                && resp.url().includes(`/wp-html/v1/collections/${collectionId}/listings/${listingId}/`)
+            resp => resp.request().method() === 'POST' && resp.url().includes(`/wp-html/v1/collections/${collectionId}/listings/${listingId}/`)
         );
         await row.locator('button:visible').first().click();
         await added;
@@ -83,8 +80,7 @@ export class SingleListingPage extends ThemePage {
         await expect(row).toBeVisible();
 
         const removed = this.page.waitForResponse(
-            resp => resp.request().method() === 'DELETE'
-                && resp.url().includes(`/wp-html/v1/collections/${collectionId}/listings/${listingId}/`)
+            resp => resp.request().method() === 'DELETE' && resp.url().includes(`/wp-html/v1/collections/${collectionId}/listings/${listingId}/`)
         );
         await row.locator('button:visible').first().click();
         await removed;

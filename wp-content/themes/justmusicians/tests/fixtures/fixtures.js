@@ -18,6 +18,7 @@ import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
 import { CollectionsPage } from '../pages/CollectionsPage.js';
 import { SingleCollectionPage } from '../pages/SingleCollectionPage.js';
+import { waitForScrollToSettle as waitForScrollToSettleFn } from './scroll.js';
 import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
@@ -180,5 +181,8 @@ export const test = base.extend({
     singleCollectionPage: async ({ page, isMobile }, use) => {
         const singleCollectionPage = new SingleCollectionPage(page, isMobile);
         await use(singleCollectionPage);
+    },
+    waitForScrollToSettle: async ({ page }, use) => {
+        await use(() => waitForScrollToSettleFn(page));
     },
 });
