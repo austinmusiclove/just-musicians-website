@@ -1,7 +1,3 @@
-Deploy
-    create access index table
-    remove the drop table for access index
-    save permalinks
 Critical bugs
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
@@ -14,11 +10,8 @@ Critical bugs
     Make sure not varnish caching the suggestions api and other similar things like that
 Applications Features to add
     Collections
-        reorder collections
-            add reorder button and finish reorder button
-            only show reorder button if user has edit access
-            only allow reorder on desktop
         test reorder
+            reorder button shows and hides handles
             reorder first page
             reorder accross pages
             make sure no reorder is allowed on mobile

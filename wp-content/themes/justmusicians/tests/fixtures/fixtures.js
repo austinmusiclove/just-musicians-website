@@ -16,13 +16,15 @@ import { MyEventsPage } from '../pages/MyEventsPage.js';
 import { EventFormPage } from '../pages/EventFormPage.js';
 import { SingleEventPage } from '../pages/SingleEventPage.js';
 import { MessagesPage } from '../pages/MessagesPage.js';
+import { CollectionsPage } from '../pages/CollectionsPage.js';
+import { SingleCollectionPage } from '../pages/SingleCollectionPage.js';
 import { findEmailBySubject as findEmail, findEmailTo as findEmailToRecipient, getEmailBody as getEmail, extractLinkFromEmail as extractLink, waitForMessageEmail as waitForMessage } from '../data/mailpit.js';
 import { downloadText as csvDownloadText, parseCsv as csvParse } from '../data/downloads.js';
 import {
     wpCliCreateUser, wpCliGetUserId, wpCliDeleteUser, wpCliDeleteUsers, wpCliDeleteUserData,
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliAddUserCap, wpCliGetWpConfig,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
-    wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
+    wpCliGetPostMetaJson, wpCliCreateCollection, wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
     wpCliSetPostThumbnail, wpCliDeletePost,
     wpCliAddListingToUser, wpCliNotificationExists,
     wpCliSetPostTerms, wpCliIndexListing, wpCliCreateListing,
@@ -70,10 +72,12 @@ export const test = base.extend({
             getPostField: wpCliGetPostField,
             getPostUrl: wpCliGetPostUrl,
             getPostMeta: wpCliGetPostMeta,
+            getPostMetaJson: wpCliGetPostMetaJson,
             getPostIdBySlug: wpCliGetPostIdBySlug,
             getPostThumbnailId: wpCliGetPostThumbnailId,
             setPostThumbnail: wpCliSetPostThumbnail,
             deletePost: wpCliDeletePost,
+            createCollection: (data) => { const id = wpCliCreateCollection(data); createdPosts.push(id); return id; },
             addListingToUser: wpCliAddListingToUser,
             notificationExists: wpCliNotificationExists,
             setPostTerms: wpCliSetPostTerms,
@@ -168,5 +172,13 @@ export const test = base.extend({
     messagesPage: async ({ page, isMobile }, use) => {
         const messagesPage = new MessagesPage(page, isMobile);
         await use(messagesPage);
+    },
+    collectionsPage: async ({ page, isMobile }, use) => {
+        const collectionsPage = new CollectionsPage(page, isMobile);
+        await use(collectionsPage);
+    },
+    singleCollectionPage: async ({ page, isMobile }, use) => {
+        const singleCollectionPage = new SingleCollectionPage(page, isMobile);
+        await use(singleCollectionPage);
     },
 });

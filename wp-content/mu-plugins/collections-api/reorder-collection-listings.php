@@ -42,7 +42,7 @@ function reorder_collection_listings($collection_id, $ordered_ids, $start_index 
 
     // Persist only when the order actually changed
     $merged_strvals = array_map('strval', $merged);
-    if (array_values($merged_strvals) !== array_values($orig)) {
+    if (array_values($merged_strvals) !== array_values($listings)) {
         if ($collection_id == 0) {
             $updated = update_user_meta(get_current_user_id(), 'favorites', array_values($merged_strvals));
             if (!$updated) { return new WP_Error(500, 'Failed to update favorites'); }

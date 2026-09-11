@@ -161,6 +161,38 @@ export function wpCliGetPostMeta(postId, key) {
     }
 }
 
+export function wpCliGetPostMetaJson(postId, key) {
+    const output = wpCliWithRetry(
+        `wp eval "echo json_encode(get_post_meta(${postId}, '${key}', true));" --path=${WP_PATH}`
+    );
+    return JSON.parse(output.trim());
+}
+
+// Creates a collection post owned by the user and registers it in the author's collections meta
+export function wpCliCreateCollection({ title, authorId, listingIds = [] }) {
+    const listings = listingIds.map(String);
+    const collectionId = wpCliCreatePost({ postType: 'collection', title, status: 'publish', authorId, meta: { name: title, listings } });
+    let collections = [];
+    try {
+        const current = execSync(
+            `wp user meta get ${authorId} collections --format=json --path=${WP_PATH}`,
+            { encoding: 'utf-8' }
+        ).trim();
+        collections = JSON.parse(current);
+    } catch {
+        // User has no collections meta yet
+    }
+    if (!Array.isArray(collections)) collections = [];
+    if (!collections.includes(String(collectionId))) {
+        collections.push(String(collectionId));
+    }
+    execSync(
+        `wp user meta update ${authorId} collections '${JSON.stringify(collections)}' --format=json --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+    return collectionId;
+}
+
 export function wpCliGetPostThumbnailId(postId) {
     return wpCliGetPostMeta(postId, '_thumbnail_id');
 }
