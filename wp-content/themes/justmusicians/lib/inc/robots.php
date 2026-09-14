@@ -19,6 +19,9 @@ function noindex_specific_post_type($robots) {
         is_singular('comp_report') or
         is_singular('review_submission') or // Keep this old post type unless all review submission posts are deleted
         is_singular('tmp_code') or
+        is_singular('glossary') or
+        is_singular('glossary-term') or
+        is_singular('venue') or
         is_page('account') or
         is_page('listings') or
         is_page('collections') or

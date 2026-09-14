@@ -25,6 +25,9 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['comp_report'] );
     unset( $post_types['review_submission'] ); // Keep this old post type unless all review submission posts are deleted
     unset( $post_types['tmp_code'] );
+    unset( $post_types['glossary'] );
+    unset( $post_types['glossary-term'] );
+    unset( $post_types['venue'] );
 
     return $post_types;
 }

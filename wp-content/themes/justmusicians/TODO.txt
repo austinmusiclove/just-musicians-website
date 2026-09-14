@@ -1,5 +1,4 @@
 Critical bugs
-    details for gigs not showing new lines
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
@@ -162,6 +161,7 @@ SEO
         make sure data can be indexed even though it is hidden behind x-show and x-cloak
         get knowledge pannel like it shows up for "texas violinist" from their gig salad page
     rock bands in austin type pages
+        remove bio or less bio because of duplicate content
         maybe add venues played and venue schema as well for those
         keep filter code out of index by lazy loading it
         add more data to the image object schema and video object schema; description for videos
