@@ -87,7 +87,7 @@
         <?php if ($args['proposal']['event']['details']) { ?>
             <div class="flex flex-col min-h-[1.5rem]">
                 <span class="text-12 text-black/50 font-semibold">Details</span>
-                <p class="text-14"><?php echo esc_html($args['proposal']['event']['details']); ?></p>
+                <p class="text-14 whitespace-pre-wrap"><?php echo esc_html($args['proposal']['event']['details']); ?></p>
             </div>
         <?php } ?>
 
