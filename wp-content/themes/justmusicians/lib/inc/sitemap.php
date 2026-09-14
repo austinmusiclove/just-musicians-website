@@ -28,6 +28,7 @@ function remove_custom_post_types_from_sitemap( $post_types ) {
     unset( $post_types['glossary'] );
     unset( $post_types['glossary-term'] );
     unset( $post_types['venue'] );
+    unset( $post_types['podcast'] );
 
     return $post_types;
 }

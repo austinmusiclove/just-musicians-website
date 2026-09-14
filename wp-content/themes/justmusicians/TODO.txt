@@ -1,4 +1,5 @@
 Critical bugs
+    change name of applications to job postings
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
