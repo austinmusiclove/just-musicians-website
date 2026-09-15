@@ -2,9 +2,9 @@
 if (!defined('ABSPATH')) { exit; }
 
 function hm_build_access_index() {
-    global $wpdb;
-    $table = hm_get_access_table();
-    $wpdb->query("DROP TABLE IF EXISTS {$table}");
+    //global $wpdb;
+    //$table = hm_get_access_table();
+    //$wpdb->query("DROP TABLE IF EXISTS {$table}");
 
     hm_create_access_index_table();
 
