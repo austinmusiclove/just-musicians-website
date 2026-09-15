@@ -67,6 +67,11 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
             'applications',
             'submitted-applications',
             'application-form',
+            'subscriptions',
+            'checkout-success',
+            'password-reset',
+            'request-password-reset',
+            'podcast',
         ];
         $page_ids = [];
 

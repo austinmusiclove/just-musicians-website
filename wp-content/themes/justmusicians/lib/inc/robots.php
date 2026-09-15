@@ -33,6 +33,11 @@ function noindex_specific_post_type($robots) {
         is_page('applications') or
         is_page('submitted-applications') or
         is_page('application-form') or
+        is_page('subscriptions') or
+        is_page('checkout-success') or
+        is_page('password-reset') or
+        is_page('request-password-reset') or
+        is_page('podcast') or
         is_page('messages')
     ) {
         $robots['noindex'] = true;

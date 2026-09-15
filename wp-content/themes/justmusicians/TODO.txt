@@ -18,7 +18,7 @@ Musician Pricing Page
         For one time set up fee
             Set up auto renew verification emails
     Community Partner (one per listing)
-        add community partner meta in listings
+        add community partner meta in listings (maybe int because there are levels to it; link, website link, brand mention)
         increase rank for community partners
         button to request community partnership that sends email to admin (sign in to access)
         list advanced features for community partners vs features for regular listings
@@ -129,6 +129,7 @@ Single Event page
     Add a way to click to convo in send message modal for a particular listing if one exists
     **add start a search at the bottom of suggestions results in empty and not empty suggestions state
 My Events page (for buyers)
+    **Connect to conversation if one exists on applicant cards instead of send message button
     Set event status to booked/open/cancelled/etc.
     Add calendar View
     Edit multiple event details at once
@@ -155,7 +156,7 @@ Offer post type (future)
     Details
     Proposal relationship
 SEO
-    remove glossary pages and maybe venue pages because they are not on topic for the site
+    take advantage of if modified since header that google bot sends by sending 304 not modified
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
         stand alone video objects to qualify for rich result
@@ -170,7 +171,6 @@ SEO
         add location pages
         add breadcrumb
         make filters lock in the category and location part; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
-    **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
         free verification for artist backlink
@@ -179,6 +179,9 @@ SEO
         get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
         get press backlinks
         steal competitor backlinks by using seo tool to findout who links to them
+    Home page
+        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
+        consider new home landing page that does not get listings right away
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
