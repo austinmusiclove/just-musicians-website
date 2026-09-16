@@ -138,10 +138,14 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                             </div>
 
-                            <span id="spinner-end" class="htmx-indicator-block">
-                                <div class="my-8 flex items-center justify-center">
-                                    <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                                </div>
+                            <span id="spinner-end" class="page-indicator htmx-indicator-block">
+                                <?php
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                ?>
                             </span>
                         </form>
 

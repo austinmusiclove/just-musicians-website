@@ -49,6 +49,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
 ?>
 
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
+        hx-ext="preload"
         x-data="{
             width: 0,
             redirect(target) { if (target) { window.location.href=target; } else { window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>';} },

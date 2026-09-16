@@ -430,6 +430,7 @@ function hmm_scripts() {
     ]);
     wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, true);
     wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
+    wp_enqueue_script('htmx-preload-js', get_template_directory_uri() . '/lib/js/htmx.preload.2.1.2.min.js', ['htmx'], $pkg->version, true);
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);

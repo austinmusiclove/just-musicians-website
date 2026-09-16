@@ -217,7 +217,7 @@ $next_page       = $result ? $result['next_page']       : null;
                     </span>
 
 
-                    <span id="spinner-end" class="htmx-indicator-block">
+                    <span id="spinner-end" class="page-indicator htmx-indicator-block">
                         <?php
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
@@ -225,9 +225,6 @@ $next_page       = $result ? $result['next_page']       : null;
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                         ?>
-                        <div class="my-8 flex items-center justify-center">
-                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                        </div>
                     </span>
 
 

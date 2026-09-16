@@ -9,14 +9,6 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     <?php if (!is_null($collection_id)) { ?>
         x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
     <?php } ?>
-    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page
-        $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
-        hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
-        hx-trigger="revealed once"
-        hx-indicator="#spinner-end"
-        hx-swap="beforeend"
-        hx-include="#hx-form"
-    <?php } ?>
 >
 
 
@@ -208,6 +200,25 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         ]); ?>
     </span>
 </div>
+
+<?php if ($args['last'] and !$args['is_last_page']) { // Load more results; show a button on the last result of the page as long as it is not the final page
+    $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
+    <div class="py-6 flex items-center justify-center page-indicator htmx-indicator-flex-replace" id="load-more-<?php echo $args['post_id']; ?>">
+        <button type="button" class="hover:bg-yellow-light bg-yellow font-sun-motter cursor-pointer px-6 py-3 rounded-sm text-16 inline-block"
+            preload="load-more-revealed-<?php echo $args['post_id']; ?>"
+            x-intersect.once="$dispatch('load-more-revealed-<?php echo $args['post_id']; ?>')"
+            hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
+            hx-trigger="click once"
+            hx-target="#load-more-<?php echo $args['post_id']; ?>"
+            hx-swap="outerHTML"
+            hx-include="#hx-form"
+            hx-sync="closest #hx-form:abort"
+            hx-indicator=".page-indicator"
+        >
+            Load More Results
+        </button>
+    </div>
+<?php } ?>
 
 <?php
 // MusicGroup Schema
