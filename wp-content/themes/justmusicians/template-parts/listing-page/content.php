@@ -21,7 +21,9 @@
             <?php if ($is_preview) { ?> x-show="pBio.length > 0" x-cloak <?php } ?>
             <?php if ($is_preview) { ?> x-on:click="focusElm('bio')" <?php } ?>
         >
-            <h2 class="text-25 font-bold mb-5">Biography</h2>
+            <h2 class="text-25 font-bold mb-5" <?php if ($is_preview) { ?> x-text="pName === '' ? 'About' : 'About ' + pName" <?php } ?> >
+                <?php if (!$is_preview) { echo 'About ' . get_field('name'); } ?>
+            </h2>
             <p class="mb-4"
                 <?php if ($is_preview) { ?> x-html="pBio.replace(/\n/g, '<br>')" <?php } ?>>
                 <?php if (!$is_preview) { echo nl2br(get_field('bio')); } ?>
