@@ -1,6 +1,6 @@
 <?php
 // Set Cache-Control so listings can be preloaded
-header('Cache-Control: private, max-age=600');
+header('Cache-Control: private, max-age=60');
 
 // Get listings
 $page = $_GET['page'] ?? 1;

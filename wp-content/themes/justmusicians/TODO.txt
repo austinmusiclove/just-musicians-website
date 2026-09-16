@@ -9,7 +9,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    preload nav links with images on mousedown
     add preload to search filter checkboxes
     Home page
         Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)

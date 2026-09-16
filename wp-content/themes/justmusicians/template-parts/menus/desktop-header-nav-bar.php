@@ -1,4 +1,4 @@
-<div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0">
+<div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0" preload="mouseover">
     <span class="flex items-center gap-2 relative group">
         <a href="#">Live Music</a>
         <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />

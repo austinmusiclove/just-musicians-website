@@ -1,4 +1,4 @@
-<div class="bg-white font-regular font-sans text-16 flex flex-col -ml-2">
+<div class="bg-white font-regular font-sans text-16 flex flex-col -ml-2" preload="mouseover">
 
 <?php
 $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
