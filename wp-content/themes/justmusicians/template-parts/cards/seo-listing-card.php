@@ -211,6 +211,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
 <?php
 // MusicGroup Schema
+/*
 echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'name'        => $args['name'],
     'description' => $args['description'],
@@ -240,4 +241,5 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         $args['soundcloud_url'] ?? '',
     ]),
 ]);
+ */
 ?>

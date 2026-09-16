@@ -201,6 +201,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
 <?php
 // MusicGroup Schema
+/*
 if (!$is_preview) {
     echo get_template_part('template-parts/global/schema/music-group-schema', '', [
         'name'        => $args['name'],
@@ -231,4 +232,5 @@ if (!$is_preview) {
         ]),
     ]);
 }
+ */
 ?>
