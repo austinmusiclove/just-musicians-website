@@ -9,18 +9,16 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    max 150-200 char for bio on listing cards
-    add self referencing canonical on listing pages
-    remove musician schema from search result pages, leaving only item list schema
     ***load more instead of infinite scroll; preload on custom event and dispatch custom event on intersect; performance not effected but page is not displayed unless load more is clicked
     change ceremony and reception settings to wedding ceremony and wedding reception
     add pianist, violinist, etc. to categories
-    change biography on listing page to About Listing Name
     take advantage of if modified since header that google bot sends by sending 304 not modified
+    add self referencing canonical on listing pages
     Home page
         Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)
         Call to sign up
         How it works section
+        Musician Earnings Database
         About Hire Musicians - Target broad keywords, value prop
         Links - verticals, categories, locations
         **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
