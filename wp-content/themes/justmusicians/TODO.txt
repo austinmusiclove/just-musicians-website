@@ -1,14 +1,103 @@
 Critical bugs
-    change name of applications to job postings
     the locaiton bar does not populate with default location when not on home page
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
-    Audit which pages are cached and not and add proper exclusions (exclude register user; check if varnish ever caches non GET requests)
-    Pages are indexed that should not be and vis versa
     Need to add unique auth keys to wp config in staging and prod
-    Figure out why update listing takes forever; probably something with unneeded image processing
-    Make events show all by default and leave upcoming and past options there; to avoid confusion
-    Make sure i am compliant with laws on accessibility and cookies
+    Audit which pages are cached and not and add proper exclusions (exclude register user)
     Make sure not varnish caching the suggestions api and other similar things like that
+    Figure out why update listing takes forever; probably something with unneeded image processing
+    Make sure i am compliant with laws on accessibility and cookies
+    Make events show all by default and leave upcoming and past options there; to avoid confusion
+    change name of applications to job postings
+SEO
+    max 150-200 char for bio on listing cards
+    add self referencing canonical on listing pages
+    remove musician schema from search result pages, leaving only item list schema
+    ***load more instead of infinite scroll; preload on custom event and dispatch custom event on intersect; performance not effected but page is not displayed unless load more is clicked
+    change ceremony and reception settings to wedding ceremony and wedding reception
+    add pianist, violinist, etc. to categories
+    change biography on listing page to About Listing Name
+    take advantage of if modified since header that google bot sends by sending 304 not modified
+    Home page
+        Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)
+        Call to sign up
+        How it works section
+        About Hire Musicians - Target broad keywords, value prop
+        Links - verticals, categories, locations
+        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
+    Live Musicians Vertical Page
+        Heading and breadcrumb
+        Hero Section - Search live musicians with location input; takes you to live music general search page (current home page)
+        CTA - Sign up as musician, tell us about your event
+        Links - locations, categories,
+        How it works section - Tell us about your event, send job to musicians, get responses and quotes, hire on or offline (specific to live music)
+        Cross-Vertical Navigation Banner: Prominent cards routing traffic to your sibling verticals (e.g., "Need instruction? Explore Music Lessons" or "Recording an album? Find Music Production services").
+        Trust & Social Proof
+            Verified client reviews
+            Total active musician count
+            Platform trust badges (e.g., payment arbitration, insurance available).
+            National level community partners or press
+        SEO Content & FAQ Block: Indexable content
+            hiring advice
+            average pricing expectations
+            equipment requirements
+            FAQ accordion targeting ItemList and FAQPage schema
+    Locations Page
+        Heading and breadcrumb
+        Interactive map showing where there are listings
+        Links - Region, city
+        CTA to tell us about your event
+    Region Pages
+        Heading and breadcrumb
+        SEO Content & FAQ Block
+            Unique description
+            Regional venues
+            Information on sub regions
+            Information about rules and regulations for live music in the city/region
+        Links - cities
+        CTA to tell us about your event
+        Trust & Social Proof
+            Listing counts
+            Link to local community partners (trusted by x)
+    Cities Pages
+        Heading and breadcrumb
+        SEO Content & FAQ Block
+            Unique description
+            Local venues
+            Information about rules and regulations for live music in the city/region
+        Links - location/category, near by cities
+        CTA to tell us about your event
+        Trust & Social Proof
+            Listing counts
+            Link to local community partners (trusted by x)
+    Location/Category Pages
+        Add breadcrumb
+        SEO Content
+        Listings
+            lock in the category and location filter; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
+            add more data to the image object schema and video object schema; description for videos
+            traditional paging
+            rank by proximity by providing a zip code list so that those zip codes are shown before all listings in the radius
+        Links - same category different location, same location different category
+        FAQ block
+    Categories Page
+    single listing pages
+        figure out what i need to do to get a rich google result with the listing pages
+        stand alone video objects to qualify for rich result
+        make sure data can be indexed even though it is hidden behind x-show and x-cloak
+        get knowledge pannel like it shows up for "texas violinist" from their gig salad page
+    backlinks
+        get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
+        free verification for artist backlink
+        artist spotlight article in exchange for backlink to article and HM profile link
+        get venue backlinks by doing x type venues in x city blog posts and asking them to link it on their site because it will get better seo traffic if the article has backlinks from the actual venues
+        get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+        get press backlinks
+        steal competitor backlinks by using seo tool to findout who links to them
+    price estimator for live band in austin tx
+    system for keeping data accurate by scraping artist websites and comparing information
+    get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
+    **Venue schema on venue pages with reviews
+    add best x in x listacle blog posts
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)
@@ -155,40 +244,6 @@ Offer post type (future)
     Event relationship
     Details
     Proposal relationship
-SEO
-    take advantage of if modified since header that google bot sends by sending 304 not modified
-    single listing pages
-        figure out what i need to do to get a rich google result with the listing pages
-        stand alone video objects to qualify for rich result
-        make sure data can be indexed even though it is hidden behind x-show and x-cloak
-        get knowledge pannel like it shows up for "texas violinist" from their gig salad page
-    rock bands in austin type pages
-        remove bio or less bio because of duplicate content
-        maybe add venues played and venue schema as well for those
-        keep filter code out of index by lazy loading it
-        add more data to the image object schema and video object schema; description for videos
-        add other location same category internal links
-        add location pages
-        add breadcrumb
-        make filters lock in the category and location part; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
-    backlinks
-        get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
-        free verification for artist backlink
-        artist spotlight article in exchange for backlink to article and HM profile link
-        get venue backlinks by doing x type venues in x city blog posts and asking them to link it on their site because it will get better seo traffic if the article has backlinks from the actual venues
-        get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
-        get press backlinks
-        steal competitor backlinks by using seo tool to findout who links to them
-    Home page
-        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
-        consider new home landing page that does not get listings right away
-    price estimator for live band in austin tx
-    system for keeping data accurate by scraping artist websites and comparing information
-    get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
-    **Venue schema on venue pages with reviews
-    add best x in x listacle blog posts
-Glossaries
-    add other glossaries section at the bottom of single-glossary
 Users
     ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
@@ -379,13 +434,6 @@ UX
     sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
     when adding to collection toast should be more specific "added to [collection name]"
-Devon
-    404 page
-    venue page especially stats
-    venues search
-    request quote pop up
-    indicator on infinite scroll and listing form (i like mine but could be something on brand)
-    podcast - get violotor-blog svg
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
