@@ -92,6 +92,37 @@ function get_terms_decoded($taxonomy, $fields, $search=false, $hide_empty=false)
     return array_map(function($term) { return html_entity_decode($term, ENT_QUOTES | ENT_HTML5, 'UTF-8'); }, $terms);
 }
 
+// Resolves a taxonomy value (canonical name, slug, or any casing) to the canonical term name.
+// Used to normalize q* query params so lowercase or slug forms match term names.
+function resolve_taxonomy_name($taxonomy, $value) {
+    $value = trim(stripslashes((string) $value));
+    if ($value === '' || !taxonomy_exists($taxonomy)) {
+        return '';
+    }
+
+    $decoded = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    $by_slug = get_term_by('slug', sanitize_title($decoded), $taxonomy);
+    if ($by_slug && !is_wp_error($by_slug)) {
+        return html_entity_decode($by_slug->name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    $by_name = get_term_by('name', $decoded, $taxonomy);
+    if ($by_name && !is_wp_error($by_name)) {
+        return html_entity_decode($by_name->name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    $strtolower = function_exists('mb_strtolower') ? function($str) { return mb_strtolower($str, 'UTF-8'); } : 'strtolower';
+    $needle = $strtolower($decoded);
+    foreach (get_terms_decoded($taxonomy, 'names', false, true) as $name) {
+        if ($strtolower($name) === $needle) {
+            return $name;
+        }
+    }
+
+    return '';
+}
+
 function clean_url_for_display($url) {
     $url = preg_replace('#^https?://#', '', $url);
     $url = preg_replace('#^www\.#', '', $url);
@@ -220,3 +251,6 @@ function wp_objects_to_ids( $items ): array {
     return array_values( array_unique( $ids ) );
 }
 
+function get_label_from_slug($slug) {
+    return ucwords(str_replace('-', ' ', $slug));
+}
