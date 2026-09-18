@@ -136,6 +136,12 @@ function html_api_v1_template_redirects() {
                 case 'POST' : status_header(200); include_once get_template_directory() . '/html-api/applications/submit-application-demo.php'; exit;
             }
 
+        // Location
+        case 'detect-location':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET'   : status_header(200); include_once get_template_directory() . '/html-api/location/detect-location.php'; exit;
+            }
+
         // Active Search
         case 'search-options':
             switch ($_SERVER['REQUEST_METHOD']) {

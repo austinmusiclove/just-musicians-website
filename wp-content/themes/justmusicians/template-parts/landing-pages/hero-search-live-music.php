@@ -38,7 +38,7 @@ $location_label = !empty($_GET['location_label']) ? $_GET['location_label'] : ''
     <?php // URL query args take priority; IP geolocation fills in when no location was provided ?>
     <?php if ($lat === null || $lng === null) { ?>
         <div
-            hx-get="<?php echo site_url('/wp-html/v1/location/'); ?>"
+            hx-get="<?php echo site_url('/wp-html/v1/detect-location/'); ?>"
             hx-trigger="load"
             hx-swap="innerHTML"
         ></div>
