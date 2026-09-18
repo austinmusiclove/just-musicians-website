@@ -9,6 +9,12 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
+    detect location on home page after first load
+    hide header search bar for some pages
+        detect location with htmx in header search bar if it is included
+    Exclude live-music/search from varnish cache or get location detection with api
+    header bar search needs to go to new live music search page
+    Change footer links and nav links for categories
     Home page
         Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)
         Call to sign up
@@ -72,6 +78,8 @@ SEO
             rank by proximity by providing a zip code list so that those zip codes are shown before all listings in the radius
         Links - same category different location, same location different category
         FAQ block
+    add new urls to the sitemap and remove existing seo urls from sitemap
+    Delete /seo folder
     Categories Page
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages

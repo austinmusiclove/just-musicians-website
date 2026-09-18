@@ -2,90 +2,6 @@
 
 
 function register_post_types() {
-    // Venue
-    register_post_type('venue', array(
-        'rewrite' => array('slug' => 'venues'),
-		//'show_in_admin_bar' => true,
-		//'show_in_nav_menus' => true,
-		//'exclude_from_search' => false,
-		//'show_ui' => true,
-		//'show_in_menu' => true,
-		//'can_export' => true,
-		//'capability_type' => 'page',
-		'has_archive' => true,
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'thumbnail'),
-        'labels' => array(
-          'name' => 'Venue',
-          'add_new_item' => 'Add New Venue',
-          'edit_item' => 'Edit Venue',
-          'all_items' => 'All Venues',
-          'singular_name' => 'Venue'
-        ),
-        'menu_icon' => 'dashicons-store'
-    ));
-
-    // Listing Review
-    register_post_type('listing_review', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'author'),
-        'labels' => array(
-          'name' => 'Listing Review',
-          'add_new_item' => 'Add New Listing Review',
-          'edit_item' => 'Edit Listing Review',
-          'all_items' => 'All Listing Reviews',
-          'singular_name' => 'Listing Review'
-        ),
-        'menu_icon' => 'dashicons-star-empty'
-    ));
-
-    // Buyer Review
-    register_post_type('buyer_review', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'author'),
-        'labels' => array(
-          'name' => 'Buyer Review',
-          'add_new_item' => 'Add New Buyer Review',
-          'edit_item' => 'Edit Buyer Review',
-          'all_items' => 'All Buyer Reviews',
-          'singular_name' => 'Buyer Review'
-        ),
-        'menu_icon' => 'dashicons-star-empty'
-    ));
-
-    // Venue Review
-    register_post_type('venue_review', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'author'),
-        'labels' => array(
-          'name' => 'Venue Review',
-          'add_new_item' => 'Add New Venue Review',
-          'edit_item' => 'Edit Venue Review',
-          'all_items' => 'All Venue Reviews',
-          'singular_name' => 'Venue Review'
-        ),
-        'menu_icon' => 'dashicons-star-empty'
-    ));
-
-    // Compensation Report
-    register_post_type('comp_report', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'author'),
-        'labels' => array(
-          'name' => 'Compensation Report',
-          'add_new_item' => 'Add New Compensation Report',
-          'edit_item' => 'Edit Compensation Report',
-          'all_items' => 'All Compensation Reports',
-          'singular_name' => 'Compensation Report'
-        ),
-        'menu_icon' => 'dashicons-clipboard'
-    ));
-
     // Listing
     register_post_type('listing', array(
         'public' => true,
@@ -99,6 +15,36 @@ function register_post_types() {
           'singular_name' => 'Listing'
         ),
         'menu_icon' => 'dashicons-id-alt'
+    ));
+
+    // Listing Review
+    register_post_type('listing_review', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'author'),
+        'labels' => array(
+          'name' => 'Listing Review',
+          'add_new_item' => 'Add New Listing Review',
+          'edit_item' => 'Edit Listing Review',
+          'all_items' => 'All Listing Reviews',
+          'singular_name' => 'Listing Review'
+        ),
+        'menu_icon' => 'dashicons-star-empty'
+    ));
+
+    // Youtube Videos
+    register_post_type('youtubevideo', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Youtube Video',
+          'add_new_item' => 'Add New Youtube Video',
+          'edit_item' => 'Edit Youtube Video',
+          'all_items' => 'All Youtube Videos',
+          'singular_name' => 'Youtube Video'
+        ),
+        'menu_icon' => 'dashicons-video-alt3'
     ));
 
     // Collections
@@ -116,9 +62,48 @@ function register_post_types() {
         'menu_icon' => 'dashicons-list-view'
     ));
 
+    // Venue
+    register_post_type('venue', array(
+        'rewrite' => array('slug' => 'venues'),
+		//'show_in_admin_bar' => true,
+		//'show_in_nav_menus' => true,
+		//'exclude_from_search' => false,
+		//'show_ui' => true,
+		//'show_in_menu' => true,
+		//'can_export' => true,
+		//'capability_type' => 'page',
+		'has_archive' => true,
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'thumbnail'),
+        'labels' => array(
+          'name' => 'Venue',
+          'add_new_item' => 'Add New Venue',
+          'edit_item' => 'Edit Venue',
+          'all_items' => 'All Venues',
+          'singular_name' => 'Venue'
+        ),
+        'menu_icon' => 'dashicons-store'
+    ));
+
+    // Venue Review
+    register_post_type('venue_review', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'author'),
+        'labels' => array(
+          'name' => 'Venue Review',
+          'add_new_item' => 'Add New Venue Review',
+          'edit_item' => 'Edit Venue Review',
+          'all_items' => 'All Venue Reviews',
+          'singular_name' => 'Venue Review'
+        ),
+        'menu_icon' => 'dashicons-star-empty'
+    ));
+
     // Inquiry (Deprecated; replaced by event)
     register_post_type('inquiry', array(
-        'public' => true,
+        'public' => false,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -148,7 +133,7 @@ function register_post_types() {
 
     // Proposal
     register_post_type('proposal', array(
-        'public' => true,
+        'public' => false,
         'show_in_rest' => true,
         'supports' => array(),
         'labels' => array(
@@ -163,7 +148,7 @@ function register_post_types() {
 
     // Offer
     register_post_type('offer', array(
-        'public' => true,
+        'public' => false,
         'show_in_rest' => true,
         'supports' => array('author'),
         'labels' => array(
@@ -174,6 +159,21 @@ function register_post_types() {
           'singular_name' => 'Offer'
         ),
         'menu_icon' => 'dashicons-text-page'
+    ));
+
+    // Buyer Review
+    register_post_type('buyer_review', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'author'),
+        'labels' => array(
+          'name' => 'Buyer Review',
+          'add_new_item' => 'Add New Buyer Review',
+          'edit_item' => 'Edit Buyer Review',
+          'all_items' => 'All Buyer Reviews',
+          'singular_name' => 'Buyer Review'
+        ),
+        'menu_icon' => 'dashicons-star-empty'
     ));
 
     // Application
@@ -206,24 +206,24 @@ function register_post_types() {
         'menu_icon' => 'dashicons-text-page'
     ));
 
-    // Youtube Videos
-    register_post_type('youtubevideo', array(
-        'public' => true,
+    // Artists
+    register_post_type('artist', array(
+        'public' => false,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
-          'name' => 'Youtube Video',
-          'add_new_item' => 'Add New Youtube Video',
-          'edit_item' => 'Edit Youtube Video',
-          'all_items' => 'All Youtube Videos',
-          'singular_name' => 'Youtube Video'
+          'name' => 'Artist',
+          'add_new_item' => 'Add New Artist',
+          'edit_item' => 'Edit Artist',
+          'all_items' => 'All Artists',
+          'singular_name' => 'Artist'
         ),
-        'menu_icon' => 'dashicons-video-alt3'
+        'menu_icon' => 'dashicons-art'
     ));
 
     // Performance
     register_post_type('performance', array(
-        'public' => true,
+        'public' => false,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -236,19 +236,66 @@ function register_post_types() {
         'menu_icon' => 'dashicons-microphone'
     ));
 
-    // Artists
-    register_post_type('artist', array(
-        'public' => true,
+    // Glossary
+    register_post_type('glossary', array(
+		'has_archive' => true,
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'excerpt'),
+        'labels' => array(
+          'name' => 'Glossary',
+          'add_new_item' => 'Add New Glossary',
+          'edit_item' => 'Edit Glossary',
+          'all_items' => 'All Glossaries',
+          'singular_name' => 'Glossary'
+        ),
+        'menu_icon' => 'dashicons-book'
+    ));
+
+    // Glossary Term
+    register_post_type('glossary-term', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'excerpt'),
+        'labels' => array(
+          'name' => 'Glossary Term',
+          'add_new_item' => 'Add New Glossary Term',
+          'edit_item' => 'Edit Glossary Term',
+          'all_items' => 'All Glossary Terms',
+          'singular_name' => 'Glossary Term'
+        ),
+        'menu_icon' => 'dashicons-book-alt'
+    ));
+
+    // Compensation Report
+    register_post_type('comp_report', array(
+        'public' => false,
+        'show_in_rest' => true,
+        'supports' => array('title', 'author'),
+        'labels' => array(
+          'name' => 'Compensation Report',
+          'add_new_item' => 'Add New Compensation Report',
+          'edit_item' => 'Edit Compensation Report',
+          'all_items' => 'All Compensation Reports',
+          'singular_name' => 'Compensation Report'
+        ),
+        'menu_icon' => 'dashicons-clipboard'
+    ));
+
+    // Temporary Code
+    register_post_type('tmp_code', array(
+        'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
-          'name' => 'Artist',
-          'add_new_item' => 'Add New Artist',
-          'edit_item' => 'Edit Artist',
-          'all_items' => 'All Artists',
-          'singular_name' => 'Artist'
+          'name' => 'Temporary Code',
+          'add_new_item' => 'Add New Temporary Code',
+          'edit_item' => 'Edit Temporary Code',
+          'all_items' => 'All Temporary Codes',
+          'singular_name' => 'Temporary Code'
         ),
-        'menu_icon' => 'dashicons-art'
+        'menu_icon' => 'dashicons-editor-code'
     ));
 
     // Podcast
@@ -266,51 +313,72 @@ function register_post_types() {
         'menu_icon' => 'dashicons-microphone'
     ));
 
-    // Glossary
-    register_post_type('glossary', array(
-		'has_archive' => true,
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'excerpt'),
-        'labels' => array(
-          'name' => 'Glossary',
-          'add_new_item' => 'Add New Glossary',
-          'edit_item' => 'Edit Glossary',
-          'all_items' => 'All Glossaries',
-          'singular_name' => 'Glossary'
-        ),
-        'menu_icon' => 'dashicons-book'
-    ));
-
-    // Glossary Term
-    register_post_type('glossary-term', array(
-        'public' => true,
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'excerpt'),
-        'labels' => array(
-          'name' => 'Glossary Term',
-          'add_new_item' => 'Add New Glossary Term',
-          'edit_item' => 'Edit Glossary Term',
-          'all_items' => 'All Glossary Terms',
-          'singular_name' => 'Glossary Term'
-        ),
-        'menu_icon' => 'dashicons-book-alt'
-    ));
-
-    // Listing Invitation Code
-    register_post_type('tmp_code', array(
+    // Region Landing Page
+    register_post_type('region-landing', array(
         'public' => false,
         'show_ui' => true,
         'show_in_rest' => true,
+        'show_in_menu' => 'landing-pages',
         'supports' => array('title'),
         'labels' => array(
-          'name' => 'Temporary Code',
-          'add_new_item' => 'Add New Temporary Code',
-          'edit_item' => 'Edit Temporary Code',
-          'all_items' => 'All Temporary Codes',
-          'singular_name' => 'Temporary Code'
+          'name' => 'Region Landing',
+          'add_new_item' => 'Add New Region Landing',
+          'edit_item' => 'Edit Region Landing',
+          'all_items' => 'Region Landings',
+          'singular_name' => 'Region Landing'
         ),
-        'menu_icon' => 'dashicons-editor-code'
+        'menu_icon' => 'dashicons-location-alt'
+    ));
+
+    // Locale Landing Page
+    register_post_type('locale-landing', array(
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_in_menu' => 'landing-pages',
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Locale Landing',
+          'add_new_item' => 'Add New Locale Landing',
+          'edit_item' => 'Edit Locale Landing',
+          'all_items' => 'Locale Landings',
+          'singular_name' => 'Locale Landing'
+        ),
+        'menu_icon' => 'dashicons-location'
+    ));
+
+    // Category Landing Page
+    register_post_type('category-landing', array(
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_in_menu' => 'landing-pages',
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Category Landing',
+          'add_new_item' => 'Add New Category Landing',
+          'edit_item' => 'Edit Category Landing',
+          'all_items' => 'Category Landings',
+          'singular_name' => 'Category Landing'
+        ),
+        'menu_icon' => 'dashicons-category'
+    ));
+
+    // Locale Category Landing Page
+    register_post_type('lc-landing', array(
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_in_menu' => 'landing-pages',
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Locale Category Landing',
+          'add_new_item' => 'Add New Locale Category Landing',
+          'edit_item' => 'Edit Locale Category Landing',
+          'all_items' => 'Locale Category Landings',
+          'singular_name' => 'Locale Category Landing'
+        ),
+        'menu_icon' => 'dashicons-tag'
     ));
 
 }
@@ -424,6 +492,32 @@ function register_taxonomies() {
 
 add_action('init', 'register_post_types');
 add_action('init', 'register_taxonomies');
+
+function render_landing_pages_root() {
+    $types = array(
+        'region-landing' => 'Region Landing',
+        'locale-landing' => 'Locale Landing',
+        'category-landing' => 'Category Landing',
+        'lc-landing' => 'Locale Category Landing',
+    );
+    echo '<div class="wrap"><h1>Landing Pages</h1><ul>';
+    foreach ($types as $type => $label) {
+        echo '<li><a href="' . esc_url(admin_url('edit.php?post_type=' . $type)) . '">' . esc_html($label) . '</a></li>';
+    }
+    echo '</ul></div>';
+}
+
+add_action('admin_menu', function () {
+    add_menu_page(
+        'Landing Pages',
+        'Landing Pages',
+        'edit_posts',
+        'landing-pages',
+        'render_landing_pages_root',
+        'dashicons-layout',
+        21
+    );
+});
 
 function get_taxonomy_terms() {
     $taxonomy = $_GET['taxonomy'];
