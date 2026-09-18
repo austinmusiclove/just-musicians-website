@@ -1,7 +1,5 @@
 <?php
-    echo get_template_part('template-parts/search/filter-components/location', '', array(
-        'device' => $args['device'] ?? 'desktop',
-    ));
+    echo get_template_part('template-parts/search/filter-components/location', '', [ 'device' => $args['device'] ?? 'desktop' ] );
 ?>
 
 <div>
@@ -9,10 +7,12 @@
     <div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0">
         <h3 class="font-bold text-18 mb-3">Verification</h3>
         <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
-            'label' => 'Verified only',
-            'name' => 'verified',
-            'value' => 'Verified',
-            'x-model' => 'verifiedCheckbox',
+            'label'           => 'Verified only',
+            'value'           => 'Verified',
+            'name'            => 'verified',
+            'input_id'        => 'verified-filter',
+            'preload'         => true,
+            'x-model'         => 'verifiedCheckbox',
             'on_change_event' => 'filterupdate',
         )); ?>
     </div>

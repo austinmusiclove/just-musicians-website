@@ -26,6 +26,7 @@
                     'is_array' => true,
                     'checked' => false,
                     'on_change_event' => 'filterupdate',
+                    'preload' => true,
                 ]);
             }
         ?>

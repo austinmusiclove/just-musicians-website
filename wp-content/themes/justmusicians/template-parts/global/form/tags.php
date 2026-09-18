@@ -10,6 +10,8 @@
                 :class="<?php echo $args['x-model']; ?>.includes('<?php echo $tag; ?>')
                     ? 'bg-yellow hover:bg-yellow-light'
                     : 'hover:bg-yellow-light'"
+                x-on:mouseenter.debounce="$refs.<?php echo $tag_ref; ?>?.dispatchEvent(new CustomEvent('preload-filter'))"
+                x-on:mousedown="$refs.<?php echo $tag_ref; ?>?.dispatchEvent(new CustomEvent('preload-filter'))"
                 x-on:click="$refs.<?php echo $tag_ref; ?>.click()">
                 <?php echo $tag; ?>
             </button>
@@ -26,6 +28,8 @@
                     :class="<?php echo $args['x-model']; ?>.includes('<?php echo $tag; ?>')
                         ? 'bg-yellow hover:bg-yellow-light'
                         : 'hover:bg-yellow-light'"
+                    x-on:mouseenter.debounce="$refs.<?php echo $tag_ref; ?>?.dispatchEvent(new CustomEvent('preload-filter'))"
+                    x-on:mousedown="$refs.<?php echo $tag_ref; ?>?.dispatchEvent(new CustomEvent('preload-filter'))"
                     x-on:click="$refs.<?php echo $tag_ref; ?>.click()">
                     <?php echo $tag; ?>
                 </button>
