@@ -9,7 +9,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    add preload to search filter checkboxes
     Home page
         Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)
         Call to sign up
@@ -434,8 +433,6 @@ Security
     use temporary code for email verification instead of account identifier
     if user is logged out because session times out, make sure that operations that require auth don't work between the session expiring and refreshing
 Performance
-    *preload/prefetch on mouse down (may not be possible with the i made the form because im using a custom event as the trigger)
-    preloading creates a cached listings response and it still requests those listings again when click happens; need to make sure to respond to the second request with cache hit instead of getting results again
     send emails in cron instead of waiting on them; they take some time
     first page of results without second trip to server
     load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
