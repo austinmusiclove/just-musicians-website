@@ -1,10 +1,16 @@
 <?php
 
-$categories       = !empty($args['qcategory'])        ? [$args['qcategory']]        : [];
-$genres           = !empty($args['qgenre'])           ? [$args['qgenre']]           : [];
-$subgenres        = !empty($args['qsubgenre'])        ? [$args['qsubgenre']]        : [];
-$instrumentations = !empty($args['qinstrumentation']) ? [$args['qinstrumentation']] : [];
-$settings         = !empty($args['qsetting'])         ? [$args['qsetting']]         : [];
+$qcategory        = !empty($args['qcategory'])        ? resolve_taxonomy_name('mcategory', $args['qcategory']) : '';
+$qgenre           = !empty($args['qgenre'])           ? resolve_taxonomy_name('genre', $args['qgenre'])       : '';
+$qsubgenre        = !empty($args['qsubgenre'])        ? resolve_taxonomy_name('subgenre', $args['qsubgenre']) : '';
+$qinstrumentation = !empty($args['qinstrumentation']) ? resolve_taxonomy_name('instrumentation', $args['qinstrumentation']) : '';
+$qsetting         = !empty($args['qsetting'])         ? resolve_taxonomy_name('setting', $args['qsetting'])   : '';
+
+$categories       = $qcategory        !== '' ? [$qcategory]        : [];
+$genres           = $qgenre           !== '' ? [$qgenre]           : [];
+$subgenres        = $qsubgenre        !== '' ? [$qsubgenre]        : [];
+$instrumentations = $qinstrumentation !== '' ? [$qinstrumentation] : [];
+$settings         = $qsetting         !== '' ? [$qsetting]         : [];
 
 // Get listings
 $result = null;
@@ -42,13 +48,13 @@ $next_page       = $result ? $result['next_page']       : null;
             showSettingModal: false,
             showEnsembleSizeModal: false,
             showLocationFilter:          <?php if (empty($args['title']))             { echo 'true'; } else { echo 'false'; }; ?>,
-            listingSearchVal:           '<?php if (!empty($_GET['qsearch']))          { echo $_GET['qsearch']; } ?>',
-            categoriesCheckboxes:       [<?php if (!empty($args['qcategory']))        { echo "'" . $args['qcategory']        . "'"; } ?>],
-            genresCheckboxes:           [<?php if (!empty($args['qgenre']))           { echo "'" . $args['qgenre']           . "'"; } ?>],
-            subgenresCheckboxes:        [<?php if (!empty($args['qsubgenre']))        { echo "'" . $args['qsubgenre']        . "'"; } ?>],
-            instrumentationsCheckboxes: [<?php if (!empty($args['qinstrumentation'])) { echo "'" . $args['qinstrumentation'] . "'"; } ?>],
-            settingsCheckboxes:         [<?php if (!empty($args['qsetting']))         { echo "'" . $args['qsetting']         . "'"; } ?>],
-            ensembleSizeCheckboxes:     [],
+            listingSearchVal:           '<?php if (!empty($_GET['qsearch'])) { echo clean_str_for_doublequotes(wp_unslash($_GET['qsearch'])); } ?>',
+            categoriesCheckboxes:        <?php echo clean_arr_for_doublequotes($categories); ?>,
+            genresCheckboxes:            <?php echo clean_arr_for_doublequotes($genres); ?>,
+            subgenresCheckboxes:         <?php echo clean_arr_for_doublequotes($subgenres); ?>,
+            instrumentationsCheckboxes:  <?php echo clean_arr_for_doublequotes($instrumentations); ?>,
+            settingsCheckboxes:          <?php echo clean_arr_for_doublequotes($settings); ?>,
+            ensembleSizeCheckboxes:      [],
             verifiedCheckbox: false,
             distance: 40,
             get selectedFilters() {

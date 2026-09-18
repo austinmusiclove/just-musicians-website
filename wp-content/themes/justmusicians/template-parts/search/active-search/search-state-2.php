@@ -2,35 +2,35 @@
 
     <!-- Categories -->
     <?php foreach(array_map('stripslashes', (array) $args['categories']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qcategory=" . urlencode($term); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qcategory=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Genres -->
     <?php foreach(array_map('stripslashes', (array) $args['genres']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qgenre=" . urlencode($term); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Subgenres -->
     <?php foreach(array_map('stripslashes', (array) $args['subgenres']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qsubgenre=" . urlencode($term); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qsubgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Instrumentatoins -->
     <?php foreach(array_map('stripslashes', (array) $args['instrumentations']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qinstrumentation=" . urlencode($term); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qinstrumentation=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Settings -->
     <?php foreach(array_map('stripslashes', (array) $args['settings']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo get_site_url() . "/?qsetting=" . urlencode($term); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qsetting=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>

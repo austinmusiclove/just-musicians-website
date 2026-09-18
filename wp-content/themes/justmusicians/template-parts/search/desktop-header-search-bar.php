@@ -2,7 +2,7 @@
     <div class="grow relative px-1 py-1 flex bg-white" x-on:click.outside="showSearchOptions = false" >
         <input class="w-full h-full py-2 px-3" type="text" name="s" autocomplete="off" placeholder="Search"
             x-on:focus="showSearchOptions = true; showMobileMenu = false; showMobileMenuDropdown1 = false; showMobileMenuDropdown2 = false; showMobileFilters = false;"
-            x-on:keyup.enter="location.href = '/?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)"
+            x-on:keyup.enter="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)"
             x-model="searchInput"
             hx-get="<?php echo site_url('/wp-html/v1/search-options/'); ?>"
             hx-trigger="input changed delay:300ms"
@@ -42,7 +42,7 @@
     <span id="desktop-header-location-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
     </span>
-    <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '/?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
+        <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
         <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
     </button>
 </div>
