@@ -108,6 +108,7 @@ $next_page       = $result ? $result['next_page']       : null;
 
                 <div class="col md:col-span-6 py-6 md:py-4">
 
+                    <?php if (isset($args['breadcrumb_items'])) { ?><div class="text-16"><?php get_template_part('template-parts/global/breadcrumb', '', ['items' => $args['breadcrumb_items'] ]); ?></div><?php } ?>
                     <?php if (isset($args['title'])) { ?><h1 class="py-4 text-28 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
                     <?php if (isset($args['description'])) { ?><p class="text-16 mb-4"><?php echo esc_html($args['description']); ?></p><?php } ?>
 

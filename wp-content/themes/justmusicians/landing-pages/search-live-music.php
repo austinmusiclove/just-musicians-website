@@ -1,5 +1,11 @@
 <?php
 
+$breadcrumb_items = [
+    [ 'label' => 'Home',       'url' => home_url('/') ],
+    [ 'label' => 'Live Music', 'url' => site_url('live-music/') ],
+    [ 'label' => 'Search', ],
+];
+
 // Get user collections
 $collections_result = get_user_collections([
     'nopaging'     => true,
@@ -8,12 +14,12 @@ $collections_result = get_user_collections([
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
 
-
 get_header();
 
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
     'collections_map'  => $collections_map,
+    'breadcrumb_items' => $breadcrumb_items,
     'title'            => "Find Live Musicians Near You",
     'qcategory'        => isset($_GET['qcategory'])        ? $_GET['qcategory']        : '',
     'qgenre'           => isset($_GET['qgenre'])           ? $_GET['qgenre']           : '',

@@ -1,5 +1,5 @@
 Critical bugs
-    the locaiton bar does not populate with default location when not on home page
+    Tests need to clean up image uploads
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Need to add unique auth keys to wp config in staging and prod
     Audit which pages are cached and not and add proper exclusions (exclude register user)
@@ -9,29 +9,28 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
+    make new screenshot images into svgs to make it fast
+    Store location in browser and it lasts 1 day
+    Change footer links and nav links for categories and search state 1 links
+    Exclude live-music/search from varnish cache or get location detection with api
+    Perfect copy for sign up as musician cta
+    Perfect copy of home page cta
     Deploy
         save permalinks
         add acf for landing pages post types
-    detect location on home page after first load
-    hide header search bar for some pages
-        detect location with htmx in header search bar if it is included
-    Exclude live-music/search from varnish cache or get location detection with api
-    header bar search needs to go to new live music search page
-    Change footer links and nav links for categories and search state 1 links
-    Home page
-        Hero section - search live musicians with location auto filled; future will have 3 categories dropdown (live, prod, education)
-        Call to sign up
-        How it works section
-        Musician Earnings Database
-        About Hire Musicians - Target broad keywords, value prop
-        Links - verticals, categories, locations
-        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
+    Location/Category Pages
+        pass breadcrumb into search page
+        SEO Content
+        Listings
+            lock in the category and location filter; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
+            add more data to the image object schema and video object schema; description for videos
+            traditional paging
+            rank by proximity by providing a zip code list so that those zip codes are shown before all listings in the radius
+        Links - same category different location, same location different category
+        FAQ block
     Live Musicians Vertical Page
-        Heading and breadcrumb
-        Hero Section - Search live musicians with location input; takes you to live music general search page (current home page)
         CTA - Sign up as musician, tell us about your event
         Links - locations, categories,
-        How it works section - Tell us about your event, send job to musicians, get responses and quotes, hire on or offline (specific to live music)
         Cross-Vertical Navigation Banner: Prominent cards routing traffic to your sibling verticals (e.g., "Need instruction? Explore Music Lessons" or "Recording an album? Find Music Production services").
         Trust & Social Proof
             Verified client reviews
@@ -44,12 +43,12 @@ SEO
             equipment requirements
             FAQ accordion targeting ItemList and FAQPage schema
     Locations Page
-        Heading and breadcrumb
+        Heading
         Interactive map showing where there are listings
         Links - Region, city
         CTA to tell us about your event
     Region Pages
-        Heading and breadcrumb
+        Heading
         SEO Content & FAQ Block
             Unique description
             Regional venues
@@ -61,7 +60,7 @@ SEO
             Listing counts
             Link to local community partners (trusted by x)
     Cities Pages
-        Heading and breadcrumb
+        Heading
         SEO Content & FAQ Block
             Unique description
             Local venues
@@ -71,16 +70,14 @@ SEO
         Trust & Social Proof
             Listing counts
             Link to local community partners (trusted by x)
-    Location/Category Pages
-        Add breadcrumb
-        SEO Content
-        Listings
-            lock in the category and location filter; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
-            add more data to the image object schema and video object schema; description for videos
-            traditional paging
-            rank by proximity by providing a zip code list so that those zip codes are shown before all listings in the radius
-        Links - same category different location, same location different category
-        FAQ block
+    Home page
+        Call to sign up - Target broad keywords, value prop
+        Links - verticals, categories, locations
+        Trust & Social Proof
+            total number of listings and other stats
+            national level partners
+        Musician Earnings Database
+        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     add new urls to the sitemap and remove existing seo urls from sitemap
     Delete /seo folder
     Categories Page

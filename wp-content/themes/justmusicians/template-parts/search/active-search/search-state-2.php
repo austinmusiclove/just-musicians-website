@@ -1,43 +1,43 @@
-<div class="absolute top-full left-0 w-full px-4 py-4 bg-white flex flex-col shadow-md rounded-sm">
+<div class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-md max-h-32 overflow-y-scroll">
 
     <!-- Categories -->
     <?php foreach(array_map('stripslashes', (array) $args['categories']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qcategory=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qcategory=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Genres -->
     <?php foreach(array_map('stripslashes', (array) $args['genres']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Subgenres -->
     <?php foreach(array_map('stripslashes', (array) $args['subgenres']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qsubgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qsubgenre=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Instrumentatoins -->
     <?php foreach(array_map('stripslashes', (array) $args['instrumentations']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qinstrumentation=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qinstrumentation=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Settings -->
     <?php foreach(array_map('stripslashes', (array) $args['settings']) as $term) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo site_url('live-music/search/?qsetting=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qsetting=' . urlencode($term)); ?>" x-on:click="showSearchOptions = false;" >
             <?php echo $term; ?>
         </a>
     <?php } ?>
 
     <!-- Listings -->
     <?php foreach((array) $args['listings'] as $listing) { ?>
-        <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo $listing['permalink']; ?>" target="_blank" x-on:click="showSearchOptions = false;" >
+        <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo $listing['permalink']; ?>" target="_blank" x-on:click="showSearchOptions = false;" >
             <div class="w-6 aspect-square shrink-0">
                 <img class="w-full h-full object-cover" src="<?php echo $listing['tiny_thumbnail_url']; ?>" />
             </div>

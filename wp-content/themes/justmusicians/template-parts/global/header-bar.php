@@ -6,8 +6,15 @@
         </a>
     </div>
 
-    <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-6 lg:gap-12 justify-between">
-        <?php echo get_template_part('template-parts/search/desktop-header-search-bar', '', []); ?>
+    <div class="col-span-10 flex flex-col-reverse max-md:grow md:flex-row md:items-center items-end gap-2 md:gap-6 lg:gap-12 justify-end min-h-[42px]">
+        <?php if (empty($args['has_header_search'])) {
+            echo get_template_part('template-parts/search/desktop-header-search-bar', '', []); ?>
+            <div
+                hx-get="<?php echo site_url('/wp-html/v1/detect-location/'); ?>"
+                hx-trigger="load"
+                hx-swap="innerHTML"
+            ></div>
+        <?php } ?>
         <?php echo get_template_part('template-parts/menus/desktop-header-nav-bar', '', []); ?>
 
         <div class="flex items-center gap-2 shrink-0">

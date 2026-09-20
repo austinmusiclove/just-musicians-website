@@ -9,8 +9,7 @@ $location_label = !empty($_GET['location_label']) ? $_GET['location_label'] : ''
 ?>
 
 <!-- Hero Section - Search Live Musicians -->
-<section
-    class="bg-brown-light-3 pt-12 md:pt-24 pb-16 md:pb-28 relative overflow-hidden"
+<section class="bg-brown-light-3 pt-12 md:pt-24 pb-16 md:pb-28 relative "
     x-data="{
         heroKeyword:       '<?php echo clean_str_for_doublequotes(wp_unslash($_GET['qsearch'])); ?>',
         heroLocationInput: '<?php echo clean_str_for_doublequotes($location_label); ?>',
@@ -60,7 +59,7 @@ $location_label = !empty($_GET['location_label']) ? $_GET['location_label'] : ''
                             type="text"
                             name="s"
                             autocomplete="off"
-                            placeholder="Search for a band, artist, or genre"
+                            placeholder="Search for a category, instrument, or genre"
                             x-model="heroKeyword"
                             x-on:focus="showSearchOptions = true"
                             x-on:keyup.enter="searchHero()"

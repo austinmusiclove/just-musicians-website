@@ -1,4 +1,4 @@
-<ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-32 overflow-y-scroll" style="margin-top: -1px">
+<ul class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-sm max-h-32 overflow-y-scroll">
 
     <!-- Locations -->
     <?php foreach((array) $args['locations'] as $location) { ?>

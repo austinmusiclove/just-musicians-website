@@ -38,6 +38,11 @@
 
 <?php
 
+global $wp;
+$no_search_bar_urls = [site_url(), site_url('live-music')];
+$current_url = home_url( add_query_arg( [], $wp->request ) );
+$has_header_search = in_array($current_url, $no_search_bar_urls);
+
 // Priority: SEO page args > URL query args > IP geolocation > hardcoded defaults
 $header_arg_location_label = $args['header_arg_location_label'] ?? '';
 $header_arg_lat            = $args['header_arg_lat'] ?? null;
@@ -168,7 +173,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
     <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->
     <header class="bg-brown-light-3 sticky top-0 z-50 h-28 md:h-16">
         <?php
-        echo get_template_part('template-parts/global/header-bar', '', []);
+        echo get_template_part('template-parts/global/header-bar', '', [ 'has_header_search' => $has_header_search ]);
         echo get_template_part('template-parts/global/toasts/success-toast', '', []);
         echo get_template_part('template-parts/global/toasts/error-toast',   '', []);
         ?>

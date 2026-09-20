@@ -1,8 +1,9 @@
 <div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0" preload="mouseover">
     <span class="flex items-center gap-2 relative group">
-        <a href="#">Live Music</a>
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+        <a href="<?php echo site_url('live-music/search'); ?>">Live Music</a>
         <!-- Dropdown menu -->
+<!--
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
         <div class="absolute top-full w-48 left-0 px-4 py-4 bg-white hidden font-regular font-sans text-16 group-hover:flex flex-col shadow-md rounded-sm z-10">
             <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Band'); ?>">
                 <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
@@ -21,6 +22,7 @@
                 Wedding Music
             </a>
         </div>
+-->
     </span>
     <a href="/pricing/">Pricing</a>
 </div>
