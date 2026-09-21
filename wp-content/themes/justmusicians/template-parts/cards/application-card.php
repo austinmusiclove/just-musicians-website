@@ -4,7 +4,7 @@
     hx-swap="beforeend" hx-target="#results" hx-indicator="#applications-spinner" hx-include="#applications-form"
     <?php } ?>>
 
-    <div class="flex flex-col gap-2 min-w-0 border border-black/20 rounded p-4 bg-yellow-10/50">
+    <div class="flex flex-col gap-2 min-w-0 border border-black/20 rounded p-4 bg-yellow-10/50 w-full">
 
         <!-- Application Title -->
         <div class="flex flex-row items-start justify-between gap-2">
