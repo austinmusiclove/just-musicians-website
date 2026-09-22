@@ -2,7 +2,9 @@
 $device = $args['device'] ?? 'desktop';
 $distance_input_ref = $device . 'DistanceInput';
 ?>
-<div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0" x-show="showLocationFilter" x-cloak>
+<div class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0"
+    <?php if (!empty($args['x-show'])) { ?>x-show="<?php echo $args['x-show']; ?>" x-cloak <?php } ?>
+>
     <div class="flex items-center gap-2 mb-3">
         <h3 class="font-bold text-18">Location</h3>
         <span id="location-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">

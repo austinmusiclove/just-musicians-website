@@ -20,6 +20,7 @@ function register_post_types() {
     // Listing Review
     register_post_type('listing_review', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -35,6 +36,7 @@ function register_post_types() {
     // Youtube Videos
     register_post_type('youtubevideo', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -74,6 +76,7 @@ function register_post_types() {
 		//'capability_type' => 'page',
 		'has_archive' => true,
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'thumbnail'),
         'labels' => array(
@@ -89,6 +92,7 @@ function register_post_types() {
     // Venue Review
     register_post_type('venue_review', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -104,6 +108,7 @@ function register_post_types() {
     // Inquiry (Deprecated; replaced by event)
     register_post_type('inquiry', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -119,6 +124,7 @@ function register_post_types() {
     // Event
     register_post_type('event', array(
         'public' => true,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -134,6 +140,7 @@ function register_post_types() {
     // Proposal
     register_post_type('proposal', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array(),
         'labels' => array(
@@ -149,6 +156,7 @@ function register_post_types() {
     // Offer
     register_post_type('offer', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('author'),
         'labels' => array(
@@ -164,6 +172,7 @@ function register_post_types() {
     // Buyer Review
     register_post_type('buyer_review', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -179,6 +188,7 @@ function register_post_types() {
     // Application
     register_post_type('application', array(
         'public' => true,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -194,6 +204,7 @@ function register_post_types() {
     // Application Submission
     register_post_type('app_submission', array(
         'public' => true,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -209,6 +220,7 @@ function register_post_types() {
     // Artists
     register_post_type('artist', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -224,6 +236,7 @@ function register_post_types() {
     // Performance
     register_post_type('performance', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -240,6 +253,7 @@ function register_post_types() {
     register_post_type('glossary', array(
 		'has_archive' => true,
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt'),
         'labels' => array(
@@ -255,6 +269,7 @@ function register_post_types() {
     // Glossary Term
     register_post_type('glossary-term', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt'),
         'labels' => array(
@@ -270,6 +285,7 @@ function register_post_types() {
     // Compensation Report
     register_post_type('comp_report', array(
         'public' => false,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -301,6 +317,7 @@ function register_post_types() {
     // Podcast
     register_post_type('podcast', array(
         'public' => true,
+        'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'thumbnail', 'excerpt'),
         'labels' => array(
@@ -319,7 +336,7 @@ function register_post_types() {
         'show_ui' => true,
         'show_in_rest' => true,
         'show_in_menu' => 'landing-pages',
-        'supports' => array('title'),
+        'supports' => array('title', 'editor'),
         'labels' => array(
           'name' => 'Region Landing',
           'add_new_item' => 'Add New Region Landing',
@@ -336,7 +353,7 @@ function register_post_types() {
         'show_ui' => true,
         'show_in_rest' => true,
         'show_in_menu' => 'landing-pages',
-        'supports' => array('title'),
+        'supports' => array('title', 'editor'),
         'labels' => array(
           'name' => 'Locale Landing',
           'add_new_item' => 'Add New Locale Landing',
@@ -353,7 +370,7 @@ function register_post_types() {
         'show_ui' => true,
         'show_in_rest' => true,
         'show_in_menu' => 'landing-pages',
-        'supports' => array('title'),
+        'supports' => array('title', 'editor'),
         'labels' => array(
           'name' => 'Category Landing',
           'add_new_item' => 'Add New Category Landing',
@@ -370,7 +387,7 @@ function register_post_types() {
         'show_ui' => true,
         'show_in_rest' => true,
         'show_in_menu' => 'landing-pages',
-        'supports' => array('title'),
+        'supports' => array('title', 'editor'),
         'labels' => array(
           'name' => 'Locale Category Landing',
           'add_new_item' => 'Add New Locale Category Landing',

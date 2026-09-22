@@ -93,66 +93,6 @@ if ($is_last_page) {
     get_template_part( 'template-parts/global/empty-states/no-more-results');
 }
 
-
-// Render Filters
-// TODO only swap out the filter section that was altered
-if ($page == 1) {
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'category-filters',
-        'title' => 'Categories',
-        'input_name' => 'categories', // should match the input name used for the tag check boxes
-        'default_tags' => get_default_options('category'),
-        'tags' => $valid_categories,
-        'show_modal_var' => 'showCategoryModal',
-        'x-model' => 'categoriesCheckboxes',
-    ));
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'genre-filters',
-        'title' => 'Genre',
-        'input_name' => 'genres',
-        'default_tags' => get_default_options('genre'),
-        'tags' => $valid_genres,
-        'show_modal_var' => 'showGenreModal',
-        'x-model' => 'genresCheckboxes',
-    ));
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'subgenre-filters',
-        'title' => 'Sub Genre',
-        'input_name' => 'subgenres',
-        'default_tags' => get_default_options('subgenre'),
-        'tags' => $valid_subgenres,
-        'show_modal_var' => 'showSubGenreModal',
-        'x-model' => 'subgenresCheckboxes',
-    ));
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'instrumentation-filters',
-        'title' => 'Instrumentation',
-        'input_name' => 'instrumentations',
-        'default_tags' => get_default_options('instrumentation'),
-        'tags' => $valid_instrumentations,
-        'show_modal_var' => 'showInstrumentationModal',
-        'x-model' => 'instrumentationsCheckboxes',
-    ));
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'setting-filters',
-        'title' => 'Settings',
-        'input_name' => 'settings',
-        'default_tags' => get_default_options('setting'),
-        'tags' => $valid_settings,
-        'show_modal_var' => 'showSettingModal',
-        'x-model' => 'settingsCheckboxes',
-    ));
-    echo get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'ensemble-size-filters',
-        'title' => 'Ensemble Size',
-        'input_name' => 'ensemble_size',
-        'default_tags' => get_default_options('ensemble_size'),
-        'tags' => $valid_ensemble_sizes,
-        'show_modal_var' => 'showEnsembleSizeModal',
-        'x-model' => 'ensembleSizeCheckboxes',
-    ));
-}
-
 // Render total resutls count
 ?><span id="max_num_results" hx-swap-oob="outerHTML"><?php
     echo $max_num_results;

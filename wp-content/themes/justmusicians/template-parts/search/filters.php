@@ -1,5 +1,8 @@
 <?php
-    echo get_template_part('template-parts/search/filter-components/location', '', [ 'device' => $args['device'] ?? 'desktop' ] );
+echo get_template_part('template-parts/search/filter-components/location', '', [
+    'device' => $args['device'] ?? 'desktop',
+    'x-show' => 'showLocationFilter',
+] );
 ?>
 
 <div>
@@ -35,6 +38,7 @@
         'tags' => isset($args['categories']) ? $args['categories'] : [],
         'show_modal_var' => 'showCategoryModal',
         'x-model' => 'categoriesCheckboxes',
+        'x-show' => 'showCategoryFilter',
     ));
     echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'genre-filters',

@@ -9,7 +9,16 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    make new screenshot images into svgs to make it fast
+    To deploy to staging
+        get listings based off of locale city state info and radius and/or zip code list
+        Locale template
+        Region template
+        Locations page
+        Austin wedding bands
+            answer how much it costs, mention other near by locations that these bands likely serve
+            something about insurance
+        Austin country bands
+        San Antonio Wedding bands
     Store location in browser and it lasts 1 day
     Change footer links and nav links for categories and search state 1 links
     Exclude live-music/search from varnish cache or get location detection with api
@@ -18,14 +27,17 @@ SEO
     Deploy
         save permalinks
         add acf for landing pages post types
+        package version update
     Location/Category Pages
-        pass breadcrumb into search page
         SEO Content
         Listings
             lock in the category and location filter; maybe not show those filters and if you get to the bottom of results; suggest starting a general search on the home page in x location if you didn't find what you are looking for
             add more data to the image object schema and video object schema; description for videos
             traditional paging
             rank by proximity by providing a zip code list so that those zip codes are shown before all listings in the radius
+        add pricing for the specific service of the category and location
+        set meta title
+        set meta description
         Links - same category different location, same location different category
         FAQ block
     Live Musicians Vertical Page
