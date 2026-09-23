@@ -36,6 +36,12 @@ $radius        = get_post_meta($locale_post, 'radius', true);
 $location_label = $locale_name . ', ' . $region_name;
 $locale_lat = null;
 $locale_lng = null;
+$postal_codes = [];
+
+$locale_data = hm_location_get_city_data($country, $region_name, $locale_name);
+$locale_lat = $locale_data->lat;
+$locale_lng = $locale_data->lng;
+$postal_codes = $locale_data->postal_codes;
 
 // Get user collections and events
 $collections_result = get_user_collections([
@@ -69,6 +75,7 @@ get_header( null, [
 
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'      => true,
+    'location_label'       => $location_label,
     'hide_location_filter' => true,
     'hide_category_filter' => true,
     'title'                => $title,
@@ -81,12 +88,7 @@ echo get_template_part('template-parts/search/search-page', '', [
     'qsetting'             => '',
     'lat'                  => $locale_lat,
     'lng'                  => $locale_lng,
-    'area_served'          => [
-        'city'  => $locale_name,
-        'state' => $region_name,
-        'lat'   => $locale_lat,
-        'lng'   => $locale_lng,
-    ],
+    'postal_codes'         => $postal_codes,
 ]);
 
 // Content

@@ -28,6 +28,43 @@ function hm_location_search_pc($q, $limit = 40) {
     ));
 }
 
+function hm_location_get_city_data($country, $state, $city) {
+    global $wpdb;
+    $city_table = hm_get_location_city_table();
+    $pc_table = hm_get_location_pc_table();
+
+    $row = $wpdb->get_row($wpdb->prepare(
+        "SELECT city, state, state_code, country, lat, lng
+         FROM {$city_table}
+         WHERE country = %s AND state = %s AND city = %s
+         ORDER BY id ASC
+         LIMIT 1",
+        strtoupper($country), $state, $city
+    ));
+
+    $postal_codes = [];
+    if ($row) {
+        $postal_codes = $wpdb->get_results($wpdb->prepare(
+            "SELECT postal_code, lat, lng
+             FROM {$pc_table}
+             WHERE country = %s AND state = %s AND city = %s
+             ORDER BY postal_code ASC",
+            $row->country, $row->state, $row->city
+        ));
+        $postal_codes = array_column($postal_codes, 'postal_code');
+    }
+
+    return (object) [
+        'city'         => $row ? $row->city : null,
+        'state'        => $row ? $row->state : null,
+        'state_code'   => $row ? $row->state_code : null,
+        'country'      => $row ? $row->country : null,
+        'lat'          => $row ? $row->lat : null,
+        'lng'          => $row ? $row->lng : null,
+        'postal_codes' => $postal_codes,
+    ];
+}
+
 function hm_location_search_cities($q, $limit = 40) {
     global $wpdb;
     $table = hm_get_location_city_table();

@@ -10,7 +10,7 @@
                 <input class="w-full py-2 pr-3 pl-6 inline-block" type="text" name="s" autocomplete="off" placeholder="Search"
                     x-ref="mobileSearchInput"
                     x-model="searchInput"
-                    x-on:keyup.enter="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)"
+                    x-on:keyup.enter="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent($el.value) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)"
                     hx-get="<?php echo site_url('/wp-html/v1/search-options-mobile/'); ?>"
                     hx-trigger="input changed delay:300ms"
                     hx-target="#active-search-results-mobile"
@@ -20,7 +20,7 @@
                 <span id="mobile-header-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
-                    <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
+                    <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
                 </button>
             </div>
@@ -32,26 +32,26 @@
                     'id'              => 'mobile-header-location-filter',
                     'input_class'     => 'w-full h-full py-2 pr-3 pl-5',
                     'input_name'      => 'location',
-                    'placeholder'     => 'Start typing your city or postal code..',
+                    'placeholder'     => 'Start typing a city or postal code..',
                     'autocomplete'    => 'off',
                     'required'        => false,
                     'input_var'       => 'locationInputHeader',
-                    'selected_var'    => 'searchLocation',
+                    'selected_var'    => 'headerSearchLocation',
                     'show_var'        => 'showLocationSearchOptionsHeader',
                     'htmx_path'       => '/wp-html/v1/location-search-options/',
                     'spinner_id'      => 'mobile-header-location-active-search-spinner',
-                    'update_func'     => 'updateLocation',
+                    'update_func'     => 'updateHeaderLocation',
                     'state_1_msg'     => 'Start typing a city or postal code..',
                 ]); ?>
                 <span id="mobile-header-location-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
-                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + searchLat + '&amp;lng=' + searchLng + '&amp;location_label=' + encodeURIComponent(searchLocation)">
+                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
                 </button>
             </div>
-            <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="searchLat" />
-            <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="searchLng" />
+            <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="headerSearchLat" />
+            <input id="lng-input-header-mobile" type="hidden" name="lng" x-model="headerSearchLng" />
         </div>
 
         <div id="active-search-results-mobile" class="p-8" x-show="getShowDefaultSearchOptionsMobile()" x-cloak>

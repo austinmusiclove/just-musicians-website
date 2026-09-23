@@ -1,4 +1,4 @@
-<div id="<?php echo $args['id']; ?>" class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0" hx-swap-oob="outerHTML"
+<div id="<?php echo $args['id']; ?>" class="border-b border-black/20 mb-6 pb-6 last:mb-0 last:pb-0 last:border-b-0" hx-swap-oob="innerHTML"
     <?php if (!empty($args['x-show'])) { ?>x-show="<?php echo $args['x-show']; ?>" x-cloak<?php } ?>
 >
     <h3 class="font-bold text-18 mb-3"><?php echo $args['title']; ?></h3>

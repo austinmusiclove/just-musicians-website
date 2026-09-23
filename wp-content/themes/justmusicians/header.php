@@ -70,10 +70,9 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             loginModalMessage: 'Sign in to your account',
             signupModalMessage: 'Sign up for an account',
             showPasswordResetModal: false,
-            locationDetectedFromServer: false,
-            searchLat: <?php echo $lat !== null ? $lat : 'null'; ?>,
-            searchLng: <?php echo $lng !== null ? $lng : 'null'; ?>,
-            searchLocation: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
+            headerSearchLat: <?php echo $lat !== null ? $lat : 'null'; ?>,
+            headerSearchLng: <?php echo $lng !== null ? $lng : 'null'; ?>,
+            headerSearchLocation: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             reviewProgress: 0,
             currentReviewSlide: '',
             showReviewModal: false,
@@ -144,10 +143,9 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
             showMobileMenuDropdown2: false,
             showMobileFilters: false,
             searchInput: '<?php if (!empty($_GET['qsearch'])) { echo $_GET['qsearch']; } ?>',
-            locationInput: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             locationInputHeader: '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             inquiryLocationInput: '',
-            updateLocation(location) { this.locationInput = location.label; this.locationInputHeader = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; },
+            updateHeaderLocation(location) { this.locationInputHeader = location.label; this.headerSearchLocation = location.label; this.headerSearchLat = location.lat; this.headerSearchLng = location.lng; },
             _updateInquiryLocation(location) { updateInquiryLocation(this, location); },
             focusElm(id) {
                 var elm = document.getElementById(id);
@@ -167,7 +165,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
         "
         x-on:focus-elm="focusElm($event.detail.id)"
         x-on:updateimageid="accountSettings.profile_image.attachment_id = $event.detail"
-        x-on:location-detected.window="locationDetectedFromServer = true; updateLocation($event.detail);"
+        x-on:location-detected.window="updateHeaderLocation($event.detail);"
     >
     <!-- Setting a fixed height allows us to position the popups on mobile -->
     <!-- if height specifications here change from h-28 md:h-16 then the height calculations in page-messages.php have to be modified -->

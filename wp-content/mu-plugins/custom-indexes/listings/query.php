@@ -1,5 +1,6 @@
 <?php
 
+// when postal codes are passed in, the results will rank any listings matching those postal codes at the top
 function hm_get_listing_ids_by_bounds($args = []) {
     global $wpdb;
     $table = hm_get_listing_index_table();
@@ -11,6 +12,7 @@ function hm_get_listing_ids_by_bounds($args = []) {
         'lng_max'      => null,
         'verified'     => null,
         'listing_type' => null,
+        'postal_codes' => null,
     ]);
 
     $where  = ['lat BETWEEN %f AND %f', 'lng BETWEEN %f AND %f'];
@@ -26,19 +28,30 @@ function hm_get_listing_ids_by_bounds($args = []) {
         $values[] = $args['listing_type'];
     }
 
+    $order = 'max_rank DESC, listing_post_id ASC';
+
+    if (!empty($args['postal_codes']) && is_array($args['postal_codes'])) {
+        $postal_codes = array_values(array_filter($args['postal_codes']));
+        if ($postal_codes) {
+            $pc_placeholders = implode(', ', array_fill(0, count($postal_codes), 'UPPER(%s)'));
+            $order = "CASE WHEN UPPER(zip_code) IN ({$pc_placeholders}) THEN 0 ELSE 1 END ASC, {$order}";
+            $values = array_merge($values, $postal_codes);
+        }
+    }
+
     $sql = $wpdb->prepare(
         "SELECT listing_post_id, MAX(search_rank) AS max_rank
          FROM {$table}
          WHERE " . implode(' AND ', $where) . "
          GROUP BY listing_post_id
-         ORDER BY max_rank DESC, listing_post_id ASC",
+         ORDER BY {$order}",
         $values
     );
 
     return array_map('intval', wp_list_pluck($wpdb->get_results($sql), 'listing_post_id'));
 }
 
-function hm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified = null, $listing_type = null) {
+function hm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified = null, $listing_type = null, $postal_codes = null) {
     $lat_delta = $distance_miles / 69;
     $lng_delta = $distance_miles / (69 * cos(deg2rad($lat)));
 
@@ -49,6 +62,7 @@ function hm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified =
         'lng_max'      => $lng + $lng_delta,
         'verified'     => $verified,
         'listing_type' => $listing_type,
+        'postal_codes' => $postal_codes,
     ]);
 }
 

@@ -12,13 +12,21 @@ $subgenres        = $qsubgenre        !== '' ? [$qsubgenre]        : [];
 $instrumentations = $qinstrumentation !== '' ? [$qinstrumentation] : [];
 $settings         = $qsetting         !== '' ? [$qsetting]         : [];
 
+$arg_location_label = $args['location_label'] ?? '';
+$arg_lat            = $args['lat'] ?? null;
+$arg_lng            = $args['lng'] ?? null;
+$location_label     = $arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : '');
+$lat                = $arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : null);
+$lng                = $arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
+$postal_codes       = !empty($args['postal_codes']) ? array_values((array) $args['postal_codes']) : [];
+
 // Get listings
 $result = null;
 if ($args['send_first_page']) {
     $result = get_listings([
         'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
-        'lat'               => !empty($args['lat']) ? $args['lat'] : null,
-        'lng'               => !empty($args['lng']) ? $args['lng'] : null,
+        'lat'               => $lat,
+        'lng'               => $lng,
         'distance'          => 40,
         'categories'        => $categories,
         'genres'            => $genres,
@@ -27,6 +35,7 @@ if ($args['send_first_page']) {
         'settings'          => $settings,
         'verified'          => false,
         'get_reviews'       => true,
+        'postal_codes'      => $postal_codes,
         'page'              => 1,
     ]);
 }
@@ -57,7 +66,12 @@ $next_page       = $result ? $result['next_page']       : null;
             settingsCheckboxes:          <?php echo clean_arr_for_doublequotes($settings); ?>,
             ensembleSizeCheckboxes:      [],
             verifiedCheckbox: false,
+            locationInput:              '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
+            searchLocation:             '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
+            searchLat:                   <?php echo $lat !== null ? $lat : 'null'; ?>,
+            searchLng:                   <?php echo $lng !== null ? $lng : 'null'; ?>,
             distance: 40,
+            updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; $nextTick(() => { $dispatch('filterupdate'); }); },
             get selectedFilters() {
                 return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.listingSearchVal].filter(Boolean).join(' | ');
             },
@@ -78,10 +92,13 @@ $next_page       = $result ? $result['next_page']       : null;
         <?php } else { ?>
             hx-trigger="load, filterupdate"
         <?php } ?>
-        x-init="$watch('searchLocation', value => { if (!locationDetectedFromServer) { $dispatch('filterupdate'); } locationDetectedFromServer = false; })"
+        x-on:location-detected-get-listings.window="updateLocation($event.detail)"
         x-on:filterupdate="window.scrollTo({ top: 0, behavior: 'instant' });"
     >
         <input type="hidden" name="search" x-model="listingSearchVal" />
+        <?php foreach ($postal_codes as $postal_code) { ?>
+            <input type="hidden" name="postal_codes[]" value="<?php echo $postal_code; ?>" />
+        <?php } ?>
         <div id="content" class="grow flex flex-col relative">
             <div class="container md:grid md:grid-cols-9 xl:grid-cols-12 gap-8 lg:gap-12">
                 <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
@@ -124,6 +141,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         <?php echo get_template_part('template-parts/search/sort', '', [
                             'show_number'     => true,
                             'max_num_results' => $max_num_results,
+                            'location_label'  => $location_label,
                         ]); ?>
                     </div>
 
@@ -202,7 +220,6 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'youtube_video_data'     => $listing['youtube_video_data'],
                                         'verified'               => $listing['verified'],
                                         'permalink'              => $listing['permalink'],
-                                        'area_served'            => $args['area_served'] ?? null,
                                         'lazyload_thumbnail'     => $index >= 3,
                                         'last'                   => $index == array_key_last($listings),
                                         'is_last_page'           => $is_last_page,

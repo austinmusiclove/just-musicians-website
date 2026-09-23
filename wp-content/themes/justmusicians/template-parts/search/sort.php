@@ -43,6 +43,8 @@
                     }
                 }
 
+                if (!empty($args['location_label'])) { echo " near " . $args['location_label']; }
+
             ?></span>
 
             <div class="spinner-start htmx-indicator flex items-center justify-center">
