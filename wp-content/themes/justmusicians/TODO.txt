@@ -10,7 +10,6 @@ Critical bugs
     change name of applications to job postings
 SEO
     To deploy to staging
-        clear in cat locale page clears the category
         Locale template
         Region template
         Locations page

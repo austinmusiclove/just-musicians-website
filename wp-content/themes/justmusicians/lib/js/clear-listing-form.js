@@ -1,8 +1,8 @@
 // Clears listing form on search page
-function clearListingForm(alco) {
+function clearListingForm(alco, skipCategory = false) {
     alco.listingSearchVal = '';
     alco.searchInput = '';
-    alco.categoriesCheckboxes = [];
+    if (!skipCategory) { alco.categoriesCheckboxes = []; }
     alco.genresCheckboxes = [];
     alco.subgenresCheckboxes = [];
     alco.instrumentationsCheckboxes = [];

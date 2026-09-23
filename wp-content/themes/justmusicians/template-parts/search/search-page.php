@@ -82,7 +82,7 @@ $next_page       = $result ? $result['next_page']       : null;
             showTagModalOption(option) {
                 return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
             },
-            _clearListingForm()                                  { clearListingForm(this); },
+            _clearListingForm()                                  { clearListingForm(this, <?php if (!empty($args['hide_category_filter']) and $args['hide_category_filter']) { echo 'true'; } else { echo 'false'; }; ?>); },
         }"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"
