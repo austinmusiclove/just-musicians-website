@@ -71,8 +71,6 @@ get_header( null, [
     'header_arg_lng'            => $locale_lng,
 ] );
 
-// Breadcrumb, Heading, Content
-
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'      => true,
     'location_label'       => $location_label,
@@ -100,40 +98,10 @@ if ( ! empty( $content_post->post_content ) ) { ?>
 <?php }
 
 
-// Links
-$categories_query = new WP_Query( [
-    'post_type'      => 'lc-landing',
-    'post_status'    => 'publish',
-    'posts_per_page' => -1,
-    'meta_query'     => [
-        [
-            'key'   => 'locale',
-            'value' => $locale_post,
-            'compare' => '=',
-        ]
-    ]
+get_template_part('template-parts/landing-pages/categories-in-locale-links', '', [
+    'heading'        => "Explore other categories in $location_label",
+    'exclude'        => [$post_id],
+    'locale_post_id' => $locale_post,
 ]);
-if ( $categories_query->have_posts() ) { ?>
-
-    <div class="container flex justify-center py-32">
-        <div class="flex flex-col items-center sm:max-w-[600px]">
-            <h2 class="font-sun-motter text-center text-25 mb-4">Explore other categories in <?php echo $location_label; ?></h2>
-            <div class="flex items-center justify-center gap-2 flex-wrap">
-                <?php while ( $categories_query->have_posts() ) {
-                    $categories_query->the_post();
-                    $cat_url_path = get_field('url_path');
-                    if ($cat_url_path == $current_path) { continue; }
-                    $cat_name = get_post_meta(get_field('category'), 'plural_name', true);
-                ?>
-                    <a class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light inline-block"
-                        href="<?php echo site_url($cat_url_path); ?>">
-                        <?php echo $cat_name; ?>
-                    </a>
-                <?php } wp_reset_postdata(); ?>
-            </div>
-        </div>
-    </div>
-
-<?php }
 
 get_footer();

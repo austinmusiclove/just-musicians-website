@@ -10,14 +10,13 @@ Critical bugs
     change name of applications to job postings
 SEO
     To deploy to staging
-        Locale template
         Region template
         Locations page
         Austin wedding bands
             answer how much it costs, mention other near by locations that these bands likely serve
             something about insurance
         Austin country bands
-        San Antonio Wedding bands
+        San Antonio bands
     Store location in browser and it lasts 1 day
     Change footer links and nav links for categories and search state 1 links
     Exclude live-music/search from varnish cache or get location detection with api

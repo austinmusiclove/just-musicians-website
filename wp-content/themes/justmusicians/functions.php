@@ -46,7 +46,16 @@ function hmm_scripts() {
     $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
 
 
-    if (is_home()) {
+    if (is_front_page()) {
+        // Inquiries
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
+    }
+
+    // Locations landing pages
+    if (preg_match('#^/live-music/locations/[^/]+/[^/]+#', $path) or
+        preg_match('#^/live-music/locations/[^/]+#', $path) or
+        preg_match('#^/live-music/locations#', $path))
+    {
         // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
     }
