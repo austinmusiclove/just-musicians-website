@@ -4,7 +4,6 @@
 global $wp;
 $post_id = null;
 $current_path = $wp->request;
-error_log($current_path);
 $query = new WP_Query( [
     'post_type'      => 'locale-landing',
     'post_status'    => 'publish',

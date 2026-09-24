@@ -18,16 +18,16 @@ $categories_query = new WP_Query( $categories_query_args );
 
 if ( $categories_query->have_posts() ) { ?>
 
-    <div class="container flex justify-center py-32">
-        <div class="flex flex-col items-center sm:max-w-[600px]">
-            <h2 class="font-sun-motter text-center text-25 mb-4"><?php echo $args['heading']; ?></h2>
-            <div class="flex items-center justify-center gap-2 flex-wrap">
+    <div class="container flex py-16">
+        <div class="flex flex-col w-full">
+            <h2 class="font-sun-motter text-25 mb-4"><?php echo $args['heading']; ?></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">
                 <?php while ( $categories_query->have_posts() ) {
                     $categories_query->the_post();
                     $cat_url_path = get_field('url_path');
                     $cat_name = get_post_meta(get_field('category'), 'plural_name', true);
                 ?>
-                    <a class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 hover:bg-yellow-light inline-block"
+                    <a class="text-20 text-yellow py-2 pr-2 underline inline-block"
                         href="<?php echo site_url($cat_url_path); ?>">
                         <?php echo $cat_name; ?>
                     </a>
