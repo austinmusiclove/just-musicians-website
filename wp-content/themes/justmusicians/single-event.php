@@ -29,11 +29,10 @@ get_header();
         <div class="container md:grid md:grid-cols-9 gap-8 lg:gap-12">
             <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                 <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                  <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
+                    <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 py-6 md:py-12"
-                x-data="{
+            <div class="col md:col-span-6 pb-6 md:pb-12" x-data="{
                     collectionsMap:  <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     showEditForm: false,
                     eventId:        '<?php echo get_the_ID(); ?>',
@@ -58,28 +57,51 @@ get_header();
                     ensembleSize:    <?php echo clean_arr_for_doublequotes( sort_ensemble_size_options(wp_list_pluck(get_the_terms(get_the_ID(), 'ensemble_size') ?: [], 'name')),); ?>,
                     proposal_ids:    <?php echo clean_arr_for_doublequotes(hm_get_proposal_ids_by_event_id(get_the_ID())); ?>,
                     _updateEvent(event) { updateEvent(this, event); },
-                }"
-                x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
-            >
+                }" x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;">
 
-                <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16" href="<?php echo site_url('/my-events/'); ?>" >
-                    <span>←</span>
-                    <span>Back to My Events</span>
-                </a>
+                <script>
+                function setPseudoBackgroundWidth() {
+                    const el = document.querySelector('.pseudo-background');
+                    if (!el) return;
 
-                <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
-                    <div class="w-20 sm:w-24 shrink-0">
-                        <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
+                    const distance = window.innerWidth - el.getBoundingClientRect().left;
+                    el.style.width = `${distance}px`;
+                }
+                document.addEventListener("DOMContentLoaded", function() {
+                    setPseudoBackgroundWidth();
+                });
+                window.addEventListener('resize', setPseudoBackgroundWidth);
+                </script>
+
+                <div class="relative pt-6 pb-6 md:pb-14">
+                    <div
+                        class="pseudo-background absolute -mx-4 md:mx-0 top-0 md:-left-8 lg:-left-12 h-full z-0 bg-yellow-10 border-b border-b-yellow/60 w-screen">
                     </div>
-                    <h1 class="font-bold text-25" x-text="eventName"></h1>
+
+                    <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-12 z-10 relative"
+                        href="<?php echo site_url('/my-events/'); ?>">
+                        <span>←</span>
+                        <span>Back to My Events</span>
+                    </a>
+
+                    <div class="mb-6 md:mb-8 flex justify-start items-start gap-4 md:gap-8 flex-row z-10 relative">
+                        <div class="w-20 sm:w-24 shrink-0">
+                            <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
+                        </div>
+                        <div class="sm:min-h-24 flex items-center">
+                            <h1 class="font-bold text-25 md:text-32" x-text="eventName"></h1>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
                 <div>
-                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span x-init="$dispatch('success-toast', {'message': 'Event Created Successfully'});"></span><?php } ?>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span
+                        x-init="$dispatch('success-toast', {'message': 'Event Created Successfully'});"></span><?php } ?>
                 </div>
 
-                <div x-data="{
+                <div class="relative z-10" x-data="{
                     showEventDetails: true,
                     showApplicants: false,
                     hideTabs() {
@@ -88,12 +110,16 @@ get_header();
                     },
                 }">
                     <!-- Tabs -->
-                    <div class="flex items-start justify-between border-b border-black/20">
+                    <div class="flex items-start justify-between -mt-9">
                         <div class="flex gap-6 items-start">
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showEventDetails}" x-on:click="hideTabs(); showEventDetails = true;">Event Details</div>
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer"
+                                :class="{'active': showEventDetails}" x-on:click="hideTabs(); showEventDetails = true;">
+                                Event Details</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative"
+                                :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
                                 Musicians
-                                <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                                <span
+                                    class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
                                     x-show="get_event_count_for_proposals(notifications, proposal_ids) > 0" x-cloak
                                     x-text="get_event_count_for_proposals(notifications, proposal_ids)">
                                 </span>

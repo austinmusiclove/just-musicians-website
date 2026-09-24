@@ -158,7 +158,7 @@
                 <span><?php echo $args['location']; ?></span>
             </span>
             <span class="text-black/50">|</span>
-            <!-- Ensemble Size -->
+            <!-- Ensemble Size  -->
             <span class="flex items-center text-14 gap-2">
                 <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
                 <span>1, 4, 6+</span>

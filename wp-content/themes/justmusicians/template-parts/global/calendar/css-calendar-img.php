@@ -12,9 +12,9 @@ $alpine_var = !empty($args['alpine_var']) ? $args['alpine_var'] : '';
     <span
         class="bg-yellow text-black text-14 md:text-16 font-sun-motter uppercase w-full text-center md:py-1 rounded-t-sm leading-tight"
         x-text="<?php echo $alpine_var; ?> ? new Date(<?php echo $alpine_var; ?> + 'T00:00:00').toLocaleDateString('en', { month: 'short', year: 'numeric' }) : ''"></span>
-    <span class="text-20 md:text-25 font-bold text-navy pt-1 leading-tight grow flex items-center justify-center"
+    <span class="text-20 md:text-28 font-bold text-navy pt-1 leading-tight grow flex items-center justify-center"
         x-text="<?php echo $alpine_var; ?> ? new Date(<?php echo $alpine_var; ?> + 'T00:00:00').getDate() : ''"></span>
-    <span class="text-14 text-black/50 pb-1 leading-tight"
+    <span class="text-14 text-black/50 pb-0.5 leading-tight"
         x-text="<?php echo $alpine_var; ?> ? new Date(<?php echo $alpine_var; ?> + 'T00:00:00').toLocaleDateString('en', { weekday: 'short' }) : ''"></span>
 </div>
 <?php } elseif ($ts) { ?>
@@ -23,7 +23,7 @@ $alpine_var = !empty($args['alpine_var']) ? $args['alpine_var'] : '';
     <span
         class="bg-yellow text-black text-14 md:text-16 font-sun-motter uppercase w-full text-center md:py-1 rounded-t-sm leading-tight"><?php echo esc_html($month_abbr . ' ' . $year); ?></span>
     <span
-        class="text-20 md:text-25 font-bold text-navy pt-1 leading-tight grow flex items-center justify-center"><?php echo esc_html($day_num); ?></span>
-    <span class="text-14 text-black/50 pb-1 leading-tight"><?php echo esc_html($day_abbr); ?></span>
+        class="text-20 md:text-28 font-bold text-navy pt-1 leading-tight grow flex items-center justify-center"><?php echo esc_html($day_num); ?></span>
+    <span class="text-14 text-black/50 pb-0.5 leading-tight"><?php echo esc_html($day_abbr); ?></span>
 </div>
 <?php } ?>

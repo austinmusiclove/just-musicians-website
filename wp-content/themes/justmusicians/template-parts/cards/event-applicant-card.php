@@ -1,35 +1,26 @@
-<div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
+<div class="py-4 relative flex flex-col sm:flex-row items-stretch gap-3 md:gap-7 relative border-b border-black/20 last:border-none"
     <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page ?>
-        hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
-        hx-trigger="revealed once"
-        hx-target="#applicant-results"
-        hx-swap="beforeend"
-        hx-indicator="#applicants-spinner-bottom"
-        hx-include="#event-applicants-form"
-    <?php } ?>
-    x-data="{
+    hx-get="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/applicants/?page=' . $args['next_page']); ?>"
+    hx-trigger="revealed once" hx-target="#applicant-results" hx-swap="beforeend"
+    hx-indicator="#applicants-spinner-bottom" hx-include="#event-applicants-form" <?php } ?> x-data="{
         proposal_status:       '<?php echo clean_str_for_doublequotes($args['proposal_status']       ?? ''); ?>',
         proposal_quote:        '<?php echo clean_str_for_doublequotes($args['proposal_quote']        ?? ''); ?>',
         proposal_draw:         '<?php echo clean_str_for_doublequotes($args['proposal_draw']         ?? ''); ?>',
         proposal_details:      '<?php echo clean_str_for_doublequotes($args['proposal_details']      ?? ''); ?>',
         proposal_availability: '<?php echo clean_str_for_doublequotes($args['proposal_availability'] ?? ''); ?>',
-    }"
->
+    }">
 
     <!-- Notifications -->
-    <div class="absolute top-2 -left-2 z-[1]"
-        hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+    <div class="absolute top-2 -left-2 z-[1]" hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
         x-bind:hx-trigger="(!has_notifications(notifications, ['inquiry_response', 'inquiry_response_update'], '<?php echo $args['proposal_id']; ?>')) ? 'never-trigger' : 'intersect once'"
-        hx-swap="beforeend"
-        hx-indicator="#decoy-indicator"
-        hx-vals='{"notification_type":"inquiry_response,inquiry_response_update","subject_id": "<?php echo $args['proposal_id']; ?>" }'
-    >
+        hx-swap="beforeend" hx-indicator="#decoy-indicator"
+        hx-vals='{"notification_type":"inquiry_response,inquiry_response_update","subject_id": "<?php echo $args['proposal_id']; ?>" }'>
         <span id="decoy-indicator"></span>
         <?php get_template_part('template-parts/cards/card-components/event-applicant-notification-badge', '', ['proposal_id' => $args['proposal_id'] ]); ?>
     </div>
 
-    <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
-        x-data="{
+    <div class="flex flex-col gap-2 w-full sm:w-56 shrink-0 max-w-3xl">
+        <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden" x-data="{
             previousIndex: 0,
             currentIndex: 0,
             showArrows: isTouchDevice,
@@ -49,169 +40,202 @@
                 this.videoData = videoData;
                 this.totalSlides = videoData.length + 1;
             },
-        }"
-        x-on:mouseleave="_leaveSlider()"
-        x-on:mouseenter="_enterSlider()">
-        <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
-            x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
-            x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();"
-        >
+        }" x-on:mouseleave="_leaveSlider()" x-on:mouseenter="_enterSlider()">
+            <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
+                x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
+                x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
 
-            <!-- Thumbnail -->
-            <img class="w-auto h-full object-cover"
-                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                src="<?php echo $args['thumbnail_url']; ?>"
-                x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
-            />
-            <!-- Youtube video iframes -->
-            <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
-                <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                    x-id="['playerId']"
-                    x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
-                    x-intersect:leave="_pauseCurrentSlide()"
-                >
-                    <div class="flex justify-center items-center h-full" :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}"><?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?></div>
-                    <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
-                </div>
-            </template>
+                <!-- Thumbnail -->
+                <img class="w-auto h-full object-cover"
+                    <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
+                    src="<?php echo $args['thumbnail_url']; ?>" x-on:click="if (totalSlides > 1) { _updateIndex(1) }" />
+                <!-- Youtube video iframes -->
+                <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover" x-id="['playerId']"
+                        x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
+                        x-intersect:leave="_pauseCurrentSlide()">
+                        <div class="flex justify-center items-center h-full"
+                            :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?>
+                        </div>
+                        <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
+                    </div>
+                </template>
 
-        </div>
+            </div>
 
 
-        <!-- Video player buttons -->
-        <!-- Play -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_updateIndex(1)"
-            x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
-        </div>
-        <!-- Pause -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            x-show="currentIndex > 0 && _isPaused()" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
-        </div>
-        <!-- Mute -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && playersMuted" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
-        </div>
-        <!-- Unmute -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && !playersMuted" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
-        </div>
-        <!-- Left Arrow -->
-        <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
-            @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-            x-show="currentIndex > 0 && showArrows" x-cloak
-            x-transition:enter-start="-translate-x-full opacity-0"
-            x-transition:enter-end="translate-x-0 opacity-100"
-            x-transition:leave-start="translate-x-0 opacity-100"
-            x-transition:leave-end="-translate-x-full opacity-0" >
-            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-        </div>
-        <!-- Right Arrow -->
-        <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
-            @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-            x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
-            x-transition:enter-start="translate-x-full opacity-0"
-            x-transition:enter-end="translate-x-0 opacity-100"
-            x-transition:leave-start="translate-x-0 opacity-100"
-            x-transition:leave-end="translate-x-full opacity-0" >
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-        </div>
+            <!-- Video player buttons -->
+            <!-- Play -->
+            <div class="absolute transform left-2 bottom-2" @click="_updateIndex(1)"
+                x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+            </div>
+            <!-- Pause -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                x-show="currentIndex > 0 && _isPaused()" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
+            </div>
+            <!-- Mute -->
+            <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
+                x-show="currentIndex > 0 && playersMuted" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+            </div>
+            <!-- Unmute -->
+            <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
+                x-show="currentIndex > 0 && !playersMuted" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+            </div>
+            <!-- Left Arrow -->
+            <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+                @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                x-show="currentIndex > 0 && showArrows" x-cloak x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="-translate-x-full opacity-0">
+                <img class="rotate-180"
+                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            </div>
+            <!-- Right Arrow -->
+            <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
+                x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="translate-x-full opacity-0">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            </div>
 
+        </div>
+        <?php
+        //$listing_image_urls = $args['listing_image_urls'] ?? [];
+        $listing_image_urls = array('https://hiremusicians.com/wp-content/uploads/2025/10/mozworth-live4-400x300.webp', 'https://hiremusicians.com/wp-content/uploads/2025/09/boz20-small-400x300.webp');
+        $listing_image_count = count($listing_image_urls);
+        ?>
+        <?php if ($listing_image_count >= 1) {
+        $media_items = ($listing_image_count == 1)
+            ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]])
+            : array_slice($listing_image_urls, 0, 2);
+        ?>
+        <div class="flex gap-2 w-full">
+            <?php foreach ($media_items as $img_url) { ?>
+            <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
+                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
+                src="<?php echo esc_url($img_url); ?>" />
+            <?php } ?>
+        </div>
+        <?php } ?>
     </div>
 
 
     <div class="py-2 flex flex-col gap-y-2 w-full">
 
-        <div class="flex flex-row justify-between items-start w-full">
+        <div class="flex flex-col gap-y-2 w-full grow">
 
-            <!-- Name and verification badge -->
-            <div class="flex flex-row justify-start items-center w-full">
-                <?php get_template_part('template-parts/cards/card-components/listing-name', '', [
+            <div class="flex flex-row justify-between items-start w-full">
+
+                <!-- Name and verification badge -->
+                <div class="flex flex-row justify-start items-center w-full">
+                    <?php get_template_part('template-parts/cards/card-components/listing-name', '', [
                     'is_preview' => false,
                     'name'       => $args['name'],
                     'permalink'  => $args['permalink'],
                     'verified'   => $args['verified'],
                 ]); ?>
-            </div>
+                </div>
 
-            <!-- Status -->
-            <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['status_var' => 'proposal_status']); ?>
+                <!-- Status -->
+                <?php get_template_part('template-parts/cards/card-components/applicant-status-badge', '', ['status_var' => 'proposal_status']); ?>
 
-            <!-- Collections button -->
-            <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [
+                <!-- Collections button -->
+                <?php get_template_part('template-parts/cards/card-components/favorites-button', '', [
                 'post_id'       => $args['listing_id'],
             ]); ?>
 
-        </div>
+            </div>
 
-        <!-- Rating -->
-        <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
+            <!-- Rating -->
+            <?php echo get_template_part('template-parts/reviews/rating-stars-with-count', '', [
             'rating'       => empty($args['rating'])       ? 0 : $args['rating'],
             'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
         ]); ?>
 
-        <!-- Location -->
-        <span class="text-14 flex items-center">
-            <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-            <span><?php echo $args['location']; ?></span>
-        </span>
 
-        <!-- Description -->
-        <p class="text-14">
-            <?php echo $args['description']; ?>
-        </p>
+            <!-- Location -->
+            <span class="text-14 flex items-center flex-wrap">
+                <img class="h-4 mr-2"
+                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
+                <span><?php echo $args['location']; ?></span>
+            </span>
+            <!-- Ensemble Size  -->
+            <span class="flex items-center text-14 gap-2">
+                <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
+            </span>
 
-        <!-- Genres -->
-        <div class="flex items-center gap-1 flex-wrap">
-            <?php foreach ($args['genres'] as $term) { ?>
-                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+
+
+
+
+            <!-- Description -->
+            <p class="text-14">
+                <?php echo $args['description']; ?>
+            </p>
+
+            <!-- Genres -->
+            <div class="flex items-center gap-1 flex-wrap">
+                <?php foreach ($args['genres'] as $term) { ?>
+                <span
+                    class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
                     <?php echo $term; ?>
                 </span>
-            <?php } ?>
-        </div>
+                <?php } ?>
+            </div>
 
-        <!-- Details -->
-        <div class="flex flex-col" x-show="proposal_details" x-cloak>
-            <span class="text-12 text-black/50 font-semibold">Response</span>
-            <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+            <!-- Details -->
+            <div class="flex flex-col" x-show="proposal_details" x-cloak>
+                <span class="text-12 text-black/50 font-semibold">Response</span>
+                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                 'text_var' => 'proposal_details',
                 'limit'    => 200,
             ]); ?>
-        </div>
+            </div>
 
-        <!-- Availability -->
-        <div class="flex flex-col items-start" x-show="proposal_availability" x-cloak>
-            <span class="text-12 text-black/50" x-show="proposal_status != 'stale'" x-cloak >Availability last updated <?php echo esc_html($args['proposal_updated']); ?></span>
-            <span class="text-12 text-black/50" x-show="proposal_status == 'stale'" x-cloak ><span class="capitalize" x-text="proposal_availability"></span> as of <?php echo esc_html($args['proposal_updated']); ?></span>
-            <span class="text-12 text-red"      x-show="proposal_status == 'stale'" x-cloak >Availability not updated since event date/time changed</span>
+            <!-- Availability -->
+            <div class="flex flex-col items-start" x-show="proposal_availability" x-cloak>
+                <span class="text-12 text-black/50" x-show="proposal_status != 'stale'" x-cloak>Availability last
+                    updated
+                    <?php echo esc_html($args['proposal_updated']); ?></span>
+                <span class="text-12 text-black/50" x-show="proposal_status == 'stale'" x-cloak><span class="capitalize"
+                        x-text="proposal_availability"></span> as of
+                    <?php echo esc_html($args['proposal_updated']); ?></span>
+                <span class="text-12 text-red" x-show="proposal_status == 'stale'" x-cloak>Availability not updated
+                    since
+                    event date/time changed</span>
+            </div>
+
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between gap-2">
             <!-- Quote / Draw -->
             <div class="flex flex-wrap items-center gap-2">
-                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
-                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
+                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
+                    x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
+                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
+                    x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
             </div>
 
             <!-- Send Message (only for published listings to avoid sending message to listing with no owner/author) -->
             <?php if ($args['listing_post_status'] == 'publish') { ?>
-                <button type="button" class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
-                    x-on:click="
+            <button type="button"
+                class="w-full sm:w-fit bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 whitespace-nowrap"
+                x-on:click="
                         sendMessageListingName = '<?php echo clean_str_for_doublequotes($args['name'] ?? ''); ?>';
                         sendMessageListingId = <?php echo $args['listing_id']; ?>;
                         sendMessageText = '';
                         showSendMessageSuccess = false;
                         $nextTick(() => { showSendMessageModal = true; });
-                    "
-                >
-                    Send Message
-                </button>
+                    ">
+                Send Message
+            </button>
             <?php } ?>
 
         </div>
