@@ -1,4 +1,6 @@
 Critical bugs
+    Log out results in wp screen asking if you want to log out
+    Dan Guevara listing link does not work from applicants when logged in as AML on prod
     Tests need to clean up image uploads
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Need to add unique auth keys to wp config in staging and prod
@@ -9,7 +11,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Store location in browser and it lasts 1 day
     Change footer links and nav links for categories and search state 1 links
     Exclude live-music/search from varnish cache or get location detection with api
     Perfect copy for sign up as musician cta

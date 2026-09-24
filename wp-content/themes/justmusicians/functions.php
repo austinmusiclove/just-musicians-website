@@ -444,6 +444,8 @@ function hmm_scripts() {
         'nonce'        => wp_create_nonce('wp_rest'),
     ]);
     wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, true);
+    wp_enqueue_script('location-detect-js', get_template_directory_uri() . '/lib/js/location-detect.js', [], $pkg->version, true);
+    wp_localize_script('location-detect-js', 'hmLocationDetect', [ 'endpoint' => site_url('/wp-json/v1/detect-location/'), ]);
     wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx.2.0.4.min.js', [], $pkg->version, true);
     wp_enqueue_script('htmx-preload-js', get_template_directory_uri() . '/lib/js/htmx.preload.2.1.2.min.js', ['htmx'], $pkg->version, true);
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
