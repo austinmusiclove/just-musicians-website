@@ -9,11 +9,13 @@ $text_size  = $args['text_size_class']  ?? 'text-14';
         expanded: false,
         tooLong: <?php echo "$text_var.length > $limit"; ?> ? true : false,
     }">
+    <!-- Dummy paragraph -->
     <p class=" <?php echo "$text_color $text_size"; ?>">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ante sem, ultrices vel condimentum non, cursus
         vitae lorem. Mauris urna sapien, euismod viverra semper a, aliquet eget eros. Fusce a gravida risus, vel aliquam
         velit. Suspendisse potenti. Sed hendrerit nisl augue, vel malesuada eros bibendum eget.
     </p>
+
     <p class="whitespace-pre-wrap <?php echo "$text_color $text_size"; ?>"
         x-text="<?php echo "expanded ? $text_var : $text_var.slice(0, $limit) + (tooLong ? '...' : '')"; ?>"></p>
 
