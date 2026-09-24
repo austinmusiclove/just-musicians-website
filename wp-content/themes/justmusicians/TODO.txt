@@ -18,7 +18,6 @@ SEO
     Deploy
         save permalinks
         add acf for landing pages post types
-        package version update
         add content
     Location/Category Pages
         Listings
