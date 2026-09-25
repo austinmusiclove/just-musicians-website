@@ -24,15 +24,30 @@ if ( ! empty( $query->posts ) ) {
     include( get_query_template( '404' ) );
     exit;
 }
-$title         = get_post_meta($post_id, 'title', true);
-$region_post   = get_post_meta($post_id, 'region', true);
-$locale_post   = get_post_meta($post_id, 'locale', true);
-$category_post = get_post_meta($post_id, 'category', true);
-$country       = get_post_meta($region_post, 'country', true);
-$region_name   = get_post_meta($region_post, 'name', true);
-$locale_name   = get_post_meta($locale_post, 'name', true);
-$category_name = get_post_meta($category_post, 'plural_name', true);
-$radius        = get_post_meta($locale_post, 'radius', true);
+$title            = get_post_meta($post_id, 'title', true);
+$meta_title       = get_post_meta($post_id, 'meta_title', true);
+$meta_description = get_post_meta($post_id, 'meta_description', true);
+$region_post      = get_post_meta($post_id, 'region', true);
+$locale_post      = get_post_meta($post_id, 'locale', true);
+$category_post    = get_post_meta($post_id, 'category', true);
+$country          = get_post_meta($region_post, 'country', true);
+$region_name      = get_post_meta($region_post, 'name', true);
+$locale_name      = get_post_meta($locale_post, 'name', true);
+$category_name    = get_post_meta($category_post, 'plural_name', true);
+$radius           = get_post_meta($locale_post, 'radius', true);
+
+// Set meta title and description
+if ( ! empty( $meta_title ) ) {
+    add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
+            return esc_html( $meta_title );
+    });
+}
+if ( ! empty( $meta_description ) ) {
+    add_action( 'wp_head', function () use ( $meta_description ) {
+        echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
+    }, 1);
+}
+
 $location_label = $locale_name . ', ' . $region_name;
 $locale_lat = null;
 $locale_lng = null;
