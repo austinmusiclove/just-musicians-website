@@ -1,4 +1,6 @@
 <?php
+// For testing use:
+// stripe listen --forward-to http://localhost/wp-json/stripe-checkout/v1/webhook
 
 function handle_stripe_webhook(WP_REST_Request $request) {
     \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
