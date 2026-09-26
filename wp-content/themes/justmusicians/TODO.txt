@@ -11,22 +11,18 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Change footer links and nav links for categories and search state 1 links
-    Exclude live-music/search from varnish cache or get location detection with api
-    Perfect copy for sign up as musician cta
-    Perfect copy of home page cta
+    Categories Page
     Deploy
         save permalinks
         add acf for landing pages post types
         add content
+        Exclude live-music/search from varnish cache or get location detection with api
+        Perfect copy for sign up as musician cta
+        Perfect copy of home page cta
     Location/Category Pages
-        Listings
-            add more data to the image object schema and video object schema; description for videos
-            traditional paging
+        traditional paging
         add pricing for the specific service of the category and location
-        set meta title
-        set meta description
-        Links - same category different location, same location different category
+        Links - same category different location
     Live Musicians Vertical Page
         CTA - Sign up as musician, tell us about your event
         Links - locations, categories,
@@ -36,27 +32,15 @@ SEO
             Total active musician count
             Platform trust badges (e.g., payment arbitration, insurance available).
             National level community partners or press
-        SEO Content & FAQ Block: Indexable content
-            hiring advice
-            average pricing expectations
-            equipment requirements
-            FAQ accordion targeting ItemList and FAQPage schema
     Locations Page
         Interactive map showing where there are listings
     Region Pages
-        SEO Content & FAQ Block
-            Unique description
-            Regional venues
-            Information on sub regions
-            Information about rules and regulations for live music in the city/region
+        Interactive map showing where there are listings
         Trust & Social Proof
             Listing counts
             Link to local community partners (trusted by x)
     Cities Pages
-        SEO Content & FAQ Block
-            Unique description
-            Local venues
-            Information about rules and regulations for live music in the city/region
+        Interactive map showing where there are listings
         Links - near by cities
         CTA to tell us about your event
         Trust & Social Proof
@@ -70,14 +54,13 @@ SEO
             national level partners
         Musician Earnings Database
         **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
-    add new urls to the sitemap and remove existing seo urls from sitemap
-    Delete /seo folder
-    Categories Page
+    Landing pages content - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
         stand alone video objects to qualify for rich result
         make sure data can be indexed even though it is hidden behind x-show and x-cloak
         get knowledge pannel like it shows up for "texas violinist" from their gig salad page
+        add more data to the image object schema and video object schema; description for videos
     backlinks
         get artist backlinks by getting artists to add HM to their list of links on their website or maybe providing something else that would make them want to put it on their site like press release or top x in x blog
         free verification for artist backlink

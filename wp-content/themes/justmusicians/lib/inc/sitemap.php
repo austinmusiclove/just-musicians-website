@@ -89,36 +89,86 @@ function exclude_pages_by_slug_from_sitemap( $args, $post_type ) {
 }
 add_filter( 'wp_sitemaps_posts_query_args', 'exclude_pages_by_slug_from_sitemap', 10, 2 );
 
-// Live Music [category] in [location] pages
 add_action( 'init', function() {
-    wp_register_sitemap_provider( 'featuredlistings', new Featured_Listing_Sitemap_Provider() );
+    $sitemap_providers = [
+        //'landingpages' => [ '', [ 'live-music/locations/', 'live-music/' ] ],
+        //'categories' => [ 'category-landing', [] ],
+        //'regions' => [ 'region-landing', [] ],
+        //'locales' => [ 'locale-landing', [] ],
+        'localecategories' => [ 'lc-landing', [] ],
+    ];
+
+    foreach ( $sitemap_providers as $name => $config ) {
+        wp_register_sitemap_provider(
+            $name,
+            new Live_Music_Sitemap_Provider( $name, $config[0], $config[1] )
+        );
+    }
 } );
-class Featured_Listing_Sitemap_Provider extends WP_Sitemaps_Provider {
-    public function __construct() {
-        $this->name = 'featuredlistings';
-        $this->object_type = 'featuredlistings';
+
+class Live_Music_Sitemap_Provider extends WP_Sitemaps_Provider {
+    private $post_type;
+    private $static_paths;
+
+    public function __construct( $name, $post_type = '', $static_paths = [] ) {
+        $this->name = $name;
+        $this->object_type = $name;
+        $this->post_type = $post_type;
+        $this->static_paths = $static_paths;
     }
 
-    public function get_url_list( $page_num, $post_type = '' ) {
-        $urls = [];
+    public function get_url_list( $page_num, $object_subtype = '' ) {
+        if ( 1 !== (int) $page_num ) { return []; }
 
-        foreach ( get_seo_location_slugs() as $location ) {
-            foreach ( get_seo_categories_for_location( $location ) as $category ) {
-                $url = home_url( "/live-music/{$location}/{$category}/" );
-                $urls[] = [
-                    'loc' => $url,
-                    'lastmod' => current_time( 'Y-m-d\TH:i:sP' ),
-                    'changefreq' => 'weekly',
-                    'priority' => 0.8,
-                ];
+        $urls = [];
+        $seen = [];
+        $add_url = function( $path, $lastmod = null ) use ( &$urls, &$seen ) {
+            if ( ! is_string( $path ) ) { return; }
+
+            $path = trim( trim( $path ), '/' );
+            if ( empty( $path ) ) { return; }
+
+            $url = home_url( '/' . $path . '/' );
+            if ( isset( $seen[ $url ] ) ) { return; }
+            $seen[ $url ] = true;
+
+            $urls[] = [
+                'loc' => $url,
+                'lastmod' => $lastmod ?: current_time( 'Y-m-d\TH:i:sP' ),
+                'changefreq' => 'weekly',
+                'priority' => 0.8,
+            ];
+        };
+
+        foreach ( $this->static_paths as $path ) {
+            $add_url( $path );
+        }
+
+        if ( ! empty( $this->post_type ) ) {
+            $posts = get_posts( [
+                'post_type'      => $this->post_type,
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'orderby'        => 'ID',
+                'order'          => 'ASC',
+                'meta_key'       => 'url_path',
+            ] );
+
+            foreach ( $posts as $post ) {
+                $url_path = get_post_meta( $post->ID, 'url_path', true );
+                if ( empty( $url_path ) ) { continue; }
+
+                $add_url(
+                    $url_path,
+                    get_post_modified_time( DATE_W3C, true, $post )
+                );
             }
         }
 
         return $urls;
     }
 
-    public function get_max_num_pages($object_subtype = '') {
-        return 1;
+    public function get_max_num_pages( $object_subtype = '' ) {
+        return empty( $this->get_url_list( 1, $object_subtype ) ) ? 0 : 1;
     }
-
 }
