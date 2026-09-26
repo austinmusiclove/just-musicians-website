@@ -54,7 +54,9 @@ function hmm_scripts() {
     // Locations landing pages
     if (preg_match('#^/live-music/locations/[^/]+/[^/]+#', $path) or
         preg_match('#^/live-music/locations/[^/]+#', $path) or
-        preg_match('#^/live-music/locations#', $path))
+        preg_match('#^/live-music/locations#', $path) or
+        preg_match('#^/live-music/categories/[^/]+##', $path) or
+        preg_match('#^/live-music/categories#', $path))
     {
         // Inquiries
         wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);

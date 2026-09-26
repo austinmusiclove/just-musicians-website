@@ -1,13 +1,38 @@
 <?php
 
+// Post data
+global $wp;
+$post_id = null;
+$current_path = $wp->request;
+$query = new WP_Query( [
+    'post_type'      => 'category-landing',
+    'post_status'    => 'publish',
+    'posts_per_page' => 1,
+    'fields'         => 'ids',
+    'meta_query'     => [
+        [
+            'key'   => 'url_path',
+            'value' => $current_path,
+            'compare' => '=',
+        ]
+    ]
+]);
+if ( ! empty( $query->posts ) ) {
+    $post_id = $query->posts[0];
+} else {
+    status_header(404);
+    include( get_query_template( '404' ) );
+    exit;
+}
+
 $vertical = get_query_var('vertical');
-$category = get_query_var('mcategory');
+$category_name = get_post_meta($post_id, 'plural_name', true);
 
 $breadcrumb_items = [
     [ 'label' => 'Home',                         'url' => home_url('/') ],
     [ 'label' => get_label_from_slug($vertical), 'url' => home_url('/' . $vertical . '/') ],
     [ 'label' => 'Categories',                   'url' => home_url('/' . $vertical . '/categories/') ],
-    [ 'label' => get_label_from_slug($category) ],
+    [ 'label' => $category_name ],
 ];
 
 get_header();
@@ -17,13 +42,13 @@ get_header();
 <header class="bg-yellow-light pt-12 md:pt-24 pb-8 md:pb-16 relative overflow-hidden">
     <div class="container">
         <?php get_template_part('template-parts/global/breadcrumb', '', ['items' => $breadcrumb_items]); ?>
-        <h1 class="font-bold text-32 md:text-36 lg:text-40">Category Page</h1>
+        <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php echo $category_name; ?></h1>
     </div>
 </header>
 
 <div class="container lg:grid lg:grid-cols-10 gap-24 py-8 min-h-[500px]">
     <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
-        content
+        <?php echo get_the_content(null, false, $post_id); ?>
     </div>
     <div class="col lg:col-span-3 relative">
         <div class="sticky top-24">
@@ -37,4 +62,10 @@ get_header();
 
 
 <?php
+
+get_template_part('template-parts/landing-pages/category-links', '', [
+    'heading'        => "Find $category_name in your area",
+    'category_post_id' => $post_id,
+]);
+
 get_footer();
