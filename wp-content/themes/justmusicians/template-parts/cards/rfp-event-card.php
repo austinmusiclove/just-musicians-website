@@ -23,6 +23,7 @@
                 'city'           => $args['city'],
                 'state'          => $args['state'],
                 'zip_code'       => $args['zip_code'],
+                'text_size'      => 'text-14',
             ]); ?>
         </div>
 

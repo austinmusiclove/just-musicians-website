@@ -29,6 +29,7 @@
             'city'           => $args['city'],
             'state'          => $args['state'],
             'zip_code'       => $args['zip_code'],
+            'text_size'      => 'text-14',
         ]); ?>
 
         <div class="clear-both flex flex-col gap-3 mb-4 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50">

@@ -116,7 +116,7 @@
         ?>
         <div class="flex gap-2 w-full">
             <?php foreach ($media_items as $img_url) { ?>
-            <img class="w-[calc(50%-6px)] aspect-4/3 object-cover bg-yellow-light"
+            <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
                 <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
                 src="<?php echo esc_url($img_url); ?>" />
             <?php } ?>

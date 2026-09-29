@@ -7,23 +7,16 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative"
     <?php if (!is_null($collection_id)) { ?>
-        x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')" x-cloak
-    <?php } ?>
-    <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page
+    x-show="collectionsMap['<?php echo $collection_id; ?>'].listings.includes('<?php echo $args['post_id']; ?>')"
+    x-cloak <?php } ?> <?php if ($args['last'] and !$args['is_last_page']) { // infinite scroll; include this on the last result of the page as long as it is not the final page
         $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
-        hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
-        hx-trigger="revealed once"
-        hx-indicator="#spinner-end"
-        hx-swap="beforeend"
-        hx-include="#hx-form"
-    <?php } ?>
->
+    hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
+    hx-trigger="revealed once" hx-indicator="#spinner-end" hx-swap="beforeend" hx-include="#hx-form" <?php } ?>>
 
 
     <div class="flex flex-col gap-3 w-full sm:w-56 shrink-0 max-w-3xl">
 
-    <div class="bg-yellow-light w-full shrink-0 relative overflow-hidden"
-        x-data="{
+        <div class="bg-yellow-light w-full shrink-0 relative overflow-hidden" x-data="{
             previousIndex: 0,
             currentIndex: 0,
             showArrows: isTouchDevice,
@@ -43,100 +36,91 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                 this.videoData = videoData;
                 this.totalSlides = videoData.length + 1;
             },
-        }"
-        x-on:mouseleave="_leaveSlider()"
-        x-on:mouseenter="_enterSlider()">
-        <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
-            x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
-            x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();"
-        >
+        }" x-on:mouseleave="_leaveSlider()" x-on:mouseenter="_enterSlider()">
+            <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
+                x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
+                x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
 
-            <!-- Thumbnail -->
-            <img class="w-auto h-full object-cover"
-                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                src="<?php echo $args['thumbnail_url']; ?>"
-                x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
-            />
+                <!-- Thumbnail -->
+                <img class="w-auto h-full object-cover"
+                    <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
+                    src="<?php echo $args['thumbnail_url']; ?>" x-on:click="if (totalSlides > 1) { _updateIndex(1) }" />
 
-            <!-- Youtube video iframes -->
-            <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
-                <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover"
-                    x-id="['playerId']"
-                    x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
-                    x-intersect:leave="_pauseCurrentSlide()"
-                >
-                    <div class="flex justify-center items-center h-full" :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}"><?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?></div>
-                    <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
-                </div>
-            </template>
+                <!-- Youtube video iframes -->
+                <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
+                    <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover" x-id="['playerId']"
+                        x-intersect.once="$nextTick(() => { playerIds[index+1] = $id('playerId'); $dispatch('init-youtube-player', { 'playerId': $id('playerId'), 'videoData': videoData }); })"
+                        x-intersect:leave="_pauseCurrentSlide()">
+                        <div class="flex justify-center items-center h-full"
+                            :class="{'hidden': $id('playerId') in players && players[$id('playerId')].isReady}">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'white']); ?>
+                        </div>
+                        <div x-bind:id="$id('playerId')" class="aspect-4/3 w-full h-full object-cover"></div>
+                    </div>
+                </template>
+
+            </div>
+
+
+            <!-- Video player buttons -->
+            <!-- Play -->
+            <div class="absolute transform left-2 bottom-2" @click="_updateIndex(1)"
+                x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
+            </div>
+            <!-- Pause -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                x-show="currentIndex > 0 && _isPaused()" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
+            </div>
+            <!-- Mute -->
+            <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
+                x-show="currentIndex > 0 && playersMuted" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+            </div>
+            <!-- Unmute -->
+            <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
+                x-show="currentIndex > 0 && !playersMuted" x-cloak>
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+            </div>
+            <!-- Left Arrow -->
+            <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
+                @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
+                x-show="currentIndex > 0 && showArrows" x-cloak x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="-translate-x-full opacity-0">
+                <img class="rotate-180"
+                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            </div>
+            <!-- Right Arrow -->
+            <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
+                @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
+                x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
+                x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="translate-x-full opacity-0">
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            </div>
 
         </div>
 
-
-        <!-- Video player buttons -->
-        <!-- Play -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_updateIndex(1)"
-            x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" />
-        </div>
-        <!-- Pause -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            x-show="currentIndex > 0 && _isPaused()" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
-        </div>
-        <!-- Mute -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && playersMuted" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
-        </div>
-        <!-- Unmute -->
-        <div class="absolute transform left-2 bottom-2"
-            @click="_toggleMuteAllVideos()"
-            x-show="currentIndex > 0 && !playersMuted" x-cloak>
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
-        </div>
-        <!-- Left Arrow -->
-        <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
-            @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-            x-show="currentIndex > 0 && showArrows" x-cloak
-            x-transition:enter-start="-translate-x-full opacity-0"
-            x-transition:enter-end="translate-x-0 opacity-100"
-            x-transition:leave-start="translate-x-0 opacity-100"
-            x-transition:leave-end="-translate-x-full opacity-0" >
-            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-        </div>
-        <!-- Right Arrow -->
-        <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
-            @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-            x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
-            x-transition:enter-start="translate-x-full opacity-0"
-            x-transition:enter-end="translate-x-0 opacity-100"
-            x-transition:leave-start="translate-x-0 opacity-100"
-            x-transition:leave-end="translate-x-full opacity-0" >
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
-        </div>
-
-    </div>
-
-    <?php
+        <?php
     $listing_image_urls = $args['listing_image_urls'] ?? [];
     $listing_image_count = count($listing_image_urls);
     ?>
-    <?php if ($listing_image_count >= 1) {
+        <?php if ($listing_image_count >= 1) {
         $media_items = ($listing_image_count == 1)
             ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]])
             : array_slice($listing_image_urls, 0, 2);
         ?>
         <div class="flex gap-3 w-full">
             <?php foreach ($media_items as $img_url) { ?>
-                <img class="w-[calc(50%-6px)] aspect-4/3 object-cover bg-yellow-light"
-                    <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
-                    src="<?php echo esc_url($img_url); ?>" />
+            <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
+                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
+                src="<?php echo esc_url($img_url); ?>" />
             <?php } ?>
         </div>
-    <?php } ?>
+        <?php } ?>
 
     </div>
 
@@ -168,7 +152,8 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Location -->
         <span class="text-14 flex items-center">
-            <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
+            <img class="h-4 mr-2"
+                src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
             <span><?php echo $args['location']; ?></span>
         </span>
 
@@ -180,19 +165,20 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         <!-- Genres -->
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach ($args['genres'] as $term) { ?>
-                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
-                    <?php echo $term; ?>
-                </span>
+            <span
+                class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+                <?php echo $term; ?>
+            </span>
             <?php } ?>
         </div>
 
         <!-- Bio -->
         <?php if (!empty($args['bio'])) { ?>
-            <div class="mb-4">
-                <?php get_template_part('template-parts/cards/card-components/show-more-text-lines', '', [
+        <div class="mb-4">
+            <?php get_template_part('template-parts/cards/card-components/show-more-text-lines', '', [
                     'text'  => wp_strip_all_tags($args['bio']),
                 ]); ?>
-            </div>
+        </div>
         <?php } ?>
 
     </div>

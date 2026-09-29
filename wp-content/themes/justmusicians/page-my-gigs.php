@@ -27,7 +27,7 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
 
                 <div class="mb-6 md:mb-12 flex justify-between items-center flex-row">
                     <a href="<?php echo site_url('/my-gigs/'); ?>">
-                        <h1 class="font-bold text-28">My Gigs</h1>
+                        <h1 class="font-bold text-32">My Gigs</h1>
                     </a>
                 </div>
 
@@ -60,7 +60,7 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                     <input type="hidden" name="date_range" x-model="dateRange" />
 
                     <!-- Filter bar -->
-                    <div class="flex flex-wrap items-center gap-2 mb-4 pb-4 border-b border-black/20">
+                    <div class="flex flex-wrap items-center gap-1 sm:gap-2 mb-4 pb-4 border-b border-black/20">
 
                         <!-- Listing dropdown -->
                         <?php
@@ -92,20 +92,22 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                                 ]); ?>
                         </div>
 
+                        <div class="sm:hidden basis-full h-px"></div>
+
                         <!-- Date range toggle -->
-                        <div class="flex items-center gap-1 border-l border-black/20 pl-2 ml-1">
+                        <div class="flex items-center gap-1 md:border-l border-black/20 sm:pl-2 sm:ml-1">
                             <button type="button"
-                                class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
+                                class="text-14 font-bold px-3 py-1 rounded-full border border-black/20 capitalize"
                                 :class="dateRange === 'upcoming' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
                                 x-on:click="dateRange = 'upcoming'; $nextTick(() => $dispatch('filterupdate'));">Upcoming</button>
                             <button type="button"
-                                class="text-12 font-bold px-2 py-0.5 rounded-full border border-black/20 capitalize"
+                                class="text-14 font-bold px-3 py-1 rounded-full border border-black/20 capitalize"
                                 :class="dateRange === 'past' ? 'bg-yellow hover:bg-yellow-light' : 'hover:bg-yellow-light'"
                                 x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
                         </div>
 
                         <div id="gig-spinner-top" class="flex items-center justify-center htmx-indicator">
-                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
                         </div>
 
                     </div>
