@@ -91,7 +91,7 @@ add_filter( 'wp_sitemaps_posts_query_args', 'exclude_pages_by_slug_from_sitemap'
 
 add_action( 'init', function() {
     $sitemap_providers = [
-        //'landingpages' => [ '', [ 'live-music/locations/', 'live-music/' ] ],
+        //'landingpages' => [ '', [ 'live-music/', 'live-music/locations/', 'live-music/categories/' ] ],
         //'categories' => [ 'category-landing', [] ],
         //'regions' => [ 'region-landing', [] ],
         //'locales' => [ 'locale-landing', [] ],

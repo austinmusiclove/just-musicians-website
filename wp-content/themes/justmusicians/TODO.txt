@@ -1,9 +1,10 @@
 Critical bugs
-    Log out results in wp screen asking if you want to log out
-    Dan Guevara listing link does not work from applicants when logged in as AML on prod
+    *make sure site does not cache and send html with the logged in flag on regarless of log in status
+    *Log out results in wp screen asking if you want to log out
+    *Dan Guevara listing link does not work from applicants when logged in as AML on prod
     Tests need to clean up image uploads
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
-    Need to add unique auth keys to wp config in staging and prod
+    *Need to add unique auth keys to wp config in staging and prod
     Audit which pages are cached and not and add proper exclusions (exclude register user)
     Make sure not varnish caching the suggestions api and other similar things like that
     Figure out why update listing takes forever; probably something with unneeded image processing
@@ -11,17 +12,26 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
+    *make it so that locale and region pages do not need to have content to look good
+    *lcoale-cat page - Links - same category different location
+    *Add sign up cta to home page
+    *Add musician earnings db to live music landing page
+    *Perfect copy for sign up as musician cta
+    *Perfect copy of home page cta
+    Landing pages content - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
     Deploy
         save permalinks
         add acf for landing pages post types
         add content
         Exclude live-music/search from varnish cache or get location detection with api
-        Perfect copy for sign up as musician cta
-        Perfect copy of home page cta
-    Location/Category Pages
-        traditional paging
-        add pricing for the specific service of the category and location
-        Links - same category different location
+    Home page
+        Call to sign up - Target broad keywords, value prop
+        Links - verticals, categories, locations
+        Trust & Social Proof
+            total number of listings and other stats
+            national level partners
+        Musician Earnings Database
+        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     Live Musicians Vertical Page
         CTA - Sign up as musician, tell us about your event
         Links - locations, categories,
@@ -45,15 +55,9 @@ SEO
         Trust & Social Proof
             Listing counts
             Link to local community partners (trusted by x)
-    Home page
-        Call to sign up - Target broad keywords, value prop
-        Links - verticals, categories, locations
-        Trust & Social Proof
-            total number of listings and other stats
-            national level partners
-        Musician Earnings Database
-        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
-    Landing pages content - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+    Location/Category Pages
+        traditional paging
+        add pricing for the specific service of the category and location
     single listing pages
         figure out what i need to do to get a rich google result with the listing pages
         stand alone video objects to qualify for rich result
@@ -100,9 +104,16 @@ Applications Features to add
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
     After design update
+        add cloak back into applicant message
+        check for and remove script for expanding background color in single application behind application title; same on single event
+        add back in functional attributes for show more dates button in single application page
+        remove dummy paragraph in show-more-text.php and add back in whitespace-pre-wrap
+        pull in images dynamically in event applicant card instead of dummy images
+        make sure event applicant card ensemble size is coming from applicant and not event
         My events spinner display non when not in use
         Create event form toast
-        Populate requestQuote and requestDraw in Applications page
+        Populate requestQuote and requestDraw in Applications page and single application
+        Fix ensemble size in applicant cards which is pulling in ens size from application
         Add two listing images on applicant cards
         Add draw and price options for application and add them to applicant card
         change edit submitted application to either resubmit or withdraw
@@ -115,6 +126,9 @@ Applications Features to add
         use publicly queriable false in post type registration
         merge application embed
         make sure request quote and request draw are connected right
+        connect non-dummy date for submitted applications
+        remove spinner at bottom of submitted applications page and my gigs
+        change your application submission has been submitted to your application has been submitted
     Other features that would be needed for parity with venue forms out there
         dates requested (Flamingo, Kick Butt Coffee)
         last time you played here (Flamingo)
