@@ -55,7 +55,7 @@ function hmm_scripts() {
     if (preg_match('#^/live-music/locations/[^/]+/[^/]+#', $path) or
         preg_match('#^/live-music/locations/[^/]+#', $path) or
         preg_match('#^/live-music/locations#', $path) or
-        preg_match('#^/live-music/categories/[^/]+##', $path) or
+        preg_match('#^/live-music/categories/[^/]+#', $path) or
         preg_match('#^/live-music/categories#', $path))
     {
         // Inquiries
@@ -481,7 +481,10 @@ require get_template_directory() . '/lib/inc/admin-panel-listings.php';
 require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/lib/inc/robots.php';
 require get_template_directory() . '/lib/inc/404-redirects.php';
-require get_template_directory() . '/lib/inc/preload.php';
+require get_template_directory() . '/lib/inc/logout.php';
+// Enables htmx preload for home and pages; Removed because it was causing issues with undesired browser caching especially while logged in
+// When logging in with user/pass, the page would reload from cache instead of getting the new logged in version of the page. This would need to be solved to re-enable the preload on pages and home
+//require get_template_directory() . '/lib/inc/preload.php';
 
 
 

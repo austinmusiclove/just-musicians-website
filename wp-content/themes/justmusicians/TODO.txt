@@ -1,10 +1,8 @@
 Critical bugs
-    *make sure site does not cache and send html with the logged in flag on regarless of log in status
-    *Log out results in wp screen asking if you want to log out
     *Dan Guevara listing link does not work from applicants when logged in as AML on prod
-    Tests need to clean up image uploads
-    When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     *Need to add unique auth keys to wp config in staging and prod
+    *Tests need to clean up image uploads
+    When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user)
     Make sure not varnish caching the suggestions api and other similar things like that
     Figure out why update listing takes forever; probably something with unneeded image processing
@@ -24,6 +22,7 @@ SEO
         add acf for landing pages post types
         add content
         Exclude live-music/search from varnish cache or get location detection with api
+        Perge varnish
     Home page
         Call to sign up - Target broad keywords, value prop
         Links - verticals, categories, locations

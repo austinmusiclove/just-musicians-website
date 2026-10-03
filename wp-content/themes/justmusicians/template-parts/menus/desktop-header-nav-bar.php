@@ -1,6 +1,6 @@
-<div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0" preload="mouseover">
+<div class="font-sun-motter text-18 items-center gap-6 hidden lg:flex shrink-0">
     <span class="flex items-center gap-2 relative group">
-        <a href="<?php echo site_url('live-music/search'); ?>">Live Music</a>
+        <a href="<?php echo site_url('live-music/search/'); ?>">Live Music</a>
         <!-- Dropdown menu -->
 <!--
         <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />

@@ -15,6 +15,11 @@ add_action('admin_init', function () {
         return;
     }
 
+    // Always allow the theme logout endpoint, it only logs out and redirects
+    if (isset($_REQUEST['action']) && 'secure_theme_logout' === sanitize_text_field(wp_unslash($_REQUEST['action']))) {
+        return;
+    }
+
     // Allow admins and editors
     if (current_user_can('manage_options') || current_user_can('edit_others_posts')) {
         return;

@@ -82,12 +82,12 @@ export class ThemePage {
         if (this.isMobile) {
             await this.hamburgerBtn.click();
             await expect(this.logoutLinkMobile).toBeVisible();
-            await expect(this.logoutLinkMobile).toHaveAttribute('href', /_wpnonce=/);
+            await expect(this.logoutLinkMobile).toHaveAttribute('href', /action=secure_theme_logout/);
             await this.logoutLinkMobile.click();
         } else {
             await this.accountMenu.hover();
             await expect(this.logoutLinkDesktop).toBeVisible();
-            await expect(this.logoutLinkDesktop).toHaveAttribute('href', /_wpnonce=/);
+            await expect(this.logoutLinkDesktop).toHaveAttribute('href', /action=secure_theme_logout/);
             await this.logoutLinkDesktop.click();
         }
     }
