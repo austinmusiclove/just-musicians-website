@@ -160,68 +160,84 @@
         ]); ?>
 
 
-            <!-- Location -->
-            <span class="text-14 flex items-center flex-wrap">
-                <img class="h-4 mr-2"
-                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
-                <span><?php echo $args['location']; ?></span>
-            </span>
-            <!-- Ensemble Size  -->
-            <span class="flex items-center text-14 gap-2">
-                <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
-            </span>
-
-
-
-
-
-            <!-- Description -->
-            <p class="text-14">
-                <?php echo $args['description']; ?>
-            </p>
-
-            <!-- Genres -->
-            <div class="flex items-center gap-1 flex-wrap">
-                <?php foreach ($args['genres'] as $term) { ?>
-                <span
-                    class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
-                    <?php echo $term; ?>
+            <div class="md:grid grid-cols-2 w-fit gap-x-4 gap-y-0.5">
+                <!-- Location -->
+                <span class="col-start-1 col row-start-1 text-14 flex items-center flex-wrap">
+                    <img class="h-4 mr-2"
+                        src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
+                    <span><?php echo $args['location']; ?></span>
                 </span>
-                <?php } ?>
+
+                <!-- Description -->
+                <p class="text-14 col-start-1 col row-start-2">
+                    <?php echo $args['description']; ?>
+                </p>
+
+
+                <!-- Ensemble Size  -->
+                <span class="col-start-2 col row-start-1 flex items-center text-14 gap-2">
+                    <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
+                </span>
+
+                <!-- Genres -->
+                <div class="flex items-center gap-1 flex-wrap col-start-2 col row-start-2">
+                    <?php foreach ($args['genres'] as $term) { ?>
+                    <span
+                        class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+                        <?php echo $term; ?>
+                    </span>
+                    <?php } ?>
+                </div>
+
             </div>
 
-            <!-- Details -->
-            <div class="flex flex-col" x-show="proposal_details" x-cloak>
-                <span class="text-12 text-black/50 font-semibold">Response</span>
-                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+
+
+
+
+
+
+
+
+            <div class="clear-both flex flex-col gap-2 mb-2 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50">
+                <!-- Details -->
+                <div class="flex flex-col" x-show="proposal_details" x-cloak>
+                    <span class="text-14 text-black/50 font-semibold mb-1">Response</span>
+                    <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                 'text_var' => 'proposal_details',
                 'limit'    => 200,
             ]); ?>
+                </div>
+
+                <!-- Availability -->
+                <div class="flex flex-col items-start" x-show="proposal_availability" x-cloak>
+                    <span class="text-12 text-black/50" x-show="proposal_status != 'stale'" x-cloak>Availability last
+                        updated
+                        <?php echo esc_html($args['proposal_updated']); ?></span>
+                    <span class="text-12 text-black/50" x-show="proposal_status == 'stale'" x-cloak><span
+                            class="capitalize" x-text="proposal_availability"></span> as of
+                        <?php echo esc_html($args['proposal_updated']); ?></span>
+                    <span class="text-12 text-red" x-show="proposal_status == 'stale'" x-cloak>Availability not updated
+                        since
+                        event date/time changed</span>
+                </div>
+
+                <!-- Quote / Draw -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
+                        x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
+                        x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
+                </div>
+
             </div>
 
-            <!-- Availability -->
-            <div class="flex flex-col items-start" x-show="proposal_availability" x-cloak>
-                <span class="text-12 text-black/50" x-show="proposal_status != 'stale'" x-cloak>Availability last
-                    updated
-                    <?php echo esc_html($args['proposal_updated']); ?></span>
-                <span class="text-12 text-black/50" x-show="proposal_status == 'stale'" x-cloak><span class="capitalize"
-                        x-text="proposal_availability"></span> as of
-                    <?php echo esc_html($args['proposal_updated']); ?></span>
-                <span class="text-12 text-red" x-show="proposal_status == 'stale'" x-cloak>Availability not updated
-                    since
-                    event date/time changed</span>
-            </div>
+
 
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between gap-2">
-            <!-- Quote / Draw -->
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
-                    x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
-                <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold"
-                    x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
-            </div>
+
 
             <!-- Send Message (only for published listings to avoid sending message to listing with no owner/author) -->
             <?php if ($args['listing_post_status'] == 'publish') { ?>
