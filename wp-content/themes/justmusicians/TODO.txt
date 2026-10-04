@@ -1,12 +1,11 @@
 Critical bugs
-    *Dan Guevara listing link does not work from applicants when logged in as AML on prod
-    *Need to add unique auth keys to wp config in staging and prod
     *Tests need to clean up image uploads
+    Need to add unique auth keys to wp config in staging and prod
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user)
     Make sure not varnish caching the suggestions api and other similar things like that
     Figure out why update listing takes forever; probably something with unneeded image processing
-    Make sure i am compliant with laws on accessibility and cookies
+    Make sure i am compliant with laws on accessibility and cookies (i am using local storage for location)
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO

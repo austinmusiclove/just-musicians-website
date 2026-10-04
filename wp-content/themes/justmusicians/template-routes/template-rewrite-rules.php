@@ -9,6 +9,13 @@ function template_route_rewrite_rules() {
         'top'
     );
 
+    // Pending listings
+    add_rewrite_rule(
+        '^listing-pid/([0-9]+)/?$',
+        'index.php?custom-template=unpublished-listing&listing-id=$matches[1]',
+        'top'
+    );
+
     // Applications
     add_rewrite_rule(
         '^musician-application/([0-9]+)/?$',
@@ -82,6 +89,7 @@ function register_template_route_query_vars($vars) {
     $vars[] = 'custom-template';
     $vars[] = 'application-id';
     $vars[] = 'buyer-id';
+    $vars[] = 'listing-id';
     $vars[] = 'vertical';
     $vars[] = 'region';
     $vars[] = 'locale';

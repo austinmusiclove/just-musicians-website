@@ -187,3 +187,14 @@ function get_mediatags($attachment_id) {
     }
     return $mediatags;
 }
+
+// Set custom permalink for pending listings so that applicants that have not signed up can be reviewed
+function get_pending_listing_url($post_id) {
+    return home_url('/listing-pid/' . (int) $post_id . '/');
+}
+add_filter('post_type_link', function($permalink, $post) {
+    if (!$post instanceof WP_Post || $post->post_type !== 'listing') { return $permalink; }
+    if ($post->post_status !== 'pending') { return $permalink; }
+    return get_pending_listing_url($post->ID);
+}, 10, 2);
+
