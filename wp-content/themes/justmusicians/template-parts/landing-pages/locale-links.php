@@ -21,7 +21,7 @@ if ( ! $locale_query->have_posts() ) { return; }
 
 ?>
 
-<div class="container flex py-16">
+<div class="flex py-8">
     <div class="flex flex-col w-full">
 
         <?php if ( !empty($args['heading']) and !empty($args['heading_href']) ) { ?>

@@ -48,8 +48,15 @@ get_header();
 <div class="container lg:grid lg:grid-cols-10 gap-24 py-8 min-h-[500px]">
 
     <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
-        <?php echo get_the_content(null, false, $post_id); ?>
+        <?php
+            echo get_the_content(null, false, $post_id);
+            get_template_part('template-parts/landing-pages/locale-links', '', [
+                'heading'        => "Cities in $region_name",
+                'region_post_id' => $post_id,
+            ]);
+        ?>
     </div>
+
     <div class="col lg:col-span-3 relative">
         <div class="sticky top-24">
             <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', [
@@ -58,14 +65,8 @@ get_header();
             ]); ?>
         </div>
     </div>
+
 </div>
 
-
 <?php
-
-get_template_part('template-parts/landing-pages/locale-links', '', [
-    'heading'        => "Cities in $region_name",
-    'region_post_id' => $post_id,
-]);
-
 get_footer();

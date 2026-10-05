@@ -18,7 +18,7 @@ $categories_query = new WP_Query( $categories_query_args );
 
 if ( $categories_query->have_posts() ) { ?>
 
-    <div class="container flex py-16">
+    <div class="flex py-8">
         <div class="flex flex-col w-full">
             <h2 class="font-sun-motter text-25 mb-4"><?php echo $args['heading']; ?></h2>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">
