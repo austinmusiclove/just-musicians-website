@@ -8,7 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    *lcoale-cat page - Links - same category different location
     *Add sign up cta to home page
     *Add musician earnings db to live music landing page
     *Perfect copy for sign up as musician cta
