@@ -26,7 +26,7 @@ import {
     wpCliCreatePost, wpCliGetUserMeta, wpCliSetUserMeta, wpCliUserHasCap, wpCliAddUserCap, wpCliGetWpConfig,
     wpCliGetLatestPostId, wpCliGetLatestPostIdByType, wpCliGetPostField, wpCliGetPostUrl, wpCliGetPostMeta,
     wpCliGetPostMetaJson, wpCliCreateCollection, wpCliGetPostIdBySlug, wpCliGetPostThumbnailId,
-    wpCliSetPostThumbnail, wpCliDeletePost,
+    wpCliSetPostThumbnail, wpCliDeletePost, wpCliDeleteAttachments, wpCliGetPostAttachmentIdsForPosts,
     wpCliAddListingToUser, wpCliNotificationExists,
     wpCliSetPostTerms, wpCliIndexListing, wpCliCreateListing,
     wpCliGetConversationId, wpCliGetLastMessage, wpCliMessageIsRead, wpCliGetUnreadConversationCount,
@@ -56,13 +56,15 @@ export const test = base.extend({
     wpCli: async ({}, use) => {
         const createdUsers = [];
         const createdPosts = [];
+        const createdAttachments = [];
+        const trackAttachment = (id) => { if (id) createdAttachments.push(id); };
         await use({
             createUser: (user) => { const id = wpCliCreateUser(user); createdUsers.push({ ...user, id }); return id; },
             getUserId: wpCliGetUserId,
             deleteUser: wpCliDeleteUser,
             deleteUsers: wpCliDeleteUsers,
             createPost: (args) => { const id = wpCliCreatePost(args); createdPosts.push(id); return id; },
-            createListing: (listingData) => { const id = wpCliCreateListing(listingData); createdPosts.push(id); return id; },
+            createListing: (listingData) => { const id = wpCliCreateListing(listingData, { onAttachment: trackAttachment }); createdPosts.push(id); return id; },
             getUserMeta: wpCliGetUserMeta,
             setUserMeta: wpCliSetUserMeta,
             userHasCap: wpCliUserHasCap,
@@ -92,8 +94,14 @@ export const test = base.extend({
             queryAccess: wpCliQueryAccess,
             trackUser: (user) => { if (user) createdUsers.push(user); },
             trackPost: (postId) => { if (postId) createdPosts.push(postId); },
+            trackAttachment,
         });
-        for (const id of createdPosts) wpCliDeletePost(id);
+        // Attachments imported up front are deleted by id. The batched sweep then picks up uploads
+        // made through the browser, which the test never sees an id for, resolving every tracked
+        // post's media in one wp eval before any post row is dropped.
+        const sweptAttachments = wpCliGetPostAttachmentIdsForPosts(createdPosts);
+        wpCliDeleteAttachments([...createdAttachments, ...Object.values(sweptAttachments).flat()]);
+        for (const id of createdPosts) wpCliDeletePost(id, { sweepMedia: false });
         if (createdUsers.length) wpCliDeleteUserData(createdUsers);
         for (const u of createdUsers) wpCliDeleteUser(u.email);
     },

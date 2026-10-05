@@ -21,6 +21,31 @@ function wpCliWithRetry(command, { attempts = 3, delayMs = 2000 } = {}) {
     throw lastError;
 }
 
+// PHP notices or deprecation warnings can land on stdout before the payload under concurrent load,
+// so the JSON is read from between sentinels and a bad parse is retried like a failed command.
+function wpCliEvalJson(php, { attempts = 3, delayMs = 2000 } = {}) {
+    const open = '<<<JSONPAYLOAD';
+    const close = 'JSONPAYLOAD>>>';
+    let lastError;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+        try {
+            const output = execSync(`wp eval "${php}" --path=${WP_PATH}`, { encoding: 'utf-8' });
+            const start = output.indexOf(open);
+            const end = output.indexOf(close);
+            if (start === -1 || end === -1) {
+                throw new Error(`no JSON payload in wp eval output: ${output.trim().slice(0, 200)}`);
+            }
+            return JSON.parse(output.slice(start + open.length, end));
+        } catch (err) {
+            lastError = err;
+            if (attempt < attempts) {
+                Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delayMs);
+            }
+        }
+    }
+    throw lastError;
+}
+
 export function wpCliCreateUser(userData) {
     const output = execSync(
         `wp user create "${userData.email}" "${userData.email}" --role=subscriber --user_pass="${userData.password}" --first_name="${userData.firstName}" --last_name="${userData.lastName}" --path=${WP_PATH} --porcelain`,
@@ -199,10 +224,41 @@ export function wpCliGetPostThumbnailId(postId) {
     return wpCliGetPostMeta(postId, '_thumbnail_id');
 }
 
-export function wpCliDeletePost(postId) {
+// Resolves every post's media in a single wp eval
+export function wpCliGetPostAttachmentIdsForPosts(postIds) {
+    const ids = [...new Set((postIds || []).map((n) => parseInt(n, 10)).filter(Number.isFinite))];
+    if (!ids.length) return {};
+    const php = ids.map((id) => (
+        `\\$ids[${id}] = [];` +
+        `\\$t = get_post_meta(${id}, '_thumbnail_id', true); if (\\$t) { \\$ids[${id}][] = (int) \\$t; }` +
+        `foreach (['listing_images', 'stage_plots'] as \\$k) { foreach ((array) get_post_meta(${id}, \\$k, true) as \\$v) { if (\\$v) { \\$ids[${id}][] = (int) \\$v; } } }` +
+        `foreach (get_children(['post_parent' => ${id}, 'post_type' => 'attachment', 'fields' => 'ids', 'numberposts' => -1]) as \\$c) { \\$ids[${id}][] = (int) \\$c; }` +
+        `\\$ids[${id}] = array_values(array_unique(\\$ids[${id}]));`
+    )).join(' ');
+    return wpCliEvalJson(`\\$ids = []; ${php} echo '<<<JSONPAYLOAD' . json_encode(\\$ids) . 'JSONPAYLOAD>>>';`);
+}
+
+// wp_delete_attachment clears the scaled file, every generated size and the unscaled original
+export function wpCliDeleteAttachments(attachmentIds) {
+    const ids = [...new Set((attachmentIds || []).map((n) => parseInt(n, 10)).filter(Number.isFinite))];
+    if (!ids.length) return;
+    const encodedIds = Buffer.from(JSON.stringify(ids)).toString('base64');
     try {
         execSync(
-            `wp post delete ${postId} --force --path=${WP_PATH}`,
+            `wp eval "foreach (json_decode(base64_decode('${encodedIds}'), true) as \\$id) { wp_delete_attachment((int) \\$id, true); }" --path=${WP_PATH}`,
+            { stdio: 'ignore' }
+        );
+    } catch (e) {
+        console.warn(`Failed to delete test attachments ${ids.join(', ')}: ${e.message}`);
+    }
+}
+
+export function wpCliDeletePost(postId) {
+    const id = parseInt(postId, 10);
+    if (!Number.isFinite(id)) return;
+    try {
+        execSync(
+            `wp post delete ${id} --force --path=${WP_PATH}`,
             { stdio: 'ignore' }
         );
     } catch (e) {}
@@ -290,10 +346,12 @@ export function wpCliAddListingToUser(userId, listingId) {
 }
 
 // Creates a fully usable listing post from createListingPostData output: post, thumbnail,
-// taxonomies, author's listings user meta, and the location/search index entry
-export function wpCliCreateListing(listingData) {
+// taxonomies, author's listings user meta, and the location/search index entry. onAttachment is
+// handed the imported thumbnail id so callers can clean up the upload without re-reading meta.
+export function wpCliCreateListing(listingData, { onAttachment } = {}) {
     const listingId = wpCliCreatePost(listingData);
-    wpCliSetPostThumbnail(listingId, LISTING_THUMBNAIL_PATH);
+    const attachmentId = wpCliSetPostThumbnail(listingId, LISTING_THUMBNAIL_PATH);
+    if (onAttachment) onAttachment(attachmentId);
     const taxonomies = [
         ['genre', listingData.genres],
         ['ensemble_size', listingData.ensembleSizes],
