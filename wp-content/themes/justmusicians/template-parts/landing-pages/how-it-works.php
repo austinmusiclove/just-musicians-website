@@ -19,7 +19,7 @@
                 </ul>
 
                 <div class="my-8">
-                    <button type="button" class="bg-navy text-white hover:bg-yellow hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
+                    <button type="button" class="bg-yellow text-black hover:bg-navy hover:text-white shadow-black-offset border-2 border-black font-sun-motter text-16 px-5 py-3"
                         x-show="!loggedIn" x-cloak
                         x-on:click="showSignupModal = true; signupModalMessage = 'Sign up to send inquiries to musicians'"
                     >Tell Us About Your Event</button>
