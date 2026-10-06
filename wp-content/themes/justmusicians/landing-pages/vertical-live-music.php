@@ -25,21 +25,26 @@ get_template_part('template-parts/landing-pages/hero-section-cta', '', [
         ],
     ],
 ]);
-// Musician Earnings Database
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
-    'title'       => 'Are You a Musician? Set up Your Account for Free',
-    'description' => 'Create a free musician listing to show up in searches and start getting inquiries from qualified buyers.',
+    'heading'       => 'Are You a Musician? Let the Gigs Come to You.',
+    'description' => 'Stop chasing leads and start playing more shows. Build a free musician listing to connect with event planners, venues, and private clients looking to hire musicians for their next event.',
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing.png',
     'benefits'    => [
-        'Show up in searches on Hire Musicians',
-        'No membership fees',
-        'No lead fees',
-        'Unlimited inquiries',
-        'Collect reviews',
+        'Get discovered on Hire Musicians',
+        'Zero membership fees',
+        'Zero commission on leads',
+        'Unlimited booking requests',
+        'Build trust with client reviews',
     ],
     'cta_text'          => 'Sign Up as a Musician',
     'cta_url'           => site_url('/listing-form/'),
     'sign_up_to_access' => 'Sign up to create your listing',
+]);
+
+get_template_part('template-parts/landing-pages/simple-cta', '', [
+    'heading'  => 'Find Live Musicians by Location',
+    'cta_text' => 'Locations',
+    'cta_url'  => site_url('/live-music/locations/'),
 ]);
 
 get_footer();

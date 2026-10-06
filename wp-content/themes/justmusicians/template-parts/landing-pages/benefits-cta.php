@@ -4,7 +4,7 @@
 
             <div class="w-full flex-auto col-span-3">
                 <p class="font-sun-motter text-13 uppercase tracking-wide text-brown-dark-3 mb-3">Musicians</p>
-                <h2 class="font-sun-motter text-navy text-28 md:text-40 mb-4"><?php echo $args['title']; ?></h2>
+                <h2 class="font-sun-motter text-navy text-28 md:text-40 mb-4"><?php echo $args['heading']; ?></h2>
                 <p class="text-16 md:text-18 text-brown-dark-3 mb-8 md:mb-10"><?php echo $args['description']; ?></p>
 
                 <ul role="list" class="grid grid-cols-1 gap-x-8 gap-y-3 text-base/7 text-brown-dark-3">

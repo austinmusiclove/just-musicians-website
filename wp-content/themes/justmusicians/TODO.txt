@@ -8,10 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    *Add sign up cta to home page
-    *Add musician earnings db to live music landing page
-    *Perfect copy for sign up as musician cta
-    *Perfect copy of home page cta
     Landing pages content - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
     Deploy
         save permalinks
@@ -20,7 +16,6 @@ SEO
         Exclude live-music/search from varnish cache or get location detection with api
         Perge varnish
     Home page
-        Call to sign up - Target broad keywords, value prop
         Links - verticals, categories, locations
         Trust & Social Proof
             total number of listings and other stats
@@ -31,6 +26,7 @@ SEO
         CTA - Sign up as musician, tell us about your event
         Links - locations, categories,
         Cross-Vertical Navigation Banner: Prominent cards routing traffic to your sibling verticals (e.g., "Need instruction? Explore Music Lessons" or "Recording an album? Find Music Production services").
+        Musician Earnings DB (add after it works for any location not just austin)
         Trust & Social Proof
             Verified client reviews
             Total active musician count

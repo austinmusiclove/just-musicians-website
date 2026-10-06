@@ -17,7 +17,7 @@ get_header();
 
 get_template_part('template-parts/landing-pages/hero-search-live-music', '', []);
 get_template_part('template-parts/landing-pages/how-it-works', '', [
-    'title'       => 'Hire Musicians For An Event',
+    'heading'       => 'Hire Musicians For An Event',
     'description' => 'Hire live musicians for weddings, parties, corporate events, and more. All it takes is a free account to send inquiries and get responses.',
     'image'       => get_template_directory_uri() . '/lib/images/other/inquiry-form-location.png',
     'steps'       => [
@@ -28,15 +28,15 @@ get_template_part('template-parts/landing-pages/how-it-works', '', [
     ],
 ]);
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
-    'title'       => 'Are You a Musician? Set up Your Account for Free',
-    'description' => 'Create a free musician listing to show up in searches and start getting inquiries from qualified buyers.',
+    'heading'       => 'Are You a Musician? Let the Gigs Come to You.',
+    'description' => 'Stop chasing leads and start playing more shows. Build a free musician listing to connect with event planners, venues, and private clients looking to hire musicians for their next event.',
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing.png',
     'benefits'    => [
-        'Show up in searches on Hire Musicians',
-        'No membership fees',
-        'No lead fees',
-        'Unlimited inquiries',
-        'Collect reviews',
+        'Get discovered on Hire Musicians',
+        'Zero membership fees',
+        'Zero commission on leads',
+        'Unlimited booking requests',
+        'Build trust with client reviews',
     ],
     'cta_text'          => 'Sign Up as a Musician',
     'cta_url'           => site_url('/listing-form/'),

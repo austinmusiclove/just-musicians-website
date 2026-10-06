@@ -8,9 +8,8 @@
             <h2 class="font-sun-motter text-navy text-28 md:text-40 mb-4"><?php echo $args['heading']; ?></h2>
             <p class="text-16 md:text-20 text-brown-dark-3 mb-8 md:mb-12 max-w-2xl mx-auto"><?php echo $args['description']; ?></p>
 
-            <a
+            <a class="inline-block bg-navy hover:bg-yellow text-white hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
                 href="<?php echo $args['cta_url']; ?>"
-                class="inline-block bg-yellow hover:bg-white text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
             >
                 <?php echo $args['cta_text']; ?>
             </a>
