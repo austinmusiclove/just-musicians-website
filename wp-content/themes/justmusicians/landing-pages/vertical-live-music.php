@@ -11,13 +11,13 @@ get_header();
 
 get_template_part('template-parts/landing-pages/hero-section-cta', '', [
     'heading'          => 'Ready to Hire Live Musicians?',
-    'description'      => 'Browse live musicians in your area and filter by genre, ensemble size, instrumentation and more.',
+    'description'      => 'Browse live musicians in your area. Filter by genre, ensemble size, instrumentation and more.',
     'cta_text'         => 'Search Musicians',
     'cta_url'          => site_url('/live-music/search/'),
     'breadcrumb_items' => [
         [
             'label' => 'Home',
-            'url'   => home_url('/'),
+            'url'   => home_url(),
         ],
         [
             'label' => 'Live Music',
@@ -25,16 +25,17 @@ get_template_part('template-parts/landing-pages/hero-section-cta', '', [
         ],
     ],
 ]);
+// Musician Earnings Database
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
-    'title'       => 'Are You a Musician? Get Gigs From Hire Musicians',
-    'description' => 'Create a free musician listing to show up in musician searches and start getting inquiries from talent buyers.',
+    'title'       => 'Are You a Musician? Set up Your Account for Free',
+    'description' => 'Create a free musician listing to show up in searches and start getting inquiries from qualified buyers.',
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing.png',
     'benefits'    => [
-        'Show up in searches when event organizers hire live music in your area',
-        'Receive direct inquiries from people who want to book you',
-        'Respond to requests and send price quotes free of charge',
-        'Collect reviews to build your reputation',
-        'No platform fees',
+        'Show up in searches on Hire Musicians',
+        'No membership fees',
+        'No lead fees',
+        'Unlimited inquiries',
+        'Collect reviews',
     ],
     'cta_text'          => 'Sign Up as a Musician',
     'cta_url'           => site_url('/listing-form/'),
