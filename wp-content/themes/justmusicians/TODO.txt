@@ -8,17 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Deploy
-        save permalinks
-        add acf for landing pages post types
-        Perge varnish
-        add content for category locale pages
-            DJ
-            Cover Band
-            Party Band
-            Funk Band
-            Wedding Band
-        fix footer links
     Challenge
         Add content to category locale pages that I can scale out
         Get backlinks to category locale pages
