@@ -2,7 +2,6 @@
 
 $breadcrumb_items = [
     [ 'label' => 'Home',       'url' => home_url('/') ],
-    [ 'label' => 'Live Music', 'url' => site_url('live-music/') ],
     [ 'label' => 'Search', ],
 ];
 
@@ -20,7 +19,6 @@ echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
     'collections_map'  => $collections_map,
     'breadcrumb_items' => $breadcrumb_items,
-    'title'            => "Find Live Musicians Near You",
     'qcategory'        => isset($_GET['qcategory'])        ? $_GET['qcategory']        : '',
     'qgenre'           => isset($_GET['qgenre'])           ? $_GET['qgenre']           : '',
     'qsubgenre'        => isset($_GET['qsubgenre'])        ? $_GET['qsubgenre']        : '',

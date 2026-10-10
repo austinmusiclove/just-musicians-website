@@ -37,12 +37,6 @@
                 <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-2' ) ); ?>
             </div>
 
-            <!-- Footer Menu 3 -->
-            <div class="footer-menu">
-                <div class="font-sans text-20 font-bold mb-4">Locations</div>
-                <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-3' ) ); ?>
-            </div>
-
         </div>
     </div>
 

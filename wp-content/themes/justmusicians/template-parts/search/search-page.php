@@ -93,7 +93,7 @@ $next_page       = $result ? $result['next_page']       : null;
             hx-trigger="load, filterupdate"
         <?php } ?>
         x-on:location-detected-get-listings.window="updateLocation($event.detail)"
-        x-on:filterupdate="window.scrollTo({ top: 0, behavior: 'instant' });"
+        x-on:filterupdate="window.scrollTo({ top: $el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'instant' });"
     >
         <input type="hidden" name="search" x-model="listingSearchVal" />
         <?php foreach ($postal_codes as $postal_code) { ?>
@@ -127,8 +127,8 @@ $next_page       = $result ? $result['next_page']       : null;
                 <div class="col md:col-span-6 py-6 md:py-4">
 
                     <?php if (isset($args['breadcrumb_items'])) { ?><div class="text-14 text-grey"><?php get_template_part('template-parts/global/breadcrumb', '', ['items' => $args['breadcrumb_items'] ]); ?></div><?php } ?>
-                    <?php if (isset($args['title'])) { ?><h1 class="py-4 text-28 font-bold"><?php echo $args['title']; ?></h1><?php } ?>
-                    <?php if (isset($args['description'])) { ?><p class="text-16 mb-4 whitespace-pre-wrap"><?php echo $args['description']; ?></p><?php } ?>
+                    <?php if (isset($args['title'])) { ?><h1 class="font-sun-motter text-navy text-28 md:text-40 py-4"><?php echo $args['title']; ?></h1><?php } ?>
+                    <?php if (isset($args['description'])) { ?><p class="text-16 md:text-18 text-brown-dark-3 mb-4 whitespace-pre-wrap"><?php echo $args['description']; ?></p><?php } ?>
 
                     <div class="flex items-center justify-between">
                         <?php echo get_template_part('template-parts/search/mobile-filter', '', [
@@ -191,7 +191,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                     if (!empty($listing['genre'])) {
                                         $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
                                     }
-                                    get_template_part('template-parts/cards/seo-listing-card', '', [
+                                    get_template_part('template-parts/cards/standard-listing-card', '', [
                                         'post_id'                => $listing['post_id'],
                                         'name'                   => $listing['name'],
                                         'rating'                 => $listing['rating'],

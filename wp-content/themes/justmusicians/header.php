@@ -39,7 +39,7 @@
 <?php
 
 global $wp;
-$no_search_bar_urls = [site_url(), site_url('live-music')];
+$no_search_bar_urls = [];
 $current_url = home_url( add_query_arg( [], $wp->request ) );
 $has_header_search = in_array($current_url, $no_search_bar_urls);
 

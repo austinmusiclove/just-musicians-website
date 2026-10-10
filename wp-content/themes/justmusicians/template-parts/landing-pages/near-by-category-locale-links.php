@@ -24,7 +24,7 @@ $query = new WP_Query( $query_args );
 
 if ( $query->have_posts() ) { ?>
 
-    <div class="flex py-8">
+    <div class="container flex py-8">
         <div class="flex flex-col w-full">
             <h2 class="font-sun-motter text-25 mb-4"><?php echo $args['heading']; ?></h2>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">

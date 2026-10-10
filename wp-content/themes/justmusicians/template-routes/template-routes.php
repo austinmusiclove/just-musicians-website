@@ -21,35 +21,17 @@ add_filter('template_include', function($template) {
             if (!empty($new_template)) { return $new_template; }
 
         // Landing Pages
-        case 'landing-vertical':
-            $new_template = locate_template(['landing-pages/vertical-live-music.php']);
-            if (!empty($new_template)) { return $new_template; }
         case 'landing-search':
             $new_template = locate_template(['landing-pages/search-live-music.php']);
             if (!empty($new_template)) { return $new_template; }
-        case 'landing-locations':
-            $new_template = locate_template(['landing-pages/locations.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-region':
-            $new_template = locate_template(['landing-pages/region.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-locale':
-            $new_template = locate_template(['landing-pages/locale.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-locale-category':
-            $new_template = locate_template(['landing-pages/locale-category.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-categories':
-            $new_template = locate_template(['landing-pages/categories.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-category':
-            $new_template = locate_template(['landing-pages/category.php']);
-            if (!empty($new_template)) { return $new_template; }
-
         // Listings
         case 'unpublished-listing':
             if (!is_singular('listing')) { return $template; }
             $new_template = locate_template(['single-listing.php']);
+            if (!empty($new_template)) { return $new_template; }
+
+        case 'landing-locale-category':
+            $new_template = locate_template(['landing-pages/locale-category.php']);
             if (!empty($new_template)) { return $new_template; }
 
         default:

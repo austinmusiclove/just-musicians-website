@@ -1,6 +1,6 @@
 <section class="overflow-hidden bg-white py-16 md:py-24">
     <div class="container relative isolate">
-        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-5 lg:items-center xl:gap-x-12">
+        <div class="grid max-w-6xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-5 lg:items-center xl:gap-x-12">
 
             <div class="w-full flex-auto col-span-3">
                 <p class="font-sun-motter text-13 uppercase tracking-wide text-brown-dark-3 mb-3">How It Works</p>

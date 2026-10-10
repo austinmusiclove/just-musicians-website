@@ -45,25 +45,8 @@ function hmm_scripts() {
     // Alpine
     $alpine_dependencies = ['alpinejs-resize', 'alpinejs-focus', 'device-detection'];
 
-
-    if (is_front_page()) {
-        // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
-    }
-
-    // Locations landing pages
-    if (preg_match('#^/live-music/locations/[^/]+/[^/]+#', $path) or
-        preg_match('#^/live-music/locations/[^/]+#', $path) or
-        preg_match('#^/live-music/locations#', $path) or
-        preg_match('#^/live-music/categories/[^/]+#', $path) or
-        preg_match('#^/live-music/categories#', $path))
-    {
-        // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, true);
-    }
-
-    // Live Music Search
-    if (preg_match('#^/live-music/(search|locations/[^/]+/[^/]+/[^/]+)#', $path)) {
+    // Home and search pages
+    if (is_front_page() or get_query_var('custom-template') === 'landing-locale-category' or preg_match('#^/live-music/search#', $path)) {
 
         // Media Slider
         wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, true);

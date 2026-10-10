@@ -38,7 +38,8 @@ function noindex_specific_post_type($robots) {
         is_page('password-reset') or
         is_page('request-password-reset') or
         is_page('podcast') or
-        is_page('messages')
+        is_page('messages') or
+        get_query_var( 'custom-template' ) === 'landing-search'
     ) {
         $robots['noindex'] = true;
     }

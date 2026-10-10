@@ -1,6 +1,6 @@
 <section class="overflow-hidden bg-white py-16 md:py-24">
     <div class="container relative isolate">
-        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-5 lg:items-center xl:gap-x-12">
+        <div class="grid max-w-6xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-5 lg:items-center xl:gap-x-12">
 
             <div class="w-full flex-auto col-span-3">
                 <p class="font-sun-motter text-13 uppercase tracking-wide text-brown-dark-3 mb-3">Musicians</p>
@@ -19,7 +19,7 @@
                 </ul>
 
                 <div class="my-8">
-                    <a class="inline-block bg-yellow hover:bg-navy hover:text-white text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
+                    <a class="inline-block bg-navy hover:bg-yellow text-white hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
                         <?php if (!is_user_logged_in() and isset($args['sign_up_to_access'])) { ?>
                             x-on:click="showLoginModal = false; showSignupModal = true; signupModalMessage = '<?php echo $args['sign_up_to_access']; ?>';"
                         <?php } else { ?>
