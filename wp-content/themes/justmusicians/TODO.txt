@@ -8,22 +8,21 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    New version
-        Landing pages
-            content section up top and at the bottom
-            Say something about the actual location
-        Challenge
-            Add content to category locale pages that I can scale out
-            Get backlinks to category locale pages
-            Confirm new strategy with consultant
     Deploy
         save permalinks
         add acf for landing pages post types
-        remove region acf group
-        Exclude live-music/search from varnish cache or get location detection with api
         Perge varnish
         add content for category locale pages
+            DJ
+            Cover Band
+            Party Band
+            Funk Band
+            Wedding Band
         fix footer links
+    Challenge
+        Add content to category locale pages that I can scale out
+        Get backlinks to category locale pages
+        Write down and confirm new content and backlink strategy with consultant
     Location/Category Pages
         Landing pages content ideas (maybe some fit elsewhere) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
         add pricing for the specific service of the category and location

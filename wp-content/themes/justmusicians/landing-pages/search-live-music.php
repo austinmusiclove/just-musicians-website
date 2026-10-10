@@ -17,6 +17,7 @@ get_header();
 
 echo get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
+    'title'            => 'Find Live Musicians Near You',
     'collections_map'  => $collections_map,
     'breadcrumb_items' => $breadcrumb_items,
     'qcategory'        => isset($_GET['qcategory'])        ? $_GET['qcategory']        : '',

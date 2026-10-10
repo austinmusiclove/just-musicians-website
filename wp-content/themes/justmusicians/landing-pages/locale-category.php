@@ -26,6 +26,7 @@ if ( ! empty( $query->posts ) ) {
 }
 $title            = get_post_meta($post_id, 'title', true);
 $meta_title       = get_post_meta($post_id, 'meta_title', true);
+$description      = get_post_meta($post_id, 'description', true);
 $meta_description = get_post_meta($post_id, 'meta_description', true);
 $region_post      = get_post_meta($post_id, 'region', true);
 $locale_post      = get_post_meta($post_id, 'locale', true);
@@ -69,7 +70,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 // Future state will be Home / Live Music in Locale / Category
 $breadcrumb_items = [
     [ 'label' => 'Home', 'url' => home_url('/') ],
-    [ 'label' => $category_name ],
+    [ 'label' => $category_name . ' in ' . $locale_name ],
 ];
 
 // Generate page content
@@ -79,13 +80,16 @@ get_header( null, [
     'header_arg_lng'            => $locale_lng,
 ] );
 
-echo get_template_part('template-parts/search/search-page', '', [
+get_template_part('template-parts/landing-pages/hero-section-basic', '', [
+    'breadcrumb_items' => $breadcrumb_items,
+    'heading'          => $title,
+    'description'      => $description,
+]);
+get_template_part('template-parts/search/search-page', '', [
     'send_first_page'      => true,
     'location_label'       => $location_label,
     'hide_location_filter' => true,
     'hide_category_filter' => true,
-    'title'                => $title,
-    'breadcrumb_items'     => $breadcrumb_items,
     'collections_map'      => $collections_map,
     'qcategory'            => $category_slug,
     'qgenre'               => '',

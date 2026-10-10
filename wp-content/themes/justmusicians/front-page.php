@@ -30,12 +30,12 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 
 get_header();
 
-echo get_template_part('template-parts/landing-pages/hero-section-basic', '', [
+get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'breadcrumb_itmes' => [],
     'heading'          => "Find Live Musicians in Austin, Texas",
     'description'      => "Elevate your next event when you hire live musicians in Austin, Texas. From lively corporate events and elegant weddings to private parties, bring the authentic sound of the Live Music Capital of the World directly to your guests.",
 ]);
-echo get_template_part('template-parts/search/search-page', '', [
+get_template_part('template-parts/search/search-page', '', [
     'send_first_page'      => false,
     'hide_location_filter' => true,
     'collections_map'      => $collections_map,
