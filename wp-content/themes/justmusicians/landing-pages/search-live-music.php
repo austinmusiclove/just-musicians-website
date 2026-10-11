@@ -15,7 +15,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 
 get_header();
 
-echo get_template_part('template-parts/search/search-page', '', [
+get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
     'title'            => 'Find Live Musicians Near You',
     'collections_map'  => $collections_map,
@@ -25,6 +25,9 @@ echo get_template_part('template-parts/search/search-page', '', [
     'qsubgenre'        => isset($_GET['qsubgenre'])        ? $_GET['qsubgenre']        : '',
     'qinstrumentation' => isset($_GET['qinstrumentation']) ? $_GET['qinstrumentation'] : '',
     'qsetting'         => isset($_GET['qsetting'])         ? $_GET['qsetting']         : '',
+    'location_label'   => 'Austin, Texas',
+    'lat'              => 30.2671500,
+    'lng'              => -97.7430600,
 ]);
 
 get_footer();

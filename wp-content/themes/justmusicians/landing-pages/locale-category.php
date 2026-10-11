@@ -104,7 +104,7 @@ get_template_part('template-parts/search/search-page', '', [
 // Content
 $content_post = get_post( $post_id );
 if ( ! empty( $content_post->post_content ) ) { ?>
-    <div class="container article-body py-8">
+    <div class="container article-body py-16">
         <?php echo get_the_content(null, false, $post_id); ?>
     </div>
 <?php }

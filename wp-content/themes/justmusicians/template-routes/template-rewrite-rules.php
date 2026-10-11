@@ -44,7 +44,7 @@ function template_route_rewrite_rules() {
     $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands' ]);
     add_rewrite_rule(
         '^([^/]+)/(' . $categories . ')/?$',
-        'index.php?custom-template=landing-locale-category&locale=$matches[1]&mcategory=$matches[2]',
+        'index.php?custom-template=landing-locale-category&locale=$matches[1]&lm-category=$matches[2]',
         'top'
     );
 
@@ -58,7 +58,7 @@ function register_template_route_query_vars($vars) {
     $vars[] = 'listing-id';
     $vars[] = 'vertical';
     $vars[] = 'locale';
-    $vars[] = 'mcategory';
+    $vars[] = 'lm-category';
     return $vars;
 }
 add_filter('query_vars', 'register_template_route_query_vars');
