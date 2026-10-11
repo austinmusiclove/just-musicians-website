@@ -415,7 +415,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('genre', array('listing', 'artist', 'inquiry', 'event'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -428,7 +428,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('subgenre', array('listing', 'artist'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -441,7 +441,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('instrumentation', array('listing', 'artist'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -454,7 +454,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('setting', array('listing', 'artist', 'event'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -467,7 +467,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('keyword', array('listing', 'artist'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -480,7 +480,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('ensemble_size', array('listing', 'inquiry', 'event'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -493,7 +493,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('mediatag', array('listing', 'attachment', 'youtubevideo'), array(
-    'public' => true,
+    'public' => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
