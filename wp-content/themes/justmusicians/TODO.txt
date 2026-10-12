@@ -8,52 +8,49 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Challenge
-        Add content to category locale pages that I can scale out
+    Strategy to confirm with expert
         Get backlinks to category locale pages
-        Write down and confirm new content and backlink strategy with consultant
             Hand pick recommendations for each category and try to convert them to community partners
-            Each community partner musician is required to give a brand mention and back link to the category locale page and locale page
-            Each community partner musician is given a recommendation on at least one locale category page with original content about why you might want to hire them
-            Each community partner musician is given a recommendation on a locale page under at least one category
-            Each community partner musician is prioritized in the rank for that locale category page
-            Each community partner musician is ranked higher in general search than every non community partner listing
-            Each community partner musician is verified
-            Each community partner gets a discount on arbitration fee
+                Each community partner musician is required to give a brand mention and back link to the category locale page and locale page
+                    provide award badges like weddingwire, some sample copy to put on their site to link to the category locale page - Mentioned by Hire Musicians on their Top Wedding Bands for Hire in Austin, Texas page
+                Each community partner musician is required to link back to their HM listing page from their website
+                Each community partner musician is given a recommendation on at least one locale category page with original content about why you might want to hire them
+                Each community partner musician is given a recommendation on a locale page under at least one category
+                Each community partner musician is prioritized in the rank for that locale category page (need to code this mechanism and add list of recommended listings in acf)
+                Each community partner musician is ranked higher in general search than every non community partner listing
+                Each community partner musician is verified
+                Each community partner gets a discount on arbitration fee
+            Collect pricing information for each listing; perhaps for each category
+            Swap links with local promoters, wedding planners, and other buyers for the locale page
+                get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+            get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
+        transition from austin tx focus to broader location
+            add landing page for hiring musicians in austin and add optional beadcrumb from category locale pages to their locale page if one exists
+            add landing pages for different cities and have static musician recommendations on there for different categories that are all backlinked (/austin/live-music)
+            change home page to hire live musicians near you
+        Add content to category locale pages that I can scale out
+            Landing pages content ideas (maybe some fit elsewhere) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+        Add internal links on listings pages to locale category pages
     Location/Category Pages
-        Landing pages content ideas (maybe some fit elsewhere) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
         add pricing for the specific service of the category and location
         traditional paging
+        add somewhere on the page that bands can apply to be recommended on the page
+        maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
     Home page
-        Add content
         **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
         Trust & Social Proof
-            total number of listings, number of cities that have musicians, categories that have musicians, established
+            total number of listings, number of cities that have musicians, categories that have musicians, established year
             national level partners
-    backlinks
-        steal competitor backlinks by using seo tool to findout who links to them
-        community partner program for musicians
-            artist will rank at top of one locale category page - need mechanism for specifying special top ranking listings in the query
-            provide some sample copy to put on their site to link to the category locale page - Mentioned by Hire Musicians on their Top Wedding Bands for Hire in Austin, Texas page
-            artists add HM to their list of links and add a proper brand mention on their site
-            provide graphic to post on social and link to the site
-            artist gets free verification
-            need system for renewing verification just by making sure they are still active
-            increase page size so that i can have more than 10 backlinking musicians per page
-            add landing pages for different cities and have static musician recommendations on there for different categories that are all backlinked (/austin/live-music)
-        link swap; trusted by in exchange for business to link to my locale category page
-        get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
-        get press backlinks
+        Add content
     single listing pages
-        figure out what i need to do to get a rich google result with the listing pages
-        stand alone video objects to qualify for rich result
         make sure data can be indexed even though it is hidden behind x-show and x-cloak
-        get knowledge pannel like it shows up for "texas violinist" from their gig salad page
-        add more data to the image object schema and video object schema; description for videos
-    transition from austin tx focus to broader location
-        add landing page for hiring musicians in austin and add optional beadcrumb from category locale pages to their locale page if one exists
-        add landing pages for different cities and have static musician recommendations on there for different categories that are all backlinked
-        change home page to hire live musicians near you
+        add self referencing canonical on listing pages
+    price estimator for live band in austin tx
+    need system for renewing verification just by making sure they are still active
+    system for keeping data accurate by scraping artist websites and comparing information
+    steal competitor backlinks by using seo tool to findout who links to them
+    add best x in x listacle blog posts
+    unnamed item in breadcrumb on google search console; maybe the item list needs an item property not just the items
     transition from live music to multi vertical
         Locale pages now need to have info on all verticals available in that region
         Add vertical pages
@@ -65,11 +62,6 @@ SEO
                 *Total active musician count
                 Platform trust badges (e.g., payment arbitration, insurance available).
                 National level community partners or press
-    price estimator for live band in austin tx
-    system for keeping data accurate by scraping artist websites and comparing information
-    get press (voyage austin, blogs, new stations, news papers, check vancerts press references)
-    add best x in x listacle blog posts
-    add self referencing canonical on listing pages
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)

@@ -39,7 +39,7 @@ if ( ! $locale_query->have_posts() ) { return; }
                 if ( empty( $locale_name ) || empty( $locale_path ) ) { continue; }
             ?>
                 <a class="text-20 text-yellow py-2 pr-2 underline inline-block"
-                    href="<?php echo site_url($locale_path); ?>">
+                    href="<?php echo trailingslashit(site_url($locale_path)); ?>">
                     <?php echo $locale_name; ?>
                 </a>
             <?php } ?>

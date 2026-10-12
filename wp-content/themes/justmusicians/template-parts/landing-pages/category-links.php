@@ -28,7 +28,7 @@ if ( $categories_query->have_posts() ) { ?>
                     $title = get_field('title');
                 ?>
                     <a class="text-20 text-yellow py-2 pr-2 underline inline-block"
-                        href="<?php echo site_url($url_path); ?>">
+                        href="<?php echo trailingslashit(site_url($url_path)); ?>">
                         <?php echo $title; ?>
                     </a>
                 <?php } wp_reset_postdata(); ?>

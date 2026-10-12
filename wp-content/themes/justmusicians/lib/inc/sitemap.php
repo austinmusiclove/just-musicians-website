@@ -117,7 +117,7 @@ class LC_Landing_Sitemap_Provider extends WP_Sitemaps_Provider {
             $url_path = get_post_meta( $post->ID, 'url_path', true );
             if ( empty( $url_path ) ) { continue; }
 
-            $url = home_url( $url_path );
+            $url = trailingslashit( site_url( $url_path ) );
             if ( isset( $seen[ $url ] ) ) { continue; }
             $seen[ $url ] = true;
 
