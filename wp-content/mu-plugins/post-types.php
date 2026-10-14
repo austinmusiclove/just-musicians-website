@@ -219,7 +219,7 @@ function register_post_types() {
 
     // Artists
     register_post_type('artist', array(
-        'public' => false,
+        'public' => true, // change to false after search console removed indexed posts
         'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
@@ -235,7 +235,7 @@ function register_post_types() {
 
     // Performance
     register_post_type('performance', array(
-        'public' => false,
+        'public' => true, // change to false after search console removed indexed posts
         'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title'),
@@ -284,7 +284,7 @@ function register_post_types() {
 
     // Compensation Report
     register_post_type('comp_report', array(
-        'public' => false,
+        'public' => true,
         'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
@@ -500,7 +500,7 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('mediatag', array('listing', 'attachment', 'youtubevideo'), array(
-    'public' => true,
+    'public' => true, // change to false after search console removed indexed posts
     'show_ui' => true,
     'hierarchical' => false,
     'show_in_rest' => true,
