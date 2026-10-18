@@ -86,6 +86,11 @@
         <!-- Calendar -->
         <?php //echo get_template_part('template-parts/listing-page/parts/calendar', '', []); ?>
 
+        <!-- Press Features -->
+        <?php if (!$is_preview) {
+            echo get_template_part('template-parts/listing-page/parts/press-features', '', [ 'post_id' => get_the_ID() ]);
+        } ?>
+
         <!-- Reviews -->
         <?php if (!$is_preview) {
             echo get_template_part('template-parts/listing-page/parts/listing-reviews', '', [

@@ -9,12 +9,11 @@ Critical bugs
     change name of applications to job postings
 SEO
     Crete special block that pulls in a listing and its thumbnail or one of its images for category locale pages
-        show recommendation on listing page
-        show featured badge next to verified badge or add featured as x text in listing card
         add community partner bool and increase rank for community partners
-        add all categories to taxonomy and router and category posts
+        add all categories to router and category posts
         deploy
-            acf update for recommendations and locale category pages
+            add all categories to taxonomy
+            acf update for recommendations and locale category pages and listings
     Prioritize recommendation listings in category locale pages
     Strategy to confirm with expert
         Get backlinks to category locale pages
@@ -355,6 +354,7 @@ Listing page
     instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
     allow collecting deposits
     create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
+    badges for featured musician on page and standard listing card
 Media slider
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
