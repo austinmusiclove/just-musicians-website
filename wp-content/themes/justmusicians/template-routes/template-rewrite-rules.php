@@ -41,7 +41,7 @@ function template_route_rewrite_rules() {
     );
 
     // Locale Category Pages
-    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands' ]);
+    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands' ]);
     add_rewrite_rule(
         '^([^/]+)/(' . $categories . ')/?$',
         'index.php?custom-template=landing-locale-category&locale=$matches[1]&lm-category=$matches[2]',
