@@ -9,7 +9,6 @@ Critical bugs
     change name of applications to job postings
 SEO
     Crete special block that pulls in a listing and its thumbnail or one of its images for category locale pages
-        add community partner bool and increase rank for community partners
         add all categories to router and category posts
         deploy
             add all categories to taxonomy
