@@ -101,6 +101,12 @@ get_template_part('template-parts/search/search-page', '', [
     'postal_codes'         => $postal_codes,
 ]);
 
+// Recommendations
+get_template_part('template-parts/landing-pages/recommendations', '', [
+    'post_id'       => $post_id,
+    'heading'       => "Curated $category_name For Hire in $locale_name, $region_name",
+]);
+
 // Content
 $content_post = get_post( $post_id );
 if ( ! empty( $content_post->post_content ) ) { ?>

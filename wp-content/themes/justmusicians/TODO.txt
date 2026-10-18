@@ -9,10 +9,8 @@ Critical bugs
     change name of applications to job postings
 SEO
     Crete special block that pulls in a listing and its thumbnail or one of its images for category locale pages
-        add recommendations section above content in category locale pages
         show recommendation on listing page
         show featured badge next to verified badge or add featured as x text in listing card
-        add featured filter in search?
         add community partner bool and increase rank for community partners
         add all categories to taxonomy and router and category posts
         deploy

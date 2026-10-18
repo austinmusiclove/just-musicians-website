@@ -4,6 +4,7 @@
     h1, h2, h3, h4, h5, h6  {
         margin-bottom: 1.5rem;
         font-weight: bold;
+        font-family: Sun Motter, sans-serif;
       }
       h1 {
         font-size: 1.8rem;
@@ -44,36 +45,36 @@
     .wp-block-table {
       margin-bottom: 2rem;
       table {
-        border-collapse: separate; 
-        border-spacing: 0; 
+        border-collapse: separate;
+        border-spacing: 0;
         line-height: 120%;
-        border: 2px solid #333; 
-        border-radius: .5rem; 
-        overflow: hidden; 
-        width: 100%; 
+        border: 2px solid #333;
+        border-radius: .5rem;
+        overflow: hidden;
+        width: 100%;
         @media (max-width: 560px) {
           font-size: 1rem;
         }
         td,
         th {
-          border: 1px solid #ddd; 
-          padding: .75rem; 
-          text-align: left; 
+          border: 1px solid #ddd;
+          padding: .75rem;
+          text-align: left;
         }
         thead th {
-          background-color: #FAF4EA; 
+          background-color: #FAF4EA;
           &:first-child {
-            border-top-left-radius: .5rem; 
+            border-top-left-radius: .5rem;
           }
           &:last-child {
-            border-top-right-radius: .5rem; 
+            border-top-right-radius: .5rem;
           }
         }
         tr:last-child td:first-child {
-          border-bottom-left-radius: 8px; 
+          border-bottom-left-radius: 8px;
         }
         tr:last-child td:last-child {
-          border-bottom-right-radius: 8px; 
+          border-bottom-right-radius: 8px;
         }
       }
     }
