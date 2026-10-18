@@ -8,12 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Crete special block that pulls in a listing and its thumbnail or one of its images for category locale pages
-        add all categories to router and category posts
-        deploy
-            add all categories to taxonomy
-            acf update for recommendations and locale category pages and listings
-    Prioritize recommendation listings in category locale pages
     Strategy to confirm with expert
         Get backlinks to category locale pages
             Hand pick recommendations for each category and try to convert them to community partners

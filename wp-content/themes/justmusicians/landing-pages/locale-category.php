@@ -66,6 +66,10 @@ $collections_result = get_user_collections([
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
+// Prioritize the listings referenced by the priority_listings meta field in search
+$priority_listings = get_post_meta($post_id, 'priority_listings', true);
+$priority_listings = is_array( $priority_listings ) ? array_map( 'intval', $priority_listings ) : [];
+
 // Breadcrumb
 // Future state will be Home / Live Music in Locale / Category
 $breadcrumb_items = [
@@ -99,6 +103,7 @@ get_template_part('template-parts/search/search-page', '', [
     'lat'                  => $locale_lat,
     'lng'                  => $locale_lng,
     'postal_codes'         => $postal_codes,
+    'priority_listings'    => $priority_listings,
 ]);
 
 // Recommendations

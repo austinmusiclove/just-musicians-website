@@ -4,27 +4,28 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
     $results = [];
-    $lat                    = (!empty($args['lat']))               ? (float) $args['lat']                                             : 30.2672;  // Default to Austin, TX coordinates
-    $lng                    = (!empty($args['lng']))               ? (float) $args['lng']                                             : -97.7431; // Default to Austin, TX coordinates
-    $distance               = (!empty($args['distance']))          ? (float) $args['distance']                                        : 40;
-    $search_term            = (!empty($args['search']))            ? sanitize_text_field($args['search'])                             : null;
-    $name_search_term       = (!empty($args['name_search']))       ? sanitize_text_field($args['name_search'])                        : null;
-    $verified               = (!empty($args['verified']))          ? rest_sanitize_boolean($args['verified'])                         : null;
-    $sanitized_page         = (!empty($args['page']))              ? sanitize_text_field($args['page'])                               : null;
-    $valid_categories       = (!empty($args['categories']))        ? validate_tax_input($args['categories'], 'mcategory')             : [];
-    $valid_genres           = (!empty($args['genres']))            ? validate_tax_input($args['genres'], 'genre')                     : [];
-    $valid_subgenres        = (!empty($args['subgenres']))         ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
-    $valid_instrumentations = (!empty($args['instrumentations']))  ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
-    $valid_settings         = (!empty($args['settings']))          ? validate_tax_input($args['settings'], 'setting')                 : [];
-    $valid_ensemble_sizes   = (!empty($args['ensemble_size']))     ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
-    $with_reviews           = (!empty($args['get_reviews']))       ? rest_sanitize_boolean($args['get_reviews'])                      : false;
-    $postal_codes           = (!empty($args['postal_codes']))      ? array_map('sanitize_text_field', (array) $args['postal_codes'])  : [];
+    $lat                    = (!empty($args['lat']))                ? (float) $args['lat']                                             : 30.2672;  // Default to Austin, TX coordinates
+    $lng                    = (!empty($args['lng']))                ? (float) $args['lng']                                             : -97.7431; // Default to Austin, TX coordinates
+    $distance               = (!empty($args['distance']))           ? (float) $args['distance']                                        : 40;
+    $search_term            = (!empty($args['search']))             ? sanitize_text_field($args['search'])                             : null;
+    $name_search_term       = (!empty($args['name_search']))        ? sanitize_text_field($args['name_search'])                        : null;
+    $verified               = (!empty($args['verified']))           ? rest_sanitize_boolean($args['verified'])                         : null;
+    $sanitized_page         = (!empty($args['page']))               ? sanitize_text_field($args['page'])                               : null;
+    $valid_categories       = (!empty($args['categories']))         ? validate_tax_input($args['categories'], 'mcategory')             : [];
+    $valid_genres           = (!empty($args['genres']))             ? validate_tax_input($args['genres'], 'genre')                     : [];
+    $valid_subgenres        = (!empty($args['subgenres']))          ? validate_tax_input($args['subgenres'], 'subgenre')               : [];
+    $valid_instrumentations = (!empty($args['instrumentations']))   ? validate_tax_input($args['instrumentations'], 'instrumentation') : [];
+    $valid_settings         = (!empty($args['settings']))           ? validate_tax_input($args['settings'], 'setting')                 : [];
+    $valid_ensemble_sizes   = (!empty($args['ensemble_size']))      ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
+    $with_reviews           = (!empty($args['get_reviews']))        ? rest_sanitize_boolean($args['get_reviews'])                      : false;
+    $postal_codes           = (!empty($args['postal_codes']))       ? array_map('sanitize_text_field', (array) $args['postal_codes'])  : [];
+    $priority_listings      = (!empty($args['priority_listings']))  ? array_map('intval', (array) $args['priority_listings'])         : [];
 
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
 
-    $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes);
+    $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes, $priority_listings);
     if (!empty($args['exclude'])) {
         $listing_ids = array_diff($listing_ids, $args['exclude']);
     }

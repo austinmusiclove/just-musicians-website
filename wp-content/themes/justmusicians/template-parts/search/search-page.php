@@ -19,6 +19,7 @@ $location_label     = $arg_location_label ?: (!empty($_GET['location_label']) ? 
 $lat                = $arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : null);
 $lng                = $arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
 $postal_codes       = !empty($args['postal_codes']) ? array_values((array) $args['postal_codes']) : [];
+$priority_listings  = !empty($args['priority_listings']) ? array_values((array) $args['priority_listings']) : [];
 
 // Get listings
 $result = null;
@@ -36,6 +37,7 @@ if ($args['send_first_page']) {
         'verified'          => false,
         'get_reviews'       => true,
         'postal_codes'      => $postal_codes,
+        'priority_listings' => $priority_listings,
         'page'              => 1,
     ]);
 }
