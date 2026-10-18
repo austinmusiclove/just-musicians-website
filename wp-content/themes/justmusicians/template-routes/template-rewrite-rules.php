@@ -41,7 +41,7 @@ function template_route_rewrite_rules() {
     );
 
     // Locale Category Pages
-    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands' ]);
+    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs' ]);
     add_rewrite_rule(
         '^([^/]+)/(' . $categories . ')/?$',
         'index.php?custom-template=landing-locale-category&locale=$matches[1]&lm-category=$matches[2]',
