@@ -17,6 +17,22 @@ function register_post_types() {
         'menu_icon' => 'dashicons-id-alt'
     ));
 
+    // Recommendation
+    register_post_type('recommendation', array(
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'),
+        'labels' => array(
+          'name' => 'Recommendation',
+          'add_new_item' => 'Add New Recommendation',
+          'edit_item' => 'Edit Recommendation',
+          'all_items' => 'All Recommendations',
+          'singular_name' => 'Recommendation'
+        ),
+        'menu_icon' => 'dashicons-thumbs-up'
+    ));
+
     // Listing Review
     register_post_type('listing_review', array(
         'public' => false,

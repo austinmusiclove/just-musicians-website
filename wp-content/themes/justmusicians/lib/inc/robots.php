@@ -23,6 +23,7 @@ function noindex_specific_post_type($robots) {
         is_singular('glossary-term') or
         is_singular('venue') or
         is_singular('podcast') or
+        is_singular('recommendation') or
         is_page('account') or
         is_page('listings') or
         is_page('collections') or
