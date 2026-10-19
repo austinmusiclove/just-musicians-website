@@ -19,22 +19,22 @@ $recommendation_ids = get_post_meta($post_id, 'recommendations', true);
         $rec_number++;
     ?>
 
-        <div class="flex flex-col md:gap-4">
+        <div class="flex flex-col">
 
             <h3>
                 <?php echo esc_html( "$rec_number. " ); ?>
                 <a href="<?php echo esc_url( get_permalink( $rec_listing ) ); ?>"><?php echo esc_html( $rec_title ); ?></a>
             </h3>
 
-            <div class="md:flex md:items-start md:gap-8">
+            <div class="flow-root">
                 <?php if ( ! empty( $rec_image ) ) { ?>
-                    <img class="w-full h-auto mb-6 md:mb-0 md:w-1/3"
+                    <img class="w-full h-auto mb-6 md:mb-0 md:float-right md:ml-8 md:w-1/3"
                         src="<?php echo esc_url( $rec_image ); ?>"
                         alt="<?php echo esc_attr( $rec_title ); ?>"
                         loading="lazy" />
                 <?php } ?>
                 <?php if ( ! empty( $rec_copy ) ) { ?>
-                    <p class="whitespace-pre-wrap md:w-3/4"><?php echo wp_kses_post( $rec_copy ); ?></p>
+                    <p class="whitespace-pre-wrap"><?php echo wp_kses_post( $rec_copy ); ?></p>
                 <?php } ?>
             </div>
 
