@@ -21,6 +21,11 @@ function validate_listing_args() {
         }
     }
 
+    // Zip code
+    if (empty($_POST['zip_code'])) {
+        return new WP_Error('missing_zip_code', 'Missing zip code');
+    }
+
     // Email
     if (isset($_POST['listing_email']) and !empty($_POST['listing_email'])) {
         if (!filter_var($_POST['listing_email'], FILTER_VALIDATE_EMAIL)) {

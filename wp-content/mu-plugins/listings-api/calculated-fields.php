@@ -68,10 +68,10 @@ add_action('listing_calc_rating_event', function($listing_post_id) {
 function update_search_rank($post_id) {
     $rank = 0;
 
-    // Boost rank by 100 if listing is a community partner
+    // Boost rank by 10 if listing is a community partner
     $community_partner = get_post_meta( $post_id, 'community_partner', true );
     if ( $community_partner ) {
-        $rank += 100;
+        $rank += 10;
     }
 
     // Boost rank by 100 if listing is claimed (not unclaimed)
