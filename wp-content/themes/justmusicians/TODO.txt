@@ -8,8 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    need to use the optimzed version of images in the recommendations on category pages
-    remove venue pages fully
     Strategy to confirm with expert
         Get backlinks to category locale pages
             Hand pick recommendations for each category and try to convert them to community partners
