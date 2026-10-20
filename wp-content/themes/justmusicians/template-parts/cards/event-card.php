@@ -40,7 +40,7 @@
             <?php if ($args['details']) { ?>
                 <div class="flex flex-col min-h-[1.5rem]">
                     <span class="text-16 text-black/50 font-semibold mb-1 inline-block">Details</span>
-                    <p class="text-14"><?php echo esc_html($args['details']); ?></p>
+                    <p class="text-14 whitespace-pre-wrap"><?php echo esc_html($args['details']); ?></p>
                 </div>
             <?php } ?>
 
@@ -53,7 +53,7 @@
                     </span>
                     <div class="flex flex-wrap items-center gap-2 text-14">
                         <?php if ($args['compensation']) { ?>
-                            <span><?php echo esc_html($args['compensation']); ?></span>
+                            <span class="whitespace-pre-wrap"><?php echo esc_html($args['compensation']); ?></span>
                         <?php } ?>
                     </div>
                 </div>

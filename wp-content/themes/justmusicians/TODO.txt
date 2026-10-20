@@ -89,9 +89,7 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     After design update
         add cloak back into applicant message
-        check for and remove script for expanding background color in single application behind application title; same on single event
         add back in functional attributes for show more dates button in single application page
-        check need for whitespace-pre-wrap in template-parts/cards/event-card.php details and gig-card.php
         pull in images dynamically in event applicant card instead of dummy images
         make sure event applicant card ensemble size is coming from applicant and not event
         My events spinner display non when not in use
@@ -105,7 +103,6 @@ Applications Features to add
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
         show availability dates on the applicant card
         add ensemble size to applicant view
-        Figure out issue with cover image
         Figure out get suggestions issue
         use publicly queriable false in post type registration
         merge application embed
