@@ -122,8 +122,7 @@
 
         </div>
         <?php
-        //$listing_image_urls = $args['listing_image_urls'] ?? [];
-        $listing_image_urls = array('https://hiremusicians.com/wp-content/uploads/2025/10/mozworth-live4-400x300.webp', 'https://hiremusicians.com/wp-content/uploads/2025/09/boz20-small-400x300.webp');
+        $listing_image_urls = $args['listing_image_urls'] ?? [];
         $listing_image_count = count($listing_image_urls);
         if ($listing_image_count >= 1) {
             $media_items = ($listing_image_count == 1) ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]]) : array_slice($listing_image_urls, 0, 2);

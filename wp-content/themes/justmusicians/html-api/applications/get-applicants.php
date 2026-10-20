@@ -38,6 +38,7 @@ if (!empty($submission_ids)) {
             'description'         => $listing['description'] ?? '',
             'genres'              => $listing['genre'] ?? [],
             'thumbnail_url'       => $listing['thumbnail_url'] ?? '',
+            'listing_image_urls'  => $listing['listing_image_urls'],
             'youtube_video_data'  => $listing['youtube_video_data'],
             'verified'            => $listing['verified'] ?? false,
             'permalink'           => $listing['permalink'] ?? '',

@@ -121,22 +121,19 @@
 
         </div>
         <?php
-        //$listing_image_urls = $args['listing_image_urls'] ?? [];
-        $listing_image_urls = array('https://hiremusicians.com/wp-content/uploads/2025/10/mozworth-live4-400x300.webp', 'https://hiremusicians.com/wp-content/uploads/2025/09/boz20-small-400x300.webp');
+        $listing_image_urls = $args['listing_image_urls'] ?? [];
         $listing_image_count = count($listing_image_urls);
+        if ($listing_image_count >= 1) {
+            $media_items = ($listing_image_count == 1) ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]]) : array_slice($listing_image_urls, 0, 2);
         ?>
-        <?php if ($listing_image_count >= 1) {
-        $media_items = ($listing_image_count == 1)
-            ? array_filter([$args['thumbnail_url'], $listing_image_urls[0]])
-            : array_slice($listing_image_urls, 0, 2);
-        ?>
-        <div class="flex gap-2 w-full">
-            <?php foreach ($media_items as $img_url) { ?>
-            <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
-                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
-                src="<?php echo esc_url($img_url); ?>" />
-            <?php } ?>
-        </div>
+            <div class="flex gap-2 w-full">
+                <?php foreach ($media_items as $img_url) { ?>
+                    <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
+                        <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
+                        src="<?php echo esc_url($img_url); ?>"
+                    />
+                <?php } ?>
+            </div>
         <?php } ?>
     </div>
     <div class="py-2 flex flex-col gap-y-2 w-full">

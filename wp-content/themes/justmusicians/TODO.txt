@@ -90,7 +90,6 @@ Applications Features to add
     After design update
         add cloak back into applicant message
         add back in functional attributes for show more dates button in single application page
-        pull in images dynamically in event applicant card instead of dummy images
         make sure event applicant card ensemble size is coming from applicant and not event
         My events spinner display non when not in use
         Create event form toast
