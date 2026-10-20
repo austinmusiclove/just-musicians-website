@@ -1,44 +1,57 @@
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative border-b border-black/20"
     <?php if ($args['last'] and !$args['is_last_page']) { ?>
-    hx-get="<?php echo site_url('/wp-html/v1/applications/' . $args['application_id'] . '/applicants/?page=' . $args['next_page']); ?>"
-    hx-trigger="revealed once" hx-target="#applicant-results" hx-swap="beforeend"
-    hx-indicator="#applicants-spinner-bottom" hx-include="#applicants-form" <?php } ?> x-data="{
+        hx-get="<?php echo site_url('/wp-html/v1/applications/' . $args['application_id'] . '/applicants/?page=' . $args['next_page']); ?>"
+        hx-trigger="revealed once"
+        hx-target="#applicant-results"
+        hx-swap="beforeend"
+        hx-indicator="#applicants-spinner-bottom"
+        hx-include="#applicants-form"
+    <?php } ?>
+    x-data="{
         submission_message: '<?php echo clean_str_for_doublequotes($args['submission_message'] ?? ''); ?>',
         submission_updated: '<?php echo clean_str_for_doublequotes($args['submission_updated'] ?? ''); ?>',
-    }">
+    }"
+>
 
     <!-- Notifications -->
-    <div class="absolute top-2 -left-2 z-[1]" hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
+    <div class="absolute top-2 -left-2 z-[1]"
+        hx-post="<?php echo site_url('/wp-html/v1/clear-notification/'); ?>"
         x-bind:hx-trigger="(!has_notification(notifications, 'new_applicant', '<?php echo $args['submission_id']; ?>')) ? 'never-trigger' : 'intersect once'"
-        hx-swap="beforeend" hx-indicator="#decoy-indicator"
-        hx-vals='{"notification_type":"new_applicant","subject_id": "<?php echo $args['submission_id']; ?>" }'>
+        hx-swap="beforeend"
+        hx-indicator="#decoy-indicator"
+        hx-vals='{"notification_type":"new_applicant","subject_id": "<?php echo $args['submission_id']; ?>" }'
+    >
         <span id="decoy-indicator"></span>
         <?php get_template_part('template-parts/cards/card-components/applicant-notification-badge', '', ['submission_id' => $args['submission_id'] ]); ?>
     </div>
 
     <div class="flex flex-col gap-2 w-full sm:w-56 shrink-0 max-w-3xl">
 
-        <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden" x-data="{
-            previousIndex: 0,
-            currentIndex: 0,
-            showArrows: isTouchDevice,
-            totalSlides: <?php echo (count($args['youtube_video_data']) + 1); ?>,
-            videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data'] ?? []); ?>,
-            playerIds: {},
-            _updateIndex(newIndex)  { updateIndex(this, newIndex); },
-            _pausePreviousSlide()   { pausePreviousSlide(this); },
-            _pauseCurrentSlide()    { pauseCurrentSlide(this); },
-            _playCurrentSlide()     { playCurrentSlide(this); },
-            _toggleMuteAllVideos()  { toggleMuteAllVideos(this); },
-            _isPaused()             { return isPaused(this); },
-            _enterSlider()          { enterSlider(this); },
-            _leaveSlider()          { leaveSlider(this); },
-            _updateVideoData(videoData) {
-                this._updateIndex(0);
-                this.videoData = videoData;
-                this.totalSlides = videoData.length + 1;
-            },
-        }" x-on:mouseleave="_leaveSlider()" x-on:mouseenter="_enterSlider()">
+        <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
+            x-data="{
+                previousIndex: 0,
+                currentIndex: 0,
+                showArrows: isTouchDevice,
+                totalSlides: <?php echo (count($args['youtube_video_data']) + 1); ?>,
+                videoData:   <?php echo clean_arr_for_doublequotes($args['youtube_video_data'] ?? []); ?>,
+                playerIds: {},
+                _updateIndex(newIndex)  { updateIndex(this, newIndex); },
+                _pausePreviousSlide()   { pausePreviousSlide(this); },
+                _pauseCurrentSlide()    { pauseCurrentSlide(this); },
+                _playCurrentSlide()     { playCurrentSlide(this); },
+                _toggleMuteAllVideos()  { toggleMuteAllVideos(this); },
+                _isPaused()             { return isPaused(this); },
+                _enterSlider()          { enterSlider(this); },
+                _leaveSlider()          { leaveSlider(this); },
+                _updateVideoData(videoData) {
+                    this._updateIndex(0);
+                    this.videoData = videoData;
+                    this.totalSlides = videoData.length + 1;
+                },
+            }"
+            x-on:mouseleave="_leaveSlider()"
+            x-on:mouseenter="_enterSlider()"
+        >
             <div class="bg-yellow-light aspect-4/3 flex transition-transform duration-500 ease-in-out"
                 x-bind:style="`transform: translateX(-${currentIndex * 100}%)`"
                 x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
@@ -46,7 +59,8 @@
                 <!-- Thumbnail -->
                 <img class="w-auto h-full object-cover"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                    src="<?php echo $args['thumbnail_url']; ?>" x-on:click="if (totalSlides > 1) { _updateIndex(1) }" />
+                    src="<?php echo $args['thumbnail_url']; ?>" x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
+                />
                 <!-- Youtube video iframes -->
                 <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
                     <div class="bg-yellow-light aspect-4/3 w-full h-full object-cover" x-id="['playerId']"
@@ -87,17 +101,19 @@
             <!-- Left Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
                 @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-                x-show="currentIndex > 0 && showArrows" x-cloak x-transition:enter-start="-translate-x-full opacity-0"
-                x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave-start="translate-x-0 opacity-100"
+                x-show="currentIndex > 0 && showArrows"
+                x-cloak x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave-start="translate-x-0 opacity-100"
                 x-transition:leave-end="-translate-x-full opacity-0">
-                <img class="rotate-180"
-                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+                <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
             </div>
             <!-- Right Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
                 @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
                 x-show="currentIndex < totalSlides - 1 && showArrows" x-cloak
-                x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:enter-start="translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
                 x-transition:leave-start="translate-x-0 opacity-100"
                 x-transition:leave-end="translate-x-full opacity-0">
                 <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
@@ -170,14 +186,13 @@
         <!-- Genres -->
         <div class="flex items-center gap-1 flex-wrap">
             <?php foreach ($args['genres'] as $term) { ?>
-            <span
-                class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
-                <?php echo $term; ?>
-            </span>
+                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+                    <?php echo $term; ?>
+                </span>
             <?php } ?>
         </div>
 
-        <!-- Description 
+        <!-- Description
         <p class="text-14">
             <?php echo $args['description']; ?>
         </p>-->
@@ -202,8 +217,7 @@
                     more</button>
             </div>
 
-            <!-- x-show="tooLong"
-        x-on:click="expanded = !expanded" x-text="expanded ? 'Show less' : 'Show more'" -->
+            <!-- x-show="tooLong" x-on:click="expanded = !expanded" x-text="expanded ? 'Show less' : 'Show more'" -->
         </div>
 
 
@@ -215,10 +229,7 @@
                 'btn_classes' => 'hover:bg-yellow-light bg-yellow font-sun-motter w-full sm:w-fit px-3 py-2 rounded-sm text-14 sm:text-12 inline-block sm:w-fit',
                 'btn_text'    => 'Send Inquiry',
             ]); ?>
-            <span class="text-14 text-black/50 ">Application submission last updated <span
-                    x-text="submission_updated"></span></span>
-
-
+            <span class="text-14 text-black/50 ">Application submission last updated <span x-text="submission_updated"></span></span>
         </div>
 
     </div>

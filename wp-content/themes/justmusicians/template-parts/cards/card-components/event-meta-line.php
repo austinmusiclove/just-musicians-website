@@ -59,7 +59,7 @@ $meta_line = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 ?>
 
 <?php if ($meta_line) { ?>
-<div class="flex items-center gap-1 min-h-[1.5rem]">
-    <p class="<?php echo $text_size; ?> truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
-</div>
+    <div class="flex items-center gap-1 min-h-[1.5rem]">
+        <p class="<?php echo $text_size; ?> truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
+    </div>
 <?php } ?>

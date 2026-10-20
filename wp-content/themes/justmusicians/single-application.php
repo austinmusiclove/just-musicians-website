@@ -62,7 +62,8 @@ get_header();
                     <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 pb-6 md:pb-12" x-data="{
+            <div class="col md:col-span-6 pb-6 md:pb-12"
+                x-data="{
                     collectionsMap:   <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     applicationId:   '<?php echo $application_id; ?>',
                     title:           '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
@@ -77,26 +78,12 @@ get_header();
                         this.appEvents    = app.events      || [];
                         this.showEditForm = false;
                     },
-                }" x-on:update-application="_updateApplication($event.detail.application)">
-
-                <script>
-                function setPseudoBackgroundWidth() {
-                    const el = document.querySelector('.pseudo-background');
-                    if (!el) return;
-
-                    const distance = window.innerWidth - el.getBoundingClientRect().left;
-                    el.style.width = `${distance}px`;
-                }
-                document.addEventListener("DOMContentLoaded", function() {
-                    setPseudoBackgroundWidth();
-                });
-                window.addEventListener('resize', setPseudoBackgroundWidth);
-                </script>
+                }"
+                x-on:update-application="_updateApplication($event.detail.application)"
+            >
 
                 <div class="relative pt-6">
-                    <div
-                        class="pseudo-background absolute -mx-4 md:mx-0 top-0 md:-left-8 lg:-left-12 h-full z-0 bg-yellow-10 border-b border-b-yellow/60 w-screen">
-                    </div>
+                    <div class="absolute -mx-4 md:mx-0 top-0 md:-left-8 lg:-left-12 h-full z-0 bg-yellow-10 border-b border-b-yellow/60 w-screen"></div>
                     <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16 relative z-10"
                         href="<?php echo site_url('/applications/'); ?>">
                         <span>←</span>
@@ -104,15 +91,13 @@ get_header();
                     </a>
 
                     <div class="pb-6 md:pb-14 flex justify-start items-center flex-row relative z-10">
-                        <h1 class="font-bold text-28 pb-8">
-                            <?php echo esc_html(get_post_meta($application_id, 'title', true) ?: 'Application'); ?></h1>
+                        <h1 class="font-bold text-28 pb-8"><?php echo esc_html(get_post_meta($application_id, 'title', true) ?: 'Application'); ?></h1>
                     </div>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
                 <div>
-                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span
-                        x-init="$dispatch('success-toast', {'message': 'Application Created Successfully'});"></span><?php } ?>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span x-init="$dispatch('success-toast', {'message': 'Application Created Successfully'});"></span><?php } ?>
                 </div>
 
                 <?php $default_tab = $_GET['tab'] ?? 'details'; ?>
@@ -125,18 +110,13 @@ get_header();
                     },
                 }">
                     <!-- Tabs -->
-                    <div class="flex items-start justify-between  -mt-9 z-10 relative">
+                    <div class="flex items-start justify-between -mt-9 z-10 relative">
                         <div class="flex gap-6 items-start">
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer"
-                                :class="{'active': showApplicationDetails}"
-                                x-on:click="hideTabs(); showApplicationDetails = true;">Application Details</div>
-                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative"
-                                :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicationDetails}" x-on:click="hideTabs(); showApplicationDetails = true;">Application Details</div>
+                            <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
                                 Applicants
-                                <span
-                                    class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-                                    x-show="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids) > 0"
-                                    x-cloak
+                                <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                                    x-show="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids) > 0" x-cloak
                                     x-text="get_notification_count_for_subject_ids(notifications, 'new_applicant', submission_ids)">
                                 </span>
                             </div>

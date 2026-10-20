@@ -26,8 +26,7 @@ get_header();
             </div>
             <div class="col md:col-span-6 py-6 md:py-12">
 
-                <a href="<?php echo site_url('/applications/'); ?>"
-                    class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8">
+                <a href="<?php echo site_url('/applications/'); ?>" class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8">
                     <span>←</span>
                     <span>Back to Applications</span>
                 </a>
@@ -42,14 +41,17 @@ get_header();
 
                 <?php } else { ?>
 
-                <form class="flex flex-col" x-data="{
-                            title: '',
-                        }" hx-post="<?php echo site_url('/wp-html/v1/applications/'); ?>"
-                    hx-target="#create-application-result" hx-indicator="#submit-button-content">
+                <form class="flex flex-col"
+                    x-data="{
+                        title: '',
+                    }"
+                    hx-post="<?php echo site_url('/wp-html/v1/applications/'); ?>"
+                    hx-target="#create-application-result"
+                    hx-indicator="#submit-button-content"
+                >
                     <div class="flex flex-col gap-2 mb-8">
                         <label for="title" class="block font-bold text-16">Title</label>
-                        <input type="text" id="title" name="title" x-model="title" class="input-border-bottom"
-                            placeholder="Live Band Application for Saturday Nights at Buck's" />
+                        <input type="text" id="title" name="title" x-model="title" class="input-border-bottom" placeholder="Live Band Application for Saturday Nights at Buck's" />
                     </div>
 
                     <!-- Description -->
@@ -89,21 +91,15 @@ get_header();
                     <?php if (!empty($upcoming_events)) { ?>
                     <div class="flex flex-col gap-2">
                         <label class="block font-bold text-22">Events</label>
-                        <p class="text-16">By associating events with your applciation, musicians can submit their
-                            availability for each event when filling out the application.</p>
+                        <p class="text-16">By associating events with your applciation, musicians can submit their availability for each event when filling out the application.</p>
                         <div class="flex flex-col gap-2">
                             <?php foreach ($upcoming_events as $event) { ?>
-                            <label
-                                class="custom-checkbox flex items-center gap-3 cursor-pointer p-2 border border-black/20 rounded-sm hover:bg-yellow-light">
+                            <label class="custom-checkbox flex items-center gap-3 cursor-pointer p-2 border border-black/20 rounded-sm hover:bg-yellow-light">
                                 <input type="checkbox" name="events[]" value="<?php echo $event['post_id']; ?>">
-                                <span class="checkmark"
-                                    style="top: 50%; transform: translateY(-50%); left: .5rem!important"></span>
+                                <span class="checkmark" style="top: 50%; transform: translateY(-50%); left: .5rem!important"></span>
                                 <div class="flex flex-col">
-                                    <div class="text-14 font-semibold"><?php echo esc_html($event['event_name']); ?>
-                                    </div>
-                                    <div class="text-12 text-black/60">
-                                        <?php echo $event['start_date'] ? gmdate('M j, Y', strtotime($event['start_date'])) : ''; ?>
-                                    </div>
+                                    <div class="text-14 font-semibold"><?php echo esc_html($event['event_name']); ?></div>
+                                    <div class="text-12 text-black/60"><?php echo $event['start_date'] ? gmdate('M j, Y', strtotime($event['start_date'])) : ''; ?></div>
                                 </div>
                             </label>
                             <?php } ?>
@@ -112,8 +108,7 @@ get_header();
                     <?php } ?>
 
                     <div class="flex gap-2 mt-4">
-                        <button type="submit" x-bind:disabled="!title"
-                            class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-3 rounded-sm font-sun-motter text-16 w-fit disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" x-bind:disabled="!title" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-3 rounded-sm font-sun-motter text-16 w-fit disabled:opacity-50 disabled:cursor-not-allowed">
                             <span id="submit-button-content">
                                 <span class="htmx-indicator-component-block-replace">Create Application</span>
                                 <span class="htmx-indicator-component-block mx-2 my-1">

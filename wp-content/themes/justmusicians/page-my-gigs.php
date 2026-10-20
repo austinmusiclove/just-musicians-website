@@ -46,17 +46,21 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                         $success = add_listing_by_invitation_code($_GET['lic']);
                         // if success, redirect back to the same page but remove query params to avoid an infinite loop
                         if ($success and !is_wp_error($success)) { ?>
-                <span x-init="$dispatch('success-toast', {'message': 'Listing published successfully'})"></span>
-                <?php } else { ?>
-                <span
-                    x-init="$dispatch('error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
-                <?php }
+                            <span x-init="$dispatch('success-toast', {'message': 'Listing published successfully'})"></span>
+                        <?php } else { ?>
+                            <span x-init="$dispatch('error-toast', {'message': 'Failed to add listing from invitation link with error: <?php echo $success->get_error_message(); ?>'})"></span>
+                        <?php }
                     } ?>
 
-                <form id="my-gigs-form" x-data="{
-                            dateRange: 'upcoming',
-                        }" hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>" hx-target="#results"
-                    hx-indicator="#gig-spinner-top" hx-trigger="load, filterupdate">
+                <form id="my-gigs-form"
+                    x-data="{
+                        dateRange: 'upcoming',
+                    }"
+                    hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
+                    hx-target="#results"
+                    hx-indicator="#gig-spinner-top"
+                    hx-trigger="load, filterupdate"
+                >
                     <input type="hidden" name="date_range" x-model="dateRange" />
 
                     <!-- Filter bar -->
@@ -64,18 +68,18 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
 
                         <!-- Listing dropdown -->
                         <?php
-                                $user_listings = get_user_listings(get_current_user_id());
-                                $listing_options = [['value' => 'all', 'label' => 'All Listings', 'show' => 'true']];
-                                foreach ($user_listings as $id => $name) {
-                                    $listing_options[] = ['value' => (string) $id, 'label' => $name, 'show' => 'true'];
-                                }
-                            ?>
+                            $user_listings = get_user_listings(get_current_user_id());
+                            $listing_options = [['value' => 'all', 'label' => 'All Listings', 'show' => 'true']];
+                            foreach ($user_listings as $id => $name) {
+                                $listing_options[] = ['value' => (string) $id, 'label' => $name, 'show' => 'true'];
+                            }
+                        ?>
                         <div x-on:filter_listing-changed="$dispatch('filterupdate');">
                             <?php get_template_part('template-parts/global/form/dropdown', '', [
-                                    'options'     => $listing_options,
-                                    'input_name'  => 'filter_listing',
-                                    'selected'    => 'all',
-                                ]); ?>
+                                'options'     => $listing_options,
+                                'input_name'  => 'filter_listing',
+                                'selected'    => 'all',
+                            ]); ?>
                         </div>
 
                         <!-- Status dropdown -->

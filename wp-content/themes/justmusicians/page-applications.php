@@ -25,26 +25,27 @@ get_header();
                         <h1 class="font-bold text-28">Applications</h1>
                     </a>
                     <?php if (is_user_logged_in()) { ?>
-                    <a href="<?php echo site_url('/application-form/'); ?>"
-                        class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add
-                        application +</a>
+                        <a href="<?php echo site_url('/application-form/'); ?>" class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add application +</a>
                     <?php } ?>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
                 <div>
-                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'delete') { ?><span
-                        x-init="$dispatch('success-toast', {'message': 'Application Deleted Successfully'});"></span><?php } ?>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'delete') { ?><span x-init="$dispatch('success-toast', {'message': 'Application Deleted Successfully'});"></span><?php } ?>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
 
-                <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'create an application' ]); ?>
+                    <?php echo get_template_part('template-parts/global/empty-states/sign-up-to-access', '', [ 'message' => 'create an application' ]); ?>
 
                 <?php } else { ?>
 
-                <form id="applications-form" hx-get="<?php echo site_url('/wp-html/v1/applications/'); ?>"
-                    hx-target="#results" hx-indicator="#applications-spinner" hx-trigger="load"></form>
+                <form id="applications-form"
+                    hx-get="<?php echo site_url('/wp-html/v1/applications/'); ?>"
+                    hx-target="#results"
+                    hx-indicator="#applications-spinner"
+                    hx-trigger="load"
+                ></form>
 
                 <span id="results"></span>
 

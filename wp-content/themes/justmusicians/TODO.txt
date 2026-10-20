@@ -91,7 +91,6 @@ Applications Features to add
         add cloak back into applicant message
         check for and remove script for expanding background color in single application behind application title; same on single event
         add back in functional attributes for show more dates button in single application page
-        remove dummy paragraph in show-more-text.php and add back in whitespace-pre-wrap
         check need for whitespace-pre-wrap in template-parts/cards/event-card.php details and gig-card.php
         pull in images dynamically in event applicant card instead of dummy images
         make sure event applicant card ensemble size is coming from applicant and not event
@@ -114,6 +113,9 @@ Applications Features to add
         connect non-dummy date for submitted applications
         remove spinner at bottom of submitted applications page and my gigs
         change your application submission has been submitted to your application has been submitted
+        connect dates in template-parts/cards/applicant-card.php
+        connection resubmit and withdraw in submitted application; template-parts/cards/card-components/submitted-application-card-form.php
+        check inquiry slide to send existing inquiries
     Other features that would be needed for parity with venue forms out there
         dates requested (Flamingo, Kick Butt Coffee)
         last time you played here (Flamingo)

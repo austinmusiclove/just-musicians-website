@@ -10,20 +10,17 @@
 }">
     <div>
         <label class="text-14 font-bold">Address Line 1</label>
-        <input type="text" name="event_address_line_1" x-bind:value="addressLine1" class="w-full"
-            placeholder="Street address" />
+        <input type="text" name="event_address_line_1" x-bind:value="addressLine1" class="w-full" placeholder="Street address" />
     </div>
     <div>
         <label class="text-14 font-bold">Address Line 2</label>
-        <input type="text" name="event_address_line_2" x-bind:value="addressLine2" class="w-full"
-            placeholder="Apt, suite, etc." />
+        <input type="text" name="event_address_line_2" x-bind:value="addressLine2" class="w-full" placeholder="Apt, suite, etc." />
     </div>
     <div class="flex flex-col sm:flex-row gap-2">
         <div class="flex flex-col justify-end">
             <div class="flex flex-row">
                 <label class="text-14 font-bold">City<span class="text-red"> *</span></label>
-                <span id="city-active-search-spinner"
-                    class="px-2 inset-0 flex items-center justify-center htmx-indicator">
+                <span id="city-active-search-spinner" class="px-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
             </div>
@@ -49,14 +46,12 @@
         </div>
         <div>
             <label class="text-14 font-bold">State</label>
-            <input type="text" name="event_state" x-model="stateInput" class="w-full"
-                autocomplete="location-disabled" />
+            <input type="text" name="event_state" x-model="stateInput" class="w-full" autocomplete="location-disabled" />
         </div>
         <div class="flex flex-col justify-end">
             <div class="flex flex-row">
                 <label class="text-14 font-bold">Postal Code</label>
-                <span id="zip-active-search-spinner"
-                    class="px-2 inset-0 flex items-center justify-center htmx-indicator">
+                <span id="zip-active-search-spinner" class="px-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
             </div>

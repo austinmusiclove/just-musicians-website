@@ -25,17 +25,13 @@ get_header();
                         <h1 class="font-bold text-28">My Events</h1>
                     </a>
                     <?php if (is_user_logged_in()) { ?>
-                    <a href="<?php echo site_url('/event-form/'); ?>"
-                        class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add
-                        event
-                        +</a>
+                        <a href="<?php echo site_url('/event-form/'); ?>" class="font-bold text-12 pt-1.5 pb-1 px-1.5 rounded bg-white border border-black/20 hover:drop-shadow cursor-pointer inline-block">Add event +</a>
                     <?php } ?>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
                 <div>
-                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'delete') { ?><span
-                        x-init="$dispatch('success-toast', {'message': 'Event Deleted Successfully'});"></span><?php } ?>
+                    <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'delete') { ?><span x-init="$dispatch('success-toast', {'message': 'Event Deleted Successfully'});"></span><?php } ?>
                 </div>
 
                 <?php if (!is_user_logged_in()) { ?>
@@ -44,10 +40,15 @@ get_header();
 
                 <?php } else { ?>
 
-                <form id="my-events-form" x-data="{
-                            dateRange: 'upcoming',
-                        }" hx-get="<?php echo site_url('/wp-html/v1/my-events/'); ?>" hx-target="#results"
-                    hx-indicator="#events-spinner-top" hx-trigger="load, filterupdate">
+                <form id="my-events-form"
+                    x-data="{
+                        dateRange: 'upcoming',
+                    }"
+                    hx-get="<?php echo site_url('/wp-html/v1/my-events/'); ?>"
+                    hx-target="#results"
+                    hx-indicator="#events-spinner-top"
+                    hx-trigger="load, filterupdate"
+                >
                     <input type="hidden" name="date_range" x-model="dateRange" />
 
                     <div class="flex flex-wrap items-center gap-2 mb-4 border-b border-black/20">

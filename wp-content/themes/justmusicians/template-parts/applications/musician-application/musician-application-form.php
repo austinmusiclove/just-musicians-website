@@ -1,11 +1,16 @@
 <form class="flex flex-col gap-8" enctype="multipart/form-data" novalidate data-testid="musician-application-form"
-    x-show="showApplication" x-cloak x-ref="listingForm" x-init="$watch('listingId', () => htmx.process($el))"
+    x-show="showApplication" x-cloak
+    x-ref="listingForm"
+    x-init="$watch('listingId', () => htmx.process($el))"
     <?php if ($args['demo']) { ?>
-    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/demo/` : '/submit/demo/')"
+        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/demo/` : '/submit/demo/')"
     <?php } else { ?>
-    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
-    <?php } ?> hx-trigger="submitapplication" hx-target="#submit-application-result"
-    hx-indicator="#submit-button-content" x-data="{
+        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
+    <?php } ?>
+    hx-trigger="submitapplication"
+    hx-target="#submit-application-result"
+    hx-indicator="#submit-button-content"
+    x-data="{
         showImageEditPopup:     false,
         showStagePlotPopup:     false,
         showYoutubeLinkPopup:   false,
@@ -84,7 +89,8 @@
 
         _addYoutubeUrl(input)    { addYoutubeUrl(this, input); },
         _removeYoutubeUrl(index) { removeYoutubeUrl(this, index); },
-    }">
+    }"
+>
 
     <!-- Listing Dropdown -->
     <?php if (count($args['user_listings']) > 0) { ?>
@@ -134,7 +140,8 @@
         </label>
         <textarea name="applicant_message" class="w-full h-32 !border-0"
             placeholder="Here's your chance to send the application reviewer a personalized message"
-            x-model="message"></textarea>
+            x-model="message"
+        ></textarea>
     </div>
     <input type="hidden" name="application_id" value="<?php echo $args['application_id']; ?>" />
     <input type="hidden" name="status" value="active" />
@@ -147,15 +154,16 @@
     <?php get_template_part('template-parts/applications/musician-application/availability-inputs', '', [ 'events' => $args['events'] ]); ?>
 
     <!-- Submit -->
-    <button type="button"
-        class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
-        x-bind:disabled="hasListings && !listingId && !createNewListing" x-on:click=" <?php // Skip front end validation when user is not creating a listing ?>
+    <button type="button" class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-16 px-2 py-2 w-full sm:w-fit disabled:opacity-70 disabled:hover:bg-black/40"
+        x-bind:disabled="hasListings && !listingId && !createNewListing"
+        x-on:click=" <?php // Skip front end validation when user is not creating a listing ?>
             if (!createNewListing) {
                 $dispatch('submitapplication');
             } else if ($refs.listingForm.reportValidity()) {
                 $dispatch('submitapplication');
             }
-        ">
+        "
+    >
         <span id="submit-button-content">
             <span class="htmx-indicator-component-block-replace">Submit Application</span>
             <span class="htmx-indicator-component-block mx-2 my-1">
