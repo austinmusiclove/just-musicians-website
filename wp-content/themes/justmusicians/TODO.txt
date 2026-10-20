@@ -92,6 +92,7 @@ Applications Features to add
         check for and remove script for expanding background color in single application behind application title; same on single event
         add back in functional attributes for show more dates button in single application page
         remove dummy paragraph in show-more-text.php and add back in whitespace-pre-wrap
+        check need for whitespace-pre-wrap in template-parts/cards/event-card.php details and gig-card.php
         pull in images dynamically in event applicant card instead of dummy images
         make sure event applicant card ensemble size is coming from applicant and not event
         My events spinner display non when not in use

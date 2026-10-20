@@ -18,6 +18,8 @@ $end_ts        = $end_date   ? strtotime($end_date)   : null;
 $start_display = $start_ts   ? gmdate('M j, Y', $start_ts) : '';
 $end_display   = $end_ts     ? gmdate('M j, Y', $end_ts)   : '';
 
+$text_size     = $args['text_size'] ?? 'text-14';
+
 $address_parts = [];
 if ($address_line_1) $address_parts[] = $address_line_1;
 if ($address_line_2) $address_parts[] = $address_line_2;
@@ -57,7 +59,7 @@ $meta_line = !empty($meta_parts) ? implode(' • ', $meta_parts) : '';
 ?>
 
 <?php if ($meta_line) { ?>
-    <div class="flex items-center gap-1 min-h-[1.5rem]">
-        <p class="text-14 truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
-    </div>
+<div class="flex items-center gap-1 min-h-[1.5rem]">
+    <p class="<?php echo $text_size; ?> truncate text-black/70"><?php echo esc_html($meta_line); ?></p>
+</div>
 <?php } ?>

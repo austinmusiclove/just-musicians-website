@@ -1,203 +1,220 @@
 form {
-	input[type="text"], input[type="number"], select, .pseudo-select, input[type="url"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"],
+  input[type='text'],
+  input[type='number'],
+  select,
+  .pseudo-select,
+  input[type='url'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='date'],
+  input[type='time'],
   .has-border {
-    &:not(.no-formatting){
+    &:not(.no-formatting) {
       display: block;
       width: 100%;
-      border: 1px solid rgba(0,0,0,.4);
-      border-radius: .25rem;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      border-radius: 0.25rem;
       font-size: 1rem;
-      padding: .5rem .75rem;
+      padding: 0.5rem 0.75rem;
     }
     &.has-icon {
       padding-left: 2.5rem;
     }
     &.rounded-tl-none {
-      border-top-left-radius: 0!important;
+      border-top-left-radius: 0 !important;
     }
     &.p-0 {
       padding: 0;
     }
-	}
-	fieldset.radio-buttons div {
-		margin-bottom: 1rem;
-	}
-	textarea:not(.no-formatting) {
-		border: 1px solid rgba(0,0,0,.2);
-		padding: .5rem;
-        border-radius: .25rem;
-	}
+  }
+  fieldset.radio-buttons div {
+    margin-bottom: 1rem;
+  }
+  textarea:not(.no-formatting) {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .input-border-bottom {
+    border-inline-width: 0 !important;
+    border-top-width: 0 !important;
+    border-radius: 0 !important;
+    padding: 0.5rem 0 !important;
+    font-size: 1.27rem !important;
+    border-bottom-width: 2px !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    margin-right: 2rem;
+    &:focus {
+      outline: none;
+      border-color: rgba(0, 0, 0, 0.4) !important;
+    }
+  }
 }
-
-
 
 /* Base styles */
 .custom-checkbox {
-    display: inline-flex;
-    align-items: start;
-    gap: .5rem;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    line-height: 125%;
-  }
+  display: inline-flex;
+  align-items: start;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  line-height: 125%;
+}
 
-  .custom-checkbox input {
-    //display: none;
-    opacity: 0;
-  }
+.custom-checkbox input {
+  //display: none;
+  opacity: 0;
+}
 
-  .custom-checkbox span {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid rgba(0,0,0,.4);
-    border-radius: .25rem;
-    background-color: white;
-    position: absolute;
-    top: .12rem;
-    left: 0;
-    flex-shrink: 0;
-  }
+.custom-checkbox span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.25rem;
+  background-color: white;
+  position: absolute;
+  top: 0.12rem;
+  left: 0;
+  flex-shrink: 0;
+}
 
-  .custom-checkbox span::after {
-    content: "";
-    position: absolute;
-    top: .09rem;
-    left: .3rem;
-    width: .3rem;
-    height: .6rem;
-    border: solid #ffffff;
-    border-width: 0 .125rem .125rem 0;
-    transform: rotate(45deg);
-    opacity: 0;
-  }
+.custom-checkbox span::after {
+  content: '';
+  position: absolute;
+  top: 0.09rem;
+  left: 0.3rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid #ffffff;
+  border-width: 0 0.125rem 0.125rem 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
 
-  /* Checked state */
-  .custom-checkbox input:checked + span {
-    background-color: #D29429;
-    border-color: #D29429;
-  }
+/* Checked state */
+.custom-checkbox input:checked + span {
+  background-color: #d29429;
+  border-color: #d29429;
+}
 
-  .custom-checkbox input:checked + span::after {
-    opacity: 1;
-  }
+.custom-checkbox input:checked + span::after {
+  opacity: 1;
+}
 
+.custom-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  .custom-radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.custom-radio div {
+  position: relative;
+}
 
-  .custom-radio div {
-    position: relative;
-  }
+.custom-radio input {
+  opacity: 0;
+  cursor: pointer;
+  margin-right: 0.125rem;
+}
 
-  .custom-radio input {
-    opacity: 0;
-    cursor: pointer;
-    margin-right:.125rem;
-  }
+.custom-radio span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #d29429;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  cursor: pointer;
+  pointer-events: none;
+  top: 0.25rem;
+  left: 0;
+}
 
-  .custom-radio span {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border: 2px solid #D29429;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-    cursor: pointer;
-    pointer-events: none;
-    top: .25rem;
-    left: 0;
+/* Inner circle for selected state */
+.custom-radio span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #d29429;
+  border-radius: 50%;
+  opacity: 0;
+}
 
-  }
+/* Checked state */
+.custom-radio input:checked + span {
+  border-color: #d29429;
+  background-color: #e6f0ff;
+}
 
-  /* Inner circle for selected state */
-  .custom-radio span::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: .5rem;
-    height: .5rem;
-    background-color: #D29429;
-    border-radius: 50%;
-    opacity: 0;
-  }
+.custom-radio input:checked + span::after {
+  opacity: 1;
+}
 
-  /* Checked state */
-  .custom-radio input:checked + span {
-    border-color: #D29429;
-    background-color: #e6f0ff;
-  }
-
-  .custom-radio input:checked + span::after {
-    opacity: 1;
-  }
-
-
-  /* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
-  .htmx-indicator {
-      opacity: 0;
-  }
-  .htmx-request .htmx-indicator {
-      opacity: 1;
-  }
-  .htmx-indicator-replace {
-      opacity: 1;
-  }
-  .htmx-request .htmx-indicator-replace {
-      opacity: 0;
-  }
-  .htmx-indicator-flex {
-      display: none;
-  }
-  .htmx-request.htmx-indicator-flex {
-      display: flex;
-  }
-  .htmx-indicator-flex-replace {
-      display: flex;
-  }
-  .htmx-request.htmx-indicator-flex-replace {
-      display: none;
-  }
-  .htmx-indicator-block {
-      display: none;
-  }
-  .htmx-request.htmx-indicator-block {
-      display: block;
-  }
-  .htmx-indicator-block-replace {
-      display: block;
-  }
-  .htmx-request.htmx-indicator-block-replace {
-      display: none;
-  }
-  .htmx-indicator-component-block {
-      display: none;
-  }
-  .htmx-request .htmx-indicator-component-flex {
-      display: flex;
-  }
-  .htmx-indicator-component-flex-replace {
-      display: flex;
-  }
-  .htmx-request .htmx-indicator-component-flex-replace {
-      display: none;
-  }
-  .htmx-indicator-component-flex {
-      display: none;
-  }
-  .htmx-request .htmx-indicator-component-block {
-      display: block;
-  }
-  .htmx-indicator-component-block-replace {
-      display: block;
-  }
-  .htmx-request .htmx-indicator-component-block-replace {
-      display: none;
-  }
+/* HTMX indicator - class defined for an element that is replaced by the htmx indicator element*/
+.htmx-indicator {
+  opacity: 0;
+}
+.htmx-request .htmx-indicator {
+  opacity: 1;
+}
+.htmx-indicator-replace {
+  opacity: 1;
+}
+.htmx-request .htmx-indicator-replace {
+  opacity: 0;
+}
+.htmx-indicator-flex {
+  display: none;
+}
+.htmx-request.htmx-indicator-flex {
+  display: flex;
+}
+.htmx-indicator-flex-replace {
+  display: flex;
+}
+.htmx-request.htmx-indicator-flex-replace {
+  display: none;
+}
+.htmx-indicator-block {
+  display: none;
+}
+.htmx-request.htmx-indicator-block {
+  display: block;
+}
+.htmx-indicator-block-replace {
+  display: block;
+}
+.htmx-request.htmx-indicator-block-replace {
+  display: none;
+}
+.htmx-indicator-component-block {
+  display: none;
+}
+.htmx-request .htmx-indicator-component-flex {
+  display: flex;
+}
+.htmx-indicator-component-flex-replace {
+  display: flex;
+}
+.htmx-request .htmx-indicator-component-flex-replace {
+  display: none;
+}
+.htmx-indicator-component-flex {
+  display: none;
+}
+.htmx-request .htmx-indicator-component-block {
+  display: block;
+}
+.htmx-indicator-component-block-replace {
+  display: block;
+}
+.htmx-request .htmx-indicator-component-block-replace {
+  display: none;
+}

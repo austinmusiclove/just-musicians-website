@@ -1,24 +1,24 @@
 <?php $entries = hm_get_access_entries($args['subject_id']); ?>
 
-<div class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4 sm:p-8" x-show="showShareModal" x-cloak>
+<div class="popup-wrapper w-screen h-screen fixed top-0 left-0 z-50 flex items-center justify-center p-4 sm:p-8"
+    x-show="showShareModal" x-cloak>
 
     <div class="popup-close-bg bg-black/40 absolute top-0 left-0 w-full h-full cursor-pointer"
-        x-on:click="showShareModal = false"
-    ></div>
+        x-on:click="showShareModal = false"></div>
 
-    <div class="bg-white relative w-full h-full md:w-auto md:h-auto flex items-center justify-center p-4 sm:p-8" style="max-width: 780px;">
+    <div class="bg-white relative w-full md:w-auto md:h-auto flex items-center justify-center p-4 sm:p-8"
+        style="max-width: 780px;">
 
         <!-- X button -->
         <img class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer"
             src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
-            x-on:click="showShareModal = false;"
-        />
+            x-on:click="showShareModal = false;" />
 
         <!-- Share form -->
-        <form id="share-access-form" class="p-8 w-full" style="width: 500px;">
+        <form id="share-access-form" class="p-2 md:p-8 w-full md:w-lg">
 
-            <h2 class="text-22 font-sun-motter mb-2"><?php echo esc_html($args['heading']); ?></h2>
-            <div class="text-14 text-black/60 mb-4 flex items-center justify-between gap-2">
+            <h2 class="text-22 md:text-25 font-sun-motter mb-8"><?php echo esc_html($args['heading']); ?></h2>
+            <div class="text-18 font-bold mb-2 flex items-center justify-between gap-1">
                 <span>People with access</span>
                 <?php
                 $other_users = array_filter($entries, function($entry) { return (int) $entry->user_id !== get_current_user_id() and !empty($entry->user_email); });
@@ -35,38 +35,42 @@
                 'subject_type' => $args['subject_type'],
             ]); ?>
 
-            <input type="email" name="email" placeholder="Email address" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 focus:border-yellow outline-none" x-model="shareEmail" />
+            <div class="bg-yellow-10 p-2 mt-3 border border-black-10 rounded">
+                <div class="mb-2 text-16">Add someone else</div>
 
-            <select name="access_type" class="w-full border-2 border-black/20 rounded-sm p-3 text-14 mt-4 bg-white focus:border-yellow outline-none" x-model="shareAccessType">
-                <option value="<?php echo esc_attr(HM_ACCESS_TYPE_VIEW); ?>">View</option>
-                <option value="<?php echo esc_attr(HM_ACCESS_TYPE_EDIT); ?>">Edit</option>
-            </select>
+                <div class="flex items-center gap-3">
+                    <input type="email" name="email" placeholder="Email address"
+                        class="w-full border-2 border-black/20 rounded-sm p-3 !text-14 focus:border-yellow outline-none"
+                        x-model="shareEmail" />
 
-            <input type="hidden" name="subject_id" value="<?php echo esc_attr($args['subject_id']); ?>" />
-            <input type="hidden" name="subject_type" value="<?php echo esc_attr($args['subject_type']); ?>" />
+                    <select name="access_type"
+                        class="!w-32 border-2 border-black/20 rounded-sm py-2 !pl-1 !text-14 max-w-[80px] bg-white focus:border-yellow outline-none"
+                        x-model="shareAccessType">
+                        <option value="<?php echo esc_attr(HM_ACCESS_TYPE_VIEW); ?>">View</option>
+                        <option value="<?php echo esc_attr(HM_ACCESS_TYPE_EDIT); ?>">Edit</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="subject_id" value="<?php echo esc_attr($args['subject_id']); ?>" />
+                <input type="hidden" name="subject_type" value="<?php echo esc_attr($args['subject_type']); ?>" />
+            </div>
 
             <div class="flex items-center justify-end gap-2 mt-6">
 
                 <?php if (!empty($args['permalink'])) { ?>
-                <button type="button" class="mr-auto border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
+                <button type="button"
+                    class="mr-auto border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
                     x-data="{ copied: false, copyLink() { const url = '<?php echo esc_url($args['permalink']); ?>'; navigator.clipboard.writeText(url).then(() => { this.copied = true; setTimeout(() => this.copied = false, 2000); }); } }"
-                    x-on:click="copyLink()"
-                    x-text="copied ? 'Copied Link!' : 'Copy Link'"
-                >Copy Link</button>
+                    x-on:click="copyLink()" x-text="copied ? 'Copied Link!' : 'Copy Link'">Copy Link</button>
                 <?php } ?>
 
-                <button type="button"
-                    class="border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
-                    x-on:click="showShareModal = false;"
-                >Cancel</button>
+                <button type="button" class="border-2 border-black px-4 py-2 text-14 font-sun-motter hover:bg-black/5"
+                    x-on:click="showShareModal = false;">Cancel</button>
                 <button type="button"
                     class="bg-yellow shadow-black-offset border-2 border-black font-sun-motter text-14 px-5 py-2 hover:bg-navy hover:text-white"
                     hx-post="<?php echo site_url('/wp-html/v1/access/'); ?>"
-                    hx-target="#share-mdl-results-<?php echo esc_attr($args['subject_id']); ?>"
-                    hx-swap="innerHTML"
-                    hx-indicator="#share-access-button-content"
-                    hx-include="#share-access-form"
-                >
+                    hx-target="#share-mdl-results-<?php echo esc_attr($args['subject_id']); ?>" hx-swap="innerHTML"
+                    hx-indicator="#share-access-button-content" hx-include="#share-access-form">
                     <span id="share-access-button-content" class="flex justify-center">
                         <span class="htmx-indicator-component-block-replace">Share</span>
                         <span class="htmx-indicator-component-block">

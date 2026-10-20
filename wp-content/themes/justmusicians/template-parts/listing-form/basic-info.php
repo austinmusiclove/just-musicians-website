@@ -3,7 +3,9 @@
     <fieldgroup class="has-border p-4 relative">
         <!-- Performer Name -->
         <label class="hidden" for="listing_name">Performer or Band Name</label>
-        <input id="performer-name-input" class="no-formatting block w-full text-20 py-2 border-b border-black/20" placeholder="Performer or band name*" type="text" id="listing_name" name="listing_name" autocomplete="off" required x-model="pName">
+        <input id="performer-name-input" class="no-formatting block w-full text-20 py-2 border-b border-black/20"
+            placeholder="Performer or band name*" type="text" id="listing_name" name="listing_name" autocomplete="off"
+            required x-model="pName">
         <!-- Description -->
         <div class="flex gap-1 mt-2">
             <label for="description" class="flex items-center gap-1">
@@ -11,8 +13,10 @@
                 <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'E.g., 5-piece Country Band' ]); ?>
             </label>
         </div>
-        <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription" ></textarea>
-        <div class="bg-yellow-20 absolute bottom-2 right-2 text-14 text-grey px-1 py-0.5 rounded-sm"><span x-text="pDescription.length">0</span>/40 char</div>
+        <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description"
+            name="description" maxlength="40" required x-model="pDescription"></textarea>
+        <div class="bg-yellow-20 absolute bottom-2 right-2 text-14 text-grey px-1 py-0.5 rounded-sm"><span
+                x-text="pDescription.length">0</span>/40 char</div>
     </fieldgroup>
 
     <!-- Location -->
@@ -38,7 +42,7 @@
                 'input_name'      => 'pc_search',
                 'placeholder'     => 'Postal Code',
                 'autocomplete'    => 'postal-code-disabled',
-                'required'        => true,
+                'required'        => false,
                 'input_var'       => 'zipCodeInput',
                 'selected_var'    => 'fullLocation',
                 'show_var'        => 'showZipSearchOptions',
@@ -67,7 +71,8 @@
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
             <span class="font-bold">Biography</span>
         </label>
-        <textarea id="bio" name="bio" placeholder="Add your bio here" class="w-full h-32 !border-0" x-model="pBio"></textarea>
+        <textarea id="bio" name="bio" placeholder="Add your bio here" class="w-full h-32 !border-0"
+            x-model="pBio"></textarea>
     </fieldgroup>
 
 
