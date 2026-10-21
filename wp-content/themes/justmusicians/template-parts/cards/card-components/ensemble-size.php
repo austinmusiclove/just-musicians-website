@@ -1,4 +1,4 @@
-<div class="flex items-start gap-1" x-data="{
+<div class="flex items-center gap-1" x-data="{
     cardEnsembleSize: <?php echo clean_arr_for_doublequotes($args['ensemble_size'] ?? []); ?>,
 }">
 

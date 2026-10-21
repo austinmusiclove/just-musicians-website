@@ -8,6 +8,8 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
+    make sure h1 heading in category locale pages and home
+    add alt text to thumbnails, icons, listing page cover and listing images
     Strategy to confirm with expert
         Get backlinks to category locale pages
             Hand pick recommendations for each category and try to convert them to community partners
@@ -90,10 +92,7 @@ Applications Features to add
     dates requested (Flamingo, Kick Butt Coffee)
     After design update
         reference emails
-            add cloak back into applicant message
-            Figure out get suggestions issue
-            remove spinner at bottom of submitted applications page and my gigs
-            add back in functional attributes for show more dates button in single application page
+            remove spinner at bottom of submitted applications page and my gigs, my events
         withdraw application
             change edit submitted application to either resubmit or withdraw
             connection resubmit and withdraw in submitted application; template-parts/cards/card-components/submitted-application-card-form.php
