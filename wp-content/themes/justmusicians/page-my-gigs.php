@@ -16,16 +16,16 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
 
 <div id="page" class="flex flex-col grow">
 
-    <div id="content" class="grow flex flex-col relative">
-        <div class="container md:grid md:grid-cols-9 gap-8 lg:gap-12">
+    <div id="content" class="flex flex-col grow relative">
+        <div class="container flex grow flex-col md:grid md:grid-cols-9 gap-8 lg:gap-12">
             <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                 <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
                     <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 py-6 md:py-12">
+            <div class="col grow md:col-span-6 pt-6 md:pt-12 pb-4 flex flex-col">
 
-                <div class="mb-6 md:mb-12 flex justify-between items-center flex-row">
+                <div class="mb-6 md:mb-14 flex justify-between items-center flex-row">
                     <a href="<?php echo site_url('/my-gigs/'); ?>">
                         <h1 class="font-bold text-32">My Gigs</h1>
                     </a>
@@ -58,7 +58,7 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                     }"
                     hx-get="<?php echo site_url('/wp-html/v1/my-gigs/'); ?>"
                     hx-target="#results"
-                    hx-indicator="#gig-spinner-top"
+                    hx-indicator=".gig-spinner"
                     hx-trigger="load, filterupdate"
                 >
                     <input type="hidden" name="date_range" x-model="dateRange" />
@@ -110,17 +110,17 @@ $initial_status = !empty($_GET['status']) && in_array($_GET['status'], $valid_st
                                 x-on:click="dateRange = 'past'; $nextTick(() => $dispatch('filterupdate'));">Past</button>
                         </div>
 
-                        <div id="gig-spinner-top" class="flex items-center justify-center htmx-indicator">
-                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
+                        <div id="gig-spinner-top" class="items-center justify-center htmx-indicator gig-spinner">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                         </div>
 
                     </div>
 
                 </form>
 
-                <span id="results"></span>
+                <span id="results" class="flex flex-col grow"></span>
 
-                <div id="gig-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">
+                <div id="gig-spinner-bottom" class="my-8 items-center justify-center htmx-indicator-flex gig-spinner">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
                 </div>
 

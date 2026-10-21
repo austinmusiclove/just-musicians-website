@@ -1,4 +1,4 @@
-<div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col">
+<div class="font-sun-motter text-center px-4 pb-16 pt-12 sm:py-20 relative flex items-center justify-center flex-col grow">
 
     <div class="pb-32 relative">
         <span class="text-22 block text-center mb-4">Nothin' on the calendar yet!</span>
