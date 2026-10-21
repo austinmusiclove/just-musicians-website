@@ -201,8 +201,8 @@
 
 
 
-        <!-- Details x-show="submission_message" x-cloak -->
-        <div class="flex flex-col bg-yellow-10 border border-black/10 rounded p-2">
+        <!-- Details -->
+        <div class="flex flex-col bg-yellow-10 border border-black/10 rounded p-2" x-show="submission_message" x-cloak>
             <span class="text-14 text-black/50 font-semibold mb-1 inline-block">Applicant Message</span>
             <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                 'text_var' => 'submission_message',
