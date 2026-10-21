@@ -91,20 +91,20 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     dates requested (Flamingo, Kick Butt Coffee)
     After design update
-        withdraw application
-            change edit submitted application to either resubmit or withdraw
-            connection resubmit and withdraw in submitted application; template-parts/cards/card-components/submitted-application-card-form.php
-        available dates
-            connect non-dummy date for submitted applications
-            show availability dates on the applicant card
-            connect dates in template-parts/cards/applicant-card.php
+        show available dates in submission card
         quote and draw
             Populate requestQuote and requestDraw in Applications page and single application
             Add draw and price options for application and add them to applicant card
             make sure request quote and request draw are connected right
+        available dates
+            connect non-dummy date for submitted applications
+            show availability dates on the applicant card
+            connect dates in template-parts/cards/applicant-card.php
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
         testing
             check inquiry slide to send existing inquiries
+            add event, send request, respond
+            add application, submit application, modify application, withdraw application
 Escrow
     explore legal issues
         create generic and customizable performance contract

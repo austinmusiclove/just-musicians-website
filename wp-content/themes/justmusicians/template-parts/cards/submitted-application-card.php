@@ -57,6 +57,7 @@
             <div>
                 <?php get_template_part('template-parts/cards/card-components/submitted-application-card-form', '', [
                     'app_submission_id' => $args['submission']['post_id'],
+                    'application_url'   => $args['application_url'] ?? '',
                 ]); ?>
             </div>
             <p class="text-12 text-black/50 pt-2">Last updated <span x-text="updated"></span></p>

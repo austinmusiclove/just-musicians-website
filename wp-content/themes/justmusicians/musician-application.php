@@ -41,9 +41,9 @@ get_header();
         <div class="container">
             <div class="max-w-4xl mx-auto md:px-12">
                 <div class="text-16 md:text-20 font-sun-motter mb-4 text-yellow/80">Musician Application</div>
-                <h1 class="font-bold text-25 md:text-28 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
+                <h1 class="font-bold text-25 md:text-28 mb-4" data-testid="musician-application-title"><?php echo esc_html($title); ?></h1>
                 <?php if ($description) { ?>
-                    <div class="text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description"></div>
+                    <div class="text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-html="description" data-testid="musician-application-description"></div>
                 <?php } ?>
             </div>
         </div>

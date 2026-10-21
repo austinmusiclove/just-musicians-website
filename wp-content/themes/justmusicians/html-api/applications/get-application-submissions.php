@@ -26,10 +26,11 @@ $next_page     = $result['next_page'];
 if (count($submissions) > 0) {
     foreach ($submissions as $index => $submission) {
         get_template_part('template-parts/cards/submitted-application-card', '', [
-            'submission'   => $submission,
-            'last'         => $index == array_key_last($submissions),
-            'is_last_page' => $is_last_page,
-            'next_page'    => $next_page,
+            'submission'      => $submission,
+            'application_url' => get_musician_application_url($submission['application_id']),
+            'last'            => $index == array_key_last($submissions),
+            'is_last_page'    => $is_last_page,
+            'next_page'       => $next_page,
         ]);
     }
 } else if ($page == 1) {
