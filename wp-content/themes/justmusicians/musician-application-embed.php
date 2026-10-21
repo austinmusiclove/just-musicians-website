@@ -39,7 +39,7 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
     get_template_part('template-parts/global/toasts/error-toast',   '', []);
     ?>
 
-        <div class="max-w-2xl mx-auto px-4 py-8"
+    <div class="max-w-2xl mx-auto px-4 py-8"
         x-data="{
             listingId: '',
             message: '',
@@ -53,10 +53,10 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
         x-on:hideform="showApplication = false;"
     >
 
-        <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
+        <h1 class="font-bold text-25 md:text-28 mb-4" x-show="showApplication" x-cloak data-testid="musician-application-title-embed"><?php echo esc_html($title); ?></h1>
 
         <?php if ($description) { ?>
-            <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description"></div>
+            <div class="text-16 text-black/80 whitespace-pre-wrap wysiwyg-content mb-4" x-show="showApplication" x-cloak x-html="description" data-testid="musician-application-description-embed"></div>
         <?php } ?>
 
         <?php if (!is_user_logged_in()) { ?>

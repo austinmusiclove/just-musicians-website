@@ -89,7 +89,6 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     dates requested (Flamingo, Kick Butt Coffee)
     After design update
-        merge application embed and remove demo application
         reference emails
             add cloak back into applicant message
             Figure out get suggestions issue

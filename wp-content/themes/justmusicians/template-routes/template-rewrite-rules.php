@@ -27,11 +27,6 @@ function template_route_rewrite_rules() {
         'index.php?custom-template=musician-application-embed&application-id=$matches[1]',
         'top'
     );
-    add_rewrite_rule(
-        '^musician-application/([0-9]+)/demo/?$',
-        'index.php?custom-template=musician-application-demo&application-id=$matches[1]',
-        'top'
-    );
 
     // Search page
     add_rewrite_rule(
