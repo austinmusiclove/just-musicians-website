@@ -28,7 +28,7 @@ if (count($submissions) > 0) {
         $application_id = $submission['application_id'] ?? 0;
         $listing_id     = $submission['listing_id'] ?? 0;
         $events         = get_application_events($application_id);
-        $event_data     = [];
+        $proposals      = [];
 
         if (!empty($events) && $listing_id) {
             foreach ($events as $event) {
@@ -37,12 +37,10 @@ if (count($submissions) > 0) {
 
                 $proposal_id = hm_proposal_exists($listing_id, $event_id);
                 if ($proposal_id) {
-                    $event_data[] = [
-                        'event_id'     => $event_id,
-                        'event_name'   => $event['event_name'],
+                    $proposals[] = [
+                        'proposal_id'  => $proposal_id,
                         'start_date'   => $event['start_date'],
                         'availability' => get_post_meta($proposal_id, 'availability', true),
-                        'proposal_id'  => $proposal_id,
                     ];
                 }
             }
@@ -51,7 +49,7 @@ if (count($submissions) > 0) {
         get_template_part('template-parts/cards/submitted-application-card', '', [
             'submission'      => $submission,
             'application_url' => get_musician_application_url($application_id),
-            'events'          => $event_data,
+            'proposals'       => $proposals,
             'last'            => $index == array_key_last($submissions),
             'is_last_page'    => $is_last_page,
             'next_page'       => $next_page,

@@ -10,6 +10,7 @@
     x-data="{
         submission_message: '<?php echo clean_str_for_doublequotes($args['submission_message'] ?? ''); ?>',
         submission_updated: '<?php echo clean_str_for_doublequotes($args['submission_updated'] ?? ''); ?>',
+        availableDates:     '<?php echo clean_str_for_doublequotes(implode("\n", array_map(fn($prop) => "{$prop['start_date']} - {$prop['availability']}", $args['proposals']))); ?>',
     }"
 >
 
@@ -199,8 +200,6 @@
             <?php echo $args['description']; ?>
         </p>-->
 
-
-
         <!-- Details -->
         <div class="flex flex-col bg-yellow-10 border border-black/10 rounded p-2" x-show="submission_message" x-cloak>
             <span class="text-14 text-black/50 font-semibold mb-1 inline-block">Applicant Message</span>
@@ -209,19 +208,17 @@
                 'limit'    => 200,
             ]); ?>
         </div>
+
         <!-- Dates -->
-        <div class="flex flex-col border border-yellow-40 rounded p-2">
+        <div class="flex flex-col border border-yellow-40 rounded p-2" x-show="availableDates" x-cloak>
             <span class="text-14 text-black/50 font-semibold mb-1 inline-block">Available Dates</span>
-            <div class="text-14 text-black/50"><span><b>September</b>
-                    20-22</span><span class="mx-1">|</span><span><b>October</b> 4, 8, 10-14, 16-20,
-                    21-25</span><span class="mx-1">|</span><span><b>November</b> 4, 8...</span>
-                <button type="button" class="text-black/50 underline cursor-pointer w-fit ml-1">Show
-                    more</button>
+            <div class="text-14 text-black/50">
+                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+                    'text_var' => 'availableDates',
+                    'limit'    => 65,
+                ]); ?>
             </div>
-
-            <!-- x-show="tooLong" x-on:click="expanded = !expanded" x-text="expanded ? 'Show less' : 'Show more'" -->
         </div>
-
 
         <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
             <?php get_template_part('template-parts/inquiries/inquire-button', '', [

@@ -17,12 +17,29 @@ $max_num_pages  = $result['max_num_pages'];
 $is_last_page   = $page == $max_num_pages;
 $next_page      = $is_last_page ? null : (int) $page + 1;
 
+$events = get_application_events($application_id);
+
 if (!empty($submission_ids)) {
     foreach ($submission_ids as $index => $submission_id) {
+        $proposals = [];
         $listing_id = (int) get_post_meta($submission_id, 'listing', true);
         $listing    = $listing_id ? get_listing(['post_id' => $listing_id]) : [];
-        if (is_wp_error($listing)) {
-            continue;
+        if (is_wp_error($listing)) { continue; }
+
+        if (!empty($events) && $listing_id) {
+            foreach ($events as $event) {
+                $event_id = $event['event_id'] ?? 0;
+                if (!$event_id) { continue; }
+
+                $proposal_id = hm_proposal_exists($listing_id, $event_id);
+                if ($proposal_id) {
+                    $proposals[] = [
+                        'proposal_id'  => $proposal_id,
+                        'start_date'   => $event['start_date'],
+                        'availability' => get_post_meta($proposal_id, 'availability', true),
+                    ];
+                }
+            }
         }
 
         get_template_part('template-parts/cards/applicant-card', '', [
@@ -31,6 +48,7 @@ if (!empty($submission_ids)) {
             'submission_id'       => $submission_id,
             'submission_message'  => get_post_meta($submission_id, 'message', true),
             'submission_updated'  => get_the_modified_time('F j, Y', $submission_id),
+            'proposals'           => $proposals,
             'name'                => $listing['name'] ?? '',
             'rating'              => $listing['rating'] ?? 0,
             'review_count'        => $listing['review_count'] ?? 0,

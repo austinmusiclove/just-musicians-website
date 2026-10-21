@@ -90,10 +90,6 @@ Applications Features to add
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
     After design update
-        available dates
-            connect non-dummy date for submitted applications
-            show availability dates on the applicant card
-            connect dates in template-parts/cards/applicant-card.php
         quote and draw
             Populate requestQuote and requestDraw in Applications page and single application
             Add draw and price options for application and add them to applicant card

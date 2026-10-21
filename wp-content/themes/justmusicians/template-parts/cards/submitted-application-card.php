@@ -9,10 +9,11 @@
     <?php } ?>
     x-data="{
         showForm: false,
-        message:     '<?php echo clean_str_for_doublequotes($args['submission']['message']); ?>',
-        status:      '<?php echo $args['submission']['status']; ?>',
-        statusInput: '<?php echo $args['submission']['status']; ?>',
-        updated:     '<?php echo $args['submission']['updated']; ?>',
+        message:        '<?php echo clean_str_for_doublequotes($args['submission']['message']); ?>',
+        availableDates: '<?php echo clean_str_for_doublequotes(implode("\n", array_map(fn($prop) => "{$prop['start_date']} - {$prop['availability']}", $args['proposals']))); ?>',
+        status:         '<?php echo $args['submission']['status']; ?>',
+        statusInput:    '<?php echo $args['submission']['status']; ?>',
+        updated:        '<?php echo $args['submission']['updated']; ?>',
         _updateSubmission(message, status, updated) { this.showForm = false; this.message = message; this.status = status; this.updated = updated },
     }"
     x-on:update-submission="_updateSubmission($event.detail.message, $event.detail.status, $event.detail.updated);"
@@ -54,18 +55,16 @@
                 ]); ?>
             </div>
 
-            <!-- Available Dates -->
-            <?php if (!empty($args['events'])) { ?>
-                <div class="flex flex-col">
-                    <?php foreach ($args['events'] as $event) { ?>
-                        <p class="text-12 text-black/50">
-                            <?php echo esc_html($event['start_date'] ?? ''); ?>
-                            <?php if (!empty($event['availability'])) { ?><span class="capitalize"> - <?php echo esc_html($event['availability']); ?></span><?php } ?>
-                        </p>
-                    <?php } ?>
-                </div>
-            <?php } ?>
+        </div>
 
+        <div class="flex flex-col border border-yellow-40 rounded p-2" x-show="availableDates" x-cloak>
+            <span class="text-14 text-black/50 font-semibold mb-1 inline-block">Available Dates</span>
+            <div class="text-14 text-black/50">
+                <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
+                    'text_var' => 'availableDates',
+                    'limit'    => 65,
+                ]); ?>
+            </div>
         </div>
 
         <div class="flex items-center gap-x-4 gap-y-1 flex-wrap">
