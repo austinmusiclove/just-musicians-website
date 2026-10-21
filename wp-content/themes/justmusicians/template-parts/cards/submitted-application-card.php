@@ -29,6 +29,8 @@
         </div>
 
         <div class="clear-both flex flex-col gap-3 mb-2 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50">
+
+            <!-- Listing -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-2">
                     <div class="w-10 h-10 rounded-full overflow-hidden bg-yellow-light shrink-0">
@@ -40,16 +42,30 @@
                     </div>
                     <div class="flex flex-col">
                         <span class="text-14 font-semibold"><?php echo esc_html($args['submission']['listing_name']); ?></span>
-                        <p class="text-12 text-black/50">Submitted on September 28, 2026</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Personal Message -->
             <div x-show="!showForm && message" x-cloak>
                 <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
-                    'text_var'      => 'message',
-                    'limit'         => 200,
+                    'text_var' => 'message',
+                    'limit'    => 200,
                 ]); ?>
             </div>
+
+            <!-- Available Dates -->
+            <?php if (!empty($args['events'])) { ?>
+                <div class="flex flex-col">
+                    <?php foreach ($args['events'] as $event) { ?>
+                        <p class="text-12 text-black/50">
+                            <?php echo esc_html($event['start_date'] ?? ''); ?>
+                            <?php if (!empty($event['availability'])) { ?><span class="capitalize"> - <?php echo esc_html($event['availability']); ?></span><?php } ?>
+                        </p>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+
         </div>
 
         <div class="flex items-center gap-x-4 gap-y-1 flex-wrap">
@@ -62,10 +78,6 @@
             </div>
             <p class="text-12 text-black/50 pt-2">Last updated <span x-text="updated"></span></p>
         </div>
-
-
-
-
 
     </div>
 
