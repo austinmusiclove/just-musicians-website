@@ -59,7 +59,6 @@ get_header();
                     'application_id'  => $application_id,
                     'user_listings'   => $user_listings,
                     'events'          => $events,
-                    'demo'            => false,
                 ]); ?>
 
 

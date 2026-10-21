@@ -91,8 +91,6 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     dates requested (Flamingo, Kick Butt Coffee)
     After design update
-        reference emails
-            remove spinner at bottom of submitted applications page and my gigs, my events
         withdraw application
             change edit submitted application to either resubmit or withdraw
             connection resubmit and withdraw in submitted application; template-parts/cards/card-components/submitted-application-card-form.php
