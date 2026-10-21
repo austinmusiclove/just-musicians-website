@@ -166,27 +166,32 @@
         <div class="flex items-center gap-2">
             <!-- Location -->
             <span class="text-14 flex items-center flex-wrap">
-                <img class="h-4 mr-2"
-                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
+                <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
                 <span><?php echo $args['location']; ?></span>
             </span>
             <span class="text-black/50">|</span>
+
             <!-- Ensemble Size  -->
             <span class="flex items-center text-14 gap-2">
-                <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
-                <span>1, 4, 6+</span>
+                <?php echo get_template_part('template-parts/cards/card-components/ensemble-size', '', [ 'ensemble_size' => $args['ensemble_size'] ]); ?>
             </span>
-
         </div>
 
+        <div class="flex items-center gap-2">
+            <!-- Description -->
+            <p class="text-14 col-start-1 col row-start-2">
+                <?php echo $args['description']; ?>
+            </p>
+            <span class="text-black/50">|</span>
 
-        <!-- Genres -->
-        <div class="flex items-center gap-1 flex-wrap">
-            <?php foreach ($args['genres'] as $term) { ?>
-                <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
-                    <?php echo $term; ?>
-                </span>
-            <?php } ?>
+            <!-- Genres -->
+            <div class="flex items-center gap-1 flex-wrap">
+                <?php foreach ($args['genres'] as $term) { ?>
+                    <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
+                        <?php echo $term; ?>
+                    </span>
+                <?php } ?>
+            </div>
         </div>
 
         <!-- Description

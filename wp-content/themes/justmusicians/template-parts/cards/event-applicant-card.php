@@ -170,33 +170,35 @@
             ]); ?>
 
 
-            <div class="md:grid grid-cols-2 w-fit gap-x-4 gap-y-0.5">
+            <div class="flex items-center gap-2">
                 <!-- Location -->
-                <span class="col-start-1 col row-start-1 text-14 flex items-center flex-wrap">
+                <span class="text-14 flex items-center flex-wrap">
                     <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" />
                     <span><?php echo $args['location']; ?></span>
                 </span>
+                <span class="text-black/50">|</span>
 
+                <!-- Ensemble Size  -->
+                <span class="flex items-center text-14 gap-2">
+                    <?php echo get_template_part('template-parts/cards/card-components/ensemble-size', '', [ 'ensemble_size' => $args['ensemble_size'] ]); ?>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2">
                 <!-- Description -->
                 <p class="text-14 col-start-1 col row-start-2">
                     <?php echo $args['description']; ?>
                 </p>
-
-
-                <!-- Ensemble Size  -->
-                <span class="col-start-2 col row-start-1 flex items-center text-14 gap-2">
-                    <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
-                </span>
+                <span class="text-black/50">|</span>
 
                 <!-- Genres -->
-                <div class="flex items-center gap-1 flex-wrap col-start-2 col row-start-2">
+                <div class="flex items-center gap-1 flex-wrap">
                     <?php foreach ($args['genres'] as $term) { ?>
                         <span class="text-12 font-bold px-2 py-0.5 rounded-full bg-yellow-50 hover:bg-yellow-light cursor-pointer inline-block">
                             <?php echo $term; ?>
                         </span>
                     <?php } ?>
                 </div>
-
             </div>
 
             <div class="clear-both flex flex-col gap-2 mb-2 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50">

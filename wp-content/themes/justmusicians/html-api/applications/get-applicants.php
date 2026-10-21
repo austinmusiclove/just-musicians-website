@@ -37,6 +37,7 @@ if (!empty($submission_ids)) {
             'location'            => $listing['city'] . ', ' . $listing['state'],
             'description'         => $listing['description'] ?? '',
             'genres'              => $listing['genre'] ?? [],
+            'ensemble_size'       => $listing['ensemble_size'] ?? [],
             'thumbnail_url'       => $listing['thumbnail_url'] ?? '',
             'listing_image_urls'  => $listing['listing_image_urls'],
             'youtube_video_data'  => $listing['youtube_video_data'],

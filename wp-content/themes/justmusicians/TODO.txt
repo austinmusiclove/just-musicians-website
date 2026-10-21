@@ -88,20 +88,15 @@ Applications Features to add
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
     After design update
-        add cloak back into applicant message
-        add back in functional attributes for show more dates button in single application page
-        make sure event applicant card ensemble size is coming from applicant and not event
         My events spinner display non when not in use
         Create event form toast
         Populate requestQuote and requestDraw in Applications page and single application
-        Fix ensemble size in applicant cards which is pulling in ens size from application
         Add two listing images on applicant cards
         Add draw and price options for application and add them to applicant card
         change edit submitted application to either resubmit or withdraw
         fix application card so that link does not blend in with description
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
         show availability dates on the applicant card
-        add ensemble size to applicant view
         Figure out get suggestions issue
         use publicly queriable false in post type registration
         merge application embed
@@ -112,6 +107,8 @@ Applications Features to add
         connect dates in template-parts/cards/applicant-card.php
         connection resubmit and withdraw in submitted application; template-parts/cards/card-components/submitted-application-card-form.php
         check inquiry slide to send existing inquiries
+        add cloak back into applicant message
+        add back in functional attributes for show more dates button in single application page
     Other features that would be needed for parity with venue forms out there
         dates requested (Flamingo, Kick Butt Coffee)
         last time you played here (Flamingo)
