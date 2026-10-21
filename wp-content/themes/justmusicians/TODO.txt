@@ -89,7 +89,6 @@ Applications Features to add
     Sorting and organizing
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
-    dates requested (Flamingo, Kick Butt Coffee)
     After design update
         show available dates in submission card
         quote and draw

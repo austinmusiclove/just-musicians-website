@@ -1,6 +1,6 @@
 <div x-data="{ showShareModal: false, shareEmail: '', shareAccessType: 'view' }">
 
-    <button class="bg-white hover:bg-yellow border border-black/20 px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block" type="button"
+    <button class="bg-white hover:bg-navy hover:text-white border border-black/20 px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block" type="button"
         x-on:click="showShareModal = true; shareEmail = ''; $dispatch('load-share-access')"
     >
         <?php echo esc_html($args['label']); ?>
