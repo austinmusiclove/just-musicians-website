@@ -30,7 +30,7 @@ function send_application_submitted_successfully_email($user_id, $application_id
 
 function send_sign_up_to_complete_application_email($email, $application_id, $sign_up_link) {
     $application_title = get_post_meta($application_id, 'title', true);
-    $subject = 'Your application submission has been submitted.';
+    $subject = 'Your application has been submitted.';
     $message = "We have received your application submission for " . $application_title . "\n\n"
         . "Your submission is complete and has been delivered to the reviewer. If you'd like to edit or withdraw your submission, create your free Hire Musicians account.\n\n"
         . "Create your free account here:\n\n"

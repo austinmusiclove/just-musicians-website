@@ -48,7 +48,7 @@ test.describe('E2E - Submit Application - Logged Out', () => {
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingPostId));
         expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);
 
-        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.meta.email}) Your application submission has been submitted.`;
+        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${listingData.meta.email}) Your application has been submitted.`;
         const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);
         expect(submitterEmail).toBeTruthy();
         const emailBody = await mailpit.getEmailBody(submitterEmail.ID);
