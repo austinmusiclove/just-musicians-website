@@ -2,7 +2,7 @@
     <h3 class="font-bold text-22 mb-2">Events</h3>
     <p class="text-16">By associating events with your applciation, musicians can submit their availability for each event when filling out the application.</p>
     <?php if (!empty($args['upcoming_events'])) { ?>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 max-h-64 overflow-y-auto pr-1">
         <input type="hidden" name="events[]"> <!-- This is here so that if no events are selected, it will result in update instead of having the events[] arg ignored -->
         <?php foreach ($args['upcoming_events'] as $event) { ?>
         <label class="custom-checkbox flex items-center gap-3 cursor-pointer p-2 border border-black/20 rounded-sm hover:bg-yellow-light">
