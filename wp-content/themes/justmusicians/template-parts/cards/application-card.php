@@ -35,11 +35,6 @@
             ]); ?>
         <?php } ?>
 
-        <!-- Min Guarantee and Estimated Draw -->
-        <?php echo get_template_part('template-parts/events/event-details/requirements', '', [
-            'show_heading' => false
-        ]); ?>
-
         <!-- Buttons -->
         <div class="flex flex-wrap items-center gap-2 md:gap-3"
             x-data="{

@@ -66,6 +66,16 @@ get_header();
                     <?php echo get_template_part('template-parts/events/event-form/taxonomy-inputs'); ?>
                     <?php echo get_template_part('template-parts/events/event-form/details-input'); ?>
                     <?php echo get_template_part('template-parts/events/event-form/compensation-inputs'); ?>
+                    <?php echo get_template_part('template-parts/global/form/checkbox-pair', '', [
+                        'label_1' => 'Request quote from musicians',
+                        'label_2' => 'Request draw estimate from musicians',
+                        'name_1' => 'event_request_quote',
+                        'name_2' => 'event_request_draw',
+                        'tooltip_1' => 'Select this if you want musicians to give you a price for their service',
+                        'tooltip_2' => 'Select this if you want musicians to let you know how many guests they believe they will attract to the show',
+                        'x_model_1' => 'requestQuote',
+                        'x_model_2' => 'requestDraw',
+                    ]); ?>
 
                     <div class="flex gap-2 mt-8">
                         <button type="submit" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit disabled:opacity-50 disabled:cursor-not-allowed"

@@ -38,16 +38,25 @@
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>
-        <div class="flex gap-2 flex-col text-14 wysiwyg-content border border-black/20 p-2 rounded"
+        <div class="flex gap-2 flex-col text-14 wysiwyg-content border border-black/20 p-4 rounded whitespace-pre-wrap"
             :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'">
         </div>
     </div>
     <!-- Requirements -->
     <div>
         <h3 class="font-bold text-16 mb-2">Requirements</h3>
-        <?php echo get_template_part('template-parts/events/event-details/requirements', '', [
-            'show_heading' => false
-        ]); ?>
+        <div class="flex flex-col items-start gap-1">
+            <div class="flex items-center gap-2">
+                <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/check.svg" x-show="requestQuote" x-cloak />
+                <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/xmark.svg" x-show="!requestQuote" x-cloak />
+                <span class="text-16">Request Minimum Guarantee</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/check.svg" x-show="requestDraw" x-cloak />
+                <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/xmark.svg" x-show="!requestDraw" x-cloak />
+                <span class="text-16">Request Draw</span>
+            </div>
+        </div>
     </div>
 
     <!-- Events -->

@@ -44,6 +44,8 @@ get_header();
                 <form class="flex flex-col"
                     x-data="{
                         title: '',
+                        requestQuote: false,
+                        requestDraw: false,
                     }"
                     hx-post="<?php echo site_url('/wp-html/v1/applications/'); ?>"
                     hx-target="#create-application-result"
@@ -58,34 +60,28 @@ get_header();
                     <div class="flex flex-col gap-2 mb-4">
                         <label for="description" class="block font-bold text-16">Description</label>
                         <?php wp_editor('', 'description', [
-                                'textarea_name' => 'description',
-                                'textarea_rows' => 8,
-                                'media_buttons' => false,
-                                'teeny'         => true,
-                                'quicktags'     => false,
-                                'toolbar1'      => 'bold,italic,underline,bullist,numlist,link,unlink',
-                                'toolbar2'      => '',
-                                'tinymce'       => ['paste_as_text' => true],
-                            ]); ?>
+                            'textarea_name' => 'description',
+                            'textarea_rows' => 8,
+                            'media_buttons' => false,
+                            'teeny'         => true,
+                            'quicktags'     => false,
+                            'toolbar1'      => 'bold,italic,underline,bullist,numlist,link,unlink',
+                            'toolbar2'      => '',
+                            'tinymce'       => ['paste_as_text' => true],
+                        ]); ?>
                     </div>
 
-                    <div
-                        class="p-4 mb-4 bg-grey-light-2 border border-grey-light-50 flex items-center gap-x-4 gap-y-2 rounded-sm flex-wrap">
-                        <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
-                            'label' => 'Request minimum guarantee',
-                            'name' => 'verified',
-                            'value' => 'Verified',
-                            'x-model' => 'verifiedCheckbox',
-                            'on_change_event' => 'filterupdate',
-                        )); ?>
-                        <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
-                            'label' => 'Request draw estimate',
-                            'name' => 'verified',
-                            'value' => 'Verified',
-                            'x-model' => 'verifiedCheckbox',
-                            'on_change_event' => 'filterupdate',
-                        )); ?>
-                    </div>
+                    <!-- Applicant Requirements -->
+                    <?php echo get_template_part('template-parts/global/form/checkbox-pair', '', [
+                        'label_1' => 'Request minimum guarantee',
+                        'label_2' => 'Request draw estimate from musicians',
+                        'name_1' => 'application_request_quote',
+                        'name_2' => 'application_request_draw',
+                        'tooltip_1' => 'Select this if you want musicians to give you their minimum guarantee',
+                        'tooltip_2' => 'Select this if you want musicians to let you know how many guests they believe they will attract to a show',
+                        'x_model_1' => 'requestQuote',
+                        'x_model_2' => 'requestDraw',
+                    ]); ?>
 
                     <!-- Events -->
                     <?php if (!empty($upcoming_events)) { ?>

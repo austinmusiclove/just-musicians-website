@@ -38,7 +38,7 @@ $app_submissions = get_applicants($application_id, [
 ]);
 $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
-$app_description = get_post_meta(get_the_ID(), 'description', true);
+$app_description = get_post_meta($application_id, 'description', true);
 
 // Events
 $user_events_result = get_user_events([
@@ -68,6 +68,8 @@ get_header();
                     applicationId:   '<?php echo $application_id; ?>',
                     title:           '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
                     description:     '<?php echo clean_str_for_doublequotes($app_description); ?>',
+                    requestQuote:    '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',
+                    requestDraw:     '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
                     appEvents:        <?php echo clean_arr_for_doublequotes($app_events); ?>,
                     selectedEventIds: <?php echo clean_arr_for_doublequotes(array_column($app_events, 'event_id')); ?>,
                     submission_ids:   <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,

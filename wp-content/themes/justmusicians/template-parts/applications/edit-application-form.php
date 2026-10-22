@@ -23,23 +23,16 @@
     ]);
     ?>
 
-    <div
-        class="p-4 mt-4 mb-4 bg-grey-light-2 border border-grey-light-50 flex items-center gap-x-4 gap-y-2 rounded-sm flex-wrap">
-        <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
-                            'label' => 'Request minimum guarantee',
-                            'name' => 'verified',
-                            'value' => 'Verified',
-                            'x-model' => 'verifiedCheckbox',
-                            'on_change_event' => 'filterupdate',
-                        )); ?>
-        <?php echo get_template_part('template-parts/global/form/checkbox', '', array(
-                            'label' => 'Request draw estimate',
-                            'name' => 'verified',
-                            'value' => 'Verified',
-                            'x-model' => 'verifiedCheckbox',
-                            'on_change_event' => 'filterupdate',
-                        )); ?>
-    </div>
+    <?php echo get_template_part('template-parts/global/form/checkbox-pair', '', [
+        'label_1' => 'Request minimum guarantee',
+        'label_2' => 'Request draw estimate from musicians',
+        'name_1' => 'application_request_quote',
+        'name_2' => 'application_request_draw',
+        'tooltip_1' => 'Select this if you want musicians to give you their minimum guarantee',
+        'tooltip_2' => 'Select this if you want musicians to let you know how many guests they believe they will attract to a show',
+        'x_model_1' => 'requestQuote',
+        'x_model_2' => 'requestDraw',
+    ]); ?>
 
     <!-- Events -->
     <h3 class="font-bold text-22 mb-2 mt-6">Events</h3>
