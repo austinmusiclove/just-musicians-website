@@ -201,7 +201,9 @@
                 </div>
             </div>
 
-            <div class="clear-both flex flex-col gap-2 mb-2 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50">
+            <div class="clear-both flex flex-col gap-2 mb-2 mt-2 border border-black/20 rounded p-4 bg-yellow-10/50"
+                x-show="proposal_details || proposal_availability || proposal_status != 'inquiry' || proposal_quote || proposal_draw" x-cloak
+            >
 
                 <!-- Details -->
                 <div class="flex flex-col" x-show="proposal_details" x-cloak>

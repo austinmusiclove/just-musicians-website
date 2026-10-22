@@ -73,7 +73,6 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     After design update
         quote and draw
-            event applicant card needs to hide response if not exist
             applications events checkboxes need to be yello not blue
         Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing (submit from logged out to create this)
         testing
