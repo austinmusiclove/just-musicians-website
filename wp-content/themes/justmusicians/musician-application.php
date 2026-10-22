@@ -31,6 +31,10 @@ get_header();
         createNewListing: <?php echo is_user_logged_in() ? 'false' : 'true'; ?>,
         showApplication: true,
         eventAvailability: {},
+        requestQuote:  '<?php echo clean_str_for_doublequotes(get_field('request_quote', $application_id)); ?>',
+        requestDraw:   '<?php echo clean_str_for_doublequotes(get_field('request_draw', $application_id)); ?>',
+        minimumGuarantee: 0,
+        drawEstimate:     0,
         savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
         description:   '<?php echo clean_str_for_doublequotes($description); ?>',
     }"

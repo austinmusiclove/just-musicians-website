@@ -90,14 +90,11 @@ Applications Features to add
         Filter genres, ensemble size and other taxonomies
     After design update
         quote and draw
-            make sure request quote and request draw are connected right
-                front end inputs
-                    musician application
-                    musician applicaiton embed
             make sure application details change when you edit using the form (Description, events, etc.) (do i need $application_description passed down through args)
             match details box in event details to that in application details on single evnet/app pages
+            event applicant card needs to hide response if not exist
             applications events checkboxes need to be yello not blue
-        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
+        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing (submit from logged out to create this)
         testing
             check inquiry slide to send existing inquiries
             add event, send request, respond

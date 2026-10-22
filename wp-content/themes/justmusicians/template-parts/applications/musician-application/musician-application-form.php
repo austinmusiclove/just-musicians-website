@@ -102,32 +102,7 @@
     </div>
 
     <!-- Min Guarantee and Draw Estimate-->
-    <div class="flex flex-col gap-2 min-w-0 border border-black/20 rounded bg-yellow-10/50">
-        <label class="block bg-yellow-20 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
-            <span class="font-bold">More Details</span>
-        </label>
-        <fieldgroup class="grid sm:grid-cols-2 gap-2 p-4">
-            <div>
-                <label class="mb-1 inline-block" for="min_guarantee">Min Guarantee</label><br>
-                <div class="relative">
-                    <span
-                        class="absolute inset-y-0 left-0 pl-3 flex pr-1 items-center text-grey pointer-events-none">$</span>
-                    <input class="!pl-8 w-full px-3 py-2" type="number" id="min_guarantee" name="min_guarantee" min="0"
-                        title="How many people can you guarantee will show up?" x-model="">
-                </div>
-                <input type="hidden" id="min_guarantee" name="min_guarantee" x-init="" x-model="">
-            </div>
-            <div>
-                <label class="mb-1 inline-block" for="draw_estimate">Draw Estimate</label><br>
-                <div class="relative">
-                    <span
-                        class="absolute inset-y-0 right-0 pr-3 flex pl-1 items-center text-grey pointer-events-none">people</span>
-                    <input class="!pr-20 w-full px-3 py-2" type="number" id="draw_estimate" name="draw_estimate" min="0"
-                        title="How many people can you guarantee will show up?" x-model="">
-                </div>
-                <input type="hidden" id="draw_estimate" name="draw_estimate" x-init="" x-model="">
-            </div>
-    </div>
+    <?php get_template_part('template-parts/applications/musician-application/guarantee-draw-inputs', '', []); ?>
 
     <!-- Application Submission Inputs -->
     <div class="has-border p-0" data-testid="application-submission-inputs">
