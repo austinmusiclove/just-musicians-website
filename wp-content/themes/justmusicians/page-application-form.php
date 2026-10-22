@@ -84,24 +84,9 @@ get_header();
                     ]); ?>
 
                     <!-- Events -->
-                    <?php if (!empty($upcoming_events)) { ?>
-                    <div class="flex flex-col gap-2">
-                        <label class="block font-bold text-22">Events</label>
-                        <p class="text-16">By associating events with your applciation, musicians can submit their availability for each event when filling out the application.</p>
-                        <div class="flex flex-col gap-2">
-                            <?php foreach ($upcoming_events as $event) { ?>
-                            <label class="custom-checkbox flex items-center gap-3 cursor-pointer p-2 border border-black/20 rounded-sm hover:bg-yellow-light">
-                                <input type="checkbox" name="events[]" value="<?php echo $event['post_id']; ?>">
-                                <span class="checkmark" style="top: 50%; transform: translateY(-50%); left: .5rem!important"></span>
-                                <div class="flex flex-col">
-                                    <div class="text-14 font-semibold"><?php echo esc_html($event['event_name']); ?></div>
-                                    <div class="text-12 text-black/60"><?php echo $event['start_date'] ? gmdate('M j, Y', strtotime($event['start_date'])) : ''; ?></div>
-                                </div>
-                            </label>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <?php } ?>
+                    <?php echo get_template_part('template-parts/applications/application-form/events', '', [
+                        'upcoming_events' => $upcoming_events,
+                    ]); ?>
 
                     <div class="flex gap-2 mt-4">
                         <button type="submit" x-bind:disabled="!title" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-3 rounded-sm font-sun-motter text-16 w-fit disabled:opacity-50 disabled:cursor-not-allowed">
