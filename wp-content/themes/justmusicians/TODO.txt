@@ -8,7 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    make sure h1 heading in category locale pages and home
     add alt text to thumbnails, icons, listing page cover and listing images
     Strategy to confirm with expert
         Get backlinks to category locale pages
@@ -92,16 +91,12 @@ Applications Features to add
     After design update
         quote and draw
             make sure request quote and request draw are connected right
-                details display
-                    single application details
-                    single event details
                 card display
-                    submitted application card (show quote and draw)
-                    gig card (show quote and draw)
+                    applicant card (show quote and draw pills)
+                    submitted application card (show quote and draw pills)
                 front end inputs
                     musician application
                     musician applicaiton embed
-            Add draw and price options for application and add them to applicant card and app submission card
             make sure application details change when you edit using the form (Description, events, etc.) (do i need $application_description passed down through args)
             match details box in event details to that in application details on single evnet/app pages
             applications events checkboxes need to be yello not blue

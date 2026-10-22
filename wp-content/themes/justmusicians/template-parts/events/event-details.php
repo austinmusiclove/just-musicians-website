@@ -8,7 +8,13 @@
     </div>
     <?php echo get_template_part('template-parts/events/event-details/details'); ?>
     <?php echo get_template_part('template-parts/events/event-details/compensation'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/requirements', '', [ 'show_heading' => true ]); ?>
+    <?php echo get_template_part('template-parts/global/feature-checks', '', [
+        'heading'  => 'Applicant Requirements',
+        'features' => [
+            [ 'label' => 'Request Quote', 'alpine_var' => 'requestQuote' ],
+            [ 'label' => 'Request Draw',  'alpine_var' => 'requestDraw' ],
+        ],
+    ]); ?>
 
     <!-- Edit Button -->
     <div class="pt-4 flex gap-2">
