@@ -9,11 +9,13 @@
     <?php } ?>
     x-data="{
         showForm: false,
-        message:        '<?php echo clean_str_for_doublequotes($args['submission']['message']); ?>',
-        availableDates: '<?php echo clean_str_for_doublequotes(implode("\n", array_map(fn($prop) => "{$prop['start_date']} - {$prop['availability']}", $args['proposals']))); ?>',
-        status:         '<?php echo $args['submission']['status']; ?>',
-        statusInput:    '<?php echo $args['submission']['status']; ?>',
-        updated:        '<?php echo $args['submission']['updated']; ?>',
+        message:           '<?php echo clean_str_for_doublequotes($args['submission']['message']); ?>',
+        minimum_guarantee: '<?php echo clean_str_for_doublequotes($args['submission']['minimum_guarantee']); ?>',
+        draw_estimate:     '<?php echo clean_str_for_doublequotes($args['submission']['draw_estimate']); ?>',
+        availableDates:    '<?php echo clean_str_for_doublequotes(implode("\n", array_map(fn($prop) => "{$prop['start_date']} - {$prop['availability']}", $args['proposals']))); ?>',
+        status:            '<?php echo $args['submission']['status']; ?>',
+        statusInput:       '<?php echo $args['submission']['status']; ?>',
+        updated:           '<?php echo $args['submission']['updated']; ?>',
         _updateSubmission(message, status, updated) { this.showForm = false; this.message = message; this.status = status; this.updated = updated },
     }"
     x-on:update-submission="_updateSubmission($event.detail.message, $event.detail.status, $event.detail.updated);"
@@ -48,16 +50,20 @@
             </div>
 
             <!-- Personal Message -->
-            <div x-show="!showForm && message" x-cloak>
+            <div class="flex flex-col gap-4" x-show="!showForm && message" x-cloak>
                 <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [
                     'text_var' => 'message',
                     'limit'    => 200,
                 ]); ?>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Min Guarantee: $${Number(minimum_guarantee).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="minimum_guarantee" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw Estimate: ${Number(draw_estimate).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="draw_estimate" x-cloak></span>
+                </div>
             </div>
 
         </div>
 
-        <div class="flex flex-col border border-yellow-40 rounded p-2" x-show="availableDates" x-cloak>
+        <div class="flex flex-col border border-yellow-40 rounded p-4" x-show="availableDates" x-cloak>
             <span class="text-14 text-black/50 font-semibold mb-1 inline-block">Available Dates</span>
             <div class="text-14 text-black/50">
                 <?php get_template_part('template-parts/cards/card-components/show-more-text', '', [

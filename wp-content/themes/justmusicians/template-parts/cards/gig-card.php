@@ -113,13 +113,13 @@
             <?php } ?>
 
             <!-- Response -->
-            <div class="flex flex-col mb-4" x-show="!showForm && status != 'inquiry' && status != 'eventremoved'" x-cloak>
-                <span class="text-12 text-black/50 font-semibold" x-show="prop_details || availability || quote || draw" x-cloak>Your Response</span>
+            <div class="flex flex-col" x-show="!showForm && status != 'inquiry' && status != 'eventremoved'" x-cloak>
+                <span class="text-14 text-black/50 font-semibold mb-1" x-show="prop_details || availability || quote || draw" x-cloak>Your Response</span>
                 <div class="flex flex-wrap items-center gap-2">
-                    <p class="w-full text-14 mb-1 whitespace-pre-wrap" x-text="prop_details" x-show="prop_details" x-cloak></p>
+                    <p class="w-full text-14 text-black/50 mb-1 whitespace-pre-wrap" x-text="prop_details" x-show="prop_details" x-cloak></p>
                     <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold capitalize" x-text="availability" x-show="availability" x-cloak></span>
-                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${quote}`" x-show="quote" x-cloak></span>
-                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw: ${draw}`" x-show="draw" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${Number(quote).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="quote" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw: ${Number(draw).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="draw" x-cloak></span>
                 </div>
             </div>
         </div>

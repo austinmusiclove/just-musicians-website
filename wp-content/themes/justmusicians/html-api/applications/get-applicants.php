@@ -48,6 +48,8 @@ if (!empty($submission_ids)) {
             'submission_id'       => $submission_id,
             'submission_message'  => get_post_meta($submission_id, 'message', true),
             'submission_updated'  => get_the_modified_time('F j, Y', $submission_id),
+            'minimum_guarantee'   => get_post_meta($submission_id, 'minimum_guarantee', true),
+            'draw_estimate'       => get_post_meta($submission_id, 'draw_estimate', true),
             'proposals'           => $proposals,
             'name'                => $listing['name'] ?? '',
             'rating'              => $listing['rating'] ?? 0,

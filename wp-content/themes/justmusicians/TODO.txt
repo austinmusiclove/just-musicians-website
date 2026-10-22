@@ -91,9 +91,6 @@ Applications Features to add
     After design update
         quote and draw
             make sure request quote and request draw are connected right
-                card display
-                    applicant card (show quote and draw pills)
-                    submitted application card (show quote and draw pills)
                 front end inputs
                     musician application
                     musician applicaiton embed

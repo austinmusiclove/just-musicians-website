@@ -74,6 +74,8 @@ function get_user_application_submissions($args = []) {
             'listing_thumbnail_url'=> $listing_id ? get_the_post_thumbnail_url($listing_id, 'thumbnail') : '',
             'status'               => get_post_meta(get_the_ID(), 'status', true),
             'message'              => get_post_meta(get_the_ID(), 'message', true),
+            'minimum_guarantee'    => get_post_meta(get_the_ID(), 'minimum_guarantee', true),
+            'draw_estimate'        => get_post_meta(get_the_ID(), 'draw_estimate', true),
             'updated'              => get_the_modified_time('F j, Y'),
         ];
     }

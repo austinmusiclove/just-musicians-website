@@ -221,8 +221,8 @@
 
                 <!-- Quote / Draw -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${proposal_quote}`" x-show="proposal_quote" x-cloak></span>
-                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw Estimate: ${proposal_draw}`" x-show="proposal_draw" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Quote: $${Number(proposal_quote).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="proposal_quote" x-cloak></span>
+                    <span class="text-12 px-2 py-0.5 rounded-full bg-yellow/40 font-semibold" x-text="`Draw Estimate: ${Number(proposal_draw).toLocaleString('en-US', { maximumFractionDigits: 2 })}`" x-show="proposal_draw" x-cloak></span>
                 </div>
 
             </div>
