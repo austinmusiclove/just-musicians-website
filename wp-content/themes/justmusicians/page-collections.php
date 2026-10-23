@@ -41,7 +41,7 @@ get_header();
 
                                 <div class="w-full flex items-center justify-between mb-8">
                                     <h4 class="font-bold text-25 w-full">Create a new collection</h4>
-                                    <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showAddCollectionPopup = false"/>
+                                    <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close create collection popup" x-on:click="showAddCollectionPopup = false"/>
                                 </div>
 
                                 <form class="w-full flex items-stretch gap-2 mb-4"

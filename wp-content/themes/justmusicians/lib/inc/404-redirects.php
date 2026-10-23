@@ -16,7 +16,7 @@ function force_404_for_private_post_types() {
         is_singular('tmp_code') or
         is_author() or
         is_category() or
-        is_tag()
+        is_tag() or
         is_tax()
     ) {
         global $wp_query;

@@ -2,7 +2,7 @@
 <section id="search-optimization-terms" class="flex flex-col gap-5">
 
     <div class="flex items-center gap-2">
-        <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+        <img class="h-4 sm:h-5 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" alt="" />
         <h2 class="text-20 sm:text-25 font-bold">Search Terms</h2>
     </div>
 
@@ -140,7 +140,7 @@
                     <div class="flex items-center bg-yellow-50 pl-3 pr-1 py-0.5 rounded-full">
                         <span x-text="tag" class="text-14 w-fit"></span>
                         <button type="button" class="opacity-50 hover:opacity-100 ml-auto" x-on:click="_removeTag(index)">
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
+                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" alt="Remove keyword" />
                         </button>
                         <input type="hidden" name="keywords[]" x-bind:value="tag"/>
                     </div>

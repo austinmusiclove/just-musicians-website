@@ -5,7 +5,7 @@
         </span>
 
         <span>
-            <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . "/lib/images/icons/{$args['icon']}"; ?>" />
+            <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . "/lib/images/icons/{$args['icon']}"; ?>" alt="" />
         </span>
     </div>
 

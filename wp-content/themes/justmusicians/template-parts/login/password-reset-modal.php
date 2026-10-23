@@ -41,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
 
     <div class="bg-white relative w-full md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
-        <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
+        <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close password reset modal"
             x-on:click="showPasswordResetModal = false;" />
 
         <button data-slide="request-password-reset" class="p-2 absolute top-2 left-2" x-on:click="showLoginModal = true; showPasswordResetModal = false;">
-            <img class="opacity-60 hover:opacity-100 w-3 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left-sharp-solid.svg';?>"/>
+            <img class="opacity-60 hover:opacity-100 w-3 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left-sharp-solid.svg';?>" alt="Back to login"/>
         </button>
 
         <div class="slide w-[32rem] grow">

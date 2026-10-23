@@ -1,7 +1,7 @@
 <section class="flex flex-col gap-5">
 
     <div class="flex items-center gap-2">
-        <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" />
+        <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location-2.svg'; ?>" alt="" />
         <h2 class="text-25 font-bold">Venues Played</h2>
         <span id="venue-active-search-spinner" class="inset-0 flex items-center justify-center htmx-indicator">
             <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
@@ -55,7 +55,7 @@
                         <span x-text="tag['street_address']"></span>
                         <span x-text="tag['address_locality'] + ', ' + tag['address_region'] + ' ' + tag['postal_code']"></span>
                         <button type="button" class="absolute top-0 right-0 opacity-50 hover:opacity-100" x-on:click="_removeTag(index)">
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" />
+                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg'; ?>" alt="Remove venue" />
                         </button>
                     </div>
                 </template>

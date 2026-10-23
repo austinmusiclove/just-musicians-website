@@ -8,7 +8,7 @@
             <div class="flex items-center justify-between my-6 flex-shrink-0">
                 <h4 class="font-bold text-25 w-full" x-show="currentYtIndex < 0" x-cloak>Add a YouTube video</h4>
                 <h4 class="font-bold text-25 w-full" x-show="currentYtIndex >= 0" x-cloak>Edit YouTube video settings</h4>
-                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showYoutubeLinkPopup = false"/>
+                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close YouTube link editor" x-on:click="showYoutubeLinkPopup = false"/>
             </div>
 
             <!-- Toasts -->

@@ -38,7 +38,7 @@ $listings_options[] = [
             x-bind:src="selected.thumbnail_url"
         />
         <span class="grow text-left" x-text="selected.label || 'Select one of your existing listings'"></span>
-        <img class="w-3 h-3 shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-down.svg'; ?>" />
+        <img class="w-3 h-3 shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-down.svg'; ?>" alt="Open listing dropdown" />
     </button>
 
     <!-- Dropdown options -->

@@ -15,18 +15,18 @@
     <div class="w-24 md:w-32 shrink-0">
         <?php if (count($args['thumbnail_urls']) >= 4) { ?>
             <div class="bg-yellow-light aspect-4/3 grid grid-cols-2 grid-rows-2 gap-0">
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" />
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][1]; ?>" />
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][2]; ?>" />
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][3]; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" alt="Collection thumbnail for <?php echo $args['name']; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][1]; ?>" alt="Collection thumbnail for <?php echo $args['name']; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][2]; ?>" alt="Collection thumbnail for <?php echo $args['name']; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][3]; ?>" alt="Collection thumbnail for <?php echo $args['name']; ?>" />
             </div>
         <?php } else if (count($args['thumbnail_urls']) >= 1) { ?>
             <div class="bg-yellow-light aspect-4/3">
-                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo $args['thumbnail_urls'][0]; ?>" alt="Collection thumbnail for <?php echo $args['name']; ?>" />
             </div>
         <?php } else { ?>
             <div class="bg-yellow-light aspect-4/3">
-                <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; ?>" />
+                <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp'; ?>" alt="Collection placeholder thumbnail image for <?php echo $args['name']; ?>" />
             </div>
         <?php } ?>
     </div>
@@ -48,7 +48,7 @@
             hx-target="#result-<?php echo $args['post_id']; ?>"
         >
             <span id="result-<?php echo $args['post_id']; ?>"></span>
-            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/trash.svg'; ?>" />
+            <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/trash.svg'; ?>" alt="Delete collection" />
         </button>
     <?php } ?>
 

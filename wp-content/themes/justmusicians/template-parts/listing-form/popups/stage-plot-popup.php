@@ -5,7 +5,7 @@
         <div class="px-6 pt-4 flex flex-col flex-1 min-h-0 overflow-hidden">
             <div class="flex items-center justify-between my-6 flex-shrink-0">
                 <h4 class="font-bold text-25 w-full">Add a stage plot image</h4>
-                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showStagePlotPopup = false"/>
+                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close stage plot editor" x-on:click="showStagePlotPopup = false"/>
             </div>
 
             <!-- Cropper display -->

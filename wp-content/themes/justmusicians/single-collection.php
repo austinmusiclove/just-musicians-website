@@ -68,7 +68,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                     <!-- Back button -->
                     <span class="block sm:hidden py-2 opacity-50 cursor-pointer">
                         <a class="flex hover:underline" href="<?php echo site_url('/collections/'); ?>">
-                            <img class="ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                            <img class="ml-[-8px] h-6 opacity-80 text-grey" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" alt="Back to Collections" />
                             <span class="text-18" >Back to Collections</span>
                         </a>
                     </span>

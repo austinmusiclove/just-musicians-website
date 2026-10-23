@@ -1,6 +1,5 @@
 <div class="relative inline-flex group">
-    <img
-        class="opacity-40 h-4 min-w-4 cursor-pointer hover:opacity-100"
+    <img class="opacity-40 h-4 min-w-4 cursor-pointer hover:opacity-100" alt=""
         src="<?php echo get_template_directory_uri() . '/lib/images/icons/circle-info.svg'; ?>"
     />
 

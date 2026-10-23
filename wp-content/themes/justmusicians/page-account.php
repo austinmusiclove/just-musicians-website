@@ -50,7 +50,7 @@ get_header();
                         x-show="show" x-cloak
                     >
                         <span>Complete your profile by including a display name and a profile image.</span>
-                        <img class="close-button opacity-60 hover:opacity-100 absolute top-0.5 right-0.5 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="closed = true"/>
+                        <img class="close-button opacity-60 hover:opacity-100 absolute top-0.5 right-0.5 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Dismiss notification" x-on:click="closed = true"/>
                     </div>
 
                     <!-- Settings -->

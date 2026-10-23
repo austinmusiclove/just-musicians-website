@@ -6,7 +6,7 @@
     <a href="<?php echo $args['permalink']; ?>" target="_blank">
         <button class="w-fit relative rounded text-14 border border-black/20 group flex items-center gap-2 font-bold py-2 px-3 hover:border-black text-grey hover:text-black disabled:opacity-50" type="button">
             <span class="htmx-indicator-replace">View Listing</span>
-            <img class="h-4 opacity-50 group-hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg';?>" />
+            <img class="h-4 opacity-50 group-hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg';?>" alt="" />
             <span class="absolute inset-0 flex items-center justify-center opacity-0 htmx-indicator">
             </span>
         </button>

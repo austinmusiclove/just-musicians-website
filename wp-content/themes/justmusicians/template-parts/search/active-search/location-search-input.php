@@ -1,6 +1,6 @@
 <div class="<?php echo $args['container_class']; ?>">
 
-    <img class="<?php echo $args['image_class']; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/' . $args['image_file']; ?>" />
+    <img class="<?php echo $args['image_class']; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/' . $args['image_file']; ?>" alt="" />
 
     <input
         id="<?php echo $args['id']; ?>"

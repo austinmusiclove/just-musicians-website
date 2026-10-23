@@ -5,7 +5,7 @@
 
     <div class="bg-white relative w-full h-auto md:w-auto flex items-center justify-center border-2 shadow-black-offset border-black" style="max-width: 780px;">
 
-    <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
+    <img data-trigger="quote" class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close signup modal"
         x-on:click="showSignupModal = false; signupModalMessage = 'Sign up for an account'; loginModalMessage = 'Sign in to your account';" />
 
     <div class="slide w-[32rem] overflow-y-auto max-h-[90vh]">
@@ -62,8 +62,8 @@
                                     data-testid="signup-password"
                                 >
                                 <span class="float-right right-[12px] mt-[-29px] relative">
-                                    <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
-                                    <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
+                                    <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" alt="Click to hide password" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
+                                    <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" alt="Click to show Password" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
                                 </span>
                             </div>
                         </div>

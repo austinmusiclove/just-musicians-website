@@ -20,7 +20,7 @@
 
         <!-- X button -->
         <img class="close-button opacity-60 hover:opacity-100 absolute top-2 right-2 cursor-pointer"
-            src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>"
+            src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close review modal"
             x-on:click="showReviewModal = false; $refs.reviewForm.reset(); rating = 0; mouseoverRating = 0;"
         />
 

@@ -5,7 +5,7 @@
         <div class="bg-yellow/20 p-2" x-trap.noreturn="getShowDefaultSearchOptionsMobile()">
             <div class="w-full bg-white border border-black/20 rounded-sm flex mb-1 pr-1 relative">
                 <button type="button" class="px-2 h-full absolute top-0 left-0 flex items-center justify-center" x-on:click="showSearchOptions = false" x-on:focus="$focus.focus($refs.mobileSearchInput)">
-                    <img class="h-5 absolute" src="<?php echo get_template_directory_uri() . '/lib/images/icons/arrow_left.svg' ?>" />
+                    <img class="h-5 absolute" src="<?php echo get_template_directory_uri() . '/lib/images/icons/arrow_left.svg' ?>" alt="Back to header" />
                 </button>
                 <input class="w-full py-2 pr-3 pl-6 inline-block" type="text" name="s" autocomplete="off" placeholder="Search"
                     x-ref="mobileSearchInput"
@@ -21,7 +21,7 @@
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
                     <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" alt="Search" />
                 </button>
             </div>
             <div class="w-full bg-white border border-black/20 rounded-sm flex text-14 pr-1 grow items-stretch">
@@ -47,7 +47,7 @@
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
                 <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" />
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" alt="Search" />
                 </button>
             </div>
             <input id="lat-input-header-mobile" type="hidden" name="lat" x-model="headerSearchLat" />

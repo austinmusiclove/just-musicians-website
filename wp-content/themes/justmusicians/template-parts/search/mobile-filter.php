@@ -1,5 +1,5 @@
 <button type="button" class="flex text-16 items-center gap-1 group relative py-0.5 rounded-full md:hidden cursor-pointer gap-1.5 border border-black/20 hover:border-black px-2 font-bold" x-on:click="showMobileFilters = ! showMobileFilters">
-    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/settings.svg'; ?>" x-show="selectedFiltersCount == 0"/>
+    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/settings.svg'; ?>" alt="Filter settings" x-show="selectedFiltersCount == 0"/>
     <div class="w-5 h-5 rounded-full bg-yellow/60 flex items-center justify-center font-bold text-14" x-show="selectedFiltersCount > 0" x-text="selectedFiltersCount">0</div>
     <span>Filter</span>
 </button>

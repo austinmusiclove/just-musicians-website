@@ -34,7 +34,7 @@ $example = get_field('example');
                         <span>Back to Glossaries</span>
                     </a>
                 <?php endif; ?>
-                <img class="h-8 rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                <img class="h-8 rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" alt="Back" />
                 <span class="font-bold"><?php the_title(); ?></span>
             </div>
 

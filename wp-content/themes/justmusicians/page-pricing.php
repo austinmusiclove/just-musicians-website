@@ -140,7 +140,7 @@ get_header();
                         $tooltip = is_array($feature) ? ($feature['tooltip'] ?? '') : '';
                     ?>
                         <li class="flex items-start gap-x-3 text-14">
-                            <img class="h-5 w-5 shrink-0 text-yellow mt-0.5" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/yellow-check.svg" />
+                            <img class="h-5 w-5 shrink-0 text-yellow mt-0.5" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/yellow-check.svg" alt="" />
                             <span><?php echo $text; ?></span>
                             <?php if ($tooltip) { ?>
                                 <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', ['tooltip' => $tooltip]); ?>

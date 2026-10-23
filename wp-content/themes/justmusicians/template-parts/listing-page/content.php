@@ -70,6 +70,7 @@
                 'is_preview'        => $is_preview,
                 'listing_image_ids' => $listing_image_ids,
                 'ph_thumbnail'      => $ph_thumbnail,
+                'name'              => get_field('name') ?? '',
             ]); ?>
             <?php echo get_template_part('template-parts/listing-page/parts/video-slider', '', [
                 'is_preview'         => $is_preview,

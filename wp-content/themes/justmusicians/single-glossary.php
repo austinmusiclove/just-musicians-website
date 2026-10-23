@@ -69,7 +69,7 @@ $alphabet = range('A', 'Z');
                 <a href="<?php echo $parent_glossary_link; ?>" class="hover:underline">
                     <span><?php echo esc_html($parent_glossary_title); ?></span>
                 </a>
-                <img class="h-8 rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" />
+                <img class="h-8 rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron-left.svg'; ?>" alt="Back" />
                 <span class="font-bold"><?php the_title(); ?></span>
             </div>
             <?php endif ?>

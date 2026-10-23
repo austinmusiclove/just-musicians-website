@@ -6,7 +6,7 @@
 
             <div class="flex items-center justify-between my-6 flex-shrink-0">
                 <h4 class="font-bold text-25 w-full">Crop your image</h4>
-                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" x-on:click="showImageEditPopup = false;"/>
+                <img class="close-button -mr-3 opacity-60 hover:opacity-100 cursor-pointer flex-shrink-0" src="<?php echo get_template_directory_uri() . '/lib/images/icons/close-small.svg';?>" alt="Close image editor" x-on:click="showImageEditPopup = false;"/>
             </div>
 
             <!-- Cropper display -->

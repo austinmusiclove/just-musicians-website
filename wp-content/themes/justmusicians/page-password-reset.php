@@ -69,8 +69,8 @@ get_header();
                     <input id="reset_user_pass" name="new_password" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" required
                         class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
                     <span class="float-right right-[10px] mt-[-30px] relative">
-                        <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
-                        <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
+                        <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" alt="Click to hide password" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
+                        <img class="h-6 w-6 cursor-pointer" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" alt="Click to show password" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
                     </span>
                 </div>
             </div>

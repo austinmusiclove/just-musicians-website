@@ -2,7 +2,7 @@
 
     <!-- Heading -->
     <div class="flex items-center gap-2">
-        <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/music.svg'; ?>" />
+        <img class="h-6 opacity-80" src="<?php echo get_template_directory_uri() . '/lib/images/icons/music.svg'; ?>" alt="" />
         <h2 class="text-25 font-bold">Performance</h2>
     </div>
     <p class="text-18">

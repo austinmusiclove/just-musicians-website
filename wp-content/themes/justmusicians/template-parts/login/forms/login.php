@@ -27,8 +27,8 @@
                             data-testid="login-password"
                         >
                         <span class="float-right right-[12px] mt-[-29px] relative">
-                            <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
-                            <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
+                            <img class="h-5 w-5 cursor-pointer opacity-100 hover:opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-show.svg'; ?>" alt="Click to hide password" x-cloak x-show="showPassword" x-on:click="showPassword = false;"/>
+                            <img class="h-5 w-5 cursor-pointer opacity-50 hover:opacity-100" src="<?php echo get_template_directory_uri() . '/lib/images/icons/eye-password-hide.svg'; ?>" alt="Click to show password" x-cloak x-show="!showPassword" x-on:click="showPassword = true;"/>
                         </span>
                     </div>
                 </div>

@@ -8,10 +8,6 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    404 author and category pages; https://hiremusicians.com/category/music-industry/studies/ https://hiremusicians.com/author/plumtonguebandgmail-com/
-    Add internal links on listings pages to locale category pages (check with seo)
-    unnamed item in breadcrumb on google search console; maybe the item list needs an item property not just the items
-    add alt text to thumbnails, icons, listing page cover and listing images
     Location/Category Pages
         add pricing for the specific service of the category and location
         traditional paging
@@ -30,7 +26,8 @@ SEO
             get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
         get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
     single listing pages
-        make sure data can be indexed even though it is hidden behind x-show and x-cloak
+        Add internal links on listings pages to locale category pages (check with seo)
+        images and video in media slider do not show without js and probably do not get indexed either
         add self referencing canonical on listing pages
     transition from live music to multi vertical
         Locale pages now need to have info on all verticals available in that region

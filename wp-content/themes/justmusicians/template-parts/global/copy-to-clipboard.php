@@ -33,7 +33,7 @@ $click_text        = $args['click_text'] ?? 'Click to copy';
     <!-- External link -->
     <?php if ($external_link) { ?>
     <a href="<?php echo esc_url($external_link); ?>" target="_blank">
-        <img class="opacity-40 hover:opacity-100 <?php echo $icon_size_classes; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/up-right-from-square.svg';?>" />
+        <img class="opacity-40 hover:opacity-100 <?php echo $icon_size_classes; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/up-right-from-square.svg';?>" alt="Open in new tab" />
     </a>
     <?php } ?>
 
@@ -47,7 +47,7 @@ $click_text        = $args['click_text'] ?? 'Click to copy';
             <div class="relative flex">
 
                 <!-- Copy icon -->
-                <img class="opacity-40 cursor-pointer hover:opacity-100 <?php echo $icon_size_classes; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/copy.svg'; ?>" />
+                <img class="opacity-40 cursor-pointer hover:opacity-100 <?php echo $icon_size_classes; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/copy.svg'; ?>" alt="Copy to clipboard" />
 
                 <!-- Copy tooltip -->
                 <div class="z-50 absolute bottom-full left-1/2 -translate-x-1/2" x-show="hover || copied" x-cloak>

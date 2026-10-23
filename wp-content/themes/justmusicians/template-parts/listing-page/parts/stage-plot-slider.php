@@ -18,7 +18,7 @@
                 <?php if ($args['is_preview']) { ?>
                     <template x-for="data in orderedImageData['stage_plots']" :key="data.image_id">
                         <div class="flex justify-center aspect-video w-full h-full object-cover">
-                            <img class="h-full" x-bind:src="_getImageData('stage_plots', data.image_id)?.url" />
+                            <img class="h-full" x-bind:src="_getImageData('stage_plots', data.image_id)?.url" alt="Stage plot" />
                         </div>
                     </template>
                 <?php } ?>
@@ -27,7 +27,7 @@
                         $img_url = wp_get_attachment_image_url($image_id, 'medium');
                         if ($img_url) { ?>
                             <div class="flex justify-center aspect-video w-full h-full object-cover">
-                                <img class="h-full" src="<?php echo esc_url($img_url); ?>" />
+                                <img class="h-full" src="<?php echo esc_url($img_url); ?>" alt="Stage plot" />
                             </div><?php
                         }
                     }
@@ -43,7 +43,7 @@
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
             x-transition:leave-end="-translate-x-full opacity-0" >
-            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Previous stage plot" />
         </div>
         <!-- Right Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
@@ -53,7 +53,7 @@
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
             x-transition:leave-end="translate-x-full opacity-0" >
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Next stage plot" />
         </div>
         <!-- Gallery Count -->
         <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides"></div>

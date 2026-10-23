@@ -60,19 +60,19 @@
     <!-- Video player buttons --> <!-- Pause -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         x-show="_isPaused()">
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" />
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" alt="Pause video" />
     </div>
     <!-- Mute -->
     <div class="absolute transform left-2 bottom-2"
         @click="_toggleMuteAllVideos()"
         x-show="playersMuted">
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" />
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" alt="Mute audio" />
     </div>
     <!-- Unmute -->
     <div class="absolute transform left-2 bottom-2"
         @click="_toggleMuteAllVideos()"
         x-show="!playersMuted">
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" />
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" alt="Unmute audio" />
     </div>
     <!-- Left Arrow -->
     <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -82,7 +82,7 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="-translate-x-full opacity-0" >
-        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Previous video" />
     </div>
     <!-- Right Arrow -->
     <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
@@ -92,6 +92,6 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="translate-x-full opacity-0" >
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" />
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Next video" />
     </div>
 </div>
