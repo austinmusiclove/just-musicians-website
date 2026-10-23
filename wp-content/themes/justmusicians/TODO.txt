@@ -71,14 +71,6 @@ Applications Features to add
     Sorting and organizing
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
-    After design update
-        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing (submit from logged out to create this)
-        testing
-            check inquiry slide to send existing inquiries
-            add event, send request, respond
-            add application, submit application, modify application, withdraw application
-        deploy
-            app submission and applications acf update
 Escrow
     explore legal issues
         create generic and customizable performance contract

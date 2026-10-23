@@ -14,9 +14,7 @@ $recommendation_ids = get_post_meta($post_id, 'recommendations', true);
         $rec_listing = get_post_meta($rec_id, 'listing', true);
         $rec_title   = $rec_listing ? get_post_meta($rec_listing, 'name', true) : '';
         $rec_img_id = get_field('image', $rec_id);
-        error_log($rec_img_id);
         $rec_img_url = wp_get_attachment_image_url($rec_img_id, 'medium');
-        error_log($rec_image_url);
         $rec_copy  = get_post_meta($rec_id, 'copy', true);
         if ( empty( $rec_img_id ) || empty( $rec_copy ) || empty( $rec_title) ) { continue; }
         $rec_number++;

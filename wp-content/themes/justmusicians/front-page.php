@@ -31,7 +31,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 get_header();
 
 get_template_part('template-parts/landing-pages/hero-section-basic', '', [
-    'breadcrumb_itmes' => [],
+    'breadcrumb_items' => [],
     'heading'          => "Find Live Musicians in Austin, Texas",
     'description'      => "Elevate your next event when you hire live musicians in Austin, Texas. From lively corporate events and elegant weddings to private parties, bring the authentic sound of the Live Music Capital of the World directly to your guests.",
 ]);
@@ -47,11 +47,6 @@ get_template_part('template-parts/search/search-page', '', [
     'location_label'       => 'Austin, Texas',
     'lat'                  => 30.2671500,
     'lng'                  => -97.7430600,
-]);
-//get_template_part('template-parts/landing-pages/hero-search-live-music', '', []);
-get_template_part('template-parts/landing-pages/categories-in-locale-links', '', [
-    'heading'     => "Explore categories in Austin, Texas",
-    'locale_slug' => 'austin',
 ]);
 get_template_part('template-parts/landing-pages/simple-feature-section', '', [
     'heading'     => "Tips for Getting Accurate Quotes from Musicians",
