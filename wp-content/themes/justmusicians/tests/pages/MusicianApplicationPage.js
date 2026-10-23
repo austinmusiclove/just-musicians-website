@@ -20,6 +20,8 @@ export class MusicianApplicationPage extends ThemePage {
         this.coverImageInput                      = page.locator('input[name="cover_image_input"]');
         this.applyCropBtn                         = page.getByRole('button', { name: 'Apply' });
         this.applicationSubmissionInputs          = page.getByTestId('application-submission-inputs');
+        this.minimumGuaranteeInput                = page.locator('input[name="minimum_guarantee"][type="number"]');
+        this.drawEstimateInput                    = page.locator('input[name="draw_estimate"][type="number"]');
         this.messageTextarea                      = page.locator('textarea[name="applicant_message"]');
         this.submitButton                         = page.locator('#submit-button-content').locator('.htmx-indicator-component-block-replace');
         this.invalidLic                           = page.getByTestId('invalid-lic');

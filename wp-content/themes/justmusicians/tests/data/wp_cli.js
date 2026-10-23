@@ -188,6 +188,13 @@ export function wpCliGetPostMeta(postId, key) {
     }
 }
 
+export function wpCliSetPostMeta(postId, key, value) {
+    execSync(
+        `wp post meta update ${postId} "${key}" '${value}' --path=${WP_PATH}`,
+        { stdio: 'ignore' }
+    );
+}
+
 export function wpCliGetPostMetaJson(postId, key) {
     const output = wpCliWithRetry(
         `wp eval "echo json_encode(get_post_meta(${postId}, '${key}', true));" --path=${WP_PATH}`
