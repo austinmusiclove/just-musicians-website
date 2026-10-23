@@ -4,16 +4,17 @@ import { ThemePage } from './ThemePage.js';
 export class SingleCollectionPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.cards            = page.locator('#results > [data-listing-id]');
-        this.reorderHandles   = page.locator('#results [data-reorder-handle]');
-        this.reorderToggle    = page.locator('[data-reorder-toggle]');
-        this.results          = page.locator('#results');
-        this.shareBtn         = page.getByRole('button', { name: 'Share' });
-        this.shareModal       = page.locator('.popup-wrapper').filter({ hasText: 'Share Collection' });
-        this.shareEmailInput  = this.shareModal.locator('input[type="email"]');
-        this.shareAccessType  = this.shareModal.locator('select[name="access_type"]');
-        this.shareSubmitBtn   = this.shareModal.getByRole('button', { name: 'Share' });
-        this.shareAccessList  = this.shareModal.locator('[id^="share-access-list-"]');
+        this.cards              = page.locator('#results > [data-listing-id]');
+        this.reorderHandles     = page.locator('#results [data-reorder-handle]');
+        this.reorderToggle      = page.locator('[data-reorder-toggle]');
+        this.loadMoreResultsBtn = page.getByRole('button', { name: 'Load More Results', exact: true });
+        this.results            = page.locator('#results');
+        this.shareBtn           = page.getByRole('button', { name: 'Share' });
+        this.shareModal         = page.locator('.popup-wrapper').filter({ hasText: 'Share Collection' });
+        this.shareEmailInput    = this.shareModal.locator('input[type="email"]');
+        this.shareAccessType    = this.shareModal.locator('select[name="access_type"]');
+        this.shareSubmitBtn     = this.shareModal.getByRole('button', { name: 'Share' });
+        this.shareAccessList    = this.shareModal.locator('[id^="share-access-list-"]');
     }
 
     async shareAccess(email, accessType = 'view') {
@@ -29,6 +30,10 @@ export class SingleCollectionPage extends ThemePage {
             && /wp-html\/v1\/collections\/\d+\/listings/.test(resp.url()));
         await this.page.goto(`/collection/${slug}`, { waitUntil: 'domcontentloaded' });
         await listingsLoaded;
+    }
+
+    async loadMoreResults() {
+        await this.loadMoreResultsBtn.click();
     }
 
     card(listingId) {

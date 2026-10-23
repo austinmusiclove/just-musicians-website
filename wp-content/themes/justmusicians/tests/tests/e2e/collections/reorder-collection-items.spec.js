@@ -82,7 +82,7 @@ test.describe('Collections - Reorder collection items', () => {
         await expect(singleCollectionPage.cards).toHaveCount(10);
 
         // Reveal the last card of page one to trigger the infinite scroll load of the rest
-        await singleCollectionPage.cards.nth(9).scrollIntoViewIfNeeded();
+        await singleCollectionPage.loadMoreResults();
         await expect(singleCollectionPage.cards).toHaveCount(12);
 
         await singleCollectionPage.expectCardOrdering(listingIds);
