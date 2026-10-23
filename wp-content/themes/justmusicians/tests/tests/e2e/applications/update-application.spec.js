@@ -33,4 +33,25 @@ test.describe('E2E - Update Application', () => {
         expect(wpCli.getPostMeta(applicationId, 'description')).toBe(newDescription);
     });
 
+    test('Update application request quote and request draw', async ({ singleApplicationPage, wpCli }) => {
+        const slug = wpCli.getPostField(applicationId, 'post_name');
+        await singleApplicationPage.navigateToApplication(slug);
+
+        // Check request quote and request draw
+        await singleApplicationPage.clickEdit();
+        await singleApplicationPage.checkRequestQuote();
+        await singleApplicationPage.checkRequestDraw();
+        await singleApplicationPage.updateApplication();
+        expect(wpCli.getPostMeta(applicationId, 'request_quote')).toBe('1');
+        expect(wpCli.getPostMeta(applicationId, 'request_draw')).toBe('1');
+
+        // Uncheck request quote and request draw
+        await singleApplicationPage.clickEdit();
+        await singleApplicationPage.checkRequestQuote(false);
+        await singleApplicationPage.checkRequestDraw(false);
+        await singleApplicationPage.updateApplication();
+        expect(wpCli.getPostMeta(applicationId, 'request_quote')).toBeNull();
+        expect(wpCli.getPostMeta(applicationId, 'request_draw')).toBeNull();
+    });
+
 });

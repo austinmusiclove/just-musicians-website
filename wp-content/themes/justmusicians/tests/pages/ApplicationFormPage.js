@@ -36,12 +36,12 @@ export class ApplicationFormPage extends ThemePage {
         );
     }
 
-    async checkRequestQuote() {
-        await this.requestQuoteCheckbox.check({ force: true });
+    async checkRequestQuote(checked = true) {
+        await this.requestQuoteCheckbox.setChecked(checked, { force: true });
     }
 
-    async checkRequestDraw() {
-        await this.requestDrawCheckbox.check({ force: true });
+    async checkRequestDraw(checked = true) {
+        await this.requestDrawCheckbox.setChecked(checked, { force: true });
     }
 
     async submitApplication() {

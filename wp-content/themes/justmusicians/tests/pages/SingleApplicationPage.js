@@ -4,18 +4,20 @@ import { ThemePage } from './ThemePage.js';
 export class SingleApplicationPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.editBtn             = page.getByRole('button', { name: 'Edit Application' });
-        this.shareBtn            = page.getByRole('button', { name: 'Share' });
-        this.titleInput          = page.locator('input[name="title"]');
-        this.updateBtn           = page.getByRole('button', { name: 'Update Application' });
-        this.deleteBtn           = page.getByRole('button', { name: 'Delete Application' });
-        this.exportButton        = page.locator('#applicants-export-button');
-        this.exportCsvOption     = page.locator('li[hx-get*="applicants-export/csv"]');
-        this.shareModal          = page.locator('.popup-wrapper').filter({ hasText: 'Share Application' });
-        this.shareEmailInput     = this.shareModal.locator('input[type="email"]');
-        this.shareAccessType     = this.shareModal.locator('select[name="access_type"]');
-        this.shareSubmitBtn      = this.shareModal.getByRole('button', { name: 'Share' });
-        this.shareAccessList     = this.shareModal.locator('[id^="share-access-list-"]');
+        this.editBtn              = page.getByRole('button', { name: 'Edit Application' });
+        this.shareBtn             = page.getByRole('button', { name: 'Share' });
+        this.titleInput           = page.locator('input[name="title"]');
+        this.requestQuoteCheckbox = page.getByRole('checkbox', { name: 'Request minimum guarantee' });
+        this.requestDrawCheckbox  = page.getByRole('checkbox', { name: 'Request draw estimate from musicians' });
+        this.updateBtn            = page.getByRole('button', { name: 'Update Application' });
+        this.deleteBtn            = page.getByRole('button', { name: 'Delete Application' });
+        this.exportButton         = page.locator('#applicants-export-button');
+        this.exportCsvOption      = page.locator('li[hx-get*="applicants-export/csv"]');
+        this.shareModal           = page.locator('.popup-wrapper').filter({ hasText: 'Share Application' });
+        this.shareEmailInput      = this.shareModal.locator('input[type="email"]');
+        this.shareAccessType      = this.shareModal.locator('select[name="access_type"]');
+        this.shareSubmitBtn       = this.shareModal.getByRole('button', { name: 'Share' });
+        this.shareAccessList      = this.shareModal.locator('[id^="share-access-list-"]');
     }
 
     async navigateToApplication(slug, tab = '') {
@@ -47,6 +49,14 @@ export class SingleApplicationPage extends ThemePage {
             (text) => document.querySelector('textarea[name="description"]').value === text,
             description
         );
+    }
+
+    async checkRequestQuote(checked = true) {
+        await this.requestQuoteCheckbox.setChecked(checked, { force: true });
+    }
+
+    async checkRequestDraw(checked = true) {
+        await this.requestDrawCheckbox.setChecked(checked, { force: true });
     }
 
     async updateApplication() {
