@@ -81,6 +81,14 @@ export class MusicianApplicationPage extends ThemePage {
         await this.applyCropBtn.click();
     }
 
+    async fillMinGuarantee(amount) {
+        await this.minimumGuaranteeInput.fill(String(amount));
+    }
+
+    async fillDrawEstimate(count) {
+        await this.drawEstimateInput.fill(String(count));
+    }
+
     async fillMessage(message) {
         await this.messageTextarea.fill(message);
     }
