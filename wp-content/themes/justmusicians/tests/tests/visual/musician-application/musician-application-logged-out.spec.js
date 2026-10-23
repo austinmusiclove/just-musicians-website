@@ -26,8 +26,8 @@ test.describe('Visual - Musician Application - Logged out', () => {
     test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId, 'test');
         await expect(musicianApplicationPage.invalidLic).toBeVisible();
-        await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
-        await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
+        await expect(musicianApplicationPage.applicationTitle).toBeVisible();
+        await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingForm).not.toBeVisible();
         await expect(musicianApplicationPage.applicationSubmissionInputs).not.toBeVisible();
     });

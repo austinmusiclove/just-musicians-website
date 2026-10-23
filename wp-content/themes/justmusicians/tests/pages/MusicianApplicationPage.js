@@ -93,20 +93,20 @@ export class MusicianApplicationPage extends ThemePage {
 
     async expectSuccessScreen() {
         await expect(this.successfulSubmission).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
     async expectSuccessScreenLoggedOut() {
         await expect(this.successfulSubmissionLoggedOut).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
     async expectSuccessfulSubmissionSignUpPage() {
         await expect(this.successfulSubmissionSignUp).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
 
