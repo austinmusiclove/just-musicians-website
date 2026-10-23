@@ -39,7 +39,7 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
     get_template_part('template-parts/global/toasts/error-toast',   '', []);
     ?>
 
-        <div class="max-w-2xl mx-auto px-4 py-8"
+    <div class="max-w-2xl mx-auto px-4 py-8"
         x-data="{
             listingId: '',
             message: '',
@@ -47,20 +47,24 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
             createNewListing: <?php echo is_user_logged_in() ? 'false' : 'true'; ?>,
             showApplication: true,
             eventAvailability: {},
+            requestQuote:  '<?php echo clean_str_for_doublequotes(get_field('request_quote', $application_id)); ?>',
+            requestDraw:   '<?php echo clean_str_for_doublequotes(get_field('request_draw', $application_id)); ?>',
+            minimumGuarantee: 0,
+            drawEstimate:     0,
             savedProposals: <?php echo clean_arr_for_doublequotes($proposals_map ?? []); ?>,
             description:   '<?php echo clean_str_for_doublequotes($description); ?>',
         }"
         x-on:hideform="showApplication = false;"
     >
 
-        <h1 class="font-bold text-25 mb-4" x-show="showApplication" x-cloak><?php echo esc_html($title); ?></h1>
+        <h1 class="font-bold text-25 md:text-28 mb-4" data-testid="musician-application-title-embed"><?php echo esc_html($title); ?></h1>
 
         <?php if ($description) { ?>
-            <div class="mb-8 text-16 text-black/80 whitespace-pre-wrap wysiwyg-content" x-show="showApplication" x-cloak x-html="description"></div>
+            <div class="text-16 text-black/80 whitespace-pre-wrap wysiwyg-content mb-4" x-html="description" data-testid="musician-application-description-embed"></div>
         <?php } ?>
 
         <?php if (!is_user_logged_in()) { ?>
-        <div class="mb-8 text-12 text-black/50" x-show="showApplication" x-cloak>
+        <div class="mb-8 text-12 text-black/50">
             This application form is powered by Hire Musicians. If you already have a Hire Musicians account, you can fast-track the application process by signing in and submitting this application
             <a class="underline font-semibold" href="<?php echo esc_url(get_musician_application_url($application_id)); ?>" target="_blank" rel="noopener">here</a>.
         </div>
@@ -70,7 +74,6 @@ $proposals_map = get_proposals_by_events_listings(array_column($events, 'event_i
             'application_id'  => $application_id,
             'user_listings'   => $user_listings,
             'events'          => $events,
-            'demo'            => false,
             'embed'           => true,
         ]); ?>
 

@@ -1,12 +1,20 @@
 <div class="flex flex-col gap-4" x-show="!showEditForm">
 
-    <?php echo get_template_part('template-parts/events/event-details/date-time'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/location'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/genre'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
+    <div class="flex flex-col bg-yellow-10 border border-black/20 rounded p-2 gap-2">
+        <?php echo get_template_part('template-parts/events/event-details/date-time'); ?>
+        <?php echo get_template_part('template-parts/events/event-details/location'); ?>
+        <?php echo get_template_part('template-parts/events/event-details/genre'); ?>
+        <?php echo get_template_part('template-parts/events/event-details/ensemble-size'); ?>
+    </div>
     <?php echo get_template_part('template-parts/events/event-details/details'); ?>
     <?php echo get_template_part('template-parts/events/event-details/compensation'); ?>
-    <?php echo get_template_part('template-parts/events/event-details/requirements'); ?>
+    <?php echo get_template_part('template-parts/global/feature-checks', '', [
+        'heading'  => 'Applicant Requirements',
+        'features' => [
+            [ 'label' => 'Request Quote', 'alpine_var' => 'requestQuote' ],
+            [ 'label' => 'Request Draw',  'alpine_var' => 'requestDraw' ],
+        ],
+    ]); ?>
 
     <!-- Edit Button -->
     <div class="pt-4 flex gap-2">
@@ -29,4 +37,3 @@
 <div x-show="showEditForm">
     <?php echo get_template_part('template-parts/events/edit-event-form', '', []); ?>
 </div>
-

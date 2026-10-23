@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 mb-4" x-data="{
+<div class="flex flex-col gap-2 mb-4 border border-black/20 rounded p-4 bg-yellow-10/50" x-data="{
     cityInput: city,
     citySelected: city,
     showCitySearchOptions: false,

@@ -33,8 +33,8 @@ test.describe('Visual - Musician Application - Logged in - Valid lic', () => {
 
     test('Displays successful submission content instead of the form', async ({ musicianApplicationPage }) => {
         await expect(musicianApplicationPage.successfulSubmission).toBeVisible();
-        await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
-        await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
+        await expect(musicianApplicationPage.applicationTitle).toBeVisible();
+        await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingForm).not.toBeVisible();
         await expect(musicianApplicationPage.applicationSubmissionInputs).not.toBeVisible();
     });

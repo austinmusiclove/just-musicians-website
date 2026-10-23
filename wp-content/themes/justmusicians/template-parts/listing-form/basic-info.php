@@ -11,7 +11,7 @@
                 <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'E.g., 5-piece Country Band' ]); ?>
             </label>
         </div>
-        <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription" ></textarea>
+        <textarea id="description-input" class="no-formatting block w-full h-20 mt-1" type="text" id="description" name="description" maxlength="40" required x-model="pDescription"></textarea>
         <div class="bg-yellow-20 absolute bottom-2 right-2 text-14 text-grey px-1 py-0.5 rounded-sm"><span x-text="pDescription.length">0</span>/40 char</div>
     </fieldgroup>
 

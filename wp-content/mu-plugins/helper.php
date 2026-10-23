@@ -49,6 +49,23 @@ function get_thumbnails_from_listings($listing_post_ids) {
     }
     return array_values(array_filter($thumbnails));
 }
+function get_listing_image_urls($post_id) {
+    $image_ids = get_post_meta($post_id, 'listing_images', true);
+    if (!is_array($image_ids)) {
+        return [];
+    }
+
+    $urls = [];
+    foreach (array_slice($image_ids, 0, 2) as $image_id) {
+        if (!$image_id) { continue; }
+        $url = wp_get_attachment_image_url($image_id, 'standard-listing');
+        if ($url) {
+            $urls[] = $url;
+        }
+    }
+
+    return $urls;
+}
 function is_valid_url($url) {
     // Trim whitespace
     $url = trim($url);

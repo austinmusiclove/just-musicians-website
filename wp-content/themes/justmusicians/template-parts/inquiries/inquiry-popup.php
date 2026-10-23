@@ -20,7 +20,8 @@
 
         <!-- Multi Slide Inquiry Popup Form -->
         <!-- Prevent submitting form with Enter button but allow shift+enter in textarea -->
-        <form x-ref="inquiryForm"
+        <form class="h-full flex flex-col justify-center"
+            x-ref="inquiryForm"
             hx-post="/wp-html/v1/events/"
             hx-target="#inquiry-result"
             hx-ext="disable-element" hx-disable-element=".inquiry-submit-button"

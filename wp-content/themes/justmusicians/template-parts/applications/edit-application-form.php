@@ -5,13 +5,11 @@
 >
 
     <!-- Title -->
-    <h3 class="font-bold text-16 mb-1 mt-6">Application Title</h3>
-    <input type="text" name="title" class="w-full px-3 py-2 border border-black/20 rounded-sm text-14" required
-        x-bind:value="title"
-    />
+    <h3 class="font-bold text-16 mb-2">Application Title</h3>
+    <input type="text" name="title" class="w-full px-3 py-2 border border-black/20 rounded-sm text-14" required x-bind:value="title" />
 
     <!-- Description -->
-    <h3 class="font-bold text-16 mb-1 mt-6">Description</h3>
+    <h3 class="font-bold text-16 mb-2 mt-6">Description</h3>
     <?php
     wp_editor($args['description'], 'application_description', [
         'textarea_name' => 'description',
@@ -25,25 +23,22 @@
     ]);
     ?>
 
+    <?php echo get_template_part('template-parts/global/form/checkbox-pair', '', [
+        'label_1' => 'Request minimum guarantee',
+        'label_2' => 'Request draw estimate from musicians',
+        'name_1' => 'application_request_quote',
+        'name_2' => 'application_request_draw',
+        'tooltip_1' => 'Select this if you want musicians to give you their minimum guarantee',
+        'tooltip_2' => 'Select this if you want musicians to let you know how many guests they believe they will attract to a show',
+        'x_model_1' => 'requestQuote',
+        'x_model_2' => 'requestDraw',
+    ]); ?>
+
     <!-- Events -->
-    <h3 class="font-bold text-16 mb-1 mt-6">Events</h3>
-    <p class="text-16 mb-2">By associating events with your application, musicians can submit their availability for each event when filling out the application.</p>
-    <?php if (!empty($args['upcoming_events'])) { ?>
-    <div class="flex flex-col gap-2">
-        <input type="hidden" name="events[]" > <!-- This is here so that if no events are selected, it will result in update instead of having the events[] arg ignored -->
-        <?php foreach ($args['upcoming_events'] as $event) { ?>
-        <label class="flex items-center gap-3 cursor-pointer p-2 border border-black/20 rounded-sm hover:bg-yellow-light">
-            <input type="checkbox" name="events[]" value="<?php echo $event['post_id']; ?>" x-model="selectedEventIds">
-            <div class="flex flex-col">
-                <span class="text-14 font-semibold"><?php echo esc_html($event['event_name']); ?></span>
-                <span class="text-12 text-black/60"><?php echo $event['start_date'] ? gmdate('M j, Y', strtotime($event['start_date'])) : ''; ?></span>
-            </div>
-        </label>
-        <?php } ?>
-    </div>
-    <?php } else { ?>
-    <p class="text-16 text-black/50">You don't have any upcoming events. <a class="underline" href="<?php echo site_url('event-form'); ?>">Create an event</a> first to add it to this application.</p>
-    <?php } ?>
+    <?php echo get_template_part('template-parts/applications/application-form/events', '', [
+        'upcoming_events' => $args['upcoming_events'],
+        'x-model' => 'selectedEventIds',
+    ]); ?>
 
     <!-- Buttons -->
     <div class="flex items-center gap-2 mt-8">

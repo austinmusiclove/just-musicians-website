@@ -6,11 +6,10 @@ $success_toast = $args['success_toast']  ?? null;
 $error_toast   = $args['error_toast']    ?? null;
 ?>
 
-<button type="button" class="hover:bg-yellow-light bg-yellow px-3 py-3 rounded-sm font-sun-motter text-14 inline-block w-full"
+<button type="button" class="bg-yellow-light hover:bg-yellow px-3 py-2 rounded-sm font-sun-motter text-12 inline-block w-full"
     hx-target="this"
     hx-swap="outerHTML"
     hx-trigger="click"
-
     <?php // Get post url with alpine or regular var based on which one is passed in ?>
     <?php if ($listing_var) { ?>
         x-bind:hx-post="'<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/listings/'); ?>' + <?php echo $listing_var; ?> + '/request-proposal/'"
@@ -19,7 +18,6 @@ $error_toast   = $args['error_toast']    ?? null;
         hx-post="<?php echo site_url('/wp-html/v1/events/' . $args['event_id'] . '/listings/' . $args['listing_id'] . '/request-proposal'); ?>"
         hx-indicator="#request-proposal-btn-indicator-<?php echo $args['event_id'] . '-' . $args['listing_id']; ?>"
     <?php } ?>
-
     <?php // Handle toasts ?>
     <?php if ($success_toast) { ?>
         x-init="$dispatch('success-toast', { 'message': '<?php echo $success_toast; ?>' })"

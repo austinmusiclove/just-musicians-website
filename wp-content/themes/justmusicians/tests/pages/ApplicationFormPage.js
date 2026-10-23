@@ -4,6 +4,8 @@ export class ApplicationFormPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
         this.titleInput           = page.locator('#title');
+        this.requestQuoteCheckbox = page.getByRole('checkbox', { name: 'Request minimum guarantee' });
+        this.requestDrawCheckbox  = page.getByRole('checkbox', { name: 'Request draw estimate from musicians' });
         this.submitBtn            = page.getByRole('button', { name: 'Create Application' });
     }
 
@@ -32,6 +34,14 @@ export class ApplicationFormPage extends ThemePage {
             (text) => document.querySelector('textarea[name="description"]').value === text,
             description
         );
+    }
+
+    async checkRequestQuote(checked = true) {
+        await this.requestQuoteCheckbox.setChecked(checked, { force: true });
+    }
+
+    async checkRequestDraw(checked = true) {
+        await this.requestDrawCheckbox.setChecked(checked, { force: true });
     }
 
     async submitApplication() {

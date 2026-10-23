@@ -16,9 +16,6 @@ add_filter('template_include', function($template) {
         case 'musician-application-embed':
             $new_template = locate_template(['musician-application-embed.php']);
             if (!empty($new_template)) { return $new_template; }
-        case 'musician-application-demo':
-            $new_template = locate_template(['musician-application-demo.php']);
-            if (!empty($new_template)) { return $new_template; }
 
         // Landing Pages
         case 'landing-search':

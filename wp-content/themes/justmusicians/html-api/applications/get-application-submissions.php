@@ -25,11 +25,34 @@ $next_page     = $result['next_page'];
 
 if (count($submissions) > 0) {
     foreach ($submissions as $index => $submission) {
+        $application_id = $submission['application_id'] ?? 0;
+        $listing_id     = $submission['listing_id'] ?? 0;
+        $events         = get_application_events($application_id);
+        $proposals      = [];
+
+        if (!empty($events) && $listing_id) {
+            foreach ($events as $event) {
+                $event_id = $event['event_id'] ?? 0;
+                if (!$event_id) { continue; }
+
+                $proposal_id = hm_proposal_exists($listing_id, $event_id);
+                if ($proposal_id) {
+                    $proposals[] = [
+                        'proposal_id'  => $proposal_id,
+                        'start_date'   => $event['start_date'],
+                        'availability' => get_post_meta($proposal_id, 'availability', true),
+                    ];
+                }
+            }
+        }
+
         get_template_part('template-parts/cards/submitted-application-card', '', [
-            'submission'   => $submission,
-            'last'         => $index == array_key_last($submissions),
-            'is_last_page' => $is_last_page,
-            'next_page'    => $next_page,
+            'submission'      => $submission,
+            'application_url' => get_musician_application_url($application_id),
+            'proposals'       => $proposals,
+            'last'            => $index == array_key_last($submissions),
+            'is_last_page'    => $is_last_page,
+            'next_page'       => $next_page,
         ]);
     }
 } else if ($page == 1) {

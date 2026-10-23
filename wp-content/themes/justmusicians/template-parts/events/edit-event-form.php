@@ -9,6 +9,16 @@
     <?php echo get_template_part('template-parts/events/event-form/taxonomy-inputs'); ?>
     <?php echo get_template_part('template-parts/events/event-form/details-input'); ?>
     <?php echo get_template_part('template-parts/events/event-form/compensation-inputs'); ?>
+    <?php echo get_template_part('template-parts/global/form/checkbox-pair', '', [
+        'label_1' => 'Request quote from musicians',
+        'label_2' => 'Request draw estimate from musicians',
+        'name_1' => 'event_request_quote',
+        'name_2' => 'event_request_draw',
+        'x_model_1' => 'requestQuote',
+        'x_model_2' => 'requestDraw',
+        'tooltip_1' => 'Select this if you want musicians to give you a price for their service',
+        'tooltip_2' => 'Select this if you want musicians to let you know how many guests they believe they will attract to the show',
+    ]); ?>
 
     <div class="flex gap-2 mt-8">
 

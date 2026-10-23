@@ -2,11 +2,7 @@
     x-show="showApplication" x-cloak
     x-ref="listingForm"
     x-init="$watch('listingId', () => htmx.process($el))"
-    <?php if ($args['demo']) { ?>
-        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/demo/` : '/submit/demo/')"
-    <?php } else { ?>
-        x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
-    <?php } ?>
+    x-bind:hx-post="'<?php echo site_url('/wp-html/v1/applications/' . $args['application_id']); ?>' + (listingId ? `/listings/${listingId}/submit/` : '/submit/')"
     hx-trigger="submitapplication"
     hx-target="#submit-application-result"
     hx-indicator="#submit-button-content"
@@ -105,6 +101,9 @@
         <?php get_template_part('template-parts/applications/musician-application/listing-form', '', []); ?>
     </div>
 
+    <!-- Min Guarantee and Draw Estimate-->
+    <?php get_template_part('template-parts/applications/musician-application/guarantee-draw-inputs', '', []); ?>
+
     <!-- Application Submission Inputs -->
     <div class="has-border p-0" data-testid="application-submission-inputs">
         <label class="block bg-yellow-10 p-2 w-full p-2 flex items-center gap-1 rounded-t-sm">
@@ -120,6 +119,7 @@
     <?php if (!empty($args['embed'])) { ?>
         <input type="hidden" name="embed" value="1" />
     <?php } ?>
+
 
     <!-- Availability -->
     <?php get_template_part('template-parts/applications/musician-application/availability-inputs', '', [ 'events' => $args['events'] ]); ?>

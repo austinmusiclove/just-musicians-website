@@ -1,4 +1,4 @@
-<div class="flex items-start gap-1">
+<div class="flex items-center gap-1">
 
     <img style="height: 1rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/user-group.svg" />
 

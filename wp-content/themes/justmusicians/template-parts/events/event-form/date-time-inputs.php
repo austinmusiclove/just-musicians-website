@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 mb-4">
+<div class="grid md:grid-cols-3 gap-2 mb-4 border border-black/20 rounded p-4 bg-yellow-10/50">
 
     <div>
         <label class="text-14 font-bold">Date</label>
@@ -7,7 +7,7 @@
         />
     </div>
 
-    <div class="flex gap-2" x-data="{ startTimeInput: startTime, endTimeInput: endTime }">
+    <div class="flex gap-2 md:col-span-2" x-data="{ startTimeInput: startTime, endTimeInput: endTime }">
         <div class="flex-1">
             <label class="text-14 font-bold">Start Time</label>
             <input type="time" name="event_start_time" x-bind:value="startTime" x-model="startTimeInput" x-bind:max="endTimeInput || '23:59'" class="w-full" />

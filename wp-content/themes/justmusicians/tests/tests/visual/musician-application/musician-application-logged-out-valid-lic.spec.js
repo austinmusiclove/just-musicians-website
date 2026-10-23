@@ -28,8 +28,8 @@ test.describe('Visual - Musician Application - Logged out - Valid lic', () => {
         await expect(musicianApplicationPage.successfulSubmissionSignUp).toBeVisible();
         await expect(musicianApplicationPage.signupModalHeading).toHaveText('Sign up to complete your submission');
         await expect(musicianApplicationPage.signupModalHeading).not.toBeVisible();
-        await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
-        await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
+        await expect(musicianApplicationPage.applicationTitle).toBeVisible();
+        await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingForm).not.toBeVisible();
         await expect(musicianApplicationPage.applicationSubmissionInputs).not.toBeVisible();
     });

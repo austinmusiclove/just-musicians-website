@@ -4,7 +4,7 @@
         <p class="text-14 text-black/60 mt-4">No one has access yet.</p>
     <?php } else { ?>
 
-        <ul class="mt-4 border border-black/10 rounded-sm divide-y divide-black/10 max-h-48 overflow-y-auto">
+        <ul class="mt-2 border border-black/10 rounded divide-y divide-black/10 max-h-48 overflow-y-auto">
             <?php foreach ($args['entries'] as $entry) { ?>
 
                 <li class="flex items-center justify-between gap-4 p-3 text-14">
@@ -14,7 +14,7 @@
                     </span>
 
                     <?php if ($entry->access_type === HM_ACCESS_TYPE_OWNER) { ?>
-                        <span class="text-black/50 uppercase shrink-0 p-3">Owner</span>
+                        <span class="uppercase shrink-0 bg-yellow-20 text-yellow font-bold py-1 px-2">Owner</span>
                     <?php } else {
                         $other_type = $entry->access_type === HM_ACCESS_TYPE_VIEW ? HM_ACCESS_TYPE_EDIT : HM_ACCESS_TYPE_VIEW;
                         $hx_vals    = [
@@ -43,7 +43,7 @@
                             hx-indicator="#<?php echo $container_id; ?>"
                             hidden></div>
 
-                        <select class="border border-black/20 rounded-sm bg-white text-14 py-1 px-2 max-w-[80px]"
+                        <select class="border border-black/20 rounded-sm bg-white !text-14 !py-1.5 !pl-1 !pr-1 max-w-[80px]"
                             onchange="htmx.trigger(document.body, 'access-' + this.value + '-<?php echo (string) $entry->id; ?>')"
                         >
                             <option value="<?php echo esc_attr($entry->access_type); ?>" selected><?php echo esc_html(ucfirst($entry->access_type)); ?></option>

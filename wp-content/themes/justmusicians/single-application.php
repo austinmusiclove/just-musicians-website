@@ -38,7 +38,7 @@ $app_submissions = get_applicants($application_id, [
 ]);
 $app_submission_ids = array_map('strval', $app_submissions['submission_ids']);
 
-$app_description = get_post_meta(get_the_ID(), 'description', true);
+$app_description = get_post_meta($application_id, 'description', true);
 
 // Events
 $user_events_result = get_user_events([
@@ -56,17 +56,20 @@ get_header();
 
     <div id="content" class="grow flex flex-col relative">
         <div class="container md:grid md:grid-cols-9 gap-8 lg:gap-12">
-            <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
+            <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row bg-white relative">
+
                 <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                  <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
+                    <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 py-6 md:py-12"
+            <div class="col md:col-span-6 pb-6 md:pb-12"
                 x-data="{
                     collectionsMap:   <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     applicationId:   '<?php echo $application_id; ?>',
                     title:           '<?php echo clean_str_for_doublequotes(get_field('title')       ?? ''); ?>',
                     description:     '<?php echo clean_str_for_doublequotes($app_description); ?>',
+                    requestQuote:    '<?php echo clean_str_for_doublequotes(get_field('request_quote')); ?>',
+                    requestDraw:     '<?php echo clean_str_for_doublequotes(get_field('request_draw')); ?>',
                     appEvents:        <?php echo clean_arr_for_doublequotes($app_events); ?>,
                     selectedEventIds: <?php echo clean_arr_for_doublequotes(array_column($app_events, 'event_id')); ?>,
                     submission_ids:   <?php echo clean_arr_for_doublequotes($app_submission_ids); ?>,
@@ -81,13 +84,17 @@ get_header();
                 x-on:update-application="_updateApplication($event.detail.application)"
             >
 
-                <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16" href="<?php echo site_url('/applications/'); ?>" >
-                    <span>←</span>
-                    <span>Back to Applications</span>
-                </a>
+                <div class="relative pt-6">
+                    <div class="absolute -mx-4 md:mx-0 top-0 md:-left-8 lg:-left-12 h-full z-0 bg-yellow-10 border-b border-b-yellow/60 w-screen"></div>
+                    <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16 relative z-10"
+                        href="<?php echo site_url('/applications/'); ?>">
+                        <span>←</span>
+                        <span>Back to Applications</span>
+                    </a>
 
-                <div class="mb-6 md:mb-14 flex justify-start items-center flex-row">
-                    <h1 class="font-bold text-25"><?php echo esc_html(get_post_meta($application_id, 'title', true) ?: 'Application'); ?></h1>
+                    <div class="pb-6 md:pb-14 flex justify-start items-center flex-row relative z-10">
+                        <h1 class="font-bold text-28 pb-8"><?php echo esc_html(get_post_meta($application_id, 'title', true) ?: 'Application'); ?></h1>
+                    </div>
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
@@ -105,7 +112,7 @@ get_header();
                     },
                 }">
                     <!-- Tabs -->
-                    <div class="flex items-start justify-between border-b border-black/20">
+                    <div class="flex items-start justify-between -mt-9 z-10 relative">
                         <div class="flex gap-6 items-start">
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showApplicationDetails}" x-on:click="hideTabs(); showApplicationDetails = true;">Application Details</div>
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">
@@ -118,7 +125,7 @@ get_header();
                         </div>
                     </div>
 
-                    <div class="pt-4" x-show="showApplicationDetails" x-cloak>
+                    <div class="pt-12" x-show="showApplicationDetails" x-cloak>
                         <?php echo get_template_part('template-parts/applications/application-details', '', [
                             'description'     => $app_description,
                             'upcoming_events' => $upcoming_events,

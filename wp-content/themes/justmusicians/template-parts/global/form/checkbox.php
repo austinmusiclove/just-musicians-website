@@ -10,12 +10,13 @@
         $input_attrs .= '"';
     }
     $input_attrs .= ' id="' . esc_attr($input_id) . '"';
-    if (!empty($args['value']))      { $input_attrs .= ' value="' . $args['value'] . '"'; }
-    if (!empty($args['x-model']))    { $input_attrs .= ' x-model="' . $args['x-model'] . '"'; }
-    if (!empty($args['x-ref']))      { $input_attrs .= ' x-ref="' . $args['x-ref'] . '"'; }
-    if (!empty($args['x-disabled'])) { $input_attrs .= ' x-bind:disabled="' . $args['x-disabled'] . '"'; }
-    if (!empty($args['checked']))    { $input_attrs .= ' checked'; }
-    if (!empty($args['preload']))    { $input_attrs .= ' preload="always preload-filter"'; }
+    if (!empty($args['value']))        { $input_attrs .= ' value="' . $args['value'] . '"'; }
+    if (!empty($args['x-model']))      { $input_attrs .= ' x-model="' . $args['x-model'] . '"'; }
+    if (!empty($args['x-ref']))        { $input_attrs .= ' x-ref="' . $args['x-ref'] . '"'; }
+    if (!empty($args['x-disabled']))   { $input_attrs .= ' x-bind:disabled="' . $args['x-disabled'] . '"'; }
+    if (!empty($args['checked']))      { $input_attrs .= ' checked'; }
+    if (!empty($args['bind-checked'])) { $input_attrs .= ' x-bind:checked="' . $args['bind-checked'] . '"'; }
+    if (!empty($args['preload']))      { $input_attrs .= ' preload="always preload-filter"'; }
 
     $x_show = !empty($args['x-show']) ? ' x-show="' . $args['x-show'] . '"' : '';
 ?>

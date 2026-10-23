@@ -50,7 +50,7 @@
         </div>
 
         <div id="applicants-spinner-top" class="flex items-center justify-center htmx-indicator">
-            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
+            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
         </div>
 
     </div>

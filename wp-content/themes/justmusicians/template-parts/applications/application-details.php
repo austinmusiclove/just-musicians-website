@@ -38,8 +38,18 @@
     <!-- Description -->
     <div>
         <h3 class="font-bold text-16 mb-2">Description</h3>
-        <div class="whitespace-pre-wrap text-16 wysiwyg-content" :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'"></div>
+        <div class="flex gap-2 flex-col text-14 wysiwyg-content border border-black/20 p-4 rounded whitespace-pre-wrap"
+            :class="description ? '' : 'text-black/50'" x-html="description ? description : 'No description provided'">
+        </div>
     </div>
+    <!-- Requirements -->
+    <?php echo get_template_part('template-parts/global/feature-checks', '', [
+        'heading'  => 'Requirements',
+        'features' => [
+            [ 'label' => 'Request Minimum Guarantee', 'alpine_var' => 'requestQuote' ],
+            [ 'label' => 'Request Draw',              'alpine_var' => 'requestDraw' ],
+        ],
+    ]); ?>
 
     <!-- Events -->
     <div>
@@ -60,9 +70,7 @@
     <!-- Actions -->
     <div class="pt-4 flex gap-2 flex-wrap">
         <?php if ($args['app_access'] === 'edit' || $args['app_access'] === 'owner') { ?>
-        <button type="button" x-on:click="showEditForm = true" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block">
-            Edit Application
-        </button>
+            <button type="button" class="bg-yellow hover:bg-navy text-black hover:text-white px-3 py-2 rounded-sm font-sun-motter text-14 w-fit whitespace-nowrap inline-block" x-on:click="showEditForm = true">Edit Application</button>
         <?php } ?>
         <?php if ($args['app_access'] === 'owner') { ?>
         <?php echo get_template_part('template-parts/access/share-button', '', [

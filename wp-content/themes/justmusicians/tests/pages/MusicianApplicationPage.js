@@ -20,6 +20,8 @@ export class MusicianApplicationPage extends ThemePage {
         this.coverImageInput                      = page.locator('input[name="cover_image_input"]');
         this.applyCropBtn                         = page.getByRole('button', { name: 'Apply' });
         this.applicationSubmissionInputs          = page.getByTestId('application-submission-inputs');
+        this.minimumGuaranteeInput                = page.locator('input[name="minimum_guarantee"][type="number"]');
+        this.drawEstimateInput                    = page.locator('input[name="draw_estimate"][type="number"]');
         this.messageTextarea                      = page.locator('textarea[name="applicant_message"]');
         this.submitButton                         = page.locator('#submit-button-content').locator('.htmx-indicator-component-block-replace');
         this.invalidLic                           = page.getByTestId('invalid-lic');
@@ -79,6 +81,14 @@ export class MusicianApplicationPage extends ThemePage {
         await this.applyCropBtn.click();
     }
 
+    async fillMinGuarantee(amount) {
+        await this.minimumGuaranteeInput.fill(String(amount));
+    }
+
+    async fillDrawEstimate(count) {
+        await this.drawEstimateInput.fill(String(count));
+    }
+
     async fillMessage(message) {
         await this.messageTextarea.fill(message);
     }
@@ -93,20 +103,20 @@ export class MusicianApplicationPage extends ThemePage {
 
     async expectSuccessScreen() {
         await expect(this.successfulSubmission).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
     async expectSuccessScreenLoggedOut() {
         await expect(this.successfulSubmissionLoggedOut).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
     async expectSuccessfulSubmissionSignUpPage() {
         await expect(this.successfulSubmissionSignUp).toBeVisible();
-        await expect(this.applicationTitle).not.toBeVisible();
-        await expect(this.applicationDescription).not.toBeVisible();
+        await expect(this.applicationTitle).toBeVisible();
+        await expect(this.applicationDescription).toBeVisible();
         await expect(this.musicianApplicationForm).not.toBeVisible();
     }
 

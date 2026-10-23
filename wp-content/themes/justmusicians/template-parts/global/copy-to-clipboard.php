@@ -7,8 +7,7 @@ $icon_size_classes = $args['icon_size_classes'] ?? 'h-6';
 $click_text        = $args['click_text'] ?? 'Click to copy';
 ?>
 
-<div
-    class="flex flex-row items-center gap-2"
+<div class="flex flex-row items-center gap-2 min-w-0"
     x-data="{
         copied: false,
         hover: false,
@@ -24,7 +23,7 @@ $click_text        = $args['click_text'] ?? 'Click to copy';
 
     <!-- Copy text -->
     <?php if ($show_text) { ?>
-    <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block"
+    <span class="text-14 whitespace-nowrap overflow-hidden text-ellipsis block min-w-0"
         <?php if ($text_var) { echo 'x-text="' . $text_var . '"'; } ?>
     >
         <?php echo $text; ?>
@@ -48,10 +47,7 @@ $click_text        = $args['click_text'] ?? 'Click to copy';
             <div class="relative flex">
 
                 <!-- Copy icon -->
-                <img
-                    class="opacity-40 cursor-pointer hover:opacity-100 <?php echo $icon_size_classes; ?>"
-                    src="<?php echo get_template_directory_uri() . '/lib/images/icons/copy.svg'; ?>"
-                />
+                <img class="opacity-40 cursor-pointer hover:opacity-100 <?php echo $icon_size_classes; ?>" src="<?php echo get_template_directory_uri() . '/lib/images/icons/copy.svg'; ?>" />
 
                 <!-- Copy tooltip -->
                 <div class="z-50 absolute bottom-full left-1/2 -translate-x-1/2" x-show="hover || copied" x-cloak>

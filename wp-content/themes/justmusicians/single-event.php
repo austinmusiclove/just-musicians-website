@@ -29,10 +29,10 @@ get_header();
         <div class="container md:grid md:grid-cols-9 gap-8 lg:gap-12">
             <div class="hidden md:col-span-3 border-r border-black/20 pr-8 md:flex flex-row">
                 <div id="sticky-sidebar" class="sticky pt-24 pb-24 md:pb-12 w-full top-16 lg:top-20 h-fit">
-                  <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
+                    <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                 </div>
             </div>
-            <div class="col md:col-span-6 py-6 md:py-12"
+            <div class="col md:col-span-6 pb-6 md:pb-12"
                 x-data="{
                     collectionsMap:  <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                     showEditForm: false,
@@ -62,16 +62,22 @@ get_header();
                 x-on:update-event="_updateEvent($event.detail.event); showEditForm = false;"
             >
 
-                <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-16" href="<?php echo site_url('/my-events/'); ?>" >
-                    <span>←</span>
-                    <span>Back to My Events</span>
-                </a>
+                <div class="relative pt-6 pb-6 md:pb-14">
+                    <div class="absolute -mx-4 md:mx-0 top-0 md:-left-8 lg:-left-12 h-full z-0 bg-yellow-10 border-b border-b-yellow/60 w-screen"></div>
+                    <a class="inline-flex items-center gap-1 text-14 text-black/60 hover:text-black mb-8 sm:mb-12 z-10 relative" href="<?php echo site_url('/my-events/'); ?>">
+                        <span>←</span>
+                        <span>Back to My Events</span>
+                    </a>
 
-                <div class="mb-6 md:mb-14 flex justify-start items-end gap-3 flex-row">
-                    <div class="w-20 sm:w-24 shrink-0">
-                        <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
+                    <div class="mb-6 md:mb-8 flex justify-start items-start gap-4 md:gap-8 flex-row z-10 relative">
+                        <div class="w-20 sm:w-24 shrink-0">
+                            <?php echo get_template_part('template-parts/global/calendar/css-calendar-img', '', ['alpine_var' => 'startDate']); ?>
+                        </div>
+                        <div class="sm:min-h-24 flex items-center">
+                            <h1 class="font-bold text-25 md:text-32" x-text="eventName"></h1>
+                        </div>
                     </div>
-                    <h1 class="font-bold text-25" x-text="eventName"></h1>
+
                 </div>
 
                 <!------------ Page Load Toasts ----------------->
@@ -79,7 +85,7 @@ get_header();
                     <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create') { ?><span x-init="$dispatch('success-toast', {'message': 'Event Created Successfully'});"></span><?php } ?>
                 </div>
 
-                <div x-data="{
+                <div class="relative z-10" x-data="{
                     showEventDetails: true,
                     showApplicants: false,
                     hideTabs() {
@@ -88,7 +94,7 @@ get_header();
                     },
                 }">
                     <!-- Tabs -->
-                    <div class="flex items-start justify-between border-b border-black/20">
+                    <div class="flex items-start justify-between -mt-9">
                         <div class="flex gap-6 items-start">
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer" :class="{'active': showEventDetails}" x-on:click="hideTabs(); showEventDetails = true;">Event Details</div>
                             <div class="preview-tab text-18 tab-heading pb-2 cursor-pointer relative" :class="{'active': showApplicants}" x-on:click="hideTabs(); showApplicants = true;">

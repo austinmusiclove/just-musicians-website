@@ -42,6 +42,7 @@ function get_listing($args) {
         'state'                    => get_field('state'),
         'zip_code'                 => get_field('zip_code'),
         'bio'                      => get_field('bio'),
+        'listing_image_urls'       => get_listing_image_urls($post_id),
         'ensemble_size'            => get_field('ensemble_size'),
         'venues_played_verified'   => wp_objects_to_ids(get_field('venues_played_verified')),
         'venues_played_unverified' => wp_objects_to_ids(get_field('venues_played_unverified')),

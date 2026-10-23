@@ -27,11 +27,6 @@ function template_route_rewrite_rules() {
         'index.php?custom-template=musician-application-embed&application-id=$matches[1]',
         'top'
     );
-    add_rewrite_rule(
-        '^musician-application/([0-9]+)/demo/?$',
-        'index.php?custom-template=musician-application-demo&application-id=$matches[1]',
-        'top'
-    );
 
     // Search page
     add_rewrite_rule(
@@ -41,9 +36,11 @@ function template_route_rewrite_rules() {
     );
 
     // Locale Category Pages
+    // Prevent this catch-all rule from swallowing single-post URLs such as /collection/country-bands/ or /artist/jazz-bands/.
     $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs' ]);
+    $locales = implode('|', [ 'austin', 'san-antonio' ]);
     add_rewrite_rule(
-        '^([^/]+)/(' . $categories . ')/?$',
+        '^(' . $locales . ')/(' . $categories . ')/?$',
         'index.php?custom-template=landing-locale-category&locale=$matches[1]&lm-category=$matches[2]',
         'top'
     );

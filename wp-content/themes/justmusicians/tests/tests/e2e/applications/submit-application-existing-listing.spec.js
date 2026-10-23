@@ -19,7 +19,7 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
         applicationAuthor = createUser();
         applicationAuthorId = wpCli.createUser(applicationAuthor);
 
-        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId }));
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorId, overrides: { request_quote: true, request_draw: true } }));
 
         submitter = createUser();
         submitterId = wpCli.createUser(submitter);
@@ -47,6 +47,40 @@ test.describe('E2E - Submit Application - Logged in - Existing Listing', () => {
         expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
         expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingId));
         expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);
+
+        const expectedSubmitterSubject = `(${mailpit.siteUrl} ${submitter.email}) Your application submission was successful!`;
+        const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);
+        expect(submitterEmail).toBeTruthy();
+
+        const expectedAuthorSubject = `(${mailpit.siteUrl} ${applicationAuthor.email}) You have a new applicant!`;
+        const authorEmail = await mailpit.findEmailBySubject(expectedAuthorSubject);
+        expect(authorEmail).toBeTruthy();
+
+        const notificationExists = wpCli.notificationExists(applicationAuthorId, 'new_applicant', submissionId);
+        expect(notificationExists).toBe(true);
+    });
+
+    test('Submit application with min guarantee and draw', async ({ musicianApplicationPage, wpCli, mailpit }) => {
+        await musicianApplicationPage.navigateToApplication(applicationId);
+
+        const minGuarantee = "1000";
+        const drawEstimate = "100";
+        await musicianApplicationPage.selectListing(listingData.meta.name);
+        await musicianApplicationPage.fillMessage(message);
+        await musicianApplicationPage.fillMinGuarantee(minGuarantee);
+        await musicianApplicationPage.fillDrawEstimate(drawEstimate);
+        await musicianApplicationPage.submitApplication();
+
+        await musicianApplicationPage.expectSuccessScreen();
+
+        const submissionId = wpCli.getLatestPostId(submitterId, 'app_submission');
+        expect(submissionId).toBeTruthy();
+        wpCli.trackPost(submissionId);
+        expect(wpCli.getPostMeta(submissionId, 'application')).toBe(String(applicationId));
+        expect(wpCli.getPostMeta(submissionId, 'listing')).toBe(String(listingId));
+        expect(wpCli.getPostMeta(submissionId, 'message')).toBe(message);
+        expect(wpCli.getPostMeta(submissionId, 'minimum_guarantee')).toBe(minGuarantee);
+        expect(wpCli.getPostMeta(submissionId, 'draw_estimate')).toBe(drawEstimate);
 
         const expectedSubmitterSubject = `(${mailpit.siteUrl} ${submitter.email}) Your application submission was successful!`;
         const submitterEmail = await mailpit.findEmailBySubject(expectedSubmitterSubject);

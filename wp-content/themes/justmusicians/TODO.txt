@@ -8,49 +8,30 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
-    Strategy to confirm with expert
-        Get backlinks to category locale pages
-            Hand pick recommendations for each category and try to convert them to community partners
-                Each community partner musician is required to give a brand mention and back link to the category locale page and locale page
-                    provide award badges like weddingwire, some sample copy to put on their site to link to the category locale page - Mentioned by Hire Musicians on their Top Wedding Bands for Hire in Austin, Texas page
-                Each community partner musician is required to link back to their HM listing page from their website
-                Each community partner musician is given a recommendation on at least one locale category page with original content about why you might want to hire them
-                Each community partner musician is given a recommendation on a locale page under at least one category
-                Each community partner musician is prioritized in the rank for that locale category page (need to code this mechanism and add list of recommended listings in acf)
-                Each community partner musician is ranked higher in general search than every non community partner listing
-                Each community partner musician is verified
-                Each community partner gets a discount on arbitration fee
-            Collect pricing information for each listing; perhaps for each category
-            Swap links with local promoters, wedding planners, and other buyers for the locale page
-                get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
-            get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
-        transition from austin tx focus to broader location
-            add landing page for hiring musicians in austin and add optional beadcrumb from category locale pages to their locale page if one exists
-            add landing pages for different cities and have static musician recommendations on there for different categories that are all backlinked (/austin/live-music)
-            change home page to hire live musicians near you
-        Add content to category locale pages that I can scale out
-            Landing pages content ideas (maybe some fit elsewhere) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
-        Add internal links on listings pages to locale category pages
+    404 author and category pages; https://hiremusicians.com/category/music-industry/studies/ https://hiremusicians.com/author/plumtonguebandgmail-com/
+    Add internal links on listings pages to locale category pages (check with seo)
+    unnamed item in breadcrumb on google search console; maybe the item list needs an item property not just the items
+    add alt text to thumbnails, icons, listing page cover and listing images
     Location/Category Pages
         add pricing for the specific service of the category and location
         traditional paging
         add somewhere on the page that bands can apply to be recommended on the page
         maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
+        add pricing for the specific service of the category and location
+        Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
     Home page
         **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
         Trust & Social Proof
             total number of listings, number of cities that have musicians, categories that have musicians, established year
             national level partners
         Add content
+    Get backlinks to category locale pages
+        Swap links with local promoters, wedding planners, and other buyers for the locale page
+            get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+        get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
     single listing pages
         make sure data can be indexed even though it is hidden behind x-show and x-cloak
         add self referencing canonical on listing pages
-    price estimator for live band in austin tx
-    need system for renewing verification just by making sure they are still active
-    system for keeping data accurate by scraping artist websites and comparing information
-    steal competitor backlinks by using seo tool to findout who links to them
-    add best x in x listacle blog posts
-    unnamed item in breadcrumb on google search console; maybe the item list needs an item property not just the items
     transition from live music to multi vertical
         Locale pages now need to have info on all verticals available in that region
         Add vertical pages
@@ -62,6 +43,10 @@ SEO
                 *Total active musician count
                 Platform trust badges (e.g., payment arbitration, insurance available).
                 National level community partners or press
+    price estimator for live band in austin tx
+    need system for renewing verification just by making sure they are still active
+    system for keeping data accurate by scraping artist websites and comparing information
+    steal competitor backlinks by using seo tool to findout who links to them
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)
@@ -87,38 +72,6 @@ Applications Features to add
     Sorting and organizing
         Filter by draw and price
         Filter genres, ensemble size and other taxonomies
-    After design update
-        add cloak back into applicant message
-        check for and remove script for expanding background color in single application behind application title; same on single event
-        add back in functional attributes for show more dates button in single application page
-        remove dummy paragraph in show-more-text.php and add back in whitespace-pre-wrap
-        pull in images dynamically in event applicant card instead of dummy images
-        make sure event applicant card ensemble size is coming from applicant and not event
-        My events spinner display non when not in use
-        Create event form toast
-        Populate requestQuote and requestDraw in Applications page and single application
-        Fix ensemble size in applicant cards which is pulling in ens size from application
-        Add two listing images on applicant cards
-        Add draw and price options for application and add them to applicant card
-        change edit submitted application to either resubmit or withdraw
-        fix application card so that link does not blend in with description
-        Show send message button disabled on pending listing with tooltip that tells you why it is disabled instead of it being missing
-        show availability dates on the applicant card
-        add ensemble size to applicant view
-        Figure out issue with cover image
-        Figure out get suggestions issue
-        use publicly queriable false in post type registration
-        merge application embed
-        make sure request quote and request draw are connected right
-        connect non-dummy date for submitted applications
-        remove spinner at bottom of submitted applications page and my gigs
-        change your application submission has been submitted to your application has been submitted
-    Other features that would be needed for parity with venue forms out there
-        dates requested (Flamingo, Kick Butt Coffee)
-        last time you played here (Flamingo)
-        Full bill; maybe bands you can play with or have played with (Flamingo)
-        Record label (Radio)
-        I'd like to open for.. (Radio)
 Escrow
     explore legal issues
         create generic and customizable performance contract

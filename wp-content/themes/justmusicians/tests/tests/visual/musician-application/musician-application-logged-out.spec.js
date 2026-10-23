@@ -26,10 +26,31 @@ test.describe('Visual - Musician Application - Logged out', () => {
     test('Displays invalid link message instead of the form when there is an invalid lic in the url', async ({ musicianApplicationPage }) => {
         await musicianApplicationPage.navigateToApplication(applicationId, 'test');
         await expect(musicianApplicationPage.invalidLic).toBeVisible();
-        await expect(musicianApplicationPage.applicationTitle).not.toBeVisible();
-        await expect(musicianApplicationPage.applicationDescription).not.toBeVisible();
+        await expect(musicianApplicationPage.applicationTitle).toBeVisible();
+        await expect(musicianApplicationPage.applicationDescription).toBeVisible();
         await expect(musicianApplicationPage.listingForm).not.toBeVisible();
         await expect(musicianApplicationPage.applicationSubmissionInputs).not.toBeVisible();
+    });
+
+    test('Displays request quote and request draw only when application has it checked', async ({ musicianApplicationPage, wpCli }) => {
+        await musicianApplicationPage.navigateToApplication(applicationId);
+        await expect(musicianApplicationPage.minimumGuaranteeInput).not.toBeVisible();
+        await expect(musicianApplicationPage.drawEstimateInput).not.toBeVisible();
+
+        wpCli.setPostMeta(applicationId, 'request_quote', '1');
+        await musicianApplicationPage.navigateToApplication(applicationId);
+        await expect(musicianApplicationPage.minimumGuaranteeInput).toBeVisible();
+        await expect(musicianApplicationPage.drawEstimateInput).not.toBeVisible();
+
+        wpCli.setPostMeta(applicationId, 'request_draw', '1');
+        await musicianApplicationPage.navigateToApplication(applicationId);
+        await expect(musicianApplicationPage.minimumGuaranteeInput).toBeVisible();
+        await expect(musicianApplicationPage.drawEstimateInput).toBeVisible();
+
+        wpCli.setPostMeta(applicationId, 'request_quote', '');
+        await musicianApplicationPage.navigateToApplication(applicationId);
+        await expect(musicianApplicationPage.minimumGuaranteeInput).not.toBeVisible();
+        await expect(musicianApplicationPage.drawEstimateInput).toBeVisible();
     });
 
 });
