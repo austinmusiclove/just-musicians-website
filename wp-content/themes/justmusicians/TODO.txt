@@ -8,6 +8,7 @@ Critical bugs
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
 SEO
+    404 author and category pages; https://hiremusicians.com/category/music-industry/studies/ https://hiremusicians.com/author/plumtonguebandgmail-com/
     Add internal links on listings pages to locale category pages (check with seo)
     unnamed item in breadcrumb on google search console; maybe the item list needs an item property not just the items
     add alt text to thumbnails, icons, listing page cover and listing images

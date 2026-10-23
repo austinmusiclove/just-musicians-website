@@ -4,8 +4,8 @@ export function createApplicationPostData({ authorId, status = 'publish', overri
     const application = {
         title: faker.lorem.sentence(),
         description: faker.lorem.sentence({ min: 10, max: 20 }),
-        request_quote: false,
-        request_draw: false,
+        request_quote: faker.datatype.boolean(),
+        request_draw: faker.datatype.boolean(),
         ...overrides,
     };
     return {
