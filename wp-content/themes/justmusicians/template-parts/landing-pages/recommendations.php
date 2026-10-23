@@ -1,9 +1,12 @@
 <?php
 $post_id       = $args['post_id'];
 $heading       = $args['heading'];
-$recommendation_ids = get_post_meta($post_id, 'recommendations', true);
+$recommendations = get_post_meta($post_id, 'recommendations', true);
+$recommendation_ids = !empty($recommendations) ? $recommendations : [];
 ?>
 
+
+<?php if ( count($recommendation_ids) > 0) { ?>
 <section class="container article-body py-16">
 
     <h2 class="mb-8"><?php echo esc_html( $heading ); ?></h2>
@@ -45,3 +48,4 @@ $recommendation_ids = get_post_meta($post_id, 'recommendations', true);
     </div>
 
 </section>
+<?php } ?>
