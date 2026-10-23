@@ -11,7 +11,7 @@ test.describe('Visual - Musician Application - Logged out', () => {
     test.beforeEach(async ({ wpCli }) => {
         const applicationAuthorUser = createUser();
         const applicationAuthorUserId = wpCli.createUser(applicationAuthorUser);
-        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorUserId }));
+        applicationId = wpCli.createPost(createApplicationPostData({ authorId: applicationAuthorUserId, overrides: { request_quote: false, request_draw: false } }));
     });
 
     test('Displays listing form and no listing dropdown', async ({ musicianApplicationPage }) => {
