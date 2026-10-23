@@ -14,6 +14,9 @@ function force_404_for_private_post_types() {
         is_singular('comp_report') or
         is_singular('review_submission') or
         is_singular('tmp_code') or
+        is_author() or
+        is_category() or
+        is_tag()
         is_tax()
     ) {
         global $wp_query;
