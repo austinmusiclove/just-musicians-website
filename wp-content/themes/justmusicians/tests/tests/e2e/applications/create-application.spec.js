@@ -23,16 +23,43 @@ test.describe('E2E - Create Application', () => {
         await applicationFormPage.submitApplication();
 
         const urlSlug = await applicationFormPage.waitForSubmitRedirect();
-        const idFromSlug = wpCli.getPostIdBySlug(urlSlug);
         const applicationId = wpCli.getLatestPostId(userId, 'application');
         wpCli.trackPost(applicationId);
-        expect(idFromSlug).toBe(applicationId);
 
+        expect(wpCli.getPostIdBySlug(urlSlug)).toBe(applicationId);
         expect(wpCli.getPostField(applicationId, 'post_title')).toBe(application.title);
         expect(wpCli.getPostField(applicationId, 'post_status')).toBe('publish');
         expect(wpCli.getPostField(applicationId, 'post_author')).toBe(userId);
         expect(wpCli.getPostMeta(applicationId, 'title')).toBe(application.title);
         expect(wpCli.getPostMeta(applicationId, 'description')).toBe(application.meta.description);
+        expect(wpCli.getPostMeta(applicationId, 'request_quote')).toBeNull();
+        expect(wpCli.getPostMeta(applicationId, 'request_draw')).toBeNull();
+
+        const expectedSubject = `(${mailpit.siteUrl} ${testUser.email}) Your application has been created!`;
+        const email = await mailpit.findEmailBySubject(expectedSubject);
+        expect(email).toBeTruthy();
+    });
+
+    test('Create application with request quote and request draw', async ({ applicationFormPage, mailpit, wpCli }) => {
+        const application = createApplicationPostData({ authorId: userId });
+
+        await applicationFormPage.fillMinimumFields(application.title, application.meta.description);
+        await applicationFormPage.checkRequestQuote();
+        await applicationFormPage.checkRequestDraw();
+        await applicationFormPage.submitApplication();
+
+        const urlSlug = await applicationFormPage.waitForSubmitRedirect();
+        const applicationId = wpCli.getLatestPostId(userId, 'application');
+        wpCli.trackPost(applicationId);
+
+        expect(wpCli.getPostIdBySlug(urlSlug)).toBe(applicationId);
+        expect(wpCli.getPostField(applicationId, 'post_title')).toBe(application.title);
+        expect(wpCli.getPostField(applicationId, 'post_status')).toBe('publish');
+        expect(wpCli.getPostField(applicationId, 'post_author')).toBe(userId);
+        expect(wpCli.getPostMeta(applicationId, 'title')).toBe(application.title);
+        expect(wpCli.getPostMeta(applicationId, 'description')).toBe(application.meta.description);
+        expect(wpCli.getPostMeta(applicationId, 'request_quote')).toBe('1');
+        expect(wpCli.getPostMeta(applicationId, 'request_draw')).toBe('1');
 
         const expectedSubject = `(${mailpit.siteUrl} ${testUser.email}) Your application has been created!`;
         const email = await mailpit.findEmailBySubject(expectedSubject);
