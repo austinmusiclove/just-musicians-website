@@ -60,9 +60,11 @@
                 x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
 
                 <!-- Thumbnail -->
-                <img class="w-auto h-full object-cover"
+                <img class="w-auto h-full object-cover" width="400" height="300"
+                    src="<?php echo $args['thumbnail_url']; ?>"
+                    alt="Applicant thumbnail for <?php $args['name']; ?>"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
-                    src="<?php echo $args['thumbnail_url']; ?>" alt="Applicant thumbnail for <?php $args['name']; ?>" x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
+                    x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
                 />
                 <!-- Youtube video iframes -->
                 <template x-for="(videoData, index) in videoData" :key="videoData.video_id + index">
@@ -84,22 +86,22 @@
             <!-- Play -->
             <div class="absolute transform left-2 bottom-2" @click="_updateIndex(1)"
                 x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" alt="Play video" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" width="32" height="32" alt="Play video" />
             </div>
             <!-- Pause -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 x-show="currentIndex > 0 && _isPaused()" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" alt="Pause video" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" width="32" height="32" alt="Pause video" />
             </div>
             <!-- Mute -->
             <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && playersMuted" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" alt="Mute audio" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" width="24" height="24" alt="Mute audio" />
             </div>
             <!-- Unmute -->
             <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && !playersMuted" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" alt="Unmute audio" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" width="24" height="24" alt="Unmute audio" />
             </div>
             <!-- Left Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -109,7 +111,7 @@
                 x-transition:enter-end="translate-x-0 opacity-100"
                 x-transition:leave-start="translate-x-0 opacity-100"
                 x-transition:leave-end="-translate-x-full opacity-0">
-                <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Previous slide" />
+                <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Previous slide" />
             </div>
             <!-- Right Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
@@ -119,7 +121,7 @@
                 x-transition:enter-end="translate-x-0 opacity-100"
                 x-transition:leave-start="translate-x-0 opacity-100"
                 x-transition:leave-end="translate-x-full opacity-0">
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Next slide" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Next slide" />
             </div>
 
         </div>
@@ -131,10 +133,10 @@
         ?>
             <div class="flex gap-2 w-full">
                 <?php foreach ($media_items as $img_url) { ?>
-                    <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
-                        <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
+                    <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light" width="400" height="300"
                         src="<?php echo esc_url($img_url); ?>"
                         alt="Applicant image for <?php $args['name']; ?>"
+                        <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
                     />
                 <?php } ?>
             </div>
@@ -170,7 +172,7 @@
         <div class="flex items-center gap-2">
             <!-- Location -->
             <span class="text-14 flex items-center flex-wrap">
-                <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" alt="" />
+                <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
                 <span><?php echo $args['location']; ?></span>
             </span>
             <span class="text-black/50">|</span>

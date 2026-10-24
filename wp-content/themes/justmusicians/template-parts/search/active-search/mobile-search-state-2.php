@@ -40,10 +40,10 @@
         <?php foreach((array) $args['listings'] as $listing) { ?>
             <a class="px-2 py-1.5 flex items-center gap-2 hover:bg-navy/10 rounded-sm" href="<?php echo $listing['permalink']; ?>" target="_blank" x-on:click="showSearchOptions = false;" >
                 <div class="w-6 aspect-square shrink-0">
-                    <img class="w-full h-full object-cover" src="<?php echo $listing['tiny_thumbnail_url']; ?>" />
+                    <img class="w-full h-full object-cover" src="<?php echo $listing['tiny_thumbnail_url']; ?>" width="23" height="23" alt="Thumbnail image for <?php echo $listing['name']; ?>" />
                 </div>
                 <?php echo $listing['name']; ?>
-                <?php if ($listing['verified']) { ?><img class="h-4 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" /><?php } ?>
+                <?php if ($listing['verified']) { ?><img class="h-4 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" width="24" height="24" alt="Verified listing icon" /><?php } ?>
             </a>
         <?php } ?>
     </div>

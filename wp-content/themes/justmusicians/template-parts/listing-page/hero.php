@@ -38,9 +38,10 @@ if ($args['instance'] == 'listing-form') {
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
 
             <!-- Cover image -->
-            <img class="w-full h-full object-cover"
-                <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="Cover image for <?php echo get_field('name'); ?>" <?php } ?>
-                <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'" alt="Cover image for <?php echo get_field('name'); ?>" <?php } ?>
+            <img class="w-full h-full object-cover" width="900" height="675"
+                alt="Cover image for <?php echo get_field('name'); ?>"
+                <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" <?php } ?>
+                <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"            <?php } ?>
                 <?php if ($is_preview)  { ?>x-on:click="focusElm('cover-image')"                                    <?php } ?>
             />
 
@@ -68,7 +69,7 @@ if ($args['instance'] == 'listing-form') {
                             <?php if (!$is_preview) { echo get_field('name'); } ?>
                         </h1>
                         <?php if (get_field('verified') === true) { ?>
-                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" alt="Verified listing icon" />
+                            <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" width="24" height="24" alt="Verified listing icon" />
                         <?php } ?>
                     </div>
 
@@ -99,7 +100,7 @@ if ($args['instance'] == 'listing-form') {
                 <div class="flex gap-2 items-center"
                     <?php if ($is_preview) { ?> x-on:click="focusElm('city')" <?php } ?>
                 >
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" alt="" />
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
                     <span <?php if ($is_preview)  { ?> x-text="getListingLocation() === '' ? 'City, State' : getListingLocation()" <?php } ?>>
                         <?php if (!$is_preview) { echo get_field('city') . ', ' . get_field('state'); } ?>
                     </span>
@@ -126,7 +127,7 @@ if ($args['instance'] == 'listing-form') {
                     <?php if ($is_preview) { ?> x-on:click="focusElm('ensemble-size-input');" <?php } ?>
                 >
                     <div class="flex items-center gap-1">
-                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" alt="" />
+                        <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" width="15" height="13" alt="" />
                         <h4 class="text-16 font-semibold">Ensemble size</h4>
                     </div>
                     <span class="text-14 v"

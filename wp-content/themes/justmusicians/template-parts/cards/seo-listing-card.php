@@ -43,8 +43,8 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                 x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
 
                 <!-- Thumbnail -->
-                <img class="w-auto h-full object-cover"
-                    src="<?php echo $args['thumbnail_url']; ?>" alt="Listing thumbnail"
+                <img class="w-auto h-full object-cover" width="400" height="300"
+                    src="<?php echo $args['thumbnail_url']; ?>"
                     alt="Thumbnail image for <?php echo $args['name']; ?>"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
                     x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
@@ -72,7 +72,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             <!-- Play -->
             <div class="absolute transform left-2 bottom-2" @click="_updateIndex(1)"
                 x-show="currentIndex == 0 && totalSlides > 1" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" alt="Play video" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/play_circle.svg'; ?>" width="32" height="32" alt="Play video" />
             </div>
             <!-- Pause -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -82,12 +82,12 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             <!-- Mute -->
             <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && playersMuted" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" alt="Mute audio" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/mute.svg'; ?>" width="24" height="24" alt="Mute audio" />
             </div>
             <!-- Unmute -->
             <div class="absolute transform left-2 bottom-2" @click="_toggleMuteAllVideos()"
                 x-show="currentIndex > 0 && !playersMuted" x-cloak>
-                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" alt="Unmute audio" />
+                <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/unmute.svg'; ?>" width="24" height="24" alt="Unmute audio" />
             </div>
             <!-- Left Arrow -->
             <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out"
@@ -119,10 +119,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         ?>
             <div class="flex gap-3 w-full">
                 <?php foreach ($media_items as $img_url) { ?>
-                    <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light"
+                    <img class="w-[calc(50%-.25rem)] aspect-4/3 object-cover bg-yellow-light" width="400" height="300"
                         <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"'; } ?>
                         src="<?php echo esc_url($img_url); ?>"
-                        alt="Listing image"
+                        alt="Thumbnail image for <?php $args['name']; ?>"
                     />
                 <?php } ?>
             </div>
@@ -158,7 +158,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
         <!-- Location -->
         <span class="text-14 flex items-center">
-            <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" alt="" />
+            <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
             <span><?php echo $args['location']; ?></span>
         </span>
 

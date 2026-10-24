@@ -15,7 +15,7 @@
 
     <!-- Verified badge -->
     <?php if ($args['verified']) { ?>
-        <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" alt="Verified listing icon" />
+        <img class="h-5 ml-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" width="24" height="24" alt="Verified listing icon" />
     <?php } ?>
 
 
