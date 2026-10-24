@@ -108,7 +108,7 @@ $next_page       = $result ? $result['next_page']       : null;
                       <div class="mb-8 min-h-16">
                           <div class="flex items-center justify-between mb-4">
                               <h2 class="font-sun-motter text-25">Filter</h2>
-                              <button id="clear-form" type="button" class="underline opacity-40 hover:opacity-100 inline-block text-14" x-on:click="_clearListingForm()" >clear all</button>
+                              <button id="clear-form" type="button" class="underline opacity-60 hover:opacity-100 inline-block text-14" x-on:click="_clearListingForm()" >clear all</button>
                           </div>
                           <div class="text-14 opacity-60" x-text="selectedFilters"> <!--Producer | Gospel Choir | Solo/Duo | Acoustic--> </div>
                       </div>
