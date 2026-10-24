@@ -14,7 +14,7 @@
     x-on:add-listing-to-collection="_addToCollection($event.detail.collection_id, $event.detail.listing_id)"
     x-on:remove-listing-from-collection="_removeFromCollection($event.detail.collection_id, $event.detail.listing_id)"
 >
-    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
+    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105" aria-label="Favorite button"
         <?php if (is_user_logged_in()) { ?>
             x-show="_showEmptyFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
             hx-post="<?php echo site_url('/wp-html/v1/collections/0/listings/' . $args['post_id']) . '/'; ?>"
@@ -31,7 +31,7 @@
         <path d="M0 48C0 21.5 21.5 0 48 0l0 48 0 393.4 130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4 336 48 48 48 48 0 336 0c26.5 0 48 21.5 48 48l0 440c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488L0 48z"/>
     </svg>
     </button>
-    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105"
+    <button type="button" class="opacity-60 hover:opacity-100 hover:scale-105" aria-label="Favorite button"
         x-show="_showFilledFavoriteButton('<?php echo $args['post_id']; ?>')" x-cloak
         x-on:click="showCollectionsPopup = true"
         hx-delete="<?php echo site_url('/wp-html/v1/collections/0/listings/' . $args['post_id']) . '/'; ?>"
@@ -83,8 +83,8 @@
                         x-init="$nextTick(() => htmx.process($el))";
                     >
                         <a class="w-full" x-bind:href="collection.permalink"><span x-text="collection.name"></span></a>
-                        <!-- Empty bookmark state -->
-                        <button type="button" class="w-6 flex items-center"
+                        <!-- Non selected state (plus icon) -->
+                        <button type="button" class="w-6 flex items-center" aria-label="Add to collection"
                             x-show="_showEmptyCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
                             x-bind:hx-post="'<?php echo site_url(); ?>/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id'] . '/'; ?>'"
                             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
@@ -98,8 +98,8 @@
                             </svg>
 
                         </button>
-                        <!-- Filled bookmark state -->
-                        <button type="button" class="w-6 flex items-center"
+                        <!-- Selected state (check icon) -->
+                        <button type="button" class="w-6 flex items-center" aria-label="Remove from collection"
                             x-show="_showFilledCollectionButton(collection.post_id, '<?php echo $args['post_id']; ?>')" x-cloak
                             x-bind:hx-delete="'<?php echo site_url(); ?>/wp-html/v1/collections/' + collection.post_id + '/listings/<?php echo $args['post_id'] . '/'; ?>'"
                             hx-target="#favorites-result-<?php echo $args['post_id']; ?>"
@@ -114,7 +114,7 @@
 
             <!-- Create New Collection -->
             <div class="pt-3 border-t">
-                <button type="button" class="text-sm text-black font-medium w-full"
+                <button type="button" class="text-sm text-black font-medium w-full" aria-label="Create new collection"
                     x-show="!showCreateCollectionInput"
                     x-on:click="showCreateCollectionInput = true; $nextTick(() => $refs.newCollectionInput<?php echo $args['post_id']; ?>.focus());"
                 >

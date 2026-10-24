@@ -18,7 +18,7 @@
     <div class="container grid md:grid-cols-6 lg:grid-cols-12 gap-20">
 
         <div class="col md:col-span-2 lg:col-span-3 justify-center hidden md:flex">
-            <a href="#">
+            <a href="<?php echo get_home_url(); ?>" aria-label="Home Page">
                 <img class="w-40" src="<?php echo get_template_directory_uri() . '/lib/images/logos/hm-logo-white-lockup-1.svg'; ?>" alt="Hire Musicians logo" />
             </a>
         </div>

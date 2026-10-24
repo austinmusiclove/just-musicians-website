@@ -7,7 +7,11 @@ Critical bugs
     Make sure i am compliant with laws on accessibility and cookies (i am using local storage for location)
     Make events show all by default and leave upcoming and past options there; to avoid confusion
     change name of applications to job postings
+    need to see if i need BMI ASCAP licensing for media on HM
 SEO
+    non descernable text contrast in hero and in link lists
+    llms.txt must be markdown with 1 h1 header and must have links
+    add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
     Location/Category Pages
         add pricing for the specific service of the category and location
         traditional paging
@@ -246,6 +250,7 @@ Messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
+    find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
     Need fuzzy search for locations in location active search
     show relevant thumbnail image and video media based on search but media does not play a part in rank
     switch to cursor pagination

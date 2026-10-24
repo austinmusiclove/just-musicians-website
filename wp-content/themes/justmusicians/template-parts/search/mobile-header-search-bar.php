@@ -20,7 +20,7 @@
                 <span id="mobile-header-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
-                    <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
+                    <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" aria-label="Search" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)" >
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" alt="Search" />
                 </button>
             </div>
@@ -46,7 +46,7 @@
                 <span id="mobile-header-location-active-search-spinner" class="p-2 inset-0 flex items-center justify-center htmx-indicator">
                     <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
                 </span>
-                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
+                <button type="button" class="flex cursor-pointer items-center px-2 py-2 hover:scale-105" aria-label="Search" x-on:click="location.href = '<?php echo site_url('live-music/search/'); ?>?qsearch=' + encodeURIComponent(searchInput) + '&amp;lat=' + headerSearchLat + '&amp;lng=' + headerSearchLng + '&amp;location_label=' + encodeURIComponent(headerSearchLocation)">
                     <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/search.svg'; ?>" alt="Search" />
                 </button>
             </div>
