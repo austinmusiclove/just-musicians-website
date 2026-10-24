@@ -26,6 +26,11 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- Preload fonts -->
+    <link rel="preload" href="<?php echo site_url('/wp-content/themes/justmusicians/lib/fonts/sun-motter-regular.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?php echo site_url('/wp-content/themes/justmusicians/lib/fonts/poppins-v24-latin-regular.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+
+
 	<?php wp_head(); ?>
 
 </head>
