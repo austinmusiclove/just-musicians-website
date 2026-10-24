@@ -38,7 +38,7 @@ if ($args['instance'] == 'listing-form') {
         <div class="bg-yellow w-full aspect-4/3 shadow-black-offset border-4 border-black relative">
 
             <!-- Cover image -->
-            <img class="w-full h-full object-cover" width="900" height="675"
+            <img class="w-full h-full object-cover" width="900" height="675" fetchpriority="high"
                 alt="Cover image for <?php echo get_field('name'); ?>"
                 <?php if (!$is_preview) { ?>src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"            <?php } ?>
