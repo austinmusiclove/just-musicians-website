@@ -49,9 +49,9 @@ function hmm_scripts() {
     if (is_front_page() or get_query_var('custom-template') === 'landing-locale-category' or preg_match('#^/live-music/search#', $path)) {
 
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
@@ -60,14 +60,14 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-intersect';
 
         // Collections
-        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, []);
         $alpine_dependencies[] = 'collections-scripts-js';
 
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // Listing Form
-        wp_enqueue_script('clear-listing-form-js', get_template_directory_uri() . '/lib/js/clear-listing-form.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('clear-listing-form-js', get_template_directory_uri() . '/lib/js/clear-listing-form.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -76,7 +76,7 @@ function hmm_scripts() {
     // Archive
     if (is_archive()) {
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -85,7 +85,7 @@ function hmm_scripts() {
     // Article and Page
     if ( is_singular(['post']) or is_page() or str_starts_with($_SERVER['REQUEST_URI'], '/blog') ) {
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -101,7 +101,7 @@ function hmm_scripts() {
     // Venue Browsing page
     if (preg_match('#^/venues/?$#', $path)) {
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // Map
         wp_enqueue_script('maplibre-gl.5.14.0-js', get_template_directory_uri() . '/lib/js/maplibre-gl.5.14.0.js', [], $pkg->version, true);
@@ -112,18 +112,18 @@ function hmm_scripts() {
     // Single Venue Pages
     } elseif (preg_match('#^/venues/[^/]+/?$#', $path)) {
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
 
         // Reviews
-        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, []);
 
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
@@ -135,15 +135,15 @@ function hmm_scripts() {
     // Listing form
     if (str_starts_with($_SERVER['REQUEST_URI'], '/listing-form')) {
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
         // Input component scripts
-        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -165,22 +165,22 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-collapse';
 
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
-        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, []);
     }
 
     // Musician Application form
     if (str_starts_with($_SERVER['REQUEST_URI'], '/musician-application')) {
 
         // Input component scripts
-        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -198,22 +198,22 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-collapse';
 
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
-        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('listing-form-img-scripts', get_template_directory_uri() . '/lib/js/listing-form-img-scripts.js', [], $pkg->version, []);
     }
 
     // Collection pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/collection/')) {
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
@@ -226,36 +226,36 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-sort';
 
         // Collections
-        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, []);
         $alpine_dependencies[] = 'collections-scripts-js';
 
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
     }
 
     // Listing pages
     if (is_singular('listing')) {
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
         // Collections
-        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, []);
         $alpine_dependencies[] = 'collections-scripts-js';
 
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // Reviews
-        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, []);
 
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
@@ -274,12 +274,12 @@ function hmm_scripts() {
     // Single Event Pages
     if (is_singular('event')) {
         // Events
-        wp_enqueue_script('events-js', get_template_directory_uri() . '/lib/js/events.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('events-js', get_template_directory_uri() . '/lib/js/events.js', [], $pkg->version, []);
 
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
@@ -292,20 +292,20 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-collapse';
 
         // Collections
-        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, []);
         $alpine_dependencies[] = 'collections-scripts-js';
 
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
     }
 
     // Single Application Pages
     if (is_singular('application')) {
 
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
@@ -314,33 +314,33 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'alpinejs-intersect';
 
         // Collections
-        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, []);
         $alpine_dependencies[] = 'collections-scripts-js';
 
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // WYSIWYG Editor
-        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, []);
 
         // Export to download
-        wp_enqueue_script('export-download-js', get_template_directory_uri() . '/lib/js/export-download.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('export-download-js', get_template_directory_uri() . '/lib/js/export-download.js', [], $pkg->version, []);
     }
 
     // Create Application Form
     if (str_starts_with($_SERVER['REQUEST_URI'], '/application-form/')) {
 
         // WYSIWYG Editor
-        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('wysiwyg-js', get_template_directory_uri() . '/lib/js/wysiwyg.js', [], $pkg->version, []);
     }
 
     // Messages pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/messages/')) {
 
         // Media Slider
-        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('media-slider-js', get_template_directory_uri() . '/lib/js/media-slider.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [], $pkg->version, []);
+        wp_enqueue_script('youtube-iframe-scripts-js', get_template_directory_uri() . '/lib/js/youtube-iframe-scripts.js', ['youtube-iframe-api', 'media-slider-js'], $pkg->version, []);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-scripts-js';
 
@@ -356,20 +356,20 @@ function hmm_scripts() {
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
 
         // Inquiries
-        wp_enqueue_script('inquiry-js', get_template_directory_uri() . '/lib/js/inquiry.js', [], $pkg->version, [ 'strategy' => 'defer' ]); // Deprecated
-        wp_enqueue_script('inquiry-messages-js', get_template_directory_uri() . '/lib/js/inquiry-messages.js', [], $pkg->version, [ 'strategy' => 'defer' ]); // Deprecated
+        wp_enqueue_script('inquiry-js', get_template_directory_uri() . '/lib/js/inquiry.js', [], $pkg->version, []); // Deprecated
+        wp_enqueue_script('inquiry-messages-js', get_template_directory_uri() . '/lib/js/inquiry-messages.js', [], $pkg->version, []); // Deprecated
 
         // Messages
-        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['messages-api-js', 'messages-app-state-js'], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('messages-api-js', get_template_directory_uri() . '/lib/js/messages-api-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('messages-js', get_template_directory_uri() . '/lib/js/messages-scripts.js', ['messages-api-js', 'messages-app-state-js'], $pkg->version, []);
+        wp_enqueue_script('messages-api-js', get_template_directory_uri() . '/lib/js/messages-api-scripts.js', [], $pkg->version, []);
+        wp_enqueue_script('messages-app-state-js', get_template_directory_uri() . '/lib/js/messages-app-state-scripts.js', ['promise-lock-js'], $pkg->version, []);
+        wp_enqueue_script('promise-lock-js', get_template_directory_uri() . '/lib/js/promise-lock.js', [], $pkg->version, []);
         wp_localize_script('messages-api-js', 'messagesSiteData', [
             'siteUrl'              => site_url(),
             'userId'               => get_current_user_id(),
             'nonce'                => wp_create_nonce('wp_rest'),
         ]);
-        wp_enqueue_script('nonce-refresh-js', get_template_directory_uri() . '/lib/js/nonce-refresh.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('nonce-refresh-js', get_template_directory_uri() . '/lib/js/nonce-refresh.js', [], $pkg->version, []);
         wp_localize_script('nonce-refresh-js', 'nonceSiteData', [
             'nonce'                => wp_create_nonce('wp_rest'),
             'nonceRefreshInterval' => NONCE_REFRESH_INTERVAL,
@@ -381,18 +381,18 @@ function hmm_scripts() {
     // Buyer pages
     if (str_starts_with($_SERVER['REQUEST_URI'], '/buyers/')) {
         // Inquiries
-        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('inquiry-modal-js', get_template_directory_uri() . '/lib/js/inquiry-modal.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
 
         // Reviews
-        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('review-modal-js', get_template_directory_uri() . '/lib/js/review-modal.js', [], $pkg->version, []);
 
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
@@ -400,9 +400,9 @@ function hmm_scripts() {
     // Account page
     if (str_starts_with($_SERVER['REQUEST_URI'], '/account/')) {
         // Cropper.js
-        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
-        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
         wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
@@ -410,7 +410,7 @@ function hmm_scripts() {
     // Musician Earnings Report Form page
     if (str_starts_with($_SERVER['REQUEST_URI'], '/musician-earnings-report/')) {
         // Input component scripts
-        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+        wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, []);
 
         // HTMX Extensions
         wp_enqueue_script('htmx-disable-element-js', get_template_directory_uri() . '/lib/js/htmx.disable-element.1.9.12.js', ['htmx'], $pkg->version, true);
@@ -436,7 +436,7 @@ function hmm_scripts() {
     wp_enqueue_script('alpinejs-resize', get_template_directory_uri() . '/lib/js/alpine.resize.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs-focus', get_template_directory_uri() . '/lib/js/alpine.focus.min.js', [], $pkg->version, true);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpine.3.14.8.min.js', $alpine_dependencies, $pkg->version, true);
-    wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+    wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, []);
 
 
 
@@ -508,20 +508,6 @@ function smartwp_remove_wp_block_library_css(){
     wp_dequeue_style( 'wc-block-style' );
 }
 add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
-
-
-// Defer render-blocking scripts
-function mind_defer_scripts( $tag, $handle, $src ) {
-    $defer = array(
-        'swiper-js',
-    );
-    if ( in_array( $handle, $defer ) ) {
-        return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
-    }
-
-    return $tag;
-}
-add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
 
 
 

@@ -41,7 +41,7 @@ function template_route_rewrite_rules() {
     $locales = implode('|', [ 'austin', 'san-antonio' ]);
     add_rewrite_rule(
         '^(' . $locales . ')/(' . $categories . ')/?$',
-        'index.php?custom-template=landing-locale-category&locale=$matches[1]&lm-category=$matches[2]',
+        'index.php?custom-template=landing-locale-category&lm-locale=$matches[1]&lm-category=$matches[2]',
         'top'
     );
 
@@ -54,7 +54,7 @@ function register_template_route_query_vars($vars) {
     $vars[] = 'buyer-id';
     $vars[] = 'listing-id';
     $vars[] = 'vertical';
-    $vars[] = 'locale';
+    $vars[] = 'lm-locale';
     $vars[] = 'lm-category';
     return $vars;
 }
