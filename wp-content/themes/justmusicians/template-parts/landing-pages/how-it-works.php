@@ -34,6 +34,7 @@
             <div class="col-span-2 lg:order-first">
                 <img class="hidden lg:block w-full max-w-none rounded-sm border-2 border-black shadow-black-offset h-96 object-cover lg:h-auto lg:max-w-lg"
                     src="<?php echo $args['image']; ?>"
+                    width="401" height="381"
                     alt="Screenshot of the location slide of the inquiry form"
                 />
             </div>

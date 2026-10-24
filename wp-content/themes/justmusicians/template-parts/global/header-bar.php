@@ -2,7 +2,7 @@
     <!-- Logo -->
     <div class="w-32 md:w-auto col-span-2 relative">
         <a class="w-full absolute top-0 left-0 z-10" href="<?php echo get_home_url(); ?>" aria-label="Home Page">
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/logos/hm-logo-emblem-white-1.svg'; ?>" alt="Hire Musicians logo" />
+            <img src="<?php echo get_template_directory_uri() . '/lib/images/logos/hm-logo-emblem-white-1.svg'; ?>" width="132" height="106" alt="Hire Musicians logo" />
         </a>
     </div>
 
