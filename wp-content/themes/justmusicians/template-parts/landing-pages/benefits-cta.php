@@ -19,15 +19,17 @@
                 </ul>
 
                 <div class="my-8">
-                    <a class="inline-block bg-navy hover:bg-yellow text-white hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
-                        <?php if (!is_user_logged_in() and isset($args['sign_up_to_access'])) { ?>
+                    <?php if (!is_user_logged_in() and isset($args['sign_up_to_access'])) { ?>
+                        <button type="button" class="inline-block bg-navy hover:bg-yellow text-white hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3"
                             x-on:click="showLoginModal = false; showSignupModal = true; signupModalMessage = '<?php echo $args['sign_up_to_access']; ?>';"
-                        <?php } else { ?>
-                            href="<?php echo $args['cta_url']; ?>"
-                        <?php } ?>
-                    >
-                        <?php echo $args['cta_text']; ?>
-                    </a>
+                        >
+                            <?php echo $args['cta_text']; ?>
+                        </button>
+                    <?php } else { ?>
+                        <a class="inline-block bg-navy hover:bg-yellow text-white hover:text-black shadow-black-offset border-2 border-black font-sun-motter text-16 px-6 md:px-8 py-3" href="<?php echo $args['cta_url']; ?>">
+                            <?php echo $args['cta_text']; ?>
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
 
