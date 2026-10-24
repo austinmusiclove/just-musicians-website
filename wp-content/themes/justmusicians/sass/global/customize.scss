@@ -17,8 +17,13 @@ body.frozen {
   }
   ul li {
     font-size: .89rem;
-    a:hover {
-      text-decoration: underline;
+    a {
+      display: inline-block; /* Allows padding to expand the clickable box */
+      padding: 3px 0;        /* Increases vertical touch target size */
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
