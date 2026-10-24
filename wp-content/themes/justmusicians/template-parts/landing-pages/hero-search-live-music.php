@@ -39,7 +39,7 @@ $location_label = !empty($_GET['location_label']) ? $_GET['location_label'] : ''
     <div class="container relative">
         <div class="max-w-3xl mx-auto">
             <h1 class="font-sun-motter text-navy text-28 text-center md:text-40 mb-4">Find Live Musicians Near You</h1>
-            <p class="text-16 text-center md:text-20 text-brown-dark-3 mb-8 md:mb-12">
+            <p class="text-16 text-center md:text-20 text-brown-dark-2 mb-8 md:mb-12">
                 Search for live musicians to hire near you. Filter by genre, ensemble size, instrumentation, categories, and more. Start by choosing your city or postal code.
             </p>
 

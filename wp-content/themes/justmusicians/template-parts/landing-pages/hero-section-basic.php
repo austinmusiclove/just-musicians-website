@@ -6,7 +6,7 @@
             </div>
 
             <h1 class="font-sun-motter text-navy text-28 md:text-40 mb-4"><?php echo $args['heading']; ?></h1>
-            <p class="text-16 md:text-20 text-brown-dark-3 mx-auto whitespace-pre-wrap"><?php echo $args['description']; ?></p>
+            <p class="text-16 md:text-20 text-brown-dark-2 mx-auto whitespace-pre-wrap"><?php echo $args['description']; ?></p>
 
         </div>
     </div>

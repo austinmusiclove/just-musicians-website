@@ -27,7 +27,7 @@ if ( $categories_query->have_posts() ) { ?>
                     $url_path = get_field('url_path');
                     $title = get_field('title');
                 ?>
-                    <a class="text-20 text-yellow py-2 pr-2 underline inline-block"
+                    <a class="text-20 text-brown-dark-3 hover:text-yellow py-2 pr-2 underline inline-block"
                         href="<?php echo trailingslashit(site_url($url_path)); ?>">
                         <?php echo $title; ?>
                     </a>
