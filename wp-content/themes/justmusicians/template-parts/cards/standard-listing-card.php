@@ -53,7 +53,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
             <!-- Thumbnail -->
             <img class="w-auto h-full object-cover"
-                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>
+                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} else { echo 'fetchpriority="high"'; } ?>
                 <?php if (!$is_preview) { ?>src="<?php echo $args['thumbnail_url']; ?>" alt="Thumbnail image for <?php echo $args['name']; ?>"                 <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'" alt="Thumbnail image for <?php echo $args['name']; ?>" <?php } ?>
                 x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
