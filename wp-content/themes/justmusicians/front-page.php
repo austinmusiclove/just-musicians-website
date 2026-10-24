@@ -30,6 +30,8 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
 
 get_header();
 
+?><main role="main"><?php
+
 get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'breadcrumb_items' => [],
     'heading'          => "Find Live Musicians in Austin, Texas",
@@ -63,7 +65,7 @@ get_template_part('template-parts/landing-pages/simple-feature-section', '', [
 get_template_part('template-parts/landing-pages/how-it-works', '', [
     'heading'       => 'Hire Musicians For An Event',
     'description' => 'Hire live musicians for weddings, parties, corporate events, and more. All it takes is a free account to send inquiries and get responses.',
-    'image'       => get_template_directory_uri() . '/lib/images/other/inquiry-form-location.png',
+    'image'       => get_template_directory_uri() . '/lib/images/other/inquiry-form-location-opt.png',
     'steps'       => [
         'Tell us about your event',
         'Send your inquiry directly to musicians you want to hire',
@@ -74,7 +76,7 @@ get_template_part('template-parts/landing-pages/how-it-works', '', [
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
     'heading'       => 'Are You a Musician? Let the Gigs Come to You.',
     'description' => 'Stop chasing leads and start playing more shows. Build a free musician listing to connect with event planners, venues, and private clients looking to hire musicians for their next event.',
-    'image'       => get_template_directory_uri() . '/lib/images/other/create-listing.png',
+    'image'       => get_template_directory_uri() . '/lib/images/other/create-listing-opt.png',
     'benefits'    => [
         'Get discovered on Hire Musicians',
         'Zero membership fees',
@@ -89,5 +91,7 @@ get_template_part('template-parts/landing-pages/benefits-cta', '', [
 get_template_part('template-parts/landing-pages/locale-category-links', '', [
     'heading' => 'Discover Musicians by Category',
 ]);
+
+?></main><?php
 
 get_footer();
