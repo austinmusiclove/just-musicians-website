@@ -9,6 +9,7 @@ Critical bugs
     change name of applications to job postings
     need to see if i need BMI ASCAP licensing for media on HM
 SEO
+    send taliwind and style css inline
     llms.txt must be markdown with 1 h1 header and must have links
     add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
     Location/Category Pages
