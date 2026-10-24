@@ -27,10 +27,40 @@ b, strong {
 
 @font-face {
 	font-family: 'Sun Motter';
-	src: url('../lib/fonts/sun-motter-regular.woff2') format('woff2'),
-		url('../lib/fonts/sun-motter-regular.woff') format('woff');
+	src: url('../wp-content/themes/justmusicians/lib/fonts/sun-motter-regular.woff2') format('woff2'),
+		url('../wp-content/themes/justmusicians/lib/fonts/sun-motter-regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
   }
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../wp-content/themes/justmusicians/lib/fonts/pxiGyp8kv8JHgFVrJJLucHtAOvWDSA.woff2') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../wp-content/themes/justmusicians/lib/fonts/pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../wp-content/themes/justmusicians/lib/fonts/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../wp-content/themes/justmusicians/lib/fonts/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2') format('truetype');
+}
 

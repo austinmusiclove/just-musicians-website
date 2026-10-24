@@ -418,8 +418,8 @@ function hmm_scripts() {
     }
 
     // Core
-    wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version );
-    wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version );
+    //wp_enqueue_style('hmm-style', get_template_directory_uri() . '/dist/style.css', [], $pkg->version ); // replaced by hm_inline_theme_styles()
+    //wp_enqueue_style('hmm-tailwind', get_template_directory_uri() . '/dist/tailwind.css', [], $pkg->version ); // replaced by hm_inline_theme_styles()
     //wp_enqueue_script('hmm-js', get_template_directory_uri() . '/lib/js/scripts.js', ['jquery'], $pkg->version, true);
 
     // Utilities
@@ -442,6 +442,20 @@ function hmm_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'hmm_scripts' );
+
+// Inline styles
+function hm_inline_theme_styles() {
+    // Paths to your compiled dist files
+    $theme_dir = get_template_directory();
+    $style_path   = $theme_dir . '/dist/style.css';
+    $tailwind_path = $theme_dir . '/dist/tailwind.css';
+
+    echo '<style id="hm-inline-styles">' . "\n";
+    if ( file_exists( $style_path ) )    { echo "/* style.css */\n" . file_get_contents( $style_path ) . "\n"; }
+    if ( file_exists( $tailwind_path ) ) { echo "/* tailwind.css */\n" . file_get_contents( $tailwind_path ) . "\n"; }
+    echo '</style>' . "\n";
+}
+add_action( 'wp_head', 'hm_inline_theme_styles', 5 ); // Hook into wp_head with priority 5 to load early in the document head
 
 // Include
 require get_template_directory() . '/lib/inc/template-functions.php';
@@ -498,12 +512,12 @@ add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
 // Defer render-blocking scripts
 function mind_defer_scripts( $tag, $handle, $src ) {
-  $defer = array(
-    'swiper-js',
-  );
-  if ( in_array( $handle, $defer ) ) {
-     return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
-  }
+    $defer = array(
+        'swiper-js',
+    );
+    if ( in_array( $handle, $defer ) ) {
+        return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
+    }
 
     return $tag;
 }
