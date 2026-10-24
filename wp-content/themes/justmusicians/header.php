@@ -29,8 +29,6 @@
     <!-- Preload fonts and location detection -->
     <link rel="preload" href="<?php echo site_url('/wp-content/themes/justmusicians/lib/fonts/sun-motter-regular.woff2'); ?>" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="<?php echo site_url('/wp-content/themes/justmusicians/lib/fonts/poppins-v24-latin-regular.woff2'); ?>" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="<?php echo esc_url( site_url('/wp-json/v1/detect-location/') ); ?>" as="fetch" crossorigin="anonymous" fetchpriority="high">
-
 
 
 	<?php wp_head(); ?>
