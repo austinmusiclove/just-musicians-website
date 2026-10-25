@@ -5,7 +5,21 @@
  * @package JustMusicians
  */
 
+$listing_name     = get_field('name');
+$listing_city     = get_field('city');
+$listing_state    = get_field('state');
+$meta_title       = "$listing_name | Live Musician Profile | $listing_city, $listing_state";
+$meta_description = "Hire $listing_name for your next event. View videos, listen to audio demos, read reviews, and get booking quotes on HireMusicians.com.";
+add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
+    return esc_html( $meta_title );
+});
+add_action( 'wp_head', function () use ( $meta_description ) {
+    echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
+}, 1);
+
 get_header();
+
+?><main role="main"><?php
 
 // Get user collections
 $collections_result = get_user_collections([
@@ -113,5 +127,7 @@ if (!empty($_GET['mdl']) and $_GET['mdl'] == 'review') {
         <span x-init="showSignupModal = true; signupModalMessage = 'Sign up to write a review'; loginModalMessage = 'Sign in to write a review';"></span>
     <?php }
 }
+
+?></main><?php
 
 get_footer();

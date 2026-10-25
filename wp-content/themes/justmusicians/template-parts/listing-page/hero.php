@@ -128,7 +128,7 @@ if ($args['instance'] == 'listing-form') {
                 >
                     <div class="flex items-center gap-1">
                         <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/people.svg'; ?>" width="15" height="13" alt="" />
-                        <h4 class="text-16 font-semibold">Ensemble size</h4>
+                        <div class="text-16 font-semibold">Ensemble size</div>
                     </div>
                     <span class="text-14 v"
                         <?php if ($is_preview) { ?> x-text="ensembleSizeCheckboxes.join(', ')" <?php } ?>

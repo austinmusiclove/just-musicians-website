@@ -11,7 +11,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('instagram_handle')"                 <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('instagram_url'); ?>"          <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" alt="Visit the Instagram page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Instagram.svg'; ?>" width="20" height="20" alt="Visit the Instagram page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="'@' + pInstagramHandle" <?php } ?>>@<?php if (!$args['is_preview']) { echo get_field('instagram_handle'); } ?></span>
         </a>
         <?php } ?>
@@ -23,7 +23,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('x_handle')"                         <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('x_url'); ?>"                  <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" alt="Visit the X page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_X.svg'; ?>" width="20" height="20" alt="Visit the X page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="'@' + pXHandle" <?php } ?>>@<?php if (!$args['is_preview']) { echo get_field('x_handle'); } ?></span>
         </a>
         <?php } ?>
@@ -35,7 +35,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('tiktok_handle')"                    <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('tiktok_url'); ?>"             <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" alt="Visit the TikTok page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_TikTok.svg'; ?>" width="20" height="20" alt="Visit the TikTok page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="'@' + pTiktokHandle" <?php } ?>>@<?php if (!$args['is_preview']) { echo get_field('tiktok_handle'); } ?></span>
         </a>
         <?php } ?>
@@ -47,7 +47,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('facebook_url')"                     <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('facebook_url'); ?>"           <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" alt="Visit the Facebook page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Facebook.svg'; ?>" width="20" height="20" alt="Visit the Facebook page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pName" <?php } ?>><?php if (!$args['is_preview']) { echo get_field('name'); } ?></span>
         </a>
         <?php } ?>
@@ -59,7 +59,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('youtube_url')"                      <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('youtube_url'); ?>"            <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_YouTube.svg'; ?>" width="20" height="20" alt="Visit the Youtube channel of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pYoutubeUrl" <?php } ?>><?php if (!$args['is_preview']) { echo clean_url_for_display(get_field('youtube_url')); } ?></span>
         </a>
         <?php } ?>
@@ -71,7 +71,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('bandcamp_url')"                     <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('bandcamp_url'); ?>"           <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" alt="Visit the Bandcamp page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Bandcamp.svg'; ?>" width="20" height="20" alt="Visit the Bandcamp page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pBandcampUrl" <?php } ?>><?php if (!$args['is_preview']) { echo clean_url_for_display(get_field('bandcamp_url')); } ?></span>
         </a>
         <?php } ?>
@@ -83,7 +83,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('spotify_artist_url')"               <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('spotify_artist_url'); ?>"     <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" alt="Visit the Spotify Artist page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Spotify.svg'; ?>" width="20" height="20" alt="Visit the Spotify Artist page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pName" <?php } ?>><?php if (!$args['is_preview']) { echo get_field('name'); } ?></span>
         </a>
         <?php } ?>
@@ -95,7 +95,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('apple_music_artist_url')"           <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('apple_music_artist_url'); ?>" <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_AppleMusic.svg'; ?>" alt="Visit the Apple Music Artist page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_AppleMusic.svg'; ?>" width="20" height="20" alt="Visit the Apple Music Artist page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pName" <?php } ?>><?php if (!$args['is_preview']) { echo get_field('name'); } ?></span>
         </a>
         <?php } ?>
@@ -107,7 +107,7 @@
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('soundcloud_url')"                   <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('soundcloud_url'); ?>"         <?php } ?>
         >
-            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" alt="Visit the Soundcloud page of <?php echo get_field('name'); ?>" />
+            <img class="h-5 opacity-50" src="<?php echo get_template_directory_uri() . '/lib/images/icons/social/_Soundcloud.svg'; ?>" width="20" height="20" alt="Visit the Soundcloud page of <?php echo get_field('name'); ?>" />
             <span class="whitespace-nowrap overflow-hidden text-ellipsis" <?php if ($args['is_preview']) { ?> x-text="pSoundcloudUrl" <?php } ?>><?php if (!$args['is_preview']) { echo clean_url_for_display(get_field('soundcloud_url')); } ?></span>
         </a>
         <?php } ?>

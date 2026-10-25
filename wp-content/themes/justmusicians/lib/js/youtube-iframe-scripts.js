@@ -30,6 +30,7 @@ function initPlayer(alpineComponent, playerId, videoData) {
     }
     if (playerId) {
         var player = new YT.Player(playerId, {
+            host: 'https://www.youtube-nocookie.com',
             videoId: videoData.video_id, // remove this to init from iframe
             playerVars: {
                 controls: 0,

@@ -2,7 +2,7 @@
 <div class="sidebar-module border border-black/20 rounded" x-data="{ showClassifications: false }">
     <div class="flex items-center justify-between bg-yellow-light-50 font-bold py-2 px-3 cursor-pointer" x-on:click="showClassifications = !showClassifications;">
         <h3>Classifications</h3>
-        <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" />
+        <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/chevron.svg'; ?>" width="24" height="25" alt="" />
     </div>
     <div class="p-4 flex flex-col gap-4 max-h-96 overflow-scroll"
         x-show="showClassifications" x-collapse x-cloak

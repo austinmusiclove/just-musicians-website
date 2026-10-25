@@ -71,6 +71,7 @@ module.exports = {
       'brown-light-3': '#F8F3DD',
       // Yellow
       yellow: '#D29429',
+      'yellow-aaa': '#7C530A',
       'yellow-60': '#E4BF7F',
       'yellow-50': '#F6E9D4',
       'yellow-40': '#EDD4A9',

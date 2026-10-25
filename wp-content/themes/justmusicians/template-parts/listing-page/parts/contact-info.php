@@ -52,7 +52,7 @@
             <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" alt="" />
             <h4 class="text-16 font-semibold">Website</h4>
         </div>
-        <span class="text-14 text-yellow underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis block">
+        <span class="text-14 text-yellow-aaa hover:text-yellow underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis block">
             <a target="_blank"
                 title="<?php echo get_field('website'); ?>"
                 <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('website'); ?>"<?php } ?>

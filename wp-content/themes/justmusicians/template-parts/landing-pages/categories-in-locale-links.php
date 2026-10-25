@@ -27,7 +27,7 @@ if ( $query->have_posts() ) { ?>
                     $cat_url_path = get_field('url_path');
                     $cat_name = get_post_meta(get_field('category'), 'plural_name', true);
                 ?>
-                    <a class="text-20 text-brown-dark-3 hover:text-yellow py-2 pr-2 underline inline-block"
+                    <a class="text-20 text-yellow-aaa hover:text-yellow py-2 pr-2 underline inline-block"
                         href="<?php echo trailingslashit(site_url($cat_url_path)); ?>">
                         <?php echo $cat_name; ?>
                     </a>

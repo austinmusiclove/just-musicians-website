@@ -84,6 +84,8 @@ get_header( null, [
     'header_arg_lng'            => $locale_lng,
 ] );
 
+?><main role="main"><?php
+
 get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'breadcrumb_items' => $breadcrumb_items,
     'heading'          => $title,
@@ -134,5 +136,6 @@ get_template_part('template-parts/landing-pages/near-by-category-locale-links', 
     'region_post_id'   => $region_post,
 ]);
 
+?></main><?php
 
 get_footer();

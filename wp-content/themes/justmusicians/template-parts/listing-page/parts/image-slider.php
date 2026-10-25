@@ -17,12 +17,12 @@
             <?php if ($args['is_preview'])  { ?>
                 <template x-for="data in orderedImageData['listing_images']" :key="data.image_id">
                     <div class="flex justify-center aspect-video w-full h-full object-cover">
-                        <img class="h-full" x-bind:src="_getImageData('listing_images', data.image_id)?.url" alt="Image of <?php echo $args['name']; ?>" />
+                        <img class="h-full" x-bind:src="_getImageData('listing_images', data.image_id)?.url" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
                     </div>
                 </template>
                 <template x-if="orderedImageData['listing_images'].length == 0">
                     <div class="flex justify-center aspect-video w-full h-full object-cover">
-                        <img class="h-full" x-bind:src="pThumbnailSrc || '<?php echo $args['ph_thumbnail']; ?>'" alt="Image of <?php echo $args['name']; ?>" />
+                        <img class="h-full" x-bind:src="pThumbnailSrc || '<?php echo $args['ph_thumbnail']; ?>'" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
                     </div>
                 </template>
             <?php } ?>
@@ -31,13 +31,13 @@
                     $img_url = wp_get_attachment_image_url($image_id, 'medium');
                     if ($img_url) { ?>
                         <div class="flex justify-center aspect-video w-full h-full object-cover">
-                            <img class="h-full" src="<?php echo esc_url($img_url); ?>" alt="Image of <?php echo $args['name']; ?>" />
+                            <img class="h-full" src="<?php echo esc_url($img_url); ?>" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
                         </div><?php
                     }
                 }
             } else if (!$args['is_preview'] and count($args['listing_image_ids']) == 0) { ?>
                 <div class="flex justify-center aspect-video w-full h-full object-cover">
-                    <img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="Image of <?php echo $args['name']; ?>" />
+                    <img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
                 </div>
             <?php } ?>
         </span>
@@ -51,7 +51,7 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="-translate-x-full opacity-0" >
-        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Previous image" />
+        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Previous image" />
     </div>
     <!-- Right Arrow -->
     <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out"
@@ -61,7 +61,7 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="translate-x-full opacity-0" >
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Next image" />
+        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Next image" />
     </div>
     <!-- Gallery Count -->
     <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12" x-text="currentIndex+1 + '/' + totalSlides"></div>

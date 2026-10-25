@@ -38,7 +38,7 @@ if ( ! $locale_query->have_posts() ) { return; }
                 $locale_path = get_post_meta( $post_id, 'url_path', true );
                 if ( empty( $locale_name ) || empty( $locale_path ) ) { continue; }
             ?>
-                <a class="text-20 text-brown-dark-3 hover:text-yellow py-2 pr-2 underline inline-block"
+                <a class="text-20 text-yellow-aaa hover:text-yellow py-2 pr-2 underline inline-block"
                     href="<?php echo trailingslashit(site_url($locale_path)); ?>">
                     <?php echo $locale_name; ?>
                 </a>
