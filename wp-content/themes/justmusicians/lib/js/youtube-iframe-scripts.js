@@ -4,7 +4,7 @@ var initQueue = [];
 window.onYouTubeIframeAPIReady = function () {
     youtubeIframeApiReady = true;
     clearInitQueue();
-    setTimeout(clearInitQueue(), 1000); // empty queue again to avoid race condition of something being added after the queue is cleared the first time
+    setTimeout(clearInitQueue, 1000); // empty queue again to avoid race condition of something being added after the queue is cleared the first time
 };
 
 

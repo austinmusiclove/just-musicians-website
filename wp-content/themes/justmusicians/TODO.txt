@@ -9,10 +9,14 @@ Critical bugs
     change name of applications to job postings
     need to see if i need BMI ASCAP licensing for media on HM
 SEO
+    try moving x data into its own js file
+    try tree shaking alpinejs bundle
     chrome issues tab
-    llms.txt must be markdown with 1 h1 header and must have links
+        failed to execute post message iframe youtube error
+    cache lifetimes
+        maybe need to do this in /etc/nginx/sites-available/default Nginx configuration file: location ~* \.(html|htm)$ { add_header Cache-Control "public, max-age=0, must-revalidate"; }
+    optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
     add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
-    failed to execute post message iframe youtube error
     Location/Category Pages
         add pricing for the specific service of the category and location
         traditional paging
