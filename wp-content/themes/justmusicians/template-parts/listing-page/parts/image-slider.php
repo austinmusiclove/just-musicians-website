@@ -17,12 +17,12 @@
             <?php if ($args['is_preview'])  { ?>
                 <template x-for="data in orderedImageData['listing_images']" :key="data.image_id">
                     <div class="flex justify-center aspect-video w-full h-full object-cover">
-                        <img class="h-full" x-bind:src="_getImageData('listing_images', data.image_id)?.url" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
+                        <img class="h-full" x-bind:src="_getImageData('listing_images', data.image_id)?.url" width="900" height="675" alt="Image of <?php echo $args['name']; ?>" />
                     </div>
                 </template>
                 <template x-if="orderedImageData['listing_images'].length == 0">
                     <div class="flex justify-center aspect-video w-full h-full object-cover">
-                        <img class="h-full" x-bind:src="pThumbnailSrc || '<?php echo $args['ph_thumbnail']; ?>'" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
+                        <img class="h-full" x-bind:src="pThumbnailSrc || '<?php echo $args['ph_thumbnail']; ?>'" width="900" height="675" alt="Image of <?php echo $args['name']; ?>" />
                     </div>
                 </template>
             <?php } ?>
@@ -31,13 +31,13 @@
                     $img_url = wp_get_attachment_image_url($image_id, 'medium');
                     if ($img_url) { ?>
                         <div class="flex justify-center aspect-video w-full h-full object-cover">
-                            <img class="h-full" src="<?php echo esc_url($img_url); ?>" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
+                            <img class="h-full" src="<?php echo esc_url($img_url); ?>" width="900" height="675" alt="Image of <?php echo $args['name']; ?>" />
                         </div><?php
                     }
                 }
             } else if (!$args['is_preview'] and count($args['listing_image_ids']) == 0) { ?>
                 <div class="flex justify-center aspect-video w-full h-full object-cover">
-                    <img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" width="900" height="674" alt="Image of <?php echo $args['name']; ?>" />
+                    <img class="h-full" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" width="900" height="675" alt="Image of <?php echo $args['name']; ?>" />
                 </div>
             <?php } ?>
         </span>
