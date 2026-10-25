@@ -127,7 +127,7 @@ function hmm_scripts() {
         wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
 
         // Alpine Sort
-        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpinejs/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
         $alpine_dependencies[] = 'alpinejs-sort';
 
         // Cropper.js
@@ -149,7 +149,7 @@ function hmm_scripts() {
         wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
 
         // Alpine Sort
-        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpinejs/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
         $alpine_dependencies[] = 'alpinejs-sort';
 
         // Cropper.js
@@ -173,7 +173,7 @@ function hmm_scripts() {
         $alpine_dependencies[] = 'youtube-iframe-api';
 
         // Alpine Sort
-        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpinejs/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
         $alpine_dependencies[] = 'alpinejs-sort';
 
         // Collections
