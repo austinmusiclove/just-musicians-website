@@ -11,7 +11,7 @@
                 hx-target="#login-result"
             >
                 <div>
-                    <label for="log" class="block text-sm font-medium leading-6">Email Address</label>
+                    <label for="user_login" class="block text-sm font-medium leading-6">Email Address</label>
                     <div class="mt-2">
                         <input id="user_login" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                             name="log" type="email" autocomplete="email" required
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="pwd" class="block text-sm font-medium leading-6">Password</label>
+                    <label for="user_pass" class="block text-sm font-medium leading-6">Password</label>
                     <div class="mt-2">
                         <input id="user_pass" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                             name="pwd" x-bind:type="showPassword ? 'text' : 'password'" autocomplete="current-password" autocapitalize="none" required

@@ -30,7 +30,7 @@
                                 <label for="first_name" class="block text-sm font-medium leading-6">First Name</label>
                                 <div class="mt-2">
                                     <input id="first_name" class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                                        name="r_user_first_name" type="text" required
+                                        name="r_user_first_name" type="text" autocomplete="first_name" required
                                         data-testid="signup-first-name"
                                     >
                                 </div>

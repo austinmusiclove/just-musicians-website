@@ -9,8 +9,6 @@ Critical bugs
     change name of applications to job postings
     need to see if i need BMI ASCAP licensing for media on HM
 SEO
-    chrome issues tab
-        failed to execute post message iframe youtube error
     performance
         show subgenre in general search
         hide category and subgenre and other filters with php not alpine so that we save alpine execution time when not included; need to address how to communicate that to the html api when it returns filters

@@ -28,15 +28,15 @@
         <label for="display_name" class="col-span-1">Display Name
             <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'This is the name other users will see when they interact with you. This is not your band or organization name.' ]); ?>
         </label>
-        <input class="border border-black/20 rounded h-8 p-2 mb-2 col-span-1 sm:col-span-2" type="text" name="display_name" placeholder="Display Name" x-model="displayNameInput">
+        <input class="border border-black/20 rounded h-8 p-2 mb-2 col-span-1 sm:col-span-2" type="text" id="display_name" name="display_name" placeholder="Display Name" x-model="displayNameInput">
         <label for="organization" class="col-span-1">Organization
             <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'The organization you represent. This could be your band name, agency name, venue, etc.' ]); ?>
         </label>
-        <input class="border border-black/20 rounded h-8 p-2 mb-2 col-span-1 sm:col-span-2" type="text" name="organization" placeholder="Organization" x-model="organizationInput">
+        <input class="border border-black/20 rounded h-8 p-2 mb-2 col-span-1 sm:col-span-2" type="text" id="organization" name="organization" placeholder="Organization" autocomplete="organization" x-model="organizationInput">
         <label for="position" class="col-span-1">Job Title
             <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [ 'tooltip' => 'Your position at the organization you represent. I.e. Guitarist, Talent Buyer, General Manger, etc.' ]); ?>
         </label>
-        <input class="border border-black/20 rounded h-8 p-2 mb-2,col-span-1 sm:col-span-2" type="text" name="position" placeholder="Job Title" x-model="positionInput">
+        <input class="border border-black/20 rounded h-8 p-2 mb-2,col-span-1 sm:col-span-2" type="text" id="position" name="position" placeholder="Job Title" x-model="positionInput">
         <!--
         <div class="flex flex-col gap-4">
             <?php //echo get_template_part('template-parts/account/settings/profile-image/label', '', []); ?>

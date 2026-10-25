@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
                     <h2 class="mt-6 text-25 font-bold leading-9 tracking-tight mb-12 text-center leading-tight">Request password reset email</h2>
                     <form class="space-y-6" action="" method="POST">
                         <div>
-                            <label for="log" class="block text-sm font-medium leading-6 mt-4">Email Address</label>
+                            <label for="pass_reset_email" class="block text-sm font-medium leading-6 mt-4">Email Address</label>
                             <div class="mt-2">
-                                <input name="email" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
+                                <input id="pass_reset_email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border border-yellow px-3 py-2 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6">
                                 <input name="is_pw_reset" type="hidden">
                             </div>
                         </div>

@@ -60,7 +60,7 @@
                 x-on:transitionstart="_pausePreviousSlide(); _playCurrentSlide();">
 
                 <!-- Thumbnail -->
-                <img class="w-auto h-full object-cover" width="400" height="300"
+                <img class="w-auto h-full object-cover aspect-[4/3]" width="400" height="300"
                     src="<?php echo $args['thumbnail_url']; ?>"
                     alt="Applicant thumbnail for <?php $args['name']; ?>"
                     <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} ?>

@@ -71,7 +71,7 @@
             </div>
 
             <!-- Search Bar -->
-            <input type="text" placeholder="Search collections..." class="w-full px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm"
+            <input id="col-search-input-<?php echo $args['post_id']; ?>" type="text" placeholder="Search collections..." class="w-full px-3 py-1.5 border rounded focus:outline-none focus:ring focus:border-black text-sm"
                 x-model="collectionSearchQuery"
             />
 

@@ -10,7 +10,7 @@
 
         <h3 class="font-bold text-18 mb-6"><?php echo $args['title']; ?></h3>
         <?php if ($args['has_search_bar']) { ?>
-        <input type='text' class="mb-6" placeholder="search..." <?php if ($args['has_search_bar']) { ?> x-model="tagModalSearchQuery" <?php } ?>></input>
+        <input id="tag-modal-search-<?php echo $args['name']; ?>" type='text' class="mb-6" placeholder="search..." <?php if ($args['has_search_bar']) { ?> x-model="tagModalSearchQuery" <?php } ?>></input>
         <?php } ?>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]"
