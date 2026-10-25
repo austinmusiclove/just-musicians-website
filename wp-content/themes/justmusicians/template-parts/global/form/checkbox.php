@@ -19,14 +19,17 @@
     if (!empty($args['preload']))      { $input_attrs .= ' preload="always preload-filter"'; }
 
     $x_show = !empty($args['x-show']) ? ' x-show="' . $args['x-show'] . '"' : '';
+    $delegate_events = !empty($args['delegate_events']);
 ?>
 
 <div class="custom-checkbox has-disabled:text-grey"<?php echo $x_show; ?>
-    <?php if (!empty($args['preload'])) { ?>
+    <?php if (!empty($args['preload']) && !$delegate_events) { ?>
     x-on:mouseenter.debounce="$el.querySelector('input').dispatchEvent(new CustomEvent('preload-filter'))"
     x-on:mousedown="$el.querySelector('input').dispatchEvent(new CustomEvent('preload-filter'))"
     <?php } ?>
+    <?php if (!$delegate_events) { ?>
     x-on:click="if (!$event.target.closest('input, label')) { $el.querySelector('input').click(); }"
+    <?php } ?>
 >
     <input type="checkbox"<?php echo $input_attrs; ?> />
     <span class="checkmark"></span>

@@ -36,6 +36,36 @@ function searchPageData(config = {}) {
             return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
         },
 
+        clickTagModalOption(event) {
+            const target = event.target;
+            if (target === event.currentTarget || target.matches('input, label')) return;
+
+            const option = target.classList.contains('custom-checkbox')
+                ? target
+                : target.parentElement;
+
+            if (!option?.classList.contains('custom-checkbox')) return;
+
+            const input = option.firstElementChild;
+            if (input instanceof HTMLInputElement) input.click();
+        },
+
+        preloadTagModalOption(event) {
+            const target = event.target;
+            if (target === event.currentTarget) return;
+
+            const option = target.classList.contains('custom-checkbox')
+                ? target
+                : target.parentElement;
+
+            if (!option?.classList.contains('custom-checkbox') || option.contains(event.relatedTarget)) return;
+
+            const input = option.firstElementChild;
+            if (input instanceof HTMLInputElement) {
+                input.dispatchEvent(new CustomEvent('preload-filter'));
+            }
+        },
+
         _clearListingForm() {
             clearListingForm(this, this.skipCategoryFilter);
         },

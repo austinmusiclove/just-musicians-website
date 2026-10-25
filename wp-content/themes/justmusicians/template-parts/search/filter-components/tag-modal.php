@@ -13,7 +13,11 @@
         <input type='text' class="mb-6" placeholder="search..." <?php if ($args['has_search_bar']) { ?> x-model="tagModalSearchQuery" <?php } ?>></input>
         <?php } ?>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-10 custom-checkbox overflow-scroll max-h-[500px] md:max-h-[240px]"
+            x-on:click="clickTagModalOption($event)"
+            x-on:mouseover="preloadTagModalOption($event)"
+            x-on:mousedown="preloadTagModalOption($event)"
+        >
         <?php
             foreach((array) $args['labels'] as $label) {
                 echo get_template_part('template-parts/global/form/checkbox', '', [
@@ -27,6 +31,7 @@
                     'checked' => false,
                     'on_change_event' => 'filterupdate',
                     'preload' => true,
+                    'delegate_events' => true,
                 ]);
             }
         ?>
