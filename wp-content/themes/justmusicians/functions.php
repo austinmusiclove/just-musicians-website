@@ -126,6 +126,10 @@ function hmm_scripts() {
         wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, []);
         wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
 
+        // Alpine Sort
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        $alpine_dependencies[] = 'alpinejs-sort';
+
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_style( 'cropper-1.6-css', get_template_directory_uri() . '/lib/css/cropper.1.6.2.min.css', [], $pkg->version);
@@ -143,6 +147,10 @@ function hmm_scripts() {
         // Input component scripts
         wp_enqueue_script('tag-input-scripts-js', get_template_directory_uri() . '/lib/js/tag-input-scripts.js', [], $pkg->version, []);
         wp_enqueue_script('youtube-urls-input-scripts-js', get_template_directory_uri() . '/lib/js/youtube-urls-input-scripts.js', [], $pkg->version, []);
+
+        // Alpine Sort
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        $alpine_dependencies[] = 'alpinejs-sort';
 
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
@@ -163,6 +171,10 @@ function hmm_scripts() {
         wp_enqueue_script('youtube-iframe-api', get_template_directory_uri() . '/lib/js/youtube-iframe-api.js', [ 'youtube-iframe-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
         wp_localize_script('youtube-iframe-scripts-js', 'siteData', [ 'siteUrl' => site_url(), ]);
         $alpine_dependencies[] = 'youtube-iframe-api';
+
+        // Alpine Sort
+        wp_enqueue_script('alpinejs-sort', get_template_directory_uri() . '/lib/js/alpine.sort.min.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        $alpine_dependencies[] = 'alpinejs-sort';
 
         // Collections
         wp_enqueue_script('collections-scripts-js', get_template_directory_uri() . '/lib/js/collections-scripts.js', [], $pkg->version, [ 'strategy' => 'async' ]);
@@ -326,8 +338,8 @@ function hmm_scripts() {
     $alpine_dependencies[] = 'device-detection';
     //wp_enqueue_script('location-detect-js', get_template_directory_uri() . '/lib/js/location-detect.js', [], $pkg->version, [ 'strategy' => 'async' ]);
     //wp_localize_script('location-detect-js', 'hmLocationDetect', [ 'endpoint' => site_url('/wp-json/v1/detect-location/'), ]);
-    wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx/htmx.2.0.4.bundle.min.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-    wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpinejs/alpine.3.14.8.bundle.min.js', $alpine_dependencies, $pkg->version, [ 'strategy' => 'defer' ]);
+    wp_enqueue_script('htmx', get_template_directory_uri() . '/dist/htmx-bundle.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
+    wp_enqueue_script('alpinejs', get_template_directory_uri() . '/dist/alpine-bundle.js', $alpine_dependencies, $pkg->version, [ 'strategy' => 'defer' ]);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, [ 'strategy' => 'async' ]);
 
 }
