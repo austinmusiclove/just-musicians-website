@@ -22,7 +22,7 @@
                   x-on:mouseenter="enter()"
                   x-on:mouseleave="leave()">
                 Default
-                <img class="mx-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="Sort Options" />
+                <img class="mx-1.5" src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" width="9" height="14" alt="Sort Options" />
             </span>
 
             <!-- Dropdown Menu Box -->

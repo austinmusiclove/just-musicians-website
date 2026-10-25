@@ -8,7 +8,7 @@
         <?php if ($args['is_preview']) { ?> x-on:click="focusElm('phone')" <?php } ?>
     >
         <div class="flex items-center gap-1">
-            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" alt="" />
+            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/phone.svg'; ?>" width="12" height="13" alt="" />
             <h4 class="text-16 font-semibold">Phone</h4>
         </div>
         <?php if (is_user_logged_in()) { ?>
@@ -27,7 +27,7 @@
         <?php if ($args['is_preview']) { ?> x-on:click="focusElm('listing_email')" <?php } ?>
     >
         <div class="flex items-center gap-1">
-            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" alt="" />
+            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/email.svg'; ?>" width="12" height="13" alt="" />
             <h4 class="text-16 font-semibold">Email</h4>
         </div>
         <?php if (is_user_logged_in()) {
@@ -49,7 +49,7 @@
         <?php if ($args['is_preview']) { ?> x-on:click="focusElm('website')" <?php } ?>
     >
         <div class="flex items-center gap-1">
-            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" alt="" />
+            <img style="height: .9rem" src="<?php echo get_template_directory_uri() . '/lib/images/icons/website.svg'; ?>" width="12" height="13" alt="" />
             <h4 class="text-16 font-semibold">Website</h4>
         </div>
         <span class="text-14 text-yellow-aaa hover:text-yellow underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis block">
