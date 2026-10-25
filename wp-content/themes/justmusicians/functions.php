@@ -320,8 +320,8 @@ function hmm_scripts() {
     $alpine_dependencies[] = 'notifications-js';
     wp_enqueue_script('device-detection', get_template_directory_uri() . '/lib/js/device-detection.js', [], $pkg->version, [ 'strategy' => 'async' ]);
     $alpine_dependencies[] = 'device-detection';
-    wp_enqueue_script('location-detect-js', get_template_directory_uri() . '/lib/js/location-detect.js', [], $pkg->version, [ 'strategy' => 'async' ]);
-    wp_localize_script('location-detect-js', 'hmLocationDetect', [ 'endpoint' => site_url('/wp-json/v1/detect-location/'), ]);
+    //wp_enqueue_script('location-detect-js', get_template_directory_uri() . '/lib/js/location-detect.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+    //wp_localize_script('location-detect-js', 'hmLocationDetect', [ 'endpoint' => site_url('/wp-json/v1/detect-location/'), ]);
     wp_enqueue_script('htmx', get_template_directory_uri() . '/lib/js/htmx/htmx.2.0.4.bundle.min.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
     wp_enqueue_script('alpinejs', get_template_directory_uri() . '/lib/js/alpinejs/alpine.3.14.8.bundle.min.js', $alpine_dependencies, $pkg->version, [ 'strategy' => 'defer' ]);
     wp_enqueue_script('animations-js', get_template_directory_uri() . '/lib/js/animations.js', [], $pkg->version, [ 'strategy' => 'async' ]);

@@ -13,7 +13,22 @@ $collections_result = get_user_collections([
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
 
+
 get_header();
+
+if (
+    ! isset($_GET['lat']) || $_GET['lat'] === '' ||
+    ! isset($_GET['lng']) || $_GET['lng'] === '' ||
+    ! isset($_GET['location_label']) || $_GET['location_label'] === ''
+) {
+    $location_label = 'Austin, Texas';
+    $lat            = 30.2671500;
+    $lng            = -97.7430600;
+} else {
+    $location_label = $_GET['location_label'];
+    $lat            = floatval($_GET['lat']);
+    $lng            = floatval($_GET['lng']);
+}
 
 get_template_part('template-parts/search/search-page', '', [
     'send_first_page'  => false,
@@ -25,9 +40,9 @@ get_template_part('template-parts/search/search-page', '', [
     'qsubgenre'        => isset($_GET['qsubgenre'])        ? $_GET['qsubgenre']        : '',
     'qinstrumentation' => isset($_GET['qinstrumentation']) ? $_GET['qinstrumentation'] : '',
     'qsetting'         => isset($_GET['qsetting'])         ? $_GET['qsetting']         : '',
-    'location_label'   => 'Austin, Texas',
-    'lat'              => 30.2671500,
-    'lng'              => -97.7430600,
+    'location_label'   => $location_label,
+    'lat'              => $lat,
+    'lng'              => $lng,
 ]);
 
 get_footer();
