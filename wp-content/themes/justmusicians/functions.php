@@ -347,17 +347,33 @@ add_action( 'wp_enqueue_scripts', 'hmm_scripts' );
 
 // Inline styles
 function hm_inline_theme_styles() {
-    // Paths to your compiled dist files
-    $theme_dir = get_template_directory();
-    $style_path   = $theme_dir . '/dist/style.css';
+    // Paths to your files
+    $theme_dir     = get_template_directory();
+    $style_path    = $theme_dir . '/dist/style.css';
     $tailwind_path = $theme_dir . '/dist/tailwind.css';
+    $cropper_path  = $theme_dir . '/lib/css/cropper.1.6.2.min.css';
 
     echo '<style id="hm-inline-styles">' . "\n";
+
     if ( file_exists( $style_path ) )    { echo "/* style.css */\n" . file_get_contents( $style_path ) . "\n"; }
     if ( file_exists( $tailwind_path ) ) { echo "/* tailwind.css */\n" . file_get_contents( $tailwind_path ) . "\n"; }
+
+    // Conditionally include Cropper CSS only where needed
+    if (
+        str_starts_with($_SERVER['REQUEST_URI'], '/account/') or
+        str_starts_with($_SERVER['REQUEST_URI'], '/listing-form') or
+        str_starts_with($_SERVER['REQUEST_URI'], '/musician-application') or
+        str_starts_with($_SERVER['REQUEST_URI'], '/buyers/') or
+        preg_match('#^/venues/?$#', $path) or
+        preg_match('#^/venues/[^/]+/?$#', $path) or
+        is_singular('listing')
+    ) {
+        echo "/* cropper.1.6.2.min.css */\n" . file_get_contents( $cropper_path ) . "\n";
+    }
+
     echo '</style>' . "\n";
 }
-add_action( 'wp_head', 'hm_inline_theme_styles', 5 ); // Hook into wp_head with priority 5 to load early in the document head
+add_action( 'wp_head', 'hm_inline_theme_styles', 5 );
 
 // Include
 require get_template_directory() . '/lib/inc/template-functions.php';
