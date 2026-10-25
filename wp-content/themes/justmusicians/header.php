@@ -48,9 +48,9 @@ $header_arg_location_label = $args['header_arg_location_label'] ?? '';
 $header_arg_lat            = $args['header_arg_lat'] ?? null;
 $header_arg_lng            = $args['header_arg_lng'] ?? null;
 
-$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : null);
-$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
-$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : '');
+$lat  = $header_arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : 30.2671500);
+$lng  = $header_arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : -97.7430600);
+$location_label = $header_arg_location_label ?: (!empty($_GET['location_label']) ? $_GET['location_label'] : 'Austin, Texas');
 ?>
 
     <body <?php body_class('flex flex-col min-h-screen relative'); ?>
