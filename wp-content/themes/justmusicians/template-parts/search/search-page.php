@@ -12,6 +12,9 @@ $subgenres        = $qsubgenre        !== '' ? [$qsubgenre]        : [];
 $instrumentations = $qinstrumentation !== '' ? [$qinstrumentation] : [];
 $settings         = $qsetting         !== '' ? [$qsetting]         : [];
 
+$hide_location_filter = !empty($args['hide_location_filter']);
+$hide_category_filter = !empty($args['hide_category_filter']);
+
 $arg_location_label = $args['location_label'] ?? '';
 $arg_lat            = $args['lat'] ?? null;
 $arg_lng            = $args['lng'] ?? null;
@@ -51,41 +54,21 @@ $next_page       = $result ? $result['next_page']       : null;
 
 <div id="page" class="flex flex-col grow">
     <form id="hx-form"
-        x-data="{
-            showCategoryModal: false,
-            showGenreModal: false,
-            showSubGenreModal: false,
-            showInstrumentationModal: false,
-            showSettingModal: false,
-            showEnsembleSizeModal: false,
-            showLocationFilter:          <?php if (!empty($args['hide_location_filter']) and $args['hide_location_filter']) { echo 'false'; } else { echo 'true'; }; ?>,
-            showCategoryFilter:          <?php if (!empty($args['hide_category_filter']) and $args['hide_category_filter']) { echo 'false'; } else { echo 'true'; }; ?>,
+        x-data="searchPageData({
+            showLocationFilter:          <?php echo $hide_location_filter ? 'false' : 'true'; ?>,
+            showCategoryFilter:          <?php echo $hide_category_filter ? 'false' : 'true'; ?>,
             listingSearchVal:           '<?php if (!empty($_GET['qsearch'])) { echo clean_str_for_doublequotes(wp_unslash($_GET['qsearch'])); } ?>',
             categoriesCheckboxes:        <?php echo clean_arr_for_doublequotes($categories); ?>,
             genresCheckboxes:            <?php echo clean_arr_for_doublequotes($genres); ?>,
             subgenresCheckboxes:         <?php echo clean_arr_for_doublequotes($subgenres); ?>,
             instrumentationsCheckboxes:  <?php echo clean_arr_for_doublequotes($instrumentations); ?>,
             settingsCheckboxes:          <?php echo clean_arr_for_doublequotes($settings); ?>,
-            ensembleSizeCheckboxes:      [],
-            verifiedCheckbox: false,
             locationInput:              '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             searchLocation:             '<?php echo clean_str_for_doublequotes($location_label ?? ''); ?>',
             searchLat:                   <?php echo $lat !== null ? $lat : 'null'; ?>,
             searchLng:                   <?php echo $lng !== null ? $lng : 'null'; ?>,
-            distance: 40,
-            updateLocation(location) { this.locationInput = location.label; this.searchLocation = location.label; this.searchLat = location.lat; this.searchLng = location.lng; $nextTick(() => { $dispatch('filterupdate'); }); },
-            get selectedFilters() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.listingSearchVal].filter(Boolean).join(' | ');
-            },
-            get selectedFiltersCount() {
-                return [...this.categoriesCheckboxes, ...this.genresCheckboxes, ...this.subgenresCheckboxes, ...this.instrumentationsCheckboxes, ...this.settingsCheckboxes, ...this.ensembleSizeCheckboxes, this.verifiedCheckbox ? 'Verified' : '', this.listingSearchVal].filter(Boolean).length;
-            },
-            tagModalSearchQuery: '', // must be defined here and not in the tag modal so that refs will still work in the checkboxes
-            showTagModalOption(option) {
-                return this.tagModalSearchQuery === '' || option.toLowerCase().includes(this.tagModalSearchQuery.toLowerCase());
-            },
-            _clearListingForm()                                  { clearListingForm(this, <?php if (!empty($args['hide_category_filter']) and $args['hide_category_filter']) { echo 'true'; } else { echo 'false'; }; ?>); },
-        }"
+            skipCategoryFilter:          <?php echo $hide_category_filter ? 'true' : 'false'; ?>,
+        })"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"
         hx-indicator=".spinner-start"

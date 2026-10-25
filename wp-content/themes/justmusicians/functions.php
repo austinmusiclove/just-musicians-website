@@ -64,6 +64,10 @@ function hmm_scripts() {
 
         // Listing Form
         wp_enqueue_script('clear-listing-form-js', get_template_directory_uri() . '/lib/js/clear-listing-form.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+
+        // Search page Alpine data
+        wp_enqueue_script('search-page-data-js', get_template_directory_uri() . '/lib/js/search-page-data.js', [], $pkg->version, [ 'strategy' => 'async' ]);
+        $alpine_dependencies[] = 'search-page-data-js';
     }
 
     // Archive
