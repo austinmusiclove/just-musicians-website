@@ -1,42 +1,37 @@
 # Hire Musicians
 
-> A free online marketplace platform for live musicians. Currently focused on Austin, Texas.
+> A free online marketplace for hiring live musicians, focused on Austin, Texas (the Live Music Capital of the World).
 
-## Key Sections
 
-- Home: Search and discover musicians with advanced filtering
-- Listings: Browse musician profiles by category, genre, instrumentation
-- Events: Create and manage gig requests
-- Applications: Job postings for musicians to apply to
-- Glossary: Music industry terminology
+## Core Functionality
 
-## For Musicians
+- [Home](/) - Start here to find live musicians in Austin, Texas.
+- [Live Music Search](/live-music/search) - The primary way to discover musicians. Filter by category, genre, subgenre, instrumentation, setting, ensemble size, and location.
+- [Curated Locale & Category Pages](/live-music/search) - Location and style specific pages that highlight curated recommendations of musicians in Austin to help find the right act faster. Examples include:
+  - [Austin Soul Bands](/austin/soul-bands)
+  - [Austin Live Bands](/austin/live-bands)
+  - [Austin Country Bands](/austin/country-bands)
+  - [Austin Wedding Bands](/austin/wedding-bands)
+  - [Austin Cover Bands](/austin/cover-bands)
+  - [Austin Funk Bands](/austin/funk-bands)
+  - [Austin Party Bands](/austin/party-bands)
+- [Musician Listings](/live-music/search) - Each listing serves as an artist EPK, showcasing their bio, photos, videos, genres, instrumentation, location, reviews, and the ability to request a quote directly from their profile.
+- [Get Quotes From Multiple Musicians](/) - Tell us about your event once and send your inquiry to multiple musicians at the same time to receive quotes back.
 
-- Create profiles showcasing music, videos, social links, and venue history
-- Apply to gig opportunities posted by buyers
-- View compensation data at venues (earnings database)
-- Contribute anonymously to earnings database
-
-## For Buyers
-
-- Search musicians with filters for category, genre, setting, ensemble size
-- Create events with date, location, budget, and genre requirements
-- Request quotes from musicians
-- Create an application to handle musician booking inquiries
-- Save favorite musician listings via collections
 
 ## Geographic Focus
 
-- Default location: Austin, Texas
-- Location-aware search using IP geolocation
+- **Primary Market:** Austin, Texas
+
 
 ## API
 
 - Find live music listings programmatically via the public API
-- OpenAPI spec: https://hiremusicians.com/openapi.json
-- Endpoint: GET https://hiremusicians.com/api/v1/musicians/live-music
+- OpenAPI spec: [https://hiremusicians.com/openapi.json](https://hiremusicians.com/openapi.json)
+- Endpoint: [GET https://hiremusicians.com/api/v1/musicians/live-music](https://hiremusicians.com/api/v1/musicians/live-music)
 - Search by postal code (required `zip` param) and filter by `genres` and `ensemble_size`
 - Returns only essential musician fields (name, genres, city, state, description, bio, thumbnail_url, permalink)
+
 
 ## Credits
 
