@@ -260,55 +260,57 @@ $next_page       = $result ? $result['next_page']       : null;
 
                 <!-- Modals -->
                 <?php
-                    $categories = get_terms_decoded('mcategory', 'names', false, true);
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    $avail_categories = get_terms_decoded('mcategory', 'names', false, true);
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Category',
-                        'labels' => $categories,
+                        'labels' => $avail_categories,
                         'name' => 'categories',
                         'x-model' => 'categoriesCheckboxes',
                         'x-show' => 'showCategoryModal',
                         'has_search_bar' => true,
                     ]);
-                    $genres = get_terms_decoded('genre', 'names', false, true);
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    $avail_genres = get_terms_decoded('genre', 'names', false, true);
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Genre',
-                        'labels' => $genres,
+                        'labels' => $avail_genres,
                         'name' => 'genres',
                         'x-model' => 'genresCheckboxes',
                         'x-show' => 'showGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $subgenres = get_terms_decoded('subgenre', 'names', false, true);
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    /* Hidden for performance
+                    $avail_subgenres = get_terms_decoded('subgenre', 'names', false, true);
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Sub Genre',
-                        'labels' => $subgenres,
+                        'labels' => $avail_subgenres,
                         'name' => 'subgenres',
                         'x-model' => 'subgenresCheckboxes',
                         'x-show' => 'showSubGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    $instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    */
+                    $avail_instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Instrumentation',
-                        'labels' => $instrumentation,
+                        'labels' => $avail_instrumentation,
                         'name' => 'instrumentations',
                         'x-model' => 'instrumentationsCheckboxes',
                         'x-show' => 'showInstrumentationModal',
                         'has_search_bar' => true,
                     ]);
-                    $settings = get_terms_decoded('setting', 'names', false, true);
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    $avail_settings = get_terms_decoded('setting', 'names', false, true);
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Setting',
-                        'labels' => $settings,
+                        'labels' => $avail_settings,
                         'name' => 'settings',
                         'x-model' => 'settingsCheckboxes',
                         'x-show' => 'showSettingModal',
                         'has_search_bar' => true,
                     ]);
-                    $ensemble_size_options = get_default_options('ensemble_size');
-                    echo get_template_part('template-parts/search/filter-components/tag-modal', '', [
+                    $avail_ensemble_size_options = get_default_options('ensemble_size');
+                    get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Ensemble Size',
-                        'labels' => $ensemble_size_options,
+                        'labels' => $avail_ensemble_size_options,
                         'name' => 'ensemble_size',
                         'x-model' => 'ensembleSizeCheckboxes',
                         'x-show' => 'showEnsembleSizeModal',
