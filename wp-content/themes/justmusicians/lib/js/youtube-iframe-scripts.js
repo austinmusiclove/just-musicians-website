@@ -1,5 +1,5 @@
 // Configuration
-var DELAY_MS = 1000; // 3 seconds delay after script load
+var DELAY_MS = 2500;
 
 // State flags
 var youtubeIframeApiReady = false;
