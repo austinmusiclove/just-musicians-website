@@ -56,7 +56,7 @@
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
             x-transition:leave-end="-translate-x-full opacity-0" >
-            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Previous" />
+            <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Previous" />
         </div>
         <!-- Right Arrow -->
         <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out cursor-pointer z-10"
@@ -66,7 +66,7 @@
             x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave-start="translate-x-0 opacity-100"
             x-transition:leave-end="translate-x-full opacity-0" >
-            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" alt="Next" />
+            <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Next" />
         </div>
         <!-- Gallery Count -->
         <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12 z-10" x-text="currentIndex+1 + '/' + totalSlides"></div>
