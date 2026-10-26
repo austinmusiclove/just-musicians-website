@@ -1,6 +1,6 @@
 {
 	"name": "JustMusicians",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
 	"main": "index.js",
 	"scripts": {
@@ -11,7 +11,7 @@
 		"build:scss": "sass --style=compressed sass:dist",
 		"build:tailwind": "tailwindcss --config tailwind.config.js --minify -i tailwind/input.css -o dist/tailwind.css",
 		"build:webp": "esbuild src/wasm-webp-wrapper.js --bundle --outfile=dist/webp.js --format=iife --global-name=WebPModule --loader:.wasm=file",
-        "build:alpine": "node -e \"const fs=require('fs'); const files=['lib/js/alpinejs/alpine.collapse.min.js','lib/js/alpinejs/alpine.focus.min.js','lib/js/alpinejs/alpine.intersect.min.js','lib/js/alpinejs/alpine.mask.min.js','lib/js/alpinejs/alpine.resize.min.js','lib/js/alpinejs/alpine.3.14.8.min.js']; fs.writeFileSync('dist/alpine-bundle.js', files.map(f => fs.readFileSync(f, 'utf8')).join('\\n'));\"",
+        "build:alpine": "node -e \"const fs=require('fs'); const files=['lib/js/alpinejs/alpine.collapse.min.js','lib/js/alpinejs/alpine.focus.min.js','lib/js/alpinejs/alpine.intersect.min.js','lib/js/alpinejs/alpine.mask.min.js','lib/js/alpinejs/alpine.resize.min.js','lib/js/alpinejs/alpine.3.17.5.min.js']; fs.writeFileSync('dist/alpine-bundle.js', files.map(f => fs.readFileSync(f, 'utf8')).join('\\n'));\"",
         "build:htmx": "node -e \"const fs=require('fs'); const files=['lib/js/htmx/htmx.2.0.4.min.js','lib/js/htmx/htmx.disable-element.1.9.12.js','lib/js/htmx/htmx.preload.2.1.2.min.js','lib/js/htmx/htmx.response-targets.2.0.4.js']; fs.writeFileSync('dist/htmx-bundle.js', files.map(f => fs.readFileSync(f, 'utf8')).join('\\n'));\"",
         "build": "NODE_ENV=production run-s clean build:scss build:tailwind build:webp build:alpine build:htmx",
 		"test:e2e": "playwright test",
