@@ -390,6 +390,7 @@ require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/lib/inc/robots.php';
 require get_template_directory() . '/lib/inc/404-redirects.php';
 require get_template_directory() . '/lib/inc/logout.php';
+require get_template_directory() . '/lib/inc/gtags.php';
 // Enables htmx preload for home and pages; Removed because it was causing issues with undesired browser caching especially while logged in
 // When logging in with user/pass, the page would reload from cache instead of getting the new logged in version of the page. This would need to be solved to re-enable the preload on pages and home
 //require get_template_directory() . '/lib/inc/preload.php';
