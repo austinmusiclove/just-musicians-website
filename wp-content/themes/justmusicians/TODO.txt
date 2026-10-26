@@ -10,7 +10,6 @@ Critical bugs
     need to see if i need BMI ASCAP licensing for media on HM
 SEO
     performance
-        try not allowing iframe init until either scroll, click, or mouseover on search page container or media section of listing page
         load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
         show subgenre in general search
         hide category and subgenre and other filters with php not alpine so that we save alpine execution time when not included; need to address how to communicate that to the html api when it returns filters

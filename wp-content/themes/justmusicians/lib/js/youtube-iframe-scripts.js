@@ -1,30 +1,5 @@
-// Watch for api ready
-/*
-var youtubeIframeApiReady = false;
-var initQueue = [];
-window.onYouTubeIframeAPIReady = function () {
-    youtubeIframeApiReady = true;
-    clearInitQueue();
-    setTimeout(clearInitQueue, 1000); // empty queue again to avoid race condition of something being added after the queue is cleared the first time
-};
-
-
-// Init players that were ready for init before the api was ready
-var clearingQueue = false;
-function clearInitQueue() {
-    if (clearingQueue) { return; } else { clearingQueue = true; } // don't allow this function to run twice at the same time
-
-    // clear the queue
-    while (initQueue.length > 0) {
-        var queueItem = initQueue.shift();
-        initPlayer(queueItem.alpineComponent, queueItem.playerId, queueItem.videoData);
-    }
-    clearingQueue = false;
-}
-*/
-
 // Configuration
-var DELAY_MS = 3000; // 3 seconds delay after script load
+var DELAY_MS = 1000; // 3 seconds delay after script load
 
 // State flags
 var youtubeIframeApiReady = false;
@@ -32,19 +7,19 @@ var delayElapsed = false;
 var initQueue = [];
 var clearingQueue = false;
 
-// 1. Start the timer immediately when the file loads
+// Start the timer immediately when the file loads
 setTimeout(function () {
     delayElapsed = true;
     tryProcessQueue();
 }, DELAY_MS);
 
-// 2. Watch for YouTube API ready
+// Watch for YouTube API ready
 window.onYouTubeIframeAPIReady = function () {
     youtubeIframeApiReady = true;
     tryProcessQueue();
 };
 
-// 3. Helper to check if both conditions are met before clearing queue
+// Helper to check if both conditions are met before clearing queue
 function tryProcessQueue() {
     if (youtubeIframeApiReady && delayElapsed) {
         clearInitQueue();
@@ -64,21 +39,11 @@ function clearInitQueue() {
 }
 
 function initPlayer(alpineComponent, playerId, videoData) {
-    /*
-    if (!youtubeIframeApiReady) {
-        // If the api is not ready, add this init call to a queue
-        initQueue.push({ alpineComponent, playerId, videoData });
-        return;
-    }
-    */
-    console.log('init attempt');
-
-    // If either condition is not met, queue the item
     if (!youtubeIframeApiReady || !delayElapsed) {
-        console.log('Not ready yet (Waiting for API and/or delay timer)');
         initQueue.push({ alpineComponent, playerId, videoData });
         return;
     }
+
     if (playerId) {
         var player = new YT.Player(playerId, {
             host: 'https://www.youtube-nocookie.com',
