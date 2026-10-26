@@ -1,4 +1,5 @@
 // Watch for api ready
+/*
 var youtubeIframeApiReady = false;
 var initQueue = [];
 window.onYouTubeIframeAPIReady = function () {
@@ -20,11 +21,61 @@ function clearInitQueue() {
     }
     clearingQueue = false;
 }
+*/
 
+// Configuration
+var DELAY_MS = 3000; // 3 seconds delay after script load
+
+// State flags
+var youtubeIframeApiReady = false;
+var delayElapsed = false;
+var initQueue = [];
+var clearingQueue = false;
+
+// 1. Start the timer immediately when the file loads
+setTimeout(function () {
+    delayElapsed = true;
+    tryProcessQueue();
+}, DELAY_MS);
+
+// 2. Watch for YouTube API ready
+window.onYouTubeIframeAPIReady = function () {
+    youtubeIframeApiReady = true;
+    tryProcessQueue();
+};
+
+// 3. Helper to check if both conditions are met before clearing queue
+function tryProcessQueue() {
+    if (youtubeIframeApiReady && delayElapsed) {
+        clearInitQueue();
+    }
+}
+
+// Clear the queue
+function clearInitQueue() {
+    if (clearingQueue) { return; }
+    clearingQueue = true;
+
+    while (initQueue.length > 0) {
+        var queueItem = initQueue.shift();
+        initPlayer(queueItem.alpineComponent, queueItem.playerId, queueItem.videoData);
+    }
+    clearingQueue = false;
+}
 
 function initPlayer(alpineComponent, playerId, videoData) {
+    /*
     if (!youtubeIframeApiReady) {
         // If the api is not ready, add this init call to a queue
+        initQueue.push({ alpineComponent, playerId, videoData });
+        return;
+    }
+    */
+    console.log('init attempt');
+
+    // If either condition is not met, queue the item
+    if (!youtubeIframeApiReady || !delayElapsed) {
+        console.log('Not ready yet (Waiting for API and/or delay timer)');
         initQueue.push({ alpineComponent, playerId, videoData });
         return;
     }
