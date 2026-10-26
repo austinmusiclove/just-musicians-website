@@ -1,17 +1,39 @@
 // Configuration
-var DELAY_MS = 3000;
+var DELAY_MS = 10000;
 
 // State flags
 var youtubeIframeApiReady = false;
 var delayElapsed = false;
 var initQueue = [];
 var clearingQueue = false;
+var hasTriggered = false;
 
-// Start the timer immediately when the file loads
-setTimeout(function () {
+// Interaction events to watch for
+var interactionEvents = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'click'];
+
+// Unified trigger function for interaction or timer
+function handleDelayOrInteraction() {
+    if (hasTriggered) { return; }
+    hasTriggered = true;
     delayElapsed = true;
+
+    // Clean up event listeners once triggered
+    interactionEvents.forEach(function (eventName) {
+        window.removeEventListener(eventName, handleDelayOrInteraction, { passive: true });
+    });
+
     tryProcessQueue();
+}
+
+// Fallback static delay timer
+setTimeout(function () {
+    handleDelayOrInteraction();
 }, DELAY_MS);
+
+// Watch for first user interaction
+interactionEvents.forEach(function (eventName) {
+    window.addEventListener(eventName, handleDelayOrInteraction, { passive: true });
+});
 
 // Watch for YouTube API ready
 window.onYouTubeIframeAPIReady = function () {

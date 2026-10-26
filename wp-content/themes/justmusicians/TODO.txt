@@ -11,6 +11,9 @@ Critical bugs
 SEO
     performance
         load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
+        cache for html
+        compress images on home
+        smaller listing cover image dpeending on device/screen size
         show subgenre in general search
         hide category and subgenre and other filters with php not alpine so that we save alpine execution time when not included; need to address how to communicate that to the html api when it returns filters
         cache lifetimes
