@@ -1,5 +1,5 @@
 // Configuration
-var DELAY_MS = 2500;
+var DELAY_MS = 3000;
 
 // State flags
 var youtubeIframeApiReady = false;
