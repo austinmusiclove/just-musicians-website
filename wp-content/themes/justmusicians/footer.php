@@ -31,10 +31,15 @@
                 <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-1' ) ); ?>
             </div>
 
-            <!-- Footer Menu 2 -->
+            <!-- Footer Menu 2 (2 Columns) -->
             <div class="footer-menu">
                 <div class="font-sans text-20 font-bold mb-4">Categories</div>
-                <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-2' ) ); ?>
+                <?php
+                wp_nav_menu( array(
+                    'theme_location' => 'footer-menu-2',
+                    'menu_class'     => 'columns-1 sm:columns-2 gap-x-12 [&>li]:mb-2',
+                ) );
+                ?>
             </div>
 
         </div>
