@@ -353,6 +353,7 @@ function hm_inline_theme_styles() {
     if ( file_exists( $tailwind_path ) ) { echo "/* tailwind.css */\n" . file_get_contents( $tailwind_path ) . "\n"; }
 
     // Conditionally include Cropper CSS only where needed
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     if (
         str_starts_with($_SERVER['REQUEST_URI'], '/account/') or
         str_starts_with($_SERVER['REQUEST_URI'], '/listing-form') or
