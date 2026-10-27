@@ -40,6 +40,8 @@ get_template_part('template-parts/landing-pages/hero-section-basic', '', [
 get_template_part('template-parts/search/search-page', '', [
     'send_first_page'      => true,
     'hide_location_filter' => true,
+    'hide_category_filter' => false,
+    'hide_subgenre_filter' => true,
     'collections_map'      => $collections_map,
     'qcategory'            => '',
     'qgenre'               => '',
@@ -49,6 +51,17 @@ get_template_part('template-parts/search/search-page', '', [
     'location_label'       => 'Austin, Texas',
     'lat'                  => 30.2671500,
     'lng'                  => -97.7430600,
+]);
+get_template_part('template-parts/landing-pages/how-it-works', '', [
+    'heading'       => 'Hire Musicians For An Event',
+    'description' => 'Hire live musicians for weddings, parties, corporate events, and more. All it takes is a free account to send inquiries and get responses.',
+    'image'       => get_template_directory_uri() . '/lib/images/other/inquiry-form-location-opt.png',
+    'steps'       => [
+        'Tell us about your event',
+        'Send your inquiry directly to musicians you want to hire',
+        'Get responses and price quotes',
+        'Book directly with musicians',
+    ],
 ]);
 get_template_part('template-parts/landing-pages/simple-feature-section', '', [
     'heading'     => "Tips for Getting Accurate Quotes from Musicians",
@@ -60,17 +73,6 @@ get_template_part('template-parts/landing-pages/simple-feature-section', '', [
         [ 'name' => "Duration of Performance", 'description' => "Clarify total time on-site versus actual playing time (for example, two 45-minute sets across a 2-hour window). Note if you need background music run through their sound system during band breaks." ],
         [ 'name' => "Equipment Needed vs. Provided", 'description' => "Specify whether the venue provides sound, microphones, staging, and power access, or if the musicians need to bring a complete PA system, backline, and stage lighting." ],
         [ 'name' => "Special Rehearsal or Song Requests", 'description' => "Note if you require specific custom songs (like wedding ceremony processionals or key corporate introductions), as these may factor into preparation time." ],
-    ],
-]);
-get_template_part('template-parts/landing-pages/how-it-works', '', [
-    'heading'       => 'Hire Musicians For An Event',
-    'description' => 'Hire live musicians for weddings, parties, corporate events, and more. All it takes is a free account to send inquiries and get responses.',
-    'image'       => get_template_directory_uri() . '/lib/images/other/inquiry-form-location-opt.png',
-    'steps'       => [
-        'Tell us about your event',
-        'Send your inquiry directly to musicians you want to hire',
-        'Get responses and price quotes',
-        'Book directly with musicians',
     ],
 ]);
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
@@ -90,6 +92,11 @@ get_template_part('template-parts/landing-pages/benefits-cta', '', [
 ]);
 get_template_part('template-parts/landing-pages/locale-category-links', '', [
     'heading' => 'Discover Musicians by Category',
+]);
+get_template_part('template-parts/landing-pages/partners', '', [
+    'heading'     => 'Trusted Austin Partners & Affiliates',
+    'description' => "We proudly collaborate with local businesses and organizations who share our passion for keeping Austin's live music scene thriving. Discover some of our trusted partners and affiliates that help us bring great music to life.",
+    'locale'      => 'austin',
 ]);
 
 ?></main><?php

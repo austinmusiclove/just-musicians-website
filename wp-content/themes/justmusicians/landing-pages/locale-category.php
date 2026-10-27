@@ -34,6 +34,7 @@ $category_post    = get_post_meta($post_id, 'category', true);
 $country          = get_post_meta($region_post, 'country', true);
 $region_name      = get_post_meta($region_post, 'name', true);
 $locale_name      = get_post_meta($locale_post, 'name', true);
+$locale_url_path  = get_post_meta($locale_post, 'url_path', true);
 $category_name    = get_post_meta($category_post, 'plural_name', true);
 $category_slug    = get_post_meta($category_post, 'taxonomy_slug', true);
 
@@ -96,6 +97,7 @@ get_template_part('template-parts/search/search-page', '', [
     'location_label'       => $location_label,
     'hide_location_filter' => true,
     'hide_category_filter' => true,
+    'hide_subgenre_filter' => false,
     'collections_map'      => $collections_map,
     'qcategory'            => $category_slug,
     'qgenre'               => '',
@@ -122,19 +124,24 @@ if ( ! empty( $content_post->post_content ) ) { ?>
     </div>
 <?php }
 
-
 get_template_part('template-parts/landing-pages/categories-in-locale-links', '', [
     'heading'        => "Explore other categories in $location_label",
     'exclude'        => [$post_id],
     'locale_post_id' => $locale_post,
 ]);
-
 get_template_part('template-parts/landing-pages/near-by-category-locale-links', '', [
     'heading'        => "Explore $category_name near by",
     'exclude'        => [$post_id],
     'category_post_id' => $category_post,
     'region_post_id'   => $region_post,
 ]);
+/*
+get_template_part('template-parts/landing-pages/partners', '', [
+    'heading'     => "Trusted $locale_name Partners & Affiliates",
+    'description' => "We proudly collaborate with local businesses and organizations who share our passion for keeping $locale_name's live music scene thriving. Discover some of our trusted partners and affiliates that help us bring great music to life.",
+    'locale'      => $locale_url_path,
+]);
+*/
 
 ?></main><?php
 
