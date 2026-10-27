@@ -122,8 +122,9 @@ if ($page == 1) {
         'input_name' => 'subgenres',
         'default_tags' => get_default_options('subgenre'),
         'tags' => $valid_subgenres,
-        'show_modal_var' => 'showSubGenreModal',
+        'show_modal_var' => 'showSubgenreModal',
         'x-model' => 'subgenresCheckboxes',
+        'x-show' => 'showSubgenreFilter',
     ));
     echo get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'instrumentation-filters',

@@ -49,17 +49,16 @@ get_template_part('template-parts/search/filter-components/location', '', [
         'show_modal_var' => 'showGenreModal',
         'x-model' => 'genresCheckboxes',
     ));
-    /* Hidden for performance
     get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'subgenre-filters',
         'title' => 'Sub Genre',
         'input_name' => 'subgenres', // should match the input name used for the tag modal checkboxes
         'default_tags' => get_default_options('subgenre'),
         'tags' => isset($args['subgenres']) ? $args['subgenres'] : [],
-        'show_modal_var' => 'showSubGenreModal',
+        'show_modal_var' => 'showSubgenreModal',
         'x-model' => 'subgenresCheckboxes',
+        'x-show' => 'showSubgenreFilter',
     ));
-    */
     get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'instrumentation-filters',
         'title' => 'Instrumentation',

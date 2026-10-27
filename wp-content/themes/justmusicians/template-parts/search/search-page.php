@@ -12,8 +12,9 @@ $subgenres        = $qsubgenre        !== '' ? [$qsubgenre]        : [];
 $instrumentations = $qinstrumentation !== '' ? [$qinstrumentation] : [];
 $settings         = $qsetting         !== '' ? [$qsetting]         : [];
 
-$hide_location_filter = !empty($args['hide_location_filter']);
-$hide_category_filter = !empty($args['hide_category_filter']);
+$hide_location_filter = $args['hide_location_filter'] ?? false;
+$hide_category_filter = $args['hide_category_filter'] ?? false;
+$hide_subgenre_filter = $args['hide_subgenre_filter'] ?? false;
 
 $arg_location_label = $args['location_label'] ?? '';
 $arg_lat            = $args['lat'] ?? null;
@@ -57,6 +58,7 @@ $next_page       = $result ? $result['next_page']       : null;
         x-data="searchPageData({
             showLocationFilter:          <?php echo $hide_location_filter ? 'false' : 'true'; ?>,
             showCategoryFilter:          <?php echo $hide_category_filter ? 'false' : 'true'; ?>,
+            showSubgenreFilter:          <?php echo $hide_subgenre_filter ? 'false' : 'true'; ?>,
             listingSearchVal:           '<?php if (!empty($_GET['qsearch'])) { echo clean_str_for_doublequotes(wp_unslash($_GET['qsearch'])); } ?>',
             categoriesCheckboxes:        <?php echo clean_arr_for_doublequotes($categories); ?>,
             genresCheckboxes:            <?php echo clean_arr_for_doublequotes($genres); ?>,
@@ -260,7 +262,7 @@ $next_page       = $result ? $result['next_page']       : null;
 
                 <!-- Modals -->
                 <?php
-                    $avail_categories = get_terms_decoded('mcategory', 'names', false, true);
+                    $avail_categories = $hide_category_filter ? $categories : get_terms_decoded('mcategory', 'names', false, true); // Only pass the selected category to reduce alpinejs execution
                     get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Category',
                         'labels' => $avail_categories,
@@ -278,17 +280,15 @@ $next_page       = $result ? $result['next_page']       : null;
                         'x-show' => 'showGenreModal',
                         'has_search_bar' => true,
                     ]);
-                    /* Hidden for performance
-                    $avail_subgenres = get_terms_decoded('subgenre', 'names', false, true);
+                    $avail_subgenres = $hide_subgenre_filter ? $subgenres : get_terms_decoded('subgenre', 'names', false, true); // Only pass the selected category to reduce alpinejs execution
                     get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Sub Genre',
                         'labels' => $avail_subgenres,
                         'name' => 'subgenres',
                         'x-model' => 'subgenresCheckboxes',
-                        'x-show' => 'showSubGenreModal',
+                        'x-show' => 'showSubgenreModal',
                         'has_search_bar' => true,
                     ]);
-                    */
                     $avail_instrumentation = get_terms_decoded('instrumentation', 'names', false, true);
                     get_template_part('template-parts/search/filter-components/tag-modal', '', [
                         'title' => 'Instrumentation',

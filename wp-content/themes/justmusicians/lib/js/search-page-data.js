@@ -4,7 +4,7 @@ function searchPageData(config = {}) {
     return {
         showCategoryModal: false,
         showGenreModal: false,
-        showSubGenreModal: false,
+        showSubgenreModal: false,
         showInstrumentationModal: false,
         showSettingModal: false,
         showEnsembleSizeModal: false,
