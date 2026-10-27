@@ -37,7 +37,7 @@ function template_route_rewrite_rules() {
 
     // Locale Category Pages
     // Prevent this catch-all rule from swallowing single-post URLs such as /collection/country-bands/ or /artist/jazz-bands/.
-    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs' ]);
+    $categories = implode('|', [ 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs', 'folk-singers', 'folk-bands', 'indie-bands', 'singing-guitarists', 'singing-pianist', 'pianist' ]);
     $locales = implode('|', [ 'austin', 'san-antonio' ]);
     add_rewrite_rule(
         '^(' . $locales . ')/(' . $categories . ')/?$',
