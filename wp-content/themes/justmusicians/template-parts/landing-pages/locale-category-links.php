@@ -5,15 +5,17 @@ $categories_query_args = [
     'post_type'      => 'lc-landing',
     'post_status'    => 'publish',
     'posts_per_page' => -1,
+    'orderby'        => 'title',
+    'order'          => 'ASC',
 ];
 if (isset($args['exclude'])) { $categories_query_args['post__not_in'] = $args['exclude']; }
 $categories_query = new WP_Query( $categories_query_args );
 
 if ( $categories_query->have_posts() ) { ?>
 
-    <div class="container flex py-8">
+    <div class="container article-body flex py-8">
         <div class="flex flex-col w-full">
-            <h2 class="font-sun-motter text-25 mb-4"><?php echo $args['heading']; ?></h2>
+            <h2 class="mb-4"><?php echo $args['heading']; ?></h2>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">
                 <?php while ( $categories_query->have_posts() ) {
                     $categories_query->the_post();

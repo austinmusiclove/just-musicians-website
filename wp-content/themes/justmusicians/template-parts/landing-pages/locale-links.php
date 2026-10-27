@@ -7,6 +7,8 @@ $locale_query_args = [
     'post_status'    => 'publish',
     'posts_per_page' => -1,
     'fields'         => 'ids',
+    'orderby'        => 'title',
+    'order'          => 'ASC',
     'meta_query'     => [
         [
             'key'   => 'region',
@@ -21,11 +23,11 @@ if ( ! $locale_query->have_posts() ) { return; }
 
 ?>
 
-<div class="flex py-8">
+<div class="container article-body flex py-8">
     <div class="flex flex-col w-full">
 
         <?php if ( !empty($args['heading']) and !empty($args['heading_href']) ) { ?>
-            <h2 class="font-sun-motter text-25 mb-4">
+            <h2 class="mb-4">
                 <a href="<?php echo $args['heading_href']; ?>"><?php echo $args['heading']; ?></a>
             </h2>
         <?php } else if ( !empty($args['heading']) ) { ?>
