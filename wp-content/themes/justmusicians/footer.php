@@ -37,7 +37,7 @@
                 <?php
                 wp_nav_menu( array(
                     'theme_location' => 'footer-menu-2',
-                    'menu_class'     => 'columns-1 sm:columns-2 gap-x-12 [&>li]:mb-2',
+                    'menu_class'     => 'columns-1 sm:columns-2 gap-x-12',
                 ) );
                 ?>
             </div>
