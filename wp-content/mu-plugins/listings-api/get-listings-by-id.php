@@ -48,6 +48,7 @@ function get_listings_by_id($args) {
                 'zip_code'               => get_field('zip_code'),
                 'description'            => get_field('description'),
                 'genre'                  => get_the_terms(get_the_ID(), 'genre'),
+                'ensemble_size'          => get_field('ensemble_size'),
                 'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
                 'website'                => get_field('website'),
                 'facebook_url'           => get_field('facebook_url'),

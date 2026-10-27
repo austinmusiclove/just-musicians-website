@@ -53,10 +53,10 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
 
             <!-- Thumbnail -->
             <img class="w-auto h-full object-cover aspect-[4/3]" width="400" height="300"
-                alt="Thumbnail image for <?php echo $args['name']; ?>"
-                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} else { echo 'fetchpriority="high"'; } ?>
                 <?php if (!$is_preview) { ?>src="<?php echo $args['thumbnail_url']; ?>"                        <?php } ?>
                 <?php if ($is_preview)  { ?>x-bind:src="pThumbnailSrc || '<?php echo $ph_thumbnail; ?>'"       <?php } ?>
+                <?php if (!$is_preview) { ?>alt="Thumbnail image for <?php echo $args['name']; ?>"             <?php } ?>
+                <?php if ($args['lazyload_thumbnail']) { echo 'loading="lazy"';} else { echo 'fetchpriority="high"'; } ?>
                 x-on:click="if (totalSlides > 1) { _updateIndex(1) }"
             />
 
@@ -152,12 +152,24 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
             'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
         ]); ?>
 
-        <!-- Location -->
-        <span class="text-14 flex items-center">
-            <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
-            <?php if ($is_preview)  { ?> <span x-text="getListingLocation()"></span> <?php } ?>
-            <?php if (!$is_preview) { ?> <span><?php echo $args['location']; ?></span> <?php } ?>
-        </span>
+        <div class="flex items-center gap-2">
+            <!-- Location -->
+            <span class="text-14 flex items-center">
+                <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
+                <?php if ($is_preview)  { ?> <span x-text="getListingLocation()"></span> <?php } ?>
+                <?php if (!$is_preview) { ?> <span><?php echo $args['location']; ?></span> <?php } ?>
+            </span>
+            <?php if ($is_preview)  { ?> <span class="text-black/50" <?php if ($is_preview) { ?>x-show="ensembleSizeCheckboxes.length > 0" x-cloak <?php } ?>>|</span> <?php } ?>
+            <?php if (!$is_preview and !empty($args['ensemble_size']) ) { ?> <span class="text-black/50" >|</span> <?php } ?>
+
+            <!-- Ensemble Size  -->
+            <span class="flex items-center text-14 gap-2" x-data="{ cardEnsembleSize: <?php echo clean_arr_for_doublequotes($args['ensemble_size'] ?? []); ?> }">
+            <?php
+                if ($is_preview)  { get_template_part('template-parts/cards/card-components/ensemble-size', '', [ 'ensemble_size_var' => 'ensembleSizeCheckboxes' ]); }
+                if (!$is_preview) { get_template_part('template-parts/cards/card-components/ensemble-size', '', [ 'ensemble_size' => $args['ensemble_size'] ]); }
+            ?>
+            </span>
+        </div>
 
         <!-- Description -->
         <p class="text-14"

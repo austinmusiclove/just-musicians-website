@@ -169,17 +169,20 @@
             'review_count' => empty($args['review_count']) ? 0 : $args['review_count'],
         ]); ?>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2" x-data="{ cardEnsembleSize: <?php echo clean_arr_for_doublequotes($args['ensemble_size'] ?? []); ?> }">
             <!-- Location -->
             <span class="text-14 flex items-center flex-wrap">
                 <img class="h-4 mr-2" src="<?php echo get_template_directory_uri() . '/lib/images/icons/location.svg'; ?>" width="10" height="17" alt="" />
                 <span><?php echo $args['location']; ?></span>
             </span>
-            <span class="text-black/50">|</span>
+            <span class="text-black/50" x-show="cardEnsembleSize.length > 0" x-cloak>|</span>
 
             <!-- Ensemble Size  -->
             <span class="flex items-center text-14 gap-2">
-                <?php echo get_template_part('template-parts/cards/card-components/ensemble-size', '', [ 'ensemble_size' => $args['ensemble_size'] ]); ?>
+                <?php get_template_part('template-parts/cards/card-components/ensemble-size', '', [
+                    'ensemble_size_var'   => 'cardEnsembleSize',
+                    'show_any_when_empty' => 'true',
+                ]); ?>
             </span>
         </div>
 

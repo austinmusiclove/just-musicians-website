@@ -192,6 +192,7 @@ $next_page       = $result ? $result['next_page']       : null;
                                         'bio'                    => $listing['bio'],
                                         'listing_image_urls'     => $listing['listing_image_urls'],
                                         'genres'                 => $genres,
+                                        'ensemble_size'          => $listing['ensemble_size'],
                                         'thumbnail_url'          => $listing['thumbnail_url'],
                                         'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
                                         'website'                => $listing['website'],

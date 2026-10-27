@@ -53,6 +53,7 @@ if (count($listings) > 0) {
             'location'               => $listing['city'] . ', ' . $listing['state'],
             'description'            => $listing['description'],
             'genres'                 => $genres,
+            'ensemble_size'          => $listing['ensemble_size'],
             'thumbnail_url'          => $listing['thumbnail_url'],
             'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
             'website'                => $listing['website'],

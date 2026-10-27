@@ -350,6 +350,7 @@ Code consistency and cleanliness
     Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
     Fix mu plugins depending on each other; move code to includes instead
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
+    make a preview listing card instead of supporting the preview with standard listing card
 My Listing page
     back end page about your listing
     *show search rank in their area and how to improve it

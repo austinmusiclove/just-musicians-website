@@ -274,7 +274,8 @@ get_header();
 
                         <?php echo get_template_part('template-parts/cards/standard-listing-card', '', [
                             'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
-                            'verified'                      => $listing_data ? $listing_data['verified']               : false,
+                            'ensemble_size'                 => $listing_data['ensemble_size'],
+                            'verified'                      => $listing_data ? $listing_data['verified'] : false,
                             'lazyload_thumbnail'            => false,
                             'last'                          => false,
                             'instance'                      => 'listing-form',
