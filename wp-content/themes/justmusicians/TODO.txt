@@ -1,6 +1,5 @@
 Critical bugs
     Need to add unique auth keys to wp config in staging and prod
-    Media slider experience sucks
     When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     Audit which pages are cached and not and add proper exclusions (exclude register user)
     Figure out why update listing takes forever; probably something with unneeded image processing
@@ -26,7 +25,8 @@ SEO
     optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
         add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
     Home page
-        **Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
+        *Add stats section with total listings in austin, verified listings, 0 listing fees, 0% platform fee
+        *Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
         total number of listings, number of cities that have musicians, categories that have musicians, established year
     single listing pages
         Add internal links on listings pages to locale category pages (check with seo)
@@ -40,7 +40,7 @@ SEO
             Musician Earnings DB (add after it works for any location not just austin)
             Trust & Social Proof
                 Verified client reviews
-                *Total active musician count
+                Total active musician count
                 Platform trust badges (e.g., payment arbitration, insurance available).
                 National level community partners or press
     performance
@@ -147,7 +147,7 @@ Single Event page
     Send message button should send a message that has the proposal/event attached to it so that it can be displayed in the convo nicely
     Conversation group for events; link from send message success on event applicant card
     Add a way to click to convo in send message modal for a particular listing if one exists
-    **add start a search at the bottom of suggestions results in empty and not empty suggestions state
+    ***add start a search at the bottom of suggestions results in empty and not empty suggestions state
 My Events page (for buyers)
     **Connect to conversation if one exists on applicant cards instead of send message button
     Set event status to booked/open/cancelled/etc.
@@ -176,15 +176,15 @@ Offer post type (future)
     Details
     Proposal relationship
 Users
-    ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
+    **when a user uploads a cover image for a listing, update their profile photo if they don't have one
     **retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
     *Automatically populate profile image with gmail image if they have one
     add default location setting in account settings
 Reviews
-    **pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
+    *pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
     **add title to review
     **Don't display name if we don't have one
-    **Lock venue review so they can only be done by invite or if you were a contributor for that venue
+    Lock venue review so they can only be done by invite or if you were a contributor for that venue
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
         don't show review for 2 weeks to give the user time to review the buyer
@@ -194,7 +194,7 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
-    ***allow add new venue
+    **allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
@@ -210,9 +210,9 @@ Venue Browsing Page
     Filter venues that played certian artists
     show/hide popup on hover
 Venue pages
-    *remove decimal places in y axis for payment method and payment speed
-    *change pay per hour to median pay
-    *add perminently closed state for venues (coral snake)
+    remove decimal places in y axis for payment method and payment speed
+    change pay per hour to median pay
+    add perminently closed state for venues (coral snake)
     Add artists recently played to venue pages
     median pay?
     typical ensemble size hired
@@ -228,7 +228,6 @@ Notifications
     Email for new listing published/draft
 Advanced inquiries
     Recurring event
-    ****Test inquiries modal on safari on desktop and mobile
     add something about sound equipment for events; musicians need to know if they need to bring PA to quote
     allow inquiry when not logged in; require email; log in to see responses
     inquiry response posts and/or offers posts; show user all inquiry responses side by side
@@ -272,8 +271,8 @@ Search algo update
         Show Relevant Media as thumbnail based on search
 Listing form
     back to listings button
-    **really slow even for small update; maybe it is doing images stuff when it shouldn't
-    *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
+    ***really slow even for small update; maybe it is doing images stuff when it shouldn't
+    **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
@@ -281,35 +280,35 @@ Listing form
     scroll preview to section when corresponding input is focused
     disable input until change made or auto save after input
     limit access until you verify email
-    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    **accept pdf for stage plots
+    ***accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    ***accept pdf for stage plots
     allow attaching stage plot to a gig
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
     add regular email to remind draft listings to go in and complete their listings
     Rename clear-listing-form to clear-listing-search-form
+    **Add press mentions to form
+    *Add event insurance (later sell insurance policies here)
 Listing page
     add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
     *add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
     *add ticket sales numbers self reported by artists
     add gear list
-    add faq
+    *add faq
     add data from chartmetric and/or musicstax
     allow play with mouse off iframe for videos; pause when another video plays
-    ***add seek in video
     see more bio
     see more venues played
-    artist pages that will get you listed on google as a musician by using schema
-    allow artists to feature releases of their choice
     add set lists with set length and repertoire
     instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
-    allow collecting deposits
+    allow collecting deposits (advanced)
     create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
     badges for featured musician on page and standard listing card
 Media slider
+    ***make media slider have images instead of videos and play button opens a video slider modal
+    ***video seeking
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
-    ***video seeking
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
     open video in modal (maybe only in listing page)
@@ -353,11 +352,11 @@ Code consistency and cleanliness
     make a preview listing card instead of supporting the preview with standard listing card
 My Listing page
     back end page about your listing
-    *show search rank in their area and how to improve it
+    show search rank in their area and how to improve it
     view/edit/delete buttons
     view/manage reviews
 UX
-    organize subgenre by parent genre groups in listing form and in search filters
+    **organize subgenre by parent genre groups in listing form and in search filters
     *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry
