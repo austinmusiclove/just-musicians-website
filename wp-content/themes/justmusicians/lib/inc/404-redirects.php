@@ -12,6 +12,7 @@ function force_404_for_private_post_types() {
         is_singular('buyer_review') or
         is_singular('venue_review') or
         is_singular('comp_report') or
+        is_singular('venue') or
         is_singular('review_submission') or
         is_singular('tmp_code') or
         is_author() or

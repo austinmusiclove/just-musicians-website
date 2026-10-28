@@ -2,6 +2,7 @@ Critical bugs
     *Need to add unique auth keys to wp config in staging and prod
     *When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
     *Figure out why update listing takes forever; probably something with unneeded image processing
+    Dan radin showing 2 reviews on listing card and one on listing page
     Make sure i am compliant with laws on cookies (google analytics)
     Make events show all by default and leave upcoming and past options there; to avoid confusion
 Musician Pricing Page
@@ -25,6 +26,7 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
+    Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
     Get backlinks to category locale pages
         Swap links with local promoters, wedding planners, and other buyers for the locale page
             get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
@@ -67,6 +69,60 @@ SEO
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     steal competitor backlinks by using seo tool to findout who links to them
+Listing form
+    back to listings button
+    ***really slow even for small update; maybe it is doing images stuff when it shouldn't
+    **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
+    when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
+    better looking disabled and spinner state for submit buttons
+    upload multiple images at once
+    ***allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
+    scroll preview to section when corresponding input is focused
+    disable input until change made or auto save after input
+    limit access until you verify email
+    ***accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    ***accept pdf for stage plots
+    allow attaching stage plot to a gig
+    accept pdf for one sheet
+    make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
+    add regular email to remind draft listings to go in and complete their listings
+    Rename clear-listing-form to clear-listing-search-form
+    **Add press mentions to form
+    *Add event insurance (later sell insurance policies here)
+Listing page
+    add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
+    ***add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
+        add request to book feature like https://www.tayloralexanderart.com/book-online so that
+    *add ticket sales numbers self reported by artists
+    add gear list
+    *add faq
+    add data from chartmetric and/or musicstax
+    allow play with mouse off iframe for videos; pause when another video plays
+    see more bio
+    see more venues played
+    add set lists with set length and repertoire
+    instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
+    allow collecting deposits (advanced)
+    create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
+    badges for featured musician on page and standard listing card
+My Listing page
+    back end page about your listing
+    show search rank in their area and how to improve it
+    view/edit/delete buttons
+    view/manage reviews
+    make badges available for them to put on their websites for backlinks
+Listing lifecycle
+    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
+    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
+    Drip campaign to reach out to pending and draft listings
+Media slider
+    ***make media slider have images instead of videos and play button opens a video slider modal
+    ***video seeking
+    somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
+    somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
+    swipe on mobile
+    somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
+    open video in modal (maybe only in listing page)
 Escrow
     explore legal issues
         create generic and customizable performance contract
@@ -116,10 +172,6 @@ Refactor listing access
         update the way user messages plugin determines if you own a listing; right now it users get user meta to get listings list
     find everywhere user listings field is referenced using grep
     phase 2: get rid of listings list in user data once it is deprecated; replace it with displaying a listing access table and a way to add/edit/remove access from wp admin user page
-Listing lifecycle
-    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
-    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
-    Drip campaign to reach out to pending and draft listings
 Applications Advanced
     Application form screen
         Inform applicant that they can come back to this application to update it any time
@@ -249,6 +301,8 @@ Messages
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
 Search algo update
+    add recommendation to search algo
+    improve design and explaination on search aglo page
     find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
     Need fuzzy search for locations in location active search
     show relevant thumbnail image and video media based on search but media does not play a part in rank
@@ -266,49 +320,6 @@ Search algo update
             4 - Profile Completeness
         3 - Profile Age (post_id tie breaker)
         Show Relevant Media as thumbnail based on search
-Listing form
-    back to listings button
-    ***really slow even for small update; maybe it is doing images stuff when it shouldn't
-    **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
-    when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
-    better looking disabled and spinner state for submit buttons
-    upload multiple images at once
-    ***allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
-    scroll preview to section when corresponding input is focused
-    disable input until change made or auto save after input
-    limit access until you verify email
-    ***accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    ***accept pdf for stage plots
-    allow attaching stage plot to a gig
-    accept pdf for one sheet
-    make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
-    add regular email to remind draft listings to go in and complete their listings
-    Rename clear-listing-form to clear-listing-search-form
-    **Add press mentions to form
-    *Add event insurance (later sell insurance policies here)
-Listing page
-    add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
-    *add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
-    *add ticket sales numbers self reported by artists
-    add gear list
-    *add faq
-    add data from chartmetric and/or musicstax
-    allow play with mouse off iframe for videos; pause when another video plays
-    see more bio
-    see more venues played
-    add set lists with set length and repertoire
-    instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
-    allow collecting deposits (advanced)
-    create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
-    badges for featured musician on page and standard listing card
-Media slider
-    ***make media slider have images instead of videos and play button opens a video slider modal
-    ***video seeking
-    somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
-    somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
-    swipe on mobile
-    somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
-    open video in modal (maybe only in listing page)
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
@@ -347,11 +358,6 @@ Code consistency and cleanliness
     Fix mu plugins depending on each other; move code to includes instead
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
     make a preview listing card instead of supporting the preview with standard listing card
-My Listing page
-    back end page about your listing
-    show search rank in their area and how to improve it
-    view/edit/delete buttons
-    view/manage reviews
 UX
     **organize subgenre by parent genre groups in listing form and in search filters
     *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
