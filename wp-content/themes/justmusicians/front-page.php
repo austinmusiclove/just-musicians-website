@@ -90,13 +90,13 @@ get_template_part('template-parts/landing-pages/benefits-cta', '', [
     'cta_url'           => site_url('/listing-form/'),
     'sign_up_to_access' => 'Sign up to create your listing',
 ]);
-get_template_part('template-parts/landing-pages/locale-category-links', '', [
-    'heading' => 'Discover Musicians by Category',
-]);
 get_template_part('template-parts/landing-pages/partners', '', [
     'heading'     => 'Trusted Austin Partners & Affiliates',
     'description' => "We proudly collaborate with local businesses and organizations who share our passion for keeping Austin's live music scene thriving. Discover some of our trusted partners and affiliates that help us bring great music to life.",
     'locale'      => 'austin',
+]);
+get_template_part('template-parts/landing-pages/locale-category-links', '', [
+    'heading' => 'Discover Musicians in Austin by Category',
 ]);
 
 ?></main><?php
