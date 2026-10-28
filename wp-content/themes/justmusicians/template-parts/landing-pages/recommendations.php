@@ -19,15 +19,14 @@ $recommendation_ids = !empty($recommendations) ? $recommendations : [];
         $rec_img_id = get_field('image', $rec_id);
         $rec_img_url = wp_get_attachment_image_url($rec_img_id, 'medium-small');
         $rec_copy  = get_post_meta($rec_id, 'copy', true);
-        if ( empty( $rec_img_id ) || empty( $rec_copy ) || empty( $rec_title) ) { continue; }
+        if ( empty( $rec_copy ) || empty( $rec_title) ) { continue; }
         $rec_number++;
     ?>
 
         <div class="flex flex-col">
 
             <h3>
-                <?php echo esc_html( "$rec_number. " ); ?>
-                <a href="<?php echo esc_url( get_permalink( $rec_listing ) ); ?>"><?php echo esc_html( $rec_title ); ?></a>
+                <?php echo esc_html( "$rec_number. $rec_title" ); ?>
             </h3>
 
             <div class="flow-root">
