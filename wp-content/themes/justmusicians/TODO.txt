@@ -1,10 +1,6 @@
 Critical bugs
-    *Need to add unique auth keys to wp config in staging and prod
-    *When there is city and state after aic or lic join, it bypasses requireing zip code; do not fill in city state in those listings
-    *Figure out why update listing takes forever; probably something with unneeded image processing
     Dan radin showing 2 reviews on listing card and one on listing page
     Make sure i am compliant with laws on cookies (google analytics)
-    Make events show all by default and leave upcoming and past options there; to avoid confusion
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)
@@ -71,7 +67,6 @@ SEO
     steal competitor backlinks by using seo tool to findout who links to them
 Listing form
     back to listings button
-    ***really slow even for small update; maybe it is doing images stuff when it shouldn't
     **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
     better looking disabled and spinner state for submit buttons
@@ -198,6 +193,7 @@ Single Event page
     Add a way to click to convo in send message modal for a particular listing if one exists
     ***add start a search at the bottom of suggestions results in empty and not empty suggestions state
 My Events page (for buyers)
+    *Make events show all by default and leave upcoming and past options there; to avoid confusion
     **Connect to conversation if one exists on applicant cards instead of send message button
     Set event status to booked/open/cancelled/etc.
     Add calendar View

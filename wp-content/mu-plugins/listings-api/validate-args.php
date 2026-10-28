@@ -90,7 +90,7 @@ function validate_listing_args() {
 // Check url is a valid url
 // Check url has particular domain if specified
 // Check for 404
-function validate_url_input($field, $domain = '') {
+function validate_url_input($field, $domain = '', $check_404 = false) {
     if (!isset($_POST[$field]) or empty($_POST[$field])) { return; }
 
     $url = trim($_POST[$field]);
@@ -110,13 +110,15 @@ function validate_url_input($field, $domain = '') {
     }
 
     // Check for 404 using HEAD request
-    $response = wp_remote_head($url, ['timeout' => 5]);
-    if (is_wp_error($response)) {
-        return new WP_Error('request_failed', 'Could not reach the URL. Please make sure the site is online.');
-    }
-    $status_code = wp_remote_retrieve_response_code($response);
-    if ($status_code === 404) {
-        return new WP_Error('url_not_found', 'The URL returned a 404 error (not found). Please check that the link is correct.');
+    if ($check_404) {
+        $response = wp_remote_head($url, ['timeout' => 5]);
+        if (is_wp_error($response)) {
+            return new WP_Error('request_failed', 'Could not reach the URL. Please make sure the site is online.');
+        }
+        $status_code = wp_remote_retrieve_response_code($response);
+        if ($status_code === 404) {
+            return new WP_Error('url_not_found', 'The URL returned a 404 error (not found). Please check that the link is correct.');
+        }
     }
 
     return true;
