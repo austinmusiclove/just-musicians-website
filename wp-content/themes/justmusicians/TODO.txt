@@ -96,10 +96,12 @@ Listing page
     see more bio
     see more venues played
     add set lists with set length and repertoire
-    instant book or hold date button; allow instant book for users who display consistent responsiveness and fill out availability regularly;
+    instant book or hold date button; allow instant book for users who opt in; penalty for cancellation after certain grace period to allow musician to decline request but calendar spot gets blocked
     allow collecting deposits (advanced)
     create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
     badges for featured musician on page and standard listing card
+    badge for "pricing available" for listings that have productized service pricing
+    seasoned pro seniority badge (suggested in https://www.christophergracelive.com/post/the-hidden-costs-sites-like-the-bash-and-gigsalad-why-performers-and-clients-both-lose)
 My Listing page
     back end page about your listing
     show search rank in their area and how to improve it
@@ -296,6 +298,7 @@ Messages
         Get other participants
         Figure out which ones are from the other party; if you are a user participant get all the listing owners; if you are a listing owner, it would be all the users
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
+    presaved message replies to make response faster
 Search algo update
     add recommendation to search algo
     improve design and explaination on search aglo page
