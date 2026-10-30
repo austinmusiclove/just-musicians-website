@@ -300,7 +300,9 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     presaved message replies to make response faster
 Search algo update
-    add recommendation to search algo
+    don't use priority zip codes on certain big city category pages
+        i want georgetown to bubble to the top of a georgetown page over austin but not vis versa so it does not hide good listings that are in the radius because they are cedar park and not austin
+    add points for recommendation to search algo
     improve design and explaination on search aglo page
     find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
     Need fuzzy search for locations in location active search
