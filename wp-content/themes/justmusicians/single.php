@@ -23,9 +23,13 @@ if (has_post_thumbnail()) {
 }
 
 // Breadcrumb
+$title = get_the_title();
+$max_len = 25;
+$short_title = (mb_strlen($title) > $max_len) ? mb_substr($title, 0, $max_len, 'UTF-8') . '...' : $title;
 $breadcrumb_items = [
     [ 'label' => 'Home', 'url' => home_url('/') ],
     [ 'label' => 'Blog', 'url' => home_url('/blog/') ],
+    [ 'label' => $short_title ],
 ];
 
 ?>
