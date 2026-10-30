@@ -15,7 +15,7 @@ if (empty($items)) {
             $last = ($i === count($items) - 1); ?>
 
             <li>
-                <?php if ($last || empty($item['url'])) { ?>
+                <?php if (empty($item['url'])) { ?>
                     <span aria-current="<?php echo $last ? 'page' : ''; ?>"><?php echo esc_html($item['label']); ?></span>
                 <?php } else { ?>
                     <a href="<?php echo esc_url($item['url']); ?>" class="hover:underline"><?php echo esc_html($item['label']); ?></a>

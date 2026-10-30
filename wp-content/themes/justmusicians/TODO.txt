@@ -1,5 +1,4 @@
 Critical bugs
-    Dan radin showing 2 reviews on listing card and one on listing page
     Make sure i am compliant with laws on cookies (google analytics)
 Musician Pricing Page
     Tab on pricing page
