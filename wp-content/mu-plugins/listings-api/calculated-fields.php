@@ -103,7 +103,7 @@ function update_search_rank($post_id) {
     }
 
     // Boost rank for each taxonomy they have at least one term in
-    $taxonomies_to_check = [ 'mcategory', 'genre', 'subgenre', 'instrumentation', 'setting', 'keyword', 'mediatag', ];
+    $taxonomies_to_check = [ 'mcategory', 'genre', 'subgenre', 'instrumentation', 'setting', 'keyword', ];
     foreach ( $taxonomies_to_check as $taxonomy ) {
         $terms = get_the_terms( $post_id, $taxonomy );
         if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {

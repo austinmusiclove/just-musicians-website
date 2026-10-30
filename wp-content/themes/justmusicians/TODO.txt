@@ -1,5 +1,6 @@
 Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
+    Add customer support page
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)
@@ -299,6 +300,8 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     presaved message replies to make response faster
 Search algo update
+    add 200 mile radius to compete with gigsalad free version
+    provide a search rank analyzer like the bash does (https://mcp.thebash.com/SearchResultsAnalyzer)
     don't use priority zip codes on certain big city category pages
         i want georgetown to bubble to the top of a georgetown page over austin but not vis versa so it does not hide good listings that are in the radius because they are cedar park and not austin
     add points for recommendation to search algo

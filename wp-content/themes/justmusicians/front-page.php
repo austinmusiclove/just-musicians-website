@@ -81,8 +81,9 @@ get_template_part('template-parts/landing-pages/benefits-cta', '', [
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing-opt.png',
     'benefits'    => [
         'Get discovered on Hire Musicians',
+        'Unlimited categories',
         'Zero membership fees',
-        'Zero commission on leads',
+        'Zero commission on bookings',
         'Unlimited booking requests',
         'Build trust with client reviews',
     ],
