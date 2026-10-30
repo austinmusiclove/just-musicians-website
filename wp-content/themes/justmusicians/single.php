@@ -26,7 +26,6 @@ if (has_post_thumbnail()) {
 $breadcrumb_items = [
     [ 'label' => 'Home', 'url' => home_url('/') ],
     [ 'label' => 'Blog', 'url' => home_url('/blog/') ],
-    [ 'label' => get_the_title() ],
 ];
 
 ?>
