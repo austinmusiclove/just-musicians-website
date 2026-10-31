@@ -137,6 +137,8 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
                 'name'       => $is_preview ? '' : $args['name'],
                 'permalink'  => $is_preview ? '' : $args['permalink'],
                 'verified'   => $args['verified'],
+                'rank'       => $args['rank'] ?? '',
+                'position'   => $args['position'] ?? '',
             ]); ?>
 
             <!-- Collections button -->

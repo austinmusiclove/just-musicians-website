@@ -24,6 +24,7 @@ function get_listings($args) {
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
+    $posts_per_page         = 10;
 
     $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes, $priority_listings);
     if (!empty($args['exclude'])) {
@@ -48,7 +49,7 @@ function get_listings($args) {
         'post_type'      => 'listing',
         'post_status'    => 'publish',
         'paged'          => $page,
-        'posts_per_page' => 10,
+        'posts_per_page' => $posts_per_page,
         'post__in'       => $listing_ids,
         'orderby'        => 'post__in',
     ];
@@ -124,8 +125,10 @@ function get_listings($args) {
     global $wpdb;
     $max_num_results = $query->found_posts;
     $max_num_pages = $query->max_num_pages;
+    $paged = max(1, $query->get('paged'));
     while ($query->have_posts()) {
         $query->the_post();
+        $position = (($paged - 1) * $posts_per_page) + $query->current_post + 1;
 
         $youtube_video_post_ids = get_field('youtube_videos');
         $youtube_video_data = get_youtube_video_data($youtube_video_post_ids);
@@ -157,6 +160,8 @@ function get_listings($args) {
             'apple_music_artist_url' => get_field('apple_music_artist_url'),
             'soundcloud_url'         => get_field('soundcloud_url'),
             'verified'               => get_field('verified'),
+            'rank'                   => get_field('rank'),
+            'position'               => $position,
             'youtube_video_data'     => $youtube_video_data,
             'permalink'              => get_permalink(),
             'reviews'                => $with_reviews ? get_reviews('listing_review', get_the_ID(), 1)['reviews'] : [],
