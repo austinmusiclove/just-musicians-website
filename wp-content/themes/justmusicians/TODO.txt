@@ -306,11 +306,9 @@ Search algo update
     *add points for longer bio
     *remove points for spotify and apple music maybe
     *improve design and explaination on search aglo page
-    *show search rank and position on listing cards for admin users
+    *show search rank and position on listing cards for admin users and listing page
     add 200 mile radius to compete with gigsalad free version
     provide a search rank analyzer like the bash does (https://mcp.thebash.com/SearchResultsAnalyzer)
-    don't use priority zip codes on certain big city category pages
-        i want georgetown to bubble to the top of a georgetown page over austin but not vis versa so it does not hide good listings that are in the radius because they are cedar park and not austin
     find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
     Need fuzzy search for locations in location active search
     show relevant thumbnail image and video media based on search but media does not play a part in rank

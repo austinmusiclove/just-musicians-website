@@ -19,12 +19,13 @@ function get_listings($args) {
     $valid_ensemble_sizes   = (!empty($args['ensemble_size']))      ? validate_tax_input($args['ensemble_size'], 'ensemble_size')      : [];
     $with_reviews           = (!empty($args['get_reviews']))        ? rest_sanitize_boolean($args['get_reviews'])                      : false;
     $postal_codes           = (!empty($args['postal_codes']))       ? array_map('sanitize_text_field', (array) $args['postal_codes'])  : [];
-    $priority_listings      = (!empty($args['priority_listings']))  ? array_map('intval', (array) $args['priority_listings'])         : [];
+    $priority_listings      = (!empty($args['priority_listings']))  ? array_map('intval', (array) $args['priority_listings'])          : [];
 
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
     $posts_per_page         = 10;
+
 
     $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes, $priority_listings);
     if (!empty($args['exclude'])) {

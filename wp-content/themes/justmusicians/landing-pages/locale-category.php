@@ -31,6 +31,7 @@ $meta_description = get_post_meta($post_id, 'meta_description', true);
 $region_post      = get_post_meta($post_id, 'region', true);
 $locale_post      = get_post_meta($post_id, 'locale', true);
 $category_post    = get_post_meta($post_id, 'category', true);
+$prioritize_zip   = get_post_meta($post_id, 'prioritize_zip', true);
 $country          = get_post_meta($region_post, 'country', true);
 $region_name      = get_post_meta($region_post, 'name', true);
 $locale_name      = get_post_meta($locale_post, 'name', true);
@@ -58,7 +59,9 @@ $postal_codes = [];
 $locale_data = hm_location_get_city_data($country, $region_name, $locale_name);
 $locale_lat = $locale_data->lat;
 $locale_lng = $locale_data->lng;
-$postal_codes = $locale_data->postal_codes;
+if ($prioritize_zip) {
+    $postal_codes = $locale_data->postal_codes;
+}
 
 // Get user collections and events
 $collections_result = get_user_collections([
