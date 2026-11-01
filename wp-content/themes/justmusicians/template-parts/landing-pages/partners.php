@@ -50,8 +50,8 @@ if ( $query->have_posts() ) {
         <div class="flex flex-col overflow-hidden">
 
             <?php if ( ! empty( $rec_img_id ) ) { ?>
-                <div class="w-full aspect-[4/3] overflow-hidden">
-                    <img class="w-full h-full object-cover"
+                <div class="w-full aspect-[4/3] overflow-hidden flex items-center justify-center p-4">
+                    <img class="w-full h-full object-contain"
                          width="600"
                          height="450"
                          src="<?php echo esc_url( $rec_img_url ); ?>"
