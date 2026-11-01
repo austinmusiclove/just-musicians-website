@@ -83,17 +83,24 @@ function update_search_rank($post_id) {
     // Boost rank for every field they have filled out in the listing
     $fields_to_check = [
         'name', 'description', 'city', 'state', 'zip_code', 'bio', 'ensemble_size',
-        'website', 'instagram_url', 'youtube_url', 'spotify_artist_url', 'apple_music_artist_url',
-        'venues_played_verified', 'venues_played_unverified',
-        'listing_images', 'stage_plots', 'youtube_videos', 'verified',
+        'website', 'instagram_url', 'youtube_url', 'venues_played_verified', 'venues_played_unverified',
+        'listing_images', 'stage_plots', 'youtube_videos', 'verified', 'recommendations'
     ];
     foreach ( $fields_to_check as $field ) {
         $meta = get_post_meta( $post_id, $field, true );
         if ( ! empty($meta) ) {
 
-            // Add a point to rank for every image and video upto 3
-            if (is_array($meta) and $field == 'listing_images' or $field == 'youtube_videos') {
-                $rank += min(count($meta), 3);
+            // Add a point to rank for every image, video, and recommendations up to 5
+            if ( is_array($meta) and (
+                $field == 'recommendations' or
+                $field == 'listing_images' or
+                $field == 'youtube_videos') )
+            {
+                $rank += min(count($meta), 5);
+
+            // Add 2 points for a long bio
+            } else if ( $field == 'bio' and is_string($meta) and strlen($meta) > 1200 ) {
+                $rank += 2;
 
             // Add a point for having any value in the field
             } else {
