@@ -301,12 +301,6 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     presaved message replies to make response faster
 Search algo update
-    *add points for recommendation to search algo
-    *add points for 4 images/videos
-    *add points for longer bio
-    *remove points for spotify and apple music maybe
-    *improve design and explaination on search aglo page
-    *show search rank and position on listing cards for admin users and listing page
     add 200 mile radius to compete with gigsalad free version
     provide a search rank analyzer like the bash does (https://mcp.thebash.com/SearchResultsAnalyzer)
     find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
