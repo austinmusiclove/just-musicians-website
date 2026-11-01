@@ -70,6 +70,7 @@ echo get_template_part('template-parts/listing-page/hero', '', [
    'collections_map' => $collections_map,
    'rating'          => $rating,
    'review_count'    => $review_count,
+   'rank'            => get_field('rank'),
 ]);
 
 // Content

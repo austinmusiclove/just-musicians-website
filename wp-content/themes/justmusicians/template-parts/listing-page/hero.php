@@ -71,6 +71,14 @@ if ($args['instance'] == 'listing-form') {
                         <?php if (get_field('verified') === true) { ?>
                             <img class="h-6" src="<?php echo get_template_directory_uri() . '/lib/images/icons/verified.svg'; ?>" width="24" height="24" alt="Verified listing icon" />
                         <?php } ?>
+
+                        <!-- Display position and rank for admins -->
+                        <?php if (current_user_can( 'manage_options' ) and !empty($args['rank']) ) { ?>
+                            <span class="text-12 text-grey ml-2">
+                                <?php echo $args['rank']; ?>
+                            </span>
+                        <?php } ?>
+
                     </div>
 
                     <!-- Collections button -->
