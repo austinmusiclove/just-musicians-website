@@ -57,6 +57,7 @@ SEO
                 Platform trust badges (e.g., payment arbitration, insurance available).
                 National level community partners or press
     performance
+        **optimize images; del big images that exist safely; and make sure when you upload an image the big version is not saved or used
         load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
         cache for html
         compress images on home
@@ -72,12 +73,12 @@ Listing form
     when websites entered are not accepted because 404 or otherwise, it is sometimes not made clear to the user and the user is confused; err msg sounds like the web server is down rather than their link
     better looking disabled and spinner state for submit buttons
     upload multiple images at once
-    ***allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
+    **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
     scroll preview to section when corresponding input is focused
     disable input until change made or auto save after input
     limit access until you verify email
-    ***accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    ***accept pdf for stage plots
+    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    **accept pdf for stage plots
     allow attaching stage plot to a gig
     accept pdf for one sheet
     make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
@@ -87,7 +88,7 @@ Listing form
     *Add event insurance (later sell insurance policies here)
 Listing page
     add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
-    ***add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
+    **add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
         add request to book feature like https://www.tayloralexanderart.com/book-online so that
     *add ticket sales numbers self reported by artists
     add gear list
@@ -114,8 +115,8 @@ Listing lifecycle
     Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
     Drip campaign to reach out to pending and draft listings
 Media slider
-    ***make media slider have images instead of videos and play button opens a video slider modal
-    ***video seeking
+    ****make media slider have images instead of videos and play button opens a video slider modal
+    ****video seeking
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
     swipe on mobile
@@ -194,10 +195,9 @@ Single Event page
     Send message button should send a message that has the proposal/event attached to it so that it can be displayed in the convo nicely
     Conversation group for events; link from send message success on event applicant card
     Add a way to click to convo in send message modal for a particular listing if one exists
-    ***add start a search at the bottom of suggestions results in empty and not empty suggestions state
 My Events page (for buyers)
     *Make events show all by default and leave upcoming and past options there; to avoid confusion
-    **Connect to conversation if one exists on applicant cards instead of send message button
+    *Connect to conversation if one exists on applicant cards instead of send message button
     Set event status to booked/open/cancelled/etc.
     Add calendar View
     Edit multiple event details at once
@@ -224,14 +224,14 @@ Offer post type (future)
     Details
     Proposal relationship
 Users
-    **when a user uploads a cover image for a listing, update their profile photo if they don't have one
-    **retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
+    ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
+    *retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
     *Automatically populate profile image with gmail image if they have one
     add default location setting in account settings
 Reviews
     *pin reviews (add pinned field in reviews, order reviews by pinned first and then publish date, add pin button on listing page for user who owns listing to click, only allow pinning 3, tooltip explaining max pins after limit reached)
-    **add title to review
-    **Don't display name if we don't have one
+    *add title to review
+    *Don't display name if we don't have one
     Lock venue review so they can only be done by invite or if you were a contributor for that venue
     only allow writing buyer/listing review by invitation
     annonymous 2 way review system
@@ -242,7 +242,7 @@ Reviews
         add regular email to invite artists to solicit reviews from bookers
     *make venue reviews invite only for performers, no public write button
 Compensation Reporting
-    **allow add new venue
+    *allow add new venue
     allow for using performance id in url
         fill in and disable performance inputs
         add performance id hidden field
@@ -359,7 +359,9 @@ Code consistency and cleanliness
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
     make a preview listing card instead of supporting the preview with standard listing card
 UX
-    **organize subgenre by parent genre groups in listing form and in search filters
+    ***Clear Join page with header bar link; join page allows you to create your listing and then sign up
+    ***organize subgenre by parent genre groups in listing form and in search filters
+    ****active search for listings seems slow; maybe i can improve the get listing speed by not doing separate queries for each field in each listing; or make sure it is using the same location index before query
     *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry
@@ -385,7 +387,7 @@ Quirks
     there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
     the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
-    **in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
+    *in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
     on many account pages, the whole html goes to half width of screen when it gets really small
 Accessibility
     *Need full audit

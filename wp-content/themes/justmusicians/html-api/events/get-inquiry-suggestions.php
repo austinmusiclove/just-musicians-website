@@ -5,6 +5,9 @@ $page             = $_GET['page'] ?? 1;
 $event_id         = get_query_var('event-id');
 $inquiry_lat      = get_post_meta($event_id, 'latitude', true);
 $inquiry_lng      = get_post_meta($event_id, 'longitude', true);
+$inquiry_city     = get_field('city', $event_id);
+$inquiry_state    = get_field('state', $event_id);
+$inquiry_location_label = trim(implode(', ', array_filter([$inquiry_city, $inquiry_state])));
 $ensemble_size    = wp_get_post_terms($event_id, 'ensemble_size', ['fields' => 'names']);
 $inquiry_genres   = wp_get_post_terms($event_id, 'genre', ['fields' => 'names']);
 $listings_invited = hm_get_listing_ids_by_event_id($event_id);
@@ -54,7 +57,12 @@ if (count($listings) > 0) {
     }
 
 } else if ($page == 1) {
-    get_template_part( 'template-parts/global/empty-states/no-suggestion-listings');
+    get_template_part( 'template-parts/global/empty-states/no-suggestion-listings', '', [
+        'event_id'       => $event_id,
+        'lat'            => $inquiry_lat,
+        'lng'            => $inquiry_lng,
+        'location_label' => $inquiry_location_label,
+    ]);
 }
 
 echo '<span x-init="showSuggestions = true;"></span>';

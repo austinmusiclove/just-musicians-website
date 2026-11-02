@@ -19,6 +19,8 @@ $collections_result = get_user_collections([
 ]);
 $collections_map = array_column($collections_result['collections'], null, 'post_id');
 
+$default_tab = $_GET['tab'] ?? 'details';
+
 get_header();
 
 ?>
@@ -35,7 +37,7 @@ get_header();
             <div class="col md:col-span-6 pb-6 md:pb-12"
                 x-data="{
                     collectionsMap:  <?php echo clean_arr_for_doublequotes($collections_map); ?>,
-                    showEditForm: false,
+                    showEditForm: <?php echo $default_tab === 'edit' ? 'true' : 'false'; ?>,
                     eventId:        '<?php echo get_the_ID(); ?>',
                     eventName:      '<?php echo clean_str_for_doublequotes(get_field('event_name')     ?? ''); ?>',
                     startDate:      '<?php echo clean_str_for_doublequotes(get_field('start_date')     ?? ''); ?>',
