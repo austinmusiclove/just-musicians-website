@@ -223,39 +223,3 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
         </button>
     </div>
 <?php } ?>
-
-<?php
-// MusicGroup Schema
-/*
-if (!$is_preview) {
-    echo get_template_part('template-parts/global/schema/music-group-schema', '', [
-        'name'        => $args['name'],
-        'description' => $args['description'],
-        'genre'       => $args['genres'],
-        'phone'       => $args['phone'],
-        'url'         => $args['permalink'],
-        'thumbnail'   => $args['thumbnail_url'],
-        'city'        => $args['city'],
-        'state'       => $args['state'],
-        'zip_code'    => $args['zip_code'] ?? '',
-        'rating'      => $args['rating'],
-        'review_count'=> $args['review_count'],
-        'reviews'     => $args['reviews'] ?? [],
-        'videos'      => $args['youtube_video_data'],
-        'images'      => $args['listing_image_urls'] ?? [],
-        'sameAs'      => array_filter([
-            $args['website'] ?? '',
-            $args['facebook_url'] ?? '',
-            $args['instagram_url'] ?? '',
-            $args['x_url'] ?? '',
-            $args['youtube_url'] ?? '',
-            $args['tiktok_url'] ?? '',
-            $args['bandcamp_url'] ?? '',
-            $args['spotify_artist_url'] ?? '',
-            $args['apple_music_artist_url'] ?? '',
-            $args['soundcloud_url'] ?? '',
-        ]),
-    ]);
-}
- */
-?>

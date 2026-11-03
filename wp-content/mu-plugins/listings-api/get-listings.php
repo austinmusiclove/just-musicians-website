@@ -3,6 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function get_listings($args) {
+
     $results = [];
     $lat                    = (!empty($args['lat']))                ? (float) $args['lat']                                             : 30.2672;  // Default to Austin, TX coordinates
     $lng                    = (!empty($args['lng']))                ? (float) $args['lng']                                             : -97.7431; // Default to Austin, TX coordinates
@@ -25,7 +26,6 @@ function get_listings($args) {
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
     $next_page              = $page + 1;
     $posts_per_page         = 10;
-
 
     $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes, $priority_listings);
     if (!empty($args['exclude'])) {
@@ -124,48 +124,76 @@ function get_listings($args) {
 
     $query = new WP_Query($query_args);
     global $wpdb;
+
+    // 1. Ensure post meta is primed for all post IDs in the query
+    if ($query->have_posts()) {
+        $post_ids = wp_list_pluck($query->posts, 'ID');
+        update_meta_cache('post', $post_ids);
+
+        // Optional: If you also want to pre-load terms for get_the_terms()
+        update_object_term_cache($post_ids, 'genre');
+    }
+
     $max_num_results = $query->found_posts;
     $max_num_pages = $query->max_num_pages;
     $paged = max(1, $query->get('paged'));
     while ($query->have_posts()) {
         $query->the_post();
+        $post_id  = get_the_ID();
         $position = (($paged - 1) * $posts_per_page) + $query->current_post + 1;
 
-        $youtube_video_post_ids = get_field('youtube_videos');
+        // Fetch ALL post meta for this post in 1 array (hits memory cache if primed)
+        $meta = get_post_meta($post_id);
+
+        // Helper closure to safely grab single values out of the raw meta array
+        // (WordPress get_post_meta arrays wrap values in an array e.g. $meta['key'][0])
+        $get_cached_meta = function($key) use ($meta) {
+            return isset($meta[$key][0]) ? $meta[$key][0] : '';
+        };
+        // Helper closure specifically for array-based fields (checkboxes, multi-selects, etc.)
+        $get_cached_meta_arr = function($key) use ($meta) {
+            if (!isset($meta[$key][0])) {
+                return [];
+            }
+            $val = maybe_unserialize($meta[$key][0]);
+            return is_array($val) ? $val : [$val];
+        };
+
+        $youtube_video_post_ids = $get_cached_meta_arr('youtube_videos');
         $youtube_video_data = get_youtube_video_data($youtube_video_post_ids);
 
         $results[] = [
-            'post_id'                => get_the_ID(),
+            'post_id'                => $post_id,
             'title'                  => get_the_title(),
-            'name'                   => get_field('name'),
-            'rating'                 => get_field('rating'),
-            'review_count'           => get_field('review_count'),
-            'city'                   => get_field('city'),
-            'state'                  => get_field('state'),
-            'zip_code'               => get_field('zip_code'),
-            'description'            => get_field('description'),
-            'bio'                    => get_field('bio'),
-            'listing_image_urls'     => get_listing_image_urls(get_the_ID()),
-            'ensemble_size'          => get_field('ensemble_size'),
-            'genre'                  => get_the_terms(get_the_ID(), 'genre'),
-            'thumbnail_url'          => get_the_post_thumbnail_url(get_the_ID(), 'standard-listing'),
-            'tiny_thumbnail_url'     => get_the_post_thumbnail_url(get_the_ID(), 'tiny'),
-            'website'                => get_field('website'),
-            'facebook_url'           => get_field('facebook_url'),
-            'instagram_url'          => get_field('instagram_url'),
-            'x_url'                  => get_field('x_url'),
-            'youtube_url'            => get_field('youtube_url'),
-            'tiktok_url'             => get_field('tiktok_url'),
-            'bandcamp_url'           => get_field('bandcamp_url'),
-            'spotify_artist_url'     => get_field('spotify_artist_url'),
-            'apple_music_artist_url' => get_field('apple_music_artist_url'),
-            'soundcloud_url'         => get_field('soundcloud_url'),
-            'verified'               => get_field('verified'),
-            'rank'                   => get_field('rank'),
+            'name'                   => $get_cached_meta('name'),
+            'rating'                 => $get_cached_meta('rating'),
+            'review_count'           => $get_cached_meta('review_count'),
+            'city'                   => $get_cached_meta('city'),
+            'state'                  => $get_cached_meta('state'),
+            'zip_code'               => $get_cached_meta('zip_code'),
+            'description'            => $get_cached_meta('description'),
+            'bio'                    => $get_cached_meta('bio'),
+            'listing_image_urls'     => get_listing_image_urls($post_id, $get_cached_meta_arr('listing_images')),
+            'ensemble_size'          => $get_cached_meta_arr('ensemble_size'),
+            'genre'                  => get_the_terms($post_id, 'genre'),
+            'thumbnail_url'          => get_the_post_thumbnail_url($post_id, 'standard-listing'),
+            'tiny_thumbnail_url'     => get_the_post_thumbnail_url($post_id, 'tiny'),
+            'website'                => $get_cached_meta('website'),
+            'facebook_url'           => $get_cached_meta('facebook_url'),
+            'instagram_url'          => $get_cached_meta('instagram_url'),
+            'x_url'                  => $get_cached_meta('x_url'),
+            'youtube_url'            => $get_cached_meta('youtube_url'),
+            'tiktok_url'             => $get_cached_meta('tiktok_url'),
+            'bandcamp_url'           => $get_cached_meta('bandcamp_url'),
+            'spotify_artist_url'     => $get_cached_meta('spotify_artist_url'),
+            'apple_music_artist_url' => $get_cached_meta('apple_music_artist_url'),
+            'soundcloud_url'         => $get_cached_meta('soundcloud_url'),
+            'verified'               => $get_cached_meta('verified'),
+            'rank'                   => $get_cached_meta('rank'),
             'position'               => $position,
             'youtube_video_data'     => $youtube_video_data,
             'permalink'              => get_permalink(),
-            'reviews'                => $with_reviews ? get_reviews('listing_review', get_the_ID(), 1)['reviews'] : [],
+            'reviews'                => $with_reviews ? get_reviews('listing_review', $post_id, 1)['reviews'] : [],
         ];
     }
 

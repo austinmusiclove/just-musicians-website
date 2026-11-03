@@ -361,7 +361,6 @@ Code consistency and cleanliness
 UX
     ***Clear Join page with header bar link; join page allows you to create your listing and then sign up
     ***organize subgenre by parent genre groups in listing form and in search filters
-    ****active search for listings seems slow; maybe i can improve the get listing speed by not doing separate queries for each field in each listing; or make sure it is using the same location index before query
     *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry

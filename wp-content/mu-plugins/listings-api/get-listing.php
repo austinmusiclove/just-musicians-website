@@ -67,7 +67,7 @@ function get_listing($args) {
         'thumbnail_filename'       => $thumbnail_filename,
         'thumbnail_id'             => $thumbnail_id,
         'thumbnail_url'            => get_the_post_thumbnail_url($post_id, 'standard-listing'),
-        'thumbnail_terms'          => get_mediatags(get_post_thumbnail_id($post_id)),
+        'thumbnail_terms'          => [], //get_mediatags(get_post_thumbnail_id($post_id)),
         'listing_images'           => get_field('listing_images'),
         'stage_plots'              => get_field('stage_plots'),
         'listing_images_data'      => get_image_data($post_id, 'listing_images'),
@@ -153,7 +153,7 @@ function get_image_data($post_id, $image_field) {
             'url'           => wp_get_attachment_url($attachment_id),
             'filename'      => basename(get_attached_file($attachment_id)),
             'caption'       => get_the_excerpt($attachment_id),
-            'mediatags'     => get_mediatags($attachment_id),
+            'mediatags'     => [], //get_mediatags($attachment_id),
             'loading'       => false,
             'worker'        => null,
         ];
@@ -163,7 +163,14 @@ function get_image_data($post_id, $image_field) {
 }
 
 function get_youtube_video_data($post_ids) {
-    if (!is_array($post_ids)) { return []; }
+    if (!is_array($post_ids) || empty($post_ids)) {
+        return [];
+    }
+
+    // Bulk prime post objects and meta caches for all video IDs in 2 queries total
+    _prime_post_caches($post_ids, true, true);
+    update_meta_cache('post', $post_ids);
+
     $posts = [];
 
     foreach ($post_ids as $video_post_id) {
@@ -172,7 +179,7 @@ function get_youtube_video_data($post_ids) {
             'url'        => get_post_meta($video_post_id, 'url', true),
             'video_id'   => get_post_meta($video_post_id, 'video_id', true),
             'start_time' => get_post_meta($video_post_id, 'start_time', true),
-            'mediatags'  => get_mediatags($video_post_id),
+            'mediatags'  => [], //get_mediatags($video_post_id),
             'post_date'  => get_the_date('c', $video_post_id),
         ];
     }

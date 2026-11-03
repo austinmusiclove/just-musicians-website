@@ -39,7 +39,6 @@ if ($args['send_first_page']) {
         'instrumentations'  => $instrumentations,
         'settings'          => $settings,
         'verified'          => false,
-        'get_reviews'       => true,
         'postal_codes'      => $postal_codes,
         'priority_listings' => $priority_listings,
         'page'              => 1,

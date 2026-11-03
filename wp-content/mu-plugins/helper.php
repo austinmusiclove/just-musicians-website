@@ -49,8 +49,12 @@ function get_thumbnails_from_listings($listing_post_ids) {
     }
     return array_values(array_filter($thumbnails));
 }
-function get_listing_image_urls($post_id) {
-    $image_ids = get_post_meta($post_id, 'listing_images', true);
+function get_listing_image_urls($post_id, $image_ids = []) {
+    // If no image IDs were passed, fetch them from post meta
+    if (empty($image_ids)) {
+        $image_ids = get_post_meta($post_id, 'listing_images', true);
+    }
+
     if (!is_array($image_ids)) {
         return [];
     }
