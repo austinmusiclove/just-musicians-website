@@ -116,7 +116,8 @@ get_template_part('template-parts/search/search-page', '', [
 // Recommendations
 get_template_part('template-parts/landing-pages/recommendations', '', [
     'post_id'       => $post_id,
-    'heading'       => "Curated $category_name For Hire in $locale_name, $region_name",
+    'heading'       => "Featured $category_name For Hire in $locale_name, $region_name",
+    'description'   => "A human-curated collection of exceptional $category_name available for hire in the $locale_name, $region_name area.",
 ]);
 
 // Content

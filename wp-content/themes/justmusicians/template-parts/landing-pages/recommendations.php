@@ -11,6 +11,12 @@ $recommendation_ids = !empty($recommendations) ? $recommendations : [];
 
     <h2 class="mb-8"><?php echo esc_html( $heading ); ?></h2>
 
+    <?php if ( ! empty( $args['description'] ) ) { ?>
+        <div class="mb-8 max-w-3xl">
+            <p><?php echo $args['description']; ?></p>
+        </div>
+    <?php } ?>
+
     <div class="flex flex-col gap-8">
 
     <?php $rec_number = 0; foreach ( $recommendation_ids as $rec_id ) {
