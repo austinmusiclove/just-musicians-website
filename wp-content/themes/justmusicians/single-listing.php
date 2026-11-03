@@ -96,7 +96,7 @@ echo get_template_part('template-parts/global/schema/music-group-schema', '', [
     'email'       => get_field('email'),
     'genre'       => array_unique(array_merge($genres, $subgenres)),
     'url'         => get_permalink(),
-    'thumbnail'   => get_the_post_thumbnail_url(get_the_ID(), 'full') ?: get_the_post_thumbnail_url(get_the_ID(), 'large'),
+    'thumbnail'   => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
     'city'        => get_field('city'),
     'state'       => get_field('state'),
     'zip_code'    => get_field('zip_code'),
