@@ -18,7 +18,7 @@ function processNewImage(alco, imageType, imageId) {
         processingType = 'libwebp';
     }
 
-    const worker = new Worker(`${cropperSiteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js`);
+    const worker = new Worker(`${cropperSiteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js?ver=${cropperSiteData.pkgVersion}`);
     setImageData(alco, imageType, imageId, 'worker', worker);
     worker.postMessage({
         type:                 processingType,

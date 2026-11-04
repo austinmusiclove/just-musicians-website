@@ -22,7 +22,7 @@ async function processNewImage(alco, submitButtons) {
         processingType = 'libwebp';
     }
 
-    const worker = new Worker(`${cropperSiteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js`);
+    const worker = new Worker(`${cropperSiteData.templateDirectoryUri}/lib/js/workers/image-processing-worker.js?ver=${cropperSiteData.pkgVersion}`);
     alco.accountSettings.profile_image.worker = worker;
     worker.postMessage({
         type:                 processingType,

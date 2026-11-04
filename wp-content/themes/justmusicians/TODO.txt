@@ -23,6 +23,7 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
+    **Add radius field in category locale page to give wider default radius for certain categories
     Add sidebar widget to direct users to add HM to their Google Preferred Sources
     Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
     Get backlinks to category locale pages
@@ -59,6 +60,7 @@ SEO
                 National level community partners or press
     performance
         ****optimize images; del big images that exist safely;
+            need to figure out how images end up unattached
             free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB
                 remove unneeded image sizes from server
                 remove orphan images from server

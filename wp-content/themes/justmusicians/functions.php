@@ -123,7 +123,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
-        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Chart.js
@@ -151,7 +154,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, []);
-        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
@@ -172,7 +178,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_script('cropper-scripts-js', get_template_directory_uri() . '/lib/js/cropper-scripts.js', [], $pkg->version, []);
-        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
 
         // Listing Form Image Upload handling
@@ -222,7 +231,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, [ 'strategy' => 'defer' ]);
         wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, [ 'strategy' => 'defer' ]);
-        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
@@ -321,7 +333,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
-        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
@@ -330,7 +345,10 @@ function hmm_scripts() {
         // Cropper.js
         wp_enqueue_script('cropper-1.6-js', get_template_directory_uri() . '/lib/js/cropper.1.6.2.min.js', [ 'account-cropper-scripts-js' ], $pkg->version, []);
         wp_enqueue_script('account-cropper-scripts-js', get_template_directory_uri() . '/lib/js/account-cropper-scripts.js', [], $pkg->version, []);
-        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [ 'templateDirectoryUri' => get_template_directory_uri(), ]);
+        wp_localize_script('account-cropper-scripts-js', 'cropperSiteData', [
+            'templateDirectoryUri' => get_template_directory_uri(),
+            'pkgVersion'           => $pkg->version,
+        ]);
         $alpine_dependencies[] = 'cropper-1.6-js';
     }
 
