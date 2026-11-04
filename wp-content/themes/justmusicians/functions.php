@@ -13,9 +13,9 @@ if ( ! function_exists( 'hmm_setup' ) ) :
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-        add_image_size('full-screen', 2000, '', true); // Large Thumbnail
-        add_image_size('extra-large', 1500, '', true); // Large Thumbnail
-        add_image_size('large', 1200, '', true); // Large Thumbnail
+        //add_image_size('full-screen', 2000, '', true); // Large Thumbnail
+        //add_image_size('extra-large', 1500, '', true); // Large Thumbnail
+        //add_image_size('large', 1200, '', true); // Large Thumbnail
 	    add_image_size('medium', 900, '', true); // Medium Thumbnail
         add_image_size('medium-small', 600, '', true); // Medium Small Thumbnail
 	    add_image_size('small', 300, '', true); // Small Thumbnail
@@ -32,6 +32,25 @@ if ( ! function_exists( 'hmm_setup' ) ) :
 	}
 endif;
 add_action( 'after_setup_theme', 'hmm_setup' );
+/**
+ * Scale down all massive image uploads to a maximum of 900px.
+ */
+add_filter( 'big_image_size_threshold', function( $threshold ) {
+    return 1024;
+} );
+/**
+ * Prevent WordPress from generating default sizes
+ */
+function hmm_remove_default_image_sizes( $sizes ) {
+    // Unset WordPress default intermediate sizes
+    //unset( $sizes['medium_large'] ); // 768px
+    //unset( $sizes['large'] );        // 1024px
+    unset( $sizes['1536x1536'] );    // 2x Medium Large
+    unset( $sizes['2048x2048'] );    // 2x Large
+    return $sizes;
+}
+add_filter( 'intermediate_image_sizes_advanced', 'hmm_remove_default_image_sizes' );
+
 
 
 // Enqueue Scripts and Styles

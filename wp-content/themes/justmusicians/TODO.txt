@@ -23,6 +23,7 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
+    Add sidebar widget to direct users to add HM to their Google Preferred Sources
     Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
     Get backlinks to category locale pages
         Swap links with local promoters, wedding planners, and other buyers for the locale page
@@ -57,7 +58,10 @@ SEO
                 Platform trust badges (e.g., payment arbitration, insurance available).
                 National level community partners or press
     performance
-        **optimize images; del big images that exist safely; and make sure when you upload an image the big version is not saved or used
+        ****optimize images; del big images that exist safely;
+            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB
+                remove unneeded image sizes from server
+                remove orphan images from server
         load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
         cache for html
         compress images on home
@@ -92,7 +96,7 @@ Listing page
         add request to book feature like https://www.tayloralexanderart.com/book-online so that
     *add ticket sales numbers self reported by artists
     add gear list
-    *add faq
+    *add faq; copy gigheavan listing pages faq
     add data from chartmetric and/or musicstax
     allow play with mouse off iframe for videos; pause when another video plays
     see more bio
@@ -109,7 +113,7 @@ My Listing page
     show search rank in their area and how to improve it
     view/edit/delete buttons
     view/manage reviews
-    make badges available for them to put on their websites for backlinks
+    ***make badges available for them to put on their websites for backlinks
 Listing lifecycle
     Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
     Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
@@ -359,7 +363,10 @@ Code consistency and cleanliness
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
     make a preview listing card instead of supporting the preview with standard listing card
 UX
-    ***Clear Join page with header bar link; join page allows you to create your listing and then sign up
+    ****Clear Join page with header bar link; join page allows you to create your listing and then sign up
+        add join page that redirects to itself after sign up and redirects to the listings page or listing form
+        link that join page in llms txt
+        join link in nav and mobile nav
     ***organize subgenre by parent genre groups in listing form and in search filters
     *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
