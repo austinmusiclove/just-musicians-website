@@ -67,6 +67,7 @@ function get_listing($args) {
         'thumbnail_filename'       => $thumbnail_filename,
         'thumbnail_id'             => $thumbnail_id,
         'thumbnail_url'            => get_the_post_thumbnail_url($post_id, 'standard-listing'),
+        'cover_image_url'          => get_the_post_thumbnail_url($post_id, 'medium'),
         'thumbnail_terms'          => [], //get_mediatags(get_post_thumbnail_id($post_id)),
         'listing_images'           => get_field('listing_images'),
         'stage_plots'              => get_field('stage_plots'),

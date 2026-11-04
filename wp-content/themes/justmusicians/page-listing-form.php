@@ -82,7 +82,7 @@ get_header();
         pSpotifyArtistId:       '<?php echo $listing_data["spotify_artist_id"]      ?? ''; ?>',
         pAppleMusicArtistUrl:   '<?php echo $listing_data["apple_music_artist_url"] ?? ''; ?>',
         pSoundcloudUrl:         '<?php echo $listing_data["soundcloud_url"]         ?? ''; ?>',
-        pThumbnailSrc:          '<?php echo $listing_data['thumbnail_url']          ?? $ph_thumbnail; ?>',
+        pThumbnailSrc:          '<?php echo $listing_data['cover_image_url']        ?? $ph_thumbnail; ?>',
         ensembleSizeCheckboxes:  <?php echo clean_arr_for_doublequotes($listing_data["ensemble_size"]      ?? []); ?>,
         categoriesCheckboxes:    <?php echo clean_arr_for_doublequotes($listing_data["mcategory"]          ?? []); ?>,
         genresCheckboxes:        <?php echo clean_arr_for_doublequotes($listing_data["genre"]              ?? []); ?>,
