@@ -32,6 +32,7 @@ $region_post      = get_post_meta($post_id, 'region', true);
 $locale_post      = get_post_meta($post_id, 'locale', true);
 $category_post    = get_post_meta($post_id, 'category', true);
 $prioritize_zip   = get_post_meta($post_id, 'prioritize_zip', true);
+$distance_miles   = get_post_meta($post_id, 'distance_miles', true);
 $country          = get_post_meta($region_post, 'country', true);
 $region_name      = get_post_meta($region_post, 'name', true);
 $locale_name      = get_post_meta($locale_post, 'name', true);
@@ -111,6 +112,7 @@ get_template_part('template-parts/search/search-page', '', [
     'lng'                  => $locale_lng,
     'postal_codes'         => $postal_codes,
     'priority_listings'    => $priority_listings,
+    'distance_miles'       => filter_var($distance_miles, FILTER_VALIDATE_INT) !== false ? (int)$distance_miles : 60,
 ]);
 
 // Recommendations

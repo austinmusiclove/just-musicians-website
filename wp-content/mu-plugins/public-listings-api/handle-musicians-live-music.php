@@ -25,17 +25,17 @@ function hm_public_api_handle_musicians_live_music() {
         ], 400);
     }
 
-    $distance = isset($_GET['distance']) && is_numeric($_GET['distance']) ? (float) $_GET['distance'] : 40;
-    $page     = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+    $distance_miles = isset($_GET['distance_miles']) && is_numeric($_GET['distance_miles']) ? (float) $_GET['distance_miles'] : 60;
+    $page           = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
     $result = get_listings([
-        'lat'           => $loc->lat,
-        'lng'           => $loc->lng,
-        'distance'      => $distance,
-        'genres'        => hm_public_api_parse_list($_GET['genres'] ?? ''),
-        'ensemble_size' => hm_public_api_parse_list($_GET['ensemble_size'] ?? ''),
-        'verified'      => true,
-        'page'          => $page,
+        'lat'            => $loc->lat,
+        'lng'            => $loc->lng,
+        'distance_miles' => $distance_miles,
+        'genres'         => hm_public_api_parse_list($_GET['genres'] ?? ''),
+        'ensemble_size'  => hm_public_api_parse_list($_GET['ensemble_size'] ?? ''),
+        'verified'       => true,
+        'page'           => $page,
     ]);
 
     $musicians = [];
@@ -65,11 +65,11 @@ function hm_public_api_handle_musicians_live_music() {
             'lng'   => (float) $loc->lng,
         ],
         'query' => [
-            'distance'      => $distance,
-            'genres'        => $result['valid_genres'],
-            'ensemble_size' => $result['valid_ensemble_sizes'],
-            'verified'      => true,
-            'page'          => $page,
+            'distance_miles' => $distance_miles,
+            'genres'         => $result['valid_genres'],
+            'ensemble_size'  => $result['valid_ensemble_sizes'],
+            'verified'       => true,
+            'page'           => $page,
         ],
         'max_num_results' => $result['max_num_results'],
         'next_page'       => $result['next_page'],

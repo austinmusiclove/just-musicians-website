@@ -23,7 +23,6 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
-    **Add radius field in category locale page to give wider default radius for certain categories
     Add sidebar widget to direct users to add HM to their Google Preferred Sources
     Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
     Get backlinks to category locale pages
@@ -307,7 +306,6 @@ Messages
         alter sql to see if there is a read receipt for any of these user ids and assign that to a variable
     presaved message replies to make response faster
 Search algo update
-    add 200 mile radius to compete with gigsalad free version
     provide a search rank analyzer like the bash does (https://mcp.thebash.com/SearchResultsAnalyzer)
     find a way to allow listings to define service area so they can give a radius from a city on a map and they understand where they are getting leads from; gigsalad does this: https://www.youtube.com/watch?v=0C5nTkNdNwk 19:00
     Need fuzzy search for locations in location active search

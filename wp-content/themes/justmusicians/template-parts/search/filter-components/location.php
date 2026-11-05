@@ -33,11 +33,13 @@ $distance_input_ref = $device . 'DistanceInput';
         <input type="hidden" name="location_label" x-model="searchLocation" />
         <input type="hidden" name="lat" x-model="searchLat" />
         <input type="hidden" name="lng" x-model="searchLng" />
-        <select id="distance-<?php echo $device; ?>" name="distance" x-model="distance" x-ref="<?php echo $distance_input_ref; ?>" x-on:change="$dispatch('filterupdate');">
+        <select id="distance-<?php echo $device; ?>" name="distance_miles" x-model="distanceMiles" x-ref="<?php echo $distance_input_ref; ?>" x-on:change="$dispatch('filterupdate');">
             <option value="10">10 mile radius</option>
             <option value="20">20 mile radius</option>
             <option value="40">40 mile radius</option>
             <option value="60">60 mile radius</option>
+            <option value="100">100 mile radius</option>
+            <option value="200">200 mile radius</option>
         </select>
     </div>
 </div>

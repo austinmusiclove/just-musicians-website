@@ -24,6 +24,7 @@ $lat                = $arg_lat ?: (!empty($_GET['lat']) ? (float)$_GET['lat'] : 
 $lng                = $arg_lng ?: (!empty($_GET['lng']) ? (float)$_GET['lng'] : null);
 $postal_codes       = !empty($args['postal_codes']) ? array_values((array) $args['postal_codes']) : [];
 $priority_listings  = !empty($args['priority_listings']) ? array_values((array) $args['priority_listings']) : [];
+$distance_miles     = (isset($args['distance_miles']) && filter_var($args['distance_miles'], FILTER_VALIDATE_INT) !== false) ? (int)$args['distance_miles'] : 60;
 
 // Get listings
 $result = null;
@@ -32,7 +33,7 @@ if ($args['send_first_page']) {
         'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
         'lat'               => $lat,
         'lng'               => $lng,
-        'distance'          => 40,
+        'distance_miles'    => $distance_miles,
         'categories'        => $categories,
         'genres'            => $genres,
         'subgenres'         => $subgenres,
@@ -69,6 +70,7 @@ $next_page       = $result ? $result['next_page']       : null;
             searchLat:                   <?php echo $lat !== null ? $lat : 'null'; ?>,
             searchLng:                   <?php echo $lng !== null ? $lng : 'null'; ?>,
             skipCategoryFilter:          <?php echo $hide_category_filter ? 'true' : 'false'; ?>,
+            distanceMiles:               <?php echo $distance_miles; ?>,
         })"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"

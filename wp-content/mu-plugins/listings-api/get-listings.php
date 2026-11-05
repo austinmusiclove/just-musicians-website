@@ -7,7 +7,7 @@ function get_listings($args) {
     $results = [];
     $lat                    = (!empty($args['lat']))                ? (float) $args['lat']                                             : 30.2672;  // Default to Austin, TX coordinates
     $lng                    = (!empty($args['lng']))                ? (float) $args['lng']                                             : -97.7431; // Default to Austin, TX coordinates
-    $distance               = (!empty($args['distance']))           ? (float) $args['distance']                                        : 40;
+    $distance_miles         = (!empty($args['distance_miles']))     ? (float) $args['distance_miles']                                  : 60;
     $search_term            = (!empty($args['search']))             ? sanitize_text_field($args['search'])                             : null;
     $name_search_term       = (!empty($args['name_search']))        ? sanitize_text_field($args['name_search'])                        : null;
     $verified               = (!empty($args['verified']))           ? rest_sanitize_boolean($args['verified'])                         : null;
@@ -27,7 +27,7 @@ function get_listings($args) {
     $next_page              = $page + 1;
     $posts_per_page         = 10;
 
-    $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance, $verified, 'live_music', $postal_codes, $priority_listings);
+    $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified, 'live_music', $postal_codes, $priority_listings);
     if (!empty($args['exclude'])) {
         $listing_ids = array_diff($listing_ids, $args['exclude']);
     }

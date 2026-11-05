@@ -10,7 +10,6 @@ function searchPageData(config = {}) {
         showEnsembleSizeModal: false,
         ensembleSizeCheckboxes: [],
         verifiedCheckbox: false,
-        distance: 40,
         tagModalSearchQuery: '',
         ...config,
 
