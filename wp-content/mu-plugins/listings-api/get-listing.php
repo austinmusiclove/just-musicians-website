@@ -168,6 +168,13 @@ function get_youtube_video_data($post_ids) {
         return [];
     }
 
+    // Sanitize, filter out empty values, and ensure all IDs are integers
+    $post_ids = array_filter(array_map('absint', $post_ids));
+
+    if (empty($post_ids)) {
+        return [];
+    }
+
     // Bulk prime post objects and meta caches for all video IDs in 2 queries total
     _prime_post_caches($post_ids, true, true);
     update_meta_cache('post', $post_ids);
