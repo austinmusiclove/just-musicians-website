@@ -107,7 +107,7 @@ My Listing page
 Listing lifecycle
     Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
     Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
-    Drip campaign to reach out to pending and draft listings
+    Drip campaign to all users wtih a listing; separate drip for draft and pending that can be terminated when they publish
 Media slider
     ****make media slider have images instead of videos and play button opens a video slider modal
         ****video seeking
@@ -178,9 +178,6 @@ Applications Advanced
     Single Application Applicant review tab
         Filter by answers to custom questions (advanced)
 Submitted Applciations
-    When active state add withdraw application button in white next to udpate button
-    When withdrawn state only show resubmit application button
-    No status input in update application form
     Allow browsing venues and applying to venues even if they have not set up application so if they do set it up, they already have applicants
 Single Event page
     Show offers
@@ -195,7 +192,7 @@ My Events page (for buyers)
     *Connect to conversation if one exists on applicant cards instead of send message button
     Set event status to booked/open/cancelled/etc.
     Add calendar View
-    Edit multiple event details at once
+    Edit multiple event details at once (for recurring events)
     Create multiple events at once (multi dates with certain time slots for performances; you can edit an individual event or all events at once)
     Create event from a copy of another event
     Current applicants get notified when event dates are added (use cron on a delay of at least an hour so that multiple emails don't go out if someone makes a ton of events in one session)
@@ -246,29 +243,10 @@ Compensation Reporting
     allow connecting listing instead of performer name
     Auto verify event from compensation report with event database
     Create a way for people to edit and see their comp report submissions
-Venue Browsing Page
-    add venues listings next to map
-    Sort venues by musician compensation metrics (contributors only feature)
-    Filter venues by genres they play
-    Filter venues that played certian artists
-    show/hide popup on hover
-Venue pages
-    remove decimal places in y axis for payment method and payment speed
-    change pay per hour to median pay
-    add perminently closed state for venues (coral snake)
-    Add artists recently played to venue pages
-    median pay?
-    typical ensemble size hired
-    typical genres hired
-    tags
-    add upcoming events
-    add amenities like bathrooms, dog friendly, food/drink, etc.
-    add musician amenities like green room, sound engineer, backline
-    switch out google map with styled map
 Notifications
     Send notifications update when a new message comes in and maybe also poll every 10 min or so
     Consider notification when musician updates a proposal
-    Email for new listing published/draft
+    *Email for new listing published/draft
 Advanced inquiries
     Recurring event
     add something about sound equipment for events; musicians need to know if they need to bring PA to quote
@@ -281,7 +259,7 @@ Advanced inquiries
     allow just send direct message for other kind of inquiry that is not for an event
     only get non expired listings for eventsMap
     search bar for events page
-    record response time; send out emails to all listings to collect an initial response or take it from email verification email
+    *record response time; send out emails to all listings to collect an initial response or take it from email verification email
     change listings page to html api
     calendly like tool for allowing artists to give you their availability for a group of dates/times
     add settings (hotel, bar, restaurant) to quiz
@@ -304,16 +282,16 @@ Search algo update
     on relevance search with search term, the oldest should go first; right now it is opposite
     Final Form Search Algorithm
         1 - Listing status
-            1 - Community Partner
-            2 - Verified
-            3 - Claimed
+            1 - Claimed
+            2 - Community Partner
+            3 - Verified
         2 - Rank
-            1 - Response Time
-            2 - Inquiries/Views/Clicks
-            3 - Reviews/Rating score
-            4 - Profile Completeness
+            1 - All time inquiry count (maybe something with views/clicks)
+            2 - Profile Completeness
+            3 - Response Time
+            4 - Reviews/Rating score
         3 - Profile Age (post_id tie breaker)
-        Show Relevant Media as thumbnail based on search
+        Show Relevant Media as thumbnail based on search (maybe have them mark media tags for category only or select one image for each category they are a part of)
 Data
     program to move unofficial taxonomies and venues to official ones when a new taxonomy term is added
     handle venue aliases
@@ -324,8 +302,6 @@ Data
     program to move unofficial tags to official if added
     start using s3 for image media storage
     write reviews as AML
-    add to people's profile so they will rank higher and come up in search properly
-    email drip campaign staring when a user's first listing is published that teaches them how to use the platform, how to rank high, etc
 Testing
     test apostrophes everywhere
     test when nonce expires and api does not return data
@@ -354,11 +330,11 @@ Code consistency and cleanliness
     make a preview listing card instead of supporting the preview with standard listing card
 UX
     ****Clear Join page with header bar link; join page allows you to create your listing and then sign up
-        add join page that redirects to itself after sign up and redirects to the listings page or listing form
+        add join landing page that redirects to itself after sign up and redirects to the listings page or listing form
         link that join page in llms txt
         join link in nav and mobile nav
     ***organize subgenre by parent genre groups in listing form and in search filters
-    *pop up on top right that prompts you to log in with google as soon as you open the site or after delay
+    **pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry
     Filters
@@ -366,9 +342,7 @@ UX
         add something about providing sound equipment
     better confirm delete listing dialog
     add name aliases so that "bob and" name search in active search results can match "Bob & Tanner" with the alias "Bob and Tanner" or maybe interchange & and and always. idk; maybe as part of keywords and do regular search from active serach instead of name search (solved by keyword taxonomy in post content?)
-    sortable listings in single-collection.php
     password reset: use html api for requesting reset so that user can see the updated message or make the modal open after post is processed so they can see it
-    when adding to collection toast should be more specific "added to [collection name]"
 Security
     audit rest api inputs and html api inputs
     use temporary code for email verification instead of account identifier
@@ -380,11 +354,9 @@ Bugs
     weird skipping around when opening conversation; can't scroll to bottom completely, it jumps back up a little. fixed by scrolling to top and getting oldest messages. hard to replicate; happens after sending a message in my deer fellow convo in prod
     messages have issues loading if response doesnt come back before first update poll (tested by sleeping on the initial req and allowing updates to go through and this worked gracefully; also tried throttling in browser to 3G and it works )
 Quirks
-    there are duplicate ids in the filter secions for mobile and desktop; they both get out of band swapped by htmx successfully but could cause other issues; can also just use different ids and out of band swap both
     when you delete a user who is still logged in, if they log out after deletion, log out goes to a confirmation screen
     the way genres are retrieved in get_listings html api and in inquiry suggestions html api and potentially other places is cumbersome; maybe can just send it in the right format from get_listings if it does not interfier with other callers
     *in home search, selecting 4-6 and 7+ ens size options causes 404. it is fixed by the status_header(200) in html-api-routes.php but for some reason wp sets 404 for this url. even if i switch up the order of the query args, 7+ with any other options is fine. same with 4-6. but if they are together, no matter what order, it flags as 404. renaming one of the options could fix it too. maybe 4to6 or 7plus
-    on many account pages, the whole html goes to half width of screen when it gets really small
 Accessibility
     *Need full audit
 Document

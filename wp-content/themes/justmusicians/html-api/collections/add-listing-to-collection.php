@@ -20,6 +20,8 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Added Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'add-listing-to-collection\', {\'collection_id\': \'' . $collection_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';
-echo '<span x-init="showCollectionsPopup = true;"></span>';
+$collection_name = get_post_meta($collection_id, 'name', true);
+?>
+<span x-init="$dispatch('success-toast', { 'message': 'Listing added to <?php echo $collection_name; ?>' })"></span>
+<span x-init="$dispatch('add-listing-to-collection', { 'collection_id': '<?php echo $collection_id; ?>', 'listing_id': '<?php echo $listing_id; ?>' })"></span>
+<span x-init="showCollectionsPopup = true;"></span>

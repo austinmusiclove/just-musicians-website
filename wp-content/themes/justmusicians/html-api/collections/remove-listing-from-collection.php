@@ -20,5 +20,7 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-echo '<span x-init="$dispatch(\'success-toast\', { \'message\': \'' . 'Listing Removed Successfully' . '\'})"></span>';
-echo '<span x-init="$dispatch(\'remove-listing-from-collection\', {\'collection_id\': \'' . $collection_id . '\', \'listing_id\': \'' . $listing_id . '\' })"></span>';
+$collection_name = get_post_meta($collection_id, 'name', true);
+?>
+<span x-init="$dispatch('success-toast', { 'message': 'Listing removed from <?php echo $collection_name; ?>' })"></span>
+<span x-init="$dispatch('remove-listing-from-collection', { 'collection_id': '<?php echo $collection_id; ?>', 'listing_id': '<?php echo $listing_id; ?>' })"></span>
