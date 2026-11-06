@@ -1,6 +1,4 @@
 Critical bugs
-    need to figure out how images end up unattached; seems like people are trying to make a listing because image is uploaded and no listing is there
-        could be happening when you upload profile image; but i don't see profile images for users that have uploaded unattached images
     figure out why i'm getting tons of requests for artist and performance pages; is it my aws server doing something?
     Make sure i am compliant with laws on cookies (google analytics)
     Make sure if i upload a big image it gets reduced and the original large image is not saved

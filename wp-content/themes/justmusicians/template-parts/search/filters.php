@@ -22,15 +22,6 @@ get_template_part('template-parts/search/filter-components/location', '', [
 
 <?php
     get_template_part('template-parts/global/form/tags', '', array(
-        'id' => 'ensemble-size-filters',
-        'title' => 'Ensemble Size',
-        'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
-        'default_tags' => get_default_options('ensemble_size'),
-        'tags' => [],
-        'show_modal_var' => 'showEnsembleSizeModal',
-        'x-model' => 'ensembleSizeCheckboxes',
-    ));
-    get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'category-filters',
         'title' => 'Categories',
         'input_name' => 'categories', // should match the input name used for the tag modal checkboxes
@@ -39,6 +30,15 @@ get_template_part('template-parts/search/filter-components/location', '', [
         'show_modal_var' => 'showCategoryModal',
         'x-model' => 'categoriesCheckboxes',
         'x-show' => 'showCategoryFilter',
+    ));
+    get_template_part('template-parts/global/form/tags', '', array(
+        'id' => 'ensemble-size-filters',
+        'title' => 'Ensemble Size',
+        'input_name' => 'ensemble_size', // should match the input name used for the tag modal checkboxes
+        'default_tags' => get_default_options('ensemble_size'),
+        'tags' => [],
+        'show_modal_var' => 'showEnsembleSizeModal',
+        'x-model' => 'ensembleSizeCheckboxes',
     ));
     get_template_part('template-parts/global/form/tags', '', array(
         'id' => 'genre-filters',
