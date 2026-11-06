@@ -118,10 +118,10 @@ function update_search_rank($post_id) {
         }
     }
 
-    // Boost rank by number of reviews
+    // Boost rank by number of reviews up to 20 reviews
     $review_count = get_post_meta( $post_id, 'review_count', true );
     $review_count = (int) $review_count;
-    $rank += $review_count;
+    $rank += min(20, $review_count);
 
     // Boost by admin defined amount
     $boost = get_post_meta( $post_id, 'rank_boost', true );
