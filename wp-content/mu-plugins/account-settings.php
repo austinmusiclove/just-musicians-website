@@ -86,7 +86,7 @@ function update_account_settings($args) {
         !empty($args['profile_image']['filename']) and
         empty($args['profile_image']['attachment_id'])
     ) {
-        $attachment_id = upload_attachment($args['profile_image']['file'], $args['profile_image']['filename'], null, 'profile image', null);
+        $attachment_id = upload_attachment($args['profile_image']['file'], $args['profile_image']['filename'], $user_id, 'profile image', null);
         if (is_wp_error($attachment_id)) { return $attachment_id; }
 
         // Save the image to the ACF 'avatar' field
