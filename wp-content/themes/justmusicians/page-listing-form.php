@@ -168,9 +168,9 @@ get_header();
 
                     <!------------ Page Load Toasts ----------------->
                     <div>
-                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create')        { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Created Successfully'});"></span><?php } ?>
-                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create-draft')  { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Draft Created Successfully'});"></span><?php } ?>
-                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'publish-draft') { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Draft Published Successfully'});"></span><?php } ?>
+                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create')        { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Published Successfully'});"></span><?php } ?>
+                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'create-draft')  { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Saved Successfully'});"></span><?php } ?>
+                        <?php if (!empty($_GET['toast']) and $_GET['toast'] == 'publish-draft') { ?><span x-init="$dispatch('success-toast', {'message': 'Listing Published Successfully'});"></span><?php } ?>
                     </div>
 
 
