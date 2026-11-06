@@ -53,7 +53,7 @@ self.onmessage = async function (e) {
             const resizedCanvas = getResizedCanvas(imageData, width, height, 1024);
             const blob = await resizedCanvas.convertToBlob({
                 type: 'image/webp',
-                quality: 0.8
+                quality: 0.85
             });
 
             self.postMessage({ success: true, blob });

@@ -53,7 +53,6 @@ SEO
         add self referencing canonical on listing pages
     performance
         ****optimize images; del big images that exist safely;
-            need to figure out how images end up unattached
             free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB
                 remove unneeded image sizes from server
                 remove orphan images from server
