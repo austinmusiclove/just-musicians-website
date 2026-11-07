@@ -76,15 +76,16 @@ get_template_part('template-parts/landing-pages/simple-feature-section', '', [
     ],
 ]);
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
-    'heading'       => 'Are You a Musician? Let the Gigs Come to You.',
-    'description' => 'Stop chasing leads and start playing more shows. Build a free musician listing to connect with event planners, venues, and private clients looking to hire musicians for their next event.',
+    'eyebrow'     => 'Musicians',
+    'heading'     => 'Are You a Musician? Never Pay To Get Booked Again.',
+    'description' => 'Keep 100% of your earnings and 100% of your client contacts. With no subscription fees, no gig commissions, and no pay-to-win algorithms, Hire Musicians gives you all the tools you need to book shows on your terms.',
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing-opt.png',
     'benefits'    => [
         'Get discovered on Hire Musicians',
-        'Unlimited categories',
         'Zero membership fees',
         'Zero commission on bookings',
         'Unlimited booking requests',
+        'Unlimited categories',
         'Build trust with client reviews',
     ],
     'cta_text'          => 'Sign Up as a Musician',

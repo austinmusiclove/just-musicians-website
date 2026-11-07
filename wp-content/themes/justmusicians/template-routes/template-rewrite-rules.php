@@ -35,9 +35,16 @@ function template_route_rewrite_rules() {
         'top'
     );
 
+    // Join page
+    add_rewrite_rule(
+        '^join/?$',
+        'index.php?custom-template=landing-join',
+        'top'
+    );
+
     // Locale Category Pages
     // Prevent this catch-all rule from swallowing single-post URLs such as /collection/country-bands/ or /artist/jazz-bands/.
-    $categories = implode('|', [ 'americana-bands', 'country-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs', 'folk-singers', 'folk-bands', 'indie-bands', 'singing-guitarists', 'singing-pianists', 'pianists', 'jazz-singers', 'cellists' ]);
+    $categories = implode('|', [ 'americana-bands', 'country-bands', 'country-singers', 'bluegrass-bands', 'wedding-bands', 'live-bands', 'party-bands', 'funk-bands', 'cover-bands', 'soul-bands', 'tribute-bands', 'punk-bands', 'metal-bands', 'jam-bands', 'rappers', 'singer-songwriters', 'violinists', 'mariachi-bands', 'latin-bands', 'salsa-bands', 'tejano-bands', 'brass-bands', 'djs', 'wedding-djs', 'folk-singers', 'folk-bands', 'indie-bands', 'singing-guitarists', 'singing-pianists', 'pianists', 'jazz-singers', 'cellists', 'harpists' ]);
     $locales = implode('|', [ 'austin', 'san-antonio' ]);
     add_rewrite_rule(
         '^(' . $locales . ')/(' . $categories . ')/?$',

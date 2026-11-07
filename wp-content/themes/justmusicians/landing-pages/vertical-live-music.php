@@ -26,6 +26,7 @@ get_template_part('template-parts/landing-pages/hero-section-cta', '', [
     ],
 ]);
 get_template_part('template-parts/landing-pages/benefits-cta', '', [
+    'eyebrow'       => 'Musicians',
     'heading'       => 'Are You a Musician? Let the Gigs Come to You.',
     'description' => 'Stop chasing leads and start playing more shows. Build a free musician listing to connect with event planners, venues, and private clients looking to hire musicians for their next event.',
     'image'       => get_template_directory_uri() . '/lib/images/other/create-listing.png',

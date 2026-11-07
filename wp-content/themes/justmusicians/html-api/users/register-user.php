@@ -100,7 +100,7 @@ if (isset( $_POST["r_user_email"] ) && wp_verify_nonce($_POST['r_csrf'], 'r-csrf
             } else if ($listing_invitation_code) {
                 echo '<span x-init="redirect(\'' . esc_url(add_query_arg('lic', $listing_invitation_code, $r_redirect)) . '\');"></span>';
             } else {
-                echo '<span x-init="redirect();"></span>';
+                echo '<span x-init="redirect(\'' . esc_url($r_redirect) . '\');"></span>';
             }
         }
     } else {

@@ -3,7 +3,7 @@
         <div class="grid max-w-6xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-5 lg:items-center xl:gap-x-12">
 
             <div class="w-full flex-auto col-span-3">
-                <p class="font-sun-motter text-13 uppercase tracking-wide text-brown-dark-3 mb-3">Musicians</p>
+                <?php if (!empty($args['eyebrow'])) { ?><p class="font-sun-motter text-13 uppercase tracking-wide text-brown-dark-3 mb-3"><?php echo $args['eyebrow']; ?></p><?php } ?>
                 <h2 class="font-sun-motter text-navy text-28 md:text-40 mb-4"><?php echo $args['heading']; ?></h2>
                 <p class="text-16 md:text-18 text-brown-dark-3 mb-8 md:mb-10"><?php echo $args['description']; ?></p>
 

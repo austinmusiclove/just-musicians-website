@@ -17,6 +17,7 @@
   - [Austin Party Bands](/austin/party-bands)
 - [Musician Listings](/live-music/search) - Each listing serves as an artist EPK, showcasing their bio, photos, videos, genres, instrumentation, location, reviews, and the ability to request a quote directly from their profile.
 - [Get Quotes From Multiple Musicians](/) - Tell us about your event once and send your inquiry to multiple musicians at the same time to receive quotes back.
+- [Musician Signup](/join) - Where musicians can join and list themselves to get booked for gigs.
 
 
 ## Geographic Focus

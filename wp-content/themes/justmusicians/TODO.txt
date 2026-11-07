@@ -329,10 +329,6 @@ Code consistency and cleanliness
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
     make a preview listing card instead of supporting the preview with standard listing card
 UX
-    ****Clear Join page with header bar link; join page allows you to create your listing and then sign up
-        add join landing page that redirects to itself after sign up and redirects to the listings page or listing form
-        link that join page in llms txt
-        join link in nav and mobile nav
     ***organize subgenre by parent genre groups in listing form and in search filters
     **pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav

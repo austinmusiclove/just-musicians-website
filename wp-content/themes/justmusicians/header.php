@@ -182,7 +182,7 @@ $location_label = $header_arg_location_label ?: (!empty($_GET['location_label'])
     <?php
         echo get_template_part('template-parts/menus/mobile-menu', '', []);
         echo get_template_part('template-parts/login/login-modal', '', []);
-        echo get_template_part('template-parts/login/signup-modal', '', []);
+        echo get_template_part('template-parts/login/signup-modal', '', [ 'signup_redirect' => $args['signup_redirect'] ?? null ]);
         echo get_template_part('template-parts/login/password-reset-modal', '', []);
         echo get_template_part('template-parts/inquiries/inquiry-popup', '', []);
         echo get_template_part('template-parts/reviews/popup/review-popup', '', []);

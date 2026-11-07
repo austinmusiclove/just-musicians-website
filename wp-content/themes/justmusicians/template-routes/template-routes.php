@@ -21,14 +21,17 @@ add_filter('template_include', function($template) {
         case 'landing-search':
             $new_template = locate_template(['landing-pages/search-live-music.php']);
             if (!empty($new_template)) { return $new_template; }
+        case 'landing-join':
+            $new_template = locate_template(['landing-pages/join.php']);
+            if (!empty($new_template)) { return $new_template; }
+        case 'landing-locale-category':
+            $new_template = locate_template(['landing-pages/locale-category.php']);
+            if (!empty($new_template)) { return $new_template; }
+
         // Listings
         case 'unpublished-listing':
             if (!is_singular('listing')) { return $template; }
             $new_template = locate_template(['single-listing.php']);
-            if (!empty($new_template)) { return $new_template; }
-
-        case 'landing-locale-category':
-            $new_template = locate_template(['landing-pages/locale-category.php']);
             if (!empty($new_template)) { return $new_template; }
 
         default:
