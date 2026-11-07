@@ -24,5 +24,5 @@
         </div>
 -->
     </span>
-    <a href="/pricing/">Pricing</a>
+    <a href="/join/">Join</a>
 </div>

@@ -1,7 +1,7 @@
 <div class="mt-28 md:mt-16 w-screen h-screen fixed top-0 left-0 z-30 flex items-center justify-center" x-show="showMobileMenu" x-transition x-cloak>
     <div class="bg-white relative p-8 md:pt-20 relative w-full h-full overflow-y-auto" style="-webkit-overflow-scrolling: touch">
 
-    <?php $class = 'border-b border-black/20 last:border-none pb-3 mb-3'; ?>
+    <?php $class = 'border-b border-black/20 last:border-none pb-4 mb-4'; ?>
 
     <div>
         <!-- Live Music -->
@@ -9,7 +9,7 @@
 
             <div class="flex justify-between items-center" x-on:click="showMobileMenuDropdown1 = ! showMobileMenuDropdown1">
                 <a class="font-sun-motter" href="<?php echo site_url('live-music/search/'); ?>">Live Music</a>
-                <!--<img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="" />-->
+                <!--<img src="<?php //echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="" />-->
             </div>
             <!-- Dropdown menu -->
             <!--
@@ -35,6 +35,11 @@
 
         </div>
 
+        <!-- Join -->
+        <div class="<?php echo $class; ?>">
+            <a class="font-sun-motter" href="<?php echo site_url('/join/'); ?>">Join</a>
+        </div>
+
         <!-- Logged In Menu -->
         <div class="<?php echo $class; ?>" x-cloak x-show="loggedIn">
 
@@ -48,37 +53,14 @@
             </div>
             <!-- Dropdown menu -->
             <div class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown2" x-transition x-cloak>
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/account'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" alt="" />
-                    <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-                        x-show="get_notification_count(notifications, 'account') > 0" x-cloak
-                        x-text="get_notification_count(notifications, 'account') ?? 0"
-                    ></span>
-                    Account
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/subscriptions/'); ?>">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" alt="" />
-                    Subscriptions
-                </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/collections/'); ?>">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" alt="" />
-                    Collections
-                </a>
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" alt="" />
-                    <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-                        x-show="get_notification_count(notifications, 'unread_convo') > 0" x-cloak
-                        x-text="get_notification_count(notifications, 'unread_convo') ?? 0"
-                    ></span>
-                    Messages
-                </a>
 
+                <hr class="my-2 border-black/10" />
                 <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none">For Musicians</span>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/listings/'); ?>">
+                <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/listings/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" alt="" />
                     My Listings
                 </a>
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/my-gigs/'); ?>">
+                <a class="relative px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/my-gigs/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" alt="" />
                     <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
                         x-show="get_gig_notification_count(notifications) > 0" x-cloak
@@ -86,13 +68,18 @@
                     ></span>
                     My Gigs
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/submitted-applications/'); ?>">
+                <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/submitted-applications/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clipboard.svg'; ?>" alt="" />
                     Submitted Applications
                 </a>
 
+                <hr class="my-2 border-black/10" />
                 <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none">For Buyers</span>
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/my-events/'); ?>">
+                <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/collections/'); ?>">
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" alt="" />
+                    Collections
+                </a>
+                <a class="relative px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/my-events/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" alt="" />
                     <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
                         x-show="get_event_notification_count(notifications) > 0" x-cloak
@@ -100,8 +87,8 @@
                     ></span>
                     My Events
                 </a>
-                <!-- <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="#">My Venues</a> -->
-                <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/applications/'); ?>">
+                <!-- <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="#">My Venues</a> -->
+                <a class="relative px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/applications/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/clipboard.svg'; ?>" alt="" />
                     <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
                         x-show="get_notification_count(notifications, 'new_applicant') > 0" x-cloak
@@ -111,25 +98,42 @@
                 </a>
 
                 <?php if (!current_user_can('hm_buyer_pro') && !current_user_can('hm_buyer_pro_lifetime')) { ?>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/pricing/'); ?>">
+                <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/pricing/'); ?>">
                     <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/bolt.svg'; ?>" alt="" />
                     Upgrade
                 </a>
                 <?php } ?>
+
+                <hr class="my-2 border-black/10" />
+                <a class="relative px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/account'); ?>">
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" alt="" />
+                    <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                        x-show="get_notification_count(notifications, 'account') > 0" x-cloak
+                        x-text="get_notification_count(notifications, 'account') ?? 0"
+                    ></span>
+                    Account
+                </a>
+                <a class="px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/subscriptions/'); ?>">
+                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" alt="" />
+                    Subscriptions
+                </a>
+                <a class="relative px-2 py-2 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/messages/'); ?>">
+                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" alt="" />
+                    <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+                        x-show="get_notification_count(notifications, 'unread_convo') > 0" x-cloak
+                        x-text="get_notification_count(notifications, 'unread_convo') ?? 0"
+                    ></span>
+                    Messages
+                </a>
             </div>
 
         </div>
 
-        <!-- Blog -->
-        <div class="<?php echo $class; ?>">
-        <a class="font-sun-motter" href="<?php echo site_url('/pricing/'); ?>">Pricing</a>
+        <!-- Log out -->
+        <div class="<?php echo $class; ?> mt-8" x-cloak x-show="loggedIn">
+            <a class="font-sun-motter" href="<?php echo esc_url( admin_url( 'admin-post.php?action=secure_theme_logout' ) ); ?>" data-testid="mobile-logout-link">Log Out</a>
         </div>
 
-    </div>
-
-    <!-- Log out -->
-    <div class="<?php echo $class; ?> mt-8" x-cloak x-show="loggedIn">
-        <a class="font-sun-motter" href="<?php echo esc_url( admin_url( 'admin-post.php?action=secure_theme_logout' ) ); ?>" data-testid="mobile-logout-link">Log Out</a>
     </div>
 
 

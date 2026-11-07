@@ -6,31 +6,7 @@ $is_my_events = $current_path === '/my-events/' || $current_path === '/event-for
 $is_applications = $current_path === '/applications/' || $current_path === '/application-form/' || preg_match('#^/application/#', $current_path);
 ?>
 
-    <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/account/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/account/'); ?>">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
-        <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-            x-show="get_notification_count(notifications, 'account') > 0" x-cloak
-            x-text="get_notification_count(notifications, 'account') ?? 0"
-        ></span>
-        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Account</span>
-    </a>
-    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/subscriptions/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/subscriptions/'); ?>">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" />
-        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Subscriptions</span>
-    </a>
-    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/collections/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/collections/'); ?>">
-        <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
-        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Collections</span>
-    </a>
-    <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/messages/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/messages/'); ?>">
-        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
-        <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
-            x-show="get_notification_count(notifications, 'unread_convo') > 0" x-cloak
-            x-text="get_notification_count(notifications, 'unread_convo') ?? 0"
-        ></span>
-        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Messages</span>
-    </a>
-
+    <hr class="my-2 border-black/10" />
     <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none" x-text="showSidebar ? 'For Musicians' : 'M'"></span>
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/listings/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/listings/'); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
@@ -49,7 +25,12 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Submitted Applications</span>
     </a>
 
+    <hr class="my-2 border-black/10" />
     <span class="px-2 py-1 mt-1 text-13 font-bold text-black/40 uppercase tracking-wider pointer-events-none select-none" x-text="showSidebar ? 'For Buyers' : 'B'"></span>
+    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/collections/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/collections/'); ?>">
+        <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/album-collection-solid.svg'; ?>" />
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Collections</span>
+    </a>
     <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $is_my_events ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/my-events/'); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/calendar.svg'; ?>" />
         <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
@@ -78,6 +59,26 @@ $is_applications = $current_path === '/applications/' || $current_path === '/app
     <?php } ?>
 
     <hr class="my-2 border-black/10" />
+    <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/account/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/account/'); ?>">
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/contact-info.svg'; ?>" />
+        <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+            x-show="get_notification_count(notifications, 'account') > 0" x-cloak
+            x-text="get_notification_count(notifications, 'account') ?? 0"
+        ></span>
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Account</span>
+    </a>
+    <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/subscriptions/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/subscriptions/'); ?>">
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/money-bill.svg'; ?>" />
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Subscriptions</span>
+    </a>
+    <a class="relative px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100<?php echo $current_path === '/messages/' ? ' bg-yellow-light/50' : ''; ?>" href="<?php echo site_url('/messages/'); ?>">
+        <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/speech-bubble.svg'; ?>" />
+        <span class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
+            x-show="get_notification_count(notifications, 'unread_convo') > 0" x-cloak
+            x-text="get_notification_count(notifications, 'unread_convo') ?? 0"
+        ></span>
+        <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Messages</span>
+    </a>
     <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm hover:bg-yellow-light/50 opacity-80 hover:opacity-100" href="<?php echo esc_url( admin_url( 'admin-post.php?action=secure_theme_logout' ) ); ?>">
         <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/log-out.svg'; ?>" />
         <span class="inline-block pr-6" x-show="showSidebar" x-transition x-cloak>Log Out</span>
