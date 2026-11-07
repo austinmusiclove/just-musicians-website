@@ -24,6 +24,8 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
+    **Check people also ask for category queries and modify content for locale-category pages accordingly
+    **Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
     Add a search feature that is like an AI prompt to log queries and learn over time what people are searching to inform what kind of keywords to target with landing pages
     Update meta descriptions to include "no booking fees" or "no platform fees"
     Add sidebar widget to direct users to add HM to their Google Preferred Sources
@@ -51,7 +53,7 @@ SEO
         add self referencing canonical on listing pages
     performance
         ****optimize images; del big images that exist safely;
-            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB
+            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 43.49)
                 remove unneeded image sizes from server
                 remove orphan images from server
         load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
@@ -63,8 +65,10 @@ SEO
     price estimator for live band in austin tx
     system for keeping data accurate by scraping artist websites and comparing information
     steal competitor backlinks by using seo tool to findout who links to them
+    ***Ad space and Luanch Partnership program for backlinks
+        include ad space in sidebars; certain pages have preferred ads; others are just random
 Listing form
-    *back to listings button
+    *back to listings button (wait til i have the listing back end page and it will go back to that)
     **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     upload multiple images at once
     **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
@@ -329,6 +333,13 @@ Code consistency and cleanliness
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
     make a preview listing card instead of supporting the preview with standard listing card
 UX
+    ***Join page funnel improvement
+        multi slide form similar to inquiry pop up but not a modal that will start with account info then minimual listing info and media
+        after completion say congrats, go here to update your listing to increase rank
+        logged in state skips the first slide with account info
+        add copy explaining why you should join similar to gigsalad
+        maybe sign them up without password and log them in and send email to change password; need to allow sign up through google too
+        maybe redirect all sign ups to a certain page that asks if you are a musician or buyer and clicking musician goes to join page with basic form
     ***organize subgenre by parent genre groups in listing form and in search filters
     **pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
