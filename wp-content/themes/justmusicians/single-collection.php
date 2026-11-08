@@ -110,7 +110,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             </span>
 
                             <!-- Results container -->
-                            <?php get_template_part('template-parts/media-sliders/media-slider-cards-container', '', [
+                            <?php get_template_part('template-parts/cards/card-containers/listing-cards-container', '', [
                                 'id'              => 'results',
                                 'reorderable'     => true,
                                 'collection_id'   => $collection_id,

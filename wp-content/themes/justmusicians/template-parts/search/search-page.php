@@ -145,7 +145,7 @@ $next_page       = $result ? $result['next_page']       : null;
                     </span>
 
                     <!-- Results container -->
-                    <?php get_template_part('template-parts/media-sliders/media-slider-cards-container', '', [
+                    <?php get_template_part('template-parts/cards/card-containers/listing-cards-container', '', [
                         'id'              => 'results',
                         'send_first_page' => $args['send_first_page'],
                         'listings'        => $listings,

@@ -29,7 +29,6 @@
     </div>
 
     <div class="flex flex-col gap-2 w-full sm:w-56 shrink-0 max-w-3xl">
-
         <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
             x-data="{
                 previousIndex: 0,

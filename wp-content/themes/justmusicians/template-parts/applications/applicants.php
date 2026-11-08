@@ -33,7 +33,7 @@
     </div>
 
     <!-- Results container -->
-    <?php get_template_part('template-parts/media-sliders/media-slider-cards-container', '', [ 'id' => 'applicant-results', ]); ?>
+    <?php get_template_part('template-parts/cards/card-containers/listing-cards-container', '', [ 'id' => 'applicant-results', ]); ?>
 
 
     <div id="applicants-spinner-bottom" class="my-8 flex items-center justify-center htmx-indicator">

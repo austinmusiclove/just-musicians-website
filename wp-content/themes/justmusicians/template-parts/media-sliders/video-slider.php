@@ -49,7 +49,8 @@
     </div>
 
 
-    <!-- Video player buttons --> <!-- Pause -->
+    <!-- Video player buttons -->
+    <!-- Pause -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         x-show="_isPaused()">
         <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/pause_circle.svg'; ?>" alt="Pause video" />

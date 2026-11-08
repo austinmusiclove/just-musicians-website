@@ -21,6 +21,7 @@ $ph_thumbnail  = get_template_directory_uri() . '/lib/images/placeholder/placeho
     <?php } ?>
 
 
+
     <div class="bg-yellow-light w-full sm:w-56 shrink-0 relative max-w-3xl overflow-hidden"
         x-data="{
             previousIndex: 0,

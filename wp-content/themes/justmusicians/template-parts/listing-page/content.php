@@ -66,17 +66,17 @@
 
 
             <!-- Sliders -->
-            <?php echo get_template_part('template-parts/listing-page/parts/image-slider', '', [
+            <?php echo get_template_part('template-parts/media-sliders/image-slider', '', [
                 'is_preview'        => $is_preview,
                 'listing_image_ids' => $listing_image_ids,
                 'ph_thumbnail'      => $ph_thumbnail,
                 'name'              => get_field('name') ?? '',
             ]); ?>
-            <?php echo get_template_part('template-parts/listing-page/parts/video-slider', '', [
+            <?php echo get_template_part('template-parts/media-sliders/video-slider', '', [
                 'is_preview'         => $is_preview,
                 'youtube_video_data' => $args['youtube_video_data'],
             ]); ?>
-            <?php echo get_template_part('template-parts/listing-page/parts/stage-plot-slider', '', [
+            <?php echo get_template_part('template-parts/media-sliders/stage-plot-slider', '', [
                 'is_preview'     => $is_preview,
                 'stage_plot_ids' => $stage_plot_ids,
             ]); ?>

@@ -258,7 +258,7 @@ get_header();
                     </div>
 
                     <!-- Search result preview -->
-                    <?php get_template_part('template-parts/media-sliders/media-slider-cards-container-preview', '', [
+                    <?php get_template_part('template-parts/cards/card-containers/listing-cards-container-preview', '', [
                         'listing'    => $listing_data,
                         'genres'     => $genres,
                     ]); ?>
