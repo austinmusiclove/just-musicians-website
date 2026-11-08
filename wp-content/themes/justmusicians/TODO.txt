@@ -36,7 +36,11 @@ SEO
         get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
     Location/Category Pages
         add pricing for the specific service of the category and location
-        traditional paging
+        traditional paging;
+            use history api through htmx to have hrefs without forcing page reload
+            server rendered pagination links inside noscript tags for search engines
+            self ref canonical for each page url
+            can also just show load more button still instead of traditional page buttons
         add somewhere on the page that bands can apply to be recommended on the page
         maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
         add pricing for the specific service of the category and location
