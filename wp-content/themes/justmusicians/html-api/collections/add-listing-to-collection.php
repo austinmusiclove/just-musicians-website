@@ -20,7 +20,7 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-$collection_name = get_post_meta($collection_id, 'name', true);
+$collection_name = $collection_id > 0 ? get_post_meta($collection_id, 'name', true) : 'Favorites';
 ?>
 <span x-init="$dispatch('success-toast', { 'message': 'Listing added to <?php echo $collection_name; ?>' })"></span>
 <span x-init="$dispatch('add-listing-to-collection', { 'collection_id': '<?php echo $collection_id; ?>', 'listing_id': '<?php echo $listing_id; ?>' })"></span>

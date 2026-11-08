@@ -20,7 +20,7 @@ if ( is_wp_error($result) ) {
 }
 
 // Success Response
-$collection_name = get_post_meta($collection_id, 'name', true);
+$collection_name = $collection_id > 0 ? get_post_meta($collection_id, 'name', true) : 'Favorites';
 ?>
 <span x-init="$dispatch('success-toast', { 'message': 'Listing removed from <?php echo $collection_name; ?>' })"></span>
 <span x-init="$dispatch('remove-listing-from-collection', { 'collection_id': '<?php echo $collection_id; ?>', 'listing_id': '<?php echo $listing_id; ?>' })"></span>
