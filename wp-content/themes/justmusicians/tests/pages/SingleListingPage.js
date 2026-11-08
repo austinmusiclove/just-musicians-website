@@ -4,11 +4,9 @@ import { ThemePage } from './ThemePage.js';
 export class SingleListingPage extends ThemePage {
     constructor(page, isMobile = false) {
         super(page, isMobile);
-        this.sendInquiryBtn            = page.getByRole('button', { name: 'Send Inquiry' });
-        this.favoritesPopup            = page.getByText('Add to collection', { exact: true });
+        this.sendInquiryBtn              = page.getByRole('button', { name: 'Send Inquiry' });
+        this.favoritesPopup              = page.getByText('Add to collection', { exact: true });
         this.collectionSavedSuccessfully = page.getByText('Collection Created Successfully', { exact: true });
-        this.listingAddedSuccessfully  = page.getByText('Listing Added Successfully', { exact: true });
-        this.listingRemovedSuccessfully = page.getByText('Listing Removed Successfully', { exact: true });
     }
 
     async navigate(url) {
@@ -21,6 +19,12 @@ export class SingleListingPage extends ThemePage {
 
     getFavoritesButton(listingId) {
         return this.page.locator(`#favorite-button-${listingId}`);
+    }
+    getListingAddedToast(collectionName) {
+        return this.page.getByText(`Listing added to ${collectionName}`, { exact: true });
+    }
+    getListingRemovedToast(collectionName) {
+        return this.page.getByText(`Listing removed from ${collectionName}`, { exact: true });
     }
 
     async addToFavorites(listingId) {
@@ -68,7 +72,7 @@ export class SingleListingPage extends ThemePage {
         );
         await row.locator('button:visible').first().click();
         await added;
-        await expect(this.listingAddedSuccessfully).toBeVisible();
+        await expect(this.getListingAddedToast(collectionName)).toBeVisible();
     }
 
     async removeListingFromCollection(listingId, collectionId, collectionName) {
@@ -84,6 +88,6 @@ export class SingleListingPage extends ThemePage {
         );
         await row.locator('button:visible').first().click();
         await removed;
-        await expect(this.listingRemovedSuccessfully).toBeVisible();
+        await expect(this.getListingRemovedToast(collectionName)).toBeVisible();
     }
 }

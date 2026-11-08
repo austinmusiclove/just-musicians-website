@@ -23,14 +23,10 @@ if ($args['instance'] == 'listing-form') {
 ?>
 
 <section class="<?php echo $theme['wrapper_class']; ?>"
-    x-data="{
-        collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
-        get sortedCollections()                              { return getSortedCollections(this, 0); },
-        _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
-        _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
-        _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
-        _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
-    }"
+    x-data="Object.assign(
+        favoriteButtonData(),
+        { collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?> },
+    )"
 >
 
 

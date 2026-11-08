@@ -58,3 +58,13 @@ function getSortedCollections(alpineComponent, collectionId) {
     }
     return sortedCollections;
 }
+
+function favoriteButtonData() {
+    return {
+        get sortedCollections()                              { return getSortedCollections(this, 0); },
+        _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
+        _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
+        _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
+        _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+    }
+}

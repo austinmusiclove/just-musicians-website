@@ -71,6 +71,7 @@ $next_page       = $result ? $result['next_page']       : null;
             searchLng:                   <?php echo $lng !== null ? $lng : 'null'; ?>,
             skipCategoryFilter:          <?php echo $hide_category_filter ? 'true' : 'false'; ?>,
             distanceMiles:               <?php echo $distance_miles; ?>,
+            collectionsMap:              <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
         })"
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"
@@ -143,97 +144,15 @@ $next_page       = $result ? $result['next_page']       : null;
                         ?>
                     </span>
 
-                    <span id="results" class="spinner-start htmx-indicator-block-replace"
-                        x-data='{
-                            collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
-                            get sortedCollections()                              { return getSortedCollections(this, 0); },
-                            _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
-                            _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
-                            _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
-                            _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
+                    <!-- Results container -->
+                    <?php get_template_part('template-parts/media-sliders/media-slider-cards-container', '', [
+                        'id'              => 'results',
+                        'send_first_page' => $args['send_first_page'],
+                        'listings'        => $listings,
+                        'is_last_page'    => $is_last_page,
+                    ]); ?>
 
-                            players: {},
-                            playersMuted: true,
-                            playersPaused: false,
-                            _initPlayer(playerId, videoData) { initPlayer(this, playerId, videoData); },
-                            _pauseAllPlayers()               { pauseAllPlayers(this); },
-                            _pausePlayer(playerId)           { pausePlayer(this, playerId); },
-                            _playPlayer(playerId)            { playPlayer(this, playerId); },
-                            _toggleMute()                    { toggleMute(this); },
-                            _setupVisibilityListener()       { setupVisibilityListener(this); },
-                        }'
-                        x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
-                        x-on:pause-all-youtube-players="_pauseAllPlayers()"
-                        x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
-                        x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
-                        x-on:mute-youtube-players="_toggleMute()"
-                        x-init="_setupVisibilityListener()"
-                    >
-                    <?php
-                        if ($args['send_first_page']) {
-                            // Render listings
-                            if (count($listings) > 0) {
-                                foreach($listings as $index => $listing) {
-                                    $genres = [];
-                                    $listing['genre'] ??= [];
-                                    if (!empty($listing['genre'])) {
-                                        $genres = array_map(fn($genre) => $genre->name, $listing['genre']);
-                                    }
-                                    get_template_part('template-parts/cards/standard-listing-card', '', [
-                                        'post_id'                => $listing['post_id'],
-                                        'name'                   => $listing['name'],
-                                        'rating'                 => $listing['rating'],
-                                        'review_count'           => $listing['review_count'],
-                                        'reviews'                => $listing['reviews'],
-                                        'city'                   => $listing['city'],
-                                        'state'                  => $listing['state'],
-                                        'zip_code'               => $listing['zip_code'],
-                                        'location'               => $listing['city'] . ', ' . $listing['state'],
-                                        'description'            => $listing['description'],
-                                        'bio'                    => $listing['bio'],
-                                        'listing_image_urls'     => $listing['listing_image_urls'],
-                                        'genres'                 => $genres,
-                                        'ensemble_size'          => $listing['ensemble_size'],
-                                        'thumbnail_url'          => $listing['thumbnail_url'],
-                                        'phone'                  => isset($listing['phone']) ? $listing['phone'] : null,
-                                        'website'                => $listing['website'],
-                                        'facebook_url'           => $listing['facebook_url'],
-                                        'instagram_url'          => $listing['instagram_url'],
-                                        'x_url'                  => $listing['x_url'],
-                                        'youtube_url'            => $listing['youtube_url'],
-                                        'tiktok_url'             => $listing['tiktok_url'],
-                                        'bandcamp_url'           => $listing['bandcamp_url'],
-                                        'spotify_artist_url'     => $listing['spotify_artist_url'],
-                                        'apple_music_artist_url' => $listing['apple_music_artist_url'],
-                                        'soundcloud_url'         => $listing['soundcloud_url'],
-                                        'youtube_video_data'     => $listing['youtube_video_data'],
-                                        'verified'               => $listing['verified'],
-                                        'rank'                   => $listing['rank'] ?? 0,
-                                        'permalink'              => $listing['permalink'],
-                                        'position'               => $listing['position'],
-                                        'lazyload_thumbnail'     => $index >= 3,
-                                        'last'                   => $index == array_key_last($listings),
-                                        'is_last_page'           => $is_last_page,
-                                        'next_page'              => $next_page,
-                                    ]);
-                                }
-
-                                get_template_part('template-parts/global/schema/item-list-schema', '', [
-                                    'listings' => $listings,
-                                ]);
-
-                            } else {
-                                get_template_part( 'template-parts/global/empty-states/no-search-results');
-                            }
-                            if ($is_last_page) {
-                                get_template_part( 'template-parts/global/empty-states/no-more-results');
-                            }
-                        }
-                    ?>
-                    </span>
-
-
-                    <span id="spinner-end" class="page-indicator htmx-indicator-block">
+                    <span class="page-indicator htmx-indicator-block">
                         <?php
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                         echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');

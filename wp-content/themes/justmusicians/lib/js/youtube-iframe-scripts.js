@@ -162,3 +162,18 @@ function toggleMute(alpineComponent) {
     }
     alpineComponent.playersMuted = !alpineComponent.playersMuted;
 }
+
+function youTubeIframeContainerData() {
+    return {
+        players: {},
+        playersMuted: true,
+        playersPaused: false,
+        _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
+        _pauseAllPlayers()             { pauseAllPlayers(this); },
+        _pausePlayer(playerId)         { pausePlayer(this, playerId); },
+        _playPlayer(playerId)          { playPlayer(this, playerId); },
+        _toggleMute()                  { toggleMute(this); },
+        _setupVisibilityListener()     { setupVisibilityListener(this); },
+    }
+}
+

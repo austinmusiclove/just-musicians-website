@@ -10,9 +10,9 @@ function get_applicants($application_id, $args = []) {
         ];
     }
 
-    $no_paging = !empty($args['nopaging']);
-
-    $page = !empty($args['page']) ? max(1, (int) $args['page']) : 1;
+    $no_paging      = !empty($args['nopaging']);
+    $posts_per_page = $args['posts_per_page'] ?? 10;
+    $page           = !empty($args['page']) ? max(1, (int) $args['page']) : 1;
 
     $meta_query = [
         [
@@ -32,7 +32,7 @@ function get_applicants($application_id, $args = []) {
         'post_type'      => 'app_submission',
         'post_status'    => 'publish',
         'fields'         => 'ids',
-        'posts_per_page' => $no_paging ? -1 : 10,
+        'posts_per_page' => $no_paging ? -1 : $posts_per_page,
         'paged'          => $no_paging ? 1 : $page,
         'meta_query'     => $meta_query,
         'orderby'        => 'modified',

@@ -119,19 +119,12 @@ Listing lifecycle
 Media slider
     ****make media slider have images instead of videos and play button opens a video slider modal
         refactor current slider into a single template part that can be swapped out
-            video slider containers
-                conversations-display for inquiry suggestions (deprectaed; delete this)
-                search-page (front page, locale-category, live music search)
-                single collection
-                listing form
-                themes/justmusicians/template-parts/applications/applicants.php
-                themes/justmusicians/template-parts/events/event-applicants.php
             video sliders
                 standard listing card
+                suggestion listing card
+                seo listing card (dep)
                 applicant cardd
                 event applicant card
-                suggestion listing card
-                seo listing card
             image sliders
                 listing page image slider
                 listing page stage plot slider

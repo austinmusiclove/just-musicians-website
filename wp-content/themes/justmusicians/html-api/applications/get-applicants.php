@@ -7,9 +7,10 @@ $sort           = $_GET['sort'] ?? 'recent';
 $per_page       = 10;
 
 $result = get_applicants($application_id, [
-    'status' => $filter_status,
-    'sort'   => $sort,
-    'page'   => $page,
+    'status'         => $filter_status,
+    'sort'           => $sort,
+    'page'           => $page,
+    'posts_per_page' => $per_page,
 ]);
 
 $submission_ids = $result['submission_ids'];

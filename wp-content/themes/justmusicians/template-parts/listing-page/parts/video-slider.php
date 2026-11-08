@@ -1,15 +1,7 @@
 
 <div class="bg-black aspect-video flex items-center justify-center relative overflow-hidden mb-[21px]" x-show="showVideoTab" x-cloak
     x-data='{
-        players: {},
-        playersMuted: true,
-        playersPaused: false,
-        _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
-        _pauseAllPlayers()             { pauseAllPlayers(this); },
-        _pausePlayer(playerId)         { pausePlayer(this, playerId); },
-        _playPlayer(playerId)          { playPlayer(this, playerId); },
-        _toggleMute()                  { toggleMute(this); },
-        _setupVisibilityListener()     { setupVisibilityListener(this); },
+        ...youTubeIframeContainerData(),
         previousIndex: 0,
         currentIndex: 0,
         showArrows: isTouchDevice,

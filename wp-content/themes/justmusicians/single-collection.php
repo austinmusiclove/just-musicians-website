@@ -37,32 +37,10 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                       <?php echo get_template_part('template-parts/account/sidebar', '', [ 'collapsible' => false ]); ?>
                     </div>
                 </div>
-                <div class="col md:col-span-6 py-8 md:py-12"
-                    x-data="{
+                <div class="col md:col-span-6 py-8 md:py-12" x-data="{
+                        collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map); ?>,
                         reorderMode: false,
-                        collectionsMap: <?php echo clean_arr_for_doublequotes($collections_map ?? []); ?>,
-                        get sortedCollections()                              { return getSortedCollections(this, <?php echo $collection_id; ?>); },
-                        _showEmptyFavoriteButton(listingId)                  { return showEmptyFavoriteButton(this, listingId); },
-                        _showFilledFavoriteButton(listingId)                 { return showFilledFavoriteButton(this, listingId); },
-                        _showEmptyCollectionButton(collectionId, listingId)  { return showEmptyCollectionButton(this, collectionId, listingId); },
-                        _showFilledCollectionButton(collectionId, listingId) { return showFilledCollectionButton(this, collectionId, listingId); },
-
-                        players: {},
-                        playersMuted: true,
-                        playersPaused: false,
-                        _initPlayer(playerId, videoData) { initPlayer(this, playerId, videoData); },
-                        _pauseAllPlayers()               { pauseAllPlayers(this); },
-                        _pausePlayer(playerId)           { pausePlayer(this, playerId); },
-                        _playPlayer(playerId)            { playPlayer(this, playerId); },
-                        _toggleMute()                    { toggleMute(this); },
-                        _setupVisibilityListener()       { setupVisibilityListener(this); },
                     }"
-                    x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
-                    x-on:pause-all-youtube-players="_pauseAllPlayers()"
-                    x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
-                    x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
-                    x-on:mute-youtube-players="_toggleMute()"
-                    x-init="_setupVisibilityListener()"
                 >
 
                     <!-- Back button -->
@@ -97,6 +75,10 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             :class="reorderMode ? 'bg-navy text-white' : 'bg-white text-black'"
                             x-text="reorderMode ? 'Done Reordering' : 'Reorder'"></button>
                         <?php } ?>
+
+                        <div class="spinner-start htmx-indicator flex items-center justify-center">
+                            <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '4', 'color' => 'yellow']); ?>
+                        </div>
                     </div>
 
 
@@ -114,31 +96,27 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                             hx-get="/wp-html/v1/collections/<?php echo $collection_id; ?>/listings/"
                             hx-trigger="load"
                             hx-target="#results"
-                            hx-indicator="#spinner"
+                            hx-indicator=".spinner-start"
                         >
 
-                            <span id="results"
-                                x-sort="$dispatch('reorder-collection');"
-                                x-sort:config="{'handle': '[data-reorder-handle]'}"
-                                hx-post="/wp-html/v1/collections/<?php echo $collection_id; ?>/reorder/"
-                                hx-trigger="reorder-collection"
-                                hx-target="#results"
-                                hx-swap="afterend"
-                            >
+                            <span class="spinner-start htmx-indicator-block">
                                 <?php
-                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                                    echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
+                                echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                                 ?>
                             </span>
 
-                            <div id="spinner" class="my-8 inset-0 flex items-center justify-center opacity-0 htmx-indicator">
-                                <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '8', 'color' => 'yellow']); ?>
-                            </div>
+                            <!-- Results container -->
+                            <?php get_template_part('template-parts/media-sliders/media-slider-cards-container', '', [
+                                'id'              => 'results',
+                                'reorderable'     => true,
+                                'collection_id'   => $collection_id,
+                            ]); ?>
 
-                            <span id="spinner-end" class="page-indicator htmx-indicator-block">
+                            <span class="page-indicator htmx-indicator-block">
                                 <?php
                                 echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
                                 echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
