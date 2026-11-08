@@ -463,11 +463,12 @@ add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
 // Req debug
 function log_incoming_request_url() {
-    $request_uri = $_SERVER['REQUEST_URI'];
+    $method        = $_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN';
+    $request_uri   = $_SERVER['REQUEST_URI'];
     $forwarded_for = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'N/A';
     $real_ip       = $_SERVER['HTTP_X_REAL_IP'] ?? 'N/A';
     $remote_addr   = $_SERVER['REMOTE_ADDR'] ?? 'N/A';
-    error_log( 'Request: ' . $request_uri . ' | REMOTE_ADDR: ' . $remote_addr . ' | X-Forwarded-For: ' . $forwarded_for . ' | X-Real-IP: ' . $real_ip );
+    error_log( 'Request: ' . $method . ' ' . $request_uri . ' | REMOTE_ADDR: ' . $remote_addr . ' | X-Forwarded-For: ' . $forwarded_for . ' | X-Real-IP: ' . $real_ip );
 }
 add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
 

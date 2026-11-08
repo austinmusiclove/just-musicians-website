@@ -114,6 +114,24 @@ Listing lifecycle
     Drip campaign to all users wtih a listing; separate drip for draft and pending that can be terminated when they publish
 Media slider
     ****make media slider have images instead of videos and play button opens a video slider modal
+        refactor current slider into a single template part that can be swapped out
+            video slider containers
+                conversations-display for inquiry suggestions (deprectaed; delete this)
+                search-page (front page, locale-category, live music search)
+                single collection
+                listing form
+                themes/justmusicians/template-parts/applications/applicants.php
+                themes/justmusicians/template-parts/events/event-applicants.php
+            video sliders
+                standard listing card
+                applicant cardd
+                event applicant card
+                suggestion listing card
+                seo listing card
+            image sliders
+                listing page image slider
+                listing page stage plot slider
+            make a tempalte part that can accommodate all scenarios or one for each
         ****video seeking
         open video in modal (maybe only in listing page)
         video and image sliders with tab interface to switch between
