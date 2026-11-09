@@ -23,10 +23,12 @@ if ($args['instance'] == 'listing-form') {
 ?>
 
 <section class="<?php echo $theme['wrapper_class']; ?>"
-    x-data="Object.assign(
-        favoriteButtonData(),
-        { collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?> },
-    )"
+    <?php if (!$is_preview) { ?>
+        x-data="Object.assign(
+            favoriteButtonData(),
+            { collectionsMap: <?php echo clean_arr_for_doublequotes($args['collections_map']); ?> },
+        )"
+    <?php } ?>
 >
 
 

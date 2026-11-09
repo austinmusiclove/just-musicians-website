@@ -24,6 +24,7 @@ Musician Pricing Page
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
 SEO
+    ****update meta descriptions to emphasize no platform fees
     **Check people also ask for category queries and modify content for locale-category pages accordingly
     **Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
     Add a search feature that is like an AI prompt to log queries and learn over time what people are searching to inform what kind of keywords to target with landing pages
@@ -119,17 +120,22 @@ Listing lifecycle
 Media slider
     ****make media slider have images instead of videos and play button opens a video slider modal
         refactor current slider into a single template part that can be swapped out
-            video sliders
-                standard listing card
-                suggestion listing card
-                seo listing card (dep)
-                applicant cardd
-                event applicant card
             image sliders
                 listing page image slider
                 listing page stage plot slider
             make a tempalte part that can accommodate all scenarios or one for each
-        ****video seeking
+        new media slider for listing cards
+            create modal with video slider and regular iframes
+            ****video seeking
+            disable slider on thumbnail
+            open modal when click play button
+            listing page video slider
+                allow seeking
+                use media slider data function
+                use buttons template part
+                make preview version or handle preview
+                no related videos
+                remove mute buttons
         open video in modal (maybe only in listing page)
         video and image sliders with tab interface to switch between
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
@@ -346,8 +352,8 @@ Code consistency and cleanliness
     Find all instances of clean_str_for_doublequotes and clean_arr_for_doublequotes and make sure not to send null (fixed in single-event.php)
     Fix mu plugins depending on each other; move code to includes instead
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
-    make a preview listing card instead of supporting the preview with standard listing card
 UX
+    ***when click send inquiry and have no events, skip to date slide instead of existing event slide
     ***Join page funnel improvement
         multi slide form similar to inquiry pop up but not a modal that will start with account info then minimual listing info and media
         after completion say congrats, go here to update your listing to increase rank

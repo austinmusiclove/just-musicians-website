@@ -12,13 +12,10 @@ $genres       = $args['genres'] ?? [];
     x-on:mute-youtube-players="_toggleMute()"
     x-init="_setupVisibilityListener()"
 >
-    <?php get_template_part('template-parts/cards/standard-listing-card', '', [
+    <?php get_template_part('template-parts/cards/standard-listing-card-preview', '', [
         'genres'                        => $genres, // pass all genres; x-show expression will show the selected options
         'ensemble_size'                 => $listing_data['ensemble_size'],
         'verified'                      => $listing_data ? $listing_data['verified'] : false,
-        'lazyload_thumbnail'            => false,
-        'last'                          => false,
-        'instance'                      => 'listing-form',
         'rating'                        => $listing_data['rating']       ?? 0,
         'review_count'                  => $listing_data['review_count'] ?? 0,
     ]); ?>

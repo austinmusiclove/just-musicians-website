@@ -59,3 +59,27 @@ function getPreviousPlayerId(alco) {
         return false;
     }
 }
+
+function mediaSliderData(config = {}) {
+    return {
+        previousIndex: 0,
+        currentIndex: 0,
+        showArrows: isTouchDevice,
+        totalSlides: config.totalSlides ?? 1,
+        videoData:   config.videoData ?? [],
+        playerIds: {},
+        _updateIndex(newIndex)  { updateIndex(this, newIndex); },
+        _pausePreviousSlide()   { pausePreviousSlide(this); },
+        _pauseCurrentSlide()    { pauseCurrentSlide(this); },
+        _playCurrentSlide()     { playCurrentSlide(this); },
+        _toggleMuteAllVideos()  { toggleMuteAllVideos(this); },
+        _isPaused()             { return isPaused(this); },
+        _enterSlider()          { enterSlider(this); },
+        _leaveSlider()          { leaveSlider(this); },
+        _updateVideoData(videoData) {
+            this._updateIndex(0);
+            this.videoData = videoData;
+            this.totalSlides = videoData.length + 1;
+        },
+    };
+}

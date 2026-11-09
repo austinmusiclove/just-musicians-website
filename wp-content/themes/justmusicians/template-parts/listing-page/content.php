@@ -111,7 +111,6 @@
             <?php get_template_part('template-parts/inquiries/inquire-button', '', [
                 'post_id'     => !$is_preview ? get_the_ID() : '',
                 'name'        => !$is_preview ? get_field('name') : '',
-                'disabled'    => $is_preview,
                 'btn_classes' => 'hover:bg-yellow-light bg-yellow font-sun-motter w-full shadow-black-offset border-2 border-black px-2 py-2',
                 'btn_text'    => 'Send Inquiry',
             ]); ?>
