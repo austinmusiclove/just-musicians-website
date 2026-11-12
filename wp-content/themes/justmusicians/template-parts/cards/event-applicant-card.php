@@ -31,7 +31,8 @@
     <div class="flex flex-col gap-2 w-full sm:w-56 shrink-0 max-w-3xl">
 
         <!-- Media Slider -->
-        <?php get_template_part('template-parts/media-sliders/card-media-slider', '', [
+        <?php get_template_part('template-parts/cards/card-components/media-modal-thumbnail', '', [
+            'post_id'            => $args['listing_id'],
             'name'               => $args['name'],
             'lazyload_thumbnail' => $args['lazyload_thumbnail'],
             'thumbnail_url'      => $args['thumbnail_url'],

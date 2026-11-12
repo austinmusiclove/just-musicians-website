@@ -7,7 +7,8 @@
 >
 
     <!-- Media Slider -->
-    <?php get_template_part('template-parts/media-sliders/card-media-slider', '', [
+    <?php get_template_part('template-parts/cards/card-components/media-modal-thumbnail', '', [
+        'post_id'            => $args['post_id'],
         'name'               => $args['name'],
         'lazyload_thumbnail' => $args['lazyload_thumbnail'],
         'thumbnail_url'      => $args['thumbnail_url'],

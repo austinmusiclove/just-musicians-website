@@ -1,9 +1,8 @@
 <div class="py-4 relative flex flex-col sm:flex-row items-start gap-3 md:gap-7 relative">
 
     <!-- Media Slider -->
-    <?php get_template_part('template-parts/media-sliders/card-media-slider-preview', '', [
-        'lazyload_thumbnail' => false,
-        'thumbnail_url'      => get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
+    <?php get_template_part('template-parts/cards/card-components/media-modal-thumbnail-preview', '', [
+        'thumbnail_url' => get_template_directory_uri() . '/lib/images/placeholder/placeholder-image.webp',
     ]); ?>
 
     <div class="flex flex-col gap-y-2 w-full">

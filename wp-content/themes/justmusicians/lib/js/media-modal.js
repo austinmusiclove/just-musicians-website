@@ -50,7 +50,9 @@ function getPreviousPlayerId(alco) {
     }
 }
 function openMediaModal(alco) {
-    alco.showMediaModal = true;
+    if (Array.isArray(alco.videoData) && alco.videoData.length > 0) {
+        alco.showMediaModal = true;
+    }
 }
 function closeMediaModal(alco) {
     alco.showMediaModal = false;

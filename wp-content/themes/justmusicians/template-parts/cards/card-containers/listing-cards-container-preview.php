@@ -30,4 +30,6 @@ $genres       = $args['genres'] ?? [];
             get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton', '', []);
         ?>
     </div>
+
+    <?php get_template_part('template-parts/media-sliders/modal-media-slider', '', []); ?>
 </span>

@@ -7,7 +7,7 @@
         _updateIndex(newIndex) { this.previousIndex = this.currentIndex; this.currentIndex = newIndex; },
     }"
     <?php if ($args['is_preview']) { ?>x-init="$watch('orderedImageData', value => { totalSlides = orderedImageData['listing_images'].length == 0 ? 1 : orderedImageData['listing_images'].length; _updateIndex(0); })"<?php } ?>
-    x-on:mouseleave="showArrows = false;"
+    x-on:mouseleave="showArrows = false"
     x-on:mouseenter="showArrows = true"
 >
     <div class="flex h-full w-full transition-transform duration-500 ease-in-out"
@@ -68,27 +68,8 @@
         </div>
     </div>
 
-    <!-- Left Arrow -->
-    <div class="absolute top-1/2 transform -translate-y-1/2 left-4 transition-all duration-100 ease-in-out cursor-pointer z-10"
-        @click="_updateIndex((currentIndex === 0) ? totalSlides - 1 : currentIndex - 1)"
-        x-show="currentIndex > 0 && showArrows"
-        x-transition:enter-start="-translate-x-full opacity-0"
-        x-transition:enter-end="translate-x-0 opacity-100"
-        x-transition:leave-start="translate-x-0 opacity-100"
-        x-transition:leave-end="-translate-x-full opacity-0" >
-        <img class="rotate-180" src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Previous" />
-    </div>
-
-    <!-- Right Arrow -->
-    <div class="absolute top-1/2 transform -translate-y-1/2 right-4 transition-all duration-100 ease-in-out cursor-pointer z-10"
-        @click="_updateIndex((currentIndex === totalSlides - 1) ? 0 : currentIndex + 1)"
-        x-show="currentIndex < totalSlides - 1 && showArrows"
-        x-transition:enter-start="translate-x-full opacity-0"
-        x-transition:enter-end="translate-x-0 opacity-100"
-        x-transition:leave-start="translate-x-0 opacity-100"
-        x-transition:leave-end="translate-x-full opacity-0" >
-        <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/slider/arrow.svg'; ?>" width="24" height="24" alt="Next" />
-    </div>
+    <!-- Slider buttons -->
+    <?php get_template_part('template-parts/media-sliders/components/arrow-buttons', '', []); ?>
 
     <!-- Gallery Count -->
     <div class="bg-white/90 py-0.5 px-2 rounded-sm absolute top-2 right-2 text-12 z-10" x-text="currentIndex+1 + '/' + totalSlides"></div>

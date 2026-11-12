@@ -70,6 +70,7 @@ if (!empty($submission_ids)) {
             'next_page'           => $next_page,
         ]);
     }
+    get_template_part('template-parts/media-sliders/modal-media-slider', '', []);
 } else if ($page == 1) {
     get_template_part('template-parts/global/empty-states/no-applicants', '', []);
 }

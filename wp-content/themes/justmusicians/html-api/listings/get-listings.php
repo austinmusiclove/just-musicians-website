@@ -1,3 +1,4 @@
+
 <?php
 // Set Cache-Control so listings can be preloaded
 header('Cache-Control: private, max-age=60');
@@ -90,6 +91,7 @@ if (count($listings) > 0) {
             'next_page'              => $next_page,
         ]);
     }
+    get_template_part('template-parts/media-sliders/modal-media-slider', '', []);
 
 } else if ($page == 1) {
     get_template_part( 'template-parts/global/empty-states/no-search-results');
