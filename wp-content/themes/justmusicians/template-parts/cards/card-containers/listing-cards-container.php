@@ -11,10 +11,12 @@ $collection_id   = $args['collection_id'] ?? 0;
     x-data='Object.assign(
         favoriteButtonData(),
         youTubeIframeContainerData(),
+        mediaModalData(),
     )'
     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
+    x-on:clear-all-youtube-players="_clearAllPlayers()"
     x-on:pause-all-youtube-players="_pauseAllPlayers()"
-    x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
+    x-on:pause-youtube-player="_pausePlayerById($event.detail.playerId)"
     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
     x-on:mute-youtube-players="_toggleMute()"
     x-init="_setupVisibilityListener()"
@@ -72,8 +74,8 @@ $collection_id   = $args['collection_id'] ?? 0;
                     'position'               => $listing['position'],
                     'lazyload_thumbnail'     => $index >= 3,
                     'last'                   => $index == array_key_last($listings),
-                    'is_last_page'           => $is_last_page,
-                    'next_page'              => $next_page,
+                    'is_last_page'           => $args['is_last_page'],
+                    'next_page'              => $args['next_page'],
                 ]);
             }
 
@@ -84,9 +86,10 @@ $collection_id   = $args['collection_id'] ?? 0;
         } else {
             get_template_part( 'template-parts/global/empty-states/no-search-results');
         }
-        if ($is_last_page) {
+        if ($args['is_last_page']) {
             get_template_part( 'template-parts/global/empty-states/no-more-results');
         }
     }
 ?>
+<?php get_template_part('template-parts/media-sliders/modal-media-slider', '', []); ?>
 </span>

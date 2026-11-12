@@ -34,6 +34,9 @@
 
 
     <!-- Video player buttons -->
-    <?php get_template_part('template-parts/media-sliders/components/media-slider-buttons', '', []); ?>
+    <?php get_template_part('template-parts/media-sliders/components/play-button', '', []); ?>
+    <?php get_template_part('template-parts/media-sliders/components/pause-button', '', []); ?>
+    <?php get_template_part('template-parts/media-sliders/components/mute-buttons', '', []); ?>
+    <?php get_template_part('template-parts/media-sliders/components/arrow-buttons', '', []); ?>
 
 </div>

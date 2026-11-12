@@ -4,10 +4,14 @@ $genres       = $args['genres'] ?? [];
 ?>
 
 <span x-show="showSearchResultTab" x-cloak
-    x-data='youTubeIframeContainerData()'
+    x-data='Object.assign(
+        youTubeIframeContainerData(),
+        mediaModalData(),
+    )'
     x-on:init-youtube-player="_initPlayer($event.detail.playerId, $event.detail.videoData);"
+    x-on:clear-all-youtube-players="_clearAllPlayers()"
     x-on:pause-all-youtube-players="_pauseAllPlayers()"
-    x-on:pause-youtube-player="_pausePlayer($event.detail.playerId)"
+    x-on:pause-youtube-player="_pausePlayerById($event.detail.playerId)"
     x-on:play-youtube-player="_playPlayer($event.detail.playerId)"
     x-on:mute-youtube-players="_toggleMute()"
     x-init="_setupVisibilityListener()"

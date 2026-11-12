@@ -181,8 +181,9 @@ function get_youtube_video_data($post_ids) {
 
     $posts = [];
 
-    foreach ($post_ids as $video_post_id) {
+    foreach ($post_ids as $index => $video_post_id) {
         $posts[] = [
+            'index'      => $index,
             'post_id'    => $video_post_id,
             'url'        => get_post_meta($video_post_id, 'url', true),
             'video_id'   => get_post_meta($video_post_id, 'video_id', true),

@@ -70,11 +70,13 @@ function initPlayer(alpineComponent, playerId, videoData) {
         var player = new YT.Player(playerId, {
             host: 'https://www.youtube-nocookie.com',
             videoId: videoData.video_id, // remove this to init from iframe
+            width: '100%',
+            height: '100%',
             playerVars: {
-                controls: 0,
+                controls: 1, // 0 for legacy media slider
                 origin: siteData.siteUrl,
                 enablejsapi: 1,
-                mute: 1,
+                mute: 0,
                 autoplay: 0,
                 rel: 0,
                 start: videoData?.start_time || 0,
@@ -82,7 +84,7 @@ function initPlayer(alpineComponent, playerId, videoData) {
             events: {
                 "onReady": () => {
                     alpineComponent.players[playerId].isReady = true;
-                    if (!alpineComponent.playersMuted) { alpineComponent.players[playerId].unMute(); }
+                    //if (!alpineComponent.playersMuted) { alpineComponent.players[playerId].unMute(); }
                 },
                 "onStateChange": (event) => {
                     /*
@@ -94,6 +96,7 @@ function initPlayer(alpineComponent, playerId, videoData) {
                     if (event.data == YT.PlayerState.CUED)      { console.log('cued'); }
                     */
 
+                    alpineComponent.players[playerId].playerState = event.data; // Not setting until state change to distinguish between pre-play (undefined) and UNSTARTED (-1)
                     if (event.data == YT.PlayerState.PAUSED)  { alpineComponent.players[playerId].isPaused = true; }
                     if (event.data == YT.PlayerState.PLAYING) { alpineComponent.players[playerId].isPaused = false; }
                     if (event.data == YT.PlayerState.PLAYING) {
@@ -113,47 +116,48 @@ function initPlayer(alpineComponent, playerId, videoData) {
 
 }
 
-
 function setupVisibilityListener(alpineComponent) {
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            alpineComponent.$dispatch('pause-all-youtube-players');
+            pauseAllPlayers(alpineComponent);
         }
     });
 }
-
-
+function clearAllPlayers(alpineComponent) {
+    alpineComponent.players = {};
+}
 function pauseAllPlayers(alpineComponent) {
     Object.values(alpineComponent.players).forEach((player) => {
-        if (player.isReady) { player.pauseVideo(); }
+        pausePlayer(player);
     });
 }
-
-
-function pausePlayer(alpineComponent, playerId) {
-    if (playerId && alpineComponent.players[playerId] && alpineComponent.players[playerId].isReady) {
-        var playerState = alpineComponent.players[playerId].getPlayerState();
-        if (playerState == YT.PlayerState.UNSTARTED ||
-            playerState == YT.PlayerState.CUED      ||
-            playerState == YT.PlayerState.BUFFERING
-        ) {
-            alpineComponent.players[playerId].pauseNextPlay = true;
-        } else {
-            alpineComponent.players[playerId].pauseVideo();
-        }
-        alpineComponent.players[playerId].isPaused = true; // redundant but this usually fires before onStateChange creating a snappier UX
+function pausePlayerById(alpineComponent, playerId) {
+    if (playerId && alpineComponent.players[playerId]) {
+        pausePlayer(alpineComponent.players[playerId]);
     }
 }
-
-
+function pausePlayer(player) {
+    if (player && player.isReady) {
+        if (player.playerState == YT.PlayerState.UNSTARTED ||
+            player.playerState == YT.PlayerState.CUED      ||
+            player.playerState == YT.PlayerState.BUFFERING
+        ) {
+            player.mute();
+            player.pauseNextPlay = true;
+        } else {
+            player.pauseVideo();
+            player.isPaused = true; // redundant but this usually fires before onStateChange creating a snappier UX
+            player.playerState = YT.PlayerState.PAUSED;
+        }
+    }
+}
 function playPlayer(alpineComponent, playerId) {
     if (playerId && alpineComponent.players[playerId] && alpineComponent.players[playerId].isReady) {
+        alpineComponent.players[playerId].pauseNextPlay = false;
         alpineComponent.players[playerId].playVideo();
         alpineComponent.players[playerId].isPaused = false; // redundant but this usually fires before onStateChange creating a snappier UX
     }
 }
-
-
 function toggleMute(alpineComponent) {
     if (alpineComponent.playersMuted) {
         Object.values(alpineComponent.players).forEach((player) => {if (player.isReady) { player.unMute(); }});
@@ -166,11 +170,12 @@ function toggleMute(alpineComponent) {
 function youTubeIframeContainerData() {
     return {
         players: {},
-        playersMuted: true,
+        playersMuted: false,
         playersPaused: false,
         _initPlayer(playerId, videoId) { initPlayer(this, playerId, videoId); },
+        _clearAllPlayers()             { clearAllPlayers(this); },
         _pauseAllPlayers()             { pauseAllPlayers(this); },
-        _pausePlayer(playerId)         { pausePlayer(this, playerId); },
+        _pausePlayerById(playerId)     { pausePlayerById(this, playerId); },
         _playPlayer(playerId)          { playPlayer(this, playerId); },
         _toggleMute()                  { toggleMute(this); },
         _setupVisibilityListener()     { setupVisibilityListener(this); },

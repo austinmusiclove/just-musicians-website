@@ -150,6 +150,7 @@ $next_page       = $result ? $result['next_page']       : null;
                         'send_first_page' => $args['send_first_page'],
                         'listings'        => $listings,
                         'is_last_page'    => $is_last_page,
+                        'next_page'       => $next_page,
                     ]); ?>
 
                     <span class="page-indicator htmx-indicator-block">

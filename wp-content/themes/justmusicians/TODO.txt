@@ -119,27 +119,20 @@ Listing lifecycle
     Drip campaign to all users wtih a listing; separate drip for draft and pending that can be terminated when they publish
 Media slider
     ****make media slider have images instead of videos and play button opens a video slider modal
+        when you hit play and exit the modal something breaks and that video never is able to work again or it is just covered by spinner because the last player state was -1
+        new media slider for listing cards
+            buttons on thumbnail for images and video; no video button if no videos
+            swap out media slider in all cards; replace media-slider js with media-modal js and switch out card media slider tempalte part
+            listing page video slider
+                use media slider data function
+                make preview version or handle preview
         refactor current slider into a single template part that can be swapped out
             image sliders
                 listing page image slider
                 listing page stage plot slider
-            make a tempalte part that can accommodate all scenarios or one for each
-        new media slider for listing cards
-            create modal with video slider and regular iframes
-            ****video seeking
-            disable slider on thumbnail
-            open modal when click play button
-            listing page video slider
-                allow seeking
-                use media slider data function
-                use buttons template part
-                make preview version or handle preview
-                no related videos
-                remove mute buttons
-        open video in modal (maybe only in listing page)
-        video and image sliders with tab interface to switch between
+    add listing images and tab interface to switch between videos and images and a button on thumbnail to open images tab
+    overlay that says play video or open images on the thumbnail on hover over buttons
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
-    somehow make iframes be ready faster; buffering is not the bottle neck, it is getting to onReady
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
 Escrow

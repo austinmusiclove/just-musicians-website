@@ -30,12 +30,12 @@ function isPaused(alco) {
 }
 
 function enterSlider(alco) {
-    playCurrentSlide(alco);
+    //playCurrentSlide(alco); // for legacy media slider only
     alco.showArrows = true;
 }
 
 function leaveSlider(alco) {
-    pauseCurrentSlide(alco);
+    //pauseCurrentSlide(alco); // for legacy media slider only
     alco.showArrows = false;
 }
 
