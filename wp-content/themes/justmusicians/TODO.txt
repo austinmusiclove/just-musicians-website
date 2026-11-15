@@ -1,8 +1,98 @@
 Critical bugs
-    figure out why i'm getting tons of requests for artist and performance pages; is it my aws server doing something?
+    **figure out why i'm getting tons of requests for artist and performance pages; is it my aws server doing something?
     Make sure i am compliant with laws on cookies (google analytics)
-    Make sure if i upload a big image it gets reduced and the original large image is not saved
     Add customer support page
+SEO
+    ****update meta descriptions to emphasize no platform fees
+    ****try yoast or rank math
+    ***Preferred Vendor program or Ad space Launch Partnership program
+        Ad space and Luanch Partnership program for backlinks
+        include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
+    ***Add article schema to blog posts
+    ***IndexNow
+    Location/Category Pages
+        ****meta title and description not working
+            ***Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
+            Update meta descriptions to include "no booking fees" or "no platform fees"
+        ***Check people also ask for category queries and modify content for locale-category pages accordingly
+            Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+        **add somewhere on the page that bands can apply to be recommended on the page
+        add pricing for the specific service of the category and location
+        traditional paging;
+            use history api through htmx to have hrefs without forcing page reload
+            server rendered pagination links inside noscript tags for search engines
+            self ref canonical for each page url
+            can also just show load more button still instead of traditional page buttons
+        maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
+    Get backlinks to category locale pages
+        Swap links with local promoters, wedding planners, and other buyers for the locale page
+            get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+        get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
+    ***optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
+        add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
+        create a page dedicated to creating an inquiry for google
+    ***price estimator for live band in austin tx
+    Add a search feature that is like an AI prompt to log queries and learn over time what people are searching to inform what kind of keywords to target with landing pages
+    Add sidebar widget to direct users to add HM to their Google Preferred Sources
+    Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
+    Home page
+        ****Adjust top of page copy and meta description
+        Add stats section with total listings in austin, verified listings, 0 listing fees, 0% platform fee (also maybe # cities, # categories, year established)
+        Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
+    single listing pages
+        ***Fix orphan pages
+        *add self referencing canonical on listing pages?
+        Add internal links on listings pages to locale category pages (check with seo)
+        images and video in media slider do not show without js and probably do not get indexed either
+    performance
+        ***optimize images; del big images that exist safely;
+            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 36.68)
+                remove orphan images from server
+                reupload large files that are being utilized
+        preload iframes somehow and store them somehow so they can be preloaded
+        compress images on home
+        cache lifetimes for html (need to be careful caching html especially back end pages and admin pages that need to respond quickly to changes and be different for different users)
+        send emails in cron instead of waiting on them; they take some time
+        dedicated server
+    system for keeping data accurate by scraping artist websites and comparing information
+Escrow
+    explore legal issues
+        create generic and customizable performance contract
+    offer
+        musicians - payment collected in advance (guaranteed payment)
+        musicians - collect deposits
+        musicians - tax/income tracking
+        musicians - payment guarantee based on cancellation policy (musicians need to document that they fulfilled the job)
+        musicians - upload your own performance contract
+        musicians - we collect after the gig for you and ask for tip
+        clients - money back guarantee based on cancellation policy
+        clients - money back guarantee based on dispute
+        clients - we handle processing payment after gig if there is no dispute
+    figure out how to provide escrow with stripe
+        direct charge or destination charge (platform or marketplace)
+        express dashboard or component integration
+        musicians bring stripe account or white labeled
+        can i charge the client's card for the rest of the payment after the gig?
+My Listing dashboard
+    ***make badges available for them to put on their websites for backlinks
+    listing review status (require manual review to publish listing to avoid spam)
+    when publish listing for first time, redirect to my listing page
+    *back to listings button (wait til i have the listing back end page and it will go back to that)
+    show search rank in their area and how to improve it
+    view/edit/delete buttons
+    view/manage reviews
+    button to submit request for review from an email address
+Listing lifecycle
+    ***Join page funnel improvement
+        multi slide form similar to inquiry pop up but not a modal that will start with account info then minimual listing info and media
+        after completion say congrats, go here to update your listing to increase rank
+        logged in state skips the first slide with account info
+        add copy explaining why you should join similar to gigsalad
+        maybe sign them up without password and log them in and send email to change password; need to allow sign up through google too
+        maybe redirect all sign ups to a certain page that asks if you are a musician or buyer and clicking musician goes to join page with basic form
+    **Drip campaign to all users wtih a listing; separate drip for draft and pending that can be terminated when they publish
+    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
+    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
 Musician Pricing Page
     Tab on pricing page
     Verification call option (one per account)
@@ -23,75 +113,9 @@ Musician Pricing Page
             provide logos and embed codes for creating links
             auto verify it is the same domain as their website and HM link is there
     **need system for renewing verification just by making sure they are still active
-SEO
-    ****update meta descriptions to emphasize no platform fees
-    **Check people also ask for category queries and modify content for locale-category pages accordingly
-    **Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
-    Add a search feature that is like an AI prompt to log queries and learn over time what people are searching to inform what kind of keywords to target with landing pages
-    Update meta descriptions to include "no booking fees" or "no platform fees"
-    Add sidebar widget to direct users to add HM to their Google Preferred Sources
-    Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
-    Get backlinks to category locale pages
-        Swap links with local promoters, wedding planners, and other buyers for the locale page
-            get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
-        get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
-    Location/Category Pages
-        add pricing for the specific service of the category and location
-        traditional paging;
-            use history api through htmx to have hrefs without forcing page reload
-            server rendered pagination links inside noscript tags for search engines
-            self ref canonical for each page url
-            can also just show load more button still instead of traditional page buttons
-        add somewhere on the page that bands can apply to be recommended on the page
-        maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
-        add pricing for the specific service of the category and location
-        Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
-    optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
-        add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
-    Home page
-        *Add stats section with total listings in austin, verified listings, 0 listing fees, 0% platform fee
-        *Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
-        total number of listings, number of cities that have musicians, categories that have musicians, established year
-    single listing pages
-        Add internal links on listings pages to locale category pages (check with seo)
-        images and video in media slider do not show without js and probably do not get indexed either
-        add self referencing canonical on listing pages
-    performance
-        ****optimize images; del big images that exist safely;
-            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 43.49)
-                remove unneeded image sizes from server
-                remove orphan images from server
-        load youtube iframes one at a time starting with first one of each slider then reorder based on user interaction
-        cache for html
-        compress images on home
-        cache lifetimes for html (need to be careful caching html especially back end pages and admin pages that need to respond quickly to changes and be different for different users)
-        send emails in cron instead of waiting on them; they take some time
-        dedicated server
-    price estimator for live band in austin tx
-    system for keeping data accurate by scraping artist websites and comparing information
-    steal competitor backlinks by using seo tool to findout who links to them
-    ***Ad space and Luanch Partnership program for backlinks
-        include ad space in sidebars; certain pages have preferred ads; others are just random
-Listing form
-    *back to listings button (wait til i have the listing back end page and it will go back to that)
-    **when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
-    upload multiple images at once
-    **allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
-    scroll preview to section when corresponding input is focused
-    disable input until change made or auto save after input
-    limit access until you verify email
-    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
-    **accept pdf for stage plots
-    allow attaching stage plot to a gig
-    accept pdf for one sheet
-    make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
-    add regular email to remind draft listings to go in and complete their listings
-    Rename clear-listing-form to clear-listing-search-form
-    **Add press mentions to form
-    *Add event insurance (later sell insurance policies here)
 Listing page
     add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
-    **add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
+    ***add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
         add request to book feature like https://www.tayloralexanderart.com/book-online so that
     *add ticket sales numbers self reported by artists
     add gear list
@@ -107,33 +131,29 @@ Listing page
     badges for featured musician on page and standard listing card
     badge for "pricing available" for listings that have productized service pricing
     seasoned pro seniority badge (suggested in https://www.christophergracelive.com/post/the-hidden-costs-sites-like-the-bash-and-gigsalad-why-performers-and-clients-both-lose)
-My Listing page
-    back end page about your listing
-    show search rank in their area and how to improve it
-    view/edit/delete buttons
-    view/manage reviews
-    ***make badges available for them to put on their websites for backlinks
-Listing lifecycle
-    Create a way to detect duplicate listings based on duplicate emails, websites, spotify etc. between a claimed and unclaimed listing
-    Warn you already have a listing and need to claim if you enter the same Spotify or website as another listing in listing form
-    Drip campaign to all users wtih a listing; separate drip for draft and pending that can be terminated when they publish
+Listing form
+    ***organize subgenre by parent genre groups in listing form and in search filters
+    **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
+    **accept pdf for stage plots
+    **Add press mentions to form
+    *Add event insurance (later sell insurance policies here)
+    *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
+    *allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
+    upload multiple images at once
+    scroll preview to section when corresponding input is focused
+    disable input until change made or auto save after input
+    limit access until you verify email
+    allow attaching stage plot to a gig
+    accept pdf for one sheet
+    make click on preview classificaiton like genre open the appropriate tab in the form instead of just going to search opt area in the form
+    add regular email to remind draft listings to go in and complete their listings
+    Rename clear-listing-form to clear-listing-search-form
 Media slider
     add listing images and tab interface to switch between videos and images and a button on thumbnail to open images tab
     overlay that says play video or open images on the thumbnail on hover over buttons
     somehow replace restricted videos (error 101 or 150 from yt iframe api) with an image or remove from slider or don't allow them to be added in the first place
     swipe on mobile
     somehow check to see if video owner has restricted playback on non youtube websites and notify users when they try to add video; and don't include video in slider if this is the case (i think carol anne bosco has a video like this?)
-Escrow
-    explore legal issues
-        create generic and customizable performance contract
-    offer
-        payment collected in advance (guaranteed payment)
-        collect deposits
-        enforce cancellation policy
-        tax/income tracking
-    fine print
-        musicians need to document that they fulfilled the job
-    figure out how to provide escrow with stripe
 Applications Features to add
     **change name of applications to job postings
     Recurring events
@@ -222,7 +242,7 @@ Offer post type (future)
     Details
     Proposal relationship
 Users
-    ***when a user uploads a cover image for a listing, update their profile photo if they don't have one
+    *when a user uploads a cover image for a listing, update their profile photo if they don't have one
     *retroactively set user's profile image to their first listing's cover photo if they don't have one or to their gmail profile image
     *Automatically populate profile image with gmail image if they have one
     add default location setting in account settings
@@ -238,7 +258,6 @@ Reviews
     Emails
         add regular email to invite artists to write earnings contributions
         add regular email to invite artists to solicit reviews from bookers
-    *make venue reviews invite only for performers, no public write button
 Compensation Reporting
     *allow add new venue
     allow for using performance id in url
@@ -334,15 +353,7 @@ Code consistency and cleanliness
     Fix mu plugins depending on each other; move code to includes instead
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 UX
-    ***when click send inquiry and have no events, skip to date slide instead of existing event slide
-    ***Join page funnel improvement
-        multi slide form similar to inquiry pop up but not a modal that will start with account info then minimual listing info and media
-        after completion say congrats, go here to update your listing to increase rank
-        logged in state skips the first slide with account info
-        add copy explaining why you should join similar to gigsalad
-        maybe sign them up without password and log them in and send email to change password; need to allow sign up through google too
-        maybe redirect all sign ups to a certain page that asks if you are a musician or buyer and clicking musician goes to join page with basic form
-    ***organize subgenre by parent genre groups in listing form and in search filters
+    ****when click send inquiry and have no events, skip to date slide instead of existing event slide
     **pop up on top right that prompts you to log in with google as soon as you open the site or after delay
     add animation when add to collection/fav
     add animation when add to inquiry

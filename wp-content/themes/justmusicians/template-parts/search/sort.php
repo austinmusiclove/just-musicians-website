@@ -2,7 +2,7 @@
 
     <div class="flex items-center gap-2">
         <?php echo get_template_part('template-parts/global/tooltips/tooltip', '', [
-            'tooltip' => 'Learn more about the default <a class="text-yellow underline" target="_blank" href="' . site_url('/search-algorithm') . '">Hire Musicians search algorithm</a>.'
+            'tooltip' => 'Learn more about the default <a class="text-yellow underline" target="_blank" href="' . site_url('/search-algorithm/') . '">Hire Musicians search algorithm</a>.'
         ]); ?>
 
         <!-- Sort Dropdown with Alpine.js -->
