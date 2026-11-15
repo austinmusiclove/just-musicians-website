@@ -6,7 +6,7 @@
 
         <!-- Instagram -->
         <?php if (!empty(get_field('instagram_handle')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pInstagramHandle" x-cloak                         <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('instagram_handle')"                 <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('instagram_url'); ?>"          <?php } ?>
@@ -18,7 +18,7 @@
 
         <!-- X -->
         <?php if (!empty(get_field('x_handle')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pXHandle" x-cloak                                 <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('x_handle')"                         <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('x_url'); ?>"                  <?php } ?>
@@ -30,7 +30,7 @@
 
         <!-- Tiktok -->
         <?php if (!empty(get_field('tiktok_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pTiktokUrl" x-cloak                               <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('tiktok_handle')"                    <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('tiktok_url'); ?>"             <?php } ?>
@@ -42,7 +42,7 @@
 
         <!-- Facebook -->
         <?php if (!empty(get_field('facebook_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pFacebookUrl" x-cloak                             <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('facebook_url')"                     <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('facebook_url'); ?>"           <?php } ?>
@@ -54,7 +54,7 @@
 
         <!-- Youtube -->
         <?php if (!empty(get_field('youtube_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pYoutubeUrl" x-cloak                              <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('youtube_url')"                      <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('youtube_url'); ?>"            <?php } ?>
@@ -66,7 +66,7 @@
 
         <!-- Bandcamp -->
         <?php if (!empty(get_field('bandcamp_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pBandcampUrl" x-cloak                             <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('bandcamp_url')"                     <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('bandcamp_url'); ?>"           <?php } ?>
@@ -78,7 +78,7 @@
 
         <!-- Spotify -->
         <?php if (!empty(get_field('spotify_artist_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pSpotifyArtistUrl" x-cloak                        <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('spotify_artist_url')"               <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('spotify_artist_url'); ?>"     <?php } ?>
@@ -90,7 +90,7 @@
 
         <!-- Apple -->
         <?php if (!empty(get_field('apple_music_artist_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pAppleMusicArtistUrl" x-cloak                     <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('apple_music_artist_url')"           <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('apple_music_artist_url'); ?>" <?php } ?>
@@ -102,7 +102,7 @@
 
         <!-- Soundcloud -->
         <?php if (!empty(get_field('soundcloud_url')) or $args['is_preview']) { ?>
-        <a class="flex items-center gap-2" target="_blank"
+        <a class="flex items-center gap-2" target="_blank" rel="nofollow"
             <?php if ($args['is_preview'])  { ?> x-show="pSoundcloudUrl" x-cloak                           <?php } ?>
             <?php if ($args['is_preview'])  { ?> x-on:click="focusElm('soundcloud_url')"                   <?php } ?>
             <?php if (!$args['is_preview']) { ?> href="<?php echo get_field('soundcloud_url'); ?>"         <?php } ?>
