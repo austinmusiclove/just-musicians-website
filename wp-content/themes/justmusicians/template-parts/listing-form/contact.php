@@ -76,7 +76,7 @@
                     x-model="pXHandle">
             </div>
             <input type="hidden" id="x_url" name="x_url"
-                x-init="$watch('pXHandle', value => pXUrl = value ? 'https://x.com/@' + value : '')"
+                x-init="$watch('pXHandle', value => pXUrl = value ? 'https://x.com/' + value : '')"
                 x-model="pXUrl">
         </div>
 
