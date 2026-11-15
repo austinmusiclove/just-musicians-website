@@ -3,7 +3,7 @@
 if (!empty($args['ensemble_size'])) { ?>
 
     <div class="flex items-center gap-1">
-        <img style="height: .9rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/user-group.svg" />
+        <img style="height: .9rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/user-group.svg" width="14" height="14" alt="Ensemble Size" />
         <span class="text-14 v"><?php echo implode(', ', $args['ensemble_size']); ?></span>
     </div>
 
@@ -13,7 +13,7 @@ if (!empty($args['ensemble_size'])) { ?>
 ?>
 
     <div class="flex items-center gap-1" x-show="<?php echo $ensemble_size_var; ?> && <?php echo $ensemble_size_var; ?>.length > 0" x-claok>
-        <img style="height: .9rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/user-group.svg" />
+        <img style="height: .9rem" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/user-group.svg" width="14" height="14" alt="Ensemble Size" />
 
         <span class="text-14 v"
             x-show="<?php echo $ensemble_size_var; ?>.length > 0" x-cloak
