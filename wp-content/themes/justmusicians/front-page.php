@@ -12,6 +12,8 @@
  * @package JustMuscians
  */
 
+// Set meta title and description
+/* Replaced by SEO plugin
 $meta_title = 'Hire Live Musicians Near Austin, Texas';
 $meta_description = 'Hire live musicians for weddings, parties, corporate events, and more. All it takes is a free account to send inquiries and get responses from musicians.';
 add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
@@ -20,6 +22,7 @@ add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
 add_action( 'wp_head', function () use ( $meta_description ) {
     echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
 }, 1);
+ */
 
 // Get user collections
 $collections_result = get_user_collections([

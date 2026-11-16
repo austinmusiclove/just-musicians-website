@@ -5,6 +5,8 @@
  * @package JustMusicians
  */
 
+// Set meta title and description
+/* Replaced by SEO plugin
 $listing_name     = get_field('name');
 $listing_city     = get_field('city');
 $listing_state    = get_field('state');
@@ -16,6 +18,7 @@ add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
 add_action( 'wp_head', function () use ( $meta_description ) {
     echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
 }, 1);
+*/
 
 get_header();
 
