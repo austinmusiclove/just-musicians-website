@@ -8,6 +8,8 @@ wp-content/mu-plugins/local-by-flywheel-live-link-helper.php
 wp-content/cache
 wp-content/debug.log
 wp-content/mu-plugins/google-sheets/website-349104-9c7063841440.json
+wp-content/plugins/seo-by-rank-math/
+wp-content/plugins/wordpress-seo/
 
 # Ignore WordPress Core
 /wp-admin/
