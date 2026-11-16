@@ -35,7 +35,7 @@ $breadcrumb_items = [
 ?>
 
 <header class="bg-brown-light-3 pt-12 md:pt-24 relative overflow-hidden <?php echo $header_padding; ?>">
-    <img class="w-32 absolute top-0 right-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/hm-violator-blog.svg'; ?>" alt="" />
+    <img class="w-32 absolute top-0 right-0" src="<?php echo get_template_directory_uri() . '/lib/images/other/hm-violator-blog.svg'; ?>" alt="" width="120" height="120" />
     <div class="container grid grid-cols-1 sm:grid-cols-10 gap-x-8 md:gap-x-24 gap-y-2 md:gap-y-10"> <!--Look here -->
         <div class="sm:col-span-7 pr-8 sm:pr-0 mt-8">
             <div class="flex">

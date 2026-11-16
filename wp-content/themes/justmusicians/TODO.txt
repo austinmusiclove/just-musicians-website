@@ -3,13 +3,20 @@ Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
     Add customer support page
 SEO
+    SEO plugin
+        Url struture update for lc-landing
+            check title/desc on home
+            check title/desc on listing pages
+            check title/desc on lc-landing pages
+            check title/desc on blog archive page
+            check title/desc on posts
+            check title/desc on pages
     ****update meta descriptions to emphasize no platform fees
-    ****try yoast or rank math
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
-    ***Add article schema to blog posts
-    ***IndexNow
+    **Add main category for listings to add to meta title and description to keep them unique from each other
+    **change join page to a regular page so i can use seo plugin on it
     Location/Category Pages
         ****meta title and description not working
             ***Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
@@ -23,7 +30,6 @@ SEO
             server rendered pagination links inside noscript tags for search engines
             self ref canonical for each page url
             can also just show load more button still instead of traditional page buttons
-        maybe change url_path to locale slug and category slug so that there can't be an issue with forgetting slash or anything like that
     Get backlinks to category locale pages
         Swap links with local promoters, wedding planners, and other buyers for the locale page
             get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
@@ -354,7 +360,7 @@ Code consistency and cleanliness
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 UX
     ****when click send inquiry and have no events, skip to date slide instead of existing event slide
-    **pop up on top right that prompts you to log in with google as soon as you open the site or after delay
+    **pop up on top right that prompts you to log in with google as soon as you open the site or after delay; https://developers.google.com/identity/gsi/web/guides/display-google-one-tap?authuser=6#html
     add animation when add to collection/fav
     add animation when add to inquiry
     Filters

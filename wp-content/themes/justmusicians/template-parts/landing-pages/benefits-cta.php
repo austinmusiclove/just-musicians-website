@@ -10,7 +10,7 @@
                 <ul role="list" class="grid grid-cols-1 gap-x-8 gap-y-3 text-base/7 text-brown-dark-3">
                     <?php foreach ($args['benefits'] as $benefit) { ?>
                         <li class="flex items-start gap-x-3">
-                            <img class="h-6 w-6 shrink-0 mt-0.5" alt="" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/yellow-circle-check.svg" />
+                            <img class="h-6 w-6 shrink-0 mt-0.5" alt="" src="<?php echo get_template_directory_uri(); ?>/lib/images/icons/yellow-circle-check.svg" width="23" height="23" />
                             <?php echo $benefit; ?>
                         </li>
                     <?php } ?>
