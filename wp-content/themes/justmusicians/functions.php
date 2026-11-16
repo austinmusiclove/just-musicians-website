@@ -429,7 +429,9 @@ require get_template_directory() . '/lib/inc/sitemap.php';
 require get_template_directory() . '/lib/inc/robots.php';
 require get_template_directory() . '/lib/inc/404-redirects.php';
 require get_template_directory() . '/lib/inc/logout.php';
-require get_template_directory() . '/lib/inc/gtags.php';
+require get_template_directory() . '/lib/inc/rss.php';
+//require get_template_directory() . '/lib/inc/gtags.php';
+//require get_template_directory() . '/lib/inc/org-schema.php';
 // Enables htmx preload for home and pages; Removed because it was causing issues with undesired browser caching especially while logged in
 // When logging in with user/pass, the page would reload from cache instead of getting the new logged in version of the page. This would need to be solved to re-enable the preload on pages and home
 //require get_template_directory() . '/lib/inc/preload.php';
@@ -461,7 +463,6 @@ function smartwp_remove_wp_block_library_css(){
 add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
 
-
 // Req debug
 function log_incoming_request_url() {
     $method        = $_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN';
@@ -478,12 +479,4 @@ add_action( 'init', 'log_incoming_request_url' ); // 'init' is an early action
 //add_filter( 'nonce_life', function( $seconds ) {
     //return 20; // seconds
 //});
-
-
-// Output Organization schema in the head
-function hm_output_organization_schema() {
-    get_template_part('template-parts/global/schema/organization-schema');
-}
-add_action('wp_head', 'hm_output_organization_schema');
-
 ?>
