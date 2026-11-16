@@ -19,11 +19,10 @@ if ( $categories_query->have_posts() ) { ?>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">
                 <?php while ( $categories_query->have_posts() ) {
                     $categories_query->the_post();
-                    $url_path = get_field('url_path');
                     $title = get_field('title');
                 ?>
                     <a class="text-20 text-yellow-aaa hover:text-yellow py-2 pr-2 underline inline-block"
-                        href="<?php echo trailingslashit(site_url($url_path)); ?>">
+                        href="<?php echo get_permalink(get_the_ID()); ?>">
                         <?php echo $title; ?>
                     </a>
                 <?php } wp_reset_postdata(); ?>

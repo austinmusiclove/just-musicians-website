@@ -3,20 +3,13 @@
 function noindex_specific_post_type($robots) {
     if (
         is_singular('collection') or
-        is_singular('inquiry') or // Deprecated
-        is_singular('event') or
         is_singular('proposal') or
         is_singular('offer') or
-        is_singular('application') or
-        is_singular('app_submission') or
         is_singular('youtubevideo') or
-        is_singular('artist') or
-        is_singular('performance') or
         is_singular('venue') or
         is_singular('listing_review') or
         is_singular('buyer_review') or
         is_singular('venue_review') or
-        is_singular('comp_report') or
         is_singular('review_submission') or // Keep this old post type unless all review submission posts are deleted
         is_singular('tmp_code') or
         is_singular('glossary') or
@@ -47,3 +40,46 @@ function noindex_specific_post_type($robots) {
     return $robots;
 }
 add_filter('wp_robots', 'noindex_specific_post_type');
+
+// Force noindex, nofollow on private post types (and any restricted dashboard pages)
+add_filter( 'rank_math/frontend/robots', function( $robots ) {
+    if (
+        is_singular('collection') or
+        is_singular('proposal') or
+        is_singular('offer') or
+        is_singular('youtubevideo') or
+        is_singular('venue') or
+        is_singular('listing_review') or
+        is_singular('buyer_review') or
+        is_singular('venue_review') or
+        is_singular('review_submission') or // Keep this old post type unless all review submission posts are deleted
+        is_singular('tmp_code') or
+        is_singular('glossary') or
+        is_singular('glossary-term') or
+        is_singular('venue') or
+        is_singular('podcast') or
+        is_singular('recommendation') or
+        is_page('account') or
+        is_page('listings') or
+        is_page('collections') or
+        is_page('inquiries') or // Deprecated
+        is_page('my-gigs') or
+        is_page('my-events') or
+        is_page('event-form') or
+        is_page('applications') or
+        is_page('submitted-applications') or
+        is_page('application-form') or
+        is_page('subscriptions') or
+        is_page('checkout-success') or
+        is_page('password-reset') or
+        is_page('request-password-reset') or
+        is_page('podcast') or
+        is_page('messages') or
+        get_query_var( 'custom-template' ) === 'landing-search'
+    ) {
+        unset( $robots['index'], $robots['follow'] );
+        $robots['noindex']  = 'noindex';
+        $robots['nofollow'] = 'nofollow';
+    }
+    return $robots;
+} );

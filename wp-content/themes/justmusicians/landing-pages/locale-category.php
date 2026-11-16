@@ -1,33 +1,9 @@
 <?php
 
 // Post data
-global $wp;
-$post_id = null;
-$current_path = $wp->request;
-$query = new WP_Query( [
-    'post_type'      => 'lc-landing',
-    'post_status'    => 'publish',
-    'posts_per_page' => 1,
-    'fields'         => 'ids',
-    'meta_query'     => [
-        [
-            'key'   => 'url_path',
-            'value' => $current_path,
-            'compare' => '=',
-        ]
-    ]
-]);
-if ( ! empty( $query->posts ) ) {
-    $post_id = $query->posts[0];
-} else {
-    status_header(404);
-    include( get_query_template( '404' ) );
-    exit;
-}
+$post_id = get_the_ID();
 $title            = get_post_meta($post_id, 'title', true);
-$meta_title       = get_post_meta($post_id, 'meta_title', true);
 $description      = get_post_meta($post_id, 'description', true);
-$meta_description = get_post_meta($post_id, 'meta_description', true);
 $region_post      = get_post_meta($post_id, 'region', true);
 $locale_post      = get_post_meta($post_id, 'locale', true);
 $category_post    = get_post_meta($post_id, 'category', true);
@@ -36,11 +12,13 @@ $distance_miles   = get_post_meta($post_id, 'distance_miles', true);
 $country          = get_post_meta($region_post, 'country', true);
 $region_name      = get_post_meta($region_post, 'name', true);
 $locale_name      = get_post_meta($locale_post, 'name', true);
-$locale_url_path  = get_post_meta($locale_post, 'url_path', true);
 $category_name    = get_post_meta($category_post, 'plural_name', true);
 $category_slug    = get_post_meta($category_post, 'taxonomy_slug', true);
 
 // Set meta title and description
+/* Replaced by SEO plugin
+$meta_title       = get_post_meta($post_id, 'meta_title', true);
+$meta_description = get_post_meta($post_id, 'meta_description', true);
 if ( ! empty( $meta_title ) ) {
     add_filter( 'pre_get_document_title', function ( $title ) use ( $meta_title ) {
             return esc_html( $meta_title );
@@ -51,6 +29,7 @@ if ( ! empty( $meta_description ) ) {
         echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
     }, 1);
 }
+ */
 
 $location_label = $locale_name . ', ' . $region_name;
 $locale_lat = null;
@@ -142,6 +121,7 @@ get_template_part('template-parts/landing-pages/near-by-category-locale-links', 
     'region_post_id'   => $region_post,
 ]);
 /*
+$locale_url_path  = get_post_meta($locale_post, 'url_path', true);
 get_template_part('template-parts/landing-pages/partners', '', [
     'heading'     => "Trusted $locale_name Partners & Affiliates",
     'description' => "We proudly collaborate with local businesses and organizations who share our passion for keeping $locale_name's live music scene thriving. Discover some of our trusted partners and affiliates that help us bring great music to life.",

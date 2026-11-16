@@ -26,11 +26,10 @@ if ( $query->have_posts() ) { ?>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full">
                 <?php while ( $query->have_posts() ) {
                     $query->the_post();
-                    $cat_url_path = get_field('url_path');
                     $cat_name = get_post_meta(get_field('category'), 'plural_name', true);
                 ?>
                     <a class="text-20 text-yellow-aaa hover:text-yellow py-2 pr-2 underline inline-block"
-                        href="<?php echo trailingslashit(site_url($cat_url_path)); ?>">
+                        href="<?php echo get_permalink(get_the_ID()); ?>">
                         <?php echo $cat_name; ?>
                     </a>
                 <?php } wp_reset_postdata(); ?>

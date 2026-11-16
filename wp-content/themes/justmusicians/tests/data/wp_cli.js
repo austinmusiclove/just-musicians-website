@@ -160,9 +160,12 @@ export function wpCliGetPostField(postId, field) {
 }
 
 export function wpCliGetPostUrl(postId) {
-    // get_permalink() can transiently return empty under concurrent load, so reject blank output and retry
+    if (!postId) {
+        throw new Error(`wpCliGetPostUrl called with empty postId: ${postId}`);
+    }
+
     const output = wpCliWithRetry(
-        `wp post url ${postId} --path=${WP_PATH}`,
+        `wp eval 'echo get_permalink((int) ${postId});' --path=${WP_PATH}`,
         (out) => out.trim().length > 0
     );
     return output.trim();

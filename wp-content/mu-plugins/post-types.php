@@ -67,7 +67,14 @@ function register_post_types() {
 
     // Collections
     register_post_type('collection', array(
-        'public' => true,
+        'public' => false,
+        'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -139,8 +146,14 @@ function register_post_types() {
 
     // Event
     register_post_type('event', array(
-        'public' => true,
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -203,8 +216,14 @@ function register_post_types() {
 
     // Application
     register_post_type('application', array(
-        'public' => true,
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -219,8 +238,14 @@ function register_post_types() {
 
     // Application Submission
     register_post_type('app_submission', array(
-        'public' => true,
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -235,8 +260,14 @@ function register_post_types() {
 
     // Artists
     register_post_type('artist', array(
-        'public' => true, // change to false after search console removed indexed posts
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -251,8 +282,14 @@ function register_post_types() {
 
     // Performance
     register_post_type('performance', array(
-        'public' => true, // change to false after search console removed indexed posts
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title'),
         'labels' => array(
@@ -300,8 +337,14 @@ function register_post_types() {
 
     // Compensation Report
     register_post_type('comp_report', array(
-        'public' => true,
+        'public' => false,
         'show_ui' => true,
+        'publicly_queryable' => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'exclude_from_search' => true,
+        'has_archive'         => false,
+        'query_var'           => true,
         'show_in_rest' => true,
         'supports' => array('title', 'author'),
         'labels' => array(
@@ -332,7 +375,7 @@ function register_post_types() {
 
     // Podcast
     register_post_type('podcast', array(
-        'public' => true,
+        'public' => false,
         'show_ui' => true,
         'show_in_rest' => true,
         'supports' => array('title', 'thumbnail', 'excerpt'),
@@ -399,27 +442,37 @@ function register_post_types() {
 
     // Locale Category Landing Page
     register_post_type('lc-landing', array(
-        'public' => false,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'show_in_menu' => 'landing-pages',
-        'supports' => array('title', 'editor'),
-        'labels' => array(
-          'name' => 'Locale Category Landing',
-          'add_new_item' => 'Add New Locale Category Landing',
-          'edit_item' => 'Edit Locale Category Landing',
-          'all_items' => 'Locale Category Landings',
-          'singular_name' => 'Locale Category Landing'
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_rest'        => true,
+        'show_in_menu'        => 'landing-pages',
+        'has_archive'         => false,
+        'rewrite'             => false, // Prevents /lc-landing/... URLs
+        'query_var'           => true,
+        'supports'            => array('title', 'editor'),
+        'labels'              => array(
+            'name'          => 'Locale Category Landing',
+            'add_new_item'  => 'Add New Locale Category Landing',
+            'edit_item'     => 'Edit Locale Category Landing',
+            'all_items'     => 'Locale Category Landings',
+            'singular_name' => 'Locale Category Landing',
         ),
-        'menu_icon' => 'dashicons-tag'
+        'menu_icon'           => 'dashicons-tag',
     ));
 
 }
 
 function register_taxonomies() {
   register_taxonomy('mcategory', array('listing', 'artist'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -432,8 +485,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('genre', array('listing', 'artist', 'inquiry', 'event'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -446,8 +505,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('subgenre', array('listing', 'artist'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -460,8 +525,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('instrumentation', array('listing', 'artist'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -474,8 +545,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('setting', array('listing', 'artist', 'event'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -488,8 +565,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('keyword', array('listing', 'artist'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -502,8 +585,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('ensemble_size', array('listing', 'inquiry', 'event'), array(
-    'public' => true,
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -516,8 +605,14 @@ function register_taxonomies() {
     )
   ));
   register_taxonomy('mediatag', array('listing', 'attachment', 'youtubevideo'), array(
-    'public' => true, // change to false after search console removed indexed posts
-    'show_ui' => true,
+    'public'             => false, // No public archive pages or sitemaps
+    'publicly_queryable' => false, // Blocks front-end ?taxonomy=term URLs
+    'show_ui'            => true,  // Shows the taxonomy box in the post editor
+    'show_in_menu'       => true,  // Shows under your CPT menu (requires manage_terms cap)
+    'show_in_nav_menus'  => false,
+    'show_tagcloud'      => false,
+    'rewrite'            => false,
+    'query_var'          => false,
     'hierarchical' => false,
     'show_in_rest' => true,
     'capabilities' => [ 'assign_terms' => 'read', ],
@@ -559,6 +654,17 @@ add_action('admin_menu', function () {
         21
     );
 });
+
+// Set up proper slugs for lc-landing pages
+add_filter('post_type_link', function($post_link, $post) {
+    if ($post->post_type === 'lc-landing') {
+        $url_path = get_post_meta($post->ID, 'url_path', true);
+        if (!empty($url_path)) {
+            return trailingslashit(home_url('/' . ltrim($url_path, '/')));
+        }
+    }
+    return $post_link;
+}, 10, 2);
 
 function get_taxonomy_terms() {
     $taxonomy = $_GET['taxonomy'];

@@ -69,3 +69,35 @@ add_action('parse_request', function($wp) {
     ];
 });
 
+// Resolve custom /city/category URL to the correct lc-landing post
+add_filter('request', function($query_vars) {
+    if (!is_admin() && ($query_vars['custom-template'] ?? '') === 'landing-locale-category') {
+        $locale   = sanitize_title($query_vars['lm-locale'] ?? '');
+        $category = sanitize_title($query_vars['lm-category'] ?? '');
+
+        if ($locale && $category) {
+            $target_path = "{$locale}/{$category}";
+
+            $posts = get_posts([
+                'post_type'      => 'lc-landing',
+                'post_status'    => 'publish',
+                'posts_per_page' => 1,
+                'fields'         => 'ids',
+                'meta_query'     => [
+                    [
+                        'key'     => 'url_path',
+                        'value'   => [ $target_path, "/{$target_path}", "{$target_path}/", "/{$target_path}/" ],
+                        'compare' => 'IN',
+                    ],
+                ],
+            ]);
+
+            if (!empty($posts)) {
+                // Keep your custom vars so your template can still read get_query_var('lm-locale') etc.
+                $query_vars['post_type'] = 'lc-landing';
+                $query_vars['p']         = $posts[0];
+            }
+        }
+    }
+    return $query_vars;
+});
