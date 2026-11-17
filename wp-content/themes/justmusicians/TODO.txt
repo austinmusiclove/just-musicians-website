@@ -3,17 +3,12 @@ Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
     Add customer support page
 SEO
-    ****update meta descriptions to emphasize no platform fees
-    ****Add meta descriptions to all pages
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
     **Add main category for listings to add to meta title and description to keep them unique from each other
     **change join page to a regular page so i can use seo plugin on it
     Location/Category Pages
-        ****meta title and description not working
-            ***Add names of recommended listings in the copy at the top right under H1 to make it more unique and also give the user the answer right away
-            Update meta descriptions to include "no booking fees" or "no platform fees"
         ***Check people also ask for category queries and modify content for locale-category pages accordingly
             Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
         **add somewhere on the page that bands can apply to be recommended on the page

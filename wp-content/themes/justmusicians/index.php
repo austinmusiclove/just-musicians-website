@@ -39,8 +39,8 @@ get_header();
     <div class="sm:col-span-4 flex flex-col gap-y-6 justify-center">
         <div class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block w-fit font-bold"><?php echo get_the_date(); ?></div>
         <h1 class="font-bold text-32 md:text-36 lg:text-40"><?php the_title(); ?></h1>
-        <div class="text-20 uppercase text-brown-dark-1 opacity-50 font-bold"><?php the_author(); ?></div>
-        <a class="font-bold text-36 font-sans text-yellow inline-block hover:text-black" href="<?php the_permalink(); ?>">Read &rarr;</a>
+        <div class="text-20 uppercase text-brown-dark-2 opacity-80 font-bold"><?php the_author(); ?></div>
+        <a class="font-bold text-36 font-sans text-yellow-aaa inline-block hover:text-yellow" href="<?php the_permalink(); ?>">Read &rarr;</a>
     </div>
 
     <?php
@@ -54,55 +54,57 @@ get_header();
     </div>
 </header>
 
-<div class="pt-12 pb-0 md:pb-12 container">
-    <h3 class="text-28 opacity-60 font-bold mb-16">More articles</h3>
+<main role="main">
+    <div class="pt-12 pb-0 md:pb-12 container">
+        <h2 class="text-28 font-bold mb-16">More articles</h2>
 
-    <div class="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-8 md:gap-20 xl:gap-24">
-        <div class="col-span-4 xl:col-span-5 grid md:grid-cols-2 gap-20 xl:gap-x-24 gap-y-8">
-        <?php
-            if ( have_posts() ) {
-                $count = 0;
-                global $wp_query;
-                $post_count = $wp_query->post_count;
-                while ( have_posts() ) {
-                    the_post();
-                    $count++;
-                if ($count == $post_count - 1) {
-                    $border = 'border-b border-black/20 pb-8 md:border-0';
-                } elseif ($count == $post_count) {
-                    $border = '';
-                } else {
-                    $border = 'border-b border-black/20 pb-8';
+        <div class="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-8 md:gap-20 xl:gap-24">
+            <div class="col-span-4 xl:col-span-5 grid md:grid-cols-2 gap-20 xl:gap-x-24 gap-y-8">
+            <?php
+                if ( have_posts() ) {
+                    $count = 0;
+                    global $wp_query;
+                    $post_count = $wp_query->post_count;
+                    while ( have_posts() ) {
+                        the_post();
+                        $count++;
+                    if ($count == $post_count - 1) {
+                        $border = 'border-b border-black/20 pb-8 md:border-0';
+                    } elseif ($count == $post_count) {
+                        $border = '';
+                    } else {
+                        $border = 'border-b border-black/20 pb-8';
+                    }
+            ?>
+                     <div class="col <?php echo $border; ?>">
+                        <div class="text-16 font-bold mb-3"><?php echo get_the_date(); ?></div>
+                        <h3 class="font-bold text-25 mb-6">
+                            <a href="<?php echo esc_url(get_the_permalink()); ?>">
+                                <?php echo esc_html(get_the_title()); ?>
+                            </a>
+                        </h3>
+                        <div class="text-18 uppercase text-brown-dark-2 opacity-80 font-bold mb-6"><?php the_author(); ?></div>
+                        <a class="font-bold text-25 font-sans text-yellow-aaa inline-block hover:text-yellow hover:scale-105" href="<?php echo esc_url(get_the_permalink()); ?>">Read &rarr;</a>
+
+                     </div>
+            <?php
+                    }
                 }
-        ?>
-                 <div class="col <?php echo $border; ?>">
-                    <div class="text-16 font-bold mb-3"><?php echo get_the_date(); ?></div>
-                    <h3 class="font-bold text-25 mb-6">
-                        <a href="<?php echo esc_url(get_the_permalink()); ?>">
-                            <?php echo esc_html(get_the_title()); ?>
-                        </a>
-                    </h3>
-                    <div class="text-18 uppercase text-brown-dark-1 opacity-50 font-bold mb-6">John Filippone</div>
-                    <a class="font-bold text-25 font-sans text-yellow inline-block hover:scale-105" href="<?php echo esc_url(get_the_permalink()); ?>">Read &rarr;</a>
+            ?>
 
-                 </div>
-        <?php
-                }
-            }
-        ?>
-
-        </div>
-        <div class="col-span-4 lg:col-span-2 relative pb-8">
-            <div class="sticky top-24">
-                <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
-                    'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
-                    'responsive' => 'lg:border-none lg:p-0'
-                )); ?>
+            </div>
+            <div class="col-span-4 lg:col-span-2 relative pb-8">
+                <div class="sticky top-24">
+                    <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
+                        'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
+                        'responsive' => 'lg:border-none lg:p-0'
+                    )); ?>
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
+</main>
 
 <?php
 un_simple_pagination();

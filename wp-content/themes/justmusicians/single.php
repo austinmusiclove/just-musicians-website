@@ -44,7 +44,7 @@ $breadcrumb_items = [
             <h1 class="font-bold text-32 md:text-40 mb-8"><?php the_title(); ?></h1>
             <div class="flex items-center gap-4 font-bold">
                 <span class="text-16 px-2 py-0.5 rounded-full bg-yellow inline-block"><?php echo get_the_date(); ?></span>
-                <span class="text-20 uppercase text-brown-dark-1 opacity-50"><?php echo the_author_meta('display_name', get_post_field('post_author')); ?></span>
+                <span class="text-20 uppercase text-brown-dark-2 opacity-80"><?php echo the_author_meta('display_name', get_post_field('post_author')); ?></span>
             </div>
                 <!--
                 <div class="flex items-center gap-3 <?php echo $social_icons_responsive; ?>">
@@ -74,20 +74,22 @@ $breadcrumb_items = [
 </header>
 
 
-<div class="container lg:grid lg:grid-cols-10 gap-24 py-8">
-    <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
-        <?php the_content(); ?>
-        <div class="text-20 uppercase text-brown-dark-1 opacity-50 mt-4 font-bold">By <?php echo the_author_meta('display_name', get_post_field('post_author')); ?></div>
-    </div>
-    <div class="col lg:col-span-3 relative">
-        <div class="sticky top-24">
-            <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
-                'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
-                'responsive' => 'lg:border-none lg:p-0'
-            )); ?>
+<main role="main">
+    <div class="container lg:grid lg:grid-cols-10 gap-24 py-8">
+        <div class="col lg:col-span-7 article-body mb-8 lg:mb-0">
+            <?php the_content(); ?>
+            <div class="text-20 uppercase text-brown-dark-2 opacity-80 mt-4 font-bold">By <?php echo the_author_meta('display_name', get_post_field('post_author')); ?></div>
+        </div>
+        <div class="col lg:col-span-3 relative">
+            <div class="sticky top-24">
+                <?php echo get_template_part('template-parts/inquiries/inquiry-sidebar', '', array(
+                    'button_color' => 'bg-navy text-white hover:bg-yellow hover:text-black',
+                    'responsive' => 'lg:border-none lg:p-0'
+                )); ?>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 
 <?php
