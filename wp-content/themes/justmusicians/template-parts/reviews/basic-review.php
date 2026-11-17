@@ -16,8 +16,8 @@
             <?php endif; ?>
 
             <div class="text-16 flex flex-col gap-1 justify-center items-left">
-                <div class="font-semibold text-grey"><?php echo $args['author_name']; ?></div>
-                <div class="text-grey"><?php echo implode(' at ', array_filter([$args['author_position'], $args['author_organization']])); ?></div>
+                <div class="font-semibold text-brown-dark-3"><?php echo $args['author_name']; ?></div>
+                <div class="text-brown-dark-3"><?php echo implode(' at ', array_filter([$args['author_position'], $args['author_organization']])); ?></div>
             </div>
         </figcaption>
 
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Review -->
-        <blockquote class="text-16 leading-8 font-semibold tracking-tight text-grey">
+        <blockquote class="text-16 leading-8 font-semibold tracking-tight">
             <p>“<?php echo $args['review']; ?>”</p>
         </blockquote>
 

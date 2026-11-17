@@ -3,15 +3,8 @@ Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
     Add customer support page
 SEO
-    SEO plugin
-        Url struture update for lc-landing
-            check title/desc on home
-            check title/desc on listing pages
-            check title/desc on lc-landing pages
-            check title/desc on blog archive page
-            check title/desc on posts
-            check title/desc on pages
     ****update meta descriptions to emphasize no platform fees
+    ****Add meta descriptions to all pages
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random

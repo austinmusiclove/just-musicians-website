@@ -25,11 +25,11 @@ if ( ! empty( $recommendation_ids ) ) { ?>
                 <h3 class="text-20 mb-2">
                     <?php echo esc_html( $verb . ' ' ); ?>
                     <?php if ( ! empty( $article_url ) ) { ?>
-                        <a class="hover:underline text-yellow" href="<?php echo esc_url( $article_url ); ?>"><?php echo esc_html( $article_title ); ?></a>
+                        <a class="hover:underline text-yellow-aaa font-semibold" href="<?php echo esc_url( $article_url ); ?>"><?php echo esc_html( $article_title ); ?></a>
                     <?php } else { echo esc_html( $article_title ); } ?>
                     by
                     <?php if ( ! empty( $publication_url ) ) { ?>
-                        <a class="hover:underline text-yellow" href="<?php echo esc_url( $publication_url ); ?>"><?php echo esc_html( $publication_name ); ?></a>
+                        <a class="hover:underline text-yellow-aaa font-semibold" href="<?php echo esc_url( $publication_url ); ?>"><?php echo esc_html( $publication_name ); ?></a>
                     <?php } else { echo esc_html( $publication_name ); } ?>
                 </h3>
 

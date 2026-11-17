@@ -1,7 +1,7 @@
 <!-- Logged in Menu -->
 <span class="relative font-sun-motter text-18 items-center gap-2 group hidden lg:flex" data-testid="header-account-menu" x-show="loggedIn" x-cloak>
     <a href="#">My Account</a>
-    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" />
+    <img src="<?php echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="" width="9" height="14" />
     <span class="absolute top-0 left-0 -translate-x-3/4 -translate-y-1/2 bg-red text-white text-12 w-4 h-4 p-[.6rem] flex items-center justify-center rounded-full"
         x-show="get_total_notification_count(notifications) > 0" x-cloak
         x-text="get_total_notification_count(notifications) ?? 0"
