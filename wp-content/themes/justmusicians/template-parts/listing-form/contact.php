@@ -62,7 +62,7 @@
                     x-model="pTiktokHandle">
             </div>
             <input type="hidden" id="tiktok_url" name="tiktok_url"
-                x-init="$watch('pTiktokHandle', value => pTiktokUrl = value ? 'https://tiktok.com/@' + value : '')"
+                x-init="$watch('pTiktokHandle', value => pTiktokUrl = value ? 'https://www.tiktok.com/@' + value : '')"
                 x-model="pTiktokUrl">
         </div>
          <!-- X -->

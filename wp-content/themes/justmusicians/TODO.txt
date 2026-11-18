@@ -3,21 +3,32 @@ Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
     Add customer support page
 SEO
+    ****Make sure every indexed wp page type post has a meta description and title
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
     **Add main category for listings to add to meta title and description to keep them unique from each other
+    ***Remove article schema from blog archive and home page and other pages that don't need that
     **change join page to a regular page so i can use seo plugin on it
+    ***improve links for community partners and listing features with proper link attirbutes noreferrer noopener and target plank
+    ***Add slider for affiliates and recommended vendor cards etc.
     Location/Category Pages
+        ****Add h2 above search section
         ***Check people also ask for category queries and modify content for locale-category pages accordingly
             Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+            FAQ schema
         **add somewhere on the page that bands can apply to be recommended on the page
         add pricing for the specific service of the category and location
-        traditional paging;
+        ****traditional paging;
+            add pagination buttons after last card of the page
+            each pagination button has an a tag with href for crawling
+            each href has ?page=n
+            make sure that they will also carry the filter params if they are selected but don't put them in the url at all if possible
+            page query param should work if input in url bar
+            make sure rel canonical for any page is the same
             use history api through htmx to have hrefs without forcing page reload
-            server rendered pagination links inside noscript tags for search engines
-            self ref canonical for each page url
-            can also just show load more button still instead of traditional page buttons
+            preload pages with htmx
+            alternative: can also just show load more button still instead of traditional page buttons
     Get backlinks to category locale pages
         Swap links with local promoters, wedding planners, and other buyers for the locale page
             get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
@@ -40,7 +51,7 @@ SEO
         images and video in media slider do not show without js and probably do not get indexed either
     performance
         ***optimize images; del big images that exist safely;
-            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 36.68)
+            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 32.62)
                 remove orphan images from server
                 reupload large files that are being utilized
         preload iframes somehow and store them somehow so they can be preloaded
@@ -49,6 +60,7 @@ SEO
         send emails in cron instead of waiting on them; they take some time
         dedicated server
     system for keeping data accurate by scraping artist websites and comparing information
+    Texas Music Office backlink; might need to have LLC; maybe i can use Hickory
 Escrow
     explore legal issues
         create generic and customizable performance contract
