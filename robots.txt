@@ -12,4 +12,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://hiremusicians.com/wp-sitemap.php
+Sitemap: https://hiremusicians.com/wp-sitemap.xml
