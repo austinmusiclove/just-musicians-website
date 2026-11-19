@@ -79,9 +79,8 @@ if (count($listings) > 0) {
         $last = $index == array_key_last($listings);
         if ($last && !$is_last_page) {
             get_template_part('template-parts/cards/card-components/load-more', '', [
-                'post_id'   => $listing['post_id'],
                 'req_path'  => 'collections/' . $collection_id . '/listings',
-                'next_page' => $result_page + 1,
+                'current_page' => $result_page,
             ]);
         }
 

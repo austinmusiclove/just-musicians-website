@@ -94,7 +94,6 @@ if (count($listings) > 0) {
         $last = $index == array_key_last($listings);
         if ($last) {
             get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
-                'post_id'           => $listing['post_id'],
                 'req_path'          => 'listings',
                 'current_page'      => $result_page,
                 'max_num_pages'     => $max_num_pages,

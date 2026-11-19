@@ -6,8 +6,10 @@ $next_page = $current_page < $max_num_pages ? $current_page + 1 : null;
 ?>
 
 <?php if ($prev_page) { ?>
-    <a id="prev-btn-<?php echo $args['post_id']; ?>"
+    <a id="prev-btn"
         href="<?php echo site_url(add_query_arg( 'lpage', $prev_page, $args['pagination_base'] )); ?>"
+        preload="prev-btn-revealed"
+        x-intersect.dwell.500ms.once="$dispatch('prev-btn-revealed')"
         hx-get="<?php echo site_url('/wp-html/v1/' . $args['req_path'] . '/?page=' . $prev_page); ?>"
         hx-trigger="click once"
         hx-target="<?php echo $args['target'] ?? '#results'; ?>"
@@ -17,20 +19,22 @@ $next_page = $current_page < $max_num_pages ? $current_page + 1 : null;
         hx-indicator=".prev-indicator"
         hx-push-url="<?php echo site_url(add_query_arg( 'lpage', $prev_page, $args['pagination_base'] )); ?>"
     >
-        <button class="prev-indicator">
+        <div class="prev-indicator">
             <span class="htmx-indicator-component-block-replace">Previous</span>
             <span class="htmx-indicator-component-block">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
             </span>
-        </button>
+        </div>
     </a>
 <? } ?>
 
 <span>Page <?php echo $current_page; ?></span>
 
 <?php if ($next_page) { ?>
-    <a id="next-btn-<?php echo $args['post_id']; ?>"
+    <a id="next-btn"
         href="<?php echo site_url(add_query_arg( 'lpage', $next_page, $args['pagination_base'] )); ?>"
+        preload="next-btn-revealed"
+        x-intersect.dwell.500ms.once="$dispatch('next-btn-revealed')"
         hx-get="<?php echo site_url('/wp-html/v1/' . $args['req_path'] . '/?page=' . $next_page); ?>"
         hx-trigger="click once"
         hx-target="<?php echo $args['target'] ?? '#results'; ?>"
@@ -40,11 +44,11 @@ $next_page = $current_page < $max_num_pages ? $current_page + 1 : null;
         hx-indicator=".next-indicator"
         hx-push-url="<?php echo site_url(add_query_arg( 'lpage', $next_page, $args['pagination_base'] )); ?>"
     >
-        <button class="next-indicator">
+        <div class="next-indicator">
             <span class="htmx-indicator-component-block-replace">Next</span>
             <span class="htmx-indicator-component-block">
                 <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
             </span>
-        </button>
+        </div>
     </a>
 <? } ?>

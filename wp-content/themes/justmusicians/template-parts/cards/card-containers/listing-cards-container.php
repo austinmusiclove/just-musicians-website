@@ -83,7 +83,6 @@ $pagination      = $args['pagination'] ?? 'infinite';
                     // Traditional Pagination
                     if ($pagination == 'traditional') {
                         get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
-                            'post_id'           => $listing['post_id'],
                             'req_path'          => 'listings',
                             'current_page'      => $args['page'] ?? 1,
                             'max_num_pages'     => $args['max_num_pages'] ?? 1,
@@ -95,9 +94,8 @@ $pagination      = $args['pagination'] ?? 'infinite';
                     } else if ($pagination == 'load-more') {
                         if (!$args['is_last_page']) {
                             get_template_part('template-parts/cards/card-components/load-more', '', [
-                                'post_id'   => $listing['post_id'],
-                                'req_path'  => 'listings',
-                                'next_page' => $args['next_page'],
+                                'req_path'     => 'listings',
+                                'current_page' => $args['page'] ?? 1,
                             ]);
                         } else {
                             get_template_part( 'template-parts/global/empty-states/no-more-results');

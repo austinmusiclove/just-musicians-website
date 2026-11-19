@@ -9,7 +9,6 @@ function get_listings_by_id($args) {
     $sanitized_page = (!empty($args['page']))        ? sanitize_text_field($args['page'])        : null;
     $nopaging       = (!empty($args['nopaging']))    ? rest_sanitize_boolean($args['nopaging'])  : false;
     $page = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
-    $next_page       = $page + 1;
     $max_num_results = 0;
     $max_num_pages   = 1;
 
@@ -73,6 +72,6 @@ function get_listings_by_id($args) {
         'listings'        => $results,
         'max_num_results' => $max_num_results,
         'max_num_pages'   => $max_num_pages,
-        'next_page'       => $next_page,
+        'page'            => $page,
     ];
 }
