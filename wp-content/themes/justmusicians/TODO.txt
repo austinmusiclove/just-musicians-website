@@ -20,11 +20,10 @@ SEO
         **add somewhere on the page that bands can apply to be recommended on the page
         add pricing for the specific service of the category and location
         ****traditional paging;
-            need to handle case where lpage is greater than total pages
             style buttons
-            remove the no more results scroll to top
+            when you hit a filter it needs to revert to page 1
             indicate page number or result range out of total results at the top by total results
-            add page number buttons
+            need to handle case where lpage is greater than total pages
             test all places effected
                 search-page
                     main search page

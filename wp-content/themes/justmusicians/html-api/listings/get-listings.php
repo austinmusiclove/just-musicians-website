@@ -93,7 +93,7 @@ if (count($listings) > 0) {
         // Load more button; show a button on the last result of the page as long as it is not the final page
         $last = $index == array_key_last($listings);
         if ($last) {
-            get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
+            get_template_part('template-parts/global/pagination/pagination-buttons', '', [
                 'req_path'          => 'listings',
                 'current_page'      => $result_page,
                 'max_num_pages'     => $max_num_pages,

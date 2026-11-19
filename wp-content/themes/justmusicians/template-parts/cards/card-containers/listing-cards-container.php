@@ -82,7 +82,7 @@ $pagination      = $args['pagination'] ?? 'infinite';
 
                     // Traditional Pagination
                     if ($pagination == 'traditional') {
-                        get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
+                        get_template_part('template-parts/global/pagination/pagination-buttons', '', [
                             'req_path'          => 'listings',
                             'current_page'      => $args['page'] ?? 1,
                             'max_num_pages'     => $args['max_num_pages'] ?? 1,
@@ -93,7 +93,7 @@ $pagination      = $args['pagination'] ?? 'infinite';
                     // Load more button; show a button on the last result of the page as long as it is not the final page
                     } else if ($pagination == 'load-more') {
                         if (!$args['is_last_page']) {
-                            get_template_part('template-parts/cards/card-components/load-more', '', [
+                            get_template_part('template-parts/global/pagination/load-more', '', [
                                 'req_path'     => 'listings',
                                 'current_page' => $args['page'] ?? 1,
                             ]);
