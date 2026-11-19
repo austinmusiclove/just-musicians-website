@@ -13,7 +13,6 @@ SEO
     Location/Category Pages
         ****Add h2 above search section
         ****traditional paging;
-            when you hit any filter it needs to revert to page 1
             on mobile hitting any page jumps on the screen
             indicate page number or result range out of total results at the top by total results
             need to handle case where lpage is greater than total pages

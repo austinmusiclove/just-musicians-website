@@ -75,7 +75,7 @@ $result_page     = $result ? $result['page']            : null;
             distanceMiles:               <?php echo $distance_miles; ?>,
             collectionsMap:              <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
         })"
-        hx-get="<?php echo site_url('/wp-html/v1/listings/?page=' . $page); ?>"
+        hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"
         hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>
