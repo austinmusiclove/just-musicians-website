@@ -24,7 +24,6 @@ function get_listings($args) {
 
     #$media_tags             = [...$valid_categories, ...$valid_genres, ...$valid_subgenres, ...$valid_instrumentations, ...$valid_settings];
     $page                   = (is_numeric($sanitized_page) and (int)$sanitized_page) ? (int)$sanitized_page : 1;
-    $next_page              = $page + 1;
     $posts_per_page         = 10;
 
     $listing_ids = hm_get_listing_ids_by_distance($lat, $lng, $distance_miles, $verified, 'live_music', $postal_codes, $priority_listings);
@@ -42,7 +41,7 @@ function get_listings($args) {
             'valid_ensemble_sizes'   => $valid_ensemble_sizes,
             'max_num_results'        => 0,
             'max_num_pages'          => 0,
-            'next_page'              => 1,
+            'page'                   => 0,
         ];
     }
 
@@ -208,7 +207,7 @@ function get_listings($args) {
         'valid_ensemble_sizes'   => $valid_ensemble_sizes,
         'max_num_results'        => $max_num_results,
         'max_num_pages'          => $max_num_pages,
-        'next_page'              => $next_page,
+        'page'                   => $page,
     ];
 }
 

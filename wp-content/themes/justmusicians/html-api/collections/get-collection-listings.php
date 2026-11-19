@@ -29,8 +29,8 @@ $result = get_listings_by_id([
 $listings        = $result['listings'];
 $max_num_results = $result['max_num_results'];
 $max_num_pages   = $result['max_num_pages'];
+$result_page     = $result['page'];
 $is_last_page    = $page == $max_num_pages;
-$next_page       = $result['next_page'];
 $results_label   = $max_num_results == 1 ? ' Listing' : ' Listings';
 
 
@@ -81,7 +81,7 @@ if (count($listings) > 0) {
             get_template_part('template-parts/cards/card-components/load-more', '', [
                 'post_id'   => $listing['post_id'],
                 'req_path'  => 'collections/' . $collection_id . '/listings',
-                'next_page' => $next_page,
+                'next_page' => $result_page + 1,
             ]);
         }
 

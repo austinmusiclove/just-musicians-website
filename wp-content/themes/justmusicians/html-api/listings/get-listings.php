@@ -52,7 +52,7 @@ $valid_ensemble_sizes   = $result['valid_ensemble_sizes'];
 $max_num_results        = $result['max_num_results'];
 $max_num_pages          = $result['max_num_pages'];
 $is_last_page           = $page == $max_num_pages;
-$next_page              = $result['next_page'];
+$result_page            = $result['page'];
 
 // Render listings
 if (count($listings) > 0) {
@@ -88,17 +88,16 @@ if (count($listings) > 0) {
             'permalink'              => $listing['permalink'],
             'position'               => $listing['position'],
             'lazyload_thumbnail'     => $index >= 3,
-            'next_page'              => $next_page,
         ]);
 
         // Load more button; show a button on the last result of the page as long as it is not the final page
         $last = $index == array_key_last($listings);
-        if ($last && !$is_last_page) {
+        if ($last) {
             get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
                 'post_id'           => $listing['post_id'],
                 'req_path'          => 'listings',
-                'prev_page'         => $next_page > 2 ? $next_page - 2 : null,
-                'next_page'         => $next_page,
+                'current_page'      => $result_page,
+                'max_num_pages'     => $max_num_pages,
                 'pagination_base'   => $pagination_base,
                 'pagination_target' => $pagination_target,
             ]);
@@ -109,9 +108,6 @@ if (count($listings) > 0) {
 
 } else if ($page == 1) {
     get_template_part( 'template-parts/global/empty-states/no-search-results');
-}
-if ($is_last_page) {
-    get_template_part( 'template-parts/global/empty-states/no-more-results');
 }
 
 // Render Filters

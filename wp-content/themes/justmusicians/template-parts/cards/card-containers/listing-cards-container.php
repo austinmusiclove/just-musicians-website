@@ -78,26 +78,30 @@ $pagination      = $args['pagination'] ?? 'infinite';
 
                 // Pagination
                 $last = $index == array_key_last($listings);
-                if ($last && !$args['is_last_page']) {
-
-                    // Load more button; show a button on the last result of the page as long as it is not the final page
-                    if ($pagination == 'load-more') {
-                        get_template_part('template-parts/cards/card-components/load-more', '', [
-                            'post_id'   => $listing['post_id'],
-                            'req_path'  => 'listings',
-                            'next_page' => $args['next_page'],
-                        ]);
+                if ($last) {
 
                     // Traditional Pagination
-                    } else if ($pagination == 'traditional') {
+                    if ($pagination == 'traditional') {
                         get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
                             'post_id'           => $listing['post_id'],
                             'req_path'          => 'listings',
-                            'prev_page'         => $args['next_page'] > 2 ? $args['next_page'] - 2 : null,
-                            'next_page'         => $args['next_page'],
+                            'current_page'      => $args['page'] ?? 1,
+                            'max_num_pages'     => $args['max_num_pages'] ?? 1,
                             'pagination_base'   => $args['pagination_base'] ?? site_url(),
                             'pagination_target' => $args['pagination_target'] ?? '#results',
                         ]);
+
+                    // Load more button; show a button on the last result of the page as long as it is not the final page
+                    } else if ($pagination == 'load-more') {
+                        if (!$args['is_last_page']) {
+                            get_template_part('template-parts/cards/card-components/load-more', '', [
+                                'post_id'   => $listing['post_id'],
+                                'req_path'  => 'listings',
+                                'next_page' => $args['next_page'],
+                            ]);
+                        } else {
+                            get_template_part( 'template-parts/global/empty-states/no-more-results');
+                        }
                     }
                 }
 
@@ -109,9 +113,6 @@ $pagination      = $args['pagination'] ?? 'infinite';
 
         } else {
             get_template_part( 'template-parts/global/empty-states/no-search-results');
-        }
-        if ($args['is_last_page']) {
-            get_template_part( 'template-parts/global/empty-states/no-more-results');
         }
     }
 ?>

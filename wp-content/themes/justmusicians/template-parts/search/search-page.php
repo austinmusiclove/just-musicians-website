@@ -51,7 +51,7 @@ $listings        = $result ? $result['listings']        : null;
 $max_num_results = $result ? $result['max_num_results'] : null;
 $max_num_pages   = $result ? $result['max_num_pages']   : null;
 $is_last_page    = $result ? 1 == $max_num_pages        : null;
-$next_page       = $result ? $result['next_page']       : null;
+$result_page     = $result ? $result['page']            : null;
 
 ?>
 
@@ -153,10 +153,11 @@ $next_page       = $result ? $result['next_page']       : null;
                         'send_first_page'   => $args['send_first_page'],
                         'listings'          => $listings,
                         'is_last_page'      => $is_last_page,
-                        'next_page'         => $next_page,
+                        'page'              => $result_page,
                         'pagination'        => 'traditional',
                         'pagination_base'   => $pagination_base,
                         'pagination_target' => '#results',
+                        'max_num_pages'     => $max_num_pages,
                     ]); ?>
 
                     <div class="xl:hidden">

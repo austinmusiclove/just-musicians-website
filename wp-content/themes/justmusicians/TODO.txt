@@ -20,12 +20,12 @@ SEO
         **add somewhere on the page that bands can apply to be recommended on the page
         add pricing for the specific service of the category and location
         ****traditional paging;
-            make it work with history api
             make it work with preload
             need to handle case where lpage is greater than total pages
             style buttons
-            add page number buttons
+            remove the no more results scroll to top
             indicate page number or result range out of total results at the top by total results
+            add page number buttons
             test all places effected
                 search-page
                     main search page

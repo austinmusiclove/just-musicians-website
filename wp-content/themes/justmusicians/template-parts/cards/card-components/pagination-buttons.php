@@ -1,6 +1,8 @@
 <?php
-$prev_page = $args['prev_page'] ?? null;
-$next_page = $args['next_page'] ?? null;
+$current_page  = $args['current_page'] ?? null;
+$max_num_pages = $args['max_num_pages'] ?? null;
+$prev_page = $current_page > 1 ? $current_page - 1 : null;
+$next_page = $current_page < $max_num_pages ? $current_page + 1 : null;
 ?>
 
 <?php if ($prev_page) { ?>
@@ -13,6 +15,7 @@ $next_page = $args['next_page'] ?? null;
         hx-params="not reorder_ids[]"
         hx-sync="closest #hx-form:abort"
         hx-indicator=".prev-indicator"
+        hx-push-url="<?php echo site_url(add_query_arg( 'lpage', $prev_page, $args['pagination_base'] )); ?>"
     >
         <button class="prev-indicator">
             <span class="htmx-indicator-component-block-replace">Previous</span>
@@ -22,6 +25,8 @@ $next_page = $args['next_page'] ?? null;
         </button>
     </a>
 <? } ?>
+
+<span>Page <?php echo $current_page; ?></span>
 
 <?php if ($next_page) { ?>
     <a id="next-btn-<?php echo $args['post_id']; ?>"
@@ -33,6 +38,7 @@ $next_page = $args['next_page'] ?? null;
         hx-params="not reorder_ids[]"
         hx-sync="closest #hx-form:abort"
         hx-indicator=".next-indicator"
+        hx-push-url="<?php echo site_url(add_query_arg( 'lpage', $next_page, $args['pagination_base'] )); ?>"
     >
         <button class="next-indicator">
             <span class="htmx-indicator-component-block-replace">Next</span>
