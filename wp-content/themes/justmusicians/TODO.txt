@@ -7,21 +7,14 @@ SEO
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
-    **Add main category for listings to add to meta title and description to keep them unique from each other
     ***Remove article schema from blog archive and home page and other pages that don't need that
-    **change join page to a regular page so i can use seo plugin on it
     ***improve links for community partners and listing features with proper link attirbutes noreferrer noopener and target plank
     ***Add slider for affiliates and recommended vendor cards etc.
     Location/Category Pages
         ****Add h2 above search section
-        ***Check people also ask for category queries and modify content for locale-category pages accordingly
-            Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
-            FAQ schema
-        **add somewhere on the page that bands can apply to be recommended on the page
-        add pricing for the specific service of the category and location
         ****traditional paging;
-            style buttons
-            when you hit a filter it needs to revert to page 1
+            when you hit any filter it needs to revert to page 1
+            on mobile hitting any page jumps on the screen
             indicate page number or result range out of total results at the top by total results
             need to handle case where lpage is greater than total pages
             test all places effected
@@ -31,16 +24,27 @@ SEO
                     category pages
                 get-listings html api
                 get collection listings html api
+                switching page retains filters
+                page links have no filters
+                canonicals have no page or query vars
+                clicking filter reverts to page 1
             caononical and title for live-music/search is blog
             alternative: can also just show load more button still instead of traditional page buttons
-    Get backlinks to category locale pages
-        Swap links with local promoters, wedding planners, and other buyers for the locale page
-            get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
-        get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
+        ***Check people also ask for category queries and modify content for locale-category pages accordingly
+            Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+            FAQ schema
+        **add somewhere on the page that bands can apply to be recommended on the page
+        add pricing for the specific service of the category and location
     ***optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
         add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
         create a page dedicated to creating an inquiry for google
     ***price estimator for live band in austin tx
+    **Add main category for listings to add to meta title and description to keep them unique from each other
+    **change join page to a regular page so i can use seo plugin on it
+    Get backlinks to category locale pages
+        Swap links with local promoters, wedding planners, and other buyers for the locale page
+            get partner backlinks (texas music office, chamber of commerce, vancerts, local sets, under the rock, interplanetary, A&R Foundation, Austin Chamber Music Center, Genesis, atxmusicians)
+        get local press backlinks where i link to the website but also individual category pages for the relevant locale (voyage austin, blogs, new stations, news papers, check vancerts press references)
     Add a search feature that is like an AI prompt to log queries and learn over time what people are searching to inform what kind of keywords to target with landing pages
     Add sidebar widget to direct users to add HM to their Google Preferred Sources
     Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash

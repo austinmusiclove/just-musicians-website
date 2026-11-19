@@ -1,11 +1,7 @@
-<a id="<?php echo $args['id']; ?>"
-    href="<?php echo esc_url(site_url(add_query_arg('lpage', $args['page'], $args['pagination_base']))); ?>"
+<a id="<?php echo $args['id']; ?>" class="flex h-8 w-8 items-center justify-center rounded border border-solid border-black/10 text-16 text-black hover:bg-yellow/10"
 
-    <?php if (isset($args['aria_label'])) { ?>
-        aria-label="<?php echo $args['aria_label']; ?>"
-    <?php } else { ?>
-        aria-label="Go to page <?php echo $args['page']; ?>"
-    <?php } ?>
+    href="<?php echo esc_url(site_url(add_query_arg('lpage', $args['page'], $args['pagination_base']))); ?>"
+    aria-label="Go to page <?php echo $args['page']; ?>"
 
     hx-get="<?php echo esc_url(site_url('/wp-html/v1/' . $args['req_path'] . '/?page=' . $args['page'])); ?>"
     hx-trigger="click once"
@@ -16,15 +12,10 @@
     hx-indicator="this"
     hx-push-url="<?php echo esc_url(site_url(add_query_arg('lpage', $args['page'], $args['pagination_base']))); ?>"
 
-    <?php if (isset($args['preload'])) { ?>
-        preload="<?php echo $args['preload']; ?>"
-    <?php } else { ?>
-        preload="prev-btn-revealed"
-        x-intersect.dwell.500ms.once="$dispatch('prev-btn-revealed')"
-    <?php } ?>
+    preload="mouseover"
 >
 
-    <div class="htmx-indicator-component-block-replace"><?php echo $args['label']; ?></div>
+    <div class="htmx-indicator-component-block-replace"><?php echo $args['page']; ?></div>
     <div class="htmx-indicator-component-block">
         <?php echo get_template_part('template-parts/global/spinner', '', ['size' => '6', 'color' => 'yellow']); ?>
     </div>
