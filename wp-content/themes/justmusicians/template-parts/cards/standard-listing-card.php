@@ -93,23 +93,3 @@ $collection_id = isset($args['collection_id']) ? $args['collection_id'] : null;
         ]); ?>
     </span>
 </div>
-
-<?php if (!empty($args['last']) && empty($args['is_last_page'])) { // Load more results; show a button on the last result of the page as long as it is not the final page
-    $req_path = !empty($args['hx-request_path']) ? $args['hx-request_path'] : 'listings'; ?>
-    <div class="py-6 flex items-center justify-center page-indicator htmx-indicator-flex-replace" id="load-more-<?php echo $args['post_id']; ?>">
-        <button type="button" class="hover:bg-yellow-light bg-yellow font-sun-motter cursor-pointer px-6 py-3 rounded-sm text-16 inline-block"
-            preload="load-more-revealed-<?php echo $args['post_id']; ?>"
-            x-intersect.once="$dispatch('load-more-revealed-<?php echo $args['post_id']; ?>')"
-            hx-get="<?php echo site_url('/wp-html/v1/' . $req_path . '/?page=' . $args['next_page']); ?>"
-            hx-trigger="click once"
-            hx-target="#load-more-<?php echo $args['post_id']; ?>"
-            hx-swap="outerHTML"
-            hx-include="#hx-form"
-            hx-params="not reorder_ids[]"
-            hx-sync="closest #hx-form:abort"
-            hx-indicator=".page-indicator"
-        >
-            Load More Results
-        </button>
-    </div>
-<?php } ?>

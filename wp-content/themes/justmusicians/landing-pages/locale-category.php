@@ -4,6 +4,7 @@
 $post_id = get_the_ID();
 $title            = get_post_meta($post_id, 'title', true);
 $description      = get_post_meta($post_id, 'description', true);
+$url_path         = get_post_meta($post_id, 'url_path', true);
 $region_post      = get_post_meta($post_id, 'region', true);
 $locale_post      = get_post_meta($post_id, 'locale', true);
 $category_post    = get_post_meta($post_id, 'category', true);
@@ -92,6 +93,8 @@ get_template_part('template-parts/search/search-page', '', [
     'postal_codes'         => $postal_codes,
     'priority_listings'    => $priority_listings,
     'distance_miles'       => filter_var($distance_miles, FILTER_VALIDATE_INT) !== false ? (int)$distance_miles : 60,
+    'page'                 => isset($_GET['lpage']) ? max(1, (int)$_GET['lpage']) : 1,
+    'pagination_base'      => trailingslashit($url_path),
 ]);
 
 // Recommendations

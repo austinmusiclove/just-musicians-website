@@ -54,6 +54,8 @@ get_template_part('template-parts/search/search-page', '', [
     'location_label'       => 'Austin, Texas',
     'lat'                  => 30.2671500,
     'lng'                  => -97.7430600,
+    'page'                 => isset($_GET['lpage']) ? max(1, (int)$_GET['lpage']) : 1,
+    'pagination_base'      => '/',
 ]);
 get_template_part('template-parts/landing-pages/how-it-works', '', [
     'heading'       => 'Hire Musicians For An Event',

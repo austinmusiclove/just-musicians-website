@@ -70,14 +70,21 @@ if (count($listings) > 0) {
             'verified'               => $listing['verified'],
             'permalink'              => $listing['permalink'],
             'lazyload_thumbnail'     => $index >= 3,
-            'hx-request_path'        => 'collections/' . $collection_id . '/listings',
             'collection_id'          => $collection_id,
             'reorderable'            => true,
             'index'                  => $index,
-            'last'                   => $index == array_key_last($listings),
-            'is_last_page'           => $is_last_page,
-            'next_page'              => $next_page,
         ]);
+
+        // Load more button; show a button on the last result of the page as long as it is not the final page
+        $last = $index == array_key_last($listings);
+        if ($last && !$is_last_page) {
+            get_template_part('template-parts/cards/card-components/load-more', '', [
+                'post_id'   => $listing['post_id'],
+                'req_path'  => 'collections/' . $collection_id . '/listings',
+                'next_page' => $next_page,
+            ]);
+        }
+
     }
     get_template_part('template-parts/media-sliders/modal-media-slider', '', []);
 

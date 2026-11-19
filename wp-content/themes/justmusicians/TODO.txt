@@ -20,14 +20,20 @@ SEO
         **add somewhere on the page that bands can apply to be recommended on the page
         add pricing for the specific service of the category and location
         ****traditional paging;
-            add pagination buttons after last card of the page
-            each pagination button has an a tag with href for crawling
-            each href has ?page=n
-            make sure that they will also carry the filter params if they are selected but don't put them in the url at all if possible
-            page query param should work if input in url bar
-            make sure rel canonical for any page is the same
-            use history api through htmx to have hrefs without forcing page reload
-            preload pages with htmx
+            make it work with history api
+            make it work with preload
+            need to handle case where lpage is greater than total pages
+            style buttons
+            add page number buttons
+            indicate page number or result range out of total results at the top by total results
+            test all places effected
+                search-page
+                    main search page
+                    home page
+                    category pages
+                get-listings html api
+                get collection listings html api
+            caononical and title for live-music/search is blog
             alternative: can also just show load more button still instead of traditional page buttons
     Get backlinks to category locale pages
         Swap links with local promoters, wedding planners, and other buyers for the locale page

@@ -28,6 +28,8 @@ $distance_miles     = (isset($args['distance_miles']) && filter_var($args['dista
 
 // Get listings
 $result = null;
+$page = $args['page'] ?? 1;
+$pagination_base = $args['pagination_base'] ?? site_url();
 if ($args['send_first_page']) {
     $result = get_listings([
         'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
@@ -42,7 +44,7 @@ if ($args['send_first_page']) {
         'verified'          => false,
         'postal_codes'      => $postal_codes,
         'priority_listings' => $priority_listings,
-        'page'              => 1,
+        'page'              => $page,
     ]);
 }
 $listings        = $result ? $result['listings']        : null;
@@ -73,7 +75,7 @@ $next_page       = $result ? $result['next_page']       : null;
             distanceMiles:               <?php echo $distance_miles; ?>,
             collectionsMap:              <?php echo clean_arr_for_doublequotes($args['collections_map']); ?>,
         })"
-        hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
+        hx-get="<?php echo site_url('/wp-html/v1/listings/?page=' . $page); ?>"
         hx-target="#results"
         hx-indicator=".spinner-start"
         <?php if ($args['send_first_page']) { ?>
@@ -84,6 +86,7 @@ $next_page       = $result ? $result['next_page']       : null;
         x-on:location-detected-get-listings.window="updateLocation($event.detail)"
         x-on:filterupdate="window.scrollTo({ top: $el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'instant' });"
     >
+        <input type="hidden" name="pagination_base" value="<?php echo $pagination_base; ?>" />
         <input type="hidden" name="search" x-model="listingSearchVal" />
         <?php foreach ($postal_codes as $postal_code) { ?>
             <input type="hidden" name="postal_codes[]" value="<?php echo $postal_code; ?>" />
@@ -146,23 +149,15 @@ $next_page       = $result ? $result['next_page']       : null;
 
                     <!-- Results container -->
                     <?php get_template_part('template-parts/cards/card-containers/listing-cards-container', '', [
-                        'id'              => 'results',
-                        'send_first_page' => $args['send_first_page'],
-                        'listings'        => $listings,
-                        'is_last_page'    => $is_last_page,
-                        'next_page'       => $next_page,
+                        'id'                => 'results',
+                        'send_first_page'   => $args['send_first_page'],
+                        'listings'          => $listings,
+                        'is_last_page'      => $is_last_page,
+                        'next_page'         => $next_page,
+                        'pagination'        => 'traditional',
+                        'pagination_base'   => $pagination_base,
+                        'pagination_target' => '#results',
                     ]); ?>
-
-                    <span class="page-indicator htmx-indicator-block">
-                        <?php
-                        echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                        echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                        echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                        echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                        echo get_template_part('template-parts/cards/card-placeholders/standard-listing-card-skeleton');
-                        ?>
-                    </span>
-
 
                     <div class="xl:hidden">
                         <?php

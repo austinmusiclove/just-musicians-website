@@ -114,6 +114,7 @@ $collections_map = array_column($collections_result['collections'], null, 'post_
                                 'id'              => 'results',
                                 'reorderable'     => true,
                                 'collection_id'   => $collection_id,
+                                'pagination'      => 'load-more',
                             ]); ?>
 
                             <span class="page-indicator htmx-indicator-block">

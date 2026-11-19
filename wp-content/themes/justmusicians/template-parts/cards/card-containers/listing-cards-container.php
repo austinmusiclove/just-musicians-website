@@ -5,6 +5,7 @@ $send_first_page = $args['send_first_page'] ?? false;
 $listings        = $args['listings'] ?? [];
 $reorderable     = $args['reorderable'] ?? false;
 $collection_id   = $args['collection_id'] ?? 0;
+$pagination      = $args['pagination'] ?? 'infinite';
 ?>
 
 <span id="<?php echo $args['id']; ?>" class="<?php echo $indicator_class; ?> htmx-indicator-block-replace"
@@ -73,10 +74,33 @@ $collection_id   = $args['collection_id'] ?? 0;
                     'permalink'              => $listing['permalink'],
                     'position'               => $listing['position'],
                     'lazyload_thumbnail'     => $index >= 3,
-                    'last'                   => $index == array_key_last($listings),
-                    'is_last_page'           => $args['is_last_page'],
-                    'next_page'              => $args['next_page'],
                 ]);
+
+                // Pagination
+                $last = $index == array_key_last($listings);
+                if ($last && !$args['is_last_page']) {
+
+                    // Load more button; show a button on the last result of the page as long as it is not the final page
+                    if ($pagination == 'load-more') {
+                        get_template_part('template-parts/cards/card-components/load-more', '', [
+                            'post_id'   => $listing['post_id'],
+                            'req_path'  => 'listings',
+                            'next_page' => $args['next_page'],
+                        ]);
+
+                    // Traditional Pagination
+                    } else if ($pagination == 'traditional') {
+                        get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
+                            'post_id'           => $listing['post_id'],
+                            'req_path'          => 'listings',
+                            'prev_page'         => $args['next_page'] > 2 ? $args['next_page'] - 2 : null,
+                            'next_page'         => $args['next_page'],
+                            'pagination_base'   => $args['pagination_base'] ?? site_url(),
+                            'pagination_target' => $args['pagination_target'] ?? '#results',
+                        ]);
+                    }
+                }
+
             }
 
             get_template_part('template-parts/global/schema/item-list-schema', '', [

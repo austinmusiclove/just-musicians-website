@@ -4,7 +4,9 @@
 header('Cache-Control: private, max-age=60');
 
 // Get listings
-$page = $_GET['page'] ?? 1;
+$page              = $_GET['page'] ?? 1;
+$pagination_target = $_GET['pagination_target'] ?? '#results';
+$pagination_base   = $_GET['pagination_base'] ?? site_url();
 $lat = !empty($_GET['lat']) ? $_GET['lat'] : null;
 $lng = !empty($_GET['lng']) ? $_GET['lng'] : null;
 $location_label = $_GET['location_label'] ?? null;
@@ -86,10 +88,22 @@ if (count($listings) > 0) {
             'permalink'              => $listing['permalink'],
             'position'               => $listing['position'],
             'lazyload_thumbnail'     => $index >= 3,
-            'last'                   => $index == array_key_last($listings),
-            'is_last_page'           => $is_last_page,
             'next_page'              => $next_page,
         ]);
+
+        // Load more button; show a button on the last result of the page as long as it is not the final page
+        $last = $index == array_key_last($listings);
+        if ($last && !$is_last_page) {
+            get_template_part('template-parts/cards/card-components/pagination-buttons', '', [
+                'post_id'           => $listing['post_id'],
+                'req_path'          => 'listings',
+                'prev_page'         => $next_page > 2 ? $next_page - 2 : null,
+                'next_page'         => $next_page,
+                'pagination_base'   => $pagination_base,
+                'pagination_target' => $pagination_target,
+            ]);
+        }
+
     }
     get_template_part('template-parts/media-sliders/modal-media-slider', '', []);
 
