@@ -8,7 +8,7 @@ $collection_id   = $args['collection_id'] ?? 0;
 $pagination      = $args['pagination'] ?? 'infinite';
 ?>
 
-<span id="<?php echo $args['id']; ?>" class="<?php echo $indicator_class; ?> htmx-indicator-block-replace"
+<span id="<?php echo $args['id']; ?>" class="<?php echo $indicator_class; ?> htmx-indicator-block-replace [overflow-anchor:none]"
     x-data='Object.assign(
         favoriteButtonData(),
         youTubeIframeContainerData(),

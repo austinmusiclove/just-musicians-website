@@ -13,9 +13,7 @@ SEO
     Location/Category Pages
         ****Add h2 above search section
         ****traditional paging;
-            on mobile hitting any page jumps on the screen
-            indicate page number or result range out of total results at the top by total results
-            need to handle case where lpage is greater than total pages
+            live search page is not loading correct page when page is put in url
             test all places effected
                 search-page
                     main search page

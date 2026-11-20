@@ -1,4 +1,4 @@
-<a id="<?php echo $args['id']; ?>" class="flex p-1 items-center justify-center rounded border border-solid border-black/10 text-16 text-black hover:bg-yellow/10"
+<a id="<?php echo $args['id']; ?>" class="flex h-8 shrink-0 items-center justify-center whitespace-nowrap rounded border border-solid border-black/10 p-1 text-16 text-black hover:bg-yellow/10"
 
     href="<?php echo esc_url(site_url(add_query_arg('lpage', $args['page'], $args['pagination_base']))); ?>"
     aria-label="Next Page"
