@@ -37,8 +37,8 @@ get_header();
 
 get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'breadcrumb_items' => [],
-    'heading'          => "Find Live Musicians in Austin, Texas",
-    'description'      => "Elevate your next event when you hire live musicians in Austin, Texas. From lively corporate events and elegant weddings to private parties, bring the authentic sound of the Live Music Capital of the World directly to your guests.",
+    'heading'          => "Hire Live Musicians in Austin, Texas",
+    'description'      => "Connect directly with local live musicians in Austin, Texas, with zero platform fees when you book directly with musicians. From lively corporate events and festivals to elegant weddings and private parties, bring the authentic sound of the Live Music Capital of the World to your next event.",
 ]);
 get_template_part('template-parts/search/search-page', '', [
     'hide_location_filter' => true,

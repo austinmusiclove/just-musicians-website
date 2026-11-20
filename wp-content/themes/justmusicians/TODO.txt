@@ -3,9 +3,9 @@ Critical bugs
     Make sure i am compliant with laws on cookies (google analytics)
     Add customer support page
 SEO
+    ****search term not working in live search page (need to include it in send first page path)
     ****Make sure every indexed wp page type post has a meta description and title
     Location/Category Pages
-        ****Add h2 above search section
         ***Check people also ask for category queries and modify content for locale-category pages accordingly
             Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
             FAQ schema
@@ -32,7 +32,6 @@ SEO
     Add sidebar widget to direct users to add HM to their Google Preferred Sources
     Blog with side by side comparison of Hire Musicians, Gig Salad and The Bash
     Home page
-        ****Adjust top of page copy and meta description
         Add stats section with total listings in austin, verified listings, 0 listing fees, 0% platform fee (also maybe # cities, # categories, year established)
         Get knowledge pannel for Hire Musicians; check for it by searching Hire Musicians and claim it
     single listing pages
@@ -42,7 +41,7 @@ SEO
         images and video in media slider do not show without js and probably do not get indexed either
     performance
         ***optimize images; del big images that exist safely;
-            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 32.62)
+            free up server space; cloudways server is starting at 46.67 GB out of 59.01 GB (now 30.84)
                 remove orphan images from server
                 reupload large files that are being utilized
         preload iframes somehow and store them somehow so they can be preloaded
@@ -112,8 +111,9 @@ Musician Pricing Page
     **need system for renewing verification just by making sure they are still active
 Listing page
     add insurance - "Insurance: $2,000,000 - COMMERCIAL GENERAL LIABILITY COVERAGE"
-    ***add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
+    ****add productized services. allow artists to include prices for things like 3 hr full band set; or min pricing in general
         add request to book feature like https://www.tayloralexanderart.com/book-online so that
+        badge for "pricing available" for listings that have productized service pricing
     *add ticket sales numbers self reported by artists
     add gear list
     *add faq; copy gigheavan listing pages faq
@@ -126,13 +126,12 @@ Listing page
     allow collecting deposits (advanced)
     create cut out image tool; image cut outs are useful for press kit for making show fliers; create a tool that lets you remove background and convert to vecor format
     badges for featured musician on page and standard listing card
-    badge for "pricing available" for listings that have productized service pricing
     seasoned pro seniority badge (suggested in https://www.christophergracelive.com/post/the-hidden-costs-sites-like-the-bash-and-gigsalad-why-performers-and-clients-both-lose)
 Listing form
     ***organize subgenre by parent genre groups in listing form and in search filters
+    ***Add press mentions to form
     **accept stage plots of any shape; some that have been uploaded are too wide for the 4:3
     **accept pdf for stage plots
-    **Add press mentions to form
     *Add event insurance (later sell insurance policies here)
     *when required field missing blocks submission, if browser does not support the annimation im doing to show the field, it looks like nothing happens; add an error toast
     *allow adding venue (notify Sherita Perez sheritaperezmusic@gmail.com this has been added)
@@ -350,7 +349,6 @@ Code consistency and cleanliness
     Fix mu plugins depending on each other; move code to includes instead
     all emails in emails api should follow same pattern of doing the var getting with ids and should look the same
 UX
-    ****when click send inquiry and have no events, skip to date slide instead of existing event slide
     **pop up on top right that prompts you to log in with google as soon as you open the site or after delay; https://developers.google.com/identity/gsi/web/guides/display-google-one-tap?authuser=6#html
     add animation when add to collection/fav
     add animation when add to inquiry

@@ -77,6 +77,7 @@ get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'description'      => $description,
 ]);
 get_template_part('template-parts/search/search-page', '', [
+    'h2'                   => 'Browse ' . $category_name . ' in ' . $locale_name,
     'location_label'       => $location_label,
     'hide_location_filter' => true,
     'hide_category_filter' => true,

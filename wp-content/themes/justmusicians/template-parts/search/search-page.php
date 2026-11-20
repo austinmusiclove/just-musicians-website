@@ -114,6 +114,7 @@ $result_page     = $result ? $result['page']            : null;
 
                     <?php if (isset($args['breadcrumb_items'])) { ?><div class="text-14 text-grey"><?php get_template_part('template-parts/global/breadcrumb', '', ['items' => $args['breadcrumb_items'] ]); ?></div><?php } ?>
                     <?php if (isset($args['title'])) { ?><h1 class="font-sun-motter text-navy text-28 md:text-40 py-4"><?php echo $args['title']; ?></h1><?php } ?>
+                    <?php if (isset($args['h2'])) { ?><h2 class="font-sun-motter text-navy text-28 md:text-36 py-4"><?php echo $args['h2']; ?></h2><?php } ?>
                     <?php if (isset($args['description'])) { ?><p class="text-16 md:text-18 text-brown-dark-3 mb-4 whitespace-pre-wrap"><?php echo $args['description']; ?></p><?php } ?>
 
                     <div class="flex items-center justify-between">
