@@ -30,23 +30,21 @@ $distance_miles     = (isset($args['distance_miles']) && filter_var($args['dista
 $result = null;
 $page = $args['page'] ?? 1;
 $pagination_base = $args['pagination_base'] ?? site_url();
-if ($args['send_first_page']) {
-    $result = get_listings([
-        'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
-        'lat'               => $lat,
-        'lng'               => $lng,
-        'distance_miles'    => $distance_miles,
-        'categories'        => $categories,
-        'genres'            => $genres,
-        'subgenres'         => $subgenres,
-        'instrumentations'  => $instrumentations,
-        'settings'          => $settings,
-        'verified'          => false,
-        'postal_codes'      => $postal_codes,
-        'priority_listings' => $priority_listings,
-        'page'              => $page,
-    ]);
-}
+$result = get_listings([
+    'search'            => !empty($_GET['search']) ? $_GET['search'] : '',
+    'lat'               => $lat,
+    'lng'               => $lng,
+    'distance_miles'    => $distance_miles,
+    'categories'        => $categories,
+    'genres'            => $genres,
+    'subgenres'         => $subgenres,
+    'instrumentations'  => $instrumentations,
+    'settings'          => $settings,
+    'verified'          => false,
+    'postal_codes'      => $postal_codes,
+    'priority_listings' => $priority_listings,
+    'page'              => $page,
+]);
 $listings        = $result ? $result['listings']        : null;
 $max_num_results = $result ? $result['max_num_results'] : null;
 $max_num_pages   = $result ? $result['max_num_pages']   : null;
@@ -78,11 +76,7 @@ $result_page     = $result ? $result['page']            : null;
         hx-get="<?php echo site_url('/wp-html/v1/listings/'); ?>"
         hx-target="#results"
         hx-indicator=".spinner-start"
-        <?php if ($args['send_first_page']) { ?>
-            hx-trigger="filterupdate"
-        <?php } else { ?>
-            hx-trigger="load, filterupdate"
-        <?php } ?>
+        hx-trigger="filterupdate"
         x-on:location-detected-get-listings.window="updateLocation($event.detail)"
         x-on:filterupdate="window.scrollTo({ top: $el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'instant' });"
     >
@@ -150,7 +144,7 @@ $result_page     = $result ? $result['page']            : null;
                     <!-- Results container -->
                     <?php get_template_part('template-parts/cards/card-containers/listing-cards-container', '', [
                         'id'                => 'results',
-                        'send_first_page'   => $args['send_first_page'],
+                        'send_first_page'   => true,
                         'listings'          => $listings,
                         'is_last_page'      => $is_last_page,
                         'page'              => $result_page,

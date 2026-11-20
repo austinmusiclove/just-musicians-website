@@ -41,7 +41,6 @@ get_template_part('template-parts/landing-pages/hero-section-basic', '', [
     'description'      => "Elevate your next event when you hire live musicians in Austin, Texas. From lively corporate events and elegant weddings to private parties, bring the authentic sound of the Live Music Capital of the World directly to your guests.",
 ]);
 get_template_part('template-parts/search/search-page', '', [
-    'send_first_page'      => true,
     'hide_location_filter' => true,
     'hide_category_filter' => false,
     'hide_subgenre_filter' => true,

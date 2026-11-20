@@ -4,34 +4,20 @@ Critical bugs
     Add customer support page
 SEO
     ****Make sure every indexed wp page type post has a meta description and title
+    Location/Category Pages
+        ****Add h2 above search section
+        ***Check people also ask for category queries and modify content for locale-category pages accordingly
+            Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
+            FAQ schema
+        **add somewhere on the page that bands can apply to be recommended on the page
+        add pricing for the specific service of the category and location
     ***Preferred Vendor program or Ad space Launch Partnership program
         Ad space and Luanch Partnership program for backlinks
         include ad space in sidebars or at bottom of category pages certain pages have preferred ads; others are just random
     ***Remove article schema from blog archive and home page and other pages that don't need that
     ***improve links for community partners and listing features with proper link attirbutes noreferrer noopener and target plank
     ***Add slider for affiliates and recommended vendor cards etc.
-    Location/Category Pages
-        ****Add h2 above search section
-        ****traditional paging;
-            live search page is not loading correct page when page is put in url
-            test all places effected
-                search-page
-                    main search page
-                    home page
-                    category pages
-                get-listings html api
-                get collection listings html api
-                switching page retains filters
-                page links have no filters
-                canonicals have no page or query vars
-                clicking filter reverts to page 1
-            caononical and title for live-music/search is blog
-            alternative: can also just show load more button still instead of traditional page buttons
-        ***Check people also ask for category queries and modify content for locale-category pages accordingly
-            Landing pages content ideas (make sure to spin to the specific locale and category) - regulations, venues, recommendations, faq, sub regions, regional culture, pricing expectation, hiring advice, equipment requirements
-            FAQ schema
-        **add somewhere on the page that bands can apply to be recommended on the page
-        add pricing for the specific service of the category and location
+    ***caononical and title for live-music/search is blog; also probably join and other pages routed in similar way
     ***optimize llms.txt with lots of links and auto build it on request; add about and faq and other pages
         add procedure for adding new locale category including adding posts, adding slugs in router, adding links to llms.txt
         create a page dedicated to creating an inquiry for google

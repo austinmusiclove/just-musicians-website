@@ -31,7 +31,6 @@ if (
 }
 
 get_template_part('template-parts/search/search-page', '', [
-    'send_first_page'  => false,
     'hide_location_filter' => false,
     'hide_category_filter' => false,
     'hide_subgenre_filter' => false,
