@@ -9,7 +9,7 @@ $search_url = add_query_arg([
     'lat'            => $search_lat,
     'lng'            => $search_lng,
     'location_label' => $search_location_label,
-], site_url('/live-music/search/'));
+], site_url('/search-live-musicians/'));
 
 $edit_event_url = $event_id ? add_query_arg('tab', 'edit', get_permalink($event_id)) : '';
 ?>

@@ -18,12 +18,6 @@ add_filter('template_include', function($template) {
             if (!empty($new_template)) { return $new_template; }
 
         // Landing Pages
-        case 'landing-search':
-            $new_template = locate_template(['landing-pages/search-live-music.php']);
-            if (!empty($new_template)) { return $new_template; }
-        case 'landing-join':
-            $new_template = locate_template(['landing-pages/join.php']);
-            if (!empty($new_template)) { return $new_template; }
         case 'landing-locale-category':
             $new_template = locate_template(['landing-pages/locale-category.php']);
             if (!empty($new_template)) { return $new_template; }

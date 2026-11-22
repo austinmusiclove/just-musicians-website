@@ -4,40 +4,35 @@
     <?php $class = 'border-b border-black/20 last:border-none pb-4 mb-4'; ?>
 
     <div>
-        <!-- Live Music -->
-        <div class="<?php echo $class; ?>">
-
+        <!-- Dropdown menu
+        <div class="<?php //echo $class; ?>">
             <div class="flex justify-between items-center" x-on:click="showMobileMenuDropdown1 = ! showMobileMenuDropdown1">
-                <a class="font-sun-motter" href="<?php echo site_url('live-music/search/'); ?>">Live Music</a>
-                <!--<img src="<?php //echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="" />-->
+                <a class="font-sun-motter" href="<?php //echo site_url('/search-live-musicians/'); ?>">Live Music</a>
+                <img src="<?php //echo get_template_directory_uri() . '/lib/images/icons/caret-down.svg'; ?>" alt="" />
             </div>
-            <!-- Dropdown menu -->
-            <!--
             <div class="bg-white font-regular font-sans text-16 flex flex-col mt-2" x-show="showMobileMenuDropdown1" x-transition x-cloak>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Band'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" alt="" />
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php //echo site_url('/?qcategory=Band'); ?>">
+                    <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" alt="" />
                     Bands
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=Solo Artist'); ?>">
-                    <img class="h-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" alt="" />
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php //echo site_url('/?qcategory=Solo Artist'); ?>">
+                    <img class="h-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" alt="" />
                     Solo Artists
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qcategory=DJ'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" alt="" />
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php //echo site_url('/?qcategory=DJ'); ?>">
+                    <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" alt="" />
                     DJs
                 </a>
-                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php echo site_url('/?qtag=Wedding Music'); ?>">
-                    <img class="w-4" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" alt="" />
+                <a class="px-2 py-1.5 flex items-center gap-2 rounded-sm" href="<?php //echo site_url('/?qtag=Wedding Music'); ?>">
+                    <img class="w-4" src="<?php //echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" alt="" />
                     Wedding Music
                 </a>
             </div>
-            -->
+        </div> -->
 
-        </div>
-
-        <!-- Join -->
+        <!-- List Your Service -->
         <div class="<?php echo $class; ?>">
-            <a class="font-sun-motter" href="<?php echo site_url('/join/'); ?>">Join</a>
+            <a class="font-sun-motter" href="<?php echo site_url('/join/'); ?>">List Your Service</a>
         </div>
 
         <!-- Logged In Menu -->

@@ -13,7 +13,7 @@ get_template_part('template-parts/landing-pages/hero-section-cta', '', [
     'heading'          => 'Ready to Hire Live Musicians?',
     'description'      => 'Browse live musicians in your area. Filter by genre, ensemble size, instrumentation and more.',
     'cta_text'         => 'Search Musicians',
-    'cta_url'          => site_url('/live-music/search/'),
+    'cta_url'          => site_url('/search-live-musicians/'),
     'breadcrumb_items' => [
         [
             'label' => 'Home',

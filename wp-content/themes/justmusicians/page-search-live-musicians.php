@@ -46,7 +46,7 @@ get_template_part('template-parts/search/search-page', '', [
     'lat'              => $lat,
     'lng'              => $lng,
     'page'             => isset($_GET['lpage']) ? max(1, (int)$_GET['lpage']) : 1,
-    'pagination_base'  => 'live-music/search/',
+    'pagination_base'  => 'search-live-musicians/',
 ]);
 
 get_footer();

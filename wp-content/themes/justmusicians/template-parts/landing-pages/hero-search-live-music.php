@@ -25,7 +25,7 @@ $location_label = !empty($_GET['location_label']) ? $_GET['location_label'] : ''
             this.heroLng = location.lng;
         },
         searchHero() {
-            let url = '<?php echo site_url('/live-music/search/'); ?>' + '?qsearch=' + encodeURIComponent(this.heroKeyword);
+            let url = '<?php echo site_url('/search-live-musicians/'); ?>' + '?qsearch=' + encodeURIComponent(this.heroKeyword);
             if (this.heroLat && this.heroLng) {
                 url += '&lat=' + this.heroLat + '&lng=' + this.heroLng + '&location_label=' + encodeURIComponent(this.heroLocation);
             }

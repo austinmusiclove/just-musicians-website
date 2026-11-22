@@ -1,18 +1,18 @@
 <div class="absolute z-10 top-full left-0 w-full bg-white border border-black/40 rounded-md shadow-md max-h-32 overflow-y-scroll">
-    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/'); ?>">
+    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('/search-live-musicians/'); ?>">
         <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-bands.svg'; ?>" />
         Live Music Search
     </a>
     <!--
-    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qcategory=Musician'); ?>">
+    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('/search-live-musicians/?qcategory=Musician'); ?>">
         <img class="h-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-person.svg'; ?>" />
         Musicians
     </a>
-    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qcategory=DJ'); ?>">
+    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('/search-live-musicians/?qcategory=DJ'); ?>">
         <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-djs.svg'; ?>" />
         DJs
     </a>
-    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('live-music/search/?qsetting=Wedding'); ?>">
+    <a class="p-2 flex items-center gap-2 hover:bg-yellow-10 rounded-sm" href="<?php echo site_url('/search-live-musicians/?qsetting=Wedding'); ?>">
         <img class="w-4 opacity-40" src="<?php echo get_template_directory_uri() . '/lib/images/icons/icon-wedding.svg'; ?>" />
         Wedding Music
     </a>

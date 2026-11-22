@@ -65,7 +65,7 @@ function hmm_scripts() {
     $alpine_dependencies = [];
 
     // Home and search pages
-    if (is_front_page() or get_query_var('custom-template') === 'landing-locale-category' or preg_match('#^/live-music/search#', $path)) {
+    if (is_front_page() or get_query_var('custom-template') === 'landing-locale-category' or preg_match('#^/search-live-musicians#', $path)) {
 
         // Media Slider
         wp_enqueue_script('media-modal-js', get_template_directory_uri() . '/lib/js/media-modal.js', [], $pkg->version, [ 'strategy' => 'async' ]);
